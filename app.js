@@ -224,10 +224,29 @@ const store = {
                     router.navigateTo('#agenda');
 
                 } catch (error) {
-                    console.error("❌ Error loading user data:", error);
-                    showToast("Error al cargar datos del usuario");
-                    // Logout on error
-                    await auth.signOut();
+                    console.error("❌ Firestore Error:", error.code || error.message);
+
+                    // DON'T logout - use fallback data instead
+                    if (!this.user) {
+                        this.user = {
+                            email: user.email,
+                            role: 'user',
+                            serviceConfig: this.defaultServiceConfig,
+                            notificationSettings: { enabled: false, leadTime: 60 },
+                            name: user.displayName || user.email.split('@')[0],
+                            avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                        };
+                    }
+
+                    if (error.code === 'permission-denied') {
+                        showToast("⚠️ Modo offline - Configurá Firestore");
+                    } else {
+                        showToast("⚠️ Error de conexión - Modo offline");
+                    }
+
+                    // Navigate anyway with local data
+                    console.log("🚀 Navigating to #agenda (offline mode)");
+                    router.navigateTo('#agenda');
                 }
             } else {
                 console.log("👋 User Logged Out");
