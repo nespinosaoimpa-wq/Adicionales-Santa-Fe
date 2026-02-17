@@ -581,16 +581,35 @@ function renderLogin(container) {
                     </div>
                 </form>
 
-                <p class="mt-10 text-center text-sm text-slate-400">
-                    ¿No tienes cuenta?
-                    <a href="#signup" class="font-semibold leading-6 text-primary hover:text-primary/80 ml-1">Regístrate gratis</a>
+            <div class="mt-8 text-center sm:mx-auto sm:w-full sm:max-w-sm">
+                <p class="text-slate-500 text-xs text-center">
+                    ¿No tienes cuenta? <a href="#signup" class="text-primary font-bold hover:underline">Regístrate gratis</a>
                 </p>
+
+                <div class="mt-8 border-t border-white/5 pt-4 text-center">
+                    <p class="text-[10px] text-slate-600 font-mono">v1.4.1 (Google Fix)</p>
+                    <button onclick="store.forceUpdate()" class="mt-2 text-[10px] text-red-400 underline hover:text-red-300">
+                        ¿Problemas? Reparar / Actualizar App
+                    </button>
+                </div>
             </div>
         </div>
     `;
 
     window.handleGoogleLogin = () => {
         store.loginWithGoogle();
+    };
+
+    store.forceUpdate = async () => {
+        if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            for (let registration of registrations) {
+                await registration.unregister();
+            }
+            window.location.reload(true);
+        } else {
+            window.location.reload(true);
+        }
     };
 
     window.handleLogin = (e) => {
