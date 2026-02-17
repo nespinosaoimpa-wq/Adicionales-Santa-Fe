@@ -300,24 +300,30 @@ const store = {
     },
 
     // Expense Actions
-    async addExpense(category, amount) {
+    async addExpense(category, amount, description) {
         try {
             await DB.addExpense({
                 category,
                 amount: parseFloat(amount),
-                date: new Date().toISOString().split('T')[0]
+                description: description || '',
+                date: this.getLocalDateString()
             });
-            showToast(`Gasto de $${amount} agregado`);
+            showToast(`Gasto de $${parseFloat(amount).toLocaleString('es-AR')} agregado`);
+            return true;
         } catch (e) {
             showToast("Error al guardar gasto");
             console.error(e);
+            return false;
         }
     },
 
     async deleteExpense(id) {
-        if (confirm("¿Eliminar este gasto?")) {
+        try {
             await DB.deleteExpense(id);
             showToast("Gasto eliminado");
+        } catch (e) {
+            showToast("Error al eliminar gasto");
+            console.error(e);
         }
     },
 
@@ -1480,54 +1486,66 @@ function renderFinancial(container) {
                         Control de Gastos
                     </h2>
                 </div>
-                 <div class="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 no-scrollbar">
-                    ${['Comida', 'Transporte', 'Equipo'].map(cat => `
-                          <button onclick="window.handleAddExpense('${cat}')" class="flex-shrink-0 flex flex-col items-center gap-2 glass-card p-4 rounded-2xl w-24">
-                             <div class="size-10 rounded-xl bg-white/10 text-white flex items-center justify-center">
-                                 <span class="material-symbols-outlined">attach_money</span>
-                             </div>
-                             <span class="text-[11px] font-bold text-white">${cat}</span>
-                         </button>
-                    `).join('')}
-                     <button onclick="window.handleAddExpense('Otros')" class="flex-shrink-0 flex flex-col items-center gap-2 glass-card p-4 rounded-2xl w-24 border-dashed border-white/20">
-                        <div class="size-10 rounded-xl bg-white/10 text-white flex items-center justify-center">
-                            <span class="material-symbols-outlined">add</span>
+
+                <!-- Add Expense Inline Form -->
+                <div class="glass-card p-4 rounded-2xl space-y-3">
+                    <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+                        ${['Comida', 'Transporte', 'Equipo', 'Comunicación', 'Salud', 'Otros'].map((cat, i) => {
+        const icons = { 'Comida': 'restaurant', 'Transporte': 'directions_car', 'Equipo': 'build', 'Comunicación': 'phone_in_talk', 'Salud': 'medical_services', 'Otros': 'more_horiz' };
+        const colors = { 'Comida': 'bg-red-500/20 text-red-400', 'Transporte': 'bg-blue-500/20 text-blue-400', 'Equipo': 'bg-purple-500/20 text-purple-400', 'Comunicación': 'bg-green-500/20 text-green-400', 'Salud': 'bg-pink-500/20 text-pink-400', 'Otros': 'bg-amber-500/20 text-amber-400' };
+        return '<button onclick="window.selectExpenseCategory(\'' + cat + '\')" id="cat-btn-' + cat + '" class="expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ' + (i === 0 ? colors[cat] + ' ring-1 ring-white/20' : 'bg-white/5 text-slate-400') + '"><span class="material-symbols-outlined text-sm">' + icons[cat] + '</span>' + cat + '</button>';
+    }).join('')}
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="flex-1 relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">$</span>
+                            <input type="number" id="expense-amount" placeholder="Monto" 
+                                   class="w-full pl-7 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm font-medium placeholder:text-slate-500 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all">
                         </div>
-                        <span class="text-[11px] font-bold text-white">Otros</span>
+                        <input type="text" id="expense-desc" placeholder="Descripción (opcional)" 
+                               class="flex-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all">
+                    </div>
+                    <button id="btn-add-expense" onclick="window.submitExpense()" 
+                            class="w-full py-2.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-red-500/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">add_circle</span>
+                        Agregar Gasto
                     </button>
-                 </div>
+                </div>
 
                  <!-- Expense Chart Visualization -->
-                 <div class="glass-card p-5 rounded-2xl mt-4">
-                     <canvas id="expenseChart" class="max-h-64"></canvas>
-                 </div>
+                 ${store.expenses.length > 0 ? '<div class="glass-card p-5 rounded-2xl"><canvas id="expenseChart" class="max-h-64"></canvas></div>' : ''}
             </section>
 
             <!-- Recent Expenses List -->
             <section class="space-y-4">
-                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Historial de Gastos</h3>
-                <div class="space-y-3">
-                    ${store.expenses.length > 0 ? store.expenses.slice(0, 10).map(e => `
-                        <div class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5">
-                            <div class="flex items-center gap-4">
-                                <div class="size-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400">
-                                    <span class="material-symbols-outlined text-xl">money_off</span>
-                                </div>
-                                <div>
-                                    <p class="font-bold text-sm text-white">${e.category}</p>
-                                    <p class="text-[10px] text-slate-400">${store.getFormattedDate(e.date)}</p>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <p class="text-sm font-bold text-white">-$${e.amount.toLocaleString()}</p>
-                                <button onclick="store.deleteExpense('${e.id}')" class="text-slate-500 hover:text-red-400">
-                                    <span class="material-symbols-outlined text-sm">delete</span>
-                                </button>
-                            </div>
-                        </div>
-                    `).join('') : '<p class="text-slate-500 text-sm text-center py-4">Sin gastos registrados</p>'}
+                <div class="flex justify-between items-center">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Historial de Gastos</h3>
+                    ${store.expenses.length > 0 ? '<span class="text-xs text-slate-500">' + store.expenses.length + ' gastos</span>' : ''}
                 </div>
-            </section>
+                <div class="space-y-2">
+                    ${store.expenses.length > 0 ? store.expenses.slice(0, 20).map(e => {
+        const catIcons = { 'Comida': 'restaurant', 'Transporte': 'directions_car', 'Equipo': 'build', 'Comunicación': 'phone_in_talk', 'Salud': 'medical_services', 'Otros': 'more_horiz' };
+        const catColors = { 'Comida': 'bg-red-500/10 text-red-400', 'Transporte': 'bg-blue-500/10 text-blue-400', 'Equipo': 'bg-purple-500/10 text-purple-400', 'Comunicación': 'bg-green-500/10 text-green-400', 'Salud': 'bg-pink-500/10 text-pink-400', 'Otros': 'bg-amber-500/10 text-amber-400' };
+        const icon = catIcons[e.category] || 'money_off';
+        const color = catColors[e.category] || 'bg-red-500/10 text-red-400';
+        return '<div class="glass-card p-3 rounded-2xl flex items-center justify-between border-white/5 group">' +
+            '<div class="flex items-center gap-3">' +
+            '<div class="size-9 rounded-xl ' + color + ' flex items-center justify-center">' +
+            '<span class="material-symbols-outlined text-lg">' + icon + '</span>' +
+            '</div>' +
+            '<div>' +
+            '<p class="font-bold text-xs text-white">' + e.category + '</p>' +
+            '<p class="text-[10px] text-slate-400">' + (e.description ? e.description + ' • ' : '') + store.getFormattedDate(e.date) + '</p>' +
+            '</div>' +
+            '</div>' +
+            '<div class="flex items-center gap-2">' +
+            '<p class="text-sm font-extrabold text-red-400">-$' + (e.amount || 0).toLocaleString('es-AR') + '</p>' +
+            '<button onclick="event.stopPropagation(); window.deleteExpenseConfirm(\'' + e.id + '\')" class="size-7 rounded-lg hover:bg-red-500/20 flex items-center justify-center text-slate-500 hover:text-red-400 transition-all">' +
+            '<span class="material-symbols-outlined text-sm">close</span>' +
+            '</button>' +
+            '</div>' +
+            '</div>';
+    }).join('') : '<div class="flex flex-col items-center py-8 text-center"><div class="size-14 rounded-full bg-red-500/10 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400/40">receipt_long</span></div><p class="text-sm font-semibold text-white mb-1">Sin gastos</p><p class="text-xs text-slate-400">Usá el formulario arriba para cargar gastos</p></div>'}
                 </div>
             </section>
             
@@ -1623,12 +1641,49 @@ function renderFinancial(container) {
         }
     }, 100);
 
-    // Attach Expense Listeners
-    window.handleAddExpense = (category) => {
-        const amount = prompt(`Monto para ${category}:`);
-        if (amount && !isNaN(amount)) {
-            store.addExpense(category, amount);
+    // Expense form state
+    let selectedCategory = 'Comida';
+
+    window.selectExpenseCategory = (cat) => {
+        selectedCategory = cat;
+        const catColors = { 'Comida': 'bg-red-500/20 text-red-400', 'Transporte': 'bg-blue-500/20 text-blue-400', 'Equipo': 'bg-purple-500/20 text-purple-400', 'Comunicación': 'bg-green-500/20 text-green-400', 'Salud': 'bg-pink-500/20 text-pink-400', 'Otros': 'bg-amber-500/20 text-amber-400' };
+        document.querySelectorAll('.expense-cat-btn').forEach(btn => {
+            btn.className = 'expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-white/5 text-slate-400';
+        });
+        const activeBtn = document.getElementById('cat-btn-' + cat);
+        if (activeBtn) {
+            const color = catColors[cat] || 'bg-amber-500/20 text-amber-400';
+            activeBtn.className = 'expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ' + color + ' ring-1 ring-white/20';
         }
+    };
+
+    window.submitExpense = async () => {
+        const amountInput = document.getElementById('expense-amount');
+        const descInput = document.getElementById('expense-desc');
+        const amount = parseFloat(amountInput.value);
+        if (!amount || isNaN(amount) || amount <= 0) {
+            showToast('Ingresá un monto válido');
+            amountInput.focus();
+            return;
+        }
+        const btn = document.getElementById('btn-add-expense');
+        btn.disabled = true;
+        btn.textContent = 'Guardando...';
+        const success = await store.addExpense(selectedCategory, amount, descInput.value.trim());
+        if (success) {
+            amountInput.value = '';
+            descInput.value = '';
+        }
+        btn.disabled = false;
+        btn.textContent = 'Agregar Gasto';
+    };
+
+    window.deleteExpenseConfirm = (id) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6';
+        overlay.innerHTML = '<div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-slide-up"><div class="flex flex-col items-center text-center"><div class="size-12 rounded-full bg-red-500/20 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400">delete_forever</span></div><h3 class="text-lg font-bold text-white mb-1">¿Eliminar gasto?</h3><p class="text-sm text-slate-400 mb-5">Esta acción no se puede deshacer</p><div class="flex gap-3 w-full"><button onclick="this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl">Cancelar</button><button onclick="store.deleteExpense(\'' + id + '\'); this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-red-500 text-white text-sm font-bold rounded-xl">Eliminar</button></div></div></div>';
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+        document.body.appendChild(overlay);
     };
 }
 
@@ -2213,11 +2268,11 @@ function renderHistory(container) {
 
         <div class="px-4 space-y-3">
             ${sortedServices.map(s => {
-                const isPub = s.type === 'Public';
-                const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
-                const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
-                const icon = isPub ? 'account_balance' : 'shopping_cart';
-                return `
+        const isPub = s.type === 'Public';
+        const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
+        const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
+        const icon = isPub ? 'account_balance' : 'shopping_cart';
+        return `
                         <div onclick="window.location.hash='#details?id=${s.id}'" class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 cursor-pointer hover:bg-white/5 transition-colors">
                             <div class="flex items-center gap-4">
                                 <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
@@ -2234,12 +2289,12 @@ function renderHistory(container) {
                             <span class="material-symbols-outlined text-slate-600">chevron_right</span>
                         </div>
                      `;
-            }).join('')}
+    }).join('')}
 
             ${sortedServices.length === 0 ? '<p class="text-center text-slate-500 py-10">No hay servicios registrados.</p>' : ''}
         </div>
     </main>
-        ${ renderBottomNav('financial') }
+        ${renderBottomNav('financial')}
 `;
 }
 
@@ -2321,7 +2376,7 @@ window.installApp = async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to the install prompt: ${ outcome } `);
+    console.log(`User response to the install prompt: ${outcome} `);
     deferredPrompt = null;
     document.getElementById('btn-install-app').classList.add('hidden');
 };
