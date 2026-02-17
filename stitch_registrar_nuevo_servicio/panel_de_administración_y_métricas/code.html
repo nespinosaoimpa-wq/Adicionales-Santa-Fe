@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Panel de Administración y Métricas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "success-emerald": "#10b981",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0a0c",
+                        "card-dark": "rgba(24, 34, 52, 0.6)",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(24, 34, 52, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .gauge-ring {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 70; /* Corresponds to roughly 75% */
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark text-white min-h-screen pb-24 font-display">
+<!-- Top Status Bar & Header -->
+<header class="sticky top-0 z-50 glass-card px-4 py-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="relative">
+<div class="size-10 rounded-full border-2 border-primary overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar of admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-u2mpUFU0jNL2YbSLTfu2kimcPBTWxh8tTW8ZCHVt95KeT2pvKq-7eXqVzJPf6jH3rF2Ak2z8PGKN6MqiZMH2WkSQel4tiHu0fWPd6PUQe079pzdRFCujBk4JLgIzRaL0odlNMZJAmRTADmOPMKTrOQemofEXo7Pk9xNzkWb-ItRzkt8r4-LwGpwcn0HGeZLW-Fprxab9JsrE_ADHIG5R_WaJ16t0x6QVrqyiyyYlTI7wnygJhRbh7zC-kqWbIDx9XskTS44PopyU"/>
+</div>
+<span class="absolute bottom-0 right-0 size-3 bg-success-emerald rounded-full border-2 border-background-dark"></span>
+</div>
+<div>
+<h1 class="text-sm font-bold text-white/90">Comandancia</h1>
+<p class="text-[10px] text-white/50 uppercase tracking-wider">Admin Dashboard</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="size-10 glass-card rounded-full flex items-center justify-center text-white/80">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+<button class="size-10 glass-card rounded-full flex items-center justify-center text-white/80">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+</div>
+</header>
+<main class="p-4 space-y-4">
+<!-- Time Filter Segmented Control -->
+<div class="flex p-1 bg-white/5 rounded-xl backdrop-blur-md">
+<button class="flex-1 py-1.5 text-xs font-semibold text-white/40">24h</button>
+<button class="flex-1 py-1.5 text-xs font-semibold text-white/40">7d</button>
+<button class="flex-1 py-1.5 text-xs font-semibold bg-primary text-white rounded-lg shadow-lg shadow-primary/20">30d</button>
+<button class="flex-1 py-1.5 text-xs font-semibold text-white/40">2026</button>
+</div>
+<!-- Active Users Hero Card -->
+<div class="glass-card rounded-2xl p-5 overflow-hidden relative">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="text-xs font-medium text-white/50 uppercase tracking-widest mb-1">Usuarios Activos</p>
+<div class="flex items-baseline gap-2">
+<h2 class="text-3xl font-bold tracking-tight">1,248</h2>
+<span class="text-xs font-bold text-success-emerald flex items-center">
+<span class="material-symbols-outlined text-sm">trending_up</span> 12.4%
+                        </span>
+</div>
+</div>
+<div class="bg-primary/20 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">group</span>
+</div>
+</div>
+<!-- Sparkline Style Graph Area -->
+<div class="h-16 w-full mt-4 flex items-end gap-1">
+<div class="flex-1 bg-primary/10 rounded-t-sm h-1/2"></div>
+<div class="flex-1 bg-primary/15 rounded-t-sm h-2/3"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-1/2"></div>
+<div class="flex-1 bg-primary/30 rounded-t-sm h-3/4"></div>
+<div class="flex-1 bg-primary/40 rounded-t-sm h-4/5"></div>
+<div class="flex-1 bg-primary/60 rounded-t-sm h-2/3"></div>
+<div class="flex-1 bg-primary/80 rounded-t-sm h-full"></div>
+<div class="flex-1 bg-primary rounded-t-sm h-5/6"></div>
+</div>
+</div>
+<!-- Profit Margin Gauge Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="glass-card rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+<p class="text-xs font-medium text-white/50 uppercase tracking-widest mb-4 w-full text-left">Utilidad Operativa</p>
+<div class="relative size-40 mb-2">
+<!-- Gauge SVG -->
+<svg class="size-full -rotate-90" viewbox="0 0 100 100">
+<circle class="text-white/5" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary gauge-ring" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-linecap="round" stroke-width="8" style="filter: drop-shadow(0 0 8px rgba(13, 89, 242, 0.5));"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-bold">75%</span>
+<span class="text-[10px] text-white/40 font-medium">Margen</span>
+</div>
+</div>
+<div class="w-full flex justify-between pt-4 border-t border-white/5 mt-2">
+<div class="text-left">
+<p class="text-[10px] text-white/40 uppercase">Ingresos</p>
+<p class="text-sm font-bold text-white/90">$42.5k</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-white/40 uppercase">Costos</p>
+<p class="text-sm font-bold text-white/90">$10.6k</p>
+</div>
+</div>
+</div>
+<!-- Growth Projection Bar Chart -->
+<div class="glass-card rounded-2xl p-5">
+<div class="flex justify-between items-center mb-6">
+<div>
+<p class="text-xs font-medium text-white/50 uppercase tracking-widest mb-1">Proyección 2026</p>
+<p class="text-xl font-bold">$184.2k <span class="text-xs text-white/30 font-normal">est.</span></p>
+</div>
+<span class="material-symbols-outlined text-white/30">monitoring</span>
+</div>
+<div class="space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-medium text-white/40">
+<span>Q1 PROYECTADO</span>
+<span>82% COMPLETADO</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-success-emerald w-[82%] rounded-full shadow-[0_0_10px_rgba(16,185,129,0.4)]"></div>
+</div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[10px] font-medium text-white/40">
+<span>Q2 PROYECTADO</span>
+<span>45% COMPLETADO</span>
+</div>
+<div class="h-2 w-full bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-primary w-[45%] rounded-full"></div>
+</div>
+</div>
+<div class="pt-2">
+<p class="text-[11px] text-white/50 leading-tight">La tendencia de crecimiento indica un superávit del 15% para el próximo semestre según horas adicionales registradas.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Monthly Income List -->
+<div class="glass-card rounded-2xl overflow-hidden">
+<div class="p-5 border-b border-white/5 flex justify-between items-center">
+<h3 class="text-sm font-bold tracking-wide uppercase text-white/70">Ingresos Mensuales</h3>
+<span class="material-symbols-outlined text-white/40 text-sm">more_horiz</span>
+</div>
+<div class="divide-y divide-white/5">
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-success-emerald/10 flex items-center justify-center text-success-emerald">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+</div>
+<div>
+<p class="text-sm font-semibold">Marzo 2026</p>
+<p class="text-[10px] text-white/40">Actual • Meta $50k</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">$42,500</p>
+<p class="text-[10px] text-success-emerald font-bold">+5.2%</p>
+</div>
+</div>
+<div class="p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-lg bg-white/5 flex items-center justify-center text-white/40">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+</div>
+<div>
+<p class="text-sm font-semibold text-white/80">Febrero 2026</p>
+<p class="text-[10px] text-white/40">Cerrado • Meta $40k</p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold text-white/80">$38,210</p>
+<p class="text-[10px] text-white/30 font-bold">-4.1%</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Stats Grid -->
+<div class="grid grid-cols-2 gap-4">
+<div class="glass-card rounded-xl p-4">
+<p class="text-[10px] text-white/40 uppercase font-bold mb-1">Horas Totales</p>
+<p class="text-xl font-bold">14,208h</p>
+</div>
+<div class="glass-card rounded-xl p-4 border-l-4 border-l-success-emerald">
+<p class="text-[10px] text-white/40 uppercase font-bold mb-1">Nuevos (Hoy)</p>
+<p class="text-xl font-bold">+24</p>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 z-[60] px-4 pb-6 pt-2">
+<div class="glass-card rounded-2xl flex items-center justify-around py-3 px-2 shadow-2xl">
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined font-variation-fill" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-bold">Panel</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/40" href="#">
+<span class="material-symbols-outlined">badge</span>
+<span class="text-[10px] font-bold">Usuarios</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/40" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="text-[10px] font-bold">Reportes</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-white/40" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-bold">Ajustes</span>
+</a>
+</div>
+</nav>
+<!-- Visual Accents for Glassmorphism -->
+<div class="fixed top-[-10%] left-[-10%] size-64 bg-primary/20 rounded-full blur-[100px] pointer-events-none"></div>
+<div class="fixed bottom-[-5%] right-[-5%] size-80 bg-success-emerald/10 rounded-full blur-[120px] pointer-events-none"></div>
+</body></html>
