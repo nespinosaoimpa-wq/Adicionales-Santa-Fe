@@ -128,20 +128,24 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.4.0 Loaded - Auth Fix");
+        debugLog("App v1.4.0 Loaded - Auth Fix");
 
         // Handle Google Redirect Result
         auth.getRedirectResult().then(async (result) => {
             if (result.user) {
-                console.log("Redirect Login Success:", result.user.email);
+                const msg = "Rcvr: " + result.user.email;
+                if (document.getElementById('debug-console')) document.getElementById('debug-console').innerHTML += `<div>${msg}</div>`;
+                debugLog(msg);
                 showToast("Sesión iniciada con Google");
                 // The onAuthStateChanged will handle the rest
+            } else {
+                if (document.getElementById('debug-console')) document.getElementById('debug-console').innerHTML += `<div>Rcvr: No User Result</div>`;
             }
         }).catch((error) => {
-            console.error("Redirect Error:", error);
-            if (error.code !== 'auth/popup-closed-by-user') {
-                showToast("Error Google: " + error.message);
-            }
+            const msg = "Err: " + error.code + " - " + error.message;
+            if (document.getElementById('debug-console')) document.getElementById('debug-console').innerHTML += `<div>${msg}</div>`;
+            debugLog("Redirect Error:", error);
+            showToast("Error Google: " + error.message);
         });
 
         // Listen to Auth State
@@ -587,10 +591,20 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-8 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-600 font-mono">v1.4.1 (Google Fix)</p>
-                    <button onclick="store.forceUpdate()" class="mt-2 text-[10px] text-red-400 underline hover:text-red-300">
-                        ¿Problemas? Reparar / Actualizar App
-                    </button>
+                    <p class="text-[10px] text-slate-600 font-mono">v1.4.2 (Debug Mode)</p>
+                    <div class="flex flex-col gap-2 mt-2 justify-center items-center">
+                        <button onclick="store.forceUpdate()" class="text-[10px] text-red-400 underline hover:text-red-300">
+                            ¿Problemas? Reparar App
+                        </button>
+                        <button onclick="store.toggleDebug()" class="text-[10px] text-yellow-400 underline hover:text-yellow-300">
+                            Ver Logs de Error
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- DEBUG CONSOLE -->
+                <div id="debug-console-container" class="hidden mt-4 p-2 bg-black text-green-400 font-mono text-[10px] text-left h-32 overflow-y-auto border border-green-900 rounded">
+                    <div id="debug-console">Ready...</div>
                 </div>
             </div>
         </div>
@@ -616,7 +630,8 @@ function renderLogin(container) {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        store.login(email, password);
+        debugLog(`Attempting Email Login: ${email}`);
+        store.login(email, password).catch(e => debugLog("Login Error: " + e.message));
     }
 }
 
