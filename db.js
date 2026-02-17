@@ -50,6 +50,17 @@ const DB = {
         }, { merge: true });
     },
 
+    async updateUser(profileData) {
+        const user = auth.currentUser;
+        if (!user) return;
+
+        await db.collection('users').doc(user.email).set({
+            ...profileData
+        }, { merge: true });
+
+        // Also update Auth profile if possible, but Firestore is our source of truth
+    },
+
     subscribeToUsers(callback) {
         return db.collection('users').onSnapshot(snapshot => {
             const users = snapshot.docs.map(doc => doc.data());
