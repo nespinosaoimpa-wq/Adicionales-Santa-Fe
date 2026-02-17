@@ -640,11 +640,17 @@ function renderLogin(container) {
         btn.disabled = true;
         btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-slate-900 mx-auto"></div>';
 
-        store.loginWithGoogle().catch(e => {
-            btn.disabled = false;
-            btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
-            showToast("Error: " + e.message);
-        });
+        store.loginWithGoogle()
+            .then(() => {
+                // Success - onAuthStateChanged will handle navigation
+                showToast("¡Bienvenido!");
+            })
+            .catch(e => {
+                // Error - restore button
+                btn.disabled = false;
+                btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
+                showToast("Error: " + e.message);
+            });
     };
 
     window.handleLogin = (e) => {
