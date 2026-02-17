@@ -111,11 +111,16 @@ const store = {
     // Initialization
     init() {
         // Listen to Auth State
-        DB.onAuthStateChanged(user => {
+        this.unsub = auth.onAuthStateChanged(async user => {
             if (user) {
                 console.log("User Logged In:", user.email);
-                this.user = {
+
+                // Load User Config/Profile
+                this.user = await DB.getUser(user.email) || {
                     email: user.email,
+                    role: 'user',
+                    serviceConfig: this.defaultServiceConfig,
+                    notificationSettings: { enabled: false, leadTime: 60 },
                     name: user.displayName || user.email.split('@')[0],
                     avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
                 };
@@ -130,64 +135,40 @@ const store = {
                     router.handleRoute();
                 });
 
-                this.unsub = auth.onAuthStateChanged(async user => {
-                    if (user) {
-                        console.log("User Logged In:", user.email);
-
-                        // Load User Config/Profile
-                        this.user = await DB.getUser(user.email) || {
-                            email: user.email,
-                            role: 'user',
-                            serviceConfig: this.defaultServiceConfig, // Default backup
-                            notificationSettings: { enabled: false, leadTime: 60 },
-                            name: user.displayName || user.email.split('@')[0],
-                            avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                        };
-
-                        // Save/Update user in DB
-                        DB.saveUser(this.user);
-
-                        // Subscribe to Data
-                        this.unsubscribeServices = DB.subscribeToServices(services => {
-                            this.services = services;
-                            if (this.checkNotifications) this.checkNotifications();
-                            router.handleRoute();
-                        });
-
-                        // Subscribe to Ads (Global)
-                        this.unsubscribeAds = DB.subscribeToAds(ads => {
-                            this.ads = ads;
-                            // Re-render if appropriate? mostly passive
-                        });
-
-                        // Subscribe to Users (for Admin)
-                        this.unsubscribeUsers = DB.subscribeToUsers(users => {
-                            this.allUsers = users;
-                        });
-                        // Subscribe to Expenses
-                        this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
-                            this.expenses = expenses;
-                            // Trigger re-render if on financial page
-                            if (window.location.hash === '#financial') router.handleRoute();
-                        });
-
-                        // Interval for alerts
-                        if (this.checkNotifications) {
-                            setInterval(() => this.checkNotifications(), 60000);
-                        }
-
-                        router.navigateTo('#agenda');
-                    } else {
-                        console.log("User Logged Out");
-                        this.user = null;
-                        this.services = [];
-                        if (this.unsubscribeServices) this.unsubscribeServices();
-                        if (this.unsubscribeUsers) this.unsubscribeUsers();
-                        if (this.unsubscribeExpenses) this.unsubscribeExpenses();
-                        router.navigateTo('#login');
-                    }
+                // Subscribe to Ads (Global)
+                this.unsubscribeAds = DB.subscribeToAds(ads => {
+                    this.ads = ads;
                 });
-            });
+
+                // Subscribe to Users (for Admin)
+                this.unsubscribeUsers = DB.subscribeToUsers(users => {
+                    this.allUsers = users;
+                });
+
+                // Subscribe to Expenses
+                this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
+                    this.expenses = expenses;
+                    if (window.location.hash === '#financial') router.handleRoute();
+                });
+
+                // Interval for alerts
+                if (this.checkNotifications) {
+                    if (this.notifInterval) clearInterval(this.notifInterval);
+                    this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
+                }
+
+                router.navigateTo('#agenda');
+            } else {
+                console.log("User Logged Out");
+                this.user = null;
+                this.services = [];
+                if (this.unsubscribeServices) this.unsubscribeServices();
+                if (this.unsubscribeUsers) this.unsubscribeUsers();
+                if (this.unsubscribeExpenses) this.unsubscribeExpenses();
+                if (this.notifInterval) clearInterval(this.notifInterval);
+                router.navigateTo('#login');
+            }
+        });
     },
 
     // Export Data (CSV)
