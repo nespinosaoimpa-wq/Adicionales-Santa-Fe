@@ -99,6 +99,24 @@ const store = {
         }
     },
 
+    shareApp() {
+        const shareData = {
+            title: 'Adicionales Santa Fe',
+            text: 'Gestiona tus servicios de policía adicional y calcula tus ganancias fácil.',
+            url: window.location.origin + window.location.pathname
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData)
+                .then(() => showToast("¡Gracias por compartir!"))
+                .catch((e) => console.log('Error sharing', e));
+        } else {
+            // Fallback: Copy to clipboard or open WhatsApp
+            const text = `¡Probá esta App para Adicionales! ${shareData.url}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+    },
+
     addService(service) {
         // Optimistic UI update (optional, skipping for simplicity with live sync)
         DB.addService(service).then(() => {
@@ -1423,10 +1441,15 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-slate-500 text-sm">edit</span>
                 </div>
 
-                <div class="mt-4 flex justify-center">
+                <div class="mt-4 flex justify-center gap-3">
                      <button onclick="store.requestNotificationPermission()" class="flex items-center gap-2 px-4 py-2 rounded-full ${store.notificationSettings.enabled ? 'bg-green-500/20 text-green-400' : 'bg-slate-700 text-slate-300'} text-xs font-bold transition-all">
                         <span class="material-symbols-outlined text-lg">${store.notificationSettings.enabled ? 'notifications_active' : 'notifications_off'}</span>
-                        ${store.notificationSettings.enabled ? 'Notificaciones Activadas' : 'Activar Alertas'}
+                        ${store.notificationSettings.enabled ? 'Alertas On' : 'Alertas'}
+                    </button>
+
+                    <button onclick="store.shareApp()" class="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white text-xs font-bold shadow-lg shadow-blue-500/30 hover:bg-blue-500 transition-all">
+                        <span class="material-symbols-outlined text-lg">share</span>
+                        Compartir
                     </button>
                 </div>
             </div>
