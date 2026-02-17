@@ -354,20 +354,21 @@ const router = {
 
     handleRoute() {
         const hash = window.location.hash || '#login';
-
-        // Auth Guard
-        const publicRoutes = ['#login', '#signup'];
-        if (!store.isAuthenticated() && !publicRoutes.includes(hash)) {
-            window.location.hash = '#login';
-            return;
-        }
-
-        if (store.isAuthenticated() && publicRoutes.includes(hash)) {
-            window.location.hash = '#agenda';
-            return;
-        }
-
         this.currentRoute = hash;
+
+        // Auto-login: If user is authenticated and trying to access login, redirect to agenda
+        if (hash === '#login' && store.isAuthenticated()) {
+            console.log("🔐 User already logged in, redirecting to agenda");
+            this.navigateTo('#agenda');
+            return;
+        }
+
+        // Protect routes that require authentication
+        if (!store.isAuthenticated() && hash !== '#login' && hash !== '#signup') {
+            this.navigateTo('#login');
+            return;
+        }
+
         this.render(hash);
     },
 
@@ -1659,20 +1660,26 @@ function renderProfile(container) {
                     ${renderConfigInputs('Private')}
                 </div>
                 
-                 <!-- OSPES Services -->
+                 <!-- OSPES / Others -->
                 <div class="glass-card rounded-2xl p-4">
-                    <h4 class="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">OSPES / Otros</h4>
+                    <h4 class="text-xs font-bold text-accent-warning uppercase tracking-wider mb-2">OSPES / Otros</h4>
                     ${renderConfigInputs('OSPES')}
                 </div>
+
+                <!-- Add Custom Sector Button -->
+                <button onclick="window.addCustomSector()" class="w-full glass-card rounded-2xl p-4 flex items-center justify-center gap-2 text-primary hover:bg-primary/10 transition-colors border-2 border-dashed border-primary/30">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    <span class="font-bold text-sm">Agregar Sector Personalizado</span>
+                </button>
             </section>
 
-            <!-- Actions -->
-            <button onclick="store.saveConfig()" class="w-full py-4 rounded-xl bg-primary text-white font-bold shadow-lg shadow-primary/25 hover:bg-primary/90 active:scale-95 transition-all">
+            <!-- Save Button -->
+            <button onclick="store.saveConfig()" class="w-full bg-primary text-white py-4 rounded-2xl font-bold text-base shadow-xl shadow-primary/30 hover:bg-primary/90 active:scale-95 transition-all">
                 Guardar Personalización
             </button>
 
-            
-            <button onclick="store.logout()" class="w-full py-4 rounded-xl border border-red-500/20 text-red-400 font-medium hover:bg-red-500/10 transition-colors">
+            <!-- Logout -->
+            <button onclick="store.logout()" class="w-full text-red-400 text-sm font-bold hover:text-red-300 transition-colors">
                 Cerrar Sesión
             </button>
              
@@ -1680,6 +1687,35 @@ function renderProfile(container) {
         </main>
     `;
 
+    // Add custom sector handler
+    window.addCustomSector = () => {
+        const sectorName = prompt("Nombre del nuevo sector (ej: IOMA, Swiss Medical):");
+        if (!sectorName || sectorName.trim() === '') return;
+
+        const ordinaryRate = prompt(`Tarifa Ordinaria para ${sectorName}:`);
+        if (!ordinaryRate || isNaN(ordinaryRate)) {
+            showToast("❌ Tarifa inválida");
+            return;
+        }
+
+        const extraRate = prompt(`Tarifa Extraordinaria para ${sectorName}:`);
+        if (!extraRate || isNaN(extraRate)) {
+            showToast("❌ Tarifa inválida");
+            return;
+        }
+
+        // Add to config
+        if (!store.serviceConfig[sectorName]) {
+            store.serviceConfig[sectorName] = {};
+        }
+        store.serviceConfig[sectorName]['Ordinaria'] = parseFloat(ordinaryRate);
+        store.serviceConfig[sectorName]['Extraordinaria'] = parseFloat(extraRate);
+
+        showToast(`✅ Sector "${sectorName}" agregado`);
+
+        // Re-render profile to show new sector
+        renderProfile(container);
+    };
 };
 
 // --- MISSING FUNCTIONS ---
@@ -1949,12 +1985,10 @@ function renderHistory(container) {
 // --- 4. SHARED COMPONENTS ---
 
 function renderBottomNav(activeTab) {
-    // We'll make a generic one for now, but design asks for specific ones per page.
-    // For this MVP step, a unified one is better for testing navigation.
+    // Main navigation tabs (centered)
     const tabs = [
         { id: 'agenda', icon: 'calendar_today', label: 'Agenda', route: '#agenda' },
         { id: 'control', icon: 'dashboard', label: 'Panel', route: '#control' },
-        { id: 'register', icon: 'add_circle', label: '', route: '#register', isFab: true },
         { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
     ];
 
@@ -1963,33 +1997,37 @@ function renderBottomNav(activeTab) {
         tabs.push({ id: 'admin', icon: 'admin_panel_settings', label: 'Admin', route: '#admin' });
     }
 
-    let navHtml = `<nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
-        <div class="flex justify-around items-end max-w-md mx-auto relative">`;
+    let navHtml = `
+        <!-- Bottom Navigation Bar -->
+        <nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
+            <div class="flex justify-center items-center gap-4 max-w-md mx-auto px-4">
+    `;
 
     tabs.forEach(tab => {
-        if (tab.isFab) {
-            navHtml += `
-                <div class="relative -top-8">
-                     <button onclick="router.navigateTo('${tab.route}')" class="size-14 rounded-full bg-primary text-white shadow-lg shadow-primary/40 flex items-center justify-center hover:scale-105 transition-transform">
-                        <span class="material-symbols-outlined text-3xl">add</span>
-                    </button>
-                </div>
-            `;
-        } else {
-            const isActive = activeTab === tab.id;
-            const colorClass = isActive ? 'text-primary' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200';
-            const iconStyle = isActive ? "font-variation-settings: 'FILL' 1" : "";
+        const isActive = activeTab === tab.id;
+        const colorClass = isActive ? 'text-primary' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200';
+        const iconStyle = isActive ? "font-variation-settings: 'FILL' 1" : "";
 
-            navHtml += `
-                <button onclick="router.navigateTo('${tab.route}')" class="flex flex-col items-center gap-1 ${colorClass} w-16 group transition-colors">
-                    <span class="material-symbols-outlined group-active:scale-90 transition-transform" style="${iconStyle}">${tab.icon}</span>
-                    <span class="text-[10px] font-bold">${tab.label}</span>
-                </button>
-            `;
-        }
+        navHtml += `
+            <button onclick="router.navigateTo('${tab.route}')" class="flex flex-col items-center gap-1 ${colorClass} flex-1 group transition-colors">
+                <span class="material-symbols-outlined group-active:scale-90 transition-transform" style="${iconStyle}">${tab.icon}</span>
+                <span class="text-[10px] font-bold">${tab.label}</span>
+            </button>
+        `;
     });
 
-    navHtml += `</div></nav>`;
+    navHtml += `
+            </div>
+        </nav>
+
+        <!-- Floating Action Button -->
+        <div class="fixed bottom-20 right-6 z-50">
+            <button onclick="router.navigateTo('#register')" class="size-16 rounded-full bg-primary text-white shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-3xl">add</span>
+            </button>
+        </div>
+    `;
+
     return navHtml;
 }
 
