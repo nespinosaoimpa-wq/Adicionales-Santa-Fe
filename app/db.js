@@ -123,13 +123,21 @@ const DB = {
 
     // --- EXPENSES ---
     subscribeToExpenses(callback) {
+        const user = auth.currentUser;
+        if (!user) {
+            callback([]);
+            return () => { };
+        }
+
         return db.collection('expenses')
+            .where('userEmail', '==', user.email)
             .orderBy('date', 'desc')
             .onSnapshot(snapshot => {
                 const expenses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 callback(expenses);
             }, error => {
                 console.error("Error syncing expenses:", error);
+                callback([]);
             });
     },
 
@@ -139,7 +147,7 @@ const DB = {
 
         return db.collection('expenses').add({
             ...expense,
-            userId: user.uid,
+            userEmail: user.email,
             timestamp: new Date().toISOString()
         });
     },
