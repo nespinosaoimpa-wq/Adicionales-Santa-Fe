@@ -1349,13 +1349,6 @@ function renderControlPanel(container) {
                 </div>
             </section>
         </main>
-        
-        <!-- FAB Add Rule -->
-        <div class="fixed bottom-24 right-6 z-50">
-            <button onclick="router.navigateTo('#register')" class="size-16 rounded-full bg-primary text-white flex items-center justify-center shadow-2xl shadow-primary/40 hover:scale-105 active:scale-95 transition-all">
-                <span class="material-symbols-outlined text-3xl">add</span>
-            </button>
-        </div>
 
         ${renderBottomNav('control')}
     `;
@@ -1438,6 +1431,11 @@ function renderFinancial(container) {
                         <span class="text-[11px] font-bold text-white">Otros</span>
                     </button>
                  </div>
+
+                 <!-- Expense Chart Visualization -->
+                 <div class="glass-card p-5 rounded-2xl mt-4">
+                     <canvas id="expenseChart" class="max-h-64"></canvas>
+                 </div>
             </section>
 
             <!-- Recent Expenses List -->
@@ -1479,6 +1477,86 @@ function renderFinancial(container) {
         ${renderBottomNav('financial')}
     `;
     container.innerHTML = html;
+
+    // Render Expense Chart
+    setTimeout(() => {
+        const canvas = document.getElementById('expenseChart');
+        if (canvas && store.expenses.length > 0) {
+            // Group expenses by category
+            const expensesByCategory = {};
+            store.expenses.forEach(e => {
+                expensesByCategory[e.category] = (expensesByCategory[e.category] || 0) + e.amount;
+            });
+
+            const categories = Object.keys(expensesByCategory);
+            const amounts = Object.values(expensesByCategory);
+
+            // Color mapping
+            const colorMap = {
+                'Comida': '#ef4444',
+                'Transporte': '#3b82f6',
+                'Equipo': '#8b5cf6',
+                'Comunicación': '#10b981',
+                'Otros': '#f59e0b'
+            };
+
+            const colors = categories.map(cat => colorMap[cat] || '#6b7280');
+
+            new Chart(canvas, {
+                type: 'doughnut',
+                data: {
+                    labels: categories,
+                    datasets: [{
+                        data: amounts,
+                        backgroundColor: colors,
+                        borderWidth: 0,
+                        hoverOffset: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#cbd5e1',
+                                font: { size: 12, weight: 'bold' },
+                                padding: 15,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleColor: '#fff',
+                            bodyColor: '#cbd5e1',
+                            padding: 12,
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            borderWidth: 1,
+                            callbacks: {
+                                label: function (context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: $${value.toLocaleString()} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    cutout: '65%'
+                }
+            });
+        } else if (canvas && store.expenses.length === 0) {
+            // Show empty state
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#475569';
+            ctx.font = '14px sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText('Sin gastos registrados', canvas.width / 2, canvas.height / 2);
+        }
+    }, 100);
 
     // Attach Expense Listeners
     window.handleAddExpense = (category) => {
