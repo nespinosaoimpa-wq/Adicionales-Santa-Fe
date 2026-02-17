@@ -187,149 +187,162 @@ const store = {
                         router.navigateTo('#login');
                     }
                 });
-            },
+            });
+    },
 
-            // Export Data (CSV)
-            exportData() {
-                const headers = ['Fecha', 'Tipo', 'Subtipo', 'Horas', 'Inicio', 'Fin', 'Lugar', 'Total', 'Estado'];
-                const rows = this.services.map(s => [
-                    s.date,
-                    s.type,
-                    s.subType || '-',
-                    s.hours,
-                    s.startTime,
-                    s.endTime,
-                    `"${s.location}"`,
-                    s.total,
-                    s.status
-                ]);
+    // Export Data (CSV)
+    exportData() {
+        const headers = ['Fecha', 'Tipo', 'Subtipo', 'Horas', 'Inicio', 'Fin', 'Lugar', 'Total', 'Estado'];
+        const rows = this.services.map(s => [
+            s.date,
+            s.type,
+            s.subType || '-',
+            s.hours,
+            s.startTime,
+            s.endTime,
+            `"${s.location}"`,
+            s.total,
+            s.status
+        ]);
 
-                const csvContent = [
-                    headers.join(','),
-                    ...rows.map(r => r.join(','))
-                ].join('\n');
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(r => r.join(','))
+        ].join('\n');
 
-                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.setAttribute('href', url);
-                link.setAttribute('download', 'mis_servicios_sf.csv');
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                showToast("Exportando CSV...");
-            },
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'mis_servicios_sf.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast("Exportando CSV...");
+    },
 
     // Expense Actions
     async addExpense(category, amount) {
-                try {
-                    await DB.addExpense({
-                        category,
-                        amount: parseFloat(amount),
-                        date: new Date().toISOString().split('T')[0]
-                    });
-                    showToast(`Gasto de $${amount} agregado`);
-                } catch (e) {
-                    showToast("Error al guardar gasto");
-                    console.error(e);
-                }
-            },
+        try {
+            await DB.addExpense({
+                category,
+                amount: parseFloat(amount),
+                date: new Date().toISOString().split('T')[0]
+            });
+            showToast(`Gasto de $${amount} agregado`);
+        } catch (e) {
+            showToast("Error al guardar gasto");
+            console.error(e);
+        }
+    },
 
     async deleteExpense(id) {
-                if (confirm("¿Eliminar este gasto?")) {
-                    await DB.deleteExpense(id);
-                    showToast("Gasto eliminado");
-                }
-            },
+        if (confirm("¿Eliminar este gasto?")) {
+            await DB.deleteExpense(id);
+            showToast("Gasto eliminado");
+        }
+    },
 
-            getFormattedDate(dateStr) {
-                const options = { weekday: 'short', day: 'numeric', month: 'short' };
-                return new Date(dateStr).toLocaleDateString('es-ES', options);
-            }
-        };
+    getFormattedDate(dateStr) {
+        const options = { weekday: 'short', day: 'numeric', month: 'short' };
+        return new Date(dateStr).toLocaleDateString('es-ES', options);
+    }
+};
 
-        // Initialize Store
-        store.init();
+// Initialize Store
+store.init();
 
 
-        // --- 2. ROUTER & NAVIGATION ---
+// --- 2. ROUTER & NAVIGATION ---
 
-        const router = {
-            currentRoute: '#login',
+const router = {
+    currentRoute: '#login',
 
-            init() {
-                window.addEventListener('hashchange', () => this.handleRoute());
-                this.handleRoute(); // Initial load
-            },
+    init() {
+        window.addEventListener('hashchange', () => this.handleRoute());
+        this.handleRoute(); // Initial load
+    },
 
-            handleRoute() {
-                const hash = window.location.hash || '#login';
+    handleRoute() {
+        const hash = window.location.hash || '#login';
 
-                // Auth Guard
-                const publicRoutes = ['#login', '#signup'];
-                if (!store.isAuthenticated() && !publicRoutes.includes(hash)) {
-                    window.location.hash = '#login';
-                    return;
-                }
+        // Auth Guard
+        const publicRoutes = ['#login', '#signup'];
+        if (!store.isAuthenticated() && !publicRoutes.includes(hash)) {
+            window.location.hash = '#login';
+            return;
+        }
 
-                if (store.isAuthenticated() && publicRoutes.includes(hash)) {
-                    window.location.hash = '#agenda';
-                    return;
-                }
+        if (store.isAuthenticated() && publicRoutes.includes(hash)) {
+            window.location.hash = '#agenda';
+            return;
+        }
 
-                this.currentRoute = hash;
-                this.render(hash);
-            },
+        this.currentRoute = hash;
+        this.render(hash);
+    },
 
-            render(route) {
-                const app = document.getElementById('app');
-                try {
-                    app.innerHTML = ''; // Clear current view
+    render(route) {
+        const app = document.getElementById('app');
+        try {
+            app.innerHTML = ''; // Clear current view
 
-                    switch (route) {
-                        case '#login':
-                            renderLogin(app);
-                            break;
-                        case '#signup':
-                            renderSignup(app);
-                            break;
-                        case '#agenda':
-                            renderAgenda(app);
-                            break;
-                        case '#admin':
-                            if (store.user && store.user.role === 'admin') {
-                                renderAdmin(app);
-                            } else {
-                                showToast("Acceso Denegado");
-                                window.location.hash = '#agenda';
-                            }
-                            break;
-                        case '#control':
-                            renderControlPanel(app);
-                            break;
-                        case '#register':
-                            renderRegister(app);
-                            break;
-                        case '#financial':
-                            renderFinancial(app);
-                            break;
-                        case '#profile':
-                            renderProfile(app);
-                            break;
-
-                        // Dynamic Route for Details
-                        default:
-                            if (route.startsWith('#service/')) {
-                                const serviceId = route.split('/')[1];
-                                renderServiceDetails(app, serviceId);
-                            } else {
-                                window.location.hash = '#agenda';
-                            }
+            switch (route) {
+                case '#login':
+                    renderLogin(app);
+                    break;
+                case '#signup':
+                    renderSignup(app);
+                    break;
+                case '#agenda':
+                    renderAgenda(app);
+                    break;
+                case '#admin':
+                    if (store.user && store.user.role === 'admin') {
+                        renderAdmin(app);
+                    } else {
+                        showToast("Acceso Denegado");
+                        window.location.hash = '#agenda';
                     }
-                } catch (e) {
-                    console.error("Render Error:", e);
-                    app.innerHTML = `
+                    break;
+                case '#control':
+                    renderControlPanel(app);
+                    break;
+                case '#register':
+                    renderRegister(app);
+                    break;
+                case '#financial':
+                    renderFinancial(app);
+                    break;
+                case '#profile':
+                    renderProfile(app);
+                    break;
+                case '#history':
+                    renderHistory(app);
+                    break;
+
+                // Dynamic Route for Details
+                default:
+                    if (route.startsWith('#details')) {
+                        const urlParams = new URLSearchParams(route.split('?')[1]);
+                        const serviceId = urlParams.get('id');
+                        if (serviceId) {
+                            renderServiceDetails(app, serviceId);
+                        } else {
+                            window.location.hash = '#agenda';
+                        }
+                    } else if (route.startsWith('#service/')) {
+                        // Backward compat or alternative
+                        const serviceId = route.split('/')[1];
+                        renderServiceDetails(app, serviceId);
+                    } else {
+                        window.location.hash = '#agenda';
+                    }
+            }
+        } catch (e) {
+            console.error("Render Error:", e);
+            app.innerHTML = `
                 <div class="p-6 text-center text-red-500">
                     <h2 class="font-bold text-xl mb-2">Error de Carga</h2>
                     <p class="text-sm border p-2 rounded border-red-500/50 bg-red-500/10">${e.message}</p>
@@ -337,39 +350,39 @@ const store = {
                     <button onclick="localStorage.clear(); window.location.reload()" class="mt-4 block mx-auto text-sm underline text-slate-500">Borrar Datos y Recargar</button>
                 </div>
             `;
-                }
-            },
+        }
+    },
 
-            navigateTo(route) {
-                window.location.hash = route;
-            }
-        };
+    navigateTo(route) {
+        window.location.hash = route;
+    }
+};
 
-        // --- ADMIN RENDERER ---
-        // --- ADMIN RENDERER ---
-        async function renderAdmin(container) {
-            container.innerHTML = `
+// --- ADMIN RENDERER ---
+// --- ADMIN RENDERER ---
+async function renderAdmin(container) {
+    container.innerHTML = `
         <div class="flex flex-col items-center justify-center h-screen space-y-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             <p class="text-slate-500 animate-pulse">Cargando datos globales...</p>
         </div>
     `;
 
-            // Fetch Global Data
-            const allServices = await DB.getAllServicesForStats();
-            // Calculate Global Stats
-            const totalHours = allServices.reduce((sum, s) => sum + (parseFloat(s.hours) || 0), 0);
-            const totalRevenue = allServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
+    // Fetch Global Data
+    const allServices = await DB.getAllServicesForStats();
+    // Calculate Global Stats
+    const totalHours = allServices.reduce((sum, s) => sum + (parseFloat(s.hours) || 0), 0);
+    const totalRevenue = allServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
 
-            // Stats Object
-            const stats = {
-                userCount: store.allUsers.length,
-                activeUsers: store.allUsers.filter(u => u.lastLogin && new Date(u.lastLogin) > new Date(Date.now() - 86400000)).length,
-                totalHours,
-                totalRevenue
-            };
+    // Stats Object
+    const stats = {
+        userCount: store.allUsers.length,
+        activeUsers: store.allUsers.filter(u => u.lastLogin && new Date(u.lastLogin) > new Date(Date.now() - 86400000)).length,
+        totalHours,
+        totalRevenue
+    };
 
-            container.innerHTML = `
+    container.innerHTML = `
 <header class="sticky top-0 z-50 bg-slate-900 border-b border-white/10 px-6 py-4 flex items-center justify-between">
     <h1 class="text-xl font-bold text-white flex items-center gap-2">
         <span class="material-symbols-outlined text-accent-cyan">admin_panel_settings</span>
@@ -478,33 +491,33 @@ const store = {
 </main>
     `;
 
-            // Logic for Ads
-            store.handleAddAd = async (form) => {
-                const imageUrl = form.imageUrl.value;
-                const linkUrl = form.linkUrl.value;
-                try {
-                    await DB.addAd({ imageUrl, linkUrl });
-                    showToast("Anuncio creado correctamente");
-                    form.reset();
-                    // Re-render implicitly handled by subscription update
-                    renderAdmin(container);
-                } catch (e) {
-                    showToast("Error al crear anuncio");
-                }
-            };
-
-            store.deleteAd = async (id) => {
-                if (confirm("¿Eliminar este anuncio?")) {
-                    await DB.deleteAd(id);
-                    renderAdmin(container);
-                }
-            };
+    // Logic for Ads
+    store.handleAddAd = async (form) => {
+        const imageUrl = form.imageUrl.value;
+        const linkUrl = form.linkUrl.value;
+        try {
+            await DB.addAd({ imageUrl, linkUrl });
+            showToast("Anuncio creado correctamente");
+            form.reset();
+            // Re-render implicitly handled by subscription update
+            renderAdmin(container);
+        } catch (e) {
+            showToast("Error al crear anuncio");
         }
+    };
 
-        // --- 3. AUTH VIEW RENDERERS ---
+    store.deleteAd = async (id) => {
+        if (confirm("¿Eliminar este anuncio?")) {
+            await DB.deleteAd(id);
+            renderAdmin(container);
+        }
+    };
+}
 
-        function renderLogin(container) {
-            container.innerHTML = `
+// --- 3. AUTH VIEW RENDERERS ---
+
+function renderLogin(container) {
+    container.innerHTML = `
         <div class="min-h-screen flex flex-col justify-center px-6 py-12 lg:px-8 bg-background-dark">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm text-center">
                 <div class="mx-auto size-16 bg-primary/20 rounded-2xl flex items-center justify-center text-primary border border-primary/30 mb-6">
@@ -561,20 +574,20 @@ const store = {
         </div>
     `;
 
-            window.handleGoogleLogin = () => {
-                store.loginWithGoogle();
-            };
+    window.handleGoogleLogin = () => {
+        store.loginWithGoogle();
+    };
 
-            window.handleLogin = (e) => {
-                e.preventDefault();
-                const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                store.login(email, password);
-            }
-        }
+    window.handleLogin = (e) => {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        store.login(email, password);
+    }
+}
 
-        function renderSignup(container) {
-            container.innerHTML = `
+function renderSignup(container) {
+    container.innerHTML = `
         <div class="min-h-screen flex flex-col justify-center px-6 py-12 lg:px-8 bg-background-dark">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm text-center">
                  <button onclick="router.navigateTo('#login')" class="absolute top-6 left-6 text-slate-400 hover:text-white flex items-center gap-1">
@@ -628,43 +641,43 @@ const store = {
         </div>
     `;
 
-            window.handleSignup = (e) => {
-                e.preventDefault();
-                const email = document.getElementById('s-email').value;
-                const password = document.querySelector('input[name="password"]').value;
-                const name = document.querySelector('input[name="name"]').value;
-                store.register(email, password, name);
-            }
-        }
+    window.handleSignup = (e) => {
+        e.preventDefault();
+        const email = document.getElementById('s-email').value;
+        const password = document.querySelector('input[name="password"]').value;
+        const name = document.querySelector('input[name="name"]').value;
+        store.register(email, password, name);
+    }
+}
 
-        // --- 4. APP VIEWS ---
+// --- 4. APP VIEWS ---
 
-        /**
-         * Render Agenda View
-         * matches: agenda_y_calendario_de_turnos/code.html
-         */
-        function renderAgenda(container) {
-            // State for Calendar View
-            if (!store.viewDate) store.viewDate = new Date();
+/**
+ * Render Agenda View
+ * matches: agenda_y_calendario_de_turnos/code.html
+ */
+function renderAgenda(container) {
+    // State for Calendar View
+    if (!store.viewDate) store.viewDate = new Date();
 
-            // Ensure we stick to the viewDate month, but if selectedDate is set, we might want to be there? 
-            // Let's keep viewDate independent so user can browse.
+    // Ensure we stick to the viewDate month, but if selectedDate is set, we might want to be there? 
+    // Let's keep viewDate independent so user can browse.
 
-            const year = store.viewDate.getFullYear();
-            const month = store.viewDate.getMonth();
-            const currentMonthLabel = store.viewDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
+    const year = store.viewDate.getFullYear();
+    const month = store.viewDate.getMonth();
+    const currentMonthLabel = store.viewDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
 
-            const selectedDate = store.selectedDate || new Date().toISOString().split('T')[0];
+    const selectedDate = store.selectedDate || new Date().toISOString().split('T')[0];
 
-            // Get services for selected date
-            const dayServices = store.services.filter(s => s.date === selectedDate);
+    // Get services for selected date
+    const dayServices = store.services.filter(s => s.date === selectedDate);
 
-            // Find next shift (first service in future)
-            const nextShift = store.services
-                .filter(s => new Date(s.date + 'T' + (s.time || '00:00')) > new Date())
-                .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
+    // Find next shift (first service in future)
+    const nextShift = store.services
+        .filter(s => new Date(s.date + 'T' + (s.time || '00:00')) > new Date())
+        .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
 
-            const html = `
+    const html = `
         <!-- Header -->
         <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 pt-12 pb-4">
             <div class="flex justify-between items-center">
@@ -738,8 +751,8 @@ const store = {
                     <!-- Calendar Grid Header -->
                     <div class="grid grid-cols-7 gap-1 mb-2">
                          ${['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'].map(d =>
-                `<div class="text-center text-[10px] font-bold text-slate-400 uppercase">${d}</div>`
-            ).join('')}
+        `<div class="text-center text-[10px] font-bold text-slate-400 uppercase">${d}</div>`
+    ).join('')}
                     </div>
                     <!-- Calendar Grid -->
                     <div class="grid grid-cols-7 gap-y-2" id="calendar-grid">
@@ -753,7 +766,7 @@ const store = {
                 <h3 class="font-bold text-lg dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
                 <div class="space-y-3">
                     ${dayServices.length > 0 ? dayServices.map(renderServiceCard).join('') :
-                    `<div class="p-8 text-center text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl">
+            `<div class="p-8 text-center text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl">
                 <span class="material-symbols-outlined text-4xl mb-2">event_busy</span>
                 <p class="text-sm">Sin servicios este día</p>
             </div>`}
@@ -763,54 +776,54 @@ const store = {
         ${renderBottomNav('agenda')}
     `;
 
-            container.innerHTML = html;
+    container.innerHTML = html;
 
-            // Attach listeners
-            document.querySelectorAll('.calendar-day').forEach(el => {
-                el.addEventListener('click', (e) => {
-                    store.selectedDate = e.currentTarget.dataset.date;
-                    renderAgenda(container);
-                });
-            });
+    // Attach listeners
+    document.querySelectorAll('.calendar-day').forEach(el => {
+        el.addEventListener('click', (e) => {
+            store.selectedDate = e.currentTarget.dataset.date;
+            renderAgenda(container);
+        });
+    });
 
-            // Month Nav Listeners
-            document.getElementById('btn-prev-month').addEventListener('click', () => {
-                store.viewDate.setMonth(store.viewDate.getMonth() - 1);
-                renderAgenda(container);
-            });
+    // Month Nav Listeners
+    document.getElementById('btn-prev-month').addEventListener('click', () => {
+        store.viewDate.setMonth(store.viewDate.getMonth() - 1);
+        renderAgenda(container);
+    });
 
-            document.getElementById('btn-next-month').addEventListener('click', () => {
-                store.viewDate.setMonth(store.viewDate.getMonth() + 1);
-                renderAgenda(container);
-            });
-        }
+    document.getElementById('btn-next-month').addEventListener('click', () => {
+        store.viewDate.setMonth(store.viewDate.getMonth() + 1);
+        renderAgenda(container);
+    });
+}
 
-        function generateCalendarGrid(year, month, selectedDate) {
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            let html = '';
+function generateCalendarGrid(year, month, selectedDate) {
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    let html = '';
 
-            // Empty slots
-            for (let i = 0; i < firstDay; i++) {
-                html += `<div class="py-2"></div>`;
-            }
+    // Empty slots
+    for (let i = 0; i < firstDay; i++) {
+        html += `<div class="py-2"></div>`;
+    }
 
-            // Days
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-                const isSelected = dateStr === selectedDate;
-                const hasService = store.services.some(s => s.date === dateStr);
-                const isToday = new Date().toISOString().split('T')[0] === dateStr;
+    // Days
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const isSelected = dateStr === selectedDate;
+        const hasService = store.services.some(s => s.date === dateStr);
+        const isToday = new Date().toISOString().split('T')[0] === dateStr;
 
-                // Colors
-                const hasPublic = store.services.some(s => s.date === dateStr && s.type === 'Public');
-                const hasPrivate = store.services.some(s => s.date === dateStr && s.type === 'Private');
+        // Colors
+        const hasPublic = store.services.some(s => s.date === dateStr && s.type === 'Public');
+        const hasPrivate = store.services.some(s => s.date === dateStr && s.type === 'Private');
 
-                let dots = '';
-                if (hasPublic) dots += `<div class="size-1 rounded-full bg-primary"></div>`;
-                if (hasPrivate) dots += `<div class="size-1 rounded-full bg-service-private"></div>`;
+        let dots = '';
+        if (hasPublic) dots += `<div class="size-1 rounded-full bg-primary"></div>`;
+        if (hasPrivate) dots += `<div class="size-1 rounded-full bg-service-private"></div>`;
 
-                html += `
+        html += `
             <div class="flex flex-col items-center py-2 relative calendar-day cursor-pointer" data-date="${dateStr}">
                 ${isSelected ? `<div class="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"></div>` : ''}
                 <span class="relative z-10 font-bold ${isSelected ? 'text-primary' : (isToday ? 'text-accent-cyan' : 'text-slate-500 dark:text-slate-300')}">${day}</span>
@@ -819,22 +832,22 @@ const store = {
                 </div>
             </div>
         `;
-            }
-            return html;
-        }
+    }
+    return html;
+}
 
-        function renderServiceCard(service) {
-            const isPublic = service.type === 'Public';
-            const borderColor = isPublic ? 'border-primary' : 'border-service-private';
-            const textColor = isPublic ? 'text-primary' : 'text-service-private';
-            const bgSoft = isPublic ? 'bg-primary/10' : 'bg-service-private/10';
-            const icon = isPublic ? 'account_balance' : 'storefront';
+function renderServiceCard(service) {
+    const isPublic = service.type === 'Public';
+    const borderColor = isPublic ? 'border-primary' : 'border-service-private';
+    const textColor = isPublic ? 'text-primary' : 'text-service-private';
+    const bgSoft = isPublic ? 'bg-primary/10' : 'bg-service-private/10';
+    const icon = isPublic ? 'account_balance' : 'storefront';
 
-            // Handle legacy data safely
-            const timeRange = service.startTime && service.endTime ? `${service.startTime} - ${service.endTime}` : 'Horario no especificado';
-            const subType = service.subType || '';
+    // Handle legacy data safely
+    const timeRange = service.startTime && service.endTime ? `${service.startTime} - ${service.endTime}` : 'Horario no especificado';
+    const subType = service.subType || '';
 
-            return `
+    return `
         <div onclick="router.navigateTo('#service/${service.id}')" class="bg-white dark:bg-slate-900 p-4 rounded-2xl flex gap-4 border-l-4 ${borderColor} shadow-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
             <div class="${bgSoft} size-12 rounded-xl flex items-center justify-center ${textColor}">
                 <span class="material-symbols-outlined">${icon}</span>
@@ -854,38 +867,38 @@ const store = {
                         <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">${timeRange}</span>
                     </div>
                     ${(() => {
-                    // DRY Status Logic for Card
-                    const today = new Date().toISOString().split('T')[0];
-                    const isFuture = service.date > today;
-                    let label = 'Pendiente';
-                    let color = 'text-amber-400';
+            // DRY Status Logic for Card
+            const today = new Date().toISOString().split('T')[0];
+            const isFuture = service.date > today;
+            let label = 'Pendiente';
+            let color = 'text-amber-400';
 
-                    if (service.status === 'paid') {
-                        label = 'Liquidado';
-                        color = 'text-green-400';
-                    } else if (isFuture) {
-                        label = 'Agendado';
-                        color = 'text-blue-400';
-                    }
-                    return `<div class="flex items-center gap-1">
+            if (service.status === 'paid') {
+                label = 'Liquidado';
+                color = 'text-green-400';
+            } else if (isFuture) {
+                label = 'Agendado';
+                color = 'text-blue-400';
+            }
+            return `<div class="flex items-center gap-1">
                             <span class="size-1.5 rounded-full ${color.replace('text-', 'bg-')}"></span>
                             <span class="text-[10px] ${color} font-bold uppercase tracking-tighter">${label}</span>
                          </div>`;
-                })()}
+        })()}
                 </div>
             </div>
         </div>
     `;
-        }
+}
 
-        /**
-         * Render Register View
-         * matches: registrar_nuevo_servicio/code.html
-         */
-        function renderRegister(container) {
-            const today = new Date().toISOString().split('T')[0];
+/**
+ * Render Register View
+ * matches: registrar_nuevo_servicio/code.html
+ */
+function renderRegister(container) {
+    const today = new Date().toISOString().split('T')[0];
 
-            container.innerHTML = `
+    container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur border-b border-slate-200 dark:border-primary/20">
             <div class="flex items-center justify-between px-4 h-16">
                 <button onclick="router.navigateTo('#agenda')" class="flex items-center text-primary">
@@ -979,145 +992,145 @@ const store = {
         </main>
     `;
 
-            // Logic
-            let currentType = 'Public';
-            let currentSubType = 'Ordinaria';
+    // Logic
+    let currentType = 'Public';
+    let currentSubType = 'Ordinaria';
 
-            // Config helper
-            const updateSubtypes = () => {
-                const container = document.getElementById('subtype-container');
-                const config = store.serviceConfig[currentType];
-                const subtypes = Object.keys(config);
+    // Config helper
+    const updateSubtypes = () => {
+        const container = document.getElementById('subtype-container');
+        const config = store.serviceConfig[currentType];
+        const subtypes = Object.keys(config);
 
-                container.innerHTML = subtypes.map(sub => `
+        container.innerHTML = subtypes.map(sub => `
             <button onclick="setSubType('${sub}')" 
                 class="px-4 py-2 rounded-lg text-sm font-bold border ${currentSubType === sub ? 'bg-primary text-white border-primary' : 'border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400'} transition-all">
                 ${sub}
             </button>
         `).join('');
 
-                // Default to first if current not invalid
-                if (!subtypes.includes(currentSubType)) {
-                    currentSubType = subtypes[0];
-                    updateSubtypes(); // Re-render to highlight correctly
-                } else {
-                    updateRate();
-                }
-            };
-
-            window.setFormType = (type) => {
-                currentType = type;
-                // Update UI Tabs
-                ['Public', 'Private', 'OSPES'].forEach(t => {
-                    const btn = document.getElementById(`type-${t.toLowerCase()}`);
-                    if (t === type) {
-                        btn.className = 'flex-1 py-2 text-xs font-bold rounded-md bg-white dark:bg-primary shadow-sm dark:text-white transition-all';
-                    } else {
-                        btn.className = 'flex-1 py-2 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-700 transition-all';
-                    }
-                });
-                updateSubtypes();
-            };
-
-            window.setSubType = (sub) => {
-                currentSubType = sub;
-                updateSubtypes();
-            };
-
-            const updateRate = () => {
-                const rate = store.serviceConfig[currentType][currentSubType];
-                document.getElementById('inp-rate').value = rate;
-                calculateTotal();
-            };
-
-            const calculateHours = () => {
-                const start = document.getElementById('inp-start').value;
-                const end = document.getElementById('inp-end').value;
-
-                if (start && end) {
-                    const startDate = new Date(`2000-01-01T${start}`);
-                    let endDate = new Date(`2000-01-01T${end}`);
-
-                    if (endDate < startDate) {
-                        // Next day
-                        endDate = new Date(`2000-01-02T${end}`);
-                    }
-
-                    const diff = (endDate - startDate) / (1000 * 60 * 60); // Hours
-                    document.getElementById('lbl-hours').innerText = diff.toFixed(1) + ' Horas';
-                    return diff;
-                }
-                return 0;
-            };
-
-            const calculateTotal = () => {
-                const hours = calculateHours();
-                const rate = parseFloat(document.getElementById('inp-rate').value) || 0;
-                const total = hours * rate;
-                document.getElementById('txt-total').innerText = `$${(total || 0).toLocaleString()}`;
-            };
-
-            // Listeners
-            document.getElementById('inp-start').addEventListener('change', calculateTotal);
-            document.getElementById('inp-end').addEventListener('change', calculateTotal);
-            document.getElementById('inp-rate').addEventListener('input', calculateTotal);
-
-            // Save
-            const saveAction = () => {
-                const date = document.getElementById('inp-date').value;
-                const start = document.getElementById('inp-start').value;
-                const end = document.getElementById('inp-end').value;
-                const rate = parseFloat(document.getElementById('inp-rate').value);
-                const location = document.getElementById('inp-location').value || (currentType + ' - ' + currentSubType);
-                const hours = calculateHours();
-
-                store.addService({
-                    date,
-                    startTime: start,
-                    endTime: end,
-                    hours,
-                    rate,
-                    type: currentType,
-                    subType: currentSubType,
-                    location,
-                    total: hours * rate,
-                    status: 'pending' // Default pending payment
-                });
-
-                router.navigateTo('#agenda');
-            };
-
-            document.getElementById('btn-save').addEventListener('click', saveAction);
-
-            // Init
-            updateSubtypes();
-            // Force type select visual update
-            setFormType('Public');
+        // Default to first if current not invalid
+        if (!subtypes.includes(currentSubType)) {
+            currentSubType = subtypes[0];
+            updateSubtypes(); // Re-render to highlight correctly
+        } else {
+            updateRate();
         }
+    };
+
+    window.setFormType = (type) => {
+        currentType = type;
+        // Update UI Tabs
+        ['Public', 'Private', 'OSPES'].forEach(t => {
+            const btn = document.getElementById(`type-${t.toLowerCase()}`);
+            if (t === type) {
+                btn.className = 'flex-1 py-2 text-xs font-bold rounded-md bg-white dark:bg-primary shadow-sm dark:text-white transition-all';
+            } else {
+                btn.className = 'flex-1 py-2 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-700 transition-all';
+            }
+        });
+        updateSubtypes();
+    };
+
+    window.setSubType = (sub) => {
+        currentSubType = sub;
+        updateSubtypes();
+    };
+
+    const updateRate = () => {
+        const rate = store.serviceConfig[currentType][currentSubType];
+        document.getElementById('inp-rate').value = rate;
+        calculateTotal();
+    };
+
+    const calculateHours = () => {
+        const start = document.getElementById('inp-start').value;
+        const end = document.getElementById('inp-end').value;
+
+        if (start && end) {
+            const startDate = new Date(`2000-01-01T${start}`);
+            let endDate = new Date(`2000-01-01T${end}`);
+
+            if (endDate < startDate) {
+                // Next day
+                endDate = new Date(`2000-01-02T${end}`);
+            }
+
+            const diff = (endDate - startDate) / (1000 * 60 * 60); // Hours
+            document.getElementById('lbl-hours').innerText = diff.toFixed(1) + ' Horas';
+            return diff;
+        }
+        return 0;
+    };
+
+    const calculateTotal = () => {
+        const hours = calculateHours();
+        const rate = parseFloat(document.getElementById('inp-rate').value) || 0;
+        const total = hours * rate;
+        document.getElementById('txt-total').innerText = `$${(total || 0).toLocaleString()}`;
+    };
+
+    // Listeners
+    document.getElementById('inp-start').addEventListener('change', calculateTotal);
+    document.getElementById('inp-end').addEventListener('change', calculateTotal);
+    document.getElementById('inp-rate').addEventListener('input', calculateTotal);
+
+    // Save
+    const saveAction = () => {
+        const date = document.getElementById('inp-date').value;
+        const start = document.getElementById('inp-start').value;
+        const end = document.getElementById('inp-end').value;
+        const rate = parseFloat(document.getElementById('inp-rate').value);
+        const location = document.getElementById('inp-location').value || (currentType + ' - ' + currentSubType);
+        const hours = calculateHours();
+
+        store.addService({
+            date,
+            startTime: start,
+            endTime: end,
+            hours,
+            rate,
+            type: currentType,
+            subType: currentSubType,
+            location,
+            total: hours * rate,
+            status: 'pending' // Default pending payment
+        });
+
+        router.navigateTo('#agenda');
+    };
+
+    document.getElementById('btn-save').addEventListener('click', saveAction);
+
+    // Init
+    updateSubtypes();
+    // Force type select visual update
+    setFormType('Public');
+}
 
 
-        /**
-         * Render Control Panel
-         * matches: panel_de_control_de_adicionales/code.html
-         */
-        function renderControlPanel(container) {
-            // Calculate Stats
-            const totalServices = store.services.length;
+/**
+ * Render Control Panel
+ * matches: panel_de_control_de_adicionales/code.html
+ */
+function renderControlPanel(container) {
+    // Calculate Stats
+    const totalServices = store.services.length;
 
-            // Sort by date desc
-            const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
+    // Sort by date desc
+    const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            const publicServices = store.services.filter(s => s.type === 'Public');
-            const privateServices = store.services.filter(s => s.type === 'Private');
+    const publicServices = store.services.filter(s => s.type === 'Public');
+    const privateServices = store.services.filter(s => s.type === 'Private');
 
-            const totalPublic = publicServices.reduce((sum, s) => sum + s.total, 0);
-            const totalPrivate = privateServices.reduce((sum, s) => sum + s.total, 0);
-            const totalEarnings = totalPublic + totalPrivate;
+    const totalPublic = publicServices.reduce((sum, s) => sum + s.total, 0);
+    const totalPrivate = privateServices.reduce((sum, s) => sum + s.total, 0);
+    const totalEarnings = totalPublic + totalPrivate;
 
-            const hoursPublic = publicServices.reduce((sum, s) => sum + s.hours, 0);
-            const hoursPrivate = privateServices.reduce((sum, s) => sum + s.hours, 0);
+    const hoursPublic = publicServices.reduce((sum, s) => sum + s.hours, 0);
+    const hoursPrivate = privateServices.reduce((sum, s) => sum + s.hours, 0);
 
-            const html = `
+    const html = `
         <header class="sticky top-0 z-50 glass-card px-5 py-4 flex items-center justify-between border-b border-white/5">
             <div class="flex items-center gap-3">
                 <div class="relative">
@@ -1190,11 +1203,11 @@ const store = {
                 </div>
                 <div class="space-y-3">
                     ${sortedServices.slice(0, 5).map(s => {
-                const isPub = s.type === 'Public';
-                const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
-                const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
-                const icon = isPub ? 'account_balance' : 'shopping_cart';
-                return `
+        const isPub = s.type === 'Public';
+        const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
+        const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
+        const icon = isPub ? 'account_balance' : 'shopping_cart';
+        return `
                             <div class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5">
                                 <div class="flex items-center gap-4">
                                     <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
@@ -1206,27 +1219,27 @@ const store = {
                                             <span class="text-[11px] text-slate-400">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                             <span class="size-1 rounded-full bg-slate-600"></span>
                                             ${(() => {
-                        const today = new Date().toISOString().split('T')[0];
-                        const isFuture = s.date > today;
-                        let label = 'Pendiente';
-                        let color = 'text-amber-400';
+                const today = new Date().toISOString().split('T')[0];
+                const isFuture = s.date > today;
+                let label = 'Pendiente';
+                let color = 'text-amber-400';
 
-                        if (s.status === 'paid') {
-                            label = 'Liquidado';
-                            color = 'text-green-400';
-                        } else if (isFuture) {
-                            label = 'Agendado';
-                            color = 'text-blue-400';
-                        }
-                        return `<span class="text-[11px] ${color} font-bold uppercase tracking-tighter">${label}</span>`;
-                    })()}
+                if (s.status === 'paid') {
+                    label = 'Liquidado';
+                    color = 'text-green-400';
+                } else if (isFuture) {
+                    label = 'Agendado';
+                    color = 'text-blue-400';
+                }
+                return `<span class="text-[11px] ${color} font-bold uppercase tracking-tighter">${label}</span>`;
+            })()}
                                         </div>
                                     </div>
                                 </div>
                                 <p class="text-sm font-bold text-white">$${(s.total || 0).toLocaleString()}</p>
                             </div>
                          `;
-            }).join('')}
+    }).join('')}
                 </div>
             </section>
         </main>
@@ -1240,18 +1253,18 @@ const store = {
 
         ${renderBottomNav('control')}
     `;
-            container.innerHTML = html;
-        }
+    container.innerHTML = html;
+}
 
-        /**
-         * Render Financial View
-         * matches: resumen_financiero_y_gastos/code.html
-         */
-        function renderFinancial(container) {
-            const totalIncome = store.services.reduce((sum, s) => sum + s.total, 0);
-            const totalExpenses = store.expenses.reduce((sum, e) => sum + e.amount, 0);
+/**
+ * Render Financial View
+ * matches: resumen_financiero_y_gastos/code.html
+ */
+function renderFinancial(container) {
+    const totalIncome = store.services.reduce((sum, s) => sum + s.total, 0);
+    const totalExpenses = store.expenses.reduce((sum, e) => sum + e.amount, 0);
 
-            const html = `
+    const html = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-3">
@@ -1359,33 +1372,33 @@ const store = {
         </main>
         ${renderBottomNav('financial')}
     `;
-            container.innerHTML = html;
+    container.innerHTML = html;
 
-            // Attach Expense Listeners
-            window.handleAddExpense = (category) => {
-                const amount = prompt(`Monto para ${category}:`);
-                if (amount && !isNaN(amount)) {
-                    store.addExpense(category, amount);
-                }
-            };
+    // Attach Expense Listeners
+    window.handleAddExpense = (category) => {
+        const amount = prompt(`Monto para ${category}:`);
+        if (amount && !isNaN(amount)) {
+            store.addExpense(category, amount);
         }
+    };
+}
 
-        /**
-         * Render Admin View
-         * matches: panel_de_administración_y_métricas/code.html
-         */
+/**
+ * Render Admin View
+ * matches: panel_de_administración_y_métricas/code.html
+ */
 
 
-        /**
-         * Render Profile / Settings View
-         */
-        function renderProfile(container) {
-            // Clone config to avoid reference issues
-            const config = JSON.parse(JSON.stringify(store.serviceConfig));
+/**
+ * Render Profile / Settings View
+ */
+function renderProfile(container) {
+    // Clone config to avoid reference issues
+    const config = JSON.parse(JSON.stringify(store.serviceConfig));
 
-            // Helper to generate inputs with editable names
-            const renderConfigInputs = (type) => {
-                return Object.keys(config[type]).map(sub => `
+    // Helper to generate inputs with editable names
+    const renderConfigInputs = (type) => {
+        return Object.keys(config[type]).map(sub => `
             <div class="flex justify-between items-center py-2 border-b border-white/5 last:border-0 gap-2">
                 <input type="text" 
                     value="${sub}" 
@@ -1401,9 +1414,9 @@ const store = {
                 </div>
             </div>
         `).join('');
-            };
+    };
 
-            container.innerHTML = `
+    container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
             <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
@@ -1478,122 +1491,114 @@ const store = {
         </main>
     `;
 
-        };
+};
 
-        // --- MISSING FUNCTIONS ---
-        store.renameServiceSubtype = (type, oldName, newName) => {
-            if (oldName === newName || !newName.trim()) return;
-            const value = store.serviceConfig[type][oldName];
-            delete store.serviceConfig[type][oldName];
-            store.serviceConfig[type][newName] = value;
-            // Re-render handled by user typing, but on save it persists
-        };
+// --- MISSING FUNCTIONS ---
+store.renameServiceSubtype = (type, oldName, newName) => {
+    if (oldName === newName || !newName.trim()) return;
+    const value = store.serviceConfig[type][oldName];
+    delete store.serviceConfig[type][oldName];
+    store.serviceConfig[type][newName] = value;
+    // Re-render handled by user typing, but on save it persists
+};
 
-        store.updateProfile = async (name, avatar) => {
-            try {
-                store.user.name = name;
-                store.user.avatar = avatar;
+store.updateProfile = async (name, avatar) => {
+    try {
+        store.user.name = name;
+        store.user.avatar = avatar;
 
-                await DB.updateUser({
-                    name,
-                    avatar,
-                    displayName: name, // Sync for auth compat
-                    photoURL: avatar
-                });
-                showToast("Perfil actualizado correctamente");
-                renderProfile(document.getElementById('app')); // Re-render profile
-            } catch (e) {
-                showToast("Error al actualizar perfil");
-                console.error(e);
-            }
-        };
+        await DB.updateUser({
+            name,
+            avatar,
+            displayName: name, // Sync for auth compat
+            photoURL: avatar
+        });
+        showToast("Perfil actualizado correctamente");
+        renderProfile(document.getElementById('app')); // Re-render profile
+    } catch (e) {
+        showToast("Error al actualizar perfil");
+        console.error(e);
+    }
+};
 
-        store.requestNotificationPermission = async () => {
-            if (!("Notification" in window)) {
-                showToast("Tu navegador no soporta notificaciones");
-                return;
-            }
+store.requestNotificationPermission = async () => {
+    if (!("Notification" in window)) {
+        showToast("Tu navegador no soporta notificaciones");
+        return;
+    }
 
-            const permission = await Notification.requestPermission();
-            if (permission === 'granted') {
-                store.notificationSettings.enabled = true;
-                showToast("Alertas Activadas");
-                renderProfile(document.getElementById('app'));
+    const permission = await Notification.requestPermission();
+    if (permission === 'granted') {
+        store.notificationSettings.enabled = true;
+        showToast("Alertas Activadas");
+        renderProfile(document.getElementById('app'));
 
-                // Test Notification manually
-                try {
-                    new Notification("Adicionales Santa Fe", {
-                        body: "¡Notificaciones configuradas correctamente!",
-                        icon: "./icon.png" // Fix icon path
-                    });
-                } catch (e) {
-                    console.error("Notification trigger error", e);
-                }
-            }
-        };
-
-        // Notification Checker Logic
-        store.checkNotifications = () => {
-            if (!store.notificationSettings.enabled) return;
-
-            const now = new Date();
-            const leadTimeMs = store.notificationSettings.leadTime * 60000;
-
-            store.services.forEach(service => {
-                if (!service.date || !service.startTime) return;
-                const start = new Date(`${service.date}T${service.startTime}`);
-                const diff = start - now;
-
-                // If within lead time range (e.g. 59-60 mins) to avoid spamming
-                // Simple check: is it happening in the next hour?
-                // A more robust check would need a "notified" flag
-                if (diff > 0 && diff <= leadTimeMs && diff > (leadTimeMs - 60000)) {
-                    new Notification("Próximo Servicio", {
-                        body: `Tu adicional en ${service.location || 'Ubicación'} comienza en 1 hora.`,
-                        icon: "/icon.png"
-                    });
-                }
+        // Test Notification manually
+        try {
+            new Notification("Adicionales Santa Fe", {
+                body: "¡Notificaciones configuradas correctamente!",
+                icon: "./icon.png" // Fix icon path
             });
-        };
+        } catch (e) {
+            console.error("Notification trigger error", e);
+        }
+    }
+};
 
-        store.saveConfig = async () => {
-            try {
-                await DB.updateUserConfig(store.serviceConfig);
-                showToast("Tarifas actualizadas correctamente");
-            } catch (e) {
-                showToast("Error al guardar: " + e.message);
-            }
-        };
+// Notification Checker Logic
+store.checkNotifications = () => {
+    if (!store.notificationSettings.enabled) return;
+
+    const now = new Date();
+    const leadTimeMs = store.notificationSettings.leadTime * 60000;
+
+    store.services.forEach(service => {
+        if (!service.date || !service.startTime) return;
+        const start = new Date(`${service.date}T${service.startTime}`);
+        const diff = start - now;
+
+        // If within lead time range (e.g. 59-60 mins) to avoid spamming
+        // Simple check: is it happening in the next hour?
+        // A more robust check would need a "notified" flag
+        if (diff > 0 && diff <= leadTimeMs && diff > (leadTimeMs - 60000)) {
+            new Notification("Próximo Servicio", {
+                body: `Tu adicional en ${service.location || 'Ubicación'} comienza en 1 hora.`,
+                icon: "/icon.png"
+            });
+        }
+    });
+};
+
+store.saveConfig = async () => {
+    try {
+        await DB.updateUserConfig(store.serviceConfig);
+        showToast("Tarifas actualizadas correctamente");
+    } catch (e) {
+        showToast("Error al guardar: " + e.message);
+    }
+};
 
 
 
 
 
-        /**
-         * Render Service Details View
-         * New view for Edit/Delete/Pay Actions
-         */
-        function renderServiceDetails(container, serviceId) {
-            const service = store.services.find(s => s.id === serviceId);
+/**
+ * Render Service Details View
+ * New view for Edit/Delete/Pay Actions
+ */
+function renderServiceDetails(container, serviceId) {
+    const service = store.services.find(s => s.id === serviceId);
 
-            if (!service) {
-                showToast("Servicio no encontrado");
-                window.location.hash = '#agenda';
-                return;
-            }
-            // ... code truncated ... rest is same
+    if (!service) {
+        showToast("Servicio no encontrado");
+        window.location.hash = '#agenda';
+        return;
+    }
 
-            const service = store.services.find(s => s.id === serviceId);
 
-            if (!service) {
-                showToast("Servicio no encontrado");
-                window.location.hash = '#agenda';
-                return;
-            }
+    const isPaid = service.status === 'paid';
 
-            const isPaid = service.status === 'paid';
-
-            container.innerHTML = `
+    container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
             <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
@@ -1659,38 +1664,38 @@ const store = {
         </main>
     `;
 
-            // Actions
-            store.togglePaidStatus = async (id, newStatus) => {
-                try {
-                    await DB.updateService(id, { status: newStatus ? 'paid' : 'pending' });
-                    showToast(newStatus ? "¡Marcado como COBRADO! 💰" : "Marcado como Pendiente");
-                    // renderServiceDetails(container, id); // Firestore sync will handle re-render if subcribed, but direct re-render is faster UX
-                    window.history.back(); // Or stay? Back seems better to see list update
-                } catch (e) {
-                    showToast("Error update: " + e.message);
-                }
-            };
-
-            store.deleteService = async (id) => {
-                if (confirm("¿Seguro que quieres borrar este servicio? No se puede deshacer.")) {
-                    try {
-                        await DB.deleteService(id);
-                        showToast("Servicio eliminado");
-                        window.history.back();
-                    } catch (e) {
-                        showToast("Error delete: " + e.message);
-                    }
-                }
-            };
+    // Actions
+    store.togglePaidStatus = async (id, newStatus) => {
+        try {
+            await DB.updateService(id, { status: newStatus ? 'paid' : 'pending' });
+            showToast(newStatus ? "¡Marcado como COBRADO! 💰" : "Marcado como Pendiente");
+            // renderServiceDetails(container, id); // Firestore sync will handle re-render if subcribed, but direct re-render is faster UX
+            window.history.back(); // Or stay? Back seems better to see list update
+        } catch (e) {
+            showToast("Error update: " + e.message);
         }
+    };
+
+    store.deleteService = async (id) => {
+        if (confirm("¿Seguro que quieres borrar este servicio? No se puede deshacer.")) {
+            try {
+                await DB.deleteService(id);
+                showToast("Servicio eliminado");
+                window.history.back();
+            } catch (e) {
+                showToast("Error delete: " + e.message);
+            }
+        }
+    };
+}
 
 
-        // --- AD COMPONENT ---
-        function renderAdBanner() {
-            if (!store.ads || store.ads.length === 0) return '';
-            // Select random ad
-            const ad = store.ads[Math.floor(Math.random() * store.ads.length)];
-            return `
+// --- AD COMPONENT ---
+function renderAdBanner() {
+    if (!store.ads || store.ads.length === 0) return '';
+    // Select random ad
+    const ad = store.ads[Math.floor(Math.random() * store.ads.length)];
+    return `
         <div class="my-6 mx-4 rounded-xl overflow-hidden shadow-lg relative group">
             <a href="${ad.linkUrl}" target="_blank" class="block relative">
                 <span class="absolute top-2 right-2 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-bold backdrop-blur-sm">Publicidad</span>
@@ -1699,15 +1704,15 @@ const store = {
             </a>
         </div>
     `;
-        }
+}
 
-        /**
-         * Render Full History View
-         */
-        function renderHistory(container) {
-            const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
+/**
+ * Render Full History View
+ */
+function renderHistory(container) {
+    const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-            container.innerHTML = `
+    container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
             <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
@@ -1722,11 +1727,11 @@ const store = {
 
             <div class="px-4 space-y-3">
                 ${sortedServices.map(s => {
-                const isPub = s.type === 'Public';
-                const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
-                const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
-                const icon = isPub ? 'account_balance' : 'shopping_cart';
-                return `
+        const isPub = s.type === 'Public';
+        const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
+        const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
+        const icon = isPub ? 'account_balance' : 'shopping_cart';
+        return `
                         <div onclick="window.location.hash='#details?id=${s.id}'" class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 cursor-pointer hover:bg-white/5 transition-colors">
                             <div class="flex items-center gap-4">
                                 <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
@@ -1743,91 +1748,91 @@ const store = {
                             <span class="material-symbols-outlined text-slate-600">chevron_right</span>
                         </div>
                      `;
-            }).join('')}
+    }).join('')}
                 
                 ${sortedServices.length === 0 ? '<p class="text-center text-slate-500 py-10">No hay servicios registrados.</p>' : ''}
             </div>
         </main>
         ${renderBottomNav('financial')}
     `;
-        }
+}
 
-        // --- 4. SHARED COMPONENTS ---
+// --- 4. SHARED COMPONENTS ---
 
-        function renderBottomNav(activeTab) {
-            // We'll make a generic one for now, but design asks for specific ones per page.
-            // For this MVP step, a unified one is better for testing navigation.
-            const tabs = [
-                { id: 'agenda', icon: 'calendar_today', label: 'Agenda', route: '#agenda' },
-                { id: 'control', icon: 'dashboard', label: 'Panel', route: '#control' },
-                { id: 'register', icon: 'add_circle', label: '', route: '#register', isFab: true },
-                { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
-            ];
+function renderBottomNav(activeTab) {
+    // We'll make a generic one for now, but design asks for specific ones per page.
+    // For this MVP step, a unified one is better for testing navigation.
+    const tabs = [
+        { id: 'agenda', icon: 'calendar_today', label: 'Agenda', route: '#agenda' },
+        { id: 'control', icon: 'dashboard', label: 'Panel', route: '#control' },
+        { id: 'register', icon: 'add_circle', label: '', route: '#register', isFab: true },
+        { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
+    ];
 
-            // Only add Admin tab if user is admin
-            if (store.user && store.user.role === 'admin') {
-                tabs.push({ id: 'admin', icon: 'admin_panel_settings', label: 'Admin', route: '#admin' });
-            }
+    // Only add Admin tab if user is admin
+    if (store.user && store.user.role === 'admin') {
+        tabs.push({ id: 'admin', icon: 'admin_panel_settings', label: 'Admin', route: '#admin' });
+    }
 
-            let navHtml = `<nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
+    let navHtml = `<nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
         <div class="flex justify-around items-end max-w-md mx-auto relative">`;
 
-            tabs.forEach(tab => {
-                if (tab.isFab) {
-                    navHtml += `
+    tabs.forEach(tab => {
+        if (tab.isFab) {
+            navHtml += `
                 <div class="relative -top-8">
                      <button onclick="router.navigateTo('${tab.route}')" class="size-14 rounded-full bg-primary text-white shadow-lg shadow-primary/40 flex items-center justify-center hover:scale-105 transition-transform">
                         <span class="material-symbols-outlined text-3xl">add</span>
                     </button>
                 </div>
             `;
-                } else {
-                    const isActive = activeTab === tab.id;
-                    const colorClass = isActive ? 'text-primary' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200';
-                    const iconStyle = isActive ? "font-variation-settings: 'FILL' 1" : "";
+        } else {
+            const isActive = activeTab === tab.id;
+            const colorClass = isActive ? 'text-primary' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200';
+            const iconStyle = isActive ? "font-variation-settings: 'FILL' 1" : "";
 
-                    navHtml += `
+            navHtml += `
                 <button onclick="router.navigateTo('${tab.route}')" class="flex flex-col items-center gap-1 ${colorClass} w-16 group transition-colors">
                     <span class="material-symbols-outlined group-active:scale-90 transition-transform" style="${iconStyle}">${tab.icon}</span>
                     <span class="text-[10px] font-bold">${tab.label}</span>
                 </button>
             `;
-                }
-            });
-
-            navHtml += `</div></nav>`;
-            return navHtml;
         }
+    });
 
-        // Init App
-        document.addEventListener('DOMContentLoaded', () => {
-            router.init();
+    navHtml += `</div></nav>`;
+    return navHtml;
+}
 
-            // Register Service Worker
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(reg => console.log('SW Registered!', reg))
-                    .catch(err => console.error('SW Failed:', err));
-            }
-        });
+// Init App
+document.addEventListener('DOMContentLoaded', () => {
+    router.init();
 
-        // PWA Install Prompt Logic
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            // Show install button in profile if available
-            const installBtn = document.getElementById('btn-install-app');
-            if (installBtn) {
-                installBtn.classList.remove('hidden');
-            }
-        });
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('SW Registered!', reg))
+            .catch(err => console.error('SW Failed:', err));
+    }
+});
 
-        window.installApp = async () => {
-            if (!deferredPrompt) return;
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User response to the install prompt: ${outcome}`);
-            deferredPrompt = null;
-            document.getElementById('btn-install-app').classList.add('hidden');
-        };
+// PWA Install Prompt Logic
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Show install button in profile if available
+    const installBtn = document.getElementById('btn-install-app');
+    if (installBtn) {
+        installBtn.classList.remove('hidden');
+    }
+});
+
+window.installApp = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to the install prompt: ${outcome}`);
+    deferredPrompt = null;
+    document.getElementById('btn-install-app').classList.add('hidden');
+};
