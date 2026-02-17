@@ -2,87 +2,174 @@
  * Adicionales Santa Fe - Core Logic
  */
 
+
+
 // --- 1. STATE MANAGEMENT ---
+
+const showToast = (message) => {
+    const toast = document.createElement('div');
+    toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium z-[100] transition-opacity duration-300 opacity-0';
+    toast.innerText = message;
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => toast.classList.remove('opacity-0'));
+
+    setTimeout(() => {
+        toast.classList.add('opacity-0');
+        setTimeout(() => toast.remove(), 300);
+    }, 2000);
+};
+
 const store = {
-    user: {
-        name: "Oficial Martínez",
-        avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBt5Js2aMpuC1Fk_ZbHQFixqomKtSI6sUwDRwYVgC8CSrnh4jA3vB53-MOo2jwzHPHBrUwKuSxWoyY33HDyUB19H2al1Ds-L7zD0vb8tFLoqZ04Ln22OdQJu3h4FVSB-988i-ChWxQYM2AVFKH4ICt1Hn15Bnf4jiwe5wb-ybk3p3oOiyt2OZxXEFnm6iNIM1MeZNqiuIJWq6YRocVUwz2QYWLcTXeHyxdf_NJgWh8oILVqJs7SmAkMVmqMoJRuM7Qo0Xq6CotbSutJ"
-    },
-    services: [
-        // Mock Data
-        { id: 1, date: '2023-11-15', type: 'Public', location: 'Banco Nación', hours: 6, rate: 1250, total: 7500, status: 'approved' },
-        { id: 2, date: '2023-11-16', type: 'Private', location: 'Supermercado Vea', hours: 4, rate: 1500, total: 6000, status: 'pending' },
-    ],
+    user: null, // Will be set by Firebase Auth
+    services: [], // Synced with Firestore
     expenses: [
+        // Expenses still local for now, could be migrated later
         { id: 1, category: 'Comida', amount: 4500, date: '2023-11-15' },
         { id: 2, category: 'Transporte', amount: 1200, date: '2023-11-16' }
     ],
+    // Cache for Admin
+    allUsers: [],
+
+    // Config (Defaults from SPA 2026 Decree)
+    serviceConfig: {
+        'Public': { 'Ordinaria': 9500, 'Extraordinaria': 11400 },
+        'Private': { 'Ordinaria': 12825, 'Extraordinaria': 15390 },
+        'OSPES': { 'Ordinaria': 8000, 'Extraordinaria': 9600 },
+    },
+
+    // Notification Settings
+    notificationSettings: {
+        enabled: false,
+        leadTime: 60 // minutes
+    },
 
     // Auth
     isAuthenticated() {
-        return !!localStorage.getItem('adicionales_santa_fe_user');
-    },
-    login(userData) {
-        this.user = userData;
-        localStorage.setItem('adicionales_santa_fe_user', JSON.stringify(userData));
-        this.load(); // Reload data for user
-    },
-    logout() {
-        this.user = null;
-        localStorage.removeItem('adicionales_santa_fe_user');
-        window.location.reload();
+        return !!this.user;
     },
 
     // Actions
-    addService(service) {
-        this.services.push({ ...service, id: Date.now() });
-        this.save();
-    },
-    addExpense(expense) {
-        this.expenses.push({ ...expense, id: Date.now() });
-        this.save();
-    },
-    load() {
+    async login(email, password) {
         try {
-            const savedDB = localStorage.getItem('adicionales_santa_fe_db');
-            const savedUser = localStorage.getItem('adicionales_santa_fe_user');
-
-            if (savedUser) {
-                this.user = JSON.parse(savedUser);
-            }
-
-            if (savedDB) {
-                const parsed = JSON.parse(savedDB);
-                this.services = parsed.services || [];
-                this.expenses = parsed.expenses || [];
-            } else {
-                // Seeds
-                this.services = [
-                    { id: 1, date: '2023-11-15', type: 'Public', subType: 'Ordinaria', startTime: '08:00', endTime: '14:00', location: 'Banco Nación', hours: 6, rate: 1250, total: 7500, status: 'approved' },
-                ];
-            }
-
-            // Safely init notifications
-            if (this.user && this.user.notifications && typeof this.initNotifications === 'function') {
-                this.initNotifications();
-            }
+            await DB.login(email, password);
+            showToast("Sesión iniciada");
         } catch (e) {
-            console.error("Error loading store:", e);
-            // Critical error recovery
-            localStorage.removeItem('adicionales_santa_fe_db');
-            localStorage.removeItem('adicionales_santa_fe_user');
-            this.user = null;
-            this.services = [];
-            this.expenses = [];
-            window.location.reload();
+            console.error(e);
+            showToast("Error: " + e.message);
         }
     },
-    save() {
-        localStorage.setItem('adicionales_santa_fe_db', JSON.stringify({
-            services: this.services,
-            expenses: this.expenses
-        }));
+
+    async register(email, password, name) {
+        try {
+            const userCred = await DB.register(email, password);
+            // Save extra details
+            await DB.saveUser({
+                email: userCred.user.email,
+                name: name,
+                role: 'user',
+                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${name}`
+            });
+            showToast("Cuenta creada");
+        } catch (e) {
+            console.error(e);
+            showToast("Error: " + e.message);
+        }
     },
+
+    async logout() {
+        await DB.logout();
+    },
+
+    async loginWithGoogle() {
+        try {
+            await DB.loginWithGoogle();
+        } catch (e) {
+            console.error(e);
+            showToast("Google Error: " + e.message);
+        }
+    },
+
+    addService(service) {
+        // Optimistic UI update (optional, skipping for simplicity with live sync)
+        DB.addService(service).then(() => {
+            showToast("Servicio Guardado en Nube");
+        }).catch(e => {
+            showToast("Error al guardar: " + e.message);
+        });
+    },
+
+    // Initialization
+    init() {
+        // Listen to Auth State
+        DB.onAuthStateChanged(user => {
+            if (user) {
+                console.log("User Logged In:", user.email);
+                this.user = {
+                    email: user.email,
+                    name: user.displayName || user.email.split('@')[0],
+                    avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                };
+
+                // Save/Update user in DB
+                DB.saveUser(this.user);
+
+                // Subscribe to Data
+                this.unsubscribeServices = DB.subscribeToServices(services => {
+                    this.services = services;
+                    if (this.checkNotifications) this.checkNotifications();
+                    router.handleRoute();
+                });
+
+                // Subscribe to Users (for Admin)
+                this.allUsers = users;
+                // Subscribe to Expenses
+                this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
+                    this.expenses = expenses;
+                    // Trigger re-render if on financial page
+                    if (window.location.hash === '#financial') router.handleRoute();
+                });
+
+                // Interval for alerts
+                if (this.checkNotifications) {
+                    setInterval(() => this.checkNotifications(), 60000);
+                }
+
+                router.navigateTo('#agenda');
+            } else {
+                console.log("User Logged Out");
+                this.user = null;
+                this.services = [];
+                if (this.unsubscribeServices) this.unsubscribeServices();
+                if (this.unsubscribeUsers) this.unsubscribeUsers();
+                if (this.unsubscribeExpenses) this.unsubscribeExpenses();
+                router.navigateTo('#login');
+            }
+        });
+    },
+
+    // Expense Actions
+    async addExpense(category, amount) {
+        try {
+            await DB.addExpense({
+                category,
+                amount: parseFloat(amount),
+                date: new Date().toISOString().split('T')[0]
+            });
+            showToast(`Gasto de $${amount} agregado`);
+        } catch (e) {
+            showToast("Error al guardar gasto");
+            console.error(e);
+        }
+    },
+
+    async deleteExpense(id) {
+        if (confirm("¿Eliminar este gasto?")) {
+            await DB.deleteExpense(id);
+            showToast("Gasto eliminado");
+        }
+    },
+
     getFormattedDate(dateStr) {
         const options = { weekday: 'short', day: 'numeric', month: 'short' };
         return new Date(dateStr).toLocaleDateString('es-ES', options);
@@ -90,7 +177,7 @@ const store = {
 };
 
 // Initialize Store
-store.load();
+store.init();
 
 
 // --- 2. ROUTER & NAVIGATION ---
@@ -138,7 +225,12 @@ const router = {
                     renderAgenda(app);
                     break;
                 case '#admin':
-                    renderAdmin(app);
+                    if (store.user && store.user.role === 'admin') {
+                        renderAdmin(app);
+                    } else {
+                        showToast("Acceso Denegado");
+                        window.location.hash = '#agenda';
+                    }
                     break;
                 case '#control':
                     renderControlPanel(app);
@@ -149,8 +241,18 @@ const router = {
                 case '#financial':
                     renderFinancial(app);
                     break;
+                case '#profile':
+                    renderProfile(app);
+                    break;
+
+                // Dynamic Route for Details
                 default:
-                    window.location.hash = '#agenda';
+                    if (route.startsWith('#service/')) {
+                        const serviceId = route.split('/')[1];
+                        renderServiceDetails(app, serviceId);
+                    } else {
+                        window.location.hash = '#agenda';
+                    }
             }
         } catch (e) {
             console.error("Render Error:", e);
@@ -172,7 +274,7 @@ const router = {
 
 // --- ADMIN RENDERER ---
 function renderAdmin(container) {
-    const stats = DB.getStats();
+    const stats = DB.calculateStats(store.allUsers, store.services);
 
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-slate-900 border-b border-white/10 px-6 py-4 flex items-center justify-between">
@@ -363,23 +465,14 @@ function renderLogin(container) {
     `;
 
     window.handleGoogleLogin = () => {
-        store.login({
-            name: "Usuario Google",
-            email: "user@gmail.com",
-            avatar: "https://lh3.googleusercontent.com/aida-public/AB6AXuBt5Js2aMpuC1Fk_ZbHQFixqomKtSI6sUwDRwYVgC8CSrnh4jA3vB53-MOo2jwzHPHBrUwKuSxWoyY33HDyUB19H2al1Ds-L7zD0vb8tFLoqZ04Ln22OdQJu3h4FVSB-988i-ChWxQYM2AVFKH4ICt1Hn15Bnf4jiwe5wb-ybk3p3oOiyt2OZxXEFnm6iNIM1MeZNqiuIJWq6YRocVUwz2QYWLcTXeHyxdf_NJgWh8oILVqJs7SmAkMVmqMoJRuM7Qo0Xq6CotbSutJ"
-        });
-        router.navigateTo('#agenda');
+        store.loginWithGoogle();
     };
 
     window.handleLogin = (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value;
-        store.login({
-            name: email.split('@')[0],
-            email: email,
-            avatar: "https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=" + email
-        });
-        router.navigateTo('#agenda');
+        const password = document.getElementById('password').value;
+        store.login(email, password);
     }
 }
 
@@ -441,12 +534,9 @@ function renderSignup(container) {
     window.handleSignup = (e) => {
         e.preventDefault();
         const email = document.getElementById('s-email').value;
-        store.login({
-            name: email.split('@')[0],
-            email: email,
-            avatar: "https://ui-avatars.com/api/?background=10b981&color=fff&name=" + email
-        });
-        router.navigateTo('#agenda');
+        const password = document.querySelector('input[name="password"]').value;
+        const name = document.querySelector('input[name="name"]').value;
+        store.register(email, password, name);
     }
 }
 
@@ -457,9 +547,17 @@ function renderSignup(container) {
  * matches: agenda_y_calendario_de_turnos/code.html
  */
 function renderAgenda(container) {
-    const today = new Date();
-    const currentMonth = today.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
-    const selectedDate = store.selectedDate || today.toISOString().split('T')[0];
+    // State for Calendar View
+    if (!store.viewDate) store.viewDate = new Date();
+
+    // Ensure we stick to the viewDate month, but if selectedDate is set, we might want to be there? 
+    // Let's keep viewDate independent so user can browse.
+
+    const year = store.viewDate.getFullYear();
+    const month = store.viewDate.getMonth();
+    const currentMonthLabel = store.viewDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
+
+    const selectedDate = store.selectedDate || new Date().toISOString().split('T')[0];
 
     // Get services for selected date
     const dayServices = store.services.filter(s => s.date === selectedDate);
@@ -475,13 +573,17 @@ function renderAgenda(container) {
             <div class="flex justify-between items-center">
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight dark:text-white">Mi Agenda</h1>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 capitalize">${currentMonth}</p>
+                    <div class="flex items-center gap-2">
+                        <button id="btn-prev-month" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">arrow_back_ios</span></button>
+                        <p class="text-sm text-slate-500 dark:text-slate-400 capitalize w-24 text-center select-none">${currentMonthLabel}</p>
+                        <button id="btn-next-month" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
+                    </div>
                 </div>
                 <div class="flex gap-3">
-                    <button class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300">
+                    <button onclick="showToast('Sin notificaciones nuevas')" class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300">
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
-                    <div class="size-10 rounded-full overflow-hidden border-2 border-primary/20">
+                    <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
                         <img class="w-full h-full object-cover" src="${store.user.avatar}" />
                     </div>
                 </div>
@@ -532,8 +634,7 @@ function renderAgenda(container) {
                 <div class="flex justify-between items-center">
                     <h3 class="font-bold text-lg dark:text-white">Calendario</h3>
                     <div class="flex gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                        <button class="px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm dark:text-white">Mes</button>
-                        <button class="px-3 py-1 text-xs font-semibold text-slate-500">Semana</button>
+                        <button onclick="store.viewDate = new Date(); renderAgenda(document.getElementById('app'))" class="px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm dark:text-white">Hoy</button>
                     </div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm">
@@ -545,7 +646,7 @@ function renderAgenda(container) {
                     </div>
                     <!-- Calendar Grid -->
                     <div class="grid grid-cols-7 gap-y-2" id="calendar-grid">
-                        ${generateCalendarGrid(today.getFullYear(), today.getMonth(), selectedDate)}
+                        ${generateCalendarGrid(year, month, selectedDate)}
                     </div>
                 </div>
             </section>
@@ -555,7 +656,10 @@ function renderAgenda(container) {
                 <h3 class="font-bold text-lg dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
                 <div class="space-y-3">
                     ${dayServices.length > 0 ? dayServices.map(renderServiceCard).join('') :
-            `<p class="text-slate-500 text-sm py-4 text-center">No hay servicios programados.</p>`}
+            `<div class="p-8 text-center text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl">
+                <span class="material-symbols-outlined text-4xl mb-2">event_busy</span>
+                <p class="text-sm">Sin servicios este día</p>
+            </div>`}
                 </div>
             </section>
         </main>
@@ -570,6 +674,17 @@ function renderAgenda(container) {
             store.selectedDate = e.currentTarget.dataset.date;
             renderAgenda(container);
         });
+    });
+
+    // Month Nav Listeners
+    document.getElementById('btn-prev-month').addEventListener('click', () => {
+        store.viewDate.setMonth(store.viewDate.getMonth() - 1);
+        renderAgenda(container);
+    });
+
+    document.getElementById('btn-next-month').addEventListener('click', () => {
+        store.viewDate.setMonth(store.viewDate.getMonth() + 1);
+        renderAgenda(container);
     });
 }
 
@@ -623,7 +738,7 @@ function renderServiceCard(service) {
     const subType = service.subType || '';
 
     return `
-        <div class="bg-white dark:bg-slate-900 p-4 rounded-2xl flex gap-4 border-l-4 ${borderColor} shadow-sm">
+        <div onclick="router.navigateTo('#service/${service.id}')" class="bg-white dark:bg-slate-900 p-4 rounded-2xl flex gap-4 border-l-4 ${borderColor} shadow-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
             <div class="${bgSoft} size-12 rounded-xl flex items-center justify-center ${textColor}">
                 <span class="material-symbols-outlined">${icon}</span>
             </div>
@@ -641,10 +756,25 @@ function renderServiceCard(service) {
                         <span class="material-symbols-outlined text-[14px] text-slate-400">schedule</span>
                         <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">${timeRange}</span>
                     </div>
-                    <div class="flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[14px] text-slate-400">timer</span>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">${service.hours}h</span>
-                    </div>
+                    ${(() => {
+            // DRY Status Logic for Card
+            const today = new Date().toISOString().split('T')[0];
+            const isFuture = service.date > today;
+            let label = 'Pendiente';
+            let color = 'text-amber-400';
+
+            if (service.status === 'paid') {
+                label = 'Liquidado';
+                color = 'text-green-400';
+            } else if (isFuture) {
+                label = 'Agendado';
+                color = 'text-blue-400';
+            }
+            return `<div class="flex items-center gap-1">
+                            <span class="size-1.5 rounded-full ${color.replace('text-', 'bg-')}"></span>
+                            <span class="text-[10px] ${color} font-bold uppercase tracking-tighter">${label}</span>
+                         </div>`;
+        })()}
                 </div>
             </div>
         </div>
@@ -679,7 +809,7 @@ function renderRegister(container) {
                         <span class="material-symbols-outlined text-primary mr-3">calendar_today</span>
                         <div class="flex-1">
                             <p class="text-xs text-slate-500">Fecha</p>
-                            <input id="inp-date" class="w-full bg-transparent border-none p-0 focus:ring-0 text-base font-medium dark:text-white" type="date" value="${today}"/>
+                            <input id="inp-date" class="w-full bg-transparent border-none p-0 focus:ring-0 text-base font-medium dark:text-white" type="date" value="${store.selectedDate || today}"/>
                         </div>
                     </div>
                     <!-- Time Range -->
@@ -854,7 +984,7 @@ function renderRegister(container) {
             subType: currentSubType,
             location,
             total: hours * rate,
-            status: 'approved' // Default approved
+            status: 'pending' // Default pending payment
         });
 
         router.navigateTo('#agenda');
@@ -905,7 +1035,7 @@ function renderControlPanel(container) {
                 </div>
             </div>
             <div class="flex gap-2">
-                <button class="size-10 flex items-center justify-center rounded-full glass-card hover:bg-white/10 transition-colors text-white">
+                <button onclick="showToast('Modo privacidad activado')" class="size-10 flex items-center justify-center rounded-full glass-card hover:bg-white/10 transition-colors text-white">
                     <span class="material-symbols-outlined text-xl">visibility</span>
                 </button>
             </div>
@@ -914,8 +1044,8 @@ function renderControlPanel(container) {
         <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32">
             <!-- Period Selector -->
             <div class="flex p-1.5 glass-card rounded-xl">
-                <button class="flex-1 py-2 px-3 rounded-lg bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/20">1 - 15 Oct</button>
-                <button class="flex-1 py-2 px-3 rounded-lg text-slate-400 text-sm font-medium hover:text-white transition-colors">16 - 31 Oct</button>
+                <button onclick="showToast('Filtrando: 1-15 Oct')" class="flex-1 py-2 px-3 rounded-lg bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/20">1 - 15 Oct</button>
+                <button onclick="showToast('Filtrando: 16-31 Oct')" class="flex-1 py-2 px-3 rounded-lg text-slate-400 text-sm font-medium hover:text-white transition-colors">16 - 31 Oct</button>
             </div>
 
             <!-- Main Earnings Card -->
@@ -953,7 +1083,7 @@ function renderControlPanel(container) {
             <section class="pb-24">
                 <div class="flex justify-between items-end mb-4 px-1">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Servicios Recientes</h3>
-                    <span class="text-xs text-slate-500">Ver todo</span>
+                    <span onclick="showToast('Historial completo pronto')" class="text-xs text-slate-500 cursor-pointer">Ver todo</span>
                 </div>
                 <div class="space-y-3">
                     ${sortedServices.slice(0, 5).map(s => {
@@ -969,10 +1099,24 @@ function renderControlPanel(container) {
                                     </div>
                                     <div>
                                         <p class="font-bold text-sm text-white">${s.location}</p>
-                                        <div class="flex items-center gap-2 mt-0.5">
+                                    <div class="flex items-center gap-2 mt-0.5">
                                             <span class="text-[11px] text-slate-400">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                             <span class="size-1 rounded-full bg-slate-600"></span>
-                                            <span class="text-[11px] ${s.status === 'approved' ? 'text-green-400' : 'text-amber-400'} font-bold uppercase tracking-tighter">${s.status === 'approved' ? 'Liquidado' : 'Pendiente'}</span>
+                                            ${(() => {
+                const today = new Date().toISOString().split('T')[0];
+                const isFuture = s.date > today;
+                let label = 'Pendiente';
+                let color = 'text-amber-400';
+
+                if (s.status === 'paid') {
+                    label = 'Liquidado';
+                    color = 'text-green-400';
+                } else if (isFuture) {
+                    label = 'Agendado';
+                    color = 'text-blue-400';
+                }
+                return `<span class="text-[11px] ${color} font-bold uppercase tracking-tighter">${label}</span>`;
+            })()}
                                         </div>
                                     </div>
                                 </div>
@@ -1018,9 +1162,9 @@ function renderFinancial(container) {
                 </div>
             </div>
             <div class="flex p-1 bg-white/5 rounded-xl">
-                <button class="flex-1 py-2 text-xs font-bold rounded-lg bg-primary text-white shadow-lg shadow-primary/20">1ra Quincena</button>
-                <button class="flex-1 py-2 text-xs font-bold text-slate-400">2da Quincena</button>
-                <button class="flex-1 py-2 text-xs font-bold text-slate-400">Total Mes</button>
+                <button onclick="showToast('Filtro: 1ra Quincena')" class="flex-1 py-2 text-xs font-bold rounded-lg bg-primary text-white shadow-lg shadow-primary/20">1ra Quincena</button>
+                <button onclick="showToast('Filtro: 2da Quincena')" class="flex-1 py-2 text-xs font-bold text-slate-400">2da Quincena</button>
+                <button onclick="showToast('Filtro: Mes Completo')" class="flex-1 py-2 text-xs font-bold text-slate-400">Total Mes</button>
             </div>
         </header>
 
@@ -1058,14 +1202,14 @@ function renderFinancial(container) {
                 </div>
                  <div class="flex gap-4 overflow-x-auto pb-2 -mx-4 px-4 no-scrollbar">
                     ${['Comida', 'Transporte', 'Equipo'].map(cat => `
-                         <button class="flex-shrink-0 flex flex-col items-center gap-2 glass-card p-4 rounded-2xl w-24">
-                            <div class="size-10 rounded-xl bg-white/10 text-white flex items-center justify-center">
-                                <span class="material-symbols-outlined">attach_money</span>
-                            </div>
-                            <span class="text-[11px] font-bold text-white">${cat}</span>
-                        </button>
+                          <button onclick="window.handleAddExpense('${cat}')" class="flex-shrink-0 flex flex-col items-center gap-2 glass-card p-4 rounded-2xl w-24">
+                             <div class="size-10 rounded-xl bg-white/10 text-white flex items-center justify-center">
+                                 <span class="material-symbols-outlined">attach_money</span>
+                             </div>
+                             <span class="text-[11px] font-bold text-white">${cat}</span>
+                         </button>
                     `).join('')}
-                    <button class="flex-shrink-0 flex flex-col items-center gap-2 glass-card p-4 rounded-2xl w-24 border-dashed border-white/20">
+                     <button onclick="window.handleAddExpense('Otros')" class="flex-shrink-0 flex flex-col items-center gap-2 glass-card p-4 rounded-2xl w-24 border-dashed border-white/20">
                         <div class="size-10 rounded-xl bg-white/10 text-white flex items-center justify-center">
                             <span class="material-symbols-outlined">add</span>
                         </div>
@@ -1073,17 +1217,318 @@ function renderFinancial(container) {
                     </button>
                  </div>
             </section>
+
+            <!-- Recent Expenses List -->
+            <section class="space-y-4">
+                <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Historial de Gastos</h3>
+                <div class="space-y-3">
+                    ${store.expenses.length > 0 ? store.expenses.slice(0, 10).map(e => `
+                        <div class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5">
+                            <div class="flex items-center gap-4">
+                                <div class="size-10 rounded-xl bg-red-500/10 flex items-center justify-center text-red-400">
+                                    <span class="material-symbols-outlined text-xl">money_off</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm text-white">${e.category}</p>
+                                    <p class="text-[10px] text-slate-400">${store.getFormattedDate(e.date)}</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <p class="text-sm font-bold text-white">-$${e.amount.toLocaleString()}</p>
+                                <button onclick="store.deleteExpense('${e.id}')" class="text-slate-500 hover:text-red-400">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    `).join('') : '<p class="text-slate-500 text-sm text-center py-4">Sin gastos registrados</p>'}
+                </div>
+            </section>
         </main>
         ${renderBottomNav('financial')}
     `;
     container.innerHTML = html;
+
+    // Attach Expense Listeners
+    window.handleAddExpense = (category) => {
+        const amount = prompt(`Monto para ${category}:`);
+        if (amount && !isNaN(amount)) {
+            store.addExpense(category, amount);
+        }
+    };
 }
 
 /**
  * Render Admin View
  * matches: panel_de_administración_y_métricas/code.html
  */
-// Duplicate renderAdmin removed
+
+
+/**
+ * Render Profile / Settings View
+ */
+function renderProfile(container) {
+    // Clone config to avoid reference issues
+    const config = JSON.parse(JSON.stringify(store.serviceConfig));
+
+    // Helper to generate inputs with editable names
+    const renderConfigInputs = (type) => {
+        return Object.keys(config[type]).map(sub => `
+            <div class="flex justify-between items-center py-2 border-b border-white/5 last:border-0 gap-2">
+                <input type="text" 
+                    value="${sub}" 
+                    onchange="store.renameServiceSubtype('${type}', '${sub}', this.value)"
+                    class="bg-transparent border-none text-sm text-slate-300 focus:ring-0 focus:text-white w-full placeholder-slate-600">
+                
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-500">$</span>
+                    <input type="number" 
+                        value="${config[type][sub]}" 
+                        onchange="store.updateLocalConfig('${type}', '${sub}', this.value)"
+                        class="w-20 bg-white/5 border border-white/10 rounded-lg px-2 py-1 text-right text-sm text-white focus:ring-primary focus:border-primary">
+                </div>
+            </div>
+        `).join('');
+    };
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-lg font-bold text-white">Mi Configuración</h1>
+        </header>
+
+        <main class="p-6 space-y-8 pb-32 max-w-md mx-auto">
+            <!-- User Info -->
+            <div class="text-center">
+                 <!-- ... User Info Block ... -->
+                 <div class="size-24 rounded-full border-4 border-primary/20 mx-auto overflow-hidden mb-4 relative group">
+                    <img src="${store.user.avatar}" class="w-full h-full object-cover">
+                </div>
+                <h2 class="text-xl font-bold text-white">${store.user.name}</h2>
+                <div class="mt-4 flex justify-center">
+                     <button onclick="store.requestNotificationPermission()" class="flex items-center gap-2 px-4 py-2 rounded-full ${store.notificationSettings.enabled ? 'bg-green-500/20 text-green-400' : 'bg-slate-700 text-slate-300'} text-xs font-bold transition-all">
+                        <span class="material-symbols-outlined text-lg">${store.notificationSettings.enabled ? 'notifications_active' : 'notifications_off'}</span>
+                        ${store.notificationSettings.enabled ? 'Notificaciones Activadas' : 'Activar Alertas'}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Rates Configuration -->
+            <section class="space-y-4">
+                <div class="flex justify-between items-end">
+                    <h3 class="font-bold text-white flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">edit</span>
+                        Editar Nombres y Tarifas
+                    </h3>
+                </div>
+
+                <!-- Public Services -->
+                <div class="glass-card rounded-2xl p-4">
+                    <h4 class="text-xs font-bold text-accent-cyan uppercase tracking-wider mb-2">Públicos</h4>
+                    ${renderConfigInputs('Public')}
+                </div>
+
+                <!-- Private Services -->
+                <div class="glass-card rounded-2xl p-4">
+                    <h4 class="text-xs font-bold text-service-ospe uppercase tracking-wider mb-2">Privados</h4>
+                    ${renderConfigInputs('Private')}
+                </div>
+                
+                 <!-- OSPES Services -->
+                <div class="glass-card rounded-2xl p-4">
+                    <h4 class="text-xs font-bold text-amber-500 uppercase tracking-wider mb-2">OSPES / Otros</h4>
+                    ${renderConfigInputs('OSPES')}
+                </div>
+            </section>
+
+            <!-- Actions -->
+            <button onclick="store.saveConfig()" class="w-full py-4 rounded-xl bg-primary text-white font-bold shadow-lg shadow-primary/25 hover:bg-primary/90 active:scale-95 transition-all">
+                Guardar Personalización
+            </button>
+
+            
+            <button onclick="store.logout()" class="w-full py-4 rounded-xl border border-red-500/20 text-red-400 font-medium hover:bg-red-500/10 transition-colors">
+                Cerrar Sesión
+            </button>
+             
+             <p class="text-center text-xs text-slate-600 pt-6">Versión 1.2.0 (PWA + Firebase)</p>
+        </main>
+    `;
+
+};
+
+// --- MISSING FUNCTIONS ---
+store.renameServiceSubtype = (type, oldName, newName) => {
+    if (oldName === newName || !newName.trim()) return;
+    const value = store.serviceConfig[type][oldName];
+    delete store.serviceConfig[type][oldName];
+    store.serviceConfig[type][newName] = value;
+    // Re-render handled by user typing, but on save it persists
+};
+
+store.requestNotificationPermission = async () => {
+    if (!("Notification" in window)) {
+        showToast("Tu navegador no soporta notificaciones");
+        return;
+    }
+
+    const permission = await Notification.requestPermission();
+    if (permission === 'granted') {
+        store.notificationSettings.enabled = true;
+        showToast("Alertas Activadas");
+        renderProfile(container); // Refresh UI
+
+        // Test Notification manually
+        new Notification("Adicionales Santa Fe", {
+            body: "¡Notificaciones configuradas correctamente!",
+            icon: "/icon.png"
+        });
+    }
+};
+
+// Notification Checker Logic
+store.checkNotifications = () => {
+    if (!store.notificationSettings.enabled) return;
+
+    const now = new Date();
+    const leadTimeMs = store.notificationSettings.leadTime * 60000;
+
+    store.services.forEach(service => {
+        if (!service.date || !service.startTime) return;
+        const start = new Date(`${service.date}T${service.startTime}`);
+        const diff = start - now;
+
+        // If within lead time range (e.g. 59-60 mins) to avoid spamming
+        // Simple check: is it happening in the next hour?
+        // A more robust check would need a "notified" flag
+        if (diff > 0 && diff <= leadTimeMs && diff > (leadTimeMs - 60000)) {
+            new Notification("Próximo Servicio", {
+                body: `Tu adicional en ${service.location || 'Ubicación'} comienza en 1 hora.`,
+                icon: "/icon.png"
+            });
+        }
+    });
+};
+
+store.saveConfig = async () => {
+    try {
+        await DB.updateUserConfig(store.serviceConfig);
+        showToast("Tarifas actualizadas correctamente");
+    } catch (e) {
+        showToast("Error al guardar: " + e.message);
+    }
+};
+
+
+
+
+
+/**
+ * Render Service Details View
+ * New view for Edit/Delete/Pay Actions
+ */
+function renderServiceDetails(container, serviceId) {
+    const service = store.services.find(s => s.id === serviceId);
+
+    if (!service) {
+        showToast("Servicio no encontrado");
+        window.location.hash = '#agenda';
+        return;
+    }
+
+    const isPaid = service.status === 'paid';
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-lg font-bold text-white">Detalle Servicio</h1>
+            
+             <button onclick="store.deleteService('${serviceId}')" class="size-10 rounded-full hover:bg-red-500/10 flex items-center justify-center text-red-500 transition-colors">
+                <span class="material-symbols-outlined">delete</span>
+            </button>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto">
+             <!-- Status Banner -->
+             <div class="p-4 rounded-xl ${isPaid ? 'bg-green-500/10 border border-green-500/20' : 'bg-slate-800 border border-white/5'} flex justify-between items-center transition-all">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider ${isPaid ? 'text-green-400' : 'text-slate-400'}">Estado</span>
+                    <p class="text-lg font-bold text-white">${isPaid ? 'LIQUIDADO' : 'PENDIENTE DE PAGO'}</p>
+                </div>
+                <!-- Toggle Switch -->
+                <button onclick="store.togglePaidStatus('${serviceId}', ${!isPaid})" class="h-8 px-4 rounded-full flex items-center gap-2 font-bold text-xs ${isPaid ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-white/10 text-slate-300'} transition-all">
+                    ${isPaid ? '<span class="material-symbols-outlined text-sm">check</span> PAGADO' : 'MARCAR PAGADO'}
+                </button>
+             </div>
+
+             <!-- Info Card -->
+             <div class="glass-card rounded-2xl p-6 space-y-6">
+                 <div>
+                    <span class="text-xs text-slate-500 uppercase font-bold">Lugar / Objetivo</span>
+                    <h2 class="text-2xl font-bold text-white leading-tight">${service.location}</h2>
+                    <p class="text-primary font-bold text-sm mt-1">${service.type} - ${service.subType}</p>
+                 </div>
+                 
+                 <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <span class="flex items-center gap-2 text-slate-400 text-xs font-bold mb-1">
+                            <span class="material-symbols-outlined text-sm">calendar_today</span> Fecha
+                        </span>
+                        <p class="text-white font-medium">${store.getFormattedDate(service.date)}</p>
+                    </div>
+                     <div>
+                        <span class="flex items-center gap-2 text-slate-400 text-xs font-bold mb-1">
+                            <span class="material-symbols-outlined text-sm">schedule</span> Horario
+                        </span>
+                        <p class="text-white font-medium">${service.startTime} - ${service.endTime}</p>
+                    </div>
+                 </div>
+                 
+                 <div class="border-t border-white/10 pt-4 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs text-slate-500 uppercase font-bold">Total a Cobrar</span>
+                        <p class="text-3xl font-black text-white">$${(service.total || 0).toLocaleString()}</p>
+                    </div>
+                 </div>
+             </div>
+             
+             <!-- Warning if future -->
+             ${service.date > new Date().toISOString().split('T')[0] ? `
+                 <div class="p-3 bg-blue-500/10 border border-blue-500/20 rounded-xl flex gap-3 text-blue-400 text-xs">
+                    <span class="material-symbols-outlined text-lg">info</span>
+                    <p>Este servicio está agendado para el futuro.</p>
+                 </div>
+             ` : ''}
+        </main>
+    `;
+
+    // Actions
+    store.togglePaidStatus = async (id, newStatus) => {
+        try {
+            await DB.updateService(id, { status: newStatus ? 'paid' : 'pending' });
+            showToast(newStatus ? "¡Marcado como COBRADO! 💰" : "Marcado como Pendiente");
+            // renderServiceDetails(container, id); // Firestore sync will handle re-render if subcribed, but direct re-render is faster UX
+            window.history.back(); // Or stay? Back seems better to see list update
+        } catch (e) {
+            showToast("Error update: " + e.message);
+        }
+    };
+
+    store.deleteService = async (id) => {
+        if (confirm("¿Seguro que quieres borrar este servicio? No se puede deshacer.")) {
+            try {
+                await DB.deleteService(id);
+                showToast("Servicio eliminado");
+                window.history.back();
+            } catch (e) {
+                showToast("Error delete: " + e.message);
+            }
+        }
+    };
+}
 
 
 // --- 4. SHARED COMPONENTS ---
@@ -1096,8 +1541,12 @@ function renderBottomNav(activeTab) {
         { id: 'control', icon: 'dashboard', label: 'Panel', route: '#control' },
         { id: 'register', icon: 'add_circle', label: '', route: '#register', isFab: true },
         { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
-        { id: 'admin', icon: 'admin_panel_settings', label: 'Admin', route: '#admin' },
     ];
+
+    // Only add Admin tab if user is admin
+    if (store.user && store.user.role === 'admin') {
+        tabs.push({ id: 'admin', icon: 'admin_panel_settings', label: 'Admin', route: '#admin' });
+    }
 
     let navHtml = `<nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
         <div class="flex justify-around items-end max-w-md mx-auto relative">`;

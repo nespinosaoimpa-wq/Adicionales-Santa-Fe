@@ -1,62 +1,127 @@
 /**
- * Database Layer (Simulated Firebase)
- * Acts as a Repository Pattern over localStorage
+ * Database Layer (Firebase Firestore)
+ * Reactive Repository Pattern
  */
 const DB = {
-    // Keys
-    KEYS: {
-        USERS: 'adicionales_sf_users',
-        SERVICES: 'adicionales_sf_services',
-        LOGS: 'adicionales_sf_logs'
+    // Auth Listeners
+    onAuthStateChanged(callback) {
+        return auth.onAuthStateChanged(callback);
+    },
+
+    async login(email, password) {
+        return auth.signInWithEmailAndPassword(email, password);
+    },
+
+    async register(email, password) {
+        return auth.createUserWithEmailAndPassword(email, password);
+    },
+
+    async logout() {
+        return auth.signOut();
+    },
+
+    async loginWithGoogle() {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        return auth.signInWithPopup(provider);
     },
 
     // --- USERS ---
-    getUsers() {
-        const users = JSON.parse(localStorage.getItem(this.KEYS.USERS) || '[]');
-        if (users.length === 0) return this._seedUsers();
-        return users;
+    async saveUser(user) {
+        if (!user.email) return;
+        // Merge user data into Firestore 'users' collection
+        const userRef = db.collection('users').doc(user.email);
+        await userRef.set({
+            ...user,
+            lastLogin: new Date().toISOString()
+        }, { merge: true });
     },
 
-    currentUser() {
-        return JSON.parse(localStorage.getItem('adicionales_santa_fe_user'));
+    async getUser(email) {
+        const doc = await db.collection('users').doc(email).get();
+        return doc.exists ? doc.data() : null;
     },
 
-    saveUser(user) {
-        const users = this.getUsers();
-        const existing = users.findIndex(u => u.email === user.email);
-        if (existing >= 0) {
-            users[existing] = { ...users[existing], ...user, lastLogin: new Date().toISOString() };
-        } else {
-            users.push({ ...user, id: Date.now(), role: 'user', joined: new Date().toISOString() });
-        }
-        localStorage.setItem(this.KEYS.USERS, JSON.stringify(users));
-        localStorage.setItem('adicionales_santa_fe_user', JSON.stringify(user));
+    async updateUserConfig(serviceConfig) {
+        const user = auth.currentUser;
+        if (!user) return;
+
+        await db.collection('users').doc(user.email).set({
+            serviceConfig: serviceConfig
+        }, { merge: true });
+    },
+
+    subscribeToUsers(callback) {
+        return db.collection('users').onSnapshot(snapshot => {
+            const users = snapshot.docs.map(doc => doc.data());
+            callback(users);
+        });
     },
 
     // --- SERVICES ---
-    getServices(filters = {}) {
-        let services = JSON.parse(localStorage.getItem(this.KEYS.SERVICES) || '[]');
-        if (services.length === 0) services = this._seedServices();
-
-        // Filter by user if not admin
-        // In a real DB, this would be a query
-        return services;
+    subscribeToServices(callback) {
+        // Real-time listener for services
+        // In a real app, you'd filter by user.uid here:
+        // .where('userId', '==', auth.currentUser.uid)
+        return db.collection('services')
+            .orderBy('date', 'desc')
+            .onSnapshot(snapshot => {
+                const services = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                callback(services);
+            }, error => {
+                console.error("Error syncing services:", error);
+            });
     },
 
-    addService(service) {
-        const services = this.getServices();
-        const newService = { ...service, id: Date.now(), timestamp: new Date().toISOString() };
-        services.push(newService);
-        localStorage.setItem(this.KEYS.SERVICES, JSON.stringify(services));
-        return newService;
+    async addService(service) {
+        const user = auth.currentUser;
+        if (!user) throw new Error("Must be logged in");
+
+        return db.collection('services').add({
+            ...service,
+            userId: user.uid,
+            userEmail: user.email,
+            timestamp: new Date().toISOString()
+        });
+    },
+
+    async updateService(id, updates) {
+        return db.collection('services').doc(id).update(updates);
+    },
+
+    async deleteService(id) {
+        return db.collection('services').doc(id).delete();
+    },
+
+    // --- EXPENSES ---
+    subscribeToExpenses(callback) {
+        return db.collection('expenses')
+            .orderBy('date', 'desc')
+            .onSnapshot(snapshot => {
+                const expenses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                callback(expenses);
+            }, error => {
+                console.error("Error syncing expenses:", error);
+            });
+    },
+
+    async addExpense(expense) {
+        const user = auth.currentUser;
+        if (!user) throw new Error("Must be logged in");
+
+        return db.collection('expenses').add({
+            ...expense,
+            userId: user.uid,
+            timestamp: new Date().toISOString()
+        });
+    },
+
+    async deleteExpense(id) {
+        return db.collection('expenses').doc(id).delete();
     },
 
     // --- ADMIN ANALYTICS ---
-    getStats() {
-        const users = this.getUsers();
-        const services = this.getServices();
-
-        // Aggregate Data
+    // Helpers for calculating stats from raw data
+    calculateStats(users, services) {
         const totalRevenue = services.reduce((acc, s) => acc + (s.total || 0), 0);
         const totalHours = services.reduce((acc, s) => acc + (s.hours || 0), 0);
 
@@ -84,37 +149,7 @@ const DB = {
                 types: Object.keys(servicesByType),
                 typeCounts: Object.values(servicesByType)
             },
-            dbSize: JSON.stringify(localStorage).length / 1024 // KB
+            dbSize: "Cloud"
         };
-    },
-
-    // --- INTERNAL SEEDS ---
-    _seedUsers() {
-        const seeds = [
-            { id: 1, name: "Admin Principal", email: "admin@santafe.gov.ar", role: "admin", avatar: "https://ui-avatars.com/api/?name=Admin&background=0d59f2&color=fff", lastLogin: new Date().toISOString() },
-            { id: 2, name: "Oficial Martínez", email: "martinez@policia.ar", role: "user", avatar: "https://ui-avatars.com/api/?name=OM&background=random", lastLogin: new Date().toISOString() },
-            { id: 3, name: "Agente Gómez", email: "gomez@policia.ar", role: "user", avatar: "https://ui-avatars.com/api/?name=AG&background=random", lastLogin: new Date(Date.now() - 100000000).toISOString() }
-        ];
-        localStorage.setItem(this.KEYS.USERS, JSON.stringify(seeds));
-        return seeds;
-    },
-
-    _seedServices() {
-        // Generate some realistic fake data for charts
-        const types = ['Public', 'Private', 'OSPES'];
-        const services = [];
-        for (let i = 0; i < 20; i++) {
-            const date = new Date(Date.now() - Math.floor(Math.random() * 1000000000)).toISOString().split('T')[0];
-            services.push({
-                id: i,
-                date: date,
-                type: types[Math.floor(Math.random() * types.length)],
-                hours: 4,
-                total: 5000 + Math.floor(Math.random() * 5000),
-                location: 'Ubicación Simulada ' + i
-            });
-        }
-        localStorage.setItem(this.KEYS.SERVICES, JSON.stringify(services));
-        return services;
     }
 };
