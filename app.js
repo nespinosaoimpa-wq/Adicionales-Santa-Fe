@@ -1278,7 +1278,7 @@ function renderControlPanel(container) {
             <div class="flex items-center gap-3">
                 <div class="relative">
                     <div class="size-10 rounded-full border-2 border-primary/50 overflow-hidden bg-slate-800">
-                        <img class="w-full h-full object-cover" src="${store.user.avatar}" />
+                        <img class="w-full h-full object-cover" src="${store.user.avatar}" onerror="this.src='https://ui-avatars.com/api/?background=0d59f2&color=fff&name=User'" />
                     </div>
                     <div class="absolute bottom-0 right-0 size-3 bg-green-500 rounded-full border-2 border-background-dark"></div>
                 </div>
@@ -1336,13 +1336,7 @@ function renderControlPanel(container) {
             <section class="pb-24">
                 <div class="flex justify-between items-end mb-4 px-1">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Servicios Recientes</h3>
-            <!-- Recent Services Feed -->
-            <section class="pb-24">
-                <div class="flex justify-between items-end mb-4 px-1">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Servicios Recientes</h3>
                     <span onclick="window.location.hash='#history'" class="text-xs text-slate-500 cursor-pointer">Ver todo</span>
-                </div>
-                <div class="space-y-3">
                 </div>
                 <div class="space-y-3">
                     ${sortedServices.slice(0, 5).map(s => {
