@@ -135,13 +135,19 @@ const store = {
         }
     },
 
-    addService(service) {
-        // Optimistic UI update (optional, skipping for simplicity with live sync)
-        DB.addService(service).then(() => {
-            showToast("Servicio Guardado en Nube");
-        }).catch(e => {
-            showToast("Error al guardar: " + e.message);
-        });
+    async addService(service) {
+        try {
+            await DB.addService(service);
+            showToast("✅ Servicio guardado");
+        } catch (e) {
+            console.error("Error saving service:", e);
+            if (e.message.includes("offline") || e.code === 'unavailable') {
+                showToast("❌ Sin conexión - Intenta más tarde");
+            } else {
+                showToast("❌ Error al guardar: " + e.message);
+            }
+            throw e; // Re-throw para que saveAction lo maneje
+        }
     },
 
     toggleDebug() {
@@ -1183,7 +1189,7 @@ function renderRegister(container) {
     document.getElementById('inp-rate').addEventListener('input', calculateTotal);
 
     // Save
-    const saveAction = () => {
+    const saveAction = async () => {
         const date = document.getElementById('inp-date').value;
         const start = document.getElementById('inp-start').value;
         const end = document.getElementById('inp-end').value;
@@ -1191,20 +1197,28 @@ function renderRegister(container) {
         const location = document.getElementById('inp-location').value || (currentType + ' - ' + currentSubType);
         const hours = calculateHours();
 
-        store.addService({
-            date,
-            startTime: start,
-            endTime: end,
-            hours,
-            rate,
-            type: currentType,
-            subType: currentSubType,
-            location,
-            total: hours * rate,
-            status: 'pending' // Default pending payment
-        });
+        try {
+            // Await para esperar que Firestore termine de guardar
+            await store.addService({
+                date,
+                startTime: start,
+                endTime: end,
+                hours,
+                rate,
+                type: currentType,
+                subType: currentSubType,
+                location,
+                total: hours * rate,
+                status: 'pending'
+            });
 
-        router.navigateTo('#agenda');
+            // Solo navegar después de guardar exitosamente
+            router.navigateTo('#agenda');
+        } catch (error) {
+            console.error("Error saving service:", error);
+            // El error ya fue mostrado en store.addService
+            // No navegamos si hubo error
+        }
     };
 
     document.getElementById('btn-save').addEventListener('click', saveAction);
