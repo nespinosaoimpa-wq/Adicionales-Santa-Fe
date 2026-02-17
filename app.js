@@ -1449,7 +1449,7 @@ store.requestNotificationPermission = async () => {
     if (permission === 'granted') {
         store.notificationSettings.enabled = true;
         showToast("Alertas Activadas");
-        // Save these settings too? For now local state.
+        renderProfile(document.getElementById('app'));
 
         // Test Notification manually
         try {
