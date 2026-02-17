@@ -137,6 +137,23 @@ const store = {
         });
     },
 
+    toggleDebug() {
+        const el = document.getElementById('debug-console-container');
+        if (el) el.classList.toggle('hidden');
+    },
+
+    async forceUpdate() {
+        if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            for (let registration of registrations) {
+                await registration.unregister();
+            }
+            window.location.reload(true);
+        } else {
+            window.location.reload(true);
+        }
+    },
+
     // Initialization
     init() {
         debugLog("App v1.4.0 Loaded - Auth Fix");
@@ -623,18 +640,6 @@ function renderLogin(container) {
 
     window.handleGoogleLogin = () => {
         store.loginWithGoogle();
-    };
-
-    store.forceUpdate = async () => {
-        if ('serviceWorker' in navigator) {
-            const registrations = await navigator.serviceWorker.getRegistrations();
-            for (let registration of registrations) {
-                await registration.unregister();
-            }
-            window.location.reload(true);
-        } else {
-            window.location.reload(true);
-        }
     };
 
     window.handleLogin = (e) => {
