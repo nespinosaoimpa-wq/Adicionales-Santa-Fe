@@ -148,6 +148,38 @@ const store = {
         });
     },
 
+    // Export Data (CSV)
+    exportData() {
+        const headers = ['Fecha', 'Tipo', 'Subtipo', 'Horas', 'Inicio', 'Fin', 'Lugar', 'Total', 'Estado'];
+        const rows = this.services.map(s => [
+            s.date,
+            s.type,
+            s.subType || '-',
+            s.hours,
+            s.startTime,
+            s.endTime,
+            `"${s.location}"`,
+            s.total,
+            s.status
+        ]);
+
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(r => r.join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'mis_servicios_sf.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast("Exportando CSV...");
+    },
+
     // Expense Actions
     async addExpense(category, amount) {
         try {
@@ -1243,6 +1275,16 @@ function renderFinancial(container) {
                     `).join('') : '<p class="text-slate-500 text-sm text-center py-4">Sin gastos registrados</p>'}
                 </div>
             </section>
+                </div>
+            </section>
+            
+             <!-- Export Actions -->
+             <div class="mt-8 flex justify-center">
+                <button onclick="store.exportData()" class="text-sm font-bold text-slate-400 flex items-center gap-2 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">download</span>
+                    Descargar reporte (CSV)
+                </button>
+             </div>
         </main>
         ${renderBottomNav('financial')}
     `;
@@ -1581,4 +1623,32 @@ function renderBottomNav(activeTab) {
 // Init App
 document.addEventListener('DOMContentLoaded', () => {
     router.init();
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('SW Registered!', reg))
+            .catch(err => console.error('SW Failed:', err));
+    }
 });
+
+// PWA Install Prompt Logic
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    // Show install button in profile if available
+    const installBtn = document.getElementById('btn-install-app');
+    if (installBtn) {
+        installBtn.classList.remove('hidden');
+    }
+});
+
+window.installApp = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to the install prompt: ${outcome}`);
+    deferredPrompt = null;
+    document.getElementById('btn-install-app').classList.add('hidden');
+};
