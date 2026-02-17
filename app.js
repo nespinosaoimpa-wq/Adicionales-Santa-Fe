@@ -20,6 +20,17 @@ const showToast = (message) => {
     }, 2000);
 };
 
+// Global Debug Logger
+const debugLog = (msg) => {
+    const consoleEl = document.getElementById('debug-console');
+    if (consoleEl) {
+        const time = new Date().toLocaleTimeString();
+        consoleEl.innerHTML += `<div>[${time}] ${msg}</div>`;
+        consoleEl.scrollTop = consoleEl.scrollHeight;
+    }
+    console.log('[DEBUG]', msg);
+};
+
 const store = {
     user: null, // Will be set by Firebase Auth
     services: [], // Synced with Firestore
