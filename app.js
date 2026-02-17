@@ -172,53 +172,65 @@ const store = {
         // Listen to Auth State
         this.unsub = auth.onAuthStateChanged(async user => {
             if (user) {
-                console.log("User Logged In:", user.email);
+                console.log("🔐 User Logged In:", user.email);
 
-                // Load User Config/Profile
-                this.user = await DB.getUser(user.email) || {
-                    email: user.email,
-                    role: 'user',
-                    serviceConfig: this.defaultServiceConfig,
-                    notificationSettings: { enabled: false, leadTime: 60 },
-                    name: user.displayName || user.email.split('@')[0],
-                    avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                };
+                try {
+                    // Load User Config/Profile (WAIT for this!)
+                    this.user = await DB.getUser(user.email) || {
+                        email: user.email,
+                        role: 'user',
+                        serviceConfig: this.defaultServiceConfig,
+                        notificationSettings: { enabled: false, leadTime: 60 },
+                        name: user.displayName || user.email.split('@')[0],
+                        avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                    };
 
-                // Save/Update user in DB
-                DB.saveUser(this.user);
+                    console.log("✅ User data loaded:", this.user.email);
 
-                // Subscribe to Data
-                this.unsubscribeServices = DB.subscribeToServices(services => {
-                    this.services = services;
-                    if (this.checkNotifications) this.checkNotifications();
-                    router.handleRoute();
-                });
+                    // Save/Update user in DB
+                    await DB.saveUser(this.user);
 
-                // Subscribe to Ads (Global)
-                this.unsubscribeAds = DB.subscribeToAds(ads => {
-                    this.ads = ads;
-                });
+                    // Subscribe to Data
+                    this.unsubscribeServices = DB.subscribeToServices(services => {
+                        this.services = services;
+                        if (this.checkNotifications) this.checkNotifications();
+                        router.handleRoute();
+                    });
 
-                // Subscribe to Users (for Admin)
-                this.unsubscribeUsers = DB.subscribeToUsers(users => {
-                    this.allUsers = users;
-                });
+                    // Subscribe to Ads (Global)
+                    this.unsubscribeAds = DB.subscribeToAds(ads => {
+                        this.ads = ads;
+                    });
 
-                // Subscribe to Expenses
-                this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
-                    this.expenses = expenses;
-                    if (window.location.hash === '#financial') router.handleRoute();
-                });
+                    // Subscribe to Users (for Admin)
+                    this.unsubscribeUsers = DB.subscribeToUsers(users => {
+                        this.allUsers = users;
+                    });
 
-                // Interval for alerts
-                if (this.checkNotifications) {
-                    if (this.notifInterval) clearInterval(this.notifInterval);
-                    this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
+                    // Subscribe to Expenses
+                    this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
+                        this.expenses = expenses;
+                        if (window.location.hash === '#financial') router.handleRoute();
+                    });
+
+                    // Interval for alerts
+                    if (this.checkNotifications) {
+                        if (this.notifInterval) clearInterval(this.notifInterval);
+                        this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
+                    }
+
+                    // NOW navigate (after user data is loaded)
+                    console.log("🚀 Navigating to #agenda");
+                    router.navigateTo('#agenda');
+
+                } catch (error) {
+                    console.error("❌ Error loading user data:", error);
+                    showToast("Error al cargar datos del usuario");
+                    // Logout on error
+                    await auth.signOut();
                 }
-
-                router.navigateTo('#agenda');
             } else {
-                console.log("User Logged Out");
+                console.log("👋 User Logged Out");
                 this.user = null;
                 this.services = [];
                 if (this.unsubscribeServices) this.unsubscribeServices();
