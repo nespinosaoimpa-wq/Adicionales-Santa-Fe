@@ -1,8 +1,9 @@
-const CACHE_NAME = 'adicionales-sf-v5';
+const CACHE_NAME = 'adicionales-sf-v10';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
     './app.js',
+    './db.js',
     './styles.css',
     'https://cdn.tailwindcss.com?plugins=forms,container-queries',
     'https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap',
