@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Console - Adicionales SF</title>
+    <style>
+        body {
+            font-family: monospace;
+            background: #000;
+            color: #0f0;
+            padding: 10px;
+            font-size: 11px;
+        }
+
+        .error {
+            color: #f00;
+        }
+
+        .success {
+            color: #0f0;
+        }
+
+        .info {
+            color: #ff0;
+        }
+
+        button {
+            background: #0f0;
+            color: #000;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>🔍 Debug Console</h2>
+    <button onclick="testFirestore()">Test Firestore Access</button>
+    <button onclick="testAuth()">Test Auth State</button>
+    <button onclick="clearLogs()">Clear</button>
+    <div id="logs"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script>
+        const logs = document.getElementById('logs');
+
+        function log(msg, type = 'info') {
+            const div = document.createElement('div');
+            div.className = type;
+            div.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+            logs.appendChild(div);
+            console.log(msg);
+        }
+
+        function clearLogs() {
+            logs.innerHTML = '';
+        }
+
+        async function testAuth() {
+            log('=== TESTING AUTH ===', 'info');
+            const user = auth.currentUser;
+            if (user) {
+                log(`✅ Logged in as: ${user.email}`, 'success');
+                log(`UID: ${user.uid}`, 'info');
+                log(`Display Name: ${user.displayName}`, 'info');
+            } else {
+                log('❌ No user logged in', 'error');
+            }
+        }
+
+        async function testFirestore() {
+            log('=== TESTING FIRESTORE ===', 'info');
+            const user = auth.currentUser;
+
+            if (!user) {
+                log('❌ Must be logged in first', 'error');
+                return;
+            }
+
+            try {
+                // Test 1: Read user document
+                log(`Reading users/${user.email}...`, 'info');
+                const userDoc = await db.collection('users').doc(user.email).get();
+
+                if (userDoc.exists) {
+                    log('✅ User document exists', 'success');
+                    log(`Data: ${JSON.stringify(userDoc.data())}`, 'info');
+                } else {
+                    log('⚠️ User document does not exist (will be created)', 'info');
+                }
+
+                // Test 2: Try to write
+                log('Testing write permission...', 'info');
+                await db.collection('users').doc(user.email).set({
+                    email: user.email,
+                    name: user.displayName || 'Test User',
+                    role: 'user',
+                    testTimestamp: new Date().toISOString()
+                }, { merge: true });
+                log('✅ Write successful', 'success');
+
+                // Test 3: Read services
+                log('Reading services...', 'info');
+                const servicesSnap = await db.collection('services')
+                    .where('userEmail', '==', user.email)
+                    .limit(5)
+                    .get();
+                log(`✅ Found ${servicesSnap.size} services`, 'success');
+
+            } catch (error) {
+                log('❌ FIRESTORE ERROR:', 'error');
+                log(`Code: ${error.code}`, 'error');
+                log(`Message: ${error.message}`, 'error');
+
+                if (error.code === 'permission-denied') {
+                    log('⚠️ PERMISSION DENIED - Check Firestore Rules', 'error');
+                    log('Go to: https://console.firebase.google.com/', 'info');
+                    log('Firestore Database → Rules', 'info');
+                }
+            }
+        }
+
+        // Auto-test on load
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                log(`🔐 Auth state: ${user.email}`, 'success');
+                setTimeout(() => testFirestore(), 1000);
+            } else {
+                log('👤 Not logged in', 'info');
+            }
+        });
+    </script>
+</body>
+
+</html>
