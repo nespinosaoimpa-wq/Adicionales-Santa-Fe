@@ -90,9 +90,10 @@
         };
 
         addLog("Inicializando Firebase...", "info");
+        let auth;
         try {
             firebase.initializeApp(firebaseConfig);
-            const auth = firebase.auth();
+            auth = firebase.auth();
             addLog("✅ Firebase inicializado correctamente", "success");
         } catch (e) {
             addLog("❌ Error al inicializar Firebase: " + e.message, "error");
