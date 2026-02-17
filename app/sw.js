@@ -1,4 +1,4 @@
-const CACHE_NAME = 'adicionales-sf-v2';
+const CACHE_NAME = 'adicionales-sf-v3';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
