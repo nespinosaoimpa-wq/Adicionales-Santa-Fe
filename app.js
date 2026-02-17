@@ -77,6 +77,15 @@ const store = {
         }
     },
 
+    async resetPassword(email) {
+        try {
+            await auth.sendPasswordResetEmail(email);
+            showToast(`Correo enviado a ${email}`);
+        } catch (e) {
+            showToast("Error: " + e.message);
+        }
+    },
+
     async logout() {
         await DB.logout();
     },
@@ -121,176 +130,206 @@ const store = {
                     router.handleRoute();
                 });
 
-                // Subscribe to Users (for Admin)
-                this.unsubscribeUsers = DB.subscribeToUsers(users => {
-                    this.allUsers = users;
+                this.unsub = auth.onAuthStateChanged(async user => {
+                    if (user) {
+                        console.log("User Logged In:", user.email);
+
+                        // Load User Config/Profile
+                        this.user = await DB.getUser(user.email) || {
+                            email: user.email,
+                            role: 'user',
+                            serviceConfig: this.defaultServiceConfig, // Default backup
+                            notificationSettings: { enabled: false, leadTime: 60 },
+                            name: user.displayName || user.email.split('@')[0],
+                            avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                        };
+
+                        // Save/Update user in DB
+                        DB.saveUser(this.user);
+
+                        // Subscribe to Data
+                        this.unsubscribeServices = DB.subscribeToServices(services => {
+                            this.services = services;
+                            if (this.checkNotifications) this.checkNotifications();
+                            router.handleRoute();
+                        });
+
+                        // Subscribe to Ads (Global)
+                        this.unsubscribeAds = DB.subscribeToAds(ads => {
+                            this.ads = ads;
+                            // Re-render if appropriate? mostly passive
+                        });
+
+                        // Subscribe to Users (for Admin)
+                        this.unsubscribeUsers = DB.subscribeToUsers(users => {
+                            this.allUsers = users;
+                        });
+                        // Subscribe to Expenses
+                        this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
+                            this.expenses = expenses;
+                            // Trigger re-render if on financial page
+                            if (window.location.hash === '#financial') router.handleRoute();
+                        });
+
+                        // Interval for alerts
+                        if (this.checkNotifications) {
+                            setInterval(() => this.checkNotifications(), 60000);
+                        }
+
+                        router.navigateTo('#agenda');
+                    } else {
+                        console.log("User Logged Out");
+                        this.user = null;
+                        this.services = [];
+                        if (this.unsubscribeServices) this.unsubscribeServices();
+                        if (this.unsubscribeUsers) this.unsubscribeUsers();
+                        if (this.unsubscribeExpenses) this.unsubscribeExpenses();
+                        router.navigateTo('#login');
+                    }
                 });
-                // Subscribe to Expenses
-                this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
-                    this.expenses = expenses;
-                    // Trigger re-render if on financial page
-                    if (window.location.hash === '#financial') router.handleRoute();
-                });
+            },
 
-                // Interval for alerts
-                if (this.checkNotifications) {
-                    setInterval(() => this.checkNotifications(), 60000);
-                }
+            // Export Data (CSV)
+            exportData() {
+                const headers = ['Fecha', 'Tipo', 'Subtipo', 'Horas', 'Inicio', 'Fin', 'Lugar', 'Total', 'Estado'];
+                const rows = this.services.map(s => [
+                    s.date,
+                    s.type,
+                    s.subType || '-',
+                    s.hours,
+                    s.startTime,
+                    s.endTime,
+                    `"${s.location}"`,
+                    s.total,
+                    s.status
+                ]);
 
-                router.navigateTo('#agenda');
-            } else {
-                console.log("User Logged Out");
-                this.user = null;
-                this.services = [];
-                if (this.unsubscribeServices) this.unsubscribeServices();
-                if (this.unsubscribeUsers) this.unsubscribeUsers();
-                if (this.unsubscribeExpenses) this.unsubscribeExpenses();
-                router.navigateTo('#login');
-            }
-        });
-    },
+                const csvContent = [
+                    headers.join(','),
+                    ...rows.map(r => r.join(','))
+                ].join('\n');
 
-    // Export Data (CSV)
-    exportData() {
-        const headers = ['Fecha', 'Tipo', 'Subtipo', 'Horas', 'Inicio', 'Fin', 'Lugar', 'Total', 'Estado'];
-        const rows = this.services.map(s => [
-            s.date,
-            s.type,
-            s.subType || '-',
-            s.hours,
-            s.startTime,
-            s.endTime,
-            `"${s.location}"`,
-            s.total,
-            s.status
-        ]);
-
-        const csvContent = [
-            headers.join(','),
-            ...rows.map(r => r.join(','))
-        ].join('\n');
-
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.setAttribute('href', url);
-        link.setAttribute('download', 'mis_servicios_sf.csv');
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        showToast("Exportando CSV...");
-    },
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'mis_servicios_sf.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                showToast("Exportando CSV...");
+            },
 
     // Expense Actions
     async addExpense(category, amount) {
-        try {
-            await DB.addExpense({
-                category,
-                amount: parseFloat(amount),
-                date: new Date().toISOString().split('T')[0]
-            });
-            showToast(`Gasto de $${amount} agregado`);
-        } catch (e) {
-            showToast("Error al guardar gasto");
-            console.error(e);
-        }
-    },
+                try {
+                    await DB.addExpense({
+                        category,
+                        amount: parseFloat(amount),
+                        date: new Date().toISOString().split('T')[0]
+                    });
+                    showToast(`Gasto de $${amount} agregado`);
+                } catch (e) {
+                    showToast("Error al guardar gasto");
+                    console.error(e);
+                }
+            },
 
     async deleteExpense(id) {
-        if (confirm("¿Eliminar este gasto?")) {
-            await DB.deleteExpense(id);
-            showToast("Gasto eliminado");
-        }
-    },
+                if (confirm("¿Eliminar este gasto?")) {
+                    await DB.deleteExpense(id);
+                    showToast("Gasto eliminado");
+                }
+            },
 
-    getFormattedDate(dateStr) {
-        const options = { weekday: 'short', day: 'numeric', month: 'short' };
-        return new Date(dateStr).toLocaleDateString('es-ES', options);
-    }
-};
-
-// Initialize Store
-store.init();
-
-
-// --- 2. ROUTER & NAVIGATION ---
-
-const router = {
-    currentRoute: '#login',
-
-    init() {
-        window.addEventListener('hashchange', () => this.handleRoute());
-        this.handleRoute(); // Initial load
-    },
-
-    handleRoute() {
-        const hash = window.location.hash || '#login';
-
-        // Auth Guard
-        const publicRoutes = ['#login', '#signup'];
-        if (!store.isAuthenticated() && !publicRoutes.includes(hash)) {
-            window.location.hash = '#login';
-            return;
-        }
-
-        if (store.isAuthenticated() && publicRoutes.includes(hash)) {
-            window.location.hash = '#agenda';
-            return;
-        }
-
-        this.currentRoute = hash;
-        this.render(hash);
-    },
-
-    render(route) {
-        const app = document.getElementById('app');
-        try {
-            app.innerHTML = ''; // Clear current view
-
-            switch (route) {
-                case '#login':
-                    renderLogin(app);
-                    break;
-                case '#signup':
-                    renderSignup(app);
-                    break;
-                case '#agenda':
-                    renderAgenda(app);
-                    break;
-                case '#admin':
-                    if (store.user && store.user.role === 'admin') {
-                        renderAdmin(app);
-                    } else {
-                        showToast("Acceso Denegado");
-                        window.location.hash = '#agenda';
-                    }
-                    break;
-                case '#control':
-                    renderControlPanel(app);
-                    break;
-                case '#register':
-                    renderRegister(app);
-                    break;
-                case '#financial':
-                    renderFinancial(app);
-                    break;
-                case '#profile':
-                    renderProfile(app);
-                    break;
-
-                // Dynamic Route for Details
-                default:
-                    if (route.startsWith('#service/')) {
-                        const serviceId = route.split('/')[1];
-                        renderServiceDetails(app, serviceId);
-                    } else {
-                        window.location.hash = '#agenda';
-                    }
+            getFormattedDate(dateStr) {
+                const options = { weekday: 'short', day: 'numeric', month: 'short' };
+                return new Date(dateStr).toLocaleDateString('es-ES', options);
             }
-        } catch (e) {
-            console.error("Render Error:", e);
-            app.innerHTML = `
+        };
+
+        // Initialize Store
+        store.init();
+
+
+        // --- 2. ROUTER & NAVIGATION ---
+
+        const router = {
+            currentRoute: '#login',
+
+            init() {
+                window.addEventListener('hashchange', () => this.handleRoute());
+                this.handleRoute(); // Initial load
+            },
+
+            handleRoute() {
+                const hash = window.location.hash || '#login';
+
+                // Auth Guard
+                const publicRoutes = ['#login', '#signup'];
+                if (!store.isAuthenticated() && !publicRoutes.includes(hash)) {
+                    window.location.hash = '#login';
+                    return;
+                }
+
+                if (store.isAuthenticated() && publicRoutes.includes(hash)) {
+                    window.location.hash = '#agenda';
+                    return;
+                }
+
+                this.currentRoute = hash;
+                this.render(hash);
+            },
+
+            render(route) {
+                const app = document.getElementById('app');
+                try {
+                    app.innerHTML = ''; // Clear current view
+
+                    switch (route) {
+                        case '#login':
+                            renderLogin(app);
+                            break;
+                        case '#signup':
+                            renderSignup(app);
+                            break;
+                        case '#agenda':
+                            renderAgenda(app);
+                            break;
+                        case '#admin':
+                            if (store.user && store.user.role === 'admin') {
+                                renderAdmin(app);
+                            } else {
+                                showToast("Acceso Denegado");
+                                window.location.hash = '#agenda';
+                            }
+                            break;
+                        case '#control':
+                            renderControlPanel(app);
+                            break;
+                        case '#register':
+                            renderRegister(app);
+                            break;
+                        case '#financial':
+                            renderFinancial(app);
+                            break;
+                        case '#profile':
+                            renderProfile(app);
+                            break;
+
+                        // Dynamic Route for Details
+                        default:
+                            if (route.startsWith('#service/')) {
+                                const serviceId = route.split('/')[1];
+                                renderServiceDetails(app, serviceId);
+                            } else {
+                                window.location.hash = '#agenda';
+                            }
+                    }
+                } catch (e) {
+                    console.error("Render Error:", e);
+                    app.innerHTML = `
                 <div class="p-6 text-center text-red-500">
                     <h2 class="font-bold text-xl mb-2">Error de Carga</h2>
                     <p class="text-sm border p-2 rounded border-red-500/50 bg-red-500/10">${e.message}</p>
@@ -298,150 +337,174 @@ const router = {
                     <button onclick="localStorage.clear(); window.location.reload()" class="mt-4 block mx-auto text-sm underline text-slate-500">Borrar Datos y Recargar</button>
                 </div>
             `;
-        }
-    },
+                }
+            },
 
-    navigateTo(route) {
-        window.location.hash = route;
-    }
-};
+            navigateTo(route) {
+                window.location.hash = route;
+            }
+        };
 
-// --- ADMIN RENDERER ---
-function renderAdmin(container) {
-    const stats = DB.calculateStats(store.allUsers, store.services);
-
-    container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-slate-900 border-b border-white/10 px-6 py-4 flex items-center justify-between">
-            <h1 class="text-xl font-bold text-white flex items-center gap-2">
-                <span class="material-symbols-outlined text-accent-cyan">admin_panel_settings</span>
-                Panel Administrador
-            </h1>
-            <button onclick="router.navigateTo('#agenda')" class="text-slate-400 hover:text-white">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-        </header>
-
-        <main class="p-6 space-y-6 pb-24">
-            <!-- KPI Cards -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-slate-800 p-4 rounded-xl border border-white/5">
-                    <p class="text-xs text-slate-400 uppercase font-bold">Usuarios Totales</p>
-                    <p class="text-2xl font-bold text-white mt-1">${stats.userCount}</p>
-                </div>
-                <div class="bg-slate-800 p-4 rounded-xl border border-white/5">
-                    <p class="text-xs text-slate-400 uppercase font-bold">Activos Hoy</p>
-                    <p class="text-2xl font-bold text-green-400 mt-1">${stats.activeUsers}</p>
-                </div>
-                <div class="bg-slate-800 p-4 rounded-xl border border-white/5">
-                    <p class="text-xs text-slate-400 uppercase font-bold">DB Size</p>
-                    <p class="text-2xl font-bold text-accent-cyan mt-1">${stats.dbSize.toFixed(2)} KB</p>
-                </div>
-                <div class="bg-slate-800 p-4 rounded-xl border border-white/5">
-                    <p class="text-xs text-slate-400 uppercase font-bold">Ingresos Globales</p>
-                    <p class="text-2xl font-bold text-yellow-400 mt-1">$${(stats.totalRevenue / 1000).toFixed(1)}k</p>
-                </div>
-            </div>
-
-            <!-- Charts Section -->
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Services Type Chart -->
-                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-white/5">
-                    <h3 class="font-bold mb-4 dark:text-white">Tipos de Servicio</h3>
-                    <canvas id="chartTypes"></canvas>
-                </div>
-
-                <!-- Daily Activity Chart -->
-                <div class="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-sm border border-slate-100 dark:border-white/5">
-                    <h3 class="font-bold mb-4 dark:text-white">Actividad Reciente</h3>
-                    <canvas id="chartActivity"></canvas>
-                </div>
-            </div>
-
-            <!-- User Database Table -->
-            <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-white/5 overflow-hidden">
-                <div class="p-4 border-b border-slate-100 dark:border-white/5 flex justify-between items-center">
-                    <h3 class="font-bold dark:text-white">Base de Datos de Usuarios</h3>
-                    <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-bold">Live Data</span>
-                </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm text-slate-500 dark:text-slate-400">
-                        <thead class="bg-slate-50 dark:bg-slate-900/50 uppercase text-xs">
-                            <tr>
-                                <th class="px-4 py-3">Usuario</th>
-                                <th class="px-4 py-3">Rol</th>
-                                <th class="px-4 py-3">Último Acceso</th>
-                            </tr>
-                        </thead>
-                        <tbody class="divide-y divide-slate-100 dark:divide-white/5">
-                            ${DB.getUsers().map(u => `
-                                <tr class="hover:bg-slate-50 dark:hover:bg-white/5">
-                                    <td class="px-4 py-3 flex items-center gap-3">
-                                        <img src="${u.avatar}" class="size-8 rounded-full">
-                                        <div>
-                                            <p class="font-bold dark:text-white">${u.name}</p>
-                                            <p class="text-xs">${u.email}</p>
-                                        </div>
-                                    </td>
-                                    <td class="px-4 py-3">
-                                        <span class="px-2 py-1 rounded-md text-xs font-bold ${u.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-slate-100 text-slate-600'}">
-                                            ${u.role.toUpperCase()}
-                                        </span>
-                                    </td>
-                                    <td class="px-4 py-3 font-mono text-xs">
-                                        ${new Date(u.lastLogin).toLocaleDateString()}
-                                    </td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
+        // --- ADMIN RENDERER ---
+        // --- ADMIN RENDERER ---
+        async function renderAdmin(container) {
+            container.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-screen space-y-4">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <p class="text-slate-500 animate-pulse">Cargando datos globales...</p>
+        </div>
     `;
 
-    // Initialize Charts
-    setTimeout(() => {
-        // Types Chart
-        new Chart(document.getElementById('chartTypes'), {
-            type: 'doughnut',
-            data: {
-                labels: stats.chartData.types,
-                datasets: [{
-                    data: stats.chartData.typeCounts,
-                    backgroundColor: ['#3b82f6', '#8b5cf6', '#10b981'],
-                    borderWidth: 0
-                }]
-            },
-            options: { responsive: true, plugins: { legend: { position: 'bottom' } } }
-        });
+            // Fetch Global Data
+            const allServices = await DB.getAllServicesForStats();
+            // Calculate Global Stats
+            const totalHours = allServices.reduce((sum, s) => sum + (parseFloat(s.hours) || 0), 0);
+            const totalRevenue = allServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
 
-        // Activity Chart
-        new Chart(document.getElementById('chartActivity'), {
-            type: 'bar',
-            data: {
-                labels: stats.chartData.dates.slice(0, 5), // Last 5 days
-                datasets: [{
-                    label: 'Servicios',
-                    data: stats.chartData.counts.slice(0, 5),
-                    backgroundColor: '#3b82f6',
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#ffffff10' } },
-                    x: { grid: { display: false } }
+            // Stats Object
+            const stats = {
+                userCount: store.allUsers.length,
+                activeUsers: store.allUsers.filter(u => u.lastLogin && new Date(u.lastLogin) > new Date(Date.now() - 86400000)).length,
+                totalHours,
+                totalRevenue
+            };
+
+            container.innerHTML = `
+<header class="sticky top-0 z-50 bg-slate-900 border-b border-white/10 px-6 py-4 flex items-center justify-between">
+    <h1 class="text-xl font-bold text-white flex items-center gap-2">
+        <span class="material-symbols-outlined text-accent-cyan">admin_panel_settings</span>
+        Panel Administrador
+    </h1>
+    <button onclick="router.navigateTo('#agenda')" class="text-slate-400 hover:text-white">
+        <span class="material-symbols-outlined">close</span>
+    </button>
+</header>
+
+<main class="p-6 space-y-6 pb-24 max-w-6xl mx-auto">
+    <!-- KPI Cards -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-slate-800 p-4 rounded-xl border border-white/5">
+            <p class="text-xs text-slate-400 uppercase font-bold">Usuarios Totales</p>
+            <p class="text-2xl font-bold text-white mt-1">${stats.userCount}</p>
+        </div>
+        <div class="bg-slate-800 p-4 rounded-xl border border-white/5">
+            <p class="text-xs text-slate-400 uppercase font-bold">Activos Hoy</p>
+            <p class="text-2xl font-bold text-green-400 mt-1">${stats.activeUsers}</p>
+        </div>
+        <div class="bg-slate-800 p-4 rounded-xl border border-white/5">
+            <p class="text-xs text-slate-400 uppercase font-bold">Horas Totales</p>
+            <p class="text-2xl font-bold text-accent-cyan mt-1">${Math.round(stats.totalHours).toLocaleString()}</p>
+        </div>
+        <div class="bg-slate-800 p-4 rounded-xl border border-white/5">
+            <p class="text-xs text-slate-400 uppercase font-bold">Volumen Global</p>
+            <p class="text-2xl font-bold text-yellow-400 mt-1">$${(stats.totalRevenue / 1000000).toFixed(2)}M</p>
+        </div>
+    </div>
+
+    <!-- Ad Management Section -->
+    <div class="bg-slate-800 rounded-2xl border border-white/5 p-6">
+        <h3 class="font-bold text-white mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-amber-400">campaign</span>
+            Gestión de Publicidad
+        </h3>
+        
+        <!-- Add Ad Form -->
+        <form onsubmit="event.preventDefault(); store.handleAddAd(this)" class="grid md:grid-cols-3 gap-4 mb-6 bg-black/20 p-4 rounded-xl">
+            <input type="text" name="imageUrl" placeholder="URL de la Imagen (Banner)" required class="bg-slate-700 border-none rounded-lg text-white text-sm focus:ring-2 focus:ring-primary md:col-span-1">
+            <input type="text" name="linkUrl" placeholder="URL de Destino (Link)" required class="bg-slate-700 border-none rounded-lg text-white text-sm focus:ring-2 focus:ring-primary md:col-span-1">
+            <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined">add</span> Agregar Anuncio
+            </button>
+        </form>
+
+        <!-- Active Ads List -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            ${store.ads && store.ads.length > 0 ? store.ads.map(ad => `
+                <div class="relative group rounded-xl overflow-hidden border border-white/10">
+                    <img src="${ad.imageUrl}" class="w-full h-32 object-cover opacity-75 group-hover:opacity-100 transition-opacity">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent p-3 flex flex-col justify-end">
+                        <p class="text-xs text-slate-300 truncate">${ad.linkUrl}</p>
+                        <div class="flex justify-between items-end mt-1">
+                            <span class="text-[10px] text-green-400 font-bold uppercase">Activo</span>
+                            <button onclick="store.deleteAd('${ad.id}')" class="bg-red-500/80 hover:bg-red-500 text-white p-1.5 rounded-lg backdrop-blur-sm transition-colors">
+                                <span class="material-symbols-outlined text-sm">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('') : '<p class="text-slate-500 text-sm col-span-full text-center py-4">No hay anuncios activos.</p>'}
+        </div>
+    </div>
+
+    <!-- User Database Table -->
+    <div class="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-100 dark:border-white/5 overflow-hidden">
+        <div class="p-4 border-b border-slate-100 dark:border-white/5 flex justify-between items-center">
+            <h3 class="font-bold dark:text-white">Base de Datos de Usuarios</h3>
+            <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded-full font-bold">Live Data</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-sm text-slate-500 dark:text-slate-400">
+                <thead class="bg-slate-50 dark:bg-slate-900/50 uppercase text-xs">
+                    <tr>
+                        <th class="px-4 py-3">Usuario</th>
+                        <th class="px-4 py-3">Rol</th>
+                        <th class="px-4 py-3">Último Acceso</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 dark:divide-white/5">
+                    ${store.allUsers ? store.allUsers.map(u => `
+                        <tr class="hover:bg-slate-50 dark:hover:bg-white/5">
+                            <td class="px-4 py-3 flex items-center gap-3">
+                                <img src="${u.avatar}" class="size-8 rounded-full">
+                                <div>
+                                    <p class="font-bold dark:text-white">${u.name}</p>
+                                    <p class="text-xs">${u.email}</p>
+                                </div>
+                            </td>
+                            <td class="px-4 py-3">
+                                <span class="px-2 py-1 rounded-md text-xs font-bold ${u.role === 'admin' ? 'bg-purple-100 text-purple-700' : 'bg-slate-100 text-slate-600'}">
+                                    ${u.role.toUpperCase()}
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 font-mono text-xs">
+                                ${u.lastLogin ? new Date(u.lastLogin).toLocaleDateString() : '-'}
+                            </td>
+                        </tr>
+                    `).join('') : ''}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+    `;
+
+            // Logic for Ads
+            store.handleAddAd = async (form) => {
+                const imageUrl = form.imageUrl.value;
+                const linkUrl = form.linkUrl.value;
+                try {
+                    await DB.addAd({ imageUrl, linkUrl });
+                    showToast("Anuncio creado correctamente");
+                    form.reset();
+                    // Re-render implicitly handled by subscription update
+                    renderAdmin(container);
+                } catch (e) {
+                    showToast("Error al crear anuncio");
                 }
-            }
-        });
-    }, 100);
-}
+            };
 
-// --- 3. AUTH VIEW RENDERERS ---
+            store.deleteAd = async (id) => {
+                if (confirm("¿Eliminar este anuncio?")) {
+                    await DB.deleteAd(id);
+                    renderAdmin(container);
+                }
+            };
+        }
 
-function renderLogin(container) {
-    container.innerHTML = `
+        // --- 3. AUTH VIEW RENDERERS ---
+
+        function renderLogin(container) {
+            container.innerHTML = `
         <div class="min-h-screen flex flex-col justify-center px-6 py-12 lg:px-8 bg-background-dark">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm text-center">
                 <div class="mx-auto size-16 bg-primary/20 rounded-2xl flex items-center justify-center text-primary border border-primary/30 mb-6">
@@ -498,20 +561,20 @@ function renderLogin(container) {
         </div>
     `;
 
-    window.handleGoogleLogin = () => {
-        store.loginWithGoogle();
-    };
+            window.handleGoogleLogin = () => {
+                store.loginWithGoogle();
+            };
 
-    window.handleLogin = (e) => {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        store.login(email, password);
-    }
-}
+            window.handleLogin = (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                store.login(email, password);
+            }
+        }
 
-function renderSignup(container) {
-    container.innerHTML = `
+        function renderSignup(container) {
+            container.innerHTML = `
         <div class="min-h-screen flex flex-col justify-center px-6 py-12 lg:px-8 bg-background-dark">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm text-center">
                  <button onclick="router.navigateTo('#login')" class="absolute top-6 left-6 text-slate-400 hover:text-white flex items-center gap-1">
@@ -565,43 +628,43 @@ function renderSignup(container) {
         </div>
     `;
 
-    window.handleSignup = (e) => {
-        e.preventDefault();
-        const email = document.getElementById('s-email').value;
-        const password = document.querySelector('input[name="password"]').value;
-        const name = document.querySelector('input[name="name"]').value;
-        store.register(email, password, name);
-    }
-}
+            window.handleSignup = (e) => {
+                e.preventDefault();
+                const email = document.getElementById('s-email').value;
+                const password = document.querySelector('input[name="password"]').value;
+                const name = document.querySelector('input[name="name"]').value;
+                store.register(email, password, name);
+            }
+        }
 
-// --- 4. APP VIEWS ---
+        // --- 4. APP VIEWS ---
 
-/**
- * Render Agenda View
- * matches: agenda_y_calendario_de_turnos/code.html
- */
-function renderAgenda(container) {
-    // State for Calendar View
-    if (!store.viewDate) store.viewDate = new Date();
+        /**
+         * Render Agenda View
+         * matches: agenda_y_calendario_de_turnos/code.html
+         */
+        function renderAgenda(container) {
+            // State for Calendar View
+            if (!store.viewDate) store.viewDate = new Date();
 
-    // Ensure we stick to the viewDate month, but if selectedDate is set, we might want to be there? 
-    // Let's keep viewDate independent so user can browse.
+            // Ensure we stick to the viewDate month, but if selectedDate is set, we might want to be there? 
+            // Let's keep viewDate independent so user can browse.
 
-    const year = store.viewDate.getFullYear();
-    const month = store.viewDate.getMonth();
-    const currentMonthLabel = store.viewDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
+            const year = store.viewDate.getFullYear();
+            const month = store.viewDate.getMonth();
+            const currentMonthLabel = store.viewDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
 
-    const selectedDate = store.selectedDate || new Date().toISOString().split('T')[0];
+            const selectedDate = store.selectedDate || new Date().toISOString().split('T')[0];
 
-    // Get services for selected date
-    const dayServices = store.services.filter(s => s.date === selectedDate);
+            // Get services for selected date
+            const dayServices = store.services.filter(s => s.date === selectedDate);
 
-    // Find next shift (first service in future)
-    const nextShift = store.services
-        .filter(s => new Date(s.date + 'T' + (s.time || '00:00')) > new Date())
-        .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
+            // Find next shift (first service in future)
+            const nextShift = store.services
+                .filter(s => new Date(s.date + 'T' + (s.time || '00:00')) > new Date())
+                .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
 
-    const html = `
+            const html = `
         <!-- Header -->
         <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 pt-12 pb-4">
             <div class="flex justify-between items-center">
@@ -675,8 +738,8 @@ function renderAgenda(container) {
                     <!-- Calendar Grid Header -->
                     <div class="grid grid-cols-7 gap-1 mb-2">
                          ${['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'].map(d =>
-        `<div class="text-center text-[10px] font-bold text-slate-400 uppercase">${d}</div>`
-    ).join('')}
+                `<div class="text-center text-[10px] font-bold text-slate-400 uppercase">${d}</div>`
+            ).join('')}
                     </div>
                     <!-- Calendar Grid -->
                     <div class="grid grid-cols-7 gap-y-2" id="calendar-grid">
@@ -690,7 +753,7 @@ function renderAgenda(container) {
                 <h3 class="font-bold text-lg dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
                 <div class="space-y-3">
                     ${dayServices.length > 0 ? dayServices.map(renderServiceCard).join('') :
-            `<div class="p-8 text-center text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl">
+                    `<div class="p-8 text-center text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl">
                 <span class="material-symbols-outlined text-4xl mb-2">event_busy</span>
                 <p class="text-sm">Sin servicios este día</p>
             </div>`}
@@ -700,54 +763,54 @@ function renderAgenda(container) {
         ${renderBottomNav('agenda')}
     `;
 
-    container.innerHTML = html;
+            container.innerHTML = html;
 
-    // Attach listeners
-    document.querySelectorAll('.calendar-day').forEach(el => {
-        el.addEventListener('click', (e) => {
-            store.selectedDate = e.currentTarget.dataset.date;
-            renderAgenda(container);
-        });
-    });
+            // Attach listeners
+            document.querySelectorAll('.calendar-day').forEach(el => {
+                el.addEventListener('click', (e) => {
+                    store.selectedDate = e.currentTarget.dataset.date;
+                    renderAgenda(container);
+                });
+            });
 
-    // Month Nav Listeners
-    document.getElementById('btn-prev-month').addEventListener('click', () => {
-        store.viewDate.setMonth(store.viewDate.getMonth() - 1);
-        renderAgenda(container);
-    });
+            // Month Nav Listeners
+            document.getElementById('btn-prev-month').addEventListener('click', () => {
+                store.viewDate.setMonth(store.viewDate.getMonth() - 1);
+                renderAgenda(container);
+            });
 
-    document.getElementById('btn-next-month').addEventListener('click', () => {
-        store.viewDate.setMonth(store.viewDate.getMonth() + 1);
-        renderAgenda(container);
-    });
-}
+            document.getElementById('btn-next-month').addEventListener('click', () => {
+                store.viewDate.setMonth(store.viewDate.getMonth() + 1);
+                renderAgenda(container);
+            });
+        }
 
-function generateCalendarGrid(year, month, selectedDate) {
-    const firstDay = new Date(year, month, 1).getDay();
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    let html = '';
+        function generateCalendarGrid(year, month, selectedDate) {
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            let html = '';
 
-    // Empty slots
-    for (let i = 0; i < firstDay; i++) {
-        html += `<div class="py-2"></div>`;
-    }
+            // Empty slots
+            for (let i = 0; i < firstDay; i++) {
+                html += `<div class="py-2"></div>`;
+            }
 
-    // Days
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-        const isSelected = dateStr === selectedDate;
-        const hasService = store.services.some(s => s.date === dateStr);
-        const isToday = new Date().toISOString().split('T')[0] === dateStr;
+            // Days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const isSelected = dateStr === selectedDate;
+                const hasService = store.services.some(s => s.date === dateStr);
+                const isToday = new Date().toISOString().split('T')[0] === dateStr;
 
-        // Colors
-        const hasPublic = store.services.some(s => s.date === dateStr && s.type === 'Public');
-        const hasPrivate = store.services.some(s => s.date === dateStr && s.type === 'Private');
+                // Colors
+                const hasPublic = store.services.some(s => s.date === dateStr && s.type === 'Public');
+                const hasPrivate = store.services.some(s => s.date === dateStr && s.type === 'Private');
 
-        let dots = '';
-        if (hasPublic) dots += `<div class="size-1 rounded-full bg-primary"></div>`;
-        if (hasPrivate) dots += `<div class="size-1 rounded-full bg-service-private"></div>`;
+                let dots = '';
+                if (hasPublic) dots += `<div class="size-1 rounded-full bg-primary"></div>`;
+                if (hasPrivate) dots += `<div class="size-1 rounded-full bg-service-private"></div>`;
 
-        html += `
+                html += `
             <div class="flex flex-col items-center py-2 relative calendar-day cursor-pointer" data-date="${dateStr}">
                 ${isSelected ? `<div class="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"></div>` : ''}
                 <span class="relative z-10 font-bold ${isSelected ? 'text-primary' : (isToday ? 'text-accent-cyan' : 'text-slate-500 dark:text-slate-300')}">${day}</span>
@@ -756,22 +819,22 @@ function generateCalendarGrid(year, month, selectedDate) {
                 </div>
             </div>
         `;
-    }
-    return html;
-}
+            }
+            return html;
+        }
 
-function renderServiceCard(service) {
-    const isPublic = service.type === 'Public';
-    const borderColor = isPublic ? 'border-primary' : 'border-service-private';
-    const textColor = isPublic ? 'text-primary' : 'text-service-private';
-    const bgSoft = isPublic ? 'bg-primary/10' : 'bg-service-private/10';
-    const icon = isPublic ? 'account_balance' : 'storefront';
+        function renderServiceCard(service) {
+            const isPublic = service.type === 'Public';
+            const borderColor = isPublic ? 'border-primary' : 'border-service-private';
+            const textColor = isPublic ? 'text-primary' : 'text-service-private';
+            const bgSoft = isPublic ? 'bg-primary/10' : 'bg-service-private/10';
+            const icon = isPublic ? 'account_balance' : 'storefront';
 
-    // Handle legacy data safely
-    const timeRange = service.startTime && service.endTime ? `${service.startTime} - ${service.endTime}` : 'Horario no especificado';
-    const subType = service.subType || '';
+            // Handle legacy data safely
+            const timeRange = service.startTime && service.endTime ? `${service.startTime} - ${service.endTime}` : 'Horario no especificado';
+            const subType = service.subType || '';
 
-    return `
+            return `
         <div onclick="router.navigateTo('#service/${service.id}')" class="bg-white dark:bg-slate-900 p-4 rounded-2xl flex gap-4 border-l-4 ${borderColor} shadow-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
             <div class="${bgSoft} size-12 rounded-xl flex items-center justify-center ${textColor}">
                 <span class="material-symbols-outlined">${icon}</span>
@@ -791,38 +854,38 @@ function renderServiceCard(service) {
                         <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">${timeRange}</span>
                     </div>
                     ${(() => {
-            // DRY Status Logic for Card
-            const today = new Date().toISOString().split('T')[0];
-            const isFuture = service.date > today;
-            let label = 'Pendiente';
-            let color = 'text-amber-400';
+                    // DRY Status Logic for Card
+                    const today = new Date().toISOString().split('T')[0];
+                    const isFuture = service.date > today;
+                    let label = 'Pendiente';
+                    let color = 'text-amber-400';
 
-            if (service.status === 'paid') {
-                label = 'Liquidado';
-                color = 'text-green-400';
-            } else if (isFuture) {
-                label = 'Agendado';
-                color = 'text-blue-400';
-            }
-            return `<div class="flex items-center gap-1">
+                    if (service.status === 'paid') {
+                        label = 'Liquidado';
+                        color = 'text-green-400';
+                    } else if (isFuture) {
+                        label = 'Agendado';
+                        color = 'text-blue-400';
+                    }
+                    return `<div class="flex items-center gap-1">
                             <span class="size-1.5 rounded-full ${color.replace('text-', 'bg-')}"></span>
                             <span class="text-[10px] ${color} font-bold uppercase tracking-tighter">${label}</span>
                          </div>`;
-        })()}
+                })()}
                 </div>
             </div>
         </div>
     `;
-}
+        }
 
-/**
- * Render Register View
- * matches: registrar_nuevo_servicio/code.html
- */
-function renderRegister(container) {
-    const today = new Date().toISOString().split('T')[0];
+        /**
+         * Render Register View
+         * matches: registrar_nuevo_servicio/code.html
+         */
+        function renderRegister(container) {
+            const today = new Date().toISOString().split('T')[0];
 
-    container.innerHTML = `
+            container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur border-b border-slate-200 dark:border-primary/20">
             <div class="flex items-center justify-between px-4 h-16">
                 <button onclick="router.navigateTo('#agenda')" class="flex items-center text-primary">
@@ -916,145 +979,145 @@ function renderRegister(container) {
         </main>
     `;
 
-    // Logic
-    let currentType = 'Public';
-    let currentSubType = 'Ordinaria';
+            // Logic
+            let currentType = 'Public';
+            let currentSubType = 'Ordinaria';
 
-    // Config helper
-    const updateSubtypes = () => {
-        const container = document.getElementById('subtype-container');
-        const config = store.serviceConfig[currentType];
-        const subtypes = Object.keys(config);
+            // Config helper
+            const updateSubtypes = () => {
+                const container = document.getElementById('subtype-container');
+                const config = store.serviceConfig[currentType];
+                const subtypes = Object.keys(config);
 
-        container.innerHTML = subtypes.map(sub => `
+                container.innerHTML = subtypes.map(sub => `
             <button onclick="setSubType('${sub}')" 
                 class="px-4 py-2 rounded-lg text-sm font-bold border ${currentSubType === sub ? 'bg-primary text-white border-primary' : 'border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400'} transition-all">
                 ${sub}
             </button>
         `).join('');
 
-        // Default to first if current not invalid
-        if (!subtypes.includes(currentSubType)) {
-            currentSubType = subtypes[0];
-            updateSubtypes(); // Re-render to highlight correctly
-        } else {
-            updateRate();
+                // Default to first if current not invalid
+                if (!subtypes.includes(currentSubType)) {
+                    currentSubType = subtypes[0];
+                    updateSubtypes(); // Re-render to highlight correctly
+                } else {
+                    updateRate();
+                }
+            };
+
+            window.setFormType = (type) => {
+                currentType = type;
+                // Update UI Tabs
+                ['Public', 'Private', 'OSPES'].forEach(t => {
+                    const btn = document.getElementById(`type-${t.toLowerCase()}`);
+                    if (t === type) {
+                        btn.className = 'flex-1 py-2 text-xs font-bold rounded-md bg-white dark:bg-primary shadow-sm dark:text-white transition-all';
+                    } else {
+                        btn.className = 'flex-1 py-2 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-700 transition-all';
+                    }
+                });
+                updateSubtypes();
+            };
+
+            window.setSubType = (sub) => {
+                currentSubType = sub;
+                updateSubtypes();
+            };
+
+            const updateRate = () => {
+                const rate = store.serviceConfig[currentType][currentSubType];
+                document.getElementById('inp-rate').value = rate;
+                calculateTotal();
+            };
+
+            const calculateHours = () => {
+                const start = document.getElementById('inp-start').value;
+                const end = document.getElementById('inp-end').value;
+
+                if (start && end) {
+                    const startDate = new Date(`2000-01-01T${start}`);
+                    let endDate = new Date(`2000-01-01T${end}`);
+
+                    if (endDate < startDate) {
+                        // Next day
+                        endDate = new Date(`2000-01-02T${end}`);
+                    }
+
+                    const diff = (endDate - startDate) / (1000 * 60 * 60); // Hours
+                    document.getElementById('lbl-hours').innerText = diff.toFixed(1) + ' Horas';
+                    return diff;
+                }
+                return 0;
+            };
+
+            const calculateTotal = () => {
+                const hours = calculateHours();
+                const rate = parseFloat(document.getElementById('inp-rate').value) || 0;
+                const total = hours * rate;
+                document.getElementById('txt-total').innerText = `$${(total || 0).toLocaleString()}`;
+            };
+
+            // Listeners
+            document.getElementById('inp-start').addEventListener('change', calculateTotal);
+            document.getElementById('inp-end').addEventListener('change', calculateTotal);
+            document.getElementById('inp-rate').addEventListener('input', calculateTotal);
+
+            // Save
+            const saveAction = () => {
+                const date = document.getElementById('inp-date').value;
+                const start = document.getElementById('inp-start').value;
+                const end = document.getElementById('inp-end').value;
+                const rate = parseFloat(document.getElementById('inp-rate').value);
+                const location = document.getElementById('inp-location').value || (currentType + ' - ' + currentSubType);
+                const hours = calculateHours();
+
+                store.addService({
+                    date,
+                    startTime: start,
+                    endTime: end,
+                    hours,
+                    rate,
+                    type: currentType,
+                    subType: currentSubType,
+                    location,
+                    total: hours * rate,
+                    status: 'pending' // Default pending payment
+                });
+
+                router.navigateTo('#agenda');
+            };
+
+            document.getElementById('btn-save').addEventListener('click', saveAction);
+
+            // Init
+            updateSubtypes();
+            // Force type select visual update
+            setFormType('Public');
         }
-    };
-
-    window.setFormType = (type) => {
-        currentType = type;
-        // Update UI Tabs
-        ['Public', 'Private', 'OSPES'].forEach(t => {
-            const btn = document.getElementById(`type-${t.toLowerCase()}`);
-            if (t === type) {
-                btn.className = 'flex-1 py-2 text-xs font-bold rounded-md bg-white dark:bg-primary shadow-sm dark:text-white transition-all';
-            } else {
-                btn.className = 'flex-1 py-2 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-700 transition-all';
-            }
-        });
-        updateSubtypes();
-    };
-
-    window.setSubType = (sub) => {
-        currentSubType = sub;
-        updateSubtypes();
-    };
-
-    const updateRate = () => {
-        const rate = store.serviceConfig[currentType][currentSubType];
-        document.getElementById('inp-rate').value = rate;
-        calculateTotal();
-    };
-
-    const calculateHours = () => {
-        const start = document.getElementById('inp-start').value;
-        const end = document.getElementById('inp-end').value;
-
-        if (start && end) {
-            const startDate = new Date(`2000-01-01T${start}`);
-            let endDate = new Date(`2000-01-01T${end}`);
-
-            if (endDate < startDate) {
-                // Next day
-                endDate = new Date(`2000-01-02T${end}`);
-            }
-
-            const diff = (endDate - startDate) / (1000 * 60 * 60); // Hours
-            document.getElementById('lbl-hours').innerText = diff.toFixed(1) + ' Horas';
-            return diff;
-        }
-        return 0;
-    };
-
-    const calculateTotal = () => {
-        const hours = calculateHours();
-        const rate = parseFloat(document.getElementById('inp-rate').value) || 0;
-        const total = hours * rate;
-        document.getElementById('txt-total').innerText = `$${(total || 0).toLocaleString()}`;
-    };
-
-    // Listeners
-    document.getElementById('inp-start').addEventListener('change', calculateTotal);
-    document.getElementById('inp-end').addEventListener('change', calculateTotal);
-    document.getElementById('inp-rate').addEventListener('input', calculateTotal);
-
-    // Save
-    const saveAction = () => {
-        const date = document.getElementById('inp-date').value;
-        const start = document.getElementById('inp-start').value;
-        const end = document.getElementById('inp-end').value;
-        const rate = parseFloat(document.getElementById('inp-rate').value);
-        const location = document.getElementById('inp-location').value || (currentType + ' - ' + currentSubType);
-        const hours = calculateHours();
-
-        store.addService({
-            date,
-            startTime: start,
-            endTime: end,
-            hours,
-            rate,
-            type: currentType,
-            subType: currentSubType,
-            location,
-            total: hours * rate,
-            status: 'pending' // Default pending payment
-        });
-
-        router.navigateTo('#agenda');
-    };
-
-    document.getElementById('btn-save').addEventListener('click', saveAction);
-
-    // Init
-    updateSubtypes();
-    // Force type select visual update
-    setFormType('Public');
-}
 
 
-/**
- * Render Control Panel
- * matches: panel_de_control_de_adicionales/code.html
- */
-function renderControlPanel(container) {
-    // Calculate Stats
-    const totalServices = store.services.length;
+        /**
+         * Render Control Panel
+         * matches: panel_de_control_de_adicionales/code.html
+         */
+        function renderControlPanel(container) {
+            // Calculate Stats
+            const totalServices = store.services.length;
 
-    // Sort by date desc
-    const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
+            // Sort by date desc
+            const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    const publicServices = store.services.filter(s => s.type === 'Public');
-    const privateServices = store.services.filter(s => s.type === 'Private');
+            const publicServices = store.services.filter(s => s.type === 'Public');
+            const privateServices = store.services.filter(s => s.type === 'Private');
 
-    const totalPublic = publicServices.reduce((sum, s) => sum + s.total, 0);
-    const totalPrivate = privateServices.reduce((sum, s) => sum + s.total, 0);
-    const totalEarnings = totalPublic + totalPrivate;
+            const totalPublic = publicServices.reduce((sum, s) => sum + s.total, 0);
+            const totalPrivate = privateServices.reduce((sum, s) => sum + s.total, 0);
+            const totalEarnings = totalPublic + totalPrivate;
 
-    const hoursPublic = publicServices.reduce((sum, s) => sum + s.hours, 0);
-    const hoursPrivate = privateServices.reduce((sum, s) => sum + s.hours, 0);
+            const hoursPublic = publicServices.reduce((sum, s) => sum + s.hours, 0);
+            const hoursPrivate = privateServices.reduce((sum, s) => sum + s.hours, 0);
 
-    const html = `
+            const html = `
         <header class="sticky top-0 z-50 glass-card px-5 py-4 flex items-center justify-between border-b border-white/5">
             <div class="flex items-center gap-3">
                 <div class="relative">
@@ -1117,15 +1180,21 @@ function renderControlPanel(container) {
             <section class="pb-24">
                 <div class="flex justify-between items-end mb-4 px-1">
                     <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Servicios Recientes</h3>
-                    <span onclick="showToast('Historial completo pronto')" class="text-xs text-slate-500 cursor-pointer">Ver todo</span>
+            <!-- Recent Services Feed -->
+            <section class="pb-24">
+                <div class="flex justify-between items-end mb-4 px-1">
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Servicios Recientes</h3>
+                    <span onclick="window.location.hash='#history'" class="text-xs text-slate-500 cursor-pointer">Ver todo</span>
+                </div>
+                <div class="space-y-3">
                 </div>
                 <div class="space-y-3">
                     ${sortedServices.slice(0, 5).map(s => {
-        const isPub = s.type === 'Public';
-        const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
-        const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
-        const icon = isPub ? 'account_balance' : 'shopping_cart';
-        return `
+                const isPub = s.type === 'Public';
+                const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
+                const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
+                const icon = isPub ? 'account_balance' : 'shopping_cart';
+                return `
                             <div class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5">
                                 <div class="flex items-center gap-4">
                                     <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
@@ -1137,27 +1206,27 @@ function renderControlPanel(container) {
                                             <span class="text-[11px] text-slate-400">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                             <span class="size-1 rounded-full bg-slate-600"></span>
                                             ${(() => {
-                const today = new Date().toISOString().split('T')[0];
-                const isFuture = s.date > today;
-                let label = 'Pendiente';
-                let color = 'text-amber-400';
+                        const today = new Date().toISOString().split('T')[0];
+                        const isFuture = s.date > today;
+                        let label = 'Pendiente';
+                        let color = 'text-amber-400';
 
-                if (s.status === 'paid') {
-                    label = 'Liquidado';
-                    color = 'text-green-400';
-                } else if (isFuture) {
-                    label = 'Agendado';
-                    color = 'text-blue-400';
-                }
-                return `<span class="text-[11px] ${color} font-bold uppercase tracking-tighter">${label}</span>`;
-            })()}
+                        if (s.status === 'paid') {
+                            label = 'Liquidado';
+                            color = 'text-green-400';
+                        } else if (isFuture) {
+                            label = 'Agendado';
+                            color = 'text-blue-400';
+                        }
+                        return `<span class="text-[11px] ${color} font-bold uppercase tracking-tighter">${label}</span>`;
+                    })()}
                                         </div>
                                     </div>
                                 </div>
                                 <p class="text-sm font-bold text-white">$${(s.total || 0).toLocaleString()}</p>
                             </div>
                          `;
-    }).join('')}
+            }).join('')}
                 </div>
             </section>
         </main>
@@ -1171,18 +1240,18 @@ function renderControlPanel(container) {
 
         ${renderBottomNav('control')}
     `;
-    container.innerHTML = html;
-}
+            container.innerHTML = html;
+        }
 
-/**
- * Render Financial View
- * matches: resumen_financiero_y_gastos/code.html
- */
-function renderFinancial(container) {
-    const totalIncome = store.services.reduce((sum, s) => sum + s.total, 0);
-    const totalExpenses = store.expenses.reduce((sum, e) => sum + e.amount, 0);
+        /**
+         * Render Financial View
+         * matches: resumen_financiero_y_gastos/code.html
+         */
+        function renderFinancial(container) {
+            const totalIncome = store.services.reduce((sum, s) => sum + s.total, 0);
+            const totalExpenses = store.expenses.reduce((sum, e) => sum + e.amount, 0);
 
-    const html = `
+            const html = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-3">
@@ -1290,33 +1359,33 @@ function renderFinancial(container) {
         </main>
         ${renderBottomNav('financial')}
     `;
-    container.innerHTML = html;
+            container.innerHTML = html;
 
-    // Attach Expense Listeners
-    window.handleAddExpense = (category) => {
-        const amount = prompt(`Monto para ${category}:`);
-        if (amount && !isNaN(amount)) {
-            store.addExpense(category, amount);
+            // Attach Expense Listeners
+            window.handleAddExpense = (category) => {
+                const amount = prompt(`Monto para ${category}:`);
+                if (amount && !isNaN(amount)) {
+                    store.addExpense(category, amount);
+                }
+            };
         }
-    };
-}
 
-/**
- * Render Admin View
- * matches: panel_de_administración_y_métricas/code.html
- */
+        /**
+         * Render Admin View
+         * matches: panel_de_administración_y_métricas/code.html
+         */
 
 
-/**
- * Render Profile / Settings View
- */
-function renderProfile(container) {
-    // Clone config to avoid reference issues
-    const config = JSON.parse(JSON.stringify(store.serviceConfig));
+        /**
+         * Render Profile / Settings View
+         */
+        function renderProfile(container) {
+            // Clone config to avoid reference issues
+            const config = JSON.parse(JSON.stringify(store.serviceConfig));
 
-    // Helper to generate inputs with editable names
-    const renderConfigInputs = (type) => {
-        return Object.keys(config[type]).map(sub => `
+            // Helper to generate inputs with editable names
+            const renderConfigInputs = (type) => {
+                return Object.keys(config[type]).map(sub => `
             <div class="flex justify-between items-center py-2 border-b border-white/5 last:border-0 gap-2">
                 <input type="text" 
                     value="${sub}" 
@@ -1332,9 +1401,9 @@ function renderProfile(container) {
                 </div>
             </div>
         `).join('');
-    };
+            };
 
-    container.innerHTML = `
+            container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
             <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
@@ -1409,113 +1478,122 @@ function renderProfile(container) {
         </main>
     `;
 
-};
+        };
 
-// --- MISSING FUNCTIONS ---
-store.renameServiceSubtype = (type, oldName, newName) => {
-    if (oldName === newName || !newName.trim()) return;
-    const value = store.serviceConfig[type][oldName];
-    delete store.serviceConfig[type][oldName];
-    store.serviceConfig[type][newName] = value;
-    // Re-render handled by user typing, but on save it persists
-};
+        // --- MISSING FUNCTIONS ---
+        store.renameServiceSubtype = (type, oldName, newName) => {
+            if (oldName === newName || !newName.trim()) return;
+            const value = store.serviceConfig[type][oldName];
+            delete store.serviceConfig[type][oldName];
+            store.serviceConfig[type][newName] = value;
+            // Re-render handled by user typing, but on save it persists
+        };
 
-store.updateProfile = async (name, avatar) => {
-    try {
-        store.user.name = name;
-        store.user.avatar = avatar;
+        store.updateProfile = async (name, avatar) => {
+            try {
+                store.user.name = name;
+                store.user.avatar = avatar;
 
-        await DB.updateUser({
-            name,
-            avatar,
-            displayName: name, // Sync for auth compat
-            photoURL: avatar
-        });
-        showToast("Perfil actualizado correctamente");
-        renderProfile(document.getElementById('app')); // Re-render profile
-    } catch (e) {
-        showToast("Error al actualizar perfil");
-        console.error(e);
-    }
-};
+                await DB.updateUser({
+                    name,
+                    avatar,
+                    displayName: name, // Sync for auth compat
+                    photoURL: avatar
+                });
+                showToast("Perfil actualizado correctamente");
+                renderProfile(document.getElementById('app')); // Re-render profile
+            } catch (e) {
+                showToast("Error al actualizar perfil");
+                console.error(e);
+            }
+        };
 
-store.requestNotificationPermission = async () => {
-    if (!("Notification" in window)) {
-        showToast("Tu navegador no soporta notificaciones");
-        return;
-    }
+        store.requestNotificationPermission = async () => {
+            if (!("Notification" in window)) {
+                showToast("Tu navegador no soporta notificaciones");
+                return;
+            }
 
-    const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
-        store.notificationSettings.enabled = true;
-        showToast("Alertas Activadas");
-        renderProfile(document.getElementById('app'));
+            const permission = await Notification.requestPermission();
+            if (permission === 'granted') {
+                store.notificationSettings.enabled = true;
+                showToast("Alertas Activadas");
+                renderProfile(document.getElementById('app'));
 
-        // Test Notification manually
-        try {
-            new Notification("Adicionales Santa Fe", {
-                body: "¡Notificaciones configuradas correctamente!",
-                icon: "./icon.png" // Fix icon path
+                // Test Notification manually
+                try {
+                    new Notification("Adicionales Santa Fe", {
+                        body: "¡Notificaciones configuradas correctamente!",
+                        icon: "./icon.png" // Fix icon path
+                    });
+                } catch (e) {
+                    console.error("Notification trigger error", e);
+                }
+            }
+        };
+
+        // Notification Checker Logic
+        store.checkNotifications = () => {
+            if (!store.notificationSettings.enabled) return;
+
+            const now = new Date();
+            const leadTimeMs = store.notificationSettings.leadTime * 60000;
+
+            store.services.forEach(service => {
+                if (!service.date || !service.startTime) return;
+                const start = new Date(`${service.date}T${service.startTime}`);
+                const diff = start - now;
+
+                // If within lead time range (e.g. 59-60 mins) to avoid spamming
+                // Simple check: is it happening in the next hour?
+                // A more robust check would need a "notified" flag
+                if (diff > 0 && diff <= leadTimeMs && diff > (leadTimeMs - 60000)) {
+                    new Notification("Próximo Servicio", {
+                        body: `Tu adicional en ${service.location || 'Ubicación'} comienza en 1 hora.`,
+                        icon: "/icon.png"
+                    });
+                }
             });
-        } catch (e) {
-            console.error("Notification trigger error", e);
-        }
-    }
-};
+        };
 
-// Notification Checker Logic
-store.checkNotifications = () => {
-    if (!store.notificationSettings.enabled) return;
-
-    const now = new Date();
-    const leadTimeMs = store.notificationSettings.leadTime * 60000;
-
-    store.services.forEach(service => {
-        if (!service.date || !service.startTime) return;
-        const start = new Date(`${service.date}T${service.startTime}`);
-        const diff = start - now;
-
-        // If within lead time range (e.g. 59-60 mins) to avoid spamming
-        // Simple check: is it happening in the next hour?
-        // A more robust check would need a "notified" flag
-        if (diff > 0 && diff <= leadTimeMs && diff > (leadTimeMs - 60000)) {
-            new Notification("Próximo Servicio", {
-                body: `Tu adicional en ${service.location || 'Ubicación'} comienza en 1 hora.`,
-                icon: "/icon.png"
-            });
-        }
-    });
-};
-
-store.saveConfig = async () => {
-    try {
-        await DB.updateUserConfig(store.serviceConfig);
-        showToast("Tarifas actualizadas correctamente");
-    } catch (e) {
-        showToast("Error al guardar: " + e.message);
-    }
-};
+        store.saveConfig = async () => {
+            try {
+                await DB.updateUserConfig(store.serviceConfig);
+                showToast("Tarifas actualizadas correctamente");
+            } catch (e) {
+                showToast("Error al guardar: " + e.message);
+            }
+        };
 
 
 
 
 
-/**
- * Render Service Details View
- * New view for Edit/Delete/Pay Actions
- */
-function renderServiceDetails(container, serviceId) {
-    const service = store.services.find(s => s.id === serviceId);
+        /**
+         * Render Service Details View
+         * New view for Edit/Delete/Pay Actions
+         */
+        function renderServiceDetails(container, serviceId) {
+            const service = store.services.find(s => s.id === serviceId);
 
-    if (!service) {
-        showToast("Servicio no encontrado");
-        window.location.hash = '#agenda';
-        return;
-    }
+            if (!service) {
+                showToast("Servicio no encontrado");
+                window.location.hash = '#agenda';
+                return;
+            }
+            // ... code truncated ... rest is same
 
-    const isPaid = service.status === 'paid';
+            const service = store.services.find(s => s.id === serviceId);
 
-    container.innerHTML = `
+            if (!service) {
+                showToast("Servicio no encontrado");
+                window.location.hash = '#agenda';
+                return;
+            }
+
+            const isPaid = service.status === 'paid';
+
+            container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
             <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
@@ -1581,108 +1659,175 @@ function renderServiceDetails(container, serviceId) {
         </main>
     `;
 
-    // Actions
-    store.togglePaidStatus = async (id, newStatus) => {
-        try {
-            await DB.updateService(id, { status: newStatus ? 'paid' : 'pending' });
-            showToast(newStatus ? "¡Marcado como COBRADO! 💰" : "Marcado como Pendiente");
-            // renderServiceDetails(container, id); // Firestore sync will handle re-render if subcribed, but direct re-render is faster UX
-            window.history.back(); // Or stay? Back seems better to see list update
-        } catch (e) {
-            showToast("Error update: " + e.message);
-        }
-    };
+            // Actions
+            store.togglePaidStatus = async (id, newStatus) => {
+                try {
+                    await DB.updateService(id, { status: newStatus ? 'paid' : 'pending' });
+                    showToast(newStatus ? "¡Marcado como COBRADO! 💰" : "Marcado como Pendiente");
+                    // renderServiceDetails(container, id); // Firestore sync will handle re-render if subcribed, but direct re-render is faster UX
+                    window.history.back(); // Or stay? Back seems better to see list update
+                } catch (e) {
+                    showToast("Error update: " + e.message);
+                }
+            };
 
-    store.deleteService = async (id) => {
-        if (confirm("¿Seguro que quieres borrar este servicio? No se puede deshacer.")) {
-            try {
-                await DB.deleteService(id);
-                showToast("Servicio eliminado");
-                window.history.back();
-            } catch (e) {
-                showToast("Error delete: " + e.message);
+            store.deleteService = async (id) => {
+                if (confirm("¿Seguro que quieres borrar este servicio? No se puede deshacer.")) {
+                    try {
+                        await DB.deleteService(id);
+                        showToast("Servicio eliminado");
+                        window.history.back();
+                    } catch (e) {
+                        showToast("Error delete: " + e.message);
+                    }
+                }
+            };
+        }
+
+
+        // --- AD COMPONENT ---
+        function renderAdBanner() {
+            if (!store.ads || store.ads.length === 0) return '';
+            // Select random ad
+            const ad = store.ads[Math.floor(Math.random() * store.ads.length)];
+            return `
+        <div class="my-6 mx-4 rounded-xl overflow-hidden shadow-lg relative group">
+            <a href="${ad.linkUrl}" target="_blank" class="block relative">
+                <span class="absolute top-2 right-2 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-bold backdrop-blur-sm">Publicidad</span>
+                <img src="${ad.imageUrl}" class="w-full h-32 object-cover" alt="Anuncio">
+                <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            </a>
+        </div>
+    `;
+        }
+
+        /**
+         * Render Full History View
+         */
+        function renderHistory(container) {
+            const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-lg font-bold text-white">Historial Completo</h1>
+            <div class="w-10"></div>
+        </header>
+
+        <main class="space-y-4 pb-32">
+             <!-- Ad Banner Top -->
+            ${renderAdBanner()}
+
+            <div class="px-4 space-y-3">
+                ${sortedServices.map(s => {
+                const isPub = s.type === 'Public';
+                const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
+                const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
+                const icon = isPub ? 'account_balance' : 'shopping_cart';
+                return `
+                        <div onclick="window.location.hash='#details?id=${s.id}'" class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 cursor-pointer hover:bg-white/5 transition-colors">
+                            <div class="flex items-center gap-4">
+                                <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
+                                    <span class="material-symbols-outlined">${icon}</span>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-sm text-white">${s.location}</p>
+                                    <div class="flex items-center gap-2 mt-0.5">
+                                        <span class="text-[11px] text-slate-400">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
+                                        ${s.status === 'paid' ? '<span class="text-[10px] text-green-400 font-bold bg-green-500/10 px-1.5 rounded">PAGADO</span>' : ''}
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-600">chevron_right</span>
+                        </div>
+                     `;
+            }).join('')}
+                
+                ${sortedServices.length === 0 ? '<p class="text-center text-slate-500 py-10">No hay servicios registrados.</p>' : ''}
+            </div>
+        </main>
+        ${renderBottomNav('financial')}
+    `;
+        }
+
+        // --- 4. SHARED COMPONENTS ---
+
+        function renderBottomNav(activeTab) {
+            // We'll make a generic one for now, but design asks for specific ones per page.
+            // For this MVP step, a unified one is better for testing navigation.
+            const tabs = [
+                { id: 'agenda', icon: 'calendar_today', label: 'Agenda', route: '#agenda' },
+                { id: 'control', icon: 'dashboard', label: 'Panel', route: '#control' },
+                { id: 'register', icon: 'add_circle', label: '', route: '#register', isFab: true },
+                { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
+            ];
+
+            // Only add Admin tab if user is admin
+            if (store.user && store.user.role === 'admin') {
+                tabs.push({ id: 'admin', icon: 'admin_panel_settings', label: 'Admin', route: '#admin' });
             }
-        }
-    };
-}
 
-
-// --- 4. SHARED COMPONENTS ---
-
-function renderBottomNav(activeTab) {
-    // We'll make a generic one for now, but design asks for specific ones per page.
-    // For this MVP step, a unified one is better for testing navigation.
-    const tabs = [
-        { id: 'agenda', icon: 'calendar_today', label: 'Agenda', route: '#agenda' },
-        { id: 'control', icon: 'dashboard', label: 'Panel', route: '#control' },
-        { id: 'register', icon: 'add_circle', label: '', route: '#register', isFab: true },
-        { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
-    ];
-
-    // Only add Admin tab if user is admin
-    if (store.user && store.user.role === 'admin') {
-        tabs.push({ id: 'admin', icon: 'admin_panel_settings', label: 'Admin', route: '#admin' });
-    }
-
-    let navHtml = `<nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
+            let navHtml = `<nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
         <div class="flex justify-around items-end max-w-md mx-auto relative">`;
 
-    tabs.forEach(tab => {
-        if (tab.isFab) {
-            navHtml += `
+            tabs.forEach(tab => {
+                if (tab.isFab) {
+                    navHtml += `
                 <div class="relative -top-8">
                      <button onclick="router.navigateTo('${tab.route}')" class="size-14 rounded-full bg-primary text-white shadow-lg shadow-primary/40 flex items-center justify-center hover:scale-105 transition-transform">
                         <span class="material-symbols-outlined text-3xl">add</span>
                     </button>
                 </div>
             `;
-        } else {
-            const isActive = activeTab === tab.id;
-            const colorClass = isActive ? 'text-primary' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200';
-            const iconStyle = isActive ? "font-variation-settings: 'FILL' 1" : "";
+                } else {
+                    const isActive = activeTab === tab.id;
+                    const colorClass = isActive ? 'text-primary' : 'text-slate-400 hover:text-slate-600 dark:hover:text-slate-200';
+                    const iconStyle = isActive ? "font-variation-settings: 'FILL' 1" : "";
 
-            navHtml += `
+                    navHtml += `
                 <button onclick="router.navigateTo('${tab.route}')" class="flex flex-col items-center gap-1 ${colorClass} w-16 group transition-colors">
                     <span class="material-symbols-outlined group-active:scale-90 transition-transform" style="${iconStyle}">${tab.icon}</span>
                     <span class="text-[10px] font-bold">${tab.label}</span>
                 </button>
             `;
+                }
+            });
+
+            navHtml += `</div></nav>`;
+            return navHtml;
         }
-    });
 
-    navHtml += `</div></nav>`;
-    return navHtml;
-}
+        // Init App
+        document.addEventListener('DOMContentLoaded', () => {
+            router.init();
 
-// Init App
-document.addEventListener('DOMContentLoaded', () => {
-    router.init();
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('SW Registered!', reg))
+                    .catch(err => console.error('SW Failed:', err));
+            }
+        });
 
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('SW Registered!', reg))
-            .catch(err => console.error('SW Failed:', err));
-    }
-});
+        // PWA Install Prompt Logic
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show install button in profile if available
+            const installBtn = document.getElementById('btn-install-app');
+            if (installBtn) {
+                installBtn.classList.remove('hidden');
+            }
+        });
 
-// PWA Install Prompt Logic
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    // Show install button in profile if available
-    const installBtn = document.getElementById('btn-install-app');
-    if (installBtn) {
-        installBtn.classList.remove('hidden');
-    }
-});
-
-window.installApp = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to the install prompt: ${outcome}`);
-    deferredPrompt = null;
-    document.getElementById('btn-install-app').classList.add('hidden');
-};
+        window.installApp = async () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
+            document.getElementById('btn-install-app').classList.add('hidden');
+        };
