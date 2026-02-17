@@ -780,7 +780,7 @@ function renderAgenda(container) {
     const month = store.viewDate.getMonth();
     const currentMonthLabel = store.viewDate.toLocaleString('es-ES', { month: 'long', year: 'numeric' });
 
-    const selectedDate = store.selectedDate || new Date().toISOString().split('T')[0];
+    const selectedDate = store.selectedDate || store.getLocalDateString();
 
     // Get services for selected date
     const dayServices = store.services.filter(s => s.date === selectedDate);
@@ -926,7 +926,7 @@ function generateCalendarGrid(year, month, selectedDate) {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const isSelected = dateStr === selectedDate;
         const hasService = store.services.some(s => s.date === dateStr);
-        const isToday = new Date().toISOString().split('T')[0] === dateStr;
+        const isToday = store.getLocalDateString() === dateStr;
 
         // Colors
         const hasPublic = store.services.some(s => s.date === dateStr && s.type === 'Public');
