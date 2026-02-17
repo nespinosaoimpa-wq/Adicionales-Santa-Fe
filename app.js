@@ -128,7 +128,22 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.3.0 Loaded - Syntax Fix");
+        console.log("App v1.4.0 Loaded - Auth Fix");
+
+        // Handle Google Redirect Result
+        auth.getRedirectResult().then(async (result) => {
+            if (result.user) {
+                console.log("Redirect Login Success:", result.user.email);
+                showToast("Sesión iniciada con Google");
+                // The onAuthStateChanged will handle the rest
+            }
+        }).catch((error) => {
+            console.error("Redirect Error:", error);
+            if (error.code !== 'auth/popup-closed-by-user') {
+                showToast("Error Google: " + error.message);
+            }
+        });
+
         // Listen to Auth State
         this.unsub = auth.onAuthStateChanged(async user => {
             if (user) {

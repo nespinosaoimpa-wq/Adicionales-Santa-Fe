@@ -22,7 +22,9 @@ const DB = {
 
     async loginWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider();
-        return auth.signInWithPopup(provider);
+        // Use Popup for Desktop, Redirect for Mobile (or just Redirect for consistency)
+        // Redirect is safer for PWA environments
+        return auth.signInWithRedirect(provider);
     },
 
     // --- USERS ---
