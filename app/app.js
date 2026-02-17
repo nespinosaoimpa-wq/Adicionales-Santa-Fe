@@ -1190,7 +1190,7 @@ function renderFinancial(container) {
                         <span class="material-symbols-outlined text-primary">shield_person</span>
                     </div>
                     <div>
-                        <h1 class="text-sm font-medium text-slate-400">Oficial Martínez</h1>
+                        <h1 class="text-sm font-medium text-slate-400">${store.user.name}</h1>
                         <p class="text-lg font-bold tracking-tight text-white">Centro de Control</p>
                     </div>
                 </div>
@@ -1343,13 +1343,22 @@ function renderProfile(container) {
         </header>
 
         <main class="p-6 space-y-8 pb-32 max-w-md mx-auto">
-            <!-- User Info -->
+            <!-- User Info (Editable) -->
             <div class="text-center">
-                 <!-- ... User Info Block ... -->
                  <div class="size-24 rounded-full border-4 border-primary/20 mx-auto overflow-hidden mb-4 relative group">
                     <img src="${store.user.avatar}" class="w-full h-full object-cover">
+                    <div onclick="const url = prompt('URL de tu foto:', '${store.user.avatar}'); if(url) store.updateProfile(store.user.name, url);" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
+                        <span class="material-symbols-outlined text-white">edit</span>
+                    </div>
                 </div>
-                <h2 class="text-xl font-bold text-white">${store.user.name}</h2>
+                
+                <div class="flex items-center justify-center gap-2 mb-2">
+                    <input type="text" value="${store.user.name}" 
+                        onchange="store.updateProfile(this.value, store.user.avatar)"
+                        class="bg-transparent text-center text-xl font-bold text-white border-b border-transparent hover:border-white/20 focus:border-primary focus:outline-none w-2/3" />
+                    <span class="material-symbols-outlined text-slate-500 text-sm">edit</span>
+                </div>
+
                 <div class="mt-4 flex justify-center">
                      <button onclick="store.requestNotificationPermission()" class="flex items-center gap-2 px-4 py-2 rounded-full ${store.notificationSettings.enabled ? 'bg-green-500/20 text-green-400' : 'bg-slate-700 text-slate-300'} text-xs font-bold transition-all">
                         <span class="material-symbols-outlined text-lg">${store.notificationSettings.enabled ? 'notifications_active' : 'notifications_off'}</span>
@@ -1411,6 +1420,25 @@ store.renameServiceSubtype = (type, oldName, newName) => {
     // Re-render handled by user typing, but on save it persists
 };
 
+store.updateProfile = async (name, avatar) => {
+    try {
+        store.user.name = name;
+        store.user.avatar = avatar;
+
+        await DB.updateUser({
+            name,
+            avatar,
+            displayName: name, // Sync for auth compat
+            photoURL: avatar
+        });
+        showToast("Perfil actualizado correctamente");
+        renderProfile(document.getElementById('app')); // Re-render profile
+    } catch (e) {
+        showToast("Error al actualizar perfil");
+        console.error(e);
+    }
+};
+
 store.requestNotificationPermission = async () => {
     if (!("Notification" in window)) {
         showToast("Tu navegador no soporta notificaciones");
@@ -1421,13 +1449,17 @@ store.requestNotificationPermission = async () => {
     if (permission === 'granted') {
         store.notificationSettings.enabled = true;
         showToast("Alertas Activadas");
-        renderProfile(container); // Refresh UI
+        // Save these settings too? For now local state.
 
         // Test Notification manually
-        new Notification("Adicionales Santa Fe", {
-            body: "¡Notificaciones configuradas correctamente!",
-            icon: "/icon.png"
-        });
+        try {
+            new Notification("Adicionales Santa Fe", {
+                body: "¡Notificaciones configuradas correctamente!",
+                icon: "./icon.png" // Fix icon path
+            });
+        } catch (e) {
+            console.error("Notification trigger error", e);
+        }
     }
 };
 
