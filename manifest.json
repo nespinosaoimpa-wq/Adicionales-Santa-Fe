@@ -4,19 +4,41 @@
     "description": "Gestión de Servicios de Policía Adicional",
     "start_url": "./index.html",
     "display": "standalone",
+    "id": "adicionales-santa-fe-pwa-v1",
     "background_color": "#0f172a",
     "theme_color": "#3b82f6",
     "orientation": "portrait",
+    "categories": [
+        "productivity",
+        "finance",
+        "utilities"
+    ],
     "icons": [
         {
-            "src": "https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=192&rounded=true&bold=true",
+            "src": "https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=192&rounded=false&bold=true",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
         },
         {
-            "src": "https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=512&rounded=true&bold=true",
+            "src": "https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=512&rounded=false&bold=true",
             "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "https://via.placeholder.com/1080x1920/0f172a/3b82f6?text=Agenda+Inteligente",
+            "sizes": "1080x1920",
+            "type": "image/png",
+            "form_factor": "narrow"
+        },
+        {
+            "src": "https://via.placeholder.com/1080x1920/0f172a/3b82f6?text=Calculo+de+Ganancias",
+            "sizes": "1080x1920",
+            "type": "image/png",
+            "form_factor": "narrow"
         }
     ]
 }
