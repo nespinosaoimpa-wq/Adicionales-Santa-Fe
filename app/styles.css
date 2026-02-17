@@ -184,3 +184,47 @@ html {
     background-color: var(--primary);
     color: white;
 }
+
+/* Stats Bar Chart Animation */
+@keyframes barGrow {
+    from {
+        height: 0%;
+        transform: scaleY(0);
+    }
+
+    to {
+        height: 100%;
+        transform: scaleY(1);
+    }
+}
+
+/* Slide-up Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-up {
+    animation: slideUp 0.4s ease-out both;
+}
+
+/* Service Card Hover */
+.service-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.service-card:active {
+    transform: scale(0.98);
+}
+
+/* 3D Chart perspective */
+.chart-3d {
+    transform-style: preserve-3d;
+}

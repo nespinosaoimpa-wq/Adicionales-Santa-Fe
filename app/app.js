@@ -423,6 +423,9 @@ const router = {
                 case '#history':
                     renderHistory(app);
                     break;
+                case '#stats':
+                    renderStats(app);
+                    break;
 
                 // Dynamic Route for Details
                 default:
@@ -885,10 +888,16 @@ function renderAgenda(container) {
             <section class="space-y-4">
                 <h3 class="font-bold text-lg dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
                 <div class="space-y-3">
-                    ${dayServices.length > 0 ? dayServices.map(renderServiceCard).join('') :
-            `<div class="p-8 text-center text-slate-400 border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl">
-                <span class="material-symbols-outlined text-4xl mb-2">event_busy</span>
-                <p class="text-sm">Sin servicios este día</p>
+                    ${dayServices.length > 0 ? dayServices.map((s, i) => renderServiceCard(s, i)).join('') :
+            `<div class="flex flex-col items-center py-10 text-center animate-slide-up">
+                <div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+                    <span class="material-symbols-outlined text-3xl text-primary/40">event_busy</span>
+                </div>
+                <p class="text-sm font-semibold dark:text-white mb-1">Sin servicios</p>
+                <p class="text-xs text-slate-400 mb-4">No hay turnos para esta fecha</p>
+                <button onclick="router.navigateTo('#register')" class="px-5 py-2 bg-primary text-white text-xs font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+                    + Registrar Servicio
+                </button>
             </div>`}
                 </div>
             </section>
@@ -956,60 +965,78 @@ function generateCalendarGrid(year, month, selectedDate) {
     return html;
 }
 
-function renderServiceCard(service) {
+function renderServiceCard(service, index = 0) {
     const isPublic = service.type === 'Public';
-    const borderColor = isPublic ? 'border-primary' : 'border-service-private';
-    const textColor = isPublic ? 'text-primary' : 'text-service-private';
-    const bgSoft = isPublic ? 'bg-primary/10' : 'bg-service-private/10';
+    const gradientFrom = isPublic ? 'from-primary' : 'from-purple-500';
+    const gradientTo = isPublic ? 'to-blue-400' : 'to-pink-500';
+    const textColor = isPublic ? 'text-primary' : 'text-purple-400';
+    const bgSoft = isPublic ? 'bg-primary/10' : 'bg-purple-500/10';
     const icon = isPublic ? 'account_balance' : 'storefront';
+    const typeLabel = isPublic ? 'Público' : (service.type === 'OSPES' ? 'OSPES' : 'Privado');
 
-    // Handle legacy data safely
     const timeRange = service.startTime && service.endTime ? `${service.startTime} - ${service.endTime}` : 'Horario no especificado';
     const subType = service.subType || '';
 
-    return `
-        <div onclick="router.navigateTo('#service/${service.id}')" class="bg-white dark:bg-slate-900 p-4 rounded-2xl flex gap-4 border-l-4 ${borderColor} shadow-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-            <div class="${bgSoft} size-12 rounded-xl flex items-center justify-center ${textColor}">
-                <span class="material-symbols-outlined">${icon}</span>
-            </div>
-            <div class="flex-1">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <h4 class="font-bold dark:text-white leading-tight">${service.location}</h4>
-                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">${service.type} ${subType}</p>
-                    </div>
-                    <span class="text-xs font-bold ${textColor}">$${(service.total || 0).toLocaleString()}</span>
-                </div>
-                
-                <div class="flex items-center gap-3 mt-2">
-                    <div class="flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[14px] text-slate-400">schedule</span>
-                        <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">${timeRange}</span>
-                    </div>
-                    ${(() => {
-            // DRY Status Logic for Card
-            const today = new Date().toISOString().split('T')[0];
-            const isFuture = service.date > today;
-            let label = 'Pendiente';
-            let color = 'text-amber-400';
+    const today = store.getLocalDateString();
+    const isFuture = service.date > today;
+    let statusLabel = 'Pendiente';
+    let statusColor = 'text-amber-400';
+    let statusBg = 'bg-amber-400/10';
+    let statusDot = 'bg-amber-400';
 
-            if (service.status === 'paid') {
-                label = 'Liquidado';
-                color = 'text-green-400';
-            } else if (isFuture) {
-                label = 'Agendado';
-                color = 'text-blue-400';
-            }
-            return `<div class="flex items-center gap-1">
-                            <span class="size-1.5 rounded-full ${color.replace('text-', 'bg-')}"></span>
-                            <span class="text-[10px] ${color} font-bold uppercase tracking-tighter">${label}</span>
-                         </div>`;
-        })()}
+    if (service.status === 'paid') {
+        statusLabel = 'Liquidado';
+        statusColor = 'text-green-400';
+        statusBg = 'bg-green-400/10';
+        statusDot = 'bg-green-400';
+    } else if (isFuture) {
+        statusLabel = 'Agendado';
+        statusColor = 'text-blue-400';
+        statusBg = 'bg-blue-400/10';
+        statusDot = 'bg-blue-400';
+    }
+
+    return `
+        <div onclick="router.navigateTo('#service/${service.id}')" 
+             class="service-card animate-slide-up bg-white dark:bg-slate-900/80 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm cursor-pointer relative overflow-hidden"
+             style="animation-delay: ${index * 60}ms">
+            <!-- Gradient accent top -->
+            <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${gradientFrom} ${gradientTo}"></div>
+            
+            <div class="flex gap-4">
+                <div class="${bgSoft} size-12 rounded-xl flex items-center justify-center ${textColor} shrink-0">
+                    <span class="material-symbols-outlined">${icon}</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex justify-between items-start">
+                        <div class="min-w-0">
+                            <h4 class="font-bold dark:text-white leading-tight truncate">${service.location || 'Sin ubicación'}</h4>
+                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">${typeLabel} ${subType}</p>
+                        </div>
+                        <span class="text-sm font-extrabold ${textColor} whitespace-nowrap ml-2">$${(service.total || 0).toLocaleString('es-AR')}</span>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 mt-2.5">
+                        <div class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px] text-slate-400">schedule</span>
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">${timeRange}</span>
+                        </div>
+                        <span class="size-0.5 rounded-full bg-slate-500"></span>
+                        <div class="flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[14px] text-slate-400">timer</span>
+                            <span class="text-[10px] text-slate-500 font-medium">${service.hours}h</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full ${statusBg}">
+                            <span class="size-1.5 rounded-full ${statusDot} animate-pulse"></span>
+                            <span class="text-[10px] ${statusColor} font-bold uppercase tracking-tighter">${statusLabel}</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     `;
 }
+
 
 /**
  * Render Register View
@@ -1969,31 +1996,228 @@ function renderAdBanner() {
 }
 
 /**
+ * Render 3D Statistics Dashboard
+ */
+function renderStats(container) {
+    const services = store.services;
+    const today = store.getLocalDateString();
+
+    // Calculate stats
+    const totalEarnings = services.reduce((sum, s) => sum + (s.total || 0), 0);
+    const totalHours = services.reduce((sum, s) => sum + (parseFloat(s.hours) || 0), 0);
+    const totalServices = services.length;
+    const paidServices = services.filter(s => s.status === 'paid').length;
+    const pendingEarnings = services.filter(s => s.status !== 'paid').reduce((sum, s) => sum + (s.total || 0), 0);
+    const avgPerService = totalServices > 0 ? Math.round(totalEarnings / totalServices) : 0;
+
+    // Weekly data (last 7 days)
+    const weekDays = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+    const weekData = [];
+    for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        const dateStr = store.getLocalDateString(d);
+        const dayServices = services.filter(s => s.date === dateStr);
+        const dayTotal = dayServices.reduce((sum, s) => sum + (s.total || 0), 0);
+        weekData.push({
+            label: weekDays[d.getDay()],
+            value: dayTotal,
+            count: dayServices.length,
+            isToday: i === 0
+        });
+    }
+    const maxWeekValue = Math.max(...weekData.map(d => d.value), 1);
+
+    // By service type
+    const publicServices = services.filter(s => s.type === 'Public');
+    const privateServices = services.filter(s => s.type === 'Private');
+    const ospesServices = services.filter(s => s.type === 'OSPES');
+    const publicTotal = publicServices.reduce((sum, s) => sum + (s.total || 0), 0);
+    const privateTotal = privateServices.reduce((sum, s) => sum + (s.total || 0), 0);
+    const ospesTotal = ospesServices.reduce((sum, s) => sum + (s.total || 0), 0);
+
+    // Monthly trend (last 6 months)
+    const monthlyData = [];
+    for (let i = 5; i >= 0; i--) {
+        const d = new Date();
+        d.setMonth(d.getMonth() - i);
+        const monthStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+        const monthServices = services.filter(s => s.date && s.date.startsWith(monthStr));
+        const monthTotal = monthServices.reduce((sum, s) => sum + (s.total || 0), 0);
+        monthlyData.push({
+            label: d.toLocaleString('es-AR', { month: 'short' }),
+            value: monthTotal,
+            count: monthServices.length
+        });
+    }
+    const maxMonthValue = Math.max(...monthlyData.map(d => d.value), 1);
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 ios-blur border-b border-slate-200 dark:border-primary/20">
+            <div class="flex items-center justify-between px-4 h-16">
+                <button onclick="router.navigateTo('#agenda')" class="flex items-center text-primary">
+                    <span class="material-symbols-outlined text-[28px]">chevron_left</span>
+                </button>
+                <h1 class="text-lg font-semibold dark:text-white">Estadísticas</h1>
+                <button onclick="router.navigateTo('#history')" class="text-primary text-sm font-medium">Historial</button>
+            </div>
+        </header>
+
+        <main class="max-w-md mx-auto px-4 py-6 space-y-6 pb-32">
+
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-2 gap-3">
+                <div class="animate-slide-up bg-gradient-to-br from-primary to-blue-400 p-4 rounded-2xl text-white shadow-lg shadow-primary/20" style="animation-delay: 0ms">
+                    <span class="material-symbols-outlined text-white/60 text-2xl">payments</span>
+                    <p class="text-2xl font-black mt-1">$${totalEarnings.toLocaleString('es-AR')}</p>
+                    <p class="text-xs text-white/70 font-medium">Total Ganado</p>
+                </div>
+                <div class="animate-slide-up bg-gradient-to-br from-purple-500 to-pink-500 p-4 rounded-2xl text-white shadow-lg shadow-purple-500/20" style="animation-delay: 60ms">
+                    <span class="material-symbols-outlined text-white/60 text-2xl">schedule</span>
+                    <p class="text-2xl font-black mt-1">${totalHours.toFixed(1)}h</p>
+                    <p class="text-xs text-white/70 font-medium">Horas Trabajadas</p>
+                </div>
+                <div class="animate-slide-up bg-gradient-to-br from-cyan-500 to-teal-500 p-4 rounded-2xl text-white shadow-lg shadow-cyan-500/20" style="animation-delay: 120ms">
+                    <span class="material-symbols-outlined text-white/60 text-2xl">fact_check</span>
+                    <p class="text-2xl font-black mt-1">${totalServices}</p>
+                    <p class="text-xs text-white/70 font-medium">Servicios</p>
+                </div>
+                <div class="animate-slide-up bg-gradient-to-br from-amber-500 to-orange-500 p-4 rounded-2xl text-white shadow-lg shadow-amber-500/20" style="animation-delay: 180ms">
+                    <span class="material-symbols-outlined text-white/60 text-2xl">trending_up</span>
+                    <p class="text-2xl font-black mt-1">$${avgPerService.toLocaleString('es-AR')}</p>
+                    <p class="text-xs text-white/70 font-medium">Promedio/Servicio</p>
+                </div>
+            </div>
+
+            <!-- 3D Bar Chart - Weekly Earnings -->
+            <section class="animate-slide-up space-y-3" style="animation-delay: 240ms">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Ganancias Semanales</h3>
+                <div class="bg-white dark:bg-slate-900/80 rounded-2xl p-5 border border-slate-100 dark:border-slate-800 shadow-sm">
+                    <div class="chart-3d" style="perspective: 800px;">
+                        <div class="flex items-end justify-between gap-2 h-40" style="transform: rotateX(5deg) rotateY(-3deg); transform-style: preserve-3d;">
+                            ${weekData.map((d, i) => {
+        const heightPct = maxWeekValue > 0 ? (d.value / maxWeekValue * 100) : 0;
+        const color = d.isToday ? 'from-primary to-blue-400' : 'from-slate-500 to-slate-400';
+        return `
+                                <div class="flex-1 flex flex-col items-center gap-1">
+                                    <span class="text-[9px] font-bold ${d.isToday ? 'text-primary' : 'text-slate-400'}">${d.value > 0 ? '$' + (d.value / 1000).toFixed(0) + 'k' : ''}</span>
+                                    <div class="w-full flex items-end justify-center" style="height: 120px;">
+                                        <div class="w-full bg-gradient-to-t ${color} rounded-t-lg shadow-lg relative"
+                                             style="height: ${Math.max(heightPct, 3)}%; min-height: 3px; animation: barGrow 0.8s ${300 + i * 100}ms ease-out both; transform-style: preserve-3d;">
+                                            <div class="absolute -right-1 top-0 w-1 h-full bg-black/15 rounded-tr-sm" style="transform: skewY(-10deg); transform-origin: top right;"></div>
+                                            <div class="absolute top-0 left-0 right-0 h-1 bg-white/25 rounded-t-lg"></div>
+                                        </div>
+                                    </div>
+                                    <span class="text-[10px] font-bold ${d.isToday ? 'text-primary' : 'text-slate-400'}">${d.label}</span>
+                                    ${d.count > 0 ? '<span class="text-[8px] text-slate-400">' + d.count + 's</span>' : ''}
+                                </div>`;
+    }).join('')}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Monthly Trend -->
+            <section class="animate-slide-up space-y-3" style="animation-delay: 360ms">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Tendencia Mensual</h3>
+                <div class="bg-white dark:bg-slate-900/80 rounded-2xl p-5 border border-slate-100 dark:border-slate-800 shadow-sm">
+                    <div class="flex items-end justify-between gap-3 h-32">
+                        ${monthlyData.map((d, i) => {
+        const heightPct = maxMonthValue > 0 ? (d.value / maxMonthValue * 100) : 0;
+        const isLast = i === monthlyData.length - 1;
+        return `
+                            <div class="flex-1 flex flex-col items-center gap-1">
+                                <span class="text-[9px] font-bold ${isLast ? 'text-primary' : 'text-slate-400'}">${d.value > 0 ? '$' + (d.value / 1000).toFixed(0) + 'k' : '-'}</span>
+                                <div class="w-full rounded-t-lg bg-gradient-to-t ${isLast ? 'from-primary/80 to-primary' : 'from-slate-200 dark:from-slate-700 to-slate-300 dark:to-slate-600'} shadow-sm"
+                                     style="height: ${Math.max(heightPct, 3)}%; min-height: 4px; animation: barGrow 0.6s ${i * 80}ms ease-out both;"></div>
+                                <span class="text-[10px] font-bold ${isLast ? 'text-primary' : 'text-slate-400'} capitalize">${d.label}</span>
+                            </div>`;
+    }).join('')}
+                    </div>
+                </div>
+            </section>
+
+            <!-- Earnings by Type -->
+            <section class="animate-slide-up space-y-3" style="animation-delay: 420ms">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Por Tipo de Servicio</h3>
+                <div class="bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
+                    ${[
+            { label: 'Público', count: publicServices.length, total: publicTotal, color: 'primary', icon: 'account_balance', gradient: 'from-primary to-blue-400' },
+            { label: 'Privado', count: privateServices.length, total: privateTotal, color: 'purple-500', icon: 'storefront', gradient: 'from-purple-500 to-pink-500' },
+            { label: 'OSPES', count: ospesServices.length, total: ospesTotal, color: 'cyan-500', icon: 'local_hospital', gradient: 'from-cyan-500 to-teal-500' }
+        ].map((type, i) => {
+            const pct = totalEarnings > 0 ? (type.total / totalEarnings * 100).toFixed(0) : 0;
+            return `
+                        <div class="flex items-center gap-4 p-4 ${i > 0 ? 'border-t border-slate-100 dark:border-slate-800' : ''}">
+                            <div class="size-10 rounded-xl bg-gradient-to-br ${type.gradient} flex items-center justify-center text-white shadow-sm">
+                                <span class="material-symbols-outlined text-lg">${type.icon}</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex justify-between items-center mb-1">
+                                    <span class="text-sm font-bold dark:text-white">${type.label}</span>
+                                    <span class="text-sm font-extrabold text-${type.color}">$${type.total.toLocaleString('es-AR')}</span>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex-1 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gradient-to-r ${type.gradient} rounded-full" style="width: ${pct}%; animation: barGrow 0.8s ${i * 150}ms ease-out both;"></div>
+                                    </div>
+                                    <span class="text-[10px] text-slate-400 font-medium">${pct}%</span>
+                                </div>
+                                <span class="text-[10px] text-slate-400">${type.count} servicios</span>
+                            </div>
+                        </div>`;
+        }).join('')}
+                </div>
+            </section>
+
+            <!-- Status Overview -->
+            <section class="animate-slide-up space-y-3" style="animation-delay: 480ms">
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Estado de Pagos</h3>
+                <div class="grid grid-cols-2 gap-3">
+                    <div class="bg-green-500/10 border border-green-500/20 rounded-2xl p-4 text-center">
+                        <span class="material-symbols-outlined text-green-400 text-2xl">check_circle</span>
+                        <p class="text-xl font-black text-green-400 mt-1">${paidServices}</p>
+                        <p class="text-[10px] text-green-400/70 font-medium">Liquidados</p>
+                    </div>
+                    <div class="bg-amber-500/10 border border-amber-500/20 rounded-2xl p-4 text-center">
+                        <span class="material-symbols-outlined text-amber-400 text-2xl">hourglass_top</span>
+                        <p class="text-xl font-black text-amber-400 mt-1">$${pendingEarnings.toLocaleString('es-AR')}</p>
+                        <p class="text-[10px] text-amber-400/70 font-medium">Pendiente</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        ${renderBottomNav('stats')}
+    `;
+}
+
+/**
  * Render Full History View
  */
 function renderHistory(container) {
     const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+    < header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between" >
             <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
             <h1 class="text-lg font-bold text-white">Historial Completo</h1>
             <div class="w-10"></div>
-        </header>
+        </header >
 
-        <main class="space-y-4 pb-32">
-             <!-- Ad Banner Top -->
-            ${renderAdBanner()}
+    <main class="space-y-4 pb-32">
+        <!-- Ad Banner Top -->
+        ${renderAdBanner()}
 
-            <div class="px-4 space-y-3">
-                ${sortedServices.map(s => {
-        const isPub = s.type === 'Public';
-        const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
-        const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
-        const icon = isPub ? 'account_balance' : 'shopping_cart';
-        return `
+        <div class="px-4 space-y-3">
+            ${sortedServices.map(s => {
+                const isPub = s.type === 'Public';
+                const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
+                const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
+                const icon = isPub ? 'account_balance' : 'shopping_cart';
+                return `
                         <div onclick="window.location.hash='#details?id=${s.id}'" class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 cursor-pointer hover:bg-white/5 transition-colors">
                             <div class="flex items-center gap-4">
                                 <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
@@ -2010,13 +2234,13 @@ function renderHistory(container) {
                             <span class="material-symbols-outlined text-slate-600">chevron_right</span>
                         </div>
                      `;
-    }).join('')}
-                
-                ${sortedServices.length === 0 ? '<p class="text-center text-slate-500 py-10">No hay servicios registrados.</p>' : ''}
-            </div>
-        </main>
-        ${renderBottomNav('financial')}
-    `;
+            }).join('')}
+
+            ${sortedServices.length === 0 ? '<p class="text-center text-slate-500 py-10">No hay servicios registrados.</p>' : ''}
+        </div>
+    </main>
+        ${ renderBottomNav('financial') }
+`;
 }
 
 // --- 4. SHARED COMPONENTS ---
@@ -2025,6 +2249,7 @@ function renderBottomNav(activeTab) {
     // Main navigation tabs (centered)
     const tabs = [
         { id: 'agenda', icon: 'calendar_today', label: 'Agenda', route: '#agenda' },
+        { id: 'stats', icon: 'bar_chart', label: 'Stats', route: '#stats' },
         { id: 'control', icon: 'dashboard', label: 'Panel', route: '#control' },
         { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
     ];
@@ -2035,7 +2260,7 @@ function renderBottomNav(activeTab) {
     }
 
     let navHtml = `
-        <!-- Bottom Navigation Bar -->
+    < !--Bottom Navigation Bar-- >
         <nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
             <div class="flex justify-center items-center gap-4 max-w-md mx-auto px-4">
     `;
@@ -2057,13 +2282,13 @@ function renderBottomNav(activeTab) {
             </div>
         </nav>
 
-        <!-- Floating Action Button -->
-        <div class="fixed bottom-20 right-6 z-50">
-            <button onclick="router.navigateTo('#register')" class="size-16 rounded-full bg-primary text-white shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
-                <span class="material-symbols-outlined text-3xl">add</span>
-            </button>
-        </div>
-    `;
+        <!--Floating Action Button-- >
+    <div class="fixed bottom-20 right-6 z-50">
+        <button onclick="router.navigateTo('#register')" class="size-16 rounded-full bg-primary text-white shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
+            <span class="material-symbols-outlined text-3xl">add</span>
+        </button>
+    </div>
+`;
 
     return navHtml;
 }
@@ -2096,7 +2321,7 @@ window.installApp = async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
     const { outcome } = await deferredPrompt.userChoice;
-    console.log(`User response to the install prompt: ${outcome}`);
+    console.log(`User response to the install prompt: ${ outcome } `);
     deferredPrompt = null;
     document.getElementById('btn-install-app').classList.add('hidden');
 };
