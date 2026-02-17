@@ -1079,29 +1079,48 @@ function renderRegister(container) {
                     <span class="material-symbols-outlined text-primary mr-3">pin_drop</span>
                     <div class="flex-1">
                         <p class="text-xs text-slate-500">Lugar</p>
-                        <input id="inp-location" type="text" placeholder="Ej: Banco Nación" class="w-full bg-transparent border-none p-0 text-base font-medium dark:text-white focus:ring-0" />
+
+            <!-- Calculator Section -->
+            <section class="space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Tarifa y Cálculo</h2>
+                <div class="bg-primary/10 dark:bg-primary/20 border-2 border-primary/30 rounded-2xl p-5 space-y-4">
+                    <!-- Price per hour -->
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm font-medium text-slate-600 dark:text-slate-300">Precio por hora</span>
+                        <div class="flex items-center text-primary font-bold">
+                            <span class="text-lg">$</span>
+                            <input id="inp-rate" class="w-20 bg-transparent border-none p-0 text-right focus:ring-0 text-lg font-bold text-primary" type="number" value="1250"/>
+                        </div>
+                    </div>
+                    
+                    <div class="h-px bg-primary/20"></div>
+                    
+                    <!-- Breakdown -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-sm text-slate-500 dark:text-slate-400">
+                            <span id="lbl-calculation">Subtotal (4h × $1250)</span>
+                            <span id="txt-subtotal">$5.000,00</span>
+                        </div>
+                        
+                        <!-- Total -->
+                        <div class="flex justify-between items-end pt-2">
+                            <span class="text-base font-bold text-slate-900 dark:text-white">Pago Estimado</span>
+                            <span id="txt-total" class="text-2xl font-black text-primary">$5.000,00</span>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Calc -->
-            <section class="space-y-4">
-                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Tarifa</h2>
-                <div class="bg-slate-900 text-white rounded-2xl p-5 space-y-4 shadow-xl">
-                    <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-slate-300">Precio hora</span>
-                        <div class="flex items-center text-primary font-bold">
-                            <span class="text-lg">$</span>
-                            <input id="inp-rate" class="w-20 bg-transparent border-none p-0 text-right focus:ring-0 text-lg text-white" type="number"/>
-                        </div>
-                    </div>
-                    <div class="h-px bg-white/10"></div>
-                    <div class="flex justify-between items-end pt-2">
-                        <span class="text-base font-bold">Total a Cobrar</span>
-                        <span id="txt-total" class="text-3xl font-black text-green-400">$0</span>
-                    </div>
-                </div>
-            </section>
+            <!-- Main Action Button -->
+            <div class="pt-4 pb-12">
+                <button id="btn-save" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/25 flex items-center justify-center gap-2 transition-all active:scale-95">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    Confirmar Registro
+                </button>
+                <p class="text-center text-xs text-slate-500 mt-4 px-6">
+                    Este registro se incluirá en la liquidación de la quincena actual.
+                </p>
+            </div>
         </main>
     `;
 
@@ -1180,7 +1199,11 @@ function renderRegister(container) {
         const hours = calculateHours();
         const rate = parseFloat(document.getElementById('inp-rate').value) || 0;
         const total = hours * rate;
-        document.getElementById('txt-total').innerText = `$${(total || 0).toLocaleString()}`;
+
+        // Update calculation label
+        document.getElementById('lbl-calculation').innerText = `Subtotal (${hours.toFixed(1)}h × $${rate.toLocaleString()})`;
+        document.getElementById('txt-subtotal').innerText = `$${(total || 0).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        document.getElementById('txt-total').innerText = `$${(total || 0).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
     };
 
     // Listeners

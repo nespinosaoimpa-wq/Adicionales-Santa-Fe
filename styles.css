@@ -1,4 +1,21 @@
-/* Global Styles */
+/* ===================================
+   ADICIONALES SANTA FE - STYLES
+   New Design System (Stitch)
+   =================================== */
+
+/* CSS Variables */
+:root {
+    --primary: #0d59f2;
+    --primary-hover: #0b4dd1;
+    --background-light: #f5f6f8;
+    --background-dark: #101622;
+    --card-light: #ffffff;
+    --card-dark: rgba(13, 89, 242, 0.05);
+    --border-light: #e2e8f0;
+    --border-dark: rgba(13, 89, 242, 0.1);
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+}
 
 /* Glassmorphism Utilities */
 .glass-card {
@@ -22,8 +39,27 @@
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .view-transition {
@@ -36,8 +72,115 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0.6;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+/* iOS-Style Toggle Switch */
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cbd5e1;
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked+.toggle-slider {
+    background-color: var(--primary);
+}
+
+input:checked+.toggle-slider:before {
+    transform: translateX(20px);
+}
+
+/* Segmented Control */
+.segmented-control {
+    display: flex;
+    padding: 2px;
+    background: rgba(148, 163, 184, 0.2);
+    border-radius: 8px;
+    gap: 2px;
+}
+
+.dark .segmented-control {
+    background: rgba(13, 89, 242, 0.1);
+}
+
+.segmented-control button {
+    flex: 1;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 6px;
+    transition: all 0.2s;
+    color: #64748b;
+}
+
+.segmented-control button.active {
+    background: white;
+    color: #0f172a;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dark .segmented-control button.active {
+    background: var(--primary);
+    color: white;
+}
+
 /* Utilities */
 .text-xxs {
     font-size: 0.65rem;
     line-height: 1rem;
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Tap Highlight */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Selection */
+::selection {
+    background-color: var(--primary);
+    color: white;
 }
