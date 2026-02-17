@@ -22,12 +22,10 @@ const DB = {
 
     async loginWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider();
-        // Redirect is safer for PWA environments
-        return auth.signInWithRedirect(provider);
-    },
-
-    async loginWithGooglePopup() {
-        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({
+            prompt: 'select_account'
+        });
+        // Popup is more reliable for mobile PWAs
         return auth.signInWithPopup(provider);
     },
 

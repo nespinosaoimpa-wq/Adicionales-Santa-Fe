@@ -97,6 +97,13 @@ const store = {
         }
     },
 
+    showPasswordReset() {
+        const email = prompt("Ingresa tu email para recuperar la contraseña:");
+        if (email) {
+            this.resetPassword(email);
+        }
+    },
+
     async logout() {
         await DB.logout();
     },
@@ -106,18 +113,7 @@ const store = {
             await DB.loginWithGoogle();
         } catch (e) {
             console.error(e);
-            showToast("Google Error: " + e.message);
-        }
-    },
-
-    async loginWithGooglePopup() {
-        try {
-            await DB.loginWithGooglePopup();
-            showToast("Login Popup Exitoso");
-        } catch (e) {
-            console.error(e);
-            debugLog("Popup Error: " + e.message);
-            showToast("Google Popup Error: " + e.message);
+            throw e; // Re-throw for button handler
         }
     },
 
@@ -167,30 +163,11 @@ const store = {
 
     // Initialization
     init() {
-        debugLog("App v1.4.3 Loaded - Popup Added");
+        console.log("App v1.4.4 Loaded - Auth Fix Applied");
 
-        // Force Persistence
+        // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .then(() => debugLog("Persistence set to LOCAL"))
-            .catch((e) => debugLog("Persist Err: " + e.message));
-
-        // Handle Google Redirect Result
-        auth.getRedirectResult().then(async (result) => {
-            if (result.user) {
-                const msg = "Rcvr: " + result.user.email;
-                if (document.getElementById('debug-console')) document.getElementById('debug-console').innerHTML += `<div>${msg}</div>`;
-                debugLog(msg);
-                showToast("Sesión iniciada con Google");
-                // The onAuthStateChanged will handle the rest
-            } else {
-                if (document.getElementById('debug-console')) document.getElementById('debug-console').innerHTML += `<div>Rcvr: No User Result</div>`;
-            }
-        }).catch((error) => {
-            const msg = "Err: " + error.code + " - " + error.message;
-            if (document.getElementById('debug-console')) document.getElementById('debug-console').innerHTML += `<div>${msg}</div>`;
-            debugLog("Redirect Error:", error);
-            showToast("Error Google: " + error.message);
-        });
+            .catch((e) => console.error("Persistence Error:", e));
 
         // Listen to Auth State
         this.unsub = auth.onAuthStateChanged(async user => {
@@ -315,6 +292,23 @@ const store = {
 
 // Initialize Store
 store.init();
+
+// Handle Google Redirect Result AFTER DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    auth.getRedirectResult().then(async (result) => {
+        if (result && result.user) {
+            console.log("✅ Google Redirect Success:", result.user.email);
+            debugLog("Google Login: " + result.user.email);
+            showToast("¡Bienvenido! " + result.user.displayName);
+        }
+    }).catch((error) => {
+        console.error("❌ Redirect Error:", error);
+        debugLog("Error: " + error.code);
+        if (error.code !== 'auth/popup-closed-by-user') {
+            showToast("Error de autenticación: " + error.message);
+        }
+    });
+});
 
 
 // --- 2. ROUTER & NAVIGATION ---
@@ -592,15 +586,9 @@ function renderLogin(container) {
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
                 <!-- Google Button -->
-                <button onclick="handleGoogleLogin()" class="flex w-full justify-center items-center gap-3 rounded-xl bg-white px-3 py-3 text-sm font-semibold text-slate-900 shadow-sm hover:bg-slate-100 transition-all">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
+                <button onclick="handleGoogleLogin()" class="flex w-full justify-center items-center gap-3 rounded-xl bg-white px-4 py-4 text-base font-semibold text-slate-900 shadow-lg hover:bg-slate-50 transition-all active:scale-95">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6" alt="Google">
                     Continuar con Google
-                </button>
-
-                <!-- Plan B (Popup) -->
-                <button onclick="handleGoogleLoginPopup()" class="flex w-full justify-center items-center gap-3 rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-slate-300 shadow-sm hover:bg-slate-600 transition-all">
-                    <span class="material-symbols-outlined text-sm">open_in_new</span>
-                    Método 2 (Si el de arriba falla)
                 </button>
                 
                 <div class="relative">
@@ -620,7 +608,7 @@ function renderLogin(container) {
                         <div class="flex items-center justify-between">
                             <label for="password" class="block text-sm font-medium leading-6 text-slate-300">Contraseña</label>
                             <div class="text-sm">
-                                <a href="#" class="font-semibold text-primary hover:text-primary/80">¿Olvidaste tu clave?</a>
+                                <a href="#" onclick="store.showPasswordReset()" class="font-semibold text-primary hover:text-primary/80">¿Olvidaste tu clave?</a>
                             </div>
                         </div>
                         <div class="mt-2">
@@ -629,7 +617,7 @@ function renderLogin(container) {
                     </div>
 
                     <div>
-                        <button type="submit" class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all shadow-lg shadow-primary/20">
+                        <button type="submit" class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all shadow-lg shadow-primary/20 active:scale-95">
                             Ingresar
                         </button>
                     </div>
@@ -640,49 +628,31 @@ function renderLogin(container) {
                     ¿No tienes cuenta? <a href="#signup" class="text-primary font-bold hover:underline">Regístrate gratis</a>
                 </p>
 
-                <div class="mt-8 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-600 font-mono">v1.4.2 (Debug Mode)</p>
-                    <div class="flex flex-col gap-2 mt-2 justify-center items-center">
-                        <button onclick="store.forceUpdate()" class="text-[10px] text-red-400 underline hover:text-red-300">
-                            ¿Problemas? Reparar App
-                        </button>
-                        <button onclick="store.toggleDebug()" class="text-[10px] text-yellow-400 underline hover:text-yellow-300">
-                            Ver Logs de Error
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- DEBUG CONSOLE -->
-                <div id="debug-console-container" class="hidden mt-4 p-2 bg-black text-green-400 font-mono text-[10px] text-left h-32 overflow-y-auto border border-green-900 rounded">
-                    <div id="debug-console">Ready...</div>
+                <div class="mt-6 border-t border-white/5 pt-4 text-center">
+                    <p class="text-[10px] text-slate-600 font-mono">v1.4.4 (Auth Fixed)</p>
                 </div>
             </div>
         </div>
     `;
 
     window.handleGoogleLogin = () => {
-        debugLog("Trying Login Method 1 (Redirect)...");
-        store.loginWithGoogle();
-    };
+        const btn = event.target.closest('button');
+        btn.disabled = true;
+        btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-slate-900 mx-auto"></div>';
 
-    window.handleGoogleLoginPopup = () => {
-        debugLog("Trying Login Method 2 (Popup)...");
-        store.loginWithGooglePopup();
-    };
-
-    store.forceUpdate = async () => {
-        debugLog("Forcing app update...");
-        await store.initPersistence();
-        debugLog("Persistence re-initialized. App should re-render.");
+        store.loginWithGoogle().catch(e => {
+            btn.disabled = false;
+            btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
+            showToast("Error: " + e.message);
+        });
     };
 
     window.handleLogin = (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        debugLog(`Attempting Email Login: ${email}`);
-        store.login(email, password).catch(e => debugLog("Login Error: " + e.message));
-    }
+        store.login(email, password);
+    };
 }
 
 function renderSignup(container) {
