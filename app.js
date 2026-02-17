@@ -1074,11 +1074,10 @@ function renderRegister(container) {
                     </div>
                 </div>
 
-                <!-- Location -->
-                <div class="bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/10 p-4 flex items-center">
-                    <span class="material-symbols-outlined text-primary mr-3">pin_drop</span>
-                    <div class="flex-1">
-                        <p class="text-xs text-slate-500">Lugar</p>
+            <input id="inp-location" type="text" placeholder="Ej: Banco Nación" class="w-full bg-transparent border-none p-0 text-base font-medium dark:text-white focus:ring-0" />
+                    </div>
+                </div>
+            </section>
 
             <!-- Calculator Section -->
             <section class="space-y-4">
