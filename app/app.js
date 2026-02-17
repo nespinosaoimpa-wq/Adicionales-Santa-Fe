@@ -110,6 +110,7 @@ const store = {
 
     // Initialization
     init() {
+        console.log("App v1.3.0 Loaded - Syntax Fix");
         // Listen to Auth State
         this.unsub = auth.onAuthStateChanged(async user => {
             if (user) {
