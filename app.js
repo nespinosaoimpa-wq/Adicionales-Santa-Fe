@@ -122,7 +122,9 @@ const store = {
                 });
 
                 // Subscribe to Users (for Admin)
-                this.allUsers = users;
+                this.unsubscribeUsers = DB.subscribeToUsers(users => {
+                    this.allUsers = users;
+                });
                 // Subscribe to Expenses
                 this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
                     this.expenses = expenses;
