@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Adicionales Santa Fe</title>
+
+    <!-- CRITICAL ERROR HANDLER -->
+    <script>
+        window.onerror = function (msg, url, lineNo, columnNo, error) {
+            const errorBox = document.createElement('div');
+            errorBox.style.position = 'fixed';
+            errorBox.style.top = '0';
+            errorBox.style.left = '0';
+            errorBox.style.width = '100%';
+            errorBox.style.background = '#ef4444';
+            errorBox.style.color = '#fff';
+            errorBox.style.padding = '20px';
+            errorBox.style.zIndex = '9999';
+            errorBox.style.fontFamily = 'monospace';
+            errorBox.innerHTML = `<strong>Error del Sistema:</strong><br>${msg}<br><small>${url}:${lineNo}</small>`;
+            document.body.appendChild(errorBox);
+            return false;
+        };
+        window.addEventListener('unhandledrejection', function (event) {
+            const errorBox = document.createElement('div');
+            errorBox.style.position = 'fixed';
+            errorBox.style.bottom = '0';
+            errorBox.style.left = '0';
+            errorBox.style.width = '100%';
+            errorBox.style.background = '#f59e0b';
+            errorBox.style.color = '#000';
+            errorBox.style.padding = '20px';
+            errorBox.style.zIndex = '9999';
+            errorBox.style.fontFamily = 'monospace';
+            errorBox.innerHTML = `<strong>Promesa Rechazada:</strong><br>${event.reason}`;
+            document.body.appendChild(errorBox);
+        });
+    </script>
+
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon"
+        href="https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=192&rounded=true&bold=true">
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('SW registered:', reg))
+                    .catch(err => console.error('SW registration failed:', err));
+            });
+        }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0c12", // Unified dark bg
+                        "card-dark": "rgba(24, 34, 52, 0.6)",
+                        "service-private": "#10b981", // Emerald
+                        "service-ospe": "#8b5cf6", // Violet
+                        "accent-cyan": "#22d3ee",
+                        "accent-warning": "#f2a10d",
+                        "success-emerald": "#10b981",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.5rem"
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Mobile App Styles -->
+    <style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            min-height: 100vh;
+            background-color: #0a0c12;
+            /* Default dark bg */
+        }
+
+        /* Hide Scrollbar but allow scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Main App Container -->
+    <div id="app"
+        class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
+        <div class="flex flex-col items-center justify-center h-screen space-y-4">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <p class="text-slate-500 animate-pulse">Cargando...</p>
+        </div>
+    </div>
+
+    <!-- External Libs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Application Logic -->
+    <script src="db.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

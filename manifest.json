@@ -1,0 +1,22 @@
+{
+    "name": "Adicionales Santa Fe",
+    "short_name": "Adicionales",
+    "description": "Gestión de Servicios de Policía Adicional",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "#0f172a",
+    "theme_color": "#3b82f6",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=192&rounded=true&bold=true",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=512&rounded=true&bold=true",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
