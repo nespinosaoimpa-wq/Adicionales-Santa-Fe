@@ -110,6 +110,17 @@ const store = {
         }
     },
 
+    async loginWithGooglePopup() {
+        try {
+            await DB.loginWithGooglePopup();
+            showToast("Login Popup Exitoso");
+        } catch (e) {
+            console.error(e);
+            debugLog("Popup Error: " + e.message);
+            showToast("Google Popup Error: " + e.message);
+        }
+    },
+
     shareApp() {
         const shareData = {
             title: 'Adicionales Santa Fe',
@@ -156,7 +167,12 @@ const store = {
 
     // Initialization
     init() {
-        debugLog("App v1.4.0 Loaded - Auth Fix");
+        debugLog("App v1.4.3 Loaded - Popup Added");
+
+        // Force Persistence
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .then(() => debugLog("Persistence set to LOCAL"))
+            .catch((e) => debugLog("Persist Err: " + e.message));
 
         // Handle Google Redirect Result
         auth.getRedirectResult().then(async (result) => {
@@ -580,6 +596,12 @@ function renderLogin(container) {
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
                     Continuar con Google
                 </button>
+
+                <!-- Plan B (Popup) -->
+                <button onclick="handleGoogleLoginPopup()" class="flex w-full justify-center items-center gap-3 rounded-xl bg-slate-700 px-3 py-2 text-xs font-semibold text-slate-300 shadow-sm hover:bg-slate-600 transition-all">
+                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    Método 2 (Si el de arriba falla)
+                </button>
                 
                 <div class="relative">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>
@@ -639,7 +661,19 @@ function renderLogin(container) {
     `;
 
     window.handleGoogleLogin = () => {
+        debugLog("Trying Login Method 1 (Redirect)...");
         store.loginWithGoogle();
+    };
+
+    window.handleGoogleLoginPopup = () => {
+        debugLog("Trying Login Method 2 (Popup)...");
+        store.loginWithGooglePopup();
+    };
+
+    store.forceUpdate = async () => {
+        debugLog("Forcing app update...");
+        await store.initPersistence();
+        debugLog("Persistence re-initialized. App should re-render.");
     };
 
     window.handleLogin = (e) => {
