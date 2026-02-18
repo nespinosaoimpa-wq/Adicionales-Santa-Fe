@@ -451,7 +451,19 @@ exportData() {
 
     // Expense Actions
     async addExpense(category, amount, description) {
+    const tempId = 'temp-' + Date.now();
     try {
+        // Optimistic Update
+        this.expenses.unshift({
+            id: tempId,
+            category,
+            amount: parseFloat(amount),
+            description: description || '',
+            date: this.getLocalDateString(),
+            timestamp: new Date().toISOString()
+        });
+        if (window.location.hash === '#financial') router.handleRoute();
+
         await DB.addExpense({
             category,
             amount: parseFloat(amount),
@@ -463,6 +475,9 @@ exportData() {
     } catch (e) {
         showToast("Error al guardar gasto");
         console.error(e);
+        // Rollback
+        this.expenses = this.expenses.filter(e => e.id !== tempId);
+        if (window.location.hash === '#financial') router.handleRoute();
         return false;
     }
 },
