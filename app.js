@@ -34,11 +34,7 @@ const debugLog = (msg) => {
 const store = {
     user: null, // Will be set by Firebase Auth
     services: [], // Synced with Firestore
-    expenses: [
-        // Expenses still local for now, could be migrated later
-        { id: 1, category: 'Comida', amount: 4500, date: '2023-11-15' },
-        { id: 2, category: 'Transporte', amount: 1200, date: '2023-11-16' }
-    ],
+    expenses: [], // Synced with Firestore
     // Cache for Admin
     allUsers: [],
 
@@ -137,6 +133,28 @@ const store = {
         } catch (e) {
             showToast("Error al guardar perfil");
             console.error(e);
+        }
+    },
+
+    async addExpense(expense) {
+        try {
+            await DB.addExpense(expense);
+            showToast("✅ Gasto agregado");
+            // store.expenses will be updated by subscription
+        } catch (e) {
+            console.error(e);
+            showToast("Error al agregar gasto");
+        }
+    },
+
+    async deleteExpense(id) {
+        if (!confirm("¿Eliminar este gasto?")) return;
+        try {
+            await DB.deleteExpense(id);
+            showToast("Gasto eliminado");
+        } catch (e) {
+            console.error(e);
+            showToast("Error al eliminar");
         }
     },
 
@@ -258,7 +276,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.5.1 Loaded - Persistence/Config Fix");
+        console.log("App v1.5.2 Loaded - Expenses Fix");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -1651,15 +1669,13 @@ function renderFinancial(container) {
             '<span class="material-symbols-outlined text-lg">' + icon + '</span>' +
             '</div>' +
             '<div>' +
-            '<p class="font-bold text-xs text-white">' + e.category + '</p>' +
-            '<p class="text-[10px] text-slate-400">' + (e.description ? e.description + ' • ' : '') + store.getFormattedDate(e.date) + '</p>' +
+            '<p class="font-bold text-sm text-white">' + e.category + '</p>' +
+            '<p class="text-[10px] text-slate-500">' + (e.description || '-') + ' • ' + new Date(e.timestamp || e.date).toLocaleDateString() + '</p>' +
             '</div>' +
             '</div>' +
-            '<div class="flex items-center gap-2">' +
-            '<p class="text-sm font-extrabold text-red-400">-$' + (e.amount || 0).toLocaleString('es-AR') + '</p>' +
-            '<button onclick="event.stopPropagation(); window.deleteExpenseConfirm(\'' + e.id + '\')" class="size-7 rounded-lg hover:bg-red-500/20 flex items-center justify-center text-slate-500 hover:text-red-400 transition-all">' +
-            '<span class="material-symbols-outlined text-sm">close</span>' +
-            '</button>' +
+            '<div class="flex items-center gap-3">' +
+            '<p class="font-bold text-white">-$' + (e.amount || 0).toLocaleString() + '</p>' +
+            '<button onclick="window.deleteExpenseConfirm(\'' + e.id + '\')" class="size-8 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>' +
             '</div>' +
             '</div>';
     }).join('') : '<div class="flex flex-col items-center py-8 text-center"><div class="size-14 rounded-full bg-red-500/10 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400/40">receipt_long</span></div><p class="text-sm font-semibold text-white mb-1">Sin gastos</p><p class="text-xs text-slate-400">Usá el formulario arriba para cargar gastos</p></div>'}

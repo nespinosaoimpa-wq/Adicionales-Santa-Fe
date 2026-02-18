@@ -131,12 +131,18 @@ const DB = {
 
         return db.collection('expenses')
             .where('userEmail', '==', user.email)
-            .orderBy('date', 'desc')
+            // .orderBy('date', 'desc') // Removed to avoid index Requirement
             .onSnapshot(snapshot => {
                 const expenses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                // Sort client-side
+                expenses.sort((a, b) => new Date(b.date) - new Date(a.date));
                 callback(expenses);
             }, error => {
                 console.error("Error syncing expenses:", error);
+                if (error.code === 'failed-precondition') {
+                    showToast("⚠️ Creando índice de gastos...");
+                    // Open console link if possible or just warn
+                }
                 callback([]);
             });
     },
