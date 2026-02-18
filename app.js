@@ -80,7 +80,7 @@ const store = {
                 name: name,
                 role: 'user',
                 avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${name}`,
-                serviceConfig: this.defaultServiceConfig,
+                serviceConfig: this.serviceConfig,
                 notificationSettings: this.notificationSettings
             });
             showToast("Cuenta creada");
@@ -258,7 +258,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.5.0 Loaded - Profile Redesign");
+        console.log("App v1.5.1 Loaded - Persistence/Config Fix");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -274,7 +274,7 @@ const store = {
                     this.user = await DB.getUser(user.email) || {
                         email: user.email,
                         role: 'user',
-                        serviceConfig: this.defaultServiceConfig,
+                        serviceConfig: this.serviceConfig,
                         notificationSettings: { enabled: false, leadTime: 60 },
                         name: user.displayName || user.email.split('@')[0],
                         avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
@@ -330,7 +330,7 @@ const store = {
                         this.user = {
                             email: user.email,
                             role: 'user',
-                            serviceConfig: this.defaultServiceConfig,
+                            serviceConfig: this.serviceConfig,
                             notificationSettings: { enabled: false, leadTime: 60 },
                             name: user.displayName || user.email.split('@')[0],
                             avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
