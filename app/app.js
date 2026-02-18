@@ -136,10 +136,348 @@ const store = {
         }
     },
 
-    // --- Global Auth Handlers ---
 
-    // (These will be attached to window in init or defined globally below)
+
+    async addExpense(expense) {
+        try {
+            await DB.addExpense(expense);
+            showToast("✅ Gasto agregado");
+            // store.expenses will be updated by subscription
+        } catch (e) {
+            console.error(e);
+            showToast("Error al agregar gasto");
+        }
+    },
+
+    async deleteExpense(id) {
+        if (!confirm("¿Eliminar este gasto?")) return;
+        try {
+            await DB.deleteExpense(id);
+            showToast("Gasto eliminado");
+        } catch (e) {
+            console.error(e);
+            showToast("Error al eliminar");
+        }
+    },
+
+    // --- Config Actions ---
+
+    updateLocalConfig(type, subType, value) {
+        if (this.user && this.user.serviceConfig) {
+            if (!this.user.serviceConfig[type]) this.user.serviceConfig[type] = {};
+            this.user.serviceConfig[type][subType] = parseFloat(value);
+        } else {
+            this.serviceConfig[type][subType] = parseFloat(value);
+        }
+    },
+
+    renameServiceSubtype(type, oldName, newName) {
+        if (!newName || newName === oldName) return;
+
+        let configTarget = this.user && this.user.serviceConfig ? this.user.serviceConfig : this.serviceConfig;
+
+        if (configTarget[type] && configTarget[type][oldName] !== undefined) {
+            const value = configTarget[type][oldName];
+            delete configTarget[type][oldName];
+            configTarget[type][newName] = value;
+
+            // Re-render if in profile
+            if (router.currentRoute === '#profile') renderProfile();
+        }
+    },
+
+    async saveConfig() {
+        if (!this.user) return;
+        try {
+            await DB.saveUser(this.user);
+            showToast("Configuración guardada y sincronizada");
+        } catch (e) {
+            console.error(e);
+            showToast("Error al guardar");
+        }
+    },
+
+    async resetPassword(email) {
+        try {
+            await auth.sendPasswordResetEmail(email);
+            showToast(`Correo enviado a ${email}`);
+        } catch (e) {
+            showToast("Error: " + e.message);
+        }
+    },
+
+    showPasswordReset() {
+        const email = prompt("Ingresa tu email para recuperar la contraseña:");
+        if (email) {
+            this.resetPassword(email);
+        }
+    },
+
+    async logout() {
+        await DB.logout();
+    },
+
+    async loginWithGoogle() {
+        try {
+            await DB.loginWithGoogle();
+        } catch (e) {
+            console.error(e);
+            throw e; // Re-throw for button handler
+        }
+    },
+
+    shareApp() {
+        const shareData = {
+            title: 'Adicionales Santa Fe',
+            text: 'Gestiona tus servicios de policía adicional y calcula tus ganancias fácil.',
+            url: window.location.origin + window.location.pathname
+        };
+
+        if (navigator.share) {
+            navigator.share(shareData)
+                .then(() => showToast("¡Gracias por compartir!"))
+                .catch((e) => console.log('Error sharing', e));
+        } else {
+            // Fallback: Copy to clipboard or open WhatsApp
+            const text = `¡Probá esta App para Adicionales! ${shareData.url}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        }
+    },
+
+    async addService(service) {
+        try {
+            await DB.addService(service);
+            showToast("✅ Servicio guardado");
+        } catch (e) {
+            console.error("Error saving service:", e);
+            if (e.message.includes("offline") || e.code === 'unavailable') {
+                showToast("❌ Sin conexión - Intenta más tarde");
+            } else {
+                showToast("❌ Error al guardar: " + e.message);
+            }
+            throw e; // Re-throw para que saveAction lo maneje
+        }
+    },
+
+    toggleDebug() {
+        const el = document.getElementById('debug-console-container');
+        if (el) el.classList.toggle('hidden');
+    },
+
+    async forceUpdate() {
+        if ('serviceWorker' in navigator) {
+            const registrations = await navigator.serviceWorker.getRegistrations();
+            for (let registration of registrations) {
+                await registration.unregister();
+            }
+            window.location.reload(true);
+        } else {
+            window.location.reload(true);
+        }
+    },
+
+    // Initialization
+    init() {
+        console.log("App v1.5.4 Loaded - Optimistic Expenses");
+
+        // Force Persistence FIRST
+        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .catch((e) => console.error("Persistence Error:", e));
+
+        // Listen to Auth State
+        this.unsub = auth.onAuthStateChanged(async user => {
+            if (user) {
+                console.log("🔐 User Logged In:", user.email);
+
+                try {
+                    // Load User Config/Profile (WAIT for this!)
+                    this.user = await DB.getUser(user.email) || {
+                        email: user.email,
+                        role: 'user',
+                        serviceConfig: this.serviceConfig,
+                        notificationSettings: { enabled: false, leadTime: 60 },
+                        name: user.displayName || user.email.split('@')[0],
+                        avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                    };
+
+                    console.log("✅ User data loaded:", this.user.email);
+
+                    // Save/Update user in DB
+                    await DB.saveUser(this.user);
+
+                    // Subscribe to Data
+                    this.unsubscribeServices = DB.subscribeToServices(services => {
+                        this.services = services;
+                        if (this.checkNotifications) this.checkNotifications();
+                        // Only handle route if we are already initialized or this is the first load
+                        if (this.authInitialized) router.handleRoute();
+                    });
+
+                    // Subscribe to Ads (Global)
+                    this.unsubscribeAds = DB.subscribeToAds(ads => {
+                        this.ads = ads;
+                    });
+
+                    // Subscribe to Users (for Admin)
+                    this.unsubscribeUsers = DB.subscribeToUsers(users => {
+                        this.allUsers = users;
+                    });
+
+                    // Subscribe to Expenses
+                    this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
+                        this.expenses = expenses;
+                        if (window.location.hash === '#financial') router.handleRoute();
+                    });
+
+                    // Interval for alerts
+                    if (this.checkNotifications) {
+                        if (this.notifInterval) clearInterval(this.notifInterval);
+                        this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
+                    }
+
+                    // Mark Auth as Initialized
+                    this.authInitialized = true;
+
+                    // NOW navigate (after user data is loaded)
+                    console.log("🚀 Navigating to requested route");
+                    router.handleRoute(); // Re-evaluate route now that we are authenticated
+
+                } catch (error) {
+                    console.error("❌ Firestore Error:", error.code || error.message);
+
+                    // DON'T logout - use fallback data instead
+                    if (!this.user) {
+                        this.user = {
+                            email: user.email,
+                            role: 'user',
+                            serviceConfig: this.serviceConfig,
+                            notificationSettings: { enabled: false, leadTime: 60 },
+                            name: user.displayName || user.email.split('@')[0],
+                            avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                        };
+                    }
+
+                    if (error.code === 'permission-denied') {
+                        showToast("⚠️ Modo offline - Configurá Firestore");
+                    } else {
+                        showToast("⚠️ Error de conexión - Modo offline");
+                    }
+
+                    this.authInitialized = true;
+
+                    // Navigate anyway with local data
+                    console.log("🚀 Navigating to #agenda (offline mode)");
+                    router.navigateTo('#agenda');
+                }
+            } else {
+                console.log("👋 User Logged Out");
+                this.user = null;
+                this.services = [];
+                if (this.unsubscribeServices) this.unsubscribeServices();
+                if (this.unsubscribeUsers) this.unsubscribeUsers();
+                if (this.unsubscribeExpenses) this.unsubscribeExpenses();
+                if (this.notifInterval) clearInterval(this.notifInterval);
+
+                this.authInitialized = true;
+                router.handleRoute(); // Re-evaluate route (will likely go to #login)
+            }
+        });
+    },
+
+    // Export Data (CSV)
+    exportData() {
+        const headers = ['Fecha', 'Tipo', 'Subtipo', 'Horas', 'Inicio', 'Fin', 'Lugar', 'Total', 'Estado'];
+        const rows = this.services.map(s => [
+            s.date,
+            s.type,
+            s.subType || '-',
+            s.hours,
+            s.startTime,
+            s.endTime,
+            `"${s.location}"`,
+            s.total,
+            s.status
+        ]);
+
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(r => r.join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'mis_servicios_sf.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        showToast("Exportando CSV...");
+    },
+
+    // Expense Actions
+    async addExpense(category, amount, description) {
+        const tempId = 'temp-' + Date.now();
+        try {
+            // Optimistic Update
+            this.expenses.unshift({
+                id: tempId,
+                category,
+                amount: parseFloat(amount),
+                description: description || '',
+                date: this.getLocalDateString(),
+                timestamp: new Date().toISOString()
+            });
+            if (window.location.hash === '#financial') router.handleRoute();
+
+            await DB.addExpense({
+                category,
+                amount: parseFloat(amount),
+                description: description || '',
+                date: this.getLocalDateString()
+            });
+            showToast(`Gasto de $${parseFloat(amount).toLocaleString('es-AR')} agregado`);
+            return true;
+        } catch (e) {
+            showToast("Error al guardar gasto");
+            console.error(e);
+            // Rollback
+            this.expenses = this.expenses.filter(e => e.id !== tempId);
+            if (window.location.hash === '#financial') router.handleRoute();
+            return false;
+        }
+    },
+
+    async deleteExpense(id) {
+        try {
+            await DB.deleteExpense(id);
+            showToast("Gasto eliminado");
+        } catch (e) {
+            showToast("Error al eliminar gasto");
+            console.error(e);
+        }
+    },
+
+    getFormattedDate(dateStr) {
+        if (!dateStr) return '';
+        // Fix: Parse manually to avoid UTC timezone issues with new Date(isoString)
+        const [year, month, day] = dateStr.split('-').map(Number);
+        const date = new Date(year, month - 1, day);
+        const options = { weekday: 'short', day: 'numeric', month: 'short' };
+        return date.toLocaleDateString('es-ES', options);
+    },
+
+    getLocalDateString(date = new Date()) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
 };
+
+// Initialize Store
+store.init();
 
 // --- GLOBAL HANDLERS ---
 window.handleGoogleLogin = async () => {
@@ -170,347 +508,6 @@ window.handleLogin = async (event) => {
         btn.innerText = "Ingresar";
     }
 };
-
-    async addExpense(expense) {
-    try {
-        await DB.addExpense(expense);
-        showToast("✅ Gasto agregado");
-        // store.expenses will be updated by subscription
-    } catch (e) {
-        console.error(e);
-        showToast("Error al agregar gasto");
-    }
-},
-
-    async deleteExpense(id) {
-    if (!confirm("¿Eliminar este gasto?")) return;
-    try {
-        await DB.deleteExpense(id);
-        showToast("Gasto eliminado");
-    } catch (e) {
-        console.error(e);
-        showToast("Error al eliminar");
-    }
-},
-
-// --- Config Actions ---
-
-updateLocalConfig(type, subType, value) {
-    if (this.user && this.user.serviceConfig) {
-        if (!this.user.serviceConfig[type]) this.user.serviceConfig[type] = {};
-        this.user.serviceConfig[type][subType] = parseFloat(value);
-    } else {
-        this.serviceConfig[type][subType] = parseFloat(value);
-    }
-},
-
-renameServiceSubtype(type, oldName, newName) {
-    if (!newName || newName === oldName) return;
-
-    let configTarget = this.user && this.user.serviceConfig ? this.user.serviceConfig : this.serviceConfig;
-
-    if (configTarget[type] && configTarget[type][oldName] !== undefined) {
-        const value = configTarget[type][oldName];
-        delete configTarget[type][oldName];
-        configTarget[type][newName] = value;
-
-        // Re-render if in profile
-        if (router.currentRoute === '#profile') renderProfile();
-    }
-},
-
-    async saveConfig() {
-    if (!this.user) return;
-    try {
-        await DB.saveUser(this.user);
-        showToast("Configuración guardada y sincronizada");
-    } catch (e) {
-        console.error(e);
-        showToast("Error al guardar");
-    }
-},
-
-    async resetPassword(email) {
-    try {
-        await auth.sendPasswordResetEmail(email);
-        showToast(`Correo enviado a ${email}`);
-    } catch (e) {
-        showToast("Error: " + e.message);
-    }
-},
-
-showPasswordReset() {
-    const email = prompt("Ingresa tu email para recuperar la contraseña:");
-    if (email) {
-        this.resetPassword(email);
-    }
-},
-
-    async logout() {
-    await DB.logout();
-},
-
-    async loginWithGoogle() {
-    try {
-        await DB.loginWithGoogle();
-    } catch (e) {
-        console.error(e);
-        throw e; // Re-throw for button handler
-    }
-},
-
-shareApp() {
-    const shareData = {
-        title: 'Adicionales Santa Fe',
-        text: 'Gestiona tus servicios de policía adicional y calcula tus ganancias fácil.',
-        url: window.location.origin + window.location.pathname
-    };
-
-    if (navigator.share) {
-        navigator.share(shareData)
-            .then(() => showToast("¡Gracias por compartir!"))
-            .catch((e) => console.log('Error sharing', e));
-    } else {
-        // Fallback: Copy to clipboard or open WhatsApp
-        const text = `¡Probá esta App para Adicionales! ${shareData.url}`;
-        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-    }
-},
-
-    async addService(service) {
-    try {
-        await DB.addService(service);
-        showToast("✅ Servicio guardado");
-    } catch (e) {
-        console.error("Error saving service:", e);
-        if (e.message.includes("offline") || e.code === 'unavailable') {
-            showToast("❌ Sin conexión - Intenta más tarde");
-        } else {
-            showToast("❌ Error al guardar: " + e.message);
-        }
-        throw e; // Re-throw para que saveAction lo maneje
-    }
-},
-
-toggleDebug() {
-    const el = document.getElementById('debug-console-container');
-    if (el) el.classList.toggle('hidden');
-},
-
-    async forceUpdate() {
-    if ('serviceWorker' in navigator) {
-        const registrations = await navigator.serviceWorker.getRegistrations();
-        for (let registration of registrations) {
-            await registration.unregister();
-        }
-        window.location.reload(true);
-    } else {
-        window.location.reload(true);
-    }
-},
-
-// Initialization
-init() {
-    console.log("App v1.5.4 Loaded - Optimistic Expenses");
-
-    // Force Persistence FIRST
-    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .catch((e) => console.error("Persistence Error:", e));
-
-    // Listen to Auth State
-    this.unsub = auth.onAuthStateChanged(async user => {
-        if (user) {
-            console.log("🔐 User Logged In:", user.email);
-
-            try {
-                // Load User Config/Profile (WAIT for this!)
-                this.user = await DB.getUser(user.email) || {
-                    email: user.email,
-                    role: 'user',
-                    serviceConfig: this.serviceConfig,
-                    notificationSettings: { enabled: false, leadTime: 60 },
-                    name: user.displayName || user.email.split('@')[0],
-                    avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                };
-
-                console.log("✅ User data loaded:", this.user.email);
-
-                // Save/Update user in DB
-                await DB.saveUser(this.user);
-
-                // Subscribe to Data
-                this.unsubscribeServices = DB.subscribeToServices(services => {
-                    this.services = services;
-                    if (this.checkNotifications) this.checkNotifications();
-                    // Only handle route if we are already initialized or this is the first load
-                    if (this.authInitialized) router.handleRoute();
-                });
-
-                // Subscribe to Ads (Global)
-                this.unsubscribeAds = DB.subscribeToAds(ads => {
-                    this.ads = ads;
-                });
-
-                // Subscribe to Users (for Admin)
-                this.unsubscribeUsers = DB.subscribeToUsers(users => {
-                    this.allUsers = users;
-                });
-
-                // Subscribe to Expenses
-                this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
-                    this.expenses = expenses;
-                    if (window.location.hash === '#financial') router.handleRoute();
-                });
-
-                // Interval for alerts
-                if (this.checkNotifications) {
-                    if (this.notifInterval) clearInterval(this.notifInterval);
-                    this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
-                }
-
-                // Mark Auth as Initialized
-                this.authInitialized = true;
-
-                // NOW navigate (after user data is loaded)
-                console.log("🚀 Navigating to requested route");
-                router.handleRoute(); // Re-evaluate route now that we are authenticated
-
-            } catch (error) {
-                console.error("❌ Firestore Error:", error.code || error.message);
-
-                // DON'T logout - use fallback data instead
-                if (!this.user) {
-                    this.user = {
-                        email: user.email,
-                        role: 'user',
-                        serviceConfig: this.serviceConfig,
-                        notificationSettings: { enabled: false, leadTime: 60 },
-                        name: user.displayName || user.email.split('@')[0],
-                        avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                    };
-                }
-
-                if (error.code === 'permission-denied') {
-                    showToast("⚠️ Modo offline - Configurá Firestore");
-                } else {
-                    showToast("⚠️ Error de conexión - Modo offline");
-                }
-
-                this.authInitialized = true;
-
-                // Navigate anyway with local data
-                console.log("🚀 Navigating to #agenda (offline mode)");
-                router.navigateTo('#agenda');
-            }
-        } else {
-            console.log("👋 User Logged Out");
-            this.user = null;
-            this.services = [];
-            if (this.unsubscribeServices) this.unsubscribeServices();
-            if (this.unsubscribeUsers) this.unsubscribeUsers();
-            if (this.unsubscribeExpenses) this.unsubscribeExpenses();
-            if (this.notifInterval) clearInterval(this.notifInterval);
-
-            this.authInitialized = true;
-            router.handleRoute(); // Re-evaluate route (will likely go to #login)
-        }
-    });
-},
-
-// Export Data (CSV)
-exportData() {
-    const headers = ['Fecha', 'Tipo', 'Subtipo', 'Horas', 'Inicio', 'Fin', 'Lugar', 'Total', 'Estado'];
-    const rows = this.services.map(s => [
-        s.date,
-        s.type,
-        s.subType || '-',
-        s.hours,
-        s.startTime,
-        s.endTime,
-        `"${s.location}"`,
-        s.total,
-        s.status
-    ]);
-
-    const csvContent = [
-        headers.join(','),
-        ...rows.map(r => r.join(','))
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.setAttribute('href', url);
-    link.setAttribute('download', 'mis_servicios_sf.csv');
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    showToast("Exportando CSV...");
-},
-
-    // Expense Actions
-    async addExpense(category, amount, description) {
-    const tempId = 'temp-' + Date.now();
-    try {
-        // Optimistic Update
-        this.expenses.unshift({
-            id: tempId,
-            category,
-            amount: parseFloat(amount),
-            description: description || '',
-            date: this.getLocalDateString(),
-            timestamp: new Date().toISOString()
-        });
-        if (window.location.hash === '#financial') router.handleRoute();
-
-        await DB.addExpense({
-            category,
-            amount: parseFloat(amount),
-            description: description || '',
-            date: this.getLocalDateString()
-        });
-        showToast(`Gasto de $${parseFloat(amount).toLocaleString('es-AR')} agregado`);
-        return true;
-    } catch (e) {
-        showToast("Error al guardar gasto");
-        console.error(e);
-        // Rollback
-        this.expenses = this.expenses.filter(e => e.id !== tempId);
-        if (window.location.hash === '#financial') router.handleRoute();
-        return false;
-    }
-},
-
-    async deleteExpense(id) {
-    try {
-        await DB.deleteExpense(id);
-        showToast("Gasto eliminado");
-    } catch (e) {
-        showToast("Error al eliminar gasto");
-        console.error(e);
-    }
-},
-
-getFormattedDate(dateStr) {
-    if (!dateStr) return '';
-    // Fix: Parse manually to avoid UTC timezone issues with new Date(isoString)
-    const [year, month, day] = dateStr.split('-').map(Number);
-    const date = new Date(year, month - 1, day);
-    const options = { weekday: 'short', day: 'numeric', month: 'short' };
-    return date.toLocaleDateString('es-ES', options);
-},
-
-getLocalDateString(date = new Date()) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
-};
-
-// Initialize Store
-store.init();
 
 // Handle Google Redirect Result AFTER DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
