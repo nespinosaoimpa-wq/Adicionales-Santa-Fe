@@ -84,18 +84,17 @@ const DB = {
         // Real-time listener for services filtered by user email
         return db.collection('services')
             .where('userEmail', '==', user.email)
-            .orderBy('date', 'desc')
+            .where('userEmail', '==', user.email)
+            // .orderBy('date', 'desc') // Removed for stability
             .onSnapshot(snapshot => {
                 const services = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                // Client-side sort
+                services.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+
                 console.log(`📊 Loaded ${services.length} services for ${user.email}`);
                 callback(services);
             }, error => {
                 console.error("Error syncing services:", error);
-                // Check if it's an index error
-                if (error.code === 'failed-precondition') {
-                    console.error("⚠️ Firestore index required. Check console for link.");
-                    showToast("⚠️ Configurando base de datos...");
-                }
                 // Fallback to empty array on error
                 callback([]);
             });
