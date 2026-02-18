@@ -336,8 +336,12 @@ const store = {
     },
 
     getFormattedDate(dateStr) {
+        if (!dateStr) return '';
+        // Fix: Parse manually to avoid UTC timezone issues with new Date(isoString)
+        const [year, month, day] = dateStr.split('-').map(Number);
+        const date = new Date(year, month - 1, day);
         const options = { weekday: 'short', day: 'numeric', month: 'short' };
-        return new Date(dateStr).toLocaleDateString('es-ES', options);
+        return date.toLocaleDateString('es-ES', options);
     },
 
     getLocalDateString(date = new Date()) {
