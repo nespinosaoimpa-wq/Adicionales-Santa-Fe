@@ -79,12 +79,101 @@ const store = {
                 email: userCred.user.email,
                 name: name,
                 role: 'user',
-                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${name}`
+                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${name}`,
+                serviceConfig: this.defaultServiceConfig,
+                notificationSettings: this.notificationSettings
             });
             showToast("Cuenta creada");
         } catch (e) {
             console.error(e);
             showToast("Error: " + e.message);
+        }
+    },
+
+    // --- Profile Actions ---
+
+    async requestNotificationPermission() {
+        if (!("Notification" in window)) {
+            showToast("Tu navegador no soporta notificaciones");
+            return;
+        }
+
+        if (Notification.permission === "granted") {
+            // Toggle off
+            this.notificationSettings.enabled = !this.notificationSettings.enabled;
+            showToast(this.notificationSettings.enabled ? "Notificaciones Activadas" : "Notificaciones Desactivadas");
+        } else if (Notification.permission !== "denied") {
+            const permission = await Notification.requestPermission();
+            if (permission === "granted") {
+                this.notificationSettings.enabled = true;
+                showToast("✅ Permiso concedido");
+            } else {
+                showToast("Permiso denegado");
+            }
+        } else {
+            showToast("Permisos bloqueados en navegador");
+        }
+
+        // Persist if user exists
+        if (this.user) {
+            this.user.notificationSettings = this.notificationSettings;
+            DB.saveUser(this.user);
+        }
+
+        // Re-render to show state
+        if (router.currentRoute === '#profile') renderProfile();
+    },
+
+    async updateProfile(name, avatar) {
+        if (!this.user) return;
+
+        this.user.name = name;
+        if (avatar) this.user.avatar = avatar;
+
+        try {
+            await DB.saveUser(this.user);
+            showToast("Perfil actualizado");
+            if (router.currentRoute === '#profile') renderProfile();
+        } catch (e) {
+            showToast("Error al guardar perfil");
+            console.error(e);
+        }
+    },
+
+    // --- Config Actions ---
+
+    updateLocalConfig(type, subType, value) {
+        if (this.user && this.user.serviceConfig) {
+            if (!this.user.serviceConfig[type]) this.user.serviceConfig[type] = {};
+            this.user.serviceConfig[type][subType] = parseFloat(value);
+        } else {
+            this.serviceConfig[type][subType] = parseFloat(value);
+        }
+    },
+
+    renameServiceSubtype(type, oldName, newName) {
+        if (!newName || newName === oldName) return;
+
+        let configTarget = this.user && this.user.serviceConfig ? this.user.serviceConfig : this.serviceConfig;
+
+        if (configTarget[type] && configTarget[type][oldName] !== undefined) {
+            const value = configTarget[type][oldName];
+            delete configTarget[type][oldName];
+            configTarget[type][newName] = value;
+
+            // Re-render if in profile
+            if (router.currentRoute === '#profile') renderProfile();
+        }
+    },
+
+    async saveConfig() {
+        if (!this.user) return;
+        try {
+            await DB.saveUser(this.user);
+            showToast("Configuración guardada y sincronizada");
+        } catch (e) {
+            console.error(e);
+            showToast("Error al guardar");
         }
     },
 
@@ -169,7 +258,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.4.5 Loaded - Auth Persistence Fix");
+        console.log("App v1.5.0 Loaded - Profile Redesign");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -1728,111 +1817,147 @@ function renderProfile(container) {
     // Clone config to avoid reference issues
     const config = JSON.parse(JSON.stringify(store.serviceConfig));
 
-    // Helper to generate inputs with editable names
-    const renderConfigInputs = (type) => {
-        return Object.keys(config[type]).map(sub => `
-            <div class="flex justify-between items-center py-2 border-b border-white/5 last:border-0 gap-2">
+    /**
+     * Render Profile / Configuration
+     * Redesigned for premium look & feel
+     */
+    function renderProfile(container) {
+        if (!container) container = document.getElementById('app');
+
+        // User Data Fallback
+        const user = store.user || { name: 'Usuario', email: '...', avatar: '' };
+        const userName = user.name && user.name !== 'undefined' ? user.name : (user.displayName || 'Usuario');
+        const userEmail = user.email || 'No email';
+        const userAvatar = user.avatar || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${userName}`;
+
+        // Clone config
+        const config = JSON.parse(JSON.stringify(store.serviceConfig));
+
+        // Helper: Config Inputs
+        const renderConfigInputs = (type) => {
+            return Object.keys(config[type]).map(sub => `
+            <div class="flex justify-between items-center py-3 border-b border-white/5 last:border-0 gap-3">
                 <input type="text" 
                     value="${sub}" 
                     onchange="store.renameServiceSubtype('${type}', '${sub}', this.value)"
-                    class="bg-transparent border-none text-sm text-slate-300 focus:ring-0 focus:text-white w-full placeholder-slate-600">
+                    class="bg-transparent border-none text-sm font-medium text-slate-300 focus:ring-0 focus:text-white w-full placeholder-slate-600 transition-colors">
                 
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 bg-white/5 rounded-lg px-2 py-1 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
                     <span class="text-xs text-slate-500">$</span>
                     <input type="number" 
                         value="${config[type][sub]}" 
                         onchange="store.updateLocalConfig('${type}', '${sub}', this.value)"
-                        class="w-20 bg-white/5 border border-white/10 rounded-lg px-2 py-1 text-right text-sm text-white focus:ring-primary focus:border-primary">
+                        class="w-20 bg-transparent border-none text-right text-sm font-bold text-white focus:ring-0 p-0">
                 </div>
             </div>
         `).join('');
-    };
+        };
 
-    container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
+        const html = `
+        <header class="sticky top-0 z-50 bg-background-dark/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors active:scale-95">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-lg font-bold text-white">Mi Configuración</h1>
+            <h1 class="text-base font-bold text-white tracking-wide">Mi Perfil</h1>
+            <div class="size-10"></div> <!-- Spacer -->
         </header>
 
-        <main class="p-6 space-y-8 pb-32 max-w-md mx-auto">
-            <!-- User Info (Editable) -->
-            <div class="text-center">
-                 <div class="size-24 rounded-full border-4 border-primary/20 mx-auto overflow-hidden mb-4 relative group">
-                    <img src="${store.user.avatar}" class="w-full h-full object-cover">
-                    <div onclick="const url = prompt('URL de tu foto:', '${store.user.avatar}'); if(url) store.updateProfile(store.user.name, url);" class="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 cursor-pointer transition-opacity">
-                        <span class="material-symbols-outlined text-white">edit</span>
+        <main class="p-6 space-y-8 pb-32 max-w-md mx-auto animate-fade-in">
+            <!-- Hero Profile Section -->
+            <div class="flex flex-col items-center pt-4">
+                <div class="relative group cursor-pointer" onclick="const url = prompt('URL de tu foto:', '${userAvatar}'); if(url) store.updateProfile('${userName}', url);">
+                    <!-- Decorative Rings -->
+                    <div class="absolute -inset-1 bg-gradient-to-tr from-primary to-accent-cyan rounded-full opacity-75 blur-sm group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="relative size-28 rounded-full p-1 bg-background-dark">
+                        <img src="${userAvatar}" class="w-full h-full rounded-full object-cover border-2 border-white/10 group-hover:border-white/30 transition-colors">
+                    </div>
+                    <!-- Edit Badge -->
+                    <div class="absolute bottom-1 right-1 bg-primary text-white size-8 rounded-full flex items-center justify-center shadow-lg border-2 border-background-dark transform group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-sm">edit</span>
                     </div>
                 </div>
-                
-                <div class="flex items-center justify-center gap-2 mb-2">
-                    <input type="text" value="${store.user.name}" 
-                        onchange="store.updateProfile(this.value, store.user.avatar)"
-                        class="bg-transparent text-center text-xl font-bold text-white border-b border-transparent hover:border-white/20 focus:border-primary focus:outline-none w-2/3" />
-                    <span class="material-symbols-outlined text-slate-500 text-sm">edit</span>
+
+                <div class="mt-4 text-center space-y-1">
+                    <div class="flex items-center justify-center gap-2">
+                        <h2 class="text-2xl font-bold text-white tracking-tight">${userName}</h2>
+                        <span onclick="const name = prompt('Nuevo nombre:', '${userName}'); if(name) store.updateProfile(name, '${userAvatar}');" class="material-symbols-outlined text-slate-500 hover:text-primary cursor-pointer text-sm transition-colors">edit</span>
+                    </div>
+                    <p class="text-sm font-medium text-slate-400">${userEmail}</p>
                 </div>
 
-                <div class="mt-4 flex justify-center gap-3">
-                     <button onclick="store.requestNotificationPermission()" class="flex items-center gap-2 px-4 py-2 rounded-full ${store.notificationSettings.enabled ? 'bg-green-500/20 text-green-400' : 'bg-slate-700 text-slate-300'} text-xs font-bold transition-all">
+                <!-- Action Buttons -->
+                <div class="flex gap-3 mt-6 w-full max-w-xs">
+                    <button onclick="store.requestNotificationPermission()" 
+                        class="flex-1 py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-xs font-bold transition-all active:scale-95 ${store.notificationSettings.enabled ? 'bg-primary/20 text-primary border border-primary/30' : 'bg-slate-800 text-slate-400 border border-white/5 hover:bg-slate-700'}">
                         <span class="material-symbols-outlined text-lg">${store.notificationSettings.enabled ? 'notifications_active' : 'notifications_off'}</span>
-                        ${store.notificationSettings.enabled ? 'Alertas On' : 'Alertas'}
+                        ${store.notificationSettings.enabled ? 'Notificaciones' : 'Activar Alertas'}
                     </button>
-
-                    <button onclick="store.shareApp()" class="flex items-center gap-2 px-4 py-2 rounded-full bg-blue-600 text-white text-xs font-bold shadow-lg shadow-blue-500/30 hover:bg-blue-500 transition-all">
+                    <button onclick="store.shareApp()" 
+                        class="flex-1 py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs font-bold hover:bg-blue-600/30 transition-all active:scale-95">
                         <span class="material-symbols-outlined text-lg">share</span>
                         Compartir
                     </button>
                 </div>
             </div>
 
-            <!-- Rates Configuration -->
-            <section class="space-y-4">
-                <div class="flex justify-between items-end">
-                    <h3 class="font-bold text-white flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">edit</span>
-                        Editar Nombres y Tarifas
-                    </h3>
+            <!-- Configuration Section -->
+            <section class="space-y-5">
+                <div class="flex items-center gap-3 text-slate-400 px-1">
+                    <span class="material-symbols-outlined text-primary">tune</span>
+                    <h3 class="text-xs font-bold uppercase tracking-widest">Configuración de Tarifas</h3>
                 </div>
 
                 <!-- Public Services -->
-                <div class="glass-card rounded-2xl p-4">
-                    <h4 class="text-xs font-bold text-accent-cyan uppercase tracking-wider mb-2">Públicos</h4>
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <h4 class="text-[10px] font-extrabold text-accent-cyan uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span class="size-2 rounded-full bg-accent-cyan"></span> Servicios Públicos
+                    </h4>
                     ${renderConfigInputs('Public')}
                 </div>
 
                 <!-- Private Services -->
-                <div class="glass-card rounded-2xl p-4">
-                    <h4 class="text-xs font-bold text-service-ospe uppercase tracking-wider mb-2">Privados</h4>
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <h4 class="text-[10px] font-extrabold text-purple-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span class="size-2 rounded-full bg-purple-400"></span> Servicios Privados
+                    </h4>
                     ${renderConfigInputs('Private')}
                 </div>
                 
                  <!-- OSPES / Others -->
-                <div class="glass-card rounded-2xl p-4">
-                    <h4 class="text-xs font-bold text-accent-warning uppercase tracking-wider mb-2">OSPES / Otros</h4>
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <h4 class="text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span class="size-2 rounded-full bg-amber-400"></span> OSPES / Otros
+                    </h4>
                     ${renderConfigInputs('OSPES')}
                 </div>
 
                 <!-- Add Custom Sector Button -->
-                <button onclick="window.addCustomSector()" class="w-full glass-card rounded-2xl p-4 flex items-center justify-center gap-2 text-primary hover:bg-primary/10 transition-colors border-2 border-dashed border-primary/30">
-                    <span class="material-symbols-outlined">add_circle</span>
-                    <span class="font-bold text-sm">Agregar Sector Personalizado</span>
+                <button onclick="window.addCustomSector()" class="w-full py-4 rounded-2xl border-2 border-dashed border-primary/30 text-primary/80 font-bold text-sm bg-primary/5 hover:bg-primary/10 hover:border-primary/50 transition-all flex items-center justify-center gap-2 group">
+                    <span class="material-symbols-outlined group-hover:scale-110 transition-transform">add_circle</span>
+                    Agregar Sector Personalizado
                 </button>
             </section>
 
             <!-- Save Button -->
-            <button onclick="store.saveConfig()" class="w-full bg-primary text-white py-4 rounded-2xl font-bold text-base shadow-xl shadow-primary/30 hover:bg-primary/90 active:scale-95 transition-all">
-                Guardar Personalización
+            <button onclick="store.saveConfig()" class="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-4 rounded-2xl font-bold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all">
+                Guardar Cambios
             </button>
 
             <!-- Logout -->
-            <button onclick="store.logout()" class="w-full text-red-400 text-sm font-bold hover:text-red-300 transition-colors">
-                Cerrar Sesión
-            </button>
-             
-             <p class="text-center text-xs text-slate-600 pt-6">Versión 1.2.0 (PWA + Firebase)</p>
+            <div class="pt-6 pb-2">
+                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10">
+                    <span class="material-symbols-outlined text-lg">logout</span>
+                    Cerrar Sesión
+                </button>
+                 <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.5.0 • Build 2026.02</p>
+            </div>
         </main>
     `;
+
+        container.innerHTML = html;
+
+        // Add logic for button states if needed
+    }
 
     // Add custom sector handler
     window.addCustomSector = () => {
