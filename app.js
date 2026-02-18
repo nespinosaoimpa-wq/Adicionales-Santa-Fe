@@ -139,13 +139,24 @@ const store = {
 
 
     async addExpense(expense) {
+        const tempId = 'temp-' + Date.now();
         try {
+            // Optimistic Update
+            this.expenses.unshift({
+                id: tempId,
+                ...expense,
+                timestamp: new Date().toISOString()
+            });
+            if (window.location.hash === '#financial') router.handleRoute();
+
             await DB.addExpense(expense);
             showToast("✅ Gasto agregado");
-            // store.expenses will be updated by subscription
         } catch (e) {
             console.error(e);
             showToast("Error al agregar gasto");
+            // Rollback
+            this.expenses = this.expenses.filter(e => e.id !== tempId);
+            if (window.location.hash === '#financial') router.handleRoute();
         }
     },
 
@@ -478,6 +489,36 @@ const store = {
 
 // Initialize Store
 store.init();
+
+// --- GLOBAL HANDLERS ---
+window.handleGoogleLogin = async () => {
+    try {
+        await store.loginWithGoogle();
+    } catch (e) {
+        showToast("Error Google: " + e.message);
+    }
+};
+
+window.handleLogin = async (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const password = document.getElementById('password') ? document.getElementById('password').value : prompt("Ingresa tu clave:");
+
+    if (!password) return;
+
+    const btn = event.target.querySelector('button[type="submit"]');
+    if (btn) {
+        btn.disabled = true;
+        btn.innerText = "Ingresando...";
+    }
+
+    await store.login(email, password);
+
+    if (btn) {
+        btn.disabled = false;
+        btn.innerText = "Ingresar";
+    }
+};
 
 // --- GLOBAL HANDLERS ---
 window.handleGoogleLogin = async () => {
