@@ -289,7 +289,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.5.8 Loaded - Profile Data Fix");
+        console.log("App v1.5.9 Loaded - Syntax Fix");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -2108,7 +2108,7 @@ window.addCustomSector = () => {
     // Re-render profile to show new sector
     renderProfile(container);
 };
-};
+
 
 // --- MISSING FUNCTIONS ---
 store.renameServiceSubtype = (type, oldName, newName) => {
