@@ -303,7 +303,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.6.0 Loaded - Expense Logic Overhaul");
+        console.log("App v1.6.1 Loaded - Stability Patch");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -2083,7 +2083,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                 <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.5.0 • Build 2026.02</p>
+                 <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.6.1 • Build 2026.02.18</p>
             </div>
         </main>
     `;
