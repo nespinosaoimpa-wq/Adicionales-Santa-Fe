@@ -276,7 +276,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.5.2 Loaded - Expenses Fix");
+        console.log("App v1.5.3 Loaded - Profile Fix");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -1828,30 +1828,28 @@ function renderFinancial(container) {
 
 /**
  * Render Profile / Settings View
+ * Redesigned for premium look & feel
  */
 function renderProfile(container) {
-    // Clone config to avoid reference issues
-    const config = JSON.parse(JSON.stringify(store.serviceConfig));
+    if (!container) container = document.getElementById('app');
 
-    /**
-     * Render Profile / Configuration
-     * Redesigned for premium look & feel
-     */
-    function renderProfile(container) {
-        if (!container) container = document.getElementById('app');
+    // User Data Fallback
+    const user = store.user || { name: 'Usuario', email: '...', avatar: '' };
+    const userName = user.name && user.name !== 'undefined' ? user.name : (user.displayName || 'Usuario');
+    const userEmail = user.email || 'No email';
+    const userAvatar = user.avatar || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${userName}`;
 
-        // User Data Fallback
-        const user = store.user || { name: 'Usuario', email: '...', avatar: '' };
-        const userName = user.name && user.name !== 'undefined' ? user.name : (user.displayName || 'Usuario');
-        const userEmail = user.email || 'No email';
-        const userAvatar = user.avatar || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${userName}`;
+    // Clone config (Defensive copy)
+    // 2026-02-18: Added safety check for undefined serviceConfig
+    const config = store.serviceConfig ? JSON.parse(JSON.stringify(store.serviceConfig)) : {
+        'Public': { 'Ordinaria': 0, 'Extraordinaria': 0 },
+        'Private': { 'Ordinaria': 0, 'Extraordinaria': 0 },
+        'OSPES': { 'Ordinaria': 0, 'Extraordinaria': 0 }
+    };
 
-        // Clone config
-        const config = JSON.parse(JSON.stringify(store.serviceConfig));
-
-        // Helper: Config Inputs
-        const renderConfigInputs = (type) => {
-            return Object.keys(config[type]).map(sub => `
+    // Helper: Config Inputs
+    const renderConfigInputs = (type) => {
+        return Object.keys(config[type]).map(sub => `
             <div class="flex justify-between items-center py-3 border-b border-white/5 last:border-0 gap-3">
                 <input type="text" 
                     value="${sub}" 
@@ -1867,9 +1865,9 @@ function renderProfile(container) {
                 </div>
             </div>
         `).join('');
-        };
+    };
 
-        const html = `
+    const html = `
         <header class="sticky top-0 z-50 bg-background-dark/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
             <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors active:scale-95">
                 <span class="material-symbols-outlined">arrow_back</span>
@@ -1970,40 +1968,40 @@ function renderProfile(container) {
         </main>
     `;
 
-        container.innerHTML = html;
+    container.innerHTML = html;
 
-        // Add logic for button states if needed
+    // Add logic for button states if needed
+}
+
+// Add custom sector handler
+window.addCustomSector = () => {
+    const sectorName = prompt("Nombre del nuevo sector (ej: IOMA, Swiss Medical):");
+    if (!sectorName || sectorName.trim() === '') return;
+
+    const ordinaryRate = prompt(`Tarifa Ordinaria para ${sectorName}:`);
+    if (!ordinaryRate || isNaN(ordinaryRate)) {
+        showToast("❌ Tarifa inválida");
+        return;
     }
 
-    // Add custom sector handler
-    window.addCustomSector = () => {
-        const sectorName = prompt("Nombre del nuevo sector (ej: IOMA, Swiss Medical):");
-        if (!sectorName || sectorName.trim() === '') return;
+    const extraRate = prompt(`Tarifa Extraordinaria para ${sectorName}:`);
+    if (!extraRate || isNaN(extraRate)) {
+        showToast("❌ Tarifa inválida");
+        return;
+    }
 
-        const ordinaryRate = prompt(`Tarifa Ordinaria para ${sectorName}:`);
-        if (!ordinaryRate || isNaN(ordinaryRate)) {
-            showToast("❌ Tarifa inválida");
-            return;
-        }
+    // Add to config
+    if (!store.serviceConfig[sectorName]) {
+        store.serviceConfig[sectorName] = {};
+    }
+    store.serviceConfig[sectorName]['Ordinaria'] = parseFloat(ordinaryRate);
+    store.serviceConfig[sectorName]['Extraordinaria'] = parseFloat(extraRate);
 
-        const extraRate = prompt(`Tarifa Extraordinaria para ${sectorName}:`);
-        if (!extraRate || isNaN(extraRate)) {
-            showToast("❌ Tarifa inválida");
-            return;
-        }
+    showToast(`✅ Sector "${sectorName}" agregado`);
 
-        // Add to config
-        if (!store.serviceConfig[sectorName]) {
-            store.serviceConfig[sectorName] = {};
-        }
-        store.serviceConfig[sectorName]['Ordinaria'] = parseFloat(ordinaryRate);
-        store.serviceConfig[sectorName]['Extraordinaria'] = parseFloat(extraRate);
-
-        showToast(`✅ Sector "${sectorName}" agregado`);
-
-        // Re-render profile to show new sector
-        renderProfile(container);
-    };
+    // Re-render profile to show new sector
+    renderProfile(container);
+};
 };
 
 // --- MISSING FUNCTIONS ---
