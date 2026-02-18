@@ -302,7 +302,15 @@ const store = {
 
                 try {
                     // Load User Config/Profile (WAIT for this!)
-                    this.user = await DB.getUser(user.email) || {
+                    const dbUser = await DB.getUser(user.email);
+
+                    // Sanitize DB Data
+                    if (dbUser) {
+                        if (dbUser.name === 'undefined') dbUser.name = null;
+                        if (dbUser.avatar === 'undefined') dbUser.avatar = null;
+                    }
+
+                    this.user = dbUser || {
                         email: user.email,
                         role: 'user',
                         serviceConfig: this.serviceConfig,
@@ -1929,9 +1937,13 @@ function renderProfile(container) {
 
     // User Data Fallback
     const user = store.user || { name: 'Usuario', email: '...', avatar: '' };
-    const userName = user.name && user.name !== 'undefined' ? user.name : (user.displayName || 'Usuario');
+
+    // Helper to sanitize "undefined" strings
+    const safeString = (str) => (!str || str === 'undefined' || str === 'null') ? null : str;
+
+    const userName = safeString(user.name) || safeString(user.displayName) || 'Usuario';
     const userEmail = user.email || 'No email';
-    const userAvatar = user.avatar || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${userName}`;
+    const userAvatar = safeString(user.avatar) || safeString(user.photoURL) || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${encodeURIComponent(userName)}`;
 
     // Clone config (Defensive copy)
     // 2026-02-18: Added safety check for undefined serviceConfig
