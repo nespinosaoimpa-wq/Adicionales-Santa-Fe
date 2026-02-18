@@ -169,7 +169,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.4.4 Loaded - Auth Fix Applied");
+        console.log("App v1.4.5 Loaded - Auth Persistence Fix");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -200,7 +200,8 @@ const store = {
                     this.unsubscribeServices = DB.subscribeToServices(services => {
                         this.services = services;
                         if (this.checkNotifications) this.checkNotifications();
-                        router.handleRoute();
+                        // Only handle route if we are already initialized or this is the first load
+                        if (this.authInitialized) router.handleRoute();
                     });
 
                     // Subscribe to Ads (Global)
@@ -225,9 +226,12 @@ const store = {
                         this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
                     }
 
+                    // Mark Auth as Initialized
+                    this.authInitialized = true;
+
                     // NOW navigate (after user data is loaded)
-                    console.log("🚀 Navigating to #agenda");
-                    router.navigateTo('#agenda');
+                    console.log("🚀 Navigating to requested route");
+                    router.handleRoute(); // Re-evaluate route now that we are authenticated
 
                 } catch (error) {
                     console.error("❌ Firestore Error:", error.code || error.message);
@@ -250,6 +254,8 @@ const store = {
                         showToast("⚠️ Error de conexión - Modo offline");
                     }
 
+                    this.authInitialized = true;
+
                     // Navigate anyway with local data
                     console.log("🚀 Navigating to #agenda (offline mode)");
                     router.navigateTo('#agenda');
@@ -262,7 +268,9 @@ const store = {
                 if (this.unsubscribeUsers) this.unsubscribeUsers();
                 if (this.unsubscribeExpenses) this.unsubscribeExpenses();
                 if (this.notifInterval) clearInterval(this.notifInterval);
-                router.navigateTo('#login');
+
+                this.authInitialized = true;
+                router.handleRoute(); // Re-evaluate route (will likely go to #login)
             }
         });
     },
@@ -375,6 +383,13 @@ const router = {
         const hash = window.location.hash || '#login';
         this.currentRoute = hash;
 
+        // 1. SHOW LOADING SCREEN IF AUTH NOT INITIALIZED
+        if (!store.authInitialized) {
+            console.log("⏳ Waiting for Auth...");
+            this.render('#loading');
+            return;
+        }
+
         // Auto-login: If user is authenticated and trying to access login, redirect to agenda
         if (hash === '#login' && store.isAuthenticated()) {
             console.log("🔐 User already logged in, redirecting to agenda");
@@ -397,6 +412,15 @@ const router = {
             app.innerHTML = ''; // Clear current view
 
             switch (route) {
+                case '#loading':
+                    app.innerHTML = `
+                        <div class="min-h-screen flex flex-col justify-center items-center bg-background-dark">
+                            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
+                            <img src="https://ui-avatars.com/api/?name=Adicionales&background=0D8ABC&color=fff&rounded=true" class="size-16 mb-4 animate-pulse">
+                            <p class="text-slate-400 text-sm font-medium">Iniciando sesión...</p>
+                        </div>
+                     `;
+                    break;
                 case '#login':
                     renderLogin(app);
                     break;
@@ -1438,8 +1462,8 @@ function renderFinancial(container) {
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-3">
-                    <div class="size-10 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
-                        <span class="material-symbols-outlined text-primary">shield_person</span>
+                    <div class="size-10 rounded-full border border-primary/30 overflow-hidden">
+                        <img src="${store.user.avatar}" class="w-full h-full object-cover">
                     </div>
                     <div>
                         <h1 class="text-sm font-medium text-slate-400">${store.user.name}</h1>
