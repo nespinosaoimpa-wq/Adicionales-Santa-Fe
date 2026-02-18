@@ -276,7 +276,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.5.3 Loaded - Profile Fix");
+        console.log("App v1.5.4 Loaded - Optimistic Expenses");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -1682,8 +1682,14 @@ function renderFinancial(container) {
                 </div>
             </section>
             
-             <!-- Export Actions -->
-             <div class="mt-8 flex justify-center">
+            </section>
+            
+             <!-- Refresh / Export Actions -->
+             <div class="mt-8 flex justify-center gap-4">
+                <button onclick="window.location.reload()" class="text-sm font-bold text-slate-500 flex items-center gap-2 hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined">refresh</span>
+                    Actualizar Datos
+                </button>
                 <button onclick="store.exportData()" class="text-sm font-bold text-slate-400 flex items-center gap-2 hover:text-white transition-colors">
                     <span class="material-symbols-outlined">download</span>
                     Descargar reporte (CSV)
