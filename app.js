@@ -138,18 +138,22 @@ const store = {
 
 
 
-    async addExpense(expense) {
+    async addExpense(category, amount, description) {
         const tempId = 'temp-' + Date.now();
+        const expenseObj = {
+            category,
+            amount: parseFloat(amount),
+            description: description || '',
+            date: this.getLocalDateString(),
+            timestamp: new Date().toISOString()
+        };
+
         try {
             // Optimistic Update
-            this.expenses.unshift({
-                id: tempId,
-                ...expense,
-                timestamp: new Date().toISOString()
-            });
+            this.expenses.unshift({ id: tempId, ...expenseObj });
             if (window.location.hash === '#financial') router.handleRoute();
 
-            await DB.addExpense(expense);
+            await DB.addExpense(expenseObj);
             showToast("✅ Gasto agregado");
         } catch (e) {
             console.error(e);
@@ -161,13 +165,23 @@ const store = {
     },
 
     async deleteExpense(id) {
-        if (!confirm("¿Eliminar este gasto?")) return;
+        // Optimistic Remove
+        const previousExpenses = [...this.expenses];
+        this.expenses = this.expenses.filter(e => e.id !== id);
+        if (window.location.hash === '#financial') router.handleRoute();
+
         try {
-            await DB.deleteExpense(id);
+            // If it's a temp ID, we just keep the local removal
+            if (!id.toString().startsWith('temp-')) {
+                await DB.deleteExpense(id);
+            }
             showToast("Gasto eliminado");
         } catch (e) {
             console.error(e);
             showToast("Error al eliminar");
+            // Rollback
+            this.expenses = previousExpenses;
+            if (window.location.hash === '#financial') router.handleRoute();
         }
     },
 
@@ -289,7 +303,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.5.9 Loaded - Syntax Fix");
+        console.log("App v1.6.0 Loaded - Expense Logic Overhaul");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
