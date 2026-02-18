@@ -289,7 +289,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.5.4 Loaded - Optimistic Expenses");
+        console.log("App v1.5.8 Loaded - Profile Data Fix");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
