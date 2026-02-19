@@ -69,7 +69,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
+                navigator.serviceWorker.register('./sw-v3.js')
                     .then(reg => {
                         console.log('SW registered:', reg);
 
@@ -200,9 +200,9 @@
 
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
-    <script src="db.js?v=172"></script>
-    <script src="components.js?v=172"></script>
-    <script src="app.js?v=172"></script>
+    <script src="db.js?v=173"></script>
+    <script src="components.js?v=173"></script>
+    <script src="app.js?v=173"></script>
 </body>
 
 </html>
