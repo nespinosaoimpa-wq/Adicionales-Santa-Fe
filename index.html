@@ -26,8 +26,20 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- CRITICAL ERROR HANDLER -->
+    <!-- CRITICAL ERROR HANDLER & CACHE WIPE -->
     <script>
+        // Kill any old Service Workers immediately
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                for (let registration of registrations) {
+                    if (!registration.active?.scriptURL.includes('sw-v3.js')) {
+                        console.log('Force killing old SW:', registration.active?.scriptURL);
+                        registration.unregister();
+                    }
+                }
+            });
+        }
+
         window.onerror = function (msg, url, lineNo, columnNo, error) {
             const errorBox = document.createElement('div');
             errorBox.style.position = 'fixed';
