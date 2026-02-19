@@ -65,6 +65,13 @@ const DB = {
         // Also update Auth profile if possible, but Firestore is our source of truth
     },
 
+    async uploadAvatar(file, email) {
+        if (!file || !email) return null;
+        const storageRef = storage.ref(`avatars/${email}/${file.name}`);
+        const snapshot = await storageRef.put(file);
+        return await snapshot.ref.getDownloadURL();
+    },
+
     subscribeToUsers(callback) {
         return db.collection('users').onSnapshot(snapshot => {
             const users = snapshot.docs.map(doc => doc.data());
