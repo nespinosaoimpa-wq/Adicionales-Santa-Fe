@@ -20,5 +20,6 @@ db.enablePersistence()
         }
     });
 const auth = firebase.auth();
+const storage = firebase.storage();
 
 console.log("Firebase Connected");

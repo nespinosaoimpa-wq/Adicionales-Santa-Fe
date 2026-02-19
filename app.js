@@ -303,7 +303,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.6.2 Loaded - Resilience Update");
+        console.log("App v1.6.3 Loaded - Photo Upload Fix");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -1997,11 +1997,14 @@ function renderProfile(container) {
         <main class="p-6 space-y-8 pb-32 max-w-md mx-auto animate-fade-in">
             <!-- Hero Profile Section -->
             <div class="flex flex-col items-center pt-4">
-                <div class="relative group cursor-pointer" onclick="const url = prompt('URL de tu foto:', '${userAvatar}'); if(url) store.updateProfile('${userName}', url);">
+                <!-- Hidden File Input -->
+                <input type="file" id="avatar-input" accept="image/*" class="hidden" onchange="store.handleAvatarUpload(event)">
+                
+                <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-input').click()">
                     <!-- Decorative Rings -->
                     <div class="absolute -inset-1 bg-gradient-to-tr from-primary to-accent-cyan rounded-full opacity-75 blur-sm group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative size-28 rounded-full p-1 bg-background-dark">
-                        <img src="${userAvatar}" class="w-full h-full rounded-full object-cover border-2 border-white/10 group-hover:border-white/30 transition-colors">
+                    <div class="relative size-28 rounded-full p-1 bg-background-dark shadow-2xl">
+                        <img id="profile-avatar-img" src="${userAvatar}" class="w-full h-full rounded-full object-cover border-2 border-white/10 group-hover:border-primary/50 transition-all duration-300 shadow-inner">
                     </div>
                     <!-- Edit Badge -->
                     <div class="absolute bottom-1 right-1 bg-primary text-white size-8 rounded-full flex items-center justify-center shadow-lg border-2 border-background-dark transform group-hover:scale-110 transition-transform">
@@ -2081,7 +2084,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                 <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.6.2 • Build 2026.02.18</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.6.3 • Build 2026.02.18</p>
             </div>
         </main>
     `;
@@ -2147,6 +2150,38 @@ store.updateProfile = async (name, avatar) => {
     } catch (e) {
         showToast("Error al actualizar perfil");
         console.error(e);
+    }
+};
+
+store.handleAvatarUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    if (file.size > 2 * 1024 * 1024) {
+        showToast("⚠️ La imagen es muy pesada (max 2MB)");
+        return;
+    }
+
+    const img = document.getElementById('profile-avatar-img');
+    const originalSrc = img.src;
+
+    try {
+        // Preview
+        const reader = new FileReader();
+        reader.onload = (e) => img.src = e.target.result;
+        reader.readAsDataURL(file);
+
+        showToast("⏳ Subiendo foto...");
+        const downloadURL = await DB.uploadAvatar(file, store.user.email);
+
+        if (downloadURL) {
+            await store.updateProfile(store.user.name, downloadURL);
+            showToast("✅ Foto actualizada");
+        }
+    } catch (e) {
+        console.error("Upload error:", e);
+        showToast("❌ Error al subir foto");
+        img.src = originalSrc;
     }
 };
 
