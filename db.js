@@ -69,6 +69,20 @@ const DB = {
         return db.collection('users').onSnapshot(snapshot => {
             const users = snapshot.docs.map(doc => doc.data());
             callback(users);
+        }, error => {
+            console.warn("Users access restricted (Normal user?):", error.message);
+            callback([]);
+        });
+    },
+
+    // --- ADS ---
+    subscribeToAds(callback) {
+        return db.collection('ads').onSnapshot(snapshot => {
+            const ads = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            callback(ads);
+        }, error => {
+            console.warn("Ads not available:", error.message);
+            callback([]);
         });
     },
 
@@ -83,7 +97,6 @@ const DB = {
 
         // Real-time listener for services filtered by user email
         return db.collection('services')
-            .where('userEmail', '==', user.email)
             .where('userEmail', '==', user.email)
             // .orderBy('date', 'desc') // Removed for stability
             .onSnapshot(snapshot => {

@@ -303,7 +303,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.6.1 Loaded - Stability Patch");
+        console.log("App v1.6.2 Loaded - Resilience Update");
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -376,9 +376,9 @@ const store = {
                     router.handleRoute(); // Re-evaluate route now that we are authenticated
 
                 } catch (error) {
-                    console.error("❌ Firestore Error:", error.code || error.message);
+                    console.error("❌ Initialization Error:", error.code || error.message);
 
-                    // DON'T logout - use fallback data instead
+                    // Resilience: Ensure user object exists even on partial failures
                     if (!this.user) {
                         this.user = {
                             email: user.email,
@@ -390,17 +390,15 @@ const store = {
                         };
                     }
 
+                    // Only show "Offline" if it's a hard connection error, not a permission issue
                     if (error.code === 'permission-denied') {
-                        showToast("⚠️ Modo offline - Configurá Firestore");
-                    } else {
-                        showToast("⚠️ Error de conexión - Modo offline");
+                        console.warn("Restricted access handled during init.");
+                    } else if (error.code === 'unavailable' || error.message.includes('offline')) {
+                        showToast("⚠️ Modo offline activo");
                     }
 
                     this.authInitialized = true;
-
-                    // Navigate anyway with local data
-                    console.log("🚀 Navigating to #agenda (offline mode)");
-                    router.navigateTo('#agenda');
+                    router.handleRoute();
                 }
             } else {
                 console.log("👋 User Logged Out");
@@ -2083,7 +2081,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                 <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.6.1 • Build 2026.02.18</p>
+                 <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.6.2 • Build 2026.02.18</p>
             </div>
         </main>
     `;
