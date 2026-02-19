@@ -64,20 +64,34 @@
     <link rel="apple-touch-icon"
         href="https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=192&rounded=true&bold=true">
 
-    <!-- Service Worker Registration -->
+    <!-- Service Worker Registration & Update Handler -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js')
                     .then(reg => {
                         console.log('SW registered:', reg);
+
+                        // Handle updates
                         reg.onupdatefound = () => {
                             const installingWorker = reg.installing;
                             installingWorker.onstatechange = () => {
                                 if (installingWorker.state === 'installed') {
                                     if (navigator.serviceWorker.controller) {
-                                        console.log('New content available; please refresh.');
-                                        // Optional: show a toast instead of alert
+                                        console.log('New update available.');
+                                        const updateBox = document.createElement('div');
+                                        updateBox.className = "fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-sm bg-primary text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between animate-bounce";
+                                        updateBox.innerHTML = `
+                                            <div class="flex items-center gap-3">
+                                                <span class="material-symbols-outlined">system_update</span>
+                                                <div class="text-xs">
+                                                    <p class="font-bold">Nueva Versión Lista</p>
+                                                    <p class="opacity-80">Actualiza para ver los cambios.</p>
+                                                </div>
+                                            </div>
+                                            <button onclick="window.location.reload(true)" class="bg-white text-primary px-3 py-1.5 rounded-xl font-bold text-[10px] uppercase">Actualizar</button>
+                                        `;
+                                        document.body.appendChild(updateBox);
                                     }
                                 }
                             };
@@ -85,11 +99,20 @@
                     })
                     .catch(err => console.error('SW registration failed:', err));
             });
+
+            // Ensure refreshes happen correctly
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    window.location.reload();
+                    refreshing = true;
+                }
+            });
         }
     </script>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link
@@ -165,19 +188,20 @@
     </div>
 
     <!-- External Libs -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
 
     <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js" crossorigin="anonymous"></script>
 
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
-    <script src="db.js?v=171"></script>
-    <script src="components.js?v=171"></script>
-    <script src="app.js?v=171"></script>
+    <script src="db.js?v=172"></script>
+    <script src="components.js?v=172"></script>
+    <script src="app.js?v=172"></script>
 </body>
 
 </html>

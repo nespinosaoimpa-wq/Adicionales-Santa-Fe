@@ -1,10 +1,10 @@
-const CACHE_NAME = 'adicionales-sf-v20';
+const CACHE_NAME = 'adicionales-sf-v21';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
-    './app.js?v=171',
-    './db.js?v=171',
-    './components.js?v=171',
+    './app.js?v=172',
+    './db.js?v=172',
+    './components.js?v=172',
     './firebase-config.js',
     './styles.css',
     'https://cdn.tailwindcss.com?plugins=forms,container-queries',

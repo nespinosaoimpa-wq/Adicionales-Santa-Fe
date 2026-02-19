@@ -356,6 +356,37 @@ const store = {
         showToast("Exportando CSV...");
     },
 
+    async forceSystemUpdate() {
+        if (!confirm("¿Deseas forzar la actualización del sistema? Esto cerrará pestañas y limpiará la memoria temporal.")) return;
+
+        showToast("⚙️ Limpiando sistema...");
+
+        try {
+            // 1. Clear Caches
+            if ('caches' in window) {
+                const keys = await caches.keys();
+                await Promise.all(keys.map(key => caches.delete(key)));
+            }
+
+            // 2. Unregister SW
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                await Promise.all(registrations.map(reg => reg.unregister()));
+            }
+
+            showToast("✅ Memoria limpia. Recargando...");
+
+            // 3. Force reload ignoring cache
+            setTimeout(() => {
+                window.location.reload(true);
+            }, 1000);
+
+        } catch (e) {
+            console.error("Force update failed:", e);
+            window.location.reload(true);
+        }
+    },
+
     getFormattedDate(dateStr) {
         if (!dateStr) return '';
         // Fix: Parse manually to avoid UTC timezone issues with new Date(isoString)
@@ -373,7 +404,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.7.1 Loaded - Multi-tab Sync & UI Fix");
+        console.log("App v1.7.2 Loaded - Nuclear Update Core");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
@@ -2048,7 +2079,12 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.7.1 • Build 2026.02.18</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.7.2 • Build 2026.02.18</p>
+                  
+                  <button onclick="store.forceSystemUpdate()" class="w-full mt-4 text-slate-500 hover:text-primary text-[10px] font-bold transition-colors flex items-center justify-center gap-1 py-2">
+                    <span class="material-symbols-outlined text-xs">refresh</span>
+                    Forzar Actualización de Sistema
+                </button>
             </div>
         </main>
     `;
