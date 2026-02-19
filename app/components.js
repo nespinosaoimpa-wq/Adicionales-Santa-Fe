@@ -93,6 +93,31 @@ function updateOfflineStatus(isOffline) {
     }
 }
 
+// PWA Install Banner Component
+function renderInstallBanner() {
+    return `
+        <div id="install-banner" class="hidden fixed top-4 left-4 right-4 z-[10000] bg-slate-900/95 backdrop-blur-xl border border-white/10 p-4 rounded-3xl shadow-2xl animate-slide-down">
+            <div class="flex items-center gap-4">
+                <div class="size-12 rounded-2xl bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary text-3xl">download_for_offline</span>
+                </div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold text-white">Instalar App</h4>
+                    <p class="text-xs text-slate-400">Agregala a tu pantalla de inicio</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="this.closest('#install-banner').classList.add('hidden')" class="p-2 text-slate-500 hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-xl">close</span>
+                    </button>
+                    <button onclick="store.installApp()" class="bg-primary text-white px-4 py-2 rounded-xl text-xs font-bold shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                        Instalar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 // Listen to online/offline events
 window.addEventListener('online', () => updateOfflineStatus(false));
 window.addEventListener('offline', () => updateOfflineStatus(true));
