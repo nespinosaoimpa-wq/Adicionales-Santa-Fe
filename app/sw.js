@@ -1,4 +1,4 @@
-const CACHE_NAME = 'adicionales-sf-v21';
+const CACHE_NAME = 'adicionales-sf-v22';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
@@ -40,48 +40,50 @@ self.addEventListener('activate', (event) => {
     self.clients.claim();
 });
 
-// Fetch Event: Stale-While-Revalidate Strategy
+// Fetch Event: Optimized Strategy
 self.addEventListener('fetch', (event) => {
-    // Skip cross-origin requests that aren't critical (optional optimization)
-    // But we want to cache CDNs, so we keep them.
+    const url = new URL(event.request.url);
 
+    // 1. Network First for index.html and Root to ensure we always get latest script versions
+    if (url.pathname === '/' || url.pathname.endsWith('index.html')) {
+        event.respondWith(
+            fetch(event.request)
+                .then((networkResponse) => {
+                    return caches.open(CACHE_NAME).then((cache) => {
+                        cache.put(event.request, networkResponse.clone());
+                        return networkResponse;
+                    });
+                })
+                .catch(() => caches.match(event.request))
+        );
+        return;
+    }
+
+    // 2. Stale-While-Revalidate for other assets
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {
-            // Return cached response if found
             if (cachedResponse) {
-                // Background update (Stale-While-Revalidate)
+                // Background update
                 fetch(event.request).then((networkResponse) => {
-                    if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+                    if (networkResponse && networkResponse.status === 200) {
                         caches.open(CACHE_NAME).then((cache) => {
                             cache.put(event.request, networkResponse.clone());
                         });
                     }
-                }).catch(() => { /* loose network connection, ignore */ });
+                }).catch(() => { });
 
                 return cachedResponse;
             }
 
-            // If not cached, fetch from network
             return fetch(event.request).then((networkResponse) => {
-                // Check if valid response
-                if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-                    return networkResponse;
-                }
+                if (!networkResponse || networkResponse.status !== 200) return networkResponse;
 
-                // Cache new resources (dynamic caching)
                 const responseToCache = networkResponse.clone();
                 caches.open(CACHE_NAME).then((cache) => {
-                    // Only cache same-origin or specific CDNs to avoid clutter
-                    if (event.request.url.startsWith('http')) {
-                        cache.put(event.request, responseToCache);
-                    }
+                    cache.put(event.request, responseToCache);
                 });
-
                 return networkResponse;
-            }).catch(() => {
-                // Offline fallback logic could go here
-                console.log('[Service Worker] Fetch failed (Offline)', event.request.url);
-            });
+            }).catch(() => { });
         })
     );
 });
