@@ -269,6 +269,15 @@ const store = {
         }
     },
 
+    async installApp() {
+        if (!this.deferredPrompt) return;
+        this.deferredPrompt.prompt();
+        const { outcome } = await this.deferredPrompt.userChoice;
+        console.log(`User response to install prompt: ${outcome}`);
+        this.deferredPrompt = null;
+        document.getElementById('install-banner')?.classList.add('hidden');
+    },
+
     async addService(service) {
         try {
             await DB.addService(service);
@@ -303,7 +312,11 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.6.3 Loaded - Photo Upload Fix");
+        console.log("App v1.6.4 Loaded - Viral Sharing Update");
+
+        // Inject UI Overlays
+        document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
+        document.body.insertAdjacentHTML('beforeend', renderInstallBanner());
 
         // Force Persistence FIRST
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -507,7 +520,17 @@ const store = {
     }
 };
 
-// Initialize Store
+// --- 10. GLOBAL LISTENERS ---
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    store.deferredPrompt = e;
+    // Update UI notify the user they can install the PWA
+    document.getElementById('install-banner')?.classList.remove('hidden');
+});
+
+// App Initiation point
 store.init();
 
 // --- GLOBAL HANDLERS ---
@@ -955,7 +978,7 @@ function renderLogin(container) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         store.login(email, password);
-    };
+    }
 }
 
 function renderSignup(container) {
@@ -1065,6 +1088,17 @@ function renderAgenda(container) {
                     <button onclick="showToast('Sin notificaciones nuevas')" class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300">
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
+                    <!-- Action Buttons -->
+                    <div class="grid grid-cols-2 gap-3 w-full max-w-[280px]">
+                        <button onclick="store.shareApp()" class="flex flex-col items-center gap-2 p-4 bg-primary/10 rounded-2xl border border-primary/20 hover:bg-primary/20 transition-all group">
+                            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">share</span>
+                            <span class="text-[10px] font-bold text-primary uppercase tracking-wider">Compartir</span>
+                        </button>
+                        <button onclick="store.toggleDebug()" class="flex flex-col items-center gap-2 p-4 bg-slate-800/50 rounded-2xl border border-white/5 hover:bg-slate-800 transition-all group">
+                            <span class="material-symbols-outlined text-slate-400 group-hover:scale-110 transition-transform">terminal</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Debug</span>
+                        </button>
+                    </div>
                     <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
                         <img class="w-full h-full object-cover" src="${store.user.avatar}" />
                     </div>
@@ -2084,7 +2118,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.6.3 • Build 2026.02.18</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.6.4 • Build 2026.02.18</p>
             </div>
         </main>
     `;
