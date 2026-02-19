@@ -11,7 +11,7 @@ const firebaseConfig = {
 // Initialize Firebase (Compat)
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-db.enablePersistence()
+db.enablePersistence({ synchronizeTabs: true })
     .catch((err) => {
         if (err.code == 'failed-precondition') {
             console.warn('Persistence failed: Multiple tabs open');

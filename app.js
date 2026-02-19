@@ -373,7 +373,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.7.0 Loaded - Persistence & UI Refinement");
+        console.log("App v1.7.1 Loaded - Multi-tab Sync & UI Fix");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
@@ -2048,7 +2048,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.7.0 • Build 2026.02.18</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.7.1 • Build 2026.02.18</p>
             </div>
         </main>
     `;
@@ -2478,7 +2478,7 @@ function renderBottomNav(activeTab) {
     }
 
     let navHtml = `
-    < !--Bottom Navigation Bar-- >
+        <!-- Bottom Navigation Bar -->
         <nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
             <div class="flex justify-center items-center gap-4 max-w-md mx-auto px-4">
     `;
@@ -2500,7 +2500,7 @@ function renderBottomNav(activeTab) {
             </div>
         </nav>
 
-        <!--Floating Action Button-- >
+        <!-- Floating Action Button -->
     <div class="fixed bottom-20 right-6 z-50">
         <button onclick="router.navigateTo('#register')" class="size-16 rounded-full bg-primary text-white shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all">
             <span class="material-symbols-outlined text-3xl">add</span>
