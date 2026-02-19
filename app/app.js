@@ -404,7 +404,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.7.2 Loaded - Nuclear Update Core");
+        console.log("App v1.7.3-nuclear-v3 Loaded - Force Wipe Core");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
@@ -2079,7 +2079,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.7.2 • Build 2026.02.18</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.7.3-nuclear-v3 • Build 2026.02.18</p>
                   
                   <button onclick="store.forceSystemUpdate()" class="w-full mt-4 text-slate-500 hover:text-primary text-[10px] font-bold transition-colors flex items-center justify-center gap-1 py-2">
                     <span class="material-symbols-outlined text-xs">refresh</span>
