@@ -31,13 +31,21 @@ const DB = {
 
     // --- USERS ---
     async saveUser(user) {
-        if (!user.email) return;
-        // Merge user data into Firestore 'users' collection
-        const userRef = db.collection('users').doc(user.email);
-        await userRef.set({
-            ...user,
+        if (!user || !user.email) return;
+
+        // Sanitize to ensures only serializable fields go to Firestore
+        const cleanUser = {
+            email: user.email,
+            name: user.name || '',
+            avatar: user.avatar || '',
+            role: user.role || 'user',
+            serviceConfig: user.serviceConfig || {},
+            notificationSettings: user.notificationSettings || { enabled: false, leadTime: 60 },
             lastLogin: new Date().toISOString()
-        }, { merge: true });
+        };
+
+        const userRef = db.collection('users').doc(user.email);
+        await userRef.set(cleanUser, { merge: true });
     },
 
     async getUser(email) {
