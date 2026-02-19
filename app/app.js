@@ -2521,13 +2521,5 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // App Initiation point
 document.addEventListener('DOMContentLoaded', () => {
     router.init();
-
-    // Register Service Worker
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('SW Registered!', reg))
-            .catch(err => console.error('SW Failed:', err));
-    }
-
     store.init();
 });
