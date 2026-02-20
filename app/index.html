@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Adicionales Santa Fe</title>
-    <meta name="app-version" content="v1.7.7-nuclear-v7">
+    <meta name="app-version" content="v1.7.8-rollback-v1.7.3">
     <meta name="description"
         content="Gestión inteligente de Servicios de Policía Adicional. Agenda, cálculos y finanzas en un solo lugar.">
 
@@ -32,7 +32,7 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(registrations => {
                 for (let registration of registrations) {
-                    if (!registration.active?.scriptURL.includes('sw-v5.js')) {
+                    if (!registration.active?.scriptURL.includes('sw-v8.js')) {
                         console.log('Force killing old SW:', registration.active?.scriptURL);
                         registration.unregister();
                     }
@@ -81,7 +81,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v5.js')
+                navigator.serviceWorker.register('./sw-v8.js')
                     .then(reg => {
                         console.log('SW registered:', reg);
 
@@ -131,8 +131,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
 
     <!-- Tailwind Config -->
     <script>
@@ -202,8 +202,6 @@
 
     <!-- External Libs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
 
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js" crossorigin="anonymous"></script>
@@ -214,9 +212,9 @@
 
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
-    <script src="db.js?v=177"></script>
-    <script src="components.js?v=177"></script>
-    <script src="app.js?v=177"></script>
+    <script src="db.js?v=178"></script>
+    <script src="components.js?v=178"></script>
+    <script src="app.js?v=178"></script>
 </body>
 
 </html>
