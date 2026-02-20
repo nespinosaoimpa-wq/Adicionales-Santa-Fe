@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Adicionales Santa Fe</title>
-    <meta name="app-version" content="v1.7.8-rollback-v1.7.3">
+    <meta name="app-version" content="v1.7.9-legacy-v1.2.0">
     <meta name="description"
         content="Gestión inteligente de Servicios de Policía Adicional. Agenda, cálculos y finanzas en un solo lugar.">
 
@@ -28,11 +28,11 @@
 
     <!-- CRITICAL ERROR HANDLER & CACHE WIPE -->
     <script>
-        // Kill any old Service Workers immediately
+        // Kill any old Service Workers immediately (v3 to v8)
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(registrations => {
                 for (let registration of registrations) {
-                    if (!registration.active?.scriptURL.includes('sw-v8.js')) {
+                    if (!registration.active?.scriptURL.includes('sw-v9.js')) {
                         console.log('Force killing old SW:', registration.active?.scriptURL);
                         registration.unregister();
                     }
@@ -55,77 +55,39 @@
             document.body.appendChild(errorBox);
             return false;
         };
-        window.addEventListener('unhandledrejection', function (event) {
-            const errorBox = document.createElement('div');
-            errorBox.style.position = 'fixed';
-            errorBox.style.bottom = '0';
-            errorBox.style.left = '0';
-            errorBox.style.width = '100%';
-            errorBox.style.background = '#f59e0b';
-            errorBox.style.color = '#000';
-            errorBox.style.padding = '20px';
-            errorBox.style.zIndex = '9999';
-            errorBox.style.fontFamily = 'monospace';
-            errorBox.innerHTML = `<strong>Promesa Rechazada:</strong><br>${event.reason}`;
-            document.body.appendChild(errorBox);
-        });
     </script>
-
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon"
         href="https://ui-avatars.com/api/?name=SF&background=3b82f6&color=fff&size=192&rounded=true&bold=true">
 
-    <!-- Service Worker Registration & Update Handler -->
+    <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v8.js')
+                navigator.serviceWorker.register('./sw-v9.js')
                     .then(reg => {
                         console.log('SW registered:', reg);
-
-                        // Handle updates
                         reg.onupdatefound = () => {
                             const installingWorker = reg.installing;
                             installingWorker.onstatechange = () => {
-                                if (installingWorker.state === 'installed') {
-                                    if (navigator.serviceWorker.controller) {
-                                        console.log('New update available.');
-                                        const updateBox = document.createElement('div');
-                                        updateBox.className = "fixed top-4 left-1/2 -translate-x-1/2 z-[100] w-[90%] max-w-sm bg-primary text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between animate-bounce";
-                                        updateBox.innerHTML = `
-                                            <div class="flex items-center gap-3">
-                                                <span class="material-symbols-outlined">system_update</span>
-                                                <div class="text-xs">
-                                                    <p class="font-bold">Nueva Versión Lista</p>
-                                                    <p class="opacity-80">Actualiza para ver los cambios.</p>
-                                                </div>
-                                            </div>
-                                            <button onclick="window.location.reload(true)" class="bg-white text-primary px-3 py-1.5 rounded-xl font-bold text-[10px] uppercase">Actualizar</button>
-                                        `;
-                                        document.body.appendChild(updateBox);
-                                    }
-                                }
+                                if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    window.location.reload();
+                                };
                             };
-                        };
-                    })
+                        })
                     .catch(err => console.error('SW registration failed:', err));
-            });
 
-            // Ensure refreshes happen correctly
-            let refreshing = false;
-            navigator.serviceWorker.addEventListener('controllerchange', () => {
-                if (!refreshing) {
+                navigator.serviceWorker.addEventListener('controllerchange', () => {
                     window.location.reload();
-                    refreshing = true;
-                }
+                });
             });
         }
     </script>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 
     <!-- Fonts -->
     <link
@@ -201,20 +163,19 @@
     </div>
 
     <!-- External Libs -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Firebase SDKs -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js" crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"
-        crossorigin="anonymous"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
 
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
-    <script src="db.js?v=178"></script>
-    <script src="components.js?v=178"></script>
-    <script src="app.js?v=178"></script>
+    <script src="db.js?v=179"></script>
+    <script src="components.js?v=179"></script>
+    <script src="app.js?v=179"></script>
 </body>
 
 </html>
