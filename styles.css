@@ -6,34 +6,35 @@
 /* CSS Variables */
 :root {
     --primary: #0d59f2;
-    --primary-gradient: linear-gradient(135deg, #0d59f2 0%, #3b82f6 100%);
-    --accent-indigo: #6366f1;
-    --accent-cyan: #06b6d4;
-    --background-light: #f8fafc;
-    --background-dark: #0f172a;
-    --card-dark: rgba(30, 41, 59, 0.7);
-    --border-dark: rgba(255, 255, 255, 0.1);
+    --primary-hover: #0b4dd1;
+    --background-light: #f5f6f8;
+    --background-dark: #101622;
+    --card-light: #ffffff;
+    --card-dark: rgba(13, 89, 242, 0.05);
+    --border-light: #e2e8f0;
+    --border-dark: rgba(13, 89, 242, 0.1);
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
 }
 
 /* Glassmorphism Utilities */
 .glass-card {
-    background: rgba(30, 41, 59, 0.5);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    background: rgba(24, 34, 52, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
 }
 
 .glass-light {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px) saturate(160%);
-    -webkit-backdrop-filter: blur(20px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .ios-blur {
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
 }
 
 /* Animations */
