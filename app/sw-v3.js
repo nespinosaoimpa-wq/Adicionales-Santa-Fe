@@ -1,10 +1,10 @@
-const CACHE_NAME = 'adicionales-sf-nuclear-v3';
+const CACHE_NAME = 'adicionales-sf-nuclear-v4';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
-    './app.js?v=173',
-    './db.js?v=173',
-    './components.js?v=173',
+    './app.js?v=174',
+    './db.js?v=174',
+    './components.js?v=174',
     './firebase-config.js',
     './styles.css',
     'https://cdn.tailwindcss.com?plugins=forms,container-queries',
