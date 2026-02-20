@@ -38,6 +38,7 @@ const store = {
     // Cache for Admin
     allUsers: [],
     ads: [],
+    searchQuery: '',
     authInitialized: false,
 
     // Config (Defaults from SPA 2026 Decree)
@@ -354,6 +355,50 @@ const store = {
         link.click();
         document.body.removeChild(link);
         showToast("Exportando CSV...");
+    },
+
+    // Export PDF (Using jsPDF)
+    async exportToPDF() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        showToast("Generando PDF...");
+
+        // Header
+        doc.setFontSize(18);
+        doc.text("Reporte de Servicios - Adicionales SF", 14, 20);
+        doc.setFontSize(11);
+        doc.setTextColor(100);
+        doc.text(`Generado el: ${new Date().toLocaleDateString()}`, 14, 30);
+        doc.text(`Usuario: ${this.user.name} (${this.user.email})`, 14, 35);
+
+        // Data
+        const tableData = this.services.map(s => [
+            s.date,
+            s.type === 'Public' ? 'Público' : 'Privado',
+            s.location || '-',
+            s.hours + 'h',
+            '$' + (s.total || 0).toLocaleString()
+        ]);
+
+        doc.autoTable({
+            startY: 45,
+            head: [['Fecha', 'Tipo', 'Lugar', 'Horas', 'Total']],
+            body: tableData,
+            theme: 'grid',
+            headStyles: { fillColor: [13, 89, 242] },
+            styles: { fontSize: 9 }
+        });
+
+        // Total Footer
+        const finalY = doc.lastAutoTable.finalY + 10;
+        const totalAmount = this.services.reduce((sum, s) => sum + (s.total || 0), 0);
+        doc.setFontSize(12);
+        doc.setTextColor(0);
+        doc.text(`Total Acumulado: $${totalAmount.toLocaleString()}`, 14, finalY);
+
+        doc.save(`adicionales_reporte_${this.getLocalDateString()}.pdf`);
+        showToast("✅ PDF Descargado");
     },
 
     async forceSystemUpdate() {
@@ -1035,8 +1080,16 @@ function renderAgenda(container) {
 
     const selectedDate = store.selectedDate || store.getLocalDateString();
 
-    // Get services for selected date
-    const dayServices = store.services.filter(s => s.date === selectedDate);
+    // Get services for selected date and apply search filter
+    const dayServices = store.services.filter(s => {
+        const matchesDate = s.date === selectedDate;
+        const query = (store.searchQuery || '').toLowerCase();
+        const matchesSearch = !query ||
+            (s.location && s.location.toLowerCase().includes(query)) ||
+            (s.type && s.type.toLowerCase().includes(query)) ||
+            (s.subType && s.subType.toLowerCase().includes(query));
+        return matchesDate && matchesSearch;
+    });
 
     // Find next shift (first service in future)
     const nextShift = store.services
@@ -1068,6 +1121,16 @@ function renderAgenda(container) {
         </header>
 
         <main class="flex-1 overflow-y-auto px-6 space-y-8 pb-32">
+            <!-- Search Bar -->
+            <section class="mt-4">
+                <div class="relative">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                    <input type="text" id="agenda-search" placeholder="Buscar por lugar o tipo..." 
+                        value="${store.searchQuery || ''}"
+                        class="w-full bg-white dark:bg-slate-900 border-none rounded-2xl py-4 pl-12 pr-4 text-sm shadow-sm focus:ring-2 focus:ring-primary dark:text-white transition-all">
+                </div>
+            </section>
+
             <!-- Next Shift Hero Card -->
             ${nextShift ? `
             <section class="mt-4">
@@ -1135,13 +1198,14 @@ function renderAgenda(container) {
                     ${dayServices.length > 0 ? dayServices.map((s, i) => renderServiceCard(s, i)).join('') :
             `<div class="flex flex-col items-center py-10 text-center animate-slide-up">
                 <div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <span class="material-symbols-outlined text-3xl text-primary/40">event_busy</span>
+                    <span class="material-symbols-outlined text-3xl text-primary/40">${store.searchQuery ? 'search_off' : 'event_busy'}</span>
                 </div>
                 <p class="text-sm font-semibold dark:text-white mb-1">Sin servicios</p>
-                <p class="text-xs text-slate-400 mb-4">No hay turnos para esta fecha</p>
+                <p class="text-xs text-slate-400 mb-4">${store.searchQuery ? 'No hay resultados para tu búsqueda' : 'No hay turnos para esta fecha'}</p>
+                ${!store.searchQuery ? `
                 <button onclick="router.navigateTo('#register')" class="px-5 py-2 bg-primary text-white text-xs font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
                     + Registrar Servicio
-                </button>
+                </button>` : ''}
             </div>`}
                 </div>
             </section>
@@ -1158,6 +1222,22 @@ function renderAgenda(container) {
             renderAgenda(container);
         });
     });
+
+    // Search listener
+    const searchInput = document.getElementById('agenda-search');
+    if (searchInput) {
+        searchInput.focus();
+        // Place cursor at end
+        const val = searchInput.value;
+        searchInput.value = '';
+        searchInput.value = val;
+
+        searchInput.addEventListener('input', (e) => {
+            store.searchQuery = e.target.value;
+            // Debounce or just re-render
+            renderAgenda(container);
+        });
+    }
 
     // Month Nav Listeners
     document.getElementById('btn-prev-month').addEventListener('click', () => {
@@ -1574,9 +1654,11 @@ function renderControlPanel(container) {
 
         <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32">
             <!-- Period Selector -->
-            <div class="flex p-1.5 glass-card rounded-xl">
+            <div class="flex gap-2 p-1.5 glass-card rounded-xl">
                 <button onclick="showToast('Filtrando: 1-15 Oct')" class="flex-1 py-2 px-3 rounded-lg bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/20">1 - 15 Oct</button>
-                <button onclick="showToast('Filtrando: 16-31 Oct')" class="flex-1 py-2 px-3 rounded-lg text-slate-400 text-sm font-medium hover:text-white transition-colors">16 - 31 Oct</button>
+                <button onclick="store.exportToPDF()" class="flex-1 py-2 px-3 rounded-lg bg-slate-800 text-slate-300 text-sm font-medium hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">picture_as_pdf</span> PDF
+                </button>
             </div>
 
             <!-- Main Earnings Card -->
@@ -2453,13 +2535,13 @@ function renderHistory(container) {
     const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     container.innerHTML = `
-    < header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between" >
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
             <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
             <h1 class="text-lg font-bold text-white">Historial Completo</h1>
             <div class="w-10"></div>
-        </header >
+        </header>
 
     <main class="space-y-4 pb-32">
         <!-- Ad Banner Top -->
