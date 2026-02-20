@@ -1110,24 +1110,24 @@ function renderAgenda(container) {
                 </div>
                 <div class="flex items-center gap-4">
                      <button onclick="store.requestNotificationPermission()" 
-                        class="size-10 rounded-full flex items-center justify-center transition-all ${store.user?.notificationSettings?.enabled ? 'bg-primary/20 text-primary' : 'bg-slate-200 dark:bg-slate-800 text-slate-400'}">
-                        <span class="material-symbols-outlined">${store.user?.notificationSettings?.enabled ? 'notifications_active' : 'notifications_off'}</span>
+                        class="size-10 rounded-full flex items-center justify-center transition-all ${store.user?.notificationSettings?.enabled ? 'bg-primary/20 text-primary' : 'bg-slate-800 text-slate-400'}">
+                        <span class="material-symbols-outlined text-xl">${store.user?.notificationSettings?.enabled ? 'notifications_active' : 'notifications_off'}</span>
                     </button>
-                    <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
+                    <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-white/10 cursor-pointer hover:scale-105 transition-transform">
                         <img class="w-full h-full object-cover" src="${store.user.avatar}" onerror="this.src='https://ui-avatars.com/api/?background=0d59f2&color=fff&name=User'" />
                     </div>
                 </div>
             </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto px-6 space-y-8 pb-32">
-            <!-- Search Bar -->
-            <section class="mt-4">
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
-                    <input type="text" id="agenda-search" placeholder="Buscar por lugar o tipo..." 
+        <main class="flex-1 overflow-y-auto px-6 space-y-8 pb-32 no-scrollbar">
+            <!-- Search Bar (iOS Style) -->
+            <section class="mt-2">
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 text-lg transition-colors group-focus-within:text-primary">search</span>
+                    <input type="text" id="agenda-search" placeholder="Buscar lugar o tipo..." 
                         value="${store.searchQuery || ''}"
-                        class="w-full bg-white dark:bg-slate-900 border-none rounded-2xl py-4 pl-12 pr-4 text-sm shadow-sm focus:ring-2 focus:ring-primary dark:text-white transition-all">
+                        class="w-full bg-slate-200/50 dark:bg-slate-900/50 border border-white/5 rounded-2xl py-3.5 pl-12 pr-4 text-sm shadow-inner focus:ring-2 focus:ring-primary/50 dark:text-white transition-all placeholder:text-slate-500">
                 </div>
             </section>
 
@@ -1322,35 +1322,18 @@ function renderServiceCard(service, index = 0) {
 
     return `
         <div onclick="router.navigateTo('#service/${service.id}')" 
-             class="service-card animate-slide-up bg-white dark:bg-slate-900/80 p-4 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm cursor-pointer relative overflow-hidden"
-             style="animation-delay: ${index * 60}ms">
-            <!-- Gradient accent top -->
-            <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r ${gradientFrom} ${gradientTo}"></div>
+             class="service-card animate-slide-up glass-card p-5 rounded-3xl cursor-pointer relative overflow-hidden group hover:scale-[1.02] transition-all duration-300"
+             style="animation-delay: ${index * 40}ms">
+            <!-- Left accent border -->
+            <div class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b ${gradientFrom} ${gradientTo}"></div>
             
             <div class="flex gap-4">
-                <div class="${bgSoft} size-12 rounded-xl flex items-center justify-center ${textColor} shrink-0">
-                    <span class="material-symbols-outlined">${icon}</span>
+                <div class="${bgSoft} size-12 rounded-2xl flex items-center justify-center ${textColor} shrink-0 shadow-inner group-hover:scale-110 transition-transform duration-300">
+                    <span class="material-symbols-outlined text-2xl font-variation-settings-fill-1">${icon}</span>
                 </div>
                 <div class="flex-1 min-w-0">
-                    <div class="flex justify-between items-start">
+                    <div class="flex justify-between items-start mb-1">
                         <div class="min-w-0">
-                            <h4 class="font-bold dark:text-white leading-tight truncate">${service.location || 'Sin ubicación'}</h4>
-                            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">${typeLabel} ${subType}</p>
-                        </div>
-                        <span class="text-sm font-extrabold ${textColor} whitespace-nowrap ml-2">$${(service.total || 0).toLocaleString('es-AR')}</span>
-                    </div>
-                    
-                    <div class="flex items-center gap-3 mt-2.5">
-                        <div class="flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[14px] text-slate-400">schedule</span>
-                            <span class="text-[10px] text-slate-500 dark:text-slate-400 font-medium">${timeRange}</span>
-                        </div>
-                        <span class="size-0.5 rounded-full bg-slate-500"></span>
-                        <div class="flex items-center gap-1">
-                            <span class="material-symbols-outlined text-[14px] text-slate-400">timer</span>
-                            <span class="text-[10px] text-slate-500 font-medium">${service.hours}h</span>
-                        </div>
-                        <div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full ${statusBg}">
                             <span class="size-1.5 rounded-full ${statusDot} animate-pulse"></span>
                             <span class="text-[10px] ${statusColor} font-bold uppercase tracking-tighter">${statusLabel}</span>
                         </div>
@@ -2554,20 +2537,23 @@ function renderHistory(container) {
         const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
         const icon = isPub ? 'account_balance' : 'shopping_cart';
         return `
-                        <div onclick="window.location.hash='#details?id=${s.id}'" class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 cursor-pointer hover:bg-white/5 transition-colors">
+                        <div onclick="window.location.hash='#details?id=${s.id}'" class="glass-card p-5 rounded-3xl flex items-center justify-between border-white/5 cursor-pointer hover:bg-white/10 hover:scale-[1.01] transition-all duration-300">
                             <div class="flex items-center gap-4">
-                                <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
-                                    <span class="material-symbols-outlined">${icon}</span>
+                                <div class="size-12 rounded-2xl ${bgClass} flex items-center justify-center ${colorClass} shadow-inner">
+                                    <span class="material-symbols-outlined text-xl font-variation-settings-fill-1">${icon}</span>
                                 </div>
-                                <div>
-                                    <p class="font-bold text-sm text-white">${s.location}</p>
+                                <div class="min-w-0">
+                                    <p class="font-bold text-white text-base truncate">${s.location}</p>
                                     <div class="flex items-center gap-2 mt-0.5">
-                                        <span class="text-[11px] text-slate-400">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
-                                        ${s.status === 'paid' ? '<span class="text-[10px] text-green-400 font-bold bg-green-500/10 px-1.5 rounded">PAGADO</span>' : ''}
+                                        <span class="text-[11px] text-slate-400 font-medium">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
+                                        ${s.status === 'paid' ? '<span class="text-[10px] text-green-400 font-black bg-green-500/10 px-2 py-0.5 rounded-full tracking-tighter">PAGADO</span>' : ''}
                                     </div>
                                 </div>
                             </div>
-                            <span class="material-symbols-outlined text-slate-600">chevron_right</span>
+                            <div class="flex flex-col items-end gap-1">
+                                <span class="text-sm font-black text-white">$${(s.total || 0).toLocaleString('es-AR')}</span>
+                                <span class="material-symbols-outlined text-slate-600 text-lg">chevron_right</span>
+                            </div>
                         </div>
                      `;
     }).join('')}
@@ -2597,7 +2583,7 @@ function renderBottomNav(activeTab) {
 
     let navHtml = `
         <!-- Bottom Navigation Bar -->
-        <nav class="fixed bottom-0 inset-x-0 bg-white/90 dark:bg-background-dark/95 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 pb-6 pt-2 z-50">
+        <nav class="fixed bottom-0 inset-x-0 bg-slate-900/60 dark:bg-background-dark/80 backdrop-blur-2xl border-t border-white/5 pb-8 pt-3 z-50">
             <div class="flex justify-center items-center gap-4 max-w-md mx-auto px-4">
     `;
 
