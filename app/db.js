@@ -344,5 +344,24 @@ const DB = {
                 typeCounts: []
             }
         };
+    },
+
+    async addReview(rating, comment) {
+        const user = auth.currentUser;
+        if (!user) return false;
+        try {
+            const { error } = await supabase
+                .from('user_reviews')
+                .insert([{
+                    user_email: user.email,
+                    rating: parseInt(rating),
+                    comment: comment
+                }]);
+            if (error) throw error;
+            return true;
+        } catch (e) {
+            console.error("Error saving review:", e);
+            return false;
+        }
     }
 };

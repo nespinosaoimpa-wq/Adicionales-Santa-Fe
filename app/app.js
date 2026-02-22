@@ -347,11 +347,14 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v3.1.0 Loaded - Hybrid (Firebase Auth + Supabase)");
+        console.log("App v2.1.0 Loaded - Suite Asistente Virtual PRO");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());
+
+        // Check for announcements
+        setTimeout(() => showAnnouncementModal(), 2000);
 
         // FORCE PERSISTENCE (Firebase)
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -2847,9 +2850,122 @@ function renderAsistenteHub(container) {
                     </div>
                 `).join('')}
             </div>
+
+            <!-- Feedback Section -->
+            <div class="mt-8 p-6 glass-card rounded-3xl border border-white/5 bg-gradient-to-b from-white/5 to-transparent">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="size-8 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-500">
+                        <span class="material-symbols-outlined text-sm">edit_square</span>
+                    </div>
+                    <h3 class="font-bold text-white text-sm">Buzón de Sugerencias</h3>
+                </div>
+                <p class="text-[11px] text-slate-400 mb-4">¿Te gustaría que Centinela sepa algo más? Tu opinión nos ayuda a mejorar el servicio.</p>
+                <form id="feedback-form" class="space-y-3">
+                    <div class="flex gap-2 justify-center mb-1">
+                        ${[1, 2, 3, 4, 5].map(n => `
+                            <button type="button" onclick="window.setFeedbackRating(${n})" class="feedback-star size-8 text-slate-600 transition-colors" data-value="${n}">
+                                <span class="material-symbols-outlined">star</span>
+                            </button>
+                        `).join('')}
+                    </div>
+                    <input type="hidden" id="feedback-rating" value="5">
+                    <textarea id="feedback-comment" placeholder="Escribe tu mensaje aquí..." 
+                        class="w-full bg-white/5 border border-white/10 rounded-2xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all h-20 resize-none"></textarea>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all active:scale-95">
+                        Enviar Reseña
+                    </button>
+                </form>
+            </div>
         </main>
         ${renderBottomNav('asistente')}
     `;
+
+    // Local Handlers
+    window.setFeedbackRating = (rating) => {
+        document.getElementById('feedback-rating').value = rating;
+        document.querySelectorAll('.feedback-star').forEach((btn, i) => {
+            btn.classList.toggle('text-amber-400', i < rating);
+            btn.classList.toggle('text-slate-600', i >= rating);
+        });
+    };
+    window.setFeedbackRating(5); // Default
+
+    const fForm = document.getElementById('feedback-form');
+    fForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const rating = document.getElementById('feedback-rating').value;
+        const comment = document.getElementById('feedback-comment').value.trim();
+
+        if (!comment) {
+            showToast("Por favor, escribe un comentario");
+            return;
+        }
+
+        const btn = fForm.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.innerText = "Enviando...";
+
+        const success = await DB.addReview(rating, comment);
+        if (success) {
+            fForm.reset();
+            window.setFeedbackRating(5);
+            showToast("¡Gracias por tu feedback! ⭐");
+        } else {
+            showToast("Error al enviar la reseña");
+        }
+        btn.disabled = false;
+        btn.innerText = "Enviar Reseña";
+    };
+}
+
+/**
+ * Announcement Modal v2.1
+ */
+function showAnnouncementModal() {
+    const hasSeen = localStorage.getItem('seen_v2_announcement');
+    if (hasSeen) return;
+
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-background-dark/95 backdrop-blur-md animate-fade-in';
+    modal.innerHTML = `
+        <div class="max-w-xs w-full glass-card p-6 rounded-[2.5rem] border border-white/10 shadow-2xl space-y-6 text-center animate-scale-up">
+            <div class="size-20 bg-gradient-to-br from-primary to-blue-600 rounded-3xl mx-auto flex items-center justify-center text-white shadow-xl shadow-primary/20">
+                <span class="material-symbols-outlined text-4xl">rocket_launch</span>
+            </div>
+            
+            <div class="space-y-2">
+                <h2 class="text-xl font-black text-white">¡App Actualizada!</h2>
+                <p class="text-xs text-slate-400 leading-relaxed">Bienvenido a la versión **2.1.0 (PRO)** con mejoras críticas de estabilidad y nuevas funciones policiales.</p>
+            </div>
+
+            <div class="space-y-3 text-left">
+                <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
+                    <span class="material-symbols-outlined text-primary">cloud_sync</span>
+                    <p class="text-[11px] text-slate-200">**Sincronización Híbrida**: Tus datos de Firebase ahora están en Supabase.</p>
+                </div>
+                <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
+                    <span class="material-symbols-outlined text-amber-500">smart_toy</span>
+                    <p class="text-[11px] text-slate-200">**Centinela AI v2**: Nueva base legal (Ley 12.521 y Decretos de Licencia).</p>
+                </div>
+                <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
+                    <span class="material-symbols-outlined text-purple-500">rate_review</span>
+                    <p class="text-[11px] text-slate-200">**Buzón de Ideas**: Ahora podés enviarnos sugerencias directamente.</p>
+                </div>
+            </div>
+
+            <button id="close-announcement" class="w-full py-4 rounded-2xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/25 active:scale-95 transition-all">
+                ¡Entendido, vamos!
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+
+    document.getElementById('close-announcement').onclick = () => {
+        localStorage.setItem('seen_v2_announcement', 'true');
+        modal.classList.add('animate-fade-out');
+        setTimeout(() => modal.remove(), 300);
+    };
 }
 
 /**
@@ -3118,7 +3234,7 @@ function renderCentinela(container) {
     const knowledgeBase = [
         {
             category: 'licencias',
-            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar'],
+            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio'],
             responses: [
                 {
                     match: ['paternidad', 'nacimiento', 'hijo'],
@@ -3131,20 +3247,24 @@ function renderCentinela(container) {
                 {
                     match: ['vacaciones', 'anual', 'ordinaria'],
                     text: "La Licencia Anual Ordinaria depende de tu antigüedad:\n- Hasta 5 años: 15 días hábiles.\n- Hasta 10 años: 20 días hábiles.\n- Hasta 15 años: 25 días hábiles.\n- Más de 15 años: 30 días hábiles."
+                },
+                {
+                    match: ['fallecimiento', 'duelo'],
+                    text: "Por fallecimiento de cónyuge, hijos o padres: **5 días corridos**. Por hermanos o abuelos: **2 días corridos**. Según Decreto 4157."
                 }
             ],
-            default: "El régimen de licencias está regulado por el **Decreto 4157/15**. ¿Sobre qué tipo de licencia específica necesitas información (Paternidad, Médica, Ordinaria)?"
+            default: "El régimen de licencias está regulado por el **Decreto 4157/15**. ¿Sobre qué tipo de licencia específica necesitas información (Paternidad, Médica, Familiar, Ordinaria)?"
         },
         {
             category: 'disciplina',
-            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario'],
+            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario', 'sumarials'],
             responses: [
                 {
-                    match: ['leves', 'demora', 'uniforme'],
+                    match: ['leves', 'demora', 'uniforme', 'aseo'],
                     text: "Las **Faltas Leves** (Art. 41 del Decreto 461/15) incluyen: demoras injustificadas, descuido en el aseo o uniforme y falta de respeto a subalternos. Sanción: apercibimiento o hasta 10 días de arresto."
                 },
                 {
-                    match: ['graves', 'abandono', 'ebriedad', 'violencia'],
+                    match: ['graves', 'abandono', 'ebriedad', 'violencia', 'maltrato'],
                     text: "Las **Faltas Graves** (Art. 42) incluyen: abandono de servicio, ebriedad en servicio o violencia de género. Sanción: desde 11 días de suspensión hasta la Destitución (Cesantía/Exoneración)."
                 }
             ],
@@ -3152,14 +3272,29 @@ function renderCentinela(container) {
         },
         {
             category: 'jerarquia',
-            keywords: ['ascenso', 'jerarquia', 'escalafon', 'oficial', 'suboficial'],
+            keywords: ['ascenso', 'jerarquia', 'escalafon', 'oficial', 'suboficial', 'grado', 'promocion'],
             responses: [
                 {
-                    match: ['ascenso', 'concurso', 'grado'],
+                    match: ['ascenso', 'concurso', 'grado', 'junta'],
                     text: "Los ascensos se realizan mediante concursos de oposición y antecedentes (Ley 12.521). Debes tener el tiempo mínimo en el grado y aprobar los cursos del ISeP correspondientes."
                 }
             ],
             default: "La carrera policial administrativa y el sistema de grados está definido en la **Ley 12.521**, Capítulos IV y V."
+        },
+        {
+            category: 'beneficios',
+            keywords: ['sueldo', 'haberes', 'suplemento', 'titulo', 'recargo', 'antigüedad'],
+            responses: [
+                {
+                    match: ['titulo'],
+                    text: "El suplemento por título depende del nivel: Terciario (15%), Universitario (25%) calculado sobre el sueldo básico del grado."
+                },
+                {
+                    match: ['recargo', 'hora', 'descanso'],
+                    text: "Por cada recargo de servicio, te corresponde el descanso compensatorio equivalente al tiempo recargado. Ley 12.521, Art 81."
+                }
+            ],
+            default: "Los beneficios económicos y recargos están contemplados en la Ley 12.521. ¿Necesitás info sobre Títulos, Antigüedad o Recargos?"
         }
     ];
 
@@ -3187,7 +3322,7 @@ function renderCentinela(container) {
                 const specificSub = categoryMatch.responses.find(r => r.match.some(m => lowerMsg.includes(m)));
                 finalResponse = specificSub ? specificSub.text : categoryMatch.default;
             } else {
-                finalResponse = "Entiendo tu consulta. Como IA centrada en el marco legal de la **Policía de Santa Fe**, me especializo en la **Ley 12.521**, el **Decreto 461** (Disciplina) y el **Decreto 4157** (Licencias). ¿Podrías reformular tu pregunta usando términos como 'licencia', 'faltas', 'ascensos' o 'uniforme'?";
+                finalResponse = "Entiendo tu consulta, pero no encuentro un artículo específico en mi base actual. Como IA centrada en el marco legal de la **Policía de Santa Fe**, me especializo exclusivamente en la **Ley 12.521**, el **Decreto 461** (Disciplina) y el **Decreto 4157** (Licencias). \n\n**¿Por qué sucede esto?** Puede que tu pregunta sea sobre temas operativos o municipales, o que necesite términos más claros como 'licencia', 'falta' o 'suplemento'.";
             }
 
             el.innerHTML = `<p class="text-xs text-slate-200 leading-relaxed">${finalResponse}</p>`;
