@@ -312,7 +312,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.6.4 Loaded - Viral Sharing Update");
+        console.log("App v1.8.0 Loaded - Security Overhaul");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
@@ -641,7 +641,16 @@ const router = {
 
         // Protect routes that require authentication
         if (!store.isAuthenticated() && hash !== '#login' && hash !== '#signup') {
+            console.log("🚫 Unauthorized access attempt to", hash);
             this.navigateTo('#login');
+            return;
+        }
+
+        // Special Protection for Admin Panel
+        if (hash === '#admin' && (!store.user || store.user.role !== 'admin')) {
+            console.warn("👮 Direct access to #admin blocked for non-admin");
+            showToast("Acceso Restringido");
+            this.navigateTo('#agenda');
             return;
         }
 
@@ -676,7 +685,8 @@ const router = {
                     if (store.user && store.user.role === 'admin') {
                         renderAdmin(app);
                     } else {
-                        showToast("Acceso Denegado");
+                        console.error("Critical: Render admin called without admin privileges");
+                        showToast("Error de Permisos");
                         window.location.hash = '#agenda';
                     }
                     break;
@@ -949,7 +959,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-600 font-mono">v1.4.4 (Auth Fixed)</p>
+                    <p class="text-[10px] text-slate-600 font-mono">v1.8.0 (Security Hardened)</p>
                 </div>
             </div>
         </div>

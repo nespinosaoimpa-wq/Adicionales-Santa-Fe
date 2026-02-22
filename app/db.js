@@ -133,10 +133,14 @@ const DB = {
     },
 
     async updateService(id, updates) {
+        const user = auth.currentUser;
+        if (!user) throw new Error("Must be logged in");
         return db.collection('services').doc(id).update(updates);
     },
 
     async deleteService(id) {
+        const user = auth.currentUser;
+        if (!user) throw new Error("Must be logged in");
         return db.collection('services').doc(id).delete();
     },
 
@@ -178,6 +182,8 @@ const DB = {
     },
 
     async deleteExpense(id) {
+        const user = auth.currentUser;
+        if (!user) throw new Error("Must be logged in");
         return db.collection('expenses').doc(id).delete();
     },
 
