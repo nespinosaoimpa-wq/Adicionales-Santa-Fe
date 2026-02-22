@@ -12,7 +12,7 @@ if (-not (Test-Path ".git")) {
 }
 
 git add .
-git commit -m "Deploying v1.9.4 - UI Styles Fixed"
+git commit -m "Deploying v1.9.5 - EMERGENCY UI RESTORATION"
 git branch -M main
 git push -u origin main
 
