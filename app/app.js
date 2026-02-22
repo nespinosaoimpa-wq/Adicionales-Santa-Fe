@@ -1150,7 +1150,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-600 font-mono">v1.9.5 (Emergency UI Restoration)</p>
+                    <p class="text-[10px] text-slate-600 font-mono">v1.9.7 (Premium Edit)</p>
                 </div>
             </div>
         </div>
