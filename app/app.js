@@ -88,38 +88,6 @@ const store = {
 
     // --- Profile Actions ---
 
-    async requestNotificationPermission() {
-        if (!("Notification" in window)) {
-            showToast("Tu navegador no soporta notificaciones");
-            return;
-        }
-
-        if (Notification.permission === "granted") {
-            // Toggle off
-            this.notificationSettings.enabled = !this.notificationSettings.enabled;
-            showToast(this.notificationSettings.enabled ? "Notificaciones Activadas" : "Notificaciones Desactivadas");
-        } else if (Notification.permission !== "denied") {
-            const permission = await Notification.requestPermission();
-            if (permission === "granted") {
-                this.notificationSettings.enabled = true;
-                showToast("✅ Permiso concedido");
-            } else {
-                showToast("Permiso denegado");
-            }
-        } else {
-            showToast("Permisos bloqueados en navegador");
-        }
-
-        // Persist if user exists
-        if (this.user) {
-            this.user.notificationSettings = this.notificationSettings;
-            DB.saveUser(this.user);
-        }
-
-        // Re-render to show state
-        if (router.currentRoute === '#profile') renderProfile();
-    },
-
     async updateProfile(name, avatar) {
         if (!this.user) return;
 
@@ -129,10 +97,75 @@ const store = {
         try {
             await DB.saveUser(this.user);
             showToast("Perfil actualizado");
-            if (router.currentRoute === '#profile') renderProfile();
+            if (router.currentRoute === '#profile') renderProfile(document.getElementById('app'));
         } catch (e) {
             showToast("Error al guardar perfil");
             console.error(e);
+        }
+    },
+
+    async handleAvatarUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (file.size > 2 * 1024 * 1024) {
+            showToast("⚠️ La imagen es muy pesada (max 2MB)");
+            return;
+        }
+
+        const img = document.getElementById('profile-avatar-img');
+        const originalSrc = img.src;
+
+        try {
+            // Preview
+            const reader = new FileReader();
+            reader.onload = (e) => img.src = e.target.result;
+            reader.readAsDataURL(file);
+
+            showToast("⏳ Subiendo foto...");
+            const downloadURL = await DB.uploadAvatar(file, this.user.email);
+
+            if (downloadURL) {
+                await this.updateProfile(this.user.name, downloadURL);
+                showToast("✅ Foto actualizada");
+            }
+        } catch (e) {
+            console.error("Upload error:", e);
+            showToast("❌ Error al subir foto");
+            img.src = originalSrc;
+        }
+    },
+
+    async requestNotificationPermission() {
+        if (!("Notification" in window)) {
+            showToast("Tu navegador no soporta notificaciones");
+            return;
+        }
+
+        const permission = await Notification.requestPermission();
+        if (permission === "granted") {
+            // Toggle
+            this.notificationSettings.enabled = !this.notificationSettings.enabled;
+            showToast(this.notificationSettings.enabled ? "Notificaciones Activadas" : "Notificaciones Desactivadas");
+
+            // Persist if user exists
+            if (this.user) {
+                this.user.notificationSettings = this.notificationSettings;
+                await DB.saveUser(this.user);
+            }
+
+            // Re-render to show state
+            if (router.currentRoute === '#profile') renderProfile(document.getElementById('app'));
+
+            // Test Notification if just enabled
+            if (this.notificationSettings.enabled) {
+                new Notification("Adicionales Santa Fe", {
+                    body: "¡Notificaciones configuradas correctamente!",
+                    icon: "./icon.png"
+                });
+            }
+        } else {
+            showToast("Permiso denegado o bloqueado");
         }
     },
 
@@ -312,7 +345,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.9.5 Loaded - Admin Upgrade + Emergency Fix");
+        console.log("App v1.9.8 Loaded - Profile Fix & Logic Cleanup");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
@@ -1150,7 +1183,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-600 font-mono">v1.9.7 (Premium Edit)</p>
+                    <p class="text-[10px] text-slate-600 font-mono">v1.9.8 (Logic Fix & Cleanup)</p>
                 </div>
             </div>
         </div>
@@ -2315,7 +2348,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.9.7 • Build 2026.02.22</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.9.8 • Build 2026.02.22</p>
             </div>
         </main>
     `;
@@ -2356,122 +2389,7 @@ window.addCustomSector = () => {
 };
 
 
-// --- MISSING FUNCTIONS ---
-store.renameServiceSubtype = (type, oldName, newName) => {
-    if (oldName === newName || !newName.trim()) return;
-    const value = store.serviceConfig[type][oldName];
-    delete store.serviceConfig[type][oldName];
-    store.serviceConfig[type][newName] = value;
-    // Re-render handled by user typing, but on save it persists
-};
-
-store.updateProfile = async (name, avatar) => {
-    try {
-        store.user.name = name;
-        store.user.avatar = avatar;
-
-        await DB.updateUser({
-            name,
-            avatar,
-            displayName: name, // Sync for auth compat
-            photoURL: avatar
-        });
-        showToast("Perfil actualizado correctamente");
-        renderProfile(document.getElementById('app')); // Re-render profile
-    } catch (e) {
-        showToast("Error al actualizar perfil");
-        console.error(e);
-    }
-};
-
-store.handleAvatarUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    if (file.size > 2 * 1024 * 1024) {
-        showToast("⚠️ La imagen es muy pesada (max 2MB)");
-        return;
-    }
-
-    const img = document.getElementById('profile-avatar-img');
-    const originalSrc = img.src;
-
-    try {
-        // Preview
-        const reader = new FileReader();
-        reader.onload = (e) => img.src = e.target.result;
-        reader.readAsDataURL(file);
-
-        showToast("⏳ Subiendo foto...");
-        const downloadURL = await DB.uploadAvatar(file, store.user.email);
-
-        if (downloadURL) {
-            await store.updateProfile(store.user.name, downloadURL);
-            showToast("✅ Foto actualizada");
-        }
-    } catch (e) {
-        console.error("Upload error:", e);
-        showToast("❌ Error al subir foto");
-        img.src = originalSrc;
-    }
-};
-
-store.requestNotificationPermission = async () => {
-    if (!("Notification" in window)) {
-        showToast("Tu navegador no soporta notificaciones");
-        return;
-    }
-
-    const permission = await Notification.requestPermission();
-    if (permission === 'granted') {
-        store.notificationSettings.enabled = true;
-        showToast("Alertas Activadas");
-        renderProfile(document.getElementById('app'));
-
-        // Test Notification manually
-        try {
-            new Notification("Adicionales Santa Fe", {
-                body: "¡Notificaciones configuradas correctamente!",
-                icon: "./icon.png" // Fix icon path
-            });
-        } catch (e) {
-            console.error("Notification trigger error", e);
-        }
-    }
-};
-
-// Notification Checker Logic
-store.checkNotifications = () => {
-    if (!store.notificationSettings.enabled) return;
-
-    const now = new Date();
-    const leadTimeMs = store.notificationSettings.leadTime * 60000;
-
-    store.services.forEach(service => {
-        if (!service.date || !service.startTime) return;
-        const start = new Date(`${service.date}T${service.startTime}`);
-        const diff = start - now;
-
-        // If within lead time range (e.g. 59-60 mins) to avoid spamming
-        // Simple check: is it happening in the next hour?
-        // A more robust check would need a "notified" flag
-        if (diff > 0 && diff <= leadTimeMs && diff > (leadTimeMs - 60000)) {
-            new Notification("Próximo Servicio", {
-                body: `Tu adicional en ${service.location || 'Ubicación'} comienza en 1 hora.`,
-                icon: "/icon.png"
-            });
-        }
-    });
-};
-
-store.saveConfig = async () => {
-    try {
-        await DB.updateUserConfig(store.serviceConfig);
-        showToast("Tarifas actualizadas correctamente");
-    } catch (e) {
-        showToast("Error al guardar: " + e.message);
-    }
-};
+// --- SUBSCRIPTIONS ---
 
 
 
