@@ -32,7 +32,7 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(registrations => {
                 for (let registration of registrations) {
-                    if (!registration.active?.scriptURL.includes('sw-v9.js')) {
+                    if (!registration.active?.scriptURL.includes('sw-v10.js')) {
                         console.log('Force killing old SW:', registration.active?.scriptURL);
                         registration.unregister();
                     }
@@ -66,7 +66,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v9.js')
+                navigator.serviceWorker.register('./sw-v10.js')
                     .then(reg => {
                         console.log('SW registered:', reg);
                         reg.onupdatefound = () => {
@@ -174,9 +174,9 @@
 
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
-    <script src="db.js?v=191"></script>
-    <script src="components.js?v=191"></script>
-    <script src="app.js?v=191"></script>
+    <script src="db.js?v=192"></script>
+    <script src="components.js?v=192"></script>
+    <script src="app.js?v=192"></script>
 </body>
 
 </html>
