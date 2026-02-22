@@ -312,7 +312,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.8.0 Loaded - Security Overhaul");
+        console.log("App v1.9.5 Loaded - Admin Upgrade + Emergency Fix");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
@@ -2319,7 +2319,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.6.4 • Build 2026.02.18</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.9.5 • Build 2026.02.22</p>
             </div>
         </main>
     `;
