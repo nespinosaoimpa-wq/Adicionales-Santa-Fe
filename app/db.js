@@ -187,7 +187,11 @@ const DB = {
         return db.collection('expenses').doc(id).delete();
     },
 
-    // --- ADMIN ANALYTICS ---
+    async getAllServicesForStats() {
+        const snapshot = await db.collection('services').get();
+        return snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    },
+
     // Helpers for calculating stats from raw data
     calculateStats(users, services) {
         const totalRevenue = services.reduce((acc, s) => acc + (s.total || 0), 0);

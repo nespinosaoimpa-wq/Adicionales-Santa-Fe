@@ -959,7 +959,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-600 font-mono">v1.8.0 (Security Hardened)</p>
+                    <p class="text-[10px] text-slate-600 font-mono">v1.8.1 (Admin Support Fixed)</p>
                 </div>
             </div>
         </div>
