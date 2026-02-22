@@ -12,7 +12,7 @@ if (-not (Test-Path ".git")) {
 }
 
 git add .
-git commit -m "Deploying v1.8.1 - Admin Access Fix"
+git commit -m "Deploying v1.9.0 - Premium Admin Upgrade"
 git branch -M main
 git push -u origin main
 

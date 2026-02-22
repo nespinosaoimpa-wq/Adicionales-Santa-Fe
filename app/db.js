@@ -65,6 +65,17 @@ const DB = {
         // Also update Auth profile if possible, but Firestore is our source of truth
     },
 
+    async updateUserRole(email, newRole) {
+        if (!email) return;
+        const user = auth.currentUser;
+        if (!user) throw new Error("Must be logged in");
+
+        // We check admin status via Security Rules, but we can also add a logic check here if we have user role in store
+        return db.collection('users').doc(email).update({
+            role: newRole
+        });
+    },
+
     async uploadAvatar(file, email) {
         if (!file || !email) return null;
         const storageRef = storage.ref(`avatars/${email}/${file.name}`);
@@ -194,34 +205,53 @@ const DB = {
 
     // Helpers for calculating stats from raw data
     calculateStats(users, services) {
-        const totalRevenue = services.reduce((acc, s) => acc + (s.total || 0), 0);
-        const totalHours = services.reduce((acc, s) => acc + (s.hours || 0), 0);
+        const totalRevenue = services.reduce((acc, s) => acc + (parseFloat(s.total) || 0), 0);
+        const totalHours = services.reduce((acc, s) => acc + (parseFloat(s.hours) || 0), 0);
 
-        // Group by Date for Charts
-        const servicesByDate = services.reduce((acc, s) => {
-            const date = s.date;
-            acc[date] = (acc[date] || 0) + 1;
-            return acc;
-        }, {});
+        // Group by Date for Trend
+        const revenueByDate = {};
+        const servicesByDate = {};
 
-        // Group by Type
+        services.forEach(s => {
+            const date = s.date || 'Sin fecha';
+            servicesByDate[date] = (servicesByDate[date] || 0) + 1;
+            revenueByDate[date] = (revenueByDate[date] || 0) + (parseFloat(s.total) || 0);
+        });
+
+        // Group by Type (Public, Private, OSPES)
         const servicesByType = services.reduce((acc, s) => {
-            acc[s.type] = (acc[s.type] || 0) + 1;
+            const type = s.type || 'Otro';
+            acc[type] = (acc[type] || 0) + 1;
             return acc;
         }, {});
+
+        // User Activity Ranking
+        const userRanking = services.reduce((acc, s) => {
+            const email = s.userEmail || 'Desconocido';
+            acc[email] = (acc[email] || 0) + (parseFloat(s.total) || 0);
+            return acc;
+        }, {});
+
+        const sortedUsers = Object.entries(userRanking)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([email, total]) => ({ email, total }));
+
+        const dates = Object.keys(servicesByDate).sort();
 
         return {
             userCount: users.length,
-            activeUsers: users.filter(u => new Date(u.lastLogin) > new Date(Date.now() - 86400000)).length,
+            activeUsers: users.filter(u => u.lastLogin && new Date(u.lastLogin) > new Date(Date.now() - 86400000)).length,
             totalRevenue,
             totalHours,
+            topUsers: sortedUsers,
             chartData: {
-                dates: Object.keys(servicesByDate).sort(),
-                counts: Object.values(servicesByDate),
+                dates: dates,
+                counts: dates.map(d => servicesByDate[d]),
+                revenue: dates.map(d => revenueByDate[d]),
                 types: Object.keys(servicesByType),
                 typeCounts: Object.values(servicesByType)
-            },
-            dbSize: "Cloud"
+            }
         };
     }
 };
