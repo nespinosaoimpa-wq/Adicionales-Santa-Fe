@@ -1285,21 +1285,17 @@ function renderAgenda(container) {
                         <button id="btn-next-month" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
                     </div>
                 </div>
-                <div class="flex gap-3">
+                <div class="flex gap-2">
+                    <button onclick="store.shareApp()" class="size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
+                        <span class="material-symbols-outlined text-xl">share</span>
+                    </button>
+                    <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl">
+                        <span class="material-symbols-outlined text-xl">terminal</span>
+                    </button>
                     <button onclick="showToast('Sin notificaciones nuevas')" class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300">
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
-                    <!-- Action Buttons -->
-                    <div class="grid grid-cols-2 gap-3 w-full max-w-[280px]">
-                        <button onclick="store.shareApp()" class="flex flex-col items-center gap-2 p-4 bg-primary/10 rounded-2xl border border-primary/20 hover:bg-primary/20 transition-all group">
-                            <span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">share</span>
-                            <span class="text-[10px] font-bold text-primary uppercase tracking-wider">Compartir</span>
-                        </button>
-                        <button onclick="store.toggleDebug()" class="flex flex-col items-center gap-2 p-4 bg-slate-800/50 rounded-2xl border border-white/5 hover:bg-slate-800 transition-all group">
-                            <span class="material-symbols-outlined text-slate-400 group-hover:scale-110 transition-transform">terminal</span>
-                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Debug</span>
-                        </button>
-                    </div>
+                </div>
                     <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
                         <img class="w-full h-full object-cover" src="${store.user.avatar}" />
                     </div>
@@ -2319,7 +2315,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.9.5 • Build 2026.02.22</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.9.7 • Build 2026.02.22</p>
             </div>
         </main>
     `;
@@ -2809,13 +2805,13 @@ function renderHistory(container) {
     const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     container.innerHTML = `
-    < header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between" >
+    <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
             <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
             <h1 class="text-lg font-bold text-white">Historial Completo</h1>
             <div class="w-10"></div>
-        </header >
+        </header>
 
     <main class="space-y-4 pb-32">
         <!-- Ad Banner Top -->

@@ -12,7 +12,7 @@ if (-not (Test-Path ".git")) {
 }
 
 git add .
-git commit -m "Deploying v1.9.6 - Security Hardening & UI Label Sync"
+git commit -m "Deploying v1.9.7 - UI Polish & Premium Finish"
 git branch -M main
 git push -u origin main
 
