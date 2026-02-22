@@ -2860,7 +2860,7 @@ function renderBottomNav(activeTab) {
     const tabs = [
         { id: 'agenda', icon: 'calendar_today', label: 'Agenda', route: '#agenda' },
         { id: 'stats', icon: 'bar_chart', label: 'Stats', route: '#stats' },
-        { id: 'control', icon: 'dashboard', label: 'Panel', route: '#control' },
+        { id: 'control', icon: 'dashboard', label: 'Mi Panel', route: '#control' },
         { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
     ];
 
