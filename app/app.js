@@ -758,7 +758,7 @@ async function renderAdmin(container) {
     try {
         const [allServices, allUsers] = await Promise.all([
             DB.getAllServicesForStats(),
-            new Promise(resolve => store.subscribeToUsers(resolve))
+            new Promise(resolve => DB.subscribeToUsers(resolve))
         ]);
 
         const stats = DB.calculateStats(allUsers, allServices);
@@ -1150,7 +1150,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-600 font-mono">v1.9.0 (Premium Admin Upgrade)</p>
+                    <p class="text-[10px] text-slate-600 font-mono">v1.9.1 (Admin Dashboard Fixed)</p>
                 </div>
             </div>
         </div>
