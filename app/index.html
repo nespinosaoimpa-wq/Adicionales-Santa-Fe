@@ -74,9 +74,10 @@
                             installingWorker.onstatechange = () => {
                                 if (installingWorker.state === 'installed' && navigator.serviceWorker.controller) {
                                     window.location.reload();
-                                };
+                                }
                             };
-                        })
+                        };
+                    })
                     .catch(err => console.error('SW registration failed:', err));
 
                 navigator.serviceWorker.addEventListener('controllerchange', () => {
@@ -173,9 +174,9 @@
 
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
-    <script src="db.js?v=179"></script>
-    <script src="components.js?v=179"></script>
-    <script src="app.js?v=179"></script>
+    <script src="db.js?v=191"></script>
+    <script src="components.js?v=191"></script>
+    <script src="app.js?v=191"></script>
 </body>
 
 </html>
