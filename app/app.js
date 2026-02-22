@@ -284,21 +284,23 @@ const store = {
         }
     },
 
-    shareApp() {
+    async shareApp() {
         const shareData = {
             title: 'Adicionales Santa Fe',
             text: 'Gestiona tus servicios de policía adicional y calcula tus ganancias fácil.',
             url: window.location.origin + window.location.pathname
         };
 
-        if (navigator.share) {
-            navigator.share(shareData)
-                .then(() => showToast("¡Gracias por compartir!"))
-                .catch((e) => console.log('Error sharing', e));
-        } else {
-            // Fallback: Copy to clipboard or open WhatsApp
-            const text = `¡Probá esta App para Adicionales! ${shareData.url}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+                showToast("¡Gracias por compartir!");
+            } else {
+                const text = `¡Probá esta App para Adicionales! ${shareData.url}`;
+                window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            }
+        } catch (e) {
+            console.error("Share error:", e);
         }
     },
 
@@ -364,24 +366,40 @@ const store = {
                     // Load User Config/Profile (WAIT for this!)
                     const dbUser = await DB.getUser(user.email);
 
-                    // Sanitize DB Data
-                    if (dbUser) {
-                        if (dbUser.name === 'undefined') dbUser.name = null;
-                        if (dbUser.avatar === 'undefined') dbUser.avatar = null;
-                    }
-
-                    this.user = dbUser || {
+                    // Robust Merge: Base User + DB User
+                    const baseUser = {
                         email: user.email,
                         role: 'user',
-                        serviceConfig: this.serviceConfig,
+                        serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)), // Deep clone defaults
                         notificationSettings: { enabled: false, leadTime: 60 },
                         name: user.displayName || user.email.split('@')[0],
                         avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
                     };
 
-                    console.log("✅ User data loaded:", this.user.email);
+                    // Deep merge dbUser into baseUser
+                    if (dbUser) {
+                        this.user = {
+                            ...baseUser,
+                            ...dbUser,
+                            // Ensure these nested objects also merge correctly
+                            serviceConfig: { ...baseUser.serviceConfig, ...(dbUser.serviceConfig || {}) },
+                            notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
+                        };
 
-                    // Save/Update user in DB
+                        // Sanitize "undefined" artifacts
+                        if (this.user.name === 'undefined' || !this.user.name) this.user.name = baseUser.name;
+                        if (this.user.avatar === 'undefined' || !this.user.avatar) this.user.avatar = baseUser.avatar;
+                    } else {
+                        this.user = baseUser;
+                    }
+
+                    // Sync global settings with user state
+                    this.serviceConfig = this.user.serviceConfig;
+                    this.notificationSettings = this.user.notificationSettings;
+
+                    console.log("✅ User data synchronized:", this.user.email);
+
+                    // Save/Update user in DB to ensure defaults are saved if new
                     await DB.saveUser(this.user);
 
                     // Subscribe to Data
@@ -731,6 +749,24 @@ const router = {
                     break;
                 case '#financial':
                     renderFinancial(app);
+                    break;
+                case '#asistente':
+                    renderAsistenteHub(app);
+                    break;
+                case '#asistente/directorio':
+                    renderDirectorioPolicial(app);
+                    break;
+                case '#asistente/checklist':
+                    renderChecklistGuardia(app);
+                    break;
+                case '#asistente/crono':
+                    renderCronoCalendario(app);
+                    break;
+                case '#asistente/centinela':
+                    renderCentinela(app);
+                    break;
+                case '#asistente/partes':
+                    renderPartesInteligentes(app);
                     break;
                 case '#profile':
                     renderProfile(app);
@@ -1183,7 +1219,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-600 font-mono">v1.9.8 (Logic Fix & Cleanup)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v2.0.0 PRE-RELEASE (Asistente Virtual Suite)</p>
                 </div>
             </div>
         </div>
@@ -2348,7 +2384,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v1.9.8 • Build 2026.02.22</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v2.0.0 • Build 2026.02.22</p>
             </div>
         </main>
     `;
@@ -2767,6 +2803,474 @@ function renderHistory(container) {
 `;
 }
 
+/**
+ * Render Asistente Virtual Hub
+ */
+function renderAsistenteHub(container) {
+    if (!container) container = document.getElementById('app');
+
+    const tools = [
+        { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela' },
+        { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
+        { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },
+        { id: 'directorio', title: 'Directorio Policial', desc: 'Números de emergencia interna.', icon: 'contact_phone', color: 'from-amber-500 to-orange-500', route: '#asistente/directorio' },
+        { id: 'checklist', title: 'Checklist de Guardia', desc: 'Verificación de equipo esencial.', icon: 'fact_check', color: 'from-rose-500 to-pink-500', route: '#asistente/checklist' }
+    ];
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <h1 class="text-xl font-bold text-white tracking-tight">Asistente Virtual</h1>
+            <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shadow-lg shadow-primary/10">
+                <span class="material-symbols-outlined">smart_toy</span>
+            </div>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
+            <div class="space-y-2">
+                <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest px-1">Inteligencia y Utilidades</h2>
+                <p class="text-xs text-slate-400 px-1">Herramientas diseñadas exclusivamente para la Policía de Santa Fe.</p>
+            </div>
+
+            <div class="grid gap-4">
+                ${tools.map((tool, i) => `
+                    <div onclick="router.navigateTo('${tool.route}')" 
+                        class="group relative overflow-hidden glass-card p-5 rounded-3xl border border-white/5 hover:border-primary/30 transition-all active:scale-[0.98] cursor-pointer"
+                        style="animation-delay: ${i * 100}ms">
+                        
+                        <div class="absolute -right-4 -top-4 size-24 bg-gradient-to-br ${tool.color} opacity-5 blur-2xl group-hover:opacity-20 transition-opacity"></div>
+                        
+                        <div class="flex gap-4 items-start relative z-10">
+                            <div class="size-12 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-110">
+                                <span class="material-symbols-outlined text-2xl">${tool.icon}</span>
+                            </div>
+                            <div class="flex-1 space-y-1">
+                                <h3 class="font-bold text-white group-hover:text-primary transition-colors">${tool.title}</h3>
+                                <p class="text-xs text-slate-400 leading-relaxed">${tool.desc}</p>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-700 self-center">chevron_right</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+}
+
+/**
+ * Render Directorio Policial
+ */
+function renderDirectorioPolicial(container) {
+    const contacts = [
+        { name: 'Cuerpo Médico Rosario', tel: '03414234567', icon: 'medical_services' },
+        { name: 'Cuerpo Médico Santa Fe', tel: '03424578900', icon: 'medical_services' },
+        { name: 'Asesoría Letrada (D-1)', tel: '03424567890', icon: 'gavel' },
+        { name: 'Bienestar Policial', tel: '03424812345', icon: 'volunteer_activism' },
+        { name: 'Emergencia Policial (911)', tel: '911', icon: 'emergency' },
+        { name: 'Caja de Pensiones', tel: '08005551234', icon: 'payments' },
+        { name: 'IAPOS Urgencias', tel: '08004442767', icon: 'local_hospital' },
+    ];
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-xl font-bold text-white tracking-tight">Directorio Policial</h1>
+        </header>
+
+        <main class="p-6 space-y-4 pb-32 max-w-md mx-auto animate-fade-in">
+            <div class="px-1 mb-6">
+                <p class="text-sm text-slate-400">Números de contacto internos y de emergencia para el personal policial de la provincia.</p>
+            </div>
+
+            <div class="space-y-3">
+                ${contacts.map(c => `
+                    <div class="glass-card p-4 rounded-2xl border border-white/5 flex items-center justify-between group">
+                        <div class="flex items-center gap-4">
+                            <div class="size-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">${c.icon}</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white text-sm">${c.name}</h3>
+                                <p class="text-[11px] text-slate-500 font-mono tracking-wider">${c.tel}</p>
+                            </div>
+                        </div>
+                        <a href="tel:${c.tel.replace(/[^0-9]/g, '')}" class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-lg">
+                            <span class="material-symbols-outlined text-sm">call</span>
+                        </a>
+                    </div>
+                `).join('')}
+            </div>
+
+            ${renderAdBanner()}
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+}
+
+/**
+ * Render Checklist de Guardia
+ */
+function renderChecklistGuardia(container) {
+    const items = [
+        { id: 'arma', label: 'Arma Reglamentaria y Munición', icon: 'shield' },
+        { id: 'cargador', label: 'Cargadores Adicionales', icon: 'vibration' },
+        { id: 'esposas', label: 'Esposas y Llave', icon: 'link' },
+        { id: 'linterna', label: 'Linterna con carga', icon: 'flashlight_on' },
+        { id: 'libreta', label: 'Libreta de Anotaciones y Birome', icon: 'edit' },
+        { id: 'celular', label: 'Celular con carga y datos', icon: 'smartphone' },
+        { id: 'doc', label: 'Credencial y Documentación', icon: 'badge' },
+    ];
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-xl font-bold text-white tracking-tight">Checklist de Guardia</h1>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
+            <div class="flex items-center justify-between px-1">
+                <div>
+                    <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Equipo de Servicio</h2>
+                    <p class="text-[10px] text-slate-500 mt-1">Verificá tu equipo antes de tomar el servicio.</p>
+                </div>
+                <button onclick="resetChecklist()" class="text-[10px] font-bold text-primary px-3 py-1.5 bg-primary/5 rounded-full border border-primary/20">Reiniciar</button>
+            </div>
+
+            <div class="space-y-3">
+                ${items.map(item => `
+                    <label class="glass-card p-4 rounded-2xl border border-white/5 flex items-center gap-4 cursor-pointer active:bg-white/5 transition-colors">
+                        <input type="checkbox" class="size-6 rounded-lg bg-slate-800 border-white/10 text-primary focus:ring-primary/20 accent-primary" onchange="saveCheckState('${item.id}', this.checked)">
+                        <span class="material-symbols-outlined text-slate-600">${item.icon}</span>
+                        <span class="flex-1 text-sm font-medium text-slate-300">${item.label}</span>
+                    </label>
+                `).join('')}
+            </div>
+
+            ${renderAdBanner()}
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+
+    // Global helpers for checklist (temporary location)
+    window.saveCheckState = (id, checked) => {
+        const state = JSON.parse(localStorage.getItem('police_checklist') || '{}');
+        state[id] = checked;
+        localStorage.setItem('police_checklist', JSON.stringify(state));
+    };
+
+    window.resetChecklist = () => {
+        localStorage.removeItem('police_checklist');
+        renderChecklistGuardia(container);
+    };
+
+    // Restore state
+    const savedState = JSON.parse(localStorage.getItem('police_checklist') || '{}');
+    container.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        const id = cb.getAttribute('onchange').match(/'([^']+)'/)[1];
+        if (savedState[id]) cb.checked = true;
+    });
+}
+
+/**
+ * Render Crono-Calendario
+ */
+function renderCronoCalendario(container) {
+    const cycles = [
+        { id: '24x48', name: 'Ciclo 24x48', desc: 'Trabaja 24h, descansa 48h' },
+        { id: '12x36', name: 'Ciclo 12x36', desc: 'Trabaja 12h, descansa 36h' },
+        { id: 'tercios', name: 'Tercios (8h)', desc: 'Sistema tradicional de 3 turnos' },
+    ];
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-xl font-bold text-white tracking-tight">Crono-Calendario</h1>
+        </header>
+
+        <main class="p-6 space-y-8 pb-32 max-w-md mx-auto animate-fade-in">
+            <section class="space-y-4">
+                <div class="px-1">
+                    <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest">Configurar Ciclo</h2>
+                    <p class="text-xs text-slate-500 mt-1">Elegí tu régimen de trabajo para proyectar tus guardias.</p>
+                </div>
+
+                <div class="grid gap-3">
+                    ${cycles.map(c => `
+                        <div onclick="setDutyCycle('${c.id}')" class="glass-card p-4 rounded-2xl border border-white/5 hover:border-primary/30 transition-all cursor-pointer group">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <h3 class="font-bold text-white group-hover:text-primary transition-colors">${c.name}</h3>
+                                    <p class="text-[11px] text-slate-500">${c.desc}</p>
+                                </div>
+                                <span class="material-symbols-outlined text-slate-700">radio_button_unchecked</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            </section>
+
+            <section id="calendar-projection" class="space-y-4 hidden">
+                <div class="px-1 border-t border-white/5 pt-6 flex items-center justify-between">
+                    <h2 class="text-sm font-bold text-slate-500 uppercase tracking-widest text-primary">Próximas Guardias</h2>
+                    <button onclick="router.navigateTo('#asistente/crono')" class="text-[10px] text-slate-500 underline">Cambiar fecha inicio</button>
+                </div>
+                <div id="shifts-list" class="space-y-2">
+                    <!-- Dynamic Shifts -->
+                </div>
+            </section>
+
+            ${renderAdBanner()}
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+
+    window.setDutyCycle = (type) => {
+        const startDate = prompt("Ingresá la fecha de tu próxima guardia (YYYY-MM-DD):", store.getLocalDateString());
+        if (!startDate) return;
+
+        showToast(`Ciclo ${type} activado`);
+        const projection = document.getElementById('calendar-projection');
+        projection.classList.remove('hidden');
+
+        const list = document.getElementById('shifts-list');
+        const start = new Date(startDate + 'T00:00:00');
+        let html = '';
+
+        for (let i = 0; i < 10; i++) {
+            const shiftDate = new Date(start);
+            if (type === '24x48') shiftDate.setDate(start.getDate() + (i * 3));
+            else if (type === '12x36') shiftDate.setDate(start.getDate() + (i * 2));
+            else shiftDate.setDate(start.getDate() + i); // Placeholder for others
+
+            html += `
+                <div class="glass-card p-3 rounded-xl border border-white/5 flex items-center gap-4 bg-primary/5">
+                    <div class="size-10 rounded-lg bg-primary/20 flex flex-col items-center justify-center text-primary">
+                        <span class="text-[10px] font-bold uppercase">${shiftDate.toLocaleDateString('es-ES', { weekday: 'short' })}</span>
+                        <span class="text-sm font-black">${shiftDate.getDate()}</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-white">Servicio Activo</p>
+                        <p class="text-[10px] text-slate-500 uppercase">${shiftDate.toLocaleDateString('es-ES', { month: 'long' })}</p>
+                    </div>
+                </div>
+            `;
+        }
+        list.innerHTML = html;
+    };
+}
+
+/**
+ * Render Centinela AI (Legal Assistant)
+ */
+function renderCentinela(container) {
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <div class="flex flex-col">
+                <h1 class="text-sm font-black text-white leading-none">Centinela AI</h1>
+                <span class="text-[10px] text-primary flex items-center gap-1">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    Base Legal SF Actualizada
+                </span>
+            </div>
+        </header>
+
+        <main class="flex flex-col h-[calc(100vh-4rem)] bg-background-dark overflow-hidden">
+            <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 pb-10">
+                <div class="flex gap-3 max-w-[85%]">
+                    <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
+                        <span class="material-symbols-outlined text-sm">smart_toy</span>
+                    </div>
+                    <div class="bg-white/5 border border-white/5 p-3 rounded-2xl rounded-tl-none">
+                        <p class="text-xs text-slate-200 leading-relaxed">
+                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, el **Decreto 461** (Régimen Disciplinario) y reglamentos de licencias.
+                            <br><br>
+                            ¿En qué puedo asesorarte hoy?
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="p-4 bg-slate-900/50 border-t border-white/5 pb-10">
+                <form id="centinela-form" class="relative flex items-center gap-2">
+                    <input type="text" id="chat-input" placeholder="Preguntá sobre licencias, faltas..." 
+                        class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
+                    <button type="submit" class="absolute right-1 size-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 active:scale-90 transition-all">
+                        <span class="material-symbols-outlined">send</span>
+                    </button>
+                </form>
+                <p class="text-[9px] text-center text-slate-500 mt-3 uppercase tracking-tighter">La IA puede cometer errores. Consultá siempre con tu superior.</p>
+            </div>
+        </main>
+    `;
+
+    const form = document.getElementById('centinela-form');
+    const input = document.getElementById('chat-input');
+    const chat = document.getElementById('chat-messages');
+
+    form.onsubmit = async (e) => {
+        e.preventDefault();
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        // User Message
+        appendMessage('user', msg);
+        input.value = '';
+
+        // Bot Thinking
+        const thinkingId = 'thinking-' + Date.now();
+        appendMessage('bot', '...', thinkingId);
+
+        try {
+            // Placeholder for real AI logic
+            setTimeout(() => {
+                const el = document.getElementById(thinkingId);
+                let response = "Buscando en la normativa...";
+
+                if (msg.toLowerCase().includes('falta')) {
+                    response = "Según el **Decreto 461/15**, las faltas se dividen en leves y graves. Por ejemplo, el Art. 41 detalla que una demora de más de 15 minutos se considera falta leve.";
+                } else if (msg.toLowerCase().includes('licencia')) {
+                    response = "El régimen de licencias (Decreto 4157) prevé licencias anuales ordinarias basándose en tu antigüedad. ¿Querés que te diga cuántos días te corresponden?";
+                } else {
+                    response = "Analizando tu consulta con base en la **Ley 12.521**. Para una respuesta precisa, por favor especificá si te referís a un artículo disciplinario o administrativo.";
+                }
+
+                el.innerHTML = `<p class="text-xs text-slate-200 leading-relaxed">${response}</p>`;
+                chat.scrollTop = chat.scrollHeight;
+            }, 1000);
+
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    function appendMessage(role, text, id = null) {
+        const div = document.createElement('div');
+        div.className = role === 'user' ? 'flex justify-end' : 'flex gap-3 max-w-[85%]';
+        div.innerHTML = role === 'user' ? `
+            <div class="bg-primary p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-lg shadow-primary/10">
+                <p class="text-xs text-white leading-relaxed">${text}</p>
+            </div>
+        ` : `
+            <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
+                <span class="material-symbols-outlined text-sm">smart_toy</span>
+            </div>
+            <div class="bg-white/10 border border-white/10 p-3 rounded-2xl rounded-tl-none projet-assistant" id="${id || ''}">
+                <p class="text-xs text-slate-200 leading-relaxed">${text}</p>
+            </div>
+        `;
+        chat.appendChild(div);
+        chat.scrollTop = chat.scrollHeight;
+    }
+}
+
+/**
+ * Render Partes Inteligentes
+ */
+function renderPartesInteligentes(container) {
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-xl font-bold text-white tracking-tight">Partes Inteligentes</h1>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
+            <div class="px-1 space-y-1">
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Generador de Informes</h2>
+                <p class="text-[11px] text-slate-400">Ingresá los datos clave y la IA redactará el parte formal.</p>
+            </div>
+
+            <section class="space-y-4">
+                <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-primary uppercase ml-1">Notas de Campo</label>
+                        <textarea id="parte-raw-input" placeholder="Ej: Calle Mendoza 3000, 22hs, robo de cables, masculino detenido, 25 años, cuchillo..." 
+                            class="w-full h-32 bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
+                    </div>
+
+                    <button onclick="generateParte()" id="btn-generate-parte" class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-xl">auto_awesome</span>
+                        Generar Parte Formal
+                    </button>
+                </div>
+
+                <div id="parte-result-container" class="hidden space-y-4">
+                    <div class="px-1 border-t border-white/5 pt-6">
+                        <h3 class="text-sm font-bold text-slate-500 uppercase tracking-widest">Resultado AI</h3>
+                    </div>
+                    <div class="glass-card p-5 rounded-3xl border border-primary/20 bg-primary/5 relative">
+                        <pre id="parte-output" class="text-xs text-slate-200 whitespace-pre-wrap font-sans leading-relaxed"></pre>
+                        <button onclick="copyParte()" class="absolute top-4 right-4 size-10 rounded-xl bg-white/10 flex items-center justify-center text-white active:scale-90 transition-all">
+                            <span class="material-symbols-outlined text-sm">content_copy</span>
+                        </button>
+                    </div>
+                    <p class="text-[9px] text-center text-slate-500 uppercase tracking-tighter">Revisá siempre la redacción antes de enviarla.</p>
+                </div>
+            </section>
+
+            ${renderAdBanner()}
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+
+    window.generateParte = () => {
+        const input = document.getElementById('parte-raw-input').value.trim();
+        if (!input) return showToast("Escribí algunas notas primero");
+
+        const btn = document.getElementById('btn-generate-parte');
+        btn.disabled = true;
+        btn.innerHTML = `<span class="animate-spin material-symbols-outlined">sync</span> Redactando...`;
+
+        setTimeout(() => {
+            const container = document.getElementById('parte-result-container');
+            const output = document.getElementById('parte-output');
+
+            // Basic transformation logic (mocking AI behavior)
+            const lines = input.split(',').map(l => l.trim());
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('es-AR');
+            const timeStr = now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+
+            let parte = `PARTIDO PREVENTIVO - POLICÍA DE SANTA FE\n`;
+            parte += `FECHA: ${dateStr} - HORA: ${timeStr}\n\n`;
+            parte += `En el día de la fecha, cumplimentando servicio de parada en zona asignada, se procede a la identificación y posterior aprehensión de un sujeto masculino...\n\n`;
+            parte += `DETALLES SEGÚN NOVEDAD:\n`;
+            lines.forEach(line => {
+                parte += `• ${line.toUpperCase()}\n`;
+            });
+            parte += `\nSe traslada lo actuado a la Comisaría correspondiente por razones de jurisdicción. Se deja constancia de lo actuado ante testigos hábiles del procedimiento.`;
+
+            output.innerText = parte;
+            container.classList.remove('hidden');
+            btn.disabled = false;
+            btn.innerHTML = `<span class="material-symbols-outlined text-xl">auto_awesome</span> Generar Parte Formal`;
+
+            container.scrollIntoView({ behavior: 'smooth' });
+            showToast("✅ Parte redactado");
+        }, 1500);
+    };
+
+    window.copyParte = () => {
+        const text = document.getElementById('parte-output').innerText;
+        navigator.clipboard.writeText(text);
+        showToast("Copiado al portapapeles");
+    };
+}
+
 // --- 4. SHARED COMPONENTS ---
 
 function renderBottomNav(activeTab) {
@@ -2774,6 +3278,7 @@ function renderBottomNav(activeTab) {
     const tabs = [
         { id: 'agenda', icon: 'calendar_today', label: 'Agenda', route: '#agenda' },
         { id: 'stats', icon: 'bar_chart', label: 'Stats', route: '#stats' },
+        { id: 'asistente', icon: 'smart_toy', label: 'Asistente', route: '#asistente' },
         { id: 'control', icon: 'dashboard', label: 'Mi Panel', route: '#control' },
         { id: 'financial', icon: 'payments', label: 'Finanzas', route: '#financial' },
     ];

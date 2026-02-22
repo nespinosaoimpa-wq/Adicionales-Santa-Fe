@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Adicionales Santa Fe</title>
-    <meta name="app-version" content="v1.9.8">
+    <meta name="app-version" content="v2.0.0-PRO">
     <meta name="description"
         content="Gestión inteligente de Servicios de Policía Adicional. Agenda, cálculos y finanzas en un solo lugar.">
 
@@ -32,7 +32,7 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(registrations => {
                 for (let registration of registrations) {
-                    if (!registration.active?.scriptURL.includes('sw-v13.js')) {
+                    if (!registration.active?.scriptURL.includes('sw-v15.js')) {
                         console.log('Force killing old SW:', registration.active?.scriptURL);
                         registration.unregister();
                     }
@@ -76,7 +76,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v13.js')
+                navigator.serviceWorker.register('./sw-v15.js')
                     .then(reg => {
                         console.log('SW registered:', reg);
                         reg.onupdatefound = () => {
@@ -184,9 +184,9 @@
 
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
-    <script src="db.js?v=198"></script>
-    <script src="components.js?v=198"></script>
-    <script src="app.js?v=198"></script>
+    <script src="db.js?v=200"></script>
+    <script src="components.js?v=200"></script>
+    <script src="app.js?v=200"></script>
 </body>
 
 </html>
