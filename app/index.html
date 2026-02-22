@@ -41,6 +41,12 @@
         }
 
         window.onerror = function (msg, url, lineNo, columnNo, error) {
+            // Suppress uninformative cross-origin errors (CORS noise or extensions)
+            if (msg.toLowerCase().includes("script error") || lineNo === 0) {
+                console.warn('Suppressed cross-origin/extension error:', msg, url);
+                return true;
+            }
+
             const errorBox = document.createElement('div');
             errorBox.style.position = 'fixed';
             errorBox.style.top = '0';
@@ -48,10 +54,14 @@
             errorBox.style.width = '100%';
             errorBox.style.background = '#ef4444';
             errorBox.style.color = '#fff';
-            errorBox.style.padding = '20px';
-            errorBox.style.zIndex = '9999';
+            errorBox.style.padding = '10px 20px';
+            errorBox.style.zIndex = '10000';
+            errorBox.style.fontSize = '12px';
             errorBox.style.fontFamily = 'monospace';
-            errorBox.innerHTML = `<strong>Error del Sistema:</strong><br>${msg}<br><small>${url}:${lineNo}</small>`;
+            errorBox.innerHTML = `<div style="display:flex; justify-content:between; align-items:center;">
+                <span><strong>Error del Sistema:</strong> ${msg} (${lineNo})</span>
+                <button onclick="this.parentElement.parentElement.remove()" style="background:rgba(0,0,0,0.2); border:none; color:white; padding:2px 8px; border-radius:4px; font-weight:bold; cursor:pointer;">Cerrar</button>
+            </div>`;
             document.body.appendChild(errorBox);
             return false;
         };
@@ -88,7 +98,7 @@
     </script>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
     <link
@@ -164,7 +174,7 @@
     </div>
 
     <!-- External Libs -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js" crossorigin="anonymous"></script>
 
     <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
