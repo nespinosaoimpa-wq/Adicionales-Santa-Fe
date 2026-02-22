@@ -347,17 +347,17 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v1.9.8 Loaded - Profile Fix & Logic Cleanup");
+        console.log("App v3.1.0 Loaded - Hybrid (Firebase Auth + Supabase)");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());
 
-        // Force Persistence FIRST
+        // FORCE PERSISTENCE (Firebase)
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .catch((e) => console.error("Persistence Error:", e));
 
-        // Listen to Auth State
+        // Source of Truth: Firebase Auth
         this.unsub = auth.onAuthStateChanged(async user => {
             if (user) {
                 console.log("🔐 User Logged In:", user.email);
@@ -645,20 +645,15 @@ window.handleLogin = async (event) => {
 };
 
 // Handle Google Redirect Result AFTER DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-    auth.getRedirectResult().then(async (result) => {
-        if (result && result.user) {
-            console.log("✅ Google Redirect Success:", result.user.email);
-            debugLog("Google Login: " + result.user.email);
-            showToast("¡Bienvenido! " + result.user.displayName);
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const { data, error } = await supabase.auth.getSession();
+        if (data?.session?.user) {
+            console.log("✅ Google/OAuth Session active:", data.session.user.email);
         }
-    }).catch((error) => {
-        console.error("❌ Redirect Error:", error);
-        debugLog("Error: " + error.code);
-        if (error.code !== 'auth/popup-closed-by-user') {
-            showToast("Error de autenticación: " + error.message);
-        }
-    });
+    } catch (error) {
+        console.error("❌ Auth Error:", error);
+    }
 });
 
 
@@ -3120,41 +3115,86 @@ function renderCentinela(container) {
     const input = document.getElementById('chat-input');
     const chat = document.getElementById('chat-messages');
 
+    const knowledgeBase = [
+        {
+            category: 'licencias',
+            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar'],
+            responses: [
+                {
+                    match: ['paternidad', 'nacimiento', 'hijo'],
+                    text: "Según el **Decreto 4157/15**, te corresponden **15 días corridos** de licencia por paternidad. Debes presentar el acta de nacimiento dentro de los 3 días posteriores al reintegro."
+                },
+                {
+                    match: ['maternidad', 'embarazo'],
+                    text: "La licencia por maternidad comprende **90 días corridos** (divididos en 45 días antes y 45 después del parto). Está regulada por la Ley 12.521 y decretos complementarios."
+                },
+                {
+                    match: ['vacaciones', 'anual', 'ordinaria'],
+                    text: "La Licencia Anual Ordinaria depende de tu antigüedad:\n- Hasta 5 años: 15 días hábiles.\n- Hasta 10 años: 20 días hábiles.\n- Hasta 15 años: 25 días hábiles.\n- Más de 15 años: 30 días hábiles."
+                }
+            ],
+            default: "El régimen de licencias está regulado por el **Decreto 4157/15**. ¿Sobre qué tipo de licencia específica necesitas información (Paternidad, Médica, Ordinaria)?"
+        },
+        {
+            category: 'disciplina',
+            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario'],
+            responses: [
+                {
+                    match: ['leves', 'demora', 'uniforme'],
+                    text: "Las **Faltas Leves** (Art. 41 del Decreto 461/15) incluyen: demoras injustificadas, descuido en el aseo o uniforme y falta de respeto a subalternos. Sanción: apercibimiento o hasta 10 días de arresto."
+                },
+                {
+                    match: ['graves', 'abandono', 'ebriedad', 'violencia'],
+                    text: "Las **Faltas Graves** (Art. 42) incluyen: abandono de servicio, ebriedad en servicio o violencia de género. Sanción: desde 11 días de suspensión hasta la Destitución (Cesantía/Exoneración)."
+                }
+            ],
+            default: "El Régimen Disciplinario se rige por el **Decreto 461/15**. Clasifica las faltas en Leves y Graves. ¿Querés saber sobre alguna conducta o sanción específica?"
+        },
+        {
+            category: 'jerarquia',
+            keywords: ['ascenso', 'jerarquia', 'escalafon', 'oficial', 'suboficial'],
+            responses: [
+                {
+                    match: ['ascenso', 'concurso', 'grado'],
+                    text: "Los ascensos se realizan mediante concursos de oposición y antecedentes (Ley 12.521). Debes tener el tiempo mínimo en el grado y aprobar los cursos del ISeP correspondientes."
+                }
+            ],
+            default: "La carrera policial administrativa y el sistema de grados está definido en la **Ley 12.521**, Capítulos IV y V."
+        }
+    ];
+
     form.onsubmit = async (e) => {
         e.preventDefault();
         const msg = input.value.trim();
         if (!msg) return;
 
-        // User Message
         appendMessage('user', msg);
         input.value = '';
 
-        // Bot Thinking
         const thinkingId = 'thinking-' + Date.now();
-        appendMessage('bot', '...', thinkingId);
+        appendMessage('bot', '<span class="animate-pulse">Consultando base legal...</span>', thinkingId);
 
-        try {
-            // Placeholder for real AI logic
-            setTimeout(() => {
-                const el = document.getElementById(thinkingId);
-                let response = "Buscando en la normativa...";
+        setTimeout(() => {
+            const el = document.getElementById(thinkingId);
+            const lowerMsg = msg.toLowerCase();
+            let finalResponse = "";
 
-                if (msg.toLowerCase().includes('falta')) {
-                    response = "Según el **Decreto 461/15**, las faltas se dividen en leves y graves. Por ejemplo, el Art. 41 detalla que una demora de más de 15 minutos se considera falta leve.";
-                } else if (msg.toLowerCase().includes('licencia')) {
-                    response = "El régimen de licencias (Decreto 4157) prevé licencias anuales ordinarias basándose en tu antigüedad. ¿Querés que te diga cuántos días te corresponden?";
-                } else {
-                    response = "Analizando tu consulta con base en la **Ley 12.521**. Para una respuesta precisa, por favor especificá si te referís a un artículo disciplinario o administrativo.";
-                }
+            // Finding category
+            const categoryMatch = knowledgeBase.find(c => c.keywords.some(k => lowerMsg.includes(k)));
 
-                el.innerHTML = `<p class="text-xs text-slate-200 leading-relaxed">${response}</p>`;
-                chat.scrollTop = chat.scrollHeight;
-            }, 1000);
+            if (categoryMatch) {
+                // Finding specific response within category
+                const specificSub = categoryMatch.responses.find(r => r.match.some(m => lowerMsg.includes(m)));
+                finalResponse = specificSub ? specificSub.text : categoryMatch.default;
+            } else {
+                finalResponse = "Entiendo tu consulta. Como IA centrada en el marco legal de la **Policía de Santa Fe**, me especializo en la **Ley 12.521**, el **Decreto 461** (Disciplina) y el **Decreto 4157** (Licencias). ¿Podrías reformular tu pregunta usando términos como 'licencia', 'faltas', 'ascensos' o 'uniforme'?";
+            }
 
-        } catch (error) {
-            console.error(error);
-        }
+            el.innerHTML = `<p class="text-xs text-slate-200 leading-relaxed">${finalResponse}</p>`;
+            chat.scrollTop = chat.scrollHeight;
+        }, 800);
     };
+
 
     function appendMessage(role, text, id = null) {
         const div = document.createElement('div');

@@ -1,0 +1,24 @@
+{
+  "name": "adicionales-santa-fe",
+  "version": "1.0.0",
+  "description": "Una aplicación web progresiva (PWA) moderna para la gestión de servicios de policía adicional en Santa Fe.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nespinosaoimpa-wq/Adicionales-Santa-Fe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/nespinosaoimpa-wq/Adicionales-Santa-Fe/issues"
+  },
+  "homepage": "https://github.com/nespinosaoimpa-wq/Adicionales-Santa-Fe#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.97.0"
+  }
+}
