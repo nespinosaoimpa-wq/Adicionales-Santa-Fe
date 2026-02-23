@@ -932,15 +932,21 @@ async function renderAdmin(container) {
 
                 <!-- Active Banners -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
-                    <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-amber-500">ads_click</span>
-                        Publicidad Activa
-                    </h3>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                            <span class="material-symbols-outlined text-amber-500">ads_click</span>
+                            Publicidad Activa
+                        </h3>
+                        <button onclick="store.addAd()" class="px-3 py-1 bg-primary/20 text-primary rounded-lg text-[10px] font-black uppercase hover:bg-primary/30 transition-all">
+                            + Agregar
+                        </button>
+                    </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         ${store.ads && store.ads.length > 0 ? store.ads.map(ad => `
                             <div class="relative group rounded-2xl overflow-hidden border border-white/10 aspect-video shadow-lg">
                                 <img src="${ad.imageUrl}" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center gap-2">
+                                    ${ad.linkUrl ? `<a href="${ad.linkUrl}" target="_blank" class="size-10 rounded-full bg-blue-500 text-white flex items-center justify-center"><span class="material-symbols-outlined">link</span></a>` : ''}
                                     <button onclick="store.deleteAd('${ad.id}')" class="size-10 rounded-full bg-red-500 text-white flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform">
                                         <span class="material-symbols-outlined">delete</span>
                                     </button>
@@ -1015,11 +1021,29 @@ async function renderAdmin(container) {
     const unsubServices = DB.subscribeToAllServices(data => {
         allServices = data;
         updateUI();
+        // Force chart refresh after UI update
+        setTimeout(() => _mountAdminCharts(DB.calculateStats(allUsers, allServices).chartData), 100);
     });
 
     const unsubReviews = DB.subscribeToReviews(newReview => {
         showToast(`⭐ Nueva Reseña: "${newReview.comment}" - ${newReview.user_email}`);
     });
+
+    store.addAd = async () => {
+        const imageUrl = prompt("URL de la Imagen (direct link):");
+        if (!imageUrl) return;
+        const linkUrl = prompt("Link de destino (opcional):", "https://");
+        try {
+            await db.collection('ads').add({
+                imageUrl,
+                linkUrl: linkUrl || '',
+                timestamp: new Date().toISOString()
+            });
+            showToast("✅ Publicidad agregada");
+        } catch (e) {
+            showToast("❌ Error al agregar");
+        }
+    };
 
     // Cleanup when navigating away
     const originalNavigate = router.navigateTo;
@@ -3690,8 +3714,8 @@ window.showDonationModal = () => {
         '<div>' +
         '<p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Alias MP</p>' +
         '<div class="flex items-center justify-between">' +
-        '<p class="text-sm font-black text-white italic">espinosa.oimpa</p>' +
-        '<button onclick="navigator.clipboard.writeText(\'espinosa.oimpa\'); showToast(\'Alias copiado\')" class="text-primary text-xs font-bold">Copiar</button>' +
+        '<p class="text-sm font-black text-white italic">SmartFlow.Digital</p>' +
+        '<button onclick="navigator.clipboard.writeText(\'SmartFlow.Digital\'); showToast(\'Alias copiado\')" class="text-primary text-xs font-bold">Copiar</button>' +
         '</div>' +
         '</div>' +
         '<div class="pt-3 border-t border-white/10">' +

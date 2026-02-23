@@ -30,17 +30,20 @@ const DB = {
     async saveUser(user) {
         if (!user.email) return;
 
-        // Save to Firestore (Retro-compatibility)
+        // Save to Firestore (Primary for UI)
         const userRef = db.collection('users').doc(user.email);
-        await userRef.set({
+        const userData = {
             ...user,
             lastLogin: new Date().toISOString()
-        }, { merge: true });
+        };
+        await userRef.set(userData, { merge: true });
 
         // Sync with Supabase Profiles
         try {
+            // Get Supabase User ID if possible, else use email-based fallback or Firebase UID
+            const sbUser = (await supabaseClient.auth.getUser()).data.user;
             await supabaseClient.from('profiles').upsert({
-                id: (await supabaseClient.auth.getUser()).data.user?.id || user.uid, // Supabase ID might differ from Firebase UID
+                id: sbUser?.id || user.uid || user.email,
                 email: user.email,
                 name: user.name,
                 avatar: user.avatar,
@@ -49,7 +52,7 @@ const DB = {
                 last_login: new Date().toISOString()
             });
         } catch (e) {
-            console.warn("Supabase profile sync failed, continuing with Firebase:", e);
+            console.warn("Supabase profile sync failed:", e);
         }
     },
 
@@ -117,7 +120,12 @@ const DB = {
     // --- ADS ---
     subscribeToAds(callback) {
         return db.collection('ads').onSnapshot(snapshot => {
-            const ads = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            const ads = snapshot.docs.map(doc => ({
+                id: doc.id,
+                imageUrl: doc.data().imageUrl,
+                linkUrl: doc.data().linkUrl || '', // Support for external links
+                ...doc.data()
+            }));
             callback(ads);
         });
     },
@@ -409,16 +417,22 @@ const DB = {
 
     async addReview(rating, comment) {
         const user = auth.currentUser;
-        if (!user) return false;
+        if (!user) {
+            console.error("Review failed: No user logged in");
+            return false;
+        }
         try {
             const { error } = await supabaseClient
                 .from('user_reviews')
                 .insert([{
                     user_email: user.email,
                     rating: parseInt(rating),
-                    comment: comment
+                    comment: comment.trim()
                 }]);
-            if (error) throw error;
+            if (error) {
+                console.error("Supabase Review Error:", error);
+                throw error;
+            }
             return true;
         } catch (e) {
             console.error("Error saving review:", e);
