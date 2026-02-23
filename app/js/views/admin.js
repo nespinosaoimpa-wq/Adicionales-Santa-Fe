@@ -10,6 +10,8 @@ async function renderAdmin(container) {
         </div>
     `;
 
+    let allUsers = [];
+    let allServices = [];
     let allReviews = [];
 
     const updateUI = () => {
