@@ -33,7 +33,7 @@
             navigator.serviceWorker.getRegistrations().then(registrations => {
                 let needsReload = false;
                 for (let registration of registrations) {
-                    if (!registration.active?.scriptURL.includes('sw-v18.js')) {
+                    if (!registration.active?.scriptURL.includes('sw-v19.js')) {
                         console.log('Force killing old SW:', registration.active?.scriptURL);
                         registration.unregister();
                         needsReload = true;
@@ -41,7 +41,10 @@
                 }
                 if (needsReload) {
                     console.log('Old SW detected and removed. Forcing refresh...');
-                    setTimeout(() => window.location.reload(), 500);
+                    caches.keys().then(names => {
+                        for (let name of names) caches.delete(name);
+                    });
+                    setTimeout(() => window.location.reload(true), 800);
                 }
             });
         }
@@ -82,7 +85,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v18.js')
+                navigator.serviceWorker.register('./sw-v19.js')
                     .then(reg => {
                         console.log('SW registered:', reg);
                         reg.onupdatefound = () => {
@@ -194,9 +197,9 @@
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
     <script src="supabase-config.js"></script>
-    <script src="db.js?v=350"></script>
-    <script src="components.js?v=350"></script>
-    <script src="app.js?v=350"></script>
+    <script src="db.js?v=360"></script>
+    <script src="components.js?v=360"></script>
+    <script src="app.js?v=360"></script>
 </body>
 
 </html>

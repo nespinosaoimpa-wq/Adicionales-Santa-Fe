@@ -356,7 +356,7 @@ const store = {
 
     // Initialization
     init() {
-        console.log("App v2.1.0 Loaded - Suite Asistente Virtual PRO");
+        console.log("App v2.1.1 Loaded - Suite Asistente Virtual PRO");
 
         // Inject UI Overlays
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
@@ -2427,7 +2427,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v2.0.0 • Build 2026.02.22</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v2.1.1 • Build 2026.02.22 v2</p>
             </div>
         </main>
     `;
