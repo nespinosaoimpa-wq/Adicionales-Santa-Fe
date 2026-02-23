@@ -141,11 +141,33 @@ const store = {
     },
 
     async addService(service) {
+        const tempId = 'temp-svc-' + Date.now();
+        const optimisticService = {
+            id: tempId,
+            ...service,
+            status: 'pending'
+        };
+
         try {
-            await DB.addService(service);
+            // Optimistic Update
+            this.services.unshift(optimisticService);
+            if (router.currentRoute === '#agenda') renderAgenda(document.getElementById('app'));
+
+            const result = await DB.addService(service);
+
+            // Reemplazar tempId con el real si es necesario (el listener lo hará eventualmente, pero esto ayuda)
+            if (result && result.id) {
+                const idx = this.services.findIndex(s => s.id === tempId);
+                if (idx !== -1) this.services[idx].id = result.id;
+            }
+
             showToast("✅ Servicio guardado");
         } catch (e) {
             console.error("Error saving service:", e);
+            // Rollback
+            this.services = this.services.filter(s => s.id !== tempId);
+            if (router.currentRoute === '#agenda') renderAgenda(document.getElementById('app'));
+
             if (e.message.includes("offline") || e.code === 'unavailable') {
                 showToast("❌ Sin conexión - Intenta más tarde");
             } else {

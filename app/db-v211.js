@@ -221,39 +221,44 @@ const DB = {
 
     async addService(service) {
         const user = auth.currentUser;
-        if (!user) throw new Error("Must be logged in");
+        if (!user) throw new Error("Debe iniciar sesión");
 
-        // 1. Save to Firestore (Redundant backup for reliability)
-        const serviceData = {
-            userEmail: user.email,
-            ...service,
-            createdAt: new Date().toISOString()
-        };
-        const fbPromise = db.collection('services').add(serviceData);
+        try {
+            // 1. Save to Firestore (Primary for UI & Reliability)
+            const serviceData = {
+                userEmail: user.email,
+                ...service,
+                createdAt: new Date().toISOString()
+            };
+            const fbPromise = db.collection('services').add(serviceData);
 
-        // 2. Sync with Supabase (Primary for hybrid stats)
-        const sbPromise = supabaseClient
-            .from('services')
-            .insert([{
-                user_email: user.email,
-                date: service.date,
-                type: service.type,
-                sub_type: service.subType,
-                hours: service.hours,
-                start_time: service.startTime,
-                end_time: service.endTime,
-                location: service.location,
-                total: service.total,
-                status: service.status || 'Pendiente'
-            }]);
+            // 2. Sync with Supabase (Asynchronous background task)
+            const sbPromise = supabaseClient
+                .from('services')
+                .insert([{
+                    user_email: user.email,
+                    date: service.date,
+                    type: service.type,
+                    sub_type: service.subType,
+                    hours: service.hours,
+                    start_time: service.startTime,
+                    end_time: service.endTime,
+                    location: service.location,
+                    total: service.total,
+                    status: service.status || 'Pendiente'
+                }]);
 
-        // Wait for at least Firebase to succeed to acknowledge to user
-        await fbPromise;
+            // Requisito de éxito: Firebase debe responder
+            const fbDoc = await fbPromise;
 
-        // Supabase is handled silently if it fails to not block UI
-        Promise.resolve(sbPromise).catch(e => console.warn("Supabase sync delayed:", e.message));
+            // Supabase se maneja de fondo sin bloquear el éxito
+            Promise.resolve(sbPromise).catch(e => console.warn("Supabase delayed sync:", e.message));
 
-        return { success: true };
+            return { success: true, id: fbDoc.id };
+        } catch (error) {
+            console.error("DB Error (addService):", error);
+            throw error;
+        }
     },
 
     async updateService(id, updates) {
@@ -319,29 +324,34 @@ const DB = {
 
     async addExpense(expense) {
         const user = auth.currentUser;
-        if (!user) throw new Error("Must be logged in");
+        if (!user) throw new Error("Debe iniciar sesión");
 
-        // 1. Save to Firestore
-        const expenseData = {
-            userEmail: user.email,
-            ...expense,
-            createdAt: new Date().toISOString()
-        };
-        const fbPromise = db.collection('expenses').add(expenseData);
+        try {
+            // 1. Save to Firestore (Primary)
+            const expenseData = {
+                userEmail: user.email,
+                ...expense,
+                createdAt: new Date().toISOString()
+            };
+            const fbPromise = db.collection('expenses').add(expenseData);
 
-        // 2. Save to Supabase
-        const sbPromise = supabaseClient.from('expenses').insert([{
-            user_email: user.email,
-            category: expense.category,
-            amount: expense.amount,
-            description: expense.description,
-            date: expense.date
-        }]);
+            // 2. Save to Supabase (Secondary)
+            const sbPromise = supabaseClient.from('expenses').insert([{
+                user_email: user.email,
+                category: expense.category,
+                amount: expense.amount,
+                description: expense.description,
+                date: expense.date
+            }]);
 
-        await fbPromise;
-        Promise.resolve(sbPromise).catch(e => console.warn("Supabase expense sync delayed:", e.message));
+            await fbPromise;
+            Promise.resolve(sbPromise).catch(e => console.warn("Supabase expense delayed sync:", e.message));
 
-        return { success: true };
+            return { success: true };
+        } catch (error) {
+            console.error("DB Error (addExpense):", error);
+            throw error;
+        }
     },
 
     async deleteExpense(id) {
