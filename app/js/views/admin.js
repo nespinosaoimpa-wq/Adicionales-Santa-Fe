@@ -10,12 +10,12 @@ async function renderAdmin(container) {
         </div>
     `;
 
-    let allUsers = [];
-    let allServices = [];
+    window.allUsers = window.allUsers || [];
+    window.allServices = window.allServices || [];
     let allReviews = [];
 
     const updateUI = () => {
-        const stats = DB.calculateStats(allUsers, allServices);
+        const stats = DB.calculateStats(window.allUsers, window.allServices);
 
         container.innerHTML = `
         <div class="min-h-screen bg-[#0f172a] text-slate-200 font-sans pb-24 animate-fade-in">
@@ -202,15 +202,15 @@ async function renderAdmin(container) {
 
     // Subscriptions
     const unsubUsers = DB.subscribeToUsers(data => {
-        allUsers = data;
+        window.allUsers = data;
         updateUI();
     });
 
     const unsubServices = DB.subscribeToAllServices(data => {
-        allServices = data;
+        window.allServices = data;
         updateUI();
         // Force chart refresh after UI update
-        setTimeout(() => _mountAdminCharts(DB.calculateStats(allUsers, allServices).chartData), 100);
+        setTimeout(() => _mountAdminCharts(DB.calculateStats(window.allUsers, window.allServices).chartData), 100);
     });
 
     const unsubReviews = DB.subscribeToReviews((newReview, isInitial) => {

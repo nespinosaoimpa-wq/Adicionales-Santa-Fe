@@ -821,9 +821,9 @@ window.showAnnouncementModal = () => {
                 <span class="material-symbols-outlined text-4xl">celebration</span>
             </div>
             <div class="space-y-2">
-                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v2.1.3 v514 Activa!</h3>
+                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v2.1.4 v517 Activa!</h3>
                 <p class="text-xs text-slate-400 font-medium leading-relaxed">
-                    🚀 **Inteligencia Centinela 3.0**: Entiende consultas naturales sobre horarios de colectivos, Manual MIRAF y Ley 14283.
+                    🚀 **Inteligencia Centinela 3.1**: Nueva **Planimetría Policial** (Jerarquías/Escalafones), Manual MIRAF y Sueldos Decreto 142/26 integrados.
                 </p>
             </div>
             <button onclick="this.closest('.fixed').remove()" class="w-full py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all uppercase tracking-widest text-xs">
