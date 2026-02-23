@@ -425,7 +425,11 @@ const DB = {
             .order('created_at', { ascending: false })
             .limit(20)
             .then(({ data }) => {
-                if (data) data.forEach(r => callback(r, true)); // true means is_initial
+                if (data && data.length > 0) {
+                    data.forEach(r => callback(r, true));
+                } else {
+                    callback(null, true);
+                }
             });
 
         const channel = supabaseClient

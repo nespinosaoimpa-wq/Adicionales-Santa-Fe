@@ -13,6 +13,7 @@ async function renderAdmin(container) {
     window.allUsers = window.allUsers || [];
     window.allServices = window.allServices || [];
     let reviewsMap = new Map(); // id -> review
+    let reviewsLoaded = false;
 
     const updateUI = () => {
         const stats = DB.calculateStats(window.allUsers, window.allServices);
@@ -115,7 +116,9 @@ async function renderAdmin(container) {
                             <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-500 text-[10px]">${reviewsMap.size}</span>
                         </h3>
                         <div class="space-y-4 overflow-y-auto flex-1 pr-2 custom-scrollbar">
-                            ${reviewsMap.size === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8">Cargando buzón...</p>' : Array.from(reviewsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map(r => `
+                            ${!reviewsLoaded ? '<p class="text-slate-500 text-xs italic text-center py-8">Cargando buzón...</p>' :
+                reviewsMap.size === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8 font-bold uppercase tracking-widest opacity-30">No hay reseñas aún</p>' :
+                    Array.from(reviewsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map(r => `
                                 <div class="p-4 bg-white/5 rounded-2xl border border-white/5 animate-fade-in">
                                     <div class="flex justify-between items-start mb-2">
                                         <p class="text-[9px] font-black text-primary truncate max-w-[120px]">${r.user_email}</p>
@@ -229,8 +232,15 @@ async function renderAdmin(container) {
     });
 
     const unsubReviews = DB.subscribeToReviews((newReview, isInitial) => {
+        if (newReview === null) {
+            reviewsLoaded = true;
+            updateUI();
+            return;
+        }
+
         // Usar Map para asegurar unicidad por ID
         reviewsMap.set(newReview.id, newReview);
+        reviewsLoaded = true;
 
         if (!isInitial) {
             showToast(`⭐ Nueva Reseña: "${newReview.comment}" - ${newReview.user_email}`);

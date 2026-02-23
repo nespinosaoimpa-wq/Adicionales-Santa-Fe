@@ -181,7 +181,7 @@ function renderDonationHeader() {
     return `
         <div onclick="window.showDonationModal()" class="flex flex-col items-end cursor-pointer group hover:scale-105 transition-transform bg-primary/5 px-3 py-1.5 rounded-2xl border border-primary/20">
             <span class="text-[9px] font-black text-primary/60 uppercase tracking-tighter">Soporte / Alias</span>
-            <span class="text-[11px] font-black text-white group-hover:text-primary transition-colors">centinela.sf</span>
+            <span class="text-[11px] font-black text-white group-hover:text-primary transition-colors">SmartFlow.Digital</span>
         </div>
     `;
 }
@@ -209,8 +209,8 @@ function showDonationModal() {
                 <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-1 group relative">
                     <span class="text-[9px] font-bold text-primary uppercase text-left">Mercado Pago / Alias</span>
                     <div class="flex items-center justify-between">
-                        <span class="text-lg font-black text-white italic">centinela.sf</span>
-                        <button onclick="copyToClipboard('centinela.sf', '✅ Alias copiado')" class="size-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                        <span class="text-lg font-black text-white italic">SmartFlow.Digital</span>
+                        <button onclick="copyToClipboard('SmartFlow.Digital', '✅ Alias copiado')" class="size-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
                             <span class="material-symbols-outlined text-sm">content_copy</span>
                         </button>
                     </div>
@@ -220,8 +220,8 @@ function showDonationModal() {
                 <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-1 group relative">
                     <span class="text-[9px] font-bold text-primary uppercase text-left">CVU</span>
                     <div class="flex items-center justify-between">
-                        <span class="text-[10px] font-mono text-slate-400 break-all pr-2">0000003100055276332766</span>
-                        <button onclick="copyToClipboard('0000003100055276332766', '✅ CVU copiado')" class="size-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all shrink-0">
+                        <span class="text-[10px] font-mono text-slate-400 break-all pr-2">0000003100001906497190</span>
+                        <button onclick="copyToClipboard('0000003100001906497190', '✅ CVU copiado')" class="size-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all shrink-0">
                             <span class="material-symbols-outlined text-sm">content_copy</span>
                         </button>
                     </div>
