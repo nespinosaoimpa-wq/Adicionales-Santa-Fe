@@ -2853,7 +2853,7 @@ function renderAsistenteHub(container) {
     if (!container) container = document.getElementById('app');
 
     const tools = [
-        { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela' },
+        { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
         { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },
         { id: 'directorio', title: 'Directorio Policial', desc: 'Números de emergencia interna.', icon: 'contact_phone', color: 'from-amber-500 to-orange-500', route: '#asistente/directorio' },
@@ -2883,8 +2883,9 @@ function renderAsistenteHub(container) {
                         <div class="absolute -right-4 -top-4 size-24 bg-gradient-to-br ${tool.color} opacity-5 blur-2xl group-hover:opacity-20 transition-opacity"></div>
                         
                         <div class="flex gap-4 items-start relative z-10">
-                            <div class="size-12 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-110">
+                            <div class="size-12 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-110 relative">
                                 <span class="material-symbols-outlined text-2xl">${tool.icon}</span>
+                                ${tool.badge ? `<span class="absolute -top-1 -right-1 flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500 border border-background-dark"></span></span>` : ''}
                             </div>
                             <div class="flex-1 space-y-1">
                                 <h3 class="font-bold text-white group-hover:text-primary transition-colors">${tool.title}</h3>
@@ -2979,7 +2980,7 @@ function renderAsistenteHub(container) {
  * Announcement Modal v2.1
  */
 function showAnnouncementModal() {
-    const hasSeen = localStorage.getItem('seen_v2_announcement');
+    const hasSeen = localStorage.getItem('seen_v2_1_1_announcement');
     if (hasSeen) return;
 
     const modal = document.createElement('div');
@@ -2992,26 +2993,26 @@ function showAnnouncementModal() {
             
             <div class="space-y-2">
                 <h2 class="text-xl font-black text-white">¡App Actualizada!</h2>
-                <p class="text-xs text-slate-400 leading-relaxed">Bienvenido a la versión **2.1.0 (PRO)** con mejoras críticas de estabilidad y nuevas funciones policiales.</p>
+                <p class="text-xs text-slate-400 leading-relaxed">Bienvenido a la versión **Final (PRO)** con todas las funciones policiales habilitadas.</p>
             </div>
 
             <div class="space-y-3 text-left">
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
-                    <span class="material-symbols-outlined text-primary">cloud_sync</span>
-                    <p class="text-[11px] text-slate-200">**Sincronización Híbrida**: Tus datos de Firebase ahora están en Supabase.</p>
+                    <span class="material-symbols-outlined text-amber-500">smart_toy</span>
+                    <p class="text-[11px] text-slate-200">**Centinela AI v2**: Base legal expandida y respuestas inteligentes para oficiales.</p>
                 </div>
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
-                    <span class="material-symbols-outlined text-amber-500">smart_toy</span>
-                    <p class="text-[11px] text-slate-200">**Centinela AI v2**: Nueva base legal (Ley 12.521 y Decretos de Licencia).</p>
+                    <span class="material-symbols-outlined text-emerald-500">volunteer_activism</span>
+                    <p class="text-[11px] text-slate-200">**Apoyo al Proyecto**: Nueva sección en Perfil para colaborar con el crecimiento.</p>
                 </div>
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
                     <span class="material-symbols-outlined text-purple-500">rate_review</span>
-                    <p class="text-[11px] text-slate-200">**Buzón de Ideas**: Ahora podés enviarnos sugerencias directamente.</p>
+                    <p class="text-[11px] text-slate-200">**Buzón de Ideas**: Envíanos tus sugerencias directamente desde el Asistente.</p>
                 </div>
             </div>
 
             <button id="close-announcement" class="w-full py-4 rounded-2xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/25 active:scale-95 transition-all">
-                ¡Entendido, vamos!
+                ¡Empezar a usar!
             </button>
         </div>
     `;
@@ -3019,7 +3020,7 @@ function showAnnouncementModal() {
     document.body.appendChild(modal);
 
     document.getElementById('close-announcement').onclick = () => {
-        localStorage.setItem('seen_v2_announcement', 'true');
+        localStorage.setItem('seen_v2_1_1_announcement', 'true');
         modal.classList.add('animate-fade-out');
         setTimeout(() => modal.remove(), 300);
     };

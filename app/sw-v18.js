@@ -2,9 +2,9 @@ const CACHE_NAME = 'adicionales-sf-v340';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
-    './app.js?v=340',
-    './db.js?v=340',
-    './components.js?v=340',
+    './app.js?v=350',
+    './db.js?v=350',
+    './components.js?v=350',
     './firebase-config.js',
     './styles.css',
     'https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries',
