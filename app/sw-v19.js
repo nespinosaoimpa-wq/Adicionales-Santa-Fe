@@ -2,9 +2,9 @@ const CACHE_NAME = 'adicionales-sf-v360';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
-    './app.js?v=360',
-    './db.js?v=360',
-    './components.js?v=360',
+    './app-v211.js?v=370',
+    './db-v211.js?v=370',
+    './components-v211.js?v=370',
     './firebase-config.js',
     './styles.css',
     'https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries',
