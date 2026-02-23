@@ -32,6 +32,23 @@ function renderStats(container) {
     }
     const maxValue = Math.max(...weekData.map(d => d.value), 1000);
 
+    // Datos Mensuales (Últimos 6 meses)
+    const monthlyData = [];
+    for (let i = 5; i >= 0; i--) {
+        const d = new Date();
+        d.setMonth(today.getMonth() - i);
+        const monthYear = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+        const monthTotal = services
+            .filter(s => s.date && s.date.startsWith(monthYear))
+            .reduce((sum, s) => sum + (s.total || 0), 0);
+
+        monthlyData.push({
+            label: d.toLocaleDateString('es-AR', { month: 'short' }).toUpperCase().replace('.', ''),
+            value: monthTotal
+        });
+    }
+    const maxMonthValue = Math.max(...monthlyData.map(d => d.value), 1000);
+
     container.innerHTML = `
         <div class="min-h-screen bg-[#0a0c12] text-white">
             <header class="h-16 flex items-center justify-between px-4 border-b border-white/5">
@@ -107,14 +124,28 @@ function renderStats(container) {
                     </div>
                 </section>
 
-                <!-- Monthly Trend (Compact & Sleek) -->
+                <!-- Monthly Trend (Dynamic Chart) -->
                 <section class="space-y-4">
-                    <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] px-1">Tendencia Mensual</h3>
-                    <div class="glass-card p-6 rounded-[2.5rem] border border-white/5 bg-slate-900/20 h-32 flex items-center justify-center">
-                        <p class="text-slate-600 text-[10px] font-bold uppercase tracking-widest italic flex items-center gap-2">
-                            <span class="material-symbols-outlined text-sm">construction</span>
-                            Optimizando datos históricos...
-                        </p>
+                    <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] px-1">Tendencia Mensual (6m)</h3>
+                    <div class="glass-card p-6 rounded-[2.5rem] border border-white/5 bg-slate-900/40">
+                        <div class="flex items-end justify-between gap-4 h-24 pb-1">
+                            ${monthlyData.map(m => {
+        const height = Math.max((m.value / maxMonthValue) * 100, 5);
+        return `
+                                    <div class="flex-1 flex flex-col items-center gap-1.5 group">
+                                        <div class="w-full relative flex items-end justify-center" style="height: 60px;">
+                                            <div class="w-full max-w-[12px] rounded-full bg-gradient-to-t from-primary/20 to-primary/80 transition-all duration-700"
+                                                 style="height: ${height}%">
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <span class="text-[8px] font-black text-slate-500 group-hover:text-primary transition-colors">${m.label}</span>
+                                            <span class="text-[7px] font-bold text-slate-700">$${(m.value / 1000).toFixed(0)}k</span>
+                                        </div>
+                                    </div>
+                                `;
+    }).join('')}
+                        </div>
                     </div>
                 </section>
             </main>
