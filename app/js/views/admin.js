@@ -93,7 +93,22 @@ async function renderAdmin(container) {
                         </div>
                     </div>
 
-                    <!-- Reviews Panel (New) -->
+                    <!-- Global Type Distribution (Restored) -->
+                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                         <div class="flex items-center justify-between mb-8">
+                            <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                <span class="material-symbols-outlined text-accent-cyan text-sm">pie_chart</span>
+                                Mix de Servicios
+                            </h3>
+                        </div>
+                        <div class="h-64 relative">
+                            <canvas id="adminTypeChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                     <!-- Reviews Panel -->
                     <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl h-[400px] flex flex-col">
                         <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center justify-between">
                             <span>Reseñas Recientes</span>
