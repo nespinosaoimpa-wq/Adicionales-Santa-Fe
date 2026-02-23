@@ -3332,7 +3332,7 @@ function renderCentinela(container) {
     const knowledgeBase = [
         {
             category: 'licencias',
-            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio'],
+            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio', 'licencias'],
             responses: [
                 {
                     match: ['paternidad', 'nacimiento', 'hijo'],
@@ -3343,60 +3343,75 @@ function renderCentinela(container) {
                     text: "La licencia por maternidad comprende **90 días corridos** (divididos en 45 días antes y 45 después del parto). Está regulada por la Ley 12.521 y decretos complementarios."
                 },
                 {
-                    match: ['vacaciones', 'anual', 'ordinaria'],
-                    text: "La Licencia Anual Ordinaria depende de tu antigüedad:\n- Hasta 5 años: 15 días hábiles.\n- Hasta 10 años: 20 días hábiles.\n- Hasta 15 años: 25 días hábiles.\n- Más de 15 años: 30 días hábiles."
+                    match: ['vacaciones', 'anual', 'ordinaria', 'días', 'fracciona', 'antigüedad'],
+                    text: "La **Licencia Anual Ordinaria** (Art. 82 Ley 12.521) se computa en **días hábiles**:\n- 6 meses a 5 años: **19 días**.\n- 5 a 15 años: **25 días**.\n- Más de 15 años: **35 días**.\n\n**Fraccionamiento**: Se puede dividir en hasta **2 fracciones**, ninguna menor a 7 días."
                 },
                 {
                     match: ['fallecimiento', 'duelo'],
                     text: "Por fallecimiento de cónyuge, hijos o padres: **5 días corridos**. Por hermanos o abuelos: **2 días corridos**. Según Decreto 4157."
                 }
             ],
-            default: "El régimen de licencias está regulado por el **Decreto 4157/15**. ¿Sobre qué tipo de licencia específica necesitas información (Paternidad, Médica, Familiar, Ordinaria)?"
+            default: "El régimen de licencias está regulado por el **Decreto 4157/15** y la **Ley 12.521**. ¿Sobre qué tipo de licencia específica necesitas información (Paternidad, Médica, Familiar, Ordinaria)?"
         },
         {
             category: 'disciplina',
-            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario', 'sumarials'],
+            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario', 'gorra', 'uniforme', 'aseo', 'amonestar'],
             responses: [
                 {
-                    match: ['leves', 'demora', 'uniforme', 'aseo'],
+                    match: ['gorra', 'uniforme', 'aseo', 'amonestar', 'vestimenta', 'prenda'],
+                    text: "El uso del uniforme y la **gorra** es **obligatorio** durante el servicio (Art. 69 Ley 12.521). No tenerla o usarla incorrectamente se considera una **Falta Leve** (Art. 41 Decreto 461/15), pudiendo derivar en apercibimiento o arresto de hasta 10 días según el R.U.E.P. (Decreto 2359/92)."
+                },
+                {
+                    match: ['leves', 'demora', 'falta'],
                     text: "Las **Faltas Leves** (Art. 41 del Decreto 461/15) incluyen: demoras injustificadas, descuido en el aseo o uniforme y falta de respeto a subalternos. Sanción: apercibimiento o hasta 10 días de arresto."
                 },
                 {
                     match: ['graves', 'abandono', 'ebriedad', 'violencia', 'maltrato'],
-                    text: "Las **Faltas Graves** (Art. 42) incluyen: abandono de servicio, ebriedad en servicio o violencia de género. Sanción: desde 11 días de suspensión hasta la Destitución (Cesantía/Exoneración)."
+                    text: "Las **Faltas Graves** (Art. 42) incluyen: abandono de servicio, ebriedad en servicio o violencia de género. Sanción: desde 11 días de suspensión hasta la Destitución."
                 }
             ],
             default: "El Régimen Disciplinario se rige por el **Decreto 461/15**. Clasifica las faltas en Leves y Graves. ¿Querés saber sobre alguna conducta o sanción específica?"
         },
         {
-            category: 'jerarquia',
-            keywords: ['ascenso', 'jerarquia', 'escalafon', 'oficial', 'suboficial', 'grado', 'promocion'],
+            category: 'retiro',
+            keywords: ['jubilacion', 'retiro', 'jubilar', 'años', 'servicio', 'porcentaje', 'haber', 'edad', 'jubilado'],
             responses: [
                 {
-                    match: ['ascenso', 'concurso', 'grado', 'junta'],
-                    text: "Los ascensos se realizan mediante concursos de oposición y antecedentes (Ley 12.521). Debes tener el tiempo mínimo en el grado y aprobar los cursos del ISeP correspondientes."
+                    match: ['cuanto', 'años', 'servicio', 'adelantado', 'porcentaje'],
+                    text: "Según la **Ley 11.530** y reformas recientes:\n- **Retiro Voluntario**: 30 años de servicio.\n- **Retiro Obligatorio**: Desde los 25 años de servicio (progresivo).\n- **Haber**: El porcentaje va desde el **72% (con 25 años)** hasta el **85% o 100%** según el tiempo excedente y jerarquía. La reforma actual busca llevar el mínimo a 30 años para el 85%."
                 }
             ],
-            default: "La carrera policial administrativa y el sistema de grados está definido en la **Ley 12.521**, Capítulos IV y V."
+            default: "Los retiros policiales en Santa Fe se rigen por la **Ley 11.530**. El haber jubilatorio depende estrictamente de los años de servicio y los aportes (17% al 20%)."
         },
         {
-            category: 'beneficios',
-            keywords: ['sueldo', 'haberes', 'suplemento', 'titulo', 'recargo', 'antigüedad'],
+            category: 'sueldos',
+            keywords: ['sueldo', 'haberes', 'cobrar', 'minimo', 'jerarquia', 'oficial', 'recardos', 'monto', 'plata', 'ingresado'],
             responses: [
                 {
-                    match: ['titulo'],
-                    text: "El suplemento por título depende del nivel: Terciario (15%), Universitario (25%) calculado sobre el sueldo básico del grado."
+                    match: ['minimo', 'recien', 'ingresado', 'cuanto', 'inicial'],
+                    text: "A febrero de 2026 (Decreto 203/26), el **Sueldo Mínimo Garantizado** para un Oficial recién ingresado es de **$1.360.299** (basado en la Canasta Básica Total)."
                 },
                 {
-                    match: ['recargo', 'hora', 'descanso'],
-                    text: "Por cada recargo de servicio, te corresponde el descanso compensatorio equivalente al tiempo recargado. Ley 12.521, Art 81."
-                },
-                {
-                    match: ['retroactivo', 'cobrar atrasado', 'pago retroactivo', 'diferencia'],
-                    text: "Los **Pagos Retroactivos** suelen corresponder a diferencias salariales por ascensos, suplementos mal liquidados o decretos de aumento con fecha anterior. Debes verificar el concepto en tu recibo (`Cód. 1045` generalmente para retroactivos) y asegurar que el decreto que otorgó el beneficio así lo estipule."
+                    match: ['operativo', 'calle', 'plus', 'adicional', 'chofer', 'conductor'],
+                    text: "Existen adicionales significativos:\n- **Plus de Calle**: $500.000 (Rosario/Santa Fe/Sto Tomé/etc).\n- **Adicional Operativo**: Sueldos base desde $1.525.682.\n- **Conducción**: Entre $250.000 y $350.000 extra por manejar móviles policiales."
                 }
             ],
-            default: "Los beneficios económicos y recargos están contemplados en la Ley 12.521. ¿Necesitás info sobre Títulos, Antigüedad o Recargos?"
+            default: "Los haberes policiales se actualizan por decretos provinciales. El mínimo garantizado actual supera los $1.3M para la jerarquía más baja."
+        },
+        {
+            category: 'transporte',
+            keywords: ['colectivo', 'transporte', 'viaje', 'horario', 'salida', 'gratis', 'boleto', 'rosario', 'paiva', 'vera'],
+            responses: [
+                {
+                    match: ['horario', 'colectivo', 'salida', 'donde', 'rosario', 'santa fe'],
+                    text: "**Servicios Policiales Exclusivos**:\n- **Santa Fe -> Rosario**: Sale 04:15 AM.\n- **Vera -> Rosario**: Sale 23:00 (pasa por SF 03:30 AM, sale 04:00 AM).\n- **Rosario -> Vera**: Sale 09:00 AM.\n\n**Recorrido Laguna Paiva**: La empresa *El Norte* tiene salidas desde SF a las 06:20, 12:00, 15:55 y 21:15."
+                },
+                {
+                    match: ['medio', 'boleto', 'descuento', 'gratis', 'pasaje'],
+                    text: "Por ley provincial, el personal policial uniformado goza de un **50% de descuento (Medio Boleto)** en colectivos interurbanos dentro de la provincia de Santa Fe para asistir al servicio."
+                }
+            ],
+            default: "El Ministerio de Seguridad ofrece colectivos exclusivos (Gratuitos) Santa Fe-Rosario y Vera-Rosario. También rige el Medio Boleto Policial (50%) para uniformados."
         }
     ];
 
