@@ -38,8 +38,9 @@
             navigator.serviceWorker.getRegistrations().then(registrations => {
                 let needsHardReset = false;
                 for (let reg of registrations) {
-                    if (!reg.active?.scriptURL.includes('sw-v525.js')) {
-                        console.log('☢️ Outdated SW detected:', reg.active?.scriptURL);
+                    const url = reg.active?.scriptURL || reg.installing?.scriptURL || reg.waiting?.scriptURL || '';
+                    if (!url.includes('sw-v525.js')) {
+                        console.log('☢️ Outdated SW detected:', url);
                         reg.unregister();
                         needsHardReset = true;
                     }
@@ -118,7 +119,7 @@
     </script>
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="styles.css?v=524">
+    <link rel="stylesheet" href="styles.css?v=525">
 
     <!-- Mobile App Styles -->
     <style>
@@ -149,7 +150,7 @@
         class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
         <div class="flex flex-col items-center justify-center h-screen space-y-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p class="text-slate-500 animate-pulse">Cargando v524...</p>
+            <p class="text-slate-500 animate-pulse">Sincronizando v525...</p>
         </div>
     </div>
 
