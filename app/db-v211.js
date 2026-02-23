@@ -251,7 +251,7 @@ const DB = {
         await fbPromise;
 
         // Supabase is handled silently if it fails to not block UI
-        sbPromise.catch(e => console.warn("Supabase sync delayed:", e.message));
+        Promise.resolve(sbPromise).catch(e => console.warn("Supabase sync delayed:", e.message));
 
         return { success: true };
     },
@@ -339,7 +339,7 @@ const DB = {
         }]);
 
         await fbPromise;
-        sbPromise.catch(e => console.warn("Supabase expense sync delayed:", e.message));
+        Promise.resolve(sbPromise).catch(e => console.warn("Supabase expense sync delayed:", e.message));
 
         return { success: true };
     },
