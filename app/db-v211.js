@@ -520,7 +520,7 @@ const DB = {
                     user_email: user.email,
                     rating: parseInt(rating),
                     comment: comment.trim(),
-                    created_at: new Date().toISOString() // Explícito
+                    timestamp: new Date().toISOString() // Explícito corregido
                 }]);
             if (error) {
                 console.error("Supabase Review Error:", error);
