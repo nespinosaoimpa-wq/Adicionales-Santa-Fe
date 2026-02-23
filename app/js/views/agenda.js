@@ -44,8 +44,11 @@ function renderAgenda(container) {
                     <button onclick="showToast('Sin notificaciones nuevas')" class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300">
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
-                    <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
-                        <img class="w-full h-full object-cover" src="${store.user.avatar}" />
+                    <div class="flex items-center gap-2">
+                        ${renderDonationHeader()}
+                        <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
+                            <img class="w-full h-full object-cover" src="${store.user.avatar}" />
+                        </div>
                     </div>
                 </div>
             </div>

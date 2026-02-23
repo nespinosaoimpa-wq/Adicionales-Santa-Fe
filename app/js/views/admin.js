@@ -12,7 +12,7 @@ async function renderAdmin(container) {
 
     window.allUsers = window.allUsers || [];
     window.allServices = window.allServices || [];
-    let allReviews = [];
+    let reviewsMap = new Map(); // id -> review
 
     const updateUI = () => {
         const stats = DB.calculateStats(window.allUsers, window.allServices);
@@ -112,10 +112,10 @@ async function renderAdmin(container) {
                     <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl h-[400px] flex flex-col">
                         <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center justify-between">
                             <span>Reseñas Recientes</span>
-                            <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-500 text-[10px]">${allReviews.length}</span>
+                            <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-500 text-[10px]">${reviewsMap.size}</span>
                         </h3>
                         <div class="space-y-4 overflow-y-auto flex-1 pr-2 custom-scrollbar">
-                            ${allReviews.length === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8">Cargando buzón...</p>' : allReviews.map(r => `
+                            ${reviewsMap.size === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8">Cargando buzón...</p>' : Array.from(reviewsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map(r => `
                                 <div class="p-4 bg-white/5 rounded-2xl border border-white/5 animate-fade-in">
                                     <div class="flex justify-between items-start mb-2">
                                         <p class="text-[9px] font-black text-primary truncate max-w-[120px]">${r.user_email}</p>
@@ -229,14 +229,10 @@ async function renderAdmin(container) {
     });
 
     const unsubReviews = DB.subscribeToReviews((newReview, isInitial) => {
-        if (isInitial) {
-            // Check if already in list to avoid duplicates from hybrid sync
-            if (!allReviews.find(r => r.id === newReview.id)) {
-                allReviews.push(newReview);
-                allReviews.sort((a, b) => new Date(b.created_at || b.timestamp) - new Date(a.created_at || a.timestamp));
-            }
-        } else {
-            allReviews.unshift(newReview);
+        // Usar Map para asegurar unicidad por ID
+        reviewsMap.set(newReview.id, newReview);
+
+        if (!isInitial) {
             showToast(`⭐ Nueva Reseña: "${newReview.comment}" - ${newReview.user_email}`);
         }
         updateUI();

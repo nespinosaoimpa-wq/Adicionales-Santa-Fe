@@ -38,7 +38,7 @@
             navigator.serviceWorker.getRegistrations().then(registrations => {
                 let needsReload = false;
                 for (let registration of registrations) {
-                    if (!registration.active?.scriptURL.includes('sw-v522.js')) {
+                    if (!registration.active?.scriptURL.includes('sw-v524.js')) {
                         console.log('Force killing old SW:', registration.active?.scriptURL);
                         registration.unregister();
                         needsReload = true;
@@ -70,9 +70,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v522.js')
+                navigator.serviceWorker.register('./sw-v524.js')
                     .then(reg => {
-                        console.log('SW v522 registered:', reg);
+                        console.log('SW v524 registered:', reg);
                         reg.onupdatefound = () => {
                             const installingWorker = reg.installing;
                             installingWorker.onstatechange = () => {
@@ -132,7 +132,7 @@
     </script>
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="styles.css?v=522">
+    <link rel="stylesheet" href="styles.css?v=524">
 
     <!-- Mobile App Styles -->
     <style>
@@ -163,7 +163,7 @@
         class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
         <div class="flex flex-col items-center justify-center h-screen space-y-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p class="text-slate-500 animate-pulse">Cargando v520...</p>
+            <p class="text-slate-500 animate-pulse">Cargando v524...</p>
         </div>
     </div>
 
@@ -182,29 +182,29 @@
     <!-- Application Logic -->
     <script src="firebase-config.js"></script>
     <script src="supabase-config.js"></script>
-    <script src="db-v211.js?v=522"></script>
+    <script src="db-v211.js?v=523"></script>
 
     <!-- Modularized Logic -->
-    <script src="js/utils.js?v=522"></script>
-    <script src="js/store.js?v=522"></script>
-    <script src="js/router.js?v=522"></script>
-    <script src="js/components.js?v=522"></script>
-    <script src="js/data/directory.js?v=522"></script>
+    <script src="js/utils.js?v=523"></script>
+    <script src="js/store.js?v=523"></script>
+    <script src="js/router.js?v=523"></script>
+    <script src="js/components.js?v=523"></script>
+    <script src="js/data/directory.js?v=523"></script>
 
     <!-- Views -->
-    <script src="js/views/auth.js?v=522"></script>
-    <script src="js/views/agenda.js?v=522"></script>
-    <script src="js/views/register.js?v=522"></script>
-    <script src="js/views/control_panel.js?v=522"></script>
-    <script src="js/views/financial.js?v=522"></script>
-    <script src="js/views/profile.js?v=522"></script>
-    <script src="js/views/stats.js?v=522"></script>
-    <script src="js/views/history.js?v=522"></script>
-    <script src="js/views/service_details.js?v=522"></script>
-    <script src="js/views/asistente.js?v=522"></script>
-    <script src="js/views/admin.js?v=522"></script>
+    <script src="js/views/auth.js?v=523"></script>
+    <script src="js/views/agenda.js?v=523"></script>
+    <script src="js/views/register.js?v=523"></script>
+    <script src="js/views/control_panel.js?v=523"></script>
+    <script src="js/views/financial.js?v=523"></script>
+    <script src="js/views/profile.js?v=523"></script>
+    <script src="js/views/stats.js?v=523"></script>
+    <script src="js/views/history.js?v=523"></script>
+    <script src="js/views/service_details.js?v=523"></script>
+    <script src="js/views/asistente.js?v=523"></script>
+    <script src="js/views/admin.js?v=523"></script>
 
-    <script src="app-v211.js?v=522"></script>
+    <script src="app-v211.js?v=523"></script>
 </body>
 
 </html>

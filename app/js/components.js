@@ -19,6 +19,7 @@ function renderAdBanner() {
 function renderBottomNav(activePage = 'agenda') {
     const navItems = [
         { id: 'agenda', icon: 'calendar_month', label: 'AGENDA', route: '#agenda' },
+        { id: 'stats', icon: 'analytics', label: 'STATS', route: '#stats' },
         { id: 'control', icon: 'grid_view', label: 'PANEL', route: '#control' },
         { id: 'financial', icon: 'payments', label: 'FINANZAS', route: '#financial' },
         { id: 'asistente', icon: 'smart_toy', label: 'ASISTENTE', route: '#asistente' }

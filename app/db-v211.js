@@ -431,7 +431,15 @@ const DB = {
         const channel = supabaseClient
             .channel('admin-reviews')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'user_reviews' }, (payload) => {
-                callback(payload.new, false);
+                const data = payload.new;
+                // Normalizar campos para que admin.js reciba datos consistentes
+                callback({
+                    id: data.id,
+                    user_email: data.user_email,
+                    rating: data.rating,
+                    comment: data.comment,
+                    created_at: data.created_at || data.timestamp || new Date().toISOString()
+                }, false);
             })
             .subscribe();
 
@@ -499,7 +507,8 @@ const DB = {
                 .insert([{
                     user_email: user.email,
                     rating: parseInt(rating),
-                    comment: comment.trim()
+                    comment: comment.trim(),
+                    created_at: new Date().toISOString() // Explícito
                 }]);
             if (error) {
                 console.error("Supabase Review Error:", error);

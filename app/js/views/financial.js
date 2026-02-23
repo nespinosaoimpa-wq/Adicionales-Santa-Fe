@@ -11,13 +11,16 @@ function renderFinancial(container) {
     const html = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4">
             <div class="flex items-center justify-between mb-4">
-                <div class="flex items-center gap-3">
-                    <div class="size-10 rounded-full border border-primary/30 overflow-hidden">
-                        <img src="${store.user.avatar}" class="w-full h-full object-cover">
+                <div class="flex items-center justify-between w-full">
+                    <div class="flex flex-col">
+                        <h1 class="text-lg font-bold tracking-tight text-white leading-tight">Centro de Control</h1>
+                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">${store.user.name}</p>
                     </div>
-                    <div>
-                        <h1 class="text-sm font-medium text-slate-400">${store.user.name}</h1>
-                        <p class="text-lg font-bold tracking-tight text-white">Centro de Control</p>
+                    <div class="flex items-center gap-3">
+                        ${renderDonationHeader()}
+                        <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full border border-primary/30 overflow-hidden cursor-pointer">
+                            <img src="${store.user.avatar}" class="w-full h-full object-cover">
+                        </div>
                     </div>
                 </div>
             </div>
