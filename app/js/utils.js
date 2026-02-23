@@ -50,9 +50,19 @@ const isIOS = () => {
 
 const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone) || window.matchMedia('(display-mode: standalone)').matches;
 
+const formatMoney = (amount) => {
+    return new Intl.NumberFormat('es-AR', {
+        style: 'currency',
+        currency: 'ARS',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+    }).format(amount);
+};
+
 // Export to window for global access (backward compatibility)
 window.showToast = showToast;
 window.copyToClipboard = copyToClipboard;
 window.debugLog = debugLog;
 window.isIOS = isIOS;
 window.isInStandaloneMode = isInStandaloneMode;
+window.formatMoney = formatMoney;
