@@ -1,5 +1,14 @@
 const policeDirectory = [
   {
+    "name": "T.A.P Tarjeta Alimentar Policial",
+    "dept": "ESENCIAL",
+    "phones": [
+      "08102227342"
+    ],
+    "is_essential": true,
+    "icon": "credit_card"
+  },
+  {
     "name": "",
     "dept": "JEFATURA DE POLICIA",
     "phones": [

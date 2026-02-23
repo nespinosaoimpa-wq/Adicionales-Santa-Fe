@@ -10,9 +10,7 @@ async function renderAdmin(container) {
         </div>
     `;
 
-    let allUsers = [];
-    let allServices = [];
-    const formatMoney = (v) => new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(v);
+    let allReviews = [];
 
     const updateUI = () => {
         const stats = DB.calculateStats(allUsers, allServices);
@@ -53,12 +51,12 @@ async function renderAdmin(container) {
                     ${_renderAdminKPICard('Caja Global estimada', formatMoney(stats.totalRevenue), 'payments', 'from-amber-500/20 to-amber-600/5', 'text-amber-400')}
                 </div>
 
-                <!-- Daily Summary Section (New) -->
+                <!-- Daily Summary Section -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-lg font-bold text-white flex items-center gap-3 italic uppercase text-xs tracking-widest">
-                            <span class="material-symbols-outlined text-primary">calendar_view_day</span>
-                            Resumen Diario de Actividad
+                        <h3 class="text-xs font-black text-slate-500 uppercase tracking-[0.2em] flex items-center gap-2">
+                             <span class="material-symbols-outlined text-primary text-sm">calendar_view_day</span>
+                             Resumen Diario
                         </h3>
                     </div>
                     <div class="overflow-x-auto">
@@ -83,9 +81,9 @@ async function renderAdmin(container) {
                     <!-- Trend Chart -->
                     <div class="lg:col-span-2 bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
                         <div class="flex items-center justify-between mb-8">
-                            <h3 class="text-lg font-bold text-white flex items-center gap-3">
-                                <span class="material-symbols-outlined text-primary">trending_up</span>
-                                Tendencia de Ingresos
+                            <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-sm">trending_up</span>
+                                Evolución de Ingresos
                             </h3>
                         </div>
                         <div class="h-64 relative">
@@ -93,17 +91,25 @@ async function renderAdmin(container) {
                         </div>
                     </div>
 
-                    <!-- Ranking -->
-                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
-                        <h3 class="text-lg font-bold text-white mb-6">Ranking de Actividad</h3>
-                        <div class="space-y-4">
-                            ${stats.topUsers.map((u, i) => `
-                                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-transparent hover:border-white/10 transition-all">
-                                    <div class="flex items-center gap-4">
-                                        <span class="size-8 rounded-full bg-slate-700 flex items-center justify-center font-black text-xs text-white/50">${i + 1}</span>
-                                        <p class="text-xs font-bold text-white max-w-[120px] truncate">${u.email}</p>
+                    <!-- Reviews Panel (New) -->
+                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl h-[400px] flex flex-col">
+                        <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center justify-between">
+                            <span>Reseñas Recientes</span>
+                            <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-500 text-[10px]">${allReviews.length}</span>
+                        </h3>
+                        <div class="space-y-4 overflow-y-auto flex-1 pr-2 custom-scrollbar">
+                            ${allReviews.length === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8">Cargando buzón...</p>' : allReviews.map(r => `
+                                <div class="p-4 bg-white/5 rounded-2xl border border-white/5 animate-fade-in">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <p class="text-[9px] font-black text-primary truncate max-w-[120px]">${r.user_email}</p>
+                                        <div class="flex">
+                                            ${Array(5).fill(0).map((_, i) => `
+                                                <span class="material-symbols-outlined text-[10px] ${i < r.rating ? 'text-amber-400' : 'text-slate-700'}">star</span>
+                                            `).join('')}
+                                        </div>
                                     </div>
-                                    <p class="text-xs font-black text-emerald-400">${formatMoney(u.total)}</p>
+                                    <p class="text-[11px] text-slate-300 leading-relaxed italic">"${r.comment}"</p>
+                                    <p class="text-[8px] text-slate-600 mt-2 text-right uppercase font-bold">${_formatAdminDate(r.created_at || r.timestamp)}</p>
                                 </div>
                             `).join('')}
                         </div>
@@ -113,12 +119,12 @@ async function renderAdmin(container) {
                 <!-- Active Banners -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                        <h3 class="text-sm font-bold text-white flex items-center gap-3">
                             <span class="material-symbols-outlined text-amber-500">ads_click</span>
-                            Publicidad Activa
+                            Pauta Publicitaria
                         </h3>
                         <button onclick="store.addAd()" class="px-3 py-1 bg-primary/20 text-primary rounded-lg text-[10px] font-black uppercase hover:bg-primary/30 transition-all">
-                            + Agregar
+                            + Nuevo Banner
                         </button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -205,8 +211,18 @@ async function renderAdmin(container) {
         setTimeout(() => _mountAdminCharts(DB.calculateStats(allUsers, allServices).chartData), 100);
     });
 
-    const unsubReviews = DB.subscribeToReviews(newReview => {
-        showToast(`⭐ Nueva Reseña: "${newReview.comment}" - ${newReview.user_email}`);
+    const unsubReviews = DB.subscribeToReviews((newReview, isInitial) => {
+        if (isInitial) {
+            // Check if already in list to avoid duplicates from hybrid sync
+            if (!allReviews.find(r => r.id === newReview.id)) {
+                allReviews.push(newReview);
+                allReviews.sort((a, b) => new Date(b.created_at || b.timestamp) - new Date(a.created_at || a.timestamp));
+            }
+        } else {
+            allReviews.unshift(newReview);
+            showToast(`⭐ Nueva Reseña: "${newReview.comment}" - ${newReview.user_email}`);
+        }
+        updateUI();
     });
 
     store.addAd = async () => {

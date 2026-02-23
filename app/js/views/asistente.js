@@ -515,31 +515,35 @@ function renderCentinela(container) {
                         <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
                     </div>
                     <div>
-                        <h3 class="font-bold text-white text-lg">Apoyar el Proyecto</h3>
-                        <p class="text-xs text-amber-500/70 font-bold uppercase tracking-widest">Sustento del Desarrollador</p>
+                        <h3 class="font-bold text-white text-lg tracking-tight">Apoyar el Proyecto</h3>
+                        <p class="text-[10px] text-amber-500/70 font-black uppercase tracking-[0.2em]">Donaciones · Mantenimiento</p>
                     </div>
                 </div>
-                <p class="text-sm text-slate-400 leading-relaxed mb-8">
-                    Mantener los servidores y el desarrollo constante lleva tiempo y costos. Si esta herramienta te ayuda en tu labor diaria, tu colaboración es fundamental para que siga siendo gratuita.
+                <p class="text-[13px] text-slate-400 leading-relaxed mb-8">
+                    Mantener los servidores y el desarrollo constante lleva tiempo y costos. Si esta herramienta te ayuda, tu colaboración es fundamental. **Tocá para copiar los datos:**
                 </p>
-                <div class="space-y-4 mb-8">
-                    <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-95 group">
+                <div class="space-y-3 mb-8">
+                    <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-[0.98] group">
                         <div>
-                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">Alias Mercado Pago</p>
-                            <p class="text-base font-mono font-bold text-white group-hover:text-amber-400 transition-colors">SmartFlow.Digital</p>
+                            <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">Alias Mercado Pago</p>
+                            <p class="text-base font-mono font-black text-white group-hover:text-primary transition-colors">SmartFlow.Digital</p>
                         </div>
-                        <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">content_copy</span>
+                        <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-base">content_copy</span>
+                        </div>
                     </div>
-                    <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-95 group">
+                    <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-[0.98] group">
                         <div>
-                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">CVU</p>
-                            <p class="text-xs font-mono font-bold text-white group-hover:text-amber-400 transition-colors">0000003100001906497190</p>
+                            <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">CVU</p>
+                            <p class="text-xs font-mono font-bold text-white group-hover:text-primary transition-colors">0000003100001906497190</p>
                         </div>
-                        <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">content_copy</span>
+                        <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-base">content_copy</span>
+                        </div>
                     </div>
                 </div>
-                <button onclick="this.closest('.fixed').remove()" class="w-full py-4 text-sm font-bold text-slate-400 hover:text-white transition-colors">
-                    Cerrar
+                <button onclick="this.closest('.fixed').remove()" class="w-full py-2 text-xs font-black text-slate-500 hover:text-white uppercase tracking-widest transition-colors">
+                    Volver al Asistente
                 </button>
             </div>
         `;

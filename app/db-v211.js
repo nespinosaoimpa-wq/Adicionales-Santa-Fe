@@ -418,14 +418,23 @@ const DB = {
     },
 
     subscribeToReviews(callback) {
+        // Initial Fetch
+        supabaseClient
+            .from('user_reviews')
+            .select('*')
+            .order('created_at', { ascending: false })
+            .limit(20)
+            .then(({ data }) => {
+                if (data) data.forEach(r => callback(r, true)); // true means is_initial
+            });
+
         const channel = supabaseClient
             .channel('admin-reviews')
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'user_reviews' }, (payload) => {
-                callback(payload.new);
+                callback(payload.new, false);
             })
             .subscribe();
 
-        // Also fetch initial set if needed, but for now just the listener for notifications
         return () => supabaseClient.removeChannel(channel);
     },
 
