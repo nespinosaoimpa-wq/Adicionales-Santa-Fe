@@ -183,18 +183,46 @@ function renderRegister(container) {
     };
 
     const calculateTotal = () => {
-        const hours = calculateHours();
-        const rate = parseFloat(document.getElementById('inp-rate').value) || 0;
-        const total = hours * rate;
-        document.getElementById('lbl-calculation').innerText = `Subtotal (${hours.toFixed(1)}h × $${rate.toLocaleString()})`;
+        const date = document.getElementById('inp-date').value;
+        const start = document.getElementById('inp-start').value;
+        const end = document.getElementById('inp-end').value;
+
+        const split = store.calculateHoursSplit(date, start, end);
+        const totalHours = split.ord + split.ext;
+
+        // Get rates for current type
+        const rates = store.serviceConfig[currentType];
+        const ordRate = rates['Ordinaria'];
+        const extRate = rates['Extraordinaria'];
+
+        const ordTotal = split.ord * ordRate;
+        const extTotal = split.ext * extRate;
+        const total = ordTotal + extTotal;
+
+        document.getElementById('lbl-hours').innerText = totalHours.toFixed(1) + ' Horas';
+
+        // Update labels
+        let calcText = '';
+        if (split.ord > 0 && split.ext > 0) {
+            calcText = `Subtotal (${split.ord.toFixed(1)}h Ord × $${ordRate.toLocaleString()} + ${split.ext.toFixed(1)}h Ext × $${extRate.toLocaleString()})`;
+        } else if (split.ext > 0) {
+            calcText = `Subtotal (${split.ext.toFixed(1)}h Ext × $${extRate.toLocaleString()})`;
+        } else {
+            calcText = `Subtotal (${split.ord.toFixed(1)}h Ord × $${ordRate.toLocaleString()})`;
+        }
+
+        document.getElementById('lbl-calculation').innerText = calcText;
         const formatted = `$${(total || 0).toLocaleString('es-AR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         document.getElementById('txt-subtotal').innerText = formatted;
         document.getElementById('txt-total').innerText = formatted;
+
+        // El input de rate se mantiene para referencia del usuario del tipo actual pero el cálculo es automático
+        document.getElementById('inp-rate').value = (split.ext > 0 && split.ord === 0) ? extRate : ordRate;
     };
 
+    document.getElementById('inp-date').addEventListener('change', calculateTotal);
     document.getElementById('inp-start').addEventListener('change', calculateTotal);
     document.getElementById('inp-end').addEventListener('change', calculateTotal);
-    document.getElementById('inp-rate').addEventListener('input', calculateTotal);
 
     const saveAction = async () => {
         const date = document.getElementById('inp-date').value;
@@ -202,7 +230,11 @@ function renderRegister(container) {
         const end = document.getElementById('inp-end').value;
         const rate = parseFloat(document.getElementById('inp-rate').value);
         const location = document.getElementById('inp-location').value || (currentType + ' - ' + currentSubType);
-        const hours = calculateHours();
+        const split = store.calculateHoursSplit(date, start, end);
+        const hours = split.ord + split.ext;
+
+        const rates = store.serviceConfig[currentType];
+        const total = (split.ord * rates['Ordinaria']) + (split.ext * rates['Extraordinaria']);
 
         try {
             await store.addService({
@@ -210,11 +242,11 @@ function renderRegister(container) {
                 startTime: start,
                 endTime: end,
                 hours,
-                rate,
+                split, // Guardar el desglose
                 type: currentType,
                 subType: currentSubType,
                 location,
-                total: hours * rate,
+                total: total,
                 status: 'pending'
             });
             router.navigateTo('#agenda');

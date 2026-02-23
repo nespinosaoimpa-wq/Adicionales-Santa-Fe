@@ -476,6 +476,88 @@ const store = {
         const month = String(date.getMonth() + 1).padStart(2, '0');
         const day = String(date.getDate()).padStart(2, '0');
         return `${year}-${month}-${day}`;
+    },
+
+    // Holiday List 2026 (Santa Fe / Argentina) - Extendable
+    holidays2026: [
+        '2026-01-01', // Año Nuevo
+        '2026-02-16', '2026-02-17', // Carnaval
+        '2026-03-24', // Memoria
+        '2026-04-02', // Malvinas
+        '2026-04-03', // Viernes Santo
+        '2026-05-01', // Trabajador
+        '2026-05-25', // Revolución de Mayo
+        '2026-06-15', // Paso a la Inmortalidad de Güemes (Feriado trasladable)
+        '2026-06-20', // Belgrano
+        '2026-07-09', // Independencia
+        '2026-08-17', // San Martín
+        '2026-10-12', // Diversidad Cultural
+        '2026-11-20', // Soberanía
+        '2026-12-08', // Virgen
+        '2026-12-25', // Navidad
+    ],
+
+    calculateHoursSplit(dateStr, startStr, endStr) {
+        if (!dateStr || !startStr || !endStr) return { ord: 0, ext: 0 };
+
+        const [y, m, d] = dateStr.split('-').map(Number);
+        const start = new Date(y, m - 1, d, ...startStr.split(':').map(Number));
+        let end = new Date(y, m - 1, d, ...endStr.split(':').map(Number));
+
+        if (end < start) {
+            end.setDate(end.getDate() + 1);
+        }
+
+        let ord = 0;
+        let ext = 0;
+
+        // Iterate by 30 minute chunks for precision
+        let current = new Date(start);
+        const step = 30 * 60 * 1000; // 30 mins
+
+        while (current < end) {
+            const next = new Date(current.getTime() + step);
+            const actualEnd = next > end ? end : next;
+            const chunkHours = (actualEnd - current) / (1000 * 60 * 60);
+
+            const day = current.getDay(); // 0: Dom, 6: Sáb
+            const hour = current.getHours();
+            const minute = current.getMinutes();
+            const timeVal = hour + (minute / 60);
+
+            const currentDateStr = this.getLocalDateString(current);
+            const isHoliday = this.holidays2026.includes(currentDateStr);
+
+            let isExtra = false;
+
+            // --- LÓGICA DE EXTRAORDINARIA ---
+
+            // 1. Feriados (Todo el día hasta las 06:00 del día hábil siguiente)
+            // Nota: Si es hoy feriado, es Extra. Si es mañana temprano (antes de las 6) Y hoy fue feriado, es Extra.
+            const prevDay = new Date(current.getTime() - 24 * 60 * 60 * 1000);
+            const wasHoliday = this.holidays2026.includes(this.getLocalDateString(prevDay));
+
+            if (isHoliday) {
+                isExtra = true;
+            } else if (wasHoliday && timeVal < 6) {
+                isExtra = true;
+            }
+            // 2. Fines de semana (Sáb 12:00 a Lun 06:00)
+            else if ((day === 6 && timeVal >= 12) || (day === 0) || (day === 1 && timeVal < 6)) {
+                isExtra = true;
+            }
+            // 3. Horario Nocturno (22:00 a 06:00 de Lun a Vie)
+            else if (timeVal >= 22 || timeVal < 6) {
+                isExtra = true;
+            }
+
+            if (isExtra) ext += chunkHours;
+            else ord += chunkHours;
+
+            current = next;
+        }
+
+        return { ord, ext };
     }
 };
 
