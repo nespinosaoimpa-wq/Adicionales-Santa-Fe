@@ -105,16 +105,44 @@ const DB = {
     },
 
     subscribeToUsers(callback) {
-        // Hybrid: Fetch all from Firestore + Supabase (Merging by email)
-        return db.collection('users').onSnapshot(async snapshot => {
-            const fbUsers = snapshot.docs.map(doc => doc.data());
-            callback(fbUsers); // Start with Firebase users immediately
+        let fbUsers = [];
+        let sbUsers = [];
 
-            // In a real dual system, we'd fetch Supabase and merge, but for Admin, Firebase is currently exhaustive
+        const mergeAndCallback = () => {
+            const unified = [...fbUsers];
+            if (sbUsers.length > 0) {
+                sbUsers.forEach(sbUser => {
+                    if (!unified.find(u => u.email === sbUser.email)) {
+                        unified.push({
+                            ...sbUser,
+                            serviceConfig: sbUser.service_config,
+                            notificationSettings: sbUser.notification_settings,
+                            role: sbUser.role || 'user'
+                        });
+                    }
+                });
+            }
+            callback(unified);
+        };
+
+        // 1. Listen to Firebase (Primary source for users currently)
+        const fbUnsub = db.collection('users').onSnapshot(snapshot => {
+            fbUsers = snapshot.docs.map(doc => doc.data());
+            mergeAndCallback();
         }, error => {
             console.warn("Users access restricted:", error.message);
             callback([]);
         });
+
+        // 2. Fetch Supabase users for completeness
+        supabaseClient.from('profiles').select('*').then(({ data }) => {
+            if (data) {
+                sbUsers = data;
+                mergeAndCallback();
+            }
+        }).catch(e => console.warn("Supabase profiles fetch failed:", e.message));
+
+        return fbUnsub;
     },
 
     // --- ADS ---
@@ -195,8 +223,16 @@ const DB = {
         const user = auth.currentUser;
         if (!user) throw new Error("Must be logged in");
 
-        // ONLY add to Supabase (New Data primary)
-        const { data, error } = await supabaseClient
+        // 1. Save to Firestore (Redundant backup for reliability)
+        const serviceData = {
+            userEmail: user.email,
+            ...service,
+            createdAt: new Date().toISOString()
+        };
+        const fbPromise = db.collection('services').add(serviceData);
+
+        // 2. Sync with Supabase (Primary for hybrid stats)
+        const sbPromise = supabaseClient
             .from('services')
             .insert([{
                 user_email: user.email,
@@ -209,11 +245,15 @@ const DB = {
                 location: service.location,
                 total: service.total,
                 status: service.status || 'Pendiente'
-            }])
-            .select();
+            }]);
 
-        if (error) throw error;
-        return data;
+        // Wait for at least Firebase to succeed to acknowledge to user
+        await fbPromise;
+
+        // Supabase is handled silently if it fails to not block UI
+        sbPromise.catch(e => console.warn("Supabase sync delayed:", e.message));
+
+        return { success: true };
     },
 
     async updateService(id, updates) {
@@ -281,14 +321,27 @@ const DB = {
         const user = auth.currentUser;
         if (!user) throw new Error("Must be logged in");
 
-        // Save to Supabase
-        return supabaseClient.from('expenses').insert([{
+        // 1. Save to Firestore
+        const expenseData = {
+            userEmail: user.email,
+            ...expense,
+            createdAt: new Date().toISOString()
+        };
+        const fbPromise = db.collection('expenses').add(expenseData);
+
+        // 2. Save to Supabase
+        const sbPromise = supabaseClient.from('expenses').insert([{
             user_email: user.email,
             category: expense.category,
             amount: expense.amount,
             description: expense.description,
             date: expense.date
         }]);
+
+        await fbPromise;
+        sbPromise.catch(e => console.warn("Supabase expense sync delayed:", e.message));
+
+        return { success: true };
     },
 
     async deleteExpense(id) {
