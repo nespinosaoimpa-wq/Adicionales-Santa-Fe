@@ -2380,42 +2380,6 @@ function renderProfile(container) {
                 </button>
             </section>
 
-            <!-- Donation Section -->
-            <section class="mt-4 p-6 glass-card rounded-[2rem] border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-transparent">
-                <div class="flex items-center gap-3 mb-4">
-                    <div class="size-10 rounded-2xl bg-amber-500/20 flex items-center justify-center text-amber-500 shadow-lg shadow-amber-500/10">
-                        <span class="material-symbols-outlined">volunteer_activism</span>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-white text-sm">Apoyá el Proyecto</h3>
-                        <p class="text-[10px] text-amber-500/70 font-bold uppercase tracking-widest">Sustento del Desarrollador</p>
-                    </div>
-                </div>
-                
-                <p class="text-[11px] text-slate-300 leading-relaxed mb-6">
-                    Desarrollar sitios lleva tiempo, esfuerzo y frustración. Mantener las bases de datos implica gastos que corren por quien desarrolla esta app para que sea gratuita para los oficiales. <br><br>
-                    <strong>Si querés que sigamos creciendo, podés colaborar aquí:</strong>
-                </p>
-
-                <div class="space-y-3">
-                    <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors group">
-                        <div>
-                            <p class="text-[9px] text-slate-500 uppercase font-black">Alias Mercado Pago</p>
-                            <p class="text-sm font-mono font-bold text-white group-hover:text-amber-400 transition-colors">SmartFlow.Digital</p>
-                        </div>
-                        <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">content_copy</span>
-                    </div>
-
-                    <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors group">
-                        <div>
-                            <p class="text-[9px] text-slate-500 uppercase font-black">CVU</p>
-                            <p class="text-sm font-mono font-bold text-white group-hover:text-amber-400 transition-colors text-[11px]">0000003100001906497190</p>
-                        </div>
-                        <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">content_copy</span>
-                    </div>
-                </div>
-            </section>
-
             <!-- Save Button -->
             <button onclick="store.saveConfig()" class="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-4 rounded-2xl font-bold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all">
                 Guardar Cambios
@@ -2924,7 +2888,7 @@ function renderAsistenteHub(container) {
             </div>
 
             <!-- Global Support Section -->
-            <div onclick="router.navigateTo('#profile')" class="mt-4 group p-5 glass-card rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent flex items-center gap-4 cursor-pointer active:scale-95 transition-all">
+            <div onclick="window.showDonationModal()" class="mt-4 group p-5 glass-card rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent flex items-center gap-4 cursor-pointer active:scale-95 transition-all">
                 <div class="size-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
                     <span class="material-symbols-outlined">favorite</span>
                 </div>
@@ -3285,6 +3249,55 @@ function renderCentinela(container) {
         </main>
     `;
 
+    // Global helper to show donation modal (Avoids exposure in profile)
+    window.showDonationModal = () => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[200] flex items-end justify-center animate-fade-in';
+        overlay.innerHTML = `
+            <div class="bg-slate-900 w-full max-w-md rounded-t-[2.5rem] border-t border-white/10 p-8 pb-12 animate-slide-up shadow-2xl shadow-primary/20">
+                <div class="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-6"></div>
+                
+                <div class="flex items-center gap-4 mb-6">
+                    <div class="size-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-amber-500 shadow-lg shadow-amber-500/10">
+                        <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-lg">Apoyar el Proyecto</h3>
+                        <p class="text-xs text-amber-500/70 font-bold uppercase tracking-widest">Sustento del Desarrollador</p>
+                    </div>
+                </div>
+
+                <p class="text-sm text-slate-400 leading-relaxed mb-8">
+                    Mantener los servidores y el desarrollo constante lleva tiempo y costos. Si esta herramienta te ayuda en tu labor diaria, tu colaboración es fundamental para que siga siendo gratuita.
+                </p>
+
+                <div class="space-y-4 mb-8">
+                    <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-95 group">
+                        <div>
+                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">Alias Mercado Pago</p>
+                            <p class="text-base font-mono font-bold text-white group-hover:text-amber-400 transition-colors">SmartFlow.Digital</p>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">content_copy</span>
+                    </div>
+
+                    <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-95 group">
+                        <div>
+                            <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest mb-1">CVU</p>
+                            <p class="text-xs font-mono font-bold text-white group-hover:text-amber-400 transition-colors">0000003100001906497190</p>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">content_copy</span>
+                    </div>
+                </div>
+
+                <button onclick="this.closest('.fixed').remove()" class="w-full py-4 text-sm font-bold text-slate-400 hover:text-white transition-colors">
+                    Cerrar
+                </button>
+            </div>
+        `;
+        overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+        document.body.appendChild(overlay);
+    };
+
     const form = document.getElementById('centinela-form');
     const input = document.getElementById('chat-input');
     const chat = document.getElementById('chat-messages');
@@ -3350,6 +3363,10 @@ function renderCentinela(container) {
                 {
                     match: ['recargo', 'hora', 'descanso'],
                     text: "Por cada recargo de servicio, te corresponde el descanso compensatorio equivalente al tiempo recargado. Ley 12.521, Art 81."
+                },
+                {
+                    match: ['retroactivo', 'cobrar atrasado', 'pago retroactivo', 'diferencia'],
+                    text: "Los **Pagos Retroactivos** suelen corresponder a diferencias salariales por ascensos, suplementos mal liquidados o decretos de aumento con fecha anterior. Debes verificar el concepto en tu recibo (`Cód. 1045` generalmente para retroactivos) y asegurar que el decreto que otorgó el beneficio así lo estipule."
                 }
             ],
             default: "Los beneficios económicos y recargos están contemplados en la Ley 12.521. ¿Necesitás info sobre Títulos, Antigüedad o Recargos?"
