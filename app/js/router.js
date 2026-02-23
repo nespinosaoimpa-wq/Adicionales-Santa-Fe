@@ -106,6 +106,9 @@ const router = {
                 case '#asistente/partes':
                     renderPartesInteligentes(app);
                     break;
+                case '#asistente/calculadora':
+                    renderCalculadoraHaberes(app);
+                    break;
                 case '#profile':
                     renderProfile(app);
                     break;

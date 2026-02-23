@@ -7,6 +7,7 @@ function renderAsistenteHub(container) {
 
     const tools = [
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
+        { id: 'calculadora', title: 'Calculadora v2', desc: 'Proyectá tu sueldo según Decreto 142/26.', icon: 'calculate', color: 'from-accent-cyan to-blue-400', route: '#asistente/calculadora', badge: 'Pro' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
         { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },
         { id: 'directorio', title: 'Directorio Policial', desc: 'Números de emergencia interna.', icon: 'contact_phone', color: 'from-amber-500 to-orange-500', route: '#asistente/directorio' },
@@ -592,6 +593,29 @@ function renderCentinela(container) {
             default: "El Manual MIRAF regula la identificación de armas de fuego. ¿Dudas sobre una clasificación o qué datos anotar?"
         },
         {
+            category: 'jurisdiccion',
+            keywords: ['unidad regional', 'ur', 'donde queda', 'cabecera', 'jurisdiccion', 'la capital', 'rosario', 'rafaela', 'reconquista', 'venado tuerto'],
+            responses: [
+                { match: ['ur 1', 'capital'], text: "La **Unidad Regional I (La Capital)** tiene su cabecera en la ciudad de **Santa Fe**. Abarca Santo Tomé, Recreo, San José del Rincón, etc." },
+                { match: ['ur 2', 'rosario'], text: "La **Unidad Regional II (Rosario)** tiene su cabecera en **Rosario**. Es la unidad con mayor despliegue operativo de la provincia." },
+                { match: ['ur 5', 'rafaela'], text: "La **Unidad Regional V (Castellanos)** tiene su cabecera en **Rafaela**." },
+                { match: ['ur 9', 'reconquista'], text: "La **Unidad Regional IX (General Obligado)** tiene su cabecera en **Reconquista**." },
+                { match: ['ur 8', 'venado'], text: "La **Unidad Regional VIII (General López)** tiene su cabecera en **Venado Tuerto**." },
+                { match: ['listado', 'todas'], text: "Santa Fe tiene 19 URs:\nI (Sta Fe), II (Rosario), III (Las Rosas), IV (Casilda), V (Rafaela), VI (Villa Constitución), VII (Helvecia), VIII (Venado Tuerto), IX (Reconquista), X (Cañada de Gómez), XI (Esperanza), XII (Tostado), XIII (San Cristóbal), XIV (San Javier), XV (Coronda), XVI (San Justo), XVII (San Lorenzo), XVIII (Sastre), XIX (Vera)." }
+            ],
+            default: "Conozco las 19 Unidades Regionales de la provincia. ¿Buscás la cabecera o jurisdicción de alguna en particular?"
+        },
+        {
+            category: 'protocolos',
+            keywords: ['genero', 'violencia', 'protocolo', 'actuacion', '1818', 'seguridad publica', '12154', 'detencion', 'procedimiento'],
+            responses: [
+                { match: ['genero', '1818'], text: "El **Protocolo de Actuación en Violencia de Género (Decreto 1818/20)** establece la obligatoriedad de recibir la denuncia, no revictimizar y dar intervención inmediata al MPA y al área de género local." },
+                { match: ['seguridad publica', '12154'], text: "La **Ley de Seguridad Pública (12.154)** define la estructura del sistema de seguridad provincial y las competencias de la policía como auxiliares de la justicia." },
+                { match: ['detencion', 'derechos'], text: "Todo procedimiento de detención debe ajustarse al Código Procesal Penal. Se debe informar el motivo, los derechos del detenido y permitir la comunicación con un abogado o familiar." }
+            ],
+            default: "Tengo información sobre protocolos de Violencia de Género (1818/20) y la Ley de Seguridad Pública. ¿Qué procedimiento necesitás verificar?"
+        },
+        {
             category: 'general',
             keywords: ['tap', 'tarjeta', 'alimentar', 'monto', 'pago', 'reintegro', 'comida', '0810'],
             responses: [
@@ -795,49 +819,92 @@ window.showAnnouncementModal = () => {
     };
 };
 
-window.showDonationModal = () => {
-    const overlay = document.createElement('div');
-    overlay.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[200] flex items-end justify-center animate-fade-in';
-    overlay.innerHTML = `
-        <div class="bg-slate-900 w-full max-w-md rounded-t-[2.5rem] border-t border-white/10 p-8 pb-12 animate-slide-up shadow-2xl shadow-primary/20">
-            <div class="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-6"></div>
-            <div class="flex items-center gap-4 mb-6">
-                <div class="size-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-amber-500 shadow-lg shadow-amber-500/10">
-                    <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
-                </div>
-                <div>
-                    <h3 class="font-bold text-white text-lg tracking-tight">Apoyar el Proyecto</h3>
-                    <p class="text-[10px] text-amber-500/70 font-black uppercase tracking-[0.2em]">Donaciones · Mantenimiento</p>
-                </div>
-            </div>
-            <p class="text-[13px] text-slate-400 leading-relaxed mb-8">
-                Mantener los servidores y el desarrollo constante lleva tiempo y costos. Si esta herramienta te ayuda, tu colaboración es fundamental. **Tocá para copiar los datos:**
-            </p>
-            <div class="space-y-3 mb-8">
-                <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-[0.98] group">
-                    <div>
-                        <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">Alias Mercado Pago</p>
-                        <p class="text-base font-mono font-black text-white group-hover:text-primary transition-colors">SmartFlow.Digital</p>
-                    </div>
-                    <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                        <span class="material-symbols-outlined text-base">content_copy</span>
-                    </div>
-                </div>
-                <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-[0.98] group">
-                    <div>
-                        <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">CVU</p>
-                        <p class="text-xs font-mono font-bold text-white group-hover:text-primary transition-colors">0000003100001906497190</p>
-                    </div>
-                    <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                        <span class="material-symbols-outlined text-base">content_copy</span>
-                    </div>
-                </div>
-            </div>
-            <button onclick="this.closest('.fixed').remove()" class="w-full py-2 text-xs font-black text-slate-500 hover:text-white uppercase tracking-widest transition-colors">
-                Volver al Asistente
+
+function renderCalculadoraHaberes(container) {
+    const hierarchies = [
+        { name: 'Director General', salary: 2264435 },
+        { name: 'Director', salary: 2145835 },
+        { name: 'Subdirector', salary: 2012335 },
+        { name: 'Comisario Supervisor', salary: 1895535 },
+        { name: 'Comisario', salary: 1802235 },
+        { name: 'Subcomisario', salary: 1722535 },
+        { name: 'Inspector', salary: 1642835 },
+        { name: 'Subinspector', salary: 1585335 },
+        { name: 'Oficial de Policía', salary: 1438835 }
+    ];
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
             </button>
-        </div>
+            <h1 class="text-sm font-black text-white">Calculadora v2</h1>
+        </header>
+
+        <main class="p-6 space-y-6 animate-fade-in max-w-md mx-auto">
+            <div class="glass-card p-6 rounded-[2.5rem] border border-primary/20 bg-gradient-to-b from-primary/10 to-transparent">
+                <div class="size-16 rounded-3xl bg-primary/20 flex items-center justify-center text-primary mb-6">
+                    <span class="material-symbols-outlined text-4xl">calculate</span>
+                </div>
+                <h2 class="text-xl font-black text-white mb-2 italic">Proyección Salarial</h2>
+                <p class="text-xs text-slate-400 mb-6">Valores actualizados al **Decreto 142/26** (Febrero 2026).</p>
+
+                <div class="space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Jerarquía Actual</label>
+                        <select id="calc-hierarchy" class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white outline-none focus:ring-2 focus:ring-primary/50 transition-all">
+                            ${hierarchies.map(h => `<option value="${h.salary}">${h.name}</option>`).join('')}
+                        </select>
+                    </div>
+
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Servicios Adicionales (Estimado)</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-primary font-bold">$</span>
+                            <input type="number" id="calc-extra" placeholder="0" class="w-full bg-white/5 border border-white/10 rounded-2xl pl-8 pr-4 py-3.5 text-sm text-white outline-none focus:ring-2 focus:ring-primary/50 transition-all">
+                        </div>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/5 space-y-4">
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Haber de Bolsillo</span>
+                            <span id="result-salary" class="text-xl font-black text-white">$0</span>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Total Proyectado</span>
+                            <span id="result-total" class="text-3xl font-black text-primary shadow-glow">$0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-2xl">
+                <div class="flex gap-3">
+                    <span class="material-symbols-outlined text-amber-500">info</span>
+                    <p class="text-[10px] text-amber-500/80 leading-relaxed font-bold">
+                        IMPORTANTE: Los montos son aproximados y pueden variar según antigüedad, asignaciones familiares y retenciones específicas de cada agente.
+                    </p>
+                </div>
+            </div>
+        </main>
     `;
-    overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
-    document.body.appendChild(overlay);
-};
+
+    const hierarchySelect = document.getElementById('calc-hierarchy');
+    const extraInput = document.getElementById('calc-extra');
+    const salaryResult = document.getElementById('result-salary');
+    const totalResult = document.getElementById('result-total');
+
+    const updateCalc = () => {
+        const salary = parseFloat(hierarchySelect.value) || 0;
+        const extra = parseFloat(extraInput.value) || 0;
+        const total = salary + extra;
+
+        salaryResult.textContent = window.formatMoney(salary);
+        totalResult.textContent = window.formatMoney(total);
+    };
+
+    hierarchySelect.onchange = updateCalc;
+    extraInput.oninput = updateCalc;
+
+    updateCalc(); // Initial run
+}

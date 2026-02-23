@@ -134,39 +134,79 @@ function renderStats(container) {
                 </div>
             </section>
 
-            <!-- Earnings by Type -->
+            <!-- Earnings by Type (Doughnut Chart) -->
             <section class="space-y-3">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Por Tipo de Servicio</h3>
-                <div class="bg-white dark:bg-slate-900/80 rounded-2xl border border-slate-100 dark:border-slate-800 shadow-sm overflow-hidden">
-                    ${[
-            { label: 'Público', count: publicServices.length, total: publicTotal, color: 'text-primary', gradient: 'from-primary to-blue-400', icon: 'account_balance' },
-            { label: 'Privado', count: privateServices.length, total: privateTotal, color: 'text-purple-500', gradient: 'from-purple-500 to-pink-500', icon: 'storefront' },
-            { label: 'OSPES', count: ospesServices.length, total: ospesTotal, color: 'text-cyan-500', gradient: 'from-cyan-500 to-teal-500', icon: 'local_hospital' }
-        ].map((type, i) => {
-            const pct = totalEarnings > 0 ? (type.total / totalEarnings * 100).toFixed(0) : 0;
-            return `
-                        <div class="flex items-center gap-4 p-4 ${i > 0 ? 'border-t border-slate-100 dark:border-slate-800' : ''}">
-                            <div class="size-10 rounded-xl bg-gradient-to-br ${type.gradient} flex items-center justify-center text-white shadow-sm">
-                                <span class="material-symbols-outlined text-lg">${type.icon}</span>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <div class="flex justify-between items-center mb-1">
-                                    <span class="text-sm font-bold dark:text-white">${type.label}</span>
-                                    <span class="text-sm font-extrabold ${type.color}">$${type.total.toLocaleString('es-AR')}</span>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Distribución por Tipo</h3>
+                <div class="bg-white dark:bg-slate-900/80 rounded-2xl p-6 border border-slate-100 dark:border-slate-800 shadow-sm space-y-6">
+                    <div class="relative h-56 flex items-center justify-center">
+                        <canvas id="earningsTypeChart"></canvas>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                            <span class="text-[10px] uppercase font-bold text-slate-500">Total</span>
+                            <span class="text-lg font-black text-slate-800 dark:text-white">$${totalEarnings >= 1000 ? (totalEarnings / 1000).toFixed(1) + 'k' : totalEarnings}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-2">
+                        ${[
+            { label: 'Público', total: publicTotal, color: '#0d59f2', icon: 'account_balance' },
+            { label: 'Privado', total: privateTotal, color: '#8b5cf6', icon: 'storefront' },
+            { label: 'OSPES', total: ospesTotal, color: '#06b6d4', icon: 'local_hospital' }
+        ].map(type => `
+                            <div class="text-center space-y-1">
+                                <div class="flex items-center justify-center gap-1.5 mb-1">
+                                    <div class="size-2 rounded-full" style="background-color: ${type.color}"></div>
+                                    <span class="text-[10px] font-bold text-slate-500 uppercase">${type.label}</span>
                                 </div>
-                                <div class="flex items-center gap-2">
-                                    <div class="flex-1 h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-gradient-to-r ${type.gradient} rounded-full" style="width: ${pct}%;"></div>
-                                    </div>
-                                    <span class="text-[10px] text-slate-400 font-medium">${pct}%</span>
-                                </div>
-                                <span class="text-[10px] text-slate-400">${type.count} servicios</span>
+                                <p class="text-xs font-black dark:text-white">$${type.total >= 1000 ? (type.total / 1000).toFixed(1) + 'k' : type.total}</p>
                             </div>
-                        </div>`;
-        }).join('')}
+                        `).join('')}
+                    </div>
                 </div>
             </section>
         </main>
         ${renderBottomNav('stats')}
     `;
+
+    // Initialize Earnings Circular Chart
+    setTimeout(() => {
+        const canvas = document.getElementById('earningsTypeChart');
+        if (canvas && window.Chart) {
+            new Chart(canvas, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Público', 'Privado', 'OSPES'],
+                    datasets: [{
+                        data: [publicTotal, privateTotal, ospesTotal],
+                        backgroundColor: ['#0d59f2', '#8b5cf6', '#06b6d4'],
+                        borderWidth: 0,
+                        hoverOffset: 15,
+                        borderRadius: 10,
+                        spacing: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            padding: 12,
+                            titleFont: { size: 12, weight: 'bold' },
+                            bodyFont: { size: 12 },
+                            cornerRadius: 12,
+                            callbacks: {
+                                label: (context) => {
+                                    const value = context.raw;
+                                    const pct = ((value / totalEarnings) * 100).toFixed(1);
+                                    return ` $${value.toLocaleString()} (${pct}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }, 100);
 }
