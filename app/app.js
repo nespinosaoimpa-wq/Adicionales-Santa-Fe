@@ -20,6 +20,15 @@ const showToast = (message) => {
     }, 2000);
 };
 
+const copyToClipboard = (text, label) => {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast(`✅ ${label} copiado`);
+    }).catch(err => {
+        console.error('Error copying:', err);
+        showToast("❌ Error al copiar");
+    });
+};
+
 // Global Debug Logger
 const debugLog = (msg) => {
     const consoleEl = document.getElementById('debug-console');
@@ -2371,6 +2380,42 @@ function renderProfile(container) {
                 </button>
             </section>
 
+            <!-- Donation Section -->
+            <section class="mt-4 p-6 glass-card rounded-[2rem] border border-amber-500/20 bg-gradient-to-br from-amber-500/10 to-transparent">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="size-10 rounded-2xl bg-amber-500/20 flex items-center justify-center text-amber-500 shadow-lg shadow-amber-500/10">
+                        <span class="material-symbols-outlined">volunteer_activism</span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm">Apoyá el Proyecto</h3>
+                        <p class="text-[10px] text-amber-500/70 font-bold uppercase tracking-widest">Sustento del Desarrollador</p>
+                    </div>
+                </div>
+                
+                <p class="text-[11px] text-slate-300 leading-relaxed mb-6">
+                    Desarrollar sitios lleva tiempo, esfuerzo y frustración. Mantener las bases de datos implica gastos que corren por quien desarrolla esta app para que sea gratuita para los oficiales. <br><br>
+                    <strong>Si querés que sigamos creciendo, podés colaborar aquí:</strong>
+                </p>
+
+                <div class="space-y-3">
+                    <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors group">
+                        <div>
+                            <p class="text-[9px] text-slate-500 uppercase font-black">Alias Mercado Pago</p>
+                            <p class="text-sm font-mono font-bold text-white group-hover:text-amber-400 transition-colors">SmartFlow.Digital</p>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">content_copy</span>
+                    </div>
+
+                    <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-colors group">
+                        <div>
+                            <p class="text-[9px] text-slate-500 uppercase font-black">CVU</p>
+                            <p class="text-sm font-mono font-bold text-white group-hover:text-amber-400 transition-colors text-[11px]">0000003100001906497190</p>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">content_copy</span>
+                    </div>
+                </div>
+            </section>
+
             <!-- Save Button -->
             <button onclick="store.saveConfig()" class="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-4 rounded-2xl font-bold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all">
                 Guardar Cambios
@@ -2875,6 +2920,18 @@ function renderAsistenteHub(container) {
                         Enviar Reseña
                     </button>
                 </form>
+            </div>
+
+            <!-- Global Support Section -->
+            <div onclick="router.navigateTo('#profile')" class="mt-4 group p-5 glass-card rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent flex items-center gap-4 cursor-pointer active:scale-95 transition-all">
+                <div class="size-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined">favorite</span>
+                </div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold text-white">¿Te gusta la App?</h4>
+                    <p class="text-[10px] text-slate-400">Apoyá el desarrollo y ayudanos a crecer.</p>
+                </div>
+                <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">arrow_forward</span>
             </div>
         </main>
         ${renderBottomNav('asistente')}
