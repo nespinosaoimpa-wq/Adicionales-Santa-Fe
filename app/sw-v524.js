@@ -1,17 +1,23 @@
-const CACHE_NAME = 'asf-v524';
+const CACHE_NAME = 'asf-v524-fix';
 const urlsToCache = [
     './',
     './index.html',
-    './js/store.js',
-    './js/router.js',
-    './js/components.js',
-    './js/views/agenda.js',
-    './js/views/control_panel.js',
-    './js/views/financial.js',
-    './js/views/profile.js',
-    './js/views/admin.js',
-    './js/views/asistente.js',
-    './db-v211.js',
+    './styles.css?v=524',
+    './js/store.js?v=524',
+    './js/router.js?v=524',
+    './js/components.js?v=524',
+    './js/views/agenda.js?v=524',
+    './js/views/control_panel.js?v=524',
+    './js/views/financial.js?v=524',
+    './js/views/profile.js?v=524',
+    './js/views/admin.js?v=524',
+    './js/views/asistente.js?v=524',
+    './js/views/stats.js?v=524',
+    './js/views/history.js?v=524',
+    './js/views/auth.js?v=524',
+    './js/views/register.js?v=524',
+    './js/views/service_details.js?v=524',
+    './db-v211.js?v=524',
     './manifest.json',
     './icon.png'
 ];
@@ -39,7 +45,6 @@ self.addEventListener('activate', event => {
 });
 
 self.addEventListener('fetch', event => {
-    // Ignorar peticiones a Firebase y Supabase (deben ser en vivo)
     if (event.request.url.includes('firestore.googleapis.com') ||
         event.request.url.includes('supabase.co') ||
         event.request.url.includes('firebasestorage.googleapis.com')) {
