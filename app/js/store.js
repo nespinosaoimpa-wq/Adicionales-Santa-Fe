@@ -280,6 +280,16 @@ const store = {
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());
 
+        // iOS Specific Prompt logic
+        if (window.isIOS() && !window.isInStandaloneMode()) {
+            setTimeout(() => {
+                const existing = document.getElementById('ios-install-banner');
+                if (!existing) {
+                    document.body.insertAdjacentHTML('beforeend', renderIOSInstallPrompt());
+                }
+            }, 4000);
+        }
+
         setTimeout(() => showAnnouncementModal(), 2000);
 
         auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)

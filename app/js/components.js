@@ -148,3 +148,32 @@ function updateOfflineStatus(isOffline) {
 // --- Global Listeners ---
 window.addEventListener('online', () => updateOfflineStatus(false));
 window.addEventListener('offline', () => updateOfflineStatus(true));
+function renderIOSInstallPrompt() {
+    return `
+        <div id="ios-install-banner" class="fixed bottom-6 left-4 right-4 z-[100] bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 shadow-2xl border border-primary/20 transform translate-y-[200%] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] animate-ios-entry">
+            <div class="flex items-start gap-5 text-left">
+                <div class="size-14 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/20 shrink-0">
+                    <span class="material-symbols-outlined text-3xl">add_to_home_screen</span>
+                </div>
+                <div class="flex-1 space-y-2">
+                    <h3 class="text-base font-bold text-slate-900 dark:text-white leading-tight">Instalá Adicionales SF</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Para usar esta aplicación a pantalla completa en tu iPhone:</p>
+                    
+                    <div class="flex flex-col gap-2 pt-2">
+                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                            <span class="size-6 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-primary font-bold">1</span>
+                            <span>Toca el botón <span class="bg-slate-100 dark:bg-white/10 px-1.5 py-0.5 rounded-md font-bold text-primary flex inline-flex items-center gap-1">Compartir <span class="material-symbols-outlined text-xs">ios_share</span></span></span>
+                        </div>
+                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                            <span class="size-6 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-primary font-bold">2</span>
+                            <span>Elegí <span class="font-bold text-primary">"Añadir a panta. de inicio"</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="this.closest('#ios-install-banner').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+    `;
+}

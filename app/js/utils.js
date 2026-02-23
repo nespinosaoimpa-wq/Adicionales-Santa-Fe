@@ -36,7 +36,23 @@ const debugLog = (msg) => {
     console.log('[DEBUG]', msg);
 };
 
+const isIOS = () => {
+    return [
+        'iPad Simulator',
+        'iPhone Simulator',
+        'iPad',
+        'iPhone',
+        'iPod'
+    ].includes(navigator.platform)
+        // iPad on iOS 13 detection
+        || (navigator.userAgent.includes("Mac") && "ontouchend" in document);
+};
+
+const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone) || window.matchMedia('(display-mode: standalone)').matches;
+
 // Export to window for global access (backward compatibility)
 window.showToast = showToast;
 window.copyToClipboard = copyToClipboard;
 window.debugLog = debugLog;
+window.isIOS = isIOS;
+window.isInStandaloneMode = isInStandaloneMode;
