@@ -1,0 +1,376 @@
+/**
+ * Adicionales Santa Fe - Admin Views
+ */
+
+async function renderAdmin(container) {
+    container.innerHTML = `
+        <div class="flex flex-col items-center justify-center h-screen space-y-4 bg-background-dark">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            <p class="text-slate-500 animate-pulse font-medium">Sincronizando datos globales en vivo...</p>
+        </div>
+    `;
+
+    let allUsers = [];
+    let allServices = [];
+    const formatMoney = (v) => new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(v);
+
+    const updateUI = () => {
+        const stats = DB.calculateStats(allUsers, allServices);
+
+        container.innerHTML = `
+        <div class="min-h-screen bg-[#0f172a] text-slate-200 font-sans pb-24 animate-fade-in">
+            <!-- Glass Header -->
+            <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/5 px-6 h-20 flex items-center justify-between shadow-2xl">
+                <div class="flex items-center gap-4">
+                    <div class="size-12 bg-gradient-to-br from-primary to-accent-cyan rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined text-white text-2xl">analytics</span>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-black text-white tracking-tight uppercase italic flex items-center gap-2">
+                            Admin Hub
+                            <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        </h1>
+                        <p class="text-[10px] text-slate-400 font-bold tracking-widest uppercase">Monitoreo Real-time</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-300">
+                        <span class="material-symbols-outlined text-sm">download</span> Exportar
+                    </button>
+                    <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+            </header>
+
+            <main class="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
+                
+                <!-- KPI Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    ${_renderAdminKPICard('Usuarios Totales', stats.userCount, 'group', 'from-blue-500/20 to-blue-600/5', 'text-blue-400')}
+                    ${_renderAdminKPICard('Activos 24h', stats.activeUsers, 'bolt', 'from-green-500/20 to-green-600/5', 'text-green-400')}
+                    ${_renderAdminKPICard('Horas Globales', Math.round(stats.totalHours).toLocaleString(), 'schedule', 'from-cyan-500/20 to-cyan-600/5', 'text-cyan-400')}
+                    ${_renderAdminKPICard('Caja Global estimada', formatMoney(stats.totalRevenue), 'payments', 'from-amber-500/20 to-amber-600/5', 'text-amber-400')}
+                </div>
+
+                <!-- Daily Summary Section (New) -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-3 italic uppercase text-xs tracking-widest">
+                            <span class="material-symbols-outlined text-primary">calendar_view_day</span>
+                            Resumen Diario de Actividad
+                        </h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <div class="flex gap-4 pb-4">
+                            ${stats.dailySummary.slice(0, 10).map(day => `
+                                <div class="min-w-[140px] p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center text-center">
+                                    <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-1">${store.getFormattedDate(day.date)}</p>
+                                    <p class="text-lg font-black text-white">${day.count}</p>
+                                    <p class="text-[10px] text-slate-400 mb-2">Servicios</p>
+                                    <div class="h-1 w-full bg-primary/20 rounded-full overflow-hidden mb-2">
+                                        <div class="h-full bg-primary" style="width: ${Math.min((day.total / 500000) * 100, 100)}%"></div>
+                                    </div>
+                                    <p class="text-[11px] font-bold text-emerald-400">${formatMoney(day.total)}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts & Stats -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Trend Chart -->
+                    <div class="lg:col-span-2 bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                        <div class="flex items-center justify-between mb-8">
+                            <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">trending_up</span>
+                                Tendencia de Ingresos
+                            </h3>
+                        </div>
+                        <div class="h-64 relative">
+                            <canvas id="adminTrendChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Ranking -->
+                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                        <h3 class="text-lg font-bold text-white mb-6">Ranking de Actividad</h3>
+                        <div class="space-y-4">
+                            ${stats.topUsers.map((u, i) => `
+                                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-transparent hover:border-white/10 transition-all">
+                                    <div class="flex items-center gap-4">
+                                        <span class="size-8 rounded-full bg-slate-700 flex items-center justify-center font-black text-xs text-white/50">${i + 1}</span>
+                                        <p class="text-xs font-bold text-white max-w-[120px] truncate">${u.email}</p>
+                                    </div>
+                                    <p class="text-xs font-black text-emerald-400">${formatMoney(u.total)}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Active Banners -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-3">
+                            <span class="material-symbols-outlined text-amber-500">ads_click</span>
+                            Publicidad Activa
+                        </h3>
+                        <button onclick="store.addAd()" class="px-3 py-1 bg-primary/20 text-primary rounded-lg text-[10px] font-black uppercase hover:bg-primary/30 transition-all">
+                            + Agregar
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${store.ads && store.ads.length > 0 ? store.ads.map(ad => `
+                            <div class="relative group rounded-2xl overflow-hidden border border-white/10 aspect-video shadow-lg">
+                                <img src="${ad.imageUrl}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center gap-2">
+                                    ${ad.linkUrl ? `<a href="${ad.linkUrl}" target="_blank" class="size-10 rounded-full bg-blue-500 text-white flex items-center justify-center"><span class="material-symbols-outlined">link</span></a>` : ''}
+                                    <button onclick="store.deleteAd('${ad.id}')" class="size-10 rounded-full bg-red-500 text-white flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('') : '<p class="text-slate-500 text-xs italic">No hay banners configurados</p>'}
+                    </div>
+                </div>
+
+                <!-- User Table -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 overflow-hidden shadow-xl">
+                    <div class="p-6 border-b border-white/5 flex items-center justify-between">
+                        <h3 class="font-bold text-white text-lg italic">Oficiales Registrados</h3>
+                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-black text-slate-500">${allUsers.length} TOTAL</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-white/2 uppercase text-[10px] font-black text-slate-500 tracking-widest border-b border-white/5">
+                                <tr>
+                                    <th class="px-6 py-4">Oficial</th>
+                                    <th class="px-6 py-4">Rango</th>
+                                    <th class="px-6 py-4 text-center">Conexión</th>
+                                    <th class="px-6 py-4 text-right">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5">
+                                ${allUsers.map(u => `
+                                    <tr class="hover:bg-white/[0.02] transition-colors group">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="size-8 rounded-full bg-slate-700">
+                                                    <img src="${u.avatar || 'https://ui-avatars.com/api/?name=' + u.name}" class="w-full h-full rounded-full object-cover">
+                                                </div>
+                                                <div>
+                                                    <p class="font-bold text-white text-xs">${u.name || 'Oficial'}</p>
+                                                    <p class="text-[9px] text-slate-500 font-mono">${u.email}</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-tighter ${u.role === 'admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-slate-500/20 text-slate-400'}">
+                                                ${u.role || 'user'}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4 text-center text-[10px] text-slate-400">
+                                            ${u.lastLogin ? _formatAdminDate(u.lastLogin) : 'N/A'}
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <button onclick="store.changeUserRole('${u.email}', '${u.role === 'admin' ? 'user' : 'admin'}')" class="text-[9px] font-bold text-primary hover:underline">
+                                                ${u.role === 'admin' ? 'Bajar' : 'Subir'}
+                                            </button>
+                                        </td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+        `;
+
+        _mountAdminCharts(stats.chartData);
+    };
+
+    // Subscriptions
+    const unsubUsers = DB.subscribeToUsers(data => {
+        allUsers = data;
+        updateUI();
+    });
+
+    const unsubServices = DB.subscribeToAllServices(data => {
+        allServices = data;
+        updateUI();
+        // Force chart refresh after UI update
+        setTimeout(() => _mountAdminCharts(DB.calculateStats(allUsers, allServices).chartData), 100);
+    });
+
+    const unsubReviews = DB.subscribeToReviews(newReview => {
+        showToast(`⭐ Nueva Reseña: "${newReview.comment}" - ${newReview.user_email}`);
+    });
+
+    store.addAd = async () => {
+        const imageUrl = prompt("URL de la Imagen (direct link):");
+        if (!imageUrl) return;
+        const linkUrl = prompt("Link de destino (opcional):", "https://");
+        try {
+            await db.collection('ads').add({
+                imageUrl,
+                linkUrl: linkUrl || '',
+                timestamp: new Date().toISOString()
+            });
+            showToast("✅ Publicidad agregada");
+        } catch (e) {
+            showToast("❌ Error al agregar");
+        }
+    };
+
+    // Cleanup when navigating away
+    const originalNavigate = router.navigateTo;
+    router.navigateTo = (route) => {
+        unsubUsers();
+        unsubServices();
+        unsubReviews();
+        router.navigateTo = originalNavigate;
+        router.navigateTo(route);
+    };
+}
+
+function _renderAdminKPICard(title, value, icon, gradient, textColor) {
+    return `
+        <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl relative overflow-hidden group hover:-translate-y-1 transition-all">
+            <div class="absolute -right-4 -top-4 size-24 bg-gradient-to-br ${gradient} rounded-full blur-2xl group-hover:scale-150 transition-transform"></div>
+            <div class="flex items-center gap-4 relative z-10">
+                <div class="size-12 rounded-2xl bg-white/5 flex items-center justify-center ${textColor}">
+                    <span class="material-symbols-outlined text-2xl">${icon}</span>
+                </div>
+            </div>
+            <div class="mt-4 relative z-10">
+                <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">${title}</p>
+                <p class="text-2xl font-black text-white mt-1">${value}</p>
+            </div>
+        </div>
+    `;
+}
+
+function _mountAdminCharts(data) {
+    const ctxTrend = document.getElementById('adminTrendChart')?.getContext('2d');
+    const ctxType = document.getElementById('adminTypeChart')?.getContext('2d');
+    if (!ctxTrend) return; // Type chart might not be in the current HTML
+
+    if (window.adminChartTrend) window.adminChartTrend.destroy();
+
+    window.adminChartTrend = new Chart(ctxTrend, {
+        type: 'line',
+        data: {
+            labels: data.dates.slice(-15),
+            datasets: [{
+                label: 'Volumen ($)',
+                data: data.revenue.slice(-15),
+                borderColor: '#4f46e5',
+                backgroundColor: 'rgba(79, 70, 229, 0.1)',
+                fill: true,
+                tension: 0.4,
+                pointRadius: 4,
+                pointBackgroundColor: '#4f46e5'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { grid: { color: 'rgba(255,255,255,0.05)' }, border: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } },
+                x: { grid: { display: false }, ticks: { color: '#64748b', font: { size: 10 } } }
+            }
+        }
+    });
+
+    if (ctxType) {
+        if (window.adminChartType) window.adminChartType.destroy();
+        window.adminChartType = new Chart(ctxType, {
+            type: 'doughnut',
+            data: {
+                labels: data.types,
+                datasets: [{
+                    data: data.typeCounts,
+                    backgroundColor: ['#4f46e5', '#22c55e', '#eab308', '#ec4899', '#8b5cf6'],
+                    borderWidth: 0,
+                    hoverOffset: 20
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#64748b', padding: 20, font: { weight: 'bold', size: 10 } } }
+                }
+            }
+        });
+    }
+}
+
+function _formatAdminDate(iso) {
+    const d = new Date(iso);
+    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+store.changeUserRole = async (email, newRole) => {
+    if (!confirm(`¿Confirmas cambiar a ${email} al rol: ${newRole}?`)) return;
+    try {
+        await DB.updateUserRole(email, newRole);
+        showToast("Rol actualizado");
+        if (window.location.hash === '#admin') router.handleRoute();
+    } catch (e) {
+        showToast("Error: " + e.message);
+    }
+};
+
+store.exportGlobalData = async () => {
+    try {
+        showToast("⏳ Generando reporte global...");
+        const services = await DB.getAllServicesForStats();
+        let csv = "Fecha,Usuario,Tipo,Sector,Horas,Total,Ubicacion\n";
+        services.forEach(s => {
+            csv += `"${s.date}","${s.userEmail}","${s.type}","${s.sector}","${s.hours}","${s.total}","${s.location || '-'}"\n`;
+        });
+        const blob = new Blob([csv], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.setAttribute('href', url);
+        a.setAttribute('download', `Adicionales_Global_${new Date().toISOString().split('T')[0]}.csv`);
+        a.click();
+        showToast("✅ Reporte descargado");
+    } catch (e) {
+        showToast("Error al exportar");
+    }
+};
+
+store.filterUserTable = (query) => {
+    const rows = document.querySelectorAll('#userAdminTable tbody tr');
+    rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(query.toLowerCase()) ? '' : 'none';
+    });
+};
+
+store.handleAddAd = async (form) => {
+    const imageUrl = form.imageUrl.value;
+    const linkUrl = form.linkUrl.value;
+    try {
+        await DB.addAd({ imageUrl, linkUrl });
+        showToast("Anuncio creado correctamente");
+        form.reset();
+        if (window.location.hash === '#admin') router.handleRoute();
+    } catch (e) {
+        showToast("Error al crear anuncio");
+    }
+};
+
+store.deleteAd = async (id) => {
+    if (confirm("¿Eliminar este anuncio?")) {
+        await DB.deleteAd(id);
+        if (window.location.hash === '#admin') router.handleRoute();
+    }
+};
