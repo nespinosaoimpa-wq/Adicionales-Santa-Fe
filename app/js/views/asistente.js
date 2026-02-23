@@ -7,7 +7,6 @@ function renderAsistenteHub(container) {
 
     const tools = [
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
-        { id: 'calculadora', title: 'Calculadora v2', desc: 'Proyectá tu sueldo según Decreto 142/26.', icon: 'calculate', color: 'from-accent-cyan to-blue-400', route: '#asistente/calculadora', badge: 'Pro' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
         { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },
         { id: 'directorio', title: 'Directorio Policial', desc: 'Números de emergencia interna.', icon: 'contact_phone', color: 'from-amber-500 to-orange-500', route: '#asistente/directorio' },
@@ -819,92 +818,3 @@ window.showAnnouncementModal = () => {
     };
 };
 
-
-function renderCalculadoraHaberes(container) {
-    const hierarchies = [
-        { name: 'Director General', salary: 2264435 },
-        { name: 'Director', salary: 2145835 },
-        { name: 'Subdirector', salary: 2012335 },
-        { name: 'Comisario Supervisor', salary: 1895535 },
-        { name: 'Comisario', salary: 1802235 },
-        { name: 'Subcomisario', salary: 1722535 },
-        { name: 'Inspector', salary: 1642835 },
-        { name: 'Subinspector', salary: 1585335 },
-        { name: 'Oficial de Policía', salary: 1438835 }
-    ];
-
-    container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
-                <span class="material-symbols-outlined">arrow_back</span>
-            </button>
-            <h1 class="text-sm font-black text-white">Calculadora v2</h1>
-        </header>
-
-        <main class="p-6 space-y-6 animate-fade-in max-w-md mx-auto">
-            <div class="glass-card p-6 rounded-[2.5rem] border border-primary/20 bg-gradient-to-b from-primary/10 to-transparent">
-                <div class="size-16 rounded-3xl bg-primary/20 flex items-center justify-center text-primary mb-6">
-                    <span class="material-symbols-outlined text-4xl">calculate</span>
-                </div>
-                <h2 class="text-xl font-black text-white mb-2 italic">Proyección Salarial</h2>
-                <p class="text-xs text-slate-400 mb-6">Valores actualizados al **Decreto 142/26** (Febrero 2026).</p>
-
-                <div class="space-y-4">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Jerarquía Actual</label>
-                        <select id="calc-hierarchy" class="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3.5 text-sm text-white outline-none focus:ring-2 focus:ring-primary/50 transition-all">
-                            ${hierarchies.map(h => `<option value="${h.salary}">${h.name}</option>`).join('')}
-                        </select>
-                    </div>
-
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-500 ml-1">Servicios Adicionales (Estimado)</label>
-                        <div class="relative">
-                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-primary font-bold">$</span>
-                            <input type="number" id="calc-extra" placeholder="0" class="w-full bg-white/5 border border-white/10 rounded-2xl pl-8 pr-4 py-3.5 text-sm text-white outline-none focus:ring-2 focus:ring-primary/50 transition-all">
-                        </div>
-                    </div>
-
-                    <div class="pt-6 border-t border-white/5 space-y-4">
-                        <div class="flex justify-between items-end">
-                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Haber de Bolsillo</span>
-                            <span id="result-salary" class="text-xl font-black text-white">$0</span>
-                        </div>
-                        <div class="flex justify-between items-end">
-                            <span class="text-xs text-slate-500 font-bold uppercase tracking-wider">Total Proyectado</span>
-                            <span id="result-total" class="text-3xl font-black text-primary shadow-glow">$0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-2xl">
-                <div class="flex gap-3">
-                    <span class="material-symbols-outlined text-amber-500">info</span>
-                    <p class="text-[10px] text-amber-500/80 leading-relaxed font-bold">
-                        IMPORTANTE: Los montos son aproximados y pueden variar según antigüedad, asignaciones familiares y retenciones específicas de cada agente.
-                    </p>
-                </div>
-            </div>
-        </main>
-    `;
-
-    const hierarchySelect = document.getElementById('calc-hierarchy');
-    const extraInput = document.getElementById('calc-extra');
-    const salaryResult = document.getElementById('result-salary');
-    const totalResult = document.getElementById('result-total');
-
-    const updateCalc = () => {
-        const salary = parseFloat(hierarchySelect.value) || 0;
-        const extra = parseFloat(extraInput.value) || 0;
-        const total = salary + extra;
-
-        salaryResult.textContent = window.formatMoney(salary);
-        totalResult.textContent = window.formatMoney(total);
-    };
-
-    hierarchySelect.onchange = updateCalc;
-    extraInput.oninput = updateCalc;
-
-    updateCalc(); // Initial run
-}
