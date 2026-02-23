@@ -105,48 +105,51 @@ const DB = {
     },
 
     subscribeToUsers(callback) {
-        let fbUsers = [];
-        let sbUsers = [];
+        const userMap = new Map();
 
         const mergeAndCallback = () => {
-            const unified = [...fbUsers];
-            if (sbUsers.length > 0) {
-                sbUsers.forEach(sbUser => {
-                    if (!unified.find(u => u.email === sbUser.email)) {
-                        unified.push({
-                            ...sbUser,
-                            serviceConfig: sbUser.service_config,
-                            notificationSettings: sbUser.notification_settings,
-                            role: sbUser.role || 'user'
-                        });
-                    }
-                });
-            }
+            const unified = Array.from(userMap.values());
             callback(unified);
         };
 
-        // 1. Listen to Firebase (Primary source for users currently)
-        const fbUnsub = db.collection('users').onSnapshot(snapshot => {
-            fbUsers = snapshot.docs.map(doc => doc.data());
+        const processUsers = (users, source) => {
+            users.forEach(u => {
+                const email = u.email || u.id;
+                if (!email) return;
+
+                const existing = userMap.get(email) || {};
+                userMap.set(email, {
+                    ...existing,
+                    ...u,
+                    email: email,
+                    serviceConfig: u.service_config || u.serviceConfig || existing.serviceConfig,
+                    notificationSettings: u.notification_settings || u.notificationSettings || existing.notificationSettings,
+                    role: u.role || existing.role || 'user',
+                    lastLogin: u.last_login || u.lastLogin || existing.lastLogin,
+                    source: (existing.source || '') + source
+                });
+            });
             mergeAndCallback();
+        };
+
+        // 1. Listen to Firebase
+        const fbUnsub = db.collection('users').onSnapshot(snapshot => {
+            processUsers(snapshot.docs.map(doc => doc.data()), 'FB');
         }, error => {
             console.warn("Users access restricted:", error.message);
-            callback([]);
         });
 
-        // 2. Fetch Supabase users for completeness (ALL)
+        // 2. Initial manual fetch from Firebase to bypass potential snapshot limits
+        db.collection('users').get().then(snapshot => {
+            processUsers(snapshot.docs.map(doc => doc.data()), 'FB-FULL');
+        });
+
+        // 3. Fetch Supabase users
         supabaseClient.from('profiles').select('*').then(({ data }) => {
             if (data) {
-                sbUsers = data;
-                mergeAndCallback();
+                processUsers(data, 'SB');
             }
         }).catch(e => console.warn("Supabase profiles fetch failed:", e.message));
-
-        // 3. Fallback: Manual fetch if Firestore subscription is limited
-        db.collection('users').get().then(snapshot => {
-            fbUsers = snapshot.docs.map(doc => doc.data());
-            mergeAndCallback();
-        });
 
         return fbUnsub;
     },
@@ -474,7 +477,8 @@ const DB = {
     },
 
     calculateStats(users, services) {
-        // Logic remains the same as before
+        console.log(`[Stats] Calculating for ${users.length} users and ${services.length} services`);
+        // Logic remains same...
         const totalRevenue = services.reduce((acc, s) => acc + (parseFloat(s.total) || 0), 0);
         const totalHours = services.reduce((acc, s) => acc + (parseFloat(s.hours) || 0), 0);
 

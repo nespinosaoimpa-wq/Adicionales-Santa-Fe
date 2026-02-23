@@ -177,61 +177,25 @@ function renderIOSInstallPrompt() {
     `;
 }
 
-function renderDonationHeader() {
-    return `
-        <div onclick="window.showDonationModal()" class="flex flex-col items-end cursor-pointer group hover:scale-105 transition-transform bg-primary/5 px-3 py-1.5 rounded-2xl border border-primary/20">
-            <span class="text-[9px] font-black text-primary/60 uppercase tracking-tighter">Soporte / Alias</span>
-            <span class="text-[11px] font-black text-white group-hover:text-primary transition-colors">SmartFlow.Digital</span>
+function showSuccessAnimation(message) {
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm';
+    overlay.innerHTML = `
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-2xl animate-scale-in">
+            <div class="flex flex-col items-center">
+                <div class="size-20 rounded-full bg-green-500/20 flex items-center justify-center mb-4 animate-bounce-in">
+                    <span class="material-symbols-outlined text-5xl text-green-500">check_circle</span>
+                </div>
+                <p class="text-lg font-bold text-slate-900 dark:text-white">${message}</p>
+            </div>
         </div>
     `;
-}
+    document.body.appendChild(overlay);
 
-function showDonationModal() {
-    const modal = document.createElement('div');
-    modal.className = 'fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-background-dark/95 backdrop-blur-md animate-fade-in';
-    modal.innerHTML = `
-        <div class="max-w-xs w-full glass-card p-6 rounded-[2.5rem] border border-white/10 shadow-2xl space-y-6 text-center animate-scale-up relative">
-            <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">
-                <span class="material-symbols-outlined">close</span>
-            </button>
-            
-            <div class="size-20 bg-gradient-to-br from-primary to-blue-600 rounded-3xl mx-auto flex items-center justify-center text-white shadow-xl shadow-primary/20">
-                <span class="material-symbols-outlined text-4xl">favorite</span>
-            </div>
-            
-            <div class="space-y-2">
-                <h2 class="text-xl font-bold text-white tracking-tight italic uppercase">Apoyá el Desarrollo</h2>
-                <p class="text-xs text-slate-400 leading-relaxed">¿Te gusta la aplicación? Ayudanos a mantenerla con un café simbólico.</p>
-            </div>
-
-            <div class="space-y-3">
-                <!-- Alias Block -->
-                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-1 group relative">
-                    <span class="text-[9px] font-bold text-primary uppercase text-left">Mercado Pago / Alias</span>
-                    <div class="flex items-center justify-between">
-                        <span class="text-lg font-black text-white italic">SmartFlow.Digital</span>
-                        <button onclick="copyToClipboard('SmartFlow.Digital', '✅ Alias copiado')" class="size-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
-                            <span class="material-symbols-outlined text-sm">content_copy</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CVU Block -->
-                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-1 group relative">
-                    <span class="text-[9px] font-bold text-primary uppercase text-left">CVU</span>
-                    <div class="flex items-center justify-between">
-                        <span class="text-[10px] font-mono text-slate-400 break-all pr-2">0000003100001906497190</span>
-                        <button onclick="copyToClipboard('0000003100001906497190', '✅ CVU copiado')" class="size-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all shrink-0">
-                            <span class="material-symbols-outlined text-sm">content_copy</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest pt-2 italic">GRACIAS POR TU COLABORACIÓN</p>
-        </div>
-    `;
-    document.body.appendChild(modal);
+    setTimeout(() => {
+        overlay.classList.add('animate-fade-out');
+        setTimeout(() => overlay.remove(), 300);
+    }, 1500);
 }
 
 function copyToClipboard(text, successMsg) {
@@ -239,6 +203,6 @@ function copyToClipboard(text, successMsg) {
         showToast(successMsg);
     });
 }
+window.showDonationModal = () => { };
 
-window.showDonationModal = showDonationModal;
 window.copyToClipboard = copyToClipboard;
