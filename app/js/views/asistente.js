@@ -584,13 +584,16 @@ function renderCentinela(container) {
             category: 'sueldos',
             keywords: ['sueldo', 'salario', 'cobrar', 'cuanto gano', 'escala', 'decreto 142', 'haberes', 'porcentaje', 'aumento', 'patrullero', 'chofer'],
             responses: [
-                { match: ['minimo', 'bolsillo', 'piso', 'percepcion'], text: "A febrero de 2026 (Decreto 142/26), el ingreso mínimo garantizado es de **$1.350.000**. El piso para personal operativo es de **$1.438.835**." },
-                { match: ['rosario', 'santa fe', 'conflictividad', 'plus', 'calle'], text: "Personal en Rosario, Santa Fe y ciudades aledañas recibe un **plus de conflictividad de $500.000**, elevando el sueldo a **$1.938.835**." },
-                { match: ['patrullero', 'conducir', 'chofer', 'movil'], text: "Conductores de móviles tienen suplementos extra. Un chofer en Rosario puede percibir hasta **$2.188.835** netos." },
-                { match: ['jerarquia', 'comisario', 'director', 'oficial'], text: "Escala 2026 (Neto): Oficial $1.43M, Subinspector $2.2M, Subcomisario $3.45M, Comisario $3.7M, Director $5.24M, Director General $6.57M." },
-                { match: ['aguinaldo', 'SAC'], text: "El SAC se calcula sobre el 50% de la mayor remuneración mensual devengada dentro de los semestres que culminan en junio y diciembre." }
+                { match: ['jerarquias', 'grados', 'escalon', 'carrera'], text: "La **Jerarquía Policial** (Ley 12521) se divide en: **Personal de Ejecución** (Suboficial, Oficial, Subinspector), **Coordinación** (Inspector, Subcomisario), **Supervisión** (Comisario, Com. Supervisor) y **Dirección** (Subdirector, Director, Director General)." },
+                { match: ['escalafones', 'subescalafones', 'especialidad'], text: "Existen 3 Escalafones principales: **General** (Seguridad, Judicial, Investigaciones), **Profesional** (Jurídico, Sanidad, Adm.) y **Técnico** (Criminalística, Comunicaciones, Bomberos, Músicos)." },
+                { match: ['sueldo oficial', 'cuanto gana un oficial', 'nivel 1', 'nivel 2', 'nivel 3'], text: "Sueldos Oficial (Neto Feb 2026):\n- **Nivel 1**: $2.050.018 (Cond.) / $1.800.018 (No Cond.)\n- **Nivel 2**: $1.800.018 (Cond.) / $1.550.018 (No Cond.)\n- **Nivel 3**: $1.700.018 (Cond.) / $1.450.018 (No Cond.)" },
+                { match: ['sueldo subinspector', 'cuanto gana un subinspector'], text: "Sueldos Subinspector (Neto Feb 2026):\n- **Nivel 1**: $2.164.635 (Cond.) / $1.914.635 (No Cond.)\n- **Nivel 2**: $1.914.635 (Cond.) / $1.664.635 (No Cond.)\n- **Nivel 3**: $1.814.635 (Cond.) / $1.564.635 (No Cond.)" },
+                { match: ['sueldo inspector', 'cuanto gana un inspector'], text: "Sueldos Inspector (Neto Feb 2026):\n- **Nivel 1**: $2.404.375 (Cond.) / $2.154.375 (No Cond.)\n- **Nivel 2**: $2.154.375 (Cond.) / $1.904.375 (No Cond.)\n- **Nivel 3**: $2.054.375 (Cond.) / $1.804.375 (No Cond.)" },
+                { match: ['minimo', 'bolsillo', 'piso', 'percepcion'], text: "A febrero de 2026, el ingreso mínimo garantizado es de **$1.350.000**. El piso para personal operativo (incluyendo T.A.P) es de **$1.525.682**." },
+                { match: ['rosario', 'santa fe', 'conflictividad', 'vgg', 'baigorria', 'santo tome'], text: "Se aplica un **Plus por Conflictividad de $500.000** en Rosario, Santa Fe, VGG, Baigorria y Santo Tomé para personal de calle, elevando el neto a **$1.938.835** para un suboficial operativo." },
+                { match: ['maximas jerarquias', 'director', 'comisario'], text: "Escalas Superiores (Neto Feb 2026):\n- **Dir. General**: $6.573.262\n- **Director**: $5.241.901\n- **Subdirector**: $4.352.690\n- **Com. Supervisor**: $3.923.687\n- **Comisario**: $3.709.842\n- **Subcomisario**: $3.455.398" }
             ],
-            default: "Los haberes fueron actualizados el 40% por el Decreto 142/26 en febrero de 2026. ¿Querés saber sobre una jerarquía o suplemento?"
+            default: "Las escalas salariales (Decreto 142/26) y la Planimetría Policial (Ley 12521) definen tus haberes según grado, nivel, escalafón y función (Conductor/No Cond.)."
         },
         {
             category: 'prevision',

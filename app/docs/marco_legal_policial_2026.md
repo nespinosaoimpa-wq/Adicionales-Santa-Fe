@@ -14,13 +14,21 @@
 
 ## 2. Escalas Salariales (Decreto 142/26 - Febrero 2026)
 - **Ingreso Mínimo Garantizado**: Ningún policía gana menos de **$1.350.000**.
-- **Piso Operativo**: **$1.438.835** (incluye tarjeta alimentaria).
-- **Plus por Conflictividad**: **$500.000** adicionales para personal de calle en Rosario, Santa Fe, Villa Gdor. Gálvez, Baigorria y Santo Tomé.
-- **Suplemento por Conducción**: Choferes de patrulleros reciben un plus extra, pudiendo alcanzar los **$2.188.835**.
-- **Haberes por Jerarquía (Bolsillo Neto)**:
+- **Piso Operativo**: **$1.525.682** (incluye tarjeta alimentaria).
+- **Plus por Conflictividad**: **$500.000** adicionales para personal de calle en áreas críticas (Rosario, Santa Fe, VGG, Baigorria, Santo Tomé).
+- **Planimetría Policial (Ley 12521)**:
+  - **Jerarquías**: Director General, Director, Subdirector, Comisario Supervisor, Comisario, Subcomisario, Inspector, Subinspector, Oficial, Suboficial.
+  - **Escalafones**: General (Seguridad, Judicial, Invest.), Profesional (Salud, Técnica, Adm.), Técnico (Criminalística, Bomberos, etc.).
+- **Escalas Niveles (Neto Feb 2026)**:
+  - **Inspector**: Nivel 1 ($2.4M), Nivel 2 ($2.1M), Nivel 3 ($2.0M).
+  - **Subinspector**: Nivel 1 ($2.1M), Nivel 2 ($1.9M), Nivel 3 ($1.8M).
+  - **Oficial**: Nivel 1 ($2.0M), Nivel 2 ($1.8M), Nivel 3 ($1.7M).
+  - *(Valores aproximados para conductores, no conductores restan ~$250.000)*.
+- **Haberes Superiores (Neto)**:
   - Director General: $6.573.262
   - Director: $5.241.901
   - Subdirector: $4.352.690
+  - Comisario Supervisor: $3.923.687
   - Comisario: $3.709.842
   - Subcomisario: $3.455.398
 

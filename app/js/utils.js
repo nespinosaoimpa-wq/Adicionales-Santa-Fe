@@ -50,7 +50,9 @@ const isIOS = () => {
 
 const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone) || window.matchMedia('(display-mode: standalone)').matches;
 
-const formatMoney = (amount) => {
+// Global Formatting Utility
+window.formatMoney = function (amount) {
+    if (typeof amount !== 'number') amount = parseFloat(amount) || 0;
     return new Intl.NumberFormat('es-AR', {
         style: 'currency',
         currency: 'ARS',
@@ -65,4 +67,3 @@ window.copyToClipboard = copyToClipboard;
 window.debugLog = debugLog;
 window.isIOS = isIOS;
 window.isInStandaloneMode = isInStandaloneMode;
-window.formatMoney = formatMoney;
