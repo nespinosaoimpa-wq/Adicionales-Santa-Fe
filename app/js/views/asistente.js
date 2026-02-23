@@ -179,7 +179,9 @@ function showAnnouncementModal() {
 function renderDirectorioPolicial(container) {
     const rawContacts = window.policeDirectory || [];
 
-    // Initial render with search bar
+    // Get unique departments for the filter
+    const departments = [...new Set(rawContacts.map(c => c.dept))].sort();
+
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
             <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
@@ -189,15 +191,24 @@ function renderDirectorioPolicial(container) {
         </header>
 
         <main class="p-6 space-y-4 pb-32 max-w-md mx-auto animate-fade-in">
-            <!-- Search Bar -->
-            <div class="relative group">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 group-focus-within:text-primary transition-colors">search</span>
-                <input type="text" id="directory-search" placeholder="Buscar dependencia (ej: Cria 1ra)..." 
-                    class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all shadow-inner"
-                    oninput="window.filterContacts(this.value)">
+            <!-- Search & Filter -->
+            <div class="space-y-3">
+                <div class="relative group">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 group-focus-within:text-primary transition-colors">search</span>
+                    <input type="text" id="directory-search" placeholder="Buscar dependencia o número..." 
+                        class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all shadow-inner"
+                        oninput="window.runDirectoryFilter()">
+                </div>
+                
+                <select id="dept-filter" onchange="window.runDirectoryFilter()" 
+                    class="w-full bg-white/5 border border-white/10 rounded-2xl py-3 px-4 text-xs text-slate-400 focus:ring-1 focus:ring-primary outline-none transition-all appearance-none cursor-pointer">
+                    <option value="all">Todas las Regiones / Departamentos</option>
+                    <option value="essential">⭐ Números Esenciales / Emergencias</option>
+                    ${departments.map(d => `<option value="${d}">${d}</option>`).join('')}
+                </select>
             </div>
 
-            <div id="contacts-list" class="space-y-3">
+            <div id="contacts-list" class="space-y-6">
                 <!-- Contacts will be rendered here -->
             </div>
 
@@ -206,52 +217,89 @@ function renderDirectorioPolicial(container) {
         ${renderBottomNav('asistente')}
     `;
 
-    // Filter Logic
-    window.filterContacts = (query) => {
+    window.runDirectoryFilter = () => {
+        const query = document.getElementById('directory-search').value.toLowerCase().trim();
+        const deptFilter = document.getElementById('dept-filter').value;
         const listContainer = document.getElementById('contacts-list');
-        const q = query.toLowerCase().trim();
 
-        const filtered = rawContacts.filter(c =>
-            c.name.toLowerCase().includes(q) ||
-            (c.address && c.address.toLowerCase().includes(q)) ||
-            c.phones.some(p => p.includes(q))
+        let filtered = rawContacts.filter(c =>
+            c.name.toLowerCase().includes(query) ||
+            c.dept.toLowerCase().includes(query) ||
+            c.phones.some(p => p.includes(query))
         );
+
+        if (deptFilter === 'essential') {
+            filtered = filtered.filter(c => c.is_essential);
+        } else if (deptFilter !== 'all') {
+            filtered = filtered.filter(c => c.dept === deptFilter);
+        }
 
         if (filtered.length === 0) {
             listContainer.innerHTML = renderEmptyState({
                 icon: 'search_off',
-                title: 'No se encontraron resultados',
-                message: `No hay dependencias que coincidan con "${query}"`
+                title: 'No hay resultados',
+                message: 'Probá con otra búsqueda o región.'
             });
             return;
         }
 
-        listContainer.innerHTML = filtered.map(c => `
-            <div class="glass-card p-4 rounded-2xl border border-white/5 flex items-center justify-between group animate-fade-in">
-                <div class="flex items-center gap-4">
-                    <div class="size-10 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 group-hover:text-primary transition-colors">
-                        <span class="material-symbols-outlined">${c.icon || 'shield'}</span>
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-white text-[13px] truncate">${c.name}</h3>
-                        <div class="flex flex-wrap gap-2 mt-1">
-                            ${c.phones.map(p => `<span class="text-[10px] text-slate-500 font-mono tracking-wider">${p}</span>`).join('')}
+        // Grouping Logic
+        const sections = {};
+        if (query === '' && deptFilter === 'all') {
+            // Default view: Essentials first, then by dept
+            sections['⭐ Números Esenciales'] = filtered.filter(c => c.is_essential);
+            const others = filtered.filter(c => !c.is_essential);
+            others.forEach(c => {
+                if (!sections[c.dept]) sections[c.dept] = [];
+                sections[c.dept].push(c);
+            });
+        } else {
+            // Search result view: single list or grouped by dept if few results
+            filtered.forEach(c => {
+                const head = c.is_essential ? '⭐ Coincidencias Críticas' : c.dept;
+                if (!sections[head]) sections[head] = [];
+                sections[head].push(c);
+            });
+        }
+
+        listContainer.innerHTML = Object.keys(sections).map(title => {
+            if (sections[title].length === 0) return '';
+            return `
+                <div class="space-y-3">
+                    <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] px-1 flex items-center gap-2">
+                        <span class="h-px flex-1 bg-white/5"></span>
+                        ${title}
+                        <span class="h-px flex-1 bg-white/5"></span>
+                    </h3>
+                    ${sections[title].map(c => `
+                        <div class="glass-card p-4 rounded-2xl border border-white/5 flex items-center justify-between group animate-fade-in ${c.is_essential ? 'bg-primary/5 border-primary/10' : ''}">
+                            <div class="flex items-center gap-4">
+                                <div class="size-10 rounded-xl ${c.is_essential ? 'bg-primary/20 text-primary' : 'bg-slate-800 text-slate-400'} flex items-center justify-center transition-colors">
+                                    <span class="material-symbols-outlined">${c.icon || 'shield'}</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <h3 class="font-bold text-white text-[13px] truncate">${c.name}</h3>
+                                    <div class="flex flex-wrap gap-2 mt-1">
+                                        ${c.phones.map(p => `<span class="text-[10px] text-slate-500 font-mono tracking-wider">${p}</span>`).join('')}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2">
+                                ${c.phones.map(p => `
+                                    <a href="tel:${p.replace(/[^0-9]/g, '')}" class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-lg active:scale-95">
+                                        <span class="material-symbols-outlined text-sm">call</span>
+                                    </a>
+                                `).join('')}
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="flex gap-2">
-                    ${c.phones.map(p => `
-                        <a href="tel:${p.replace(/[^0-9]/g, '')}" class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-lg active:scale-95">
-                            <span class="material-symbols-outlined text-sm">call</span>
-                        </a>
                     `).join('')}
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     };
 
     // Initial load
-    window.filterContacts('');
+    window.runDirectoryFilter();
 }
 
 function renderChecklistGuardia(container) {

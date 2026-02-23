@@ -36,6 +36,11 @@ function renderControlPanel(container) {
                 </div>
             </div>
             <div class="flex gap-2">
+                ${store.user && store.user.role === 'admin' ? `
+                    <button onclick="router.navigateTo('#admin')" class="size-10 flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/30 transition-colors text-primary border border-primary/30">
+                        <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
+                    </button>
+                ` : ''}
                 <button onclick="showToast('Modo privacidad activado')" class="size-10 flex items-center justify-center rounded-full glass-card hover:bg-white/10 transition-colors text-white">
                     <span class="material-symbols-outlined text-xl">visibility</span>
                 </button>

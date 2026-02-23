@@ -1,3501 +1,4489 @@
 const policeDirectory = [
   {
-    "name": "[JEFATURA DE POLICIA]",
+    "name": "",
+    "dept": "JEFATURA DE POLICIA",
     "phones": [
       "4579498"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[JEFATURA DE POLICIA] Santa Fe Fax 1ra. Junta 2823",
+    "name": "Santa Fe Fax 1ra. Junta 2823",
+    "dept": "JEFATURA DE POLICIA",
     "phones": [
       "28544572854"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] A. Aguiar Cria Distrito 21 San Martin S/N secretaria gral",
+    "name": "A. Aguiar Cria Distrito 21 San Martin S/N secretaria gral",
+    "dept": "LA CAPITAL",
     "phones": [
       "62244572837"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Alto Verde Cria. Distrito 24 Manzana 6",
+    "name": "Alto Verde Cria. Distrito 24 Manzana 6",
+    "dept": "LA CAPITAL",
     "phones": [
       "3424847772"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] C. Andino Destacamento 1 Zona Urbana",
+    "name": "C. Andino Destacamento 1 Zona Urbana",
+    "dept": "LA CAPITAL",
     "phones": [
       "3497494044"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Candioti Cria Distrito 22º Zona Urbana",
+    "name": "Candioti Cria Distrito 22º Zona Urbana",
+    "dept": "LA CAPITAL",
     "phones": [
       "58554906155"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Emilia Cria Distrito 18 Zona Urbana CRIA MUJER 4831575",
+    "name": "Emilia Cria Distrito 18 Zona Urbana CRIA MUJER 4831575",
+    "dept": "LA CAPITAL",
     "phones": [
       "1297493054",
       "12974831575"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] La Guardia Sub Comisaria 6ta. Zona Urbana",
+    "name": "La Guardia Sub Comisaria 6ta. Zona Urbana",
+    "dept": "LA CAPITAL",
     "phones": [
-      "70144574845",
-      "70144577014"
+      "70144577014",
+      "70144574845"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Lag. Paiva Cria Distrito 13 A.Peron y 1ro Mayo",
+    "name": "Lag. Paiva Cria Distrito 13 A.Peron y 1ro Mayo",
+    "dept": "LA CAPITAL",
     "phones": [
-      "89124574844",
-      "89124578912"
+      "89124578912",
+      "89124574844"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Ll.Campbell Cria Distrito 17 A.Brown y Mons. Lovato",
+    "name": "Ll.Campbell Cria Distrito 17 A.Brown y Mons. Lovato",
+    "dept": "LA CAPITAL",
     "phones": [
       "9360420008",
       "9360420428"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Monte Vera Cria Distrito 20 Lopez y Bs.As",
+    "name": "Monte Vera Cria Distrito 20 Lopez y Bs.As",
+    "dept": "LA CAPITAL",
     "phones": [
       "89114578911"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Nelson Cria Distrito 15 Santa Fe 1169",
+    "name": "Nelson Cria Distrito 15 Santa Fe 1169",
+    "dept": "LA CAPITAL",
     "phones": [
       "25454902008"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Recreo Cria Distrito 16 Av. Mitre 1241",
+    "name": "Recreo Cria Distrito 16 Av. Mitre 1241",
+    "dept": "LA CAPITAL",
     "phones": [
       "70204577020"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Recreo Dest. Recreo Sur J.de Garay y Gdor. Freyre",
+    "name": "Recreo Dest. Recreo Sur J.de Garay y Gdor. Freyre",
+    "dept": "LA CAPITAL",
     "phones": [
       "49204574920"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] S.J.Rincon Cria Distrito 14 Zona Urbana",
+    "name": "S.J.Rincon Cria Distrito 14 Zona Urbana",
+    "dept": "LA CAPITAL",
     "phones": [
       "70224577022"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Santa Fe Seccional 1ra. 1ra. Junta 2454",
+    "name": "Santa Fe Seccional 1ra. 1ra. Junta 2454",
+    "dept": "LA CAPITAL",
     "phones": [
       "3424572823"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 2da. Gral. Lopez 3299",
+    "name": "Seccional 2da. Gral. Lopez 3299",
+    "dept": "LA CAPITAL",
     "phones": [
       "28344572834"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 3ra. Lavalle 3400",
+    "name": "Seccional 3ra. Lavalle 3400",
+    "dept": "LA CAPITAL",
     "phones": [
       "3424572806"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 4ta. Tucuman 3595",
+    "name": "Seccional 4ta. Tucuman 3595",
+    "dept": "LA CAPITAL",
     "phones": [
       "28464572846"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 5ta. S. del Carril 2027 juveniles 4572827",
+    "name": "Seccional 5ta. S. del Carril 2027 juveniles 4572827",
+    "dept": "LA CAPITAL",
     "phones": [
-      "3424578901",
-      "3424572827"
+      "3424572827",
+      "3424578901"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 6ta. L. y Planes 4328",
+    "name": "Seccional 6ta. L. y Planes 4328",
+    "dept": "LA CAPITAL",
     "phones": [
       "28014572801"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 7ma. 12 de Octubre 9200 comisario marcelo fabro jefe",
+    "name": "Seccional 7ma. 12 de Octubre 9200 comisario marcelo fabro jefe",
+    "dept": "LA CAPITAL",
     "phones": [
       "3424578908"
     ],
-    "icon": "shield"
+    "is_essential": true,
+    "icon": "verified_user"
   },
   {
-    "name": "[LA CAPITAL] Seccional 8va. Gral. Paz 7374",
+    "name": "Seccional 8va. Gral. Paz 7374",
+    "dept": "LA CAPITAL",
     "phones": [
       "89004578900"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 9na. F. Zuviria 5802",
+    "name": "Seccional 9na. F. Zuviria 5802",
+    "dept": "LA CAPITAL",
     "phones": [
       "89094578909"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 10ma. E. Zeballos 4207",
+    "name": "Seccional 10ma. E. Zeballos 4207",
+    "dept": "LA CAPITAL",
     "phones": [
       "3424578905"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Seccional 11ma. A. del Valle 4806 AUOP",
+    "name": "Seccional 11ma. A. del Valle 4806 AUOP",
+    "dept": "LA CAPITAL",
     "phones": [
-      "3424589498",
-      "3424572820"
+      "3424572820",
+      "3424589498"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Cria Distrito 25ª Barrio El Pozo",
+    "name": "Cria Distrito 25ª Barrio El Pozo",
+    "dept": "LA CAPITAL",
     "phones": [
       "70004577000"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Comisaría 26ª Pompeya",
+    "name": "Comisaría 26ª Pompeya",
+    "dept": "LA CAPITAL",
     "phones": [
-      "89104578910",
-      "89104589490"
+      "89104589490",
+      "89104578910"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaria 1ra. B. Centenario",
+    "name": "Sub Comisaria 1ra. B. Centenario",
+    "dept": "LA CAPITAL",
     "phones": [
       "28314589491",
       "28314572831"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaria 2da. Europa 2250",
+    "name": "Sub Comisaria 2da. Europa 2250",
+    "dept": "LA CAPITAL",
     "phones": [
       "28034572803"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaria 3ra. Lamad. y Ayacucho",
+    "name": "Sub Comisaria 3ra. Lamad. y Ayacucho",
+    "dept": "LA CAPITAL",
     "phones": [
       "89064578906"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaría 4ta Colastine Sur Km. 1 S/N",
+    "name": "Sub Comisaría 4ta Colastine Sur Km. 1 S/N",
+    "dept": "LA CAPITAL",
     "phones": [
       "41834982127"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaria 8va. Arroyo Leyes",
+    "name": "Sub Comisaria 8va. Arroyo Leyes",
+    "dept": "LA CAPITAL",
     "phones": [
       "77154971291"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaria 10ma San Lorenzo Tramites y lib",
+    "name": "Sub Comisaria 10ma San Lorenzo Tramites y lib",
+    "dept": "LA CAPITAL",
     "phones": [
       "28364572836",
       "28364845462"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaria 12ma. Los Troncos",
+    "name": "Sub Comisaria 12ma. Los Troncos",
+    "dept": "LA CAPITAL",
     "phones": [
       "89034578903"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] sub comisaria 17 gorriti 5780",
+    "name": "sub comisaria 17 gorriti 5780",
+    "dept": "LA CAPITAL",
     "phones": [
       "4845412"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaría 14ª Malvinas 4487",
+    "name": "Sub Comisaría 14ª Malvinas 4487",
+    "dept": "LA CAPITAL",
     "phones": [
       "92824579282"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaría 18ª",
+    "name": "Sub Comisaría 18ª",
+    "dept": "LA CAPITAL",
     "phones": [
-      "92294579296",
-      "92294579229"
+      "92294579229",
+      "92294579296"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaría 19ª Pje Alfonso 10581 destacamento 4579229 int 351",
+    "name": "Sub Comisaría 19ª Pje Alfonso 10581 destacamento 4579229 int 351",
+    "dept": "LA CAPITAL",
     "phones": [
+      "3424579229",
       "342154401298",
-      "3424848443",
-      "3424579229"
+      "3424848443"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Destacamento 4 Parque Garay",
+    "name": "Destacamento 4 Parque Garay",
+    "dept": "LA CAPITAL",
     "phones": [
       "70064577006"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Dest. Vuelta Paraguayo Alto Verde",
+    "name": "Dest. Vuelta Paraguayo Alto Verde",
+    "dept": "LA CAPITAL",
     "phones": [
       "70504577050"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Dest. Laprida Laprida 5000",
+    "name": "Dest. Laprida Laprida 5000",
+    "dept": "LA CAPITAL",
     "phones": [
       "70024577002"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Dest. Mercado Productores Teniente Loza 7100",
+    "name": "Dest. Mercado Productores Teniente Loza 7100",
+    "dept": "LA CAPITAL",
     "phones": [
       "91064579106"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Santo Tome Cria Distrito 12 Alvear 2523",
+    "name": "Santo Tome Cria Distrito 12 Alvear 2523",
+    "dept": "LA CAPITAL",
     "phones": [
       "79164577916"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Cria 16 Roverano Sto Tome",
+    "name": "Sub Cria 16 Roverano Sto Tome",
+    "dept": "LA CAPITAL",
     "phones": [
       "3424544664"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Cria Distrito 23 Santo Tome",
+    "name": "Cria Distrito 23 Santo Tome",
+    "dept": "LA CAPITAL",
     "phones": [
       "57704753480"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaria 9na. Barrio Loyola",
+    "name": "Sub Comisaria 9na. Barrio Loyola",
+    "dept": "LA CAPITAL",
     "phones": [
       "79154577915"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaria 15ª Sarmiento 4018",
+    "name": "Sub Comisaria 15ª Sarmiento 4018",
+    "dept": "LA CAPITAL",
     "phones": [
-      "57754544664",
-      "57754753485"
+      "57754753485",
+      "57754544664"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sauce Viejo Cria Distrito 19 Ruta 11 Km. 447",
+    "name": "Sauce Viejo Cria Distrito 19 Ruta 11 Km. 447",
+    "dept": "LA CAPITAL",
     "phones": [
       "26394572639"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LA CAPITAL] Sub Comisaría 13ª Villa Adelina",
+    "name": "Sub Comisaría 13ª Villa Adelina",
+    "dept": "LA CAPITAL",
     "phones": [
       "84804951210"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Acebal Comisaria Distrito 28 Arzumendi 247",
+    "name": "Acebal Comisaria Distrito 28 Arzumendi 247",
+    "dept": "ROSARIO",
     "phones": [
       "3469420009"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Albarellos Sub Comisaria 7ma. Zona Urbana",
+    "name": "Albarellos Sub Comisaria 7ma. Zona Urbana",
+    "dept": "ROSARIO",
     "phones": [
       "3402494053"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Alvarez Sub Comisaria 3ra. Pje. Malvinas 400",
+    "name": "Alvarez Sub Comisaria 3ra. Pje. Malvinas 400",
+    "dept": "ROSARIO",
     "phones": [
       "3402461013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Alvear Sub Comisaria 8va. America 2002",
+    "name": "Alvear Sub Comisaria 8va. America 2002",
+    "dept": "ROSARIO",
     "phones": [
       "3414922500"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Arminda Destacamento 4to. Pte. Roca 409",
+    "name": "Arminda Destacamento 4to. Pte. Roca 409",
+    "dept": "ROSARIO",
     "phones": [
       "6736493030"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Arroyo Seco Comisaria Distrito 27 9 de Julio 247",
+    "name": "Arroyo Seco Comisaria Distrito 27 9 de Julio 247",
+    "dept": "ROSARIO",
     "phones": [
       "3402426552"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Bo. FONAVI Comisaria 30ma. Superi 2484",
+    "name": "Bo. FONAVI Comisaria 30ma. Superi 2484",
+    "dept": "ROSARIO",
     "phones": [
       "3414726545"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] C.del Sauce Destacamento 2da. Carmen del Sauce",
+    "name": "C.del Sauce Destacamento 2da. Carmen del Sauce",
+    "dept": "ROSARIO",
     "phones": [
       "6363420007"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] C.Dominguez Sub Comisaria 14ta. Bs. As 454",
+    "name": "C.Dominguez Sub Comisaria 14ta. Bs. As 454",
+    "dept": "ROSARIO",
     "phones": [
       "3402493017"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Cnel.Bogado Sub Comisaria 10ma. Belgrano 654",
+    "name": "Cnel.Bogado Sub Comisaria 10ma. Belgrano 654",
+    "dept": "ROSARIO",
     "phones": [
       "3402491232"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Fighiera Sub Comisaria 11ma. O. Andrade 625",
+    "name": "Fighiera Sub Comisaria 11ma. O. Andrade 625",
+    "dept": "ROSARIO",
     "phones": [
       "3402470112"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Funes Comisaria Distrito 23 P. Rios 1264",
+    "name": "Funes Comisaria Distrito 23 P. Rios 1264",
+    "dept": "ROSARIO",
     "phones": [
       "3414931280"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] G. Baigorria Comisaria Distrito 24 Moreno 160",
+    "name": "G. Baigorria Comisaria Distrito 24 Moreno 160",
+    "dept": "ROSARIO",
     "phones": [
       "3414711620"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Gabin Nvo.(Perez) Sub Comisaria 18va. Hudson 9002",
+    "name": "Gabin Nvo.(Perez) Sub Comisaria 18va. Hudson 9002",
+    "dept": "ROSARIO",
     "phones": [
       "3414956473"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Gral. Lagos Sub Comisaria 13ra. San Martin 134",
+    "name": "Gral. Lagos Sub Comisaria 13ra. San Martin 134",
+    "dept": "ROSARIO",
     "phones": [
       "3402490050"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Ibarlucea Sub Comisaria 17ma. A. Rosario S/N",
+    "name": "Ibarlucea Sub Comisaria 17ma. A. Rosario S/N",
+    "dept": "ROSARIO",
     "phones": [
       "3414904031"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] N. Alberdi Sub Comisaria 2da. Gascon 2987",
+    "name": "N. Alberdi Sub Comisaria 2da. Gascon 2987",
+    "dept": "ROSARIO",
     "phones": [
       "3414726544"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] P. Esther Sub Comisaria 15ta. J. Per｢n 2001",
+    "name": "P. Esther Sub Comisaria 15ta. J. Per｢n 2001",
+    "dept": "ROSARIO",
     "phones": [
       "3402499015"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] P. Mugueta Sub Comisaria 16ta. Reconquista 145",
+    "name": "P. Mugueta Sub Comisaria 16ta. Reconquista 145",
+    "dept": "ROSARIO",
     "phones": [
       "3469492092"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Pblo. Nuevo Comisaria Distrito 25 Corrientes 567",
+    "name": "Pblo. Nuevo Comisaria Distrito 25 Corrientes 567",
+    "dept": "ROSARIO",
     "phones": [
       "3414729535",
       "3414636995"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Perez Comisaria Distrito 22 1ro de Mayo 2096",
+    "name": "Perez Comisaria Distrito 22 1ro de Mayo 2096",
+    "dept": "ROSARIO",
     "phones": [
       "3414951112"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Pi､ero Sub Comisaria 4ta. B. y S. Martin",
+    "name": "Pi､ero Sub Comisaria 4ta. B. y S. Martin",
+    "dept": "ROSARIO",
     "phones": [
       "3402461123"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Rosario Seccional 1ra. J. M. Rosas 1350",
+    "name": "Rosario Seccional 1ra. J. M. Rosas 1350",
+    "dept": "ROSARIO",
     "phones": [
-      "3414498289",
-      "3414721760"
+      "3414721760",
+      "3414498289"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 2da. Paraguay 1123",
+    "name": "Seccional 2da. Paraguay 1123",
+    "dept": "ROSARIO",
     "phones": [
       "3414721762"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 3ra. Dorrego 161",
+    "name": "Seccional 3ra. Dorrego 161",
+    "dept": "ROSARIO",
     "phones": [
       "3414721769",
       "3414483545"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 4ta. La Paz 450",
+    "name": "Seccional 4ta. La Paz 450",
+    "dept": "ROSARIO",
     "phones": [
       "3414728520"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 5ta. Italia 2153",
+    "name": "Seccional 5ta. Italia 2153",
+    "dept": "ROSARIO",
     "phones": [
       "3414728525"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 6ta. San Luis 3261",
+    "name": "Seccional 6ta. San Luis 3261",
+    "dept": "ROSARIO",
     "phones": [
-      "3414388824",
-      "3414724594"
+      "3414724594",
+      "3414388824"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 7ma. Cafferata 345",
+    "name": "Seccional 7ma. Cafferata 345",
+    "dept": "ROSARIO",
     "phones": [
-      "3414350707",
-      "3414724588"
+      "3414724588",
+      "3414350707"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 8va. Ing. Toedy 375 bis",
+    "name": "Seccional 8va. Ing. Toedy 375 bis",
+    "dept": "ROSARIO",
     "phones": [
-      "3414724595",
-      "3414391780"
+      "3414391780",
+      "3414724595"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 9na. J.V.Gonzalez 950",
+    "name": "Seccional 9na. J.V.Gonzalez 950",
+    "dept": "ROSARIO",
     "phones": [
-      "3414380697",
-      "3414724589"
+      "3414724589",
+      "3414380697"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 10ma. Darragueira 1158",
+    "name": "Seccional 10ma. Darragueira 1158",
+    "dept": "ROSARIO",
     "phones": [
       "3414726542"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 11ma. Lamadrid 210 bis",
+    "name": "Seccional 11ma. Lamadrid 210 bis",
+    "dept": "ROSARIO",
     "phones": [
       "3414729533"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 12da. P.L. Funes 241",
+    "name": "Seccional 12da. P.L. Funes 241",
+    "dept": "ROSARIO",
     "phones": [
-      "3414397447",
-      "3414724582"
+      "3414724582",
+      "3414397447"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 13ra. San Nicolas 2023",
+    "name": "Seccional 13ra. San Nicolas 2023",
+    "dept": "ROSARIO",
     "phones": [
-      "3414335548",
-      "3414725562"
+      "3414725562",
+      "3414335548"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 14ta. Marcos Paz 6650",
+    "name": "Seccional 14ta. Marcos Paz 6650",
+    "dept": "ROSARIO",
     "phones": [
-      "3414727551",
-      "3414584338"
+      "3414584338",
+      "3414727551"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 15ta. Sarmiento 4310",
+    "name": "Seccional 15ta. Sarmiento 4310",
+    "dept": "ROSARIO",
     "phones": [
       "3414653300",
       "3414729534"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 16ta. Ayacucho 3350",
+    "name": "Seccional 16ta. Ayacucho 3350",
+    "dept": "ROSARIO",
     "phones": [
       "3414729538"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 17ma. Donado 957",
+    "name": "Seccional 17ma. Donado 957",
+    "dept": "ROSARIO",
     "phones": [
       "3414515142"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 18va. Av. Francia 3670",
+    "name": "Seccional 18va. Av. Francia 3670",
+    "dept": "ROSARIO",
     "phones": [
       "3414725563"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 19na. Calchaqui 3580",
+    "name": "Seccional 19na. Calchaqui 3580",
+    "dept": "ROSARIO",
     "phones": [
       "3414725560"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 20ma. Carrasco 2515",
+    "name": "Seccional 20ma. Carrasco 2515",
+    "dept": "ROSARIO",
     "phones": [
       "3414724592"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Seccional 21ra. Arijon 2349",
+    "name": "Seccional 21ra. Arijon 2349",
+    "dept": "ROSARIO",
     "phones": [
       "3414729537",
       "3414652575"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Comisaria 32da. Fernando Fader 3164",
+    "name": "Comisaria 32da. Fernando Fader 3164",
+    "dept": "ROSARIO",
     "phones": [
       "3414727505"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Comisaria 33ra. Lavalle 5860",
+    "name": "Comisaria 33ra. Lavalle 5860",
+    "dept": "ROSARIO",
     "phones": [
       "3414657293"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Comisaría 34ta Bo. Rucci",
+    "name": "Comisaría 34ta Bo. Rucci",
+    "dept": "ROSARIO",
     "phones": [
       "3414726540"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Sub Comisaria 19na. F. de Nacar 7088",
+    "name": "Sub Comisaria 19na. F. de Nacar 7088",
+    "dept": "ROSARIO",
     "phones": [
       "3414729532"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Sub Comisaria 20ma. San Martin 6201",
+    "name": "Sub Comisaria 20ma. San Martin 6201",
+    "dept": "ROSARIO",
     "phones": [
       "3414729531"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Sub Comisaria 21ra. Ayala Gauna 7959",
+    "name": "Sub Comisaria 21ra. Ayala Gauna 7959",
+    "dept": "ROSARIO",
     "phones": [
       "3414510210"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Sub Comisaria 22da. Forest 7680",
+    "name": "Sub Comisaria 22da. Forest 7680",
+    "dept": "ROSARIO",
     "phones": [
-      "3414727156",
-      "3414564433"
+      "3414564433",
+      "3414727156"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Sub Comisaria 24ta. J. J. Paso 2076",
+    "name": "Sub Comisaria 24ta. J. J. Paso 2076",
+    "dept": "ROSARIO",
     "phones": [
       "3414804535"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Destacamento 7mo. Est.M. Moreno",
+    "name": "Destacamento 7mo. Est.M. Moreno",
+    "dept": "ROSARIO",
     "phones": [
       "3414724573"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Destacamento Hosp. Centenario",
+    "name": "Destacamento Hosp. Centenario",
+    "dept": "ROSARIO",
     "phones": [
       "3414300202"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Destacamento La Florida",
+    "name": "Destacamento La Florida",
+    "dept": "ROSARIO",
     "phones": [
       "3414532797"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Destacamento 14to. Calle 1110 al 2800",
+    "name": "Destacamento 14to. Calle 1110 al 2800",
+    "dept": "ROSARIO",
     "phones": [
       "3414319745"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Destacamento 20mo. Riobamba 155 bis",
+    "name": "Destacamento 20mo. Riobamba 155 bis",
+    "dept": "ROSARIO",
     "phones": [
       "3414728167"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Destacamento 24to. Grandoli y Guiralde",
+    "name": "Destacamento 24to. Grandoli y Guiralde",
+    "dept": "ROSARIO",
     "phones": [
       "3414656778"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Soldini Sub Comisaria 6ta. Alte. Brown 1590",
+    "name": "Soldini Sub Comisaria 6ta. Alte. Brown 1590",
+    "dept": "ROSARIO",
     "phones": [
       "3414901044"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Uranga Sub Comisaria 12da. San Martin 54",
+    "name": "Uranga Sub Comisaria 12da. San Martin 54",
+    "dept": "ROSARIO",
     "phones": [
       "3469490090"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] V. Amelia Sub Comisaria 9na. E. Rios 257",
+    "name": "V. Amelia Sub Comisaria 9na. E. Rios 257",
+    "dept": "ROSARIO",
     "phones": [
       "3402492221"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] V.G. Galvez Comisaria Distrito 26 Av. Mitre 1957",
+    "name": "V.G. Galvez Comisaria Distrito 26 Av. Mitre 1957",
+    "dept": "ROSARIO",
     "phones": [
       "3414922535",
       "3414637555"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Villa Diego Comisaria Distrito 29 Juan Justo 1883",
+    "name": "Villa Diego Comisaria Distrito 29 Juan Justo 1883",
+    "dept": "ROSARIO",
     "phones": [
-      "3414922534",
-      "3414729536"
+      "3414729536",
+      "3414922534"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO] Zavalla Comisaria 31ra. Sastre 3351",
+    "name": "Zavalla Comisaria 31ra. Sastre 3351",
+    "dept": "ROSARIO",
     "phones": [
       "3414970037"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO]",
+    "name": "",
+    "dept": "ROSARIO",
     "phones": [
       "3414470202"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO]",
+    "name": "",
+    "dept": "ROSARIO",
     "phones": [
       "3414302535"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO]",
+    "name": "",
+    "dept": "ROSARIO",
     "phones": [
       "3414922533"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO]",
+    "name": "",
+    "dept": "ROSARIO",
     "phones": [
       "3414639185"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[ROSARIO]",
+    "name": "",
+    "dept": "ROSARIO",
     "phones": [
       "3414637153"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[DEPARTAMENTO BELGRANO] Armstrong Comisaria 3ra. 14 de Dic. 1559",
+    "name": "Armstrong Comisaria 3ra. 14 de Dic. 1559",
+    "dept": "DEPARTAMENTO BELGRANO",
     "phones": [
       "6388461219"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[DEPARTAMENTO BELGRANO] Bouquet Comisaria 6ta. Moreno S/N",
+    "name": "Bouquet Comisaria 6ta. Moreno S/N",
+    "dept": "DEPARTAMENTO BELGRANO",
     "phones": [
       "3471496381"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[DEPARTAMENTO BELGRANO] Las Parejas Comisaria 2da. Calle 14 N. 909",
+    "name": "Las Parejas Comisaria 2da. Calle 14 N. 909",
+    "dept": "DEPARTAMENTO BELGRANO",
     "phones": [
       "6390471118"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[DEPARTAMENTO BELGRANO] Las Rosas Comisaria 1ra. San Martin 299",
+    "name": "Las Rosas Comisaria 1ra. San Martin 299",
+    "dept": "DEPARTAMENTO BELGRANO",
     "phones": [
       "6380451002"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[DEPARTAMENTO BELGRANO] Secc. 3 D.G.S.R",
+    "name": "Secc. 3 D.G.S.R",
+    "dept": "DEPARTAMENTO BELGRANO",
     "phones": [
       "347115672865"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[DEPARTAMENTO BELGRANO] M. de Oca Comisaria 4ta. Sarmiento 542",
+    "name": "M. de Oca Comisaria 4ta. Sarmiento 542",
+    "dept": "DEPARTAMENTO BELGRANO",
     "phones": [
       "3471495103"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[DEPARTAMENTO BELGRANO] Tortugas Comisaria 5ta. Bv. Celman 609",
+    "name": "Tortugas Comisaria 5ta. Bv. Celman 609",
+    "dept": "DEPARTAMENTO BELGRANO",
     "phones": [
       "6398494113"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Arequito Comisaria 7ma. 9 Julio y Puig.",
+    "name": "Arequito Comisaria 7ma. 9 Julio y Puig.",
+    "dept": "CASEROS",
     "phones": [
       "6309471154"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Arteaga Comisaria 3ra. Santa Fe 294",
+    "name": "Arteaga Comisaria 3ra. Santa Fe 294",
+    "dept": "CASEROS",
     "phones": [
       "6350450200"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Berabevu Sub Comisaria 5ta. Gral. Roca S/N",
+    "name": "Berabevu Sub Comisaria 5ta. Gral. Roca S/N",
+    "dept": "CASEROS",
     "phones": [
       "6333494232"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Bigand Comisaria 6ta . Sarmiento 673",
+    "name": "Bigand Comisaria 6ta . Sarmiento 673",
+    "dept": "CASEROS",
     "phones": [
       "6306461013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Casilda Comisaria 1ra. Zeb. y 1ro Mayo",
+    "name": "Casilda Comisaria 1ra. Zeb. y 1ro Mayo",
+    "dept": "CASEROS",
     "phones": [
       "3209422217"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Cuatro Esquinas Secc. 4  D.G.S.R.",
+    "name": "Cuatro Esquinas Secc. 4  D.G.S.R.",
+    "dept": "CASEROS",
     "phones": [
       "346515661155"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Ch.Ladeado Comisaria 5ta. Alvarez y Rvia.",
+    "name": "Ch.Ladeado Comisaria 5ta. Alvarez y Rvia.",
+    "dept": "CASEROS",
     "phones": [
       "6359481211"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Chabas Comisaria 4ta. R. S. Pe､a 1842",
+    "name": "Chabas Comisaria 4ta. R. S. Pe､a 1842",
+    "dept": "CASEROS",
     "phones": [
       "6313480309"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Chabas Secc. 28 D.G.S.R.",
+    "name": "Chabas Secc. 28 D.G.S.R.",
+    "dept": "CASEROS",
     "phones": [
       "346415687422"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Godeken Sub Comisaria 6ta. Calle 13 S/N",
+    "name": "Godeken Sub Comisaria 6ta. Calle 13 S/N",
+    "dept": "CASEROS",
     "phones": [
       "6337498030"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] L. Molinos Sub Comisaria 1ra. B. Lopez 415",
+    "name": "L. Molinos Sub Comisaria 1ra. B. Lopez 415",
+    "dept": "CASEROS",
     "phones": [
       "6314495111"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Quirqu. Sub Comisaria 2da. Belgrano 674",
+    "name": "Quirqu. Sub Comisaria 2da. Belgrano 674",
+    "dept": "CASEROS",
     "phones": [
       "6334496012"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] S.J.Esq Comisaria 2da. Carcamo 939",
+    "name": "S.J.Esq Comisaria 2da. Carcamo 939",
+    "dept": "CASEROS",
     "phones": [
       "6354461220"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Sanford Sub Comisaria 4ta. Paraguay 511",
+    "name": "Sanford Sub Comisaria 4ta. Paraguay 511",
+    "dept": "CASEROS",
     "phones": [
       "3464496121"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASEROS] Villada Sub Comisaria 3ra. E. Lopez 310",
+    "name": "Villada Sub Comisaria 3ra. E. Lopez 310",
+    "dept": "CASEROS",
     "phones": [
       "6327491118"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Aldao Comisaria 11ma. C. Aldao S/N",
+    "name": "Aldao Comisaria 11ma. C. Aldao S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493497013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Angelica Sub Comisaria 5ta. E. Lopez 178",
+    "name": "Angelica Sub Comisaria 5ta. E. Lopez 178",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492487407"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Ataliva Sub Comisaria 2da. Sarmiento 188",
+    "name": "Ataliva Sub Comisaria 2da. Sarmiento 188",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493491020"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Aurelia Sub Comisaria 17ma. Av. Sta. Fe S/N",
+    "name": "Aurelia Sub Comisaria 17ma. Av. Sta. Fe S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "7660488060"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] B. Italia Destacamento 3ro. Zona Urbana",
+    "name": "B. Italia Destacamento 3ro. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "4091497021"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Bauer Sigel Sub Comisaria 13ra. Santa Fe S/N",
+    "name": "Bauer Sigel Sub Comisaria 13ra. Santa Fe S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492489050"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] C. Maua Destacamento 4to. Zona Urbana",
+    "name": "C. Maua Destacamento 4to. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
-      "3493421770",
-      "3493492675"
+      "3493492675",
+      "3493421770"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] C.Margarita Sub Comisaria 21ra. Zona Urbana",
+    "name": "C.Margarita Sub Comisaria 21ra. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "1264495812"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] C.Tacurales Destacamento 5to. Zona Urbana",
+    "name": "C.Tacurales Destacamento 5to. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493421909"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Cnia. Bicha Sub Comisaria 11ma. Zona urbana",
+    "name": "Cnia. Bicha Sub Comisaria 11ma. Zona urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493492746"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Cnia. Cello Sub Comisaria 22da. Zona Urbana",
+    "name": "Cnia. Cello Sub Comisaria 22da. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "3631492131"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Coronel Fraga Sub Comisaria 12ma. San Martin S/N",
+    "name": "Coronel Fraga Sub Comisaria 12ma. San Martin S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492492058"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] E.Clucellas Sub Comisaria 6ta. Peru 209",
+    "name": "E.Clucellas Sub Comisaria 6ta. Peru 209",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492495016"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Egusquiza Sub Comisaria 20ma. San Martin S/N",
+    "name": "Egusquiza Sub Comisaria 20ma. San Martin S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492484537"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Esmeralda Sub Comisaria 23ra. Zona Urbana",
+    "name": "Esmeralda Sub Comisaria 23ra. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "1265498179"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Eusebia Sub Comisaria 4ta. San Martin 73",
+    "name": "Eusebia Sub Comisaria 4ta. San Martin 73",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493493323"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Frontera Comisaria 6ta. Calle 84 Nro. 76",
+    "name": "Frontera Comisaria 6ta. Calle 84 Nro. 76",
+    "dept": "CASTELLANOS",
     "phones": [
       "3564425067"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Galisteo Destacamento 1ro. Zona Urbana",
+    "name": "Galisteo Destacamento 1ro. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493421409"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Garibaldi Sub Comisaria 24ta. Zona Urbana",
+    "name": "Garibaldi Sub Comisaria 24ta. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "8560495090"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Hto. 1ro Comisaria 7ma. Cordoba 136",
+    "name": "Hto. 1ro Comisaria 7ma. Cordoba 136",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493480002"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Josefina Sub Comisaria 8va. 25 de Mayo 614",
+    "name": "Josefina Sub Comisaria 8va. 25 de Mayo 614",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492469001"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Lehmmann Sub Comisaria 1ra. Av. Belgrano 202",
+    "name": "Lehmmann Sub Comisaria 1ra. Av. Belgrano 202",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492480015"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] M. Juana Comisaria 4ta. B. Mitre 590",
+    "name": "M. Juana Comisaria 4ta. B. Mitre 590",
+    "dept": "CASTELLANOS",
     "phones": [
       "3406471230"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Marini Destacamento 2do. Zona Urbana",
+    "name": "Marini Destacamento 2do. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492496097"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] P.Clucellas Sub Comisaria 7ma. Av. Ctes 239",
+    "name": "P.Clucellas Sub Comisaria 7ma. Av. Ctes 239",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492499011"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Pte. Roca Sub Comisaria 15ta. Zona Urbana",
+    "name": "Pte. Roca Sub Comisaria 15ta. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492485020"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Rafaela Comisaria 1ra. Av. Italia 458",
+    "name": "Rafaela Comisaria 1ra. Av. Italia 458",
+    "dept": "CASTELLANOS",
     "phones": [
       "4042425083",
       "4042430900"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Comisaria 2da. Bolivar 518",
+    "name": "Comisaria 2da. Bolivar 518",
+    "dept": "CASTELLANOS",
     "phones": [
       "4043432000",
       "4043425082"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Comisaria 13ra. Tuc. y Edison",
+    "name": "Comisaria 13ra. Tuc. y Edison",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492422187"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Sub Comisaria 26ta. Mons. Brasca S/N",
+    "name": "Sub Comisaria 26ta. Mons. Brasca S/N",
+    "dept": "CASTELLANOS",
     "phones": [
-      "6523428666",
-      "6523437385"
+      "6523437385",
+      "6523428666"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Cdo. Radioelectrico Santa Fe y Salta",
+    "name": "Cdo. Radioelectrico Santa Fe y Salta",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492422567",
       "3492424150"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Ramona Comisaria 9na. T. y Sto. S/N",
+    "name": "Ramona Comisaria 9na. T. y Sto. S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492496002"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Raquel Sub Comisaria 10ma. Hiriendo S/N",
+    "name": "Raquel Sub Comisaria 10ma. Hiriendo S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493496001"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] S. Vicente Comisaria 5ta. S. Martin 390",
+    "name": "S. Vicente Comisaria 5ta. S. Martin 390",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492470391"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Saguier Sub Comisaria 18va. Santa Fe S/N",
+    "name": "Saguier Sub Comisaria 18va. Santa Fe S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492486013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] San Antonio Sub Comisaria 14ta. 25 Mayo/Belgrano",
+    "name": "San Antonio Sub Comisaria 14ta. 25 Mayo/Belgrano",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492491001"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] SCSaguier Comisaria 8va. S. Clara Asis 54",
+    "name": "SCSaguier Comisaria 8va. S. Clara Asis 54",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492490002"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Sunchales Comisaria 3ra. Av. Belgrano 380",
+    "name": "Sunchales Comisaria 3ra. Av. Belgrano 380",
+    "dept": "CASTELLANOS",
     "phones": [
-      "3493420134",
-      "3493420483"
+      "3493420483",
+      "3493420134"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Cdo. Radioelectrico Belgrano 380",
+    "name": "Cdo. Radioelectrico Belgrano 380",
+    "dept": "CASTELLANOS",
     "phones": [
       "1272420483"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Secc. 5ta. D.G.S.R. Belgrano y Urquiza",
+    "name": "Secc. 5ta. D.G.S.R. Belgrano y Urquiza",
+    "dept": "CASTELLANOS",
     "phones": [
       "1273423918"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Susana Sub Comisaria 16ta. Zona Urbana",
+    "name": "Susana Sub Comisaria 16ta. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492482094"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Tacural Sub Comisaria 3ra. Lopez 535",
+    "name": "Tacural Sub Comisaria 3ra. Lopez 535",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493492272"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] V. San Jose Sub Comisaria 19na. San Martin S/N",
+    "name": "V. San Jose Sub Comisaria 19na. San Martin S/N",
+    "dept": "CASTELLANOS",
     "phones": [
       "4096494048"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Vila Comisaria 10ma. Bv. Ac. y Belg.",
+    "name": "Vila Comisaria 10ma. Bv. Ac. y Belg.",
+    "dept": "CASTELLANOS",
     "phones": [
       "3492493015"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Virginia Sub Comisaria 9na. Zona Urbana",
+    "name": "Virginia Sub Comisaria 9na. Zona Urbana",
+    "dept": "CASTELLANOS",
     "phones": [
       "3493492631"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CASTELLANOS] Z. Pereyra Comisaria 12da. P. Morello 612",
+    "name": "Z. Pereyra Comisaria 12da. P. Morello 612",
+    "dept": "CASTELLANOS",
     "phones": [
       "3564492236"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Alcorta Comisaria 2da. San Lorenzo 954",
+    "name": "Alcorta Comisaria 2da. San Lorenzo 954",
+    "dept": "CONSTITUCION",
     "phones": [
       "6321470202"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Bombal Comisaria 10ma. Altamirano 590",
+    "name": "Bombal Comisaria 10ma. Altamirano 590",
+    "dept": "CONSTITUCION",
     "phones": [
       "3465497044"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Cda. Rica Destacamento 2da. Guiraldes 82",
+    "name": "Cda. Rica Destacamento 2da. Guiraldes 82",
+    "dept": "CONSTITUCION",
     "phones": [
       "3460499000"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Cepeda Destacamento 3ro. Colaso S/N",
+    "name": "Cepeda Destacamento 3ro. Colaso S/N",
+    "dept": "CONSTITUCION",
     "phones": [
       "6263491171"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Emp. V. C. Comisaria 5ta. Espa､a 298",
+    "name": "Emp. V. C. Comisaria 5ta. Espa､a 298",
+    "dept": "CONSTITUCION",
     "phones": [
       "6130493133"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Godoy Comisaria 12da. San Martin 570",
+    "name": "Godoy Comisaria 12da. San Martin 570",
+    "dept": "CONSTITUCION",
     "phones": [
       "6266497012"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Gral. Gelly Destacamento 4to. F. Elizalde 562",
+    "name": "Gral. Gelly Destacamento 4to. F. Elizalde 562",
+    "dept": "CONSTITUCION",
     "phones": [
       "3477490003"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] J.B. Molina Comisaria 8va. Alberdi 337",
+    "name": "J.B. Molina Comisaria 8va. Alberdi 337",
+    "dept": "CONSTITUCION",
     "phones": [
       "3460498222"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Juncal Comisaria 11ma. San Martin 298",
+    "name": "Juncal Comisaria 11ma. San Martin 298",
+    "dept": "CONSTITUCION",
     "phones": [
       "3473492300"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] La Vanguardia Destacamento 5to. Zona Urbana",
+    "name": "La Vanguardia Destacamento 5to. Zona Urbana",
+    "dept": "CONSTITUCION",
     "phones": [
       "3460493064"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Maximo Paz Comisaria 3ra. 9 de Julio 673",
+    "name": "Maximo Paz Comisaria 3ra. 9 de Julio 673",
+    "dept": "CONSTITUCION",
     "phones": [
       "3460496013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Pavon Sub Comisaria 2da. B. Mitre 2523",
+    "name": "Pavon Sub Comisaria 2da. B. Mitre 2523",
+    "dept": "CONSTITUCION",
     "phones": [
       "6128490037"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Pavon A. Comisaria 9na. Indep. 986",
+    "name": "Pavon A. Comisaria 9na. Indep. 986",
+    "dept": "CONSTITUCION",
     "phones": [
       "6371491016"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Peyrano Comisaria 6ta. Jujuy 455",
+    "name": "Peyrano Comisaria 6ta. Jujuy 455",
+    "dept": "CONSTITUCION",
     "phones": [
       "6259470014"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Secc. 6・D.G.S.R.",
+    "name": "Secc. 6・D.G.S.R.",
+    "dept": "CONSTITUCION",
     "phones": [
       "341155524171"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Rueda Destacamento 6to. Pedro Rueda S/N",
+    "name": "Rueda Destacamento 6to. Pedro Rueda S/N",
+    "dept": "CONSTITUCION",
     "phones": [
       "6135496001"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Sgto.Cabral Comisaria 7ma. San Nicolas 346",
+    "name": "Sgto.Cabral Comisaria 7ma. San Nicolas 346",
+    "dept": "CONSTITUCION",
     "phones": [
       "6261491004"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Sta. Teresa Comisaria 4ta. San Martin 765",
+    "name": "Sta. Teresa Comisaria 4ta. San Martin 765",
+    "dept": "CONSTITUCION",
     "phones": [
       "6255420101"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] Theobald Destacamento 8vo. Cordoba S/N",
+    "name": "Theobald Destacamento 8vo. Cordoba S/N",
+    "dept": "CONSTITUCION",
     "phones": [
       "3400491826"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[CONSTITUCION] V. Constit. Comisaria 1ra. L. la Torre 433",
+    "name": "V. Constit. Comisaria 1ra. L. la Torre 433",
+    "dept": "CONSTITUCION",
     "phones": [
       "1212474802"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] C. Macia Comisaria 2da. Zona Rural",
+    "name": "C. Macia Comisaria 2da. Zona Rural",
+    "dept": "GARAY",
     "phones": [
       "6215424590"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] Calchaqui Secc. 7 D.G.S.R. Zona Rural",
+    "name": "Calchaqui Secc. 7 D.G.S.R. Zona Rural",
+    "dept": "GARAY",
     "phones": [
       "6471470783"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] Cayasta Comisaria 5ta. Zona Urbana",
+    "name": "Cayasta Comisaria 5ta. Zona Urbana",
+    "dept": "GARAY",
     "phones": [
       "6227493023"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] El Laurel Sub Comisaria 1ra. Zona Urbana",
+    "name": "El Laurel Sub Comisaria 1ra. Zona Urbana",
+    "dept": "GARAY",
     "phones": [
       "3405470203"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] Helvecia Comisaria 1ra. Pte. Roca 813",
+    "name": "Helvecia Comisaria 1ra. Pte. Roca 813",
+    "dept": "GARAY",
     "phones": [
       "6219470163"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] Las Cañas Sub Comisaria 6ta. Zona Rural",
+    "name": "Las Cañas Sub Comisaria 6ta. Zona Rural",
+    "dept": "GARAY",
     "phones": [
       "3405470065"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] Los Zapallos Sub Comisaria 5ta. Zona Rural",
+    "name": "Los Zapallos Sub Comisaria 5ta. Zona Rural",
+    "dept": "GARAY",
     "phones": [
       "41854997021"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] S.Cabal Comisaria 4ta. Zona Urbana",
+    "name": "S.Cabal Comisaria 4ta. Zona Urbana",
+    "dept": "GARAY",
     "phones": [
       "6213424474"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GARAY] Sta.Rosa Comisaria 3ra. Fray Rossi S/N",
+    "name": "Sta.Rosa Comisaria 3ra. Fray Rossi S/N",
+    "dept": "GARAY",
     "phones": [
       "25494908023"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] A.Castellanos Sub Comisaria 8va. Zona Urbana",
+    "name": "A.Castellanos Sub Comisaria 8va. Zona Urbana",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3382498027"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Amenabar Sub Comisaria 14ta. Rivadavia 291",
+    "name": "Amenabar Sub Comisaria 14ta. Rivadavia 291",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6124492610"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] C. del Ucle Sub Comisaria 4ta. Rivadavia 640",
+    "name": "C. del Ucle Sub Comisaria 4ta. Rivadavia 640",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3465492219"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Cafferata Sub Comisaria 15ta. Moreno 862",
+    "name": "Cafferata Sub Comisaria 15ta. Moreno 862",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3468498065"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Carmen Sub Comisaria 2da. Rivadavia 193",
+    "name": "Carmen Sub Comisaria 2da. Rivadavia 193",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3065493109"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Carreras Sub Comisaria 1ra. Aldao 234",
+    "name": "Carreras Sub Comisaria 1ra. Aldao 234",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6323490111"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Chapuy Sub Comisaria 7ma. Bs. Aires S/N",
+    "name": "Chapuy Sub Comisaria 7ma. Bs. Aires S/N",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3070494031"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Chovet Sub Comisaria 3ra . Espa､a 297",
+    "name": "Chovet Sub Comisaria 3ra . Espa､a 297",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6329493104"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Christop. Destacamento Nro.3 Zona Urbana",
+    "name": "Christop. Destacamento Nro.3 Zona Urbana",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3462485066"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] D.de Alvear Sub Comisaria 6ta. San Martin 840",
+    "name": "D.de Alvear Sub Comisaria 6ta. San Martin 840",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3382493122"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Elortondo Comisaria 8va. J. Salk 910",
+    "name": "Elortondo Comisaria 8va. J. Salk 910",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6289470024"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Firmat Comisaria 4ta. E. Rios y S.Martin",
+    "name": "Firmat Comisaria 4ta. E. Rios y S.Martin",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "2290423516"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Hughes Comisaria 11ra. 15 de Abril 234",
+    "name": "Hughes Comisaria 11ra. 15 de Abril 234",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "2473491013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] La Chispa Destacamento Nro.4 Zona Urbana",
+    "name": "La Chispa Destacamento Nro.4 Zona Urbana",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "2082487082"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Labordeboy Sub Comisaria 9na. El Gaucho 145",
+    "name": "Labordeboy Sub Comisaria 9na. El Gaucho 145",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3465495313"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Lazzarino Destacamento Nro.2 Zona Urbana",
+    "name": "Lazzarino Destacamento Nro.2 Zona Urbana",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6125492051"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] M.Teresa Sub Comisaria 13ra. Calle 5 N. 342",
+    "name": "M.Teresa Sub Comisaria 13ra. Calle 5 N. 342",
+    "dept": "GENERAL LOPEZ",
     "phones": [
-      "6291480013",
-      "6291480518"
+      "6291480518",
+      "6291480013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Maggiolo Sub Comisaria 11ma. Sarmiento 298",
+    "name": "Maggiolo Sub Comisaria 11ma. Sarmiento 298",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3462492005"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Maria Teresa Destacamento Belgrano 197",
+    "name": "Maria Teresa Destacamento Belgrano 197",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6294480144"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Melincue Comisaria 1ra. Rivadavia 551",
+    "name": "Melincue Comisaria 1ra. Rivadavia 551",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "2314499007"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Miguel Torres Destacamento Nro.1 San Miguel S/Nｧ",
+    "name": "Miguel Torres Destacamento Nro.1 San Miguel S/Nｧ",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6318420569"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Murphy Sub Comisaria 10ma. San Martin 348",
+    "name": "Murphy Sub Comisaria 10ma. San Martin 348",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3462441213"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Rufino Comisaria 3ra. Centenario 525",
+    "name": "Rufino Comisaria 3ra. Centenario 525",
+    "dept": "GENERAL LOPEZ",
     "phones": [
-      "3382429328",
-      "3382429304"
+      "3382429304",
+      "3382429328"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Residencia Jefe U.R.",
+    "name": "Residencia Jefe U.R.",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3456429357"
     ],
-    "icon": "shield"
+    "is_essential": true,
+    "icon": "verified_user"
   },
   {
-    "name": "[GENERAL LOPEZ] Secc. 25 D.G.S.R.",
+    "name": "Secc. 25 D.G.S.R.",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3382430028"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] S. Eduardo Sub Comisaria 12da. Bolivia 477",
+    "name": "S. Eduardo Sub Comisaria 12da. Bolivia 477",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3462482027"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] S. Gregorio Sub Comisaria 5ta. Rivadavia 1060",
+    "name": "S. Gregorio Sub Comisaria 5ta. Rivadavia 1060",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3382470013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] S. Spiritu Comisaria 10ma. Castelli 46",
+    "name": "S. Spiritu Comisaria 10ma. Castelli 46",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3462444013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] S.Francisco Destacamento Nro.5 Zona Urbana",
+    "name": "S.Francisco Destacamento Nro.5 Zona Urbana",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "4942481182"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Sta. Isabel Comisaria 5ta. 25 de Mayo 1061",
+    "name": "Sta. Isabel Comisaria 5ta. 25 de Mayo 1061",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3056490013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Teodelina Comisaria 7ma. Belgrano 203",
+    "name": "Teodelina Comisaria 7ma. Belgrano 203",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6286440213"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Venado Tuerto Comisaria 2da. Saavedra 455",
+    "name": "Venado Tuerto Comisaria 2da. Saavedra 455",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3462421612",
       "3462421613"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Secc. 8 D.G.S.R.",
+    "name": "Secc. 8 D.G.S.R.",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "3462423636"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Comisaria 12da. Alem 631",
+    "name": "Comisaria 12da. Alem 631",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "8453424400"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Villa Ca､as Comisaria 6ta. Calle 52 Nro 162",
+    "name": "Villa Ca､as Comisaria 6ta. Calle 52 Nro 162",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "6287450013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL LOPEZ] Wheelwright Comisaria 9na. Moreno 206",
+    "name": "Wheelwright Comisaria 9na. Moreno 206",
+    "dept": "GENERAL LOPEZ",
     "phones": [
       "2473480313"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Arroyo Ceibal Sub Comisaria 7ma. Zona Urbana",
+    "name": "Arroyo Ceibal Sub Comisaria 7ma. Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "5088497140"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Avellaneda Comisaria 3ra. Calle 12 Nro.612",
+    "name": "Avellaneda Comisaria 3ra. Calle 12 Nro.612",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "5031481230"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Barros Pazos Destacamento 2do. Zona Urbana",
+    "name": "Barros Pazos Destacamento 2do. Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482422689"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Berna Destacamento 5to. Zona Urbana",
+    "name": "Berna Destacamento 5to. Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "7770473020"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] El Araza Destacamento 8vo. Zona Urbana",
+    "name": "El Araza Destacamento 8vo. Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "8081490188"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Flor de Oro Destacamento 10 Zona Urbana",
+    "name": "Flor de Oro Destacamento 10 Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482499450"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Florencia Comisaria 9na . San Martin 627",
+    "name": "Florencia Comisaria 9na . San Martin 627",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "6451491102"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Guadalupe. Norte Sub Comisaria 4ta Zona Urbana",
+    "name": "Guadalupe. Norte Sub Comisaria 4ta Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "6458498052"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] La Cigüeña Secc. 20 D.G.S.R.",
+    "name": "La Cigüeña Secc. 20 D.G.S.R.",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "348215640718"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] La Sarita Sub Comisaria 10ma. Zona Urbana",
+    "name": "La Sarita Sub Comisaria 10ma. Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482476022"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Lanteri Comisaria 10ma. Planta Urbana",
+    "name": "Lanteri Comisaria 10ma. Planta Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482474002"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Las Garzas Sub Comisaria 3ra. Zona Urbana Comuna",
+    "name": "Las Garzas Sub Comisaria 3ra. Zona Urbana Comuna",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "5087493010"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Las Toscas Comisaria 5ta. Calle 10 Nro.848",
+    "name": "Las Toscas Comisaria 5ta. Calle 10 Nro.848",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482492135"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Los Laureles Sub Comisaria 2ra. Planta Urbana",
+    "name": "Los Laureles Sub Comisaria 2ra. Planta Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "6444479053"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Malabrigo Comisaria 6ta. Av. Sigel 817",
+    "name": "Malabrigo Comisaria 6ta. Av. Sigel 817",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "6441454013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Moussy Destacamento 11ro. Zona Urbana",
+    "name": "Moussy Destacamento 11ro. Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482490668"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Reconquista Comisaria 1ra. Irigoyen 500",
+    "name": "Reconquista Comisaria 1ra. Irigoyen 500",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "5060420069"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Comisaria 2da. J. Chapero 1880",
+    "name": "Comisaria 2da. J. Chapero 1880",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "5065420053"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Secc. 26 D.G.S.R.",
+    "name": "Secc. 26 D.G.S.R.",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "8216426830"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] San Antonio Ob. Sub Comisaría 9ª Zona Urbana",
+    "name": "San Antonio Ob. Sub Comisaría 9ª Zona Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482593101"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Sombrerito Sub Comisaria 6ta. Zona Urbana Cab.TE",
+    "name": "Sombrerito Sub Comisaria 6ta. Zona Urbana Cab.TE",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482493060"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Tacuarendi Sub Comisaria 1ra. Planta Urbana",
+    "name": "Tacuarendi Sub Comisaria 1ra. Planta Urbana",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482492790"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] V. Guillermina Comisaria 8va. Menchaca S/N",
+    "name": "V. Guillermina Comisaria 8va. Menchaca S/N",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482475030"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] V. Ocampo Comisaria 4ta. 9 de julio 1640",
+    "name": "V. Ocampo Comisaria 4ta. 9 de julio 1640",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482466350"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Villa Ana Comisaria 7ma. 25 de Mayo S/N",
+    "name": "Villa Ana Comisaria 7ma. 25 de Mayo S/N",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "6455494022"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[GENERAL OBLIGADO] Villa Ocampo Secc. 9  D.G.S.R.",
+    "name": "Villa Ocampo Secc. 9  D.G.S.R.",
+    "dept": "GENERAL OBLIGADO",
     "phones": [
       "3482466291"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Andino Comisaria 13ra. Pellegrini 925",
+    "name": "Andino Comisaria 13ra. Pellegrini 925",
+    "dept": "IRIONDO",
     "phones": [
       "6414496185"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Bustinza Comisaria 8va. S. Martin/Sta.Fe",
+    "name": "Bustinza Comisaria 8va. S. Martin/Sta.Fe",
+    "dept": "IRIONDO",
     "phones": [
       "3471497054"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] C. de Gomez Comisaria 1ra. Ocampo 885",
+    "name": "C. de Gomez Comisaria 1ra. Ocampo 885",
+    "dept": "IRIONDO",
     "phones": [
       "3311422045"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Comisaria 2da. Urquiza 786",
+    "name": "Comisaria 2da. Urquiza 786",
+    "dept": "IRIONDO",
     "phones": [
       "3314422355"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Secc. 10  D.G.S.R.",
+    "name": "Secc. 10  D.G.S.R.",
+    "dept": "IRIONDO",
     "phones": [
       "3471422856"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Carrizales Comisaria 9na. Mitre y Lavalle",
+    "name": "Carrizales Comisaria 9na. Mitre y Lavalle",
+    "dept": "IRIONDO",
     "phones": [
       "3476497035"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Clason Comisaria 11ma. Santa Fe S/N",
+    "name": "Clason Comisaria 11ma. Santa Fe S/N",
+    "dept": "IRIONDO",
     "phones": [
       "6399499039"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Correa Comisaria 5ta. Riv. y 24 Set",
+    "name": "Correa Comisaria 5ta. Riv. y 24 Set",
+    "dept": "IRIONDO",
     "phones": [
       "6394492006"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Lucio Lopez Comisaria 10ma. 9 de Julio S/N",
+    "name": "Lucio Lopez Comisaria 10ma. 9 de Julio S/N",
+    "dept": "IRIONDO",
     "phones": [
       "8570491210"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Oliveros Comisaria 12da. Cordoba 84",
+    "name": "Oliveros Comisaria 12da. Cordoba 84",
+    "dept": "IRIONDO",
     "phones": [
       "3476498040"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] S. Grande Comisaria 7ma. Belgrano 383",
+    "name": "S. Grande Comisaria 7ma. Belgrano 383",
+    "dept": "IRIONDO",
     "phones": [
       "3476494257"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Serodino Comisaria 4ta. Zarate e Italia",
+    "name": "Serodino Comisaria 4ta. Zarate e Italia",
+    "dept": "IRIONDO",
     "phones": [
       "6412490010"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] Totoras Comisaria 3ra. Aren. y Moreno",
+    "name": "Totoras Comisaria 3ra. Aren. y Moreno",
+    "dept": "IRIONDO",
     "phones": [
       "6403460007"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[IRIONDO] V. Eloisa Comisaria 6ta. 20 de Junio S/N",
+    "name": "V. Eloisa Comisaria 6ta. 20 de Junio S/N",
+    "dept": "IRIONDO",
     "phones": [
       "3471491013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Cavour Destacamento 7mo Zona Urbana",
+    "name": "Cavour Destacamento 7mo Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "7792495212"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Cululu Destacamento 3ro Zona Urbana",
+    "name": "Cululu Destacamento 3ro Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3497491210"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Elisa Sub Comisaria 7ma. S.Francisco 417",
+    "name": "Elisa Sub Comisaria 7ma. S.Francisco 417",
+    "dept": "LAS COLONIAS",
     "phones": [
       "2038499048"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Empalme S.Carlos Destacamento 12do Zona Urbana",
+    "name": "Empalme S.Carlos Destacamento 12do Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "81564998009"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Esperanza Comisaria 1ra. San Martin 2455",
+    "name": "Esperanza Comisaria 1ra. San Martin 2455",
+    "dept": "LAS COLONIAS",
     "phones": [
       "4376420003"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Destacamento 1ro Zona Urbana",
+    "name": "Destacamento 1ro Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "4377420295"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Secc. 11 D.G.S.R.",
+    "name": "Secc. 11 D.G.S.R.",
+    "dept": "LAS COLONIAS",
     "phones": [
       "4251422227"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Felicia Sub Comisaria 3ra. Dr. Belotti 235",
+    "name": "Felicia Sub Comisaria 3ra. Dr. Belotti 235",
+    "dept": "LAS COLONIAS",
     "phones": [
       "1286491052"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Franck Comisaria 4ta. San Martin 1711",
+    "name": "Franck Comisaria 4ta. San Martin 1711",
+    "dept": "LAS COLONIAS",
     "phones": [
-      "25554930995",
-      "25554930116"
+      "25554930116",
+      "25554930995"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Grutly N. Destacamento 11ro Zona Urbana 492558 (Cab.P.)",
+    "name": "Grutly N. Destacamento 11ro Zona Urbana 492558 (Cab.P.)",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3496492558"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Grutly Sur Sub Comisaria 16ta. VolLenwider S/N",
+    "name": "Grutly Sur Sub Comisaria 16ta. VolLenwider S/N",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3496492509"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Hipatia Destacamento 5to Zona Urbana 488268 (Cab.P.)",
+    "name": "Hipatia Destacamento 5to Zona Urbana 488268 (Cab.P.)",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3497488268"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Humboldt Comisaria 5ta. San Martin 1620",
+    "name": "Humboldt Comisaria 5ta. San Martin 1620",
+    "dept": "LAS COLONIAS",
     "phones": [
       "1285480129"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Ituzaingo(com.) Destacamento 9no Zona Urbana",
+    "name": "Ituzaingo(com.) Destacamento 9no Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3497495998"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] J.L.Arauz Destacamento 10 Zona Urbana 495994 (Cab.P.)",
+    "name": "J.L.Arauz Destacamento 10 Zona Urbana 495994 (Cab.P.)",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3497495994"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] La Pelada Sub Comisaria 4ta. 9 de Julio S/N",
+    "name": "La Pelada Sub Comisaria 4ta. 9 de Julio S/N",
+    "dept": "LAS COLONIAS",
     "phones": [
       "1299495044"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Las Tunas Destacamento 4to S.Roque y S.Martin",
+    "name": "Las Tunas Destacamento 4to S.Roque y S.Martin",
+    "dept": "LAS COLONIAS",
     "phones": [
       "49284992000"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] M. Luisa Sub Comisaria 15ta. M. Argent. S/N",
+    "name": "M. Luisa Sub Comisaria 15ta. M. Argent. S/N",
+    "dept": "LAS COLONIAS",
     "phones": [
       "1240496004"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Matilde Sub Comisaria 17ma. Zona Urbana",
+    "name": "Matilde Sub Comisaria 17ma. Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "25564993013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] N. Torino Sub Comisaria 13ra. Zona Urbana",
+    "name": "N. Torino Sub Comisaria 13ra. Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3496494515"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Pilar Comisaria 6ta. 25 Mayo y Coloniz.",
+    "name": "Pilar Comisaria 6ta. 25 Mayo y Coloniz.",
+    "dept": "LAS COLONIAS",
     "phones": [
       "6184470019"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Progreso Sub Comisaria 5ta. Esperanza 67",
+    "name": "Progreso Sub Comisaria 5ta. Esperanza 67",
+    "dept": "LAS COLONIAS",
     "phones": [
       "1293488137"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Providencia Sub Comisaria 14ta. Zona Urbana",
+    "name": "Providencia Sub Comisaria 14ta. Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "1295492016"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] S. C. Sud Sub Comisaria 6ta. 9 de Julio S/N",
+    "name": "S. C. Sud Sub Comisaria 6ta. 9 de Julio S/N",
+    "dept": "LAS COLONIAS",
     "phones": [
       "6176420108"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] S.C. Norte Sub Comisaria 10ma. Beck S/N",
+    "name": "S.C. Norte Sub Comisaria 10ma. Beck S/N",
+    "dept": "LAS COLONIAS",
     "phones": [
       "6181456043"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] S.C.B.Vista Sub Comisaria 1ra. Cordoba 566",
+    "name": "S.C.B.Vista Sub Comisaria 1ra. Cordoba 566",
+    "dept": "LAS COLONIAS",
     "phones": [
       "6194493254"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] S.C.Centro Comisaria 2da. Belgrano 727",
+    "name": "S.C.Centro Comisaria 2da. Belgrano 727",
+    "dept": "LAS COLONIAS",
     "phones": [
-      "6174420016",
-      "6174421912"
+      "6174421912",
+      "6174420016"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Cdo. Rco. San Carlos Ctro. Belgrano 727",
+    "name": "Cdo. Rco. San Carlos Ctro. Belgrano 727",
+    "dept": "LAS COLONIAS",
     "phones": [
       "5843423043"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] S.J. Norte Comisaria 3ra. San Martin 554",
+    "name": "S.J. Norte Comisaria 3ra. San Martin 554",
+    "dept": "LAS COLONIAS",
     "phones": [
       "6183460111"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] S.J.Sauce Sub Comisaria 12da. San Jeronimo 683",
+    "name": "S.J.Sauce Sub Comisaria 12da. San Jeronimo 683",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3404495103"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Sa Pereyra Sub Comisaria 2da. 9 de Julio 280",
+    "name": "Sa Pereyra Sub Comisaria 2da. 9 de Julio 280",
+    "dept": "LAS COLONIAS",
     "phones": [
       "6197494049"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] San Agustin Sub Comisaria 11ma. M. Cabal 1386",
+    "name": "San Agustin Sub Comisaria 11ma. M. Cabal 1386",
+    "dept": "LAS COLONIAS",
     "phones": [
       "25484907023"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] San Jose Destacamento 13ro Zona Urbana",
+    "name": "San Jose Destacamento 13ro Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3424990010"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] San Mariano Destacamento 2do Zona Urbana",
+    "name": "San Mariano Destacamento 2do Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3404452055"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Sarmiento Sub Comisaria 9na. Sto. y Laprida",
+    "name": "Sarmiento Sub Comisaria 9na. Sto. y Laprida",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3497497042"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Soutomayor Destacamento 6to Zona Urbana 495993 (Cab.P.)",
+    "name": "Soutomayor Destacamento 6to Zona Urbana 495993 (Cab.P.)",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3497495993"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Sta.M.Norte Destacamento 8vo Zona Urbana",
+    "name": "Sta.M.Norte Destacamento 8vo Zona Urbana",
+    "dept": "LAS COLONIAS",
     "phones": [
       "6180453017"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] Sto.Domingo Sub Comisaria 8va. Av. America 387",
+    "name": "Sto.Domingo Sub Comisaria 8va. Av. America 387",
+    "dept": "LAS COLONIAS",
     "phones": [
       "1242498071"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[LAS COLONIAS] 496676 (Cab.P.)",
+    "name": "496676 (Cab.P.)",
+    "dept": "LAS COLONIAS",
     "phones": [
       "3493496676"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] Antonio Pini Destacamento Nro.1",
+    "name": "Antonio Pini Destacamento Nro.1",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "349115687624"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] El Nochero Comisaria 3ra.",
+    "name": "El Nochero Comisaria 3ra.",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3864494014"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] Esteban Rams Comisaria 9na. (Cab.TE)",
+    "name": "Esteban Rams Comisaria 9na. (Cab.TE)",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3491481052"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] G.Colorado Comisaria 5ta.",
+    "name": "G.Colorado Comisaria 5ta.",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3491499055"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] Logroño Comisaria 7ma. (Cab.TE)",
+    "name": "Logroño Comisaria 7ma. (Cab.TE)",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3491490170"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] Montefiore Comisaria 8va. (Cab.TE) 485007  Comuna",
+    "name": "Montefiore Comisaria 8va. (Cab.TE) 485007  Comuna",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3491485007"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] P.Borrado Comisaria 6ta.",
+    "name": "P.Borrado Comisaria 6ta.",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3491497170"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] S.Margarita Comisaria 4ta.",
+    "name": "S.Margarita Comisaria 4ta.",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3491483016"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] San Bernardo Sub Comisaria 5ta.",
+    "name": "San Bernardo Sub Comisaria 5ta.",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "349115687963"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] Tostado Comisaria 1ra. San Martin 1563",
+    "name": "Tostado Comisaria 1ra. San Martin 1563",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3491470555"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] Sub Comisaria 1ra. Maipu 1458",
+    "name": "Sub Comisaria 1ra. Maipu 1458",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "3491470435"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] Asentamiento D.G.S.R.",
+    "name": "Asentamiento D.G.S.R.",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "349115699118"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] V. Minetti Comisaria 2da. 25 de Mayo S/N",
+    "name": "V. Minetti Comisaria 2da. 25 de Mayo S/N",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "6498496030"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[NUEVE DE JULIO] Secc. 12 D.G.S.R.",
+    "name": "Secc. 12 D.G.S.R.",
+    "dept": "NUEVE DE JULIO",
     "phones": [
       "5089496259"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Aguara Gde. Sub Comisaria 1ra. Zona Urbana",
+    "name": "Aguara Gde. Sub Comisaria 1ra. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3408425410"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Ambrosetti Comisaria 13ra. Sarmiento S/N",
+    "name": "Ambrosetti Comisaria 13ra. Sarmiento S/N",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "6495492033"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Arrufo Comisaria 7ma. S. Martin S/N",
+    "name": "Arrufo Comisaria 7ma. S. Martin S/N",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3491493233"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] C.Portugal Destacamento 7mo. Zona Urbana 429976 (Cab.P.)",
+    "name": "C.Portugal Destacamento 7mo. Zona Urbana 429976 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3408429976"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Capivara Destacamento 4to. Zona Urbana 429977 (Cab.P.)",
+    "name": "Capivara Destacamento 4to. Zona Urbana 429977 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3408429977"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Ceres Comisaria 2da. L. N. Alem 116",
+    "name": "Ceres Comisaria 2da. L. N. Alem 116",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "6476420082"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Asentamiento D.G.S.R.",
+    "name": "Asentamiento D.G.S.R.",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3491422839"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Cnia. Rosa Sub Comisaria 3ra. Zona Urbana",
+    "name": "Cnia. Rosa Sub Comisaria 3ra. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3562465023"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Col. Bossi Destacamento 9no. Zona Urbana",
+    "name": "Col. Bossi Destacamento 9no. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3409420988"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Col. Clara Destacamento 10mo. Zona Urbana 499034 (Cab.P.)",
+    "name": "Col. Clara Destacamento 10mo. Zona Urbana 499034 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3498499034"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Colonia Ana Destacamento 8vo. Zona Urbana 491111 (Cab.P.)",
+    "name": "Colonia Ana Destacamento 8vo. Zona Urbana 491111 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3491491111"
     ],
-    "icon": "shield"
+    "is_essential": true,
+    "icon": "verified_user"
   },
   {
-    "name": "[SAN CRISTOBAL] Constanza Destacamento 2do. Zona Urbana 420018 (Cab.P.)",
+    "name": "Constanza Destacamento 2do. Zona Urbana 420018 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3409420018"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Curupayti Comisaria 17ma. San Martin S/N",
+    "name": "Curupayti Comisaria 17ma. San Martin S/N",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3491493600"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Hersilia Comisaria 6ta. C. Zibechi 283",
+    "name": "Hersilia Comisaria 6ta. C. Zibechi 283",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3491494114"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Huanqueros Comisaria 8va.",
+    "name": "Huanqueros Comisaria 8va.",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3408421490"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] La Cabral Destacamento 3ro. Zona Urbana",
+    "name": "La Cabral Destacamento 3ro. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3408490441"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] La Lucila Comisaria 16ta. Zona Urbana",
+    "name": "La Lucila Comisaria 16ta. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "4970426010"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] La Rubia Comisaria 18va. Zona Urbana",
+    "name": "La Rubia Comisaria 18va. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "6497495830"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Las Avispas Destacamento 6to. Zona Urbana 492062 (Cab.P.)",
+    "name": "Las Avispas Destacamento 6to. Zona Urbana 492062 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3491492062"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] M. Eugenia Sub Comisaria 4ta. Zona Urbana 498085 (Cab.P.)",
+    "name": "M. Eugenia Sub Comisaria 4ta. Zona Urbana 498085 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3498498085"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] M. Ville Comisaria 3ra. 9 de Julio 69",
+    "name": "M. Ville Comisaria 3ra. 9 de Julio 69",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "6247420023"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Monigotes Comisaria 15ta. Zona Urbana",
+    "name": "Monigotes Comisaria 15ta. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "6254496020"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Mte. Oscur. Destacamento 11ro. Zona Urbana",
+    "name": "Mte. Oscur. Destacamento 11ro. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3652423965"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Ñanducita Sub Comisaria 2da. Zona Urbana 429975 (Cab.P.)",
+    "name": "Ñanducita Sub Comisaria 2da. Zona Urbana 429975 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3408429975"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Palacios Comisaria 12da. Zona Urbana",
+    "name": "Palacios Comisaria 12da. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3409492016"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Palmeras Comisaria 14ta. Zona Urbana",
+    "name": "Palmeras Comisaria 14ta. Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "6252491009"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] S.Cristobal Comisaria 1ra. Las Heras 1294",
+    "name": "S.Cristobal Comisaria 1ra. Las Heras 1294",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3610422021"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] San Guillermo Comisaria 5ta. Gral Lopez S/N",
+    "name": "San Guillermo Comisaria 5ta. Gral Lopez S/N",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3562466227"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Seccion 23 DGSR Zona Urbana",
+    "name": "Seccion 23 DGSR Zona Urbana",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3562467226"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Santurce Destacamento 1ro. Zona Urbana 429974 (Cab.P.)",
+    "name": "Santurce Destacamento 1ro. Zona Urbana 429974 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3408429974"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Soledad Comisaria 10ma. Soledad",
+    "name": "Soledad Comisaria 10ma. Soledad",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3498498210"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] Suardi Comisaria 4ta. M. Locatelli 361",
+    "name": "Suardi Comisaria 4ta. M. Locatelli 361",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3562477106"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] V. Trinidad Comisaria 9na. Falucho 544",
+    "name": "V. Trinidad Comisaria 9na. Falucho 544",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "6491491080"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN CRISTOBAL] V.Zaralegui Comisaria 11ra. Zona Urbana 427911 (Cab.P.)",
+    "name": "V.Zaralegui Comisaria 11ra. Zona Urbana 427911 (Cab.P.)",
+    "dept": "SAN CRISTOBAL",
     "phones": [
       "3498427911"
     ],
-    "icon": "shield"
+    "is_essential": true,
+    "icon": "verified_user"
   },
   {
-    "name": "[SAN JAVIER] Alejandra Comisaria 3ra. Belgrano 1188",
+    "name": "Alejandra Comisaria 3ra. Belgrano 1188",
+    "dept": "SAN JAVIER",
     "phones": [
       "6224492065"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] C. Del Toba Destacamento 1ro Ruta 36 421300 (Cab.P.)",
+    "name": "C. Del Toba Destacamento 1ro Ruta 36 421300 (Cab.P.)",
+    "dept": "SAN JAVIER",
     "phones": [
       "3483421300"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] C. Duran Sub Comisaria 4ta. Ruta 287S 496116 (Cab.P.)",
+    "name": "C. Duran Sub Comisaria 4ta. Ruta 287S 496116 (Cab.P.)",
+    "dept": "SAN JAVIER",
     "phones": [
       "3482496116"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] C. Teresa Sub Comisaria 3ra. Ruta 1 424722 (Cab.P.)",
+    "name": "C. Teresa Sub Comisaria 3ra. Ruta 1 424722 (Cab.P.)",
+    "dept": "SAN JAVIER",
     "phones": [
       "3405424722"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] Cacique A. Sub Comisaria 2da. Ruta 72 S 424714 (Cab.P.)",
+    "name": "Cacique A. Sub Comisaria 2da. Ruta 72 S 424714 (Cab.P.)",
+    "dept": "SAN JAVIER",
     "phones": [
       "3405424714"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] Corralitos Destacamento 4to.",
+    "name": "Corralitos Destacamento 4to.",
+    "dept": "SAN JAVIER",
     "phones": [
       "3405492073"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] La Brava Sub Comisaria 1ra. Ruta 72 S",
+    "name": "La Brava Sub Comisaria 1ra. Ruta 72 S",
+    "dept": "SAN JAVIER",
     "phones": [
       "4153494033"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] La Maria Destacamento 3ro. Zona Urbana",
+    "name": "La Maria Destacamento 3ro. Zona Urbana",
+    "dept": "SAN JAVIER",
     "phones": [
       "3483498303"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] Romang Comisaria 2da. San Martin 894",
+    "name": "Romang Comisaria 2da. San Martin 894",
+    "dept": "SAN JAVIER",
     "phones": [
       "6457496022"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] Secc. 21 D.G.S.R.",
+    "name": "Secc. 21 D.G.S.R.",
+    "dept": "SAN JAVIER",
     "phones": [
       "348215633093"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] San Javier Comisaria 1ra. 9 de Julio 817",
+    "name": "San Javier Comisaria 1ra. 9 de Julio 817",
+    "dept": "SAN JAVIER",
     "phones": [
       "6204424111"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] Secc. 14 D.G.S.R.",
+    "name": "Secc. 14 D.G.S.R.",
+    "dept": "SAN JAVIER",
     "phones": [
       "340515688811"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] San Jose Destacamento 5to. Ruta 1 424732 (Cab.P.)",
+    "name": "San Jose Destacamento 5to. Ruta 1 424732 (Cab.P.)",
+    "dept": "SAN JAVIER",
     "phones": [
       "3405424732"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JAVIER] San Roque Destacamento 2do. Zona Urbana",
+    "name": "San Roque Destacamento 2do. Zona Urbana",
+    "dept": "SAN JAVIER",
     "phones": [
       "3483498305"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Arocena Comisaria 13ra. Dr. Rovere 649",
+    "name": "Arocena Comisaria 13ra. Dr. Rovere 649",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3466495037"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] B. Irigoyen Comisaria 9na. Sarmiento 582",
+    "name": "B. Irigoyen Comisaria 9na. Sarmiento 582",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6348494031"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Barrancas Comisaria 3ra. Alem 765",
+    "name": "Barrancas Comisaria 3ra. Alem 765",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6343420219"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Barrio Caima Destacamento Zona Urbana",
+    "name": "Barrio Caima Destacamento Zona Urbana",
+    "dept": "SAN JERONIMO",
     "phones": [
       "49174900060"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Casalegno Destacamento 3 Zona Urbana",
+    "name": "Casalegno Destacamento 3 Zona Urbana",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3466490051"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Centeno Comisaria 8va. Corrientes 1231",
+    "name": "Centeno Comisaria 8va. Corrientes 1231",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3401498222"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Coronda Comisaria 1ra. San Martin 1114",
+    "name": "Coronda Comisaria 1ra. San Martin 1114",
+    "dept": "SAN JERONIMO",
     "phones": [
       "34054910035"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] D. Arijon Comisaria 15ta. Z. Urbana (Cab.TE.)",
+    "name": "D. Arijon Comisaria 15ta. Z. Urbana (Cab.TE.)",
+    "dept": "SAN JERONIMO",
     "phones": [
       "49184900074"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Est. Diaz Comisaria 11ra. Desague 105",
+    "name": "Est. Diaz Comisaria 11ra. Desague 105",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3466496195"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Galvez Comisaria 2da. Mitre 346",
+    "name": "Galvez Comisaria 2da. Mitre 346",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6188481101"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Gessler Comisaria 10ma. San Martin 840",
+    "name": "Gessler Comisaria 10ma. San Martin 840",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6199497018"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Irigoyen Comisaria 17ma. Belgrano 514",
+    "name": "Irigoyen Comisaria 17ma. Belgrano 514",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6345491020"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Larrechea Comisaria 18va. M. Leiva S/N",
+    "name": "Larrechea Comisaria 18va. M. Leiva S/N",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3404499103"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Loma Alta Destacamento 2 Zona Urbana",
+    "name": "Loma Alta Destacamento 2 Zona Urbana",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3404457052"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Lopez Comisaria 16ta. Corrientes 1454",
+    "name": "Lopez Comisaria 16ta. Corrientes 1454",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6201498361"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Maciel Comisaria 4ta. Mendoza 356",
+    "name": "Maciel Comisaria 4ta. Mendoza 356",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6408470242"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Monje Comisaria 5ta. San Martin 357",
+    "name": "Monje Comisaria 5ta. San Martin 357",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3466498032"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Pto. Gaboto Comisaria 12da. Paganini",
+    "name": "Pto. Gaboto Comisaria 12da. Paganini",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6411488056"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] S. Fabian Comisaria 14ta. 9 de Julio 349",
+    "name": "S. Fabian Comisaria 14ta. 9 de Julio 349",
+    "dept": "SAN JERONIMO",
     "phones": [
       "6347492055"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] S. J. Norte Comisaria 6ta. Santa Fe 415",
+    "name": "S. J. Norte Comisaria 6ta. Santa Fe 415",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3401493171"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] S. Jenaro Comisaria 7ma. J. Lazarte",
+    "name": "S. Jenaro Comisaria 7ma. J. Lazarte",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3401448316"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] San Eugenio Destacamento 1 Zona Urbana",
+    "name": "San Eugenio Destacamento 1 Zona Urbana",
+    "dept": "SAN JERONIMO",
     "phones": [
       "3404486204"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JERONIMO] Secc. 15 D.G.S.R B. Irigoyen",
+    "name": "Secc. 15 D.G.S.R B. Irigoyen",
+    "dept": "SAN JERONIMO",
     "phones": [
       "340415630586"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] C. Esther Destacamento 1ro Zona Urbana",
+    "name": "C. Esther Destacamento 1ro Zona Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "3497420255"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] C. Silva Destacamento 7mo Zona Urbana 480591 (Cab.P.)",
+    "name": "C. Silva Destacamento 7mo Zona Urbana 480591 (Cab.P.)",
+    "dept": "SAN JUSTO",
     "phones": [
       "3498480591"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] Cayastacito Comisaria 11ma. Zona Rural",
+    "name": "Cayastacito Comisaria 11ma. Zona Rural",
+    "dept": "SAN JUSTO",
     "phones": [
       "5680486070"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] Col.Dolores Destacamento 6to Zona Urbana",
+    "name": "Col.Dolores Destacamento 6to Zona Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "3498480435"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] G. Crespo Comisaria 3ra. Moreno 346",
+    "name": "G. Crespo Comisaria 3ra. Moreno 346",
+    "dept": "SAN JUSTO",
     "phones": [
       "2027480014"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] L. Leiva Destacamento 3ro Ruta 11",
+    "name": "L. Leiva Destacamento 3ro Ruta 11",
+    "dept": "SAN JUSTO",
     "phones": [
       "3498429108"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] La Blanca Destacamento 10mo Zona Urbana",
+    "name": "La Blanca Destacamento 10mo Zona Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "3498480021"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] La Camila Comisaria 10ma. Zona Rural",
+    "name": "La Camila Comisaria 10ma. Zona Rural",
+    "dept": "SAN JUSTO",
     "phones": [
       "4431472031"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] La Criolla Comisaria 7ma. 2 de Abril S/N",
+    "name": "La Criolla Comisaria 7ma. 2 de Abril S/N",
+    "dept": "SAN JUSTO",
     "phones": [
       "3498495244"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] Las Pencas Destacamento 8vo Zona Urbana",
+    "name": "Las Pencas Destacamento 8vo Zona Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "3491491211"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] M. Escalada Comisaria 6ta. Planta Urbana",
+    "name": "M. Escalada Comisaria 6ta. Planta Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "2032493035"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] Nare Comisaria 12da. Zona Urbana",
+    "name": "Nare Comisaria 12da. Zona Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "7749494049"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] P.G.Cello Comisaria 9na. Ruta Nac. 11",
+    "name": "P.G.Cello Comisaria 9na. Ruta Nac. 11",
+    "dept": "SAN JUSTO",
     "phones": [
       "6472491015"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] Ramayon Comisaria 5ta. Est. Lopez S/N",
+    "name": "Ramayon Comisaria 5ta. Est. Lopez S/N",
+    "dept": "SAN JUSTO",
     "phones": [
       "2034497000"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] S. Bernardo Destacamento 2do Zona Urbana",
+    "name": "S. Bernardo Destacamento 2do Zona Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "3498428684"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] S.M. Norte Destacamento 5to Zona Urbana",
+    "name": "S.M. Norte Destacamento 5to Zona Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "3498471064"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] San Justo Comisaria 1ra. N. Figueredo 2679",
+    "name": "San Justo Comisaria 1ra. N. Figueredo 2679",
+    "dept": "SAN JUSTO",
     "phones": [
       "1246427351"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] Comisaria 2da. 9 de Julio S/N",
+    "name": "Comisaria 2da. 9 de Julio S/N",
+    "dept": "SAN JUSTO",
     "phones": [
       "1248427442"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] Secc. 16 D.G.S.R.",
+    "name": "Secc. 16 D.G.S.R.",
+    "dept": "SAN JUSTO",
     "phones": [
       "349815474280"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] V. Pintado Comisaria 8va. Planta Urbana",
+    "name": "V. Pintado Comisaria 8va. Planta Urbana",
+    "dept": "SAN JUSTO",
     "phones": [
       "3498496047"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN JUSTO] Videla Comisaria 4ta. Ant. Noceda",
+    "name": "Videla Comisaria 4ta. Ant. Noceda",
+    "dept": "SAN JUSTO",
     "phones": [
       "2029490017"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Aldao Comisaria 11ra. L. la Torre S/N",
+    "name": "Aldao Comisaria 11ra. L. la Torre S/N",
+    "dept": "SAN LORENZO",
     "phones": [
       "4113482041"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] C. Arnold Destacamento 1ro Sarmiento S/N",
+    "name": "C. Arnold Destacamento 1ro Sarmiento S/N",
+    "dept": "SAN LORENZO",
     "phones": [
       "3414902229"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] C.Bermudez Comisaria 2da. Santiago 852",
+    "name": "C.Bermudez Comisaria 2da. Santiago 852",
+    "dept": "SAN LORENZO",
     "phones": [
       "3414912000",
       "3414912444"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Carcaraña Comisaria 3ra. Belgrano 1126",
+    "name": "Carcaraña Comisaria 3ra. Belgrano 1126",
+    "dept": "SAN LORENZO",
     "phones": [
       "46704941259"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] F.L.Beltran Comisaria 4ta. San Martin 1600",
+    "name": "F.L.Beltran Comisaria 4ta. San Martin 1600",
+    "dept": "SAN LORENZO",
     "phones": [
-      "3414918000",
-      "3414918347"
+      "3414918347",
+      "3414918000"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Fuentes Comisaria 15ta. Iriondo 364",
+    "name": "Fuentes Comisaria 15ta. Iriondo 364",
+    "dept": "SAN LORENZO",
     "phones": [
       "3464493311"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] L.Palacios Comisaria 10ma. Rivadavia S/N",
+    "name": "L.Palacios Comisaria 10ma. Rivadavia S/N",
+    "dept": "SAN LORENZO",
     "phones": [
       "6415499134"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Maizales Destacamento 2do Zona Rural",
+    "name": "Maizales Destacamento 2do Zona Rural",
+    "dept": "SAN LORENZO",
     "phones": [
       "3469497169"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] P.S.Martin Comisaria 5ta. Alem 257",
+    "name": "P.S.Martin Comisaria 5ta. Alem 257",
+    "dept": "SAN LORENZO",
     "phones": [
       "3818422659"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Pujato Comisaria 14ta. Belgrano 766",
+    "name": "Pujato Comisaria 14ta. Belgrano 766",
+    "dept": "SAN LORENZO",
     "phones": [
       "3464494037"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Ricardone Comisaria 12da. Palac. e Iriondo",
+    "name": "Ricardone Comisaria 12da. Palac. e Iriondo",
+    "dept": "SAN LORENZO",
     "phones": [
       "4114492000"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Roldan Comisaria 6ta. A. Argentina 38",
+    "name": "Roldan Comisaria 6ta. A. Argentina 38",
+    "dept": "SAN LORENZO",
     "phones": [
       "3414961340"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] S.Jeronimo Sud Secc. 17 D.G.S.R.",
+    "name": "S.Jeronimo Sud Secc. 17 D.G.S.R.",
+    "dept": "SAN LORENZO",
     "phones": [
       "341156410183"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] San Lorenzo Comisaria 1ra. Urquiza 749",
+    "name": "San Lorenzo Comisaria 1ra. Urquiza 749",
+    "dept": "SAN LORENZO",
     "phones": [
       "3812422408"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Comisaria 7ma. Suiza y Lopez",
+    "name": "Comisaria 7ma. Suiza y Lopez",
+    "dept": "SAN LORENZO",
     "phones": [
       "3813422255"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] San.J.Sud Comisaria 8va. 25 de Mayo 348",
+    "name": "San.J.Sud Comisaria 8va. 25 de Mayo 348",
+    "dept": "SAN LORENZO",
     "phones": [
       "46674909013"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] Timbues Comisaria 9na. Gaboto 5492",
+    "name": "Timbues Comisaria 9na. Gaboto 5492",
+    "dept": "SAN LORENZO",
     "phones": [
       "4115495002"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN LORENZO] V. Mugueta Comisaria 13ra. Gral. Roca 269",
+    "name": "V. Mugueta Comisaria 13ra. Gral. Roca 269",
+    "dept": "SAN LORENZO",
     "phones": [
       "6315497016"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Belgrano Sub Comisaria 6ta. Sarmiento 950 C.",
+    "name": "Belgrano Sub Comisaria 6ta. Sarmiento 950 C.",
+    "dept": "SAN MARTIN",
     "phones": [
       "3404496111"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] C. Pelleg. Comisaria 5ta. 9 de Julio 123",
+    "name": "C. Pelleg. Comisaria 5ta. 9 de Julio 123",
+    "dept": "SAN MARTIN",
     "phones": [
       "6146480110"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] C. Rosquin Comisaria 3ra. Rivadavia 730",
+    "name": "C. Rosquin Comisaria 3ra. Rivadavia 730",
+    "dept": "SAN MARTIN",
     "phones": [
       "6145470313"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Castelar Sub Comisaria 2da. Zona Urbana",
+    "name": "Castelar Sub Comisaria 2da. Zona Urbana",
+    "dept": "SAN MARTIN",
     "phones": [
       "3564497029"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Crispi Sub Comisaria 1ra. Zona Urbana",
+    "name": "Crispi Sub Comisaria 1ra. Zona Urbana",
+    "dept": "SAN MARTIN",
     "phones": [
       "6244493020"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] El Trebol Comisaria 4ta. Rosario 866",
+    "name": "El Trebol Comisaria 4ta. Rosario 866",
+    "dept": "SAN MARTIN",
     "phones": [
       "6138422306"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Landeta Comisaria 9na. L. la Torre 757",
+    "name": "Landeta Comisaria 9na. L. la Torre 757",
+    "dept": "SAN MARTIN",
     "phones": [
       "3406497210"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Las Casas Sub Comisaria 7ma. Gral. Lopez S/N",
+    "name": "Las Casas Sub Comisaria 7ma. Gral. Lopez S/N",
+    "dept": "SAN MARTIN",
     "phones": [
       "6148494003"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Las Petacas Sub Comisaria 3ra. Zona Urbana",
+    "name": "Las Petacas Sub Comisaria 3ra. Zona Urbana",
+    "dept": "SAN MARTIN",
     "phones": [
       "3406494043"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Los Cardos Sub Comisaria 4ta. H. Irigoyen 950",
+    "name": "Los Cardos Sub Comisaria 4ta. H. Irigoyen 950",
+    "dept": "SAN MARTIN",
     "phones": [
       "6152497022"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] M. Susana Comisaria 8va. Colon 826",
+    "name": "M. Susana Comisaria 8va. Colon 826",
+    "dept": "SAN MARTIN",
     "phones": [
       "3401466270"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Piamonte Comisaria 6ta. Rivadavia 841",
+    "name": "Piamonte Comisaria 6ta. Rivadavia 841",
+    "dept": "SAN MARTIN",
     "phones": [
       "3476455146"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] S.M.Escobas Comisaria 7ma. E. Lopez 917",
+    "name": "S.M.Escobas Comisaria 7ma. E. Lopez 917",
+    "dept": "SAN MARTIN",
     "phones": [
       "3406498213"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] San Jorge Comisaria 2da. Av. Alberdi S/N",
+    "name": "San Jorge Comisaria 2da. Av. Alberdi S/N",
+    "dept": "SAN MARTIN",
     "phones": [
       "3614441000"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Secc. 18・D.G.S.R.        R ivadavia 1545",
+    "name": "Secc. 18・D.G.S.R.        R ivadavia 1545",
+    "dept": "SAN MARTIN",
     "phones": [
       "8005442688"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[SAN MARTIN] Sastre Comisaria 1ra. Gral. Lopez 1480",
+    "name": "Sastre Comisaria 1ra. Gral. Lopez 1480",
+    "dept": "SAN MARTIN",
     "phones": [
       "6237480003"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Calchaqui Comisaria 2da. 25 de Mayo 165",
+    "name": "Calchaqui Comisaria 2da. 25 de Mayo 165",
+    "dept": "VERA",
     "phones": [
       "6470470208"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Cañada Ombu Sub Cria. 2da. Zona Urbana",
+    "name": "Cañada Ombu Sub Cria. 2da. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3482493065"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Caraguatay Destacamento 2do. Zona Urbana",
+    "name": "Caraguatay Destacamento 2do. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3483420002"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Colmena Destacamento 14to. Zona Urbana",
+    "name": "Colmena Destacamento 14to. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3482490595"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Espin Destacamento 4to. Zona Urbana",
+    "name": "Espin Destacamento 4to. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3483420960"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] F. Olmos Comisaria 3ra. Peron e Irigoyen",
+    "name": "F. Olmos Comisaria 3ra. Peron e Irigoyen",
+    "dept": "VERA",
     "phones": [
       "3483492341"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] F. Olmos Secc. 22 D.G.S.R.",
+    "name": "F. Olmos Secc. 22 D.G.S.R.",
+    "dept": "VERA",
     "phones": [
       "348315458609"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] F.Chilcas Destacamento 10mo. Zona Urbana",
+    "name": "F.Chilcas Destacamento 10mo. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3482492020"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Garabato Sub Cria. 4ta. Zona Urbana",
+    "name": "Garabato Sub Cria. 4ta. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3482490216"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Golondrina Sub Cria. 3ra. Zona Urbana",
+    "name": "Golondrina Sub Cria. 3ra. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3482490596"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Intiyaco Comisaria 6ta. Zona Urbana 490303 (Cab.P.)",
+    "name": "Intiyaco Comisaria 6ta. Zona Urbana 490303 (Cab.P.)",
+    "dept": "VERA",
     "phones": [
       "3482490303"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] La Gallareta Comisaria 5ta. Zona Urbana 496106 (Cab.P.)",
+    "name": "La Gallareta Comisaria 5ta. Zona Urbana 496106 (Cab.P.)",
+    "dept": "VERA",
     "phones": [
       "3483496106"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Las Gamas Destacamento 3ro. Zona Urbana",
+    "name": "Las Gamas Destacamento 3ro. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3483429977"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Los Amores Sub Sub Cria. 1ra. Zona Urbana",
+    "name": "Los Amores Sub Sub Cria. 1ra. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3482490477"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Margarita Comisaria 4ta. B. y Santa Fe",
+    "name": "Margarita Comisaria 4ta. B. y Santa Fe",
+    "dept": "VERA",
     "phones": [
       "3483498333"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Ogilvie Destacamento 1ro. Zona Urbana",
+    "name": "Ogilvie Destacamento 1ro. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3483420000"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Pje. Km.17 Destacamento 7mo. Zona Urbana",
+    "name": "Pje. Km.17 Destacamento 7mo. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3483421400"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Sta. Lucia Sub Cria. 6ta. Zona Urbana 420758 (Cab.P.)",
+    "name": "Sta. Lucia Sub Cria. 6ta. Zona Urbana 420758 (Cab.P.)",
+    "dept": "VERA",
     "phones": [
       "3483420758"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Sta.Felicia Secc. 19 D.G.S.R.",
+    "name": "Sta.Felicia Secc. 19 D.G.S.R.",
+    "dept": "VERA",
     "phones": [
       "8286428011"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Tartagal Comisaria 7ma. Zona Urbana 490516 (Cab.P.)",
+    "name": "Tartagal Comisaria 7ma. Zona Urbana 490516 (Cab.P.)",
+    "dept": "VERA",
     "phones": [
       "3482490516"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Toba Sub Cria. 5ta. Zona Urbana",
+    "name": "Toba Sub Cria. 5ta. Zona Urbana",
+    "dept": "VERA",
     "phones": [
       "3483429979"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Vera Comisaria 1ra. Pte. Peron 1235",
+    "name": "Vera Comisaria 1ra. Pte. Peron 1235",
+    "dept": "VERA",
     "phones": [
       "8276420004"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Secc. 7  D.G.S.R.",
+    "name": "Secc. 7  D.G.S.R.",
+    "dept": "VERA",
     "phones": [
       "6471470783"
     ],
+    "is_essential": false,
     "icon": "shield"
   },
   {
-    "name": "[VERA] Secc. 20 D.G.S.R.",
+    "name": "Secc. 20 D.G.S.R.",
+    "dept": "VERA",
     "phones": [
       "348315640718"
     ],
+    "is_essential": false,
     "icon": "shield"
   }
 ];
