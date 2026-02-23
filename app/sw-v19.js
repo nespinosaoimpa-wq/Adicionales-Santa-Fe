@@ -1,15 +1,33 @@
-const CACHE_NAME = 'adicionales-sf-v360';
+const CACHE_NAME = 'adicionales-sf-v500';
 const ASSETS_TO_CACHE = [
     './',
     './index.html',
-    './app-v211.js?v=360',
-    './db-v211.js?v=360',
-    './components-v211.js?v=360',
-    './firebase-config.js',
     './styles.css',
+    './firebase-config.js',
+    './supabase-config.js',
+    './db-v211.js?v=500',
+    './app-v211.js?v=500',
+    './js/utils.js?v=500',
+    './js/store.js?v=500',
+    './js/router.js?v=500',
+    './js/components.js?v=500',
+    './js/data/directory.js?v=500',
+    './js/views/auth.js?v=500',
+    './js/views/agenda.js?v=500',
+    './js/views/register.js?v=500',
+    './js/views/control_panel.js?v=500',
+    './js/views/financial.js?v=500',
+    './js/views/profile.js?v=500',
+    './js/views/stats.js?v=500',
+    './js/views/history.js?v=500',
+    './js/views/service_details.js?v=500',
+    './js/views/asistente.js?v=500',
+    './js/views/admin.js?v=500',
     'https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries',
     'https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap',
-    'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap'
+    'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap',
+    'https://cdn.jsdelivr.net/npm/chart.js',
+    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
 ];
 
 self.addEventListener('install', (event) => {
