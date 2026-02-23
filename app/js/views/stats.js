@@ -41,15 +41,15 @@ function renderStats(container) {
         const monthTotal = services
             .filter(s => {
                 if (!s.date) return false;
-                // Caso YYYY-MM-DD
-                if (s.date.startsWith(monthYear)) return true;
-                // Caso DD/MM/YYYY
-                const [day, month, year] = s.date.split('/');
-                if (year && month) {
-                    const entryMonthYear = `${year}-${month.padStart(2, '0')}`;
-                    return entryMonthYear === monthYear;
+                // Normalize date to YYYY-MM
+                let entryYearMonth = '';
+                if (s.date.includes('-')) {
+                    entryYearMonth = s.date.substring(0, 7); // YYYY-MM
+                } else if (s.date.includes('/')) {
+                    const [d, m, y] = s.date.split('/');
+                    if (y && m) entryYearMonth = `${y}-${m.padStart(2, '0')}`;
                 }
-                return false;
+                return entryYearMonth === monthYear;
             })
             .reduce((sum, s) => sum + (s.total || 0), 0);
 

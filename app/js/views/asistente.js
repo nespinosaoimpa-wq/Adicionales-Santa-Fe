@@ -835,7 +835,7 @@ window.showAnnouncementModal = () => {
                 <span class="material-symbols-outlined text-4xl">celebration</span>
             </div>
             <div class="space-y-2">
-                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v2.1.4 final Activa!</h3>
+                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v527.4-FINAL Activa!</h3>
                 <p class="text-xs text-slate-400 font-medium leading-relaxed">
                     🚀 **Centinela v3.5-MAX**: Toda la información de ISEP, Sueldos (Decreto 142) y Salud Mental 2026 integrada. ¡Nueva sección de **Alias/CBU** en tu Perfil!
                 </p>

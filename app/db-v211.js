@@ -31,9 +31,10 @@ const DB = {
         if (!user.email) return;
 
         // Save to Firestore (Primary for UI)
-        const userRef = db.collection('users').doc(user.email);
+        const userRef = db.collection('users').doc(user.email.toLowerCase().trim());
         const userData = {
             ...user,
+            email: user.email.toLowerCase().trim(),
             lastLogin: new Date().toISOString()
         };
         await userRef.set(userData, { merge: true });
@@ -41,10 +42,11 @@ const DB = {
         // Sync with Supabase Profiles
         try {
             const { error } = await supabaseClient.from('profiles').upsert({
-                id: user.uid || user.email,
-                email: user.email,
+                id: user.uid || user.email.toLowerCase().trim(),
+                email: user.email.toLowerCase().trim(),
                 name: user.name,
                 avatar: user.avatar,
+                alias: user.alias || '',
                 service_config: user.serviceConfig,
                 notification_settings: user.notificationSettings,
                 last_login: new Date().toISOString()
@@ -110,12 +112,14 @@ const DB = {
 
         const mergeAndCallback = () => {
             const unified = Array.from(userMap.values());
+            // Log for debugging count issues
+            console.log(`[UsersSync] Unified total: ${unified.length}`);
             callback(unified);
         };
 
         const processUsers = (users, source) => {
             users.forEach(u => {
-                const email = u.email || u.id;
+                const email = (u.email || u.id || '').toLowerCase().trim();
                 if (!email) return;
 
                 const existing = userMap.get(email) || {};
@@ -123,33 +127,28 @@ const DB = {
                     ...existing,
                     ...u,
                     email: email,
+                    // Prioritize newer fields but keep consistency
                     serviceConfig: u.service_config || u.serviceConfig || existing.serviceConfig,
                     notificationSettings: u.notification_settings || u.notificationSettings || existing.notificationSettings,
+                    alias: u.alias || existing.alias || '',
                     role: u.role || existing.role || 'user',
                     lastLogin: u.last_login || u.lastLogin || existing.lastLogin,
-                    source: (existing.source || '') + source
+                    source: (existing.source || '').includes(source) ? existing.source : (existing.source || '') + '|' + source
                 });
             });
             mergeAndCallback();
         };
 
-        // 1. Listen to Firebase
+        // 1. Listen to Firebase (Real-time)
         const fbUnsub = db.collection('users').onSnapshot(snapshot => {
             processUsers(snapshot.docs.map(doc => doc.data()), 'FB');
         }, error => {
             console.warn("Users access restricted:", error.message);
         });
 
-        // 2. Initial manual fetch from Firebase to bypass potential snapshot limits
-        db.collection('users').get().then(snapshot => {
-            processUsers(snapshot.docs.map(doc => doc.data()), 'FB-FULL');
-        });
-
-        // 3. Fetch Supabase users
+        // 2. Fetch Supabase users (Full list)
         supabaseClient.from('profiles').select('*').then(({ data }) => {
-            if (data) {
-                processUsers(data, 'SB');
-            }
+            if (data) processUsers(data, 'SB');
         }).catch(e => console.warn("Supabase profiles fetch failed:", e.message));
 
         return fbUnsub;

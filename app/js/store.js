@@ -320,7 +320,7 @@ const store = {
     },
 
     init() {
-        console.log("App v5.2.6.3 PURIFIED - Suite Asistente Virtual PRO");
+        console.log("App v527.4-FINAL - Suite Asistente Virtual PRO");
 
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());

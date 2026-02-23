@@ -118,7 +118,11 @@ async function renderAdmin(container) {
                         <div class="space-y-4 overflow-y-auto flex-1 pr-2 custom-scrollbar">
                             ${!reviewsLoaded ? '<p class="text-slate-500 text-xs italic text-center py-8">Cargando buzón...</p>' :
                 reviewsMap.size === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8 font-bold uppercase tracking-widest opacity-30">No hay reseñas aún</p>' :
-                    Array.from(reviewsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map(r => {
+                    Array.from(reviewsMap.values()).sort((a, b) => {
+                        const dateA = new Date(a.created_at || a.timestamp || 0).getTime();
+                        const dateB = new Date(b.created_at || b.timestamp || 0).getTime();
+                        return dateB - dateA;
+                    }).map(r => {
                         const isAlert = r.comment.startsWith('[CRITICAL-MH]');
                         const displayComment = isAlert ? r.comment.replace('[CRITICAL-MH]', '').trim() : r.comment;
 
