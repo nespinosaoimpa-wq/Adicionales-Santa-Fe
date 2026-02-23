@@ -71,9 +71,15 @@ CREATE POLICY "Users can manage their own services" ON services FOR ALL USING (a
 -- Políticas para GASTOS
 CREATE POLICY "Users can manage their own expenses" ON expenses FOR ALL USING (auth.uid() = user_id);
 
--- Políticas para RESEÑAS
-CREATE POLICY "Users can insert their own reviews" ON public.user_reviews FOR INSERT WITH CHECK (true);
-CREATE POLICY "Anyone can view reviews" ON public.user_reviews FOR SELECT USING (true);
+-- Políticas para RESEÑAS (Híbrido: Firebase Auth no es detectado por Supabase RLS por defecto)
+DROP POLICY IF EXISTS "Users can insert their own reviews" ON public.user_reviews;
+DROP POLICY IF EXISTS "Anyone can view reviews" ON public.user_reviews;
+
+CREATE POLICY "Allow public insert for reviews" ON public.user_reviews FOR INSERT WITH CHECK (true);
+CREATE POLICY "Allow public select for reviews" ON public.user_reviews FOR SELECT USING (true);
+
+-- Otorgar permisos técnicos a los roles anon y authenticated
+GRANT INSERT, SELECT ON public.user_reviews TO anon, authenticated;
 
 -- ── 6. TRIGGER PARA NUEVOS USUARIOS ────────────────
 -- Crea automáticamente un perfil cuando alguien se registra

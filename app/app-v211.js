@@ -3672,7 +3672,7 @@ function _renderAdminKPICard(title, value, icon, gradient, textColor) {
 window.showDonationModal = () => {
     const modal = document.createElement('div');
     modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in';
-    modal.innerHTML = \`
+    modal.innerHTML = `
         <div class="bg-[#1e293b] w-full max-w-sm rounded-3xl border border-white/10 p-6 shadow-2xl animate-scale-in">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-bold text-white flex items-center gap-2">
@@ -3711,6 +3711,6 @@ window.showDonationModal = () => {
                 </button>
             </div>
         </div>
-    \`;
+    `;
     document.body.appendChild(modal);
 }
