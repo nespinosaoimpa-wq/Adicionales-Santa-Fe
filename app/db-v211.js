@@ -482,6 +482,14 @@ const DB = {
 
         const dates = Object.keys(servicesByDate).sort();
 
+        const typeDistribution = services.reduce((acc, s) => {
+            const type = s.type || 'Otro';
+            acc[type] = (acc[type] || 0) + 1;
+            return acc;
+        }, {});
+
+        const sortedTypes = Object.entries(typeDistribution).sort((a, b) => b[1] - a[1]);
+
         return {
             userCount: users.length,
             activeUsers: users.filter(u => u.lastLogin && new Date(u.lastLogin) > new Date(Date.now() - 86400000)).length,
@@ -493,8 +501,8 @@ const DB = {
                 dates: dates,
                 counts: dates.map(d => servicesByDate[d]),
                 revenue: dates.map(d => revenueByDate[d]),
-                types: [], // Can be extracted if needed
-                typeCounts: []
+                types: sortedTypes.map(t => t[0]),
+                typeCounts: sortedTypes.map(t => t[1])
             }
         };
     },
