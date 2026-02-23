@@ -297,7 +297,7 @@ const store = {
     },
 
     init() {
-        console.log("App v2.1.1 Loaded - Suite Asistente Virtual PRO");
+        console.log("App v5.2.5 NUCLEAR - Suite Asistente Virtual PRO");
 
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());

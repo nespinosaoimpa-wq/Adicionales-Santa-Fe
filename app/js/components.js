@@ -176,3 +176,69 @@ function renderIOSInstallPrompt() {
         </div>
     `;
 }
+
+function renderDonationHeader() {
+    return `
+        <div onclick="window.showDonationModal()" class="flex flex-col items-end cursor-pointer group hover:scale-105 transition-transform bg-primary/5 px-3 py-1.5 rounded-2xl border border-primary/20">
+            <span class="text-[9px] font-black text-primary/60 uppercase tracking-tighter">Soporte / Alias</span>
+            <span class="text-[11px] font-black text-white group-hover:text-primary transition-colors">centinela.sf</span>
+        </div>
+    `;
+}
+
+function showDonationModal() {
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 z-[1000] flex items-center justify-center p-6 bg-background-dark/95 backdrop-blur-md animate-fade-in';
+    modal.innerHTML = `
+        <div class="max-w-xs w-full glass-card p-6 rounded-[2.5rem] border border-white/10 shadow-2xl space-y-6 text-center animate-scale-up relative">
+            <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 text-slate-500 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            
+            <div class="size-20 bg-gradient-to-br from-primary to-blue-600 rounded-3xl mx-auto flex items-center justify-center text-white shadow-xl shadow-primary/20">
+                <span class="material-symbols-outlined text-4xl">favorite</span>
+            </div>
+            
+            <div class="space-y-2">
+                <h2 class="text-xl font-bold text-white tracking-tight italic uppercase">Apoyá el Desarrollo</h2>
+                <p class="text-xs text-slate-400 leading-relaxed">¿Te gusta la aplicación? Ayudanos a mantenerla con un café simbólico.</p>
+            </div>
+
+            <div class="space-y-3">
+                <!-- Alias Block -->
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-1 group relative">
+                    <span class="text-[9px] font-bold text-primary uppercase text-left">Mercado Pago / Alias</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-lg font-black text-white italic">centinela.sf</span>
+                        <button onclick="copyToClipboard('centinela.sf', '✅ Alias copiado')" class="size-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-sm">content_copy</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CVU Block -->
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col gap-1 group relative">
+                    <span class="text-[9px] font-bold text-primary uppercase text-left">CVU</span>
+                    <div class="flex items-center justify-between">
+                        <span class="text-[10px] font-mono text-slate-400 break-all pr-2">0000003100055276332766</span>
+                        <button onclick="copyToClipboard('0000003100055276332766', '✅ CVU copiado')" class="size-9 rounded-xl bg-primary/10 text-primary flex items-center justify-center hover:bg-primary hover:text-white transition-all shrink-0">
+                            <span class="material-symbols-outlined text-sm">content_copy</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest pt-2 italic">GRACIAS POR TU COLABORACIÓN</p>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function copyToClipboard(text, successMsg) {
+    navigator.clipboard.writeText(text).then(() => {
+        showToast(successMsg);
+    });
+}
+
+window.showDonationModal = showDonationModal;
+window.copyToClipboard = copyToClipboard;
