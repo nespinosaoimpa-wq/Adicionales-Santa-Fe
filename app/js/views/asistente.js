@@ -803,3 +803,30 @@ function renderPartesInteligentes(container) {
         showToast("Copiado al portapapeles");
     };
 }
+
+// Global Exports
+window.renderAsistenteHub = renderAsistenteHub;
+window.renderPartesInteligentes = renderPartesInteligentes;
+
+window.showAnnouncementModal = () => {
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 z-[100] bg-background-dark/80 backdrop-blur-md flex items-center justify-center p-6 animate-fade-in';
+    overlay.innerHTML = `
+        <div class="glass-card max-w-sm w-full p-8 rounded-[40px] border border-primary/20 bg-gradient-to-b from-primary/10 to-transparent text-center space-y-6 relative overflow-hidden shadow-2xl">
+            <div class="absolute -top-12 -right-12 size-40 bg-primary/20 blur-3xl"></div>
+            <div class="size-20 bg-primary/20 rounded-3xl flex items-center justify-center text-primary mx-auto mb-4 animate-bounce">
+                <span class="material-symbols-outlined text-4xl">celebration</span>
+            </div>
+            <div class="space-y-2">
+                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v2.1.3 v514 Activa!</h3>
+                <p class="text-xs text-slate-400 font-medium leading-relaxed">
+                    🚀 **Inteligencia Centinela 3.0**: Entiende consultas naturales sobre horarios de colectivos, Manual MIRAF y Ley 14283.
+                </p>
+            </div>
+            <button onclick="this.closest('.fixed').remove()" class="w-full py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all uppercase tracking-widest text-xs">
+                Explorar Ahora
+            </button>
+        </div>
+    `;
+    document.body.appendChild(overlay);
+};
