@@ -17,23 +17,21 @@ function renderAdBanner() {
 }
 
 function renderBottomNav(activePage = 'agenda') {
-    const pages = [
-        { id: 'agenda', icon: 'calendar_today', label: 'Agenda', hash: '#agenda' },
-        { id: 'control', icon: 'dashboard', label: 'Panel', hash: '#control' },
-        { id: 'register', icon: 'add_circle', label: 'Nuevo', hash: '#register', highlight: true },
-        { id: 'financial', icon: 'payments', label: 'Finanzas', hash: '#financial' },
-        { id: 'asistente', icon: 'smart_toy', label: 'Asistente', hash: '#asistente' }
+    const navItems = [
+        { id: 'agenda', icon: 'calendar_month', label: 'AGENDA', route: '#agenda' },
+        { id: 'panel', icon: 'grid_view', label: 'PANEL', route: '#control_panel' },
+        { id: 'financial', icon: 'payments', label: 'FINANZAS', route: '#financial' },
+        { id: 'asistente', icon: 'smart_toy', label: 'ASISTENTE', route: '#asistente' }
     ];
 
     return `
-        <nav class="fixed bottom-0 left-0 right-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-xl border-t border-slate-200 dark:border-white/5 px-4 pb-8 pt-2">
-            <div class="flex items-center justify-around max-w-md mx-auto">
-                ${pages.map(p => `
-                    <button onclick="router.navigateTo('${p.hash}')" class="flex flex-col items-center gap-1 group transition-all">
-                        <div class="size-12 flex items-center justify-center rounded-2xl transition-all ${activePage === p.id ? (p.highlight ? 'bg-primary text-white shadow-lg shadow-primary/20 scale-110' : 'text-primary') : 'text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-200'}">
-                            <span class="material-symbols-outlined text-[24px] ${activePage === p.id && !p.highlight ? 'font-fill' : ''}">${p.icon}</span>
-                        </div>
-                        <span class="text-[10px] font-bold uppercase tracking-widest ${activePage === p.id ? 'text-primary' : 'text-slate-400'}">${p.label}</span>
+        <nav class="fixed bottom-0 left-0 right-0 z-[100] pb-6 px-4">
+            <div class="max-w-md mx-auto glass-card rounded-[2.5rem] p-2 flex items-center justify-around shadow-2xl shadow-black/20 border border-white/5 bg-background-dark/90 backdrop-blur-xl">
+                ${navItems.map(item => `
+                    <button onclick="router.navigateTo('${item.route}')" 
+                        class="flex flex-col items-center gap-1.5 px-4 py-2 rounded-3xl transition-all duration-300 ${activePage === item.id ? 'bg-primary text-white scale-110 shadow-lg shadow-primary/30' : 'text-slate-500 hover:text-white'}">
+                        <span class="material-symbols-outlined text-[22px] ${activePage === item.id ? 'fill-1' : ''}">${item.icon}</span>
+                        <span class="text-[9px] font-black tracking-tighter">${item.label}</span>
                     </button>
                 `).join('')}
             </div>

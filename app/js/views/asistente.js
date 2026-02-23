@@ -16,8 +16,15 @@ function renderAsistenteHub(container) {
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
             <h1 class="text-xl font-bold text-white tracking-tight">Asistente Virtual</h1>
-            <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shadow-lg shadow-primary/10">
-                <span class="material-symbols-outlined">smart_toy</span>
+            <div class="flex items-center gap-2">
+                ${store.user && store.user.role === 'admin' ? `
+                    <button onclick="router.navigateTo('#admin')" class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+                        <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
+                    </button>
+                ` : ''}
+                <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shadow-lg shadow-primary/10">
+                    <span class="material-symbols-outlined">smart_toy</span>
+                </div>
             </div>
         </header>
 
@@ -272,22 +279,22 @@ function renderDirectorioPolicial(container) {
                         <span class="h-px flex-1 bg-white/5"></span>
                     </h3>
                     ${sections[title].map(c => `
-                        <div class="glass-card p-4 rounded-2xl border border-white/5 flex items-center justify-between group animate-fade-in ${c.is_essential ? 'bg-primary/5 border-primary/10' : ''}">
-                            <div class="flex items-center gap-4">
-                                <div class="size-10 rounded-xl ${c.is_essential ? 'bg-primary/20 text-primary' : 'bg-slate-800 text-slate-400'} flex items-center justify-center transition-colors">
-                                    <span class="material-symbols-outlined">${c.icon || 'shield'}</span>
+                        <div class="glass-card p-3 rounded-2xl border border-white/5 flex items-center justify-between group animate-fade-in ${c.is_essential ? 'bg-primary/5 border-primary/10' : ''}">
+                            <div class="flex items-center gap-3 overflow-hidden">
+                                <div class="size-9 rounded-xl ${c.is_essential ? 'bg-primary/20 text-primary' : 'bg-slate-800 text-slate-500'} flex items-center justify-center transition-colors shrink-0">
+                                    <span class="material-symbols-outlined text-lg">${c.icon || 'shield'}</span>
                                 </div>
-                                <div class="flex-1 min-w-0">
-                                    <h3 class="font-bold text-white text-[13px] truncate">${c.name}</h3>
-                                    <div class="flex flex-wrap gap-2 mt-1">
-                                        ${c.phones.map(p => `<span class="text-[10px] text-slate-500 font-mono tracking-wider">${p}</span>`).join('')}
+                                <div class="flex-1 min-w-0 pr-2">
+                                    <h3 class="font-bold text-white text-[12px] leading-tight line-clamp-1">${c.name}</h3>
+                                    <div class="flex flex-wrap gap-x-2 gap-y-0.5 mt-0.5">
+                                        ${c.phones.map(p => `<span class="text-[10px] text-slate-500 font-mono">${p}</span>`).join('')}
                                     </div>
                                 </div>
                             </div>
-                            <div class="flex gap-2">
+                            <div class="flex gap-1.5 shrink-0">
                                 ${c.phones.map(p => `
-                                    <a href="tel:${p.replace(/[^0-9]/g, '')}" class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-lg active:scale-95">
-                                        <span class="material-symbols-outlined text-sm">call</span>
+                                    <a href="tel:${p.replace(/[^0-9]/g, '')}" class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all shadow-sm active:scale-90">
+                                        <span class="material-symbols-outlined text-base">call</span>
                                     </a>
                                 `).join('')}
                             </div>
