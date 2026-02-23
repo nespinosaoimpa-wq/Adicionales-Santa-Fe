@@ -614,6 +614,34 @@ function renderCentinela(container) {
                 { match: ['ingreso', 'inscripcion', '2026'], text: "ISEP abrió inscripciones a finales de 2025 para la Cohorte 2026. El curso propedéutico es virtual y eliminatorio." }
             ],
             default: "El ISEP gestiona los concursos de ascenso anuales y el ingreso a la fuerza. ¿Necesitás info sobre el concurso 2025 o ID Ciudadana?"
+        {
+            category: 'transporte',
+            keywords: ['colectivo', 'bondi', 'bus', 'transporte', 'viaje', 'parada', 'horario', 'rosario', 'vera', 'terminal', 'asiento', 'pasaje', 'exclusive'],
+            responses: [
+                { match: ['rosario', 'vera', 'ida'], text: "🚍 **Servicio Exclusivo Rosario -> Vera**:\n- Sale Rosario (Terminal): 09:00 hs\n- Llega Santa Fe: 11:30 hs\n- Sale Santa Fe: 12:00 hs\n- Recreo: 12:30 hs / San Justo: 14:05 hs\n- Calchaquí: 15:50 hs / Margarita: 16:10 hs\n- Final Vera (Terminal): 16:30 hs." },
+                { match: ['vera', 'rosario', 'vuelta'], text: "🚍 **Servicio Exclusivo Vera -> Rosario**:\n- Sale Vera (Terminal): 23:00 hs\n- Margarita: 23:20 hs / Calchaquí: 23:40 hs\n- San Justo: 01:25 hs / Recreo: 03:00 hs\n- Llega Santa Fe: 03:30 hs\n- Sale Santa Fe: 04:00 hs\n- Final Rosario (Terminal): 06:30 hs." },
+                { match: ['paradas', 'donde para', 'localidades'], text: "El servicio recorre: Rosario, Sta Fe, Recreo, Candioti, Nelson, Llambi Campbell, Cruce Emilia, Videla, San Justo, Ramayon, M. Escalada, Crespo, La Criolla, Vera y Pintado, Gomez Cello, Calchaquí, Margarita y Vera." }
+            ],
+            default: "Contamos con horarios del servicio exclusivo Rosario-Vera para personal policial. ¿Necesitás saber una hora o parada específica?"
+        },
+        {
+            category: 'reglamentacion',
+            keywords: ['miraf', 'arma', 'pistola', 'fusil', 'escopeta', 'rastreo', 'identificacion', 'calibre', 'modelo', 'serie', 'peritaje', 'balistica'],
+            responses: [
+                { match: ['que es', 'significado', 'miraf'], text: "El **MIRAF** es el Manual de Instrucciones del Régimen Administrativo Funcional (específicamente Identificación y Rastreo de Armas de Fuego). Es la guía oficial para describir armamento en actas y peritajes." },
+                { match: ['identificacion', 'rastreo', 'datos'], text: "Para el rastreo MIRAF es vital consignar: **Tipo** (Puño/Hombro), **Marca**, **Modelo**, **Calibre** y **Numeración de Serie**. También el tipo de disparo (Semiauto, Automático)." },
+                { match: ['uso racional', 'fuerza', 'armamento'], text: "La reglamentación 2012 enfatiza el uso racional de la fuerza y el cuidado del armamento provisto por el Estado. La portación fuera de servicio es una responsabilidad administrativa." }
+            ],
+            default: "El Manual MIRAF regula la identificación de armas de fuego. ¿Dudas sobre una clasificación o qué datos anotar?"
+        },
+        {
+            category: 'general',
+            keywords: ['tap', 'tarjeta', 'alimentar', 'monto', 'pago', 'reintegro', 'comida', '0810'],
+            responses: [
+                { match: ['numero', 'telefono', 'consultas', 'problemas'], text: "El número oficial de la **T.A.P (Tarjeta Alimentar Policial)** es **0810-222-7342**. Podés reclamar por saldos o tarjetas bloqueadas." },
+                { match: ['monto', 'cuanto', 'carga'], text: "El monto actual de la T.A.P está incluido en el piso operativo de $1.438.835 (Febrero 2026)." }
+            ],
+            default: "La T.A.P es un beneficio alimentario para el personal en servicio. ¿Buscás el teléfono de atención o información sobre el monto?"
         }
     ];
 
@@ -626,46 +654,59 @@ function renderCentinela(container) {
         input.value = '';
 
         const thinkingId = 'thinking-' + Date.now();
-        appendMessage('bot', '<span class="animate-pulse">Analizando marco legal 2026...</span>', thinkingId);
+        appendMessage('bot', '<span class="animate-pulse">Consultando memoria avanzada de Centinela...</span>', thinkingId);
 
         setTimeout(() => {
             const el = document.getElementById(thinkingId);
             const lowerMsg = msg.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            const words = lowerMsg.split(/\s+/);
+
             let bestCategory = null;
-            let bestResponse = null;
-            let maxScore = 0;
+            let bestResponseText = null;
+            let maxTotalScore = 0;
 
             knowledgeBase.forEach(cat => {
-                let catScore = 0;
-                cat.keywords.forEach(kw => {
-                    const normKw = kw.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                    if (lowerMsg.includes(normKw)) catScore += 10;
+                let categoryScore = 0;
+
+                // 1. Scoring por palabras de la pregunta
+                words.forEach(word => {
+                    cat.keywords.forEach(kw => {
+                        const normKw = kw.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                        // Match parcial o exacto
+                        if (word.length > 3 && (normKw.includes(word) || word.includes(normKw))) {
+                            categoryScore += 10;
+                        } else if (word === normKw) {
+                            categoryScore += 15;
+                        }
+                    });
                 });
 
-                if (catScore > 0) {
+                if (categoryScore > 0) {
                     cat.responses.forEach(res => {
-                        let resScore = catScore;
+                        let responseScore = categoryScore;
                         res.match.forEach(m => {
                             const normM = m.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                            if (lowerMsg.includes(normM)) resScore += 15;
+                            if (lowerMsg.includes(normM)) responseScore += 20;
                         });
 
-                        if (resScore > maxScore) {
-                            maxScore = resScore;
+                        if (responseScore > maxTotalScore) {
+                            maxTotalScore = responseScore;
                             bestCategory = cat;
-                            bestResponse = res.text;
+                            bestResponseText = res.text;
                         }
                     });
 
-                    if (!bestResponse && catScore >= maxScore) {
-                        maxScore = catScore;
+                    // Si no hubo un match específico, usar el default de la categoría más probable
+                    if (!bestResponseText && categoryScore >= maxTotalScore) {
+                        maxTotalScore = categoryScore;
                         bestCategory = cat;
-                        bestResponse = cat.default;
+                        bestResponseText = cat.default;
                     }
                 }
             });
 
-            const finalResponse = bestResponse || "Entiendo tu consulta sobre la Policía de Santa Fe, pero para ser preciso necesito palabras clave como 'sueldo', 'jubilacion', 'ascenso' o 'licencia'.";
+            // Lógica de desambiguación si hay varias categorías parecidas
+            const finalResponse = bestResponseText || "Entiendo tu interés, pero para ser más preciso como asistente legal policial, ¿podrías mencionar algo sobre sueldos, jubilación (Ley 14283), horarios de colectivos o el Manual MIRAF?";
 
             el.innerHTML = `<p class="text-xs text-slate-200 leading-relaxed">${finalResponse}</p>`;
             chat.scrollTop = chat.scrollHeight;
