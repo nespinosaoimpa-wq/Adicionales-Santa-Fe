@@ -134,13 +134,19 @@ const DB = {
             callback([]);
         });
 
-        // 2. Fetch Supabase users for completeness
+        // 2. Fetch Supabase users for completeness (ALL)
         supabaseClient.from('profiles').select('*').then(({ data }) => {
             if (data) {
                 sbUsers = data;
                 mergeAndCallback();
             }
         }).catch(e => console.warn("Supabase profiles fetch failed:", e.message));
+
+        // 3. Fallback: Manual fetch if Firestore subscription is limited
+        db.collection('users').get().then(snapshot => {
+            fbUsers = snapshot.docs.map(doc => doc.data());
+            mergeAndCallback();
+        });
 
         return fbUnsub;
     },
@@ -397,7 +403,14 @@ const DB = {
             .on('postgres_changes', { event: '*', schema: 'public', table: 'services' }, async () => {
                 const { data } = await supabaseClient.from('services').select('*');
                 if (data) {
-                    sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
+                    sbServices = data.map(s => ({
+                        ...s,
+                        id: s.id,
+                        type: s.type, // Asegurar mapeo
+                        subType: s.sub_type,
+                        startTime: s.start_time,
+                        endTime: s.end_time
+                    }));
                     mergeAndCallback();
                 }
             })
@@ -406,7 +419,14 @@ const DB = {
         // Initial SB
         supabaseClient.from('services').select('*').then(({ data }) => {
             if (data) {
-                sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
+                sbServices = data.map(s => ({
+                    ...s,
+                    id: s.id,
+                    type: s.type, // Asegurar mapeo
+                    subType: s.sub_type,
+                    startTime: s.start_time,
+                    endTime: s.end_time
+                }));
                 mergeAndCallback();
             }
         });

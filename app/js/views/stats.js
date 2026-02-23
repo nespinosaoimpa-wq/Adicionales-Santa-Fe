@@ -39,7 +39,18 @@ function renderStats(container) {
         d.setMonth(today.getMonth() - i);
         const monthYear = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
         const monthTotal = services
-            .filter(s => s.date && s.date.startsWith(monthYear))
+            .filter(s => {
+                if (!s.date) return false;
+                // Caso YYYY-MM-DD
+                if (s.date.startsWith(monthYear)) return true;
+                // Caso DD/MM/YYYY
+                const [day, month, year] = s.date.split('/');
+                if (year && month) {
+                    const entryMonthYear = `${year}-${month.padStart(2, '0')}`;
+                    return entryMonthYear === monthYear;
+                }
+                return false;
+            })
             .reduce((sum, s) => sum + (s.total || 0), 0);
 
         monthlyData.push({
