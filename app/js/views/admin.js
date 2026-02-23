@@ -118,20 +118,28 @@ async function renderAdmin(container) {
                         <div class="space-y-4 overflow-y-auto flex-1 pr-2 custom-scrollbar">
                             ${!reviewsLoaded ? '<p class="text-slate-500 text-xs italic text-center py-8">Cargando buzón...</p>' :
                 reviewsMap.size === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8 font-bold uppercase tracking-widest opacity-30">No hay reseñas aún</p>' :
-                    Array.from(reviewsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map(r => `
-                                <div class="p-4 bg-white/5 rounded-2xl border border-white/5 animate-fade-in">
+                    Array.from(reviewsMap.values()).sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).map(r => {
+                        const isAlert = r.comment.startsWith('[CRITICAL-MH]');
+                        const displayComment = isAlert ? r.comment.replace('[CRITICAL-MH]', '').trim() : r.comment;
+
+                        return `
+                                <div class="p-4 ${isAlert ? 'bg-red-500/10 border-red-500/30' : 'bg-white/5 border-white/5'} rounded-2xl border animate-fade-in">
                                     <div class="flex justify-between items-start mb-2">
-                                        <p class="text-[9px] font-black text-primary truncate max-w-[120px]">${r.user_email}</p>
+                                        <div class="flex flex-col">
+                                            <p class="text-[9px] font-black ${isAlert ? 'text-red-400' : 'text-primary'} truncate max-w-[120px]">${r.user_email}</p>
+                                            ${isAlert ? '<span class="text-[7px] font-black bg-red-500 text-white px-1.5 py-0.5 rounded-full w-fit mt-1">ALERTA SALUD MENTAL</span>' : ''}
+                                        </div>
                                         <div class="flex">
-                                            ${Array(5).fill(0).map((_, i) => `
+                                            ${!isAlert ? Array(5).fill(0).map((_, i) => `
                                                 <span class="material-symbols-outlined text-[10px] ${i < r.rating ? 'text-amber-400' : 'text-slate-700'}">star</span>
-                                            `).join('')}
+                                            `).join('') : '<span class="material-symbols-outlined text-red-500 text-sm">warning</span>'}
                                         </div>
                                     </div>
-                                    <p class="text-[11px] text-slate-300 leading-relaxed italic">"${r.comment}"</p>
+                                    <p class="text-[11px] ${isAlert ? 'text-red-200 font-bold' : 'text-slate-300'} leading-relaxed italic">"${displayComment}"</p>
                                     <p class="text-[8px] text-slate-600 mt-2 text-right uppercase font-bold">${_formatAdminDate(r.created_at || r.timestamp)}</p>
                                 </div>
-                            `).join('')}
+                            `;
+                    }).join('')}
                         </div>
                     </div>
                 </div>

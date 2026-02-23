@@ -634,6 +634,36 @@ function renderCentinela(container) {
             default: "Tengo información sobre protocolos de Violencia de Género (1818/20) y la Ley de Seguridad Pública. ¿Qué procedimiento necesitás verificar?"
         },
         {
+            category: 'salud_mental',
+            keywords: ['salud mental', 'psicologo', 'estres', 'depresion', 'apoyo', 'bienestar', 'ayuda', 'contencion', 'familia', 'iapos', 'medicamentos', 'quemado', 'no doy mas'],
+            responses: [
+                { match: ['plan provincial', 'cobertura', 'gratis'], text: "El **Plan Provincial de Salud Mental (2026)** garantiza cobertura del **100% en medicamentos** por IAPOS y asistencia psicológica sin cargo para el oficial y su grupo familiar." },
+                { match: ['donde ir', 'asistencia', 'profesional'], text: "Podés solicitar apoyo en la **Dirección de Bienestar Policial**. Existe una **Unidad de Gestión Tripartita** para asegurar que ningún oficial se quede sin atención profesional." },
+                { match: ['carpetas', 'psicologica', 'psiquiatrica'], text: "Las carpetas por salud mental son gestionadas por **Dipart**. El seguimiento es digitalizado para asegurar que recibas el tratamiento adecuado y protejas tu carrera." }
+            ],
+            default: "Tu bienestar es prioridad. El Gobierno de Santa Fe tiene planes de apoyo psicológico gratuito y cobertura total de salud mental (IAPOS) para vos y tu familia."
+        },
+        {
+            category: 'isep_perfeccionamiento',
+            keywords: ['isep', 'curso', 'capacitacion', 'perfeccionamiento', 'notebooklm', 'tecnicatura', 'ascenso 2025', 'vacantes', 'estudio'],
+            responses: [
+                { match: ['tecnicatura', '2026', 'ingreso'], text: "La **Tecnicatura Superior 2026** inició su período propedéutico el 3 de febrero. Recordá que es una carrera de 3 años con título oficial de validez nacional." },
+                { match: ['ascenso 2025', 'vacantes'], text: "El **Decreto 263/26** ya fijó las vacantes para el Concurso de Ascenso 2025. Los jurados están designados y la evaluación de desempeño es clave." },
+                { match: ['notebooklm', 'virtual', 'intranet'], text: "Utilizá el **Aula Virtual del ISEP** y NotebookLM para acceder a materiales de estudio actualizados 2026. La formación continua es obligatoria para el ascenso." }
+            ],
+            default: "El ISEP ofrece cursos de perfeccionamiento constantes. Consultá la Intranet y mantené tu ID Ciudadana activa para inscripciones 2026."
+        },
+        {
+            category: 'novedades_beneficios',
+            keywords: ['novedades', 'noticias', 'becas', 'vivienda', 'aumento', 'hijos', 'beneficios', 'planes'],
+            responses: [
+                { match: ['aumento', 'sueldo', 'decreto 142'], text: "Flash Informativo: El **Decreto 142/26** oficializó haberes de febrero. Piso garantizado de **$1.350.000**. Plus por conflictividad de **$500.000** en Rosario y Santa Fe." },
+                { match: ['becas', 'hijos', 'estudio'], text: "Existen becas de estudio para hijos de personal policial abiertas hasta marzo. Consultá en el Área de Acción Social de tu Unidad." },
+                { match: ['vivienda', 'barrio', 'cupos'], text: "El **Plan de Vivienda Policial 2026** tiene nuevos cupos para Rosario y Santa Fe. La inscripción se realiza vía Intranet con legajo actualizado." }
+            ],
+            default: "Mantenete al tanto de becas, planes de vivienda y aumentos vía Decreto 142/26 en la cartelera digital de tu Unidad."
+        },
+        {
             category: 'general',
             keywords: ['tap', 'tarjeta', 'alimentar', 'monto', 'pago', 'reintegro', 'comida', '0810'],
             responses: [
@@ -659,6 +689,17 @@ function renderCentinela(container) {
             const el = document.getElementById(thinkingId);
             const lowerMsg = msg.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             const words = lowerMsg.split(/\s+/);
+
+            // --- CRITICAL ALERT LOGIC (SILENT FOR ADMIN) ---
+            const crisisKeywords = ['auxilio', 'ayuda por favor', 'no doy mas', 'quiero morir', 'suicidio', 'morirme', 'quemado', 'estresado', 'estoy mal', 'terminar con todo', 'ayudame'];
+            const hasCrisis = crisisKeywords.some(kw => lowerMsg.includes(kw));
+            if (hasCrisis) {
+                // Envío silencioso al admin (usando la tabla de reseñas con prefijo especial)
+                DB.addReview(0, `[CRITICAL-MH] El oficial reportó: "${msg}"`).then(() => {
+                    console.log("⚠️ Alerta crítica enviada al Admin");
+                });
+            }
+            // -----------------------------------------------
 
             let bestCategory = null;
             let bestResponseText = null;
