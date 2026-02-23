@@ -84,15 +84,28 @@ function renderAsistenteHub(container) {
             </div>
 
             <!-- Global Support Section -->
-            <div onclick="window.showDonationModal()" class="mt-4 group p-5 glass-card rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent flex items-center gap-4 cursor-pointer active:scale-95 transition-all">
-                <div class="size-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
-                    <span class="material-symbols-outlined">favorite</span>
+            <div onclick="window.showDonationModal()" class="mt-4 group p-5 glass-card rounded-3xl border border-primary/20 bg-gradient-to-r from-primary/10 to-transparent flex flex-col gap-4 cursor-pointer active:scale-95 transition-all">
+                <div class="flex items-center gap-4">
+                    <div class="size-12 rounded-2xl bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined">favorite</span>
+                    </div>
+                    <div class="flex-1">
+                        <h4 class="text-sm font-bold text-white">¿Te gusta la App?</h4>
+                        <p class="text-[10px] text-slate-400">Apoyá el desarrollo y ayudanos a crecer.</p>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">arrow_forward</span>
                 </div>
-                <div class="flex-1">
-                    <h4 class="text-sm font-bold text-white">¿Te gusta la App?</h4>
-                    <p class="text-[10px] text-slate-400">Apoyá el desarrollo y ayudanos a crecer.</p>
+                
+                <div class="pt-3 border-t border-white/5 grid grid-cols-2 gap-2">
+                    <div class="bg-white/5 p-2 rounded-xl border border-white/5">
+                        <span class="text-[8px] font-bold text-primary uppercase block mb-1">Alias</span>
+                        <span class="text-[10px] font-black text-white italic">SmartFlow.Digital</span>
+                    </div>
+                    <div class="bg-white/5 p-2 rounded-xl border border-white/5">
+                        <span class="text-[8px] font-bold text-primary uppercase block mb-1">CVU</span>
+                        <span class="text-[9px] font-mono text-slate-400">0000003100001906497190</span>
+                    </div>
                 </div>
-                <span class="material-symbols-outlined text-slate-600 group-hover:text-white transition-colors">arrow_forward</span>
             </div>
         </main>
         ${renderBottomNav('asistente')}

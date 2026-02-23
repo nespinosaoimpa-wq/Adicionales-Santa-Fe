@@ -45,7 +45,6 @@ function renderAgenda(container) {
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
                     <div class="flex items-center gap-2">
-                        ${renderDonationHeader()}
                         <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
                             <img class="w-full h-full object-cover" src="${store.user.avatar}" />
                         </div>
