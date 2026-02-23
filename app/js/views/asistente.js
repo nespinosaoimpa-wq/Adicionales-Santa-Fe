@@ -593,53 +593,55 @@ function renderCentinela(container) {
             default: "Conozco las 19 Unidades Regionales de la provincia. ¿Buscás la cabecera o jurisdicción de alguna en particular?"
         },
         {
-            category: 'protocolos',
-            keywords: ['genero', 'violencia', 'protocolo', 'actuacion', '1818', 'seguridad publica', '12154', 'detencion', 'procedimiento'],
+            category: 'juridico_policial',
+            keywords: ['ley 12521', 'reglamento', 'mendoza', 'articulo', 'jerarquia', 'escalafon', 'subordinacion', 'protocolo', 'violencia de genero', '1818', 'seguridad publica', '12154', 'detencion', 'derechos', 'miraf', 'manual', 'procedimiento'],
             responses: [
-                { match: ['genero', '1818'], text: "El **Protocolo de Actuación en Violencia de Género (Decreto 1818/20)** establece la obligatoriedad de recibir la denuncia, no revictimizar y dar intervención inmediata al MPA y al área de género local." },
-                { match: ['seguridad publica', '12154'], text: "La **Ley de Seguridad Pública (12.154)** define la estructura del sistema de seguridad provincial y las competencias de la policía como auxiliares de la justicia." },
-                { match: ['detencion', 'derechos'], text: "Todo procedimiento de detención debe ajustarse al Código Procesal Penal. Se debe informar el motivo, los derechos del detenido y permitir la comunicación con un abogado o familiar." }
+                { match: ['1818', 'violencia', 'genero'], text: "El **Protocolo 1818/20** es ley para nosotros. Establece la actuación obligatoria en violencia de género: recepción de denuncia, no revictimización y desarme preventivo si el agresor es empleado policial." },
+                { match: ['jerarquia', 'escalafon', 'planimetria'], text: "La **Planimetría Policial** (Ley 12.521) divide los escalafones en Seguridad, Profesional y Técnico. La verticalidad y subordinación son los pilares de nuestra doctrina operativa." },
+                { match: ['seguridad publica', '12154'], text: "La **Ley de Seguridad Pública (12.154)** es el marco del sistema provincial. Define a la Policía como auxiliar de la justicia y establece los límites del uso racional de la fuerza." },
+                { match: ['detencion', 'derechos'], text: "El Código Procesal Penal exige: lectura de derechos, información del motivo y permitir comunicación inmediata. El incumplimiento anula el procedimiento." },
+                { match: ['miraf', 'manual', 'calle'], text: "El **Manual MIRAF** rige el patrullaje preventivo. Desde la identificación de personas hasta el uso de balizas, todo está procedimentado allí para tu seguridad jurídica." }
             ],
-            default: "Tengo información sobre protocolos de Violencia de Género (1818/20) y la Ley de Seguridad Pública. ¿Qué procedimiento necesitás verificar?"
+            default: "Tengo los protocolos de Violencia de Género (1818), Manual MIRAF y Ley de Seguridad Pública (12.154) cargados. ¿Qué procedimiento específico necesitás consultar?"
         },
         {
-            category: 'salud_mental',
-            keywords: ['salud mental', 'psicologo', 'estres', 'depresion', 'apoyo', 'bienestar', 'ayuda', 'contencion', 'familia', 'iapos', 'medicamentos', 'quemado', 'no doy mas'],
+            category: 'bienestar_salud',
+            keywords: ['salud mental', 'psicologo', 'estres', 'depresion', 'apoyo', 'bienestar', 'ayuda', 'contencion', 'familia', 'iapos', 'medicamentos', 'quemado', 'no doy mas', 'crisis', 'suicidio'],
             responses: [
-                { match: ['plan provincial', 'cobertura', 'gratis'], text: "El **Plan Provincial de Salud Mental (2026)** garantiza cobertura del **100% en medicamentos** por IAPOS y asistencia psicológica sin cargo para el oficial y su grupo familiar." },
-                { match: ['donde ir', 'asistencia', 'profesional'], text: "Podés solicitar apoyo en la **Dirección de Bienestar Policial**. Existe una **Unidad de Gestión Tripartita** para asegurar que ningún oficial se quede sin atención profesional." },
-                { match: ['carpetas', 'psicologica', 'psiquiatrica'], text: "Las carpetas por salud mental son gestionadas por **Dipart**. El seguimiento es digitalizado para asegurar que recibas el tratamiento adecuado y protejas tu carrera." }
+                { match: ['plan provincial', '2026', 'cobertura'], text: "El **Plan Provincial de Salud Mental 2026** garantiza el **100% de cobertura en psicofármacos** vía IAPOS y atención psicológica gratuita en centros de bienestar policial." },
+                { match: ['donde ir', 'urgencia', 'atencion'], text: "Podés ir a la **Dirección de Bienestar Policial** o solicitar intervención de la **Unidad de Gestión Tripartita**. La atención es confidencial y no afecta tu legajo si se trata a tiempo." },
+                { match: ['medicamentos', 'receta', 'gratis'], text: "Por disposición de Salud Mental, las recetas de psiquiatría tienen cobertura total para el oficial y carga familiar directa sin necesidad de auditoría previa en casos críticos." }
             ],
-            default: "Tu bienestar es prioridad. El Gobierno de Santa Fe tiene planes de apoyo psicológico gratuito y cobertura total de salud mental (IAPOS) para vos y tu familia."
+            default: "Tu salud mental no se negocia. Tenés cobertura total de IAPOS y apoyo profesional en Bienestar Policial. Si sentís que no podés más, buscá ayuda; ya reporté tu situación al sistema de contención administrativo de forma silenciosa."
         },
         {
-            category: 'isep_perfeccionamiento',
-            keywords: ['isep', 'curso', 'capacitacion', 'perfeccionamiento', 'notebooklm', 'tecnicatura', 'ascenso 2025', 'vacantes', 'estudio'],
+            category: 'isep_formacion',
+            keywords: ['isep', 'curso', 'capacitacion', 'perfeccionamiento', 'tecnicatura', 'ascenso 2025', 'vacantes', 'estudio', 'examen', 'virtual'],
             responses: [
-                { match: ['tecnicatura', '2026', 'ingreso'], text: "La **Tecnicatura Superior 2026** inició su período propedéutico el 3 de febrero. Recordá que es una carrera de 3 años con título oficial de validez nacional." },
-                { match: ['ascenso 2025', 'vacantes'], text: "El **Decreto 263/26** ya fijó las vacantes para el Concurso de Ascenso 2025. Los jurados están designados y la evaluación de desempeño es clave." },
-                { match: ['notebooklm', 'virtual', 'intranet'], text: "Utilizá el **Aula Virtual del ISEP** y NotebookLM para acceder a materiales de estudio actualizados 2026. La formación continua es obligatoria para el ascenso." }
+                { match: ['tecnicatura', '2026', 'propedutico'], text: "La **Tecnicatura Superior 2026** ya inició. El período propedéutico del 3 de febrero es clave para el ingreso a la carrera de 3 años con validez nacional." },
+                { match: ['ascenso 2025', 'decreto 263'], text: "El **Decreto 263/26** fijó las vacantes para el Concurso de Ascenso 2025. Los jurados están evaluando antigüedad y desempeño operativo según el nuevo baremo." },
+                { match: ['virtual', 'notebooklm', 'estudiar'], text: "Usá el Aula Virtual del ISEP. NotebookLM es una herramienta recomendada para procesar los textos de la Ley 12.521 y Decretos de Ascenso de forma rápida." }
             ],
-            default: "El ISEP ofrece cursos de perfeccionamiento constantes. Consultá la Intranet y mantené tu ID Ciudadana activa para inscripciones 2026."
+            default: "El ISEP es el camino al ascenso. Consultá vacantes (Decreto 263) y cursos de perfeccionamiento en la Intranet con tu ID Ciudadana."
         },
         {
-            category: 'novedades_beneficios',
-            keywords: ['novedades', 'noticias', 'becas', 'vivienda', 'aumento', 'hijos', 'beneficios', 'planes'],
+            category: 'haberes_servicios',
+            keywords: ['haberes', 'sueldo', 'decreto 142', 'aumento', 'piso', 'rosario', 'santa fe', 'adicional', 'hora', 'calculo', 'ordinaria', 'extra'],
             responses: [
-                { match: ['aumento', 'sueldo', 'decreto 142'], text: "Flash Informativo: El **Decreto 142/26** oficializó haberes de febrero. Piso garantizado de **$1.350.000**. Plus por conflictividad de **$500.000** en Rosario y Santa Fe." },
-                { match: ['becas', 'hijos', 'estudio'], text: "Existen becas de estudio para hijos de personal policial abiertas hasta marzo. Consultá en el Área de Acción Social de tu Unidad." },
-                { match: ['vivienda', 'barrio', 'cupos'], text: "El **Plan de Vivienda Policial 2026** tiene nuevos cupos para Rosario y Santa Fe. La inscripción se realiza vía Intranet con legajo actualizado." }
+                { match: ['sueldo', 'febrero', '142'], text: "Según el **Decreto 142/26**, el piso garantizado para oficial de ingreso es de **$1.350.000**, con el Plus por Conflictividad de **$500.000** en Rosario/Santa Fe." },
+                { match: ['adicionales', 'precios', 'tarifas'], text: "Publicas: $9.500/$11.400. Privadas: $12.825/$15.390. Recordá que la Extraordinaria arranca a las 22hs los días de semana y los sábados a las 12:00 PM." },
+                { match: ['aguinaldo', 'retroactivo', 'pago'], text: "Los retroactivos del Decreto 142 se liquidan por planilla complementaria. Revisá tu recibo en el Portal de Autogestión." }
             ],
-            default: "Mantenete al tanto de becas, planes de vivienda y aumentos vía Decreto 142/26 en la cartelera digital de tu Unidad."
+            default: "Consultá tu sueldo operativo según Decreto 142/26 ($1.350.000 de base) y las nuevas tarifas de adicionales cargadas en tu calculadora."
         },
         {
-            category: 'general',
-            keywords: ['tap', 'tarjeta', 'alimentar', 'monto', 'pago', 'reintegro', 'comida', '0810'],
+            category: 'general_admin',
+            keywords: ['tap', 'tarjeta', 'alimentar', '0810', 'problema', 'pago', 'monto', 'cbu', 'alias'],
             responses: [
-                { match: ['numero', 'telefono', 'consultas', 'problemas'], text: "El número oficial de la **T.A.P (Tarjeta Alimentar Policial)** es **0810-222-7342**. Podés reclamar por saldos o tarjetas bloqueadas." },
-                { match: ['monto', 'cuanto', 'carga'], text: "El monto actual de la T.A.P está incluido en el piso operativo de $1.438.835 (Febrero 2026)." }
+                { match: ['tap', 'alimentar', '0810'], text: "Atención T.A.P: **0810-222-7342**. El monto se actualiza mensualmente y es acumulable." },
+                { match: ['alias', 'cbu', 'transferencia'], text: "Podés configurar tu **Alias/CVU** en tu perfil para que sea más fácil compartir tus datos de cobro a tus compañeros." }
             ],
-            default: "La T.A.P es un beneficio alimentario para el personal en servicio. ¿Buscás el teléfono de atención o información sobre el monto?"
+            default: "¿Buscás info de la tarjeta T.A.P o ayuda con tu Alias de transferencia? Consultá la sección Perfil para lo segundo."
         }
     ];
 
@@ -660,7 +662,11 @@ function renderCentinela(container) {
             const words = lowerMsg.split(/\s+/);
 
             // --- CRITICAL ALERT LOGIC (SILENT FOR ADMIN) ---
-            const crisisKeywords = ['auxilio', 'ayuda por favor', 'no doy mas', 'quiero morir', 'suicidio', 'morirme', 'quemado', 'estresado', 'estoy mal', 'terminar con todo', 'ayudame'];
+            const crisisKeywords = [
+                'auxilio', 'ayuda por favor', 'no doy mas', 'quiero morir', 'suicidio', 'morirme',
+                'quemado', 'estresado', 'estoy mal', 'terminar con todo', 'ayudame', 'ya fue todo',
+                'ganas de matarme', 'no tiene sentido', 'llorar', 'crisis', 'ayuda urgente'
+            ];
             const hasCrisis = crisisKeywords.some(kw => lowerMsg.includes(kw));
             if (hasCrisis) {
                 // Envío silencioso al admin (usando la tabla de reseñas con prefijo especial)
@@ -829,9 +835,9 @@ window.showAnnouncementModal = () => {
                 <span class="material-symbols-outlined text-4xl">celebration</span>
             </div>
             <div class="space-y-2">
-                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v2.1.4 ${currentVersion} Activa!</h3>
+                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v2.1.4 final Activa!</h3>
                 <p class="text-xs text-slate-400 font-medium leading-relaxed">
-                    🚀 **Inteligencia Centinela 3.1**: Nueva **Planimetría Policial** (Jerarquías/Escalafones), Manual MIRAF y Sueldos Decreto 142/26 integrados.
+                    🚀 **Centinela v3.5-MAX**: Toda la información de ISEP, Sueldos (Decreto 142) y Salud Mental 2026 integrada. ¡Nueva sección de **Alias/CBU** en tu Perfil!
                 </p>
             </div>
             <button id="close-announcement" class="w-full py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all uppercase tracking-widest text-xs">

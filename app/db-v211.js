@@ -87,6 +87,7 @@ const DB = {
         await supabaseClient.from('profiles').update({
             name: profileData.name,
             avatar: profileData.avatar,
+            alias: profileData.alias,
             notification_settings: profileData.notificationSettings
         }).eq('email', user.email);
     },

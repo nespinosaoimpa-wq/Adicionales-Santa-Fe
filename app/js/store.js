@@ -210,6 +210,29 @@ const store = {
         }
     },
 
+    async saveProfile() {
+        const name = document.getElementById('profile-name')?.innerText || this.user.name;
+        const alias = document.getElementById('user-alias-input')?.value || this.user.alias || '';
+
+        try {
+            showToast("⏳ Guardando cambios...");
+            await DB.updateUser({
+                name,
+                alias,
+                avatar: this.user.avatar,
+                notificationSettings: this.notificationSettings
+            });
+            // Update local state
+            this.user.name = name;
+            this.user.alias = alias;
+            showToast("✅ Perfil y Tarifas actualizadas");
+            await this.saveConfig(); // Seguir guardando config de servicios
+        } catch (e) {
+            showToast("❌ Error al guardar perfil");
+            console.error(e);
+        }
+    },
+
     async saveConfig() {
         if (!this.user) return;
         try {
