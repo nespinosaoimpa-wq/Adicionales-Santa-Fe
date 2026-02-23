@@ -13,7 +13,7 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <meta name="app-version" content="v526.3-PURIFIED">
+    <meta name="app-version" content="v526.4-PURIFIED">
     <meta name="description"
         content="Gestión inteligente de Servicios de Policía Adicional. Agenda, cálculos y finanzas en un solo lugar.">
 
@@ -39,19 +39,19 @@
                 let needsHardReset = false;
                 for (let reg of registrations) {
                     const url = reg.active?.scriptURL || reg.installing?.scriptURL || reg.waiting?.scriptURL || '';
-                    if (!url.includes('sw-v525.js')) {
+                    if (!url.includes('sw-v526.js')) {
                         console.log('☢️ Outdated SW detected:', url);
                         reg.unregister();
                         needsHardReset = true;
                     }
                 }
-                if (needsHardReset || !localStorage.getItem('app_v525_initialized')) {
+                if (needsHardReset || !localStorage.getItem('app_v526_initialized')) {
                     console.log('☢️ Initializing Nuclear Purge...');
                     if ('caches' in window) {
                         caches.keys().then(names => {
                             return Promise.all(names.map(name => caches.delete(name)));
                         }).then(() => {
-                            localStorage.setItem('app_v525_initialized', 'true');
+                            localStorage.setItem('app_v526_initialized', 'true');
                             window.location.replace(window.location.href.split('#')[0] + '?purge=' + Date.now());
                         });
                     } else {
@@ -71,8 +71,8 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v525.js?v=525')
-                    .then(reg => console.log('✅ SW v525 Registered'))
+                navigator.serviceWorker.register('./sw-v526.js?v=526')
+                    .then(reg => console.log('✅ SW v526 Registered'))
                     .catch(err => console.error('❌ SW Fail:', err));
             });
         }
@@ -150,7 +150,7 @@
         class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
         <div class="flex flex-col items-center justify-center h-screen space-y-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p class="text-slate-500 animate-pulse">Sincronizando v526.3...</p>
+            <p class="text-slate-500 animate-pulse">Sincronizando v526.4...</p>
         </div>
     </div>
 
