@@ -1,57 +1,47 @@
-const CACHE_NAME = 'adicionales-sf-v522';
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = 'centinela-v525';
+const ASSETS = [
     './',
-    './index.html',
-    './styles.css?v=522',
-    './firebase-config.js',
-    './supabase-config.js',
-    './db-v211.js?v=522',
-    './app-v211.js?v=522',
-    './js/utils.js?v=522',
-    './js/store.js?v=522',
-    './js/router.js?v=522',
-    './js/components.js?v=522',
-    './js/data/directory.js?v=522',
-    './js/views/auth.js?v=522',
-    './js/views/agenda.js?v=522',
-    './js/views/register.js?v=522',
-    './js/views/control_panel.js?v=522',
-    './js/views/financial.js?v=522',
-    './js/views/profile.js?v=522',
-    './js/views/stats.js?v=522',
-    './js/views/history.js?v=522',
-    './js/views/service_details.js?v=522',
-    './js/views/asistente.js?v=522',
-    './js/views/admin.js?v=522',
-    'https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries',
-    'https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap',
-    'https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap',
-    'https://cdn.jsdelivr.net/npm/chart.js',
-    'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2'
+    './index.html?v=525',
+    './styles.css?v=525',
+    './supabase-config.js?v=525',
+    './db-v211.js?v=525',
+    './js/store.js?v=525',
+    './js/components.js?v=525',
+    './js/router.js?v=525',
+    './js/views/auth.js?v=525',
+    './js/views/agenda.js?v=525',
+    './js/views/register.js?v=525',
+    './js/views/control_panel.js?v=525',
+    './js/views/financial.js?v=525',
+    './js/views/profile.js?v=525',
+    './js/views/stats.js?v=525',
+    './js/views/history.js?v=525',
+    './js/views/service_details.js?v=525',
+    './js/views/asistente.js?v=525',
+    './js/views/admin.js?v=525',
+    './app-v211.js?v=525'
 ];
 
-self.addEventListener('install', (event) => {
+self.addEventListener('install', event => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
+        caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
     );
-    self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
+self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cache) => {
-                    if (cache !== CACHE_NAME) return caches.delete(cache);
-                })
-            );
-        })
+        caches.keys().then(keys => Promise.all(
+            keys.map(key => {
+                if (key !== CACHE_NAME) return caches.delete(key);
+            })
+        ))
     );
-    self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', event => {
     event.respondWith(
-        caches.match(event.request).then((response) => response || fetch(event.request))
+        caches.match(event.request).then(response => {
+            return response || fetch(event.request);
+        })
     );
 });
