@@ -97,12 +97,18 @@ function renderAsistenteHub(container) {
                 </div>
                 
                 <div class="pt-3 border-t border-white/5 grid grid-cols-2 gap-2">
-                    <div class="bg-white/5 p-2 rounded-xl border border-white/5">
-                        <span class="text-[8px] font-bold text-primary uppercase block mb-1">Alias</span>
+                    <div onclick="event.stopPropagation(); copyToClipboard('SmartFlow.Digital', '✅ Alias copiado')" class="bg-white/5 p-2 rounded-xl border border-white/5 hover:bg-primary/10 transition-colors cursor-pointer group/copy">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[8px] font-bold text-primary uppercase">Alias</span>
+                            <span class="material-symbols-outlined text-[10px] text-slate-600 group-hover/copy:text-primary transition-colors">content_copy</span>
+                        </div>
                         <span class="text-[10px] font-black text-white italic">SmartFlow.Digital</span>
                     </div>
-                    <div class="bg-white/5 p-2 rounded-xl border border-white/5">
-                        <span class="text-[8px] font-bold text-primary uppercase block mb-1">CVU</span>
+                    <div onclick="event.stopPropagation(); copyToClipboard('0000003100001906497190', '✅ CVU copiado')" class="bg-white/5 p-2 rounded-xl border border-white/5 hover:bg-primary/10 transition-colors cursor-pointer group/copy">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="text-[8px] font-bold text-primary uppercase">CVU</span>
+                            <span class="material-symbols-outlined text-[10px] text-slate-600 group-hover/copy:text-primary transition-colors">content_copy</span>
+                        </div>
                         <span class="text-[9px] font-mono text-slate-400">0000003100001906497190</span>
                     </div>
                 </div>
