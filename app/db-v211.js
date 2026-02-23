@@ -39,8 +39,8 @@ const DB = {
 
         // Sync with Supabase Profiles
         try {
-            await supabase.from('profiles').upsert({
-                id: (await supabase.auth.getUser()).data.user?.id || user.uid, // Supabase ID might differ from Firebase UID
+            await supabaseClient.from('profiles').upsert({
+                id: (await supabaseClient.auth.getUser()).data.user?.id || user.uid, // Supabase ID might differ from Firebase UID
                 email: user.email,
                 name: user.name,
                 avatar: user.avatar,
@@ -59,7 +59,7 @@ const DB = {
         if (doc.exists) return doc.data();
 
         // Fallback to Supabase
-        const { data } = await supabase.from('profiles').select('*').eq('email', email).single();
+        const { data } = await supabaseClient.from('profiles').select('*').eq('email', email).single();
         if (data) return { ...data, serviceConfig: data.service_config, notificationSettings: data.notification_settings };
 
         return null;
@@ -73,7 +73,7 @@ const DB = {
         await db.collection('users').doc(user.email).set({ serviceConfig }, { merge: true });
 
         // Update Supabase
-        await supabase.from('profiles').update({ service_config: serviceConfig }).eq('email', user.email);
+        await supabaseClient.from('profiles').update({ service_config: serviceConfig }).eq('email', user.email);
     },
 
     async updateUser(profileData) {
@@ -81,7 +81,7 @@ const DB = {
         if (!user) return;
 
         await db.collection('users').doc(user.email).set({ ...profileData }, { merge: true });
-        await supabase.from('profiles').update({
+        await supabaseClient.from('profiles').update({
             name: profileData.name,
             avatar: profileData.avatar,
             notification_settings: profileData.notificationSettings
@@ -90,7 +90,7 @@ const DB = {
 
     async updateUserRole(email, newRole) {
         await db.collection('users').doc(email).update({ role: newRole });
-        await supabase.from('profiles').update({ role: newRole }).eq('email', email);
+        await supabaseClient.from('profiles').update({ role: newRole }).eq('email', email);
     },
 
     async uploadAvatar(file, email) {
@@ -153,7 +153,7 @@ const DB = {
             });
 
         // 2. Listen to Supabase
-        const channel = supabase
+        const channel = supabaseClient
             .channel('services-hybrid')
             .on('postgres_changes', {
                 event: '*',
@@ -161,7 +161,7 @@ const DB = {
                 table: 'services',
                 filter: `user_email=eq.${user.email}`
             }, async () => {
-                const { data } = await supabase.from('services').select('*').eq('user_email', user.email);
+                const { data } = await supabaseClient.from('services').select('*').eq('user_email', user.email);
                 if (data) {
                     sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
                     mergeAndCallback();
@@ -170,7 +170,7 @@ const DB = {
             .subscribe();
 
         // Initial Supabase Fetch
-        supabase.from('services').select('*').eq('user_email', user.email).then(({ data }) => {
+        supabaseClient.from('services').select('*').eq('user_email', user.email).then(({ data }) => {
             if (data) {
                 sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
                 mergeAndCallback();
@@ -179,7 +179,7 @@ const DB = {
 
         return () => {
             fbUnsub();
-            supabase.removeChannel(channel);
+            supabaseClient.removeChannel(channel);
         };
     },
 
@@ -188,7 +188,7 @@ const DB = {
         if (!user) throw new Error("Must be logged in");
 
         // ONLY add to Supabase (New Data primary)
-        const { data, error } = await supabase
+        const { data, error } = await supabaseClient
             .from('services')
             .insert([{
                 user_email: user.email,
@@ -219,7 +219,7 @@ const DB = {
             Object.keys(updates).forEach(key => {
                 if (!['subType', 'startTime', 'endTime'].includes(key)) dbUpdates[key] = updates[key];
             });
-            return supabase.from('services').update(dbUpdates).eq('id', id);
+            return supabaseClient.from('services').update(dbUpdates).eq('id', id);
         } else {
             // Firebase
             return db.collection('services').doc(id).update(updates);
@@ -228,7 +228,7 @@ const DB = {
 
     async deleteService(id) {
         if (id.toString().includes('-')) {
-            return supabase.from('services').delete().eq('id', id);
+            return supabaseClient.from('services').delete().eq('id', id);
         } else {
             return db.collection('services').doc(id).delete();
         }
@@ -259,7 +259,7 @@ const DB = {
             });
 
         // Supabase Fetch/Realtime for expenses
-        supabase.from('expenses').select('*').eq('user_email', user.email).then(({ data }) => {
+        supabaseClient.from('expenses').select('*').eq('user_email', user.email).then(({ data }) => {
             if (data) {
                 sbExpenses = data;
                 mergeAndCallback();
@@ -274,7 +274,7 @@ const DB = {
         if (!user) throw new Error("Must be logged in");
 
         // Save to Supabase
-        return supabase.from('expenses').insert([{
+        return supabaseClient.from('expenses').insert([{
             user_email: user.email,
             category: expense.category,
             amount: expense.amount,
@@ -285,7 +285,7 @@ const DB = {
 
     async deleteExpense(id) {
         if (id.toString().includes('-')) {
-            return supabase.from('expenses').delete().eq('id', id);
+            return supabaseClient.from('expenses').delete().eq('id', id);
         } else {
             return db.collection('expenses').doc(id).delete();
         }
@@ -295,7 +295,7 @@ const DB = {
         // Fetch from both
         const [fbSnap, sbResult] = await Promise.all([
             db.collection('services').get(),
-            supabase.from('services').select('*')
+            supabaseClient.from('services').select('*')
         ]);
 
         const fbServices = fbSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -350,7 +350,7 @@ const DB = {
         const user = auth.currentUser;
         if (!user) return false;
         try {
-            const { error } = await supabase
+            const { error } = await supabaseClient
                 .from('user_reviews')
                 .insert([{
                     user_email: user.email,
