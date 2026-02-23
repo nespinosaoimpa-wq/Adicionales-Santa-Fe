@@ -68,11 +68,10 @@ function showDonationModal() {
                 </div>
 
                 <div class="space-y-3">
-                    <a href="https://cafecito.app/nespinosa" target="_blank" class="flex items-center justify-center gap-2 w-full py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 hover:scale-105 transition-all">
-                        Donar via Cafecito
-                    </a>
-                    <button onclick="this.closest('.animate-fade-in').remove()" class="text-xs font-bold text-slate-400 uppercase tracking-widest hover:text-slate-600">
-                        Cerrar
+                    <p class="text-[10px] text-slate-500 uppercase font-black tracking-widest">Colaboración</p>
+                    <p class="text-xs text-slate-400">Podés encontrar los datos de Mercado Pago en la sección de **Asistente > Apoyar el Proyecto**.</p>
+                    <button onclick="this.closest('.animate-fade-in').remove()" class="w-full py-4 bg-primary text-white font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-all">
+                        Entendido
                     </button>
                 </div>
              </div>

@@ -15,7 +15,7 @@ function renderLogin(container) {
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
                 <!-- Google Button -->
-                <button onclick="handleGoogleLogin()" class="flex w-full justify-center items-center gap-3 rounded-xl bg-white px-4 py-4 text-base font-semibold text-slate-900 shadow-lg hover:bg-slate-50 transition-all active:scale-95">
+                <button onclick="handleGoogleLogin(event)" class="flex w-full justify-center items-center gap-3 rounded-xl bg-white px-4 py-4 text-base font-semibold text-slate-900 shadow-lg hover:bg-slate-50 transition-all active:scale-95">
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6" alt="Google">
                     Continuar con Google
                 </button>
@@ -65,9 +65,11 @@ function renderLogin(container) {
     `;
 
     window.handleGoogleLogin = (event) => {
-        const btn = event.currentTarget;
-        btn.disabled = true;
-        btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-slate-900 mx-auto"></div>';
+        const btn = (event && event.currentTarget) ? event.currentTarget : document.querySelector('button[onclick*="handleGoogleLogin"]');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-slate-900 mx-auto"></div>';
+        }
 
         store.loginWithGoogle()
             .then(() => {
