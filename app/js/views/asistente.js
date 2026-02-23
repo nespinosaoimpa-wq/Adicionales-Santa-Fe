@@ -554,56 +554,62 @@ function renderCentinela(container) {
     const knowledgeBase = [
         {
             category: 'licencias',
-            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio', 'licencias', 'ausentismo', 'salud laboral'],
+            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio', 'licencias', 'ausentismo', 'salud laboral', 'medico', 'carpeta'],
             responses: [
-                { match: ['salud laboral', 'ausentismo', 'nuevo sistema'], text: "En enero de 2026 se implementó el **Sistema Integrado de Protección de la Salud Laboral** para reducir el ausentismo y mejorar el seguimiento médico del personal." },
-                { match: ['paternidad', 'nacimiento', 'hijo'], text: "Según el **Decreto 4157/15**, te corresponden **15 días corridos** de licencia por paternidad." },
-                { match: ['maternidad', 'embarazo'], text: "La licencia por maternidad comprende **90 días corridos**." },
-                { match: ['vacaciones', 'anual', 'ordinaria'], text: "La **Licencia Anual Ordinaria** varía según antigüedad (19, 25 o 35 días hábiles)." },
-                { match: ['fallecimiento', 'duelo'], text: "Por familiares directos: **5 días corridos**. Secundarios: **2 días**." }
+                { match: ['salud laboral', 'ausentismo', 'nuevo sistema', 'seguimiento'], text: "Desde enero 2026 rige el **Sistema Integrado de Protección de la Salud Laboral**. Busca reducir el ausentismo mediante auditorías médicas más estrictas y un seguimiento digitalizado del personal con carpeta médica." },
+                { match: ['paternidad', 'nacimiento', 'hijo'], text: "El **Decreto 4157/15** otorga **15 días corridos** por paternidad. Debes presentar el certificado de nacimiento en tu unidad." },
+                { match: ['maternidad', 'embarazo', 'lactancia'], text: "La licencia por maternidad es de **90 días corridos**. También contempla períodos de lactancia tras el reintegro." },
+                { match: ['vacaciones', 'anual', 'ordinaria', 'LAO'], text: "La **Licencia Anual Ordinaria** (Decreto 4157/15) se otorga por año vencido: 19 días (hasta 5 años), 25 días (hasta 15 años) o 35 días (más de 15 años). Son días hábiles." },
+                { match: ['fallecimiento', 'duelo', 'muerte'], text: "Familiares directos (padres, hijos, cónyuge): **5 días corridos**. Otros familiares: **2 días**." },
+                { match: ['estudio', 'examen'], text: "Te corresponden hasta **28 días anuales** para rendir exámenes de enseñanza media, terciaria o universitaria, con un máximo de 5 días por examen." }
             ],
-            default: "El régimen de licencias se rige por el Decreto 4157/15 y las nuevas circulares de Salud Laboral de 2026."
+            default: "El régimen de licencias (Decreto 4157/15) y el nuevo Sistema de Salud Laboral 2026 regulan tus descansos y justificaciones médicas."
         },
         {
             category: 'disciplina',
-            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario'],
+            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario', 'asuntos internos', 'destitucion'],
             responses: [
-                { match: ['gorra', 'uniforme'], text: "El uso de la gorra es obligatorio. Su falta es leve (Decreto 461/15)." },
-                { match: ['leves', 'demora'], text: "Faltas leves: apercibimiento o hasta 10 días de arresto." },
-                { match: ['graves', 'abandono'], text: "Faltas graves: desde 11 días de suspensión hasta destitución." }
+                { match: ['gorra', 'uniforme', 'aseo'], text: "El uso de la gorra es obligatorio y su omisión es una **falta leve** según el Decreto 461/15. La nueva gestión hace hincapié en la presencia policial." },
+                { match: ['leves', 'apercibimiento', '10 dias'], text: "Las faltas leves conllevan apercibimiento o hasta **10 días de arresto**. No implican cese de funciones." },
+                { match: ['graves', 'suspension', '30 dias', 'destitucion'], text: "Faltas graves: de 11 a 30 días de suspensión o destitución. El abandono de servicio es una falta grave de primer orden." },
+                { match: ['defensa', 'recurso', 'descargo'], text: "Ante una sanción, tenés derecho a presentar un descargo por escrito en los plazos legales y solicitar vista del legajo." }
             ],
-            default: "El Régimen Disciplinario se rige por el Decreto 461/15."
+            default: "El Régimen Disciplinario se rige por el Decreto 461/15. ¿Tu duda es sobre una falta leve o grave?"
         },
         {
             category: 'sueldos',
-            keywords: ['sueldo', 'salario', 'cobrar', 'cuanto gano', 'escala', 'decreto 142', 'haberes'],
+            keywords: ['sueldo', 'salario', 'cobrar', 'cuanto gano', 'escala', 'decreto 142', 'haberes', 'porcentaje', 'aumento', 'patrullero', 'chofer'],
             responses: [
-                { match: ['minimo', 'bolsillo', 'piso'], text: "A febrero de 2026 (Decreto 142/26), el piso salarial para personal operativo es de **$1.438.835** (incluye tarjeta alimentaria)." },
-                { match: ['rosario', 'santa fe', 'conflictividad', 'plus'], text: "Personal en zonas de alta conflictividad (Rosario/Santa Fe) recibe un **plus de $500.000**, elevando el sueldo base a aprox. **$1.938.835**." },
-                { match: ['patrullero', 'conducir', 'chofer'], text: "Si sos conductor de patrullero, el salario neto puede alcanzar los **$2.188.835** con los suplementos de 2026." },
-                { match: ['oficial', 'subinspector', 'comisario'], text: "Escala Feb 2026: Subcomisario $3.45M, Comisario $3.7M, Director General $6.57M (Bolsillo neto)." }
+                { match: ['minimo', 'bolsillo', 'piso', 'percepcion'], text: "A febrero de 2026 (Decreto 142/26), el ingreso mínimo garantizado es de **$1.350.000**. El piso para personal operativo es de **$1.438.835**." },
+                { match: ['rosario', 'santa fe', 'conflictividad', 'plus', 'calle'], text: "Personal en Rosario, Santa Fe y ciudades aledañas recibe un **plus de conflictividad de $500.000**, elevando el sueldo a **$1.938.835**." },
+                { match: ['patrullero', 'conducir', 'chofer', 'movil'], text: "Conductores de móviles tienen suplementos extra. Un chofer en Rosario puede percibir hasta **$2.188.835** netos." },
+                { match: ['jerarquia', 'comisario', 'director', 'oficial'], text: "Escala 2026 (Neto): Oficial $1.43M, Subinspector $2.2M, Subcomisario $3.45M, Comisario $3.7M, Director $5.24M, Director General $6.57M." },
+                { match: ['aguinaldo', 'SAC'], text: "El SAC se calcula sobre el 50% de la mayor remuneración mensual devengada dentro de los semestres que culminan en junio y diciembre." }
             ],
-            default: "Los sueldos se actualizaron por el Decreto 142/26 en febrero de 2026. ¿Buscás una jerarquía específica?"
+            default: "Los haberes fueron actualizados el 40% por el Decreto 142/26 en febrero de 2026. ¿Querés saber sobre una jerarquía o suplemento?"
         },
         {
             category: 'prevision',
-            keywords: ['jubilacion', 'retiro', 'ley 14283', 'aportes', '30 años', 'caja'],
+            keywords: ['jubilacion', 'retiro', 'ley 14283', 'aportes', '30 años', 'caja', 'edad', 'emergencia', 'pension'],
             responses: [
-                { match: ['ley 14283', 'reforma'], text: "La **Ley 14.283 (Sep 2024)** declaró la emergencia previsional. Los aportes subieron al **17%** (Cuerpo de Ejecución) y **18%** (Supervisión)." },
-                { match: ['calculo', 'promedio', 'cuanto'], text: "El haber se calcula con el promedio de las últimas **120 remuneraciones**. Es el **70%** con 30 años de aportes, subiendo hasta el **82%** con 36 años." },
-                { match: ['solidario', 'descuento'], text: "Se estableció un aporte solidario (2% al 6%) para pasivos que superen 3 mínimas, aunque se anunció que no se prorrogaría en 2026." }
+                { match: ['ley 14283', 'reforma', 'emergencia'], text: "La **Ley 14.283 (Sep 2024)** declaró la emergencia previsional por 2 años. Los aportes subieron: **17%** para operativos y **18%** para jerarquías." },
+                { match: ['calculo', 'promedio', '120 meses'], text: "El haber se calcula sobre el promedio de las últimas **120 remuneraciones** actualizadas (últimos 10 años), no los últimos 3 como antes." },
+                { match: ['porcentaje', '30 años', '36 años', '82%'], text: "Haber ordinario: **70%** con 30 años de aportes. Sube un 2% por año extra hasta el tope del **82%** (con 36 años)." },
+                { match: ['edad', 'limite'], text: "La reforma busca desalentar retiros prematuros. Aunque se mantienen regímenes específicos, el cálculo del haber premia la permanencia." },
+                { match: ['solidario', 'aporte solidario'], text: "Se aplica un aporte del 2% al 6% para pasivos que ganen más de 3 mínimas. Este aporte es transitorio por la emergencia previsional." }
             ],
-            default: "La Reforma Previsional (Ley 14.283) modificó los aportes y el cálculo del haber. ¿Necesitás detalle sobre los años o aportes?"
+            default: "La Reforma Previsional (Ley 14.283) cambió aportes y el cálculo del haber (ahora sobre 120 meses). ¿Dudas sobre años o porcentaje?"
         },
         {
             category: 'isep_ascensos',
-            keywords: ['isep', 'ascenso', 'concurso', '2024', '2025', '2026', 'id ciudadana', 'curso', 'llamado'],
+            keywords: ['isep', 'ascenso', 'concurso', '2024', '2025', '2026', 'id ciudadana', 'curso', 'llamado', 'vacantes', 'examen'],
             responses: [
-                { match: ['ascenso 2024', '2025'], text: "El **Concurso de Ascenso 2024** se oficializó con el Decreto 2640. El **Ciclo 2025** ya tiene jurados asignados (Decreto 263/26)." },
-                { match: ['id ciudadana', 'intranet'], text: "Contar con **ID Ciudadana activa** es un requisito excluyente para todas las etapas de los concursos de ascenso." },
-                { match: ['ingreso', 'tecnicatura', '2026'], text: "ISEP abrió inscripciones para la Tecnicatura Cohorte 2026 en nov/dic 2025. Los egresados 2024/2025 ya están recibiendo equipamiento." }
+                { match: ['ascenso 2024', 'pago'], text: "El **Concurso 2024** finalizó su etapa de evaluación (Decreto 2640). Los decretos de ascenso se están notificando para el pago retroactivo." },
+                { match: ['ascenso 2025', 'jurado', 'vacantes'], text: "Para el **Ciclo 2025**, el Decreto 263/26 ya asignó jurados. Las vacantes se distribuyen según las necesidades de cada agrupamiento." },
+                { match: ['id ciudadana', 'intranet', 'usuario', 'clave'], text: "Es **obligatorio** tener la **ID Ciudadana** vinculada a la Intranet para inscribirse y rendir los exámenes del ISEP. Sin ella no podés concursar." },
+                { match: ['ingreso', 'inscripcion', '2026'], text: "ISEP abrió inscripciones a finales de 2025 para la Cohorte 2026. El curso propedéutico es virtual y eliminatorio." }
             ],
-            default: "El calendario del ISEP incluye concursos de ascenso anuales y tecnicaturas. ¿Buscás info sobre ingreso o promoción?"
+            default: "El ISEP gestiona los concursos de ascenso anuales y el ingreso a la fuerza. ¿Necesitás info sobre el concurso 2025 o ID Ciudadana?"
         }
     ];
 
@@ -616,22 +622,50 @@ function renderCentinela(container) {
         input.value = '';
 
         const thinkingId = 'thinking-' + Date.now();
-        appendMessage('bot', '<span class="animate-pulse">Consultando base legal...</span>', thinkingId);
+        appendMessage('bot', '<span class="animate-pulse">Analizando marco legal 2026...</span>', thinkingId);
 
         setTimeout(() => {
             const el = document.getElementById(thinkingId);
-            const lowerMsg = msg.toLowerCase();
-            let finalResponse = "Entiendo tu consulta sobre el marco legal de la Policía de Santa Fe, pero necesito términos más claros como 'licencia' o 'falta'.";
+            const lowerMsg = msg.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            let bestCategory = null;
+            let bestResponse = null;
+            let maxScore = 0;
 
-            const categoryMatch = knowledgeBase.find(c => c.keywords.some(k => lowerMsg.includes(k)));
-            if (categoryMatch) {
-                const specificSub = categoryMatch.responses.find(r => r.match.some(m => lowerMsg.includes(m)));
-                finalResponse = specificSub ? specificSub.text : categoryMatch.default;
-            }
+            knowledgeBase.forEach(cat => {
+                let catScore = 0;
+                cat.keywords.forEach(kw => {
+                    const normKw = kw.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    if (lowerMsg.includes(normKw)) catScore += 10;
+                });
+
+                if (catScore > 0) {
+                    cat.responses.forEach(res => {
+                        let resScore = catScore;
+                        res.match.forEach(m => {
+                            const normM = m.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                            if (lowerMsg.includes(normM)) resScore += 15;
+                        });
+
+                        if (resScore > maxScore) {
+                            maxScore = resScore;
+                            bestCategory = cat;
+                            bestResponse = res.text;
+                        }
+                    });
+
+                    if (!bestResponse && catScore >= maxScore) {
+                        maxScore = catScore;
+                        bestCategory = cat;
+                        bestResponse = cat.default;
+                    }
+                }
+            });
+
+            const finalResponse = bestResponse || "Entiendo tu consulta sobre la Policía de Santa Fe, pero para ser preciso necesito palabras clave como 'sueldo', 'jubilacion', 'ascenso' o 'licencia'.";
 
             el.innerHTML = `<p class="text-xs text-slate-200 leading-relaxed">${finalResponse}</p>`;
             chat.scrollTop = chat.scrollHeight;
-        }, 800);
+        }, 1200);
     };
 
     function appendMessage(role, text, id = null) {
