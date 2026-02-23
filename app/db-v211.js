@@ -422,11 +422,14 @@ const DB = {
         supabaseClient
             .from('user_reviews')
             .select('*')
-            .order('created_at', { ascending: false })
+            .order('timestamp', { ascending: false }) // Corregido a timestamp
             .limit(20)
             .then(({ data }) => {
                 if (data && data.length > 0) {
-                    data.forEach(r => callback(r, true));
+                    data.forEach(r => callback({
+                        ...r,
+                        created_at: r.created_at || r.timestamp // Normalizar para admin.js
+                    }, true));
                 } else {
                     callback(null, true);
                 }
