@@ -812,6 +812,9 @@ window.renderAsistenteHub = renderAsistenteHub;
 window.renderPartesInteligentes = renderPartesInteligentes;
 
 window.showAnnouncementModal = () => {
+    const currentVersion = 'v517';
+    if (localStorage.getItem('last_announcement') === currentVersion) return;
+
     const overlay = document.createElement('div');
     overlay.className = 'fixed inset-0 z-[100] bg-background-dark/80 backdrop-blur-md flex items-center justify-center p-6 animate-fade-in';
     overlay.innerHTML = `
@@ -821,15 +824,20 @@ window.showAnnouncementModal = () => {
                 <span class="material-symbols-outlined text-4xl">celebration</span>
             </div>
             <div class="space-y-2">
-                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v2.1.4 v517 Activa!</h3>
+                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v2.1.4 ${currentVersion} Activa!</h3>
                 <p class="text-xs text-slate-400 font-medium leading-relaxed">
                     🚀 **Inteligencia Centinela 3.1**: Nueva **Planimetría Policial** (Jerarquías/Escalafones), Manual MIRAF y Sueldos Decreto 142/26 integrados.
                 </p>
             </div>
-            <button onclick="this.closest('.fixed').remove()" class="w-full py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all uppercase tracking-widest text-xs">
+            <button id="close-announcement" class="w-full py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all uppercase tracking-widest text-xs">
                 Explorar Ahora
             </button>
         </div>
     `;
     document.body.appendChild(overlay);
+
+    overlay.querySelector('#close-announcement').onclick = () => {
+        localStorage.setItem('last_announcement', currentVersion);
+        overlay.remove();
+    };
 };
