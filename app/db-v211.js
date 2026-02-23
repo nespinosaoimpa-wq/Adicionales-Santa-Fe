@@ -304,6 +304,60 @@ const DB = {
         return [...fbServices, ...sbServices];
     },
 
+    // --- ADMIN GLOBAL REAL-TIME ---
+    subscribeToAllServices(callback) {
+        let fbServices = [];
+        let sbServices = [];
+
+        const mergeAndCallback = () => {
+            const unified = [...fbServices, ...sbServices];
+            callback(unified);
+        };
+
+        // FB Global
+        const fbUnsub = db.collection('services').onSnapshot(snapshot => {
+            fbServices = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            mergeAndCallback();
+        });
+
+        // SB Global
+        const channel = supabaseClient
+            .channel('admin-global-services')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'services' }, async () => {
+                const { data } = await supabaseClient.from('services').select('*');
+                if (data) {
+                    sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
+                    mergeAndCallback();
+                }
+            })
+            .subscribe();
+
+        // Initial SB
+        supabaseClient.from('services').select('*').then(({ data }) => {
+            if (data) {
+                sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
+                mergeAndCallback();
+            }
+        });
+
+        return () => {
+            fbUnsub();
+            supabaseClient.removeChannel(channel);
+        };
+    },
+
+    subscribeToReviews(callback) {
+        const channel = supabaseClient
+            .channel('admin-reviews')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'user_reviews' }, (payload) => {
+                callback(payload.new);
+            })
+            .subscribe();
+
+        // Also fetch initial set if needed, but for now just the listener for notifications
+        return () => supabaseClient.removeChannel(channel);
+    },
+
     calculateStats(users, services) {
         // Logic remains the same as before
         const totalRevenue = services.reduce((acc, s) => acc + (parseFloat(s.total) || 0), 0);
@@ -316,6 +370,12 @@ const DB = {
             servicesByDate[date] = (servicesByDate[date] || 0) + 1;
             revenueByDate[date] = (revenueByDate[date] || 0) + (parseFloat(s.total) || 0);
         });
+
+        const dailySummary = Object.keys(servicesByDate).sort().reverse().map(date => ({
+            date,
+            count: servicesByDate[date],
+            total: revenueByDate[date]
+        }));
 
         const userRanking = services.reduce((acc, s) => {
             const email = s.userEmail || s.user_email || 'Desconocido';
@@ -336,6 +396,7 @@ const DB = {
             totalRevenue,
             totalHours,
             topUsers: sortedUsers,
+            dailySummary: dailySummary,
             chartData: {
                 dates: dates,
                 counts: dates.map(d => servicesByDate[d]),

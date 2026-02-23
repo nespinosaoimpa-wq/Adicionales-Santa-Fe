@@ -822,26 +822,23 @@ const router = {
 };
 
 // --- ADMIN RENDERER ---
-// --- ADMIN RENDERER ---
 async function renderAdmin(container) {
     container.innerHTML = `
         <div class="flex flex-col items-center justify-center h-screen space-y-4 bg-background-dark">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p class="text-slate-500 animate-pulse font-medium">Sincronizando datos globales...</p>
+            <p class="text-slate-500 animate-pulse font-medium">Sincronizando datos globales en vivo...</p>
         </div>
     `;
 
-    try {
-        const [allServices, allUsers] = await Promise.all([
-            DB.getAllServicesForStats(),
-            new Promise(resolve => DB.subscribeToUsers(resolve))
-        ]);
+    let allUsers = [];
+    let allServices = [];
+    const formatMoney = (v) => new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(v);
 
+    const updateUI = () => {
         const stats = DB.calculateStats(allUsers, allServices);
-        const formatMoney = (v) => new Intl.NumberFormat('es-AR', { style: 'currency', currency: 'ARS', maximumFractionDigits: 0 }).format(v);
 
         container.innerHTML = `
-        <div class="min-h-screen bg-[#0f172a] text-slate-200 font-sans pb-24">
+        <div class="min-h-screen bg-[#0f172a] text-slate-200 font-sans pb-24 animate-fade-in">
             <!-- Glass Header -->
             <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/5 px-6 h-20 flex items-center justify-between shadow-2xl">
                 <div class="flex items-center gap-4">
@@ -849,12 +846,15 @@ async function renderAdmin(container) {
                         <span class="material-symbols-outlined text-white text-2xl">analytics</span>
                     </div>
                     <div>
-                        <h1 class="text-xl font-black text-white tracking-tight uppercase italic">Admin Dashboard</h1>
-                        <p class="text-[10px] text-slate-400 font-bold tracking-widest uppercase">Panel de Control Global</p>
+                        <h1 class="text-xl font-black text-white tracking-tight uppercase italic flex items-center gap-2">
+                            Admin Hub
+                            <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        </h1>
+                        <p class="text-[10px] text-slate-400 font-bold tracking-widest uppercase">Monitoreo Real-time</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold transition-all flex items-center gap-2">
+                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-300">
                         <span class="material-symbols-outlined text-sm">download</span> Exportar
                     </button>
                     <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
@@ -863,17 +863,42 @@ async function renderAdmin(container) {
                 </div>
             </header>
 
-            <main class="p-4 md:p-8 max-w-7xl mx-auto space-y-8 animate-fade-in">
+            <main class="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
                 
                 <!-- KPI Grid -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     ${_renderAdminKPICard('Usuarios Totales', stats.userCount, 'group', 'from-blue-500/20 to-blue-600/5', 'text-blue-400')}
                     ${_renderAdminKPICard('Activos 24h', stats.activeUsers, 'bolt', 'from-green-500/20 to-green-600/5', 'text-green-400')}
                     ${_renderAdminKPICard('Horas Globales', Math.round(stats.totalHours).toLocaleString(), 'schedule', 'from-cyan-500/20 to-cyan-600/5', 'text-cyan-400')}
-                    ${_renderAdminKPICard('Volumen Mensual', formatMoney(stats.totalRevenue), 'payments', 'from-amber-500/20 to-amber-600/5', 'text-amber-400')}
+                    ${_renderAdminKPICard('Caja Global estimada', formatMoney(stats.totalRevenue), 'payments', 'from-amber-500/20 to-amber-600/5', 'text-amber-400')}
                 </div>
 
-                <!-- Main Analytics Section -->
+                <!-- Daily Summary Section (New) -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-lg font-bold text-white flex items-center gap-3 italic uppercase text-xs tracking-widest">
+                            <span class="material-symbols-outlined text-primary">calendar_view_day</span>
+                            Resumen Diario de Actividad
+                        </h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <div class="flex gap-4 pb-4">
+                            ${stats.dailySummary.slice(0, 10).map(day => `
+                                <div class="min-w-[140px] p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center text-center">
+                                    <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-1">${getFormattedDate(day.date)}</p>
+                                    <p class="text-lg font-black text-white">${day.count}</p>
+                                    <p class="text-[10px] text-slate-400 mb-2">Servicios</p>
+                                    <div class="h-1 w-full bg-primary/20 rounded-full overflow-hidden mb-2">
+                                        <div class="h-full bg-primary" style="width: ${Math.min((day.total / 500000) * 100, 100)}%"></div>
+                                    </div>
+                                    <p class="text-[11px] font-bold text-emerald-400">${formatMoney(day.total)}</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Charts & Stats -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <!-- Trend Chart -->
                     <div class="lg:col-span-2 bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
@@ -882,96 +907,63 @@ async function renderAdmin(container) {
                                 <span class="material-symbols-outlined text-primary">trending_up</span>
                                 Tendencia de Ingresos
                             </h3>
-                            <div class="flex gap-2">
-                                <span class="size-3 rounded-full bg-primary"></span>
-                                <span class="text-[10px] text-slate-400 uppercase font-bold">Últimos 30 días</span>
-                            </div>
                         </div>
                         <div class="h-64 relative">
                             <canvas id="adminTrendChart"></canvas>
                         </div>
                     </div>
 
-                    <!-- Distribution Chart -->
+                    <!-- Ranking -->
                     <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
-                        <h3 class="text-lg font-bold text-white mb-8 flex items-center gap-3">
-                            <span class="material-symbols-outlined text-accent-cyan">pie_chart</span>
-                            Mix de Servicios
-                        </h3>
-                        <div class="h-64 relative">
-                            <canvas id="adminTypeChart"></canvas>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- User Management & Ads -->
-                <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
-                    <!-- Top Users Ranking -->
-                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
-                        <h3 class="text-lg font-bold text-white mb-6">Ranking de Actividad (Top 5)</h3>
+                        <h3 class="text-lg font-bold text-white mb-6">Ranking de Actividad</h3>
                         <div class="space-y-4">
                             ${stats.topUsers.map((u, i) => `
-                                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors border border-transparent hover:border-white/10">
+                                <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-transparent hover:border-white/10 transition-all">
                                     <div class="flex items-center gap-4">
                                         <span class="size-8 rounded-full bg-slate-700 flex items-center justify-center font-black text-xs text-white/50">${i + 1}</span>
-                                        <div>
-                                            <p class="text-sm font-bold text-white max-w-[150px] truncate">${u.email}</p>
-                                            <p class="text-[10px] text-slate-500 uppercase font-bold">Oficial Registrado</p>
-                                        </div>
+                                        <p class="text-xs font-bold text-white max-w-[120px] truncate">${u.email}</p>
                                     </div>
-                                    <p class="text-sm font-black text-emerald-400">${formatMoney(u.total)}</p>
+                                    <p class="text-xs font-black text-emerald-400">${formatMoney(u.total)}</p>
                                 </div>
                             `).join('')}
                         </div>
                     </div>
+                </div>
 
-                    <!-- Ad Management -->
-                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
-                         <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-3">
-                            <span class="material-symbols-outlined text-amber-500">ads_click</span>
-                            Pautas Publicitarias
-                        </h3>
-                        <form onsubmit="event.preventDefault(); store.handleAddAd(this)" class="flex flex-col gap-3 mb-6">
-                            <input type="text" name="imageUrl" placeholder="URL del Banner" required class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:bg-white/10 transition-all outline-none">
-                            <div class="flex gap-2">
-                                <input type="text" name="linkUrl" placeholder="Link de Acción" required class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary outline-none">
-                                <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold px-6 rounded-xl transition-all active:scale-95 flex items-center gap-2">
-                                    <span class="material-symbols-outlined">send</span>
-                                </button>
-                            </div>
-                        </form>
-                        <div class="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
-                            ${store.ads && store.ads.length > 0 ? store.ads.map(ad => `
-                                <div class="min-w-[200px] relative group rounded-2xl overflow-hidden border border-white/10 aspect-video">
-                                    <img src="${ad.imageUrl}" class="w-full h-full object-cover">
-                                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
-                                        <button onclick="store.deleteAd('${ad.id}')" class="size-10 rounded-full bg-red-500 text-white flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform">
-                                            <span class="material-symbols-outlined text-xl">delete</span>
-                                        </button>
-                                    </div>
+                <!-- Active Banners -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-amber-500">ads_click</span>
+                        Publicidad Activa
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${store.ads && store.ads.length > 0 ? store.ads.map(ad => `
+                            <div class="relative group rounded-2xl overflow-hidden border border-white/10 aspect-video shadow-lg">
+                                <img src="${ad.imageUrl}" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex items-center justify-center">
+                                    <button onclick="store.deleteAd('${ad.id}')" class="size-10 rounded-full bg-red-500 text-white flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
                                 </div>
-                            `).join('') : '<p class="text-slate-500 text-xs italic">No hay banners activos</p>'}
-                        </div>
+                            </div>
+                        `).join('') : '<p class="text-slate-500 text-xs italic">No hay banners configurados</p>'}
                     </div>
                 </div>
 
                 <!-- User Table -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 overflow-hidden shadow-xl">
-                    <div class="p-6 border-b border-white/5 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <h3 class="font-bold text-white text-lg">Base de Usuarios (${allUsers.length})</h3>
-                        <div class="relative">
-                            <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500">search</span>
-                            <input type="text" placeholder="Buscar oficial..." oninput="store.filterUserTable(this.value)" class="bg-white/5 border border-white/10 rounded-full pl-10 pr-4 py-2 text-xs focus:ring-2 focus:ring-primary outline-none w-full md:w-64">
-                        </div>
+                    <div class="p-6 border-b border-white/5 flex items-center justify-between">
+                        <h3 class="font-bold text-white text-lg italic">Oficiales Registrados</h3>
+                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-black text-slate-500">${allUsers.length} TOTAL</span>
                     </div>
                     <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm" id="userAdminTable">
-                            <thead class="bg-white/2 sticky top-0 uppercase text-[10px] font-black text-slate-500 tracking-widest border-b border-white/5">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-white/2 uppercase text-[10px] font-black text-slate-500 tracking-widest border-b border-white/5">
                                 <tr>
                                     <th class="px-6 py-4">Oficial</th>
-                                    <th class="px-6 py-4">Rango / Rol</th>
-                                    <th class="px-6 py-4 text-center">Última Conexión</th>
-                                    <th class="px-6 py-4 text-right">Acciones</th>
+                                    <th class="px-6 py-4">Rango</th>
+                                    <th class="px-6 py-4 text-center">Conexión</th>
+                                    <th class="px-6 py-4 text-right">Acción</th>
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-white/5">
@@ -979,26 +971,26 @@ async function renderAdmin(container) {
                                     <tr class="hover:bg-white/[0.02] transition-colors group">
                                         <td class="px-6 py-4">
                                             <div class="flex items-center gap-3">
-                                                <div class="size-10 rounded-full border border-white/10 p-0.5 bg-slate-700">
+                                                <div class="size-8 rounded-full bg-slate-700">
                                                     <img src="${u.avatar || 'https://ui-avatars.com/api/?name=' + u.name}" class="w-full h-full rounded-full object-cover">
                                                 </div>
                                                 <div>
-                                                    <p class="font-bold text-white group-hover:text-primary transition-colors">${u.name || 'Sin nombre'}</p>
-                                                    <p class="text-[10px] text-slate-500 font-mono">${u.email}</p>
+                                                    <p class="font-bold text-white text-xs">${u.name || 'Oficial'}</p>
+                                                    <p class="text-[9px] text-slate-500 font-mono">${u.email}</p>
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="px-6 py-4">
-                                            <span class="px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${u.role === 'admin' ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30' : 'bg-slate-500/20 text-slate-400 border border-slate-500/30'}">
+                                            <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-tighter ${u.role === 'admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-slate-500/20 text-slate-400'}">
                                                 ${u.role || 'user'}
                                             </span>
                                         </td>
-                                        <td class="px-6 py-4 text-center text-[11px] font-mono text-slate-400">
+                                        <td class="px-6 py-4 text-center text-[10px] text-slate-400">
                                             ${u.lastLogin ? _formatAdminDate(u.lastLogin) : 'N/A'}
                                         </td>
                                         <td class="px-6 py-4 text-right">
-                                            <button onclick="store.changeUserRole('${u.email}', '${u.role === 'admin' ? 'user' : 'admin'}')" class="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors">
-                                                ${u.role === 'admin' ? 'Bajar a Usuario' : 'Subir a Admin'}
+                                            <button onclick="store.changeUserRole('${u.email}', '${u.role === 'admin' ? 'user' : 'admin'}')" class="text-[9px] font-bold text-primary hover:underline">
+                                                ${u.role === 'admin' ? 'Bajar' : 'Subir'}
                                             </button>
                                         </td>
                                     </tr>
@@ -1011,22 +1003,33 @@ async function renderAdmin(container) {
         </div>
         `;
 
-        // Wait for DOM to render then mount Charts
-        setTimeout(() => {
-            _mountAdminCharts(stats.chartData);
-        }, 100);
+        _mountAdminCharts(stats.chartData);
+    };
 
-    } catch (e) {
-        console.error("Admin render failed:", e);
-        container.innerHTML = `
-            <div class="h-screen flex flex-col items-center justify-center p-6 text-center space-y-4">
-                <span class="material-symbols-outlined text-6xl text-red-500">error</span>
-                <h2 class="text-xl font-bold text-white">Error al cargar el panel</h2>
-                <p class="text-slate-400 text-sm max-w-xs">${e.message}</p>
-                <button onclick="router.handleRoute()" class="bg-primary text-white px-6 py-2 rounded-xl font-bold">Reintentar</button>
-            </div>
-        `;
-    }
+    // Subscriptions
+    const unsubUsers = DB.subscribeToUsers(data => {
+        allUsers = data;
+        updateUI();
+    });
+
+    const unsubServices = DB.subscribeToAllServices(data => {
+        allServices = data;
+        updateUI();
+    });
+
+    const unsubReviews = DB.subscribeToReviews(newReview => {
+        showToast(`⭐ Nueva Reseña: "${newReview.comment}" - ${newReview.user_email}`);
+    });
+
+    // Cleanup when navigating away
+    const originalNavigate = router.navigateTo;
+    router.navigateTo = (route) => {
+        unsubUsers();
+        unsubServices();
+        unsubReviews();
+        router.navigateTo = originalNavigate;
+        router.navigateTo(route);
+    };
 }
 
 // --- ADMIN HELPERS & ACTIONS (Isolated from Render Cycle) ---
