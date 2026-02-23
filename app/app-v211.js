@@ -3672,45 +3672,40 @@ function _renderAdminKPICard(title, value, icon, gradient, textColor) {
 window.showDonationModal = () => {
     const modal = document.createElement('div');
     modal.className = 'fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in';
-    modal.innerHTML = `
-        <div class="bg-[#1e293b] w-full max-w-sm rounded-3xl border border-white/10 p-6 shadow-2xl animate-scale-in">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                    <span class="material-symbols-outlined text-primary">favorite</span>
-                    Apoyar Proyecto
-                </h3>
-                <button onclick="this.closest('.fixed').remove()" class="size-8 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-            </div>
-            
-            <div class="space-y-4">
-                <p class="text-xs text-slate-400 leading-relaxed">
-                    Si esta herramienta te es útil, podés colaborar con el mantenimiento del servidor y futuras mejoras.
-                </p>
-                
-                <div class="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-3">
-                    <div>
-                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Alias MP</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-sm font-black text-white italic">espinosa.oimpa</p>
-                            <button onclick="navigator.clipboard.writeText('espinosa.oimpa'); showToast('Alias copiado')" class="text-primary text-xs font-bold">Copiar</button>
-                        </div>
-                    </div>
-                    <div class="pt-3 border-t border-white/10">
-                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">CVU</p>
-                        <div class="flex items-center justify-between">
-                            <p class="text-[11px] font-mono text-slate-300">0000003100057056024419</p>
-                            <button onclick="navigator.clipboard.writeText('0000003100057056024419'); showToast('CVU copiado')" class="text-primary text-xs font-bold">Copiar</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <button onclick="this.closest('.fixed').remove()" class="w-full py-4 rounded-2xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all">
-                    Entendido
-                </button>
-            </div>
-        </div>
-    `;
+    modal.innerHTML = '<div class="bg-[#1e293b] w-full max-w-sm rounded-3xl border border-white/10 p-6 shadow-2xl animate-scale-in">' +
+        '<div class="flex items-center justify-between mb-6">' +
+        '<h3 class="text-lg font-bold text-white flex items-center gap-2">' +
+        '<span class="material-symbols-outlined text-primary">favorite</span>' +
+        'Apoyar Proyecto' +
+        '</h3>' +
+        '<button onclick="this.closest(\'.fixed\').remove()" class="size-8 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:text-white">' +
+        '<span class="material-symbols-outlined">close</span>' +
+        '</button>' +
+        '</div>' +
+        '<div class="space-y-4">' +
+        '<p class="text-xs text-slate-400 leading-relaxed">' +
+        'Si esta herramienta te es útil, podés colaborar con el mantenimiento del servidor y futuras mejoras.' +
+        '</p>' +
+        '<div class="p-4 bg-white/5 rounded-2xl border border-white/10 space-y-3">' +
+        '<div>' +
+        '<p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Alias MP</p>' +
+        '<div class="flex items-center justify-between">' +
+        '<p class="text-sm font-black text-white italic">espinosa.oimpa</p>' +
+        '<button onclick="navigator.clipboard.writeText(\'espinosa.oimpa\'); showToast(\'Alias copiado\')" class="text-primary text-xs font-bold">Copiar</button>' +
+        '</div>' +
+        '</div>' +
+        '<div class="pt-3 border-t border-white/10">' +
+        '<p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">CVU</p>' +
+        '<div class="flex items-center justify-between">' +
+        '<p class="text-[11px] font-mono text-slate-300">0000003100057056024419</p>' +
+        '<button onclick="navigator.clipboard.writeText(\'0000003100057056024419\'); showToast(\'CVU copiado\')" class="text-primary text-xs font-bold">Copiar</button>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+        '<button onclick="this.closest(\'.fixed\').remove()" class="w-full py-4 rounded-2xl bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:scale-[1.02] transition-all">' +
+        'Entendido' +
+        '</button>' +
+        '</div>' +
+        '</div>';
     document.body.appendChild(modal);
 }
