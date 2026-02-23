@@ -483,9 +483,9 @@ function renderCentinela(container) {
                     </div>
                     <div class="bg-white/5 border border-white/5 p-3 rounded-2xl rounded-tl-none">
                         <p class="text-xs text-slate-200 leading-relaxed">
-                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, el **Decreto 461** (Régimen Disciplinario) y reglamentos de licencias.
+                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, el **Decreto 461**, la nueva **Reforma Previsional (Ley 14.283)** y las escalas salariales de **Febrero 2026 (Decreto 142/26)**.
                             <br><br>
-                            ¿En qué puedo asesorarte hoy?
+                            ¿Qué duda reglamentaria o de haberes tenés hoy?
                         </p>
                     </div>
                 </div>
@@ -493,7 +493,7 @@ function renderCentinela(container) {
 
             <div class="p-4 bg-slate-900/50 border-t border-white/5 pb-10">
                 <form id="centinela-form" class="relative flex items-center gap-2">
-                    <input type="text" id="chat-input" placeholder="Preguntá sobre licencias, faltas..." 
+                    <input type="text" id="chat-input" placeholder="Sueldos, jubilación, ascensos..." 
                         class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
                     <button type="submit" class="absolute right-1 size-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 active:scale-90 transition-all">
                         <span class="material-symbols-outlined">send</span>
@@ -554,14 +554,15 @@ function renderCentinela(container) {
     const knowledgeBase = [
         {
             category: 'licencias',
-            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio', 'licencias'],
+            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio', 'licencias', 'ausentismo', 'salud laboral'],
             responses: [
+                { match: ['salud laboral', 'ausentismo', 'nuevo sistema'], text: "En enero de 2026 se implementó el **Sistema Integrado de Protección de la Salud Laboral** para reducir el ausentismo y mejorar el seguimiento médico del personal." },
                 { match: ['paternidad', 'nacimiento', 'hijo'], text: "Según el **Decreto 4157/15**, te corresponden **15 días corridos** de licencia por paternidad." },
                 { match: ['maternidad', 'embarazo'], text: "La licencia por maternidad comprende **90 días corridos**." },
                 { match: ['vacaciones', 'anual', 'ordinaria'], text: "La **Licencia Anual Ordinaria** varía según antigüedad (19, 25 o 35 días hábiles)." },
                 { match: ['fallecimiento', 'duelo'], text: "Por familiares directos: **5 días corridos**. Secundarios: **2 días**." }
             ],
-            default: "El régimen de licencias se rige por el Decreto 4157/15. ¿Qué licencia buscas?"
+            default: "El régimen de licencias se rige por el Decreto 4157/15 y las nuevas circulares de Salud Laboral de 2026."
         },
         {
             category: 'disciplina',
@@ -572,8 +573,38 @@ function renderCentinela(container) {
                 { match: ['graves', 'abandono'], text: "Faltas graves: desde 11 días de suspensión hasta destitución." }
             ],
             default: "El Régimen Disciplinario se rige por el Decreto 461/15."
+        },
+        {
+            category: 'sueldos',
+            keywords: ['sueldo', 'salario', 'cobrar', 'cuanto gano', 'escala', 'decreto 142', 'haberes'],
+            responses: [
+                { match: ['minimo', 'bolsillo', 'piso'], text: "A febrero de 2026 (Decreto 142/26), el piso salarial para personal operativo es de **$1.438.835** (incluye tarjeta alimentaria)." },
+                { match: ['rosario', 'santa fe', 'conflictividad', 'plus'], text: "Personal en zonas de alta conflictividad (Rosario/Santa Fe) recibe un **plus de $500.000**, elevando el sueldo base a aprox. **$1.938.835**." },
+                { match: ['patrullero', 'conducir', 'chofer'], text: "Si sos conductor de patrullero, el salario neto puede alcanzar los **$2.188.835** con los suplementos de 2026." },
+                { match: ['oficial', 'subinspector', 'comisario'], text: "Escala Feb 2026: Subcomisario $3.45M, Comisario $3.7M, Director General $6.57M (Bolsillo neto)." }
+            ],
+            default: "Los sueldos se actualizaron por el Decreto 142/26 en febrero de 2026. ¿Buscás una jerarquía específica?"
+        },
+        {
+            category: 'prevision',
+            keywords: ['jubilacion', 'retiro', 'ley 14283', 'aportes', '30 años', 'caja'],
+            responses: [
+                { match: ['ley 14283', 'reforma'], text: "La **Ley 14.283 (Sep 2024)** declaró la emergencia previsional. Los aportes subieron al **17%** (Cuerpo de Ejecución) y **18%** (Supervisión)." },
+                { match: ['calculo', 'promedio', 'cuanto'], text: "El haber se calcula con el promedio de las últimas **120 remuneraciones**. Es el **70%** con 30 años de aportes, subiendo hasta el **82%** con 36 años." },
+                { match: ['solidario', 'descuento'], text: "Se estableció un aporte solidario (2% al 6%) para pasivos que superen 3 mínimas, aunque se anunció que no se prorrogaría en 2026." }
+            ],
+            default: "La Reforma Previsional (Ley 14.283) modificó los aportes y el cálculo del haber. ¿Necesitás detalle sobre los años o aportes?"
+        },
+        {
+            category: 'isep_ascensos',
+            keywords: ['isep', 'ascenso', 'concurso', '2024', '2025', '2026', 'id ciudadana', 'curso', 'llamado'],
+            responses: [
+                { match: ['ascenso 2024', '2025'], text: "El **Concurso de Ascenso 2024** se oficializó con el Decreto 2640. El **Ciclo 2025** ya tiene jurados asignados (Decreto 263/26)." },
+                { match: ['id ciudadana', 'intranet'], text: "Contar con **ID Ciudadana activa** es un requisito excluyente para todas las etapas de los concursos de ascenso." },
+                { match: ['ingreso', 'tecnicatura', '2026'], text: "ISEP abrió inscripciones para la Tecnicatura Cohorte 2026 en nov/dic 2025. Los egresados 2024/2025 ya están recibiendo equipamiento." }
+            ],
+            default: "El calendario del ISEP incluye concursos de ascenso anuales y tecnicaturas. ¿Buscás info sobre ingreso o promoción?"
         }
-        // ... (truncated for brevity in this example code block, full logic would be here)
     ];
 
     form.onsubmit = async (e) => {
