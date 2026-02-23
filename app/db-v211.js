@@ -40,10 +40,8 @@ const DB = {
 
         // Sync with Supabase Profiles
         try {
-            // Get Supabase User ID if possible, else use email-based fallback or Firebase UID
-            const sbUser = (await supabaseClient.auth.getUser()).data.user;
-            await supabaseClient.from('profiles').upsert({
-                id: sbUser?.id || user.uid || user.email,
+            const { error } = await supabaseClient.from('profiles').upsert({
+                id: user.uid || user.email,
                 email: user.email,
                 name: user.name,
                 avatar: user.avatar,
@@ -51,8 +49,10 @@ const DB = {
                 notification_settings: user.notificationSettings,
                 last_login: new Date().toISOString()
             });
+            if (error) throw error;
+            console.log("✅ Supabase Profile Synced");
         } catch (e) {
-            console.warn("Supabase profile sync failed:", e);
+            console.warn("⚠️ Supabase profile sync failed:", e.message);
         }
     },
 
