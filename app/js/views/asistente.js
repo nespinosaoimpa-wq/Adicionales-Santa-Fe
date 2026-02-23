@@ -823,7 +823,7 @@ window.renderAsistenteHub = renderAsistenteHub;
 window.renderPartesInteligentes = renderPartesInteligentes;
 
 window.showAnnouncementModal = () => {
-    const currentVersion = 'v517';
+    const currentVersion = 'v527.4-FINAL';
     if (localStorage.getItem('last_announcement') === currentVersion) return;
 
     const overlay = document.createElement('div');
