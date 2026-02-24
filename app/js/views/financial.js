@@ -17,7 +17,6 @@ function renderFinancial(container) {
                         <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">${store.user.name}</p>
                     </div>
                     <div class="flex items-center gap-3">
-                        ${renderDonationHeader()}
                         <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full border border-primary/30 overflow-hidden cursor-pointer">
                             <img src="${store.user.avatar}" class="w-full h-full object-cover">
                         </div>

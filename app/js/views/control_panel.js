@@ -25,7 +25,6 @@ function renderControlPanel(container) {
         <header class="sticky top-0 z-50 glass-card px-5 py-4 flex items-center justify-between border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
             <div class="flex items-center gap-3">
                 <div class="flex items-center gap-3">
-                    ${renderDonationHeader()}
                     <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full border-2 border-primary/50 overflow-hidden bg-slate-800 cursor-pointer">
                         <img class="w-full h-full object-cover" src="${store.user.avatar}" onerror="this.src='https://ui-avatars.com/api/?background=0d59f2&color=fff&name=User'" />
                     </div>

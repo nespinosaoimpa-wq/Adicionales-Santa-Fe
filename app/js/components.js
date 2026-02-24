@@ -203,6 +203,5 @@ function copyToClipboard(text, successMsg) {
         showToast(successMsg);
     });
 }
-window.showDonationModal = () => { };
 
 window.copyToClipboard = copyToClipboard;
