@@ -83,6 +83,26 @@ function renderAsistenteHub(container) {
                 </form>
             </div>
 
+            <!-- Donation Section -->
+            <div class="mt-6 p-6 rounded-3xl bg-gradient-to-br from-primary/20 to-accent-cyan/10 border border-primary/20 shadow-xl shadow-primary/5 animate-fade-in">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="size-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined">volunteer_activism</span>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-white text-sm tracking-tight">Apoyá el Proyecto</h3>
+                        <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Soporte Voluntario</p>
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-relaxed mb-5">
+                    ¿Te gusta la App? Ayudanos a seguir desarrollando herramientas gratuitas para toda la fuerza. Tu aporte voluntario es fundamental.
+                </p>
+                <button onclick="window.showDonationModal()" class="w-full py-3.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-sm">favorite</span>
+                    Contribuir al Crecimiento
+                </button>
+            </div>
+
         ${renderBottomNav('asistente')}
     `;
 
