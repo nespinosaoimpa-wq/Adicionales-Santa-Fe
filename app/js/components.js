@@ -50,7 +50,7 @@ function renderOfflineBanner() {
 
 function renderInstallBanner() {
     return `
-        <div id="install-banner" class="fixed bottom-24 left-4 right-4 z-[60] bg-primary text-white p-4 rounded-2xl flex items-center justify-between shadow-2xl shadow-primary/40 transform translate-y-32 transition-transform duration-500 hidden">
+        <div id="install-banner" class="fixed bottom-32 left-4 right-4 z-[60] bg-primary text-white p-4 rounded-2xl flex items-center justify-between shadow-2xl shadow-primary/40 animate-slide-up hidden">
             <div class="flex items-center gap-3">
                 <div class="size-10 bg-white/20 rounded-xl flex items-center justify-center">
                     <span class="material-symbols-outlined">download</span>
@@ -149,7 +149,7 @@ window.addEventListener('online', () => updateOfflineStatus(false));
 window.addEventListener('offline', () => updateOfflineStatus(true));
 function renderIOSInstallPrompt() {
     return `
-        <div id="ios-install-banner" class="fixed bottom-6 left-4 right-4 z-[100] bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 shadow-2xl border border-primary/20 transform translate-y-[200%] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] animate-ios-entry">
+        <div id="ios-install-banner" class="fixed bottom-32 left-4 right-4 z-[100] bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 shadow-2xl border border-primary/20 transform translate-y-[200%] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] animate-ios-entry">
             <div class="flex items-start gap-5 text-left">
                 <div class="size-14 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/20 shrink-0">
                     <span class="material-symbols-outlined text-3xl">add_to_home_screen</span>

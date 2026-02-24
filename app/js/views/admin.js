@@ -12,6 +12,7 @@ async function renderAdmin(container) {
 
     window.allUsers = window.allUsers || [];
     window.allServices = window.allServices || [];
+    window.queryLogs = window.queryLogs || [];
     let reviewsMap = new Map(); // id -> review
     let reviewsLoaded = false;
 
