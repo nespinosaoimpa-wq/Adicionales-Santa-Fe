@@ -108,9 +108,9 @@ async function renderAdmin(container) {
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                      <!-- Reviews Panel -->
-                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl h-[400px] flex flex-col">
+                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl h-[500px] flex flex-col">
                         <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center justify-between">
                             <span>Reseñas Recientes</span>
                             <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-500 text-[10px]">${reviewsMap.size}</span>
@@ -123,8 +123,8 @@ async function renderAdmin(container) {
                         const dateB = new Date(b.created_at || b.timestamp || 0).getTime();
                         return dateB - dateA;
                     }).map(r => {
-                        const isAlert = r.comment.startsWith('[CRITICAL-MH]');
-                        const displayComment = isAlert ? r.comment.replace('[CRITICAL-MH]', '').trim() : r.comment;
+                        const isAlert = r.comment.startsWith('[CRITICAL-MH]') || r.comment.startsWith('[CRISIS]');
+                        const displayComment = isAlert ? r.comment.replace(/^\[CRITICAL-MH\]|^\[CRISIS\]/, '').trim() : r.comment;
 
                         return `
                                 <div class="p-4 ${isAlert ? 'bg-red-500/10 border-red-500/30' : 'bg-white/5 border-white/5'} rounded-2xl border animate-fade-in">
@@ -144,6 +144,35 @@ async function renderAdmin(container) {
                                 </div>
                             `;
                     }).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Centinela Auditor Panel -->
+                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl h-[500px] flex flex-col">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
+                                Auditoría Centinela
+                            </h3>
+                            <button onclick="router.navigateTo('#asistente')" class="text-[10px] font-bold text-primary hover:underline">Entrenar IA</button>
+                        </div>
+                        <div class="space-y-3 overflow-y-auto flex-1 pr-2 custom-scrollbar">
+                            ${!window.queryLogs ? '<p class="text-slate-500 text-xs italic text-center py-8">Auditoría desconectada...</p>' :
+                window.queryLogs.length === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8">Sin consultas registradas</p>' :
+                    window.queryLogs.map(log => `
+                                <div class="p-3 bg-white/5 border border-white/5 rounded-2xl space-y-2">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-[8px] font-black text-slate-500 uppercase tracking-widest">${log.category}</span>
+                                        <span class="px-1.5 py-0.5 rounded bg-${log.score < 20 ? 'red' : log.score < 50 ? 'amber' : 'emerald'}-500/20 text-${log.score < 20 ? 'red' : log.score < 50 ? 'amber' : 'emerald'}-500 text-[8px] font-bold">Confianza: ${log.score}</span>
+                                    </div>
+                                    <p class="text-[11px] text-white font-medium">Q: ${log.query}</p>
+                                    <p class="text-[10px] text-slate-400 italic">R: ${log.response.substring(0, 60)}...</p>
+                                    <div class="flex justify-between items-center pt-1 border-t border-white/5">
+                                        <span class="text-[7px] text-slate-600 uppercase font-bold">${log.user_email}</span>
+                                        <span class="text-[7px] text-slate-600">${_formatAdminDate(log.timestamp)}</span>
+                                    </div>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
                 </div>
@@ -260,6 +289,11 @@ async function renderAdmin(container) {
         updateUI();
     });
 
+    const unsubLogs = DB.subscribeToQueryLogs(data => {
+        window.queryLogs = data;
+        updateUI();
+    });
+
     store.addAd = async () => {
         const imageUrl = prompt("URL de la Imagen (direct link):");
         if (!imageUrl) return;
@@ -282,6 +316,7 @@ async function renderAdmin(container) {
         unsubUsers();
         unsubServices();
         unsubReviews();
+        unsubLogs();
         router.navigateTo = originalNavigate;
         router.navigateTo(route);
     };

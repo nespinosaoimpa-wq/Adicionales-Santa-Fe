@@ -476,6 +476,28 @@ const DB = {
         return () => supabaseClient.removeChannel(channel);
     },
 
+    subscribeToQueryLogs(callback) {
+        // Initial Fetch
+        supabaseClient
+            .from('query_logs')
+            .select('*')
+            .order('timestamp', { ascending: false })
+            .limit(30)
+            .then(({ data }) => {
+                if (data) callback(data, true);
+            });
+
+        const channel = supabaseClient
+            .channel('admin-query-logs')
+            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'query_logs' }, async () => {
+                const { data } = await supabaseClient.from('query_logs').select('*').order('timestamp', { ascending: false }).limit(30);
+                if (data) callback(data, false);
+            })
+            .subscribe();
+
+        return () => supabaseClient.removeChannel(channel);
+    },
+
     calculateStats(users, services) {
         console.log(`[Stats] Calculating for ${users.length} users and ${services.length} services`);
         // Logic remains same...

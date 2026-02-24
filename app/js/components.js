@@ -177,26 +177,7 @@ function renderIOSInstallPrompt() {
     `;
 }
 
-function showSuccessAnimation(message) {
-    const overlay = document.createElement('div');
-    overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm';
-    overlay.innerHTML = `
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-2xl animate-scale-in">
-            <div class="flex flex-col items-center">
-                <div class="size-20 rounded-full bg-green-500/20 flex items-center justify-center mb-4 animate-bounce-in">
-                    <span class="material-symbols-outlined text-5xl text-green-500">check_circle</span>
-                </div>
-                <p class="text-lg font-bold text-slate-900 dark:text-white">${message}</p>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(overlay);
 
-    setTimeout(() => {
-        overlay.classList.add('animate-fade-out');
-        setTimeout(() => overlay.remove(), 300);
-    }, 1500);
-}
 
 function copyToClipboard(text, successMsg) {
     navigator.clipboard.writeText(text).then(() => {
