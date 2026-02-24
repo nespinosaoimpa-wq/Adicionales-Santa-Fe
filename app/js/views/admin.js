@@ -192,15 +192,23 @@ async function renderAdmin(container) {
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         ${store.ads && store.ads.length > 0 ? store.ads.map(ad => `
-                            <div class="relative rounded-2xl overflow-hidden border border-white/10 aspect-video shadow-lg">
-                                <img src="${ad.imageUrl}" class="w-full h-full object-cover">
-                                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2 flex items-center justify-between">
-                                    ${ad.linkUrl ? `<a href="${ad.linkUrl}" target="_blank" class="size-8 rounded-full bg-blue-500/80 text-white flex items-center justify-center"><span class="material-symbols-outlined text-sm">link</span></a>` : '<span></span>'}
-                                    <button onclick="store.deleteAd('${ad.id}')" class="size-8 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors active:scale-95">
-                                        <span class="material-symbols-outlined text-sm">delete</span>
-                                    </button>
-                                </div>
-                            </div>
+                            <div class="group relative rounded-2xl overflow-hidden border border-white/10 aspect-video shadow-lg bg-slate-900 transition-all hover:border-amber-500/50">
+                                <img src="${ad.imageUrl}" class="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all">
+                                
+                                <!-- Polish delete button -->
+                                <button onclick="store.deleteAd('${ad.id}')" 
+                                    class="absolute top-2 right-2 size-8 rounded-full bg-black/60 backdrop-blur-md text-white border border-white/10 flex items-center justify-center hover:bg-red-500 hover:border-red-500 transition-all opacity-100 md:opacity-0 group-hover:opacity-100 active:scale-95 shadow-lg">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+
+                                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-3 flex items-center justify-between">
+                                    <p class="text-[10px] font-bold text-white uppercase tracking-wider truncate mr-2">
+                                         Banner Activo
+                                    </p>
+                                    ${ad.linkUrl ? `
+                                        <a href="${ad.linkUrl}" target="_blank" class="px-2 py-1 rounded bg-white/10 text-[8px] text-white flex items-center gap-1 uppercase font-black hover:bg-white/20 transition-all">
+                                            <span class="material-symbols-outlined text-[10px]">open_in_new</span> Ir
+                                        </a>` : ''}
                                 </div>
                             </div>
                         `).join('') : '<p class="text-slate-500 text-xs italic">No hay banners configurados</p>'}

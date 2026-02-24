@@ -189,6 +189,17 @@ const DB = {
         });
     },
 
+    async addAd(adData) {
+        return db.collection('ads').add({
+            ...adData,
+            createdAt: new Date().toISOString()
+        });
+    },
+
+    async deleteAd(id) {
+        return db.collection('ads').doc(id).delete();
+    },
+
     // --- SERVICES (The Core Hybrid Logic) ---
     subscribeToServices(callback) {
         const user = auth.currentUser;
