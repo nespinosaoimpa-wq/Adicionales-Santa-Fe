@@ -224,7 +224,10 @@ function renderRegister(container) {
     document.getElementById('inp-start').addEventListener('change', calculateTotal);
     document.getElementById('inp-end').addEventListener('change', calculateTotal);
 
+    let isSaving = false;
     const saveAction = async () => {
+        if (isSaving) return;
+
         const date = document.getElementById('inp-date').value;
         const start = document.getElementById('inp-start').value;
         const end = document.getElementById('inp-end').value;
@@ -233,10 +236,25 @@ function renderRegister(container) {
         const split = store.calculateHoursSplit(date, start, end);
         const hours = split.ord + split.ext;
 
+        if (hours <= 0) {
+            showToast("⚠️ Define un horario válido");
+            return;
+        }
+
         const rates = store.serviceConfig[currentType];
         const total = (split.ord * rates['Ordinaria']) + (split.ext * rates['Extraordinaria']);
 
         try {
+            isSaving = true;
+            const btn = document.getElementById('btn-save');
+            const btnTop = document.getElementById('btn-save-top');
+
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<span class="animate-spin material-symbols-outlined">sync</span> Guardando...';
+            }
+            if (btnTop) btnTop.disabled = true;
+
             await store.addService({
                 date,
                 startTime: start,
@@ -252,6 +270,14 @@ function renderRegister(container) {
             router.navigateTo('#agenda');
         } catch (error) {
             console.error("Error saving service:", error);
+            isSaving = false;
+            const btn = document.getElementById('btn-save');
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Confirmar Registro';
+            }
+            const btnTop = document.getElementById('btn-save-top');
+            if (btnTop) btnTop.disabled = false;
         }
     };
 

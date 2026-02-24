@@ -179,14 +179,12 @@ const DB = {
         let sbServices = [];
 
         const mergeAndCallback = () => {
-            // Unify and sort
             const unified = [...fbServices, ...sbServices];
-            // Remove duplicates by ID (if any data was migrated manually)
-            const unique = Array.from(new Map(unified.map(s => [s.id, s])).values());
-            unique.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+            const deduplicated = this._deduplicateUnified(unified);
+            deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
-            console.log(`📊 Hybrid Sync: ${fbServices.length} (FB) + ${sbServices.length} (SB)`);
-            callback(unique);
+            console.log(`📊 Hybrid Sync: ${fbServices.length} (FB) + ${sbServices.length} (SB) -> ${deduplicated.length} Total`);
+            callback(deduplicated);
         };
 
         // 1. Listen to Firebase
@@ -309,8 +307,9 @@ const DB = {
 
         const mergeAndCallback = () => {
             const unified = [...fbExpenses, ...sbExpenses];
-            unified.sort((a, b) => new Date(b.date) - new Date(a.date));
-            callback(unified);
+            const deduplicated = this._deduplicateUnified(unified);
+            deduplicated.sort((a, b) => new Date(b.date) - new Date(a.date));
+            callback(deduplicated);
         };
 
         const fbUnsub = db.collection('expenses')
@@ -391,7 +390,7 @@ const DB = {
 
         const mergeAndCallback = () => {
             const unified = [...fbServices, ...sbServices];
-            callback(unified);
+            callback(this._deduplicateUnified(unified));
         };
 
         // FB Global
@@ -496,6 +495,47 @@ const DB = {
             .subscribe();
 
         return () => supabaseClient.removeChannel(channel);
+    },
+
+    // --- HELPER: DEDUPLICATION ---
+    _deduplicateUnified(unified) {
+        const seen = new Map();
+        return unified.filter(item => {
+            // Normalizar campos para key de deduplicación
+            const email = (item.userEmail || item.user_email || '').toLowerCase().trim();
+            const date = item.date || '';
+            const start = item.startTime || item.start_time || '';
+            const loc = (item.location || '').toLowerCase().trim();
+            const type = item.type || '';
+            const hours = parseFloat(item.hours) || 0;
+
+            // Key heurística: Email + Fecha + Hora Inicio + Ubicación + Tipo + Horas
+            // Nota: Se omiten campos volátiles como timestamp o ID
+            const key = `${email}|${date}|${start}|${loc}|${type}|${hours}`;
+
+            if (seen.has(key)) {
+                // Si ya lo vimos, preferir el que tenga una ID de Firebase (suele ser el más rápido/fiel)
+                const existing = seen.get(key);
+                const isFirebaseId = (id) => id && !id.toString().includes('-'); // Firebase IDs are doc IDs, Supabase are UUIDs (contain -)
+
+                if (!isFirebaseId(existing.id) && isFirebaseId(item.id)) {
+                    seen.set(key, item);
+                }
+                return false;
+            }
+
+            seen.set(key, item);
+            return true;
+        }).map(item => {
+            // Normalizar para que el resto de la app reciba nombres consistentes (CamelCase preferido)
+            return {
+                ...item,
+                userEmail: item.userEmail || item.user_email,
+                startTime: item.startTime || item.start_time,
+                endTime: item.endTime || item.end_time,
+                subType: item.subType || item.sub_type
+            };
+        });
     },
 
     calculateStats(users, services) {
