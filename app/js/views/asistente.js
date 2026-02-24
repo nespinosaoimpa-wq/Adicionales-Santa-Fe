@@ -83,6 +83,26 @@ function renderAsistenteHub(container) {
                 </form>
             </div>
 
+            <!-- Donation Section -->
+            <div class="mt-6 p-6 rounded-3xl bg-gradient-to-br from-primary/20 to-accent-cyan/10 border border-primary/20 shadow-xl shadow-primary/5 animate-fade-in">
+                <div class="flex items-center gap-4 mb-4">
+                    <div class="size-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
+                        <span class="material-symbols-outlined">volunteer_activism</span>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-white text-sm tracking-tight">Apoyá al Desarrollador</h3>
+                        <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Sustento del Proyecto</p>
+                    </div>
+                </div>
+                <p class="text-[11px] text-slate-300 leading-relaxed mb-5">
+                    Desarrollar sitios lleva tiempo, esfuerzo y frustración, como así también a veces las bases de datos generan gastos cuyo sustento corre por quien desarrolla la app. Esta app está pensada para hacer funcionales las tareas de los policías; si querés que sigamos creciendo, podés donar a nuestra cuenta:
+                </p>
+                <button onclick="window.showDonationModal()" class="w-full py-3.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-sm">favorite</span>
+                    Contribuir al Crecimiento
+                </button>
+            </div>
+
         ${renderBottomNav('asistente')}
     `;
 

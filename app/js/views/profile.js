@@ -131,28 +131,6 @@ function renderProfile(container) {
                 </button>
             </section>
 
-            <!-- Banking / Alias Section -->
-            <section class="space-y-4">
-                <div class="flex items-center gap-3 text-slate-400 px-1">
-                    <span class="material-symbols-outlined text-primary">account_balance_wallet</span>
-                    <h3 class="text-xs font-bold uppercase tracking-widest">Información de Cobro</h3>
-                </div>
-                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm space-y-4">
-                    <div class="space-y-2">
-                        <label class="text-[10px] font-bold text-primary uppercase ml-1">Mi Alias / CVU</label>
-                        <div class="flex gap-2">
-                            <input type="text" id="user-alias-input" 
-                                value="${user.alias || ''}" 
-                                placeholder="Ej: JUAN.PEDRO.ALIAS"
-                                class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:ring-1 focus:ring-primary outline-none transition-all">
-                            <button onclick="copyToClipboard(document.getElementById('user-alias-input').value, '✅ Alias copiado')" class="size-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-slate-400 hover:text-white transition-colors">
-                                <span class="material-symbols-outlined text-sm">content_copy</span>
-                            </button>
-                        </div>
-                        <p class="text-[9px] text-slate-500 ml-1 italic">Este alias se usará para compartir tus datos de transferencia rápido.</p>
-                    </div>
-                </div>
-            </section>
 
             <!-- Save Button -->
             <button onclick="store.saveProfile()" class="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-4 rounded-2xl font-bold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all">
