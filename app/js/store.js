@@ -501,21 +501,39 @@ const store = {
         return `${year}-${month}-${day}`;
     },
 
-    // Holiday List 2026 (Santa Fe / Argentina) - Extendable
+    // Feriados Nacionales Argentina 2025 y 2026 — Incluye traslados oficiales
     holidays2026: [
-        '2026-01-01', // Año Nuevo
+        // 2025
+        '2025-01-01', // Ano Nuevo
+        '2025-03-03', '2025-03-04', // Carnaval
+        '2025-03-24', // Dia de la Memoria
+        '2025-04-02', // Malvinas
+        '2025-04-18', // Viernes Santo
+        '2025-05-01', // Trabajador
+        '2025-05-25', // Revolucion de Mayo
+        '2025-06-16', // Paso a la Inmortalidad de Guemes (lunes)
+        '2025-06-20', // Belgrano
+        '2025-07-09', // Independencia
+        '2025-08-18', // San Martin (lunes en lugar del 17)
+        '2025-10-12', // Diversidad Cultural
+        '2025-11-20', // Soberania
+        '2025-11-21', // puente por elecciones
+        '2025-12-08', // Virgen
+        '2025-12-25', // Navidad
+        // 2026
+        '2026-01-01', // Ano Nuevo
         '2026-02-16', '2026-02-17', // Carnaval
         '2026-03-24', // Memoria
         '2026-04-02', // Malvinas
         '2026-04-03', // Viernes Santo
         '2026-05-01', // Trabajador
-        '2026-05-25', // Revolución de Mayo
-        '2026-06-15', // Paso a la Inmortalidad de Güemes (Feriado trasladable)
+        '2026-05-25', // Revolucion de Mayo
+        '2026-06-15', // Guemes
         '2026-06-20', // Belgrano
         '2026-07-09', // Independencia
-        '2026-08-17', // San Martín
+        '2026-08-17', // San Martin
         '2026-10-12', // Diversidad Cultural
-        '2026-11-20', // Soberanía
+        '2026-11-20', // Soberania
         '2026-12-08', // Virgen
         '2026-12-25', // Navidad
     ],

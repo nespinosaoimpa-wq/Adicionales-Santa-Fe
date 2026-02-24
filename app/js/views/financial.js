@@ -1,12 +1,62 @@
 /**
  * Adicionales Santa Fe - Financial View
+ * Quincenas: 1ra (1-15 cobro el 24), 2da (16-fin cobro el 9 del siguiente)
  */
 
 function renderFinancial(container) {
     if (!container) container = document.getElementById('app');
 
-    const totalIncome = store.services.reduce((sum, s) => sum + s.total, 0);
-    const totalExpenses = store.expenses.reduce((sum, e) => sum + e.amount, 0);
+    // --- QUINCENAL FILTER STATE ---
+    if (window._financialFilter === undefined) window._financialFilter = 'q1';
+
+    const today = new Date();
+    const currentMonth = today.getMonth();
+    const currentYear = today.getFullYear();
+    const currentDay = today.getDate();
+
+    // Determine current period automatically
+    if (window._financialFilter === undefined) {
+        window._financialFilter = currentDay <= 15 ? 'q1' : 'q2';
+    }
+
+    const filter = window._financialFilter;
+
+    // --- FILTER SERVICES AND EXPENSES BY PERIOD ---
+    const filterByPeriod = (items, dateField = 'date') => {
+        return items.filter(item => {
+            if (!item[dateField]) return false;
+            const d = new Date(item[dateField] + 'T00:00:00');
+            const isSameMonth = d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+            if (!isSameMonth) return false;
+            const day = d.getDate();
+            if (filter === 'q1') return day >= 1 && day <= 15;
+            if (filter === 'q2') return day >= 16;
+            return true; // 'all'
+        });
+    };
+
+    const periodServices = filter === 'all' ? store.services : filterByPeriod(store.services, 'date');
+    const periodExpenses = filter === 'all' ? store.expenses : filterByPeriod(store.expenses, 'date');
+
+    const totalIncome = periodServices.reduce((sum, s) => sum + (s.total || 0), 0);
+    const totalExpenses = periodExpenses.reduce((sum, e) => sum + (e.amount || 0), 0);
+    const balance = totalIncome - totalExpenses;
+
+    // Payment dates
+    const monthNames = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+    let paymentLabel = '';
+    if (filter === 'q1') {
+        paymentLabel = `Cobro estimado: 24 de ${monthNames[currentMonth]}`;
+    } else if (filter === 'q2') {
+        const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
+        paymentLabel = `Cobro estimado: 9 de ${monthNames[nextMonth]}`;
+    } else {
+        paymentLabel = 'Mes completo';
+    }
+
+    const filterBtnClass = (f) => f === filter
+        ? 'flex-1 py-2 text-xs font-bold rounded-lg bg-primary text-white shadow-lg shadow-primary/20'
+        : 'flex-1 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors';
 
     const html = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4">
@@ -18,16 +68,17 @@ function renderFinancial(container) {
                     </div>
                     <div class="flex items-center gap-3">
                         <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full border border-primary/30 overflow-hidden cursor-pointer">
-                            <img src="${store.user.avatar}" class="w-full h-full object-cover">
+                            <img src="${store.user.avatar || `https://ui-avatars.com/api/?name=${store.user.name}`}" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flex p-1 bg-white/5 rounded-xl">
-                <button onclick="showToast('Filtro: 1ra Quincena')" class="flex-1 py-2 text-xs font-bold rounded-lg bg-primary text-white shadow-lg shadow-primary/20">1ra Quincena</button>
-                <button onclick="showToast('Filtro: 2da Quincena')" class="flex-1 py-2 text-xs font-bold text-slate-400">2da Quincena</button>
-                <button onclick="showToast('Filtro: Mes Completo')" class="flex-1 py-2 text-xs font-bold text-slate-400">Total Mes</button>
+            <div class="flex p-1 bg-white/5 rounded-xl gap-1">
+                <button onclick="window._financialFilter='q1'; renderFinancial()" class="${filterBtnClass('q1')}">1ra Quincena</button>
+                <button onclick="window._financialFilter='q2'; renderFinancial()" class="${filterBtnClass('q2')}">2da Quincena</button>
+                <button onclick="window._financialFilter='all'; renderFinancial()" class="${filterBtnClass('all')}">Total Mes</button>
             </div>
+            <p class="text-[10px] text-primary/70 font-bold text-center mt-2">${paymentLabel}</p>
         </header>
 
         <main class="flex-1 px-4 py-6 space-y-6 overflow-y-auto pb-32">
@@ -37,24 +88,28 @@ function renderFinancial(container) {
                     <div class="absolute top-0 right-0 p-2 opacity-10">
                         <span class="material-symbols-outlined text-4xl text-white">payments</span>
                     </div>
-                    <p class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Total Quincena</p>
-                    <p class="text-2xl font-bold tracking-tighter text-white">$${(totalIncome || 0).toLocaleString()}</p>
-                    <div class="flex items-center gap-1 mt-2">
-                        <span class="material-symbols-outlined text-accent-success text-sm">trending_up</span>
-                        <span class="text-accent-success text-xs font-bold">+12.5%</span>
-                    </div>
+                    <p class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Adicionales</p>
+                    <p class="text-2xl font-bold tracking-tighter text-white">$${(totalIncome || 0).toLocaleString('es-AR')}</p>
+                    <p class="text-[10px] text-emerald-400 mt-1">${periodServices.length} servicios</p>
                 </div>
-                <div class="glass-card p-5 rounded-2xl flex flex-col gap-1 border-primary/20 bg-primary/5">
+                <div class="glass-card p-5 rounded-2xl flex flex-col gap-1 border-red-500/20 bg-red-500/5">
                     <p class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Total Gastos</p>
-                    <p class="text-2xl font-bold tracking-tighter text-white">$${(totalExpenses || 0).toLocaleString()}</p>
-                     <div class="flex items-center gap-1 mt-2">
-                        <span class="material-symbols-outlined text-accent-warning text-sm">trending_flat</span>
-                        <span class="text-accent-warning text-xs font-bold">Estable</span>
-                    </div>
+                    <p class="text-2xl font-bold tracking-tighter text-white">$${(totalExpenses || 0).toLocaleString('es-AR')}</p>
+                    <p class="text-[10px] text-red-400 mt-1">${periodExpenses.length} gastos</p>
                 </div>
             </div>
 
-            <!-- Expense Control Actions -->
+            <!-- Balance Card -->
+            <div class="glass-card p-5 rounded-2xl flex items-center justify-between ${balance >= 0 ? 'border-emerald-500/20 bg-emerald-500/5' : 'border-red-500/20 bg-red-500/5'}">
+                <div>
+                    <p class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Balance del Período</p>
+                    <p class="text-3xl font-black tracking-tighter ${balance >= 0 ? 'text-emerald-400' : 'text-red-400'}">$${Math.abs(balance).toLocaleString('es-AR')}</p>
+                    <p class="text-[10px] text-slate-500 mt-1">${balance >= 0 ? 'Superávit' : 'Déficit'}</p>
+                </div>
+                <span class="material-symbols-outlined text-4xl ${balance >= 0 ? 'text-emerald-500/30' : 'text-red-500/30'}">${balance >= 0 ? 'trending_up' : 'trending_down'}</span>
+            </div>
+
+            <!-- Expense Control -->
             <section class="space-y-4">
                  <div class="flex justify-between items-center">
                     <h2 class="text-base font-bold flex items-center gap-2 text-white">
@@ -88,18 +143,18 @@ function renderFinancial(container) {
                     </button>
                 </div>
 
-                 <!-- Expense Chart Visualization -->
-                 ${store.expenses.length > 0 ? '<div class="glass-card p-5 rounded-2xl"><canvas id="expenseChart" class="max-h-64"></canvas></div>' : ''}
+                 <!-- Expense Chart -->
+                 ${periodExpenses.length > 0 ? '<div class="glass-card p-5 rounded-2xl"><canvas id="expenseChart" class="max-h-64"></canvas></div>' : ''}
             </section>
 
             <!-- Recent Expenses List -->
             <section class="space-y-4">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Historial de Gastos</h3>
-                    ${store.expenses.length > 0 ? '<span class="text-xs text-slate-500">' + store.expenses.length + ' gastos</span>' : ''}
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Gastos del Período</h3>
+                    ${periodExpenses.length > 0 ? '<span class="text-xs text-slate-500">' + periodExpenses.length + ' gastos</span>' : ''}
                 </div>
                 <div class="space-y-2">
-                    ${store.expenses.length > 0 ? store.expenses.slice(0, 20).map(e => {
+                    ${periodExpenses.length > 0 ? periodExpenses.slice(0, 20).map(e => {
         const catIcons = { 'Comida': 'restaurant', 'Transporte': 'directions_car', 'Equipo': 'build', 'Comunicación': 'phone_in_talk', 'Salud': 'medical_services', 'Otros': 'more_horiz' };
         const catColors = { 'Comida': 'bg-red-500/10 text-red-400', 'Transporte': 'bg-blue-500/10 text-blue-400', 'Equipo': 'bg-purple-500/10 text-purple-400', 'Comunicación': 'bg-green-500/10 text-green-400', 'Salud': 'bg-pink-500/10 text-pink-400', 'Otros': 'bg-amber-500/10 text-amber-400' };
         const icon = catIcons[e.category] || 'money_off';
@@ -115,15 +170,15 @@ function renderFinancial(container) {
             '</div>' +
             '</div>' +
             '<div class="flex items-center gap-3">' +
-            '<p class="font-bold text-white">-$' + (e.amount || 0).toLocaleString() + '</p>' +
+            '<p class="font-bold text-white">-$' + (e.amount || 0).toLocaleString('es-AR') + '</p>' +
             '<button onclick="window.deleteExpenseConfirm(\'' + e.id + '\')" class="size-8 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>' +
             '</div>' +
             '</div>';
-    }).join('') : '<div class="flex flex-col items-center py-8 text-center"><div class="size-14 rounded-full bg-red-500/10 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400/40">receipt_long</span></div><p class="text-sm font-semibold text-white mb-1">Sin gastos</p><p class="text-xs text-slate-400">Usá el formulario arriba para cargar gastos</p></div>'}
+    }).join('') : '<div class="flex flex-col items-center py-8 text-center"><div class="size-14 rounded-full bg-red-500/10 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400/40">receipt_long</span></div><p class="text-sm font-semibold text-white mb-1">Sin gastos en este período</p><p class="text-xs text-slate-400">Usá el formulario arriba para cargar gastos</p></div>'}
                 </div>
             </section>
             
-             <!-- Refresh / Export Actions -->
+             <!-- Refresh / Export -->
              <div class="mt-8 flex justify-center gap-4">
                 <button onclick="window.location.reload()" class="text-sm font-bold text-slate-500 flex items-center gap-2 hover:text-primary transition-colors">
                     <span class="material-symbols-outlined">refresh</span>
@@ -131,7 +186,7 @@ function renderFinancial(container) {
                 </button>
                 <button onclick="store.exportData()" class="text-sm font-bold text-slate-400 flex items-center gap-2 hover:text-white transition-colors">
                     <span class="material-symbols-outlined">download</span>
-                    Descargar reporte (CSV)
+                    Descargar CSV
                 </button>
              </div>
         </main>
@@ -139,54 +194,37 @@ function renderFinancial(container) {
     `;
     container.innerHTML = html;
 
-    // Render Expense Chart
+    // Expense Chart
     setTimeout(() => {
         const canvas = document.getElementById('expenseChart');
-        if (canvas && store.expenses.length > 0) {
+        if (canvas && periodExpenses.length > 0) {
             const expensesByCategory = {};
-            store.expenses.forEach(e => {
+            periodExpenses.forEach(e => {
                 expensesByCategory[e.category] = (expensesByCategory[e.category] || 0) + e.amount;
             });
-
             const categories = Object.keys(expensesByCategory);
             const amounts = Object.values(expensesByCategory);
             const colorMap = { 'Comida': '#ef4444', 'Transporte': '#3b82f6', 'Equipo': '#8b5cf6', 'Comunicación': '#10b981', 'Salud': '#ec4899', 'Otros': '#f59e0b' };
             const colors = categories.map(cat => colorMap[cat] || '#6b7280');
-
             if (window.Chart) {
                 new Chart(canvas, {
                     type: 'doughnut',
                     data: {
                         labels: categories,
-                        datasets: [{
-                            data: amounts,
-                            backgroundColor: colors,
-                            borderWidth: 0,
-                            hoverOffset: 8
-                        }]
+                        datasets: [{ data: amounts, backgroundColor: colors, borderWidth: 0, hoverOffset: 8 }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: true,
                         plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: { color: '#cbd5e1', font: { size: 12, weight: 'bold' }, padding: 15, usePointStyle: true, pointStyle: 'circle' }
-                            },
+                            legend: { position: 'bottom', labels: { color: '#cbd5e1', font: { size: 12, weight: 'bold' }, padding: 15, usePointStyle: true, pointStyle: 'circle' } },
                             tooltip: {
-                                backgroundColor: 'rgba(15, 23, 42, 0.9)',
-                                titleColor: '#fff',
-                                bodyColor: '#cbd5e1',
-                                padding: 12,
-                                borderColor: 'rgba(255, 255, 255, 0.1)',
-                                borderWidth: 1,
+                                backgroundColor: 'rgba(15,23,42,0.9)', titleColor: '#fff', bodyColor: '#cbd5e1', padding: 12,
                                 callbacks: {
                                     label: function (context) {
-                                        const label = context.label || '';
                                         const value = context.parsed || 0;
                                         const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                        const percentage = ((value / total) * 100).toFixed(1);
-                                        return `${label}: $${value.toLocaleString()} (${percentage}%)`;
+                                        return `${context.label}: $${value.toLocaleString('es-AR')} (${((value / total) * 100).toFixed(1)}%)`;
                                     }
                                 }
                             }
@@ -227,12 +265,9 @@ function renderFinancial(container) {
         btn.disabled = true;
         btn.textContent = 'Guardando...';
         const success = await store.addExpense(selectedCategory, amount, descInput.value.trim());
-        if (success) {
-            amountInput.value = '';
-            descInput.value = '';
-        }
+        if (success) { amountInput.value = ''; descInput.value = ''; }
         btn.disabled = false;
-        btn.textContent = 'Agregar Gasto';
+        btn.innerHTML = '<span class="material-symbols-outlined text-lg">add_circle</span> Agregar Gasto';
     };
 
     window.deleteExpenseConfirm = (id) => {

@@ -12,7 +12,7 @@ async function renderAdmin(container) {
 
     window.allUsers = window.allUsers || [];
     window.allServices = window.allServices || [];
-    window.queryLogs = window.queryLogs || [];
+    if (window.queryLogs === undefined) window.queryLogs = null;
     let reviewsMap = new Map(); // id -> review
     let reviewsLoaded = false;
 
@@ -153,13 +153,14 @@ async function renderAdmin(container) {
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest flex items-center gap-2">
                                 <span class="material-symbols-outlined text-primary text-sm">smart_toy</span>
-                                Auditoría Centinela
+                                Auditoria Centinela
+                                <span class="flex h-2 w-2 rounded-full ${window.queryLogs !== null ? 'bg-emerald-500 animate-pulse' : 'bg-red-500'}"></span>
                             </h3>
                             <button onclick="router.navigateTo('#asistente')" class="text-[10px] font-bold text-primary hover:underline">Entrenar IA</button>
                         </div>
                         <div class="space-y-3 overflow-y-auto flex-1 pr-2 custom-scrollbar">
-                            ${!window.queryLogs ? '<p class="text-slate-500 text-xs italic text-center py-8">Auditoría desconectada...</p>' :
-                window.queryLogs.length === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8">Sin consultas registradas</p>' :
+                            ${window.queryLogs === null ? '<p class="text-slate-500 text-xs italic text-center py-8">Conectando con Supabase...</p>' :
+                window.queryLogs.length === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8">Sin consultas registradas aun</p>' :
                     window.queryLogs.map(log => `
                                 <div class="p-3 bg-white/5 border border-white/5 rounded-2xl space-y-2">
                                     <div class="flex justify-between items-center">
@@ -167,7 +168,7 @@ async function renderAdmin(container) {
                                         <span class="px-1.5 py-0.5 rounded bg-${log.score < 20 ? 'red' : log.score < 50 ? 'amber' : 'emerald'}-500/20 text-${log.score < 20 ? 'red' : log.score < 50 ? 'amber' : 'emerald'}-500 text-[8px] font-bold">Confianza: ${log.score}</span>
                                     </div>
                                     <p class="text-[11px] text-white font-medium">Q: ${log.query}</p>
-                                    <p class="text-[10px] text-slate-400 italic">R: ${log.response.substring(0, 60)}...</p>
+                                    <p class="text-[10px] text-slate-400 italic">R: ${(log.response || '').substring(0, 60)}...</p>
                                     <div class="flex justify-between items-center pt-1 border-t border-white/5">
                                         <span class="text-[7px] text-slate-600 uppercase font-bold">${log.user_email}</span>
                                         <span class="text-[7px] text-slate-600">${_formatAdminDate(log.timestamp)}</span>
@@ -185,19 +186,21 @@ async function renderAdmin(container) {
                             <span class="material-symbols-outlined text-amber-500">ads_click</span>
                             Pauta Publicitaria
                         </h3>
-                        <button onclick="store.addAd()" class="px-3 py-1 bg-primary/20 text-primary rounded-lg text-[10px] font-black uppercase hover:bg-primary/30 transition-all">
+                        <button onclick="window._showAddAdModal()" class="px-3 py-1 bg-primary/20 text-primary rounded-lg text-[10px] font-black uppercase hover:bg-primary/30 transition-all">
                             + Nuevo Banner
                         </button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         ${store.ads && store.ads.length > 0 ? store.ads.map(ad => `
-                            <div class="relative group rounded-2xl overflow-hidden border border-white/10 aspect-video shadow-lg">
+                            <div class="relative rounded-2xl overflow-hidden border border-white/10 aspect-video shadow-lg">
                                 <img src="${ad.imageUrl}" class="w-full h-full object-cover">
-                                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center gap-2">
-                                    ${ad.linkUrl ? `<a href="${ad.linkUrl}" target="_blank" class="size-10 rounded-full bg-blue-500 text-white flex items-center justify-center"><span class="material-symbols-outlined">link</span></a>` : ''}
-                                    <button onclick="store.deleteAd('${ad.id}')" class="size-10 rounded-full bg-red-500 text-white flex items-center justify-center transform scale-75 group-hover:scale-100 transition-transform">
-                                        <span class="material-symbols-outlined">delete</span>
+                                <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent p-2 flex items-center justify-between">
+                                    ${ad.linkUrl ? `<a href="${ad.linkUrl}" target="_blank" class="size-8 rounded-full bg-blue-500/80 text-white flex items-center justify-center"><span class="material-symbols-outlined text-sm">link</span></a>` : '<span></span>'}
+                                    <button onclick="store.deleteAd('${ad.id}')" class="size-8 rounded-full bg-red-500 text-white flex items-center justify-center hover:bg-red-600 transition-colors active:scale-95">
+                                        <span class="material-symbols-outlined text-sm">delete</span>
                                     </button>
+                                </div>
+                            </div>
                                 </div>
                             </div>
                         `).join('') : '<p class="text-slate-500 text-xs italic">No hay banners configurados</p>'}
@@ -456,8 +459,59 @@ store.handleAddAd = async (form) => {
 };
 
 store.deleteAd = async (id) => {
-    if (confirm("¿Eliminar este anuncio?")) {
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6';
+    overlay.innerHTML = '<div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl"><div class="flex flex-col items-center text-center"><div class="size-12 rounded-full bg-red-500/20 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400">delete_forever</span></div><h3 class="text-lg font-bold text-white mb-1">Eliminar anuncio</h3><p class="text-sm text-slate-400 mb-5">Esta accion no se puede deshacer</p><div class="flex gap-3 w-full"><button onclick="this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl">Cancelar</button><button id="confirm-del-ad" class="flex-1 py-2.5 bg-red-500 text-white text-sm font-bold rounded-xl">Eliminar</button></div></div></div>';
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+    document.body.appendChild(overlay);
+    document.getElementById('confirm-del-ad').onclick = async () => {
+        overlay.remove();
         await DB.deleteAd(id);
         if (window.location.hash === '#admin') router.handleRoute();
-    }
+    };
+};
+
+window._showAddAdModal = () => {
+    const overlay = document.createElement('div');
+    overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6';
+    overlay.innerHTML = `
+        <div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-slide-up space-y-4">
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary">add_photo_alternate</span>
+                Nuevo Banner
+            </h3>
+            <div class="space-y-3">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">URL de la imagen *</label>
+                    <input id="ad-image-url" type="url" placeholder="https://..." class="w-full mt-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">URL de destino (opcional)</label>
+                    <input id="ad-link-url" type="url" placeholder="https://..." class="w-full mt-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all">
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="this.closest('.fixed').remove()" class="flex-1 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl">Cancelar</button>
+                <button id="btn-save-ad" class="flex-1 py-2.5 bg-primary text-white text-sm font-bold rounded-xl">Publicar</button>
+            </div>
+        </div>
+    `;
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+    document.body.appendChild(overlay);
+    document.getElementById('btn-save-ad').onclick = async () => {
+        const imageUrl = document.getElementById('ad-image-url').value.trim();
+        const linkUrl = document.getElementById('ad-link-url').value.trim();
+        if (!imageUrl) { showToast('Ingresa la URL de imagen'); return; }
+        const btn = document.getElementById('btn-save-ad');
+        btn.disabled = true; btn.textContent = 'Publicando...';
+        try {
+            await DB.addAd({ imageUrl, linkUrl: linkUrl || null });
+            showToast('Anuncio publicado');
+            overlay.remove();
+            if (window.location.hash === '#admin') router.handleRoute();
+        } catch (e) {
+            showToast('Error al publicar');
+            btn.disabled = false; btn.textContent = 'Publicar';
+        }
+    };
 };

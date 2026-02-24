@@ -101,10 +101,32 @@ const DB = {
 
     async uploadAvatar(file, email) {
         if (!file || !email) return null;
-        // Upload to Firebase Storage as primary
-        const storageRef = storage.ref(`avatars/${email}/${file.name}`);
-        const snapshot = await storageRef.put(file);
-        return await snapshot.ref.getDownloadURL();
+        try {
+            // Primary: Upload to Firebase Storage
+            const storageRef = storage.ref(`avatars/${email}/profile`);
+            const snapshot = await storageRef.put(file);
+            const downloadURL = await snapshot.ref.getDownloadURL();
+            // Also persist URL directly in Firestore in case app loses storage reference
+            await db.collection('users').doc(email).set({ avatar: downloadURL }, { merge: true });
+            return downloadURL;
+        } catch (storageError) {
+            console.warn('Storage upload failed, using Base64 fallback:', storageError.message);
+            // Fallback: Convert to Base64 and store in Firestore directly
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        const base64 = e.target.result;
+                        await db.collection('users').doc(email).set({ avatar: base64 }, { merge: true });
+                        resolve(base64);
+                    } catch (err) {
+                        reject(err);
+                    }
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
     },
 
     subscribeToUsers(callback) {

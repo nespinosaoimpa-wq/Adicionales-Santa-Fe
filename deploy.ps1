@@ -1,26 +1,25 @@
 # ============================================================
-# DEPLOY SCRIPT — Adicionales Santa Fe
-# = [MODIFIED] — Fixed syntax and added gh-pages sync
+# DEPLOY SCRIPT - Adicionales Santa Fe
 # ============================================================
 
-Write-Host "🚀 Iniciando deploy completo..." -ForegroundColor Cyan
+Write-Host "Starting full deployment..." -ForegroundColor Cyan
 
-# 1. Guardar cambios en git (main = historial de código)
-Write-Host "📦 Commiteando cambios en main..." -ForegroundColor Yellow
+# 1. Save changes to git (main)
+Write-Host "Committing changes to main..." -ForegroundColor Yellow
 git add -A
-# Version automatically generated or prompted
-$msg = "Fix: Deduplication and UI double-click protection"
+$msg = Read-Host "Commit message (Enter for 'Update')"
+if (-not $msg) { $msg = "Update" }
 git commit -m $msg
 git push origin main
 
-# 2. Publicar a Firebase Hosting (el sitio REAL)
-Write-Host "🔥 Desplegando a Firebase Hosting..." -ForegroundColor Yellow
+# 2. Publish to Firebase Hosting
+Write-Host "Deploying to Firebase Hosting..." -ForegroundColor Yellow
 npx firebase-tools deploy --only hosting, firestore:rules
 
-# 3. Sincronizar con GitHub Pages
-Write-Host "📚 Sincronizando con GitHub Pages..." -ForegroundColor Yellow
+# 3. Synchronize with GitHub Pages
+Write-Host "Syncing with GitHub Pages..." -ForegroundColor Yellow
 git subtree push --prefix app origin gh-pages
 
 Write-Host "" 
-Write-Host "✅ Deploy completo!" -ForegroundColor Green
-Write-Host "🌐 Sitio en vivo: https://adicionales-santa-fe.web.app" -ForegroundColor Green
+Write-Host "DEPLOY COMPLETE!" -ForegroundColor Green
+Write-Host "Live Site: https://adicionales-santa-fe.web.app" -ForegroundColor Green
