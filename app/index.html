@@ -45,13 +45,13 @@
                         needsHardReset = true;
                     }
                 }
-                if (needsHardReset || !localStorage.getItem('app_v527_initialized')) {
-                    console.log('☢️ Initializing Nuclear Purge...');
+                if (needsHardReset || !localStorage.getItem('app_v528_final_initialized')) {
+                    console.log('☢️ Initializing Nuclear Purge v528.0...');
                     if ('caches' in window) {
                         caches.keys().then(names => {
                             return Promise.all(names.map(name => caches.delete(name)));
                         }).then(() => {
-                            localStorage.setItem('app_v527_initialized', 'true');
+                            localStorage.setItem('app_v528_final_initialized', 'true');
                             window.location.replace(window.location.href.split('#')[0] + '?purge=' + Date.now());
                         });
                     } else {
