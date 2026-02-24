@@ -16,9 +16,20 @@ git push origin main
 Write-Host "Deploying to Firebase Hosting..." -ForegroundColor Yellow
 npx firebase-tools deploy --only hosting, firestore:rules
 
-# 3. Synchronize with GitHub Pages
+# 3. Synchronize with GitHub Pages (deploys only /app folder content)
 Write-Host "Syncing with GitHub Pages..." -ForegroundColor Yellow
-git subtree push --prefix app origin gh-pages
+$tempDir = "C:\Temp\gh-pages-$(Get-Date -Format 'yyyyMMddHHmmss')"
+New-Item -ItemType Directory -Path $tempDir -Force | Out-Null
+Copy-Item -Path ".\app\*" -Destination $tempDir -Recurse -Force
+Push-Location $tempDir
+git init
+git checkout -b gh-pages
+git add -A
+git commit -m "Deploy: app to gh-pages"
+git remote add origin "https://github.com/nespinosaoimpa-wq/Adicionales-Santa-Fe.git"
+git push origin gh-pages --force
+Pop-Location
+Remove-Item -Path $tempDir -Recurse -Force
 
 Write-Host "" 
 Write-Host "DEPLOY COMPLETE!" -ForegroundColor Green
