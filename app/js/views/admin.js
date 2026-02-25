@@ -4,7 +4,7 @@
 
 async function renderAdmin(container) {
     container.innerHTML = `
-        <div class="flex flex-col items-center justify-center h-screen space-y-4 bg-background-dark">
+        <div class="flex flex-col items-center justify-center h-screen space-y-4 bg-background-light dark:bg-background-dark">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             <p class="text-slate-500 animate-pulse font-medium">Sincronizando datos globales en vivo...</p>
         </div>
@@ -20,26 +20,26 @@ async function renderAdmin(container) {
         const stats = DB.calculateStats(window.allUsers, window.allServices);
 
         container.innerHTML = `
-        <div class="min-h-screen bg-[#0f172a] text-slate-200 font-sans pb-24 animate-fade-in">
+        <div class="min-h-screen bg-background-light dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 font-sans pb-24 animate-fade-in">
             <!-- Glass Header -->
-            <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-xl border-b border-white/5 px-6 h-20 flex items-center justify-between shadow-2xl">
+            <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 px-6 h-20 flex items-center justify-between shadow-2xl">
                 <div class="flex items-center gap-4">
-                    <div class="size-12 bg-gradient-to-br from-primary to-accent-cyan rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20">
-                        <span class="material-symbols-outlined text-white text-2xl">analytics</span>
+                    <div class="hover:scale-105 transition-transform cursor-pointer">
+                        ${renderLogo('large')}
                     </div>
                     <div>
-                        <h1 class="text-xl font-black text-white tracking-tight uppercase italic flex items-center gap-2">
+                        <h1 class="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase italic flex items-center gap-2">
                             Admin Hub
                             <span class="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
                         </h1>
-                        <p class="text-[10px] text-slate-400 font-bold tracking-widest uppercase">Monitoreo Real-time</p>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-bold tracking-widest uppercase">Monitoreo Real-time</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-300">
+                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-700 dark:text-slate-300">
                         <span class="material-symbols-outlined text-sm">download</span> Exportar
                     </button>
-                    <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
+                    <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
                         <span class="material-symbols-outlined">close</span>
                     </button>
                 </div>

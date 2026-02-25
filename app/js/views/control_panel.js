@@ -46,14 +46,14 @@ function renderControlPanel(container) {
     const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     const html = `
-        <header class="sticky top-0 z-50 glass-card px-5 py-4 flex items-center justify-between border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
+        <header class="sticky top-0 z-50 px-5 py-4 flex items-center justify-between border-b border-white/5 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
             <div class="flex items-center gap-3">
-                <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full border-2 border-primary/50 overflow-hidden bg-slate-800 cursor-pointer">
-                    <img class="w-full h-full object-cover" src="${store.user.avatar || `https://ui-avatars.com/api/?name=${store.user.name}`}" onerror="this.src='https://ui-avatars.com/api/?background=0d59f2&color=fff&name=User'" />
+                <div onclick="router.navigateTo('#profile')" class="hover:scale-105 transition-transform cursor-pointer">
+                    ${renderLogo('medium')}
                 </div>
                 <div>
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-primary/80">Oficial de Guardia</p>
-                    <h1 class="text-base font-bold leading-tight dark:text-white">Panel de Control</h1>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-primary">Oficial de Guardia</p>
+                    <h1 class="text-base font-bold leading-tight text-slate-900 dark:text-white">Panel de Control</h1>
                 </div>
             </div>
             <div class="flex gap-2">
@@ -62,7 +62,7 @@ function renderControlPanel(container) {
                         <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
                     </button>
                 ` : ''}
-                <button onclick="showToast('Modo de visualización activado')" class="size-10 flex items-center justify-center rounded-full glass-card hover:bg-white/10 transition-colors text-white">
+                <button onclick="router.navigateTo('#stats')" class="size-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-white/10 transition-colors text-slate-600 dark:text-white">
                     <span class="material-symbols-outlined text-xl">visibility</span>
                 </button>
             </div>
@@ -131,7 +131,7 @@ function renderControlPanel(container) {
                                         <span class="material-symbols-outlined">${icon}</span>
                                     </div>
                                     <div>
-                                        <p class="font-bold text-sm text-white">${s.location}</p>
+                                        <p class="font-bold text-sm text-slate-800 dark:text-white">${s.location}</p>
                                     <div class="flex items-center gap-2 mt-0.5">
                                             <span class="text-[11px] text-slate-400 font-bold">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                             <span class="size-1 rounded-full bg-slate-600"></span>

@@ -537,19 +537,21 @@ const DB = {
             // Normalizar campos para key de deduplicación
             const email = (item.userEmail || item.user_email || '').toLowerCase().trim();
             const date = item.date || '';
-            const start = item.startTime || item.start_time || '';
+
+            // NORMALIZACIÓN CRÍTICA: Supabase suele devolver HH:mm:ss, Firebase HH:mm. Tomamos solo HH:mm.
+            const rawStart = (item.startTime || item.start_time || '');
+            const start = rawStart.length > 5 ? rawStart.substring(0, 5) : rawStart;
+
             const loc = (item.location || '').toLowerCase().trim();
             const type = item.type || '';
             const hours = parseFloat(item.hours) || 0;
 
             // Key heurística: Email + Fecha + Hora Inicio + Ubicación + Tipo + Horas
-            // Nota: Se omiten campos volátiles como timestamp o ID
             const key = `${email}|${date}|${start}|${loc}|${type}|${hours}`;
 
             if (seen.has(key)) {
-                // Si ya lo vimos, preferir el que tenga una ID de Firebase (suele ser el más rápido/fiel)
                 const existing = seen.get(key);
-                const isFirebaseId = (id) => id && !id.toString().includes('-'); // Firebase IDs are doc IDs, Supabase are UUIDs (contain -)
+                const isFirebaseId = (id) => id && !id.toString().includes('-');
 
                 if (!isFirebaseId(existing.id) && isFirebaseId(item.id)) {
                     seen.set(key, item);
@@ -560,12 +562,16 @@ const DB = {
             seen.set(key, item);
             return true;
         }).map(item => {
-            // Normalizar para que el resto de la app reciba nombres consistentes (CamelCase preferido)
+            // Normalizar para que el resto de la app reciba nombres consistentes
+            // Aseguramos que startTime/endTime también lleguen normalizados (HH:mm)
+            const nStart = (item.startTime || item.start_time || '');
+            const nEnd = (item.endTime || item.end_time || '');
+
             return {
                 ...item,
                 userEmail: item.userEmail || item.user_email,
-                startTime: item.startTime || item.start_time,
-                endTime: item.endTime || item.end_time,
+                startTime: nStart.length > 5 ? nStart.substring(0, 5) : nStart,
+                endTime: nEnd.length > 5 ? nEnd.substring(0, 5) : nEnd,
                 subType: item.subType || item.sub_type
             };
         });

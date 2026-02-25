@@ -59,21 +59,21 @@ function renderFinancial(container) {
         : 'flex-1 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors';
 
     const html = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4">
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center justify-between w-full">
                     <div class="flex flex-col">
-                        <h1 class="text-lg font-bold tracking-tight text-white leading-tight">Centro de Control</h1>
-                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest">${store.user.name}</p>
+                        <h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white leading-tight">Centro de Control</h1>
+                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest leading-none mt-1">${store.user.name}</p>
                     </div>
                     <div class="flex items-center gap-3">
-                        <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full border border-primary/30 overflow-hidden cursor-pointer">
-                            <img src="${store.user.avatar || `https://ui-avatars.com/api/?name=${store.user.name}`}" class="w-full h-full object-cover">
+                        <div onclick="router.navigateTo('#profile')" class="hover:scale-105 transition-transform cursor-pointer">
+                            ${renderLogo('medium')}
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="flex p-1 bg-white/5 rounded-xl gap-1">
+            <div class="flex p-1 bg-slate-200 dark:bg-white/5 rounded-xl gap-1">
                 <button onclick="window._financialFilter='q1'; renderFinancial()" class="${filterBtnClass('q1')}">1ra Quincena</button>
                 <button onclick="window._financialFilter='q2'; renderFinancial()" class="${filterBtnClass('q2')}">2da Quincena</button>
                 <button onclick="window._financialFilter='all'; renderFinancial()" class="${filterBtnClass('all')}">Total Mes</button>
@@ -88,13 +88,13 @@ function renderFinancial(container) {
                     <div class="absolute top-0 right-0 p-2 opacity-10">
                         <span class="material-symbols-outlined text-4xl text-white">payments</span>
                     </div>
-                    <p class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Adicionales</p>
-                    <p class="text-2xl font-bold tracking-tighter text-white">$${(totalIncome || 0).toLocaleString('es-AR')}</p>
+                    <p class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Adicionales</p>
+                    <p class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-white">$${(totalIncome || 0).toLocaleString('es-AR')}</p>
                     <p class="text-[10px] text-emerald-400 mt-1">${periodServices.length} servicios</p>
                 </div>
                 <div class="glass-card p-5 rounded-2xl flex flex-col gap-1 border-red-500/20 bg-red-500/5">
-                    <p class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold">Total Gastos</p>
-                    <p class="text-2xl font-bold tracking-tighter text-white">$${(totalExpenses || 0).toLocaleString('es-AR')}</p>
+                    <p class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Total Gastos</p>
+                    <p class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-white">$${(totalExpenses || 0).toLocaleString('es-AR')}</p>
                     <p class="text-[10px] text-red-400 mt-1">${periodExpenses.length} gastos</p>
                 </div>
             </div>

@@ -186,3 +186,21 @@ function copyToClipboard(text, successMsg) {
 }
 
 window.copyToClipboard = copyToClipboard;
+
+function renderLogo(size = 'medium') {
+    const sizes = {
+        small: 'size-8 text-xs',
+        medium: 'size-10 text-sm',
+        large: 'size-12 text-lg'
+    };
+    const s = sizes[size] || sizes.medium;
+
+    return `
+        <div class="${s} rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center text-white font-black tracking-tighter shadow-lg shadow-primary/20 border border-white/20 select-none overflow-hidden">
+            <span class="relative">
+                ASF
+                <span class="absolute -top-1 -right-1 size-1 bg-accent-cyan rounded-full animate-pulse"></span>
+            </span>
+        </div>
+    `;
+}

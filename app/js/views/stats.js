@@ -66,12 +66,12 @@ function renderStats(container) {
     const sum = arr => arr.reduce((t, x) => t + (x.total || 0), 0);
 
     container.innerHTML = `
-        <div class="min-h-screen bg-[#0a0c12] text-white">
-            <header class="h-16 flex items-center justify-between px-4 border-b border-white/5">
+        <div class="min-h-screen bg-background-light dark:bg-[#0a0c12] text-slate-900 dark:text-white">
+            <header class="h-16 flex items-center justify-between px-4 border-b border-white/5 bg-background-light/80 dark:bg-[#0a0c12]/80 backdrop-blur-md sticky top-0 z-50">
                 <button onclick="router.navigateTo('#agenda')" class="size-10 flex items-center justify-center text-primary">
                     <span class="material-symbols-outlined text-2xl">chevron_left</span>
                 </button>
-                <h1 class="text-lg font-bold tracking-tight">Estadisticas</h1>
+                <h1 class="text-lg font-bold tracking-tight text-slate-900 dark:text-white">Estadísticas</h1>
                 <button onclick="router.navigateTo('#history')" class="text-primary text-xs font-bold uppercase tracking-widest">Historial</button>
             </header>
 

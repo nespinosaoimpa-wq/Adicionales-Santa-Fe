@@ -7,12 +7,12 @@ function renderHistory(container) {
     const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
-            <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-lg font-bold text-white">Historial Completo</h1>
-            <div class="w-10"></div>
+            <h1 class="text-lg font-bold text-slate-900 dark:text-white">Historial Completo</h1>
+            <div class="size-10 flex items-center justify-center">${renderLogo('small')}</div>
         </header>
 
         <main class="space-y-4 pb-32">
@@ -32,7 +32,7 @@ function renderHistory(container) {
                                     <span class="material-symbols-outlined">${icon}</span>
                                 </div>
                                 <div>
-                                    <p class="font-bold text-sm text-white">${s.location}</p>
+                                    <p class="font-bold text-sm text-slate-800 dark:text-white">${s.location}</p>
                                     <div class="flex items-center gap-2 mt-0.5">
                                         <span class="text-[11px] text-slate-400">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                         ${s.status === 'paid' ? '<span class="text-[10px] text-green-400 font-bold bg-green-500/10 px-1.5 rounded">PAGADO</span>' : ''}

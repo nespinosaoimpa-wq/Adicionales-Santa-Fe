@@ -15,11 +15,11 @@ function renderServiceDetails(container, serviceId) {
     const isPaid = service.status === 'paid';
 
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
-            <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <button onclick="window.history.back()" class="size-10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-lg font-bold text-white">Detalle Servicio</h1>
+            <h1 class="text-lg font-bold text-slate-900 dark:text-white">Detalle Servicio</h1>
             
              <button onclick="handleDeleteService('${serviceId}')" class="size-10 rounded-full hover:bg-red-500/10 flex items-center justify-center text-red-500 transition-colors">
                 <span class="material-symbols-outlined">delete</span>
@@ -28,13 +28,13 @@ function renderServiceDetails(container, serviceId) {
 
         <main class="p-6 space-y-6 pb-32 max-w-md mx-auto">
              <!-- Status Banner -->
-             <div class="p-4 rounded-xl ${isPaid ? 'bg-green-500/10 border border-green-500/20' : 'bg-slate-800 border border-white/5'} flex justify-between items-center transition-all">
+             <div class="p-4 rounded-xl ${isPaid ? 'bg-green-500/10 border border-green-500/20' : 'bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-white/5'} flex justify-between items-center transition-all">
                 <div>
-                    <span class="text-xs font-bold uppercase tracking-wider ${isPaid ? 'text-green-400' : 'text-slate-400'}">Estado</span>
-                    <p class="text-lg font-bold text-white">${isPaid ? 'LIQUIDADO' : 'PENDIENTE DE PAGO'}</p>
+                    <span class="text-xs font-bold uppercase tracking-wider ${isPaid ? 'text-green-600 dark:text-green-400' : 'text-slate-500 dark:text-slate-400'}">Estado</span>
+                    <p class="text-lg font-bold text-slate-900 dark:text-white">${isPaid ? 'LIQUIDADO' : 'PENDIENTE DE PAGO'}</p>
                 </div>
                 <!-- Toggle Switch -->
-                <button onclick="handleTogglePaid('${serviceId}', ${!isPaid})" class="h-8 px-4 rounded-full flex items-center gap-2 font-bold text-xs ${isPaid ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-white/10 text-slate-300'} transition-all">
+                <button onclick="handleTogglePaid('${serviceId}', ${!isPaid})" class="h-8 px-4 rounded-full flex items-center gap-2 font-bold text-xs ${isPaid ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300'} transition-all">
                     ${isPaid ? '<span class="material-symbols-outlined text-sm">check</span> PAGADO' : 'MARCAR PAGADO'}
                 </button>
              </div>
@@ -58,14 +58,14 @@ function renderServiceDetails(container, serviceId) {
                         <span class="flex items-center gap-2 text-slate-400 text-xs font-bold mb-1">
                             <span class="material-symbols-outlined text-sm">schedule</span> Horario
                         </span>
-                        <p class="text-white font-medium">${service.startTime} - ${service.endTime}</p>
+                        <p class="text-slate-900 dark:text-white font-medium">${service.startTime} - ${service.endTime}</p>
                     </div>
                  </div>
                  
                  <div class="border-t border-white/10 pt-4 flex justify-between items-center">
                     <div>
                         <span class="text-xs text-slate-500 uppercase font-bold">Total a Cobrar</span>
-                        <p class="text-3xl font-black text-white">$${(service.total || 0).toLocaleString()}</p>
+                        <p class="text-3xl font-black text-slate-900 dark:text-white">$${(service.total || 0).toLocaleString()}</p>
                     </div>
                  </div>
              </div>

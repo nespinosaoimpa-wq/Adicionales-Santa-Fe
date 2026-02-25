@@ -27,7 +27,7 @@ function renderAgenda(container) {
         <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 pt-12 pb-4">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-2xl font-bold tracking-tight dark:text-white">Mi Agenda</h1>
+                    <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Mi Agenda</h1>
                     <div class="flex items-center gap-2">
                         <button id="btn-prev-month" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">arrow_back_ios</span></button>
                         <p class="text-sm text-slate-500 dark:text-slate-400 capitalize w-24 text-center select-none">${currentMonthLabel}</p>
@@ -45,8 +45,8 @@ function renderAgenda(container) {
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
                     <div class="flex items-center gap-2">
-                        <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
-                            <img class="w-full h-full object-cover" src="${store.user.avatar}" />
+                        <div onclick="router.navigateTo('#profile')" class="hover:scale-105 transition-transform cursor-pointer">
+                            ${renderLogo('medium')}
                         </div>
                     </div>
                 </div>

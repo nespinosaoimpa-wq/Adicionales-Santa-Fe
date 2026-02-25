@@ -14,8 +14,8 @@ function renderAsistenteHub(container) {
     ];
 
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
-            <h1 class="text-xl font-bold text-white tracking-tight">Asistente Virtual</h1>
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Asistente Virtual</h1>
             <div class="flex items-center gap-2">
                 ${store.user && store.user.role === 'admin' ? `
                     <button onclick="router.navigateTo('#admin')" class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
@@ -23,7 +23,7 @@ function renderAsistenteHub(container) {
                     </button>
                 ` : ''}
                 <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shadow-lg shadow-primary/10">
-                    <span class="material-symbols-outlined">smart_toy</span>
+                    ${renderLogo('small')}
                 </div>
             </div>
         </header>

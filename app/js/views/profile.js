@@ -32,24 +32,24 @@ function renderProfile(container) {
                     onchange="store.renameServiceSubtype('${type}', '${sub}', this.value)"
                     class="bg-transparent border-none text-sm font-medium text-slate-300 focus:ring-0 focus:text-white w-full placeholder-slate-600 transition-colors">
                 
-                <div class="flex items-center gap-2 bg-white/5 rounded-lg px-2 py-1 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
+                <div class="flex items-center gap-2 bg-slate-200 dark:bg-white/5 rounded-lg px-2 py-1 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
                     <span class="text-xs text-slate-500">$</span>
                     <input type="number" 
                         value="${config[type][sub]}" 
                         onchange="store.updateLocalConfig('${type}', '${sub}', this.value)"
-                        class="w-20 bg-transparent border-none text-right text-sm font-bold text-white focus:ring-0 p-0">
+                        class="w-20 bg-transparent border-none text-right text-sm font-bold text-slate-900 dark:text-white focus:ring-0 p-0">
                 </div>
             </div>
         `).join('');
     };
 
     const html = `
-        <header class="sticky top-0 z-50 bg-background-dark/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
-            <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors active:scale-95">
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 transition-colors active:scale-95">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-base font-bold text-white tracking-wide">Mi Perfil</h1>
-            <div class="size-10"></div> <!-- Spacer -->
+            <h1 class="text-base font-bold text-slate-900 dark:text-white tracking-wide">Mi Perfil</h1>
+            <div class="size-10 flex items-center justify-center">${renderLogo('small')}</div>
         </header>
 
         <main class="p-6 space-y-8 pb-32 max-w-md mx-auto animate-fade-in">
@@ -61,8 +61,8 @@ function renderProfile(container) {
                 <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-input').click()">
                     <!-- Decorative Rings -->
                     <div class="absolute -inset-1 bg-gradient-to-tr from-primary to-accent-cyan rounded-full opacity-75 blur-sm group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative size-28 rounded-full p-1 bg-background-dark shadow-2xl">
-                        <img id="profile-avatar-img" src="${userAvatar}" class="w-full h-full rounded-full object-cover border-2 border-white/10 group-hover:border-primary/50 transition-all duration-300 shadow-inner">
+                    <div class="relative size-28 rounded-full p-1 bg-white dark:bg-background-dark shadow-2xl">
+                        <img id="profile-avatar-img" src="${userAvatar}" class="w-full h-full rounded-full object-cover border-2 border-slate-200 dark:border-white/10 group-hover:border-primary/50 transition-all duration-300 shadow-inner">
                     </div>
                     <!-- Edit Badge -->
                     <div class="absolute bottom-1 right-1 bg-primary text-white size-8 rounded-full flex items-center justify-center shadow-lg border-2 border-background-dark transform group-hover:scale-110 transition-transform">
@@ -72,10 +72,10 @@ function renderProfile(container) {
 
                 <div class="mt-4 text-center space-y-1">
                     <div class="flex items-center justify-center gap-2">
-                        <h2 class="text-2xl font-bold text-white tracking-tight">${userName}</h2>
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">${userName}</h2>
                         <span onclick="const name = prompt('Nuevo nombre:', '${userName}'); if(name) store.updateProfile(name, '${userAvatar}');" class="material-symbols-outlined text-slate-500 hover:text-primary cursor-pointer text-sm transition-colors">edit</span>
                     </div>
-                    <p class="text-sm font-medium text-slate-400">${userEmail}</p>
+                    <p class="text-sm font-medium text-slate-500 dark:text-slate-400">${userEmail}</p>
                 </div>
 
                 <!-- Action Buttons -->
