@@ -61,13 +61,8 @@ function renderRegister(container) {
                     <button id="type-ospes" class="flex-1 py-2 text-xs font-bold text-slate-500 dark:text-slate-400" onclick="setFormType('OSPES')">OSPES</button>
                 </div>
                 
-                <!-- Sub Type -->
-                <div class="bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/10 p-4">
-                    <p class="text-xs text-slate-500 mb-2">Categoría</p>
-                    <div class="flex gap-2 flex-wrap" id="subtype-container">
-                        <!-- Injected by JS -->
-                    </div>
-                </div>
+                <!-- Sub Type Hidden (Automated) -->
+                <div class="hidden" id="subtype-container"></div>
 
                 <div class="bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/10 p-4">
                     <p class="text-xs text-slate-500 mb-2">Ubicación / Notas</p>
@@ -124,23 +119,8 @@ function renderRegister(container) {
     let currentSubType = 'Ordinaria';
 
     const updateSubtypes = () => {
-        const container = document.getElementById('subtype-container');
-        const config = store.serviceConfig[currentType];
-        const subtypes = Object.keys(config);
-
-        container.innerHTML = subtypes.map(sub => `
-            <button onclick="setSubType('${sub}')" 
-                class="px-4 py-2 rounded-lg text-sm font-bold border ${currentSubType === sub ? 'bg-primary text-white border-primary' : 'border-slate-300 dark:border-slate-600 text-slate-500 dark:text-slate-400'} transition-all">
-                ${sub}
-            </button>
-        `).join('');
-
-        if (!subtypes.includes(currentSubType)) {
-            currentSubType = subtypes[0];
-            updateSubtypes();
-        } else {
-            updateRate();
-        }
+        // Now automated, but we keep the logic to fetch rates
+        updateRate();
     };
 
     window.setFormType = (type) => {

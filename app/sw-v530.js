@@ -1,28 +1,28 @@
-const CACHE_NAME = 'centinela-v529.3';
+const CACHE_NAME = 'centinela-v530.0';
 const ASSETS = [
     './',
-    './index.html?v=529.3',
-    './styles.css?v=529.3',
-    './supabase-config.js?v=529.3',
-    './firebase-config.js?v=529.3',
-    './db-v211.js?v=529.3',
-    './js/utils.js?v=529.3',
-    './js/store.js?v=529.3',
-    './js/components.js?v=529.3',
-    './js/router.js?v=529.3',
-    './js/data/directory.js?v=529.3',
-    './js/views/auth.js?v=529.3',
-    './js/views/agenda.js?v=529.3',
-    './js/views/register.js?v=529.3',
-    './js/views/control_panel.js?v=529.3',
-    './js/views/financial.js?v=529.3',
-    './js/views/profile.js?v=529.3',
-    './js/views/stats.js?v=529.3',
-    './js/views/history.js?v=529.3',
-    './js/views/service_details.js?v=529.3',
-    './js/views/asistente.js?v=529.3',
-    './js/views/admin.js?v=529.3',
-    './app-v211.js?v=529.3'
+    './index.html?v=530.0',
+    './styles.css?v=530.0',
+    './supabase-config.js?v=530.0',
+    './firebase-config.js?v=530.0',
+    './db-v211.js?v=530.0',
+    './js/utils.js?v=530.0',
+    './js/store.js?v=530.0',
+    './js/components.js?v=530.0',
+    './js/router.js?v=530.0',
+    './js/data/directory.js?v=530.0',
+    './js/views/auth.js?v=530.0',
+    './js/views/agenda.js?v=530.0',
+    './js/views/register.js?v=530.0',
+    './js/views/control_panel.js?v=530.0',
+    './js/views/financial.js?v=530.0',
+    './js/views/profile.js?v=530.0',
+    './js/views/stats.js?v=530.0',
+    './js/views/history.js?v=530.0',
+    './js/views/service_details.js?v=530.0',
+    './js/views/asistente.js?v=530.0',
+    './js/views/admin.js?v=530.0',
+    './app-v211.js?v=530.0'
 ];
 
 self.addEventListener('install', event => {
@@ -37,7 +37,7 @@ self.addEventListener('activate', event => {
         caches.keys().then(keys => Promise.all(
             keys.map(key => {
                 if (key !== CACHE_NAME) {
-                    console.log('[SW v529] Purging old cache:', key);
+                    console.log('[SW v530] Purging old cache:', key);
                     return caches.delete(key);
                 }
             })
