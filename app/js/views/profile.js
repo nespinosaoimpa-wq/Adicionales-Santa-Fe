@@ -132,6 +132,62 @@ function renderProfile(container) {
             </section>
 
 
+            <!-- Apariencia & Notificaciones -->
+            <section class="space-y-5">
+                <h3 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Apariencia y Notificaciones</h3>
+
+                <!-- Dark/Light Mode Toggle -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-xl bg-indigo-500/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-indigo-400" id="theme-icon">${document.documentElement.classList.contains('dark') ? 'dark_mode' : 'light_mode'}</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-white">Modo Visual</p>
+                                <p class="text-[10px] text-slate-500" id="theme-label">${document.documentElement.classList.contains('dark') ? 'Oscuro activo' : 'Claro activo'}</p>
+                            </div>
+                        </div>
+                        <button onclick="store.toggleTheme()" 
+                            class="relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-300 focus:outline-none ${document.documentElement.classList.contains('dark') ? 'bg-indigo-500' : 'bg-slate-300'}">
+                            <span class="inline-block size-5 transform rounded-full bg-white shadow-md transition-transform duration-300 ${document.documentElement.classList.contains('dark') ? 'translate-x-6' : 'translate-x-1'}"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-xl bg-amber-500/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-amber-400">alarm</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-white">Alarma de Adicionales</p>
+                                <p class="text-[10px] text-slate-500">${store.notificationSettings?.enabled ? 'Activa ✅' : 'Inactiva ❌'}</p>
+                            </div>
+                        </div>
+                        <button onclick="store.requestNotificationPermission()" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold transition-all ${store.notificationSettings?.enabled ? 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-red-500/20 hover:text-red-400 hover:border-red-500/30' : 'bg-primary/20 text-primary border border-primary/30 hover:bg-primary/30'}">
+                            ${store.notificationSettings?.enabled ? 'Desactivar' : 'Activar'}
+                        </button>
+                    </div>
+
+                    ${store.notificationSettings?.enabled ? `
+                    <div class="space-y-2">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Avisar con anticipación de:</p>
+                        <div class="flex gap-2">
+                            ${[15, 30, 60, 120].map(mins => `
+                                <button onclick="store.setNotifLeadTime(${mins})" 
+                                    class="flex-1 py-2 rounded-xl text-xs font-bold transition-all ${(store.notificationSettings.leadTime || 60) === mins ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'}">
+                                    ${mins < 60 ? mins + 'min' : (mins / 60) + 'h'}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>` : ''}
+                </div>
+            </section>
+
             <!-- Save Button -->
             <button onclick="store.saveProfile()" class="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-4 rounded-2xl font-bold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all">
                 Guardar Cambios

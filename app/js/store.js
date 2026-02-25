@@ -113,31 +113,46 @@ const store = {
             return;
         }
 
-        const permission = await Notification.requestPermission();
-        if (permission === "granted") {
-            // Toggle
+        // If already granted, just toggle
+        if (Notification.permission === 'granted') {
             this.notificationSettings.enabled = !this.notificationSettings.enabled;
-            showToast(this.notificationSettings.enabled ? "Notificaciones Activadas" : "Notificaciones Desactivadas");
-
-            // Persist if user exists
-            if (this.user) {
-                this.user.notificationSettings = this.notificationSettings;
-                await DB.saveUser(this.user);
-            }
-
-            // Re-render to show state
-            if (router.currentRoute === '#profile') renderProfile(document.getElementById('app'));
-
-            // Test Notification if just enabled
-            if (this.notificationSettings.enabled) {
-                new Notification("Adicionales Santa Fe", {
-                    body: "¡Notificaciones configuradas correctamente!",
-                    icon: "./icon.png"
-                });
-            }
+            showToast(this.notificationSettings.enabled ? "🔔 Alarmas Activadas" : "🔕 Alarmas Desactivadas");
         } else {
-            showToast("Permiso denegado o bloqueado");
+            const permission = await Notification.requestPermission();
+            if (permission === "granted") {
+                this.notificationSettings.enabled = true;
+                showToast("🔔 Alarmas Activadas");
+                new Notification("Adicionales Santa Fe", {
+                    body: "¡Alarmas configuradas! Te avisaremos antes de cada adicional.",
+                    icon: "./assets/icon-192.png"
+                });
+            } else {
+                showToast("⚠️ Permiso denegado — Habilitá las notificaciones en Ajustes del navegador");
+                return;
+            }
         }
+
+        // Persist settings
+        if (this.user) {
+            this.user.notificationSettings = this.notificationSettings;
+            await DB.saveUser(this.user);
+        }
+
+        // Re-schedule alarms
+        this.scheduleShiftAlarms();
+
+        // Re-render to show state
+        if (router.currentRoute === '#profile') renderProfile(document.getElementById('app'));
+    },
+
+    async setNotifLeadTime(minutes) {
+        this.notificationSettings.leadTime = minutes;
+        if (this.user) {
+            this.user.notificationSettings = this.notificationSettings;
+            DB.saveUser(this.user).catch(e => console.warn('setNotifLeadTime save error:', e));
+        }
+        this.scheduleShiftAlarms(); // Re-schedule with new lead time
+        if (router.currentRoute === '#profile') renderProfile(document.getElementById('app'));
     },
 
     async addService(service) {
@@ -320,7 +335,10 @@ const store = {
     },
 
     init() {
-        console.log("App v528.0-AUDIT-COMPLETE - Suite Asistente Virtual PRO");
+        console.log("App v529.2-PHASE12 - Dark Mode, Alarms, Offline");
+
+        // Apply saved theme ASAP
+        this.initTheme();
 
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());
@@ -375,6 +393,7 @@ const store = {
                     this.unsubscribeServices = DB.subscribeToServices(services => {
                         this.services = services;
                         if (this.checkNotifications) this.checkNotifications();
+                        this.scheduleShiftAlarms(); // Schedule push notifications for upcoming shifts
                         if (this.authInitialized) router.handleRoute();
                     });
 
@@ -599,6 +618,79 @@ const store = {
         }
 
         return { ord, ext };
+    },
+
+    // --- THEME: Dark / Light Mode ---
+    initTheme() {
+        const saved = localStorage.getItem('app_theme') || 'dark';
+        const root = document.documentElement;
+        if (saved === 'light') {
+            root.classList.remove('dark');
+        } else {
+            root.classList.add('dark');
+        }
+    },
+
+    toggleTheme() {
+        const root = document.documentElement;
+        const isDark = root.classList.contains('dark');
+        if (isDark) {
+            root.classList.remove('dark');
+            localStorage.setItem('app_theme', 'light');
+            showToast('☀️ Modo Claro activado');
+        } else {
+            root.classList.add('dark');
+            localStorage.setItem('app_theme', 'dark');
+            showToast('🌙 Modo Oscuro activado');
+        }
+        // Re-render current view to update theme-dependent UI
+        if (router && router.currentRoute) router.handleRoute();
+    },
+
+    // --- SHIFT ALARMS: Schedule push notifications for upcoming shifts ---
+    scheduleShiftAlarms() {
+        if (!this.notificationSettings?.enabled) return;
+        if (Notification.permission !== 'granted') return;
+
+        // Clear previous timers
+        if (this._alarmTimers) this._alarmTimers.forEach(t => clearTimeout(t));
+        this._alarmTimers = [];
+
+        const leadMs = (this.notificationSettings.leadTime || 60) * 60 * 1000;
+        const now = Date.now();
+
+        this.services.forEach(service => {
+            if (!service.date || !service.startTime) return;
+            const [hours, minutes] = service.startTime.split(':').map(Number);
+            const [y, m, d] = service.date.split('-').map(Number);
+            const shiftDate = new Date(y, m - 1, d, hours, minutes, 0, 0);
+            const notifyAt = shiftDate.getTime() - leadMs;
+
+            if (notifyAt <= now) return; // Already past
+
+            const delay = notifyAt - now;
+            const timer = setTimeout(() => {
+                const location = service.location || 'Sin ubicación';
+                const timeRange = service.startTime + (service.endTime ? ` - ${service.endTime}` : '');
+                const typeMap = { Public: 'Público', Private: 'Privado', OSPES: 'OSPES' };
+                const type = typeMap[service.type] || service.type;
+                if (Notification.permission === 'granted') {
+                    new Notification(`🚨 Adicional en ${this.notificationSettings.leadTime} min`, {
+                        body: `📍 ${location}\n🕐 ${timeRange} — ${type}`,
+                        icon: './assets/icon-192.png',
+                        badge: './assets/icon-192.png',
+                        vibrate: [200, 100, 200],
+                        tag: 'shift-alarm-' + service.id,
+                        renotify: false
+                    });
+                }
+            }, delay);
+
+            this._alarmTimers.push(timer);
+        });
+
+        const count = this._alarmTimers.length;
+        if (count > 0) console.log(`⏰ ${count} alarma(s) programada(s)`);
     }
 };
 
