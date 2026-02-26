@@ -43,12 +43,12 @@ function renderAsistenteHub(container) {
                         <div class="absolute -right-4 -top-4 size-24 bg-gradient-to-br ${tool.color} opacity-5 blur-2xl group-hover:opacity-20 transition-opacity"></div>
                         
                         <div class="flex gap-4 items-start relative z-10">
-                            <div class="size-12 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-110 relative">
+                            <div class="size-12 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center text-slate-900 dark:text-white shadow-lg transition-transform group-hover:scale-110 relative">
                                 <span class="material-symbols-outlined text-2xl">${tool.icon}</span>
                                 ${tool.badge ? `<span class="absolute -top-1 -right-1 flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500 border border-background-dark"></span></span>` : ''}
                             </div>
                             <div class="flex-1 space-y-1">
-                                <h3 class="font-bold text-white group-hover:text-primary transition-colors">${tool.title}</h3>
+                                <h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">${tool.title}</h3>
                                 <p class="text-xs text-slate-400 leading-relaxed">${tool.desc}</p>
                             </div>
                             <span class="material-symbols-outlined text-slate-700 self-center">chevron_right</span>
@@ -63,7 +63,7 @@ function renderAsistenteHub(container) {
                     <div class="size-8 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-500">
                         <span class="material-symbols-outlined text-sm">edit_square</span>
                     </div>
-                    <h3 class="font-bold text-white text-sm">Buzón de Sugerencias</h3>
+                    <h3 class="font-bold text-slate-900 dark:text-white text-sm">Buzón de Sugerencias</h3>
                 </div>
                 <p class="text-[11px] text-slate-400 mb-4">¿Te gustaría que Centinela sepa algo más? Tu opinión nos ayuda a mejorar el servicio.</p>
                 <form id="feedback-form" class="space-y-3">
@@ -76,8 +76,8 @@ function renderAsistenteHub(container) {
                     </div>
                     <input type="hidden" id="feedback-rating" value="5">
                     <textarea id="feedback-comment" placeholder="Escribe tu mensaje aquí..." 
-                        class="w-full bg-white/5 border border-white/10 rounded-2xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all h-20 resize-none"></textarea>
-                    <button type="submit" class="w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all active:scale-95">
+                        class="w-full bg-white/5 border border-white/10 rounded-2xl p-3 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all h-20 resize-none"></textarea>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-slate-900 dark:text-white text-xs font-bold transition-all active:scale-95">
                         Enviar Reseña
                     </button>
                 </form>
@@ -90,11 +90,11 @@ function renderAsistenteHub(container) {
                         <span class="material-symbols-outlined">volunteer_activism</span>
                     </div>
                     <div>
-                        <h3 class="font-black text-white text-sm tracking-tight">Apoyá al Desarrollador</h3>
+                        <h3 class="font-black text-slate-900 dark:text-white text-sm tracking-tight">Apoyá al Desarrollador</h3>
                         <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Sustento del Proyecto</p>
                     </div>
                 </div>
-                <p class="text-[11px] text-slate-300 leading-relaxed mb-5">
+                <p class="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed mb-5">
                     Desarrollar sitios lleva tiempo, esfuerzo y frustración, como así también a veces las bases de datos generan gastos cuyo sustento corre por quien desarrolla la app. Esta app está pensada para hacer funcionales las tareas de los policías; si querés que sigamos creciendo, podés donar a nuestra cuenta:
                 </p>
                 <button onclick="window.showDonationModal()" class="w-full py-3.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-95 transition-all">
@@ -157,22 +157,22 @@ function showAnnouncementModal() {
             </div>
             
             <div class="space-y-2">
-                <h2 class="text-xl font-black text-white">¡App Actualizada!</h2>
+                <h2 class="text-xl font-black text-slate-900 dark:text-white">¡App Actualizada!</h2>
                 <p class="text-xs text-slate-400 leading-relaxed">Bienvenido a la versión **Final (PRO)** con todas las funciones policiales habilitadas.</p>
             </div>
 
             <div class="space-y-3 text-left">
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
                     <span class="material-symbols-outlined text-amber-500">smart_toy</span>
-                    <p class="text-[11px] text-slate-200">**Centinela AI v2**: Base legal expandida y respuestas inteligentes para oficiales.</p>
+                    <p class="text-[11px] text-slate-800 dark:text-slate-200">**Centinela AI v2**: Base legal expandida y respuestas inteligentes para oficiales.</p>
                 </div>
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
                     <span class="material-symbols-outlined text-emerald-500">volunteer_activism</span>
-                    <p class="text-[11px] text-slate-200">**Apoyo al Proyecto**: Nueva sección en Perfil para colaborar con el crecimiento.</p>
+                    <p class="text-[11px] text-slate-800 dark:text-slate-200">**Apoyo al Proyecto**: Nueva sección en Perfil para colaborar con el crecimiento.</p>
                 </div>
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
                     <span class="material-symbols-outlined text-purple-500">rate_review</span>
-                    <p class="text-[11px] text-slate-200">**Buzón de Ideas**: Envíanos tus sugerencias directamente desde el Asistente.</p>
+                    <p class="text-[11px] text-slate-800 dark:text-slate-200">**Buzón de Ideas**: Envíanos tus sugerencias directamente desde el Asistente.</p>
                 </div>
             </div>
 
@@ -199,10 +199,10 @@ function renderDirectorioPolicial(container) {
 
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-xl font-bold text-white tracking-tight">Directorio Policial</h1>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Directorio Policial</h1>
         </header>
 
         <main class="p-6 space-y-4 pb-32 max-w-md mx-auto animate-fade-in">
@@ -211,7 +211,7 @@ function renderDirectorioPolicial(container) {
                 <div class="relative group">
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 group-focus-within:text-primary transition-colors">search</span>
                     <input type="text" id="directory-search" placeholder="Buscar dependencia o número..." 
-                        class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all shadow-inner"
+                        class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all shadow-inner"
                         oninput="window.runDirectoryFilter()">
                 </div>
                 
@@ -293,7 +293,7 @@ function renderDirectorioPolicial(container) {
                                     <span class="material-symbols-outlined text-lg">${c.icon || 'shield'}</span>
                                 </div>
                                 <div class="flex-1 min-w-0 pr-2">
-                                    <h3 class="font-bold text-white text-[12px] leading-tight line-clamp-1">${c.name}</h3>
+                                    <h3 class="font-bold text-slate-900 dark:text-white text-[12px] leading-tight line-clamp-1">${c.name}</h3>
                                     <div class="flex flex-wrap gap-x-2 gap-y-0.5 mt-0.5">
                                         ${c.phones.map(p => `<span class="text-[10px] text-slate-500 font-mono">${p}</span>`).join('')}
                                     </div>
@@ -330,10 +330,10 @@ function renderChecklistGuardia(container) {
 
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-xl font-bold text-white tracking-tight">Checklist de Guardia</h1>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Checklist de Guardia</h1>
         </header>
 
         <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
@@ -350,7 +350,7 @@ function renderChecklistGuardia(container) {
                     <label class="glass-card p-4 rounded-2xl border border-white/5 flex items-center gap-4 cursor-pointer active:bg-white/5 transition-colors">
                         <input type="checkbox" class="size-6 rounded-lg bg-slate-800 border-white/10 text-primary focus:ring-primary/20 accent-primary" onchange="saveCheckState('${item.id}', this.checked)">
                         <span class="material-symbols-outlined text-slate-600">${item.icon}</span>
-                        <span class="flex-1 text-sm font-medium text-slate-300">${item.label}</span>
+                        <span class="flex-1 text-sm font-medium text-slate-700 dark:text-slate-300">${item.label}</span>
                     </label>
                 `).join('')}
             </div>
@@ -387,10 +387,10 @@ function renderCronoCalendario(container) {
 
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-xl font-bold text-white tracking-tight">Crono-Calendario</h1>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Crono-Calendario</h1>
         </header>
 
         <main class="p-6 space-y-8 pb-32 max-w-md mx-auto animate-fade-in">
@@ -405,7 +405,7 @@ function renderCronoCalendario(container) {
                         <div onclick="setDutyCycle('${c.id}')" class="glass-card p-4 rounded-2xl border border-white/5 hover:border-primary/30 transition-all cursor-pointer group">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <h3 class="font-bold text-white group-hover:text-primary transition-colors">${c.name}</h3>
+                                    <h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">${c.name}</h3>
                                     <p class="text-[11px] text-slate-500">${c.desc}</p>
                                 </div>
                                 <span class="material-symbols-outlined text-slate-700">radio_button_unchecked</span>
@@ -455,7 +455,7 @@ function renderCronoCalendario(container) {
                         <span class="text-sm font-black">${shiftDate.getDate()}</span>
                     </div>
                     <div>
-                        <p class="text-xs font-bold text-white">Servicio Activo</p>
+                        <p class="text-xs font-bold text-slate-900 dark:text-white">Servicio Activo</p>
                         <p class="text-[10px] text-slate-500 uppercase">${shiftDate.toLocaleDateString('es-ES', { month: 'long' })}</p>
                     </div>
                 </div>
@@ -468,11 +468,11 @@ function renderCronoCalendario(container) {
 function renderCentinela(container) {
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
             <div class="flex flex-col">
-                <h1 class="text-sm font-black text-white leading-none">Centinela AI</h1>
+                <h1 class="text-sm font-black text-slate-900 dark:text-white leading-none">Centinela AI</h1>
                 <span class="text-[10px] text-primary flex items-center gap-1">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -490,10 +490,10 @@ function renderCentinela(container) {
                         <span class="material-symbols-outlined text-sm">smart_toy</span>
                     </div>
                     <div class="bg-white/5 border border-white/5 p-3 rounded-2xl rounded-tl-none">
-                        <p class="text-xs text-slate-200 leading-relaxed">
-                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, el **Decreto 461**, la nueva **Reforma Previsional (Ley 14.283)** y las escalas salariales de **Febrero 2026 (Decreto 142/26)**.
+                        <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">
+                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, **Decreto 461**, **Reforma Previsional (Ley 14.283)**, las escalas salariales de **Febrero 2026 (Decreto 142/26)**, el **Código Procesal Penal (CPP) de Santa Fe**, el **Código Penal Argentino (CP)** y las últimas grillas del **ISeP 2026**.
                             <br><br>
-                            ¿Qué duda reglamentaria o de haberes tenés hoy?
+                            ¿Qué duda reglamentaria, penal o de haberes tenés hoy?
                         </p>
                     </div>
                 </div>
@@ -502,7 +502,7 @@ function renderCentinela(container) {
             <div class="p-4 bg-slate-900/50 border-t border-white/5 pb-10">
                 <form id="centinela-form" class="relative flex items-center gap-2">
                     <input type="text" id="chat-input" placeholder="Sueldos, jubilación, ascensos..." 
-                        class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
+                        class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
                     <button type="submit" class="absolute right-1 size-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 active:scale-90 transition-all">
                         <span class="material-symbols-outlined">send</span>
                     </button>
@@ -838,7 +838,43 @@ function renderCentinela(container) {
                 { match: ['boletin oficial', 'legislacion', 'leyes', 'decretos'], text: "**Legislación Oficial**: santafe.gov.ar/legislación → Texto completo de leyes, decretos y resoluciones provinciales. También en: saij.gob.ar (nacional)." },
                 { match: ['intranet', 'portalpolicial', 'portal'], text: "**Intranet Policial**: Accesible solo desde redes internas. Gestión de ID Ciudadana, novedades, formularios de RRHH y publicaciones del Boletín Policial." }
             ],
-            default: "Conozco los principales recursos webs policiales: isepsantafe.edu.ar (cursos), iapossantafe.gob.ar (salud), mpa.santafe.gov.ar (protocolos). ¿Qué institución necesitás consultar?"
+        },
+        // --- 🚨 NUEVAS BASES LEGALES Y ACTUALIZACIONES 2026 🚨 ---
+        {
+            category: 'isep_actualidad_2026',
+            keywords: ['isep', '2026', 'ascensos', 'perfeccionamiento', 'curso', 'actualizacion', 'egresados', 'nuevos policias', 'novedades', 'escuela superior'],
+            responses: [
+                { match: ['curso de perfeccionamiento', 'marzo', 'recreo', 'rosario'], text: "El **Curso de Perfeccionamiento y/o Actualización Ciclo 2026** inició la semana del **9 de marzo de 2026** en Reconquista, Recreo y Rosario (jerarquías Inspector a Suboficial). Mantiene tu habilitación para concursos por 5 años." },
+                { match: ['escuela superior', 'director', 'subdirector'], text: "Para Directores y Subdirectores de Policía, el Curso de Perfeccionamiento 2026 cerró inscripciones en enero 2026." },
+                { match: ['cadetes', 'ingreso', 'ciclo lectivo', 'policias'], text: "El 24 de febrero de 2026 comenzó el Ciclo Lectivo 2026 para el 1er año de cadetes. Además, para la nueva cohorte se aumentó la proporción de varones para suplir jubilaciones operativas." },
+                { match: ['nuevos policias', 'egresados', 'febrero', 'suboficiales'], text: "El 23 de febrero de 2026, **811 nuevos suboficiales** (cohorte 2024-2025) recibieron su equipamiento reglamentario, sumándose a la operatividad provincial." },
+                { match: ['ascensos', '2026-2027', 'seleccion'], text: "En diciembre de 2025 se publicaron los aptos (psicológico, físico e intelectual) del proceso de selección del ciclo 2026-2027." }
+            ],
+            default: "El ISeP comenzó los cursos de actualización en marzo 2026. Es fundamental aprobarlo si no ascendiste en el último concurso para mantener la habilitación. ¿Qué información sobre capacitación necesitás?"
+        },
+        {
+            category: 'codigo_procesal_penal_sf',
+            keywords: ['cpp', 'codigo procesal', 'santa fe', 'ley 12734', 'ipp', 'detencion', 'allanamiento', 'demora', 'flagrancia', 'derechos victima', 'fiscal', 'actuacion policial', 'mpa'],
+            responses: [
+                { match: ['ipp', 'investigacion penal preparatoria'], text: "La actuación policial transcurre en la **I.P.P (Investigación Penal Preparatoria)**. Actuamos bajo las órdenes directas del Fiscal (MPA), quien dirige jurídica y técnicamente el caso." },
+                { match: ['detencion', 'libertad', 'arresto', 'demora', '10 bis'], text: "**Detención / Demora**: No podés detener o restringir la libertad sin orden judicial, SALVO flagrancia. Excepcionalmente, en casos como averiguación de identidad por indicios ciertos, se puede demorar preventivamente." },
+                { match: ['allanamiento', 'orden', 'horario'], text: "El **allanamiento** requiere orden escrita que especifique domicilio y objetivo. El horario normal es de **07:00 a 21:00**, salvo excepciones gravísimas, riesgo de destrucción de prueba, o consentimiento." },
+                { match: ['mpa', 'comunicacion', 'aviso', 'oficio'], text: "La PDI y GOC (o Personal de Guardia en general) tienen la obligación de informar **de inmediato** al Fiscal de turno cualquier inicio de actuación de oficio." },
+                { match: ['victima', 'derechos', 'informacion'], text: "Es tu obligación informar a la víctima sobre sus derechos (ser asistida, asesorada) conjuntamente con el MPA en la primera intervención." }
+            ],
+            default: "El Código Procesal (Ley 12.734) enmarca nuestra actuación. Trabajamos para la IPP bajo mandato de los Fiscales del MPA. Toda privación de libertad u allanamiento es de interpretación restrictiva y exige orden, salvo flagrancia."
+        },
+        {
+            category: 'codigo_penal_arg',
+            keywords: ['codigo penal', 'argentino', 'legitima defensa', 'penas', 'territorialidad', 'reforma', 'fuerza de seguridad', 'usurpacion', 'ley 11179', 'corrupcion', 'imputabilidad'],
+            responses: [
+                { match: ['legitima defensa', 'requisitos', 'disparo'], text: "**Legítima Defensa (CP)** exige: A) Agresión ilegítima. B) Necesidad y racionalidad del medio empleado. C) Falta de provocación suficiente. *(Nota: Existen proyectos de reforma 2025/2026 para presumir a favor del policía el cumplimiento del deber si usa su arma reglamentariamente).* " },
+                { match: ['penas', 'reclusion', 'prision'], text: "Las penas establecidas por el Libro I son: **Reclusión, Prisión, Multa e Inhabilitación**. Reclusión/Prisión temporal/perpetua se cumplen con trabajo obligatorio según el trato penitenciario." },
+                { match: ['reforma', 'nuevo codigo', 'corrupcion', 'piquetes'], text: "El proyecto de **Nuevo Código Penal** impulsa penas endurecidas para: corrupción, fraudes con IA, usurpaciones, barrabravas y organizadores de piquetes, además de proteger la labor del agente de seguridad." },
+                { match: ['menores', 'participacion', 'mayores'], text: "Si un delito es cometido mediante la participación de menores de 18 años, la escala penal para los *mayores* involucrados **aumenta en 1/3** del mínimo y máximo." },
+                { match: ['ley benigna', 'retroactividad'], text: "Siempre se aplica, por principio de Derecho Penal, la **ley más benigna** al imputado." }
+            ],
+            default: "El Código Penal Argentino detalla los tipos penales y penas. El uso del arma y la legítima defensa están sujetos al requisito ineludible de proporcionalidad en la agresión. ¿Sobre qué delito necesitás la tipificación?"
         }
     ];
 
@@ -872,7 +908,7 @@ function renderCentinela(container) {
     // --- 3. RENDERIZADOR MARKDOWN → HTML PROFESIONAL ---
     function renderMarkdown(text) {
         return text
-            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-bold">$1</strong>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-900 dark:text-white font-bold">$1</strong>')
             .replace(/^(\d+)\.\s+(.+)$/gm, '<div class="flex gap-2 my-1"><span class="text-primary font-bold shrink-0">$1.</span><span>$2</span></div>')
             .replace(/^[-•]\s+(.+)$/gm, '<div class="flex gap-2 my-1"><span class="text-primary shrink-0">▸</span><span>$1</span></div>')
             .replace(/\n/g, '<br>');
@@ -1051,7 +1087,7 @@ function renderCentinela(container) {
             const intent = detectIntent(normalizedMsg);
             if (intent && intentResponses[intent]) {
                 const intentText = intentResponses[intent]();
-                el.innerHTML = `<div class="text-xs text-slate-200 leading-relaxed">${renderMarkdown(intentText)}</div>`;
+                el.innerHTML = `<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(intentText)}</div>`;
                 chat.scrollTop = chat.scrollHeight;
                 logQueryToAudit(msg, intentText, 100, intent);
                 return;
@@ -1098,7 +1134,7 @@ function renderCentinela(container) {
             el.innerHTML = `
                 <div class="space-y-1">
                     ${confidenceBadge}
-                    <div class="text-xs text-slate-200 leading-relaxed">${renderMarkdown(finalResponseText)}</div>
+                    <div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(finalResponseText)}</div>
                     ${renderSuggestionChips(suggestions)}
                 </div>`;
 
@@ -1128,14 +1164,14 @@ function renderCentinela(container) {
         div.className = role === 'user' ? 'flex justify-end' : 'flex gap-3 max-w-[85%]';
         div.innerHTML = role === 'user' ? `
             <div class="bg-primary p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-lg shadow-primary/10">
-                <p class="text-xs text-white leading-relaxed">${text}</p>
+                <p class="text-xs text-slate-900 dark:text-white leading-relaxed">${text}</p>
             </div>
         ` : `
             <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
                 <span class="material-symbols-outlined text-sm">smart_toy</span>
             </div>
             <div class="bg-white/10 border border-white/10 p-3 rounded-2xl rounded-tl-none" id="${id || ''}">
-                <p class="text-xs text-slate-200 leading-relaxed">${text}</p>
+                <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${text}</p>
             </div>
         `;
         chat.appendChild(div);
@@ -1146,10 +1182,10 @@ function renderCentinela(container) {
 function renderPartesInteligentes(container) {
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-xl font-bold text-white tracking-tight">Partes Inteligentes</h1>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Partes Inteligentes</h1>
         </header>
 
         <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
@@ -1163,7 +1199,7 @@ function renderPartesInteligentes(container) {
                     <div class="space-y-2">
                         <label class="text-[10px] font-bold text-primary uppercase ml-1">Notas de Campo</label>
                         <textarea id="parte-raw-input" placeholder="Ej: Calle Mendoza 3000, 22hs, robo de cables..." 
-                            class="w-full h-32 bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
+                            class="w-full h-32 bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
                     </div>
                     <button onclick="generateParte()" id="btn-generate-parte" class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
                         <span class="material-symbols-outlined text-xl">auto_awesome</span>Generar Parte Formal
@@ -1171,8 +1207,8 @@ function renderPartesInteligentes(container) {
                 </div>
                 <div id="parte-result-container" class="hidden space-y-4">
                     <div class="glass-card p-5 rounded-3xl border border-primary/20 bg-primary/5 relative">
-                        <pre id="parte-output" class="text-xs text-slate-200 whitespace-pre-wrap font-sans leading-relaxed"></pre>
-                        <button onclick="copyParte()" class="absolute top-4 right-4 size-10 rounded-xl bg-white/10 flex items-center justify-center text-white active:scale-90 transition-all">
+                        <pre id="parte-output" class="text-xs text-slate-800 dark:text-slate-200 whitespace-pre-wrap font-sans leading-relaxed"></pre>
+                        <button onclick="copyParte()" class="absolute top-4 right-4 size-10 rounded-xl bg-white/10 flex items-center justify-center text-slate-900 dark:text-white active:scale-90 transition-all">
                             <span class="material-symbols-outlined text-sm">content_copy</span>
                         </button>
                     </div>
@@ -1230,7 +1266,7 @@ window.showAnnouncementModal = () => {
                 <span class="material-symbols-outlined text-4xl">celebration</span>
             </div>
             <div class="space-y-2">
-                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v527.4-FINAL Activa!</h3>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase italic">¡v527.4-FINAL Activa!</h3>
                 <p class="text-xs text-slate-400 font-medium leading-relaxed">
                     🚀 **Centinela v3.8-SAFE**: Lógica blindada contra confusiones. Se activó el sistema de **Auditoría IA** para que el Administrador reciba reportes de entrenamiento basados en tus dudas reales.
                 </p>

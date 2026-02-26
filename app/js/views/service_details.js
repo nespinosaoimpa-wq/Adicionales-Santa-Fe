@@ -34,7 +34,7 @@ function renderServiceDetails(container, serviceId) {
                     <p class="text-lg font-bold text-slate-900 dark:text-white">${isPaid ? 'LIQUIDADO' : 'PENDIENTE DE PAGO'}</p>
                 </div>
                 <!-- Toggle Switch -->
-                <button onclick="handleTogglePaid('${serviceId}', ${!isPaid})" class="h-8 px-4 rounded-full flex items-center gap-2 font-bold text-xs ${isPaid ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300'} transition-all">
+                <button onclick="handleTogglePaid('${serviceId}', ${!isPaid})" class="h-8 px-4 rounded-full flex items-center gap-2 font-bold text-xs ${isPaid ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-700 dark:text-slate-300'} transition-all">
                     ${isPaid ? '<span class="material-symbols-outlined text-sm">check</span> PAGADO' : 'MARCAR PAGADO'}
                 </button>
              </div>
@@ -43,7 +43,7 @@ function renderServiceDetails(container, serviceId) {
              <div class="glass-card rounded-2xl p-6 space-y-6">
                  <div>
                     <span class="text-xs text-slate-500 uppercase font-bold">Lugar / Objetivo</span>
-                    <h2 class="text-2xl font-bold text-white leading-tight">${service.location}</h2>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight">${escapeHTML(service.location)}</h2>
                     <p class="text-primary font-bold text-sm mt-1">${service.type} - ${service.subType}</p>
                  </div>
                  
@@ -52,7 +52,7 @@ function renderServiceDetails(container, serviceId) {
                         <span class="flex items-center gap-2 text-slate-400 text-xs font-bold mb-1">
                             <span class="material-symbols-outlined text-sm">calendar_today</span> Fecha
                         </span>
-                        <p class="text-white font-medium">${store.getFormattedDate(service.date)}</p>
+                        <p class="text-slate-900 dark:text-white font-medium">${store.getFormattedDate(service.date)}</p>
                     </div>
                      <div>
                         <span class="flex items-center gap-2 text-slate-400 text-xs font-bold mb-1">

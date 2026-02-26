@@ -13,7 +13,7 @@ function renderRegister(container) {
                     <span class="material-symbols-outlined text-[28px]">chevron_left</span>
                     <span class="text-lg font-medium">Atrás</span>
                 </button>
-                <h1 class="text-lg font-semibold absolute left-1/2 -translate-x-1/2 dark:text-white">Nuevo Servicio</h1>
+                <h1 class="text-lg font-semibold absolute left-1/2 -translate-x-1/2 dark:text-slate-900 dark:text-white">Nuevo Servicio</h1>
                 <button id="btn-save-top" class="text-primary text-lg font-semibold">Guardar</button>
             </div>
         </header>
@@ -27,7 +27,7 @@ function renderRegister(container) {
                         <span class="material-symbols-outlined text-primary mr-3">calendar_today</span>
                         <div class="flex-1">
                             <p class="text-xs text-slate-500">Fecha</p>
-                            <input id="inp-date" class="w-full bg-transparent border-none p-0 focus:ring-0 text-base font-medium dark:text-white" type="date" value="${store.selectedDate || today}"/>
+                            <input id="inp-date" class="w-full bg-transparent border-none p-0 focus:ring-0 text-base font-medium dark:text-slate-900 dark:text-white" type="date" value="${store.selectedDate || today}"/>
                         </div>
                     </div>
                     <!-- Time Range -->
@@ -36,11 +36,11 @@ function renderRegister(container) {
                          <div class="flex-1 grid grid-cols-2 gap-4">
                             <div>
                                 <p class="text-xs text-slate-500">Inicio</p>
-                                <input id="inp-start" class="w-full bg-transparent border-none p-0 focus:ring-0 text-base font-medium dark:text-white" type="time" value="08:00"/>
+                                <input id="inp-start" class="w-full bg-transparent border-none p-0 focus:ring-0 text-base font-medium dark:text-slate-900 dark:text-white" type="time" value="08:00"/>
                             </div>
                             <div>
                                 <p class="text-xs text-slate-500">Fin</p>
-                                <input id="inp-end" class="w-full bg-transparent border-none p-0 focus:ring-0 text-base font-medium dark:text-white" type="time" value="12:00"/>
+                                <input id="inp-end" class="w-full bg-transparent border-none p-0 focus:ring-0 text-base font-medium dark:text-slate-900 dark:text-white" type="time" value="12:00"/>
                             </div>
                          </div>
                     </div>
@@ -66,7 +66,7 @@ function renderRegister(container) {
 
                 <div class="bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/10 p-4">
                     <p class="text-xs text-slate-500 mb-2">Ubicación / Notas</p>
-                    <input id="inp-location" type="text" placeholder="Ej: Banco Nación" class="w-full bg-transparent border-none p-0 text-base font-medium dark:text-white focus:ring-0" />
+                    <input id="inp-location" type="text" placeholder="Ej: Banco Nación" class="w-full bg-transparent border-none p-0 text-base font-medium dark:text-slate-900 dark:text-white focus:ring-0" />
                 </div>
             </section>
 
@@ -76,7 +76,7 @@ function renderRegister(container) {
                 <div class="bg-primary/10 dark:bg-primary/20 border-2 border-primary/30 rounded-2xl p-5 space-y-4">
                     <!-- Price per hour -->
                     <div class="flex items-center justify-between">
-                        <span class="text-sm font-medium text-slate-600 dark:text-slate-300">Precio por hora</span>
+                        <span class="text-sm font-medium text-slate-600 dark:text-slate-700 dark:text-slate-300">Precio por hora</span>
                         <div class="flex items-center text-primary font-bold">
                             <span class="text-lg">$</span>
                             <input id="inp-rate" class="w-20 bg-transparent border-none p-0 text-right focus:ring-0 text-lg font-bold text-primary" type="number" value="1250"/>

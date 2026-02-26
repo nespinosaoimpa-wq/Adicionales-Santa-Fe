@@ -30,7 +30,7 @@ function renderProfile(container) {
                 <input type="text" 
                     value="${sub}" 
                     onchange="store.renameServiceSubtype('${type}', '${sub}', this.value)"
-                    class="bg-transparent border-none text-sm font-medium text-slate-300 focus:ring-0 focus:text-white w-full placeholder-slate-600 transition-colors">
+                    class="bg-transparent border-none text-sm font-medium text-slate-700 dark:text-slate-300 focus:ring-0 focus:text-slate-900 dark:text-white w-full placeholder-slate-600 transition-colors">
                 
                 <div class="flex items-center gap-2 bg-slate-200 dark:bg-white/5 rounded-lg px-2 py-1 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
                     <span class="text-xs text-slate-500">$</span>
@@ -144,7 +144,7 @@ function renderProfile(container) {
                                 <span class="material-symbols-outlined text-indigo-400" id="theme-icon">${document.documentElement.classList.contains('dark') ? 'dark_mode' : 'light_mode'}</span>
                             </div>
                             <div>
-                                <p class="text-sm font-bold text-white">Modo Visual</p>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white">Modo Visual</p>
                                 <p class="text-[10px] text-slate-500" id="theme-label">${document.documentElement.classList.contains('dark') ? 'Oscuro activo' : 'Claro activo'}</p>
                             </div>
                         </div>
@@ -163,7 +163,7 @@ function renderProfile(container) {
                                 <span class="material-symbols-outlined text-amber-400">alarm</span>
                             </div>
                             <div>
-                                <p class="text-sm font-bold text-white">Alarma de Adicionales</p>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white">Alarma de Adicionales</p>
                                 <p class="text-[10px] text-slate-500">${store.notificationSettings?.enabled ? 'Activa ✅' : 'Inactiva ❌'}</p>
                             </div>
                         </div>

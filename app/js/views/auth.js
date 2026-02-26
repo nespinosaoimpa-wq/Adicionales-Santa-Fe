@@ -9,7 +9,7 @@ function renderLogin(container) {
                 <div class="mx-auto size-16 bg-primary/20 rounded-2xl flex items-center justify-center text-primary border border-primary/30 mb-6">
                     <span class="material-symbols-outlined text-4xl">security</span>
                 </div>
-                <h2 class="text-3xl font-bold tracking-tight text-white">Bienvenido</h2>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Bienvenido</h2>
                 <p class="mt-2 text-sm text-slate-400">Ingresa a tu cuenta para continuar</p>
             </div>
 
@@ -27,21 +27,21 @@ function renderLogin(container) {
 
                 <form class="space-y-4" onsubmit="handleLogin(event)">
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-slate-300">Email / Legajo</label>
+                        <label for="email" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Email / Legajo</label>
                         <div class="mt-2">
-                            <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
                     <div>
                         <div class="flex items-center justify-between">
-                            <label for="password" class="block text-sm font-medium leading-6 text-slate-300">Contraseña</label>
+                            <label for="password" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Contraseña</label>
                             <div class="text-sm">
                                 <a href="#" onclick="store.showPasswordReset()" class="font-semibold text-primary hover:text-primary/80">¿Olvidaste tu clave?</a>
                             </div>
                         </div>
                         <div class="mt-2">
-                            <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
@@ -94,13 +94,13 @@ function renderSignup(container) {
     container.innerHTML = `
         <div class="min-h-screen flex flex-col justify-center px-6 py-12 lg:px-8 bg-background-dark">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm text-center">
-                 <button onclick="router.navigateTo('#login')" class="absolute top-6 left-6 text-slate-400 hover:text-white flex items-center gap-1">
+                 <button onclick="router.navigateTo('#login')" class="absolute top-6 left-6 text-slate-400 hover:text-slate-900 dark:text-white flex items-center gap-1">
                     <span class="material-symbols-outlined">arrow_back</span> Atrás
                 </button>
                 <div class="mx-auto size-16 bg-primary/20 rounded-2xl flex items-center justify-center text-primary border border-primary/30 mb-6">
                     <span class="material-symbols-outlined text-4xl">person_add</span>
                 </div>
-                <h2 class="text-3xl font-bold tracking-tight text-white">Crear Cuenta</h2>
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Crear Cuenta</h2>
                 <p class="mt-2 text-sm text-slate-400">Comienza a gestionar tus adicionales hoy</p>
             </div>
 
@@ -108,30 +108,30 @@ function renderSignup(container) {
                 <form class="space-y-4" onsubmit="handleSignup(event)">
                     <div class="grid grid-cols-2 gap-4">
                          <div>
-                            <label class="block text-sm font-medium leading-6 text-slate-300">Nombre</label>
+                            <label class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Nombre</label>
                             <div class="mt-2">
-                                <input id="s-name" name="name" type="text" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                                <input id="s-name" name="name" type="text" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                             </div>
                         </div>
                          <div>
-                            <label class="block text-sm font-medium leading-6 text-slate-300">Apellido</label>
+                            <label class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Apellido</label>
                             <div class="mt-2">
-                                <input id="s-lastname" name="lastname" type="text" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                                <input id="s-lastname" name="lastname" type="text" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                             </div>
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium leading-6 text-slate-300">Email</label>
+                        <label class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Email</label>
                         <div class="mt-2">
-                            <input id="s-email" name="email" type="email" autocomplete="email" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="s-email" name="email" type="email" autocomplete="email" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium leading-6 text-slate-300">Contraseña</label>
+                        <label class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Contraseña</label>
                         <div class="mt-2">
-                            <input id="s-password" name="password" type="password" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="s-password" name="password" type="password" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 

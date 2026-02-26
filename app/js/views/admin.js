@@ -20,7 +20,7 @@ async function renderAdmin(container) {
         const stats = DB.calculateStats(window.allUsers, window.allServices);
 
         container.innerHTML = `
-        <div class="min-h-screen bg-background-light dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 font-sans pb-24 animate-fade-in">
+        <div class="min-h-screen bg-background-light dark:bg-[#0f172a] text-slate-800 dark:text-slate-800 dark:text-slate-200 font-sans pb-24 animate-fade-in">
             <!-- Glass Header -->
             <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 px-6 h-20 flex items-center justify-between shadow-2xl">
                 <div class="flex items-center gap-4">
@@ -36,7 +36,7 @@ async function renderAdmin(container) {
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-700 dark:text-slate-300">
+                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-700 dark:text-slate-700 dark:text-slate-300">
                         <span class="material-symbols-outlined text-sm">download</span> Exportar
                     </button>
                     <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
@@ -68,7 +68,7 @@ async function renderAdmin(container) {
                             ${stats.dailySummary.slice(0, 10).map(day => `
                                 <div class="min-w-[140px] p-4 rounded-2xl bg-white/5 border border-white/10 flex flex-col items-center text-center">
                                     <p class="text-[9px] text-slate-500 font-bold uppercase tracking-widest mb-1">${store.getFormattedDate(day.date)}</p>
-                                    <p class="text-lg font-black text-white">${day.count}</p>
+                                    <p class="text-lg font-black text-slate-900 dark:text-white">${day.count}</p>
                                     <p class="text-[10px] text-slate-400 mb-2">Servicios</p>
                                     <div class="h-1 w-full bg-primary/20 rounded-full overflow-hidden mb-2">
                                         <div class="h-full bg-primary" style="width: ${Math.min((day.total / 500000) * 100, 100)}%"></div>
@@ -140,7 +140,7 @@ async function renderAdmin(container) {
                                             `).join('') : '<span class="material-symbols-outlined text-red-500 text-sm">warning</span>'}
                                         </div>
                                     </div>
-                                    <p class="text-[11px] ${isAlert ? 'text-red-200 font-bold' : 'text-slate-300'} leading-relaxed italic">"${displayComment}"</p>
+                                    <p class="text-[11px] ${isAlert ? 'text-red-200 font-bold' : 'text-slate-700 dark:text-slate-300'} leading-relaxed italic">"${displayComment}"</p>
                                     <p class="text-[8px] text-slate-600 mt-2 text-right uppercase font-bold">${_formatAdminDate(r.created_at || r.timestamp)}</p>
                                 </div>
                             `;
@@ -167,7 +167,7 @@ async function renderAdmin(container) {
                                         <span class="text-[8px] font-black text-slate-500 uppercase tracking-widest">${log.category}</span>
                                         <span class="px-1.5 py-0.5 rounded bg-${log.score < 20 ? 'red' : log.score < 50 ? 'amber' : 'emerald'}-500/20 text-${log.score < 20 ? 'red' : log.score < 50 ? 'amber' : 'emerald'}-500 text-[8px] font-bold">Confianza: ${log.score}</span>
                                     </div>
-                                    <p class="text-[11px] text-white font-medium">Q: ${log.query}</p>
+                                    <p class="text-[11px] text-slate-900 dark:text-white font-medium">Q: ${log.query}</p>
                                     <p class="text-[10px] text-slate-400 italic">R: ${(log.response || '').substring(0, 60)}...</p>
                                     <div class="flex justify-between items-center pt-1 border-t border-white/5">
                                         <span class="text-[7px] text-slate-600 uppercase font-bold">${log.user_email}</span>
@@ -182,7 +182,7 @@ async function renderAdmin(container) {
                 <!-- Active Banners -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
                     <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-sm font-bold text-white flex items-center gap-3">
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-3">
                             <span class="material-symbols-outlined text-amber-500">ads_click</span>
                             Pauta Publicitaria
                         </h3>
@@ -202,11 +202,11 @@ async function renderAdmin(container) {
                                 </button>
 
                                 <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 to-transparent p-3 flex items-center justify-between">
-                                    <p class="text-[10px] font-bold text-white uppercase tracking-wider truncate mr-2">
+                                    <p class="text-[10px] font-bold text-slate-900 dark:text-white uppercase tracking-wider truncate mr-2">
                                          Banner Activo
                                     </p>
                                     ${ad.linkUrl ? `
-                                        <a href="${ad.linkUrl}" target="_blank" class="px-2 py-1 rounded bg-white/10 text-[8px] text-white flex items-center gap-1 uppercase font-black hover:bg-white/20 transition-all">
+                                        <a href="${ad.linkUrl}" target="_blank" class="px-2 py-1 rounded bg-white/10 text-[8px] text-slate-900 dark:text-white flex items-center gap-1 uppercase font-black hover:bg-white/20 transition-all">
                                             <span class="material-symbols-outlined text-[10px]">open_in_new</span> Ir
                                         </a>` : ''}
                                 </div>
@@ -218,7 +218,7 @@ async function renderAdmin(container) {
                 <!-- User Table -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 overflow-hidden shadow-xl">
                     <div class="p-6 border-b border-white/5 flex items-center justify-between">
-                        <h3 class="font-bold text-white text-lg italic">Oficiales Registrados</h3>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-lg italic">Oficiales Registrados</h3>
                         <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-black text-slate-500">${allUsers.length} TOTAL</span>
                     </div>
                     <div class="overflow-x-auto">
@@ -240,7 +240,7 @@ async function renderAdmin(container) {
                                                     <img src="${u.avatar || 'https://ui-avatars.com/api/?name=' + u.name}" class="w-full h-full rounded-full object-cover">
                                                 </div>
                                                 <div>
-                                                    <p class="font-bold text-white text-xs">${u.name || 'Oficial'}</p>
+                                                    <p class="font-bold text-slate-900 dark:text-white text-xs">${u.name || 'Oficial'}</p>
                                                     <p class="text-[9px] text-slate-500 font-mono">${u.email}</p>
                                                 </div>
                                             </div>
@@ -345,7 +345,7 @@ function _renderAdminKPICard(title, value, icon, gradient, textColor) {
             </div>
             <div class="mt-4 relative z-10">
                 <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">${title}</p>
-                <p class="text-2xl font-black text-white mt-1">${value}</p>
+                <p class="text-2xl font-black text-slate-900 dark:text-white mt-1">${value}</p>
             </div>
         </div>
     `;
@@ -469,7 +469,7 @@ store.handleAddAd = async (form) => {
 store.deleteAd = async (id) => {
     const overlay = document.createElement('div');
     overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6';
-    overlay.innerHTML = '<div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl"><div class="flex flex-col items-center text-center"><div class="size-12 rounded-full bg-red-500/20 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400">delete_forever</span></div><h3 class="text-lg font-bold text-white mb-1">Eliminar anuncio</h3><p class="text-sm text-slate-400 mb-5">Esta accion no se puede deshacer</p><div class="flex gap-3 w-full"><button onclick="this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl">Cancelar</button><button id="confirm-del-ad" class="flex-1 py-2.5 bg-red-500 text-white text-sm font-bold rounded-xl">Eliminar</button></div></div></div>';
+    overlay.innerHTML = '<div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl"><div class="flex flex-col items-center text-center"><div class="size-12 rounded-full bg-red-500/20 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400">delete_forever</span></div><h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">Eliminar anuncio</h3><p class="text-sm text-slate-400 mb-5">Esta accion no se puede deshacer</p><div class="flex gap-3 w-full"><button onclick="this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-white/10 text-slate-900 dark:text-white text-sm font-bold rounded-xl">Cancelar</button><button id="confirm-del-ad" class="flex-1 py-2.5 bg-red-500 text-white text-sm font-bold rounded-xl">Eliminar</button></div></div></div>';
     overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
     document.body.appendChild(overlay);
     document.getElementById('confirm-del-ad').onclick = async () => {
@@ -484,22 +484,22 @@ window._showAddAdModal = () => {
     overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6';
     overlay.innerHTML = `
         <div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-slide-up space-y-4">
-            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary">add_photo_alternate</span>
                 Nuevo Banner
             </h3>
             <div class="space-y-3">
                 <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">URL de la imagen *</label>
-                    <input id="ad-image-url" type="url" placeholder="https://..." class="w-full mt-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all">
+                    <input id="ad-image-url" type="url" placeholder="https://..." class="w-full mt-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-sm placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all">
                 </div>
                 <div>
                     <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">URL de destino (opcional)</label>
-                    <input id="ad-link-url" type="url" placeholder="https://..." class="w-full mt-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all">
+                    <input id="ad-link-url" type="url" placeholder="https://..." class="w-full mt-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-sm placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all">
                 </div>
             </div>
             <div class="flex gap-3">
-                <button onclick="this.closest('.fixed').remove()" class="flex-1 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl">Cancelar</button>
+                <button onclick="this.closest('.fixed').remove()" class="flex-1 py-2.5 bg-white/10 text-slate-900 dark:text-white text-sm font-bold rounded-xl">Cancelar</button>
                 <button id="btn-save-ad" class="flex-1 py-2.5 bg-primary text-white text-sm font-bold rounded-xl">Publicar</button>
             </div>
         </div>

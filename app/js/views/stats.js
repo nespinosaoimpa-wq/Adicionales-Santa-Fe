@@ -80,31 +80,31 @@ function renderStats(container) {
                 <!-- KPI Grid -->
                 <div class="grid grid-cols-2 gap-4">
                     <div class="p-5 rounded-[2.5rem] bg-gradient-to-br from-[#3b82f6] to-[#60a5fa] shadow-xl shadow-blue-500/20 flex flex-col justify-between aspect-square md:aspect-auto h-36">
-                        <span class="material-symbols-outlined text-white/50 text-2xl">payments</span>
+                        <span class="material-symbols-outlined text-slate-900 dark:text-slate-500 dark:text-white/50 text-2xl">payments</span>
                         <div>
                             <p class="text-2xl font-black leading-none">$${totalEarnings.toLocaleString('es-AR')}</p>
-                            <p class="text-[10px] font-bold text-white/70 uppercase tracking-widest mt-1">Total Ganado</p>
+                            <p class="text-[10px] font-bold text-slate-900 dark:text-slate-600 dark:text-white/70 uppercase tracking-widest mt-1">Total Ganado</p>
                         </div>
                     </div>
                     <div class="p-5 rounded-[2.5rem] bg-gradient-to-br from-[#a855f7] to-[#d946ef] shadow-xl shadow-purple-500/20 flex flex-col justify-between h-36">
-                        <span class="material-symbols-outlined text-white/50 text-2xl">schedule</span>
+                        <span class="material-symbols-outlined text-slate-900 dark:text-slate-500 dark:text-white/50 text-2xl">schedule</span>
                         <div>
                             <p class="text-2xl font-black leading-none">${totalHours.toFixed(1)}h</p>
-                            <p class="text-[10px] font-bold text-white/70 uppercase tracking-widest mt-1">Horas Trabajadas</p>
+                            <p class="text-[10px] font-bold text-slate-900 dark:text-slate-600 dark:text-white/70 uppercase tracking-widest mt-1">Horas Trabajadas</p>
                         </div>
                     </div>
                     <div class="p-5 rounded-[2.5rem] bg-gradient-to-br from-[#14b8a6] to-[#2dd4bf] shadow-xl shadow-teal-500/20 flex flex-col justify-between h-36">
-                        <span class="material-symbols-outlined text-white/50 text-2xl">fact_check</span>
+                        <span class="material-symbols-outlined text-slate-900 dark:text-slate-500 dark:text-white/50 text-2xl">fact_check</span>
                         <div>
                             <p class="text-2xl font-black leading-none">${totalServices}</p>
-                            <p class="text-[10px] font-bold text-white/70 uppercase tracking-widest mt-1">Servicios</p>
+                            <p class="text-[10px] font-bold text-slate-900 dark:text-slate-600 dark:text-white/70 uppercase tracking-widest mt-1">Servicios</p>
                         </div>
                     </div>
                     <div class="p-5 rounded-[2.5rem] bg-gradient-to-br from-[#f97316] to-[#fb923c] shadow-xl shadow-orange-500/20 flex flex-col justify-between h-36">
-                        <span class="material-symbols-outlined text-white/50 text-2xl">trending_up</span>
+                        <span class="material-symbols-outlined text-slate-900 dark:text-slate-500 dark:text-white/50 text-2xl">trending_up</span>
                         <div>
                             <p class="text-2xl font-black leading-none">$${avgPerService.toLocaleString('es-AR')}</p>
-                            <p class="text-[10px] font-bold text-white/70 uppercase tracking-widest mt-1">Promedio/Servicio</p>
+                            <p class="text-[10px] font-bold text-slate-900 dark:text-slate-600 dark:text-white/70 uppercase tracking-widest mt-1">Promedio/Servicio</p>
                         </div>
                     </div>
                 </div>
@@ -115,7 +115,7 @@ function renderStats(container) {
                     <div class="glass-card p-5 rounded-[2.5rem] border border-white/5 bg-slate-900/40 space-y-4">
                         <div>
                             <div class="flex justify-between items-center mb-2">
-                                <p class="text-xs font-bold text-white">1ra Quincena (1-15 ${mNames[cm]})</p>
+                                <p class="text-xs font-bold text-slate-900 dark:text-white">1ra Quincena (1-15 ${mNames[cm]})</p>
                                 <span class="text-[9px] font-bold text-slate-500 bg-white/5 px-2 py-0.5 rounded-full">Cobro: 24 ${mNames[cm]}</span>
                             </div>
                             <div class="grid grid-cols-2 gap-2">
@@ -134,7 +134,7 @@ function renderStats(container) {
                         <div class="h-px bg-white/5"></div>
                         <div>
                             <div class="flex justify-between items-center mb-2">
-                                <p class="text-xs font-bold text-white">2da Quincena (16-fin ${mNames[cm]})</p>
+                                <p class="text-xs font-bold text-slate-900 dark:text-white">2da Quincena (16-fin ${mNames[cm]})</p>
                                 <span class="text-[9px] font-bold text-slate-500 bg-white/5 px-2 py-0.5 rounded-full">Cobro: 9 ${mNames[nm]}</span>
                             </div>
                             <div class="grid grid-cols-2 gap-2">
@@ -162,7 +162,7 @@ function renderStats(container) {
         const height = Math.max((d.value / maxValue) * 100, 5);
         return `
                                     <div class="flex-1 flex flex-col items-center gap-2 group">
-                                        ${d.value > 0 ? `<span class="text-[8px] font-bold text-white/80">$${(d.value / 1000).toFixed(0)}k</span>` : '<span class="text-[8px] opacity-0">0</span>'}
+                                        ${d.value > 0 ? `<span class="text-[8px] font-bold text-slate-900 dark:text-white/80">$${(d.value / 1000).toFixed(0)}k</span>` : '<span class="text-[8px] opacity-0">0</span>'}
                                         <div class="w-full relative flex items-end justify-center" style="height: 120px;">
                                             <div class="w-full max-w-[24px] rounded-lg bg-gradient-to-t ${d.isToday ? 'from-[#3b82f6] to-[#60a5fa] shadow-lg shadow-blue-500/30' : 'from-slate-700/50 to-slate-500/50'} transition-all duration-500"
                                                  style="height: ${height}%">

@@ -38,7 +38,7 @@ function renderAgenda(container) {
                     <button onclick="store.shareApp()" class="size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
                         <span class="material-symbols-outlined text-xl">share</span>
                     </button>
-                    <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl">
+                    <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-slate-900 dark:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl">
                         <span class="material-symbols-outlined text-xl">terminal</span>
                     </button>
                     <button onclick="showToast('Sin notificaciones nuevas')" class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300">
@@ -66,7 +66,7 @@ function renderAgenda(container) {
                             <h2 class="text-xl font-bold">Adicional ${nextShift.type}</h2>
                         </div>
                         <div class="flex flex-col items-end">
-                             <span class="material-symbols-outlined text-white/80">alarm</span>
+                             <span class="material-symbols-outlined text-slate-900 dark:text-white/80">alarm</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-4 mb-6">
@@ -75,7 +75,7 @@ function renderAgenda(container) {
                         </div>
                         <div>
                             <p class="text-3xl font-bold tracking-tighter">${nextShift.hours}h</p>
-                            <p class="text-xs opacity-80">${store.getFormattedDate(nextShift.date)} • ${nextShift.location}</p>
+                            <p class="text-xs opacity-80">${store.getFormattedDate(nextShift.date)} • ${escapeHTML(nextShift.location)}</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
@@ -95,9 +95,9 @@ function renderAgenda(container) {
             <!-- Calendar Section -->
             <section class="space-y-4">
                 <div class="flex justify-between items-center">
-                    <h3 class="font-bold text-lg dark:text-white">Calendario</h3>
+                    <h3 class="font-bold text-lg dark:text-slate-900 dark:text-white">Calendario</h3>
                     <div class="flex gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                        <button onclick="store.viewDate = new Date(); renderAgenda(document.getElementById('app'))" class="px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm dark:text-white">Hoy</button>
+                        <button onclick="store.viewDate = new Date(); renderAgenda(document.getElementById('app'))" class="px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm dark:text-slate-900 dark:text-white">Hoy</button>
                     </div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm">
@@ -116,14 +116,14 @@ function renderAgenda(container) {
 
             <!-- Shifts List -->
             <section class="space-y-4">
-                <h3 class="font-bold text-lg dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
+                <h3 class="font-bold text-lg dark:text-slate-900 dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
                 <div class="space-y-3">
                     ${dayServices.length > 0 ? dayServices.map((s, i) => renderServiceCard(s, i)).join('') :
             `<div class="flex flex-col items-center py-10 text-center animate-slide-up">
                 <div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <span class="material-symbols-outlined text-3xl text-primary/40">event_busy</span>
                 </div>
-                <p class="text-sm font-semibold dark:text-white mb-1">Sin servicios</p>
+                <p class="text-sm font-semibold dark:text-slate-900 dark:text-white mb-1">Sin servicios</p>
                 <p class="text-xs text-slate-400 mb-4">No hay turnos para esta fecha</p>
                 <button onclick="router.navigateTo('#register')" class="px-5 py-2 bg-primary text-white text-xs font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
                     + Registrar Servicio
@@ -185,7 +185,7 @@ function generateCalendarGrid(year, month, selectedDate) {
         html += `
             <div class="flex flex-col items-center py-2 relative calendar-day cursor-pointer" data-date="${dateStr}">
                 ${isSelected ? `<div class="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"></div>` : ''}
-                <span class="relative z-10 font-bold ${isSelected ? 'text-primary' : (isToday ? 'text-accent-cyan' : 'text-slate-500 dark:text-slate-300')}">${day}</span>
+                <span class="relative z-10 font-bold ${isSelected ? 'text-primary' : (isToday ? 'text-accent-cyan' : 'text-slate-500 dark:text-slate-700 dark:text-slate-300')}">${day}</span>
                 <div class="flex gap-0.5 mt-1 relative z-10 h-1">
                     ${dots}
                 </div>
@@ -240,7 +240,7 @@ function renderServiceCard(service, index = 0) {
                 <div class="flex-1 min-w-0">
                     <div class="flex justify-between items-start" style="display: flex; justify-content: space-between; align-items: flex-start;">
                         <div class="min-w-0">
-                            <h4 class="font-bold dark:text-white leading-tight truncate">${service.location || 'Sin ubicación'}</h4>
+                            <h4 class="font-bold dark:text-slate-900 dark:text-white leading-tight truncate">${escapeHTML(service.location || 'Sin ubicación')}</h4>
                             <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">${typeLabel} ${subType}</p>
                         </div>
                         <span class="text-sm font-extrabold ${textColor} whitespace-nowrap ml-2">$${(service.total || 0).toLocaleString('es-AR')}</span>

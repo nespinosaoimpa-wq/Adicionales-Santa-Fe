@@ -8,7 +8,7 @@ function renderAdBanner() {
     return `
         <div class="my-6 mx-4 rounded-xl overflow-hidden shadow-lg relative group">
             <a href="${ad.linkUrl}" target="_blank" class="block relative">
-                <span class="absolute top-2 right-2 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-bold backdrop-blur-sm">Publicidad</span>
+                <span class="absolute top-2 right-2 bg-black/60 text-slate-900 dark:text-white text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-bold backdrop-blur-sm">Publicidad</span>
                 <img src="${ad.imageUrl}" class="w-full h-32 object-cover" alt="Anuncio">
                 <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </a>
@@ -104,7 +104,7 @@ function renderEmptyState(config) {
             <div class="size-24 rounded-full bg-primary/10 flex items-center justify-center mb-6">
                 <span class="material-symbols-outlined text-5xl text-primary/40">${icon}</span>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">${title}</h3>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">${title}</h3>
             <p class="text-slate-400 mb-6 max-w-sm">${message}</p>
             ${actionText ? `
                 <button onclick="${actionHandler}" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl transition-all active:scale-95">
@@ -159,18 +159,18 @@ function renderIOSInstallPrompt() {
                     <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Para usar esta aplicación a pantalla completa en tu iPhone:</p>
                     
                     <div class="flex flex-col gap-2 pt-2">
-                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-700 dark:text-slate-300">
                             <span class="size-6 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-primary font-bold">1</span>
                             <span>Toca el botón <span class="bg-slate-100 dark:bg-white/10 px-1.5 py-0.5 rounded-md font-bold text-primary flex inline-flex items-center gap-1">Compartir <span class="material-symbols-outlined text-xs">ios_share</span></span></span>
                         </div>
-                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-700 dark:text-slate-300">
                             <span class="size-6 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-primary font-bold">2</span>
                             <span>Elegí <span class="font-bold text-primary">"Añadir a panta. de inicio"</span></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <button onclick="this.closest('#ios-install-banner').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
+            <button onclick="this.closest('#ios-install-banner').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
@@ -212,7 +212,7 @@ function renderLogo(size = 'medium') {
                 </svg>
                 
                 <!-- Identity Text -->
-                <div class="font-black tracking-[0.15em] text-white/90 uppercase leading-none">
+                <div class="font-black tracking-[0.15em] text-slate-900 dark:text-white/90 uppercase leading-none">
                     ASF
                 </div>
                 

@@ -86,7 +86,7 @@ function renderFinancial(container) {
             <div class="grid grid-cols-2 gap-4">
                 <div class="glass-card p-5 rounded-2xl flex flex-col gap-1 relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-2 opacity-10">
-                        <span class="material-symbols-outlined text-4xl text-white">payments</span>
+                        <span class="material-symbols-outlined text-4xl text-slate-900 dark:text-white">payments</span>
                     </div>
                     <p class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Adicionales</p>
                     <p class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-white">$${(totalIncome || 0).toLocaleString('es-AR')}</p>
@@ -112,7 +112,7 @@ function renderFinancial(container) {
             <!-- Expense Control -->
             <section class="space-y-4">
                  <div class="flex justify-between items-center">
-                    <h2 class="text-base font-bold flex items-center gap-2 text-white">
+                    <h2 class="text-base font-bold flex items-center gap-2 text-slate-900 dark:text-white">
                         <span class="material-symbols-outlined text-primary">account_balance_wallet</span>
                         Control de Gastos
                     </h2>
@@ -131,10 +131,10 @@ function renderFinancial(container) {
                         <div class="flex-1 relative">
                             <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">$</span>
                             <input type="number" id="expense-amount" placeholder="Monto" 
-                                   class="w-full pl-7 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm font-medium placeholder:text-slate-500 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all">
+                                   class="w-full pl-7 pr-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-sm font-medium placeholder:text-slate-500 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all">
                         </div>
                         <input type="text" id="expense-desc" placeholder="Descripción (opcional)" 
-                               class="flex-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-sm placeholder:text-slate-500 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all">
+                               class="flex-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-sm placeholder:text-slate-500 focus:border-primary/50 focus:ring-1 focus:ring-primary/30 outline-none transition-all">
                     </div>
                     <button id="btn-add-expense" onclick="window.submitExpense()" 
                             class="w-full py-2.5 bg-red-500 hover:bg-red-600 text-white text-sm font-bold rounded-xl shadow-lg shadow-red-500/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
@@ -165,16 +165,16 @@ function renderFinancial(container) {
             '<span class="material-symbols-outlined text-lg">' + icon + '</span>' +
             '</div>' +
             '<div>' +
-            '<p class="font-bold text-sm text-white">' + e.category + '</p>' +
+            '<p class="font-bold text-sm text-slate-900 dark:text-white">' + e.category + '</p>' +
             '<p class="text-[10px] text-slate-500">' + (e.description || '-') + ' • ' + new Date(e.timestamp || e.date).toLocaleDateString() + '</p>' +
             '</div>' +
             '</div>' +
             '<div class="flex items-center gap-3">' +
-            '<p class="font-bold text-white">-$' + (e.amount || 0).toLocaleString('es-AR') + '</p>' +
+            '<p class="font-bold text-slate-900 dark:text-white">-$' + (e.amount || 0).toLocaleString('es-AR') + '</p>' +
             '<button onclick="window.deleteExpenseConfirm(\'' + e.id + '\')" class="size-8 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>' +
             '</div>' +
             '</div>';
-    }).join('') : '<div class="flex flex-col items-center py-8 text-center"><div class="size-14 rounded-full bg-red-500/10 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400/40">receipt_long</span></div><p class="text-sm font-semibold text-white mb-1">Sin gastos en este período</p><p class="text-xs text-slate-400">Usá el formulario arriba para cargar gastos</p></div>'}
+    }).join('') : '<div class="flex flex-col items-center py-8 text-center"><div class="size-14 rounded-full bg-red-500/10 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400/40">receipt_long</span></div><p class="text-sm font-semibold text-slate-900 dark:text-white mb-1">Sin gastos en este período</p><p class="text-xs text-slate-400">Usá el formulario arriba para cargar gastos</p></div>'}
                 </div>
             </section>
             
@@ -184,7 +184,7 @@ function renderFinancial(container) {
                     <span class="material-symbols-outlined">refresh</span>
                     Actualizar Datos
                 </button>
-                <button onclick="store.exportData()" class="text-sm font-bold text-slate-400 flex items-center gap-2 hover:text-white transition-colors">
+                <button onclick="store.exportData()" class="text-sm font-bold text-slate-400 flex items-center gap-2 hover:text-slate-900 dark:text-white transition-colors">
                     <span class="material-symbols-outlined">download</span>
                     Descargar CSV
                 </button>
@@ -273,7 +273,7 @@ function renderFinancial(container) {
     window.deleteExpenseConfirm = (id) => {
         const overlay = document.createElement('div');
         overlay.className = 'fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-6';
-        overlay.innerHTML = '<div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-slide-up"><div class="flex flex-col items-center text-center"><div class="size-12 rounded-full bg-red-500/20 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400">delete_forever</span></div><h3 class="text-lg font-bold text-white mb-1">¿Eliminar gasto?</h3><p class="text-sm text-slate-400 mb-5">Esta acción no se puede deshacer</p><div class="flex gap-3 w-full"><button onclick="this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-white/10 text-white text-sm font-bold rounded-xl">Cancelar</button><button onclick="store.deleteExpense(\'' + id + '\'); this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-red-500 text-white text-sm font-bold rounded-xl">Eliminar</button></div></div></div>';
+        overlay.innerHTML = '<div class="bg-slate-900 border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl animate-slide-up"><div class="flex flex-col items-center text-center"><div class="size-12 rounded-full bg-red-500/20 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400">delete_forever</span></div><h3 class="text-lg font-bold text-slate-900 dark:text-white mb-1">¿Eliminar gasto?</h3><p class="text-sm text-slate-400 mb-5">Esta acción no se puede deshacer</p><div class="flex gap-3 w-full"><button onclick="this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-white/10 text-slate-900 dark:text-white text-sm font-bold rounded-xl">Cancelar</button><button onclick="store.deleteExpense(\'' + id + '\'); this.closest(\'.fixed\').remove()" class="flex-1 py-2.5 bg-red-500 text-white text-sm font-bold rounded-xl">Eliminar</button></div></div></div>';
         overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
         document.body.appendChild(overlay);
     };

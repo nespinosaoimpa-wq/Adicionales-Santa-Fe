@@ -32,7 +32,7 @@ function renderHistory(container) {
                                     <span class="material-symbols-outlined">${icon}</span>
                                 </div>
                                 <div>
-                                    <p class="font-bold text-sm text-slate-800 dark:text-white">${s.location}</p>
+                                    <p class="font-bold text-sm text-slate-800 dark:text-slate-900 dark:text-white">${escapeHTML(s.location)}</p>
                                     <div class="flex items-center gap-2 mt-0.5">
                                         <span class="text-[11px] text-slate-400">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                         ${s.status === 'paid' ? '<span class="text-[10px] text-green-400 font-bold bg-green-500/10 px-1.5 rounded">PAGADO</span>' : ''}

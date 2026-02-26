@@ -62,7 +62,7 @@ function renderControlPanel(container) {
                         <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
                     </button>
                 ` : ''}
-                <button onclick="router.navigateTo('#stats')" class="size-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-white/10 transition-colors text-slate-600 dark:text-white">
+                <button onclick="router.navigateTo('#stats')" class="size-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-white/10 transition-colors text-slate-600 dark:text-slate-900 dark:text-white">
                     <span class="material-symbols-outlined text-xl">visibility</span>
                 </button>
             </div>
@@ -88,7 +88,7 @@ function renderControlPanel(container) {
                     <p class="text-xs font-medium text-slate-400 uppercase tracking-widest mb-1">Total Acumulado Quincena</p>
                     <div class="flex items-baseline gap-1 mb-6">
                         <span class="text-2xl font-bold text-primary">$</span>
-                        <span class="text-5xl font-extrabold tracking-tight text-white">${(totalEarnings || 0).toLocaleString('es-AR')}</span>
+                        <span class="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">${(totalEarnings || 0).toLocaleString('es-AR')}</span>
                     </div>
                     
                     <div class="grid grid-cols-2 gap-4 w-full">
@@ -97,7 +97,7 @@ function renderControlPanel(container) {
                                 <span class="size-2 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(34,211,238,0.5)]"></span>
                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Público</p>
                             </div>
-                            <p class="text-lg font-bold text-white">$${(totalPublic || 0).toLocaleString('es-AR')}</p>
+                            <p class="text-lg font-bold text-slate-900 dark:text-white">$${(totalPublic || 0).toLocaleString('es-AR')}</p>
                             <p class="text-[10px] text-slate-500">${hoursPublic.toFixed(1)} Horas</p>
                         </div>
                         <div class="bg-white/5 rounded-xl p-3 border border-white/5">
@@ -105,7 +105,7 @@ function renderControlPanel(container) {
                                 <span class="size-2 rounded-full bg-service-ospe shadow-[0_0_8px_rgba(139,92,246,0.5)]"></span>
                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Privado</p>
                             </div>
-                            <p class="text-lg font-bold text-white">$${(totalPrivate || 0).toLocaleString('es-AR')}</p>
+                            <p class="text-lg font-bold text-slate-900 dark:text-white">$${(totalPrivate || 0).toLocaleString('es-AR')}</p>
                             <p class="text-[10px] text-slate-500">${hoursPrivate.toFixed(1)} Horas</p>
                         </div>
                     </div>
@@ -131,7 +131,7 @@ function renderControlPanel(container) {
                                         <span class="material-symbols-outlined">${icon}</span>
                                     </div>
                                     <div>
-                                        <p class="font-bold text-sm text-slate-800 dark:text-white">${s.location}</p>
+                                        <p class="font-bold text-sm text-slate-800 dark:text-slate-900 dark:text-white">${s.location}</p>
                                     <div class="flex items-center gap-2 mt-0.5">
                                             <span class="text-[11px] text-slate-400 font-bold">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                             <span class="size-1 rounded-full bg-slate-600"></span>
@@ -153,7 +153,7 @@ function renderControlPanel(container) {
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-sm font-bold text-white">$${(s.total || 0).toLocaleString('es-AR')}</p>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white">$${(s.total || 0).toLocaleString('es-AR')}</p>
                             </div>
                          `;
     }).join('')}
