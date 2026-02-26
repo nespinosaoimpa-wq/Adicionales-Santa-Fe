@@ -222,3 +222,5 @@ function renderLogo(size = 'medium') {
         </div>
     `;
 }
+
+console.log("✅ components.js loaded successfully");

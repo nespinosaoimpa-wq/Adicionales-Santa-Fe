@@ -335,7 +335,7 @@ const store = {
     },
 
     init() {
-        console.log("App v529.2-PHASE12 - Dark Mode, Alarms, Offline");
+        console.log("App v531.0-FIX - Light Mode, Alarms, Offline");
 
         // Apply saved theme ASAP
         this.initTheme();
