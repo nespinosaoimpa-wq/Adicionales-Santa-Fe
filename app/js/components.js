@@ -222,5 +222,14 @@ function renderLogo(size = 'medium') {
         </div>
     `;
 }
+// --- Export to global window scope ---
+window.renderLogo = renderLogo;
+window.renderAdBanner = renderAdBanner;
+window.renderBottomNav = renderBottomNav;
+window.renderOfflineBanner = renderOfflineBanner;
+window.renderInstallBanner = renderInstallBanner;
+window.renderLoadingState = renderLoadingState;
+window.renderEmptyState = renderEmptyState;
+window.renderIOSInstallPrompt = renderIOSInstallPrompt;
 
-console.log("✅ components.js loaded successfully");
+console.log("✅ components.js loaded & exported successfully");
