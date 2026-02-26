@@ -472,13 +472,13 @@ function renderCentinela(container) {
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
             <div class="flex flex-col">
-                <h1 class="text-sm font-black text-slate-900 dark:text-white leading-none">Centinela AI</h1>
+                <h1 class="text-sm font-black text-slate-900 dark:text-white leading-none">Centinela AI v10</h1>
                 <span class="text-[10px] text-primary flex items-center gap-1">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    Base Legal SF Actualizada
+                    Base Legal & ISeP 2025/26 Activa
                 </span>
             </div>
         </header>
@@ -491,9 +491,9 @@ function renderCentinela(container) {
                     </div>
                     <div class="bg-white/5 border border-white/5 p-3 rounded-2xl rounded-tl-none">
                         <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">
-                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, **Decreto 461**, **Reforma Previsional (Ley 14.283)**, las escalas salariales de **Febrero 2026 (Decreto 142/26)**, el **Código Procesal Penal (CPP) de Santa Fe**, el **Código Penal Argentino (CP)** y las últimas grillas del **ISeP 2026**.
+                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, **Decreto 461**, **Reforma Previsional (Ley 14.283)**, las escalas salariales de **Febrero 2026 (Decreto 142/26)**, el **Código Procesal Penal (CPP) de Santa Fe**, el **Código Penal Argentino (CP)** y los últimos listados y manuales del **ISeP 2025/2026**.
                             <br><br>
-                            ¿Qué duda reglamentaria, penal o de haberes tenés hoy?
+                            ¿Qué duda reglamentaria, penal o de listados del ISeP tenés hoy?
                         </p>
                     </div>
                 </div>
@@ -677,6 +677,20 @@ function renderCentinela(container) {
             default: "Tu salud mental no se negocia. Tenés cobertura total de IAPOS y apoyo profesional en Bienestar Policial. Si sentís que no podés más, buscá ayuda; ya reporté tu situación al sistema de contención administrativo de forma silenciosa."
         },
         {
+            category: 'isep_documentos',
+            keywords: ['listado', 'habilitados', 'habilitado', 'concurso', 'convocados', 'pdf', 'enlace', 'link', 'descargar', 'buscar', 'merito', 'suboficial', 'oficial', 'estudio', 'material', 'manual'],
+            responses: [
+                { match: ['habilitados 2026', 'merito 2026', 'continuación'], text: "📄 **Listado Continúan en Orden de Mérito (Ciclo 2026)**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/publicaciones/Prope%202026%20-%20Continuan%20en%20orden%20de%20merito/CONTINUAN%20EN%20ORDEN%20DE%20MERITO%20PARA%20CITAR.pdf)" },
+                { match: ['habilitados suboficiales', 'inscripto suboficial', '2026'], text: "📄 **Personal Habilitado (Suboficiales) - Ciclo 2026**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/Publicaciones/EE%20-%20Perfeccionamiento%202026/SUBOFICIAL%20INSCRIPTO%202026.pdf)" },
+                { match: ['habilitados oficiales', 'inscripto oficial', '2026'], text: "📄 **Personal Habilitado (Oficiales) - Ciclo 2026**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/Publicaciones/EE%20-%20Perfeccionamiento%202026/OFICIAL%20INSCRIPTO%2020263.pdf)" },
+                { match: ['convocados', 'subcomisario', '2025'], text: "📄 **Convocados Ascenso 2025 - Subcomisario**:\n[Ver en Google Drive](https://drive.google.com/file/d/1zLxytU1o6JQm_S83QSHeh2CGIZCIRL62/view?usp=sharing)" },
+                { match: ['convocados', 'comisario', 'supervisor', '2025'], text: "📄 **Convocados Ascenso 2025 - Comisario Supervisor**:\n[Ver en Google Drive](https://drive.google.com/file/d/1Vqtgg9bZj1xbJrKJBN5qnG_ECXLfFsrt/view?usp=sharing)" },
+                { match: ['material', 'estudio', 'manual', 'tecnicatura', '2026'], text: "📚 **Manual de Estudio 2026 (Tecnicatura)**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/Publicaciones/EaD%20-%20examenes%20tecnicatura%202026/Manual%20Tecnicatura%20Sup%20Seg%20Publica%20y%20Ciudadana%202026.pdf)" },
+                { match: ['situacion revista', 'revista', '2025'], text: "📄 **Situación de Revista 2025 (Ascensos)**:\n[Ver en Google Drive](https://drive.google.com/file/d/1yvUD4GjwmO6iH8UNmABun5diahmxZpgz/view?usp=sharing)" }
+            ],
+            default: "He recopilado los enlaces directos a los listados del ISeP (Habilitados 2026, Convocados 2025, Manuales). ¿Sobre qué jerarquía o año necesitás el link?"
+        },
+        {
             category: 'isep_formacion',
             keywords: ['isep', 'curso', 'capacitacion', 'perfeccionamiento', 'tecnicatura', 'ascenso 2025', 'vacantes', 'estudio', 'examen', 'virtual'],
             responses: [
@@ -684,7 +698,7 @@ function renderCentinela(container) {
                 { match: ['ascenso 2025', 'decreto 263'], text: "El **Decreto 263/26** fijó las vacantes para el Concurso de Ascenso 2025. Los jurados están evaluando antigüedad y desempeño operativo." },
                 { match: ['virtual', 'notebooklm', 'estudiar'], text: "Usá el Aula Virtual del ISEP. NotebookLM es una herramienta recomendada para procesar los textos de la Ley 12.521 y Decretos de Ascenso." }
             ],
-            default: "El ISEP es el camino al ascenso. Consultá vacantes (Decreto 263) y cursos de perfeccionamiento en la Intranet con tu ID Ciudadana."
+            default: "El ISEP es el camino al ascenso. Consultá vacantes (Decreto 263) y cursos de perfeccionamiento en la Intranet con tu ID Ciudadana o pedime los listados de habilitados."
         },
         {
             category: 'haberes_servicios',
