@@ -199,7 +199,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v2.1.4 • Build 2026.02.24 v531.1-FINAL</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v2.1.4 • Build 2026.02.24 v531.2-FINAL</p>
             </div>
         </main>
     `;
