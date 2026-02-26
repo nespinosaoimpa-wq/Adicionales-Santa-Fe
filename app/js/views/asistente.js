@@ -678,7 +678,7 @@ function renderCentinela(container) {
         },
         {
             category: 'isep_documentos',
-            keywords: ['listado', 'habilitados', 'habilitado', 'concurso', 'convocados', 'pdf', 'enlace', 'link', 'descargar', 'buscar', 'merito', 'suboficial', 'oficial', 'estudio', 'material', 'manual'],
+            keywords: ['listado habilitados', 'habilitados 2026', 'concurso ascenso', 'convocados ascenso', 'pdf isep', 'enlace isep', 'link isep', 'descargar listado', 'buscar habilitado', 'orden de merito', 'inscripto suboficial', 'inscripto oficial', 'manual tecnicatura', 'material de estudio', 'situacion revista'],
             responses: [
                 { match: ['habilitados 2026', 'merito 2026', 'continuación'], text: "📄 **Listado Continúan en Orden de Mérito (Ciclo 2026)**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/publicaciones/Prope%202026%20-%20Continuan%20en%20orden%20de%20merito/CONTINUAN%20EN%20ORDEN%20DE%20MERITO%20PARA%20CITAR.pdf)" },
                 { match: ['habilitados suboficiales', 'inscripto suboficial', '2026'], text: "📄 **Personal Habilitado (Suboficiales) - Ciclo 2026**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/Publicaciones/EE%20-%20Perfeccionamiento%202026/SUBOFICIAL%20INSCRIPTO%202026.pdf)" },
@@ -964,31 +964,27 @@ function renderCentinela(container) {
                 const normKw = normalizeText(kw);
                 const kwWords = normKw.split(/\s+/);
 
+                // Multi-word keyword: must appear as exact phrase
                 if (kwWords.length > 1 && normalizedMsg.includes(normKw)) {
                     score += 60;
                     matchedKeywords++;
                     return;
                 }
-                if (msgTokens.has(normKw)) {
+                // Single-word keyword: exact token match only
+                if (kwWords.length === 1 && msgTokens.has(normKw)) {
+                    // Longer/numeric keywords are more specific → higher score
                     score += (normKw.length > 7 || /\d+/.test(normKw)) ? 45 : 22;
                     matchedKeywords++;
                     return;
                 }
-                for (const word of words) {
-                    if (word.length >= 5 && normKw.length >= 4) {
-                        if (normKw.includes(word) || word.includes(normKw)) {
-                            score += 8;
-                            break;
-                        }
-                    }
-                }
             });
 
-            if (sessionContext.lastCategory === cat.category) score += 15;
-            if (sessionContext.history.slice(-3).some(h => h.category === cat.category)) score += 8;
+            // Context bonus: lighter than before
+            if (sessionContext.lastCategory === cat.category) score += 10;
 
+            // Coverage bonus
             const coverage = matchedKeywords / Math.max(cat.keywords.length, 1);
-            if (coverage > 0.3) score += Math.round(coverage * 20);
+            if (coverage > 0.3) score += Math.round(coverage * 15);
 
             if (score > 0) scored.push({ cat, score, matchedKeywords });
         });
@@ -1003,18 +999,30 @@ function renderCentinela(container) {
 
         cat.responses.forEach(res => {
             let matchScore = 0;
+            let totalTerms = res.match.length;
+            let matchedTerms = 0;
+
             res.match.forEach(m => {
                 const normM = normalizeText(m);
-                if (normalizedMsg.includes(normM)) matchScore += 30;
-                else if (normM.length > 4 && normalizedMsg.split(' ').some(w => w.includes(normM) || normM.includes(w))) matchScore += 10;
+                if (normalizedMsg.includes(normM)) {
+                    matchScore += 30;
+                    matchedTerms++;
+                }
             });
+
+            // Bonus if ALL match terms were found (strong signal)
+            if (totalTerms > 0 && matchedTerms === totalTerms) {
+                matchScore += 20;
+            }
+
             if (matchScore > bestMatchScore) {
                 bestMatchScore = matchScore;
                 bestResponse = res;
             }
         });
 
-        if (bestMatchScore > 0 && bestResponse) return bestResponse.text;
+        // Only return a specific response if we had a meaningful match
+        if (bestMatchScore >= 30 && bestResponse) return bestResponse.text;
         return cat.default;
     }
 
@@ -1022,7 +1030,8 @@ function renderCentinela(container) {
     function fuseResponses(topResults, normalizedMsg) {
         if (topResults.length < 2) return null;
         const [first, second] = topResults;
-        if (second.score >= 25 && (first.score - second.score) < 30) {
+        // Only fuse if 2nd category is strong AND close in score
+        if (second.score >= 40 && (first.score - second.score) < 20 && first.cat.category !== second.cat.category) {
             const r1 = selectResponse(first.cat, normalizedMsg);
             const r2 = selectResponse(second.cat, normalizedMsg);
             if (r1 !== r2) return `${r1}\n\n---\n📌 **También relacionado (${second.cat.category.replace(/_/g, ' ')}):**\n${r2}`;
