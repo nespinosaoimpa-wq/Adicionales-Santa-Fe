@@ -2,7 +2,7 @@
  * Adicionales Santa Fe - Router & Navigation
  */
 
-const router = {
+window.router = {
     currentRoute: '#login',
 
     init() {

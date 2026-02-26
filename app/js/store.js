@@ -2,7 +2,7 @@
  * Adicionales Santa Fe - State Management (Store)
  */
 
-const store = {
+window.store = {
     user: null, // Will be set by Firebase Auth
     services: [], // Synced with Firestore
     expenses: [], // Synced with Firestore
@@ -335,7 +335,7 @@ const store = {
     },
 
     init() {
-        console.log("App v531.0-FIX - Light Mode, Alarms, Offline");
+        console.log("App v531.1-FINAL - Absolute Fix, Standard Exports");
 
         // Apply saved theme ASAP
         this.initTheme();

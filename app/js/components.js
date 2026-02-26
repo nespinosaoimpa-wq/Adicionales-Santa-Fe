@@ -224,5 +224,12 @@ function copyToClipboard(text, successMsg) {
 }
 
 window.copyToClipboard = copyToClipboard;
+window.renderAdBanner = renderAdBanner;
+window.renderBottomNav = renderBottomNav;
+window.renderOfflineBanner = renderOfflineBanner;
+window.renderInstallBanner = renderInstallBanner;
+window.renderLoadingState = renderLoadingState;
+window.renderEmptyState = renderEmptyState;
+window.renderIOSInstallPrompt = renderIOSInstallPrompt;
 
 console.log("✅ components.js loaded & exported successfully");
