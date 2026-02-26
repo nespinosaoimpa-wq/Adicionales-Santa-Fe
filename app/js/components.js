@@ -2,6 +2,44 @@
  * Adicionales Santa Fe - Shared UI Components
  */
 
+// --- Global Branding ---
+function renderLogo(size = 'medium') {
+    const sizes = {
+        small: 'size-8 text-[8px]',
+        medium: 'size-12 text-[10px]',
+        large: 'size-16 text-xs'
+    };
+    const s = sizes[size] || sizes.medium;
+
+    return `
+        <div class="${s} relative flex items-center justify-center select-none group">
+            <!-- Glow Effect -->
+            <div class="absolute inset-0 bg-primary/20 dark:bg-primary/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+            
+            <!-- Shield Container -->
+            <div class="relative w-full h-full bg-slate-900 rounded-2xl border border-white/10 flex flex-col items-center justify-center overflow-hidden shadow-2xl ring-1 ring-white/5">
+                <!-- Inner Gradient Glow -->
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-black/40"></div>
+                
+                <!-- Police Shield SVG Icon -->
+                <svg viewBox="0 0 24 24" class="size-1/2 text-primary mb-0.5 drop-shadow-[0_0_8px_rgba(13,89,242,0.4)]" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M12 8v4M12 16h.01" stroke-width="2.5" />
+                </svg>
+                
+                <!-- Identity Text -->
+                <div class="font-black tracking-[0.15em] text-white/90 uppercase leading-none">
+                    ASF
+                </div>
+                
+                <!-- Status Dot -->
+                <div class="absolute top-1.5 right-1.5 size-1.5 bg-emerald-500 rounded-full shadow-[0_0_6px_rgba(16,185,129,0.9)] animate-pulse"></div>
+            </div>
+        </div>
+    `;
+}
+window.renderLogo = renderLogo;
+
 function renderAdBanner() {
     if (!store.ads || store.ads.length === 0) return '';
     const ad = store.ads[Math.floor(Math.random() * store.ads.length)];
@@ -186,50 +224,5 @@ function copyToClipboard(text, successMsg) {
 }
 
 window.copyToClipboard = copyToClipboard;
-
-function renderLogo(size = 'medium') {
-    const sizes = {
-        small: 'size-8 text-[8px]',
-        medium: 'size-12 text-[10px]',
-        large: 'size-16 text-xs'
-    };
-    const s = sizes[size] || sizes.medium;
-
-    return `
-        <div class="${s} relative flex items-center justify-center select-none group">
-            <!-- Glow Effect -->
-            <div class="absolute inset-0 bg-primary/20 dark:bg-primary/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
-            
-            <!-- Shield Container -->
-            <div class="relative w-full h-full bg-slate-900 rounded-2xl border border-white/10 flex flex-col items-center justify-center overflow-hidden shadow-2xl ring-1 ring-white/5">
-                <!-- Inner Gradient Glow -->
-                <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-black/40"></div>
-                
-                <!-- Police Shield SVG Icon -->
-                <svg viewBox="0 0 24 24" class="size-1/2 text-primary mb-0.5 drop-shadow-[0_0_8px_rgba(13,89,242,0.4)]" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                    <path d="M12 8v4M12 16h.01" stroke-width="2.5" />
-                </svg>
-                
-                <!-- Identity Text -->
-                <div class="font-black tracking-[0.15em] text-slate-900 dark:text-white/90 uppercase leading-none">
-                    ASF
-                </div>
-                
-                <!-- Status Dot -->
-                <div class="absolute top-1.5 right-1.5 size-1.5 bg-emerald-500 rounded-full shadow-[0_0_6px_rgba(16,185,129,0.9)] animate-pulse"></div>
-            </div>
-        </div>
-    `;
-}
-// --- Export to global window scope ---
-window.renderLogo = renderLogo;
-window.renderAdBanner = renderAdBanner;
-window.renderBottomNav = renderBottomNav;
-window.renderOfflineBanner = renderOfflineBanner;
-window.renderInstallBanner = renderInstallBanner;
-window.renderLoadingState = renderLoadingState;
-window.renderEmptyState = renderEmptyState;
-window.renderIOSInstallPrompt = renderIOSInstallPrompt;
 
 console.log("✅ components.js loaded & exported successfully");
