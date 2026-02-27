@@ -93,24 +93,23 @@ CREATE POLICY "Users can only access their own expenses" ON expenses
 
 -- Políticas para RESEÑAS
 DROP POLICY IF EXISTS "Allow public insert for reviews" ON public.user_reviews;
-DROP POLICY IF EXISTS "Allow public select for reviews" ON public.user_reviews;
-
-CREATE POLICY "Users can insert reviews" ON public.user_reviews 
-    FOR INSERT WITH CHECK (true); -- Permitimos insert pero select está filtrado si se requiere
-CREATE POLICY "Anyone can view reviews" ON public.user_reviews 
+DROP POLICY IF EXISTS "Anyone can view reviews" ON public.user_reviews;
+CREATE POLICY "Auth users can insert reviews" ON public.user_reviews 
+    FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Public can view reviews" ON public.user_reviews 
     FOR SELECT USING (true);
 
 -- Políticas para REGISTROS DE CONSULTAS
 DROP POLICY IF EXISTS "Users can insert query logs" ON public.query_logs;
-CREATE POLICY "Users can insert query logs" ON public.query_logs 
-    FOR INSERT WITH CHECK (true);
-CREATE POLICY "Admin can view query logs" ON public.query_logs 
-    FOR SELECT USING (true); -- En un entorno real filtraríamos por rol admin
+DROP POLICY IF EXISTS "Admin can view query logs" ON public.query_logs;
+CREATE POLICY "Auth users can insert query logs" ON public.query_logs 
+    FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Users can only view their own logs" ON public.query_logs 
+    FOR SELECT USING (user_email = current_setting('request.jwt.claims', true)::jsonb->>'email');
 
 -- Permisos técnicos
-GRANT ALL ON profiles, services, expenses TO anon, authenticated;
-GRANT INSERT, SELECT ON public.user_reviews TO anon, authenticated;
-GRANT INSERT, SELECT ON public.query_logs TO anon, authenticated;
+GRANT INSERT, SELECT ON public.user_reviews TO authenticated;
+GRANT INSERT, SELECT ON public.query_logs TO authenticated;
 
 -- ── 6. TRIGGER PARA NUEVOS USUARIOS ────────────────
 -- Crea automáticamente un perfil cuando alguien se registra

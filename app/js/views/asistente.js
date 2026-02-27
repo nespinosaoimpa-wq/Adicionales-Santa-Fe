@@ -1422,7 +1422,7 @@ window.renderAsistenteHub = renderAsistenteHub;
 window.renderPartesInteligentes = renderPartesInteligentes;
 
 window.showAnnouncementModal = () => {
-    const currentVersion = 'v527.4-FINAL';
+    const currentVersion = 'v531.3-HARDENED';
     if (localStorage.getItem('last_announcement') === currentVersion) return;
 
     const overlay = document.createElement('div');
@@ -1434,9 +1434,9 @@ window.showAnnouncementModal = () => {
                 <span class="material-symbols-outlined text-4xl">celebration</span>
             </div>
             <div class="space-y-2">
-                <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase italic">¡v527.4-FINAL Activa!</h3>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase italic">¡v531.3-HARDENED Activa!</h3>
                 <p class="text-xs text-slate-400 font-medium leading-relaxed">
-                    🚀 **Centinela v3.8-SAFE**: Lógica blindada contra confusiones. Se activó el sistema de **Auditoría IA** para que el Administrador reciba reportes de entrenamiento basados en tus dudas reales.
+                    🚀 **Centinela v10.2-SEC**: Lógica blindada y seguridad reforzada. Se implementó un **Content Security Policy (CSP)** riguroso y políticas de acceso (RLS) más estrictas.
                 </p>
             </div>
             <button id="close-announcement" class="w-full py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all uppercase tracking-widest text-xs">
