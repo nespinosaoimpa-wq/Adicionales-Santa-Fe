@@ -893,7 +893,7 @@ function renderCentinela(container) {
     ];
 
     // ═══════════════════════════════════════════════════════════
-    // CENTINELA AI — MOTOR DE INTELIGENCIA v9.0 (Deep Logic)
+    // CENTINELA AI — MOTOR DE INTELIGENCIA v10.2 (NLU Deep)
     // ═══════════════════════════════════════════════════════════
 
     // --- 1. CONTEXTO DE CONVERSACIÓN ---
@@ -914,72 +914,172 @@ function renderCentinela(container) {
         return text.toLowerCase()
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¿!¡]/g, " ")
+            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¿!¡"']/g, " ")
             .replace(/\s+/g, " ")
             .trim();
     }
 
-    // --- 3. RENDERIZADOR MARKDOWN → HTML PROFESIONAL ---
+    // --- 3. DICCIONARIO DE SINÓNIMOS / INTENCIONES NATURALES ---
+    // Mapea frases coloquiales a la categoría correcta del knowledgeBase
+    const synonymMap = [
+        // --- SUELDOS & HABERES ---
+        { phrases: ['cuanto cobro', 'cuanto gano', 'cuanto me pagan', 'cuanto es mi sueldo', 'plata que cobro', 'cobro poco', 'me pagan mal', 'cuanto me corresponde', 'cuanto cobran', 'cuanto ganan', 'cuanto pagan', 'cuanto esta el sueldo'], category: 'sueldos' },
+        { phrases: ['aumento de sueldo', 'pido aumento', 'subio el sueldo', 'nos aumentaron', 'grilla salarial', 'escala salarial'], category: 'sueldos' },
+        { phrases: ['cuanto cobra un oficial', 'cuanto gana un suboficial', 'cuanto gana un inspector', 'cuanto gana un comisario', 'cuanto gana un subinspector'], category: 'sueldos' },
+        { phrases: ['que es el tap', 'la tarjeta alimentar', 'tarjeta de comida'], category: 'general_admin' },
+
+        // --- LICENCIAS ---
+        { phrases: ['me puedo tomar dias', 'necesito dias', 'pedir franco', 'dias por hijo', 'dias por casamiento', 'me enfermo', 'estoy enfermo', 'me siento mal', 'carpeta medica', 'tengo que ir al medico'], category: 'licencias' },
+        { phrases: ['cuantos dias de vacaciones tengo', 'cuando me tocan vacaciones', 'me corresponden vacaciones'], category: 'licencias' },
+        { phrases: ['se me murio un familiar', 'fallecio mi padre', 'fallecio mi madre', 'duelo', 'muerte de familiar'], category: 'licencias' },
+        { phrases: ['tengo un examen', 'tengo que rendir', 'dias para estudiar', 'rindo parcial'], category: 'licencias' },
+        { phrases: ['voy a ser papa', 'voy a ser padre', 'nacio mi hijo', 'dias por paternidad'], category: 'licencias' },
+        { phrases: ['estoy embarazada', 'licencia por embarazo', 'cuando me toca la maternidad'], category: 'licencias' },
+
+        // --- DISCIPLINA ---
+        { phrases: ['me sancionaron', 'me van a sancionar', 'me pueden sancionar', 'me hicieron un sumario', 'tengo un sumario', 'me quieren suspender', 'me corrieron', 'me arrestaron', 'me mandaron preso', 'me dieron de baja'], category: 'disciplina' },
+        { phrases: ['que pasa si me agarro el celular', 'puedo fumar en servicio', 'si llego tarde', 'falta leve', 'falta grave'], category: 'disciplina' },
+        { phrases: ['como me defiendo', 'como hago un descargo', 'tengo derecho a defenderme', 'donde hago el descargo'], category: 'decreto_461_profundizado' },
+
+        // --- JUBILACIÓN ---
+        { phrases: ['me quiero jubilar', 'cuando me jubilo', 'cuanto me falta para jubilarme', 'cuantos años me faltan', 'cuanto me queda', 'me corresponde jubilarme'], category: 'prevision' },
+        { phrases: ['cuanto va a ser mi jubilacion', 'cuanto voy a cobrar de jubilado', 'como se calcula la jubilacion'], category: 'prevision' },
+        { phrases: ['aporte jubilatorio', 'cuanto me descuentan', 'me descuentan mucho'], category: 'prevision' },
+
+        // --- ASCENSOS / ISEP ---
+        { phrases: ['como asciendo', 'quiero ascender', 'cuando es el concurso', 'hay concurso', 'puedo ascender', 'me postulo', 'requisitos para ascender'], category: 'isep_ascensos' },
+        { phrases: ['hay algun curso', 'tengo que hacer un curso', 'como me capacito', 'cursos disponibles', 'donde estudio'], category: 'isep_formacion' },
+        { phrases: ['estoy en el listado', 'listado de habilitados', 'sali habilitado', 'estoy habilitado', 'me habilitaron', 'listado isep'], category: 'isep_documentos' },
+        { phrases: ['manual para estudiar', 'material de estudio', 'que tengo que leer', 'de donde estudio', 'manual tecnicatura'], category: 'isep_documentos' },
+        { phrases: ['novedades del isep', 'que hay de nuevo en el isep', 'nuevo del isep'], category: 'isep_actualidad_2026' },
+
+        // --- PROCEDIMIENTOS OPERATIVOS ---
+        { phrases: ['agarre un chorro', 'lo puedo detener', 'lo detengo', 'lo puedo parar', 'que hago si lo agarro en flagrancia', 'lo vi robando'], category: 'etaf_flagrancia_0800' },
+        { phrases: ['me encontre con droga', 'encontre droga', 'tienen droga', 'hay un bunker', 'venden droga', 'punto de venta de droga'], category: 'microtrafico' },
+        { phrases: ['tengo que preservar la escena', 'como acordono', 'llegue a un crimen', 'hay un muerto', 'encontre un cuerpo'], category: 'escena_del_crimen' },
+        { phrases: ['tengo que allanar', 'necesito orden de allanamiento', 'puedo entrar sin orden', 'puedo entrar a la casa', 'requisa'], category: 'reforma_procesal_penal' },
+        { phrases: ['controlar un auto', 'control vehicular', 'retener una moto', 'le retengo la moto', 'no tiene papeles', 'sin seguro', 'sin licencia'], category: 'control_vehicular_transito' },
+        { phrases: ['violencia de genero', 'violencia domestica', 'le pega a la mujer', 'mujer golpeada', 'denuncia por violencia', 'la pareja le pega'], category: 'juridico_policial' },
+        { phrases: ['cuando puedo disparar', 'puedo disparar', 'cuando uso el arma', 'uso de la fuerza', 'me amenaza con un arma', 'me apuntan'], category: 'uso_fuerza_armamento' },
+        { phrases: ['que es el cuij', 'numero de causa', 'como identifico la causa'], category: 'actuaciones_mpa_general' },
+        { phrases: ['trata de personas', 'explotacion sexual', 'prostitucion forzada'], category: 'trata_personas_protocolo' },
+
+        // --- OBRA SOCIAL / SALUD ---
+        { phrases: ['me cubre iapos', 'que me cubre', 'tengo cobertura', 'necesito ir al medico', 'necesito un turno', 'donde me atiendo', 'obra social'], category: 'iapos_salud' },
+        { phrases: ['estoy mal', 'no puedo mas', 'tengo depresion', 'necesito un psicologo', 'salud mental', 'estres', 'me siento quemado', 'burnout'], category: 'bienestar_salud' },
+
+        // --- TARIFAS ADICIONALES ---
+        { phrases: ['cuanto me pagan la hora', 'cuanto vale la hora', 'tarifa del adicional', 'cuanto cobro un adicional', 'cuanto es la extraordinaria', 'cuanto es la ordinaria', 'precio del adicional'], category: 'osesp_spa_tarifas' },
+
+        // --- TRANSPORTE ---
+        { phrases: ['horario del colectivo', 'cuando sale el bondi', 'a que hora sale', 'hay colectivo', 'micro policial', 'transporte policial'], category: 'transporte' },
+
+        // --- LEY 12521 ---
+        { phrases: ['que dice la ley', 'ley de policia', 'derechos del policia', 'mis derechos', 'que articulo', 'estabilidad laboral'], category: 'ley_12521_profundizada' },
+
+        // --- CÓDIGO PENAL / PROCESAL ---
+        { phrases: ['legitima defensa', 'defensa propia', 'me puedo defender', 'si me atacan'], category: 'codigo_penal_arg' },
+        { phrases: ['que es el cpp', 'codigo procesal', 'como actuo penalmente'], category: 'codigo_procesal_penal_sf' },
+
+        // --- ARMAS ---
+        { phrases: ['como identifico un arma', 'que datos anoto del arma', 'clasificar un arma', 'calibre', 'numero de serie'], category: 'reglamentacion' },
+
+        // --- JURISDICCIÓN ---
+        { phrases: ['donde queda la ur', 'unidad regional', 'que ur me corresponde', 'cabecera'], category: 'jurisdiccion' },
+
+        // --- RECURSOS WEB ---
+        { phrases: ['pagina del isep', 'pagina de iapos', 'web del mpa', 'donde consulto', 'intranet', 'portal policial'], category: 'recursos_web_policiales' },
+    ];
+
+    // --- 4. STEMMER SIMPLE PARA ESPAÑOL ---
+    function spanishStem(word) {
+        if (word.length < 5) return word;
+        return word
+            .replace(/(cion|sion|mente|idad|ismo|ista|ario|ario|orio|amiento|imiento|acion|encia|ancia)$/i, '')
+            .replace(/(ando|iendo|ar|er|ir|ado|ido|arse|erse|irse)$/i, '')
+            .replace(/(es|as|os|is)$/i, '');
+    }
+
+    // --- 5. RENDERIZADOR MARKDOWN → HTML PROFESIONAL ---
     function renderMarkdown(text) {
         return text
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-primary underline hover:text-blue-300 transition-colors">$1</a>')
             .replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-900 dark:text-white font-bold">$1</strong>')
             .replace(/^(\d+)\.\s+(.+)$/gm, '<div class="flex gap-2 my-1"><span class="text-primary font-bold shrink-0">$1.</span><span>$2</span></div>')
             .replace(/^[-•]\s+(.+)$/gm, '<div class="flex gap-2 my-1"><span class="text-primary shrink-0">▸</span><span>$1</span></div>')
             .replace(/\n/g, '<br>');
     }
 
-    // --- 4. DETECTOR DE INTENCIÓN ---
+    // --- 6. DETECTOR DE INTENCIÓN ---
     function detectIntent(msg) {
-        const greetings = ['hola', 'buen dia', 'buenas', 'buenos dias', 'buenas tardes', 'buenas noches', 'que tal', 'como estas'];
-        const thanks = ['gracias', 'muchas gracias', 'genial', 'perfecto', 'ok gracias', 'entendido'];
-        const confusions = ['no entiendo', 'no se', 'que haces', 'que podes hacer', 'que sabes', 'para que sirves'];
+        const greetings = ['hola', 'buen dia', 'buenas', 'buenos dias', 'buenas tardes', 'buenas noches', 'que tal', 'como estas', 'hey', 'ey'];
+        const thanks = ['gracias', 'muchas gracias', 'genial', 'perfecto', 'ok gracias', 'entendido', 'dale gracias', 'groso', 'barbaro', 'excelente', 'muy bien'];
+        const confusions = ['no entiendo', 'no se', 'que haces', 'que podes hacer', 'que sabes', 'para que sirves', 'como funciona esto', 'ayuda', 'help', 'que temas manejas'];
         if (greetings.some(g => msg.includes(g))) return 'greeting';
         if (thanks.some(t => msg.includes(t))) return 'thanks';
         if (confusions.some(c => msg.includes(c))) return 'capabilities';
         return null;
     }
 
-    // --- 5. RESPUESTAS DE INTENCIÓN ---
+    // --- 7. RESPUESTAS DE INTENCIÓN ---
     const intentResponses = {
         greeting: () => {
             const hour = new Date().getHours();
             const greet = hour < 12 ? 'Buenos días' : hour < 18 ? 'Buenas tardes' : 'Buenas noches';
-            return `${greet}, oficial. Soy **Centinela AI v9**, tu asesor legal y operativo de la PSF.\n\nPuedo consultarte sobre:\n- **Sueldos y Haberes** (Decreto 142/26, escalas)\n- **Ley 12521 y Decreto 461** (escalafón, sanciones, derechos)\n- **Procedimientos operativos** (flagrancia, MPA, ETAF 0800)\n- **IAPOS, OSESP y SPA** (salud, tarifas de adicionales)\n- **Leyes penales** (CPP, 23737, 14239)\n\n¿Qué necesitás consultar?`;
+            return `${greet}, oficial. Soy **Centinela AI v10**, tu asesor legal y operativo de la PSF.\n\nPodés preguntarme lo que necesites con tus palabras, no hace falta que uses términos técnicos. Algunos temas que manejo:\n- **Sueldos**: "¿Cuánto cobro?", "¿Cuánto gana un inspector?"\n- **Licencias**: "Necesito días", "Me enfermé"\n- **Ascensos**: "¿Cómo asciendo?", "Listado de habilitados"\n- **Procedimientos**: "Agarre un chorro", "Encontré droga"\n- **Salud/IAPOS**: "Necesito un psicólogo", "¿Qué me cubre?"\n- **Leyes**: Ley 12521, CPP, Código Penal\n\n¿Qué necesitás?`;
         },
-        thanks: () => `De nada, oficial. Estoy disponible 24/7 para cualquier duda legal o de procedimiento. 🫡`,
-        capabilities: () => `Soy **Centinela AI**, especializado en la **Policía de Santa Fe**. Puedo asesorarte sobre:\n- Ley 12521, Decreto 461 (personal policial)\n- Sueldos, OSESP, IAPOS, SPA\n- CPP, 23737, 14239 (leyes penales)\n- MPA, ETAF 0800, CUIJ\n- Uso de la fuerza (Res. 2237/25, Taser, Byrna)\n\nPreguntame lo que necesites con precisión.`
+        thanks: () => `De nada, oficial. Estoy disponible 24/7 para cualquier duda. Si no supe responder algo, ya le avisé al administrador para que me entrene mejor. 🫡`,
+        capabilities: () => `Soy **Centinela AI v10**, especializado en la **Policía de Santa Fe**. Preguntame con tus palabras, sin formalidades:\n\n📋 **Temas que domino:**\n- Sueldos, haberes y tarifas de adicionales\n- Licencias (vacaciones, maternidad, enfermedad)\n- Ascensos y cursos del ISeP\n- Procedimientos operativos (flagrancia, uso de fuerza, drogas)\n- IAPOS, salud mental y bienestar\n- Leyes: 12521, CPP, Código Penal, Decreto 461\n- Transporte policial, jurisdicción y directorio\n\n💡 **Ejemplo**: En vez de "Decreto 4157 licencia paternidad", podés preguntar "¿Cuántos días me dan si nace mi hijo?"`
     };
 
-    // --- 6. MOTOR DE SCORING AVANZADO ---
+    // --- 8. MOTOR DE SCORING AVANZADO CON NLU ---
     function scoreCategories(normalizedMsg) {
         const words = normalizedMsg.split(/\s+/).filter(w => w.length > 2);
         const msgTokens = new Set(words);
+        const stemmedWords = words.map(w => spanishStem(w));
         const scored = [];
 
+        // --- PASO 1: Synonym boost (natural phrases → category) ---
+        const synonymBoosts = {};
+        synonymMap.forEach(entry => {
+            entry.phrases.forEach(phrase => {
+                if (normalizedMsg.includes(phrase)) {
+                    synonymBoosts[entry.category] = (synonymBoosts[entry.category] || 0) + 80;
+                }
+            });
+        });
+
         knowledgeBase.forEach(cat => {
-            let score = 0;
+            let score = synonymBoosts[cat.category] || 0;
             let matchedKeywords = 0;
 
             cat.keywords.forEach(kw => {
                 const normKw = normalizeText(kw);
                 const kwWords = normKw.split(/\s+/);
 
-                // Multi-word keyword: must appear as exact phrase
+                // Multi-word keyword: exact phrase match
                 if (kwWords.length > 1 && normalizedMsg.includes(normKw)) {
                     score += 60;
                     matchedKeywords++;
                     return;
                 }
-                // Single-word keyword: exact token match only
+                // Single-word keyword: exact token match
                 if (kwWords.length === 1 && msgTokens.has(normKw)) {
-                    // Longer/numeric keywords are more specific → higher score
                     score += (normKw.length > 7 || /\d+/.test(normKw)) ? 45 : 22;
                     matchedKeywords++;
                     return;
                 }
+                // Stem matching: compare stems for partial conjugation match
+                if (kwWords.length === 1 && normKw.length >= 5) {
+                    const kwStem = spanishStem(normKw);
+                    if (kwStem.length >= 4 && stemmedWords.some(sw => sw === kwStem)) {
+                        score += 15;
+                        matchedKeywords++;
+                    }
+                }
             });
 
-            // Context bonus: lighter than before
+            // Context bonus
             if (sessionContext.lastCategory === cat.category) score += 10;
 
             // Coverage bonus
@@ -992,7 +1092,7 @@ function renderCentinela(container) {
         return scored.sort((a, b) => b.score - a.score);
     }
 
-    // --- 7. SELECTOR DE RESPUESTA ESPECÍFICA ---
+    // --- 9. SELECTOR DE RESPUESTA ESPECÍFICA ---
     function selectResponse(cat, normalizedMsg) {
         let bestResponse = null;
         let bestMatchScore = -1;
@@ -1010,7 +1110,7 @@ function renderCentinela(container) {
                 }
             });
 
-            // Bonus if ALL match terms were found (strong signal)
+            // Bonus if ALL match terms were found
             if (totalTerms > 0 && matchedTerms === totalTerms) {
                 matchScore += 20;
             }
@@ -1021,16 +1121,14 @@ function renderCentinela(container) {
             }
         });
 
-        // Only return a specific response if we had a meaningful match
         if (bestMatchScore >= 30 && bestResponse) return bestResponse.text;
         return cat.default;
     }
 
-    // --- 8. FUSIÓN MULTI-CATEGORÍA ---
+    // --- 10. FUSIÓN MULTI-CATEGORÍA ---
     function fuseResponses(topResults, normalizedMsg) {
         if (topResults.length < 2) return null;
         const [first, second] = topResults;
-        // Only fuse if 2nd category is strong AND close in score
         if (second.score >= 40 && (first.score - second.score) < 20 && first.cat.category !== second.cat.category) {
             const r1 = selectResponse(first.cat, normalizedMsg);
             const r2 = selectResponse(second.cat, normalizedMsg);
@@ -1039,34 +1137,81 @@ function renderCentinela(container) {
         return null;
     }
 
-    // --- 9. SUGERENCIAS CONTEXTUALES ---
+    // --- 11. SUGERENCIAS CONTEXTUALES ---
     function generateSuggestions(category) {
         const map = {
-            'haberes_sueldos': ['¿Básico de un Agente 2026?', '¿Cómo se calcula el presentismo?', '¿Qué es el FONID?'],
-            'jubilacion_pension': ['¿Cuándo me jubilo con 30 años?', '¿Qué es la Ley 14283?', '¿Existe jubilación por invalidez?'],
-            'juridico_policial': ['¿Art. 268 del CPP?', '¿Cuándo aprehendo sin orden?', 'Art. 147 CPP'],
-            'microtrafico': ['¿Qué es una feria de droga?', '¿Ley 14239 o 23737?', '¿Cómo actúo en un búnker?'],
-            'narcotrafico_ley_23737': ['¿Diferencia federal vs provincial?', '¿Qué son precursores?', 'Fallo Arriola CSJN'],
+            'sueldos': ['¿Cuánto gana un oficial?', '¿Hay plus por Rosario?', '¿Cuánto es el mínimo?'],
+            'licencias': ['¿Cuántos días por paternidad?', '¿Vacaciones con 10 años?', 'Días por examen'],
+            'disciplina': ['¿Qué es falta leve?', '¿Me pueden suspender?', '¿Cómo hago un descargo?'],
+            'prevision': ['¿Cuándo me jubilo?', '¿Cuánto me descuentan?', '¿Cuánto voy a cobrar?'],
+            'isep_ascensos': ['¿Cómo asciendo?', '¿Hay concurso 2025?', '¿Qué es la ID Ciudadana?'],
+            'isep_formacion': ['¿Hay cursos virtuales?', 'Vacantes del Decreto 263', 'Tecnicatura 2026'],
+            'isep_documentos': ['Listado de habilitados 2026', 'Manual de tecnicatura', 'Convocados ascenso 2025'],
+            'isep_actualidad_2026': ['Novedades del ISeP', 'Egresados 2026', 'Curso de perfeccionamiento'],
+            'haberes_servicios': ['¿Cuánto es la hora adicional?', 'Tarifa privada', 'Decreto 142'],
+            'juridico_policial': ['¿Art. 268 del CPP?', 'Protocolo violencia de género', 'Flagrancia 0800'],
             'etaf_flagrancia_0800': ['Paso a paso del 0800', '¿Qué es flagrancia virtual?', 'Formulario ETAF'],
-            'actuaciones_mpa_general': ['¿Qué es el CUIJ?', '¿Cómo hago acta de secuestro?', '¿Plazos para informar?'],
-            'osesp_spa_tarifas': ['Tarifa privada ordinaria', 'Alta complejidad pública', '¿Cuánto es la hora OSESP base?'],
-            'iapos_salud': ['¿Cobertura salud mental?', '¿IAPOS para fuerzas federales?', '¿Web de IAPOS?'],
-            'uso_fuerza_armamento': ['¿Cuándo uso la Taser?', '¿Proporcionalidad en fuerza?', 'Res. 2237/25'],
-            'ley_12521_profundizada': ['Art. 25 - Autoridad policial', 'Art. 3 - Escala jerárquica', '¿Qué escalafones hay?'],
-            'decreto_461_profundizado': ['¿Qué es falta grave?', '¿Cómo hago mi descargo?', '¿Qué es el Tribunal de Conducta?'],
-            'control_vehicular_transito': ['¿Cuándo reteneo una moto?', '¿Qué documentos verifico?', 'Alcoholemia positiva'],
+            'microtrafico': ['¿Cómo actúo en un búnker?', '¿Ley 14239 o 23737?', 'Narcomenudeo'],
+            'narcotrafico_ley_23737': ['¿Competencia federal o provincial?', '¿Qué son precursores?', 'Fallo Arriola'],
+            'actuaciones_mpa_general': ['¿Qué es el CUIJ?', '¿Cómo hago acta de secuestro?', 'Plazos de comunicación'],
+            'osesp_spa_tarifas': ['Tarifa privada ordinaria', 'Alta complejidad pública', '¿Hora OSESP base?'],
+            'iapos_salud': ['¿Cobertura salud mental?', '¿IAPOS para federales?', '¿Web de IAPOS?'],
+            'bienestar_salud': ['¿Cómo pido ayuda?', '¿Dónde hay psicólogo?', 'Medicamentos gratis'],
+            'uso_fuerza_armamento': ['¿Cuándo uso la Taser?', '¿Cuándo puedo disparar?', 'Res. 2237/25'],
+            'ley_12521_profundizada': ['Art. 25 - Autoridad policial', 'Escala jerárquica', '¿Qué escalafones hay?'],
+            'decreto_461_profundizado': ['¿Qué es falta grave?', '¿Cómo hago mi descargo?', 'Tribunal de Conducta'],
+            'control_vehicular_transito': ['¿Cuándo retengo una moto?', '¿Qué documentos verifico?', 'Alcoholemia'],
             'recursos_web_policiales': ['Web del ISeP', 'Web de IAPOS', 'Portal del MPA'],
+            'escena_del_crimen': ['¿Cómo preservo la escena?', 'Cadena de custodia', 'Bioseguridad'],
+            'transporte': ['Horario Rosario-Vera', '¿Dónde para?', 'Vuelta Vera-Rosario'],
+            'codigo_penal_arg': ['Legítima defensa', 'Reforma penal', 'Penas'],
+            'codigo_procesal_penal_sf': ['¿Cuándo detengo?', 'Allanamiento', 'Derechos de la víctima'],
+            'trata_personas_protocolo': ['¿Cómo identifico trata?', 'Protocolo de actuación', '¿Quién investiga?'],
+            'general_admin': ['¿Qué es la TAP?', '0810 TAP', 'Alias CBU'],
+            'reglamentacion': ['MIRAF', 'Identificar un arma', 'Uso racional'],
+            'jurisdiccion': ['¿Dónde queda la UR?', 'Listado de URs', 'Cabecera UR 2'],
+            'codigo_faltas': ['Ruidos molestos', 'Código contravencional', 'Penas por falta'],
+            'reforma_procesal_penal': ['Allanamiento urgente', 'Ley 14258', 'Plazos de detención'],
+            'politica_actualidad': ['Equipamiento nuevo', 'Chalecos', 'Política criminal'],
         };
         return map[category] || [];
     }
 
-    // --- 10. FALLBACK INTELIGENTE ---
-    function generateSmartFallback(normalizedMsg, topResults) {
-        if (topResults.length > 0 && topResults[0].score >= 8) {
+    // --- 12. FALLBACK CON NOTIFICACIÓN AL ADMINISTRADOR ---
+    function generateSmartFallback(normalizedMsg, topResults, originalMsg) {
+        // Log the unanswered query to Supabase for admin review
+        notifyAdminUnanswered(originalMsg, normalizedMsg, topResults);
+
+        if (topResults.length > 0 && topResults[0].score >= 15) {
             const topCat = topResults[0].cat;
-            return `Entiendo que tu consulta podría estar relacionada con **${topCat.category.replace(/_/g, ' ')}**. Para darte la respuesta exacta, ¿podrías especificar un poco más?\n\nAlgunos temas que manejo en esa área:\n- ${topCat.keywords.slice(0, 3).join(', ')}`;
+            const suggestions = generateSuggestions(topCat.category);
+            const sugText = suggestions.length > 0 ? `\n\nProbá preguntando:\n- ${suggestions.join('\n- ')}` : '';
+            return `Creo que tu consulta podría estar relacionada con **${topCat.category.replace(/_/g, ' ')}**, pero necesito que me des un poco más de detalle para darte la respuesta correcta.${sugText}\n\n📝 *Tu pregunta fue registrada para que el administrador me entrene mejor.*`;
         }
-        return `No encontré información exacta para esa consulta. Probá mencionando:\n- El **número de ley** (ej: 12521, 23737, 14239)\n- El **tema** (sueldos, ascenso, flagrancia, IAPOS, OSESP)\n- O el **órgano** (MPA, ETAF, ISeP, Tribunal de Conducta)`;
+        return `No tengo información exacta para responder eso, pero **tu pregunta ya fue enviada al administrador** para que me entrene y pueda responderla en el futuro. 📝\n\nMientras tanto, probá preguntando de otra forma o sobre alguno de estos temas:\n- **Sueldos**: "¿Cuánto cobro?"\n- **Licencias**: "¿Cuántos días me corresponden?"\n- **Ascensos**: "¿Cómo asciendo?"\n- **Procedimientos**: "¿Qué hago si agarro a alguien robando?"\n- **Salud**: "Necesito un psicólogo"`;
+    }
+
+    // --- 13. NOTIFICADOR AL ADMINISTRADOR (Supabase) ---
+    async function notifyAdminUnanswered(originalMsg, normalizedMsg, topResults) {
+        try {
+            const user = typeof auth !== 'undefined' && auth.currentUser ? auth.currentUser : null;
+            const topGuess = topResults.length > 0 ? topResults[0].cat.category : 'ninguna';
+            const topScore = topResults.length > 0 ? topResults[0].score : 0;
+
+            await supabaseClient.from('unanswered_queries').insert([{
+                user_email: user ? user.email : 'anónimo',
+                original_query: originalMsg,
+                normalized_query: normalizedMsg,
+                closest_category: topGuess,
+                closest_score: topScore,
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            }]);
+            console.log('📝 Consulta sin respuesta enviada al admin');
+        } catch (e) {
+            // Silently fail — don't break the UX
+            console.warn('Admin notification failed (table may not exist yet):', e.message);
+        }
     }
 
     // --- 11. CHIPS DE SUGERENCIA ---
@@ -1140,7 +1285,7 @@ function renderCentinela(container) {
 
             // --- E. FALLBACK INTELIGENTE ---
             if (!finalResponseText || confidence < CONFIDENCE_MED) {
-                finalResponseText = generateSmartFallback(normalizedMsg, topResults);
+                finalResponseText = generateSmartFallback(normalizedMsg, topResults, msg);
                 usedCategory = 'fallback_inteligente';
                 suggestions = [];
             }
