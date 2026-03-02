@@ -35,7 +35,7 @@ function renderServiceDetails(container, serviceId) {
                 </div>
                 <!-- Toggle Switch -->
                 <button onclick="handleTogglePaid('${serviceId}', ${!isPaid})" class="h-8 px-4 rounded-full flex items-center gap-2 font-bold text-xs ${isPaid ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-700 dark:text-slate-300'} transition-all">
-                    ${isPaid ? '<span class="material-symbols-outlined text-sm">check</span> PAGADO' : 'MARCAR PAGADO'}
+                    ${isPaid ? '<span class="material-symbols-outlined text-sm">check</span> LIQUIDADO' : 'LIQUIDAR'}
                 </button>
              </div>
 

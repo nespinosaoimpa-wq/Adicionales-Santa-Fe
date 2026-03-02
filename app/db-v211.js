@@ -532,35 +532,53 @@ const DB = {
 
     // --- HELPER: DEDUPLICATION ---
     _deduplicateUnified(unified) {
-        const seen = new Map();
-        return unified.filter(item => {
-            // Normalizar campos para key de deduplicación
-            const email = (item.userEmail || item.user_email || '').toLowerCase().trim();
-            const date = item.date || '';
+        const fbSeenCounts = new Map();
 
-            // NORMALIZACIÓN CRÍTICA: Supabase suele devolver HH:mm:ss, Firebase HH:mm. Tomamos solo HH:mm.
-            const rawStart = (item.startTime || item.start_time || '');
-            const start = rawStart.length > 5 ? rawStart.substring(0, 5) : rawStart;
+        // Fase 1: Contar los items de Firebase
+        unified.forEach(item => {
+            const isFirebaseId = (id) => id && !id.toString().includes('-');
+            if (isFirebaseId(item.id)) {
+                const email = (item.userEmail || item.user_email || '').toLowerCase().trim();
+                const date = item.date || '';
+                const rawStart = (item.startTime || item.start_time || '');
+                const start = rawStart.length > 5 ? rawStart.substring(0, 5) : rawStart;
+                const loc = (item.location || '').toLowerCase().trim();
+                const type = item.type || '';
+                const hours = parseFloat(item.hours) || 0;
 
-            const loc = (item.location || '').toLowerCase().trim();
-            const type = item.type || '';
-            const hours = parseFloat(item.hours) || 0;
-
-            // Key heurística: Email + Fecha + Hora Inicio + Ubicación + Tipo + Horas
-            const key = `${email}|${date}|${start}|${loc}|${type}|${hours}`;
-
-            if (seen.has(key)) {
-                const existing = seen.get(key);
-                const isFirebaseId = (id) => id && !id.toString().includes('-');
-
-                if (!isFirebaseId(existing.id) && isFirebaseId(item.id)) {
-                    seen.set(key, item);
-                }
-                return false;
+                const key = `${email}|${date}|${start}|${loc}|${type}|${hours}`;
+                fbSeenCounts.set(key, (fbSeenCounts.get(key) || 0) + 1);
             }
+        });
 
-            seen.set(key, item);
-            return true;
+        // Fase 2: Filtrar deduplicando híbrido
+        const uniqueSbIds = new Set();
+        return unified.filter(item => {
+            const isFirebaseId = (id) => id && !id.toString().includes('-');
+            if (isFirebaseId(item.id)) {
+                return true; // Todos los de Firebase se mantienen (presumimos que tienen doc.id único si son intencionales)
+            } else {
+                if (uniqueSbIds.has(item.id)) return false;
+                uniqueSbIds.add(item.id);
+
+                const email = (item.userEmail || item.user_email || '').toLowerCase().trim();
+                const date = item.date || '';
+                const rawStart = (item.startTime || item.start_time || '');
+                const start = rawStart.length > 5 ? rawStart.substring(0, 5) : rawStart;
+                const loc = (item.location || '').toLowerCase().trim();
+                const type = item.type || '';
+                const hours = parseFloat(item.hours) || 0;
+
+                const key = `${email}|${date}|${start}|${loc}|${type}|${hours}`;
+
+                if (fbSeenCounts.has(key) && fbSeenCounts.get(key) > 0) {
+                    // Hay un item FB equivalente, suprimimos el de SB para evitar duplicación del MISMO servicio
+                    fbSeenCounts.set(key, fbSeenCounts.get(key) - 1);
+                    return false;
+                }
+
+                return true;
+            }
         }).map(item => {
             // Normalizar para que el resto de la app reciba nombres consistentes
             // Aseguramos que startTime/endTime también lleguen normalizados (HH:mm)

@@ -7,19 +7,40 @@ function renderFinancial(container) {
     if (!container) container = document.getElementById('app');
 
     // --- QUINCENAL FILTER STATE ---
-    if (window._financialFilter === undefined) window._financialFilter = 'q1';
-
-    const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentYear = today.getFullYear();
-    const currentDay = today.getDate();
-
-    // Determine current period automatically
     if (window._financialFilter === undefined) {
-        window._financialFilter = currentDay <= 15 ? 'q1' : 'q2';
+        const today = new Date();
+        window._financialFilter = today.getDate() <= 15 ? 'q1' : 'q2';
+    }
+    if (window._financialMonth === undefined) {
+        window._financialMonth = new Date().getMonth();
+        window._financialYear = new Date().getFullYear();
     }
 
     const filter = window._financialFilter;
+    const currentMonth = window._financialMonth;
+    const currentYear = window._financialYear;
+
+    window.prevFinancialMonth = () => {
+        if (window._financialMonth === 0) {
+            window._financialMonth = 11;
+            window._financialYear--;
+        } else {
+            window._financialMonth--;
+        }
+        renderFinancial();
+    };
+
+    window.nextFinancialMonth = () => {
+        if (window._financialMonth === 11) {
+            window._financialMonth = 0;
+            window._financialYear++;
+        } else {
+            window._financialMonth++;
+        }
+        renderFinancial();
+    };
+
+
 
     // --- FILTER SERVICES AND EXPENSES BY PERIOD ---
     const filterByPeriod = (items, dateField = 'date') => {
@@ -73,12 +94,17 @@ function renderFinancial(container) {
                     </div>
                 </div>
             </div>
+            <div class="flex items-center justify-between mb-4 px-1">
+                <button onclick="window.prevFinancialMonth()" class="p-1 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">arrow_back_ios_new</span></button>
+                <div class="text-[13px] font-bold uppercase tracking-widest text-slate-900 dark:text-white">${monthNames[currentMonth]} ${currentYear}</div>
+                <button onclick="window.nextFinancialMonth()" class="p-1 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
+            </div>
             <div class="flex p-1 bg-slate-200 dark:bg-white/5 rounded-xl gap-1">
                 <button onclick="window._financialFilter='q1'; renderFinancial()" class="${filterBtnClass('q1')}">1ra Quincena</button>
                 <button onclick="window._financialFilter='q2'; renderFinancial()" class="${filterBtnClass('q2')}">2da Quincena</button>
                 <button onclick="window._financialFilter='all'; renderFinancial()" class="${filterBtnClass('all')}">Total Mes</button>
             </div>
-            <p class="text-[10px] text-primary/70 font-bold text-center mt-2">${paymentLabel}</p>
+            <p class="text-[10px] text-primary/70 font-bold text-center mt-3">${paymentLabel}</p>
         </header>
 
         <main class="flex-1 px-4 py-6 space-y-6 overflow-y-auto pb-32">

@@ -10,13 +10,36 @@ function renderControlPanel(container) {
         const today = new Date();
         window._controlPanelFilter = today.getDate() <= 15 ? 'q1' : 'q2';
     }
+    if (window._controlPanelMonth === undefined) {
+        window._controlPanelMonth = new Date().getMonth();
+        window._controlPanelYear = new Date().getFullYear();
+    }
 
     const filter = window._controlPanelFilter;
-    const today = new Date();
-    const currentMonth = today.getMonth();
-    const currentYear = today.getFullYear();
-    const monthNamesShort = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    const currentMonth = window._controlPanelMonth;
+    const currentYear = window._controlPanelYear;
+    const monthNamesShort = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
     const currentMonthName = monthNamesShort[currentMonth];
+
+    window.prevControlMonth = () => {
+        if (window._controlPanelMonth === 0) {
+            window._controlPanelMonth = 11;
+            window._controlPanelYear--;
+        } else {
+            window._controlPanelMonth--;
+        }
+        renderControlPanel();
+    };
+
+    window.nextControlMonth = () => {
+        if (window._controlPanelMonth === 11) {
+            window._controlPanelMonth = 0;
+            window._controlPanelYear++;
+        } else {
+            window._controlPanelMonth++;
+        }
+        renderControlPanel();
+    };
 
     // Filter services by current month and selected quincena
     const periodServices = store.services.filter(s => {
@@ -69,14 +92,21 @@ function renderControlPanel(container) {
         </header>
 
         <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32 animate-fade-in">
+        <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32 animate-fade-in">
             <!-- Period Selector -->
+            <div class="flex items-center justify-between mb-4 px-2">
+                <button onclick="window.prevControlMonth()" class="p-1 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">arrow_back_ios_new</span></button>
+                <div class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white">${currentMonthName} ${currentYear}</div>
+                <button onclick="window.nextControlMonth()" class="p-1 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
+            </div>
+
             <div class="flex p-1.5 glass-card rounded-xl">
                 <button onclick="window._controlPanelFilter='q1'; renderControlPanel()" 
-                        class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition-all ${filter === 'q1' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:text-white'}">
+                        class="flex-1 py-2 px-3 rounded-lg text-[13px] font-semibold transition-all ${filter === 'q1' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:text-white'}">
                     1 - 15 ${currentMonthName}
                 </button>
                 <button onclick="window._controlPanelFilter='q2'; renderControlPanel()" 
-                        class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold transition-all ${filter === 'q2' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:text-white'}">
+                        class="flex-1 py-2 px-3 rounded-lg text-[13px] font-semibold transition-all ${filter === 'q2' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:text-white'}">
                     16 - 31 ${currentMonthName}
                 </button>
             </div>
@@ -125,7 +155,7 @@ function renderControlPanel(container) {
         const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
         const icon = isPub ? 'account_balance' : 'shopping_cart';
         return `
-                            <div class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 group active:scale-[0.98] transition-transform">
+                            <div onclick="router.navigateTo('#details?id=${s.id}')" class="cursor-pointer glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 group active:scale-[0.98] transition-transform hover:bg-white/5">
                                 <div class="flex items-center gap-4">
                                     <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
                                         <span class="material-symbols-outlined">${icon}</span>
