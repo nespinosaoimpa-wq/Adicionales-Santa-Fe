@@ -38,7 +38,7 @@
                 let needsHardReset = false;
                 for (let reg of registrations) {
                     const url = reg.active?.scriptURL || reg.installing?.scriptURL || reg.waiting?.scriptURL || '';
-                    if (!url.includes('sw-v531_final.js')) {
+                    if (!url.includes('sw-v532_final.js')) {
                         console.log('☢️ Outdated SW detected:', url);
                         reg.unregister();
                         needsHardReset = true;
@@ -69,7 +69,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v531_final.js?v532.0')
+                navigator.serviceWorker.register('./sw-v532_final.js?v532.0')
                     .then(reg => console.log('✅ SW v532.0 Registered'))
                     .catch(err => console.error('❌ SW Fail:', err));
             });
