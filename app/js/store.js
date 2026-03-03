@@ -340,6 +340,9 @@ window.store = {
         // Apply saved theme ASAP
         this.initTheme();
 
+        // Fetch dynamic holidays from Supabase (Improvement #1)
+        this.fetchHolidays();
+
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());
 
@@ -465,6 +468,100 @@ window.store = {
         showToast("Exportando CSV...");
     },
 
+    // Improvement #3: Advanced PDF Export
+    exportToPDF() {
+        if (!this.services || this.services.length === 0) {
+            showToast("⚠️ No hay servicios para exportar.");
+            return;
+        }
+
+        showToast("⏳ Generando PDF Profesional...");
+
+        // Usar los datos del reporte que acabamos de ordenar (descendente)
+        const sortedServices = [...this.services].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Sum total amount
+        const grandTotal = sortedServices.reduce((acc, s) => acc + (parseFloat(s.total) || 0), 0);
+        const userName = this.user?.name || this.user?.displayName || 'Usuario';
+
+        // Estructura del Documento Oculto
+        const tempContainer = document.createElement('div');
+        tempContainer.id = 'pdf-export-container';
+        // Estilos ultra limpios específicos para A4
+        tempContainer.innerHTML = `
+            <div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; max-width: 800px; margin: 0 auto; background: white;">
+                <div style="border-bottom: 2px solid #0d59f2; padding-bottom: 15px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div>
+                        <h1 style="color: #0d59f2; font-size: 24px; margin: 0; font-weight: 800;">Adicionales Santa Fe</h1>
+                        <p style="margin: 5px 0 0 0; color: #666; font-size: 12px;">Resumen Oficial de Servicios Prestados</p>
+                    </div>
+                    <div style="text-align: right; font-size: 12px; color: #555;">
+                        <p style="margin: 0; font-weight: bold;">AGENTE: ${userName.toUpperCase()}</p>
+                        <p style="margin: 2px 0 0 0;">FECHA EMISIÓN: ${new Date().toLocaleDateString('es-AR')}</p>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 20px; background: #f8fafc; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <p style="margin: 0; font-size: 14px; font-weight: bold; color: #0f172a;">TOTAL ACUMULADO: $${grandTotal.toLocaleString('es-AR')}</p>
+                    <p style="margin: 5px 0 0 0; font-size: 12px; color: #64748b;">TOTAL SERVICIOS: ${sortedServices.length}</p>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+                    <thead>
+                        <tr style="background-color: #f1f5f9; text-align: left;">
+                            <th style="padding: 8px; border-bottom: 2px solid #cbd5e1; width: 12%;">FECHA</th>
+                            <th style="padding: 8px; border-bottom: 2px solid #cbd5e1; width: 15%;">TIPO / CLASE</th>
+                            <th style="padding: 8px; border-bottom: 2px solid #cbd5e1; width: 33%;">LUGAR (OBJETIVO)</th>
+                            <th style="padding: 8px; border-bottom: 2px solid #cbd5e1; width: 15%;">HORARIO / HS</th>
+                            <th style="padding: 8px; border-bottom: 2px solid #cbd5e1; width: 15%; text-align: right;">IMPORTE</th>
+                            <th style="padding: 8px; border-bottom: 2px solid #cbd5e1; width: 10%; text-align: center;">ESTADO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${sortedServices.map((s, idx) => `
+                            <tr style="background-color: ${idx % 2 === 0 ? '#ffffff' : '#f8fafc'}">
+                                <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${s.date.split('-').reverse().join('/')}</td>
+                                <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; font-weight: bold; color: ${s.type === 'Public' ? '#0d59f2' : '#f59e0b'};">
+                                    ${s.type === 'Public' ? 'PÚB.' : (s.type === 'Private' ? 'PRIV.' : 'OSP.')} <span style="font-weight: normal; color: #64748b;">${s.subType ? s.subType.substring(0, 3).toUpperCase() : ''}</span>
+                                </td>
+                                <td style="padding: 8px; border-bottom: 1px solid #e2e8f0;">${s.location.substring(0, 35)}${s.location.length > 35 ? '...' : ''}</td>
+                                <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; color: #475569;">${s.startTime || '--'} a ${s.endTime || '--'} (${s.hours}h)</td>
+                                <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; text-align: right; font-weight: bold;">$${parseFloat(s.total).toLocaleString('es-AR')}</td>
+                                <td style="padding: 8px; border-bottom: 1px solid #e2e8f0; text-align: center;">
+                                    ${s.status === 'paid' ? '<span style="color: #10b981;">PAGADO</span>' : '<span style="color: #f59e0b;">PDT</span>'}
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+                <div style="margin-top: 30px; text-align: center; font-size: 9px; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 10px;">
+                    Generado automáticamente por la App Adicionales Santa Fe. Este documento tiene valor exclusivamente informativo.
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(tempContainer);
+
+        // html2pdf Opciones
+        const opt = {
+            margin: 0,
+            filename: `Resumen_Adicionales_${userName.replace(/ /g, '_')}_${new Date().getFullYear()}.pdf`,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Generar
+        html2pdf().set(opt).from(tempContainer).save().then(() => {
+            document.body.removeChild(tempContainer);
+            showToast("✅ PDF Exportado con Éxito");
+        }).catch(err => {
+            console.error("PDF Generate error:", err);
+            document.body.removeChild(tempContainer);
+            showToast("❌ Hubo un error al generar el PDF");
+        });
+    },
+
     async addExpense(category, amount, description) {
         const tempId = 'temp-' + Date.now();
         try {
@@ -520,7 +617,20 @@ window.store = {
         return `${year}-${month}-${day}`;
     },
 
-    // Feriados Nacionales Argentina 2025 y 2026 — Incluye traslados oficiales
+    // Fetches holidays from Supabase DB to avoid app updates just for calendar changes
+    async fetchHolidays() {
+        if (typeof DB !== 'undefined' && DB.getHolidays) {
+            const remoteHolidays = await DB.getHolidays();
+            if (remoteHolidays && remoteHolidays.length > 0) {
+                this.holidays2026 = remoteHolidays;
+                console.log("📅 Feriados dinámicos cargados exitosamente desde la nube.");
+            } else {
+                console.log("📅 Feriados dinámicos no encontrados, usando calendario local (fallback).");
+            }
+        }
+    },
+
+    // Feriados Nacionales Argentina 2025 y 2026 — Incluye traslados oficiales (Fallback local)
     holidays2026: [
         // 2025
         '2025-01-01', // Ano Nuevo

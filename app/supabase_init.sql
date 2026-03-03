@@ -63,6 +63,13 @@ CREATE TABLE IF NOT EXISTS public.query_logs (
     timestamp TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- ── 6. TABLA DE FERIADOS (NUEVO - MEJORA 1) ──────────────────────────────────
+CREATE TABLE IF NOT EXISTS public.holidays (
+    id SERIAL PRIMARY KEY,
+    date DATE UNIQUE NOT NULL,
+    description TEXT
+);
+
 -- ── 6. SEGURIDAD (RLS) ─────────────────────────────
 
 -- Habilitar RLS
@@ -71,6 +78,7 @@ ALTER TABLE services ENABLE ROW LEVEL SECURITY;
 ALTER TABLE expenses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE user_reviews ENABLE ROW LEVEL SECURITY;
 ALTER TABLE query_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE holidays ENABLE ROW LEVEL SECURITY;
 
 -- ── 5. SEGURIDAD (RLS) REFORZADA ───────────────────
 -- Nota: La aplicación envía el email del usuario en cada petición.
@@ -107,9 +115,17 @@ CREATE POLICY "Auth users can insert query logs" ON public.query_logs
 CREATE POLICY "Users can only view their own logs" ON public.query_logs 
     FOR SELECT USING (user_email = current_setting('request.jwt.claims', true)::jsonb->>'email');
 
+-- Políticas para FERIADOS
+DROP POLICY IF EXISTS "Anyone can view holidays" ON public.holidays;
+CREATE POLICY "Public can view holidays" ON public.holidays 
+    FOR SELECT USING (true); -- Cualquiera puede leer los feriados
+
 -- Permisos técnicos
 GRANT INSERT, SELECT ON public.user_reviews TO authenticated;
 GRANT INSERT, SELECT ON public.query_logs TO authenticated;
+GRANT SELECT ON public.holidays TO public;
+GRANT SELECT ON public.holidays TO anon;
+GRANT SELECT ON public.holidays TO authenticated;
 
 -- ── 6. TRIGGER PARA NUEVOS USUARIOS ────────────────
 -- Crea automáticamente un perfil cuando alguien se registra

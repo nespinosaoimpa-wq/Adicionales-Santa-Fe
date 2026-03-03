@@ -115,6 +115,9 @@ window.router = {
                 case '#stats':
                     renderStats(app);
                     break;
+                case '#diagnostics':
+                    renderDiagnostics(app);
+                    break;
 
                 // Dynamic Route for Details
                 default:

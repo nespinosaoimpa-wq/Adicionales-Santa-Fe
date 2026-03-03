@@ -55,13 +55,11 @@ function renderRegister(container) {
                 <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-primary/60 px-1">Tipo de Servicio</h2>
                 
                 <!-- Main Type -->
-                <div class="flex p-1 bg-slate-200 dark:bg-slate-800 rounded-lg">
-                    <button id="type-public" class="flex-1 py-2 text-xs font-bold rounded-md bg-white dark:bg-primary shadow-sm dark:text-white transition-all" onclick="setFormType('Public')">Público</button>
-                    <button id="type-private" class="flex-1 py-2 text-xs font-bold text-slate-500 dark:text-slate-400" onclick="setFormType('Private')">Privado</button>
-                    <button id="type-ospes" class="flex-1 py-2 text-xs font-bold text-slate-500 dark:text-slate-400" onclick="setFormType('OSPES')">OSPES</button>
+                <div class="flex flex-wrap p-1 bg-slate-200 dark:bg-slate-800 rounded-lg gap-1" id="type-buttons-container">
+                    <!-- Dynamic Types Injected Here -->
                 </div>
                 
-                <!-- Sub Type Hidden (Automated) -->
+                <!-- Sub Type Hidden (Automated / Subcategories) -->
                 <div class="hidden" id="subtype-container"></div>
 
                 <div class="bg-white dark:bg-primary/5 rounded-xl border border-slate-200 dark:border-primary/10 p-4">
@@ -118,21 +116,43 @@ function renderRegister(container) {
     let currentType = 'Public';
     let currentSubType = 'Ordinaria';
 
+    const renderTypeButtons = () => {
+        const container = document.getElementById('type-buttons-container');
+        if (!container) return;
+
+        // Custom config keys from store
+        const types = Object.keys(store.serviceConfig || { 'Public': {}, 'Private': {}, 'OSPES': {} });
+
+        container.innerHTML = types.map(t => {
+            const isSelected = t === currentType;
+            const bgClass = isSelected ? 'bg-white dark:bg-primary shadow-sm dark:text-white' : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300';
+            const label = t === 'Public' ? 'Público' : (t === 'Private' ? 'Privado' : t);
+            return `<button id="type-${t.replace(/\s+/g, '-').toLowerCase()}" class="flex-1 min-w-[30%] max-w-full py-2 text-xs font-bold rounded-md transition-all ${bgClass}" onclick="setFormType('${t}')">${label}</button>`;
+        }).join('');
+    };
+
     const updateSubtypes = () => {
-        // Now automated, but we keep the logic to fetch rates
+        // Here we could render subtypes dynamically if needed, 
+        // for now we only grab rates or update UI.
+
+        const typeConfig = store.serviceConfig[currentType];
+
+        // Auto select first sub type if current one isn't in new category
+        if (typeConfig && typeof typeConfig === 'object') {
+            const keys = Object.keys(typeConfig);
+            if (!keys.includes(currentSubType)) {
+                currentSubType = keys.length > 0 ? keys[0] : 'Ordinaria';
+            }
+        } else {
+            currentSubType = 'Ordinaria';
+        }
+
         updateRate();
     };
 
     window.setFormType = (type) => {
         currentType = type;
-        ['Public', 'Private', 'OSPES'].forEach(t => {
-            const btn = document.getElementById(`type-${t.toLowerCase()}`);
-            if (t === type) {
-                btn.className = 'flex-1 py-2 text-xs font-bold rounded-md bg-white dark:bg-primary shadow-sm dark:text-white transition-all';
-            } else {
-                btn.className = 'flex-1 py-2 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-slate-700 transition-all';
-            }
-        });
+        renderTypeButtons();
         updateSubtypes();
     };
 
@@ -264,6 +284,7 @@ function renderRegister(container) {
     document.getElementById('btn-save').addEventListener('click', saveAction);
     document.getElementById('btn-save-top').addEventListener('click', saveAction);
 
+    renderTypeButtons();
     updateSubtypes();
     setFormType('Public');
 }

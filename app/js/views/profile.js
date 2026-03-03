@@ -85,10 +85,11 @@ function renderProfile(container) {
                         <span class="material-symbols-outlined text-lg">${store.notificationSettings.enabled ? 'notifications_active' : 'notifications_off'}</span>
                         ${store.notificationSettings.enabled ? 'Notificaciones' : 'Activar Alertas'}
                     </button>
-                    <button onclick="store.shareApp()" 
-                        class="flex-1 py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs font-bold hover:bg-blue-600/30 transition-all active:scale-95">
-                        <span class="material-symbols-outlined text-lg">share</span>
-                        Compartir
+                    <!-- Enhanced PDF Export Button -->
+                    <button onclick="store.exportToPDF()" 
+                        class="flex-1 py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 bg-red-600/20 text-red-400 border border-red-500/30 text-xs font-bold hover:bg-red-600/30 transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                        Exportar PDF
                     </button>
                 </div>
             </div>
@@ -193,13 +194,18 @@ function renderProfile(container) {
                 Guardar Cambios
             </button>
 
-            <!-- Logout -->
-            <div class="pt-6 pb-2">
-                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10">
+            <!-- Logout & System Info -->
+            <div class="pt-6 pb-2 space-y-4">
+                 <button onclick="router.navigateTo('#diagnostics')" class="w-full text-indigo-400 text-xs font-bold hover:text-indigo-300 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 active:scale-95">
+                    <span class="material-symbols-outlined text-lg">memory</span>
+                    Estado del Sistema (Diagnóstico)
+                </button>
+
+                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10 mt-2">
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v2.1.4 • Build 2026.02.27 v531.3-HARDENED</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v531.5-FINAL • Adicionales Santa Fe</p>
             </div>
         </main>
     `;

@@ -677,5 +677,28 @@ const DB = {
             console.error("Error saving review:", e);
             return false;
         }
+    },
+
+    // --- CONFIGURATION / DATA ---
+    async getHolidays() {
+        try {
+            const { data, error } = await supabaseClient
+                .from('holidays')
+                .select('date');
+
+            if (error) {
+                console.warn("Error fetching holidays from Supabase:", error);
+                return null; // Signals failure, store.js will use local fallback
+            }
+
+            if (data && data.length > 0) {
+                return data.map(holy => holy.date);
+            }
+
+            return null; // Return null if empty to keep using fallback until admin populates it
+        } catch (e) {
+            console.warn("Holidays fetch failed:", e.message);
+            return null;
+        }
     }
 };
