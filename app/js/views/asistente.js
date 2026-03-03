@@ -493,7 +493,7 @@ function renderCentinela(container) {
                         <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">
                             Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, **Decreto 461**, **Reforma Previsional (Ley 14.283)**, las escalas salariales de **Febrero 2026 (Decreto 142/26)**, el **Código Procesal Penal (CPP) de Santa Fe**, el **Código Penal Argentino (CP)** y los últimos listados y manuales del **ISeP 2025/2026**.
                             <br><br>
-                            ¿Qué duda reglamentaria, penal o de listados del ISeP tenés hoy?
+                            Preguntame por normas, reglamentos, o las **últimas noticias y novedades del 2026**. ¿En qué te ayudo hoy?
                         </p>
                     </div>
                 </div>
@@ -532,10 +532,10 @@ function renderCentinela(container) {
         },
         {
             category: 'disciplina',
-            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario', 'asuntos internos', 'destitucion', 'decreto 461', 'reglamento', 'leves', 'graves', 'indisciplina', 'conducta'],
+            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario', 'asuntos internos', 'destitucion', 'decreto 461', 'reglamento', 'leves', 'graves', 'indisciplina', 'conducta', 'gorra', 'uniforme'],
             responses: [
                 { match: ['decreto 461', 'reglamento', 'especificos'], text: "El **Decreto 461/15** reglamenta la Ley 12521. Define faltas por negligencia, incumplimiento de órdenes y conductas que afecten el prestigio institucional." },
-                { match: ['leves', 'celular', 'aseo', 'fumar', 'uniforme'], text: "Ejemplos de **faltas leves** (Dec. 461): descuido en el aseo o uniforme, fumar en servicio, uso indebido de celulares o falta de diligencia en el trámite. Tres leves pueden sumar una grave." },
+                { match: ['leves', 'celular', 'aseo', 'fumar', 'uniforme', 'gorra'], text: "Ejemplos de **faltas leves** (Dec. 461): descuido en el aseo o uniforme, fumar en servicio, uso indebido de celulares o falta de diligencia. *Atención:* La falta de gorra o descuido del uniforme tienen un **seguimiento estricto** en la nueva gestión. Tres leves pueden sumar una grave." },
                 { match: ['graves', 'engaño', 'arma', 'indisciplina', 'colaboracion', 'droga'], text: "Ejemplos de **faltas graves** (Dec. 461): inducir a engaño al superior, uso arbitrario del arma de fuego, falta de colaboración con la justicia, consumo de estupefacientes o permitir indisciplina bajo su mando." },
                 { match: ['defensa', 'recurso', 'descargo'], text: "Ante una sanción, tenés derecho a presentar un descargo por escrito en los plazos legales y solicitar vista del legajo. El Tribunal de Conducta Policial juzga las graves." }
             ],
@@ -558,15 +558,15 @@ function renderCentinela(container) {
         },
         {
             category: 'prevision',
-            keywords: ['jubilacion', 'retiro', 'ley 14283', 'aportes', '30 años', 'caja', 'edad', 'emergencia', 'pension'],
+            keywords: ['jubilacion', 'retiro', 'ley 14283', 'aportes', '30 años', 'caja', 'edad', 'emergencia', 'pension', 'solidario', 'aporte solidario'],
             responses: [
                 { match: ['ley 14283', 'reforma', 'emergencia'], text: "La **Ley 14.283 (Sep 2024)** declaró la emergencia previsional por 2 años. Los aportes subieron: **17%** para operativos y **18%** para jerarquías." },
                 { match: ['calculo', 'promedio', '120 meses'], text: "El haber se calcula sobre el promedio de las últimas **120 remuneraciones** actualizadas (últimos 10 años), no los últimos 3 como antes." },
                 { match: ['porcentaje', '30 años', '36 años', '82%'], text: "Haber ordinario: **70%** con 30 años de aportes. Sube un 2% por año extra hasta el tope del **82%** (con 36 años)." },
                 { match: ['edad', 'limite'], text: "La reforma busca desalentar retiros prematuros. Aunque se mantienen regímenes específicos, el cálculo del haber premia la permanencia." },
-                { match: ['solidario', 'aporte solidario'], text: "Se aplica un aporte del 2% al 6% para pasivos que ganen más de 3 mínimas. Este aporte es transitorio por la emergencia previsional." }
+                { match: ['solidario', 'aporte solidario', 'descuento', 'jubilados'], text: "Se aplica un Aporte Solidario transitorio (del 2% al 6%) para pasivos que superen las 3 jubilaciones mínimas. **No obstante, se anunció que este aporte NO se prorrogará en 2026.**" }
             ],
-            default: "La Reforma Previsional (Ley 14.283) cambió aportes y el cálculo del haber (ahora sobre 120 meses). ¿Dudas sobre años o porcentaje?"
+            default: "La Reforma Previsional (Ley 14.283) cambió aportes y el cálculo del haber (ahora sobre 120 meses). ¿Dudas sobre años, porcentaje o aporte solidario?"
         },
         {
             category: 'isep_ascensos',
@@ -588,6 +588,17 @@ function renderCentinela(container) {
                 { match: ['paradas', 'donde para', 'localidades'], text: "El servicio recorre: Rosario, Sta Fe, Recreo, Candioti, Nelson, Llambi Campbell, Cruce Emilia, Videla, San Justo, Ramayon, M. Escalada, Crespo, La Criolla, Vera y Pintado, Gomez Cello, Calchaquí, Margarita y Vera." }
             ],
             default: "Contamos con horarios del servicio exclusivo Rosario-Vera para personal policial. ¿Necesitás saber una hora o parada específica?"
+        },
+        {
+            category: 'noticias_2026',
+            keywords: ['noticias', 'novedades', 'ultimo', 'ultimas noticias', '2026', 'resumen', 'ley nueva', 'actualidad', 'noticia'],
+            responses: [
+                { match: ['sueldos', 'salarios', 'aumento', 'febrero'], text: "🗞️ **Noticias de Sueldos (Feb 2026):** El piso operativo quedó en **$1.525.682** (incluyendo tarjeta alimentaria), sumado a un Plus por Conflictividad de **$500.000** en áreas críticas." },
+                { match: ['salud', 'carpetas', 'medicas', 'licencias'], text: "🗞️ **Noticias de Salud Laboral:** Desde enero 2026 rige el **Sistema Integrado de Protección de la Salud Laboral**, estableciendo un esquema estricto de auditorías para reducir el ausentismo (carpetas médicas)." },
+                { match: ['ascensos', 'isep', 'concursos'], text: "🗞️ **Noticias del ISeP:** El Concurso de Ascenso 2024 ya tiene vigencia con pago retroactivo (Decreto 2640). Para rendir el Ciclo 2025/26 es obligatoria la **ID Ciudadana** vinculada a la Intranet." },
+                { match: ['disciplina', 'gorra', 'uniforme'], text: "🗞️ **Noticias de Disciplina:** Hay una orden expresa de realizar un seguimiento muy estricto sobre las faltas relacionadas con el descuido del uniforme, especficamente la **falta de gorra**, sancionables como falta leve." }
+            ],
+            default: "🗞️ **Resumen Noticias 2026**: Nuevo **Sistema de Salud Laboral** en vigencia (fuerte control de carpetas médicas), ingresos mínimos garantizados de **$1.350.000**, confirmación de que el **Aporte Solidario a pasivos NO se prorroga**, y control estricto del uso del uniforme. Preguntame por 'sueldos', 'ascensos' o 'salud' para ampliar."
         },
         {
             category: 'reglamentacion',
