@@ -116,7 +116,12 @@ window.router = {
                     renderStats(app);
                     break;
                 case '#diagnostics':
-                    renderDiagnostics(app);
+                    if (store.user && store.user.role === 'admin') {
+                        renderDiagnostics(app);
+                    } else {
+                        showToast("Acceso denegado. Se requiere nivel de Administrador.");
+                        window.location.hash = '#profile';
+                    }
                     break;
 
                 // Dynamic Route for Details

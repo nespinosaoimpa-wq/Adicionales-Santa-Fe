@@ -13,11 +13,12 @@ async function renderAdmin(container) {
     window.allUsers = window.allUsers || [];
     window.allServices = window.allServices || [];
     if (window.queryLogs === undefined) window.queryLogs = null;
+    window.adminDateFilter = window.adminDateFilter || 'all';
     let reviewsMap = new Map(); // id -> review
     let reviewsLoaded = false;
 
     const updateUI = () => {
-        const stats = DB.calculateStats(window.allUsers, window.allServices);
+        const stats = DB.calculateStats(window.allUsers, window.allServices, window.adminDateFilter);
 
         container.innerHTML = `
         <div class="min-h-screen bg-background-light dark:bg-[#0f172a] text-slate-800 dark:text-slate-800 dark:text-slate-200 font-sans pb-24 animate-fade-in">
@@ -36,6 +37,12 @@ async function renderAdmin(container) {
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
+                    <select id="adminDateSelect" onchange="window.updateAdminFilter(this.value)" class="px-3 py-2 rounded-xl bg-slate-200 dark:bg-white/5 border border-slate-300 dark:border-white/10 text-xs font-bold text-slate-700 dark:text-slate-300 outline-none">
+                        <option value="all" ${window.adminDateFilter === 'all' ? 'selected' : ''}>Histórico</option>
+                        <option value="this_month" ${window.adminDateFilter === 'this_month' ? 'selected' : ''}>Mes Actual</option>
+                        <option value="last_month" ${window.adminDateFilter === 'last_month' ? 'selected' : ''}>Mes Pasado</option>
+                    </select>
+
                     <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-700 dark:text-slate-700 dark:text-slate-300">
                         <span class="material-symbols-outlined text-sm">download</span> Exportar
                     </button>
@@ -179,6 +186,33 @@ async function renderAdmin(container) {
                     </div>
                 </div>
 
+                <!-- Global Announcements -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-3">
+                            <span class="material-symbols-outlined text-purple-500">campaign</span>
+                            Centro de Anuncios
+                        </h3>
+                    </div>
+                    <form onsubmit="event.preventDefault(); store.handlePublishAnnouncement(this);" class="space-y-4">
+                        <div>
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mensaje Global</label>
+                            <textarea name="message" rows="3" placeholder="Escribe el aviso que verán todos los usuarios..." class="w-full mt-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-sm placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all resize-none" required></textarea>
+                        </div>
+                        <div class="flex gap-4 items-center">
+                            <select name="type" class="px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-sm outline-none w-1/3">
+                                <option value="info" class="text-slate-900">Info (Azul)</option>
+                                <option value="warning" class="text-slate-900">Urgente (Amarillo)</option>
+                                <option value="success" class="text-slate-900">Éxito (Verde)</option>
+                                <option value="danger" class="text-slate-900">Peligro (Rojo)</option>
+                            </select>
+                            <button type="submit" class="flex-1 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl transition-all active:scale-95 shadow-lg shadow-purple-500/20">
+                                Transmitir Ahora
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
                 <!-- Active Banners -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
                     <div class="flex items-center justify-between mb-6">
@@ -249,14 +283,22 @@ async function renderAdmin(container) {
                                             <span class="px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-tighter ${u.role === 'admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-slate-500/20 text-slate-400'}">
                                                 ${u.role || 'user'}
                                             </span>
+                                            ${u.status === 'suspended' ? '<span class="px-2 py-0.5 mt-1 block w-fit rounded-full text-[9px] font-black uppercase tracking-tighter bg-red-500/20 text-red-500">Suspendido</span>' : ''}
                                         </td>
                                         <td class="px-6 py-4 text-center text-[10px] text-slate-400">
                                             ${u.lastLogin ? _formatAdminDate(u.lastLogin) : 'N/A'}
                                         </td>
                                         <td class="px-6 py-4 text-right">
-                                            <button onclick="store.changeUserRole('${u.email}', '${u.role === 'admin' ? 'user' : 'admin'}')" class="text-[9px] font-bold text-primary hover:underline">
-                                                ${u.role === 'admin' ? 'Bajar' : 'Subir'}
-                                            </button>
+                                            <div class="flex flex-col items-end gap-1">
+                                                <button onclick="store.changeUserRole('${u.email}', '${u.role === 'admin' ? 'user' : 'admin'}')" class="text-[9px] font-bold text-primary hover:underline">
+                                                    ${u.role === 'admin' ? 'Bajar Rol' : 'Subir Rol'}
+                                                </button>
+                                                ${u.role !== 'admin' ? `
+                                                <button onclick="store.changeUserStatus('${u.email}', '${u.status === 'suspended' ? 'active' : 'suspended'}')" class="text-[9px] font-bold ${u.status === 'suspended' ? 'text-emerald-500' : 'text-red-500'} hover:underline">
+                                                    ${u.status === 'suspended' ? 'Activar' : 'Suspender'}
+                                                </button>
+                                                ` : ''}
+                                            </div>
                                         </td>
                                     </tr>
                                 `).join('')}
@@ -281,8 +323,14 @@ async function renderAdmin(container) {
         window.allServices = data;
         updateUI();
         // Force chart refresh after UI update
-        setTimeout(() => _mountAdminCharts(DB.calculateStats(window.allUsers, window.allServices).chartData), 100);
+        setTimeout(() => _mountAdminCharts(DB.calculateStats(window.allUsers, window.allServices, window.adminDateFilter).chartData), 100);
     });
+
+    // Global Filter Hook
+    window.updateAdminFilter = (filter) => {
+        window.adminDateFilter = filter;
+        updateUI();
+    };
 
     const unsubReviews = DB.subscribeToReviews((newReview, isInitial) => {
         if (newReview === null) {
@@ -425,6 +473,17 @@ store.changeUserRole = async (email, newRole) => {
     }
 };
 
+store.changeUserStatus = async (email, newStatus) => {
+    if (!confirm(`¿Confirmas cambiar el estado a ${email} a: ${newStatus.toUpperCase()}?`)) return;
+    try {
+        await DB.updateUserStatus(email, newStatus);
+        showToast("Estado actualizado");
+        if (window.location.hash === '#admin') router.handleRoute();
+    } catch (e) {
+        showToast("Error: " + e.message);
+    }
+};
+
 store.exportGlobalData = async () => {
     try {
         showToast("⏳ Generando reporte global...");
@@ -451,6 +510,24 @@ store.filterUserTable = (query) => {
         const text = row.innerText.toLowerCase();
         row.style.display = text.includes(query.toLowerCase()) ? '' : 'none';
     });
+};
+
+store.handlePublishAnnouncement = async (form) => {
+    const message = form.message.value.trim();
+    const type = form.type.value;
+    if (!message) return;
+
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true; btn.textContent = 'Enviando...';
+    try {
+        await DB.publishAnnouncement({ message, type });
+        showToast("📢 Anuncio global publicado");
+        form.reset();
+    } catch (e) {
+        showToast("Error al publicar anuncio");
+    } finally {
+        btn.disabled = false; btn.textContent = 'Transmitir Ahora';
+    }
 };
 
 store.handleAddAd = async (form) => {

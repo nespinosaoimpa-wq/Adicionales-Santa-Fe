@@ -41,8 +41,20 @@ function renderLogo(size = 'medium') {
 window.renderLogo = renderLogo;
 
 function renderAdBanner() {
-    // Google AdSense Banner (Horizontal / Responsive)
-    // Replace ca-pub-XXXXXXXX and data-ad-slot with real values once AdSense is approved
+    // 1. Native Custom Ad Check
+    if (store.ads && store.ads.length > 0) {
+        const ad = store.ads[0]; // For now just pick the first active ad
+        return `
+            <div class="w-full my-4 flex justify-center group" style="min-height:90px;">
+                <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-3xl overflow-hidden rounded-2xl shadow-lg border border-white/10 opacity-90 hover:opacity-100 transition-opacity">
+                    <img src="${ad.imageUrl}" class="w-full object-cover max-h-[120px]" alt="Patrocinado">
+                    <div class="absolute top-1 right-2 px-1.5 rounded-sm bg-black/40 backdrop-blur-md text-[8px] text-white uppercase font-bold">Patrocinado</div>
+                </a>
+            </div>
+        `;
+    }
+
+    // 2. Google AdSense Fallback
     return `
         <div class="w-full my-4 flex justify-center" style="min-height:90px;">
             <ins class="adsbygoogle"
@@ -57,7 +69,19 @@ function renderAdBanner() {
 }
 
 function renderAdBannerSmall() {
-    // Google AdSense Small Banner (In-Feed / Between Sections)
+    if (store.ads && store.ads.length > 0) {
+        const ad = store.ads[0];
+        return `
+            <div class="w-full my-3 flex justify-center relative group" style="min-height:50px;">
+                <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-md overflow-hidden rounded-xl shadow-md border border-white/10 opacity-90 hover:opacity-100 transition-opacity">
+                    <img src="${ad.imageUrl}" class="w-full object-cover max-h-[80px]" alt="Patrocinado">
+                    <div class="absolute top-1 right-2 px-1.5 rounded-sm bg-black/40 backdrop-blur-md text-[8px] text-white uppercase font-bold">Patrocinado</div>
+                </a>
+            </div>
+        `;
+    }
+
+    // Google AdSense Small Banner Fallback
     return `
         <div class="w-full my-3 flex justify-center" style="min-height:50px;">
             <ins class="adsbygoogle"
@@ -249,5 +273,41 @@ window.renderInstallBanner = renderInstallBanner;
 window.renderLoadingState = renderLoadingState;
 window.renderEmptyState = renderEmptyState;
 window.renderIOSInstallPrompt = renderIOSInstallPrompt;
+
+window.renderGlobalAnnouncement = function () {
+    const container = document.getElementById('global-announcement-container');
+    if (!container) return;
+
+    const ann = store.latestAnnouncement;
+    if (!ann) {
+        container.innerHTML = '';
+        return;
+    }
+
+    if (localStorage.getItem('dismissed_announcement_' + ann.id)) {
+        container.innerHTML = '';
+        return;
+    }
+
+    let bg, text, icon;
+    switch (ann.type) {
+        case 'warning': bg = 'bg-yellow-500/95'; text = 'text-yellow-950'; icon = 'warning'; break;
+        case 'danger': bg = 'bg-red-500/95'; text = 'text-white'; icon = 'emergency'; break;
+        case 'success': bg = 'bg-emerald-500/95'; text = 'text-white'; icon = 'check_circle'; break;
+        default: bg = 'bg-blue-500/95'; text = 'text-white'; icon = 'campaign'; break;
+    }
+
+    container.innerHTML = `
+        <div class="w-full ${bg} ${text} backdrop-blur-xl px-4 py-3 shadow-lg flex items-start gap-3 animate-slide-down border-b border-white/20">
+            <span class="material-symbols-outlined shrink-0 mt-0.5">${icon}</span>
+            <div class="flex-1">
+                <p class="text-[13px] font-bold leading-tight">${ann.message}</p>
+            </div>
+            <button onclick="localStorage.setItem('dismissed_announcement_${ann.id}', 'true'); renderGlobalAnnouncement();" class="shrink-0 p-1 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center justify-center">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+    `;
+};
 
 console.log("✅ components.js loaded & exported successfully");

@@ -154,6 +154,7 @@ const DB = {
                     notificationSettings: u.notification_settings || u.notificationSettings || existing.notificationSettings,
                     alias: u.alias || existing.alias || '',
                     role: u.role || existing.role || 'user',
+                    status: u.status || existing.status || 'active',
                     lastLogin: u.last_login || u.lastLogin || existing.lastLogin,
                     source: (existing.source || '').includes(source) ? existing.source : (existing.source || '') + '|' + source
                 });
@@ -595,9 +596,28 @@ const DB = {
         });
     },
 
-    calculateStats(users, services) {
-        console.log(`[Stats] Calculating for ${users.length} users and ${services.length} services`);
-        // Logic remains same...
+    calculateStats(users, allServices, dateFilter = 'all') {
+        let services = allServices;
+        if (dateFilter !== 'all') {
+            const now = new Date();
+            services = allServices.filter(s => {
+                if (!s.date) return false;
+                const [y, m] = s.date.split('-');
+                if (!y || !m) return false;
+                const itemYear = parseInt(y);
+                const itemMonth = parseInt(m) - 1;
+
+                if (dateFilter === 'this_month') {
+                    return itemYear === now.getFullYear() && itemMonth === now.getMonth();
+                } else if (dateFilter === 'last_month') {
+                    const lm = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+                    return itemYear === lm.getFullYear() && itemMonth === lm.getMonth();
+                }
+                return true;
+            });
+        }
+        console.log(`[Stats] Calculating for ${users.length} users and ${services.length} services (Filter: ${dateFilter})`);
+
         const totalRevenue = services.reduce((acc, s) => acc + (parseFloat(s.total) || 0), 0);
         const totalHours = services.reduce((acc, s) => acc + (parseFloat(s.hours) || 0), 0);
 
@@ -677,6 +697,43 @@ const DB = {
             console.error("Error saving review:", e);
             return false;
         }
+    },
+
+    // --- ADMINISTRATOR TOOLS ---
+    async updateUserRole(email, role) {
+        const promises = [];
+        promises.push(db.collection('users').doc(email).set({ role: role }, { merge: true }).catch(console.warn));
+        promises.push(supabaseClient.from('profiles').update({ role: role }).eq('email', email).catch(console.warn));
+        await Promise.all(promises);
+    },
+
+    async updateUserStatus(email, status) {
+        const promises = [];
+        promises.push(db.collection('users').doc(email).set({ status: status }, { merge: true }).catch(console.warn));
+        promises.push(supabaseClient.from('profiles').update({ status: status }).eq('email', email).catch(console.warn));
+        await Promise.all(promises);
+    },
+
+    // --- ANNOUNCEMENTS ---
+    subscribeToAnnouncements(callback) {
+        return db.collection('announcements')
+            .orderBy('timestamp', 'desc')
+            .limit(1)
+            .onSnapshot(snapshot => {
+                if (!snapshot.empty) {
+                    const doc = snapshot.docs[0];
+                    callback({ id: doc.id, ...doc.data() });
+                } else {
+                    callback(null);
+                }
+            });
+    },
+
+    async publishAnnouncement(data) {
+        return db.collection('announcements').add({
+            ...data,
+            timestamp: new Date().toISOString()
+        });
     },
 
     // --- CONFIGURATION / DATA ---

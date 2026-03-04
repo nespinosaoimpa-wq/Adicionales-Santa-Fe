@@ -388,6 +388,12 @@ window.store = {
                         this.user = baseUser;
                     }
 
+                    if (this.user.status === 'suspended') {
+                        showToast("❌ Tu cuenta ha sido suspendida por un administrador.", 8000);
+                        this.logout();
+                        return;
+                    }
+
                     this.serviceConfig = this.user.serviceConfig;
                     this.notificationSettings = this.user.notificationSettings;
                     console.log("✅ User data synchronized:", this.user.email);
@@ -406,6 +412,13 @@ window.store = {
 
                     this.unsubscribeUsers = DB.subscribeToUsers(users => {
                         this.allUsers = users;
+                    });
+
+                    this.unsubscribeAnnouncements = DB.subscribeToAnnouncements(announcement => {
+                        this.latestAnnouncement = announcement;
+                        if (typeof renderGlobalAnnouncement === 'function') {
+                            renderGlobalAnnouncement();
+                        }
                     });
 
                     this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {

@@ -215,10 +215,12 @@ function renderProfile(container) {
 
             <!-- Logout & System Info -->
             <div class="pt-6 pb-2 space-y-4">
+                ${store.user?.role === 'admin' ? `
                  <button onclick="router.navigateTo('#diagnostics')" class="w-full text-indigo-400 text-xs font-bold hover:text-indigo-300 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 active:scale-95">
                     <span class="material-symbols-outlined text-lg">memory</span>
                     Estado del Sistema (Diagnóstico)
                 </button>
+                ` : ''}
 
                  <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10 mt-2">
                     <span class="material-symbols-outlined text-lg">logout</span>
