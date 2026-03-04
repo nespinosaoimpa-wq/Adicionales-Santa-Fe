@@ -41,15 +41,32 @@ function renderLogo(size = 'medium') {
 window.renderLogo = renderLogo;
 
 function renderAdBanner() {
-    if (!store.ads || store.ads.length === 0) return '';
-    const ad = store.ads[Math.floor(Math.random() * store.ads.length)];
+    // Google AdSense Banner (Horizontal / Responsive)
+    // Replace ca-pub-XXXXXXXX and data-ad-slot with real values once AdSense is approved
     return `
-        <div class="my-6 mx-4 rounded-xl overflow-hidden shadow-lg relative group">
-            <a href="${ad.linkUrl}" target="_blank" class="block relative">
-                <span class="absolute top-2 right-2 bg-black/60 text-slate-900 dark:text-white text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-bold backdrop-blur-sm">Publicidad</span>
-                <img src="${ad.imageUrl}" class="w-full h-32 object-cover" alt="Anuncio">
-                <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </a>
+        <div class="w-full my-4 flex justify-center" style="min-height:90px;">
+            <ins class="adsbygoogle"
+                 style="display:block;width:100%;max-width:728px;height:90px;"
+                 data-ad-client="ca-pub-XXXXXXXX"
+                 data-ad-slot="XXXXXXXXXX"
+                 data-ad-format="horizontal"
+                 data-full-width-responsive="true"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    `;
+}
+
+function renderAdBannerSmall() {
+    // Google AdSense Small Banner (In-Feed / Between Sections)
+    return `
+        <div class="w-full my-3 flex justify-center" style="min-height:50px;">
+            <ins class="adsbygoogle"
+                 style="display:block;width:100%;max-width:400px;height:100px;"
+                 data-ad-client="ca-pub-XXXXXXXX"
+                 data-ad-slot="YYYYYYYYYY"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="-fb+5w+4e-db+86"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
     `;
 }
@@ -225,6 +242,7 @@ function copyToClipboard(text, successMsg) {
 
 window.copyToClipboard = copyToClipboard;
 window.renderAdBanner = renderAdBanner;
+window.renderAdBannerSmall = renderAdBannerSmall;
 window.renderBottomNav = renderBottomNav;
 window.renderOfflineBanner = renderOfflineBanner;
 window.renderInstallBanner = renderInstallBanner;

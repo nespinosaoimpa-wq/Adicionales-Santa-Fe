@@ -421,6 +421,9 @@ window.store = {
                     this.authInitialized = true;
                     router.handleRoute();
 
+                    // Trigger onboarding for new users (Mejora 4)
+                    setTimeout(() => { if (typeof showOnboarding === 'function') showOnboarding(); }, 1500);
+
                 } catch (error) {
                     console.error("❌ Initialization Error:", error.code || error.message);
                     if (!this.user) {
@@ -801,6 +804,169 @@ window.store = {
 
         const count = this._alarmTimers.length;
         if (count > 0) console.log(`⏰ ${count} alarma(s) programada(s)`);
+    },
+
+    // --- GAMIFICATION: User Rank System ---
+    getUserRank() {
+        const now = new Date();
+        const cm = now.getMonth();
+        const cy = now.getFullYear();
+        const monthHours = this.services
+            .filter(s => {
+                if (!s.date) return false;
+                const d = new Date(s.date + 'T00:00:00');
+                return d.getMonth() === cm && d.getFullYear() === cy;
+            })
+            .reduce((sum, s) => sum + (parseFloat(s.hours) || 0), 0);
+
+        const ranks = [
+            { name: 'Cadete', icon: '🥉', min: 0, max: 20 },
+            { name: 'Oficial de Bronce', icon: '🥈', min: 21, max: 60 },
+            { name: 'Centinela de Plata', icon: '⭐', min: 61, max: 120 },
+            { name: 'Centinela de Oro', icon: '🏆', min: 121, max: Infinity }
+        ];
+
+        let current = ranks[0];
+        for (const r of ranks) {
+            if (monthHours >= r.min) current = r;
+        }
+
+        const nextRank = ranks[ranks.indexOf(current) + 1];
+        const hoursToNext = nextRank ? (nextRank.min - monthHours) : 0;
+
+        return { ...current, monthHours, nextRank, hoursToNext };
+    },
+
+    getRankProgress() {
+        const rank = this.getUserRank();
+        if (!rank.nextRank) return 100; // Max rank
+        const rangeSize = rank.nextRank.min - rank.min;
+        const progress = rank.monthHours - rank.min;
+        return Math.min(Math.round((progress / rangeSize) * 100), 100);
+    },
+
+    // --- MONTHLY GOAL ---
+    setMonthlyGoal(amount) {
+        const goal = parseFloat(amount) || 0;
+        if (this.user) {
+            this.user.monthlyGoal = goal;
+            DB.saveUser(this.user).catch(e => console.warn('Goal save error:', e));
+        }
+        showToast(`🎯 Meta mensual: $${goal.toLocaleString('es-AR')}`);
+    },
+
+    getGoalProgress() {
+        const goal = (this.user && this.user.monthlyGoal) || 0;
+        if (goal <= 0) return { goal: 0, earned: 0, percent: 0 };
+        const now = new Date();
+        const earned = this.services
+            .filter(s => {
+                if (!s.date) return false;
+                const d = new Date(s.date + 'T00:00:00');
+                return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+            })
+            .reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
+        return { goal, earned, percent: Math.min(Math.round((earned / goal) * 100), 100) };
+    },
+
+    // --- SHARE CARD ---
+    async generateShareCard() {
+        const rank = this.getUserRank();
+        const now = new Date();
+        const monthName = now.toLocaleString('es-AR', { month: 'long' });
+        const userName = this.user?.name || 'Agente';
+
+        const monthServices = this.services.filter(s => {
+            if (!s.date) return false;
+            const d = new Date(s.date + 'T00:00:00');
+            return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+        });
+        const totalSvcs = monthServices.length;
+
+        const canvas = document.createElement('canvas');
+        canvas.width = 600;
+        canvas.height = 400;
+        const ctx = canvas.getContext('2d');
+
+        // Background gradient
+        const grad = ctx.createLinearGradient(0, 0, 600, 400);
+        grad.addColorStop(0, '#0f172a');
+        grad.addColorStop(1, '#1e293b');
+        ctx.fillStyle = grad;
+        ctx.fillRect(0, 0, 600, 400);
+
+        // Accent bar
+        const accentGrad = ctx.createLinearGradient(0, 0, 600, 0);
+        accentGrad.addColorStop(0, '#0d59f2');
+        accentGrad.addColorStop(1, '#3b82f6');
+        ctx.fillStyle = accentGrad;
+        ctx.fillRect(0, 0, 600, 6);
+
+        // Brand
+        ctx.fillStyle = '#0d59f2';
+        ctx.font = 'bold 16px Inter, sans-serif';
+        ctx.fillText('ADICIONALES SANTA FE', 40, 50);
+
+        // Month
+        ctx.fillStyle = '#64748b';
+        ctx.font = '13px Inter, sans-serif';
+        ctx.fillText(`Resumen de ${monthName.toUpperCase()} ${now.getFullYear()}`, 40, 75);
+
+        // User
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 28px Inter, sans-serif';
+        ctx.fillText(userName.toUpperCase(), 40, 130);
+
+        // Rank badge
+        ctx.font = '42px sans-serif';
+        ctx.fillText(rank.icon, 40, 200);
+        ctx.fillStyle = '#e2e8f0';
+        ctx.font = 'bold 22px Inter, sans-serif';
+        ctx.fillText(rank.name, 95, 195);
+
+        // Stats
+        ctx.fillStyle = '#94a3b8';
+        ctx.font = '14px Inter, sans-serif';
+        ctx.fillText('HORAS TRABAJADAS', 40, 260);
+        ctx.fillText('SERVICIOS CUMPLIDOS', 320, 260);
+
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 36px Inter, sans-serif';
+        ctx.fillText(`${rank.monthHours.toFixed(1)}h`, 40, 300);
+        ctx.fillText(`${totalSvcs}`, 320, 300);
+
+        // Footer
+        ctx.fillStyle = '#334155';
+        ctx.fillRect(0, 355, 600, 45);
+        ctx.fillStyle = '#64748b';
+        ctx.font = '11px Inter, sans-serif';
+        ctx.fillText('Generado con la App Adicionales Santa Fe • adicionales-sf.app', 40, 382);
+
+        try {
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+            const file = new File([blob], 'mi_resumen_adicionales.png', { type: 'image/png' });
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    title: 'Mi Resumen - Adicionales Santa Fe',
+                    text: `Soy ${rank.name} ${rank.icon} este mes con ${rank.monthHours.toFixed(1)} horas trabajadas.`,
+                    files: [file]
+                });
+                showToast('✅ ¡Tarjeta compartida!');
+            } else {
+                // Fallback: download
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'mi_resumen_adicionales.png';
+                a.click();
+                URL.revokeObjectURL(url);
+                showToast('📥 Imagen descargada');
+            }
+        } catch (e) {
+            console.error('Share card error:', e);
+            showToast('Error al compartir');
+        }
     }
 };
 

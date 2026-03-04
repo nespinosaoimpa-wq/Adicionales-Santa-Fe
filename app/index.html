@@ -11,8 +11,8 @@
     <meta name="apple-mobile-web-app-title" content="Adicionales SF">
     <title>Adicionales Santa Fe</title>
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' https://*.supabase.co https://*.googleapis.com https://*.gstatic.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.supabase.co https://ui-avatars.com https://www.gstatic.com https://www.svgrepo.com; connect-src 'self' https://*.supabase.co https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com;">
-    <meta name="app-version" content="v532.0">
+        content="default-src 'self' https://*.supabase.co https://*.googleapis.com https://*.gstatic.com https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://pagead2.googlesyndication.com https://googleads.g.doubleclick.net; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdn.tailwindcss.com https://www.gstatic.com https://pagead2.googlesyndication.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.supabase.co https://ui-avatars.com https://www.gstatic.com https://www.svgrepo.com https://pagead2.googlesyndication.com; connect-src 'self' https://*.supabase.co https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://pagead2.googlesyndication.com; frame-src https://googleads.g.doubleclick.net;">
+    <meta name="app-version" content="v533.0">
     <meta name="description"
         content="Gestión inteligente de Servicios de Policía Adicional. Agenda, cálculos y finanzas en un solo lugar.">
 
@@ -44,13 +44,13 @@
                         needsHardReset = true;
                     }
                 }
-                if (needsHardReset || !localStorage.getItem('app_v532_0_final_initialized')) {
-                    console.log('☢️ Initializing Nuclear Purge v532.0...');
+                if (needsHardReset || !localStorage.getItem('app_v533_0_final_initialized')) {
+                    console.log('☢️ Initializing Nuclear Purge v533.0...');
                     if ('caches' in window) {
                         caches.keys().then(names => {
                             return Promise.all(names.map(name => caches.delete(name)));
                         }).then(() => {
-                            localStorage.setItem('app_v532_0_final_initialized', 'true');
+                            localStorage.setItem('app_v533_0_final_initialized', 'true');
                             window.location.replace(window.location.href.split('#')[0] + '?purge=' + Date.now());
                         });
                     } else {
@@ -69,8 +69,8 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v532_final.js?v532.0')
-                    .then(reg => console.log('✅ SW v532.0 Registered'))
+                navigator.serviceWorker.register('./sw-v532_final.js?v533.0')
+                    .then(reg => console.log('✅ SW v533.0 Registered'))
                     .catch(err => console.error('❌ SW Fail:', err));
             });
         }
@@ -148,13 +148,16 @@
         class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
         <div class="flex flex-col items-center justify-center h-screen space-y-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p class="text-slate-500 animate-pulse">Cargando Adicionales Santa Fe v532.0-FINAL...</p>
+            <p class="text-slate-500 animate-pulse">Cargando Adicionales Santa Fe v533.0-FINAL...</p>
         </div>
     </div>
 
     <!-- External Libs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Google AdSense (replace ca-pub-XXXXXXXX with your real publisher ID) -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXX"
+        crossorigin="anonymous"></script>
 
     <!-- Firebase SDKs (Legacy & Auth) -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
@@ -166,32 +169,33 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Application Logic -->
-    <script src="firebase-config.js?v532.0" defer></script>
-    <script src="supabase-config.js?v532.0" defer></script>
-    <script src="db-v211.js?v532.0" defer></script>
+    <script src="firebase-config.js?v533.0" defer></script>
+    <script src="supabase-config.js?v533.0" defer></script>
+    <script src="db-v211.js?v533.0" defer></script>
 
     <!-- Modularized Logic -->
-    <script src="js/utils.js?v532.0" defer></script>
-    <script src="js/components.js?v532.0" defer></script>
-    <script src="js/store.js?v532.0" defer></script>
-    <script src="js/router.js?v532.0" defer></script>
-    <script src="js/data/directory.js?v532.0" defer></script>
+    <script src="js/utils.js?v533.0" defer></script>
+    <script src="js/components.js?v533.0" defer></script>
+    <script src="js/store.js?v533.0" defer></script>
+    <script src="js/router.js?v533.0" defer></script>
+    <script src="js/data/directory.js?v533.0" defer></script>
 
     <!-- Views -->
-    <script src="js/views/auth.js?v532.0" defer></script>
-    <script src="js/views/agenda.js?v532.0" defer></script>
-    <script src="js/views/register.js?v532.0" defer></script>
-    <script src="js/views/control_panel.js?v532.0" defer></script>
-    <script src="js/views/financial.js?v532.0" defer></script>
-    <script src="js/views/profile.js?v532.0" defer></script>
-    <script src="js/views/stats.js?v532.0" defer></script>
-    <script src="js/views/history.js?v532.0" defer></script>
-    <script src="js/views/service_details.js?v532.0" defer></script>
-    <script src="js/views/asistente.js?v532.0" defer></script>
-    <script src="js/views/admin.js?v532.0" defer></script>
-    <script src="js/views/diagnostics.js?v532.0" defer></script>
+    <script src="js/views/auth.js?v533.0" defer></script>
+    <script src="js/views/agenda.js?v533.0" defer></script>
+    <script src="js/views/register.js?v533.0" defer></script>
+    <script src="js/views/control_panel.js?v533.0" defer></script>
+    <script src="js/views/financial.js?v533.0" defer></script>
+    <script src="js/views/profile.js?v533.0" defer></script>
+    <script src="js/views/stats.js?v533.0" defer></script>
+    <script src="js/views/history.js?v533.0" defer></script>
+    <script src="js/views/service_details.js?v533.0" defer></script>
+    <script src="js/views/asistente.js?v533.0" defer></script>
+    <script src="js/views/admin.js?v533.0" defer></script>
+    <script src="js/views/diagnostics.js?v533.0" defer></script>
+    <script src="js/views/onboarding.js?v533.0" defer></script>
 
-    <script src="app-v211.js?v532.0" defer></script>
+    <script src="app-v211.js?v533.0" defer></script>
 </body>
 
 </html>

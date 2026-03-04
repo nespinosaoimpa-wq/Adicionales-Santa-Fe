@@ -109,6 +109,12 @@ function renderStats(container) {
                     </div>
                 </div>
 
+                <!-- Share Card Button -->
+                <button onclick="store.generateShareCard()" class="w-full py-3 rounded-2xl bg-gradient-to-r from-primary to-blue-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-primary/20 hover:shadow-primary/40 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-lg">share</span>
+                    Compartir mi Resumen del Mes
+                </button>
+
                 <!-- Liquidation Panel -->
                 <section class="space-y-4">
                     <h3 class="text-[10px] font-black text-primary uppercase tracking-[0.2em] px-1">Control de Liquidaciones</h3>

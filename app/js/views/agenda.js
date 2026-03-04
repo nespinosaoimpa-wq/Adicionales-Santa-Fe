@@ -92,6 +92,45 @@ function renderAgenda(container) {
             </section>
             ` : ''}
 
+            <!-- Rank Badge + Goal Bar -->
+            <section class="mt-4 space-y-3">
+                ${(() => {
+            const rank = store.getUserRank();
+            const progress = store.getRankProgress();
+            const goal = store.getGoalProgress();
+            return `
+                    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-white/5">
+                        <span class="text-3xl">${rank.icon}</span>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-center">
+                                <p class="text-xs font-bold text-slate-900 dark:text-white truncate">${rank.name}</p>
+                                <p class="text-[10px] font-bold text-primary">${rank.monthHours.toFixed(1)}h este mes</p>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 mt-1.5">
+                                <div class="bg-gradient-to-r from-primary to-blue-400 h-1.5 rounded-full transition-all duration-700" style="width: ${progress}%"></div>
+                            </div>
+                            ${rank.nextRank ? `<p class="text-[9px] text-slate-500 mt-0.5">Faltan ${rank.hoursToNext.toFixed(1)}h para ${rank.nextRank.name} ${rank.nextRank.icon}</p>` : `<p class="text-[9px] text-amber-500 mt-0.5 font-bold">¡Rango máximo alcanzado!</p>`}
+                        </div>
+                    </div>
+                    ${goal.goal > 0 ? `
+                    <div class="p-3 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-white/5">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">🎯 Meta Mensual</p>
+                            <p class="text-[10px] font-bold ${goal.percent >= 100 ? 'text-emerald-500' : 'text-primary'}">${goal.percent}%</p>
+                        </div>
+                        <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                            <div class="${goal.percent >= 100 ? 'bg-gradient-to-r from-emerald-500 to-green-400' : 'bg-gradient-to-r from-amber-500 to-orange-400'} h-2 rounded-full transition-all duration-700" style="width: ${goal.percent}%"></div>
+                        </div>
+                        <div class="flex justify-between mt-1">
+                            <p class="text-[9px] text-slate-500">$${goal.earned.toLocaleString('es-AR')} ganado</p>
+                            <p class="text-[9px] text-slate-500">$${goal.goal.toLocaleString('es-AR')} meta</p>
+                        </div>
+                    </div>
+                    ` : ''}
+                    `;
+        })()}
+            </section>
+
             <!-- Calendar Section -->
             <section class="space-y-4">
                 <div class="flex justify-between items-center">
@@ -104,8 +143,8 @@ function renderAgenda(container) {
                     <!-- Calendar Grid Header -->
                     <div class="grid grid-cols-7 gap-1 mb-2">
                          ${['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'].map(d =>
-        `<div class="text-center text-[10px] font-bold text-slate-400 uppercase">${d}</div>`
-    ).join('')}
+            `<div class="text-center text-[10px] font-bold text-slate-400 uppercase">${d}</div>`
+        ).join('')}
                     </div>
                     <!-- Calendar Grid -->
                     <div class="grid grid-cols-7 gap-y-2" id="calendar-grid">

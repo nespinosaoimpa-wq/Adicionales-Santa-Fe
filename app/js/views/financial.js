@@ -108,6 +108,34 @@ function renderFinancial(container) {
         </header>
 
         <main class="flex-1 px-4 py-6 space-y-6 overflow-y-auto pb-32">
+            <!-- Liquidity Widget (Mejora 5) -->
+            ${(() => {
+            const allMonthSvcs = filterByPeriod(store.services, 'date');
+            const paid = allMonthSvcs.filter(s => s.status === 'paid' || s.status === 'Pagado').reduce((t, s) => t + (s.total || 0), 0);
+            const pending = allMonthSvcs.filter(s => s.status !== 'paid' && s.status !== 'Pagado').reduce((t, s) => t + (s.total || 0), 0);
+            const total = paid + pending;
+            const paidPercent = total > 0 ? Math.round((paid / total) * 100) : 0;
+            return `
+            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 p-5 border border-white/5 shadow-xl">
+                <div class="absolute top-3 right-3 opacity-10"><span class="material-symbols-outlined text-5xl text-white">account_balance_wallet</span></div>
+                <p class="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-500 mb-4">💰 Liquidez del Período</p>
+                <div class="grid grid-cols-2 gap-4 mb-3">
+                    <div>
+                        <p class="text-[10px] text-emerald-500 font-bold uppercase">Cobrado</p>
+                        <p class="text-xl font-black text-emerald-400">$${paid.toLocaleString('es-AR')}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-[10px] text-amber-500 font-bold uppercase">Pendiente</p>
+                        <p class="text-xl font-black text-amber-400">$${pending.toLocaleString('es-AR')}</p>
+                    </div>
+                </div>
+                <div class="w-full bg-slate-700 rounded-full h-2 overflow-hidden">
+                    <div class="bg-gradient-to-r from-emerald-500 to-emerald-400 h-2 rounded-full transition-all duration-700" style="width: ${paidPercent}%"></div>
+                </div>
+                <p class="text-[9px] text-slate-600 mt-1.5 text-center">${paidPercent}% cobrado del total ($${total.toLocaleString('es-AR')})</p>
+            </div>`;
+        })()}
+
             <!-- Summary Cards -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="glass-card p-5 rounded-2xl flex flex-col gap-1 relative overflow-hidden">
@@ -148,10 +176,10 @@ function renderFinancial(container) {
                 <div class="glass-card p-4 rounded-2xl space-y-3">
                     <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
                         ${['Comida', 'Transporte', 'Equipo', 'Comunicación', 'Salud', 'Otros'].map((cat, i) => {
-        const icons = { 'Comida': 'restaurant', 'Transporte': 'directions_car', 'Equipo': 'build', 'Comunicación': 'phone_in_talk', 'Salud': 'medical_services', 'Otros': 'more_horiz' };
-        const colors = { 'Comida': 'bg-red-500/20 text-red-400', 'Transporte': 'bg-blue-500/20 text-blue-400', 'Equipo': 'bg-purple-500/20 text-purple-400', 'Comunicación': 'bg-green-500/20 text-green-400', 'Salud': 'bg-pink-500/20 text-pink-400', 'Otros': 'bg-amber-500/20 text-amber-400' };
-        return '<button onclick="window.selectExpenseCategory(\'' + cat + '\')" id="cat-btn-' + cat + '" class="expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ' + (i === 0 ? colors[cat] + ' ring-1 ring-white/20' : 'bg-white/5 text-slate-400') + '"><span class="material-symbols-outlined text-sm">' + icons[cat] + '</span>' + cat + '</button>';
-    }).join('')}
+            const icons = { 'Comida': 'restaurant', 'Transporte': 'directions_car', 'Equipo': 'build', 'Comunicación': 'phone_in_talk', 'Salud': 'medical_services', 'Otros': 'more_horiz' };
+            const colors = { 'Comida': 'bg-red-500/20 text-red-400', 'Transporte': 'bg-blue-500/20 text-blue-400', 'Equipo': 'bg-purple-500/20 text-purple-400', 'Comunicación': 'bg-green-500/20 text-green-400', 'Salud': 'bg-pink-500/20 text-pink-400', 'Otros': 'bg-amber-500/20 text-amber-400' };
+            return '<button onclick="window.selectExpenseCategory(\'' + cat + '\')" id="cat-btn-' + cat + '" class="expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ' + (i === 0 ? colors[cat] + ' ring-1 ring-white/20' : 'bg-white/5 text-slate-400') + '"><span class="material-symbols-outlined text-sm">' + icons[cat] + '</span>' + cat + '</button>';
+        }).join('')}
                     </div>
                     <div class="flex gap-2">
                         <div class="flex-1 relative">
@@ -181,26 +209,26 @@ function renderFinancial(container) {
                 </div>
                 <div class="space-y-2">
                     ${periodExpenses.length > 0 ? periodExpenses.slice(0, 20).map(e => {
-        const catIcons = { 'Comida': 'restaurant', 'Transporte': 'directions_car', 'Equipo': 'build', 'Comunicación': 'phone_in_talk', 'Salud': 'medical_services', 'Otros': 'more_horiz' };
-        const catColors = { 'Comida': 'bg-red-500/10 text-red-400', 'Transporte': 'bg-blue-500/10 text-blue-400', 'Equipo': 'bg-purple-500/10 text-purple-400', 'Comunicación': 'bg-green-500/10 text-green-400', 'Salud': 'bg-pink-500/10 text-pink-400', 'Otros': 'bg-amber-500/10 text-amber-400' };
-        const icon = catIcons[e.category] || 'money_off';
-        const color = catColors[e.category] || 'bg-red-500/10 text-red-400';
-        return '<div class="glass-card p-3 rounded-2xl flex items-center justify-between border-white/5 group">' +
-            '<div class="flex items-center gap-3">' +
-            '<div class="size-9 rounded-xl ' + color + ' flex items-center justify-center">' +
-            '<span class="material-symbols-outlined text-lg">' + icon + '</span>' +
-            '</div>' +
-            '<div>' +
-            '<p class="font-bold text-sm text-slate-900 dark:text-white">' + e.category + '</p>' +
-            '<p class="text-[10px] text-slate-500">' + (e.description || '-') + ' • ' + new Date(e.timestamp || e.date).toLocaleDateString() + '</p>' +
-            '</div>' +
-            '</div>' +
-            '<div class="flex items-center gap-3">' +
-            '<p class="font-bold text-slate-900 dark:text-white">-$' + (e.amount || 0).toLocaleString('es-AR') + '</p>' +
-            '<button onclick="window.deleteExpenseConfirm(\'' + e.id + '\')" class="size-8 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>' +
-            '</div>' +
-            '</div>';
-    }).join('') : '<div class="flex flex-col items-center py-8 text-center"><div class="size-14 rounded-full bg-red-500/10 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400/40">receipt_long</span></div><p class="text-sm font-semibold text-slate-900 dark:text-white mb-1">Sin gastos en este período</p><p class="text-xs text-slate-400">Usá el formulario arriba para cargar gastos</p></div>'}
+            const catIcons = { 'Comida': 'restaurant', 'Transporte': 'directions_car', 'Equipo': 'build', 'Comunicación': 'phone_in_talk', 'Salud': 'medical_services', 'Otros': 'more_horiz' };
+            const catColors = { 'Comida': 'bg-red-500/10 text-red-400', 'Transporte': 'bg-blue-500/10 text-blue-400', 'Equipo': 'bg-purple-500/10 text-purple-400', 'Comunicación': 'bg-green-500/10 text-green-400', 'Salud': 'bg-pink-500/10 text-pink-400', 'Otros': 'bg-amber-500/10 text-amber-400' };
+            const icon = catIcons[e.category] || 'money_off';
+            const color = catColors[e.category] || 'bg-red-500/10 text-red-400';
+            return '<div class="glass-card p-3 rounded-2xl flex items-center justify-between border-white/5 group">' +
+                '<div class="flex items-center gap-3">' +
+                '<div class="size-9 rounded-xl ' + color + ' flex items-center justify-center">' +
+                '<span class="material-symbols-outlined text-lg">' + icon + '</span>' +
+                '</div>' +
+                '<div>' +
+                '<p class="font-bold text-sm text-slate-900 dark:text-white">' + e.category + '</p>' +
+                '<p class="text-[10px] text-slate-500">' + (e.description || '-') + ' • ' + new Date(e.timestamp || e.date).toLocaleDateString() + '</p>' +
+                '</div>' +
+                '</div>' +
+                '<div class="flex items-center gap-3">' +
+                '<p class="font-bold text-slate-900 dark:text-white">-$' + (e.amount || 0).toLocaleString('es-AR') + '</p>' +
+                '<button onclick="window.deleteExpenseConfirm(\'' + e.id + '\')" class="size-8 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-500 hover:text-red-400 transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>' +
+                '</div>' +
+                '</div>';
+        }).join('') : '<div class="flex flex-col items-center py-8 text-center"><div class="size-14 rounded-full bg-red-500/10 flex items-center justify-center mb-3"><span class="material-symbols-outlined text-2xl text-red-400/40">receipt_long</span></div><p class="text-sm font-semibold text-slate-900 dark:text-white mb-1">Sin gastos en este período</p><p class="text-xs text-slate-400">Usá el formulario arriba para cargar gastos</p></div>'}
                 </div>
             </section>
             

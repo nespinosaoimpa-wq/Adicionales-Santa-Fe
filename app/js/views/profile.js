@@ -132,6 +132,25 @@ function renderProfile(container) {
                 </button>
             </section>
 
+            <!-- Monthly Goal Section -->
+            <section class="space-y-3">
+                <div class="flex items-center gap-3 text-slate-400 px-1">
+                    <span class="material-symbols-outlined text-amber-400">flag</span>
+                    <h3 class="text-xs font-bold uppercase tracking-widest">Meta Financiera Mensual</h3>
+                </div>
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <p class="text-[10px] text-slate-500 mb-3">Definí cuánto querés ganar este mes. Verás tu progreso en la Agenda.</p>
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-1 flex-1 bg-slate-900/50 rounded-xl px-3 py-2.5 border border-white/5">
+                            <span class="text-slate-500 text-sm font-bold">$</span>
+                            <input type="number" id="monthly-goal-input" placeholder="Ej: 500000" value="${(store.user && store.user.monthlyGoal) || ''}" class="bg-transparent text-white text-sm font-bold w-full outline-none placeholder-slate-700">
+                        </div>
+                        <button onclick="const val = document.getElementById('monthly-goal-input').value; store.setMonthlyGoal(val);" class="px-4 py-2.5 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-bold hover:bg-amber-500/30 transition-all active:scale-95">
+                            Fijar
+                        </button>
+                    </div>
+                </div>
+            </section>
 
             <!-- Apariencia & Notificaciones -->
             <section class="space-y-5">
