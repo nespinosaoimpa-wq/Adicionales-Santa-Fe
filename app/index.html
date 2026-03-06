@@ -43,19 +43,19 @@
                 let needsHardReset = false;
                 for (let reg of registrations) {
                     const url = reg.active?.scriptURL || reg.installing?.scriptURL || reg.waiting?.scriptURL || '';
-                    if (!url.includes('sw-v532_final.js')) {
+                    if (!url.includes('sw-v534-2_final.js')) {
                         console.log('☢️ Outdated SW detected:', url);
                         reg.unregister();
                         needsHardReset = true;
                     }
                 }
-                if (needsHardReset || !localStorage.getItem('app_v534.1_final_initialized')) {
-                    console.log('☢️ Initializing Nuclear Purge v534.1...');
+                if (needsHardReset || !localStorage.getItem('app_v534_2_final_initialized')) {
+                    console.log('☢️ Initializing Nuclear Purge v534.2...');
                     if ('caches' in window) {
                         caches.keys().then(names => {
                             return Promise.all(names.map(name => caches.delete(name)));
                         }).then(() => {
-                            localStorage.setItem('app_v534.1_final_initialized', 'true');
+                            localStorage.setItem('app_v534_2_final_initialized', 'true');
                             window.location.replace(window.location.href.split('#')[0] + '?purge=' + Date.now());
                         });
                     } else {
@@ -74,8 +74,8 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v532_final.js?v534.1')
-                    .then(reg => console.log('✅ SW v534.1 Registered'))
+                navigator.serviceWorker.register('./sw-v534-2_final.js?v534.2')
+                    .then(reg => console.log('✅ SW v534.2 Registered'))
                     .catch(err => console.error('❌ SW Fail:', err));
             });
         }
