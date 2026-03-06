@@ -59,7 +59,7 @@ function renderAdBanner() {
         <div class="w-full my-4 flex justify-center" style="min-height:90px;">
             <ins class="adsbygoogle"
                  style="display:block;width:100%;max-width:728px;height:90px;"
-                 data-ad-client="ca-pub-XXXXXXXX"
+                 data-ad-client="ca-pub-4261554477116731"
                  data-ad-slot="XXXXXXXXXX"
                  data-ad-format="horizontal"
                  data-full-width-responsive="true"></ins>
@@ -86,7 +86,7 @@ function renderAdBannerSmall() {
         <div class="w-full my-3 flex justify-center" style="min-height:50px;">
             <ins class="adsbygoogle"
                  style="display:block;width:100%;max-width:400px;height:100px;"
-                 data-ad-client="ca-pub-XXXXXXXX"
+                 data-ad-client="ca-pub-4261554477116731"
                  data-ad-slot="YYYYYYYYYY"
                  data-ad-format="fluid"
                  data-ad-layout-key="-fb+5w+4e-db+86"></ins>
