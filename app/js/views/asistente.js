@@ -77,7 +77,7 @@ function renderAsistenteHub(container) {
                     <input type="hidden" id="feedback-rating" value="5">
                     <textarea id="feedback-comment" placeholder="Escribe tu mensaje aquí..." 
                         class="w-full bg-white/5 border border-white/10 rounded-2xl p-3 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all h-20 resize-none"></textarea>
-                    <button type="submit" class="w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-slate-900 dark:text-white text-xs font-bold transition-all active:scale-95">
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-primary text-white text-xs font-bold transition-all active:scale-95 shadow-lg shadow-primary/20">
                         Enviar Reseña
                     </button>
                 </form>
