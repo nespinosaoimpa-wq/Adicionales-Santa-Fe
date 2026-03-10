@@ -292,7 +292,7 @@ window.store = {
         const shareData = {
             title: 'Adicionales Santa Fe',
             text: 'Gestiona tus servicios de policía adicional y calcula tus ganancias fácil.',
-            url: window.location.origin + window.location.pathname
+            url: 'https://adicionalessantafe.com.ar/'
         };
 
         try {
