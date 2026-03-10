@@ -34,7 +34,7 @@ function renderServiceDetails(container, serviceId) {
                     <p class="text-lg font-bold text-slate-900 dark:text-white">${isPaid ? 'LIQUIDADO' : 'PENDIENTE DE PAGO'}</p>
                 </div>
                 <!-- Toggle Switch -->
-                <button onclick="handleTogglePaid('${serviceId}', ${!isPaid})" class="h-8 px-4 rounded-full flex items-center gap-2 font-bold text-xs ${isPaid ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-slate-200 dark:bg-white/10 text-slate-600 dark:text-slate-300'} transition-all">
+                <button onclick="handleTogglePaid('${serviceId}', ${!isPaid})" class="h-8 px-4 rounded-full flex items-center gap-2 font-bold text-xs ${isPaid ? 'bg-green-500 text-white shadow-lg shadow-green-500/20' : 'bg-primary text-white dark:bg-primary shadow-lg shadow-primary/20'} transition-all active:scale-95">
                     ${isPaid ? '<span class="material-symbols-outlined text-sm">check</span> LIQUIDADO' : 'LIQUIDAR'}
                 </button>
              </div>

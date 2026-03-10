@@ -92,6 +92,9 @@ function renderAgenda(container) {
             </section>
             ` : ''}
 
+            <!-- Ad Banner -->
+            ${renderAdBanner()}
+
             <!-- Rank Badge + Goal Bar -->
             <section class="mt-4 space-y-3">
                 ${(() => {

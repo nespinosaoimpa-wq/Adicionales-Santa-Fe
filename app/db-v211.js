@@ -190,6 +190,14 @@ const DB = {
         });
     },
 
+    async uploadAdBanner(file) {
+        if (!file) return null;
+        const filename = `banner_${Date.now()}`;
+        const storageRef = storage.ref(`ads/${filename}`);
+        const snapshot = await storageRef.put(file);
+        return snapshot.ref.getDownloadURL();
+    },
+
     async addAd(adData) {
         return db.collection('ads').add({
             ...adData,

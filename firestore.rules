@@ -5,8 +5,8 @@ service cloud.firestore {
     // ── Función helper: verificar si el usuario es admin ──
     function isAdmin() {
       return request.auth != null &&
-        exists(/databases/$(database)/documents/users/$(request.auth.token.email)) &&
-        get(/databases/$(database)/documents/users/$(request.auth.token.email)).data.role == 'admin';
+        exists(/databases/$(database)/documents/users/$(request.auth.token.email.lower())) &&
+        get(/databases/$(database)/documents/users/$(request.auth.token.email.lower())).data.role == 'admin';
     }
 
     // ── USUARIOS: cada usuario solo puede leer/editar su propio perfil ──
@@ -72,6 +72,11 @@ service cloud.firestore {
       );
       allow delete: if isAdmin();
       allow update: if false;
+    }
+    // ── ANUNCIOS: lectura pública, escritura solo admin ──
+    match /announcements/{announcementId} {
+      allow read: if true;
+      allow write: if isAdmin();
     }
   }
 }

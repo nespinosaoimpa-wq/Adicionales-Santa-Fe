@@ -21,7 +21,7 @@ async function renderAdmin(container) {
         const stats = DB.calculateStats(window.allUsers, window.allServices, window.adminDateFilter);
 
         container.innerHTML = `
-        <div class="min-h-screen bg-background-light dark:bg-[#0f172a] text-slate-800 dark:text-slate-800 dark:text-slate-200 font-sans pb-24 animate-fade-in">
+        <div class="min-h-screen bg-background-light dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 font-sans pb-24 animate-fade-in">
             <!-- Glass Header -->
             <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 px-6 h-20 flex items-center justify-between shadow-2xl">
                 <div class="flex items-center gap-4">
@@ -43,7 +43,7 @@ async function renderAdmin(container) {
                         <option value="last_month" ${window.adminDateFilter === 'last_month' ? 'selected' : ''}>Mes Pasado</option>
                     </select>
 
-                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-700 dark:text-slate-700 dark:text-slate-300">
+                    <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-700 dark:text-slate-300">
                         <span class="material-symbols-outlined text-sm">download</span> Exportar
                     </button>
                     <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
@@ -326,6 +326,10 @@ async function renderAdmin(container) {
         setTimeout(() => _mountAdminCharts(DB.calculateStats(window.allUsers, window.allServices, window.adminDateFilter).chartData), 100);
     });
 
+    const unsubAds = DB.subscribeToAds(() => {
+        updateUI();
+    });
+
     // Global Filter Hook
     window.updateAdminFilter = (filter) => {
         window.adminDateFilter = filter;
@@ -375,6 +379,7 @@ async function renderAdmin(container) {
     router.navigateTo = (route) => {
         unsubUsers();
         unsubServices();
+        unsubAds();
         unsubReviews();
         unsubLogs();
         router.navigateTo = originalNavigate;
@@ -566,8 +571,22 @@ window._showAddAdModal = () => {
                 Nuevo Banner
             </h3>
             <div class="space-y-3">
+                <div id="banner-upload-area" class="border-2 border-dashed border-white/10 rounded-xl p-4 text-center hover:border-primary/50 transition-all cursor-pointer group">
+                    <input type="file" id="ad-file-input" class="hidden" accept="image/*">
+                    <div id="banner-preview-container" class="hidden mb-2">
+                        <img id="banner-preview-img" class="w-full h-20 object-cover rounded-lg">
+                    </div>
+                    <div id="upload-prompt">
+                        <span class="material-symbols-outlined text-3xl text-slate-500 group-hover:text-primary transition-colors">cloud_upload</span>
+                        <p class="text-[10px] text-slate-500 font-bold mt-1">SUBIR IMAGEN DEL DISPOSITIVO</p>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/5"></div></div>
+                    <div class="relative flex justify-center text-[8px] uppercase font-black text-slate-600 bg-slate-900 px-2">o usar URL externa</div>
+                </div>
                 <div>
-                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">URL de la imagen *</label>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">URL de la imagen</label>
                     <input id="ad-image-url" type="url" placeholder="https://..." class="w-full mt-1 px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-sm placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all">
                 </div>
                 <div>
@@ -583,19 +602,57 @@ window._showAddAdModal = () => {
     `;
     overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
     document.body.appendChild(overlay);
+
+    const fileInput = document.getElementById('ad-file-input');
+    const uploadArea = document.getElementById('banner-upload-area');
+    const previewContainer = document.getElementById('banner-preview-container');
+    const previewImg = document.getElementById('banner-preview-img');
+    const uploadPrompt = document.getElementById('upload-prompt');
+    const inputUrl = document.getElementById('ad-image-url');
+
+    uploadArea.onclick = () => fileInput.click();
+
+    fileInput.onchange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (ev) => {
+                previewImg.src = ev.target.result;
+                previewContainer.classList.remove('hidden');
+                uploadPrompt.classList.add('hidden');
+                inputUrl.value = ''; // Clear URL if file selected
+                inputUrl.disabled = true;
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
     document.getElementById('btn-save-ad').onclick = async () => {
-        const imageUrl = document.getElementById('ad-image-url').value.trim();
+        const urlValue = inputUrl.value.trim();
         const linkUrl = document.getElementById('ad-link-url').value.trim();
-        if (!imageUrl) { showToast('Ingresa la URL de imagen'); return; }
+        const file = fileInput.files[0];
+
+        if (!file && !urlValue) { showToast('Selecciona una imagen o ingresa una URL'); return; }
+
         const btn = document.getElementById('btn-save-ad');
         btn.disabled = true; btn.textContent = 'Publicando...';
+
         try {
-            await DB.addAd({ imageUrl, linkUrl: linkUrl || null });
-            showToast('Anuncio publicado');
+            let finalImageUrl = urlValue;
+            if (file) {
+                showToast('⏳ Subiendo imagen...');
+                finalImageUrl = await DB.uploadAdBanner(file);
+            }
+
+            if (!finalImageUrl) throw new Error("No se pudo obtener la URL de imagen");
+
+            await DB.addAd({ imageUrl: finalImageUrl, linkUrl: linkUrl || null });
+            showToast('✅ Anuncio publicado');
             overlay.remove();
             if (window.location.hash === '#admin') router.handleRoute();
         } catch (e) {
-            showToast('Error al publicar');
+            console.error("Ad publish error:", e);
+            showToast('❌ Error al publicar');
             btn.disabled = false; btn.textContent = 'Publicar';
         }
     };
