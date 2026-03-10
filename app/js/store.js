@@ -335,7 +335,7 @@ window.store = {
     },
 
     init() {
-        console.log("App v531.1-FINAL - Absolute Fix, Standard Exports");
+        console.log("App v534.8-FINAL - Standard Deployment");
 
         // Apply saved theme ASAP
         this.initTheme();
@@ -367,6 +367,7 @@ window.store = {
                 try {
                     const dbUser = await DB.getUser(user.email);
                     const baseUser = {
+                        uid: user.uid,
                         email: user.email,
                         role: 'user',
                         serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),

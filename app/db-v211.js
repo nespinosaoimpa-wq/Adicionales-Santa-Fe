@@ -54,7 +54,7 @@ const DB = {
             if (error) throw error;
             console.log("✅ Supabase Profile Synced");
         } catch (e) {
-            console.warn("⚠️ Supabase profile sync failed:", e.message);
+            console.warn("⚠️ Supabase profile sync failed:", e.message, e);
         }
     },
 

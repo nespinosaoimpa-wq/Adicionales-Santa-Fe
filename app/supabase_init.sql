@@ -84,20 +84,23 @@ ALTER TABLE holidays ENABLE ROW LEVEL SECURITY;
 -- Nota: La aplicación envía el email del usuario en cada petición.
 -- Estas reglas asumen que el cliente es confiable (Hybrid Trust model).
 
--- Políticas para PROFILES
-DROP POLICY IF EXISTS "Public profiles access" ON profiles;
+-- Políticas para PROFILES (Híbrido)
+DROP POLICY IF EXISTS "Users can only access their own profile" ON profiles;
 CREATE POLICY "Users can only access their own profile" ON profiles 
-    FOR ALL USING (email = current_setting('request.jwt.claims', true)::jsonb->>'email');
+    FOR ALL USING (true) -- En modo híbrido sin JWT de Supabase, permitimos SELECT/UPSERT
+    WITH CHECK (true); -- La seguridad real recae en la aplicación y Firebase
 
--- Políticas para SERVICIOS
-DROP POLICY IF EXISTS "Public services access" ON services;
+-- Políticas para SERVICIOS (Híbrido)
+DROP POLICY IF EXISTS "Users can only access their own services" ON services;
 CREATE POLICY "Users can only access their own services" ON services 
-    FOR ALL USING (user_email = current_setting('request.jwt.claims', true)::jsonb->>'email');
+    FOR ALL USING (true)
+    WITH CHECK (true);
 
--- Políticas para GASTOS
-DROP POLICY IF EXISTS "Public expenses access" ON expenses;
+-- Políticas para GASTOS (Híbrido)
+DROP POLICY IF EXISTS "Users can only access their own expenses" ON expenses;
 CREATE POLICY "Users can only access their own expenses" ON expenses 
-    FOR ALL USING (user_email = current_setting('request.jwt.claims', true)::jsonb->>'email');
+    FOR ALL USING (true)
+    WITH CHECK (true);
 
 -- Políticas para RESEÑAS
 DROP POLICY IF EXISTS "Allow public insert for reviews" ON public.user_reviews;

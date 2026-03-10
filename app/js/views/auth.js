@@ -58,7 +58,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v2.1.1 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v534.8 (Suite Asistente Virtual PRO)</p>
                 </div>
             </div>
         </div>
