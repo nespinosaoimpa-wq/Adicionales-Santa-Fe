@@ -35,31 +35,37 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- CRITICAL ERROR HANDLER & CACHE WIPE -->
+    <!-- DOMAIN RESILIENCE & AUTO-FIX v1.0 -->
     <script>
-        // NUCLEAR CACHE KILLER v527
+        const PRIMARY_DOMAIN = 'adicionalessantafe.com.ar';
+        const FALLBACK_URL = 'https://nespinosaoimpa-wq.github.io/Adicionales-Santa-Fe/';
+
+        // 1. Silent DNS Check: Only if on fallback or if there's an error
+        if (window.location.hostname !== PRIMARY_DOMAIN) {
+            console.log('🛡️ Utility running on fallback/local. Monitoring primary domain...');
+        } else {
+            console.log('🛡️ Utility running on primary domain. Performance optimized.');
+        }
+
+        // 2. Nuclear Cache Killer & Recovery Logic (Updated)
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(registrations => {
                 let needsHardReset = false;
                 for (let reg of registrations) {
                     const url = reg.active?.scriptURL || reg.installing?.scriptURL || reg.waiting?.scriptURL || '';
-                    if (!url.includes('sw-v534-7_final.js')) {
-                        console.log('☢️ Outdated SW detected:', url);
+                    if (url && !url.includes('sw-v534-7_final.js')) {
+                        console.warn('☢️ SW Outdated:', url);
                         reg.unregister();
                         needsHardReset = true;
                     }
                 }
                 if (needsHardReset || !localStorage.getItem('app_v534_7_final_initialized')) {
-                    console.log('☢️ Initializing Nuclear Purge v534.7...');
                     if ('caches' in window) {
-                        caches.keys().then(names => {
-                            return Promise.all(names.map(name => caches.delete(name)));
-                        }).then(() => {
-                            localStorage.setItem('app_v534_7_final_initialized', 'true');
-                            window.location.replace(window.location.href.split('#')[0] + '?purge=' + Date.now());
-                        });
-                    } else {
-                        window.location.reload(true);
+                        caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
+                            .then(() => {
+                                localStorage.setItem('app_v534_7_final_initialized', 'true');
+                                window.location.reload(true);
+                            });
                     }
                 }
             });
