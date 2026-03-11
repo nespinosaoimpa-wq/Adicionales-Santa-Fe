@@ -127,6 +127,43 @@
         }
     </script>
 
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                // v534.9 Cache Buster - Forzar actualización
+                navigator.serviceWorker.register('./sw-v534-9_final.js?v=' + new Date().getTime())
+                    .then(registration => {
+                        console.log('ServiceWorker v534.9 registrado con éxito: ', registration.scope);
+
+                        // Detectar si hay un nuevo worker instalándose
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('Nueva actualización de SW disponible. Recargando automáticamente...');
+                                    // Forzar la recarga automática para aplicar el nuevo SW y saltar el cache viejo
+                                    window.location.reload(true);
+                                }
+                            });
+                        });
+                    }, err => {
+                        console.log('Fallo el registro del ServiceWorker: ', err);
+                    });
+            });
+
+            // Si el controlador cambia (el SW 9 tomó el control), forzar recarga por si acaso
+            let refreshing = false;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (!refreshing) {
+                    refreshing = true;
+                    console.log('SW Controller change detectado. Recargando la página para usar los recursos frescos...');
+                    window.location.reload(true);
+                }
+            });
+        }
+    </script>
+
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css?v=534.8">
 
