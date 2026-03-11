@@ -194,7 +194,22 @@
     <!-- Main App Container -->
     <div id="app"
         class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
-        <div id="global-announcement-container" class="sticky top-0 z-[100] w-full"></div>
+        <div id="global-announcement-container" class="sticky top-0 z-[100] w-full">
+            <div id="update-banner"
+                class="w-full bg-blue-600 text-white px-4 py-3 shadow-lg flex items-start flex-row gap-3 border-b border-white/20 animate-slide-down">
+                <span class="material-symbols-outlined shrink-0 mt-0.5">campaign</span>
+                <div class="flex-1">
+                    <p class="text-[13px] font-bold leading-tight">
+                        📢 ¡App Actualizada! Hemos solucionado el error de ingreso. Si continuás teniendo problemas al
+                        loguearte, cerrá la App por completo y volvé a abrirla para aplicar los cambios.
+                    </p>
+                </div>
+                <button onclick="this.closest('#update-banner').remove();"
+                    class="shrink-0 p-1 bg-black/10 hover:bg-black/20 transition-colors rounded-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-sm">close</span>
+                </button>
+            </div>
+        </div>
         <div class="flex flex-col items-center justify-center h-screen space-y-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
             <p class="text-slate-500 animate-pulse">Cargando Adicionales Santa Fe v534.8-FINAL...</p>
