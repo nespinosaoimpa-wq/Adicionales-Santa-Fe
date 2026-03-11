@@ -131,19 +131,19 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // v534.9 Cache Buster - Forzar actualización
-                navigator.serviceWorker.register('./sw-v534-9_final.js?v=' + new Date().getTime())
+                // Registro estable sin timestamp dinámico para evitar el bucle infinito
+                navigator.serviceWorker.register('./sw-v534-9_final.js?v=534.9.1')
                     .then(registration => {
-                        console.log('ServiceWorker v534.9 registrado con éxito: ', registration.scope);
+                        console.log('ServiceWorker v534.9.1 registrado con éxito: ', registration.scope);
 
                         // Detectar si hay un nuevo worker instalándose
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {
                                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                                    console.log('Nueva actualización de SW disponible. Recargando automáticamente...');
-                                    // Forzar la recarga automática para aplicar el nuevo SW y saltar el cache viejo
-                                    window.location.reload(true);
+                                    console.log('Nueva actualización de SW disponible.');
+                                    // En lugar de recargar forzosamente y crear un bucle, esperamos a la próxima visita
+                                    // o dejamos que el banner de actualización avise al usuario.
                                 }
                             });
                         });
@@ -152,13 +152,13 @@
                     });
             });
 
-            // Si el controlador cambia (el SW 9 tomó el control), forzar recarga por si acaso
             let refreshing = false;
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 if (!refreshing) {
                     refreshing = true;
-                    console.log('SW Controller change detectado. Recargando la página para usar los recursos frescos...');
-                    window.location.reload(true);
+                    // Solo recargar una única vez si cambian los assets troncales, 
+                    // pero al haber fijado la URL del SW ya no entrará en bucle.
+                    console.log('SW Controller change detectado.');
                 }
             });
         }
