@@ -432,6 +432,10 @@ window.store = {
                         this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
                     }
 
+                    // Ocultar banner de actualización ya que el usuario ingresó correctamente
+                    localStorage.setItem('banner_v534.8_dismissed', 'true');
+                    document.getElementById('update-banner')?.remove();
+
                     this.authInitialized = true;
                     router.handleRoute();
 

@@ -543,18 +543,19 @@ function renderCentinela(container) {
         },
         {
             category: 'sueldos',
-            keywords: ['sueldo', 'salario', 'cobrar', 'cuanto gano', 'escala', 'decreto 142', 'haberes', 'porcentaje', 'aumento', 'patrullero', 'chofer'],
+            keywords: ['sueldo', 'salario', 'cobrar', 'cuanto gano', 'escala', 'decreto 142', 'decreto 411', 'haberes', 'porcentaje', 'aumento', 'patrullero', 'chofer', 'basico', 'pagos'],
             responses: [
                 { match: ['jerarquias', 'grados', 'escalon', 'carrera'], text: "La **Jerarquía Policial** (Ley 12521) se divide en: **Personal de Ejecución** (Suboficial, Oficial, Subinspector), **Coordinación** (Inspector, Subcomisario), **Supervisión** (Comisario, Com. Supervisor) y **Dirección** (Subdirector, Director, Director General)." },
                 { match: ['escalafones', 'subescalafones', 'especialidad'], text: "Existen 3 Escalafones principales: **General** (Seguridad, Judicial, Investigaciones), **Profesional** (Jurídico, Sanidad, Adm.) y **Técnico** (Criminalística, Comunicaciones, Bomberos, Músicos)." },
-                { match: ['sueldo oficial', 'cuanto gana un oficial', 'nivel 1', 'nivel 2', 'nivel 3'], text: "Sueldos Oficial (Neto Feb 2026):\n- **Nivel 1**: $2.050.018 (Cond.) / $1.800.018 (No Cond.)\n- **Nivel 2**: $1.800.018 (Cond.) / $1.550.018 (No Cond.)\n- **Nivel 3**: $1.700.018 (Cond.) / $1.450.018 (No Cond.)" },
-                { match: ['sueldo subinspector', 'cuanto gana un subinspector'], text: "Sueldos Subinspector (Neto Feb 2026):\n- **Nivel 1**: $2.164.635 (Cond.) / $1.914.635 (No Cond.)\n- **Nivel 2**: $1.914.635 (Cond.) / $1.664.635 (No Cond.)\n- **Nivel 3**: $1.814.635 (Cond.) / $1.564.635 (No Cond.)" },
-                { match: ['sueldo inspector', 'cuanto gana un inspector'], text: "Sueldos Inspector (Neto Feb 2026):\n- **Nivel 1**: $2.404.375 (Cond.) / $2.154.375 (No Cond.)\n- **Nivel 2**: $2.154.375 (Cond.) / $1.904.375 (No Cond.)\n- **Nivel 3**: $2.054.375 (Cond.) / $1.804.375 (No Cond.)" },
-                { match: ['minimo', 'bolsillo', 'piso', 'percepcion'], text: "A febrero de 2026, el ingreso mínimo garantizado es de **$1.350.000**. El piso para personal operativo (incluyendo T.A.P) es de **$1.525.682**." },
-                { match: ['rosario', 'santa fe', 'conflictividad', 'vgg', 'baigorria', 'santo tome'], text: "Se aplica un **Plus por Conflictividad de $500.000** en Rosario, Santa Fe, VGG, Baigorria y Santo Tomé para personal de calle, elevando el neto a **$1.938.835** para un suboficial operativo." },
-                { match: ['maximas jerarquias', 'director', 'comisario'], text: "Escalas Superiores (Neto Feb 2026):\n- **Dir. General**: $6.573.262\n- **Director**: $5.241.901\n- **Subdirector**: $4.352.690\n- **Com. Supervisor**: $3.923.687\n- **Comisario**: $3.709.842\n- **Subcomisario**: $3.455.398" }
+                { match: ['decreto 411', 'historico 2026', 'aumento 2026', 'escala salarial'], text: "El **Decreto 0411/26** establece un incremento salarial progresivo desde Enero a Junio de 2026. Fija un piso salarial garantizado de neto bolsillo de $75.000 extras en Enero y $170.000 extras en Febrero. Se consolida además el valor de junio 2026 como nuevo sueldo de referencia." },
+                { match: ['sueldo oficial', 'cuanto gana un oficial', 'basico oficial'], text: "Sueldos Oficial (Básico Decreto 411/26):\n- **Enero 2026**: $166.615\n- **Febrero 2026**: $170.025\n- **Junio 2026**: $182.692\nEl neto de bolsillo incluye además sumas no remunerativas y otros complementos que elevan significativamente el haber de bolsillo final según nivel y condición." },
+                { match: ['sueldo subinspector', 'cuanto gana un subinspector'], text: "Sueldos Subinspector (Básico Decreto 411/26):\n- **Enero 2026**: $247.424\n- **Febrero 2026**: $302.986\n- **Junio 2026**: $325.558" },
+                { match: ['sueldo inspector', 'cuanto gana un inspector'], text: "Sueldos Inspector (Básico Decreto 411/26):\n- **Enero 2026**: $333.230\n- **Febrero 2026**: $408.061\n- **Junio 2026**: $438.461" },
+                { match: ['minimo', 'bolsillo', 'piso', 'percepcion'], text: "Piso Ingreso (Decreto 411/26): Ningún empleado percibirá neto menos de **$896.651** (Enero) a **$983.170** (Junio). El Oficial operativo puede llegar al rango de $1.800.000 - $2.050.000 neto sumando adicionales." },
+                { match: ['rosario', 'santa fe', 'conflictividad', 'vgg', 'baigorria', 'santo tome'], text: "Se aplica un **Plus por Conflictividad de $500.000** en Rosario, Santa Fe, VGG, Baigorria y Santo Tomé para personal de calle." },
+                { match: ['maximas jerarquias', 'director', 'comisario'], text: "Básico Escalas Superiores (Decreto 411/26 - Junio 2026 sin sumas complementarias):\n- **Dir. General**: $2.039.350\n- **Director**: $1.700.463\n- **Subdirector**: $1.403.882\n- **Com. Supervisor**: $1.179.261\n- **Comisario**: $1.123.106" }
             ],
-            default: "Las escalas salariales (Decreto 142/26) y la Planimetría Policial (Ley 12521) definen tus haberes según grado, nivel, escalafón y función (Conductor/No Cond.)."
+            default: "Las escalas salariales vigentes (Decreto 411/26) definen tus haberes básicos y complementos desde enero a junio 2026. Preguntame por tu rango ('Sueldo Oficial', 'Piso salarial') para más detalles."
         },
         {
             category: 'prevision',
@@ -581,13 +582,23 @@ function renderCentinela(container) {
         },
         {
             category: 'transporte',
-            keywords: ['colectivo', 'bondi', 'bus', 'transporte', 'viaje', 'parada', 'horario', 'rosario', 'vera', 'terminal', 'asiento', 'pasaje', 'exclusive'],
+            keywords: ['colectivo', 'bondi', 'bus', 'transporte', 'viaje', 'parada', 'horario', 'rosario', 'vera', 'terminal', 'asiento', 'pasaje', 'exclusive', 'd-4', 'san javier', 'reconquista'],
             responses: [
-                { match: ['rosario', 'vera', 'ida'], text: "🚍 **Servicio Exclusivo Rosario -> Vera**:\n- Sale Rosario (Terminal): 09:00 hs\n- Llega Santa Fe: 11:30 hs\n- Sale Santa Fe: 12:00 hs\n- Recreo: 12:30 hs / San Justo: 14:05 hs\n- Calchaquí: 15:50 hs / Margarita: 16:10 hs\n- Final Vera (Terminal): 16:30 hs." },
-                { match: ['vera', 'rosario', 'vuelta'], text: "🚍 **Servicio Exclusivo Vera -> Rosario**:\n- Sale Vera (Terminal): 23:00 hs\n- Margarita: 23:20 hs / Calchaquí: 23:40 hs\n- San Justo: 01:25 hs / Recreo: 03:00 hs\n- Llega Santa Fe: 03:30 hs\n- Sale Santa Fe: 04:00 hs\n- Final Rosario (Terminal): 06:30 hs." },
-                { match: ['paradas', 'donde para', 'localidades'], text: "El servicio recorre: Rosario, Sta Fe, Recreo, Candioti, Nelson, Llambi Campbell, Cruce Emilia, Videla, San Justo, Ramayon, M. Escalada, Crespo, La Criolla, Vera y Pintado, Gomez Cello, Calchaquí, Margarita y Vera." }
+                { match: ['rosario', 'vera', 'ida', 'reconquista', 'ir a reconquista'], text: "🚍 **Norte -> Sur / Sur -> Norte (Horarios 2026 D-4)**:\n- **Santa Fe -> Reconquista/Vera**: 12:00 hs\n- **Santa Fe -> San Javier**: 23:00 hs\n- **Santa Fe -> Tostado**: (Consultar cronograma extra)\nHace base en las Terminales locales. Presentate con credencial." },
+                { match: ['rosario', 'vuelta', 'ir a rosario', 'salir de rosario', 'venir a santa fe', 'santa fe rosario'], text: "🚍 **Santa Fe <-> Rosario (D-4 a partir 02/03/2026)**:\n**Desde Terminal Santa Fe (a Rosario):**\n- Madrugada: 02:30, 03:30 hs\n- Tarde: 16:00 hs\n\n**Desde Rosario (Pellegrini 3223 a Santa Fe):**\n- Mañana: 08:00, 08:30, 09:00 hs\n- Noche: 20:00, 20:30, 21:00 hs" },
+                { match: ['paradas', 'donde para', 'localidades'], text: "Las paradas oficiales del Departamento Logística (D-4) incluyen cabeceras departamentales: Rosario (Pellegrini 3223), Terminal Santa Fe, Reconquista, Vera, San Javier. Recuerde formar en dársena 15 min antes." }
             ],
-            default: "Contamos con horarios del servicio exclusivo Rosario-Vera para personal policial. ¿Necesitás saber una hora o parada específica?"
+            default: "Estos son los nuevos horarios del transporte departamental D-4 vigentes (Marzo 2026). Consultá por salidas desde Santa Fe, hacia Rosario o al norte (Reconquista/Vera)."
+        },
+        {
+            category: 'desendeudamiento',
+            keywords: ['desendeudamiento', 'credito', 'deuda', 'olivares', 'refinanciar', 'mutuales', 'banco', 'sueldo comprometido', 'endeudado', 'cuotas', 'prestamo'],
+            responses: [
+                { match: ['que es', 'plan', 'provincial', 'olivares'], text: "El **Plan de Desendeudamiento** (anunciado por el Mtro. Pablo Olivares en 2026) es un programa provincial destinado a empleados estatales (incluyendo policías) para refinanciar deudas con mutuales y entidades financieras y recuperar capacidad salarial." },
+                { match: ['como funciona', 'requisitos', 'condiciones'], text: "El plan permite **unificar deudas** pasándolas a una nueva línea de crédito provincial con menor tasa de interés y más plazo. Se otorgan incluso **2 meses de gracia** para empezar a pagar y liberar saldo en la cuenta sueldo de forma inmediata." },
+                { match: ['promedio nacional', 'situacion'], text: "Según datos oficiales, si bien la deuda del estatal santafesino está por debajo del promedio nacional, muchos agentes tienen sus recibos embargados o muy comprometidos. Este plan busca sanear esa economía familiar." }
+            ],
+            default: "El nuevo Plan de Desendeudamiento provincial permite a los empleados (incluyendo policías) consolidar sus deudas de mutuales/bancos con menores tasas, más plazo y 2 meses de gracia. Es útil si tu sueldo está muy afectado por cuotas."
         },
         {
             category: 'noticias_2026',
@@ -599,6 +610,15 @@ function renderCentinela(container) {
                 { match: ['disciplina', 'gorra', 'uniforme'], text: "🗞️ **Noticias de Disciplina:** Hay una orden expresa de realizar un seguimiento muy estricto sobre las faltas relacionadas con el descuido del uniforme, especficamente la **falta de gorra**, sancionables como falta leve." }
             ],
             default: "🗞️ **Resumen Noticias 2026**: Nuevo **Sistema de Salud Laboral** en vigencia (fuerte control de carpetas médicas), ingresos mínimos garantizados de **$1.350.000**, confirmación de que el **Aporte Solidario a pasivos NO se prorroga**, y control estricto del uso del uniforme. Preguntame por 'sueldos', 'ascensos' o 'salud' para ampliar."
+        },
+        {
+            category: 'app_actualizacion',
+            keywords: ['app', 'actualizacion', 'v534', 'novedades app', 'error', 'ingreso', 'novedades de la aplicacion', 'cartel', 'version'],
+            responses: [
+                { match: ['ingreso', 'error', 'login', 'solucion'], text: "✅ **Problema de Ingreso Resuelto**: La versión actual solucionó el error de inicio de sesión que existía en algunos dispositivos. Si persistiera algún inconveniente, cerrá por completo la app y volvé a abrirla." },
+                { match: ['novedades', 'v534', 'pro', 'cartel'], text: "🚀 **Novedades de la App**: Se optimizó el rendimiento general de Adicionales Santa Fe, se arregló el cartel de actualizaciones para que no vuelva a molestarte luego de iniciar sesión, y se me actualizó (Soy Centinela AI) con datos recientes al 2026." }
+            ],
+            default: "Nuestra App Adicionales Santa Fe se encuentra en su versión actual (PRO). Se mejoró la estabilidad, se arreglaron problemas del cartel de avisos y logueos. ¡Cerrala y abrila ante cualquier duda!"
         },
         {
             category: 'reglamentacion',

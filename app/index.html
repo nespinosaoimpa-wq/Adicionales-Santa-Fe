@@ -204,11 +204,16 @@
                         loguearte, cerrá la App por completo y volvé a abrirla para aplicar los cambios.
                     </p>
                 </div>
-                <button onclick="this.closest('#update-banner').remove();"
+                <button onclick="localStorage.setItem('banner_v534.8_dismissed', 'true'); this.closest('#update-banner').remove();"
                     class="shrink-0 p-1 bg-black/10 hover:bg-black/20 transition-colors rounded-full flex items-center justify-center">
                     <span class="material-symbols-outlined text-sm">close</span>
                 </button>
             </div>
+            <script>
+                if (localStorage.getItem('banner_v534.8_dismissed') === 'true') {
+                    document.getElementById('update-banner')?.remove();
+                }
+            </script>
         </div>
         <div class="flex flex-col items-center justify-center h-screen space-y-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
