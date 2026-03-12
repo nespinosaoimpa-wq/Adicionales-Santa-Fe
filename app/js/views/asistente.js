@@ -571,14 +571,15 @@ function renderCentinela(container) {
         },
         {
             category: 'isep_ascensos',
-            keywords: ['isep', 'ascenso', 'concurso', '2024', '2025', '2026', 'id ciudadana', 'curso', 'llamado', 'vacantes', 'examen'],
+            keywords: ['isep', 'ascenso', 'concurso', '2024', '2025', '2026', 'id ciudadana', 'curso', 'llamado', 'vacantes', 'examen', 'cronograma', 'resolucion 0803', 'fechas', 'proyectos'],
             responses: [
                 { match: ['ascenso 2024', 'pago'], text: "El **Concurso 2024** finalizó su etapa de evaluación (Decreto 2640). Los decretos de ascenso se están notificando para el pago retroactivo." },
-                { match: ['ascenso 2025', 'jurado', 'vacantes'], text: "Para el **Ciclo 2025**, el Decreto 263/26 ya asignó jurados. Las vacantes se distribuyen según las necesidades de cada agrupamiento." },
+                { match: ['ascenso 2025', 'concurso 2025', 'inscripcion', 'fechas', 'cronograma', 'resolucion 0803'], text: "📌 **Concurso de Ascenso 2025 (Res. 0803/2026)**:\n- **Inscripción**: Del 25/03 al 01/04 (hasta las 12:00 hs) vía Portal Web.\n- **Entrega Documental**: Hasta el 01/04 a las 12:00 hs.\n- **Examen (Escrito PC)**: Del 04/05 al 13/05.\n- **Defensa de Proyectos**: Del 14/05 al 05/06.\n- **Publicación Acta Final**: 09/06/2026." },
+                { match: ['proyectos', 'entrega', 'direccion', 'mail', 'correo'], text: "📁 **Entrega de Proyectos (Supervisión/Dirección)**:\n- **Digital**: Enviar a `concursospoliciales@santafe.gov.ar` hasta el 01/04.\n- **Físico**: Sede Adm. Jurados el 07/04 (08:30 a 10:30 hs) en **Primera Junta 2823, Santa Fe** (Oficina 06, Planta Baja)." },
                 { match: ['id ciudadana', 'intranet', 'usuario', 'clave'], text: "Es **obligatorio** tener la **ID Ciudadana** vinculada a la Intranet para inscribirse y rendir los exámenes del ISEP. Sin ella no podés concursar." },
                 { match: ['ingreso', 'inscripcion', '2026'], text: "ISEP abrió inscripciones a finales de 2025 para la Cohorte 2026. El curso propedéutico es virtual y eliminatorio." }
             ],
-            default: "El ISEP gestiona los concursos de ascenso anuales y el ingreso a la fuerza. ¿Necesitás info sobre el concurso 2025 o ID Ciudadana?"
+            default: "El ISEP gestiona los concursos de ascenso anuales. Ya está disponible el cronograma para el **Concurso de Ascenso 2025** (Res. 0803/26). ¿Querés saber las fechas de inscripción o el lugar de entrega?"
         },
         {
             category: 'transporte',
@@ -606,7 +607,7 @@ function renderCentinela(container) {
             responses: [
                 { match: ['sueldos', 'salarios', 'aumento', 'febrero'], text: "🗞️ **Noticias de Sueldos (Feb 2026):** El piso operativo quedó en **$1.525.682** (incluyendo tarjeta alimentaria), sumado a un Plus por Conflictividad de **$500.000** en áreas críticas." },
                 { match: ['salud', 'carpetas', 'medicas', 'licencias'], text: "🗞️ **Noticias de Salud Laboral:** Desde enero 2026 rige el **Sistema Integrado de Protección de la Salud Laboral**, estableciendo un esquema estricto de auditorías para reducir el ausentismo (carpetas médicas)." },
-                { match: ['ascensos', 'isep', 'concursos'], text: "🗞️ **Noticias del ISeP:** El Concurso de Ascenso 2024 ya tiene vigencia con pago retroactivo (Decreto 2640). Para rendir el Ciclo 2025/26 es obligatoria la **ID Ciudadana** vinculada a la Intranet." },
+                { match: ['ascensos', 'isep', 'concursos', '2025'], text: "🗞️ **Noticias del ISeP (Marzo 2026):** Se abrió la convocatoria al **Concurso de Ascenso 2025** (Res. 0803/26). Inscripciones del 25/03 al 01/04 vía Web. Exámenes en Mayo." },
                 { match: ['disciplina', 'gorra', 'uniforme'], text: "🗞️ **Noticias de Disciplina:** Hay una orden expresa de realizar un seguimiento muy estricto sobre las faltas relacionadas con el descuido del uniforme, especficamente la **falta de gorra**, sancionables como falta leve." }
             ],
             default: "🗞️ **Resumen Noticias 2026**: Nuevo **Sistema de Salud Laboral** en vigencia (fuerte control de carpetas médicas), ingresos mínimos garantizados de **$1.350.000**, confirmación de que el **Aporte Solidario a pasivos NO se prorroga**, y control estricto del uso del uniforme. Preguntame por 'sueldos', 'ascensos' o 'salud' para ampliar."
