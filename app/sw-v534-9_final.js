@@ -28,7 +28,6 @@ const ASSETS = [
 ];
 
 self.addEventListener('install', event => {
-    // Instalación inmediata para forzar la actualización
     self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS).catch(e => console.warn('SW cache partial:', e)))
@@ -36,19 +35,15 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('activate', event => {
-    // Limpieza agresiva de TODO caché viejo
     event.waitUntil(
         caches.keys().then(keys => Promise.all(
             keys.map(key => {
                 if (key !== CACHE_NAME) {
-                    console.log('[SW v534.9] Borrando caché viejo:', key);
+                    console.log('[SW v534.9] Purging old cache:', key);
                     return caches.delete(key);
                 }
             })
-        )).then(() => {
-            console.log('[SW v534.9] Tomando el control total.');
-            return self.clients.claim();
-        })
+        )).then(() => self.clients.claim())
     );
 });
 
