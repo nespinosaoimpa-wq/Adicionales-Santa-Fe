@@ -12,9 +12,17 @@ if (-not $msg) { $msg = "Update" }
 git commit -m $msg
 git push origin main
 
-# 2. Publish to Firebase Hosting
+# 2. Publish to Firebase Hosting (Automated with Service Account)
 Write-Host "Deploying to Firebase Hosting..." -ForegroundColor Yellow
-npx firebase-tools deploy --only hosting, firestore:rules
+$serviceAccountKey = "adicionales-santa-fe-firebase-adminsdk-fbsvc-112bd55a2a.json"
+
+if (Test-Path $serviceAccountKey) {
+    $env:GOOGLE_APPLICATION_CREDENTIALS = (Resolve-Path $serviceAccountKey).Path
+    npx firebase-tools deploy --only hosting,firestore:rules
+} else {
+    Write-Warning "Service account key not found. Attempting manual deploy..."
+    npx firebase-tools deploy --only hosting,firestore:rules
+}
 
 # 3. Synchronize with GitHub Pages (deploys only /app folder content)
 Write-Host "Syncing with GitHub Pages..." -ForegroundColor Yellow
