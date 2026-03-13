@@ -329,61 +329,10 @@ const DB = {
     },
 
     async deleteService(id) {
-        const user = auth.currentUser;
-        if (!user) return;
-
-        try {
-            // Find the item first to get matching criteria for the "other" database
-            let itemToDelete = null;
-            const isSbId = id.toString().includes('-');
-
-            if (isSbId) {
-                const { data } = await supabaseClient.from('services').select('*').eq('id', id).single();
-                itemToDelete = data;
-            } else {
-                const doc = await db.collection('services').doc(id).get();
-                if (doc.exists) itemToDelete = doc.data();
-            }
-
-            // 1. Delete from Primary Source
-            if (isSbId) {
-                await supabaseClient.from('services').delete().eq('id', id);
-            } else {
-                await db.collection('services').doc(id).delete();
-            }
-
-            // 2. Attempt deletion in the "other" source by matching criteria
-            if (itemToDelete) {
-                const email = (itemToDelete.userEmail || itemToDelete.user_email || user.email).toLowerCase().trim();
-                const date = itemToDelete.date;
-                const startTime = itemToDelete.startTime || itemToDelete.start_time;
-                const location = itemToDelete.location;
-
-                if (isSbId) {
-                    // Item was SB, try deleting matching from FB
-                    const fbMatches = await db.collection('services')
-                        .where('userEmail', '==', email)
-                        .where('date', '==', date)
-                        .where('startTime', '==', startTime)
-                        .where('location', '==', location)
-                        .get();
-                    
-                    const batch = db.batch();
-                    fbMatches.docs.forEach(doc => batch.delete(doc.ref));
-                    await batch.commit();
-                } else {
-                    // Item was FB, try deleting matching from SB
-                    await supabaseClient.from('services').delete()
-                        .eq('user_email', email)
-                        .eq('date', date)
-                        .eq('start_time', startTime)
-                        .eq('location', location);
-                }
-            }
-            return { success: true };
-        } catch (error) {
-            console.error("DB Error (deleteService):", error);
-            throw error;
+        if (id.toString().includes('-')) {
+            return supabaseClient.from('services').delete().eq('id', id);
+        } else {
+            return db.collection('services').doc(id).delete();
         }
     },
 
@@ -456,58 +405,10 @@ const DB = {
     },
 
     async deleteExpense(id) {
-        const user = auth.currentUser;
-        if (!user) return;
-
-        try {
-            let itemToDelete = null;
-            const isSbId = id.toString().includes('-');
-
-            if (isSbId) {
-                const { data } = await supabaseClient.from('expenses').select('*').eq('id', id).single();
-                itemToDelete = data;
-            } else {
-                const doc = await db.collection('expenses').doc(id).get();
-                if (doc.exists) itemToDelete = doc.data();
-            }
-
-            if (isSbId) {
-                await supabaseClient.from('expenses').delete().eq('id', id);
-            } else {
-                await db.collection('expenses').doc(id).delete();
-            }
-
-            if (itemToDelete) {
-                const email = (itemToDelete.userEmail || itemToDelete.user_email || user.email).toLowerCase().trim();
-                const date = itemToDelete.date;
-                const amount = parseFloat(itemToDelete.amount);
-                const category = itemToDelete.category;
-
-                if (isSbId) {
-                    const fbMatches = await db.collection('expenses')
-                        .where('userEmail', '==', email)
-                        .where('date', '==', date)
-                        .where('amount', '==', amount)
-                        .where('category', '==', category)
-                        .get();
-                    
-                    const batch = db.batch();
-                    fbMatches.docs.forEach(doc => batch.delete(doc.ref));
-                    batch.commit().catch(e => console.warn("FB expense delete sync failed:", e));
-                } else {
-                    supabaseClient.from('expenses').delete()
-                        .eq('user_email', email)
-                        .eq('date', date)
-                        .eq('amount', amount)
-                        .eq('category', category)
-                        .then(() => console.log("SB expense delete sync ok"))
-                        .catch(e => console.warn("SB expense delete sync failed:", e));
-                }
-            }
-            return { success: true };
-        } catch (error) {
-            console.error("DB Error (deleteExpense):", error);
-            throw error;
+        if (id.toString().includes('-')) {
+            return supabaseClient.from('expenses').delete().eq('id', id);
+        } else {
+            return db.collection('expenses').doc(id).delete();
         }
     },
 

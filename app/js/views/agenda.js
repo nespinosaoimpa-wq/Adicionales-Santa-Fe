@@ -174,6 +174,15 @@ function renderAgenda(container) {
                 </div>
             </section>
         </main>
+        
+        <!-- Floating Action Button for Registration -->
+        <div class="fixed bottom-32 right-6 z-[90]">
+            <button onclick="router.navigateTo('#register')" 
+                    class="size-14 rounded-2xl bg-primary text-white shadow-2xl shadow-primary/40 flex items-center justify-center active:scale-95 transition-all hover:rotate-90 duration-300 group">
+                <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">add</span>
+            </button>
+        </div>
+
         ${renderBottomNav('agenda')}
     `;
 
@@ -217,12 +226,15 @@ function generateCalendarGrid(year, month, selectedDate) {
         const isToday = store.getLocalDateString() === dateStr;
 
         // Colors
-        const hasPublic = store.services.some(s => s.date === dateStr && s.type === 'Public');
-        const hasPrivate = store.services.some(s => s.date === dateStr && s.type === 'Private');
-
+        const dayServices = store.services.filter(s => s.date === dateStr);
         let dots = '';
-        if (hasPublic) dots += `<div class="size-1 rounded-full bg-primary"></div>`;
-        if (hasPrivate) dots += `<div class="size-1 rounded-full bg-service-private"></div>`;
+        dayServices.slice(0, 3).forEach(s => {
+            const dotColor = s.type === 'Public' ? 'bg-primary' : (s.type === 'Private' ? 'bg-service-private' : 'bg-service-ospe');
+            dots += `<div class="size-1 rounded-full ${dotColor}"></div>`;
+        });
+        if (dayServices.length > 3) {
+             dots += `<div class="size-1 rounded-full bg-slate-400"></div>`;
+        }
 
         html += `
             <div class="flex flex-col items-center py-2 relative calendar-day cursor-pointer" data-date="${dateStr}">

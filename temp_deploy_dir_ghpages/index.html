@@ -82,7 +82,16 @@
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="assets/icon-512.png">
 
-    <!-- Skip legacy registration here as it's handled below -->
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw-v534-9_final.js?v534.9')
+                    .then(reg => console.log('✅ SW v534.9 Registered'))
+                    .catch(err => console.error('❌ SW Fail:', err));
+            });
+        }
+    </script>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries"></script>
@@ -129,7 +138,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 // Registro estable sin timestamp dinámico para evitar el bucle infinito
-                navigator.serviceWorker.register('./sw-v534-9_final.js?v=534.9.0')
+                navigator.serviceWorker.register('./sw-v534-9_final.js?v=534.9.1')
                     .then(registration => {
                         console.log('ServiceWorker v534.9.1 registrado con éxito: ', registration.scope);
 
