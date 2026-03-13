@@ -518,21 +518,35 @@ window.store = {
     },
 
     exportData() {
-        const headers = ['Fecha', 'Tipo', 'Subtipo', 'Horas', 'Inicio', 'Fin', 'Lugar', 'Total', 'Estado'];
-        const rows = this.services.map(s => [
-            s.date, s.type, s.subType || '-', s.hours, s.startTime, s.endTime, `"${s.location}"`, s.total, s.status
+        const headers = ['Fecha', 'Tipo/Categoria', 'Lugar/Descripcion', 'Ingreso', 'Egreso', 'Estado'];
+        
+        // Map Services (Income)
+        const serviceRows = this.services.map(s => [
+            s.date, `Servicio ${s.type}`, `"${s.location}"`, s.total, '', s.status
         ]);
-        const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+
+        // Map Expenses (and Sueldo as Income)
+        const expenseRows = this.expenses.map(e => {
+            const isIncome = e.category === 'Sueldo';
+            return [
+                e.date, e.category, `"${e.description || '-'}"`, isIncome ? e.amount : '', isIncome ? '' : e.amount, '-'
+            ];
+        });
+
+        // Combine and sort by date descending
+        const allRows = [...serviceRows, ...expenseRows].sort((a, b) => new Date(b[0]) - new Date(a[0]));
+
+        const csvContent = [headers.join(','), ...allRows.map(r => r.join(','))].join('\n');
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.setAttribute('href', url);
-        link.setAttribute('download', 'mis_servicios_sf.csv');
+        link.setAttribute('download', 'mis_finanzas_sf.csv');
         link.style.visibility = 'hidden';
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        showToast("Exportando CSV...");
+        showToast("Exportando CSV Financiero...");
     },
 
     // Improvement #3: Advanced PDF Export
