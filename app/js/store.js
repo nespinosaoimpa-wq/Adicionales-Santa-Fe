@@ -381,7 +381,7 @@ window.store = {
     },
 
     init() {
-        console.log("App v535.1.1-FINAL - Standard Deployment");
+        console.log("App v535.1.2-FINAL - Standard Deployment");
 
         // Apply saved theme ASAP
         this.initTheme();

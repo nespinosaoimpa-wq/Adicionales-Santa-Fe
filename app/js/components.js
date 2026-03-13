@@ -56,7 +56,8 @@ function renderAdBanner() {
 
     // 2. Google AdSense Fallback
     return `
-        <div class="w-full my-4 flex justify-center" style="min-height:90px;">
+        <div class="w-full my-4 flex flex-col items-center justify-center" style="min-height:90px;">
+            <div class="text-[8px] text-slate-500 uppercase font-black tracking-widest mb-1 opacity-20">Publicidad</div>
             <ins class="adsbygoogle"
                  style="display:block;width:100%;max-width:728px;height:90px;"
                  data-ad-client="ca-pub-4261554477116731"
@@ -66,6 +67,7 @@ function renderAdBanner() {
         </div>
     `;
 }
+
 
 
 function renderAdBannerSmall() {
@@ -258,17 +260,29 @@ function renderIOSInstallPrompt() {
 
 
 
-window.initAds = function() {
+function initAds() {
     try {
         const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status="done"])');
-        ads.forEach(() => {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        });
-        console.log(`📊 AdSense initialized for ${ads.length} units.`);
+        if (ads.length === 0) return;
+        
+        console.log(`📊 AdSense: Preparing to init ${ads.length} units...`);
+        
+        // Give the DOM a moment to settle (helpful in SPAs)
+        setTimeout(() => {
+            ads.forEach(() => {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (err) {
+                    console.warn("Individual ad push error:", err);
+                }
+            });
+            console.log(`✅ AdSense: Push completed for ${ads.length} units.`);
+        }, 150);
     } catch (e) {
         console.error("AdSense init error:", e);
     }
-};
+}
+
 
 window.copyToClipboard = copyToClipboard;
 window.renderAdBanner = renderAdBanner;
