@@ -65,11 +65,11 @@
                         needsHardReset = true;
                     }
                 }
-                if (needsHardReset || !localStorage.getItem('app_v534_9_final_initialized')) {
+                if (needsHardReset || !localStorage.getItem('app_v534_9_1_initialized')) {
                     if ('caches' in window) {
                         caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
                             .then(() => {
-                                localStorage.setItem('app_v534_9_final_initialized', 'true');
+                                localStorage.setItem('app_v534_9_1_initialized', 'true');
                                 window.location.reload(true);
                             });
                     }
@@ -129,7 +129,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 // Registro estable sin timestamp dinámico para evitar el bucle infinito
-                navigator.serviceWorker.register('./sw-v534-9_final.js?v=534.9.0')
+                navigator.serviceWorker.register('./sw-v534-9_final.js?v=534.9.1')
                     .then(registration => {
                         console.log('ServiceWorker v534.9.1 registrado con éxito: ', registration.scope);
 
@@ -232,33 +232,33 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Application Logic -->
-    <script src="firebase-config.js?v534.9" defer></script>
-    <script src="supabase-config.js?v534.9" defer></script>
-    <script src="db-v211.js?v534.9" defer></script>
+    <script src="firebase-config.js?v534.9.1" defer></script>
+    <script src="supabase-config.js?v534.9.1" defer></script>
+    <script src="db-v211.js?v534.9.1" defer></script>
 
     <!-- Modularized Logic -->
-    <script src="js/utils.js?v534.9" defer></script>
-    <script src="js/components.js?v534.9" defer></script>
-    <script src="js/store.js?v534.9" defer></script>
-    <script src="js/router.js?v534.9" defer></script>
-    <script src="js/data/directory.js?v534.9" defer></script>
+    <script src="js/utils.js?v534.9.1" defer></script>
+    <script src="js/components.js?v534.9.1" defer></script>
+    <script src="js/store.js?v534.9.1" defer></script>
+    <script src="js/router.js?v534.9.1" defer></script>
+    <script src="js/data/directory.js?v534.9.1" defer></script>
 
     <!-- Views -->
-    <script src="js/views/auth.js?v534.9" defer></script>
-    <script src="js/views/agenda.js?v534.9" defer></script>
-    <script src="js/views/register.js?v534.9" defer></script>
-    <script src="js/views/control_panel.js?v534.9" defer></script>
-    <script src="js/views/financial.js?v534.9" defer></script>
-    <script src="js/views/profile.js?v534.9" defer></script>
-    <script src="js/views/stats.js?v534.9" defer></script>
-    <script src="js/views/history.js?v534.9" defer></script>
-    <script src="js/views/service_details.js?v534.9" defer></script>
-    <script src="js/views/asistente.js?v534.9" defer></script>
-    <script src="js/views/admin.js?v534.9" defer></script>
-    <script src="js/views/diagnostics.js?v534.9" defer></script>
-    <script src="js/views/onboarding.js?v534.9" defer></script>
+    <script src="js/views/auth.js?v534.9.1" defer></script>
+    <script src="js/views/agenda.js?v534.9.1" defer></script>
+    <script src="js/views/register.js?v534.9.1" defer></script>
+    <script src="js/views/control_panel.js?v534.9.1" defer></script>
+    <script src="js/views/financial.js?v534.9.1" defer></script>
+    <script src="js/views/profile.js?v534.9.1" defer></script>
+    <script src="js/views/stats.js?v534.9.1" defer></script>
+    <script src="js/views/history.js?v534.9.1" defer></script>
+    <script src="js/views/service_details.js?v534.9.1" defer></script>
+    <script src="js/views/asistente.js?v534.9.1" defer></script>
+    <script src="js/views/admin.js?v534.9.1" defer></script>
+    <script src="js/views/diagnostics.js?v534.9.1" defer></script>
+    <script src="js/views/onboarding.js?v534.9.1" defer></script>
 
-    <script src="app-v211.js?v534.9" defer></script>
+    <script src="app-v211.js?v534.9.1" defer></script>
 </body>
 
 </html>
