@@ -63,10 +63,10 @@ function renderAdBanner() {
                  data-ad-slot="2506973015"
                  data-ad-format="horizontal"
                  data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
     `;
 }
+
 
 function renderAdBannerSmall() {
     if (store.ads && store.ads.length > 0) {
@@ -90,10 +90,10 @@ function renderAdBannerSmall() {
                  data-ad-slot="2506973015"
                  data-ad-format="fluid"
                  data-ad-layout-key="-fb+5w+4e-db+86"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
     `;
 }
+
 
 function renderBottomNav(activePage = 'agenda') {
     const navItems = [
@@ -258,15 +258,22 @@ function renderIOSInstallPrompt() {
 
 
 
-function copyToClipboard(text, successMsg) {
-    navigator.clipboard.writeText(text).then(() => {
-        showToast(successMsg);
-    });
-}
+window.initAds = function() {
+    try {
+        const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status="done"])');
+        ads.forEach(() => {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        });
+        console.log(`📊 AdSense initialized for ${ads.length} units.`);
+    } catch (e) {
+        console.error("AdSense init error:", e);
+    }
+};
 
 window.copyToClipboard = copyToClipboard;
 window.renderAdBanner = renderAdBanner;
 window.renderAdBannerSmall = renderAdBannerSmall;
+window.initAds = initAds;
 window.renderBottomNav = renderBottomNav;
 window.renderOfflineBanner = renderOfflineBanner;
 window.renderInstallBanner = renderInstallBanner;

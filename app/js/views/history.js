@@ -46,6 +46,9 @@ function renderHistory(container) {
         ${renderBottomNav('financial')}
     `;
 
+    initAds();
+
+
     if (sortedServices.length > 0) {
         loadMoreHistory(sortedServices);
         setupHistoryObserver(sortedServices);

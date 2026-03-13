@@ -187,6 +187,8 @@ function renderAgenda(container) {
     `;
 
     container.innerHTML = html;
+    initAds();
+
 
     // Attach listeners
     document.querySelectorAll('.calendar-day').forEach(el => {

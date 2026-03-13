@@ -232,6 +232,9 @@ function renderDirectorioPolicial(container) {
         ${renderBottomNav('asistente')}
     `;
 
+    initAds();
+
+
     window.runDirectoryFilter = () => {
         const query = document.getElementById('directory-search').value.toLowerCase().trim();
         const deptFilter = document.getElementById('dept-filter').value;
@@ -360,6 +363,9 @@ function renderChecklistGuardia(container) {
         ${renderBottomNav('asistente')}
     `;
 
+    initAds();
+
+
     window.saveCheckState = (id, checked) => {
         const state = JSON.parse(localStorage.getItem('police_checklist') || '{}');
         state[id] = checked;
@@ -429,6 +435,9 @@ function renderCronoCalendario(container) {
         </main>
         ${renderBottomNav('asistente')}
     `;
+
+    initAds();
+
 
     window.setDutyCycle = (type) => {
         const startDate = prompt("Ingresá la fecha de tu próxima guardia (YYYY-MM-DD):", store.getLocalDateString());
