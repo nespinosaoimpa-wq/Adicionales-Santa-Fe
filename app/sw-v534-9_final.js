@@ -1,4 +1,4 @@
-const CACHE_NAME = 'centinela-v534.9.2';
+const CACHE_NAME = 'centinela-v534.9.3';
 const ASSETS = [
     './',
     './index.html?v534.9.0',

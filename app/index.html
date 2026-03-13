@@ -65,11 +65,11 @@
                         needsHardReset = true;
                     }
                 }
-                if (needsHardReset || !localStorage.getItem('app_v534_9_2_initialized')) {
+                if (needsHardReset || !localStorage.getItem('app_v534_9_3_initialized')) {
                     if ('caches' in window) {
                         caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
                             .then(() => {
-                                localStorage.setItem('app_v534_9_2_initialized', 'true');
+                                localStorage.setItem('app_v534_9_3_initialized', 'true');
                                 window.location.reload(true);
                             });
                     }

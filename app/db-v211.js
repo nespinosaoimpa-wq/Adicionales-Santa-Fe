@@ -102,6 +102,15 @@ const DB = {
     async uploadAvatar(file, email) {
         if (!file || !email) return null;
         try {
+            // New Logic: Check if it's already a compressed Base64 object from store.js
+            if (file.isBase64 && file.data) {
+                 const base64Data = file.data;
+                 // Persist Base64 directly into Firestore
+                 await db.collection('users').doc(email).set({ avatar: base64Data }, { merge: true });
+                 return base64Data; // Return the base64 string to be used as src
+            }
+
+            // Legacy Logic (if ever called with a real File object)
             // Primary: Upload to Firebase Storage
             const storageRef = storage.ref(`avatars/${email}/profile`);
             const snapshot = await storageRef.put(file);

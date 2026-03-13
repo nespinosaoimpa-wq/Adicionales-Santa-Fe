@@ -79,55 +79,101 @@ window.store = {
         const file = event.target.files[0];
         if (!file) return;
 
-        if (file.size > 2 * 1024 * 1024) {
-            showToast("⚠️ La imagen es muy pesada (max 2MB)");
-            return;
-        }
+        showToast("⏳ Preparando y comprimiendo foto...");
 
-        const img = document.getElementById('profile-avatar-img');
-        const originalSrc = img.src;
+        const imgEl = document.getElementById('profile-avatar-img');
+        const originalSrc = imgEl.src;
 
         try {
-            // Preview
+            // Client-side compression logic (Canvas)
             const reader = new FileReader();
-            reader.onload = (e) => img.src = e.target.result;
             reader.readAsDataURL(file);
+            reader.onload = (e) => {
+                const img = new Image();
+                img.src = e.target.result;
+                img.onload = async () => {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 300;
+                    const MAX_HEIGHT = 300;
+                    let width = img.width;
+                    let height = img.height;
 
-            showToast("⏳ Subiendo foto...");
-            const downloadURL = await DB.uploadAvatar(file, this.user.email);
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+                    canvas.width = width;
+                    canvas.height = height;
 
-            if (downloadURL) {
-                await this.updateProfile(this.user.name, downloadURL);
-                showToast("✅ Foto actualizada");
-            }
-        } catch (e) {
-            console.error("Upload error:", e);
-            showToast("❌ Error al subir foto");
-            img.src = originalSrc;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // Compress to highly optimized JPEG Base64
+                    const base64Compressed = canvas.toDataURL('image/jpeg', 0.6); // 60% quality
+
+                    // Test size
+                    if (base64Compressed.length > 500000) {
+                         showToast("❌ La imagen sigue siendo muy grande. Intenta con otra.");
+                         return;
+                    }
+
+                    imgEl.src = base64Compressed;
+
+                    showToast("⏳ Subiendo foto (Max. velocidad)...");
+                    try {
+                        const downloadURL = await DB.uploadAvatar({ isBase64: true, data: base64Compressed }, this.user.email);
+                        if (downloadURL) {
+                            await this.updateProfile(this.user.name, downloadURL);
+                            showToast("✅ Foto actualizada y comprimida");
+                        }
+                    } catch(upErr) {
+                         console.error("Upload error after compression:", upErr);
+                         showToast("❌ Error al guardar en base de datos.");
+                         imgEl.src = originalSrc;
+                    }
+                };
+            };
+        } catch (err) {
+            console.error("Client compression error:", err);
+            showToast("❌ Error al procesar imagen");
+            imgEl.src = originalSrc;
         }
     },
 
     async requestNotificationPermission() {
         if (!("Notification" in window)) {
-            showToast("Tu navegador no soporta notificaciones");
+            showToast("❌ Tu navegador no soporta notificaciones");
+            return;
+        }
+
+        // PWA specific warning
+        if (window.isIOS() && !window.isInStandaloneMode()) {
+            showToast("⚠️ En iPhone, debés 'Agregar a Inicio' la app primero para recibir alarmas.");
             return;
         }
 
         // If already granted, just toggle
         if (Notification.permission === 'granted') {
             this.notificationSettings.enabled = !this.notificationSettings.enabled;
-            showToast(this.notificationSettings.enabled ? "🔔 Alarmas Activadas" : "🔕 Alarmas Desactivadas");
+            showToast(this.notificationSettings.enabled ? "🔔 Alarmas Activadas (Mantené la ventana de fondo)" : "🔕 Alarmas Desactivadas");
         } else {
             const permission = await Notification.requestPermission();
             if (permission === "granted") {
                 this.notificationSettings.enabled = true;
-                showToast("🔔 Alarmas Activadas");
+                showToast("🔔 Alarmas Activadas. Mantené la pestaña abierta de fondo.");
                 new Notification("Adicionales Santa Fe", {
                     body: "¡Alarmas configuradas! Te avisaremos antes de cada adicional.",
                     icon: "./assets/icon-192.png"
                 });
             } else {
-                showToast("⚠️ Permiso denegado — Habilitá las notificaciones en Ajustes del navegador");
+                showToast("⚠️ Permiso denegado — Habilitá las notificaciones en Ajustes de Safari/Chrome");
                 return;
             }
         }
@@ -433,7 +479,7 @@ window.store = {
                     }
 
                     // Ocultar banner de actualización ya que el usuario ingresó correctamente
-                    localStorage.setItem('banner_v534.8_dismissed', 'true');
+                    localStorage.setItem('banner_v534.9_dismissed', 'true');
                     document.getElementById('update-banner')?.remove();
 
                     this.authInitialized = true;
