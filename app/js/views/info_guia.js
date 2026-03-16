@@ -165,9 +165,56 @@ function renderInfoGuia(container) {
                         </div>
                     `).join('')}
                 </div>
+
+                <!-- NEW: Tips de Uso Section -->
+                <section class="space-y-4">
+                    <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-2 text-center">Tips de Uso y Restricciones</h3>
+                    <div class="grid gap-3">
+                        <div class="glass-card p-5 rounded-[2rem] border border-white/5 space-y-3">
+                            <div class="flex items-center gap-3 text-amber-500">
+                                <span class="material-symbols-outlined">info</span>
+                                <p class="font-black text-xs uppercase tracking-widest">¿Por qué falla el pago?</p>
+                            </div>
+                            <p class="text-[11px] text-slate-500 leading-relaxed italic">
+                                La TAP usa códigos de rubro (MCC). Si el local no está registrado como "Alimentación", la tarjeta rechaza automáticamente para evitar gastos no permitidos.
+                            </p>
+                        </div>
+
+                        <div class="glass-card p-5 rounded-[2rem] border border-white/5 space-y-4 text-[11px]">
+                            <div class="flex items-start gap-4">
+                                <div class="size-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500 shrink-0">
+                                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <p class="font-black text-slate-900 dark:text-white uppercase tracking-tighter">Kioscos y Almacenes</p>
+                                    <p class="text-slate-500">Pasa siempre si el local vende pan, leche o es un almacén de barrio.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="size-8 rounded-full bg-red-500/10 flex items-center justify-center text-red-500 shrink-0">
+                                    <span class="material-symbols-outlined text-sm">block</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <p class="font-black text-slate-900 dark:text-white uppercase tracking-tighter">Estaciones de Servicio</p>
+                                    <p class="text-slate-500">**No sirve para NAFTA.** Solo podés usarla en el SHOP (Full/Select) para comida o café.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="size-8 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-500 shrink-0">
+                                    <span class="material-symbols-outlined text-sm">warning</span>
+                                </div>
+                                <div class="space-y-1">
+                                    <p class="font-black text-slate-900 dark:text-white uppercase tracking-tighter">Comida Rápida</p>
+                                    <p class="text-slate-500">Lugares como **McDonald's** suelen fallar porque su rubro es "Entretenimiento".</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         `;
     }
+
 
     function renderEstampillasTab() {
         return `
