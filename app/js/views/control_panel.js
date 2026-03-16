@@ -197,3 +197,38 @@ function renderControlPanel(container) {
     `;
     container.innerHTML = html;
 }
+
+function renderHomeBenefits() {
+    const today = new Date().toLocaleDateString('es-ES', { weekday: 'long' });
+    const capitalizedToday = today.charAt(0).toUpperCase() + today.slice(1);
+    
+    const dayMap = {
+        'Lunes': '15% en Coto (TAP)',
+        'Martes': '30% en DIA (MODO)',
+        'Miércoles': '35% BNA+ / 15% Coto',
+        'Jueves': '20% ICBC (MODO)',
+        'Viernes': '25% Kilbel / Alvear',
+        'Sábado': '30% La Anónima',
+        'Domingo': '15% Diarco'
+    };
+    
+    const offer = dayMap[capitalizedToday];
+    if (!offer) return '';
+
+    return `
+        <div onclick="router.navigateTo('#info')" class="mx-2 p-4 rounded-3xl bg-gradient-to-r from-primary to-blue-600 text-white shadow-xl shadow-primary/20 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer overflow-hidden relative">
+            <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="flex items-center gap-4 relative z-10">
+                <div class="size-10 rounded-2xl bg-white/20 flex items-center justify-center backdrop-blur-md">
+                    <span class="material-symbols-outlined text-xl">celebration</span>
+                </div>
+                <div>
+                    <p class="text-[9px] font-black uppercase tracking-[0.2em] opacity-80">Promoción de ${capitalizedToday}</p>
+                    <p class="text-sm font-black">${offer}</p>
+                </div>
+            </div>
+            <span class="material-symbols-outlined relative z-10 animate-bounce-x">arrow_forward</span>
+        </div>
+    `;
+}
+
