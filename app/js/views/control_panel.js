@@ -92,8 +92,8 @@ function renderControlPanel(container) {
         </header>
 
         <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32 animate-fade-in">
-        <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32 animate-fade-in">
             <!-- Period Selector -->
+
             <div class="flex items-center justify-between mb-4 px-2">
                 <button onclick="window.prevControlMonth()" class="p-1 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">arrow_back_ios_new</span></button>
                 <div class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white">${currentMonthName} ${currentYear}</div>
@@ -216,19 +216,22 @@ function renderHomeBenefits() {
     if (!offer) return '';
 
     return `
-        <div onclick="router.navigateTo('#info')" class="mx-2 p-4 rounded-3xl bg-gradient-to-r from-primary to-blue-600 text-white shadow-xl shadow-primary/20 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer overflow-hidden relative">
+        <div onclick="router.navigateTo('#info')" class="mx-2 p-4 rounded-3xl bg-gradient-to-br from-primary to-blue-700 text-white shadow-2xl shadow-primary/30 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer overflow-hidden relative border border-white/10">
             <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <div class="flex items-center gap-4 relative z-10">
-                <div class="size-10 rounded-2xl bg-white/20 flex items-center justify-center backdrop-blur-md">
-                    <span class="material-symbols-outlined text-xl">celebration</span>
+                <div class="size-11 rounded-2xl bg-white/20 flex items-center justify-center backdrop-blur-md shadow-inner">
+                    <span class="material-symbols-outlined text-2xl">celebration</span>
                 </div>
                 <div>
-                    <p class="text-[9px] font-black uppercase tracking-[0.2em] opacity-80">Promoción de ${capitalizedToday}</p>
-                    <p class="text-sm font-black">${offer}</p>
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-white/80">Hoy ${capitalizedToday}</p>
+                    <p class="text-[15px] font-black tracking-tight">${offer}</p>
                 </div>
             </div>
-            <span class="material-symbols-outlined relative z-10 animate-bounce-x">arrow_forward</span>
+            <div class="size-8 rounded-full bg-white/10 flex items-center justify-center relative z-10">
+                <span class="material-symbols-outlined text-sm animate-bounce-x">arrow_forward</span>
+            </div>
         </div>
     `;
 }
+
 
