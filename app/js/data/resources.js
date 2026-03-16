@@ -14,6 +14,7 @@ window.policeResources = {
         departments: {
             'La Capital': [
                 { chain: 'Kilbel / Alvear', detail: '25% Reintegro los Viernes con MODO.' },
+                { chain: 'Franco Colella', detail: 'Acepta TAP para panadería y cafetería.' },
                 { chain: 'El Solar', detail: 'Beneficios Billetera Santa Fe (hasta $20k).' }
             ],
             'Rosario': [
@@ -32,6 +33,10 @@ window.policeResources = {
                 { chain: 'La Anónima', detail: '30% Reintegro (Vie/Sáb) MODO NBSF.' },
                 { chain: 'ICBC MODO', detail: '20% Reintegro los Jueves.' }
             ]
+        },
+        tips: {
+            acceptance: "La TAP usa el código de rubro (MCC). Pasa en Panaderías y Almacenes (ej. Franco Colella), pero suele fallar en Fast Food (ej. McDonald's) o Nafta.",
+            gasStations: "En estaciones de servicio, solo usala en el SHOP (Full/Select) para comida, NO para combustible."
         }
     },
     estampillas: {

@@ -61,12 +61,25 @@ function renderInfoGuia(container) {
                 </div>
 
                 <!-- Tips -->
-                <div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-2xl flex gap-3">
-                    <span class="material-symbols-outlined text-amber-500">lightbulb</span>
-                    <p class="text-[11px] text-amber-700 dark:text-amber-400 leading-relaxed font-medium">
-                        **Tip Pro:** Vinculá tu tarjeta a la app **MODO** del Banco Santa Fe para aprovechar reintegros de hasta el 30% en supermercados.
-                    </p>
+                <div class="space-y-3">
+                    <div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-2xl flex gap-3">
+                        <span class="material-symbols-outlined text-amber-500">lightbulb</span>
+                        <p class="text-[11px] text-amber-700 dark:text-amber-400 leading-relaxed font-medium">
+                            **Tip Pro:** Vinculá tu tarjeta a la app **MODO** del Banco Santa Fe para aprovechar reintegros de hasta el 30% en supermercados.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-blue-500/10 border border-blue-500/20 p-4 rounded-2xl flex gap-3">
+                        <span class="material-symbols-outlined text-blue-500">info</span>
+                        <div>
+                            <p class="text-[11px] text-blue-700 dark:text-blue-400 leading-relaxed font-bold">¿Por qué en algunos lugares no pasa?</p>
+                            <p class="text-[10px] text-blue-600/80 dark:text-blue-400/80 mt-1 leading-tight">
+                                ${resources.tap.tips.acceptance}
+                            </p>
+                        </div>
+                    </div>
                 </div>
+
 
                 <!-- By Department -->
                 <div class="space-y-4">

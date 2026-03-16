@@ -758,7 +758,12 @@ function renderCentinela(container) {
             keywords: ['tap', 'tarjeta alimentar', 'alimentaria policial', 'donde pagar', 'reintegro', 'modo', 'coto', 'la anonima', 'kilbel', 'alvear', 'beneficios tap'],
             responses: [
                 { match: ['modo', 'vincular', 'como'], text: "💳 **Vinculación MODO**: Entrá a la app de tu banco (NBSF o BNA), buscá el botón de MODO y vinculá tu Tarjeta Alimentar. Al pagar, avisá que usás QR de MODO y seleccioná la tarjeta TAP para que se aplique el reintegro." },
+                { match: ['mcdonalds', 'mc donalds', 'comida rapida', 'fast food'], text: "🍔 **McDonald's y Fast Food**: Muchos locales de comida rápida no aceptan la TAP porque están registrados como 'Comida Rápida' (MCC 5814) y la tarjeta suele estar restringida a 'Almacenes y Supermercados'." },
+                { match: ['franco colella', 'panaderia', 'facturas'], text: "🥐 **Franco Colella / Panaderías**: SÍ aceptan la TAP. Al estar registrados como panaderías o almacenes de alimentos, el sistema los autoriza sin problemas." },
+                { match: ['estacion', 'servicio', 'nafta', 'combustible', 'ypf', 'shell'], text: "⛽ **Estaciones de Servicio**: No podés pagar NAFTA con la TAP. Solo te va a pasar en el **SHOP** (Full, Select, etc.) si comprás comida o café, y si el posnet está bien configurado." },
+                { match: ['porque', 'no pasa', 'rechazada', 'mcc'], text: "🔐 **¿Por qué falla?**: La TAP tiene restricciones por rubro (MCC). Solo pasa en lugares que venden comida para llevar o supermercados. Si el lugar es de 'entretenimiento' o 'servicios', Visa la rechazará automáticamente." },
                 { match: ['coto'], text: "🛒 **COTO**: 15% de descuento los Lunes y Miércoles pagando con tarjeta de crédito (la TAP suele leerse como tal)." },
+
                 { match: ['santa fe', 'capital', 'kilbel', 'alvear'], text: "📍 **Santa Fe (Capital)**: Los Viernes tenés 25% de reintegro en **Kilbel** y **Alvear** pagando con MODO." },
                 { match: ['reconquista', 'avellaneda', 'el super'], text: "📍 **Reconquista**: Miércoles 30% de reintegro con MODO BNA+ en **El Súper**. Los Viernes hay promos de hasta 45% (Súper Fridays)." },
                 { match: ['rafaela', 'venado tuerto', 'la anonima'], text: "📍 **La Anónima (Rafaela/Venado)**: Viernes y Sábados 30% de reintegro con MODO Banco Santa Fe (Tope $20.000 mensual)." }
