@@ -54,9 +54,9 @@ function renderAdBanner() {
         `;
     }
 
-    // 2. Google AdSense Fallback - Hide until loaded
+    // 2. Google AdSense Fallback - Self-collapsing container
     return `
-        <div class="w-full my-2 flex flex-col items-center justify-center ad-container overflow-hidden">
+        <div class="w-full flex flex-col items-center justify-center ad-container overflow-hidden">
             <ins class="adsbygoogle"
                  style="display:block;width:100%;max-width:728px;"
                  data-ad-client="ca-pub-4261554477116731"
@@ -66,6 +66,7 @@ function renderAdBanner() {
         </div>
     `;
 }
+
 
 
 

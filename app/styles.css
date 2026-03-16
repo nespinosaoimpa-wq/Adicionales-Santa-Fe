@@ -173,6 +173,24 @@ input:checked+.toggle-slider:before {
     color: white;
 }
 
+/* AdSense Fixes */
+.ad-container {
+    transition: all 0.3s ease;
+}
+
+ins.adsbygoogle[data-ad-status="unfilled"] {
+    display: none !important;
+}
+
+.ad-container:has(ins[data-ad-status="unfilled"]) {
+    display: none !important;
+}
+
+/* Fallback for when AdSense doesn't provide the attribute yet */
+ins.adsbygoogle:empty {
+    height: 0 !important;
+}
+
 /* Utilities */
 .text-xxs {
     font-size: 0.65rem;

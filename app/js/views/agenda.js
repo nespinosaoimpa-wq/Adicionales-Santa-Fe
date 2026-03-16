@@ -53,7 +53,8 @@ function renderAgenda(container) {
             </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto px-6 space-y-8 pb-32">
+        <main class="flex-1 overflow-y-auto px-6 space-y-5 pb-32">
+
             <!-- Next Shift Hero Card -->
             ${nextShift ? `
             <section class="mt-4">
