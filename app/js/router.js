@@ -103,7 +103,11 @@ window.router = {
                 case '#asistente/centinela':
                     renderCentinela(app);
                     break;
+                case '#info':
+                    renderInfoGuia(app);
+                    break;
                 case '#asistente/partes':
+
                     renderPartesInteligentes(app);
                     break;
                 case '#profile':

@@ -7,7 +7,9 @@ function renderAsistenteHub(container) {
 
     const tools = [
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
+        { id: 'guia', title: 'Guía de Recursos', desc: 'Beneficios TAP y Estampillas Médicas.', icon: 'library_books', color: 'from-indigo-500 to-blue-600', route: '#info', badge: 'Pro' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
+
         { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },
         { id: 'directorio', title: 'Directorio Policial', desc: 'Números de emergencia interna.', icon: 'contact_phone', color: 'from-amber-500 to-orange-500', route: '#asistente/directorio' },
         { id: 'checklist', title: 'Checklist de Guardia', desc: 'Verificación de equipo esencial.', icon: 'fact_check', color: 'from-rose-500 to-pink-500', route: '#asistente/checklist' }
@@ -752,7 +754,32 @@ function renderCentinela(container) {
             default: "Consultá tu sueldo operativo según Decreto 142/26 ($1.350.000 de base) y las nuevas tarifas de adicionales cargadas en tu calculadora."
         },
         {
+            category: 'tap_beneficios',
+            keywords: ['tap', 'tarjeta alimentar', 'alimentaria policial', 'donde pagar', 'reintegro', 'modo', 'coto', 'la anonima', 'kilbel', 'alvear', 'beneficios tap'],
+            responses: [
+                { match: ['modo', 'vincular', 'como'], text: "💳 **Vinculación MODO**: Entrá a la app de tu banco (NBSF o BNA), buscá el botón de MODO y vinculá tu Tarjeta Alimentar. Al pagar, avisá que usás QR de MODO y seleccioná la tarjeta TAP para que se aplique el reintegro." },
+                { match: ['coto'], text: "🛒 **COTO**: 15% de descuento los Lunes y Miércoles pagando con tarjeta de crédito (la TAP suele leerse como tal)." },
+                { match: ['santa fe', 'capital', 'kilbel', 'alvear'], text: "📍 **Santa Fe (Capital)**: Los Viernes tenés 25% de reintegro en **Kilbel** y **Alvear** pagando con MODO." },
+                { match: ['reconquista', 'avellaneda', 'el super'], text: "📍 **Reconquista**: Miércoles 30% de reintegro con MODO BNA+ en **El Súper**. Los Viernes hay promos de hasta 45% (Súper Fridays)." },
+                { match: ['rafaela', 'venado tuerto', 'la anonima'], text: "📍 **La Anónima (Rafaela/Venado)**: Viernes y Sábados 30% de reintegro con MODO Banco Santa Fe (Tope $20.000 mensual)." }
+            ],
+            default: "La Tarjeta Alimentar Policial (TAP) tiene un monto de $175.682. Podés ver todos los beneficios por departamento en la nueva **Guía de Recursos** del Asistente."
+        },
+        {
+            category: 'estampillas',
+            keywords: ['estampilla', 'medica', 'donde compro', 'estampillas', 'vender', 'venden', 'comprar estampilla', 'estampillas santa fe'],
+            responses: [
+                { match: ['aritoys', 'centro'], text: "📍 **Aritoys**: Tucumán entre San Martín y San Jerónimo." },
+                { match: ['junin', 'industrial'], text: "📍 **Librería Junín**: Junín casi 9 de Julio, cerca de la Escuela Industrial." },
+                { match: ['francia', 'fatima'], text: "📍 **Librería Francia**: Francia y Pasaje Irala, frente a la Escuela Fátima." },
+                { match: ['verna', 'hernandarias'], text: "📍 **Clínica Verna**: Las Heras y Hernandarias." },
+                { match: ['mayo', 'san jeronimo'], text: "📍 **Santa Fe**: Tenés la Clínica 1° de Mayo (1° de Mayo 3017) y Consultorios San Gerónimo (Barrio El Pozo)." }
+            ],
+            default: "Podés conseguir Estampillas Médicas en: Aritoys, Librería Junín, Clínica Verna, Caja Arte de Curar (25 de Mayo 1867), entre otros. Mirá la lista completa en la **Guía de Recursos**."
+        },
+        {
             category: 'general_admin',
+
             keywords: ['tap', 'tarjeta', 'alimentar', '0810', 'problema', 'pago', 'monto', 'cbu', 'alias'],
             responses: [
                 { match: ['tap', 'alimentar', '0810'], text: "Atención T.A.P: **0810-222-7342**. El monto se actualiza mensualmente y es acumulable." },
