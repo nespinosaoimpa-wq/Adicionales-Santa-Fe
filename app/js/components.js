@@ -43,23 +43,22 @@ window.renderLogo = renderLogo;
 function renderAdBanner() {
     // 1. Native Custom Ad Check
     if (store.ads && store.ads.length > 0) {
-        const ad = store.ads[0]; // For now just pick the first active ad
+        const ad = store.ads[0]; 
         return `
-            <div class="w-full my-4 flex justify-center group" style="min-height:90px;">
-                <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-3xl overflow-hidden rounded-2xl shadow-lg border border-white/10 opacity-90 hover:opacity-100 transition-opacity">
-                    <img src="${ad.imageUrl}" class="w-full object-cover max-h-[120px]" alt="Patrocinado">
+            <div class="w-full my-4 flex justify-center group overflow-hidden">
+                <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-3xl overflow-hidden rounded-2xl shadow-lg border border-white/10 opacity-90 hover:opacity-100 transition-opacity relative">
+                    <img src="${ad.imageUrl}" class="w-full object-cover max-h-[140px]" alt="Patrocinado">
                     <div class="absolute top-1 right-2 px-1.5 rounded-sm bg-black/40 backdrop-blur-md text-[8px] text-white uppercase font-bold">Patrocinado</div>
                 </a>
             </div>
         `;
     }
 
-    // 2. Google AdSense Fallback
+    // 2. Google AdSense Fallback - Hide until loaded
     return `
-        <div class="w-full my-4 flex flex-col items-center justify-center" style="min-height:90px;">
-            <div class="text-[8px] text-slate-500 uppercase font-black tracking-widest mb-1 opacity-20">Publicidad</div>
+        <div class="w-full my-2 flex flex-col items-center justify-center ad-container overflow-hidden">
             <ins class="adsbygoogle"
-                 style="display:block;width:100%;max-width:728px;height:90px;"
+                 style="display:block;width:100%;max-width:728px;"
                  data-ad-client="ca-pub-4261554477116731"
                  data-ad-slot="2506973015"
                  data-ad-format="horizontal"
@@ -67,6 +66,7 @@ function renderAdBanner() {
         </div>
     `;
 }
+
 
 
 

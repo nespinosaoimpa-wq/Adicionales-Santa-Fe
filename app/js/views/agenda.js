@@ -92,6 +92,8 @@ function renderAgenda(container) {
             </section>
             ` : ''}
 
+            ${renderHomeBenefits()}
+
             <!-- Ad Banner -->
             ${renderAdBanner()}
 
