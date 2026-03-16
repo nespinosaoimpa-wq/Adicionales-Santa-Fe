@@ -381,7 +381,8 @@ window.store = {
     },
 
     init() {
-        console.log("App v535.1.6-FINAL - Standard Deployment");
+        console.log("App v535.1.7-FINAL - Standard Deployment");
+
 
 
 
