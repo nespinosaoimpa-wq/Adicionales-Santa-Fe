@@ -44,7 +44,10 @@ function renderServiceDetails(container, serviceId) {
                  <div>
                     <span class="text-xs text-slate-500 uppercase font-bold">Lugar / Objetivo</span>
                     <h2 class="text-2xl font-bold text-slate-900 dark:text-white leading-tight">${escapeHTML(service.location)}</h2>
-                    <p class="text-primary font-bold text-sm mt-1">${service.type} - ${service.subType}</p>
+                    <p class="text-primary font-bold text-sm mt-1">
+                        ${service.type === 'Public' ? 'Público' : (service.type === 'Private' ? 'Privado' : service.type)} - ${service.subType}
+                    </p>
+
                  </div>
                  
                  <div class="grid grid-cols-2 gap-6">
@@ -81,13 +84,39 @@ function renderServiceDetails(container, serviceId) {
     `;
 
     // Local Handlers to avoid polluting global scope more than necessary
-    window.handleTogglePaid = async (id, newStatus) => {
+    window.handleTogglePaid = async (id) => {
+        const service = store.services.find(s => s.id === id);
+        if (!service) return;
+
+        const isPaid = service.status === 'paid' || service.status === 'Pagado';
+        const newStatus = isPaid ? 'pending' : 'paid';
+
+        const btn = document.querySelector('[onclick*="handleTogglePaid"]');
+        if (btn) btn.disabled = true;
+
         try {
-            await DB.updateService(id, { status: newStatus ? 'paid' : 'pending' });
-            showToast(newStatus ? "¡Marcado como COBRADO! 💰" : "Marcado como Pendiente");
-            window.history.back();
-        } catch (e) {
-            showToast("Error update: " + e.message);
+            const success = await DB.updateService(id, { status: newStatus });
+            if (success) {
+                // If marking as paid, ask to record as income
+                if (newStatus === 'paid') {
+                    const confirmIncome = confirm(`¿Deseas registrar el cobro de $${service.total.toLocaleString('es-AR')} como ingreso en el Control Financiero?`);
+                    if (confirmIncome) {
+                        const incomeDesc = `Cobro: ${service.location}`;
+                        await store.addExpense('Cobro Adicionales', service.total, incomeDesc);
+                        showToast('✅ Servicio liquidado e ingreso registrado');
+                    } else {
+                        showToast('✅ Servicio marcado como pagado');
+                    }
+                } else {
+                    showToast('Servicio marcado como pendiente');
+                }
+                renderServiceDetails(id);
+            }
+        } catch (error) {
+            console.error("Error toggling paid status:", error);
+            showToast('Error al actualizar estado');
+        } finally {
+            if (btn) btn.disabled = false;
         }
     };
 

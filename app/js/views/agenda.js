@@ -257,8 +257,9 @@ function renderServiceCard(service, index = 0) {
     const gradientTo = isPublic ? 'to-blue-400' : 'to-pink-500';
     const textColor = isPublic ? 'text-primary' : 'text-purple-400';
     const bgSoft = isPublic ? 'bg-primary/10' : 'bg-purple-500/10';
-    const icon = isPublic ? 'account_balance' : 'storefront';
-    const typeLabel = isPublic ? 'Público' : (service.type === 'OSPES' ? 'OSPES' : 'Privado');
+    const icon = isPublic ? 'account_balance' : (service.type === 'OSPES' ? 'medical_services' : 'storefront');
+    const typeLabel = isPublic ? 'Público' : (service.type === 'Private' ? 'Privado' : (service.type || 'Privado'));
+
 
     const timeRange = service.startTime && service.endTime ? `${service.startTime} - ${service.endTime}` : 'Horario no especificado';
     const subType = service.subType || '';

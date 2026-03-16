@@ -381,7 +381,9 @@ window.store = {
     },
 
     init() {
-        console.log("App v535.1.2-FINAL - Standard Deployment");
+        console.log("App v535.1.4-FINAL - Standard Deployment");
+
+
 
         // Apply saved theme ASAP
         this.initTheme();
@@ -525,13 +527,14 @@ window.store = {
             s.date, `Servicio ${s.type}`, `"${s.location}"`, s.total, '', s.status
         ]);
 
-        // Map Expenses (and Sueldo as Income)
+        // Map Expenses (and Incomes as Income)
         const expenseRows = this.expenses.map(e => {
-            const isIncome = e.category === 'Sueldo';
+            const isIncome = ['Sueldo', 'Cobro Adicionales', 'Otros Ingresos'].includes(e.category);
             return [
                 e.date, e.category, `"${e.description || '-'}"`, isIncome ? e.amount : '', isIncome ? '' : e.amount, '-'
             ];
         });
+
 
         // Combine and sort by date descending
         const allRows = [...serviceRows, ...expenseRows].sort((a, b) => new Date(b[0]) - new Date(a[0]));

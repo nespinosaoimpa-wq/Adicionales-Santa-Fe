@@ -59,12 +59,14 @@ function renderFinancial(container) {
     const periodServices = filter === 'all' ? store.services : filterByPeriod(store.services, 'date');
     const periodExpenses = filter === 'all' ? store.expenses : filterByPeriod(store.expenses, 'date');
 
-    const externalIncome = periodExpenses.filter(e => e.category === 'Sueldo').reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
+    const incomeCategories = ['Sueldo', 'Cobro Adicionales', 'Otros Ingresos'];
+    const externalIncome = periodExpenses.filter(e => incomeCategories.includes(e.category)).reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
     const totalAdditionalIncome = periodServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
     const totalIncome = totalAdditionalIncome + externalIncome;
 
-    const totalExpenses = periodExpenses.filter(e => e.category !== 'Sueldo').reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
+    const totalExpenses = periodExpenses.filter(e => !incomeCategories.includes(e.category)).reduce((sum, e) => sum + (parseFloat(e.amount) || 0), 0);
     const balance = totalIncome - totalExpenses;
+
 
     // Payment dates
     const monthNames = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
@@ -147,13 +149,15 @@ function renderFinancial(container) {
                     </div>
                     <p class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Ingresos Totales</p>
                     <p class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-white">$${(totalIncome || 0).toLocaleString('es-AR')}</p>
-                    <p class="text-[10px] text-emerald-400 mt-1">${periodServices.length} adic. + ${periodExpenses.filter(e => e.category === 'Sueldo').length} sueldos</p>
+                    <p class="text-[10px] text-emerald-400 mt-1">${periodServices.length} adic. + ${periodExpenses.filter(e => incomeCategories.includes(e.category)).length} manuales</p>
                 </div>
+
                 <div class="glass-card p-5 rounded-2xl flex flex-col gap-1 border-red-500/20 bg-red-500/5">
                     <p class="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">Total Gastos</p>
                     <p class="text-2xl font-bold tracking-tighter text-slate-900 dark:text-white">$${(totalExpenses || 0).toLocaleString('es-AR')}</p>
-                    <p class="text-[10px] text-red-400 mt-1">${periodExpenses.filter(e => e.category !== 'Sueldo').length} gastos</p>
+                    <p class="text-[10px] text-red-400 mt-1">${periodExpenses.filter(e => !incomeCategories.includes(e.category)).length} gastos</p>
                 </div>
+
             </div>
 
             <!-- Balance Card -->
@@ -178,12 +182,13 @@ function renderFinancial(container) {
                 <!-- Add Expense Inline Form -->
                 <div class="glass-card p-4 rounded-2xl space-y-3">
                     <div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
-                        ${['Sueldo', 'Comida', 'Alquiler', 'Transporte', 'Gas/Luz/Agua', 'Internet', 'Celular', 'Cable/TV', 'Seguro', 'Mecánico', 'Salud', 'Equipo', 'Otros'].map((cat, i) => {
-            const icons = { 'Sueldo': 'payments', 'Comida': 'restaurant', 'Alquiler': 'real_estate_agent', 'Transporte': 'directions_car', 'Gas/Luz/Agua': 'water_damage', 'Internet': 'wifi', 'Celular': 'smartphone', 'Cable/TV': 'tv', 'Seguro': 'health_and_safety', 'Mecánico': 'handyman', 'Salud': 'medical_services', 'Equipo': 'build', 'Otros': 'more_horiz' };
-            const colors = { 'Sueldo': 'bg-emerald-500/20 text-emerald-400', 'Comida': 'bg-red-500/20 text-red-400', 'Alquiler': 'bg-indigo-500/20 text-indigo-400', 'Transporte': 'bg-blue-500/20 text-blue-400', 'Gas/Luz/Agua': 'bg-amber-500/20 text-amber-500', 'Internet': 'bg-cyan-500/20 text-cyan-400', 'Celular': 'bg-teal-500/20 text-teal-400', 'Cable/TV': 'bg-sky-500/20 text-sky-400', 'Seguro': 'bg-rose-500/20 text-rose-400', 'Mecánico': 'bg-slate-500/20 text-slate-400', 'Salud': 'bg-pink-500/20 text-pink-400', 'Equipo': 'bg-purple-500/20 text-purple-400', 'Otros': 'bg-orange-500/20 text-orange-400' };
-            return '<button onclick="window.selectExpenseCategory(\'' + cat + '\')" id="cat-btn-' + cat + '" class="expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ' + (i === 0 ? colors[cat] + ' ring-1 ring-white/20' : 'bg-white/5 text-slate-400') + '"><span class="material-symbols-outlined text-sm">' + icons[cat] + '</span>' + cat + '</button>';
+                        ${['Cobro Adicionales', 'Sueldo', 'Otros Ingresos', 'Comida', 'Alquiler', 'Transporte', 'Gas/Luz/Agua', 'Internet', 'Celular', 'Cable/TV', 'Seguro', 'Mecánico', 'Salud', 'Equipo', 'Otros'].map((cat, i) => {
+            const icons = { 'Cobro Adicionales': 'account_balance_wallet', 'Sueldo': 'payments', 'Otros Ingresos': 'add_card', 'Comida': 'restaurant', 'Alquiler': 'real_estate_agent', 'Transporte': 'directions_car', 'Gas/Luz/Agua': 'water_damage', 'Internet': 'wifi', 'Celular': 'smartphone', 'Cable/TV': 'tv', 'Seguro': 'health_and_safety', 'Mecánico': 'handyman', 'Salud': 'medical_services', 'Equipo': 'build', 'Otros': 'more_horiz' };
+            const colors = { 'Cobro Adicionales': 'bg-emerald-500/20 text-emerald-400', 'Sueldo': 'bg-emerald-500/20 text-emerald-400', 'Otros Ingresos': 'bg-emerald-500/20 text-emerald-400', 'Comida': 'bg-red-500/20 text-red-400', 'Alquiler': 'bg-indigo-500/20 text-indigo-400', 'Transporte': 'bg-blue-500/20 text-blue-400', 'Gas/Luz/Agua': 'bg-amber-500/20 text-amber-500', 'Internet': 'bg-cyan-500/20 text-cyan-400', 'Celular': 'bg-teal-500/20 text-teal-400', 'Cable/TV': 'bg-sky-500/20 text-sky-400', 'Seguro': 'bg-rose-500/20 text-rose-400', 'Mecánico': 'bg-slate-500/20 text-slate-400', 'Salud': 'bg-pink-500/20 text-pink-400', 'Equipo': 'bg-purple-500/20 text-purple-400', 'Otros': 'bg-orange-500/20 text-orange-400' };
+            return '<button onclick="window.selectExpenseCategory(\'' + cat + '\')" id="cat-btn-' + cat.replace(/\s+/g, '-') + '" class="expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ' + (i === 0 ? colors[cat] + ' ring-1 ring-white/20' : 'bg-white/5 text-slate-400') + '"><span class="material-symbols-outlined text-sm">' + icons[cat] + '</span>' + cat + '</button>';
         }).join('')}
                     </div>
+
 
                     <div class="flex gap-2">
                         <div class="flex-1 relative">
@@ -213,11 +218,12 @@ function renderFinancial(container) {
                 </div>
                 <div class="space-y-2">
                     ${periodExpenses.length > 0 ? periodExpenses.slice(0, 50).map(e => {
-            const isIncome = e.category === 'Sueldo';
-            const catIcons = { 'Sueldo': 'payments', 'Comida': 'restaurant', 'Alquiler': 'real_estate_agent', 'Transporte': 'directions_car', 'Gas/Luz/Agua': 'water_damage', 'Internet': 'wifi', 'Celular': 'smartphone', 'Cable/TV': 'tv', 'Seguro': 'health_and_safety', 'Mecánico': 'handyman', 'Salud': 'medical_services', 'Equipo': 'build', 'Otros': 'more_horiz' };
-            const catColors = { 'Sueldo': 'bg-emerald-500/20 text-emerald-400', 'Comida': 'bg-red-500/10 text-red-400', 'Alquiler': 'bg-indigo-500/10 text-indigo-400', 'Transporte': 'bg-blue-500/10 text-blue-400', 'Gas/Luz/Agua': 'bg-amber-500/10 text-amber-400', 'Internet': 'bg-cyan-500/10 text-cyan-400', 'Celular': 'bg-teal-500/10 text-teal-400', 'Cable/TV': 'bg-sky-500/10 text-sky-400', 'Seguro': 'bg-rose-500/10 text-rose-400', 'Mecánico': 'bg-slate-500/10 text-slate-400', 'Salud': 'bg-pink-500/10 text-pink-400', 'Equipo': 'bg-purple-500/10 text-purple-400', 'Otros': 'bg-orange-500/10 text-orange-400' };
+            const isIncome = incomeCategories.includes(e.category);
+            const catIcons = { 'Cobro Adicionales': 'account_balance_wallet', 'Sueldo': 'payments', 'Otros Ingresos': 'add_card', 'Comida': 'restaurant', 'Alquiler': 'real_estate_agent', 'Transporte': 'directions_car', 'Gas/Luz/Agua': 'water_damage', 'Internet': 'wifi', 'Celular': 'smartphone', 'Cable/TV': 'tv', 'Seguro': 'health_and_safety', 'Mecánico': 'handyman', 'Salud': 'medical_services', 'Equipo': 'build', 'Otros': 'more_horiz' };
+            const catColors = { 'Cobro Adicionales': 'bg-emerald-500/20 text-emerald-400', 'Sueldo': 'bg-emerald-500/20 text-emerald-400', 'Otros Ingresos': 'bg-emerald-500/20 text-emerald-400', 'Comida': 'bg-red-500/10 text-red-400', 'Alquiler': 'bg-indigo-500/10 text-indigo-400', 'Transporte': 'bg-blue-500/10 text-blue-400', 'Gas/Luz/Agua': 'bg-amber-500/10 text-amber-400', 'Internet': 'bg-cyan-500/10 text-cyan-400', 'Celular': 'bg-teal-500/10 text-teal-400', 'Cable/TV': 'bg-sky-500/10 text-sky-400', 'Seguro': 'bg-rose-500/10 text-rose-400', 'Mecánico': 'bg-slate-500/10 text-slate-400', 'Salud': 'bg-pink-500/10 text-pink-400', 'Equipo': 'bg-purple-500/10 text-purple-400', 'Otros': 'bg-orange-500/10 text-orange-400' };
             const icon = catIcons[e.category] || 'money_off';
             const color = catColors[e.category] || 'bg-slate-500/10 text-slate-400';
+
             return '<div class="glass-card p-3 rounded-2xl flex items-center justify-between border-white/5 group">' +
                 '<div class="flex items-center gap-3">' +
                 '<div class="size-9 rounded-xl ' + color + ' flex items-center justify-center">' +
@@ -258,8 +264,9 @@ function renderFinancial(container) {
     // Expense Chart
     setTimeout(() => {
         const canvas = document.getElementById('expenseChart');
-        // Only chart real expenses, not Income (Sueldo)
-        const realExpenses = periodExpenses.filter(e => e.category !== 'Sueldo');
+        // Only chart real expenses, not Incomes
+        const realExpenses = periodExpenses.filter(e => !incomeCategories.includes(e.category));
+
         if (canvas && realExpenses.length > 0) {
             const expensesByCategory = {};
             realExpenses.forEach(e => {
@@ -302,20 +309,28 @@ function renderFinancial(container) {
     }, 100);
 
     // Expense form state
-    let selectedCategory = 'Sueldo';
+    let selectedCategory = 'Cobro Adicionales';
 
     window.selectExpenseCategory = (cat) => {
         selectedCategory = cat;
-        const catColors = { 'Sueldo': 'bg-emerald-500/20 text-emerald-400', 'Comida': 'bg-red-500/20 text-red-400', 'Alquiler': 'bg-indigo-500/20 text-indigo-400', 'Transporte': 'bg-blue-500/20 text-blue-400', 'Gas/Luz/Agua': 'bg-amber-500/20 text-amber-500', 'Internet': 'bg-cyan-500/20 text-cyan-400', 'Celular': 'bg-teal-500/20 text-teal-400', 'Cable/TV': 'bg-sky-500/20 text-sky-400', 'Seguro': 'bg-rose-500/20 text-rose-400', 'Mecánico': 'bg-slate-500/20 text-slate-400', 'Salud': 'bg-pink-500/20 text-pink-400', 'Equipo': 'bg-purple-500/20 text-purple-400', 'Otros': 'bg-orange-500/20 text-orange-400' };
+        const catColors = { 'Cobro Adicionales': 'bg-emerald-500/20 text-emerald-400', 'Sueldo': 'bg-emerald-500/20 text-emerald-400', 'Otros Ingresos': 'bg-emerald-500/20 text-emerald-400', 'Comida': 'bg-red-500/20 text-red-400', 'Alquiler': 'bg-indigo-500/20 text-indigo-400', 'Transporte': 'bg-blue-500/20 text-blue-400', 'Gas/Luz/Agua': 'bg-amber-500/20 text-amber-500', 'Internet': 'bg-cyan-500/20 text-cyan-400', 'Celular': 'bg-teal-500/20 text-teal-400', 'Cable/TV': 'bg-sky-500/20 text-sky-400', 'Seguro': 'bg-rose-500/20 text-rose-400', 'Mecánico': 'bg-slate-500/20 text-slate-400', 'Salud': 'bg-pink-500/20 text-pink-400', 'Equipo': 'bg-purple-500/20 text-purple-400', 'Otros': 'bg-orange-500/20 text-orange-400' };
         document.querySelectorAll('.expense-cat-btn').forEach(btn => {
             btn.className = 'expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all bg-white/5 text-slate-400';
         });
-        const activeBtn = document.getElementById('cat-btn-' + cat);
+        const activeBtn = document.getElementById('cat-btn-' + cat.replace(/\s+/g, '-'));
         if (activeBtn) {
             const color = catColors[cat] || 'bg-amber-500/20 text-amber-400';
             activeBtn.className = 'expense-cat-btn flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-bold transition-all ' + color + ' ring-1 ring-white/20';
         }
+
+        const isIncome = incomeCategories.includes(selectedCategory);
+        const submitBtn = document.getElementById('btn-add-expense');
+        if (submitBtn) {
+            submitBtn.className = `w-full py-2.5 ${isIncome ? 'bg-emerald-500 shadow-emerald-500/20' : 'bg-red-500 shadow-red-500/20'} text-white text-sm font-bold rounded-xl shadow-lg active:scale-[0.98] transition-all flex items-center justify-center gap-2`;
+            submitBtn.innerHTML = `<span class="material-symbols-outlined text-lg">${isIncome ? 'add_circle' : 'remove_circle'}</span> ${isIncome ? 'Guardar Ingreso' : 'Agregar Gasto'}`;
+        }
     };
+
 
     window.submitExpense = async () => {
         const amountInput = document.getElementById('expense-amount');
@@ -329,12 +344,13 @@ function renderFinancial(container) {
         const btn = document.getElementById('btn-add-expense');
         btn.disabled = true;
         btn.textContent = 'Guardando...';
-        const isIncome = selectedCategory === 'Sueldo';
+        const isIncome = incomeCategories.includes(selectedCategory);
         const success = await store.addExpense(selectedCategory, amount, descInput.value.trim());
         if (success) { amountInput.value = ''; descInput.value = ''; }
         btn.disabled = false;
-        btn.innerHTML = `<span class="material-symbols-outlined text-lg">add_circle</span> ${isIncome ? 'Guardar Ingreso' : 'Agregar Gasto'}`;
+        window.selectExpenseCategory(selectedCategory); // Restore state
     };
+
 
     window.deleteExpenseConfirm = (id) => {
         const overlay = document.createElement('div');

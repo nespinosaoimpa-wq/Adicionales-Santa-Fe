@@ -216,9 +216,19 @@ function renderRegister(container) {
         document.getElementById('txt-subtotal').innerText = formatted;
         document.getElementById('txt-total').innerText = formatted;
 
+        // Auto-update currentSubType for saving/displaying
+        if (split.ext > 0 && split.ord === 0) {
+            currentSubType = 'Extraordinaria';
+        } else if (split.ext > 0 && split.ord > 0) {
+            currentSubType = 'Mixta';
+        } else {
+            currentSubType = 'Ordinaria';
+        }
+
         // El input de rate se mantiene para referencia del usuario del tipo actual pero el cálculo es automático
         document.getElementById('inp-rate').value = (split.ext > 0 && split.ord === 0) ? extRate : ordRate;
     };
+
 
     document.getElementById('inp-date').addEventListener('change', calculateTotal);
     document.getElementById('inp-start').addEventListener('change', calculateTotal);
