@@ -59,6 +59,13 @@ function renderLogin(container) {
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
                     <p class="text-[10px] text-slate-500 font-mono">v534.8 (Suite Asistente Virtual PRO)</p>
+                    <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
+                        <a href="#legal/privacy" class="hover:underline">Privacidad</a>
+                        <span>•</span>
+                        <a href="#legal/terms" class="hover:underline">Términos</a>
+                        <span>•</span>
+                        <a href="#legal/about" class="hover:underline">Sobre Nosotros</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -141,6 +148,16 @@ function renderSignup(container) {
                         </button>
                     </div>
                 </form>
+
+                <div class="mt-10 border-t border-white/5 pt-4 text-center">
+                    <div class="flex justify-center gap-4 text-[10px] text-slate-400">
+                        <a href="#legal/privacy" class="hover:underline">Privacidad</a>
+                        <span>•</span>
+                        <a href="#legal/terms" class="hover:underline">Términos</a>
+                        <span>•</span>
+                        <a href="#legal/about" class="hover:underline">Sobre Nosotros</a>
+                    </div>
+                </div>
             </div>
         </div>
     `;

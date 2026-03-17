@@ -28,8 +28,9 @@ window.router = {
             return;
         }
 
-        // Protect routes that require authentication
-        if (!store.isAuthenticated() && hash !== '#login' && hash !== '#signup') {
+        // Protect routes that require authentication (except login, signup, and legal)
+        const isLegalRoute = hash.startsWith('#legal/');
+        if (!store.isAuthenticated() && hash !== '#login' && hash !== '#signup' && !isLegalRoute) {
             console.log("🚫 Unauthorized access attempt to", hash);
             this.navigateTo('#login');
             return;
@@ -118,6 +119,15 @@ window.router = {
                     break;
                 case '#stats':
                     renderStats(app);
+                    break;
+                case '#legal/privacy':
+                    renderPrivacyPolicy(app);
+                    break;
+                case '#legal/terms':
+                    renderTermsAndConditions(app);
+                    break;
+                case '#legal/about':
+                    renderAboutUs(app);
                     break;
                 case '#diagnostics':
                     if (store.user && store.user.role === 'admin') {
