@@ -15,7 +15,7 @@ window.policeResources = {
             'La Capital': [
                 { chain: 'Kilbel / Alvear', detail: '25% Reintegro los Viernes con MODO.', category: 'supermarket' },
                 { chain: 'Franco Colella', detail: 'Acepta TAP para panadería y cafetería.', category: 'food' },
-                { chain: 'Lo de Pancho', detail: 'Acepta TAP en sucursal Blas Parera.', category: 'food' },
+                { chain: 'Lo de Pancho', detail: 'Acepta TAP en sucursal Bulevar.', category: 'food' },
                 { chain: 'Punto Natural', detail: 'Dietética y productos saludables.', category: 'leaf' },
                 { chain: 'The Diet (Bv. Gálvez)', detail: 'Productos naturales y sin TACC.', category: 'leaf' },
                 { chain: 'Almacén del Norte', detail: 'Acepta TAP para compras diarias.', category: 'store' },
