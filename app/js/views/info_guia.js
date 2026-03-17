@@ -141,26 +141,56 @@ function renderInfoGuia(container) {
                     </div>
                 </div>
 
+                <!-- NEW: Experiencia de la Comunidad (Coto/MODO) -->
+                <div class="bg-amber-500/10 border border-amber-500/20 p-5 rounded-[2rem] space-y-2">
+                    <div class="flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                        <span class="material-symbols-outlined text-sm">warning</span>
+                        <p class="font-black text-[10px] uppercase tracking-widest">Alerta de Usuario</p>
+                    </div>
+                    <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed italic">
+                        "${resources.tap.tips.cotoMode}"
+                    </p>
+                </div>
+
+                <!-- Comprehensive Map Button -->
+                <a href="https://www.google.com/maps/search/comercios+adheridos+alimentos+Santa+Fe+Capital" target="_blank"
+                   class="flex items-center justify-center gap-2 w-full py-4 rounded-3xl bg-slate-800 text-white font-black text-xs uppercase tracking-widest hover:bg-slate-700 transition-all active:scale-95 shadow-xl">
+                    <span class="material-symbols-outlined">map</span>
+                    Ver Mapa Completísimo
+                </a>
+
                 <div class="space-y-4">
-                    <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-2 text-center">Interacción por Departamento</h3>
+                    <h3 class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] px-2 text-center">Lugares que aceptan TAP</h3>
                     ${Object.entries(resources.tap.departments).map(([dept, items]) => `
                         <div class="glass-card p-4 rounded-3xl border border-white/5 space-y-3">
-                            <h4 class="text-[10px] font-black text-primary uppercase tracking-widest flex items-center gap-2">
-                                <span class="size-2 rounded-full bg-primary animate-pulse"></span> ${dept}
+                            <h4 class="text-[10px] font-black text-primary uppercase tracking-widest flex items-center gap-2 px-2">
+                                <span class="size-2 rounded-full bg-primary"></span> ${dept}
                             </h4>
                             <div class="grid gap-2">
-                                ${items.map(item => `
-                                    <div class="p-3 rounded-2xl bg-white/5 border border-white/5 flex items-center justify-between">
-                                        <div class="flex-1 pr-4">
-                                            <p class="text-[11px] font-black text-slate-900 dark:text-white uppercase leading-none mb-1">${item.chain}</p>
-                                            <p class="text-[10px] text-slate-500 leading-tight">${item.detail}</p>
+                                ${items.map(item => {
+                                    const icons = {
+                                        supermarket: 'shopping_cart',
+                                        food: 'restaurant',
+                                        leaf: 'eco',
+                                        store: 'storefront',
+                                        mall: 'local_mall'
+                                    };
+                                    const icon = icons[item.category] || 'store';
+                                    return `
+                                    <div class="p-3 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-3">
+                                        <div class="size-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                            <span class="material-symbols-outlined text-sm">${icon}</span>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-[11px] font-black text-slate-900 dark:text-white uppercase truncate">${item.chain}</p>
+                                            <p class="text-[10px] text-slate-500 truncate">${item.detail}</p>
                                         </div>
                                         <a href="https://www.google.com/maps/search/${encodeURIComponent(item.chain + ' ' + dept + ' Santa Fe')}" target="_blank" 
-                                           class="size-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-primary transition-all active:scale-90">
+                                           class="size-9 rounded-xl bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-90">
                                             <span class="material-symbols-outlined text-sm">near_me</span>
                                         </a>
                                     </div>
-                                `).join('')}
+                                    `}).join('')}
                             </div>
                         </div>
                     `).join('')}

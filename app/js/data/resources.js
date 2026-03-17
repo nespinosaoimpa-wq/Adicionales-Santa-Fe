@@ -13,29 +13,35 @@ window.policeResources = {
         ],
         departments: {
             'La Capital': [
-                { chain: 'Kilbel / Alvear', detail: '25% Reintegro los Viernes con MODO.' },
-                { chain: 'Franco Colella', detail: 'Acepta TAP para panadería y cafetería.' },
-                { chain: 'El Solar', detail: 'Beneficios Billetera Santa Fe (hasta $20k).' }
+                { chain: 'Kilbel / Alvear', detail: '25% Reintegro los Viernes con MODO.', category: 'supermarket' },
+                { chain: 'Franco Colella', detail: 'Acepta TAP para panadería y cafetería.', category: 'food' },
+                { chain: 'Lo de Pancho', detail: 'Acepta TAP en sucursal Blas Parera.', category: 'food' },
+                { chain: 'Punto Natural', detail: 'Dietética y productos saludables.', category: 'leaf' },
+                { chain: 'The Diet (Bv. Gálvez)', detail: 'Productos naturales y sin TACC.', category: 'leaf' },
+                { chain: 'Almacén del Norte', detail: 'Acepta TAP para compras diarias.', category: 'store' },
+                { chain: 'Carnicerías El Triunfo', detail: 'Cortes seleccionados y embutidos.', category: 'store' },
+                { chain: 'El Solar', detail: 'Beneficios Billetera Santa Fe (hasta $20k).', category: 'mall' }
             ],
             'Rosario': [
-                { chain: 'La Reina / La Gallega', detail: '10-20% Reintegro diario con Billetera SF.' },
-                { chain: 'Supermercados DIA', detail: '30% Descuento los Martes con MODO NBSF.' }
+                { chain: 'La Reina / La Gallega', detail: '10-20% Reintegro diario con Billetera SF.', category: 'supermarket' },
+                { chain: 'Supermercados DIA', detail: '30% Descuento los Martes con MODO NBSF.', category: 'supermarket' }
             ],
             'Castellanos (Rafaela)': [
-                { chain: 'La Anónima', detail: '30% Reintegro (Vie/Sáb) MODO NBSF.' },
-                { chain: 'Diarco', detail: '15% Descuento (Sáb/Dom) sin tope.' }
+                { chain: 'La Anónima', detail: '30% Reintegro (Vie/Sáb) MODO NBSF.', category: 'supermarket' },
+                { chain: 'Diarco', detail: '15% Descuento (Sáb/Dom) sin tope.', category: 'supermarket' }
             ],
             'Gral. Obligado (Reconquista)': [
-                { chain: 'El Súper Reconquista', detail: '30% Reintegro Miércoles (MODO BNA).' },
-                { chain: 'Súper Fridays', detail: 'Descuentos hasta el 45% con BNA.' }
+                { chain: 'El Súper Reconquista', detail: '30% Reintegro Miércoles (MODO BNA).', category: 'supermarket' },
+                { chain: 'Súper Fridays', detail: 'Descuentos hasta el 45% con BNA.', category: 'supermarket' }
             ],
             'Gral. López (Venado)': [
-                { chain: 'La Anónima', detail: '30% Reintegro (Vie/Sáb) MODO NBSF.' },
-                { chain: 'ICBC MODO', detail: '20% Reintegro los Jueves.' }
+                { chain: 'La Anónima', detail: '30% Reintegro (Vie/Sáb) MODO NBSF.', category: 'supermarket' },
+                { chain: 'ICBC MODO', detail: '20% Reintegro los Jueves.', category: 'supermarket' }
             ]
         },
         tips: {
-            acceptance: "La TAP usa el código de rubro (MCC). Pasa en Panaderías y Almacenes (ej. Franco Colella), pero suele fallar en Fast Food (ej. McDonald's) o Nafta.",
+            acceptance: "La TAP usa el código de rubro (MCC). Pasa en Panaderías y Almacenes (ej. Franco Colella), pero suele fallar en Fast Food (ej. McDonald's).",
+            cotoMode: "⚠️ **CUIDADO EN COTO:** Los descuentos de comunidad a veces requieren la **tarjeta física**. MODO puede fallar si no detecta la promo bancaria específica.",
             gasStations: "En estaciones de servicio, solo usala en el SHOP (Full/Select) para comida, NO para combustible."
         }
     },
