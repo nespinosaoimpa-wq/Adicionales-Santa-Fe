@@ -30,26 +30,26 @@ function renderProfile(container) {
                 <input type="text" 
                     value="${sub}" 
                     onchange="store.renameServiceSubtype('${type}', '${sub}', this.value)"
-                    class="bg-transparent border-none text-sm font-medium text-slate-300 focus:ring-0 focus:text-white w-full placeholder-slate-600 transition-colors">
+                    class="bg-transparent border-none text-sm font-medium text-slate-700 dark:text-slate-300 focus:ring-0 focus:text-slate-900 dark:text-white w-full placeholder-slate-600 transition-colors">
                 
-                <div class="flex items-center gap-2 bg-white/5 rounded-lg px-2 py-1 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
+                <div class="flex items-center gap-2 bg-slate-200 dark:bg-white/5 rounded-lg px-2 py-1 focus-within:ring-1 focus-within:ring-primary/50 transition-all">
                     <span class="text-xs text-slate-500">$</span>
                     <input type="number" 
                         value="${config[type][sub]}" 
                         onchange="store.updateLocalConfig('${type}', '${sub}', this.value)"
-                        class="w-20 bg-transparent border-none text-right text-sm font-bold text-white focus:ring-0 p-0">
+                        class="w-20 bg-transparent border-none text-right text-sm font-bold text-slate-900 dark:text-white focus:ring-0 p-0">
                 </div>
             </div>
         `).join('');
     };
 
     const html = `
-        <header class="sticky top-0 z-50 bg-background-dark/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
-            <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors active:scale-95">
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full hover:bg-slate-200 dark:hover:bg-white/10 flex items-center justify-center text-slate-500 dark:text-slate-400 transition-colors active:scale-95">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-base font-bold text-white tracking-wide">Mi Perfil</h1>
-            <div class="size-10"></div> <!-- Spacer -->
+            <h1 class="text-base font-bold text-slate-900 dark:text-white tracking-wide">Mi Perfil</h1>
+            <div class="size-10 flex items-center justify-center">${renderLogo('small')}</div>
         </header>
 
         <main class="p-6 space-y-8 pb-32 max-w-md mx-auto animate-fade-in">
@@ -61,8 +61,8 @@ function renderProfile(container) {
                 <div class="relative group cursor-pointer" onclick="document.getElementById('avatar-input').click()">
                     <!-- Decorative Rings -->
                     <div class="absolute -inset-1 bg-gradient-to-tr from-primary to-accent-cyan rounded-full opacity-75 blur-sm group-hover:opacity-100 transition-opacity duration-500"></div>
-                    <div class="relative size-28 rounded-full p-1 bg-background-dark shadow-2xl">
-                        <img id="profile-avatar-img" src="${userAvatar}" class="w-full h-full rounded-full object-cover border-2 border-white/10 group-hover:border-primary/50 transition-all duration-300 shadow-inner">
+                    <div class="relative size-28 rounded-full p-1 bg-white dark:bg-background-dark shadow-2xl">
+                        <img id="profile-avatar-img" src="${userAvatar}" class="w-full h-full rounded-full object-cover border-2 border-slate-200 dark:border-white/10 group-hover:border-primary/50 transition-all duration-300 shadow-inner">
                     </div>
                     <!-- Edit Badge -->
                     <div class="absolute bottom-1 right-1 bg-primary text-white size-8 rounded-full flex items-center justify-center shadow-lg border-2 border-background-dark transform group-hover:scale-110 transition-transform">
@@ -72,10 +72,10 @@ function renderProfile(container) {
 
                 <div class="mt-4 text-center space-y-1">
                     <div class="flex items-center justify-center gap-2">
-                        <h2 class="text-2xl font-bold text-white tracking-tight">${userName}</h2>
+                        <h2 class="text-2xl font-bold text-slate-900 dark:text-white tracking-tight">${userName}</h2>
                         <span onclick="const name = prompt('Nuevo nombre:', '${userName}'); if(name) store.updateProfile(name, '${userAvatar}');" class="material-symbols-outlined text-slate-500 hover:text-primary cursor-pointer text-sm transition-colors">edit</span>
                     </div>
-                    <p class="text-sm font-medium text-slate-400">${userEmail}</p>
+                    <p class="text-sm font-medium text-slate-500 dark:text-slate-400">${userEmail}</p>
                 </div>
 
                 <!-- Action Buttons -->
@@ -85,10 +85,11 @@ function renderProfile(container) {
                         <span class="material-symbols-outlined text-lg">${store.notificationSettings.enabled ? 'notifications_active' : 'notifications_off'}</span>
                         ${store.notificationSettings.enabled ? 'Notificaciones' : 'Activar Alertas'}
                     </button>
-                    <button onclick="store.shareApp()" 
-                        class="flex-1 py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 bg-blue-600/20 text-blue-400 border border-blue-500/30 text-xs font-bold hover:bg-blue-600/30 transition-all active:scale-95">
-                        <span class="material-symbols-outlined text-lg">share</span>
-                        Compartir
+                    <!-- Enhanced PDF Export Button -->
+                    <button onclick="store.exportToPDF()" 
+                        class="flex-1 py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 bg-red-600/20 text-red-400 border border-red-500/30 text-xs font-bold hover:bg-red-600/30 transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                        Exportar PDF
                     </button>
                 </div>
             </div>
@@ -131,19 +132,101 @@ function renderProfile(container) {
                 </button>
             </section>
 
+            <!-- Monthly Goal Section -->
+            <section class="space-y-3">
+                <div class="flex items-center gap-3 text-slate-400 px-1">
+                    <span class="material-symbols-outlined text-amber-400">flag</span>
+                    <h3 class="text-xs font-bold uppercase tracking-widest">Meta Financiera Mensual</h3>
+                </div>
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <p class="text-[10px] text-slate-500 mb-3">Definí cuánto querés ganar este mes. Verás tu progreso en la Agenda.</p>
+                    <div class="flex items-center gap-3">
+                        <div class="flex items-center gap-1 flex-1 bg-slate-900/50 rounded-xl px-3 py-2.5 border border-white/5">
+                            <span class="text-slate-500 text-sm font-bold">$</span>
+                            <input type="number" id="monthly-goal-input" placeholder="Ej: 500000" value="${(store.user && store.user.monthlyGoal) || ''}" class="bg-transparent text-white text-sm font-bold w-full outline-none placeholder-slate-700">
+                        </div>
+                        <button onclick="const val = document.getElementById('monthly-goal-input').value; store.setMonthlyGoal(val);" class="px-4 py-2.5 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-bold hover:bg-amber-500/30 transition-all active:scale-95">
+                            Fijar
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Apariencia & Notificaciones -->
+            <section class="space-y-5">
+                <h3 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Apariencia y Notificaciones</h3>
+
+                <!-- Dark/Light Mode Toggle -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-xl bg-indigo-500/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-indigo-400" id="theme-icon">${document.documentElement.classList.contains('dark') ? 'dark_mode' : 'light_mode'}</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white">Modo Visual</p>
+                                <p class="text-[10px] text-slate-500" id="theme-label">${document.documentElement.classList.contains('dark') ? 'Oscuro activo' : 'Claro activo'}</p>
+                            </div>
+                        </div>
+                        <button onclick="store.toggleTheme()" 
+                            class="relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-300 focus:outline-none ${document.documentElement.classList.contains('dark') ? 'bg-indigo-500' : 'bg-slate-300'}">
+                            <span class="inline-block size-5 transform rounded-full bg-white shadow-md transition-transform duration-300 ${document.documentElement.classList.contains('dark') ? 'translate-x-6' : 'translate-x-1'}"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Notifications -->
+                <div class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-white/5 p-5 shadow-sm">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-xl bg-amber-500/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-amber-400">alarm</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white">Alarma de Adicionales</p>
+                                <p class="text-[10px] text-slate-500">${store.notificationSettings?.enabled ? 'Activa ✅' : 'Inactiva ❌'}</p>
+                            </div>
+                        </div>
+                        <button onclick="store.requestNotificationPermission()" 
+                            class="px-4 py-2 rounded-xl text-xs font-bold transition-all ${store.notificationSettings?.enabled ? 'bg-green-500/20 text-green-400 border border-green-500/30 hover:bg-red-500/20 hover:text-red-400 hover:border-red-500/30' : 'bg-primary/20 text-primary border border-primary/30 hover:bg-primary/30'}">
+                            ${store.notificationSettings?.enabled ? 'Desactivar' : 'Activar'}
+                        </button>
+                    </div>
+
+                    ${store.notificationSettings?.enabled ? `
+                    <div class="space-y-2">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Avisar con anticipación de:</p>
+                        <div class="flex gap-2">
+                            ${[15, 30, 60, 120].map(mins => `
+                                <button onclick="store.setNotifLeadTime(${mins})" 
+                                    class="flex-1 py-2 rounded-xl text-xs font-bold transition-all ${(store.notificationSettings.leadTime || 60) === mins ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/20' : 'bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white'}">
+                                    ${mins < 60 ? mins + 'min' : (mins / 60) + 'h'}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>` : ''}
+                </div>
+            </section>
 
             <!-- Save Button -->
             <button onclick="store.saveProfile()" class="w-full bg-gradient-to-r from-primary to-blue-600 text-white py-4 rounded-2xl font-bold text-base shadow-lg shadow-primary/25 hover:shadow-primary/40 active:scale-95 transition-all">
                 Guardar Cambios
             </button>
 
-            <!-- Logout -->
-            <div class="pt-6 pb-2">
-                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10">
+            <!-- Logout & System Info -->
+            <div class="pt-6 pb-2 space-y-4">
+                ${store.user?.role === 'admin' ? `
+                 <button onclick="router.navigateTo('#diagnostics')" class="w-full text-indigo-400 text-xs font-bold hover:text-indigo-300 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 active:scale-95">
+                    <span class="material-symbols-outlined text-lg">memory</span>
+                    Estado del Sistema (Diagnóstico)
+                </button>
+                ` : ''}
+
+                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10 mt-2">
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 mt-2 font-mono">v2.1.4 • Build 2026.02.23 v527.4-FINAL</p>
+                  <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v531.5-FINAL • Adicionales Santa Fe</p>
             </div>
         </main>
     `;

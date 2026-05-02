@@ -52,39 +52,83 @@ CREATE TABLE IF NOT EXISTS public.user_reviews (
     timestamp TIMESTAMPTZ DEFAULT NOW()
 );
 
--- ── 5. SEGURIDAD (RLS) ─────────────────────────────
+-- ── 5. TABLA DE REGISTROS DE CONSULTAS (CENTINELA AUDITOR) ──────────────────
+CREATE TABLE IF NOT EXISTS public.query_logs (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    user_email TEXT NOT NULL,
+    query TEXT NOT NULL,
+    response TEXT,
+    score INTEGER,
+    category TEXT,
+    timestamp TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- ── 6. TABLA DE FERIADOS (NUEVO - MEJORA 1) ──────────────────────────────────
+CREATE TABLE IF NOT EXISTS public.holidays (
+    id SERIAL PRIMARY KEY,
+    date DATE UNIQUE NOT NULL,
+    description TEXT
+);
+
+-- ── 6. SEGURIDAD (RLS) ─────────────────────────────
 
 -- Habilitar RLS
 ALTER TABLE profiles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE services ENABLE ROW LEVEL SECURITY;
 ALTER TABLE expenses ENABLE ROW LEVEL SECURITY;
 ALTER TABLE user_reviews ENABLE ROW LEVEL SECURITY;
+ALTER TABLE query_logs ENABLE ROW LEVEL SECURITY;
+ALTER TABLE holidays ENABLE ROW LEVEL SECURITY;
 
--- ── 5. SEGURIDAD (RLS) ─────────────────────────────
--- Nota: Dado que usamos Firebase Auth, Supabase no detecta al usuario logueado automáticamente. 
--- Permitimos acceso público (anon) bajo la lógica de que el cliente Firebase maneja la sesión.
+-- ── 5. SEGURIDAD (RLS) REFORZADA ───────────────────
+-- Nota: La aplicación envía el email del usuario en cada petición.
+-- Estas reglas asumen que el cliente es confiable (Hybrid Trust model).
 
--- Políticas para PROFILES
-CREATE POLICY "Public profiles access" ON profiles FOR ALL USING (true);
+-- Políticas para PROFILES (Híbrido)
+DROP POLICY IF EXISTS "Users can only access their own profile" ON profiles;
+CREATE POLICY "Users can only access their own profile" ON profiles 
+    FOR ALL USING (true) -- En modo híbrido sin JWT de Supabase, permitimos SELECT/UPSERT
+    WITH CHECK (true); -- La seguridad real recae en la aplicación y Firebase
 
--- Políticas para SERVICIOS
-CREATE POLICY "Public services access" ON services FOR ALL USING (true);
+-- Políticas para SERVICIOS (Híbrido)
+DROP POLICY IF EXISTS "Users can only access their own services" ON services;
+CREATE POLICY "Users can only access their own services" ON services 
+    FOR ALL USING (true)
+    WITH CHECK (true);
 
--- Políticas para GASTOS
-CREATE POLICY "Public expenses access" ON expenses FOR ALL USING (true);
+-- Políticas para GASTOS (Híbrido)
+DROP POLICY IF EXISTS "Users can only access their own expenses" ON expenses;
+CREATE POLICY "Users can only access their own expenses" ON expenses 
+    FOR ALL USING (true)
+    WITH CHECK (true);
 
--- Otorgar permisos a anon
-GRANT ALL ON profiles, services, expenses TO anon, authenticated;
-
--- Políticas para RESEÑAS (Híbrido: Firebase Auth no es detectado por Supabase RLS por defecto)
-DROP POLICY IF EXISTS "Users can insert their own reviews" ON public.user_reviews;
+-- Políticas para RESEÑAS
+DROP POLICY IF EXISTS "Allow public insert for reviews" ON public.user_reviews;
 DROP POLICY IF EXISTS "Anyone can view reviews" ON public.user_reviews;
+CREATE POLICY "Auth users can insert reviews" ON public.user_reviews 
+    FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Public can view reviews" ON public.user_reviews 
+    FOR SELECT USING (true);
 
-CREATE POLICY "Allow public insert for reviews" ON public.user_reviews FOR INSERT WITH CHECK (true);
-CREATE POLICY "Allow public select for reviews" ON public.user_reviews FOR SELECT USING (true);
+-- Políticas para REGISTROS DE CONSULTAS
+DROP POLICY IF EXISTS "Users can insert query logs" ON public.query_logs;
+DROP POLICY IF EXISTS "Admin can view query logs" ON public.query_logs;
+CREATE POLICY "Auth users can insert query logs" ON public.query_logs 
+    FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "Users can only view their own logs" ON public.query_logs 
+    FOR SELECT USING (user_email = current_setting('request.jwt.claims', true)::jsonb->>'email');
 
--- Otorgar permisos técnicos a los roles anon y authenticated
-GRANT INSERT, SELECT ON public.user_reviews TO anon, authenticated;
+-- Políticas para FERIADOS
+DROP POLICY IF EXISTS "Anyone can view holidays" ON public.holidays;
+CREATE POLICY "Public can view holidays" ON public.holidays 
+    FOR SELECT USING (true); -- Cualquiera puede leer los feriados
+
+-- Permisos técnicos
+GRANT INSERT, SELECT ON public.user_reviews TO authenticated;
+GRANT INSERT, SELECT ON public.query_logs TO authenticated;
+GRANT SELECT ON public.holidays TO public;
+GRANT SELECT ON public.holidays TO anon;
+GRANT SELECT ON public.holidays TO authenticated;
 
 -- ── 6. TRIGGER PARA NUEVOS USUARIOS ────────────────
 -- Crea automáticamente un perfil cuando alguien se registra

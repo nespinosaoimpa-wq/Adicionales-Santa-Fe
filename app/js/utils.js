@@ -2,6 +2,18 @@
  * Adicionales Santa Fe - Utilities
  */
 
+// --- Security: XSS Sanitizer ---
+window.escapeHTML = function (str) {
+    if (str === null || str === undefined) return '';
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+};
+
+
 const showToast = (message) => {
     const toast = document.createElement('div');
     toast.className = 'fixed bottom-24 left-1/2 -translate-x-1/2 bg-slate-800 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium z-[100] transition-opacity duration-300 opacity-0';

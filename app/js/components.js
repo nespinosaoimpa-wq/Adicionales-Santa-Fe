@@ -2,19 +2,101 @@
  * Adicionales Santa Fe - Shared UI Components
  */
 
-function renderAdBanner() {
-    if (!store.ads || store.ads.length === 0) return '';
-    const ad = store.ads[Math.floor(Math.random() * store.ads.length)];
+// --- Global Branding ---
+function renderLogo(size = 'medium') {
+    const sizes = {
+        small: 'size-8 text-[8px]',
+        medium: 'size-12 text-[10px]',
+        large: 'size-16 text-xs'
+    };
+    const s = sizes[size] || sizes.medium;
+
     return `
-        <div class="my-6 mx-4 rounded-xl overflow-hidden shadow-lg relative group">
-            <a href="${ad.linkUrl}" target="_blank" class="block relative">
-                <span class="absolute top-2 right-2 bg-black/60 text-white text-[9px] px-1.5 py-0.5 rounded uppercase tracking-wider font-bold backdrop-blur-sm">Publicidad</span>
-                <img src="${ad.imageUrl}" class="w-full h-32 object-cover" alt="Anuncio">
-                <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            </a>
+        <div class="${s} relative flex items-center justify-center select-none group">
+            <!-- Glow Effect -->
+            <div class="absolute inset-0 bg-primary/20 dark:bg-primary/10 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500"></div>
+            
+            <!-- Shield Container -->
+            <div class="relative w-full h-full bg-slate-900 rounded-2xl border border-white/10 flex flex-col items-center justify-center overflow-hidden shadow-2xl ring-1 ring-white/5">
+                <!-- Inner Gradient Glow -->
+                <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-black/40"></div>
+                
+                <!-- Police Shield SVG Icon -->
+                <svg viewBox="0 0 24 24" class="size-1/2 text-primary mb-0.5 drop-shadow-[0_0_8px_rgba(13,89,242,0.4)]" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="M12 8v4M12 16h.01" stroke-width="2.5" />
+                </svg>
+                
+                <!-- Identity Text -->
+                <div class="font-black tracking-[0.15em] text-white/90 uppercase leading-none">
+                    ASF
+                </div>
+                
+                <!-- Status Dot -->
+                <div class="absolute top-1.5 right-1.5 size-1.5 bg-emerald-500 rounded-full shadow-[0_0_6px_rgba(16,185,129,0.9)] animate-pulse"></div>
+            </div>
         </div>
     `;
 }
+window.renderLogo = renderLogo;
+
+function renderAdBanner() {
+    // 1. Native Custom Ad Check
+    if (store.ads && store.ads.length > 0) {
+        const ad = store.ads[0]; 
+        return `
+            <div class="w-full my-4 flex justify-center group overflow-hidden">
+                <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-3xl overflow-hidden rounded-2xl shadow-lg border border-white/10 opacity-90 hover:opacity-100 transition-opacity relative">
+                    <img src="${ad.imageUrl}" class="w-full object-cover max-h-[140px]" alt="Patrocinado">
+                    <div class="absolute top-1 right-2 px-1.5 rounded-sm bg-black/40 backdrop-blur-md text-[8px] text-white uppercase font-bold">Patrocinado</div>
+                </a>
+            </div>
+        `;
+    }
+
+    // 2. Google AdSense Fallback - Self-collapsing container
+    return `
+        <div class="w-full flex flex-col items-center justify-center ad-container overflow-hidden">
+            <ins class="adsbygoogle"
+                 style="display:block;width:100%;max-width:728px;"
+                 data-ad-client="ca-pub-4261554477116731"
+                 data-ad-slot="2506973015"
+                 data-ad-format="horizontal"
+                 data-full-width-responsive="true"></ins>
+        </div>
+    `;
+}
+
+
+
+
+
+function renderAdBannerSmall() {
+    if (store.ads && store.ads.length > 0) {
+        const ad = store.ads[0];
+        return `
+            <div class="w-full my-3 flex justify-center relative group" style="min-height:50px;">
+                <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-md overflow-hidden rounded-xl shadow-md border border-white/10 opacity-90 hover:opacity-100 transition-opacity">
+                    <img src="${ad.imageUrl}" class="w-full object-cover max-h-[80px]" alt="Patrocinado">
+                    <div class="absolute top-1 right-2 px-1.5 rounded-sm bg-black/40 backdrop-blur-md text-[8px] text-white uppercase font-bold">Patrocinado</div>
+                </a>
+            </div>
+        `;
+    }
+
+    // Google AdSense Small Banner Fallback
+    return `
+        <div class="w-full my-3 flex justify-center" style="min-height:50px;">
+            <ins class="adsbygoogle"
+                 style="display:block;width:100%;max-width:400px;height:100px;"
+                 data-ad-client="ca-pub-4261554477116731"
+                 data-ad-slot="2506973015"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="-fb+5w+4e-db+86"></ins>
+        </div>
+    `;
+}
+
 
 function renderBottomNav(activePage = 'agenda') {
     const navItems = [
@@ -50,7 +132,7 @@ function renderOfflineBanner() {
 
 function renderInstallBanner() {
     return `
-        <div id="install-banner" class="fixed bottom-24 left-4 right-4 z-[60] bg-primary text-white p-4 rounded-2xl flex items-center justify-between shadow-2xl shadow-primary/40 transform translate-y-32 transition-transform duration-500 hidden">
+        <div id="install-banner" class="fixed bottom-32 left-4 right-4 z-[60] bg-primary text-white p-4 rounded-2xl flex items-center justify-between shadow-2xl shadow-primary/40 animate-slide-up hidden">
             <div class="flex items-center gap-3">
                 <div class="size-10 bg-white/20 rounded-xl flex items-center justify-center">
                     <span class="material-symbols-outlined">download</span>
@@ -104,7 +186,7 @@ function renderEmptyState(config) {
             <div class="size-24 rounded-full bg-primary/10 flex items-center justify-center mb-6">
                 <span class="material-symbols-outlined text-5xl text-primary/40">${icon}</span>
             </div>
-            <h3 class="text-xl font-bold text-white mb-2">${title}</h3>
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">${title}</h3>
             <p class="text-slate-400 mb-6 max-w-sm">${message}</p>
             ${actionText ? `
                 <button onclick="${actionHandler}" class="px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl transition-all active:scale-95">
@@ -149,7 +231,7 @@ window.addEventListener('online', () => updateOfflineStatus(false));
 window.addEventListener('offline', () => updateOfflineStatus(true));
 function renderIOSInstallPrompt() {
     return `
-        <div id="ios-install-banner" class="fixed bottom-6 left-4 right-4 z-[100] bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 shadow-2xl border border-primary/20 transform translate-y-[200%] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] animate-ios-entry">
+        <div id="ios-install-banner" class="fixed bottom-32 left-4 right-4 z-[100] bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 shadow-2xl border border-primary/20 transform translate-y-[200%] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] animate-ios-entry">
             <div class="flex items-start gap-5 text-left">
                 <div class="size-14 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/20 shrink-0">
                     <span class="material-symbols-outlined text-3xl">add_to_home_screen</span>
@@ -159,49 +241,95 @@ function renderIOSInstallPrompt() {
                     <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Para usar esta aplicación a pantalla completa en tu iPhone:</p>
                     
                     <div class="flex flex-col gap-2 pt-2">
-                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-700 dark:text-slate-300">
                             <span class="size-6 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-primary font-bold">1</span>
                             <span>Toca el botón <span class="bg-slate-100 dark:bg-white/10 px-1.5 py-0.5 rounded-md font-bold text-primary flex inline-flex items-center gap-1">Compartir <span class="material-symbols-outlined text-xs">ios_share</span></span></span>
                         </div>
-                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-300">
+                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-700 dark:text-slate-300">
                             <span class="size-6 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-primary font-bold">2</span>
                             <span>Elegí <span class="font-bold text-primary">"Añadir a panta. de inicio"</span></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <button onclick="this.closest('#ios-install-banner').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
+            <button onclick="this.closest('#ios-install-banner').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">close</span>
             </button>
         </div>
     `;
 }
 
-function showSuccessAnimation(message) {
-    const overlay = document.createElement('div');
-    overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm';
-    overlay.innerHTML = `
-        <div class="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-2xl animate-scale-in">
-            <div class="flex flex-col items-center">
-                <div class="size-20 rounded-full bg-green-500/20 flex items-center justify-center mb-4 animate-bounce-in">
-                    <span class="material-symbols-outlined text-5xl text-green-500">check_circle</span>
-                </div>
-                <p class="text-lg font-bold text-slate-900 dark:text-white">${message}</p>
-            </div>
-        </div>
-    `;
-    document.body.appendChild(overlay);
 
-    setTimeout(() => {
-        overlay.classList.add('animate-fade-out');
-        setTimeout(() => overlay.remove(), 300);
-    }, 1500);
+
+function initAds() {
+    try {
+        const ads = document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status="done"])');
+        if (ads.length === 0) return;
+        
+        console.log(`📊 AdSense: Preparing to init ${ads.length} units...`);
+        
+        // Give the DOM a moment to settle (helpful in SPAs)
+        setTimeout(() => {
+            ads.forEach(() => {
+                try {
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                } catch (err) {
+                    console.warn("Individual ad push error:", err);
+                }
+            });
+            console.log(`✅ AdSense: Push completed for ${ads.length} units.`);
+        }, 150);
+    } catch (e) {
+        console.error("AdSense init error:", e);
+    }
 }
 
-function copyToClipboard(text, successMsg) {
-    navigator.clipboard.writeText(text).then(() => {
-        showToast(successMsg);
-    });
-}
 
 window.copyToClipboard = copyToClipboard;
+window.renderAdBanner = renderAdBanner;
+window.renderAdBannerSmall = renderAdBannerSmall;
+window.initAds = initAds;
+window.renderBottomNav = renderBottomNav;
+window.renderOfflineBanner = renderOfflineBanner;
+window.renderInstallBanner = renderInstallBanner;
+window.renderLoadingState = renderLoadingState;
+window.renderEmptyState = renderEmptyState;
+window.renderIOSInstallPrompt = renderIOSInstallPrompt;
+
+window.renderGlobalAnnouncement = function () {
+    const container = document.getElementById('global-announcement-container');
+    if (!container) return;
+
+    const ann = store.latestAnnouncement;
+    if (!ann) {
+        container.innerHTML = '';
+        return;
+    }
+
+    if (localStorage.getItem('dismissed_announcement_' + ann.id)) {
+        container.innerHTML = '';
+        return;
+    }
+
+    let bg, text, icon;
+    switch (ann.type) {
+        case 'warning': bg = 'bg-yellow-500/95'; text = 'text-yellow-950'; icon = 'warning'; break;
+        case 'danger': bg = 'bg-red-500/95'; text = 'text-white'; icon = 'emergency'; break;
+        case 'success': bg = 'bg-emerald-500/95'; text = 'text-white'; icon = 'check_circle'; break;
+        default: bg = 'bg-blue-500/95'; text = 'text-white'; icon = 'campaign'; break;
+    }
+
+    container.innerHTML = `
+        <div class="w-full ${bg} ${text} backdrop-blur-xl px-4 py-3 shadow-lg flex items-start gap-3 animate-slide-down border-b border-white/20">
+            <span class="material-symbols-outlined shrink-0 mt-0.5">${icon}</span>
+            <div class="flex-1">
+                <p class="text-[13px] font-bold leading-tight">${ann.message}</p>
+            </div>
+            <button onclick="localStorage.setItem('dismissed_announcement_${ann.id}', 'true'); renderGlobalAnnouncement();" class="shrink-0 p-1 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center justify-center">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+    `;
+};
+
+console.log("✅ components.js loaded & exported successfully");

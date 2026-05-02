@@ -27,7 +27,7 @@ function renderAgenda(container) {
         <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 pt-12 pb-4">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-2xl font-bold tracking-tight dark:text-white">Mi Agenda</h1>
+                    <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Mi Agenda</h1>
                     <div class="flex items-center gap-2">
                         <button id="btn-prev-month" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">arrow_back_ios</span></button>
                         <p class="text-sm text-slate-500 dark:text-slate-400 capitalize w-24 text-center select-none">${currentMonthLabel}</p>
@@ -38,22 +38,23 @@ function renderAgenda(container) {
                     <button onclick="store.shareApp()" class="size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
                         <span class="material-symbols-outlined text-xl">share</span>
                     </button>
-                    <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl">
+                    <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-slate-900 dark:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl">
                         <span class="material-symbols-outlined text-xl">terminal</span>
                     </button>
                     <button onclick="showToast('Sin notificaciones nuevas')" class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300">
                         <span class="material-symbols-outlined">notifications</span>
                     </button>
                     <div class="flex items-center gap-2">
-                        <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full overflow-hidden border-2 border-primary/20 cursor-pointer hover:scale-105 transition-transform">
-                            <img class="w-full h-full object-cover" src="${store.user.avatar}" />
+                        <div onclick="router.navigateTo('#profile')" class="hover:scale-105 transition-transform cursor-pointer">
+                            ${renderLogo('medium')}
                         </div>
                     </div>
                 </div>
             </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto px-6 space-y-8 pb-32">
+        <main class="flex-1 overflow-y-auto px-6 space-y-5 pb-32">
+
             <!-- Next Shift Hero Card -->
             ${nextShift ? `
             <section class="mt-4">
@@ -66,7 +67,7 @@ function renderAgenda(container) {
                             <h2 class="text-xl font-bold">Adicional ${nextShift.type}</h2>
                         </div>
                         <div class="flex flex-col items-end">
-                             <span class="material-symbols-outlined text-white/80">alarm</span>
+                             <span class="material-symbols-outlined text-slate-900 dark:text-white/80">alarm</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-4 mb-6">
@@ -75,7 +76,7 @@ function renderAgenda(container) {
                         </div>
                         <div>
                             <p class="text-3xl font-bold tracking-tighter">${nextShift.hours}h</p>
-                            <p class="text-xs opacity-80">${store.getFormattedDate(nextShift.date)} • ${nextShift.location}</p>
+                            <p class="text-xs opacity-80">${store.getFormattedDate(nextShift.date)} • ${escapeHTML(nextShift.location)}</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4 border-t border-white/10 pt-4">
@@ -92,20 +93,64 @@ function renderAgenda(container) {
             </section>
             ` : ''}
 
+            ${renderHomeBenefits()}
+
+            <!-- Ad Banner -->
+            ${renderAdBanner()}
+
+            <!-- Rank Badge + Goal Bar -->
+            <section class="mt-4 space-y-3">
+                ${(() => {
+            const rank = store.getUserRank();
+            const progress = store.getRankProgress();
+            const goal = store.getGoalProgress();
+            return `
+                    <div class="flex items-center gap-3 p-3 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-white/5">
+                        <span class="text-3xl">${rank.icon}</span>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-center">
+                                <p class="text-xs font-bold text-slate-900 dark:text-white truncate">${rank.name}</p>
+                                <p class="text-[10px] font-bold text-primary">${rank.monthHours.toFixed(1)}h este mes</p>
+                            </div>
+                            <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 mt-1.5">
+                                <div class="bg-gradient-to-r from-primary to-blue-400 h-1.5 rounded-full transition-all duration-700" style="width: ${progress}%"></div>
+                            </div>
+                            ${rank.nextRank ? `<p class="text-[9px] text-slate-500 mt-0.5">Faltan ${rank.hoursToNext.toFixed(1)}h para ${rank.nextRank.name} ${rank.nextRank.icon}</p>` : `<p class="text-[9px] text-amber-500 mt-0.5 font-bold">¡Rango máximo alcanzado!</p>`}
+                        </div>
+                    </div>
+                    ${goal.goal > 0 ? `
+                    <div class="p-3 rounded-2xl bg-white dark:bg-slate-800/60 border border-slate-200 dark:border-white/5">
+                        <div class="flex justify-between items-center mb-1.5">
+                            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">🎯 Meta Mensual</p>
+                            <p class="text-[10px] font-bold ${goal.percent >= 100 ? 'text-emerald-500' : 'text-primary'}">${goal.percent}%</p>
+                        </div>
+                        <div class="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+                            <div class="${goal.percent >= 100 ? 'bg-gradient-to-r from-emerald-500 to-green-400' : 'bg-gradient-to-r from-amber-500 to-orange-400'} h-2 rounded-full transition-all duration-700" style="width: ${goal.percent}%"></div>
+                        </div>
+                        <div class="flex justify-between mt-1">
+                            <p class="text-[9px] text-slate-500">$${goal.earned.toLocaleString('es-AR')} ganado</p>
+                            <p class="text-[9px] text-slate-500">$${goal.goal.toLocaleString('es-AR')} meta</p>
+                        </div>
+                    </div>
+                    ` : ''}
+                    `;
+        })()}
+            </section>
+
             <!-- Calendar Section -->
             <section class="space-y-4">
                 <div class="flex justify-between items-center">
-                    <h3 class="font-bold text-lg dark:text-white">Calendario</h3>
+                    <h3 class="font-bold text-lg dark:text-slate-900 dark:text-white">Calendario</h3>
                     <div class="flex gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                        <button onclick="store.viewDate = new Date(); renderAgenda(document.getElementById('app'))" class="px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm dark:text-white">Hoy</button>
+                        <button onclick="store.viewDate = new Date(); renderAgenda(document.getElementById('app'))" class="px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm dark:text-slate-900 dark:text-white">Hoy</button>
                     </div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm">
                     <!-- Calendar Grid Header -->
                     <div class="grid grid-cols-7 gap-1 mb-2">
                          ${['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'].map(d =>
-        `<div class="text-center text-[10px] font-bold text-slate-400 uppercase">${d}</div>`
-    ).join('')}
+            `<div class="text-center text-[10px] font-bold text-slate-400 uppercase">${d}</div>`
+        ).join('')}
                     </div>
                     <!-- Calendar Grid -->
                     <div class="grid grid-cols-7 gap-y-2" id="calendar-grid">
@@ -116,14 +161,14 @@ function renderAgenda(container) {
 
             <!-- Shifts List -->
             <section class="space-y-4">
-                <h3 class="font-bold text-lg dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
+                <h3 class="font-bold text-lg dark:text-slate-900 dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
                 <div class="space-y-3">
                     ${dayServices.length > 0 ? dayServices.map((s, i) => renderServiceCard(s, i)).join('') :
             `<div class="flex flex-col items-center py-10 text-center animate-slide-up">
                 <div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
                     <span class="material-symbols-outlined text-3xl text-primary/40">event_busy</span>
                 </div>
-                <p class="text-sm font-semibold dark:text-white mb-1">Sin servicios</p>
+                <p class="text-sm font-semibold dark:text-slate-900 dark:text-white mb-1">Sin servicios</p>
                 <p class="text-xs text-slate-400 mb-4">No hay turnos para esta fecha</p>
                 <button onclick="router.navigateTo('#register')" class="px-5 py-2 bg-primary text-white text-xs font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
                     + Registrar Servicio
@@ -132,10 +177,21 @@ function renderAgenda(container) {
                 </div>
             </section>
         </main>
+        
+        <!-- Floating Action Button for Registration -->
+        <div class="fixed bottom-32 right-6 z-[90]">
+            <button onclick="router.navigateTo('#register')" 
+                    class="size-14 rounded-2xl bg-primary text-white shadow-2xl shadow-primary/40 flex items-center justify-center active:scale-95 transition-all hover:rotate-90 duration-300 group">
+                <span class="material-symbols-outlined text-3xl group-hover:scale-110 transition-transform">add</span>
+            </button>
+        </div>
+
         ${renderBottomNav('agenda')}
     `;
 
     container.innerHTML = html;
+    initAds();
+
 
     // Attach listeners
     document.querySelectorAll('.calendar-day').forEach(el => {
@@ -175,17 +231,20 @@ function generateCalendarGrid(year, month, selectedDate) {
         const isToday = store.getLocalDateString() === dateStr;
 
         // Colors
-        const hasPublic = store.services.some(s => s.date === dateStr && s.type === 'Public');
-        const hasPrivate = store.services.some(s => s.date === dateStr && s.type === 'Private');
-
+        const dayServices = store.services.filter(s => s.date === dateStr);
         let dots = '';
-        if (hasPublic) dots += `<div class="size-1 rounded-full bg-primary"></div>`;
-        if (hasPrivate) dots += `<div class="size-1 rounded-full bg-service-private"></div>`;
+        dayServices.slice(0, 3).forEach(s => {
+            const dotColor = s.type === 'Public' ? 'bg-primary' : (s.type === 'Private' ? 'bg-service-private' : 'bg-service-ospe');
+            dots += `<div class="size-1 rounded-full ${dotColor}"></div>`;
+        });
+        if (dayServices.length > 3) {
+             dots += `<div class="size-1 rounded-full bg-slate-400"></div>`;
+        }
 
         html += `
             <div class="flex flex-col items-center py-2 relative calendar-day cursor-pointer" data-date="${dateStr}">
                 ${isSelected ? `<div class="absolute inset-0 bg-primary/10 rounded-lg border border-primary/20"></div>` : ''}
-                <span class="relative z-10 font-bold ${isSelected ? 'text-primary' : (isToday ? 'text-accent-cyan' : 'text-slate-500 dark:text-slate-300')}">${day}</span>
+                <span class="relative z-10 font-bold ${isSelected ? 'text-primary' : (isToday ? 'text-accent-cyan' : 'text-slate-500 dark:text-slate-700 dark:text-slate-300')}">${day}</span>
                 <div class="flex gap-0.5 mt-1 relative z-10 h-1">
                     ${dots}
                 </div>
@@ -201,8 +260,9 @@ function renderServiceCard(service, index = 0) {
     const gradientTo = isPublic ? 'to-blue-400' : 'to-pink-500';
     const textColor = isPublic ? 'text-primary' : 'text-purple-400';
     const bgSoft = isPublic ? 'bg-primary/10' : 'bg-purple-500/10';
-    const icon = isPublic ? 'account_balance' : 'storefront';
-    const typeLabel = isPublic ? 'Público' : (service.type === 'OSPES' ? 'OSPES' : 'Privado');
+    const icon = isPublic ? 'account_balance' : (service.type === 'OSPES' ? 'medical_services' : 'storefront');
+    const typeLabel = isPublic ? 'Público' : (service.type === 'Private' ? 'Privado' : (service.type || 'Privado'));
+
 
     const timeRange = service.startTime && service.endTime ? `${service.startTime} - ${service.endTime}` : 'Horario no especificado';
     const subType = service.subType || '';
@@ -240,7 +300,7 @@ function renderServiceCard(service, index = 0) {
                 <div class="flex-1 min-w-0">
                     <div class="flex justify-between items-start" style="display: flex; justify-content: space-between; align-items: flex-start;">
                         <div class="min-w-0">
-                            <h4 class="font-bold dark:text-white leading-tight truncate">${service.location || 'Sin ubicación'}</h4>
+                            <h4 class="font-bold dark:text-slate-900 dark:text-white leading-tight truncate">${escapeHTML(service.location || 'Sin ubicación')}</h4>
                             <p class="text-[10px] text-slate-500 font-bold uppercase tracking-wider mt-0.5">${typeLabel} ${subType}</p>
                         </div>
                         <span class="text-sm font-extrabold ${textColor} whitespace-nowrap ml-2">$${(service.total || 0).toLocaleString('es-AR')}</span>

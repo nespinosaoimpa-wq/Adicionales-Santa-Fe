@@ -5,33 +5,78 @@
 function renderControlPanel(container) {
     if (!container) container = document.getElementById('app');
 
-    // Calculate Stats
-    const totalServices = store.services.length;
+    // --- QUINCENAL FILTER STATE ---
+    if (window._controlPanelFilter === undefined) {
+        const today = new Date();
+        window._controlPanelFilter = today.getDate() <= 15 ? 'q1' : 'q2';
+    }
+    if (window._controlPanelMonth === undefined) {
+        window._controlPanelMonth = new Date().getMonth();
+        window._controlPanelYear = new Date().getFullYear();
+    }
 
-    // Sort by date desc
-    const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
+    const filter = window._controlPanelFilter;
+    const currentMonth = window._controlPanelMonth;
+    const currentYear = window._controlPanelYear;
+    const monthNamesShort = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const currentMonthName = monthNamesShort[currentMonth];
 
-    const publicServices = store.services.filter(s => s.type === 'Public');
-    const privateServices = store.services.filter(s => s.type === 'Private');
+    window.prevControlMonth = () => {
+        if (window._controlPanelMonth === 0) {
+            window._controlPanelMonth = 11;
+            window._controlPanelYear--;
+        } else {
+            window._controlPanelMonth--;
+        }
+        renderControlPanel();
+    };
 
-    const totalPublic = publicServices.reduce((sum, s) => sum + s.total, 0);
-    const totalPrivate = privateServices.reduce((sum, s) => sum + s.total, 0);
+    window.nextControlMonth = () => {
+        if (window._controlPanelMonth === 11) {
+            window._controlPanelMonth = 0;
+            window._controlPanelYear++;
+        } else {
+            window._controlPanelMonth++;
+        }
+        renderControlPanel();
+    };
+
+    // Filter services by current month and selected quincena
+    const periodServices = store.services.filter(s => {
+        if (!s.date) return false;
+        const d = new Date(s.date + 'T00:00:00');
+        const isSameMonth = d.getMonth() === currentMonth && d.getFullYear() === currentYear;
+        if (!isSameMonth) return false;
+
+        const day = d.getDate();
+        if (filter === 'q1') return day >= 1 && day <= 15;
+        if (filter === 'q2') return day >= 16;
+        return true;
+    });
+
+    // Calculate Stats for filtered services
+    const publicServices = periodServices.filter(s => s.type === 'Public');
+    const privateServices = periodServices.filter(s => s.type === 'Private');
+
+    const totalPublic = publicServices.reduce((sum, s) => sum + (s.total || 0), 0);
+    const totalPrivate = privateServices.reduce((sum, s) => sum + (s.total || 0), 0);
     const totalEarnings = totalPublic + totalPrivate;
 
-    const hoursPublic = publicServices.reduce((sum, s) => sum + s.hours, 0);
-    const hoursPrivate = privateServices.reduce((sum, s) => sum + s.hours, 0);
+    const hoursPublic = publicServices.reduce((sum, s) => sum + (parseFloat(s.hours) || 0), 0);
+    const hoursPrivate = privateServices.reduce((sum, s) => sum + (parseFloat(s.hours) || 0), 0);
+
+    // Sort all services by date desc for the recent feed
+    const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
 
     const html = `
-        <header class="sticky top-0 z-50 glass-card px-5 py-4 flex items-center justify-between border-b border-white/5 bg-background-dark/80 backdrop-blur-md">
+        <header class="sticky top-0 z-50 px-5 py-4 flex items-center justify-between border-b border-white/5 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
             <div class="flex items-center gap-3">
-                <div class="flex items-center gap-3">
-                    <div onclick="router.navigateTo('#profile')" class="size-10 rounded-full border-2 border-primary/50 overflow-hidden bg-slate-800 cursor-pointer">
-                        <img class="w-full h-full object-cover" src="${store.user.avatar}" onerror="this.src='https://ui-avatars.com/api/?background=0d59f2&color=fff&name=User'" />
-                    </div>
+                <div onclick="router.navigateTo('#profile')" class="hover:scale-105 transition-transform cursor-pointer">
+                    ${renderLogo('medium')}
                 </div>
                 <div>
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-primary/80">Oficial de Guardia</p>
-                    <h1 class="text-base font-bold leading-tight dark:text-white">Panel de Control</h1>
+                    <p class="text-[10px] font-bold uppercase tracking-widest text-primary">Oficial de Guardia</p>
+                    <h1 class="text-base font-bold leading-tight text-slate-900 dark:text-white">Panel de Control</h1>
                 </div>
             </div>
             <div class="flex gap-2">
@@ -40,18 +85,33 @@ function renderControlPanel(container) {
                         <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
                     </button>
                 ` : ''}
-                <button onclick="showToast('Modo privacidad activado')" class="size-10 flex items-center justify-center rounded-full glass-card hover:bg-white/10 transition-colors text-white">
+                <button onclick="router.navigateTo('#stats')" class="size-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-white/10 transition-colors text-slate-600 dark:text-slate-900 dark:text-white">
                     <span class="material-symbols-outlined text-xl">visibility</span>
                 </button>
             </div>
         </header>
 
-        <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32">
+        <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32 animate-fade-in">
             <!-- Period Selector -->
-            <div class="flex p-1.5 glass-card rounded-xl">
-                <button onclick="showToast('Filtrando: 1-15 Oct')" class="flex-1 py-2 px-3 rounded-lg bg-primary text-white text-sm font-semibold shadow-lg shadow-primary/20">1 - 15 Oct</button>
-                <button onclick="showToast('Filtrando: 16-31 Oct')" class="flex-1 py-2 px-3 rounded-lg text-slate-400 text-sm font-medium hover:text-white transition-colors">16 - 31 Oct</button>
+
+            <div class="flex items-center justify-between mb-4 px-2">
+                <button onclick="window.prevControlMonth()" class="p-1 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">arrow_back_ios_new</span></button>
+                <div class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white">${currentMonthName} ${currentYear}</div>
+                <button onclick="window.nextControlMonth()" class="p-1 text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
             </div>
+
+            <div class="flex p-1.5 glass-card rounded-xl">
+                <button onclick="window._controlPanelFilter='q1'; renderControlPanel()" 
+                        class="flex-1 py-2 px-3 rounded-lg text-[13px] font-semibold transition-all ${filter === 'q1' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:text-white'}">
+                    1 - 15 ${currentMonthName}
+                </button>
+                <button onclick="window._controlPanelFilter='q2'; renderControlPanel()" 
+                        class="flex-1 py-2 px-3 rounded-lg text-[13px] font-semibold transition-all ${filter === 'q2' ? 'bg-primary text-white shadow-lg shadow-primary/20' : 'text-slate-400 hover:text-white'}">
+                    16 - 31 ${currentMonthName}
+                </button>
+            </div>
+
+            ${renderHomeBenefits()}
 
             <!-- Main Earnings Card -->
             <div class="relative overflow-hidden rounded-2xl glass-card p-6 border border-white/10">
@@ -60,7 +120,7 @@ function renderControlPanel(container) {
                     <p class="text-xs font-medium text-slate-400 uppercase tracking-widest mb-1">Total Acumulado Quincena</p>
                     <div class="flex items-baseline gap-1 mb-6">
                         <span class="text-2xl font-bold text-primary">$</span>
-                        <span class="text-5xl font-extrabold tracking-tight text-white">${(totalEarnings || 0).toLocaleString()}</span>
+                        <span class="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">${(totalEarnings || 0).toLocaleString('es-AR')}</span>
                     </div>
                     
                     <div class="grid grid-cols-2 gap-4 w-full">
@@ -69,16 +129,16 @@ function renderControlPanel(container) {
                                 <span class="size-2 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(34,211,238,0.5)]"></span>
                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Público</p>
                             </div>
-                            <p class="text-lg font-bold text-white">$${(totalPublic || 0).toLocaleString()}</p>
-                            <p class="text-[10px] text-slate-500">${hoursPublic} Horas</p>
+                            <p class="text-lg font-bold text-slate-900 dark:text-white">$${(totalPublic || 0).toLocaleString('es-AR')}</p>
+                            <p class="text-[10px] text-slate-500">${hoursPublic.toFixed(1)} Horas</p>
                         </div>
                         <div class="bg-white/5 rounded-xl p-3 border border-white/5">
                             <div class="flex items-center gap-2 mb-1">
                                 <span class="size-2 rounded-full bg-service-ospe shadow-[0_0_8px_rgba(139,92,246,0.5)]"></span>
                                 <p class="text-[10px] font-bold text-slate-400 uppercase">Privado</p>
                             </div>
-                            <p class="text-lg font-bold text-white">$${(totalPrivate || 0).toLocaleString()}</p>
-                            <p class="text-[10px] text-slate-500">${hoursPrivate} Horas</p>
+                            <p class="text-lg font-bold text-slate-900 dark:text-white">$${(totalPrivate || 0).toLocaleString('es-AR')}</p>
+                            <p class="text-[10px] text-slate-500">${hoursPrivate.toFixed(1)} Horas</p>
                         </div>
                     </div>
                 </div>
@@ -87,8 +147,8 @@ function renderControlPanel(container) {
             <!-- Recent Services Feed -->
             <section>
                 <div class="flex justify-between items-end mb-4 px-1">
-                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400">Servicios Recientes</h3>
-                    <span onclick="router.navigateTo('#history')" class="text-xs text-slate-500 cursor-pointer">Ver todo</span>
+                    <h3 class="text-sm font-bold uppercase tracking-wider text-slate-400 font-bold">Servicios Recientes</h3>
+                    <span onclick="router.navigateTo('#history')" class="text-xs text-slate-500 cursor-pointer font-bold">Ver todo</span>
                 </div>
                 <div class="space-y-3">
                     ${sortedServices.slice(0, 5).map(s => {
@@ -97,25 +157,25 @@ function renderControlPanel(container) {
         const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
         const icon = isPub ? 'account_balance' : 'shopping_cart';
         return `
-                            <div class="glass-card p-4 rounded-2xl flex items-center justify-between border-white/5">
+                            <div onclick="router.navigateTo('#details?id=${s.id}')" class="cursor-pointer glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 group active:scale-[0.98] transition-transform hover:bg-white/5">
                                 <div class="flex items-center gap-4">
                                     <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
                                         <span class="material-symbols-outlined">${icon}</span>
                                     </div>
                                     <div>
-                                        <p class="font-bold text-sm text-white">${s.location}</p>
+                                        <p class="font-bold text-sm text-slate-800 dark:text-slate-900 dark:text-white">${s.location}</p>
                                     <div class="flex items-center gap-2 mt-0.5">
-                                            <span class="text-[11px] text-slate-400">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
+                                            <span class="text-[11px] text-slate-400 font-bold">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                             <span class="size-1 rounded-full bg-slate-600"></span>
                                             ${(() => {
-                const today = store.getLocalDateString();
-                const isFuture = s.date > today;
+                const todayStr = store.getLocalDateString();
+                const isFuture = s.date > todayStr;
                 let label = 'Pendiente';
                 let color = 'text-amber-400';
 
-                if (s.status === 'paid') {
+                if (s.status === 'paid' || s.status === 'Pagado') {
                     label = 'Liquidado';
-                    color = 'text-green-400';
+                    color = 'text-emerald-400';
                 } else if (isFuture) {
                     label = 'Agendado';
                     color = 'text-blue-400';
@@ -125,7 +185,7 @@ function renderControlPanel(container) {
                                         </div>
                                     </div>
                                 </div>
-                                <p class="text-sm font-bold text-white">$${(s.total || 0).toLocaleString()}</p>
+                                <p class="text-sm font-bold text-slate-900 dark:text-white">$${(s.total || 0).toLocaleString('es-AR')}</p>
                             </div>
                          `;
     }).join('')}
@@ -137,3 +197,41 @@ function renderControlPanel(container) {
     `;
     container.innerHTML = html;
 }
+
+function renderHomeBenefits() {
+    const today = new Date().toLocaleDateString('es-ES', { weekday: 'long' });
+    const capitalizedToday = today.charAt(0).toUpperCase() + today.slice(1);
+    
+    const dayMap = {
+        'Lunes': '15% en Coto (TAP)',
+        'Martes': '30% en DIA (MODO)',
+        'Miércoles': '35% BNA+ / 15% Coto',
+        'Jueves': '20% ICBC (MODO)',
+        'Viernes': '25% Kilbel / Alvear',
+        'Sábado': '30% La Anónima',
+        'Domingo': '15% Diarco'
+    };
+    
+    const offer = dayMap[capitalizedToday];
+    if (!offer) return '';
+
+    return `
+        <div onclick="router.navigateTo('#info')" class="mx-2 p-4 rounded-3xl bg-gradient-to-br from-primary to-blue-700 text-white shadow-2xl shadow-primary/30 flex items-center justify-between group active:scale-[0.98] transition-all cursor-pointer overflow-hidden relative border border-white/10">
+            <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="flex items-center gap-4 relative z-10">
+                <div class="size-11 rounded-2xl bg-white/20 flex items-center justify-center backdrop-blur-md shadow-inner">
+                    <span class="material-symbols-outlined text-2xl">celebration</span>
+                </div>
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-white/80">Hoy ${capitalizedToday}</p>
+                    <p class="text-[15px] font-black tracking-tight">${offer}</p>
+                </div>
+            </div>
+            <div class="size-8 rounded-full bg-white/10 flex items-center justify-center relative z-10">
+                <span class="material-symbols-outlined text-sm animate-bounce-x">arrow_forward</span>
+            </div>
+        </div>
+    `;
+}
+
+

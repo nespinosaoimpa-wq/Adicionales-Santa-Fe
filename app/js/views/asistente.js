@@ -6,20 +6,18 @@ function renderAsistenteHub(container) {
     if (!container) container = document.getElementById('app');
 
     const tools = [
-        { id: 'actas', title: 'Actas Policiales', desc: 'Generá actas formales: allanamiento, custodia, procedimiento y más.', icon: 'description', color: 'from-red-500 to-rose-500', route: '#asistente/actas', badge: 'Nuevo' },
-        { id: 'intervenciones', title: 'Intervenciones en Campo', desc: 'Registro en tiempo real y partes para WhatsApp.', icon: 'add_alert', color: 'from-blue-500 to-indigo-500', route: '#asistente/intervenciones', badge: 'Nuevo' },
-        { id: 'procedimiento', title: 'Registro de Procedimiento', desc: 'GPS, fotos y generación de PDF estructurado.', icon: 'local_police', color: 'from-emerald-500 to-green-500', route: '#asistente/procedimiento', badge: 'Nuevo' },
-        { id: 'archivos', title: 'Archivos Digitales', desc: 'Historial personal de actas y procedimientos.', icon: 'folder_open', color: 'from-amber-500 to-orange-500', route: '#asistente/archivos', badge: 'Nuevo' },
-        { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela' },
+        { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
+        { id: 'guia', title: 'Guía de Recursos', desc: 'Beneficios TAP y Estampillas Médicas.', icon: 'library_books', color: 'from-indigo-500 to-blue-600', route: '#info', badge: 'Pro' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
+
         { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },
         { id: 'directorio', title: 'Directorio Policial', desc: 'Números de emergencia interna.', icon: 'contact_phone', color: 'from-amber-500 to-orange-500', route: '#asistente/directorio' },
         { id: 'checklist', title: 'Checklist de Guardia', desc: 'Verificación de equipo esencial.', icon: 'fact_check', color: 'from-rose-500 to-pink-500', route: '#asistente/checklist' }
     ];
 
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
-            <h1 class="text-xl font-bold text-white tracking-tight">Asistente Virtual</h1>
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Asistente Virtual</h1>
             <div class="flex items-center gap-2">
                 ${store.user && store.user.role === 'admin' ? `
                     <button onclick="router.navigateTo('#admin')" class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
@@ -27,7 +25,7 @@ function renderAsistenteHub(container) {
                     </button>
                 ` : ''}
                 <div class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shadow-lg shadow-primary/10">
-                    <span class="material-symbols-outlined">smart_toy</span>
+                    ${renderLogo('small')}
                 </div>
             </div>
         </header>
@@ -47,12 +45,12 @@ function renderAsistenteHub(container) {
                         <div class="absolute -right-4 -top-4 size-24 bg-gradient-to-br ${tool.color} opacity-5 blur-2xl group-hover:opacity-20 transition-opacity"></div>
                         
                         <div class="flex gap-4 items-start relative z-10">
-                            <div class="size-12 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-110 relative">
+                            <div class="size-12 rounded-2xl bg-gradient-to-br ${tool.color} flex items-center justify-center text-slate-900 dark:text-white shadow-lg transition-transform group-hover:scale-110 relative">
                                 <span class="material-symbols-outlined text-2xl">${tool.icon}</span>
                                 ${tool.badge ? `<span class="absolute -top-1 -right-1 flex h-3 w-3"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span><span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500 border border-background-dark"></span></span>` : ''}
                             </div>
                             <div class="flex-1 space-y-1">
-                                <h3 class="font-bold text-white group-hover:text-primary transition-colors">${tool.title}</h3>
+                                <h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">${tool.title}</h3>
                                 <p class="text-xs text-slate-400 leading-relaxed">${tool.desc}</p>
                             </div>
                             <span class="material-symbols-outlined text-slate-700 self-center">chevron_right</span>
@@ -67,7 +65,7 @@ function renderAsistenteHub(container) {
                     <div class="size-8 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-500">
                         <span class="material-symbols-outlined text-sm">edit_square</span>
                     </div>
-                    <h3 class="font-bold text-white text-sm">Buzón de Sugerencias</h3>
+                    <h3 class="font-bold text-slate-900 dark:text-white text-sm">Buzón de Sugerencias</h3>
                 </div>
                 <p class="text-[11px] text-slate-400 mb-4">¿Te gustaría que Centinela sepa algo más? Tu opinión nos ayuda a mejorar el servicio.</p>
                 <form id="feedback-form" class="space-y-3">
@@ -80,8 +78,8 @@ function renderAsistenteHub(container) {
                     </div>
                     <input type="hidden" id="feedback-rating" value="5">
                     <textarea id="feedback-comment" placeholder="Escribe tu mensaje aquí..." 
-                        class="w-full bg-white/5 border border-white/10 rounded-2xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all h-20 resize-none"></textarea>
-                    <button type="submit" class="w-full py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-all active:scale-95">
+                        class="w-full bg-white/5 border border-white/10 rounded-2xl p-3 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all h-20 resize-none"></textarea>
+                    <button type="submit" class="w-full py-3 rounded-2xl bg-primary text-white text-xs font-bold transition-all active:scale-95 shadow-lg shadow-primary/20">
                         Enviar Reseña
                     </button>
                 </form>
@@ -94,11 +92,11 @@ function renderAsistenteHub(container) {
                         <span class="material-symbols-outlined">volunteer_activism</span>
                     </div>
                     <div>
-                        <h3 class="font-black text-white text-sm tracking-tight">Apoyá al Desarrollador</h3>
+                        <h3 class="font-black text-slate-900 dark:text-white text-sm tracking-tight">Apoyá al Desarrollador</h3>
                         <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Sustento del Proyecto</p>
                     </div>
                 </div>
-                <p class="text-[11px] text-slate-300 leading-relaxed mb-5">
+                <p class="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed mb-5">
                     Desarrollar sitios lleva tiempo, esfuerzo y frustración, como así también a veces las bases de datos generan gastos cuyo sustento corre por quien desarrolla la app. Esta app está pensada para hacer funcionales las tareas de los policías; si querés que sigamos creciendo, podés donar a nuestra cuenta:
                 </p>
                 <button onclick="window.showDonationModal()" class="w-full py-3.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-95 transition-all">
@@ -161,22 +159,22 @@ function showAnnouncementModal() {
             </div>
             
             <div class="space-y-2">
-                <h2 class="text-xl font-black text-white">¡App Actualizada!</h2>
+                <h2 class="text-xl font-black text-slate-900 dark:text-white">¡App Actualizada!</h2>
                 <p class="text-xs text-slate-400 leading-relaxed">Bienvenido a la versión **Final (PRO)** con todas las funciones policiales habilitadas.</p>
             </div>
 
             <div class="space-y-3 text-left">
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
                     <span class="material-symbols-outlined text-amber-500">smart_toy</span>
-                    <p class="text-[11px] text-slate-200">**Centinela AI v2**: Base legal expandida y respuestas inteligentes para oficiales.</p>
+                    <p class="text-[11px] text-slate-800 dark:text-slate-200">**Centinela AI v2**: Base legal expandida y respuestas inteligentes para oficiales.</p>
                 </div>
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
                     <span class="material-symbols-outlined text-emerald-500">volunteer_activism</span>
-                    <p class="text-[11px] text-slate-200">**Apoyo al Proyecto**: Nueva sección en Perfil para colaborar con el crecimiento.</p>
+                    <p class="text-[11px] text-slate-800 dark:text-slate-200">**Apoyo al Proyecto**: Nueva sección en Perfil para colaborar con el crecimiento.</p>
                 </div>
                 <div class="flex gap-3 items-center p-3 rounded-2xl bg-white/5 border border-white/5">
                     <span class="material-symbols-outlined text-purple-500">rate_review</span>
-                    <p class="text-[11px] text-slate-200">**Buzón de Ideas**: Envíanos tus sugerencias directamente desde el Asistente.</p>
+                    <p class="text-[11px] text-slate-800 dark:text-slate-200">**Buzón de Ideas**: Envíanos tus sugerencias directamente desde el Asistente.</p>
                 </div>
             </div>
 
@@ -203,10 +201,10 @@ function renderDirectorioPolicial(container) {
 
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-xl font-bold text-white tracking-tight">Directorio Policial</h1>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Directorio Policial</h1>
         </header>
 
         <main class="p-6 space-y-4 pb-32 max-w-md mx-auto animate-fade-in">
@@ -215,7 +213,7 @@ function renderDirectorioPolicial(container) {
                 <div class="relative group">
                     <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 group-focus-within:text-primary transition-colors">search</span>
                     <input type="text" id="directory-search" placeholder="Buscar dependencia o número..." 
-                        class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all shadow-inner"
+                        class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all shadow-inner"
                         oninput="window.runDirectoryFilter()">
                 </div>
                 
@@ -235,6 +233,9 @@ function renderDirectorioPolicial(container) {
         </main>
         ${renderBottomNav('asistente')}
     `;
+
+    initAds();
+
 
     window.runDirectoryFilter = () => {
         const query = document.getElementById('directory-search').value.toLowerCase().trim();
@@ -297,7 +298,7 @@ function renderDirectorioPolicial(container) {
                                     <span class="material-symbols-outlined text-lg">${c.icon || 'shield'}</span>
                                 </div>
                                 <div class="flex-1 min-w-0 pr-2">
-                                    <h3 class="font-bold text-white text-[12px] leading-tight line-clamp-1">${c.name}</h3>
+                                    <h3 class="font-bold text-slate-900 dark:text-white text-[12px] leading-tight line-clamp-1">${c.name}</h3>
                                     <div class="flex flex-wrap gap-x-2 gap-y-0.5 mt-0.5">
                                         ${c.phones.map(p => `<span class="text-[10px] text-slate-500 font-mono">${p}</span>`).join('')}
                                     </div>
@@ -334,10 +335,10 @@ function renderChecklistGuardia(container) {
 
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-xl font-bold text-white tracking-tight">Checklist de Guardia</h1>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Checklist de Guardia</h1>
         </header>
 
         <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
@@ -354,7 +355,7 @@ function renderChecklistGuardia(container) {
                     <label class="glass-card p-4 rounded-2xl border border-white/5 flex items-center gap-4 cursor-pointer active:bg-white/5 transition-colors">
                         <input type="checkbox" class="size-6 rounded-lg bg-slate-800 border-white/10 text-primary focus:ring-primary/20 accent-primary" onchange="saveCheckState('${item.id}', this.checked)">
                         <span class="material-symbols-outlined text-slate-600">${item.icon}</span>
-                        <span class="flex-1 text-sm font-medium text-slate-300">${item.label}</span>
+                        <span class="flex-1 text-sm font-medium text-slate-700 dark:text-slate-300">${item.label}</span>
                     </label>
                 `).join('')}
             </div>
@@ -363,6 +364,9 @@ function renderChecklistGuardia(container) {
         </main>
         ${renderBottomNav('asistente')}
     `;
+
+    initAds();
+
 
     window.saveCheckState = (id, checked) => {
         const state = JSON.parse(localStorage.getItem('police_checklist') || '{}');
@@ -391,10 +395,10 @@ function renderCronoCalendario(container) {
 
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-xl font-bold text-white tracking-tight">Crono-Calendario</h1>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Crono-Calendario</h1>
         </header>
 
         <main class="p-6 space-y-8 pb-32 max-w-md mx-auto animate-fade-in">
@@ -409,7 +413,7 @@ function renderCronoCalendario(container) {
                         <div onclick="setDutyCycle('${c.id}')" class="glass-card p-4 rounded-2xl border border-white/5 hover:border-primary/30 transition-all cursor-pointer group">
                             <div class="flex items-center justify-between">
                                 <div>
-                                    <h3 class="font-bold text-white group-hover:text-primary transition-colors">${c.name}</h3>
+                                    <h3 class="font-bold text-slate-900 dark:text-white group-hover:text-primary transition-colors">${c.name}</h3>
                                     <p class="text-[11px] text-slate-500">${c.desc}</p>
                                 </div>
                                 <span class="material-symbols-outlined text-slate-700">radio_button_unchecked</span>
@@ -433,6 +437,9 @@ function renderCronoCalendario(container) {
         </main>
         ${renderBottomNav('asistente')}
     `;
+
+    initAds();
+
 
     window.setDutyCycle = (type) => {
         const startDate = prompt("Ingresá la fecha de tu próxima guardia (YYYY-MM-DD):", store.getLocalDateString());
@@ -459,7 +466,7 @@ function renderCronoCalendario(container) {
                         <span class="text-sm font-black">${shiftDate.getDate()}</span>
                     </div>
                     <div>
-                        <p class="text-xs font-bold text-white">Servicio Activo</p>
+                        <p class="text-xs font-bold text-slate-900 dark:text-white">Servicio Activo</p>
                         <p class="text-[10px] text-slate-500 uppercase">${shiftDate.toLocaleDateString('es-ES', { month: 'long' })}</p>
                     </div>
                 </div>
@@ -472,17 +479,17 @@ function renderCronoCalendario(container) {
 function renderCentinela(container) {
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
             <div class="flex flex-col">
-                <h1 class="text-sm font-black text-white leading-none">Centinela AI</h1>
+                <h1 class="text-sm font-black text-slate-900 dark:text-white leading-none">Centinela AI v10</h1>
                 <span class="text-[10px] text-primary flex items-center gap-1">
                     <span class="relative flex h-2 w-2">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                     </span>
-                    Base Legal SF Actualizada
+                    Base Legal & ISeP 2025/26 Activa
                 </span>
             </div>
         </header>
@@ -494,31 +501,24 @@ function renderCentinela(container) {
                         <span class="material-symbols-outlined text-sm">smart_toy</span>
                     </div>
                     <div class="bg-white/5 border border-white/5 p-3 rounded-2xl rounded-tl-none">
-                        <p class="text-xs text-slate-200 leading-relaxed">
-                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, el **Decreto 461**, la nueva **Reforma Previsional (Ley 14.283)** y las escalas salariales de **Febrero 2026 (Decreto 142/26)**.
+                        <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">
+                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, **Decreto 461**, **Reforma Previsional (Ley 14.283)**, las escalas salariales de **Febrero 2026 (Decreto 142/26)**, el **Código Procesal Penal (CPP) de Santa Fe**, el **Código Penal Argentino (CP)** y los últimos listados y manuales del **ISeP 2025/2026**.
                             <br><br>
-                            ¿Qué duda reglamentaria o de haberes tenés hoy?
+                            Preguntame por normas, reglamentos, o las **últimas noticias y novedades del 2026**. ¿En qué te ayudo hoy?
                         </p>
                     </div>
                 </div>
             </div>
 
-            <div class="p-4 bg-slate-900/50 border-t border-white/5 pb-10 space-y-3">
-                <div id="quick-actions" class="flex flex-wrap gap-1.5">
-                    <button onclick="window._quickAsk('¿Cómo hago una detención?')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">🔒 Detención</button>
-                    <button onclick="window._quickAsk('Números de emergencia')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">📞 Emergencias</button>
-                    <button onclick="window._quickAsk('Diferencia robo y hurto')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">⚖️ Delitos</button>
-                    <button onclick="window._quickAsk('Sueldos febrero 2026')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">💰 Sueldos</button>
-                    <button onclick="window._quickAsk('¿Cómo labrar un acta?')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">📋 Actas</button>
-                </div>
+            <div class="p-4 bg-slate-900/50 border-t border-white/5 pb-10">
                 <form id="centinela-form" class="relative flex items-center gap-2">
-                    <input type="text" id="chat-input" placeholder="Sueldos, procedimientos, delitos, emergencias..." 
-                        class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
+                    <input type="text" id="chat-input" placeholder="Sueldos, jubilación, ascensos..." 
+                        class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
                     <button type="submit" class="absolute right-1 size-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 active:scale-90 transition-all">
                         <span class="material-symbols-outlined">send</span>
                     </button>
                 </form>
-                <p class="text-[9px] text-center text-slate-500 uppercase tracking-tighter">Centinela solo actúa bajo tu instrucción. Consultá siempre con tu superior jerárquico.</p>
+                <p class="text-[9px] text-center text-slate-500 mt-3 uppercase tracking-tighter">La IA puede cometer errores. Consultá siempre con tu superior.</p>
             </div>
         </main>
     `;
@@ -527,20 +527,14 @@ function renderCentinela(container) {
     const input = document.getElementById('chat-input');
     const chat = document.getElementById('chat-messages');
 
-    // Quick action handler
-    window._quickAsk = (question) => {
-        input.value = question;
-        form.dispatchEvent(new Event('submit'));
-    };
-
     const knowledgeBase = [
         {
             category: 'licencias',
-            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio', 'licencias', 'ausentismo', 'salud laboral', 'medico', 'carpeta'],
+            keywords: ['licencia', 'vacaciones', 'paternidad', 'maternidad', 'enfermedad', 'familiar', 'fallecimiento', 'estudio', 'licencias', 'ausentismo', 'salud laboral', 'medico', 'carpeta', '4157', 'decreto 4157'],
             responses: [
                 { match: ['salud laboral', 'ausentismo', 'nuevo sistema', 'seguimiento'], text: "Desde enero 2026 rige el **Sistema Integrado de Protección de la Salud Laboral**. Busca reducir el ausentismo mediante auditorías médicas más estrictas y un seguimiento digitalizado del personal con carpeta médica." },
-                { match: ['paternidad', 'nacimiento', 'hijo'], text: "El **Decreto 4157/15** otorga **15 días corridos** por paternidad. Debes presentar el certificado de nacimiento en tu unidad." },
-                { match: ['maternidad', 'embarazo', 'lactancia'], text: "La licencia por maternidad es de **90 días corridos**. También contempla períodos de lactancia tras el reintegro." },
+                { match: ['paternidad', 'nacimiento', 'hijo'], text: "El **Decreto 4157/15** otorga **15 días corridos** por paternidad. Debes presentar el certificado de nacimiento en tu unidad dentro de las 72hs." },
+                { match: ['maternidad', 'embarazo', 'lactancia'], text: "La licencia por maternidad es de **90 días corridos**. También contempla períodos de lactancia tras el reintegro (permiso para amamantar durante el servicio)." },
                 { match: ['vacaciones', 'anual', 'ordinaria', 'LAO'], text: "La **Licencia Anual Ordinaria** (Decreto 4157/15) se otorga por año vencido: 19 días (hasta 5 años), 25 días (hasta 15 años) o 35 días (más de 15 años). Son días hábiles." },
                 { match: ['fallecimiento', 'duelo', 'muerte'], text: "Familiares directos (padres, hijos, cónyuge): **5 días corridos**. Otros familiares: **2 días**." },
                 { match: ['estudio', 'examen'], text: "Te corresponden hasta **28 días anuales** para rendir exámenes de enseñanza media, terciaria o universitaria, con un máximo de 5 días por examen." }
@@ -549,62 +543,94 @@ function renderCentinela(container) {
         },
         {
             category: 'disciplina',
-            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario', 'asuntos internos', 'destitucion'],
+            keywords: ['falta', 'sancion', 'arresto', 'suspension', 'disciplinario', 'sumario', 'asuntos internos', 'destitucion', 'decreto 461', 'reglamento', 'leves', 'graves', 'indisciplina', 'conducta', 'gorra', 'uniforme'],
             responses: [
-                { match: ['gorra', 'uniforme', 'aseo'], text: "El uso de la gorra es obligatorio y su omisión es una **falta leve** según el Decreto 461/15. La nueva gestión hace hincapié en la presencia policial." },
-                { match: ['leves', 'apercibimiento', '10 dias'], text: "Las faltas leves conllevan apercibimiento o hasta **10 días de arresto**. No implican cese de funciones." },
-                { match: ['graves', 'suspension', '30 dias', 'destitucion'], text: "Faltas graves: de 11 a 30 días de suspensión o destitución. El abandono de servicio es una falta grave de primer orden." },
-                { match: ['defensa', 'recurso', 'descargo'], text: "Ante una sanción, tenés derecho a presentar un descargo por escrito en los plazos legales y solicitar vista del legajo." }
+                { match: ['decreto 461', 'reglamento', 'especificos'], text: "El **Decreto 461/15** reglamenta la Ley 12521. Define faltas por negligencia, incumplimiento de órdenes y conductas que afecten el prestigio institucional." },
+                { match: ['leves', 'celular', 'aseo', 'fumar', 'uniforme', 'gorra'], text: "Ejemplos de **faltas leves** (Dec. 461): descuido en el aseo o uniforme, fumar en servicio, uso indebido de celulares o falta de diligencia. *Atención:* La falta de gorra o descuido del uniforme tienen un **seguimiento estricto** en la nueva gestión. Tres leves pueden sumar una grave." },
+                { match: ['graves', 'engaño', 'arma', 'indisciplina', 'colaboracion', 'droga'], text: "Ejemplos de **faltas graves** (Dec. 461): inducir a engaño al superior, uso arbitrario del arma de fuego, falta de colaboración con la justicia, consumo de estupefacientes o permitir indisciplina bajo su mando." },
+                { match: ['defensa', 'recurso', 'descargo'], text: "Ante una sanción, tenés derecho a presentar un descargo por escrito en los plazos legales y solicitar vista del legajo. El Tribunal de Conducta Policial juzga las graves." }
             ],
-            default: "El Régimen Disciplinario se rige por el Decreto 461/15. ¿Tu duda es sobre una falta leve o grave?"
+            default: "El Régimen Disciplinario se rige por la Ley 12521 y el Decreto 461/15. ¿Tu duda es sobre el procedimiento, una falta leve o una grave?"
         },
         {
             category: 'sueldos',
-            keywords: ['sueldo', 'salario', 'cobrar', 'cuanto gano', 'escala', 'decreto 142', 'haberes', 'porcentaje', 'aumento', 'patrullero', 'chofer'],
+            keywords: ['sueldo', 'salario', 'cobrar', 'cuanto gano', 'escala', 'decreto 142', 'decreto 411', 'haberes', 'porcentaje', 'aumento', 'patrullero', 'chofer', 'basico', 'pagos'],
             responses: [
                 { match: ['jerarquias', 'grados', 'escalon', 'carrera'], text: "La **Jerarquía Policial** (Ley 12521) se divide en: **Personal de Ejecución** (Suboficial, Oficial, Subinspector), **Coordinación** (Inspector, Subcomisario), **Supervisión** (Comisario, Com. Supervisor) y **Dirección** (Subdirector, Director, Director General)." },
                 { match: ['escalafones', 'subescalafones', 'especialidad'], text: "Existen 3 Escalafones principales: **General** (Seguridad, Judicial, Investigaciones), **Profesional** (Jurídico, Sanidad, Adm.) y **Técnico** (Criminalística, Comunicaciones, Bomberos, Músicos)." },
-                { match: ['sueldo oficial', 'cuanto gana un oficial', 'nivel 1', 'nivel 2', 'nivel 3'], text: "Sueldos Oficial (Neto Feb 2026):\n- **Nivel 1**: $2.050.018 (Cond.) / $1.800.018 (No Cond.)\n- **Nivel 2**: $1.800.018 (Cond.) / $1.550.018 (No Cond.)\n- **Nivel 3**: $1.700.018 (Cond.) / $1.450.018 (No Cond.)" },
-                { match: ['sueldo subinspector', 'cuanto gana un subinspector'], text: "Sueldos Subinspector (Neto Feb 2026):\n- **Nivel 1**: $2.164.635 (Cond.) / $1.914.635 (No Cond.)\n- **Nivel 2**: $1.914.635 (Cond.) / $1.664.635 (No Cond.)\n- **Nivel 3**: $1.814.635 (Cond.) / $1.564.635 (No Cond.)" },
-                { match: ['sueldo inspector', 'cuanto gana un inspector'], text: "Sueldos Inspector (Neto Feb 2026):\n- **Nivel 1**: $2.404.375 (Cond.) / $2.154.375 (No Cond.)\n- **Nivel 2**: $2.154.375 (Cond.) / $1.904.375 (No Cond.)\n- **Nivel 3**: $2.054.375 (Cond.) / $1.804.375 (No Cond.)" },
-                { match: ['minimo', 'bolsillo', 'piso', 'percepcion'], text: "A febrero de 2026, el ingreso mínimo garantizado es de **$1.350.000**. El piso para personal operativo (incluyendo T.A.P) es de **$1.525.682**." },
-                { match: ['rosario', 'santa fe', 'conflictividad', 'vgg', 'baigorria', 'santo tome'], text: "Se aplica un **Plus por Conflictividad de $500.000** en Rosario, Santa Fe, VGG, Baigorria y Santo Tomé para personal de calle, elevando el neto a **$1.938.835** para un suboficial operativo." },
-                { match: ['maximas jerarquias', 'director', 'comisario'], text: "Escalas Superiores (Neto Feb 2026):\n- **Dir. General**: $6.573.262\n- **Director**: $5.241.901\n- **Subdirector**: $4.352.690\n- **Com. Supervisor**: $3.923.687\n- **Comisario**: $3.709.842\n- **Subcomisario**: $3.455.398" }
+                { match: ['decreto 411', 'historico 2026', 'aumento 2026', 'escala salarial'], text: "El **Decreto 0411/26** establece un incremento salarial progresivo desde Enero a Junio de 2026. Fija un piso salarial garantizado de neto bolsillo de $75.000 extras en Enero y $170.000 extras en Febrero. Se consolida además el valor de junio 2026 como nuevo sueldo de referencia." },
+                { match: ['sueldo oficial', 'cuanto gana un oficial', 'basico oficial'], text: "Sueldos Oficial (Básico Decreto 411/26):\n- **Enero 2026**: $166.615\n- **Febrero 2026**: $170.025\n- **Junio 2026**: $182.692\nEl neto de bolsillo incluye además sumas no remunerativas y otros complementos que elevan significativamente el haber de bolsillo final según nivel y condición." },
+                { match: ['sueldo subinspector', 'cuanto gana un subinspector'], text: "Sueldos Subinspector (Básico Decreto 411/26):\n- **Enero 2026**: $247.424\n- **Febrero 2026**: $302.986\n- **Junio 2026**: $325.558" },
+                { match: ['sueldo inspector', 'cuanto gana un inspector'], text: "Sueldos Inspector (Básico Decreto 411/26):\n- **Enero 2026**: $333.230\n- **Febrero 2026**: $408.061\n- **Junio 2026**: $438.461" },
+                { match: ['minimo', 'bolsillo', 'piso', 'percepcion'], text: "Piso Ingreso (Decreto 411/26): Ningún empleado percibirá neto menos de **$896.651** (Enero) a **$983.170** (Junio). El Oficial operativo puede llegar al rango de $1.800.000 - $2.050.000 neto sumando adicionales." },
+                { match: ['rosario', 'santa fe', 'conflictividad', 'vgg', 'baigorria', 'santo tome'], text: "Se aplica un **Plus por Conflictividad de $500.000** en Rosario, Santa Fe, VGG, Baigorria y Santo Tomé para personal de calle." },
+                { match: ['maximas jerarquias', 'director', 'comisario'], text: "Básico Escalas Superiores (Decreto 411/26 - Junio 2026 sin sumas complementarias):\n- **Dir. General**: $2.039.350\n- **Director**: $1.700.463\n- **Subdirector**: $1.403.882\n- **Com. Supervisor**: $1.179.261\n- **Comisario**: $1.123.106" }
             ],
-            default: "Las escalas salariales (Decreto 142/26) y la Planimetría Policial (Ley 12521) definen tus haberes según grado, nivel, escalafón y función (Conductor/No Cond.)."
+            default: "Las escalas salariales vigentes (Decreto 411/26) definen tus haberes básicos y complementos desde enero a junio 2026. Preguntame por tu rango ('Sueldo Oficial', 'Piso salarial') para más detalles."
         },
         {
             category: 'prevision',
-            keywords: ['jubilacion', 'retiro', 'ley 14283', 'aportes', '30 años', 'caja', 'edad', 'emergencia', 'pension'],
+            keywords: ['jubilacion', 'retiro', 'ley 14283', 'aportes', '30 años', 'caja', 'edad', 'emergencia', 'pension', 'solidario', 'aporte solidario'],
             responses: [
                 { match: ['ley 14283', 'reforma', 'emergencia'], text: "La **Ley 14.283 (Sep 2024)** declaró la emergencia previsional por 2 años. Los aportes subieron: **17%** para operativos y **18%** para jerarquías." },
                 { match: ['calculo', 'promedio', '120 meses'], text: "El haber se calcula sobre el promedio de las últimas **120 remuneraciones** actualizadas (últimos 10 años), no los últimos 3 como antes." },
                 { match: ['porcentaje', '30 años', '36 años', '82%'], text: "Haber ordinario: **70%** con 30 años de aportes. Sube un 2% por año extra hasta el tope del **82%** (con 36 años)." },
                 { match: ['edad', 'limite'], text: "La reforma busca desalentar retiros prematuros. Aunque se mantienen regímenes específicos, el cálculo del haber premia la permanencia." },
-                { match: ['solidario', 'aporte solidario'], text: "Se aplica un aporte del 2% al 6% para pasivos que ganen más de 3 mínimas. Este aporte es transitorio por la emergencia previsional." }
+                { match: ['solidario', 'aporte solidario', 'descuento', 'jubilados'], text: "Se aplica un Aporte Solidario transitorio (del 2% al 6%) para pasivos que superen las 3 jubilaciones mínimas. **No obstante, se anunció que este aporte NO se prorrogará en 2026.**" }
             ],
-            default: "La Reforma Previsional (Ley 14.283) cambió aportes y el cálculo del haber (ahora sobre 120 meses). ¿Dudas sobre años o porcentaje?"
+            default: "La Reforma Previsional (Ley 14.283) cambió aportes y el cálculo del haber (ahora sobre 120 meses). ¿Dudas sobre años, porcentaje o aporte solidario?"
         },
         {
             category: 'isep_ascensos',
-            keywords: ['isep', 'ascenso', 'concurso', '2024', '2025', '2026', 'id ciudadana', 'curso', 'llamado', 'vacantes', 'examen'],
+            keywords: ['isep', 'ascenso', 'concurso', '2024', '2025', '2026', 'id ciudadana', 'curso', 'llamado', 'vacantes', 'examen', 'cronograma', 'resolucion 0803', 'fechas', 'proyectos'],
             responses: [
                 { match: ['ascenso 2024', 'pago'], text: "El **Concurso 2024** finalizó su etapa de evaluación (Decreto 2640). Los decretos de ascenso se están notificando para el pago retroactivo." },
-                { match: ['ascenso 2025', 'jurado', 'vacantes'], text: "Para el **Ciclo 2025**, el Decreto 263/26 ya asignó jurados. Las vacantes se distribuyen según las necesidades de cada agrupamiento." },
+                { match: ['ascenso 2025', 'concurso 2025', 'inscripcion', 'fechas', 'cronograma', 'resolucion 0803'], text: "📌 **Concurso de Ascenso 2025 (Res. 0803/2026)**:\n- **Inscripción**: Del 25/03 al 01/04 (hasta las 12:00 hs) vía Portal Web.\n- **Entrega Documental**: Hasta el 01/04 a las 12:00 hs.\n- **Examen (Escrito PC)**: Del 04/05 al 13/05.\n- **Defensa de Proyectos**: Del 14/05 al 05/06.\n- **Publicación Acta Final**: 09/06/2026." },
+                { match: ['proyectos', 'entrega', 'direccion', 'mail', 'correo'], text: "📁 **Entrega de Proyectos (Supervisión/Dirección)**:\n- **Digital**: Enviar a `concursospoliciales@santafe.gov.ar` hasta el 01/04.\n- **Físico**: Sede Adm. Jurados el 07/04 (08:30 a 10:30 hs) en **Primera Junta 2823, Santa Fe** (Oficina 06, Planta Baja)." },
                 { match: ['id ciudadana', 'intranet', 'usuario', 'clave'], text: "Es **obligatorio** tener la **ID Ciudadana** vinculada a la Intranet para inscribirse y rendir los exámenes del ISEP. Sin ella no podés concursar." },
                 { match: ['ingreso', 'inscripcion', '2026'], text: "ISEP abrió inscripciones a finales de 2025 para la Cohorte 2026. El curso propedéutico es virtual y eliminatorio." }
             ],
-            default: "El ISEP gestiona los concursos de ascenso anuales y el ingreso a la fuerza. ¿Necesitás info sobre el concurso 2025 o ID Ciudadana?"
+            default: "El ISEP gestiona los concursos de ascenso anuales. Ya está disponible el cronograma para el **Concurso de Ascenso 2025** (Res. 0803/26). ¿Querés saber las fechas de inscripción o el lugar de entrega?"
         },
         {
             category: 'transporte',
-            keywords: ['colectivo', 'bondi', 'bus', 'transporte', 'viaje', 'parada', 'horario', 'rosario', 'vera', 'terminal', 'asiento', 'pasaje', 'exclusive'],
+            keywords: ['colectivo', 'bondi', 'bus', 'transporte', 'viaje', 'parada', 'horario', 'rosario', 'vera', 'terminal', 'asiento', 'pasaje', 'exclusive', 'd-4', 'san javier', 'reconquista'],
             responses: [
-                { match: ['rosario', 'vera', 'ida'], text: "🚍 **Servicio Exclusivo Rosario -> Vera**:\n- Sale Rosario (Terminal): 09:00 hs\n- Llega Santa Fe: 11:30 hs\n- Sale Santa Fe: 12:00 hs\n- Recreo: 12:30 hs / San Justo: 14:05 hs\n- Calchaquí: 15:50 hs / Margarita: 16:10 hs\n- Final Vera (Terminal): 16:30 hs." },
-                { match: ['vera', 'rosario', 'vuelta'], text: "🚍 **Servicio Exclusivo Vera -> Rosario**:\n- Sale Vera (Terminal): 23:00 hs\n- Margarita: 23:20 hs / Calchaquí: 23:40 hs\n- San Justo: 01:25 hs / Recreo: 03:00 hs\n- Llega Santa Fe: 03:30 hs\n- Sale Santa Fe: 04:00 hs\n- Final Rosario (Terminal): 06:30 hs." },
-                { match: ['paradas', 'donde para', 'localidades'], text: "El servicio recorre: Rosario, Sta Fe, Recreo, Candioti, Nelson, Llambi Campbell, Cruce Emilia, Videla, San Justo, Ramayon, M. Escalada, Crespo, La Criolla, Vera y Pintado, Gomez Cello, Calchaquí, Margarita y Vera." }
+                { match: ['rosario', 'vera', 'ida', 'reconquista', 'ir a reconquista'], text: "🚍 **Norte -> Sur / Sur -> Norte (Horarios 2026 D-4)**:\n- **Santa Fe -> Reconquista/Vera**: 12:00 hs\n- **Santa Fe -> San Javier**: 23:00 hs\n- **Santa Fe -> Tostado**: (Consultar cronograma extra)\nHace base en las Terminales locales. Presentate con credencial." },
+                { match: ['rosario', 'vuelta', 'ir a rosario', 'salir de rosario', 'venir a santa fe', 'santa fe rosario'], text: "🚍 **Santa Fe <-> Rosario (D-4 a partir 02/03/2026)**:\n**Desde Terminal Santa Fe (a Rosario):**\n- Madrugada: 02:30, 03:30 hs\n- Tarde: 16:00 hs\n\n**Desde Rosario (Pellegrini 3223 a Santa Fe):**\n- Mañana: 08:00, 08:30, 09:00 hs\n- Noche: 20:00, 20:30, 21:00 hs" },
+                { match: ['paradas', 'donde para', 'localidades'], text: "Las paradas oficiales del Departamento Logística (D-4) incluyen cabeceras departamentales: Rosario (Pellegrini 3223), Terminal Santa Fe, Reconquista, Vera, San Javier. Recuerde formar en dársena 15 min antes." }
             ],
-            default: "Contamos con horarios del servicio exclusivo Rosario-Vera para personal policial. ¿Necesitás saber una hora o parada específica?"
+            default: "Estos son los nuevos horarios del transporte departamental D-4 vigentes (Marzo 2026). Consultá por salidas desde Santa Fe, hacia Rosario o al norte (Reconquista/Vera)."
+        },
+        {
+            category: 'desendeudamiento',
+            keywords: ['desendeudamiento', 'credito', 'deuda', 'olivares', 'refinanciar', 'mutuales', 'banco', 'sueldo comprometido', 'endeudado', 'cuotas', 'prestamo'],
+            responses: [
+                { match: ['que es', 'plan', 'provincial', 'olivares'], text: "El **Plan de Desendeudamiento** (anunciado por el Mtro. Pablo Olivares en 2026) es un programa provincial destinado a empleados estatales (incluyendo policías) para refinanciar deudas con mutuales y entidades financieras y recuperar capacidad salarial." },
+                { match: ['como funciona', 'requisitos', 'condiciones'], text: "El plan permite **unificar deudas** pasándolas a una nueva línea de crédito provincial con menor tasa de interés y más plazo. Se otorgan incluso **2 meses de gracia** para empezar a pagar y liberar saldo en la cuenta sueldo de forma inmediata." },
+                { match: ['promedio nacional', 'situacion'], text: "Según datos oficiales, si bien la deuda del estatal santafesino está por debajo del promedio nacional, muchos agentes tienen sus recibos embargados o muy comprometidos. Este plan busca sanear esa economía familiar." }
+            ],
+            default: "El nuevo Plan de Desendeudamiento provincial permite a los empleados (incluyendo policías) consolidar sus deudas de mutuales/bancos con menores tasas, más plazo y 2 meses de gracia. Es útil si tu sueldo está muy afectado por cuotas."
+        },
+        {
+            category: 'noticias_2026',
+            keywords: ['noticias', 'novedades', 'ultimo', 'ultimas noticias', '2026', 'resumen', 'ley nueva', 'actualidad', 'noticia'],
+            responses: [
+                { match: ['sueldos', 'salarios', 'aumento', 'febrero'], text: "🗞️ **Noticias de Sueldos (Feb 2026):** El piso operativo quedó en **$1.525.682** (incluyendo tarjeta alimentaria), sumado a un Plus por Conflictividad de **$500.000** en áreas críticas." },
+                { match: ['salud', 'carpetas', 'medicas', 'licencias'], text: "🗞️ **Noticias de Salud Laboral:** Desde enero 2026 rige el **Sistema Integrado de Protección de la Salud Laboral**, estableciendo un esquema estricto de auditorías para reducir el ausentismo (carpetas médicas)." },
+                { match: ['ascensos', 'isep', 'concursos', '2025'], text: "🗞️ **Noticias del ISeP (Marzo 2026):** Se abrió la convocatoria al **Concurso de Ascenso 2025** (Res. 0803/26). Inscripciones del 25/03 al 01/04 vía Web. Exámenes en Mayo." },
+                { match: ['disciplina', 'gorra', 'uniforme'], text: "🗞️ **Noticias de Disciplina:** Hay una orden expresa de realizar un seguimiento muy estricto sobre las faltas relacionadas con el descuido del uniforme, especficamente la **falta de gorra**, sancionables como falta leve." }
+            ],
+            default: "🗞️ **Resumen Noticias 2026**: Nuevo **Sistema de Salud Laboral** en vigencia (fuerte control de carpetas médicas), ingresos mínimos garantizados de **$1.350.000**, confirmación de que el **Aporte Solidario a pasivos NO se prorroga**, y control estricto del uso del uniforme. Preguntame por 'sueldos', 'ascensos' o 'salud' para ampliar."
+        },
+        {
+            category: 'app_actualizacion',
+            keywords: ['app', 'actualizacion', 'v534', 'novedades app', 'error', 'ingreso', 'novedades de la aplicacion', 'cartel', 'version'],
+            responses: [
+                { match: ['ingreso', 'error', 'login', 'solucion'], text: "✅ **Problema de Ingreso Resuelto**: La versión actual solucionó el error de inicio de sesión que existía en algunos dispositivos. Si persistiera algún inconveniente, cerrá por completo la app y volvé a abrirla." },
+                { match: ['novedades', 'v534', 'pro', 'cartel'], text: "🚀 **Novedades de la App**: Se optimizó el rendimiento general de Adicionales Santa Fe, se arregló el cartel de actualizaciones para que no vuelva a molestarte luego de iniciar sesión, y se me actualizó (Soy Centinela AI) con datos recientes al 2026." }
+            ],
+            default: "Nuestra App Adicionales Santa Fe se encuentra en su versión actual (PRO). Se mejoró la estabilidad, se arreglaron problemas del cartel de avisos y logueos. ¡Cerrala y abrila ante cualquier duda!"
         },
         {
             category: 'reglamentacion',
@@ -631,35 +657,91 @@ function renderCentinela(container) {
         },
         {
             category: 'juridico_policial',
-            keywords: ['ley 12521', 'reglamento', 'mendoza', 'articulo', 'jerarquia', 'escalafon', 'subordinacion', 'protocolo', 'violencia de genero', '1818', 'seguridad publica', '12154', 'detencion', 'derechos', 'miraf', 'manual', 'procedimiento'],
+            keywords: ['ley 12521', 'reglamento', 'mendoza', 'articulo', 'jerarquia', 'escalafon', 'subordinacion', 'violencia de genero', '1818', 'seguridad publica', '12154', 'detencion', 'derechos', 'miraf', 'manual', 'art 268', 'articulo 268', 'atribuciones', 'deberes'],
             responses: [
                 { match: ['1818', 'violencia', 'genero'], text: "El **Protocolo 1818/20** es ley para nosotros. Establece la actuación obligatoria en violencia de género: recepción de denuncia, no revictimización y desarme preventivo si el agresor es empleado policial." },
-                { match: ['jerarquia', 'escalafon', 'planimetria'], text: "La **Planimetría Policial** (Ley 12.521) divide los escalafones en Seguridad, Profesional y Técnico. La verticalidad y subordinación son los pilares de nuestra doctrina operativa." },
+                { match: ['0800', 'mpa', 'fiscal', 'flagrancia', 'llamada'], text: "Desde el 1/12/2025, toda **flagrancia** se consulta vía **0800 MPA**. Proporciona trazabilidad y directivas grabadas. Si la situación es urgente, aplicá acciones protocolizadas de preservación antes de llamar." },
+                { match: ['art 268', 'articulo 268', 'atribuciones', 'deberes'], text: "El **Art. 268 del CPP** detalla tus deberes: recibir denuncias, impedir consecuencias del hecho, aprehender en flagrancia, recoger pruebas urgentes, secuestrar instrumentos del delito e informar derechos al imputado." },
+                { match: ['jerarquia', 'escalafon', 'planimetria', 'estabilidad'], text: "La **Ley 12.521** otorga estabilidad en el empleo, propiedad del grado y derecho a la percepción de haberes. La verticalidad y subordinación son los pilares de la doctrina." },
                 { match: ['seguridad publica', '12154'], text: "La **Ley de Seguridad Pública (12.154)** es el marco del sistema provincial. Define a la Policía como auxiliar de la justicia y establece los límites del uso racional de la fuerza." },
-                { match: ['detencion', 'derechos'], text: "El Código Procesal Penal exige: lectura de derechos, información del motivo y permitir comunicación inmediata. El incumplimiento anula el procedimiento." },
-                { match: ['miraf', 'manual', 'calle'], text: "El **Manual MIRAF** rige el patrullaje preventivo. Desde la identificación de personas hasta el uso de balizas, todo está procedimentado allí para tu seguridad jurídica." }
+                { match: ['detencion', 'derechos', 'imputado'], text: "Según el CPP y Art. 268, debés informar al imputado: motivo de detención, derecho a abogado, a que se informe a un familiar y a ser revisado por un médico. Se debe entregar por escrito." }
             ],
-            default: "Tengo los protocolos de Violencia de Género (1818), Manual MIRAF y Ley de Seguridad Pública (12.154) cargados. ¿Qué procedimiento específico necesitás consultar?"
+            default: "Tengo los protocolos de Violencia de Género (1818), Manual MIRAF, 0800 MPA, y las atribuciones del Art. 268 del CPP. ¿Qué procedimiento específico necesitás?"
+        },
+        {
+            category: 'codigo_faltas',
+            keywords: ['faltas', 'contravencion', 'ley 10703', 'convivencia', 'ruidos molestos', 'desorden', 'ebriedad', 'pelea', 'sumario contravencional'],
+            responses: [
+                { match: ['ley 10703', 'codigo de faltas', 'contravenciones'], text: "La **Ley 10.703** regula las contravenciones. La policía debe instruir el sumario contravencional e informar de inmediato al Juez de Faltas competente." },
+                { match: ['acta', 'seccional', 'denuncia'], text: "Toda falta da lugar a una acción pública. Podés actuar de oficio o por denuncia. Al constatarla, se labra acta de procedimiento con testigos y se secuestran pruebas." },
+                { match: ['penas', 'multa', 'arresto', 'comiso'], text: "Las penas incluyen multas, arresto (puede ser domiciliario según el caso), comiso de objetos y clausura provisional del local infractor." }
+            ],
+            default: "El Código de Faltas (Ley 10.703) busca la paz social. Conozco procedimientos sobre ruidos molestos, ebriedad y desorden público. ¿Qué situación buscás reportar?"
+        },
+        {
+            category: 'reforma_procesal_penal',
+            keywords: ['ley 14258', 'reforma', 'allanamiento', 'fiscal', 'mpa', 'investigacion', 'plazos', 'detencion', 'feria judicial', '170', 'art 214', 'procedimiento', 'urgencia'],
+            responses: [
+                { match: ['ley 14258', 'reforma', 'cambios'], text: "La **Ley 14.258** amplió facultades: permite allanamientos con orden fiscal en casos urgentes, extiende plazos de detención hasta 96hs y elimina la feria judicial penal." },
+                { match: ['allanamiento', 'urgencia', 'sin orden', '170'], text: "Excepciones al Allanamiento (Art. 170 CPP): No se requiere orden ante incendio/inundación, persecución de un imputado que entre a un domicilio, o si se ve a extraños entrar con fines delictivos." },
+                { match: ['allanamiento', 'vivienda', 'fiscal'], text: "Se facilitan los allanamientos en investigaciones de criminalidad organizada, permitiendo ampliaciones a viviendas contiguas con autorización del MPA." },
+                { match: ['investigacion', 'mpa', 'fiscal'], text: "La policía investiga bajo dirección del **MPA**. El Art. 252 del CPP permite actuar por iniciativa propia para asegurar pruebas ante peligro de desaparición (urge)." }
+            ],
+            default: "La última reforma procesal (Ley 14.258) y el Art. 170 regulan tu actuación en allanamientos y detenciones. ¿Dudas sobre la urgencia o los plazos?"
+        },
+        {
+            category: 'escena_del_crimen',
+            keywords: ['escena', 'crimen', 'lugar del hecho', 'preservar', 'cinta', 'acordonar', 'evidencia', 'huellas', 'cadena de custodia', 'bioseguridad', 'cuij'],
+            responses: [
+                { match: ['preservacion', 'pasos', 'primero'], text: "Protocolo de Preservación:\n1. **Arribo**: Registrar hora y evaluar riesgos.\n2. **Asistir**: Priorizar vívtimas (fijar posición del cuerpo si se traslada).\n3. **Acordonar**: Roja (Zona Crítica) y Amarilla (Seguridad).\n4. **Regla de Oro**: NO tocar, NO mover, NO agregar, NO sustraer nada." },
+                { match: ['cadena de custodia', 'cuij', 'formulario'], text: "La **Cadena de Custodia** (Art. 204 quinquies) asegura la prueba. Cada elemento debe ir con **Formulario de Seguimiento**, CUIJ, firma del actuante y descripción del embalaje." },
+                { match: ['bioseguridad', 'guantes'], text: "Usar guantes de látex/nitrilo, no fumar/salivar y no dejar objetos personales para evitar contaminación de ADN o huellas." }
+            ],
+            default: "La preservación del Lugar del Hecho es vital para la investigación. ¿Dudas sobre el acordonamiento o la cadena de custodia?"
+        },
+        {
+            category: 'microtrafico',
+            keywords: ['microtrafico', 'droga', 'estupefacientes', 'bunker', 'venta', 'narcomenudeo', 'ley 14239', 'desfederalizacion', 'demolicion', 'procedimiento', 'protocolo', 'quiosco', 'sustancia'],
+            responses: [
+                { match: ['ley 14239', 'competencia', 'provincial'], text: "La **Ley 14.239** otorga competencia a la Provincia para investigar el narcomenudeo. Interviene la Unidad Fiscal Especial de Microtráfico del MPA." },
+                { match: ['bunker', 'demolicion', 'derribo'], text: "Procedimiento: Bajo dirección fiscal, la policía puede adoptar medidas urgentes para hacer cesar el estado antijurídico, incluyendo la **demolición de búnkeres**." },
+                { match: ['prioridad', 'calle'], text: "Se priorizan mercados abiertos, presencia de armas y casos donde el traficante participe en otros delitos graves." }
+            ],
+            default: "La Ley 14.239 de Microtráfico activa la competencia provincial y el derribo de puntos de venta. ¿Qué situación necesitás consultar?"
         },
         {
             category: 'bienestar_salud',
             keywords: ['salud mental', 'psicologo', 'estres', 'depresion', 'apoyo', 'bienestar', 'ayuda', 'contencion', 'familia', 'iapos', 'medicamentos', 'quemado', 'no doy mas', 'crisis', 'suicidio'],
             responses: [
                 { match: ['plan provincial', '2026', 'cobertura'], text: "El **Plan Provincial de Salud Mental 2026** garantiza el **100% de cobertura en psicofármacos** vía IAPOS y atención psicológica gratuita en centros de bienestar policial." },
-                { match: ['donde ir', 'urgencia', 'atencion'], text: "Podés ir a la **Dirección de Bienestar Policial** o solicitar intervención de la **Unidad de Gestión Tripartita**. La atención es confidencial y no afecta tu legajo si se trata a tiempo." },
+                { match: ['donde ir', 'urgencia', 'atencion'], text: "Podés ir a la **Dirección de Bienestar Policial** o solicitar intervención de la **Unidad de Gestión Tripartita**. La atención es confidencial e institucional." },
                 { match: ['medicamentos', 'receta', 'gratis'], text: "Por disposición de Salud Mental, las recetas de psiquiatría tienen cobertura total para el oficial y carga familiar directa sin necesidad de auditoría previa en casos críticos." }
             ],
             default: "Tu salud mental no se negocia. Tenés cobertura total de IAPOS y apoyo profesional en Bienestar Policial. Si sentís que no podés más, buscá ayuda; ya reporté tu situación al sistema de contención administrativo de forma silenciosa."
+        },
+        {
+            category: 'isep_documentos',
+            keywords: ['listado habilitados', 'habilitados 2026', 'concurso ascenso', 'convocados ascenso', 'pdf isep', 'enlace isep', 'link isep', 'descargar listado', 'buscar habilitado', 'orden de merito', 'inscripto suboficial', 'inscripto oficial', 'manual tecnicatura', 'material de estudio', 'situacion revista'],
+            responses: [
+                { match: ['habilitados 2026', 'merito 2026', 'continuación'], text: "📄 **Listado Continúan en Orden de Mérito (Ciclo 2026)**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/publicaciones/Prope%202026%20-%20Continuan%20en%20orden%20de%20merito/CONTINUAN%20EN%20ORDEN%20DE%20MERITO%20PARA%20CITAR.pdf)" },
+                { match: ['habilitados suboficiales', 'inscripto suboficial', '2026'], text: "📄 **Personal Habilitado (Suboficiales) - Ciclo 2026**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/Publicaciones/EE%20-%20Perfeccionamiento%202026/SUBOFICIAL%20INSCRIPTO%202026.pdf)" },
+                { match: ['habilitados oficiales', 'inscripto oficial', '2026'], text: "📄 **Personal Habilitado (Oficiales) - Ciclo 2026**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/Publicaciones/EE%20-%20Perfeccionamiento%202026/OFICIAL%20INSCRIPTO%2020263.pdf)" },
+                { match: ['convocados', 'subcomisario', '2025'], text: "📄 **Convocados Ascenso 2025 - Subcomisario**:\n[Ver en Google Drive](https://drive.google.com/file/d/1zLxytU1o6JQm_S83QSHeh2CGIZCIRL62/view?usp=sharing)" },
+                { match: ['convocados', 'comisario', 'supervisor', '2025'], text: "📄 **Convocados Ascenso 2025 - Comisario Supervisor**:\n[Ver en Google Drive](https://drive.google.com/file/d/1Vqtgg9bZj1xbJrKJBN5qnG_ECXLfFsrt/view?usp=sharing)" },
+                { match: ['material', 'estudio', 'manual', 'tecnicatura', '2026'], text: "📚 **Manual de Estudio 2026 (Tecnicatura)**:\n[Descargar PDF](https://isepsantafe.edu.ar/images/Publicaciones/EaD%20-%20examenes%20tecnicatura%202026/Manual%20Tecnicatura%20Sup%20Seg%20Publica%20y%20Ciudadana%202026.pdf)" },
+                { match: ['situacion revista', 'revista', '2025'], text: "📄 **Situación de Revista 2025 (Ascensos)**:\n[Ver en Google Drive](https://drive.google.com/file/d/1yvUD4GjwmO6iH8UNmABun5diahmxZpgz/view?usp=sharing)" }
+            ],
+            default: "He recopilado los enlaces directos a los listados del ISeP (Habilitados 2026, Convocados 2025, Manuales). ¿Sobre qué jerarquía o año necesitás el link?"
         },
         {
             category: 'isep_formacion',
             keywords: ['isep', 'curso', 'capacitacion', 'perfeccionamiento', 'tecnicatura', 'ascenso 2025', 'vacantes', 'estudio', 'examen', 'virtual'],
             responses: [
                 { match: ['tecnicatura', '2026', 'propedutico'], text: "La **Tecnicatura Superior 2026** ya inició. El período propedéutico del 3 de febrero es clave para el ingreso a la carrera de 3 años con validez nacional." },
-                { match: ['ascenso 2025', 'decreto 263'], text: "El **Decreto 263/26** fijó las vacantes para el Concurso de Ascenso 2025. Los jurados están evaluando antigüedad y desempeño operativo según el nuevo baremo." },
-                { match: ['virtual', 'notebooklm', 'estudiar'], text: "Usá el Aula Virtual del ISEP. NotebookLM es una herramienta recomendada para procesar los textos de la Ley 12.521 y Decretos de Ascenso de forma rápida." }
+                { match: ['ascenso 2025', 'decreto 263'], text: "El **Decreto 263/26** fijó las vacantes para el Concurso de Ascenso 2025. Los jurados están evaluando antigüedad y desempeño operativo." },
+                { match: ['virtual', 'notebooklm', 'estudiar'], text: "Usá el Aula Virtual del ISEP. NotebookLM es una herramienta recomendada para procesar los textos de la Ley 12.521 y Decretos de Ascenso." }
             ],
-            default: "El ISEP es el camino al ascenso. Consultá vacantes (Decreto 263) y cursos de perfeccionamiento en la Intranet con tu ID Ciudadana."
+            default: "El ISEP es el camino al ascenso. Consultá vacantes (Decreto 263) y cursos de perfeccionamiento en la Intranet con tu ID Ciudadana o pedime los listados de habilitados."
         },
         {
             category: 'haberes_servicios',
@@ -672,7 +754,38 @@ function renderCentinela(container) {
             default: "Consultá tu sueldo operativo según Decreto 142/26 ($1.350.000 de base) y las nuevas tarifas de adicionales cargadas en tu calculadora."
         },
         {
+            category: 'tap_beneficios',
+            keywords: ['tap', 'tarjeta alimentar', 'alimentaria policial', 'donde pagar', 'reintegro', 'modo', 'coto', 'la anonima', 'kilbel', 'alvear', 'beneficios tap'],
+            responses: [
+                { match: ['modo', 'vincular', 'como'], text: "💳 **Vinculación MODO**: Entrá a la app de tu banco (NBSF o BNA), buscá el botón de MODO y vinculá tu Tarjeta Alimentar. Al pagar, avisá que usás QR de MODO y seleccioná la tarjeta TAP para que se aplique el reintegro." },
+                { match: ['mcdonalds', 'mc donalds', 'comida rapida', 'fast food'], text: "🍔 **McDonald's y Comida Rápida**: Muchos locales como McDonald's o Mostaza suelen fallar porque están registrados como 'Comida Rápida' (MCC 5814) y la TAP requiere rubros de 'Almacén/Venta de Alimentos'. No es un error de tu tarjeta, sino una restricción de rubro." },
+                { match: ['franco colella', 'panaderia', 'facturas', 'kiosco', 'kiosko', 'almacen'], text: "🥐 **Kioscos y Panaderías**: En locales como **Franco Colella** o panaderías de barrio la TAP pasa siempre. En **Kioscos**, solo va a pasar si el local está registrado como 'Almacén' o 'Minimercado'. Si es revistería pura, te va a dar error." },
+                { match: ['estacion', 'servicio', 'nafta', 'combustible', 'ypf', 'shell', 'axion'], text: "⛽ **Estaciones de Servicio**: **No podés pagar NAFTA con la TAP.** La tarjeta rechaza el rubro de combustible. Pero **SÍ podés usarla en el SHOP** (Full, Select, Spot) si comprás comida o café, ya que el posnet de la comida suele ser independiente." },
+
+                { match: ['porque', 'no pasa', 'rechazada', 'mcc'], text: "🔐 **¿Por qué falla?**: La TAP tiene restricciones por rubro (MCC). Solo pasa en lugares que venden comida para llevar o supermercados. Si el lugar es de 'entretenimiento' o 'servicios', Visa la rechazará automáticamente." },
+                { match: ['coto'], text: "🛒 **COTO**: 15% de descuento los Lunes y Miércoles pagando con tarjeta de crédito (la TAP suele leerse como tal)." },
+
+                { match: ['santa fe', 'capital', 'kilbel', 'alvear'], text: "📍 **Santa Fe (Capital)**: Los Viernes tenés 25% de reintegro en **Kilbel** y **Alvear** pagando con MODO." },
+                { match: ['reconquista', 'avellaneda', 'el super'], text: "📍 **Reconquista**: Miércoles 30% de reintegro con MODO BNA+ en **El Súper**. Los Viernes hay promos de hasta 45% (Súper Fridays)." },
+                { match: ['rafaela', 'venado tuerto', 'la anonima'], text: "📍 **La Anónima (Rafaela/Venado)**: Viernes y Sábados 30% de reintegro con MODO Banco Santa Fe (Tope $20.000 mensual)." }
+            ],
+            default: "La Tarjeta Alimentar Policial (TAP) tiene un monto de $175.682. Podés ver todos los beneficios por departamento en la nueva **Guía de Recursos** del Asistente."
+        },
+        {
+            category: 'estampillas',
+            keywords: ['estampilla', 'medica', 'donde compro', 'estampillas', 'vender', 'venden', 'comprar estampilla', 'estampillas santa fe'],
+            responses: [
+                { match: ['aritoys', 'centro'], text: "📍 **Aritoys**: Tucumán entre San Martín y San Jerónimo." },
+                { match: ['junin', 'industrial'], text: "📍 **Librería Junín**: Junín casi 9 de Julio, cerca de la Escuela Industrial." },
+                { match: ['francia', 'fatima'], text: "📍 **Librería Francia**: Francia y Pasaje Irala, frente a la Escuela Fátima." },
+                { match: ['verna', 'hernandarias'], text: "📍 **Clínica Verna**: Las Heras y Hernandarias." },
+                { match: ['mayo', 'san jeronimo'], text: "📍 **Santa Fe**: Tenés la Clínica 1° de Mayo (1° de Mayo 3017) y Consultorios San Gerónimo (Barrio El Pozo)." }
+            ],
+            default: "Podés conseguir Estampillas Médicas en: Aritoys, Librería Junín, Clínica Verna, Caja Arte de Curar (25 de Mayo 1867), entre otros. Mirá la lista completa en la **Guía de Recursos**."
+        },
+        {
             category: 'general_admin',
+
             keywords: ['tap', 'tarjeta', 'alimentar', '0810', 'problema', 'pago', 'monto', 'cbu', 'alias'],
             responses: [
                 { match: ['tap', 'alimentar', '0810'], text: "Atención T.A.P: **0810-222-7342**. El monto se actualiza mensualmente y es acumulable." },
@@ -681,44 +794,516 @@ function renderCentinela(container) {
             default: "¿Buscás info de la tarjeta T.A.P o ayuda con tu Alias de transferencia? Consultá la sección Perfil para lo segundo."
         },
         {
-            category: 'procedimientos_campo',
-            keywords: ['procedimiento', 'detencion', 'detener', 'requisa', 'requisar', 'cacheo', 'allanamiento', 'como hago', 'paso a paso', 'acta', 'labrar', 'actuar'],
+            category: 'narcotrafico_ley_23737',
+            keywords: ['ley 23737', 'estupefacientes', 'droga', 'federal', 'transporte', 'comercializacion', 'tenencia', 'competencia', 'nacional', 'precursores'],
             responses: [
-                { match: ['detener', 'detencion', 'aprehender'], text: "**Procedimiento de Detención/Aprehensión:**\n1. Identificarse como personal policial\n2. Informar el motivo de la detención\n3. Lectura de derechos (Art. 212 CPP)\n4. Comunicar al fiscal de turno **inmediatamente**\n5. Labrar acta con testigos\n6. Trasladar a la dependencia\n\n⚠️ Plazo máximo sin orden judicial: **12 horas**. Superado ese plazo, comunicar al juez de garantías." },
-                { match: ['requisa', 'cacheo', 'personal'], text: "**Requisa Personal (Art. 230 CPP):**\n1. Solo con **motivos fundados** de que oculta evidencia\n2. Realizarla con **testigos** (mínimo 1)\n3. Persona del **mismo sexo** que el requisado\n4. Informar al requisado el motivo\n5. Labrar acta detallada de elementos hallados\n6. Comunicar al fiscal si hay hallazgo positivo\n\n⚠️ Sin orden judicial solo en casos de urgencia o flagrancia." },
-                { match: ['allanamiento', 'ingresar', 'domicilio'], text: "**Allanamiento de Domicilio:**\n- Requiere **orden judicial** (Art. 227 CPP)\n- Excepción sin orden: pedido de auxilio, persecución, incendio/catástrofe\n- Labrar acta con inventario completo\n- **Mínimo 2 testigos** del procedimiento\n- Filmar/fotografiar todo\n\n📋 Podés generar el acta desde **Asistente → Actas Policiales → Acta de Allanamiento**." },
-                { match: ['acta', 'labrar', 'como hago'], text: "**¿Cómo labrar un acta correctamente?**\n1. Encabezado: fecha, hora, lugar, funcionario\n2. Descripción objetiva y cronológica de los hechos\n3. Datos de todos los intervinientes\n4. Testigos con nombre completo y DNI\n5. Inventario de secuestros (si aplica)\n6. Firmas de todos los participantes\n\n📋 Usá el módulo **Actas Policiales** en el Asistente para generar automáticamente el formato correcto." }
+                { match: ['federal', 'provincial', 'competencia', 'diferencia'], text: "Diferencia de Competencia:\n- **Federal (Ley 23737)**: Grandes cantidades, transporte interjurisdiccional, precursores químicos y contrabando.\n- **Provincial (Ley 14239)**: Microtráfico, narcomenudeo y venta minorista al consumidor final (búnkeres/quioscos)." },
+                { match: ['tenencia', 'consumo', 'personal'], text: "La Ley 23.737 penaliza la tenencia, pero el fallo 'Arriola' de la CSJN estableció que el consumo personal en el ámbito privado sin afectar a terceros no es punible. No obstante, se debe informar al fiscal federal." },
+                { match: ['precursores', 'quimicos'], text: "Cualquier hallazgo de sustancias indicativas de fabricación (estiramiento) o precursores químicos debe ser consultado de inmediato con la Justicia Federal." }
             ],
-            default: "Tengo guías paso a paso para detenciones, requisas, allanamientos y cómo labrar actas. ¿Qué procedimiento necesitás consultar?"
+            default: "La Ley Nacional 23.737 regula el tráfico de estupefacientes. En Santa Fe, la Ley 14.239 nos permite actuar en casos de microtráfico bajo fiscalía provincial. ¿Necesitás saber sobre competencia o delitos específicos?"
         },
         {
-            category: 'delitos_tipificacion',
-            keywords: ['delito', 'robo', 'hurto', 'lesiones', 'homicidio', 'portacion', 'arma', 'amenaza', 'abuso', 'violacion', 'estafa', 'daño', 'usurpacion', 'diferencia', 'codigo penal'],
+            category: 'etaf_flagrancia_0800',
+            keywords: ['etaf', '0800 mpa', 'flagrancia', 'equipo de trabajo', 'formulario etaf', 'protocolo 2025', 'comunicacion', 'trazabilidad', 'directiva'],
             responses: [
-                { match: ['robo', 'hurto', 'diferencia'], text: "**Hurto vs Robo (Arts. 162-167 CP):**\n- **Hurto**: apoderamiento ilegítimo sin violencia ni fuerza. Pena: 1 mes a 2 años.\n- **Robo**: apoderamiento con **fuerza en las cosas** o **violencia física en las personas**. Pena: 1 mes a 6 años.\n- **Robo agravado** (con arma, en despoblado, banda): hasta 10 años." },
-                { match: ['lesiones', 'golpes'], text: "**Lesiones (Arts. 89-94 CP):**\n- **Leves**: daño en el cuerpo o salud. Pena: 1 mes a 1 año.\n- **Graves**: debilitación permanente de sentido/órgano. Pena: 1 a 6 años.\n- **Gravísimas**: pérdida de sentido/órgano, incapacidad permanente. Pena: 3 a 10 años." },
-                { match: ['portacion', 'tenencia', 'arma'], text: "**Portación y Tenencia de Armas (Ley 20.429):**\n- **Tenencia sin autorización**: 1 a 4 años\n- **Portación sin autorización**: 3 a 6 años (arma de fuego)\n- **Portación de arma de guerra**: 3,5 a 8,5 años\n\n⚠️ Los antecedentes del portador **agravan** la pena." },
-                { match: ['amenaza', 'coaccion'], text: "**Amenazas y Coacciones (Arts. 149 bis/ter CP):**\n- **Amenazas simples**: 6 meses a 2 años\n- **Amenazas con arma**: 1 a 3 años\n- **Coacción**: obligar a hacer o no hacer algo. Pena: 2 a 4 años." },
-                { match: ['daño', 'romper', 'destruir'], text: "**Daño (Art. 183 CP):** Destruir, inutilizar o hacer desaparecer cosa ajena. Pena: 15 días a 1 año. El **daño agravado** (incendio, explosión) tiene penas mayores." }
+                { match: ['que es', 'etaf', 'para que sirve'], text: "El **ETAF** (Equipo de Trabajo para el Abordaje de la Flagrancia) es la estructura del MPA que gestiona el **0800 MPA**. Centraliza las comunicaciones para que la policía reciba directivas uniformes y rápidas." },
+                { match: ['paso a paso', 'procedimiento', '0800'], text: "Protocolo ETAF/0800:\n1. **Aprehender**: Medidas precautorias (Art. 268).\n2. **Llamar al 0800**: Reportar novedad con CUIJ (si ya existe) o datos del hecho.\n3. **Clasificación**: El operador da la directiva o deriva al fiscal según complejidad.\n4. **Formularios ETAF**: Completar el acta de procedimiento según los campos requeridos por el sistema para asegurar trazabilidad." },
+                { match: ['virtual', 'camaras', 'ia'], text: "La **Flagrancia Virtual (2025/2026)** permite actuar sin orden si el delito es detectado por cámaras de videovigilancia (IA) hasta 1 hora después del hecho, considerándose persecución ininterrumpida." }
             ],
-            default: "Tengo tipificaciones del Código Penal Argentino. ¿Necesitás info sobre un delito específico: robo, hurto, lesiones, portación de arma, amenazas?"
+            default: "El sistema 0800 ETAF (MPA) es el canal oficial para directivas en flagrancia. ¿Necesitás el número, el protocolo de llamada o los campos del formulario ETAF?"
         },
         {
-            category: 'numeros_asistencia',
-            keywords: ['numero', 'telefono', 'llamar', 'emergencia', 'fiscal', 'fiscalia', 'defensoria', 'juzgado', 'bombero', 'ambulancia', 'asistencia', '911', '107', '100'],
+            category: 'actuaciones_mpa_general',
+            keywords: ['actuaciones', 'mpa', 'fiscalia', 'cuij', 'oficio', 'notificacion', 'pericia', 'secuestro', 'cadena de custodia', 'procedimiento', 'formulario'],
             responses: [
-                { match: ['emergencia', '911', 'urgencia'], text: "**Números de Emergencia:**\n📞 **911** - Emergencias Policiales\n🚑 **107** - SIES (Emergencias Médicas)\n🚒 **100** - Bomberos\n👶 **102** - Atención a Niñez\n👩 **144** - Violencia de Género\n🆘 **135** - Prevención del Suicidio\n📱 **0800-777-5000** - Ministerio de Seguridad" },
-                { match: ['fiscal', 'fiscalia', 'MPA'], text: "**Fiscalías - Ministerio Público de la Acusación:**\n📞 **0800-555-0065** - MPA Central\n📞 Santa Fe: (0342) 457-3340\n📞 Rosario: (0341) 472-1540\n\nPara consultas fuera de horario, comunicarse con el **fiscal de turno** a través del 911." },
-                { match: ['defensoria', 'defensor'], text: "**Defensoría del Pueblo:**\n📞 Santa Fe: (0342) 457-3933\n📞 Rosario: (0341) 472-1466\n📞 **0800-777-3368** - Línea gratuita" },
-                { match: ['violencia', 'genero', '144'], text: "**Violencia de Género:**\n📞 **144** - Línea Nacional (24hs)\n📞 **0800-777-0000** - Línea Mujer Santa Fe\n\n⚠️ Recordá aplicar el **Protocolo 1818/20**: recepción obligatoria de denuncia, medidas de protección inmediata, y desarme preventivo si el agresor es personal policial." }
+                { match: ['cuij', 'numero', 'identificacion'], text: "El **CUIJ** (Clave Única de Identificación Judicial) es el 'documento' de la causa. Debe figurar en todas las actas, sobres de secuestro y comunicaciones oficiales. Es generado por el 911 o la Central de Emergencias al inicio." },
+                { match: ['cadena de custodia', 'secuestro', 'embalaje'], text: "Toda pieza de convicción debe ser rotulada inmediatamente. El **Acta de Secuestro** debe detallar: lugar exacto, estado del objeto, quién lo halló y firma de testigos. Usar formularios oficiales de cadena de custodia." },
+                { match: ['tiempos', 'plazos', 'informar'], text: "La comunicación al MPA debe ser **inmediata** en caso de detenidos. Los informes periciales deben elevarse en los plazos que fije el fiscal, generalmente 48/72hs para diligencias ordinarias." }
             ],
-            default: "Emergencias: 911 (Policía), 107 (SIES), 100 (Bomberos), 144 (Violencia de Género). ¿Necesitás un número específico?"
+            default: "Conozco los protocolos generales del MPA: CUIJ, Cadena de Custodia y Actuaciones procedimentales. ¿Qué trámite específico estás realizando?"
+        },
+        {
+            category: 'politica_actualidad',
+            keywords: ['gestion', 'ministro', 'noticias', 'actualidad', 'mejoras', 'equipamiento', 'chalecos', 'moviles', 'politica criminal'],
+            responses: [
+                { match: ['equipamiento', 'chalecos', 'moviles', 'patrullas'], text: "La gestión 2026 prioriza el reequipamiento: se han entregado nuevos móviles inteligentes y chalecos con protección balística nivel RB3 certificados." },
+                { match: ['profesionalizacion', 'capacitacion', 'reentrenamiento'], text: "Se están implementando centros de reentrenamiento permanente en Rosario y Santa Fe para tácticas de intervención urbana y primeros auxilios tácticos." },
+                { match: ['politica', 'actualidad', 'noticias'], text: "La política actual se centra en la presencia operativa en calle y la lucha contra el crimen organizado mediante la Ley de Microtráfico y el endurecimiento del CPP." }
+            ],
+            default: "Mantente al día con las noticias en la Intranet Policial. Conozco sobre el nuevo equipamiento y la política criminal actual de la PSf."
+        },
+        {
+            category: 'iapos_salud',
+            keywords: ['iapos', 'obra social', 'salud', 'cobertura', 'medico', 'hospital', 'prestacion', 'afiliado', 'complementario', 'coseguro', 'internacion', 'cirugia', 'receta', 'farmacia', 'plan'],
+            responses: [
+                { match: ['que es', 'iapos', 'obra social'], text: "El **IAPOS** (Instituto Autárquico Provincial de Obra Social) es la obra social del personal de la Provincia de Santa Fe, incluida la Policía. Ofrece cobertura de consultas, prácticas ambulatorias, internaciones y cirugías." },
+                { match: ['salud mental', 'psicologo', 'psicologo gratis', 'cobertura mental'], text: "Desde 2025, el **Plan Integral de Salud Mental Policial** garantiza atención psicológica gratuita, **100% de cobertura en psicofármacos** sin coseguro ni auditoría previa, y acompañamiento al grupo familiar. Derivá tu caso a Bienestar Policial para acceder." },
+                { match: ['complementario', 'servicio complementario', 'mayo 2025'], text: "Desde **mayo 2025** (activos) y **junio 2025** (pasivos), IAPOS actualizó el valor del Servicio Complementario. El aumento es porcentual según la contribución general y varía por grupo familiar. Consultá tu recibo de sueldo o la web de IAPOS." },
+                { match: ['fuerzas federales', 'gendarmeria', 'prefectura', 'plan bandera'], text: "Desde octubre 2025, el **Plan Bandera** extiende cobertura IAPOS a las fuerzas federales (P. Federal, PSA, Prefectura, Gendarmería) que no tengan cobertura propia, pagada por el tesoro provincial." },
+                { match: ['alojamiento', 'traslado', 'transporte'], text: "El plan policial 2025-2026 incluye **alojamiento gratuito** en Rosario y Santa Fe para efectivos que residan en otras localidades, y ampliación del sistema de **transporte gratuito** (mayores destinos y frecuencia)." },
+                { match: ['contacto', 'telefono', 'atencion iapos'], text: "Podés contactar a IAPOS en: **iapossantafe.gob.ar** | Atención personalizada en las delegaciones de cada ciudad cabecera." }
+            ],
+            default: "IAPOS es tu obra social. Ofrece cobertura total en salud, incluyendo el Plan Integral de Salud Mental sin coseguro. ¿Necesitás info sobre un trámite o prestación específica?"
+        },
+        {
+            category: 'osesp_spa_tarifas',
+            keywords: ['osesp', 'spa', 'adicionales', 'hora', 'tarifa', 'precio', 'servicio adicional', 'ordinaria', 'extraordinaria', 'decreto 0075', 'privado', 'publico', 'policía adicional', 'cobrar', 'cuanto cobro'],
+            responses: [
+                { match: ['decreto 0075', '2025', 'aumento', 'actualizacion'], text: "El **Decreto 0075 (Ene 2025)** actualizó las tarifas con un aumento del **50%**. Son los valores oficiales actualizados más recientes para SPA y OSESP." },
+                { match: ['spa', 'publico', 'organismos', 'municipio', 'nacion', 'provincia'], text: "**SPA (Servicio de Policía Adicional) - Organismos Públicos (bloque de 4hs)**:\n- Ordinario: **$20.205**\n- Baja Complejidad: **$2.007**\n- Media Complejidad: **$6.039**\n- Alta Complejidad: **$8.037**" },
+                { match: ['spa', 'privado', 'empresa', 'comercio', 'particular'], text: "**SPA (Servicio de Policía Adicional) - Entidades Privadas (bloque de 4hs)**:\n- Ordinario: **$27.927**\n- Baja Complejidad: **$2.781**\n- Media Complejidad: **$8.352**\n- Alta Complejidad: **$11.142**" },
+                { match: ['osesp', 'hora', 'excepcional', 'compensacion'], text: "**OSESP (Orden de Servicio Excepcional) - Compensación por hora**:\n- Base: **$5.508/hora**\n- Supervisión/Dirección: **$6.600/hora**\n- Coordinación: **$6.000/hora**\n- Chofer de Patrullero: **$6.000/hora**" },
+                { match: ['ordinaria', 'extraordinaria', 'cuando', 'inicio'], text: "Según los Decretos vigentes, la **Ordinaria** aplica en días hábiles. La **Extraordinaria** inicia a las **22:00hs** los días de semana y a las **12:00hs** los sábados y domingos. Revisar convenio actualizado en intranet." }
+            ],
+            default: "Las tarifas de Adicionales (SPA) y OSESP fueron actualizadas por Decreto 0075 en enero 2025. ¿Necesitás el valor para un servicio público o privado?"
+        },
+        {
+            category: 'uso_fuerza_armamento',
+            keywords: ['uso fuerza', 'taser', 'byrna', 'pistola electrica', 'bala de goma', 'arma menos letal', 'baja letalidad', 'proporcionalidad', 'protocolo fuerza', 'resolucion 2237', '2237/25', 'reglamento uso armas'],
+            responses: [
+                { match: ['protocolo', 'resolucion 2237', '2237/25', 'uso progresivo'], text: "La **Resolución Ministerial 2237/25** (28/08/2025) aprueba el 'Protocolo de Uso Progresivo de la Fuerza'. Principios: **Legalidad, Necesidad y Proporcionalidad**. Siempre se deben agotar los medios menos letales antes de escalar al siguiente nivel." },
+                { match: ['taser', 'pistola electrica', 'electroshock'], text: "Desde **agosto 2025**, la PSF comenzó la distribución de **100 pistolas Taser**. Solo el personal certificado como 'instructor maestro' puede usarlas tras la capacitación específica. Su uso está protocolizado en la Res. 2237/25." },
+                { match: ['byrna', 'lanzadora', 'impacto controlado'], text: "Se distribuyeron **100 lanzadoras Byrna** junto con las Taser. Son armas de impacto controlado. No son letales pero requieren habilitación. Capacitación a cargo del ISeP según Res. 2237/25." },
+                { match: ['principios', 'legalidad', 'necesidad', 'proporcionalidad'], text: "El **Uso Racional de la Fuerza** se basa en:\n1. **Legalidad**: Solo en los supuestos autorizados.\n2. **Necesidad**: Cuando no hay alternativa efectiva.\n3. **Proporcionalidad**: El nivel debe ser equivalente a la amenaza.\nEl arma de fuego es el ÚLTIMO recurso." },
+                { match: ['arma de fuego', 'ultimo recurso', 'cuando disparo'], text: "Usar el arma de fuego solo para: **Defensa propia o de terceros** ante peligro inminente de muerte o lesiones graves, o para evitar la fuga de un sujeto que represente esa amenaza, siempre que medidas menos extremas sean insuficientes. Documentar y reportar SIEMPRE." }
+            ],
+            default: "El uso de la fuerza se rige por la Res. 2237/25. Los principios son Legalidad, Necesidad y Proporcionalidad. ¿Dudas sobre Taser, Byrna o el protocolo de escalada?"
+        },
+        {
+            category: 'ley_12521_profundizada',
+            keywords: ['articulo 25', 'articulo 1', 'articulo 3', 'articulo 4', 'articulo 12', 'funciones policiales', 'autoridad policial', 'personal ejecucion', 'personal coordinacion', 'personal supervision', 'cuidar bienes', 'proporcionalidad', 'deberes y derechos', 'obedecer ordenar'],
+            responses: [
+                { match: ['art 1', 'articulo 1', 'objeto', 'ambito'], text: "**Art. 1 (Ley 12521)**: El personal policial se rige por esta ley en todo lo relativo a la organización, funcionamiento del servicio y las funciones de sus miembros. Las normas se interpretan en favor del bien común y la dignidad de la función." },
+                { match: ['art 3', 'articulo 3', 'grados', 'jerarquia'], text: "**Art. 3 (Escala Jerárquica)** de Mayor a Menor:\n1. Director General de Policía\n2. Director de Policía\n3. Subdirector de Policía\n4. Comisario Supervisor\n5. Comisario\n6. Subcomisario\n7. Inspector\n8. Subinspector\n9. Oficial de Policía\n10. Suboficial de Policía" },
+                { match: ['art 4', 'articulo 4', 'grupos', 'categorias'], text: "**Art. 4 (Agrupamientos)**: \n- **Ejecución**: Suboficial y Oficial.\n- **Coordinación**: Subinspector e Inspector.\n- **Supervisión**: Subcomisario y Comisario Supervisor.\n- **Dirección**: Subdirector, Director y Director General." },
+                { match: ['art 12', 'articulo 12', 'escalafones', 'subescalafones'], text: "**Art. 12 (Escalafones)**:\n- **General**: Seguridad, Judicial, Investigación Criminal.\n- **Profesional**: Jurídico, Sanidad, Administración.\n- **Técnico**: Criminalista, Comunicaciones e Informática, Bombeiro, Música, Administrativo Técnico, Sanidad Técnico.\n- **Servicios**: Servicios Especializados y Mantenimiento." },
+                { match: ['art 25', 'articulo 25', 'autoridad policial', 'funciones', 'que puedo hacer'], text: "**Art. 25 (Autoridad Policial)**: El personal del Escalafón General tiene autoridad para: defender la vida, libertad, propiedad e integridad de las personas; adoptar procedimientos para **prevenir el delito o interrumpir su ejecución**; identificar sospechosos y realizar aprehensiones en casos de flagrancia." },
+                { match: ['derechos', 'estabilidad', 'propiedad grado'], text: "**Derechos del Art. 47**: El personal tiene derecho a: estabilidad en el empleo, **propiedad del grado**, percepción de haberes según escala, licencias, cobertura de salud (IAPOS), y acceso a formación profesional en el ISeP." }
+            ],
+            default: "Tengo conocimiento profundo de la Ley 12521. ¿Qué artículo específico, escalafón o agrupamiento necesitás consultar?"
+        },
+        {
+            category: 'decreto_461_profundizado',
+            keywords: ['decreto 461', 'falta', 'sancion', 'tribunal conducta', 'leve', 'grave', 'sumario', 'procedimiento disciplinario', 'defensa', 'plazo', 'descargo', 'asuntos internos', 'juzgamiento'],
+            responses: [
+                { match: ['que es', 'decreto 461', 'reglamento'], text: "El **Decreto 461/2015** (Régimen de Responsabilidad Administrativa del Personal Policial) reglamentó el Título II cap. 2 de la Ley 12521. Define faltas, sanciones, procedimiento y el **Tribunal de Conducta Policial** para juzgar las graves." },
+                { match: ['faltas leves', 'leve', 'ejemplos'], text: "**FALTAS LEVES** (Dec. 461): Descuido en higiene personal o uniforme, fumar en servicio, uso indebido del celular, falta de puntualidad, no rendir novedades, trato incorrecto con ciudadanos. **Sanción**: Apercibimiento o hasta **10 días de arresto**. Tres leves equivalen a una grave." },
+                { match: ['faltas graves', 'grave', 'ejemplos'], text: "**FALTAS GRAVES** (Dec. 461): Inducir a engaño al superior, uso arbitrario del arma, falta de colaboración con la justicia, consumo de estupefacientes, permitir indisciplina bajo su mando, actos deshonestos, conducta indecorosa, incumplimiento de orden legal. **Sanción**: 11 a 30 días de suspensión o destitución." },
+                { match: ['descargo', 'defensa', 'plazo', 'recurso'], text: "Ante una sanción, tenés derecho a presentar **descargo escrito** en el plazo legal (generalmente 5 días hábiles desde la notificación). Podés solicitar vista del expediente. Para faltas graves, el **Tribunal de Conducta Policial** juzga el caso y podés ser asistido por abogado." },
+                { match: ['tribunal conducta', 'que hace', 'como funciona'], text: "El **Tribunal de Conducta Policial** es el órgano que juzga las **faltas graves**. Está compuesto por oficiales superiores y emite resolución elevada al Director General para aplicar la sanción (suspensión o destitución). Se puede recurrir ante la Secretaría de RRHH." },
+                { match: ['modificacion', '3268', 'decreto 3268', '2018'], text: "El **Decreto 3268/2018** modificó parcialmente el Dec. 461/2015, ajustando plazos y criterios para ciertos procedimientos. La reforma 2018 buscó acelerar la resolución de sumarios sin afectar el derecho de defensa." }
+            ],
+            default: "El Decreto 461/2015 regula el Régimen Disciplinario. Define faltas leves y graves, procedimientos y el Tribunal de Conducta. ¿Necesitás saber sobre sanciones, plazos o derecho de defensa?"
+        },
+        {
+            category: 'trata_personas_protocolo',
+            keywords: ['trata', 'trata de personas', 'explotacion', 'victima', 'proxenetismo', 'captacion', 'protocolo trata', 'rota', 'ufase', 'organizacion criminal', 'trafico'],
+            responses: [
+                { match: ['que hacer', 'protocolo', 'actuacion'], text: "**Protocolo de Actuación - Trata de Personas**:\n1. **No revictimizar**: Trato respetuoso, no preguntar el número de 'clientes'.\n2. **Asistencia inmediata**: Derivar a la víctima a salud y trabajo social.\n3. **Comunicar al MPA**: Inmediatamente (es un delito federal).\n4. **Preservar el lugar**: Acordonar sin que la víctima quede expuesta." },
+                { match: ['delito federal', 'competencia', 'quién investiga'], text: "La **Trata de Personas** es un delito federal (Ley 26842). La Justicia Federal investiga. La PSF actúa inicialmente para asistir a la víctima y preservar la escena, luego notifica a la **UFASe** (Unidad Fiscal de Asistencia en Secuestros Extorsivos) y al Juzgado Federal." },
+                { match: ['indicios', 'sospecha', 'como identifico'], text: "Indicios de Trata: Persona que no puede hablar libremente, sin documentos, con miedo, que repite frases aprendidas, sin libertad de movimiento, señales de violencia, encerrada en inmuebles específicos, que no conoce la ciudad donde está." }
+            ],
+            default: "La trata de personas (Ley 26842) es un delito federal. La policía actúa para asistir a la víctima y preservar la escena. ¿Dudas sobre el protocolo de actuación o la competencia?"
+        },
+        {
+            category: 'control_vehicular_transito',
+            keywords: ['control vehicular', 'moto', 'motocicleta', 'retencion', 'ciclomotor', 'infraccion', 'ley transito', 'seguro', 'cedula verde', 'verificacion tecnica', 'vhf', 'alcoholemia', 'protocolo control'],
+            responses: [
+                { match: ['protocolo control vehicular', 'como controlo', 'procedimiento'], text: "El **Protocolo de Control Vehicular SF** (Resolución Ministerial) establece:\n1. Señalización visible del operativo.\n2. Verificar documentación: Licencia, Cédula Verde/Azul, Seguro, VTV.\n3. Retención preventiva si falta documentación o existe prohibición.\n4. Acta de retención con datos del conductor y vehículo." },
+                { match: ['retencion', 'secuestro', 'moto retenida'], text: "La **retención preventiva** de un vehículo se aplica cuando: falta documentación obligatoria, está prohibida la circulación, o hay indicios de uso en un delito. Se labra Acta con CUIJ y se informa al dueño del lugar de depósito." },
+                { match: ['alcoholemia', 'aliento', 'control', 'positivo'], text: "Ante control de alcoholemia positivo: Informar el resultado al conductor, aplicar el procedimiento de la Ley de Tránsito Nacional (24449) y labrar acta contravencional. En caso de accidente con lesionados, se llama al MPA (0800)." }
+            ],
+            default: "El Protocolo de Control Vehicular regula la retención de motos y controles de documentación. ¿Necesitás el procedimiento específico para retención o alcoholemia?"
+        },
+        {
+            category: 'recursos_web_policiales',
+            keywords: ['pagina web', 'recursos online', 'intranet', 'donde consulto', 'web policial', 'isep online', 'isep web', 'iapos web', 'sanidad', 'mpa online', 'boletín oficial', 'legislacion'],
+            responses: [
+                { match: ['isep', 'web', 'aula virtual', 'isep online'], text: "**Recursos ISeP**: isepsantafe.edu.ar → Aula Virtual, inscripciones a cursos y la Tecnicatura Superior en Seguridad Pública." },
+                { match: ['iapos', 'web', 'tramites online', 'prestaciones'], text: "**Recursos IAPOS**: iapossantafe.gob.ar → Cartilla de prestadores, autorizaciones, formularios y trámites online." },
+                { match: ['mpa', 'web', 'protocolo', 'formulario'], text: "**Recursos MPA**: mpa.santafe.gov.ar → Protocolos, formularios ETAF y comunicaciones oficiales del Ministerio Público de la Acusación." },
+                { match: ['boletin oficial', 'legislacion', 'leyes', 'decretos'], text: "**Legislación Oficial**: santafe.gov.ar/legislación → Texto completo de leyes, decretos y resoluciones provinciales. También en: saij.gob.ar (nacional)." },
+                { match: ['intranet', 'portalpolicial', 'portal'], text: "**Intranet Policial**: Accesible solo desde redes internas. Gestión de ID Ciudadana, novedades, formularios de RRHH y publicaciones del Boletín Policial." }
+            ],
+        },
+        // --- 🚨 NUEVAS BASES LEGALES Y ACTUALIZACIONES 2026 🚨 ---
+        {
+            category: 'isep_actualidad_2026',
+            keywords: ['isep', '2026', 'ascensos', 'perfeccionamiento', 'curso', 'actualizacion', 'egresados', 'nuevos policias', 'novedades', 'escuela superior'],
+            responses: [
+                { match: ['curso de perfeccionamiento', 'marzo', 'recreo', 'rosario'], text: "El **Curso de Perfeccionamiento y/o Actualización Ciclo 2026** inició la semana del **9 de marzo de 2026** en Reconquista, Recreo y Rosario (jerarquías Inspector a Suboficial). Mantiene tu habilitación para concursos por 5 años." },
+                { match: ['escuela superior', 'director', 'subdirector'], text: "Para Directores y Subdirectores de Policía, el Curso de Perfeccionamiento 2026 cerró inscripciones en enero 2026." },
+                { match: ['cadetes', 'ingreso', 'ciclo lectivo', 'policias'], text: "El 24 de febrero de 2026 comenzó el Ciclo Lectivo 2026 para el 1er año de cadetes. Además, para la nueva cohorte se aumentó la proporción de varones para suplir jubilaciones operativas." },
+                { match: ['nuevos policias', 'egresados', 'febrero', 'suboficiales'], text: "El 23 de febrero de 2026, **811 nuevos suboficiales** (cohorte 2024-2025) recibieron su equipamiento reglamentario, sumándose a la operatividad provincial." },
+                { match: ['ascensos', '2026-2027', 'seleccion'], text: "En diciembre de 2025 se publicaron los aptos (psicológico, físico e intelectual) del proceso de selección del ciclo 2026-2027." }
+            ],
+            default: "El ISeP comenzó los cursos de actualización en marzo 2026. Es fundamental aprobarlo si no ascendiste en el último concurso para mantener la habilitación. ¿Qué información sobre capacitación necesitás?"
+        },
+        {
+            category: 'codigo_procesal_penal_sf',
+            keywords: ['cpp', 'codigo procesal', 'santa fe', 'ley 12734', 'ipp', 'detencion', 'allanamiento', 'demora', 'flagrancia', 'derechos victima', 'fiscal', 'actuacion policial', 'mpa'],
+            responses: [
+                { match: ['ipp', 'investigacion penal preparatoria'], text: "La actuación policial transcurre en la **I.P.P (Investigación Penal Preparatoria)**. Actuamos bajo las órdenes directas del Fiscal (MPA), quien dirige jurídica y técnicamente el caso." },
+                { match: ['detencion', 'libertad', 'arresto', 'demora', '10 bis'], text: "**Detención / Demora**: No podés detener o restringir la libertad sin orden judicial, SALVO flagrancia. Excepcionalmente, en casos como averiguación de identidad por indicios ciertos, se puede demorar preventivamente." },
+                { match: ['allanamiento', 'orden', 'horario'], text: "El **allanamiento** requiere orden escrita que especifique domicilio y objetivo. El horario normal es de **07:00 a 21:00**, salvo excepciones gravísimas, riesgo de destrucción de prueba, o consentimiento." },
+                { match: ['mpa', 'comunicacion', 'aviso', 'oficio'], text: "La PDI y GOC (o Personal de Guardia en general) tienen la obligación de informar **de inmediato** al Fiscal de turno cualquier inicio de actuación de oficio." },
+                { match: ['victima', 'derechos', 'informacion'], text: "Es tu obligación informar a la víctima sobre sus derechos (ser asistida, asesorada) conjuntamente con el MPA en la primera intervención." }
+            ],
+            default: "El Código Procesal (Ley 12.734) enmarca nuestra actuación. Trabajamos para la IPP bajo mandato de los Fiscales del MPA. Toda privación de libertad u allanamiento es de interpretación restrictiva y exige orden, salvo flagrancia."
+        },
+        {
+            category: 'codigo_penal_arg',
+            keywords: ['codigo penal', 'argentino', 'legitima defensa', 'penas', 'territorialidad', 'reforma', 'fuerza de seguridad', 'usurpacion', 'ley 11179', 'corrupcion', 'imputabilidad'],
+            responses: [
+                { match: ['legitima defensa', 'requisitos', 'disparo'], text: "**Legítima Defensa (CP)** exige: A) Agresión ilegítima. B) Necesidad y racionalidad del medio empleado. C) Falta de provocación suficiente. *(Nota: Existen proyectos de reforma 2025/2026 para presumir a favor del policía el cumplimiento del deber si usa su arma reglamentariamente).* " },
+                { match: ['penas', 'reclusion', 'prision'], text: "Las penas establecidas por el Libro I son: **Reclusión, Prisión, Multa e Inhabilitación**. Reclusión/Prisión temporal/perpetua se cumplen con trabajo obligatorio según el trato penitenciario." },
+                { match: ['reforma', 'nuevo codigo', 'corrupcion', 'piquetes'], text: "El proyecto de **Nuevo Código Penal** impulsa penas endurecidas para: corrupción, fraudes con IA, usurpaciones, barrabravas y organizadores de piquetes, además de proteger la labor del agente de seguridad." },
+                { match: ['menores', 'participacion', 'mayores'], text: "Si un delito es cometido mediante la participación de menores de 18 años, la escala penal para los *mayores* involucrados **aumenta en 1/3** del mínimo y máximo." },
+                { match: ['ley benigna', 'retroactividad'], text: "Siempre se aplica, por principio de Derecho Penal, la **ley más benigna** al imputado." }
+            ],
+            default: "El Código Penal Argentino detalla los tipos penales y penas. El uso del arma y la legítima defensa están sujetos al requisito ineludible de proporcionalidad en la agresión. ¿Sobre qué delito necesitás la tipificación?"
         }
     ];
 
-    // Quick actions for suggestions
-    const quickActions = ['¿Cómo detener?', 'Sueldos 2026', 'Licencias', 'Números de emergencia', 'Robo vs Hurto', '¿Cómo labrar un acta?'];
+    // ═══════════════════════════════════════════════════════════
+    // CENTINELA AI — MOTOR DE INTELIGENCIA v10.2 (NLU Deep)
+    // ═══════════════════════════════════════════════════════════
 
+    // --- 1. CONTEXTO DE CONVERSACIÓN ---
+    const sessionContext = {
+        history: [],
+        lastCategory: null,
+        messageCount: 0,
+        addTurn(category, query) {
+            this.history.push({ category, query, ts: Date.now() });
+            if (this.history.length > 5) this.history.shift();
+            this.lastCategory = category;
+            this.messageCount++;
+        }
+    };
+
+    // --- 2. NORMALIZADOR UNIVERSAL ---
+    function normalizeText(text) {
+        return text.toLowerCase()
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?¿!¡"']/g, " ")
+            .replace(/\s+/g, " ")
+            .trim();
+    }
+
+    // --- 3. DICCIONARIO DE SINÓNIMOS / INTENCIONES NATURALES ---
+    // Mapea frases coloquiales a la categoría correcta del knowledgeBase
+    const synonymMap = [
+        // --- SUELDOS & HABERES ---
+        { phrases: ['cuanto cobro', 'cuanto gano', 'cuanto me pagan', 'cuanto es mi sueldo', 'plata que cobro', 'cobro poco', 'me pagan mal', 'cuanto me corresponde', 'cuanto cobran', 'cuanto ganan', 'cuanto pagan', 'cuanto esta el sueldo'], category: 'sueldos' },
+        { phrases: ['aumento de sueldo', 'pido aumento', 'subio el sueldo', 'nos aumentaron', 'grilla salarial', 'escala salarial'], category: 'sueldos' },
+        { phrases: ['cuanto cobra un oficial', 'cuanto gana un suboficial', 'cuanto gana un inspector', 'cuanto gana un comisario', 'cuanto gana un subinspector'], category: 'sueldos' },
+        { phrases: ['que es el tap', 'la tarjeta alimentar', 'tarjeta de comida'], category: 'general_admin' },
+
+        // --- LICENCIAS ---
+        { phrases: ['me puedo tomar dias', 'necesito dias', 'pedir franco', 'dias por hijo', 'dias por casamiento', 'me enfermo', 'estoy enfermo', 'me siento mal', 'carpeta medica', 'tengo que ir al medico'], category: 'licencias' },
+        { phrases: ['cuantos dias de vacaciones tengo', 'cuando me tocan vacaciones', 'me corresponden vacaciones'], category: 'licencias' },
+        { phrases: ['se me murio un familiar', 'fallecio mi padre', 'fallecio mi madre', 'duelo', 'muerte de familiar'], category: 'licencias' },
+        { phrases: ['tengo un examen', 'tengo que rendir', 'dias para estudiar', 'rindo parcial'], category: 'licencias' },
+        { phrases: ['voy a ser papa', 'voy a ser padre', 'nacio mi hijo', 'dias por paternidad'], category: 'licencias' },
+        { phrases: ['estoy embarazada', 'licencia por embarazo', 'cuando me toca la maternidad'], category: 'licencias' },
+
+        // --- DISCIPLINA ---
+        { phrases: ['me sancionaron', 'me van a sancionar', 'me pueden sancionar', 'me hicieron un sumario', 'tengo un sumario', 'me quieren suspender', 'me corrieron', 'me arrestaron', 'me mandaron preso', 'me dieron de baja'], category: 'disciplina' },
+        { phrases: ['que pasa si me agarro el celular', 'puedo fumar en servicio', 'si llego tarde', 'falta leve', 'falta grave'], category: 'disciplina' },
+        { phrases: ['como me defiendo', 'como hago un descargo', 'tengo derecho a defenderme', 'donde hago el descargo'], category: 'decreto_461_profundizado' },
+
+        // --- JUBILACIÓN ---
+        { phrases: ['me quiero jubilar', 'cuando me jubilo', 'cuanto me falta para jubilarme', 'cuantos años me faltan', 'cuanto me queda', 'me corresponde jubilarme'], category: 'prevision' },
+        { phrases: ['cuanto va a ser mi jubilacion', 'cuanto voy a cobrar de jubilado', 'como se calcula la jubilacion'], category: 'prevision' },
+        { phrases: ['aporte jubilatorio', 'cuanto me descuentan', 'me descuentan mucho'], category: 'prevision' },
+
+        // --- ASCENSOS / ISEP ---
+        { phrases: ['como asciendo', 'quiero ascender', 'cuando es el concurso', 'hay concurso', 'puedo ascender', 'me postulo', 'requisitos para ascender'], category: 'isep_ascensos' },
+        { phrases: ['hay algun curso', 'tengo que hacer un curso', 'como me capacito', 'cursos disponibles', 'donde estudio'], category: 'isep_formacion' },
+        { phrases: ['estoy en el listado', 'listado de habilitados', 'sali habilitado', 'estoy habilitado', 'me habilitaron', 'listado isep'], category: 'isep_documentos' },
+        { phrases: ['manual para estudiar', 'material de estudio', 'que tengo que leer', 'de donde estudio', 'manual tecnicatura'], category: 'isep_documentos' },
+        { phrases: ['novedades del isep', 'que hay de nuevo en el isep', 'nuevo del isep'], category: 'isep_actualidad_2026' },
+
+        // --- PROCEDIMIENTOS OPERATIVOS ---
+        { phrases: ['agarre un chorro', 'lo puedo detener', 'lo detengo', 'lo puedo parar', 'que hago si lo agarro en flagrancia', 'lo vi robando'], category: 'etaf_flagrancia_0800' },
+        { phrases: ['me encontre con droga', 'encontre droga', 'tienen droga', 'hay un bunker', 'venden droga', 'punto de venta de droga'], category: 'microtrafico' },
+        { phrases: ['tengo que preservar la escena', 'como acordono', 'llegue a un crimen', 'hay un muerto', 'encontre un cuerpo'], category: 'escena_del_crimen' },
+        { phrases: ['tengo que allanar', 'necesito orden de allanamiento', 'puedo entrar sin orden', 'puedo entrar a la casa', 'requisa'], category: 'reforma_procesal_penal' },
+        { phrases: ['controlar un auto', 'control vehicular', 'retener una moto', 'le retengo la moto', 'no tiene papeles', 'sin seguro', 'sin licencia'], category: 'control_vehicular_transito' },
+        { phrases: ['violencia de genero', 'violencia domestica', 'le pega a la mujer', 'mujer golpeada', 'denuncia por violencia', 'la pareja le pega'], category: 'juridico_policial' },
+        { phrases: ['cuando puedo disparar', 'puedo disparar', 'cuando uso el arma', 'uso de la fuerza', 'me amenaza con un arma', 'me apuntan'], category: 'uso_fuerza_armamento' },
+        { phrases: ['que es el cuij', 'numero de causa', 'como identifico la causa'], category: 'actuaciones_mpa_general' },
+        { phrases: ['trata de personas', 'explotacion sexual', 'prostitucion forzada'], category: 'trata_personas_protocolo' },
+
+        // --- OBRA SOCIAL / SALUD ---
+        { phrases: ['me cubre iapos', 'que me cubre', 'tengo cobertura', 'necesito ir al medico', 'necesito un turno', 'donde me atiendo', 'obra social'], category: 'iapos_salud' },
+        { phrases: ['estoy mal', 'no puedo mas', 'tengo depresion', 'necesito un psicologo', 'salud mental', 'estres', 'me siento quemado', 'burnout'], category: 'bienestar_salud' },
+
+        // --- TARIFAS ADICIONALES ---
+        { phrases: ['cuanto me pagan la hora', 'cuanto vale la hora', 'tarifa del adicional', 'cuanto cobro un adicional', 'cuanto es la extraordinaria', 'cuanto es la ordinaria', 'precio del adicional'], category: 'osesp_spa_tarifas' },
+
+        // --- TRANSPORTE ---
+        { phrases: ['horario del colectivo', 'cuando sale el bondi', 'a que hora sale', 'hay colectivo', 'micro policial', 'transporte policial'], category: 'transporte' },
+
+        // --- LEY 12521 ---
+        { phrases: ['que dice la ley', 'ley de policia', 'derechos del policia', 'mis derechos', 'que articulo', 'estabilidad laboral'], category: 'ley_12521_profundizada' },
+
+        // --- CÓDIGO PENAL / PROCESAL ---
+        { phrases: ['legitima defensa', 'defensa propia', 'me puedo defender', 'si me atacan'], category: 'codigo_penal_arg' },
+        { phrases: ['que es el cpp', 'codigo procesal', 'como actuo penalmente'], category: 'codigo_procesal_penal_sf' },
+
+        // --- ARMAS ---
+        { phrases: ['como identifico un arma', 'que datos anoto del arma', 'clasificar un arma', 'calibre', 'numero de serie'], category: 'reglamentacion' },
+
+        // --- JURISDICCIÓN ---
+        { phrases: ['donde queda la ur', 'unidad regional', 'que ur me corresponde', 'cabecera'], category: 'jurisdiccion' },
+
+        // --- RECURSOS WEB ---
+        { phrases: ['pagina del isep', 'pagina de iapos', 'web del mpa', 'donde consulto', 'intranet', 'portal policial'], category: 'recursos_web_policiales' },
+    ];
+
+    // --- 4. STEMMER SIMPLE PARA ESPAÑOL ---
+    function spanishStem(word) {
+        if (word.length < 5) return word;
+        return word
+            .replace(/(cion|sion|mente|idad|ismo|ista|ario|ario|orio|amiento|imiento|acion|encia|ancia)$/i, '')
+            .replace(/(ando|iendo|ar|er|ir|ado|ido|arse|erse|irse)$/i, '')
+            .replace(/(es|as|os|is)$/i, '');
+    }
+
+    // --- 5. RENDERIZADOR MARKDOWN → HTML PROFESIONAL ---
+    function renderMarkdown(text) {
+        return text
+            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" class="text-primary underline hover:text-blue-300 transition-colors">$1</a>')
+            .replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-900 dark:text-white font-bold">$1</strong>')
+            .replace(/^(\d+)\.\s+(.+)$/gm, '<div class="flex gap-2 my-1"><span class="text-primary font-bold shrink-0">$1.</span><span>$2</span></div>')
+            .replace(/^[-•]\s+(.+)$/gm, '<div class="flex gap-2 my-1"><span class="text-primary shrink-0">▸</span><span>$1</span></div>')
+            .replace(/\n/g, '<br>');
+    }
+
+    // --- 6. DETECTOR DE INTENCIÓN ---
+    function detectIntent(msg) {
+        const greetings = ['hola', 'buen dia', 'buenas', 'buenos dias', 'buenas tardes', 'buenas noches', 'que tal', 'como estas', 'hey', 'ey'];
+        const thanks = ['gracias', 'muchas gracias', 'genial', 'perfecto', 'ok gracias', 'entendido', 'dale gracias', 'groso', 'barbaro', 'excelente', 'muy bien'];
+        const confusions = ['no entiendo', 'no se', 'que haces', 'que podes hacer', 'que sabes', 'para que sirves', 'como funciona esto', 'ayuda', 'help', 'que temas manejas'];
+        if (greetings.some(g => msg.includes(g))) return 'greeting';
+        if (thanks.some(t => msg.includes(t))) return 'thanks';
+        if (confusions.some(c => msg.includes(c))) return 'capabilities';
+        return null;
+    }
+
+    // --- 7. RESPUESTAS DE INTENCIÓN ---
+    const intentResponses = {
+        greeting: () => {
+            const hour = new Date().getHours();
+            const greet = hour < 12 ? 'Buenos días' : hour < 18 ? 'Buenas tardes' : 'Buenas noches';
+            return `${greet}, oficial. Soy **Centinela AI v10**, tu asesor legal y operativo de la PSF.\n\nPodés preguntarme lo que necesites con tus palabras, no hace falta que uses términos técnicos. Algunos temas que manejo:\n- **Sueldos**: "¿Cuánto cobro?", "¿Cuánto gana un inspector?"\n- **Licencias**: "Necesito días", "Me enfermé"\n- **Ascensos**: "¿Cómo asciendo?", "Listado de habilitados"\n- **Procedimientos**: "Agarre un chorro", "Encontré droga"\n- **Salud/IAPOS**: "Necesito un psicólogo", "¿Qué me cubre?"\n- **Leyes**: Ley 12521, CPP, Código Penal\n\n¿Qué necesitás?`;
+        },
+        thanks: () => `De nada, oficial. Estoy disponible 24/7 para cualquier duda. Si no supe responder algo, ya le avisé al administrador para que me entrene mejor. 🫡`,
+        capabilities: () => `Soy **Centinela AI v10**, especializado en la **Policía de Santa Fe**. Preguntame con tus palabras, sin formalidades:\n\n📋 **Temas que domino:**\n- Sueldos, haberes y tarifas de adicionales\n- Licencias (vacaciones, maternidad, enfermedad)\n- Ascensos y cursos del ISeP\n- Procedimientos operativos (flagrancia, uso de fuerza, drogas)\n- IAPOS, salud mental y bienestar\n- Leyes: 12521, CPP, Código Penal, Decreto 461\n- Transporte policial, jurisdicción y directorio\n\n💡 **Ejemplo**: En vez de "Decreto 4157 licencia paternidad", podés preguntar "¿Cuántos días me dan si nace mi hijo?"`
+    };
+
+    // --- 8. MOTOR DE SCORING AVANZADO CON NLU ---
+    function scoreCategories(normalizedMsg) {
+        const words = normalizedMsg.split(/\s+/).filter(w => w.length > 2);
+        const msgTokens = new Set(words);
+        const stemmedWords = words.map(w => spanishStem(w));
+        const scored = [];
+
+        // --- PASO 1: Synonym boost (natural phrases → category) ---
+        const synonymBoosts = {};
+        synonymMap.forEach(entry => {
+            entry.phrases.forEach(phrase => {
+                if (normalizedMsg.includes(phrase)) {
+                    synonymBoosts[entry.category] = (synonymBoosts[entry.category] || 0) + 80;
+                }
+            });
+        });
+
+        knowledgeBase.forEach(cat => {
+            let score = synonymBoosts[cat.category] || 0;
+            let matchedKeywords = 0;
+
+            cat.keywords.forEach(kw => {
+                const normKw = normalizeText(kw);
+                const kwWords = normKw.split(/\s+/);
+
+                // Multi-word keyword: exact phrase match
+                if (kwWords.length > 1 && normalizedMsg.includes(normKw)) {
+                    score += 60;
+                    matchedKeywords++;
+                    return;
+                }
+                // Single-word keyword: exact token match
+                if (kwWords.length === 1 && msgTokens.has(normKw)) {
+                    score += (normKw.length > 7 || /\d+/.test(normKw)) ? 45 : 22;
+                    matchedKeywords++;
+                    return;
+                }
+                // Stem matching: compare stems for partial conjugation match
+                if (kwWords.length === 1 && normKw.length >= 5) {
+                    const kwStem = spanishStem(normKw);
+                    if (kwStem.length >= 4 && stemmedWords.some(sw => sw === kwStem)) {
+                        score += 15;
+                        matchedKeywords++;
+                    }
+                }
+            });
+
+            // Context bonus
+            if (sessionContext.lastCategory === cat.category) score += 10;
+
+            // Coverage bonus
+            const coverage = matchedKeywords / Math.max(cat.keywords.length, 1);
+            if (coverage > 0.3) score += Math.round(coverage * 15);
+
+            if (score > 0) scored.push({ cat, score, matchedKeywords });
+        });
+
+        return scored.sort((a, b) => b.score - a.score);
+    }
+
+    // --- 9. SELECTOR DE RESPUESTA ESPECÍFICA ---
+    function selectResponse(cat, normalizedMsg) {
+        let bestResponse = null;
+        let bestMatchScore = -1;
+
+        cat.responses.forEach(res => {
+            let matchScore = 0;
+            let totalTerms = res.match.length;
+            let matchedTerms = 0;
+
+            res.match.forEach(m => {
+                const normM = normalizeText(m);
+                if (normalizedMsg.includes(normM)) {
+                    matchScore += 30;
+                    matchedTerms++;
+                }
+            });
+
+            // Bonus if ALL match terms were found
+            if (totalTerms > 0 && matchedTerms === totalTerms) {
+                matchScore += 20;
+            }
+
+            if (matchScore > bestMatchScore) {
+                bestMatchScore = matchScore;
+                bestResponse = res;
+            }
+        });
+
+        if (bestMatchScore >= 30 && bestResponse) return bestResponse.text;
+        return cat.default;
+    }
+
+    // --- 10. FUSIÓN MULTI-CATEGORÍA ---
+    function fuseResponses(topResults, normalizedMsg) {
+        if (topResults.length < 2) return null;
+        const [first, second] = topResults;
+        if (second.score >= 40 && (first.score - second.score) < 20 && first.cat.category !== second.cat.category) {
+            const r1 = selectResponse(first.cat, normalizedMsg);
+            const r2 = selectResponse(second.cat, normalizedMsg);
+            if (r1 !== r2) return `${r1}\n\n---\n📌 **También relacionado (${second.cat.category.replace(/_/g, ' ')}):**\n${r2}`;
+        }
+        return null;
+    }
+
+    // --- 11. SUGERENCIAS CONTEXTUALES ---
+    function generateSuggestions(category) {
+        const map = {
+            'sueldos': ['¿Cuánto gana un oficial?', '¿Hay plus por Rosario?', '¿Cuánto es el mínimo?'],
+            'licencias': ['¿Cuántos días por paternidad?', '¿Vacaciones con 10 años?', 'Días por examen'],
+            'disciplina': ['¿Qué es falta leve?', '¿Me pueden suspender?', '¿Cómo hago un descargo?'],
+            'prevision': ['¿Cuándo me jubilo?', '¿Cuánto me descuentan?', '¿Cuánto voy a cobrar?'],
+            'isep_ascensos': ['¿Cómo asciendo?', '¿Hay concurso 2025?', '¿Qué es la ID Ciudadana?'],
+            'isep_formacion': ['¿Hay cursos virtuales?', 'Vacantes del Decreto 263', 'Tecnicatura 2026'],
+            'isep_documentos': ['Listado de habilitados 2026', 'Manual de tecnicatura', 'Convocados ascenso 2025'],
+            'isep_actualidad_2026': ['Novedades del ISeP', 'Egresados 2026', 'Curso de perfeccionamiento'],
+            'haberes_servicios': ['¿Cuánto es la hora adicional?', 'Tarifa privada', 'Decreto 142'],
+            'juridico_policial': ['¿Art. 268 del CPP?', 'Protocolo violencia de género', 'Flagrancia 0800'],
+            'etaf_flagrancia_0800': ['Paso a paso del 0800', '¿Qué es flagrancia virtual?', 'Formulario ETAF'],
+            'microtrafico': ['¿Cómo actúo en un búnker?', '¿Ley 14239 o 23737?', 'Narcomenudeo'],
+            'narcotrafico_ley_23737': ['¿Competencia federal o provincial?', '¿Qué son precursores?', 'Fallo Arriola'],
+            'actuaciones_mpa_general': ['¿Qué es el CUIJ?', '¿Cómo hago acta de secuestro?', 'Plazos de comunicación'],
+            'osesp_spa_tarifas': ['Tarifa privada ordinaria', 'Alta complejidad pública', '¿Hora OSESP base?'],
+            'iapos_salud': ['¿Cobertura salud mental?', '¿IAPOS para federales?', '¿Web de IAPOS?'],
+            'bienestar_salud': ['¿Cómo pido ayuda?', '¿Dónde hay psicólogo?', 'Medicamentos gratis'],
+            'uso_fuerza_armamento': ['¿Cuándo uso la Taser?', '¿Cuándo puedo disparar?', 'Res. 2237/25'],
+            'ley_12521_profundizada': ['Art. 25 - Autoridad policial', 'Escala jerárquica', '¿Qué escalafones hay?'],
+            'decreto_461_profundizado': ['¿Qué es falta grave?', '¿Cómo hago mi descargo?', 'Tribunal de Conducta'],
+            'control_vehicular_transito': ['¿Cuándo retengo una moto?', '¿Qué documentos verifico?', 'Alcoholemia'],
+            'recursos_web_policiales': ['Web del ISeP', 'Web de IAPOS', 'Portal del MPA'],
+            'escena_del_crimen': ['¿Cómo preservo la escena?', 'Cadena de custodia', 'Bioseguridad'],
+            'transporte': ['Horario Rosario-Vera', '¿Dónde para?', 'Vuelta Vera-Rosario'],
+            'codigo_penal_arg': ['Legítima defensa', 'Reforma penal', 'Penas'],
+            'codigo_procesal_penal_sf': ['¿Cuándo detengo?', 'Allanamiento', 'Derechos de la víctima'],
+            'trata_personas_protocolo': ['¿Cómo identifico trata?', 'Protocolo de actuación', '¿Quién investiga?'],
+            'general_admin': ['¿Qué es la TAP?', '0810 TAP', 'Alias CBU'],
+            'reglamentacion': ['MIRAF', 'Identificar un arma', 'Uso racional'],
+            'jurisdiccion': ['¿Dónde queda la UR?', 'Listado de URs', 'Cabecera UR 2'],
+            'codigo_faltas': ['Ruidos molestos', 'Código contravencional', 'Penas por falta'],
+            'reforma_procesal_penal': ['Allanamiento urgente', 'Ley 14258', 'Plazos de detención'],
+            'politica_actualidad': ['Equipamiento nuevo', 'Chalecos', 'Política criminal'],
+        };
+        return map[category] || [];
+    }
+
+    // --- 12. FALLBACK CON NOTIFICACIÓN AL ADMINISTRADOR ---
+    function generateSmartFallback(normalizedMsg, topResults, originalMsg) {
+        // Log the unanswered query to Supabase for admin review
+        notifyAdminUnanswered(originalMsg, normalizedMsg, topResults);
+
+        if (topResults.length > 0 && topResults[0].score >= 15) {
+            const topCat = topResults[0].cat;
+            const suggestions = generateSuggestions(topCat.category);
+            const sugText = suggestions.length > 0 ? `\n\nProbá preguntando:\n- ${suggestions.join('\n- ')}` : '';
+            return `Creo que tu consulta podría estar relacionada con **${topCat.category.replace(/_/g, ' ')}**, pero necesito que me des un poco más de detalle para darte la respuesta correcta.${sugText}\n\n📝 *Tu pregunta fue registrada para que el administrador me entrene mejor.*`;
+        }
+        return `No tengo información exacta para responder eso, pero **tu pregunta ya fue enviada al administrador** para que me entrene y pueda responderla en el futuro. 📝\n\nMientras tanto, probá preguntando de otra forma o sobre alguno de estos temas:\n- **Sueldos**: "¿Cuánto cobro?"\n- **Licencias**: "¿Cuántos días me corresponden?"\n- **Ascensos**: "¿Cómo asciendo?"\n- **Procedimientos**: "¿Qué hago si agarro a alguien robando?"\n- **Salud**: "Necesito un psicólogo"`;
+    }
+
+    // --- 13. NOTIFICADOR AL ADMINISTRADOR (Supabase) ---
+    async function notifyAdminUnanswered(originalMsg, normalizedMsg, topResults) {
+        try {
+            const user = typeof auth !== 'undefined' && auth.currentUser ? auth.currentUser : null;
+            const topGuess = topResults.length > 0 ? topResults[0].cat.category : 'ninguna';
+            const topScore = topResults.length > 0 ? topResults[0].score : 0;
+
+            await supabaseClient.from('unanswered_queries').insert([{
+                user_email: user ? user.email : 'anónimo',
+                original_query: originalMsg,
+                normalized_query: normalizedMsg,
+                closest_category: topGuess,
+                closest_score: topScore,
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            }]);
+            console.log('📝 Consulta sin respuesta enviada al admin');
+        } catch (e) {
+            // Silently fail — don't break the UX
+            console.warn('Admin notification failed (table may not exist yet):', e.message);
+        }
+    }
+
+    // --- 11. CHIPS DE SUGERENCIA ---
+    function renderSuggestionChips(suggestions) {
+        if (!suggestions || suggestions.length === 0) return '';
+        return `
+        <div class="flex flex-wrap gap-2 mt-3 pt-3 border-t border-white/10">
+            <span class="text-[9px] text-slate-500 w-full uppercase tracking-wider">Preguntas relacionadas:</span>
+            ${suggestions.map(s => `
+                <button onclick="document.getElementById('chat-input').value='${s.replace(/'/g, "\\'")}'; document.getElementById('centinela-form').dispatchEvent(new Event('submit', {bubbles:true,cancelable:true}))"
+                    class="text-[10px] bg-primary/10 border border-primary/20 text-primary px-2 py-1 rounded-full hover:bg-primary/20 transition-all active:scale-95">
+                    ${s}
+                </button>
+            `).join('')}
+        </div>`;
+    }
+
+    // ═══ MANEJADOR PRINCIPAL ═══
     form.onsubmit = async (e) => {
         e.preventDefault();
         const msg = input.value.trim();
@@ -728,93 +1313,107 @@ function renderCentinela(container) {
         input.value = '';
 
         const thinkingId = 'thinking-' + Date.now();
-        appendMessage('bot', '<span class="animate-pulse">Consultando memoria avanzada de Centinela...</span>', thinkingId);
+        appendMessage('bot', '<span class="animate-pulse text-xs">Analizando consulta...</span>', thinkingId);
 
         setTimeout(() => {
             const el = document.getElementById(thinkingId);
-            const lowerMsg = msg.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-            const words = lowerMsg.split(/\s+/);
+            const normalizedMsg = normalizeText(msg);
 
-            // --- CRITICAL ALERT LOGIC (SILENT FOR ADMIN) ---
-            const crisisKeywords = [
-                'auxilio', 'ayuda por favor', 'no doy mas', 'quiero morir', 'suicidio', 'morirme',
-                'quemado', 'estresado', 'estoy mal', 'terminar con todo', 'ayudame', 'ya fue todo',
-                'ganas de matarme', 'no tiene sentido', 'llorar', 'crisis', 'ayuda urgente'
-            ];
-            const hasCrisis = crisisKeywords.some(kw => lowerMsg.includes(kw));
-            if (hasCrisis) {
-                // Envío silencioso al admin (usando la tabla de reseñas con prefijo especial)
-                DB.addReview(0, `[CRITICAL-MH] El oficial reportó: "${msg}"`).then(() => {
-                    console.log("⚠️ Alerta crítica enviada al Admin");
-                });
+            // --- A. ALERTA DE CRISIS ---
+            const crisisKeywords = ['no doy mas', 'quiero morir', 'suicidio', 'morirme', 'no tiene sentido', 'terminar con todo', 'ganas de matarme', 'crisis'];
+            if (crisisKeywords.some(kw => normalizedMsg.includes(kw))) {
+                DB.addReview(0, `[CRISIS] ${msg}`);
             }
-            // -----------------------------------------------
 
-            let bestCategory = null;
-            let bestResponseText = null;
-            let maxTotalScore = 0;
+            // --- B. DETECCIÓN DE INTENCIÓN ---
+            const intent = detectIntent(normalizedMsg);
+            if (intent && intentResponses[intent]) {
+                const intentText = intentResponses[intent]();
+                el.innerHTML = `<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(intentText)}</div>`;
+                chat.scrollTop = chat.scrollHeight;
+                logQueryToAudit(msg, intentText, 100, intent);
+                return;
+            }
 
-            knowledgeBase.forEach(cat => {
-                let categoryScore = 0;
+            // --- C. SCORING MULTI-PASS ---
+            const topResults = scoreCategories(normalizedMsg);
+            const CONFIDENCE_HIGH = 45;
+            const CONFIDENCE_MED = 20;
 
-                // 1. Scoring por palabras de la pregunta
-                words.forEach(word => {
-                    cat.keywords.forEach(kw => {
-                        const normKw = kw.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                        // Match parcial o exacto
-                        if (word.length > 3 && (normKw.includes(word) || word.includes(normKw))) {
-                            categoryScore += 10;
-                        } else if (word === normKw) {
-                            categoryScore += 15;
-                        }
-                    });
-                });
+            let finalResponseText = '';
+            let usedCategory = 'desconocido';
+            let confidence = 0;
+            let suggestions = [];
 
-                if (categoryScore > 0) {
-                    cat.responses.forEach(res => {
-                        let responseScore = categoryScore;
-                        res.match.forEach(m => {
-                            const normM = m.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                            if (lowerMsg.includes(normM)) responseScore += 20;
-                        });
+            if (topResults.length > 0) {
+                const best = topResults[0];
+                confidence = best.score;
+                usedCategory = best.cat.category;
 
-                        if (responseScore > maxTotalScore) {
-                            maxTotalScore = responseScore;
-                            bestCategory = cat;
-                            bestResponseText = res.text;
-                        }
-                    });
+                // --- D. FUSIÓN MULTI-CATEGORÍA ---
+                const fused = (confidence >= CONFIDENCE_MED) ? fuseResponses(topResults, normalizedMsg) : null;
+                finalResponseText = fused || selectResponse(best.cat, normalizedMsg);
+                suggestions = generateSuggestions(usedCategory);
+                sessionContext.addTurn(usedCategory, msg);
+            }
 
-                    // Si no hubo un match específico, usar el default de la categoría más probable
-                    if (!bestResponseText && categoryScore >= maxTotalScore) {
-                        maxTotalScore = categoryScore;
-                        bestCategory = cat;
-                        bestResponseText = cat.default;
-                    }
-                }
-            });
+            // --- E. FALLBACK INTELIGENTE ---
+            if (!finalResponseText || confidence < CONFIDENCE_MED) {
+                finalResponseText = generateSmartFallback(normalizedMsg, topResults, msg);
+                usedCategory = 'fallback_inteligente';
+                suggestions = [];
+            }
 
-            // Lógica de desambiguación si hay varias categorías parecidas
-            const finalResponse = bestResponseText || "Entiendo tu interés, pero para ser más preciso como asistente legal policial, ¿podrías mencionar algo sobre sueldos, jubilación (Ley 14283), horarios de colectivos o el Manual MIRAF?";
+            // --- F. BADGE DE CONFIANZA ---
+            let confidenceBadge = '';
+            if (confidence >= CONFIDENCE_HIGH) {
+                confidenceBadge = `<span class="text-[9px] text-emerald-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">verified</span>Alta confianza · ${usedCategory.replace(/_/g, ' ')}</span>`;
+            } else if (confidence >= CONFIDENCE_MED) {
+                confidenceBadge = `<span class="text-[9px] text-amber-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">info</span>Confianza media · ${usedCategory.replace(/_/g, ' ')}</span>`;
+            }
 
-            el.innerHTML = `<p class="text-xs text-slate-200 leading-relaxed">${finalResponse}</p>`;
+            // --- G. RENDER FINAL ---
+            el.innerHTML = `
+                <div class="space-y-1">
+                    ${confidenceBadge}
+                    <div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(finalResponseText)}</div>
+                    ${renderSuggestionChips(suggestions)}
+                </div>`;
+
             chat.scrollTop = chat.scrollHeight;
-        }, 1200);
+            logQueryToAudit(msg, finalResponseText, confidence, usedCategory);
+        }, 900);
     };
+
+    async function logQueryToAudit(query, response, score, category) {
+        const user = auth.currentUser;
+        if (!user) return;
+        try {
+            await supabaseClient.from('query_logs').insert([{
+                user_email: user.email,
+                query: query,
+                response: response,
+                score: score,
+                category: category
+            }]);
+        } catch (e) {
+            console.error("Audit log failed:", e);
+        }
+    }
 
     function appendMessage(role, text, id = null) {
         const div = document.createElement('div');
         div.className = role === 'user' ? 'flex justify-end' : 'flex gap-3 max-w-[85%]';
         div.innerHTML = role === 'user' ? `
             <div class="bg-primary p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-lg shadow-primary/10">
-                <p class="text-xs text-white leading-relaxed">${text}</p>
+                <p class="text-xs text-slate-900 dark:text-white leading-relaxed">${text}</p>
             </div>
         ` : `
             <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
                 <span class="material-symbols-outlined text-sm">smart_toy</span>
             </div>
             <div class="bg-white/10 border border-white/10 p-3 rounded-2xl rounded-tl-none" id="${id || ''}">
-                <p class="text-xs text-slate-200 leading-relaxed">${text}</p>
+                <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${text}</p>
             </div>
         `;
         chat.appendChild(div);
@@ -823,103 +1422,26 @@ function renderCentinela(container) {
 }
 
 function renderPartesInteligentes(container) {
-    // Diccionario de transformación de lenguaje informal → formal policial
-    const FORMAL_DICT = [
-        [/\bel tipo\b/gi, 'el masculino de referencia'],
-        [/\bla mina\b/gi, 'la femenina de referencia'],
-        [/\blos tipos\b/gi, 'los masculinos de referencia'],
-        [/\bse escapo\b/gi, 'se dio a la fuga'],
-        [/\bse escapó\b/gi, 'se dio a la fuga'],
-        [/\bse fue\b/gi, 'se retiró del lugar'],
-        [/\bse fue corriendo\b/gi, 'se dio a la fuga a pie'],
-        [/\brobo\b/gi, 'hecho delictivo tipificado como robo'],
-        [/\bhurto\b/gi, 'hecho delictivo tipificado como hurto'],
-        [/\bpelea\b/gi, 'agresión física entre las partes'],
-        [/\bgolpeo\b/gi, 'ejerció violencia física sobre'],
-        [/\ble pego\b/gi, 'ejerció violencia física sobre la persona de'],
-        [/\ble pegó\b/gi, 'ejerció violencia física sobre la persona de'],
-        [/\bchoco\b/gi, 'colisionó'],
-        [/\bchocó\b/gi, 'colisionó'],
-        [/\bborracho\b/gi, 'en aparente estado de ebriedad'],
-        [/\bdrogado\b/gi, 'en aparente estado de intoxicación'],
-        [/\bamenazó\b/gi, 'profirió amenazas hacia'],
-        [/\bamenazas\b/gi, 'intimidación pública'],
-        [/\bpistola\b/gi, 'arma de fuego tipo pistola'],
-        [/\bcuchillo\b/gi, 'arma blanca tipo cuchillo'],
-        [/\bauto\b/gi, 'vehículo automotor'],
-        [/\bmoto\b/gi, 'motovehículo'],
-        [/\bbici\b/gi, 'bicicleta'],
-        [/\bplata\b/gi, 'dinero en efectivo'],
-        [/\bcelular\b/gi, 'teléfono celular'],
-        [/\bdroga\b/gi, 'sustancia estupefaciente presuntamente ilícita'],
-        [/\bfaso\b/gi, 'cigarrillo de sustancia presuntamente ilícita'],
-        [/\bmarihuana\b/gi, 'sustancia vegetal presuntamente cannabis sativa'],
-        [/\bcocaina\b/gi, 'sustancia presuntamente clorhidrato de cocaína'],
-        [/\bcocaína\b/gi, 'sustancia presuntamente clorhidrato de cocaína'],
-        [/\bmuerto\b/gi, 'persona sin signos vitales'],
-        [/\bherido\b/gi, 'persona con lesiones visibles'],
-        [/\bmenor\b/gi, 'persona menor de edad'],
-        [/\bnene\b/gi, 'niño menor de edad'],
-        [/\bnena\b/gi, 'niña menor de edad'],
-        [/\bvecinos\b/gi, 'frentistas del lugar'],
-        [/\bgritos\b/gi, 'manifestaciones verbales en alta voz'],
-        [/\btiros\b/gi, 'detonaciones de arma de fuego'],
-        [/\bdisparo\b/gi, 'detonación de arma de fuego'],
-        [/\bpatrullero\b/gi, 'móvil policial'],
-        [/\bcomisaria\b/gi, 'dependencia policial'],
-        [/\bcomisaría\b/gi, 'dependencia policial'],
-        [/\bllamaron\b/gi, 'se recepcionó comunicación'],
-        [/\bllegamos\b/gi, 'se hizo presente el personal policial'],
-    ];
-
-    function formalizeText(raw) {
-        let text = raw;
-        FORMAL_DICT.forEach(([pattern, replacement]) => {
-            text = text.replace(pattern, replacement);
-        });
-        // Capitalize first letter of each sentence
-        text = text.replace(/(^\w|[.!?]\s*\w)/g, c => c.toUpperCase());
-        return text;
-    }
-
-    const partTypes = [
-        { id: 'novedad', label: 'Parte de Novedad' },
-        { id: 'informe', label: 'Informe Policial' },
-        { id: 'comunicado', label: 'Comunicado Interno' },
-        { id: 'oficio', label: 'Oficio' }
-    ];
-
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <div class="flex flex-col">
-                <h1 class="text-lg font-black text-white leading-none">Partes Inteligentes</h1>
-                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Lenguaje Formal Policial</span>
-            </div>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Partes Inteligentes</h1>
         </header>
 
-        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto view-transition">
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
             <div class="px-1 space-y-1">
-                <p class="text-[11px] text-slate-400 leading-relaxed">Escribí tus notas de campo y el sistema las transformará en un documento con lenguaje formal, profesional y policial.</p>
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Generador de Informes</h2>
+                <p class="text-[11px] text-slate-400">Ingresá los datos clave y la IA redactará el parte formal.</p>
             </div>
 
             <section class="space-y-4">
                 <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-4">
                     <div class="space-y-2">
-                        <label class="text-[10px] font-bold text-primary uppercase ml-1">Tipo de Parte</label>
-                        <div class="segmented-control">
-                            ${partTypes.map((t, i) => `
-                                <button type="button" onclick="window._setPartType('${t.id}')" class="parte-type-btn text-[10px] ${i === 0 ? 'active' : ''}" data-type="${t.id}">${t.label}</button>
-                            `).join('')}
-                        </div>
-                        <input type="hidden" id="parte-type" value="novedad">
-                    </div>
-                    <div class="space-y-2">
                         <label class="text-[10px] font-bold text-primary uppercase ml-1">Notas de Campo</label>
-                        <textarea id="parte-raw-input" placeholder="Ej: Llegamos a calle Mendoza 3000, 22hs, el tipo se escapó corriendo con un celular robado, los vecinos llamaron..."
-                            class="w-full h-32 bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
+                        <textarea id="parte-raw-input" placeholder="Ej: Calle Mendoza 3000, 22hs, robo de cables..." 
+                            class="w-full h-32 bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
                     </div>
                     <button onclick="generateParte()" id="btn-generate-parte" class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
                         <span class="material-symbols-outlined text-xl">auto_awesome</span>Generar Parte Formal
@@ -927,93 +1449,45 @@ function renderPartesInteligentes(container) {
                 </div>
                 <div id="parte-result-container" class="hidden space-y-4">
                     <div class="glass-card p-5 rounded-3xl border border-primary/20 bg-primary/5 relative">
-                        <pre id="parte-output" class="text-xs text-slate-200 whitespace-pre-wrap font-sans leading-relaxed"></pre>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="copyParte()" class="py-3 rounded-xl bg-white/10 text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
-                            <span class="material-symbols-outlined text-sm">content_copy</span>Copiar
-                        </button>
-                        <button onclick="window._shareParteWA()" class="py-3 rounded-xl bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
-                            <span class="material-symbols-outlined text-sm">share</span>WhatsApp
+                        <pre id="parte-output" class="text-xs text-slate-800 dark:text-slate-200 whitespace-pre-wrap font-sans leading-relaxed"></pre>
+                        <button onclick="copyParte()" class="absolute top-4 right-4 size-10 rounded-xl bg-white/10 flex items-center justify-center text-slate-900 dark:text-white active:scale-90 transition-all">
+                            <span class="material-symbols-outlined text-sm">content_copy</span>
                         </button>
                     </div>
                 </div>
             </section>
-
-            <div class="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/20">
-                <div class="flex gap-3 items-start">
-                    <span class="material-symbols-outlined text-purple-400 text-lg mt-0.5">translate</span>
-                    <div>
-                        <p class="text-[11px] text-purple-200/80 leading-relaxed font-bold mb-1">Transformaciones automáticas</p>
-                        <p class="text-[10px] text-slate-400 leading-relaxed">El sistema convierte automáticamente lenguaje coloquial a terminología policial formal. Ejemplo: <em>"el tipo se escapó"</em> → <em>"el masculino de referencia se dio a la fuga"</em></p>
-                    </div>
-                </div>
-            </div>
         </main>
         ${renderBottomNav('asistente')}
     `;
-
-    window._setPartType = (type) => {
-        document.getElementById('parte-type').value = type;
-        document.querySelectorAll('.parte-type-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.type === type);
-        });
-    };
 
     window.generateParte = () => {
         const input = document.getElementById('parte-raw-input').value.trim();
         if (!input) return showToast("Escribí algunas notas primero");
 
-        const partType = document.getElementById('parte-type').value;
         const btn = document.getElementById('btn-generate-parte');
         btn.disabled = true;
-        btn.innerHTML = `<span class="animate-pulse">Formalizando lenguaje...</span>`;
+        btn.innerHTML = `Redactando...`;
 
         setTimeout(() => {
-            const resultContainer = document.getElementById('parte-result-container');
+            const container = document.getElementById('parte-result-container');
             const output = document.getElementById('parte-output');
             const now = new Date();
-            const userName = store.user?.name || 'FUNCIONARIO POLICIAL';
-
-            const formalizedBody = formalizeText(input);
-
-            const typeHeaders = {
-                novedad: 'PARTE DE NOVEDAD',
-                informe: 'INFORME POLICIAL',
-                comunicado: 'COMUNICADO INTERNO',
-                oficio: 'OFICIO'
-            };
-
-            let parte = `═══════════════════════════════════════\n`;
-            parte += `POLICÍA DE LA PROVINCIA DE SANTA FE\n`;
-            parte += `${typeHeaders[partType] || 'PARTE DE NOVEDAD'}\n`;
-            parte += `═══════════════════════════════════════\n\n`;
-            parte += `FECHA: ${now.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}\n`;
-            parte += `HORA: ${now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })} hs.\n`;
-            parte += `FUNCIONARIO: ${userName}\n\n`;
-            parte += `DETALLE DE LA NOVEDAD:\n`;
-            parte += `${formalizedBody}\n\n`;
-            parte += `Se eleva el presente a conocimiento de la Superioridad a los efectos que estime corresponder.\n\n`;
-            parte += `───────────────────────────────\n`;
-            parte += `${userName}\n`;
-            parte += `Policía de la Pcia. de Santa Fe\n`;
+            let parte = `PARTIDO PREVENTIVO - POLICÍA DE SANTA FE\n`;
+            parte += `FECHA: ${now.toLocaleDateString()} - HORA: ${now.toLocaleTimeString()}\n\n`;
+            parte += `DETALLES SEGÚN NOVEDAD:\n${input.toUpperCase()}\n\n`;
+            parte += `Se traslada lo actuado a la Comisaría correspondiente.`;
 
             output.innerText = parte;
-            resultContainer.classList.remove('hidden');
+            container.classList.remove('hidden');
             btn.disabled = false;
-            btn.innerHTML = `<span class="material-symbols-outlined text-xl">auto_awesome</span>Generar Parte Formal`;
-            showToast("✅ Parte formalizado con éxito");
-        }, 1200);
+            btn.innerHTML = `Generar Parte Formal`;
+            showToast("✅ Parte redactado");
+        }, 1500);
     };
 
     window.copyParte = () => {
         navigator.clipboard.writeText(document.getElementById('parte-output').innerText);
-        showToast("✅ Copiado al portapapeles");
-    };
-
-    window._shareParteWA = () => {
-        const text = document.getElementById('parte-output').innerText;
-        window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+        showToast("Copiado al portapapeles");
     };
 }
 
@@ -1022,7 +1496,7 @@ window.renderAsistenteHub = renderAsistenteHub;
 window.renderPartesInteligentes = renderPartesInteligentes;
 
 window.showAnnouncementModal = () => {
-    const currentVersion = 'v527.4-FINAL';
+    const currentVersion = 'v531.3-HARDENED';
     if (localStorage.getItem('last_announcement') === currentVersion) return;
 
     const overlay = document.createElement('div');
@@ -1034,9 +1508,9 @@ window.showAnnouncementModal = () => {
                 <span class="material-symbols-outlined text-4xl">celebration</span>
             </div>
             <div class="space-y-2">
-                <h3 class="text-2xl font-black text-white tracking-tight uppercase italic">¡v527.4-FINAL Activa!</h3>
+                <h3 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight uppercase italic">¡v531.3-HARDENED Activa!</h3>
                 <p class="text-xs text-slate-400 font-medium leading-relaxed">
-                    🚀 **Centinela v3.5-MAX**: Toda la información de ISEP, Sueldos (Decreto 142) y Salud Mental 2026 integrada. ¡Nueva sección de **Alias/CBU** en tu Perfil!
+                    🚀 **Centinela v10.2-SEC**: Lógica blindada y seguridad reforzada. Se implementó un **Content Security Policy (CSP)** riguroso y políticas de acceso (RLS) más estrictas.
                 </p>
             </div>
             <button id="close-announcement" class="w-full py-4 bg-primary text-white font-black rounded-2xl shadow-xl shadow-primary/20 active:scale-95 transition-all uppercase tracking-widest text-xs">

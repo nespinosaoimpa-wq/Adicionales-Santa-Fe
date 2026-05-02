@@ -2,7 +2,7 @@
  * Adicionales Santa Fe - Router & Navigation
  */
 
-const router = {
+window.router = {
     currentRoute: '#login',
 
     init() {
@@ -28,8 +28,9 @@ const router = {
             return;
         }
 
-        // Protect routes that require authentication
-        if (!store.isAuthenticated() && hash !== '#login' && hash !== '#signup') {
+        // Protect routes that require authentication (except login, signup, and legal)
+        const isLegalRoute = hash.startsWith('#legal/');
+        if (!store.isAuthenticated() && hash !== '#login' && hash !== '#signup' && !isLegalRoute) {
             console.log("🚫 Unauthorized access attempt to", hash);
             this.navigateTo('#login');
             return;
@@ -103,7 +104,11 @@ const router = {
                 case '#asistente/centinela':
                     renderCentinela(app);
                     break;
+                case '#info':
+                    renderInfoGuia(app);
+                    break;
                 case '#asistente/partes':
+
                     renderPartesInteligentes(app);
                     break;
                 case '#asistente/actas':
@@ -129,6 +134,23 @@ const router = {
                     break;
                 case '#stats':
                     renderStats(app);
+                    break;
+                case '#legal/privacy':
+                    renderPrivacyPolicy(app);
+                    break;
+                case '#legal/terms':
+                    renderTermsAndConditions(app);
+                    break;
+                case '#legal/about':
+                    renderAboutUs(app);
+                    break;
+                case '#diagnostics':
+                    if (store.user && store.user.role === 'admin') {
+                        renderDiagnostics(app);
+                    } else {
+                        showToast("Acceso denegado. Se requiere nivel de Administrador.");
+                        window.location.hash = '#profile';
+                    }
                     break;
 
                 // Dynamic Route for Details

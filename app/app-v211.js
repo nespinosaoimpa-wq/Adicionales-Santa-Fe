@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Check Supabase session (OAuth Redirect Handling)
     try {
-        if (typeof supabase !== 'undefined') {
-            const { data, error } = await supabase.auth.getSession();
+        if (typeof supabaseClient !== 'undefined') {
+            const { data, error } = await supabaseClient.auth.getSession();
             if (data?.session?.user) {
                 console.log("✅ OAuth Session active:", data.session.user.email);
             }
