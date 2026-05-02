@@ -106,6 +106,9 @@ const router = {
                 case '#asistente/partes':
                     renderPartesInteligentes(app);
                     break;
+                case '#asistente/actas':
+                    renderActasHub(app);
+                    break;
                 case '#profile':
                     renderProfile(app);
                     break;
@@ -130,6 +133,9 @@ const router = {
                         // Backward compat or alternative
                         const serviceId = route.split('/')[1];
                         renderServiceDetails(app, serviceId);
+                    } else if (route.startsWith('#asistente/actas/')) {
+                        const actaTipo = route.split('/')[2];
+                        renderActaForm(app, actaTipo);
                     } else {
                         window.location.hash = '#agenda';
                     }

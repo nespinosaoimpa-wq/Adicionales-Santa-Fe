@@ -6,7 +6,8 @@ function renderAsistenteHub(container) {
     if (!container) container = document.getElementById('app');
 
     const tools = [
-        { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
+        { id: 'actas', title: 'Actas Policiales', desc: 'Generá actas formales: allanamiento, custodia, procedimiento y más.', icon: 'description', color: 'from-red-500 to-rose-500', route: '#asistente/actas', badge: 'Nuevo' },
+        { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
         { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },
         { id: 'directorio', title: 'Directorio Policial', desc: 'Números de emergencia interna.', icon: 'contact_phone', color: 'from-amber-500 to-orange-500', route: '#asistente/directorio' },
@@ -499,15 +500,22 @@ function renderCentinela(container) {
                 </div>
             </div>
 
-            <div class="p-4 bg-slate-900/50 border-t border-white/5 pb-10">
+            <div class="p-4 bg-slate-900/50 border-t border-white/5 pb-10 space-y-3">
+                <div id="quick-actions" class="flex flex-wrap gap-1.5">
+                    <button onclick="window._quickAsk('¿Cómo hago una detención?')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">🔒 Detención</button>
+                    <button onclick="window._quickAsk('Números de emergencia')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">📞 Emergencias</button>
+                    <button onclick="window._quickAsk('Diferencia robo y hurto')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">⚖️ Delitos</button>
+                    <button onclick="window._quickAsk('Sueldos febrero 2026')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">💰 Sueldos</button>
+                    <button onclick="window._quickAsk('¿Cómo labrar un acta?')" class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-slate-400 hover:text-white hover:border-primary/30 transition-all active:scale-95">📋 Actas</button>
+                </div>
                 <form id="centinela-form" class="relative flex items-center gap-2">
-                    <input type="text" id="chat-input" placeholder="Sueldos, jubilación, ascensos..." 
+                    <input type="text" id="chat-input" placeholder="Sueldos, procedimientos, delitos, emergencias..." 
                         class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
                     <button type="submit" class="absolute right-1 size-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 active:scale-90 transition-all">
                         <span class="material-symbols-outlined">send</span>
                     </button>
                 </form>
-                <p class="text-[9px] text-center text-slate-500 mt-3 uppercase tracking-tighter">La IA puede cometer errores. Consultá siempre con tu superior.</p>
+                <p class="text-[9px] text-center text-slate-500 uppercase tracking-tighter">Centinela solo actúa bajo tu instrucción. Consultá siempre con tu superior jerárquico.</p>
             </div>
         </main>
     `;
@@ -515,6 +523,12 @@ function renderCentinela(container) {
     const form = document.getElementById('centinela-form');
     const input = document.getElementById('chat-input');
     const chat = document.getElementById('chat-messages');
+
+    // Quick action handler
+    window._quickAsk = (question) => {
+        input.value = question;
+        form.dispatchEvent(new Event('submit'));
+    };
 
     const knowledgeBase = [
         {
@@ -662,8 +676,45 @@ function renderCentinela(container) {
                 { match: ['alias', 'cbu', 'transferencia'], text: "Podés configurar tu **Alias/CVU** en tu perfil para que sea más fácil compartir tus datos de cobro a tus compañeros." }
             ],
             default: "¿Buscás info de la tarjeta T.A.P o ayuda con tu Alias de transferencia? Consultá la sección Perfil para lo segundo."
+        },
+        {
+            category: 'procedimientos_campo',
+            keywords: ['procedimiento', 'detencion', 'detener', 'requisa', 'requisar', 'cacheo', 'allanamiento', 'como hago', 'paso a paso', 'acta', 'labrar', 'actuar'],
+            responses: [
+                { match: ['detener', 'detencion', 'aprehender'], text: "**Procedimiento de Detención/Aprehensión:**\n1. Identificarse como personal policial\n2. Informar el motivo de la detención\n3. Lectura de derechos (Art. 212 CPP)\n4. Comunicar al fiscal de turno **inmediatamente**\n5. Labrar acta con testigos\n6. Trasladar a la dependencia\n\n⚠️ Plazo máximo sin orden judicial: **12 horas**. Superado ese plazo, comunicar al juez de garantías." },
+                { match: ['requisa', 'cacheo', 'personal'], text: "**Requisa Personal (Art. 230 CPP):**\n1. Solo con **motivos fundados** de que oculta evidencia\n2. Realizarla con **testigos** (mínimo 1)\n3. Persona del **mismo sexo** que el requisado\n4. Informar al requisado el motivo\n5. Labrar acta detallada de elementos hallados\n6. Comunicar al fiscal si hay hallazgo positivo\n\n⚠️ Sin orden judicial solo en casos de urgencia o flagrancia." },
+                { match: ['allanamiento', 'ingresar', 'domicilio'], text: "**Allanamiento de Domicilio:**\n- Requiere **orden judicial** (Art. 227 CPP)\n- Excepción sin orden: pedido de auxilio, persecución, incendio/catástrofe\n- Labrar acta con inventario completo\n- **Mínimo 2 testigos** del procedimiento\n- Filmar/fotografiar todo\n\n📋 Podés generar el acta desde **Asistente → Actas Policiales → Acta de Allanamiento**." },
+                { match: ['acta', 'labrar', 'como hago'], text: "**¿Cómo labrar un acta correctamente?**\n1. Encabezado: fecha, hora, lugar, funcionario\n2. Descripción objetiva y cronológica de los hechos\n3. Datos de todos los intervinientes\n4. Testigos con nombre completo y DNI\n5. Inventario de secuestros (si aplica)\n6. Firmas de todos los participantes\n\n📋 Usá el módulo **Actas Policiales** en el Asistente para generar automáticamente el formato correcto." }
+            ],
+            default: "Tengo guías paso a paso para detenciones, requisas, allanamientos y cómo labrar actas. ¿Qué procedimiento necesitás consultar?"
+        },
+        {
+            category: 'delitos_tipificacion',
+            keywords: ['delito', 'robo', 'hurto', 'lesiones', 'homicidio', 'portacion', 'arma', 'amenaza', 'abuso', 'violacion', 'estafa', 'daño', 'usurpacion', 'diferencia', 'codigo penal'],
+            responses: [
+                { match: ['robo', 'hurto', 'diferencia'], text: "**Hurto vs Robo (Arts. 162-167 CP):**\n- **Hurto**: apoderamiento ilegítimo sin violencia ni fuerza. Pena: 1 mes a 2 años.\n- **Robo**: apoderamiento con **fuerza en las cosas** o **violencia física en las personas**. Pena: 1 mes a 6 años.\n- **Robo agravado** (con arma, en despoblado, banda): hasta 10 años." },
+                { match: ['lesiones', 'golpes'], text: "**Lesiones (Arts. 89-94 CP):**\n- **Leves**: daño en el cuerpo o salud. Pena: 1 mes a 1 año.\n- **Graves**: debilitación permanente de sentido/órgano. Pena: 1 a 6 años.\n- **Gravísimas**: pérdida de sentido/órgano, incapacidad permanente. Pena: 3 a 10 años." },
+                { match: ['portacion', 'tenencia', 'arma'], text: "**Portación y Tenencia de Armas (Ley 20.429):**\n- **Tenencia sin autorización**: 1 a 4 años\n- **Portación sin autorización**: 3 a 6 años (arma de fuego)\n- **Portación de arma de guerra**: 3,5 a 8,5 años\n\n⚠️ Los antecedentes del portador **agravan** la pena." },
+                { match: ['amenaza', 'coaccion'], text: "**Amenazas y Coacciones (Arts. 149 bis/ter CP):**\n- **Amenazas simples**: 6 meses a 2 años\n- **Amenazas con arma**: 1 a 3 años\n- **Coacción**: obligar a hacer o no hacer algo. Pena: 2 a 4 años." },
+                { match: ['daño', 'romper', 'destruir'], text: "**Daño (Art. 183 CP):** Destruir, inutilizar o hacer desaparecer cosa ajena. Pena: 15 días a 1 año. El **daño agravado** (incendio, explosión) tiene penas mayores." }
+            ],
+            default: "Tengo tipificaciones del Código Penal Argentino. ¿Necesitás info sobre un delito específico: robo, hurto, lesiones, portación de arma, amenazas?"
+        },
+        {
+            category: 'numeros_asistencia',
+            keywords: ['numero', 'telefono', 'llamar', 'emergencia', 'fiscal', 'fiscalia', 'defensoria', 'juzgado', 'bombero', 'ambulancia', 'asistencia', '911', '107', '100'],
+            responses: [
+                { match: ['emergencia', '911', 'urgencia'], text: "**Números de Emergencia:**\n📞 **911** - Emergencias Policiales\n🚑 **107** - SIES (Emergencias Médicas)\n🚒 **100** - Bomberos\n👶 **102** - Atención a Niñez\n👩 **144** - Violencia de Género\n🆘 **135** - Prevención del Suicidio\n📱 **0800-777-5000** - Ministerio de Seguridad" },
+                { match: ['fiscal', 'fiscalia', 'MPA'], text: "**Fiscalías - Ministerio Público de la Acusación:**\n📞 **0800-555-0065** - MPA Central\n📞 Santa Fe: (0342) 457-3340\n📞 Rosario: (0341) 472-1540\n\nPara consultas fuera de horario, comunicarse con el **fiscal de turno** a través del 911." },
+                { match: ['defensoria', 'defensor'], text: "**Defensoría del Pueblo:**\n📞 Santa Fe: (0342) 457-3933\n📞 Rosario: (0341) 472-1466\n📞 **0800-777-3368** - Línea gratuita" },
+                { match: ['violencia', 'genero', '144'], text: "**Violencia de Género:**\n📞 **144** - Línea Nacional (24hs)\n📞 **0800-777-0000** - Línea Mujer Santa Fe\n\n⚠️ Recordá aplicar el **Protocolo 1818/20**: recepción obligatoria de denuncia, medidas de protección inmediata, y desarme preventivo si el agresor es personal policial." }
+            ],
+            default: "Emergencias: 911 (Policía), 107 (SIES), 100 (Bomberos), 144 (Violencia de Género). ¿Necesitás un número específico?"
         }
     ];
+
+    // Quick actions for suggestions
+    const quickActions = ['¿Cómo detener?', 'Sueldos 2026', 'Licencias', 'Números de emergencia', 'Robo vs Hurto', '¿Cómo labrar un acta?'];
 
     form.onsubmit = async (e) => {
         e.preventDefault();
@@ -769,25 +820,102 @@ function renderCentinela(container) {
 }
 
 function renderPartesInteligentes(container) {
+    // Diccionario de transformación de lenguaje informal → formal policial
+    const FORMAL_DICT = [
+        [/\bel tipo\b/gi, 'el masculino de referencia'],
+        [/\bla mina\b/gi, 'la femenina de referencia'],
+        [/\blos tipos\b/gi, 'los masculinos de referencia'],
+        [/\bse escapo\b/gi, 'se dio a la fuga'],
+        [/\bse escapó\b/gi, 'se dio a la fuga'],
+        [/\bse fue\b/gi, 'se retiró del lugar'],
+        [/\bse fue corriendo\b/gi, 'se dio a la fuga a pie'],
+        [/\brobo\b/gi, 'hecho delictivo tipificado como robo'],
+        [/\bhurto\b/gi, 'hecho delictivo tipificado como hurto'],
+        [/\bpelea\b/gi, 'agresión física entre las partes'],
+        [/\bgolpeo\b/gi, 'ejerció violencia física sobre'],
+        [/\ble pego\b/gi, 'ejerció violencia física sobre la persona de'],
+        [/\ble pegó\b/gi, 'ejerció violencia física sobre la persona de'],
+        [/\bchoco\b/gi, 'colisionó'],
+        [/\bchocó\b/gi, 'colisionó'],
+        [/\bborracho\b/gi, 'en aparente estado de ebriedad'],
+        [/\bdrogado\b/gi, 'en aparente estado de intoxicación'],
+        [/\bamenazó\b/gi, 'profirió amenazas hacia'],
+        [/\bamenazas\b/gi, 'intimidación pública'],
+        [/\bpistola\b/gi, 'arma de fuego tipo pistola'],
+        [/\bcuchillo\b/gi, 'arma blanca tipo cuchillo'],
+        [/\bauto\b/gi, 'vehículo automotor'],
+        [/\bmoto\b/gi, 'motovehículo'],
+        [/\bbici\b/gi, 'bicicleta'],
+        [/\bplata\b/gi, 'dinero en efectivo'],
+        [/\bcelular\b/gi, 'teléfono celular'],
+        [/\bdroga\b/gi, 'sustancia estupefaciente presuntamente ilícita'],
+        [/\bfaso\b/gi, 'cigarrillo de sustancia presuntamente ilícita'],
+        [/\bmarihuana\b/gi, 'sustancia vegetal presuntamente cannabis sativa'],
+        [/\bcocaina\b/gi, 'sustancia presuntamente clorhidrato de cocaína'],
+        [/\bcocaína\b/gi, 'sustancia presuntamente clorhidrato de cocaína'],
+        [/\bmuerto\b/gi, 'persona sin signos vitales'],
+        [/\bherido\b/gi, 'persona con lesiones visibles'],
+        [/\bmenor\b/gi, 'persona menor de edad'],
+        [/\bnene\b/gi, 'niño menor de edad'],
+        [/\bnena\b/gi, 'niña menor de edad'],
+        [/\bvecinos\b/gi, 'frentistas del lugar'],
+        [/\bgritos\b/gi, 'manifestaciones verbales en alta voz'],
+        [/\btiros\b/gi, 'detonaciones de arma de fuego'],
+        [/\bdisparo\b/gi, 'detonación de arma de fuego'],
+        [/\bpatrullero\b/gi, 'móvil policial'],
+        [/\bcomisaria\b/gi, 'dependencia policial'],
+        [/\bcomisaría\b/gi, 'dependencia policial'],
+        [/\bllamaron\b/gi, 'se recepcionó comunicación'],
+        [/\bllegamos\b/gi, 'se hizo presente el personal policial'],
+    ];
+
+    function formalizeText(raw) {
+        let text = raw;
+        FORMAL_DICT.forEach(([pattern, replacement]) => {
+            text = text.replace(pattern, replacement);
+        });
+        // Capitalize first letter of each sentence
+        text = text.replace(/(^\w|[.!?]\s*\w)/g, c => c.toUpperCase());
+        return text;
+    }
+
+    const partTypes = [
+        { id: 'novedad', label: 'Parte de Novedad' },
+        { id: 'informe', label: 'Informe Policial' },
+        { id: 'comunicado', label: 'Comunicado Interno' },
+        { id: 'oficio', label: 'Oficio' }
+    ];
+
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
             <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
-            <h1 class="text-xl font-bold text-white tracking-tight">Partes Inteligentes</h1>
+            <div class="flex flex-col">
+                <h1 class="text-lg font-black text-white leading-none">Partes Inteligentes</h1>
+                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Lenguaje Formal Policial</span>
+            </div>
         </header>
 
-        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto view-transition">
             <div class="px-1 space-y-1">
-                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Generador de Informes</h2>
-                <p class="text-[11px] text-slate-400">Ingresá los datos clave y la IA redactará el parte formal.</p>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Escribí tus notas de campo y el sistema las transformará en un documento con lenguaje formal, profesional y policial.</p>
             </div>
 
             <section class="space-y-4">
                 <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-4">
                     <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-primary uppercase ml-1">Tipo de Parte</label>
+                        <div class="segmented-control">
+                            ${partTypes.map((t, i) => `
+                                <button type="button" onclick="window._setPartType('${t.id}')" class="parte-type-btn text-[10px] ${i === 0 ? 'active' : ''}" data-type="${t.id}">${t.label}</button>
+                            `).join('')}
+                        </div>
+                        <input type="hidden" id="parte-type" value="novedad">
+                    </div>
+                    <div class="space-y-2">
                         <label class="text-[10px] font-bold text-primary uppercase ml-1">Notas de Campo</label>
-                        <textarea id="parte-raw-input" placeholder="Ej: Calle Mendoza 3000, 22hs, robo de cables..." 
+                        <textarea id="parte-raw-input" placeholder="Ej: Llegamos a calle Mendoza 3000, 22hs, el tipo se escapó corriendo con un celular robado, los vecinos llamaron..."
                             class="w-full h-32 bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
                     </div>
                     <button onclick="generateParte()" id="btn-generate-parte" class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
@@ -797,44 +925,92 @@ function renderPartesInteligentes(container) {
                 <div id="parte-result-container" class="hidden space-y-4">
                     <div class="glass-card p-5 rounded-3xl border border-primary/20 bg-primary/5 relative">
                         <pre id="parte-output" class="text-xs text-slate-200 whitespace-pre-wrap font-sans leading-relaxed"></pre>
-                        <button onclick="copyParte()" class="absolute top-4 right-4 size-10 rounded-xl bg-white/10 flex items-center justify-center text-white active:scale-90 transition-all">
-                            <span class="material-symbols-outlined text-sm">content_copy</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="copyParte()" class="py-3 rounded-xl bg-white/10 text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-sm">content_copy</span>Copiar
+                        </button>
+                        <button onclick="window._shareParteWA()" class="py-3 rounded-xl bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-sm">share</span>WhatsApp
                         </button>
                     </div>
                 </div>
             </section>
+
+            <div class="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/20">
+                <div class="flex gap-3 items-start">
+                    <span class="material-symbols-outlined text-purple-400 text-lg mt-0.5">translate</span>
+                    <div>
+                        <p class="text-[11px] text-purple-200/80 leading-relaxed font-bold mb-1">Transformaciones automáticas</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed">El sistema convierte automáticamente lenguaje coloquial a terminología policial formal. Ejemplo: <em>"el tipo se escapó"</em> → <em>"el masculino de referencia se dio a la fuga"</em></p>
+                    </div>
+                </div>
+            </div>
         </main>
         ${renderBottomNav('asistente')}
     `;
+
+    window._setPartType = (type) => {
+        document.getElementById('parte-type').value = type;
+        document.querySelectorAll('.parte-type-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.type === type);
+        });
+    };
 
     window.generateParte = () => {
         const input = document.getElementById('parte-raw-input').value.trim();
         if (!input) return showToast("Escribí algunas notas primero");
 
+        const partType = document.getElementById('parte-type').value;
         const btn = document.getElementById('btn-generate-parte');
         btn.disabled = true;
-        btn.innerHTML = `Redactando...`;
+        btn.innerHTML = `<span class="animate-pulse">Formalizando lenguaje...</span>`;
 
         setTimeout(() => {
-            const container = document.getElementById('parte-result-container');
+            const resultContainer = document.getElementById('parte-result-container');
             const output = document.getElementById('parte-output');
             const now = new Date();
-            let parte = `PARTIDO PREVENTIVO - POLICÍA DE SANTA FE\n`;
-            parte += `FECHA: ${now.toLocaleDateString()} - HORA: ${now.toLocaleTimeString()}\n\n`;
-            parte += `DETALLES SEGÚN NOVEDAD:\n${input.toUpperCase()}\n\n`;
-            parte += `Se traslada lo actuado a la Comisaría correspondiente.`;
+            const userName = store.user?.name || 'FUNCIONARIO POLICIAL';
+
+            const formalizedBody = formalizeText(input);
+
+            const typeHeaders = {
+                novedad: 'PARTE DE NOVEDAD',
+                informe: 'INFORME POLICIAL',
+                comunicado: 'COMUNICADO INTERNO',
+                oficio: 'OFICIO'
+            };
+
+            let parte = `═══════════════════════════════════════\n`;
+            parte += `POLICÍA DE LA PROVINCIA DE SANTA FE\n`;
+            parte += `${typeHeaders[partType] || 'PARTE DE NOVEDAD'}\n`;
+            parte += `═══════════════════════════════════════\n\n`;
+            parte += `FECHA: ${now.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}\n`;
+            parte += `HORA: ${now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })} hs.\n`;
+            parte += `FUNCIONARIO: ${userName}\n\n`;
+            parte += `DETALLE DE LA NOVEDAD:\n`;
+            parte += `${formalizedBody}\n\n`;
+            parte += `Se eleva el presente a conocimiento de la Superioridad a los efectos que estime corresponder.\n\n`;
+            parte += `───────────────────────────────\n`;
+            parte += `${userName}\n`;
+            parte += `Policía de la Pcia. de Santa Fe\n`;
 
             output.innerText = parte;
-            container.classList.remove('hidden');
+            resultContainer.classList.remove('hidden');
             btn.disabled = false;
-            btn.innerHTML = `Generar Parte Formal`;
-            showToast("✅ Parte redactado");
-        }, 1500);
+            btn.innerHTML = `<span class="material-symbols-outlined text-xl">auto_awesome</span>Generar Parte Formal`;
+            showToast("✅ Parte formalizado con éxito");
+        }, 1200);
     };
 
     window.copyParte = () => {
         navigator.clipboard.writeText(document.getElementById('parte-output').innerText);
-        showToast("Copiado al portapapeles");
+        showToast("✅ Copiado al portapapeles");
+    };
+
+    window._shareParteWA = () => {
+        const text = document.getElementById('parte-output').innerText;
+        window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
     };
 }
 
