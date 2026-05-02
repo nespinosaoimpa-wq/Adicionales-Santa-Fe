@@ -109,6 +109,12 @@ const router = {
                 case '#asistente/actas':
                     renderActasHub(app);
                     break;
+                case '#asistente/intervenciones':
+                    renderIntervenciones(app);
+                    break;
+                case '#asistente/procedimiento':
+                    renderProcedimiento(app);
+                    break;
                 case '#profile':
                     renderProfile(app);
                     break;

@@ -534,7 +534,7 @@ const DB = {
         };
     },
 
-    async addReview(rating, comment) {
+    async saveReview(rating, comment) {
         const user = auth.currentUser;
         if (!user) {
             console.error("Review failed: No user logged in");
@@ -556,6 +556,63 @@ const DB = {
             return true;
         } catch (e) {
             console.error("Error saving review:", e);
+            return false;
+        }
+    },
+
+    // ── MÓDULOS POLICIALES (INTERVENCIONES Y PROCEDIMIENTOS) ──
+    async saveIntervention(inv) {
+        const user = auth.currentUser;
+        if (!user) return false;
+        try {
+            const { error } = await supabaseClient.from('interventions').insert([{
+                user_email: user.email,
+                type: inv.type,
+                description: inv.desc,
+                location: inv.loc,
+                timestamp: new Date().toISOString()
+            }]);
+            if (error) throw error;
+            return true;
+        } catch (e) {
+            console.error("Error saving intervention to Supabase:", e);
+            return false; // Silently fail to offline mode (localStorage handles it)
+        }
+    },
+
+    async saveProcedure(procData) {
+        const user = auth.currentUser;
+        if (!user) return false;
+        try {
+            // 1. Insert procedure
+            const { data, error } = await supabaseClient.from('procedures').insert([{
+                user_email: user.email,
+                type: procData.type,
+                location: procData.loc,
+                lat: procData.lat,
+                lng: procData.lng,
+                notes: procData.notes,
+                seized_items: procData.items,
+                timestamp: new Date().toISOString()
+            }]).select();
+            
+            if (error) throw error;
+            
+            // 2. Insert people
+            if (procData.people && procData.people.length > 0 && data && data[0]) {
+                const procId = data[0].id;
+                const peopleToInsert = procData.people.map(p => ({
+                    procedure_id: procId,
+                    role: p.role,
+                    full_name: p.name,
+                    dni: p.dni
+                }));
+                const { error: pError } = await supabaseClient.from('procedure_persons').insert(peopleToInsert);
+                if(pError) console.error("Error inserting procedure persons:", pError);
+            }
+            return true;
+        } catch (e) {
+            console.error("Error saving procedure to Supabase:", e);
             return false;
         }
     }

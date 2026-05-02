@@ -100,3 +100,60 @@ $$ LANGUAGE plpgsql SECURITY DEFINER;
 CREATE OR REPLACE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();
+
+-- ── 7. MÓDULOS OPERATIVOS (ACTAS Y PROCEDIMIENTOS) ────────────────
+
+-- Intervenciones rápidas
+CREATE TABLE IF NOT EXISTS interventions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_email TEXT NOT NULL,
+  type TEXT,
+  description TEXT,
+  location TEXT,
+  lat NUMERIC,
+  lng NUMERIC,
+  timestamp TIMESTAMPTZ DEFAULT NOW(),
+  shift_date DATE DEFAULT CURRENT_DATE
+);
+
+-- Procedimientos complejos
+CREATE TABLE IF NOT EXISTS procedures (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_email TEXT NOT NULL,
+  type TEXT,
+  location TEXT,
+  lat NUMERIC,
+  lng NUMERIC,
+  start_time TIMESTAMPTZ DEFAULT NOW(),
+  end_time TIMESTAMPTZ,
+  notes TEXT,
+  seized_items JSONB DEFAULT '[]',
+  photos TEXT[] DEFAULT '{}',
+  status TEXT DEFAULT 'abierto',
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Personas involucradas en procedimientos
+CREATE TABLE IF NOT EXISTS procedure_persons (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  procedure_id UUID REFERENCES procedures(id) ON DELETE CASCADE,
+  role TEXT,
+  full_name TEXT,
+  dni TEXT,
+  address TEXT,
+  phone TEXT,
+  notes TEXT
+);
+
+-- Habilitar RLS
+ALTER TABLE interventions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE procedures ENABLE ROW LEVEL SECURITY;
+ALTER TABLE procedure_persons ENABLE ROW LEVEL SECURITY;
+
+-- Políticas públicas temporales para el cliente
+CREATE POLICY "Public interventions access" ON interventions FOR ALL USING (true);
+CREATE POLICY "Public procedures access" ON procedures FOR ALL USING (true);
+CREATE POLICY "Public procedure_persons access" ON procedure_persons FOR ALL USING (true);
+
+-- Otorgar permisos
+GRANT ALL ON interventions, procedures, procedure_persons TO anon, authenticated;
