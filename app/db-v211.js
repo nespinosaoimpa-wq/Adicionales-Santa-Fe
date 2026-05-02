@@ -615,5 +615,40 @@ const DB = {
             console.error("Error saving procedure to Supabase:", e);
             return false;
         }
+    },
+
+    // ── AUDITORÍA ──
+    async saveAuditLog(logData) {
+        try {
+            const { error } = await supabaseClient.from('audit_log').insert([{
+                user_email: logData.user_email,
+                action: logData.action,
+                target_type: logData.target_type,
+                target_id: logData.target_id,
+                metadata: logData.metadata,
+                timestamp: new Date().toISOString()
+            }]);
+            if (error) throw error;
+            return true;
+        } catch (e) {
+            console.error("Error saving audit log:", e);
+            return false;
+        }
+    },
+
+    async getAuditLogs() {
+        try {
+            const { data, error } = await supabaseClient
+                .from('audit_log')
+                .select('*')
+                .order('timestamp', { ascending: false })
+                .limit(100);
+            
+            if (error) throw error;
+            return data || [];
+        } catch (e) {
+            console.error("Error fetching audit logs:", e);
+            return [];
+        }
     }
 };

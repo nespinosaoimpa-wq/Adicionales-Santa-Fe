@@ -9,6 +9,7 @@ function renderAsistenteHub(container) {
         { id: 'actas', title: 'Actas Policiales', desc: 'Generá actas formales: allanamiento, custodia, procedimiento y más.', icon: 'description', color: 'from-red-500 to-rose-500', route: '#asistente/actas', badge: 'Nuevo' },
         { id: 'intervenciones', title: 'Intervenciones en Campo', desc: 'Registro en tiempo real y partes para WhatsApp.', icon: 'add_alert', color: 'from-blue-500 to-indigo-500', route: '#asistente/intervenciones', badge: 'Nuevo' },
         { id: 'procedimiento', title: 'Registro de Procedimiento', desc: 'GPS, fotos y generación de PDF estructurado.', icon: 'local_police', color: 'from-emerald-500 to-green-500', route: '#asistente/procedimiento', badge: 'Nuevo' },
+        { id: 'archivos', title: 'Archivos Digitales', desc: 'Historial personal de actas y procedimientos.', icon: 'folder_open', color: 'from-amber-500 to-orange-500', route: '#asistente/archivos', badge: 'Nuevo' },
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
         { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },

@@ -157,3 +157,19 @@ CREATE POLICY "Public procedure_persons access" ON procedure_persons FOR ALL USI
 
 -- Otorgar permisos
 GRANT ALL ON interventions, procedures, procedure_persons TO anon, authenticated;
+
+-- ── 8. AUDITORÍA DE SEGURIDAD ──────────────────────────────────
+CREATE TABLE IF NOT EXISTS audit_log (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_email TEXT NOT NULL,
+  action TEXT NOT NULL,
+  target_type TEXT,
+  target_id TEXT,
+  metadata JSONB DEFAULT '{}',
+  ip TEXT,
+  timestamp TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE audit_log ENABLE ROW LEVEL SECURITY;
+CREATE POLICY "Public audit access" ON audit_log FOR ALL USING (true);
+GRANT ALL ON audit_log TO anon, authenticated;

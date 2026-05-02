@@ -115,6 +115,12 @@ const router = {
                 case '#asistente/procedimiento':
                     renderProcedimiento(app);
                     break;
+                case '#asistente/archivos':
+                    renderArchivos(app);
+                    break;
+                case '#admin/auditoria':
+                    renderAuditoria(app);
+                    break;
                 case '#profile':
                     renderProfile(app);
                     break;
