@@ -873,5 +873,70 @@ const DB = {
             console.warn("Holidays fetch failed:", e.message);
             return null;
         }
+    },
+    
+    // --- POLICE OPERATIONAL MODULES (PRO) ---
+    async saveIntervention(inv) {
+        try {
+            const { error } = await supabaseClient.from('interventions').insert([{
+                ...inv,
+                user_email: store.user?.email
+            }]);
+            if (error) console.warn("Supabase intervention sync error:", error);
+        } catch (e) { console.warn("Intervention sync failed:", e.message); }
+    },
+
+    async saveProcedure(proc) {
+        try {
+            // Save main procedure metadata
+            const { data, error } = await supabaseClient.from('procedures').insert([{
+                type: proc.type,
+                location: proc.loc,
+                lat: proc.lat,
+                lng: proc.lng,
+                notes: proc.notes,
+                user_email: store.user?.email,
+                timestamp: new Date().toISOString()
+            }]).select();
+
+            if (error) throw error;
+            const procId = data[0].id;
+
+            // Save persons linked to procedure
+            if (proc.people.length > 0) {
+                const persons = proc.people.map(p => ({
+                    procedure_id: procId,
+                    name: p.name,
+                    dni: p.dni,
+                    role: p.role
+                }));
+                await supabaseClient.from('procedure_persons').insert(persons);
+            }
+        } catch (e) { console.warn("Procedure sync failed:", e.message); }
+    },
+
+    async saveAuditLog(log) {
+        try {
+            const { error } = await supabaseClient.from('audit_log').insert([{
+                ...log,
+                timestamp: new Date().toISOString()
+            }]);
+            if (error) console.error("Audit log error:", error);
+        } catch (e) { console.error("Audit log failed", e); }
+    },
+
+    async getAuditLogs() {
+        try {
+            const { data, error } = await supabaseClient
+                .from('audit_log')
+                .select('*')
+                .order('timestamp', { ascending: false })
+                .limit(50);
+            if (error) throw error;
+            return data;
+        } catch (e) {
+            console.error("Fetch audit logs failed", e);
+            return [];
+        }
     }
 };

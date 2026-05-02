@@ -46,6 +46,9 @@ async function renderAdmin(container) {
                     <button onclick="store.exportGlobalData()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/5 hover:bg-slate-300 dark:hover:bg-white/10 border border-slate-300 dark:border-white/10 text-xs font-bold transition-all flex items-center gap-2 text-slate-700 dark:text-slate-300">
                         <span class="material-symbols-outlined text-sm">download</span> Exportar
                     </button>
+                    <button onclick="router.navigateTo('#admin/auditoria')" class="px-4 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-xs font-bold transition-all flex items-center gap-2 text-amber-600 dark:text-amber-400">
+                        <span class="material-symbols-outlined text-sm">shield</span> Auditoría
+                    </button>
                     <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
                         <span class="material-symbols-outlined">close</span>
                     </button>
