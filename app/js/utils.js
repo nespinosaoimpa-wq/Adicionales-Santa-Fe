@@ -73,12 +73,59 @@ window.formatMoney = function (amount) {
     }).format(amount);
 };
 
+// --- AI: Police Narrative Improver ---
+window.improvePoliceNarrative = function (text) {
+    if (!text) return "";
+    
+    let refined = text;
+    
+    // Diccionario de mejoras (términos comunes -> términos profesionales)
+    const improvements = [
+        { regex: /vi a un (tipo|sujeto|hombre)/gi, replace: "se observa a un masculino" },
+        { regex: /vi a una (mujer|chica|sujeta)/gi, replace: "se observa a una femenina" },
+        { regex: /estaba robando/gi, replace: "se encontraba cometiendo un ilícito" },
+        { regex: /le pegó a/gi, replace: "propinó golpes a" },
+        { regex: /corrió por/gi, replace: "emprendió veloz huida por" },
+        { regex: /lo agarramos/gi, replace: "se procedió a la aprehensión del mismo" },
+        { regex: /llame al/gi, replace: "se entabló comunicación con" },
+        { regex: /me dijo que/gi, replace: "manifestando el mismo que" },
+        { regex: /tenía un arma/gi, replace: "portaba un elemento similar a un arma de fuego" },
+        { regex: /tenia un arma/gi, replace: "portaba un elemento similar a un arma de fuego" },
+        { regex: /entramos a la casa/gi, replace: "se procedió al ingreso a la morada" },
+        { regex: /en el medio de la calle/gi, replace: "en la vía pública" },
+        { regex: /mirando para todos lados/gi, replace: "en actitud sospechosa, observando hacia diferentes puntos" },
+        { regex: /salio de/gi, replace: "egresó de" },
+        { regex: /entro a/gi, replace: "ingresó a" },
+        { regex: /me acerque/gi, replace: "procedí a acercarme" },
+        { regex: /lo pare/gi, replace: "procedí a interceptar al mismo" },
+        { regex: /robando cables/gi, replace: "sustrayendo cableado del tendido público" },
+        { regex: /tirado en el piso/gi, replace: "tendido sobre la cinta asfáltica" },
+        { regex: /estaba roto/gi, replace: "presentaba daños visibles" },
+        { regex: /no tenia documentos/gi, replace: "carecía de documentación que acredite su identidad" },
+        { regex: /no tenía documentos/gi, replace: "carecía de documentación que acredite su identidad" }
+    ];
+
+    improvements.forEach(item => {
+        refined = refined.replace(item.regex, item.replace);
+    });
+
+    // Mejoras de estructura (Mayúscula al inicio, punto al final)
+    refined = refined.trim();
+    if (refined.length > 0) {
+        refined = refined.charAt(0).toUpperCase() + refined.slice(1);
+        if (!refined.endsWith(".")) refined += ".";
+    }
+
+    return refined;
+};
+
 // Export to window for global access (backward compatibility)
 window.showToast = showToast;
 window.copyToClipboard = copyToClipboard;
 window.debugLog = debugLog;
 window.isIOS = isIOS;
 window.isInStandaloneMode = isInStandaloneMode;
+window.improvePoliceNarrative = improvePoliceNarrative;
 // Donation Modal (Global)
 window.showDonationModal = () => {
     const overlay = document.createElement('div');

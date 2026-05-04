@@ -1476,16 +1476,26 @@ function renderPartesInteligentes(container) {
             const container = document.getElementById('parte-result-container');
             const output = document.getElementById('parte-output');
             const now = new Date();
-            let parte = `PARTIDO PREVENTIVO - POLICÍA DE SANTA FE\n`;
-            parte += `FECHA: ${now.toLocaleDateString()} - HORA: ${now.toLocaleTimeString()}\n\n`;
-            parte += `DETALLES SEGÚN NOVEDAD:\n${input.toUpperCase()}\n\n`;
-            parte += `Se traslada lo actuado a la Comisaría correspondiente.`;
+            
+            // Professional Narrative Improvement
+            const refinedInput = window.improvePoliceNarrative(input);
+            
+            let parte = `═══════════════════════════════════════\n`;
+            parte += `   PARTIDO PREVENTIVO - POLICÍA DE SANTA FE\n`;
+            parte += `═══════════════════════════════════════\n\n`;
+            parte += `FECHA: ${now.toLocaleDateString('es-AR')} - HORA: ${now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}\n`;
+            parte += `DEP: ${store.user?.dependency || 'UNIDAD OPERATIVA'}\n\n`;
+            parte += `DETALLES DE LA INTERVENCIÓN:\n${refinedInput}\n\n`;
+            parte += `───────────────────────────────\n`;
+            parte += `Firma Funcionario: ${store.user?.name || '________________'}\n`;
+            parte += `Legajo: ${store.user?.badge || '________'}\n\n`;
+            parte += `Se traslada lo actuado a la Comisaría correspondiente para su prosecución legal.`;
 
             output.innerText = parte;
             container.classList.remove('hidden');
             btn.disabled = false;
-            btn.innerHTML = `Generar Parte Formal`;
-            showToast("✅ Parte redactado");
+            btn.innerHTML = `<span class="material-symbols-outlined text-xl">auto_awesome</span>Generar Parte Formal`;
+            showToast("✅ Parte profesional redactado");
         }, 1500);
     };
 

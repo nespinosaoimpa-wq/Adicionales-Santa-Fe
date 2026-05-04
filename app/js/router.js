@@ -167,6 +167,8 @@ window.router = {
                         // Backward compat or alternative
                         const serviceId = route.split('/')[1];
                         renderServiceDetails(app, serviceId);
+                    } else if (route === '#asistente/actas/settings') {
+                        renderActasSettings(app);
                     } else if (route.startsWith('#asistente/actas/')) {
                         const actaTipo = route.split('/')[2];
                         renderActaForm(app, actaTipo);

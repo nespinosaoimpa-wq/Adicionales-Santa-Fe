@@ -3,6 +3,78 @@
  * Módulo de creación de documentos formales policiales
  */
 
+// ── AJUSTES DE FORMATO ──
+function getActaSettings() {
+    const defaults = {
+        header: `POLICÍA DE LA PROVINCIA DE SANTA FE\nDEPARTAMENTO DE OPERACIONES`,
+        footer: `Con lo que no siendo para más, se da por finalizada la presente actuación, previa lectura y ratificación, firmando los intervinientes al pie para constancia.`,
+        signature: `${store.user?.name || 'FUNCIONARIO POLICIAL'}\nLegajo: ${store.user?.badge || '________'}`
+    };
+    try {
+        const saved = JSON.parse(localStorage.getItem('acta_format_settings') || 'null');
+        return saved ? { ...defaults, ...saved } : defaults;
+    } catch (e) {
+        return defaults;
+    }
+}
+
+function renderActasSettings(container) {
+    if (!container) container = document.getElementById('app');
+    const settings = getActaSettings();
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente/actas')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <div class="flex flex-col">
+                <h1 class="text-sm font-black text-white leading-none">Ajustes de Formato</h1>
+                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Membretes y Firmas</span>
+            </div>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto view-transition">
+            <div class="px-1 space-y-1">
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Personalizar Acta</h2>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Configurá el membrete de tu brigada y tu firma para que aparezcan en todos los documentos.</p>
+            </div>
+
+            <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-primary uppercase ml-1">Encabezado / Membrete</label>
+                    <textarea id="set-acta-header" class="w-full h-24 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none" placeholder="Ej: BRIGADA MOTORIZADA - UR I">${settings.header}</textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-primary uppercase ml-1">Cierre de Acta (Pie)</label>
+                    <textarea id="set-acta-footer" class="w-full h-24 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none">${settings.footer}</textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-primary uppercase ml-1">Firma / Legajo</label>
+                    <textarea id="set-acta-signature" class="w-full h-20 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none" placeholder="Nombre y Legajo">${settings.signature}</textarea>
+                </div>
+
+                <button onclick="window._saveActaSettings()" class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined">save</span>Guardar Cambios
+                </button>
+            </div>
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+
+    window._saveActaSettings = () => {
+        const header = document.getElementById('set-acta-header').value.trim();
+        const footer = document.getElementById('set-acta-footer').value.trim();
+        const signature = document.getElementById('set-acta-signature').value.trim();
+
+        localStorage.setItem('acta_format_settings', JSON.stringify({ header, footer, signature }));
+        showToast('✅ Formato actualizado');
+        router.navigateTo('#asistente/actas');
+    };
+}
+
+
 // ── PLANTILLAS DE ACTAS ──
 const ACTA_TEMPLATES = {
     allanamiento: {
@@ -113,14 +185,14 @@ const ACTA_TEMPLATES = {
 
 // ── GENERADOR DE TEXTO FORMAL ──
 function generateActaText(tipo, data) {
+    const settings = getActaSettings();
     const now = new Date();
     const fecha = now.toLocaleDateString('es-AR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     const hora = now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
     const userName = store.user?.name || 'FUNCIONARIO POLICIAL';
-    const userEmail = store.user?.email || '';
 
     const header = `═══════════════════════════════════════\n` +
-        `POLICÍA DE LA PROVINCIA DE SANTA FE\n` +
+        `${settings.header.toUpperCase()}\n` +
         `${ACTA_TEMPLATES[tipo].title.toUpperCase()}\n` +
         `═══════════════════════════════════════\n\n` +
         `En la ciudad de ${data.localidad || data.zona || '________'}, Provincia de Santa Fe, ` +
@@ -202,12 +274,10 @@ function generateActaText(tipo, data) {
             break;
     }
 
-    const footer = `Con lo que no siendo para más, se da por finalizada la presente ` +
-        `actuación, previa lectura y ratificación, firmando los intervinientes ` +
-        `al pie para constancia.\n\n` +
+    const footer = `\n${settings.footer}\n\n` +
         `───────────────────────────────\n` +
         `Firma Funcionario Actuante\n` +
-        `${userName}\n` +
+        `${settings.signature}\n` +
         `───────────────────────────────\n` +
         `Firma Interviniente/Notificado\n\n` +
         `───────────────────────────────\n` +
@@ -226,14 +296,19 @@ function renderActasHub(container) {
     const actaTypes = Object.entries(ACTA_TEMPLATES);
 
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
-                <span class="material-symbols-outlined">arrow_back</span>
-            </button>
-            <div class="flex flex-col">
-                <h1 class="text-lg font-black text-white leading-none">Actas Policiales</h1>
-                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Generador de Documentos Formales</span>
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div class="flex flex-col">
+                    <h1 class="text-lg font-black text-white leading-none">Actas Policiales</h1>
+                    <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Generador de Documentos Formales</span>
+                </div>
             </div>
+            <button onclick="router.navigateTo('#asistente/actas/settings')" class="size-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary transition-all">
+                <span class="material-symbols-outlined">settings</span>
+            </button>
         </header>
 
         <main class="p-6 space-y-6 pb-32 max-w-md mx-auto view-transition">
@@ -299,9 +374,14 @@ function renderActaForm(container, tipo) {
                     ${tmpl.fields.map(f => {
                         if (f.type === 'textarea') {
                             return `<div class="space-y-1.5">
-                                <label class="text-[10px] font-bold text-primary uppercase ml-1">${f.label} ${f.required ? '*' : ''}</label>
+                                <div class="flex justify-between items-center px-1">
+                                    <label class="text-[10px] font-bold text-primary uppercase">${f.label} ${f.required ? '*' : ''}</label>
+                                    <button type="button" onclick="window._improveField('acta-${f.id}')" class="text-[9px] bg-primary/10 text-primary px-2 py-0.5 rounded-full flex items-center gap-1 hover:bg-primary/20 transition-all">
+                                        <span class="material-symbols-outlined text-[10px]">auto_awesome</span>Pulir Narrativa
+                                    </button>
+                                </div>
                                 <textarea id="acta-${f.id}" ${f.required ? 'required' : ''} placeholder="${f.label}..."
-                                    class="w-full h-24 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
+                                    class="w-full h-32 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
                             </div>`;
                         } else if (f.type === 'select') {
                             return `<div class="space-y-1.5">
@@ -385,9 +465,27 @@ function renderActaForm(container, tipo) {
     window._newActa = () => {
         renderActaForm(container, tipo);
     };
+
+    window._improveField = (fieldId) => {
+        const el = document.getElementById(fieldId);
+        if (!el || !el.value.trim()) return showToast("Escribí algo primero");
+        
+        const original = el.value;
+        const improved = window.improvePoliceNarrative(original);
+        
+        if (original === improved) {
+            showToast("ℹ️ El texto ya es profesional");
+        } else {
+            el.value = improved;
+            showToast("✨ Narrativa profesionalizada");
+            el.classList.add('ring-2', 'ring-emerald-500/50');
+            setTimeout(() => el.classList.remove('ring-2', 'ring-emerald-500/50'), 2000);
+        }
+    };
 }
 
 // ── EXPORTS ──
 window.renderActasHub = renderActasHub;
+window.renderActasSettings = renderActasSettings;
 window.renderActaForm = renderActaForm;
 window.ACTA_TEMPLATES = ACTA_TEMPLATES;
