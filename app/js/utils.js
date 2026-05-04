@@ -131,6 +131,41 @@ window.improvePoliceNarrative = function (text) {
     return refined;
 };
 
+window.compressImage = function (dataUrl, maxWidth = 800, maxHeight = 800, quality = 0.6) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.src = dataUrl;
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > maxWidth) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                }
+            } else {
+                if (height > maxHeight) {
+                    width *= maxHeight / height;
+                    height = maxHeight;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.height > 0 ? canvas.getContext('2d') : null;
+            if (ctx) {
+                ctx.drawImage(img, 0, 0, width, height);
+                resolve(canvas.toDataURL('image/jpeg', quality));
+            } else {
+                resolve(dataUrl); // Fallback
+            }
+        };
+        img.onerror = () => resolve(dataUrl);
+    });
+};
+
 // Export to window for global access (backward compatibility)
 window.showToast = showToast;
 window.copyToClipboard = copyToClipboard;

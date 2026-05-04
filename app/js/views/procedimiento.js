@@ -344,16 +344,19 @@ function renderItemsList() {
     `).join('');
 }
 
-window._handlePhotoUpload = (e) => {
+window._handlePhotoUpload = async (e) => {
     const file = e.target.files[0];
     if(!file) return;
 
+    showToast("⏳ Procesando imagen...");
+    
     // Convert to base64 for PDF and preview
     const reader = new FileReader();
-    reader.onload = (event) => {
+    reader.onload = async (event) => {
+        const compressed = await compressImage(event.target.result);
         procData.photos.push({
             id: Date.now(),
-            dataUrl: event.target.result,
+            dataUrl: compressed,
             name: file.name
         });
         renderPhotosList();
