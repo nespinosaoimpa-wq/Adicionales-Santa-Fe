@@ -104,6 +104,12 @@ window.router = {
                 case '#asistente/centinela':
                     renderCentinela(app);
                     break;
+                case '#asistente/sueldo':
+                    renderSueldoPRO(app);
+                    break;
+                case '#asistente/iapos':
+                    renderIAPOS(app);
+                    break;
                 case '#info':
                     renderInfoGuia(app);
                     break;

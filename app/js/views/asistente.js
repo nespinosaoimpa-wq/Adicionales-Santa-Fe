@@ -7,10 +7,12 @@ function renderAsistenteHub(container) {
 
     const tools = [
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
+        { id: 'sueldo', title: 'Sueldo PRO', desc: 'Calculá tu neto con jerarquía, antigüedad y adicionales.', icon: 'payments', color: 'from-emerald-500 to-teal-500', route: '#asistente/sueldo', badge: 'PRO' },
         { id: 'actas', title: 'Actas Policiales', desc: 'Generá actas formales: allanamiento, custodia, procedimiento y más.', icon: 'description', color: 'from-red-500 to-rose-600', route: '#asistente/actas', badge: 'PRO' },
         { id: 'intervenciones', title: 'Intervenciones en Campo', desc: 'Registro en tiempo real con GPS y partes para WhatsApp.', icon: 'add_alert', color: 'from-blue-500 to-indigo-600', route: '#asistente/intervenciones', badge: 'PRO' },
         { id: 'procedimiento', title: 'Registro de Procedimiento', desc: 'Wizard guiado: GPS, fotos y PDF estructurado.', icon: 'local_police', color: 'from-emerald-500 to-green-600', route: '#asistente/procedimiento', badge: 'PRO' },
         { id: 'archivos', title: 'Archivos Digitales', desc: 'Historial personal de actas y procedimientos guardados.', icon: 'folder_open', color: 'from-amber-500 to-orange-500', route: '#asistente/archivos', badge: 'PRO' },
+        { id: 'iapos', title: 'Cartilla IAPOS', desc: 'Buscador oficial de médicos, clínicas y farmacias.', icon: 'medical_services', color: 'from-cyan-500 to-blue-500', route: '#asistente/iapos', badge: 'PRO' },
         { id: 'guia', title: 'Guía de Recursos', desc: 'Beneficios TAP y Estampillas Médicas.', icon: 'library_books', color: 'from-indigo-500 to-blue-600', route: '#info', badge: 'Pro' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
 

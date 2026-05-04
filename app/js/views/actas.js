@@ -95,18 +95,21 @@ const ACTA_TEMPLATES = {
         ]
     },
     custodia: {
-        title: 'Cadena de Custodia',
-        icon: 'lock',
+        title: 'Cadena de Custodia (Rótulo)',
+        icon: 'inventory',
         color: 'from-amber-500 to-orange-600',
         fields: [
-            { id: 'nro_causa', label: 'N° de Causa / Actuación', type: 'text', required: true },
-            { id: 'descripcion_evidencia', label: 'Descripción de la Evidencia', type: 'textarea', required: true },
-            { id: 'lugar_hallazgo', label: 'Lugar de Hallazgo', type: 'text', required: true },
+            { id: 'imputado', label: 'Imputado', type: 'text', required: true },
+            { id: 'cuij', label: 'CUIJ', type: 'text', required: true },
+            { id: 'victima', label: 'Víctima', type: 'text', required: true },
+            { id: 'fiscal', label: 'Fiscal Interviniente', type: 'text', required: true },
+            { id: 'procedimiento', label: 'Procedimiento (Allanamiento, Requisa, etc)', type: 'text', required: true },
+            { id: 'elementos', label: 'Detalle de Elementos (N°, Descrip, Lugar, Cant)', type: 'textarea', required: true },
+            { id: 'embalaje', label: 'Embalaje (Bolsa plástica/papel, Frasco, etc)', type: 'text', required: true },
             { id: 'recolector', label: 'Funcionario que Recolecta', type: 'text', required: true },
-            { id: 'recolector_jerarquia', label: 'Jerarquía / Legajo', type: 'text', required: true },
-            { id: 'destino', label: 'Destino de la Evidencia', type: 'text', required: true },
-            { id: 'estado_evidencia', label: 'Estado de la Evidencia', type: 'select', options: ['Intacta', 'Dañada', 'Fragmentada', 'Contaminada'], required: true },
-            { id: 'observaciones', label: 'Observaciones', type: 'textarea', required: false }
+            { id: 'recolector_cargo', label: 'Cargo y Dependencia', type: 'text', required: true },
+            { id: 'testigos', label: 'Testigos (Nombre, DNI, Tel)', type: 'textarea', required: false },
+            { id: 'observaciones', label: 'Observaciones / Estado', type: 'textarea', required: false }
         ]
     },
     procedimiento: {
@@ -216,14 +219,15 @@ function generateActaText(tipo, data) {
                 `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
             break;
         case 'custodia':
-            body = `Se labra la presente a fin de dejar constancia de la CADENA DE CUSTODIA ` +
-                `de la evidencia recolectada en el marco de la actuación N° ${data.nro_causa}.\n\n` +
-                `DESCRIPCIÓN DE LA EVIDENCIA:\n${data.descripcion_evidencia}\n\n` +
-                `LUGAR DE HALLAZGO: ${data.lugar_hallazgo}\n` +
-                `ESTADO: ${data.estado_evidencia}\n\n` +
-                `FUNCIONARIO QUE RECOLECTA: ${data.recolector}\n` +
-                `JERARQUÍA / LEGAJO: ${data.recolector_jerarquia}\n` +
-                `DESTINO: ${data.destino}\n\n` +
+            body = `RÓTULO DE ELEMENTOS SECUESTRADOS\n` +
+                `IMPUTADO: ${data.imputado}\t\tCUIJ: ${data.cuij}\n` +
+                `VÍCTIMA: ${data.victima}\t\tFISCAL: ${data.fiscal}\n` +
+                `PROCEDIMIENTO: ${data.procedimiento}\n\n` +
+                `DETALLE DE ELEMENTOS:\n${data.elementos}\n\n` +
+                `EMBALAJE: ${data.embalaje}\n\n` +
+                `FUNCIONARIO QUE EFECTUÓ LA RECOLECCIÓN:\n` +
+                `${data.recolector} - ${data.recolector_cargo}\n\n` +
+                `TESTIGOS CIVILES:\n${data.testigos || 'Sin testigos registrados'}\n\n` +
                 `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
             break;
         case 'procedimiento':
@@ -414,6 +418,15 @@ function renderActaForm(container, tipo) {
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
+                    <button onclick="window._downloadPDF()" class="py-3 rounded-xl bg-red-600/20 text-red-400 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all border border-red-500/30">
+                        <span class="material-symbols-outlined text-sm">picture_as_pdf</span>PDF
+                    </button>
+                    <button onclick="window._downloadWord()" class="py-3 rounded-xl bg-blue-600/20 text-blue-400 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all border border-blue-500/30">
+                        <span class="material-symbols-outlined text-sm">description</span>Word (.doc)
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
                     <button onclick="window._copyActa()" class="py-3 rounded-xl bg-white/10 text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all">
                         <span class="material-symbols-outlined text-sm">content_copy</span>Copiar
                     </button>
@@ -460,6 +473,50 @@ function renderActaForm(container, tipo) {
     window._shareActaWA = () => {
         const text = document.getElementById('acta-output').innerText;
         window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
+    };
+
+    window._downloadPDF = () => {
+        const text = document.getElementById('acta-output').innerText;
+        const filename = `Acta_${tipo}_${new Date().getTime()}.pdf`;
+        
+        // Crear elemento temporal para renderizado PDF con formato profesional
+        const temp = document.createElement('div');
+        temp.style.padding = '40px';
+        temp.style.fontFamily = 'serif';
+        temp.style.color = '#000';
+        temp.style.backgroundColor = '#fff';
+        temp.innerHTML = `<pre style="white-space: pre-wrap; font-size: 11pt; line-height: 1.5; color: #000;">${text}</pre>`;
+        
+        showToast('⏳ Generando PDF...');
+        html2pdf().from(temp).set({
+            margin: 1,
+            filename: filename,
+            html2canvas: { scale: 2 },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        }).save().then(() => showToast('✅ PDF Descargado'));
+    };
+
+    window._downloadWord = () => {
+        const text = document.getElementById('acta-output').innerText;
+        const filename = `Acta_${tipo}_${new Date().getTime()}.doc`;
+        
+        // HTML wrapper compatible con Word
+        const html = `
+            <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+            <head><meta charset='utf-8'><title>Acta</title></head>
+            <body style="font-family: 'Times New Roman', Times, serif;">
+                <pre style="white-space: pre-wrap; font-size: 12pt;">${text}</pre>
+            </body>
+            </html>
+        `;
+
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        showToast('✅ Archivo Word (.doc) generado');
     };
 
     window._newActa = () => {
