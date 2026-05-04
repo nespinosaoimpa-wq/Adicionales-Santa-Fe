@@ -8,6 +8,7 @@ window.store = {
     expenses: [], // Synced with Firestore
     // Cache for Admin
     allUsers: [],
+    ads: [], // Cache for custom banners
 
     // Config (Defaults from SPA 2026 Decree)
     serviceConfig: {
