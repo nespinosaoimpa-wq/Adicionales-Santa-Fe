@@ -102,7 +102,19 @@ window.improvePoliceNarrative = function (text) {
         { regex: /tirado en el piso/gi, replace: "tendido sobre la cinta asfáltica" },
         { regex: /estaba roto/gi, replace: "presentaba daños visibles" },
         { regex: /no tenia documentos/gi, replace: "carecía de documentación que acredite su identidad" },
-        { regex: /no tenía documentos/gi, replace: "carecía de documentación que acredite su identidad" }
+        { regex: /no tenía documentos/gi, replace: "carecía de documentación que acredite su identidad" },
+        { regex: /\bvi\b/gi, replace: "se observa" },
+        { regex: /\bvimos\b/gi, replace: "se observa" },
+        { regex: /\bfui\b/gi, replace: "me comisioné" },
+        { regex: /\bfuimos\b/gi, replace: "nos comisionamos" },
+        { regex: /\bllegue\b/gi, replace: "arribé" },
+        { regex: /\bllegamos\b/gi, replace: "arribamos" },
+        { regex: /\bhice\b/gi, replace: "procedí a realizar" },
+        { regex: /\bhicimos\b/gi, replace: "se procedió a realizar" },
+        { regex: /\btenia\b/gi, replace: "poseía" },
+        { regex: /\btenía\b/gi, replace: "poseía" },
+        { regex: /\bestaba\b/gi, replace: "se encontraba" },
+        { regex: /\bestaban\b/gi, replace: "se encontraban" }
     ];
 
     improvements.forEach(item => {
