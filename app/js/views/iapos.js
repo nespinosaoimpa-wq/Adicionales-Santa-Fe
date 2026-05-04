@@ -25,9 +25,9 @@ function renderIAPOS(container) {
                 <h2 class="text-lg font-bold text-white mb-2">Buscador de Cartilla</h2>
                 <p class="text-xs text-slate-400 leading-relaxed mb-6">Accedé al padrón oficial de médicos, clínicas y farmacias que trabajan con IAPOS en toda la provincia.</p>
                 
-                <a href="https://www.santafe.gob.ar/index.php/tramites/modul1/index?m=ecodig&f=index&t=15364" target="_blank" 
+                <a href="https://www.santafe.gob.ar/ms/iapos/padron-de-prestadores/" target="_blank" rel="noopener noreferrer"
                    class="w-full py-4 bg-primary text-white font-bold rounded-2xl flex items-center justify-center gap-2 active:scale-95 transition-all shadow-xl shadow-primary/20">
-                    <span class="material-symbols-outlined">open_in_new</span>Abrir Cartilla Oficial
+                    <span class="material-symbols-outlined">open_in_new</span>Abrir Buscador Directo
                 </a>
             </div>
 
@@ -37,7 +37,7 @@ function renderIAPOS(container) {
                 
                 <div class="grid gap-3">
                     <!-- WhatsApp -->
-                    <a href="https://wa.me/5493425594737" target="_blank" class="glass-card p-4 rounded-2xl border border-white/5 flex items-center gap-4 hover:border-emerald-500/30 transition-all">
+                    <a href="https://wa.me/5493425594737" target="_blank" rel="noopener noreferrer" class="glass-card p-4 rounded-2xl border border-white/5 flex items-center gap-4 hover:border-emerald-500/30 transition-all">
                         <div class="size-10 rounded-xl bg-emerald-500/20 text-emerald-500 flex items-center justify-center">
                             <span class="material-symbols-outlined text-lg">chat</span>
                         </div>
@@ -70,10 +70,10 @@ function renderIAPOS(container) {
                 </div>
                 <p class="text-[11px] text-slate-400 leading-relaxed">Te recomendamos descargar la App oficial para gestionar tus órdenes, recetas y credencial digital directamente desde el celular.</p>
                 <div class="flex gap-3">
-                    <a href="https://play.google.com/store/apps/details?id=ar.gov.santafe.mi_iapos" target="_blank" class="flex-1 py-2 rounded-xl bg-white/5 text-[10px] font-bold text-slate-300 text-center border border-white/10 flex items-center justify-center gap-2">
+                    <a href="https://play.google.com/store/apps/details?id=ar.gov.santafe.mi_iapos" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-white/5 text-[10px] font-bold text-slate-300 text-center border border-white/10 flex items-center justify-center gap-2 active:scale-95 transition-all">
                         Play Store
                     </a>
-                    <a href="https://apps.apple.com/ar/app/mi-iapos/id1514781475" target="_blank" class="flex-1 py-2 rounded-xl bg-white/5 text-[10px] font-bold text-slate-300 text-center border border-white/10 flex items-center justify-center gap-2">
+                    <a href="https://apps.apple.com/ar/app/mi-iapos/id1514781475" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 rounded-xl bg-white/5 text-[10px] font-bold text-slate-300 text-center border border-white/10 flex items-center justify-center gap-2 active:scale-95 transition-all">
                         App Store
                     </a>
                 </div>
