@@ -207,10 +207,8 @@ function generateActaText(tipo, data) {
     const hora = now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
     const userName = store.user?.name || 'FUNCIONARIO POLICIAL';
 
-    const header = `═══════════════════════════════════════\n` +
-        `${settings.header.toUpperCase()}\n` +
-        `${ACTA_TEMPLATES[tipo].title.toUpperCase()}\n` +
-        `═══════════════════════════════════════\n\n` +
+    const header = `${settings.header.toUpperCase()}\n` +
+        `${ACTA_TEMPLATES[tipo].title.toUpperCase()}\n\n` +
         `En la ciudad de ${data.localidad || data.zona || '________'}, Provincia de Santa Fe, ` +
         `a los ${now.getDate()} días del mes de ${now.toLocaleDateString('es-AR', { month: 'long' })} ` +
         `del año ${now.getFullYear()}, siendo las ${hora} horas, ` +
@@ -303,16 +301,12 @@ function generateActaText(tipo, data) {
     }
 
     const footer = `\n${settings.footer}\n\n` +
-        `───────────────────────────────\n` +
         `Firma Funcionario Actuante\n` +
-        `${settings.signature}\n` +
-        `───────────────────────────────\n` +
-        `Firma Interviniente/Notificado\n\n` +
-        `───────────────────────────────\n` +
-        `Firma Testigo 1\n\n` +
-        `───────────────────────────────\n` +
-        `Firma Testigo 2\n\n` +
-        `Generado por Adicionales Santa Fe - ${fecha} ${hora}`;
+        `${settings.signature}\n\n` +
+        `Firma Interviniente/Notificado\n\n\n` +
+        `Firma Testigo 1\n\n\n` +
+        `Firma Testigo 2\n\n\n` +
+        `Documento generado digitalmente por Adicionales Santa Fe - ${fecha} ${hora}`;
 
     return header + body + footer;
 }
@@ -503,33 +497,61 @@ function renderActaForm(container, tipo) {
         const text = document.getElementById('acta-output').innerText;
         const filename = `Acta_${tipo}_${new Date().getTime()}.pdf`;
         
-        // Crear elemento temporal para renderizado PDF con formato profesional
+        // Crear elemento temporal para renderizado PDF con formato sobrio (Estilo APA/Judicial)
         const temp = document.createElement('div');
-        temp.style.padding = '40px';
-        temp.style.fontFamily = 'serif';
+        temp.style.padding = '50px 70px'; // Márgenes amplios
+        temp.style.fontFamily = '"Times New Roman", Times, serif';
+        temp.style.fontSize = '12pt';
+        temp.style.lineHeight = '1.6';
         temp.style.color = '#000';
         temp.style.backgroundColor = '#fff';
-        temp.innerHTML = `<pre style="white-space: pre-wrap; font-size: 11pt; line-height: 1.5; color: #000;">${text}</pre>`;
+        temp.style.textAlign = 'justify';
         
-        showToast('⏳ Generando PDF...');
+        // Formatear el texto para que el encabezado esté centrado
+        const lines = text.split('\n');
+        let formattedHtml = '';
+        lines.forEach((line, i) => {
+            if (i < 2) { // Encabezado y Título centrados y en negrita
+                formattedHtml += `<div style="text-align: center; font-weight: bold; margin-bottom: 5px;">${line}</div>`;
+            } else if (line.trim() === '') {
+                formattedHtml += '<br>';
+            } else {
+                formattedHtml += `<div>${line}</div>`;
+            }
+        });
+        
+        temp.innerHTML = formattedHtml;
+        
+        showToast('⏳ Generando documento profesional...');
         html2pdf().from(temp).set({
-            margin: 1,
+            margin: [0.75, 0.75, 0.75, 0.75], // Pulgadas (aprox normas APA)
             filename: filename,
-            html2canvas: { scale: 2 },
+            html2canvas: { scale: 3, logging: false, useCORS: true },
             jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-        }).save().then(() => showToast('✅ PDF Descargado'));
+        }).save().then(() => showToast('✅ PDF Profesional Descargado'));
     };
 
     window._downloadWord = () => {
         const text = document.getElementById('acta-output').innerText;
         const filename = `Acta_${tipo}_${new Date().getTime()}.doc`;
         
+        // Formatear el texto para Word (Centrar encabezado)
+        const lines = text.split('\n');
+        let formattedBody = '';
+        lines.forEach((line, i) => {
+            if (i < 2) {
+                formattedBody += `<p style="text-align: center; font-weight: bold; margin: 0;">${line}</p>`;
+            } else {
+                formattedBody += `<p style="margin: 0; min-height: 1em;">${line || '&nbsp;'}</p>`;
+            }
+        });
+
         // HTML wrapper compatible con Word
         const html = `
             <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
             <head><meta charset='utf-8'><title>Acta</title></head>
-            <body style="font-family: 'Times New Roman', Times, serif;">
-                <pre style="white-space: pre-wrap; font-size: 12pt;">${text}</pre>
+            <body style="font-family: 'Times New Roman', Times, serif; font-size: 12pt; text-align: justify; padding: 1in;">
+                ${formattedBody}
             </body>
             </html>
         `;
