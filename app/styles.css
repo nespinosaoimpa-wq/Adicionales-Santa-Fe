@@ -15,8 +15,7 @@
     --border-light: #e2e8f0;
     --border-dark: rgba(13, 89, 242, 0.1);
     --text-primary: #0f172a;
-    --text-secondary: #475569;
-    /* Más oscuro para mejor contraste */
+    --text-secondary: #334155; /* Más oscuro para mejor contraste (slate-700) */
 }
 
 /* Glassmorphism Utilities */
@@ -193,7 +192,7 @@ ins.adsbygoogle:empty {
 
 /* Utilities */
 .text-xxs {
-    font-size: 0.65rem;
+    font-size: 0.75rem; /* 12px */
     line-height: 1rem;
 }
 

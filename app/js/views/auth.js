@@ -15,7 +15,7 @@ function renderLogin(container) {
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
                 <!-- Google Button -->
-                <button onclick="handleGoogleLogin(event)" class="flex w-full justify-center items-center gap-3 rounded-xl bg-white px-4 py-4 text-base font-semibold text-slate-900 shadow-lg hover:bg-slate-50 transition-all active:scale-95">
+                <button onclick="handleGoogleLogin(event)" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-white px-4 py-4 text-base font-bold text-slate-900 shadow-xl border border-slate-200 hover:bg-slate-50 transition-all active:scale-95 ring-1 ring-slate-200 ring-offset-2">
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6" alt="Google">
                     Continuar con Google
                 </button>

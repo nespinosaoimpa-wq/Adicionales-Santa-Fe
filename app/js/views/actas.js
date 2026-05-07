@@ -6,8 +6,8 @@
 // ── AJUSTES DE FORMATO ──
 function getActaSettings() {
     const defaults = {
-        header: `POLICÍA DE LA PROVINCIA DE SANTA FE\nDEPARTAMENTO DE OPERACIONES`,
-        footer: `Con lo que no siendo para más, se da por finalizada la presente actuación, previa lectura y ratificación, firmando los intervinientes al pie para constancia.`,
+        header: `POLICÍA DE LA PROVINCIA DE SANTA FE\nADICIONALES SANTA FE - ASISTENTE VIRTUAL`,
+        footer: `Con lo que no siendo para más, se da por finalizada la presente actuación, previa lectura y ratificación de su contenido, firmando los intervinientes de plena conformidad por ante mí y testigos de actuación que certifican lo actuado.`,
         signature: `${store.user?.name || 'FUNCIONARIO POLICIAL'}\nLegajo: ${store.user?.badge || '________'}`
     };
     try {
@@ -177,11 +177,24 @@ const ACTA_TEMPLATES = {
             { id: 'denunciante_dni', label: 'DNI del Denunciante', type: 'text', required: true },
             { id: 'denunciante_domicilio', label: 'Domicilio', type: 'text', required: true },
             { id: 'denunciante_telefono', label: 'Teléfono de Contacto', type: 'text', required: false },
-            { id: 'hechos', label: 'Relato de los Hechos', type: 'textarea', required: true },
+            { id: 'hechos', label: 'Relato Circunstanciado de los Hechos', type: 'textarea', required: true },
             { id: 'lugar_hecho', label: 'Lugar del Hecho', type: 'text', required: true },
             { id: 'fecha_hecho', label: 'Fecha y Hora del Hecho', type: 'text', required: true },
             { id: 'testigos', label: 'Testigos (si los hubiere)', type: 'textarea', required: false },
             { id: 'observaciones', label: 'Observaciones', type: 'textarea', required: false }
+        ]
+    },
+    oficio: {
+        title: 'Oficio Judicial / Comunicación',
+        icon: 'mail',
+        color: 'from-slate-600 to-slate-800',
+        fields: [
+            { id: 'destinatario', label: 'Destinatario (Autoridad/Cargo)', type: 'text', required: true },
+            { id: 'dependencia', label: 'Dependencia / Organismo', type: 'text', required: true },
+            { id: 'referencia', label: 'Referencia (CUIJ / Nro. Causa)', type: 'text', required: true },
+            { id: 'objeto', label: 'Objeto de la Comunicación', type: 'text', required: true },
+            { id: 'cuerpo', label: 'Cuerpo del Mensaje (Narrativa)', type: 'textarea', required: true },
+            { id: 'anexos', label: 'Documentación Anexa', type: 'text', required: false }
         ]
     }
 };
@@ -266,15 +279,26 @@ function generateActaText(tipo, data) {
                 `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
             break;
         case 'denuncia':
-            body = `Comparece ante esta dependencia policial ${data.denunciante_nombre}, ` +
+            body = `Comparece ante esta dependencia policial el/la ciudadano/a ${data.denunciante_nombre}, ` +
                 `D.N.I. N° ${data.denunciante_dni}, con domicilio real en ${data.denunciante_domicilio}` +
                 `${data.denunciante_telefono ? ', teléfono de contacto: ' + data.denunciante_telefono : ''}, ` +
-                `quien MANIFIESTA:\n\n` +
-                `RELATO DE LOS HECHOS:\n${data.hechos}\n\n` +
+                `quien previa lectura de sus derechos y garantías legales, MANIFIESTA:\n\n` +
+                `RELATO CIRCUNSTANCIADO DE LOS HECHOS:\n${data.hechos}\n\n` +
                 `LUGAR DEL HECHO: ${data.lugar_hecho}\n` +
                 `FECHA Y HORA: ${data.fecha_hecho}\n\n` +
                 `${data.testigos ? 'TESTIGOS:\n' + data.testigos + '\n\n' : ''}` +
                 `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
+            break;
+        case 'oficio':
+            body = `A: ${data.destinatario}\n` +
+                `DEPENDENCIA: ${data.dependencia}\n` +
+                `REF: ${data.referencia}\n` +
+                `OBJETO: ${data.objeto}\n\n` +
+                `Tengo el agrado de dirigirme a Usted, en el marco de la actuación de referencia, ` +
+                `a efectos de elevar a su conocimiento lo siguiente:\n\n` +
+                `${data.cuerpo}\n\n` +
+                `${data.anexos ? 'DOCUMENTACIÓN ANEXA: ' + data.anexos + '\n\n' : ''}` +
+                `Sin otro particular, saludo a Usted muy atentamente.\n\n`;
             break;
     }
 
