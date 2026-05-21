@@ -6,6 +6,7 @@ window.router = {
     currentRoute: '#login',
 
     init() {
+        this.initialized = true;
         window.addEventListener('hashchange', () => this.handleRoute());
         this.handleRoute(); // Initial load
     },
@@ -103,6 +104,12 @@ window.router = {
                     break;
                 case '#asistente/centinela':
                     renderCentinela(app);
+                    break;
+                case '#asistente/vademecum':
+                    renderVademecum(app);
+                    break;
+                case '#asistente/dictado':
+                    renderDictadoNovedades(app);
                     break;
                 case '#asistente/iapos':
                     renderIAPOS(app);

@@ -384,13 +384,6 @@ window.store = {
     init() {
         console.log("App v535.2.0-FINAL - Standard Deployment");
 
-
-
-
-
-
-
-
         // Apply saved theme ASAP
         this.initTheme();
 
@@ -412,116 +405,141 @@ window.store = {
 
         setTimeout(() => showAnnouncementModal(), 2000);
 
-        auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            .catch((e) => console.error("Persistence Error:", e));
+        return new Promise((resolve) => {
+            let resolved = false;
+            const finishResolve = () => {
+                if (!resolved) {
+                    resolved = true;
+                    clearTimeout(safetyTimeout);
+                    resolve();
+                }
+            };
 
-        this.unsub = auth.onAuthStateChanged(async user => {
-            if (user) {
-                console.log("🔐 User Logged In:", user.email);
-                try {
-                    const dbUser = await DB.getUser(user.email);
-                    const baseUser = {
-                        uid: user.uid,
-                        email: user.email,
-                        role: 'user',
-                        serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
-                        notificationSettings: { enabled: false, leadTime: 60 },
-                        name: user.displayName || user.email.split('@')[0],
-                        avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                    };
+            const safetyTimeout = setTimeout(() => {
+                console.warn("⚠️ store.init auth observer timed out (2.5s fallback)");
+                this.authInitialized = true;
+                finishResolve();
+            }, 2500);
 
-                    if (dbUser) {
-                        this.user = {
-                            ...baseUser,
-                            ...dbUser,
-                            serviceConfig: { ...baseUser.serviceConfig, ...(dbUser.serviceConfig || {}) },
-                            notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
-                        };
-                        if (this.user.name === 'undefined' || !this.user.name) this.user.name = baseUser.name;
-                        if (this.user.avatar === 'undefined' || !this.user.avatar) this.user.avatar = baseUser.avatar;
-                    } else {
-                        this.user = baseUser;
-                    }
+            auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .catch((e) => console.error("Persistence Error:", e))
+                .then(() => {
+                    this.unsub = auth.onAuthStateChanged(async user => {
+                        if (user) {
+                            console.log("🔐 User Logged In:", user.email);
+                            try {
+                                const dbUser = await DB.getUser(user.email);
+                                const baseUser = {
+                                    uid: user.uid,
+                                    email: user.email,
+                                    role: 'user',
+                                    serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+                                    notificationSettings: { enabled: false, leadTime: 60 },
+                                    name: user.displayName || user.email.split('@')[0],
+                                    avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                                };
 
-                    if (this.user.status === 'suspended') {
-                        showToast("❌ Tu cuenta ha sido suspendida por un administrador.", 8000);
-                        this.logout();
-                        return;
-                    }
+                                if (dbUser) {
+                                    this.user = {
+                                        ...baseUser,
+                                        ...dbUser,
+                                        serviceConfig: { ...baseUser.serviceConfig, ...(dbUser.serviceConfig || {}) },
+                                        notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
+                                    };
+                                    if (this.user.name === 'undefined' || !this.user.name) this.user.name = baseUser.name;
+                                    if (this.user.avatar === 'undefined' || !this.user.avatar) this.user.avatar = baseUser.avatar;
+                                } else {
+                                    this.user = baseUser;
+                                }
 
-                    this.serviceConfig = this.user.serviceConfig;
-                    this.notificationSettings = this.user.notificationSettings;
-                    console.log("✅ User data synchronized:", this.user.email);
-                    await DB.saveUser(this.user);
+                                if (this.user.status === 'suspended') {
+                                    showToast("❌ Tu cuenta ha sido suspendida por un administrador.", 8000);
+                                    this.logout();
+                                    finishResolve();
+                                    return;
+                                }
 
-                    this.unsubscribeServices = DB.subscribeToServices(services => {
-                        this.services = services;
-                        if (this.checkNotifications) this.checkNotifications();
-                        this.scheduleShiftAlarms(); // Schedule push notifications for upcoming shifts
-                        if (this.authInitialized) router.handleRoute();
-                    });
+                                this.serviceConfig = this.user.serviceConfig;
+                                this.notificationSettings = this.user.notificationSettings;
+                                console.log("✅ User data synchronized:", this.user.email);
+                                await DB.saveUser(this.user);
 
-                    this.unsubscribeAds = DB.subscribeToAds(ads => {
-                        this.ads = ads;
-                    });
+                                this.unsubscribeServices = DB.subscribeToServices(services => {
+                                    this.services = services;
+                                    if (this.checkNotifications) this.checkNotifications();
+                                    this.scheduleShiftAlarms(); // Schedule push notifications for upcoming shifts
+                                    if (this.authInitialized && window.router && window.router.initialized) router.handleRoute();
+                                });
 
-                    this.unsubscribeUsers = DB.subscribeToUsers(users => {
-                        this.allUsers = users;
-                    });
+                                this.unsubscribeAds = DB.subscribeToAds(ads => {
+                                    this.ads = ads;
+                                });
 
-                    this.unsubscribeAnnouncements = DB.subscribeToAnnouncements(announcement => {
-                        this.latestAnnouncement = announcement;
-                        if (typeof renderGlobalAnnouncement === 'function') {
-                            renderGlobalAnnouncement();
+                                this.unsubscribeUsers = DB.subscribeToUsers(users => {
+                                    this.allUsers = users;
+                                });
+
+                                this.unsubscribeAnnouncements = DB.subscribeToAnnouncements(announcement => {
+                                    this.latestAnnouncement = announcement;
+                                    if (typeof renderGlobalAnnouncement === 'function') {
+                                        renderGlobalAnnouncement();
+                                    }
+                                });
+
+                                this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
+                                    this.expenses = expenses;
+                                    if (window.location.hash === '#financial' && window.router && window.router.initialized) router.handleRoute();
+                                });
+
+                                if (this.checkNotifications) {
+                                    if (this.notifInterval) clearInterval(this.notifInterval);
+                                    this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
+                                }
+
+                                // Ocultar banner de actualización ya que el usuario ingresó correctamente
+                                localStorage.setItem('banner_v534.9_dismissed', 'true');
+                                document.getElementById('update-banner')?.remove();
+
+                                this.authInitialized = true;
+                                finishResolve();
+                                if (window.router && window.router.initialized) router.handleRoute();
+
+                                // Trigger onboarding for new users (Mejora 4)
+                                setTimeout(() => { if (typeof showOnboarding === 'function') showOnboarding(); }, 1500);
+
+                                // Trigger survey / rating banner (Cartel publicitario para opinar)
+                                setTimeout(() => { if (typeof showSurveyBanner === 'function') showSurveyBanner(); }, 6000);
+
+                            } catch (error) {
+                                console.error("❌ Initialization Error:", error.code || error.message);
+                                if (!this.user) {
+                                    this.user = {
+                                        email: user.email,
+                                        role: 'user',
+                                        serviceConfig: this.serviceConfig,
+                                        notificationSettings: { enabled: false, leadTime: 60 },
+                                        name: user.displayName || user.email.split('@')[0],
+                                        avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                                    };
+                                }
+                                this.authInitialized = true;
+                                finishResolve();
+                                if (window.router && window.router.initialized) router.handleRoute();
+                            }
+                        } else {
+                            console.log("👋 User Logged Out");
+                            this.user = null;
+                            this.services = [];
+                            if (this.unsubscribeServices) this.unsubscribeServices();
+                            if (this.unsubscribeUsers) this.unsubscribeUsers();
+                            if (this.unsubscribeExpenses) this.unsubscribeExpenses();
+                            if (this.notifInterval) clearInterval(this.notifInterval);
+                            this.authInitialized = true;
+                            finishResolve();
+                            if (window.router && window.router.initialized) router.handleRoute();
                         }
                     });
-
-                    this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
-                        this.expenses = expenses;
-                        if (window.location.hash === '#financial') router.handleRoute();
-                    });
-
-                    if (this.checkNotifications) {
-                        if (this.notifInterval) clearInterval(this.notifInterval);
-                        this.notifInterval = setInterval(() => this.checkNotifications(), 60000);
-                    }
-
-                    // Ocultar banner de actualización ya que el usuario ingresó correctamente
-                    localStorage.setItem('banner_v534.9_dismissed', 'true');
-                    document.getElementById('update-banner')?.remove();
-
-                    this.authInitialized = true;
-                    router.handleRoute();
-
-                    // Trigger onboarding for new users (Mejora 4)
-                    setTimeout(() => { if (typeof showOnboarding === 'function') showOnboarding(); }, 1500);
-
-                } catch (error) {
-                    console.error("❌ Initialization Error:", error.code || error.message);
-                    if (!this.user) {
-                        this.user = {
-                            email: user.email,
-                            role: 'user',
-                            serviceConfig: this.serviceConfig,
-                            notificationSettings: { enabled: false, leadTime: 60 },
-                            name: user.displayName || user.email.split('@')[0],
-                            avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                        };
-                    }
-                    this.authInitialized = true;
-                    router.handleRoute();
-                }
-            } else {
-                console.log("👋 User Logged Out");
-                this.user = null;
-                this.services = [];
-                if (this.unsubscribeServices) this.unsubscribeServices();
-                if (this.unsubscribeUsers) this.unsubscribeUsers();
-                if (this.unsubscribeExpenses) this.unsubscribeExpenses();
-                if (this.notifInterval) clearInterval(this.notifInterval);
-                this.authInitialized = true;
-                router.handleRoute();
-            }
+                });
         });
     },
 
@@ -1055,6 +1073,136 @@ window.store = {
             showToast('Error al compartir');
         }
     }
+};
+
+window.showSurveyBanner = () => {
+    // Check if already voted or dismissed
+    if (localStorage.getItem('survey_rating_submitted') === 'true' || 
+        localStorage.getItem('survey_rating_dismissed') === 'true') {
+        return;
+    }
+
+    // Only show if user is authenticated
+    if (!store.isAuthenticated()) return;
+
+    // Create banner container
+    const banner = document.createElement('div');
+    banner.id = 'survey-rating-banner';
+    banner.className = 'fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-96 glass-card p-5 rounded-3xl border border-white/10 shadow-2xl z-[150] translate-y-20 opacity-0 transition-all duration-500 ease-out flex flex-col gap-3';
+    banner.style.background = 'rgba(15, 23, 42, 0.95)';
+    banner.style.backdropFilter = 'blur(16px)';
+
+    banner.innerHTML = `
+        <div class="flex justify-between items-start">
+            <div class="flex gap-2.5 items-center">
+                <div class="size-9 rounded-xl bg-primary/20 flex items-center justify-center text-primary shrink-0">
+                    <span class="material-symbols-outlined">reviews</span>
+                </div>
+                <div>
+                    <h4 class="font-bold text-white text-xs leading-none">¿Qué opinás de la App?</h4>
+                    <span class="text-[9px] text-primary font-bold uppercase tracking-wider">Tu opinión nos ayuda a mejorar</span>
+                </div>
+            </div>
+            <button onclick="window._dismissSurvey()" class="text-slate-400 hover:text-white transition-colors p-1">
+                <span class="material-symbols-outlined text-sm">close</span>
+            </button>
+        </div>
+
+        <p class="text-[11px] text-slate-400 leading-relaxed">
+            Queremos que la aplicación sea tu mejor herramienta en el servicio policial. Calificanos y déjanos tu sugerencia.
+        </p>
+
+        <div class="flex justify-center gap-2 py-1.5" id="survey-stars">
+            ${[1, 2, 3, 4, 5].map(num => `
+                <button type="button" onclick="window._setSurveyRating(${num})" class="text-slate-600 hover:text-amber-400 transition-colors p-1" data-val="${num}">
+                    <span class="material-symbols-outlined text-2xl font-fill-0">grade</span>
+                </button>
+            `).join('')}
+        </div>
+
+        <div class="space-y-2 hidden" id="survey-feedback-form">
+            <textarea id="survey-comment" class="w-full h-16 bg-white/5 border border-white/10 rounded-xl p-2.5 text-[11px] text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none" placeholder="¿Alguna sugerencia o mejora para el servicio policial? (Opcional)"></textarea>
+            <button onclick="window._submitSurvey()" class="w-full py-2 bg-primary hover:bg-primary-hover text-white text-[11px] font-bold rounded-xl transition-all shadow-md shadow-primary/10">
+                Enviar Calificación
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(banner);
+
+    // Trigger animation
+    setTimeout(() => {
+        banner.classList.remove('translate-y-20', 'opacity-0');
+    }, 100);
+
+    let selectedRating = 0;
+
+    window._setSurveyRating = (rating) => {
+        selectedRating = rating;
+        const buttons = document.querySelectorAll('#survey-stars button');
+        buttons.forEach(btn => {
+            const val = parseInt(btn.getAttribute('data-val'));
+            const icon = btn.querySelector('.material-symbols-outlined');
+            if (val <= rating) {
+                btn.className = 'text-amber-400 transition-colors p-1';
+                icon.style.fontVariationSettings = "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24";
+            } else {
+                btn.className = 'text-slate-600 hover:text-amber-400 transition-colors p-1';
+                icon.style.fontVariationSettings = "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24";
+            }
+        });
+
+        // Show comments area and submit button
+        document.getElementById('survey-feedback-form').classList.remove('hidden');
+    };
+
+    window._submitSurvey = async () => {
+        if (selectedRating === 0) return;
+        const comment = document.getElementById('survey-comment').value.trim();
+        
+        // Show loading state
+        const submitBtn = document.querySelector('#survey-feedback-form button');
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Enviando...';
+
+        try {
+            let success = false;
+            if (typeof DB !== 'undefined' && DB.addReview) {
+                success = await DB.addReview(selectedRating, comment);
+            }
+            
+            if (success) {
+                showToast("✨ ¡Gracias por tu opinión! Nos ayuda a crecer.");
+                localStorage.setItem('survey_rating_submitted', 'true');
+            } else {
+                console.warn("Could not save to Supabase. Saving to LocalStorage instead.");
+                const localReviews = JSON.parse(localStorage.getItem('local_reviews') || '[]');
+                localReviews.push({ rating: selectedRating, comment, timestamp: new Date().toISOString() });
+                localStorage.setItem('local_reviews', JSON.stringify(localReviews));
+                localStorage.setItem('survey_rating_submitted', 'true');
+                showToast("✨ Calificación guardada localmente.");
+            }
+        } catch (e) {
+            console.error("Survey submission failed:", e);
+            localStorage.setItem('survey_rating_submitted', 'true');
+        }
+
+        // Hide banner
+        const element = document.getElementById('survey-rating-banner');
+        if (element) {
+            element.classList.add('translate-y-20', 'opacity-0');
+            setTimeout(() => element.remove(), 500);
+        }
+    };
+
+    window._dismissSurvey = () => {
+        localStorage.setItem('survey_rating_dismissed', 'true');
+        const element = document.getElementById('survey-rating-banner');
+        if (element) {
+            element.classList.add('translate-y-20', 'opacity-0');
+            setTimeout(() => element.remove(), 500);
+        }
+    };
 };
 
 window.store = store;
