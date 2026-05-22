@@ -1,37 +1,37 @@
-const CACHE_NAME = 'asistentepro-v535.3.8';
+const CACHE_NAME = 'asistentepro-v535.4.0';
 const ASSETS = [
     './',
-    './index.html?v=535.3.8',
-    './styles.css?v=535.3.8',
-    './supabase-config.js?v=535.3.8',
-    './firebase-config.js?v=535.3.8',
-    './db-v211.js?v=535.3.8',
-    './js/utils.js?v=535.3.8',
-    './js/store.js?v=535.3.8',
-    './js/components.js?v=535.3.8',
-    './js/router.js?v=535.3.8',
-    './js/data/directory.js?v=535.3.8',
-    './js/data/resources.js?v=535.3.8',
-    './js/views/auth.js?v=535.3.8',
-    './js/views/agenda.js?v=535.3.8',
-    './js/views/register.js?v=535.3.8',
-    './js/views/control_panel.js?v=535.3.8',
-    './js/views/financial.js?v=535.3.8',
-    './js/views/info_guia.js?v=535.3.8',
-    './js/views/profile.js?v=535.3.8',
-    './js/views/stats.js?v=535.3.8',
-    './js/views/history.js?v=535.3.8',
-    './js/views/service_details.js?v=535.3.8',
-    './js/views/asistente.js?v=535.3.8',
-    './js/views/actas.js?v=535.3.8',
-    './js/views/intervenciones.js?v=535.3.8',
-    './js/views/procedimiento.js?v=535.3.8',
-    './js/views/archivos.js?v=535.3.8',
-    './js/views/auditoria.js?v=535.3.8',
-    './js/views/admin.js?v=535.3.8',
-    './js/views/diagnostics.js?v=535.3.8',
-    './js/views/onboarding.js?v=535.3.8',
-    './app-v211.js?v=535.3.8'
+    './index.html?v=535.4.0',
+    './styles.css?v=535.4.0',
+    './supabase-config.js?v=535.4.0',
+    './firebase-config.js?v=535.4.0',
+    './db-v211.js?v=535.4.0',
+    './js/utils.js?v=535.4.0',
+    './js/store.js?v=535.4.0',
+    './js/components.js?v=535.4.0',
+    './js/router.js?v=535.4.0',
+    './js/data/directory.js?v=535.4.0',
+    './js/data/resources.js?v=535.4.0',
+    './js/views/auth.js?v=535.4.0',
+    './js/views/agenda.js?v=535.4.0',
+    './js/views/register.js?v=535.4.0',
+    './js/views/control_panel.js?v=535.4.0',
+    './js/views/financial.js?v=535.4.0',
+    './js/views/info_guia.js?v=535.4.0',
+    './js/views/profile.js?v=535.4.0',
+    './js/views/stats.js?v=535.4.0',
+    './js/views/history.js?v=535.4.0',
+    './js/views/service_details.js?v=535.4.0',
+    './js/views/asistente.js?v=535.4.0',
+    './js/views/actas.js?v=535.4.0',
+    './js/views/intervenciones.js?v=535.4.0',
+    './js/views/procedimiento.js?v=535.4.0',
+    './js/views/archivos.js?v=535.4.0',
+    './js/views/auditoria.js?v=535.4.0',
+    './js/views/admin.js?v=535.4.0',
+    './js/views/diagnostics.js?v=535.4.0',
+    './js/views/onboarding.js?v=535.4.0',
+    './app-v211.js?v=535.4.0'
 ];
 
 self.addEventListener('install', event => {
@@ -46,7 +46,7 @@ self.addEventListener('activate', event => {
         caches.keys().then(keys => Promise.all(
             keys.map(key => {
                 if (key !== CACHE_NAME) {
-                    console.log('[SW v535.3] Purging old cache:', key);
+                    console.log('[SW v535.4] Purging old cache:', key);
                     return caches.delete(key);
                 }
             })

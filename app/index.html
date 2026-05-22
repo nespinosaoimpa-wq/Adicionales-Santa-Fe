@@ -67,17 +67,17 @@
                 let needsHardReset = false;
                 for (let reg of registrations) {
                     const url = reg.active?.scriptURL || reg.installing?.scriptURL || reg.waiting?.scriptURL || '';
-                    if (url && !url.includes('sw-v535-3.js')) {
+                    if (url && !url.includes('sw-v535-4.js')) {
                         console.warn('☢️ SW Outdated:', url);
                         reg.unregister();
                         needsHardReset = true;
                     }
                 }
-                if (needsHardReset || !localStorage.getItem('app_v535_3_initialized')) {
+                if (needsHardReset || !localStorage.getItem('app_v535_4_initialized')) {
                     if ('caches' in window) {
                         caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
                             .then(() => {
-                                localStorage.setItem('app_v535_3_initialized', 'true');
+                                localStorage.setItem('app_v535_4_initialized', 'true');
                                 window.location.reload(true);
                             });
                     }
@@ -137,7 +137,7 @@
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 // Registro estable sin timestamp dinámico para evitar el bucle infinito
-                navigator.serviceWorker.register('./sw-v535-3.js?v=535.3.8')
+                navigator.serviceWorker.register('./sw-v535-4.js?v=535.4.0')
 
 
 
