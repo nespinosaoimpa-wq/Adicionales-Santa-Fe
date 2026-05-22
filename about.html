@@ -1,30 +1,88 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nosotros - Adicionales Santa Fe</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-dark": "#0a0c12",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        body { background-color: #101622; color: #f5f6f8; font-family: 'Inter', sans-serif; }
+        body { font-family: 'Public Sans', sans-serif; background-color: #0a0c12; color: #f5f6f8; }
+        .glass-card { background: rgba(16, 22, 34, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
 </head>
-<body class="p-6 md:p-12 text-center">
-    <div class="max-w-2xl mx-auto space-y-8">
-        <div class="mx-auto size-24 bg-blue-500/20 rounded-3xl flex items-center justify-center text-blue-500 border border-blue-500/30 mb-6">
-            <span class="material-symbols-outlined text-6xl">verified_user</span>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <div class="size-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30">
+                        <span class="material-symbols-outlined text-primary">security</span>
+                    </div>
+                    <span class="font-bold text-lg tracking-tight">Adicionales <span class="text-primary">SF</span></span>
+                </a>
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[18px]">arrow_back</span> Inicio
+                </a>
+            </div>
         </div>
-        <h1 class="text-4xl font-bold text-white">Adicionales Santa Fe</h1>
-        <p class="text-slate-300 text-lg leading-relaxed">
-            Somos una plataforma dedicada a facilitar la gestión de servicios de policía adicional para los efectivos de la Provincia de Santa Fe. Nuestra misión es brindar herramientas tecnológicas que simplifiquen el cálculo, seguimiento y organización de la labor policial.
-        </p>
-        <div class="pt-8 border-t border-white/10 space-y-4">
-            <p class="text-slate-400">Contacto para soporte y consultas:</p>
-            <a href="mailto:soporte@adicionalessantafe.com.ar" class="text-blue-500 font-bold text-xl">soporte@adicionalessantafe.com.ar</a>
+    </nav>
+
+    <!-- Content -->
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-2xl mx-auto space-y-8 glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden text-center">
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+
+            <div class="mx-auto size-24 bg-primary/20 rounded-3xl flex items-center justify-center text-primary border border-primary/30 mb-6 relative">
+                <span class="material-symbols-outlined text-6xl">verified_user</span>
+            </div>
+            
+            <h1 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400 mb-4 relative">Adicionales Santa Fe</h1>
+            
+            <p class="text-slate-300 text-lg leading-relaxed relative">
+                Somos una plataforma de utilidad desarrollada para facilitar la gestión de servicios de policía adicional para los efectivos de la Provincia de Santa Fe. Nuestra misión es brindar herramientas tecnológicas modernas que simplifiquen el cálculo de haberes, seguimiento de servicios y organización de la labor policial.
+            </p>
+
+            <div class="pt-8 border-t border-white/10 space-y-4 relative mt-10">
+                <div class="size-12 bg-white/5 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                    <span class="material-symbols-outlined text-slate-400 text-2xl">mail</span>
+                </div>
+                <p class="text-slate-400 text-sm">Contacto para soporte técnico y consultas:</p>
+                <a href="mailto:soporte@adicionalessantafe.com.ar" class="inline-block text-primary hover:text-primary/80 font-bold text-xl hover:underline transition-all">
+                    soporte@adicionalessantafe.com.ar
+                </a>
+            </div>
+
+            <footer class="pt-8 text-center relative mt-8">
+                <a href="index.html" class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl text-sm font-bold border border-white/10 transition-all">
+                    Volver al Inicio
+                </a>
+            </footer>
         </div>
-        <footer class="pt-12">
-            <a href="/" class="text-blue-500 hover:underline">Volver al Inicio</a>
-        </footer>
-    </div>
+    </main>
 </body>
 </html>

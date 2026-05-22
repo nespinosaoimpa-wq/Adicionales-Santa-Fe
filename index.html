@@ -1,17 +1,242 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
-    <title>Adicionales Santa Fe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Adicionales Santa Fe - Gestión y Cálculo de Policía Adicional</title>
+    <meta name="description" content="La herramienta definitiva para la gestión de servicios de policía adicional en Santa Fe. Calculá tus ganancias, organizá tu agenda y consultá la guía oficial.">
+    <meta name="keywords" content="policia santa fe, servicios adicionales, calculo adicionales, agenda policial, santa fe, argentina">
+    
     <!-- Google AdSense Verification -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731"
-        crossorigin="anonymous"></script>
-    <meta http-equiv="refresh" content="0; url=./app/">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731" crossorigin="anonymous"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0c12",
+                        "card-dark": "#101622"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #0a0c12; color: #f5f6f8; }
+        .glass-card { background: rgba(16, 22, 34, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
 </head>
+<body class="antialiased min-h-screen flex flex-col">
 
-<body>
-    <p>Redirigiendo a la aplicación... <a href="./app/">Haga clic aquí si no es redirigido</a>.</p>
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-3">
+                    <div class="size-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30 shadow-[0_0_15px_rgba(13,89,242,0.3)]">
+                        <span class="material-symbols-outlined text-primary">security</span>
+                    </div>
+                    <span class="font-bold text-lg tracking-tight">Adicionales <span class="text-primary">SF</span></span>
+                </div>
+                <div>
+                    <a href="./app/" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all active:scale-95 flex items-center gap-2">
+                        Ingresar <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="flex-grow pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-10 md:mt-20">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-primary mb-6 animate-pulse">
+                <span class="relative flex h-2 w-2">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                La plataforma definitiva para la Policía de Santa Fe
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+                Gestión Inteligente de <br class="hidden md:block" />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">Servicios Adicionales</span>
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+                Organizá tu agenda, calculá tus haberes exactos según las reglamentaciones vigentes y controlá tus ingresos en tiempo real. Todo desde una aplicación rápida, segura y que funciona sin conexión.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="./app/" class="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-2xl text-base font-bold shadow-xl shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined">launch</span> Comenzar Gratis
+                </a>
+                <a href="#caracteristicas" class="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-2xl text-base font-bold border border-white/10 transition-all">
+                    Saber Más
+                </a>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div id="caracteristicas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32 mb-20">
+            <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">Herramientas diseñadas para el Oficial</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:border-primary/50 transition-colors">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                    <div class="size-14 bg-primary/20 rounded-2xl flex items-center justify-center mb-6 border border-primary/20">
+                        <span class="material-symbols-outlined text-primary text-3xl">calculate</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Cálculo Automático</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Las tarifas y horas de tu servicio de policía adicional se calculan de manera automática y exacta de acuerdo a la Ley 14283 y normativas actuales.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:border-cyan-500/50 transition-colors">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                    <div class="size-14 bg-cyan-500/20 rounded-2xl flex items-center justify-center mb-6 border border-cyan-500/20">
+                        <span class="material-symbols-outlined text-cyan-400 text-3xl">calendar_month</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Agenda Policial</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Gestiona tu calendario de guardias y turnos para evitar superposiciones, organizando tu jornada laboral de forma eficiente e inteligente.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:border-emerald-500/50 transition-colors">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                    <div class="size-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
+                        <span class="material-symbols-outlined text-emerald-400 text-3xl">monitoring</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Estadísticas y Finanzas</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Obtén gráficos de tus ingresos mensuales, diferencia el estado de los cobros (OSPE, Municipios, Privados) y lleva el control absoluto de tu dinero.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ Section for AdSense Content Requirements -->
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-20">
+            <h2 class="text-3xl font-bold text-center mb-10">Preguntas Frecuentes e Información Útil</h2>
+            
+            <div class="space-y-6">
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">help</span> ¿Qué es Adicionales Santa Fe?
+                    </h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Adicionales Santa Fe es una herramienta digital progresiva (PWA) desarrollada de forma independiente para asistir a los efectivos de la Policía de la Provincia de Santa Fe en la gestión, cálculo y organización de sus servicios de Policía Adicional. No es una plataforma gubernamental oficial, sino un servicio de utilidad diseñado para optimizar el control personal de las finanzas y el tiempo del personal policial.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">gavel</span> ¿En qué normativas se basan los cálculos?
+                    </h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        La calculadora y la agenda integran la lógica tarifaria estipulada en las reglamentaciones vigentes, tales como la <strong>Ley 14283</strong> y las disposiciones actualizadas sobre el servicio de Policía Adicional (incluyendo la clasificación de servicios Públicos, Privados y bancarios). Garantizamos que la plataforma se actualiza regularmente ante cada decreto salarial (ej. el Decreto 2026-00000411) para ofrecer estimaciones precisas de los montos a percibir.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl">
+                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">wifi_off</span> ¿Funciona sin conexión a Internet?
+                    </h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Sí. Al estar construida como una Aplicación Web Progresiva (PWA), puedes instalarla directamente en la pantalla de inicio de tu celular (Android o iOS). Una vez cargada, su <em>Service Worker</em> permite utilizar la agenda, calcular servicios y ver tu historial incluso si te encuentras en zonas sin cobertura o sin conexión a datos móviles. Tus datos se sincronizarán al recuperar la señal.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 glass-card mt-auto">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-2">
+                    <div class="size-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[16px] text-primary">security</span>
+                    </div>
+                    <span class="font-bold text-sm text-slate-300">Adicionales Santa Fe &copy; 2026</span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
+                    <a href="privacy.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+                    <span>•</span>
+                    <a href="terms.html" class="hover:text-white transition-colors">Términos y Condiciones</a>
+                    <span>•</span>
+                    <a href="about.html" class="hover:text-white transition-colors">Sobre Nosotros / Contacto</a>
+                </div>
+            </div>
+            <div class="mt-4 text-center text-xs text-slate-600 max-w-2xl mx-auto">
+                Herramienta no oficial. Los montos calculados son estimaciones y dependen estrictamente de los decretos y liquidaciones finales del gobierno provincial.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-banner" class="fixed bottom-0 left-0 w-full z-[100] transform translate-y-full transition-transform duration-500 ease-out hidden">
+        <div class="bg-[#101622] border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.5)] p-4 sm:p-6">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex-1 text-sm text-slate-300">
+                    <p class="mb-2"><strong>Aviso sobre Cookies y Privacidad</strong></p>
+                    <p>
+                        Este sitio web utiliza cookies propias y de terceros (como Google AdSense) para analizar nuestro tráfico, mejorar su experiencia y personalizar los anuncios que le mostramos en función de sus hábitos de navegación. 
+                        Al pulsar "Aceptar", usted consiente el uso de todas las cookies. Puede consultar nuestra <a href="privacy.html" class="text-primary hover:underline">Política de Privacidad</a> para obtener más información y configurar sus preferencias.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 shrink-0">
+                    <a href="privacy.html" class="text-xs font-bold text-slate-400 hover:text-white px-4 py-2 border border-white/10 rounded-xl">Más Información</a>
+                    <button id="accept-cookies" class="bg-primary hover:bg-primary/90 text-white px-6 py-2 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all active:scale-95">
+                        Aceptar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Cookie Consent Logic
+        document.addEventListener('DOMContentLoaded', () => {
+            const banner = document.getElementById('cookie-banner');
+            const acceptBtn = document.getElementById('accept-cookies');
+            
+            if (!localStorage.getItem('cookie_consent_accepted')) {
+                // Show banner after a slight delay
+                setTimeout(() => {
+                    banner.classList.remove('hidden');
+                    // Small delay to allow display:block to apply before animating transform
+                    setTimeout(() => {
+                        banner.classList.remove('translate-y-full');
+                    }, 50);
+                }, 1000);
+            }
+
+            acceptBtn.addEventListener('click', () => {
+                localStorage.setItem('cookie_consent_accepted', 'true');
+                banner.classList.add('translate-y-full');
+                setTimeout(() => {
+                    banner.classList.add('hidden');
+                }, 500);
+            });
+        });
+    </script>
 </body>
-
 </html>
