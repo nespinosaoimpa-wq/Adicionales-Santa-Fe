@@ -10,6 +10,22 @@
     <!-- Google AdSense Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731" crossorigin="anonymous"></script>
 
+    <!-- Cache Buster & Rogue SW Killer -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    // Only kill SWs registered at the root scope to free the landing page
+                    if(registration.scope === window.location.origin + '/') {
+                        console.log('Unregistering rogue root Service Worker to show landing page');
+                        registration.unregister();
+                        window.location.reload(true);
+                    }
+                }
+            });
+        }
+    </script>
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries"></script>
 

@@ -416,10 +416,10 @@ window.store = {
             };
 
             const safetyTimeout = setTimeout(() => {
-                console.warn("⚠️ store.init auth observer timed out (2.5s fallback)");
+                console.warn("⚠️ store.init auth observer timed out (12s fallback)");
                 this.authInitialized = true;
                 finishResolve();
-            }, 2500);
+            }, 12000);
 
             auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .catch((e) => console.error("Persistence Error:", e))
