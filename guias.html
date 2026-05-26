@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guías y Recursos - Adicionales Santa Fe</title>
+    <meta name="description" content="Guías, consejos y recursos útiles para el personal policial de Santa Fe sobre servicios adicionales, reglamentaciones y finanzas.">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Google AdSense Verification -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731" crossorigin="anonymous"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-light": "#f5f6f8",
+                        "background-dark": "#0a0c12",
+                        "card-dark": "#101622"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #0a0c12; color: #f5f6f8; }
+        .glass-card { background: rgba(16, 22, 34, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <div class="size-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30">
+                        <span class="material-symbols-outlined text-primary">security</span>
+                    </div>
+                    <span class="font-bold text-lg tracking-tight">Adicionales <span class="text-primary">SF</span></span>
+                </a>
+                <a href="index.html" class="text-sm font-medium text-slate-400 hover:text-white flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[18px]">arrow_back</span> Inicio
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16 relative">
+                <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400 mb-4 relative">Guías y Recursos</h1>
+                <p class="text-lg text-slate-400 max-w-2xl mx-auto relative">Información útil, reglamentaciones y consejos prácticos para optimizar tu gestión de servicios de policía adicional en Santa Fe.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Artículo 1 -->
+                <a href="guia-calculo-adicionales.html" class="glass-card rounded-3xl overflow-hidden group hover:border-primary/50 transition-colors flex flex-col h-full relative">
+                    <div class="h-48 bg-black/40 relative overflow-hidden flex items-center justify-center">
+                        <span class="material-symbols-outlined text-6xl text-primary/30 group-hover:scale-110 transition-transform duration-500">calculate</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#101622] to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold px-3 py-1 bg-primary/20 text-primary rounded-full">Normativa</span>
+                            <span class="text-xs text-slate-500">Lectura de 4 min</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 group-hover:text-primary transition-colors">Cómo se calculan las horas de Policía Adicional en Santa Fe</h2>
+                        <p class="text-slate-400 text-sm flex-grow">Descubrí la fórmula oficial para calcular tus haberes según la Ley 14283, los decretos vigentes y cómo evitar errores en tus estimaciones de fin de mes.</p>
+                        <div class="mt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                            Leer artículo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Artículo 2 -->
+                <a href="guia-organizacion-turnos.html" class="glass-card rounded-3xl overflow-hidden group hover:border-cyan-500/50 transition-colors flex flex-col h-full relative">
+                    <div class="h-48 bg-black/40 relative overflow-hidden flex items-center justify-center">
+                        <span class="material-symbols-outlined text-6xl text-cyan-500/30 group-hover:scale-110 transition-transform duration-500">event_available</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#101622] to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full">Productividad</span>
+                            <span class="text-xs text-slate-500">Lectura de 3 min</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 group-hover:text-cyan-400 transition-colors">Consejos para organizar tu agenda de turnos y guardias</h2>
+                        <p class="text-slate-400 text-sm flex-grow">Aprende estrategias prácticas para organizar tus servicios adicionales, evitar el agotamiento y llevar un registro ordenado que garantice el cobro de cada servicio.</p>
+                        <div class="mt-4 flex items-center text-cyan-400 font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                            Leer artículo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Artículo 3 -->
+                <a href="guia-tipos-servicios.html" class="glass-card rounded-3xl overflow-hidden group hover:border-emerald-500/50 transition-colors flex flex-col h-full relative">
+                    <div class="h-48 bg-black/40 relative overflow-hidden flex items-center justify-center">
+                        <span class="material-symbols-outlined text-6xl text-emerald-500/30 group-hover:scale-110 transition-transform duration-500">account_balance</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#101622] to-transparent"></div>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="text-xs font-bold px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full">Finanzas</span>
+                            <span class="text-xs text-slate-500">Lectura de 5 min</span>
+                        </div>
+                        <h2 class="text-xl font-bold mb-3 group-hover:text-emerald-400 transition-colors">Diferencias entre servicios Públicos, Privados y Bancarios</h2>
+                        <p class="text-slate-400 text-sm flex-grow">Una guía completa sobre las distintas categorías de servicio adicional en Santa Fe, sus tarifas correspondientes y los canales de pago asociados a cada una.</p>
+                        <div class="mt-4 flex items-center text-emerald-400 font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                            Leer artículo <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 glass-card mt-auto">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-2">
+                    <div class="size-8 bg-primary/20 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-[16px] text-primary">security</span>
+                    </div>
+                    <span class="font-bold text-sm text-slate-300">Adicionales Santa Fe &copy; 2026</span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
+                    <a href="index.html" class="hover:text-white transition-colors">Inicio</a>
+                    <span>•</span>
+                    <a href="privacy.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+                    <span>•</span>
+                    <a href="terms.html" class="hover:text-white transition-colors">Términos y Condiciones</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -71,7 +71,8 @@
                     </div>
                     <span class="font-bold text-lg tracking-tight">Adicionales <span class="text-primary">SF</span></span>
                 </div>
-                <div>
+                <div class="flex items-center gap-6">
+                    <a href="guias.html" class="hidden sm:block text-sm font-medium text-slate-300 hover:text-white transition-colors">Guías y Recursos</a>
                     <a href="./app/" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all active:scale-95 flex items-center gap-2">
                         Ingresar <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                     </a>
@@ -147,6 +148,49 @@
             </div>
         </div>
 
+        <!-- Últimas Guías -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-20">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">Recursos para el Efectivo</h2>
+                    <p class="text-slate-400">Mantente informado sobre reglamentaciones y mejora tu organización.</p>
+                </div>
+                <a href="guias.html" class="hidden sm:flex text-primary font-bold items-center gap-1 hover:gap-2 transition-all">Ver todas <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Guide 1 -->
+                <a href="guia-calculo-adicionales.html" class="glass-card p-6 rounded-3xl group hover:border-primary/50 transition-colors flex flex-col h-full">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-bold px-3 py-1 bg-primary/20 text-primary rounded-full">Normativa</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-primary transition-colors">Cómo se calculan las horas de Policía Adicional en Santa Fe</h3>
+                    <p class="text-slate-400 text-sm flex-grow">Descubrí la fórmula oficial para calcular tus haberes según la Ley 14283, los decretos vigentes y cómo evitar errores en tus estimaciones.</p>
+                </a>
+                
+                <!-- Guide 2 -->
+                <a href="guia-organizacion-turnos.html" class="glass-card p-6 rounded-3xl group hover:border-cyan-500/50 transition-colors flex flex-col h-full">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-bold px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full">Productividad</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-cyan-400 transition-colors">Consejos para organizar tu agenda de turnos y guardias</h3>
+                    <p class="text-slate-400 text-sm flex-grow">Aprende estrategias prácticas para organizar tus servicios adicionales, evitar el agotamiento y llevar un registro ordenado de todo.</p>
+                </a>
+
+                <!-- Guide 3 -->
+                <a href="guia-tipos-servicios.html" class="glass-card p-6 rounded-3xl group hover:border-emerald-500/50 transition-colors flex flex-col h-full hidden md:flex">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="text-xs font-bold px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full">Finanzas</span>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 group-hover:text-emerald-400 transition-colors">Diferencias entre servicios Públicos, Privados y Bancarios</h3>
+                    <p class="text-slate-400 text-sm flex-grow">Conoce las distintas categorías de servicio adicional en Santa Fe, sus tarifas correspondientes y los canales de cobro asociados.</p>
+                </a>
+            </div>
+            <div class="mt-6 text-center sm:hidden">
+                <a href="guias.html" class="inline-flex text-primary font-bold items-center gap-1">Ver todas las guías <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+            </div>
+        </div>
+
         <!-- FAQ Section for AdSense Content Requirements -->
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-20">
             <h2 class="text-3xl font-bold text-center mb-10">Preguntas Frecuentes e Información Útil</h2>
@@ -194,11 +238,13 @@
                 </div>
                 
                 <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
-                    <a href="privacy.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+                    <a href="guias.html" class="hover:text-white transition-colors">Guías</a>
                     <span>•</span>
-                    <a href="terms.html" class="hover:text-white transition-colors">Términos y Condiciones</a>
+                    <a href="privacy.html" class="hover:text-white transition-colors">Privacidad</a>
                     <span>•</span>
-                    <a href="about.html" class="hover:text-white transition-colors">Sobre Nosotros / Contacto</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Términos</a>
+                    <span>•</span>
+                    <a href="about.html" class="hover:text-white transition-colors">Contacto</a>
                 </div>
             </div>
             <div class="mt-4 text-center text-xs text-slate-600 max-w-2xl mx-auto">
