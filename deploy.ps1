@@ -13,6 +13,21 @@ git commit -m $msg
 git push origin main
 
 # 2. Publish to Firebase Hosting (Automated with Service Account)
+Write-Host "Building dist/ directory..." -ForegroundColor Yellow
+if (Test-Path ".\dist") { Remove-Item -Path ".\dist" -Recurse -Force }
+New-Item -ItemType Directory -Path ".\dist" -Force | Out-Null
+
+# Copy root static files
+Copy-Item -Path ".\*.html" -Destination ".\dist\" -Force
+Copy-Item -Path ".\*.txt" -Destination ".\dist\" -Force
+Copy-Item -Path ".\*.json" -Destination ".\dist\" -Exclude "package.json", "package-lock.json", "firebase.json", "adicionales-santa-fe-firebase-adminsdk-fbsvc-112bd55a2a.json" -Force
+Copy-Item -Path ".\*.pdf" -Destination ".\dist\" -Force
+if (Test-Path ".\sw.js") { Copy-Item -Path ".\sw.js" -Destination ".\dist\" -Force }
+
+# Copy app directory
+New-Item -ItemType Directory -Path ".\dist\app" -Force | Out-Null
+Copy-Item -Path ".\app\*" -Destination ".\dist\app" -Recurse -Force
+
 Write-Host "Deploying to Firebase Hosting..." -ForegroundColor Yellow
 $serviceAccountKey = "adicionales-santa-fe-firebase-adminsdk-fbsvc-112bd55a2a.json"
 

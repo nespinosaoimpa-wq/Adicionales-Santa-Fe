@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cómo leer tu Recibo de Sueldo y Liquidación de Adicionales</title>
+    <meta name="description" content="Guía práctica para entender el recibo digital de haberes, códigos de liquidación y reclamos por adicionales policiales en Santa Fe.">
+    
+    <!-- Google AdSense Verification -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731" crossorigin="anonymous"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,typography"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d59f2",
+                        "background-dark": "#0a0c12",
+                        "card-dark": "#101622"
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "Inter", "sans-serif"],
+                        "body": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Public Sans', sans-serif; background-color: #0a0c12; color: #f5f6f8; }
+        .glass-card { background: rgba(16, 22, 34, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <div class="size-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30">
+                        <span class="material-symbols-outlined text-primary">security</span>
+                    </div>
+                    <span class="font-bold text-lg tracking-tight">Adicionales <span class="text-primary">SF</span></span>
+                </a>
+                <a href="guias.html" class="text-sm font-medium text-slate-400 hover:text-white flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[18px]">arrow_back</span> Ver todas las Guías
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <main class="flex-grow pt-28 pb-12 px-4 sm:px-6 lg:px-8">
+        <article class="max-w-3xl mx-auto glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+
+            <header class="mb-10 border-b border-white/10 pb-8 relative">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="text-xs font-bold px-3 py-1 bg-primary/20 text-primary rounded-full">Finanzas y Recibos</span>
+                    <span class="text-xs text-slate-500">Lectura de 5 min</span>
+                </div>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400 mb-4 leading-tight">
+                    Cómo leer tu Recibo de Sueldo y Liquidación de Adicionales
+                </h1>
+                <p class="text-slate-400 text-lg">Aprendé a identificar los códigos de cobro de servicios de policía adicional (SPA), los descuentos obligatorios y cómo tramitar reclamos administrativos.</p>
+            </header>
+
+            <div class="prose prose-invert prose-lg max-w-none text-slate-300 relative space-y-6">
+                <p>Para el personal de la Policía de Santa Fe, interpretar el **Recibo Digital de Haberes** a veces puede tornarse complejo debido a la cantidad de códigos de haberes con y sin aportes, asignaciones extraordinarias y descuentos. Cuando realizamos **Servicios de Policía Adicional (SPA)**, el seguimiento de la acreditación de esas planillas requiere atención especial, ya que los canales de cobro y tiempos difieren de la liquidación mensual de haberes comunes.</p>
+                
+                <p>En esta guía explicamos el circuito de cobro y cómo verificar en la intranet provincial que cada planilla de servicio adicional haya sido correctamente liquidada.</p>
+
+                <h2 class="text-2xl font-bold text-white mt-8 mb-4">El Circuito del Pago de un Servicio Adicional</h2>
+                <p>El cobro del SPA no se liquida de manera automática e inmediata, sino que sigue un circuito burocrático que involucra varias áreas:</p>
+                
+                <ol class="list-decimal pl-6 space-y-2 text-slate-400">
+                    <li><strong class="text-white">Depósito del Contratante:</strong> El ente privado, banco o entidad pública que contrató la custodia debe depositar los fondos correspondientes en la cuenta oficial del Servicio de Policía Adicional de la Unidad Regional correspondiente.</li>
+                    <li><strong class="text-white">Planillaje:</strong> La dependencia o tercio donde se prestó el servicio eleva la planilla de asistencia con las firmas correspondientes.</li>
+                    <li><strong class="text-white">Procesamiento en Habilitación:</strong> La **División Habilitación** de la Unidad Regional coteja el depósito del contratante con la planilla presentada. Si coinciden, se autoriza la liquidación individual para el agente.</li>
+                    <li><strong class="text-white">Acreditación Bancaria:</strong> Los fondos se transfieren a la cuenta sueldo del Banco de Santa Fe del oficial. Esta acreditación suele aparecer como un "Abono de Haberes" extra o bajo la leyenda "SPA".</li>
+                </ol>
+
+                <h2 class="text-2xl font-bold text-white mt-8 mb-4">Principales Códigos en el Recibo de Sueldo</h2>
+                <p>En tu recibo de sueldo de la Intranet de Santa Fe, podrás visualizar los distintos componentes remunerativos y descuentos. A continuación listamos los más comunes:</p>
+
+                <div class="overflow-x-auto my-6">
+                    <table class="w-full text-left border-collapse border border-white/10 text-sm">
+                        <thead>
+                            <tr class="bg-white/5">
+                                <th class="p-3 border border-white/10 text-white font-bold">Código</th>
+                                <th class="p-3 border border-white/10 text-white font-bold">Descripción del Concepto</th>
+                                <th class="p-3 border border-white/10 text-white font-bold">Tipo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="p-3 border border-white/10 text-slate-300 font-mono">1001 / 1002</td>
+                                <td class="p-3 border border-white/10 text-slate-300 font-medium">Sueldo Básico de Grado</td>
+                                <td class="p-3 border border-white/10 text-emerald-400 font-bold">Remunerativo</td>
+                            </tr>
+                            <tr class="bg-white/5">
+                                <td class="p-3 border border-white/10 text-slate-300 font-mono">1005 / 2005</td>
+                                <td class="p-3 border border-white/10 text-slate-300 font-medium">Asignación Mensual Remunerativa No Bonificable</td>
+                                <td class="p-3 border border-white/10 text-emerald-400 font-bold">Remunerativo</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border border-white/10 text-slate-300 font-mono">3100 / 3200</td>
+                                <td class="p-3 border border-white/10 text-slate-300 font-medium">Abono Planilla de Servicio de Policía Adicional (SPA)</td>
+                                <td class="p-3 border border-white/10 text-emerald-400 font-bold">Concepto Externo / Adicional</td>
+                            </tr>
+                            <tr class="bg-white/5">
+                                <td class="p-3 border border-white/10 text-slate-300 font-mono">4001 / 4002</td>
+                                <td class="p-3 border border-white/10 text-slate-300 font-medium">Aporte Jubilatorio (Caja de Jubilaciones)</td>
+                                <td class="p-3 border border-white/10 text-red-400 font-bold">Descuento</td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 border border-white/10 text-slate-300 font-mono">4010</td>
+                                <td class="p-3 border border-white/10 text-slate-300 font-medium">Obra Social IAPOS (Aporte Estándar)</td>
+                                <td class="p-3 border border-white/10 text-red-400 font-bold">Descuento</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h2 class="text-2xl font-bold text-white mt-8 mb-4">¿Qué Hacer si una Planilla no se Acredita?</h2>
+                <p>Las demoras en la liquidación de las planillas de adicionales suelen ser comunes. Si transcurren más de **45 días** desde la prestación efectiva del servicio y el cobro no se refleja, se recomienda iniciar el siguiente trámite de reclamo:</p>
+                
+                <ul class="list-disc pl-6 space-y-2 text-slate-400">
+                    <li><strong class="text-white">Verificar el Número de Planilla:</strong> Consulta con el oficial del servicio o de guardia en la dependencia el número identificador con el que se elevó la planilla de SPA.</li>
+                    <li><strong class="text-white">Consulta en Habilitación:</strong> Acude o comunícate con la **División Habilitación** de tu Unidad Regional. Allí te informarán si la planilla fue procesada, si fue rechazada por falta de firmas, o si el contratante aún no ha efectuado el depósito bancario obligatorio.</li>
+                    <li><strong class="text-white">Uso del Historial de la App:</strong> Manteniendo al día tu agenda en **Adicionales Santa Fe**, tienes un comprobante digital exacto del día, horario, contratante y monto estimado de cada servicio. Puedes utilizar esta bitácora para cotejarla contra los depósitos y no perder el control de un solo centavo.</li>
+                </ul>
+            </div>
+            
+            <footer class="mt-12 pt-8 border-t border-white/10 text-center relative">
+                <a href="guias.html" class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl text-sm font-bold border border-white/10 transition-all">
+                    Volver a las Guías
+                </a>
+            </footer>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-white/10 glass-card mt-auto">
+        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center text-sm text-slate-400">
+            Adicionales Santa Fe &copy; 2026. <a href="privacy.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+        </div>
+    </footer>
+</body>
+</html>
