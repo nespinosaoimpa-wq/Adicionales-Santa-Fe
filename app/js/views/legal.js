@@ -20,10 +20,15 @@ function renderPrivacyPolicy(container) {
                 </section>
 
                 <section>
-                    <h3 class="text-primary font-bold">2. Google AdSense y la Cookie de DoubleClick</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Google, como proveedor externo, utiliza cookies para publicar anuncios en Adicionales Santa Fe. El uso de la cookie de DART por parte de Google le permite publicar anuncios a los usuarios en función de su visita a Adicionales Santa Fe y otros sitios en Internet. Los usuarios pueden inhabilitar el uso de la cookie de DART visitando la política de privacidad de la red de contenido y anuncios de Google.
-                    </p>
+                    <h3 class="text-primary font-bold">2. Google AdSense y Cookies de Publicidad</h3>
+                    <div class="space-y-4 mt-2">
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Google, como proveedor externo, utiliza cookies para publicar anuncios en Adicionales Santa Fe. El uso de cookies de publicidad permite a Google y a sus socios presentar anuncios a los usuarios en función de sus visitas a este sitio web y a otros sitios de Internet.
+                        </p>
+                        <p class="text-slate-400 text-sm leading-relaxed">
+                            Los usuarios pueden inhabilitar la publicidad personalizada. Para ello, pueden acceder a la página de <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Configuración de Anuncios de Google</a>. De forma alternativa, los usuarios pueden inhabilitar el uso de cookies para la publicidad personalizada por parte de otros proveedores visitando <a href="http://www.aboutads.info/choices" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">www.aboutads.info</a>.
+                        </p>
+                    </div>
                 </section>
 
                 <section>

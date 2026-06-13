@@ -91,7 +91,7 @@ function renderArchivos(container) {
         </main>
 
         <!-- Acta Modal -->
-        <div id="acta-view-modal" class="fixed inset-0 z-[100] bg-background-dark/95 backdrop-blur-md hidden flex-col">
+        <div id="acta-view-modal" class="fixed inset-0 z-[200] bg-background-dark/95 backdrop-blur-md hidden flex-col">
             <header class="border-b border-white/5 px-4 h-16 flex items-center justify-between shrink-0">
                 <h3 class="text-sm font-bold text-white uppercase tracking-widest">Visor de Acta</h3>
                 <button onclick="window._closeActaView()" class="p-2 text-slate-400 hover:text-white"><span class="material-symbols-outlined">close</span></button>

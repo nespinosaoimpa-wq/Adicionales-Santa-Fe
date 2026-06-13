@@ -20,13 +20,15 @@ function renderAsistenteHub(container) {
     const tools = [
         { id: 'fixture', title: 'Fixture Mundial 2026', desc: 'Consultá partidos, horarios y registrá tus pronósticos.', icon: 'sports_soccer', color: 'from-[#74ACDF] to-blue-500', route: '#asistente/fixture', badge: '🏆' },
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
+        { id: 'vademecum', title: 'Vademécum Contravencional', desc: 'Guía de actuación y consulta del Código Penal y Convivencia.', icon: 'gavel', color: 'from-amber-500 to-amber-600', route: '#asistente/vademecum', badge: 'Nuevo' },
+        { id: 'dictado', title: 'Dictado de Novedades', desc: 'Dictá por voz y estructurá actas y libros de guardia.', icon: 'mic', color: 'from-blue-500 to-cyan-500', route: '#asistente/dictado', badge: 'Nuevo' },
         { id: 'actas', title: 'Actas Policiales', desc: 'Generá actas formales: allanamiento, custodia, procedimiento y más.', icon: 'description', color: 'from-red-500 to-rose-600', route: '#asistente/actas', badge: 'PRO' },
         { id: 'intervenciones', title: 'Intervenciones en Campo', desc: 'Registro en tiempo real con GPS y partes para WhatsApp.', icon: 'add_alert', color: 'from-blue-500 to-indigo-600', route: '#asistente/intervenciones', badge: 'PRO' },
         { id: 'procedimiento', title: 'Registro de Procedimiento', desc: 'Wizard guiado: GPS, fotos y PDF estructurado.', icon: 'local_police', color: 'from-emerald-500 to-green-600', route: '#asistente/procedimiento', badge: 'PRO' },
         { id: 'archivos', title: 'Archivos Digitales', desc: 'Historial personal de actas y procedimientos guardados.', icon: 'folder_open', color: 'from-amber-500 to-orange-500', route: '#asistente/archivos', badge: 'PRO' },
+        { id: 'iapos', title: 'Cartilla IAPOS', desc: 'Buscador oficial de médicos, clínicas y farmacias.', icon: 'medical_services', color: 'from-cyan-500 to-blue-500', route: '#asistente/iapos', badge: 'PRO' },
         { id: 'guia', title: 'Guía de Recursos', desc: 'Beneficios TAP y Estampillas Médicas.', icon: 'library_books', color: 'from-indigo-500 to-blue-600', route: '#info', badge: 'Pro' },
         { id: 'partes', title: 'Partes Inteligentes', desc: 'Convierte notas en informes profesionales.', icon: 'edit_note', color: 'from-purple-500 to-indigo-500', route: '#asistente/partes' },
-
         { id: 'crono', title: 'Crono-Calendario', desc: 'Gestioná tus tercios y ciclos de guardia.', icon: 'calendar_month', color: 'from-emerald-500 to-teal-500', route: '#asistente/crono' },
         { id: 'directorio', title: 'Directorio Policial', desc: 'Números de emergencia interna.', icon: 'contact_phone', color: 'from-amber-500 to-orange-500', route: '#asistente/directorio' },
         { id: 'checklist', title: 'Checklist de Guardia', desc: 'Verificación de equipo esencial.', icon: 'fact_check', color: 'from-rose-500 to-pink-500', route: '#asistente/checklist' }
@@ -517,7 +519,7 @@ function renderCronoCalendario(container) {
 
 function renderCentinela(container) {
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5 px-4 h-16 flex items-center gap-4">
             <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <span class="material-symbols-outlined">arrow_back</span>
             </button>
@@ -533,14 +535,14 @@ function renderCentinela(container) {
             </div>
         </header>
 
-        <main class="flex flex-col h-[calc(100vh-4rem)] bg-background-dark overflow-hidden">
+        <main class="flex flex-col h-[calc(100vh-4rem)] bg-background-light dark:bg-background-dark overflow-hidden">
             <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 pb-10">
                 <div class="flex gap-3 max-w-[85%]">
                     <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
                         <span class="material-symbols-outlined text-sm">smart_toy</span>
                     </div>
-                    <div class="bg-white/5 border border-white/5 p-3 rounded-2xl rounded-tl-none">
-                        <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">
+                    <div class="bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-3 rounded-2xl rounded-tl-none shadow-sm">
+                        <p class="text-xs text-slate-900 dark:text-slate-200 leading-relaxed">
                             Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, **Decreto 461**, **Reforma Previsional (Ley 14.283)**, las escalas salariales de **Febrero 2026 (Decreto 142/26)**, el **Código Procesal Penal (CPP) de Santa Fe**, el **Código Penal Argentino (CP)** y los últimos listados y manuales del **ISeP 2025/2026**.
                             <br><br>
                             Preguntame por normas, reglamentos, o las **últimas noticias y novedades del 2026**. ¿En qué te ayudo hoy?
@@ -549,10 +551,10 @@ function renderCentinela(container) {
                 </div>
             </div>
 
-            <div class="p-4 bg-slate-900/50 border-t border-white/5 pb-10">
+            <div class="p-4 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-white/5 pb-10">
                 <form id="centinela-form" class="relative flex items-center gap-2">
                     <input type="text" id="chat-input" placeholder="Sueldos, jubilación, ascensos..." 
-                        class="flex-1 bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
+                        class="flex-1 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
                     <button type="submit" class="absolute right-1 size-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 active:scale-90 transition-all">
                         <span class="material-symbols-outlined">send</span>
                     </button>
@@ -740,13 +742,15 @@ function renderCentinela(container) {
         },
         {
             category: 'microtrafico',
-            keywords: ['microtrafico', 'droga', 'estupefacientes', 'bunker', 'venta', 'narcomenudeo', 'ley 14239', 'desfederalizacion', 'demolicion', 'procedimiento', 'protocolo', 'quiosco', 'sustancia'],
+            keywords: ['microtrafico', 'droga', 'estupefacientes', 'bunker', 'venta', 'narcomenudeo', 'ley 14239', 'desfederalizacion', 'demolicion', 'procedimiento', 'protocolo', 'quiosco', 'sustancia', 'reactivo', 'test', 'plazo', 'notificacion'],
             responses: [
-                { match: ['ley 14239', 'competencia', 'provincial'], text: "La **Ley 14.239** otorga competencia a la Provincia para investigar el narcomenudeo. Interviene la Unidad Fiscal Especial de Microtráfico del MPA." },
-                { match: ['bunker', 'demolicion', 'derribo'], text: "Procedimiento: Bajo dirección fiscal, la policía puede adoptar medidas urgentes para hacer cesar el estado antijurídico, incluyendo la **demolición de búnkeres**." },
+                { match: ['ley 14239', 'competencia', 'provincial', 'desfederalizacion', 'desfederalizar'], text: "La **Ley 14.239** decretó la desfederalización del narcomenudeo en Santa Fe. Esto significa que la Policía provincial e investigadores locales persiguen la venta minorista de drogas, bajo directiva de la **Unidad Fiscal Especial de Microtráfico del MPA**." },
+                { match: ['bunker', 'demolicion', 'derribo', 'cesar'], text: "Procedimiento de **Demolición de Búnkeres**: Ante el hallazgo de un punto de venta inactivo o utilizado exclusivamente para comercio de estupefacientes, y bajo expresa directiva de la Unidad de Microtráfico del MPA, se procede al cese del estado antijurídico mediante la demolición de la estructura edilicia con apoyo logístico municipal/provincial." },
+                { match: ['plazo', 'comunicacion', 'fiscal', 'notificacion', 'limite', 'horas'], text: "⏱️ **Límite de Notificación**: Ante un procedimiento con secuestro de estupefacientes o aprehendidos por narcomenudeo, existe un **plazo máximo improrrogable de 2 horas** para dar aviso formal a la Unidad Fiscal Especial de Microtráfico del MPA." },
+                { match: ['reactivo', 'test', 'quimico', 'sustancia', 'orientativo'], text: "🧪 **Reactivos Químicos**: Para determinar preliminarmente la naturaleza de la sustancia (cocaína, marihuana), el personal de Criminalística/PDI debe realizar el test de campo químico orientativo (de Duquenois-Levine para marihuana o Scott para cocaína) y dejar constancia del resultado de coloración en el acta." },
                 { match: ['prioridad', 'calle'], text: "Se priorizan mercados abiertos, presencia de armas y casos donde el traficante participe en otros delitos graves." }
             ],
-            default: "La Ley 14.239 de Microtráfico activa la competencia provincial y el derribo de puntos de venta. ¿Qué situación necesitás consultar?"
+            default: "La Ley 14.239 de Microtráfico activa la competencia provincial, el derribo de puntos de venta y plazos estrictos de 2hs para informar al MPA. ¿Qué situación necesitás consultar?"
         },
         {
             category: 'bienestar_salud',
@@ -911,29 +915,32 @@ function renderCentinela(container) {
         },
         {
             category: 'ley_12521_profundizada',
-            keywords: ['articulo 25', 'articulo 1', 'articulo 3', 'articulo 4', 'articulo 12', 'funciones policiales', 'autoridad policial', 'personal ejecucion', 'personal coordinacion', 'personal supervision', 'cuidar bienes', 'proporcionalidad', 'deberes y derechos', 'obedecer ordenar'],
+            keywords: ['articulo 25', 'articulo 1', 'articulo 3', 'articulo 4', 'articulo 12', 'articulo 46', 'deberes', 'obligaciones', 'examen', 'concurso', 'isep', 'promocional', 'obligatorio', 'funciones policiales', 'autoridad policial', 'personal ejecucion', 'personal coordinacion', 'personal supervision', 'cuidar bienes', 'proporcionalidad', 'deberes y derechos', 'obedecer ordenar'],
             responses: [
                 { match: ['art 1', 'articulo 1', 'objeto', 'ambito'], text: "**Art. 1 (Ley 12521)**: El personal policial se rige por esta ley en todo lo relativo a la organización, funcionamiento del servicio y las funciones de sus miembros. Las normas se interpretan en favor del bien común y la dignidad de la función." },
                 { match: ['art 3', 'articulo 3', 'grados', 'jerarquia'], text: "**Art. 3 (Escala Jerárquica)** de Mayor a Menor:\n1. Director General de Policía\n2. Director de Policía\n3. Subdirector de Policía\n4. Comisario Supervisor\n5. Comisario\n6. Subcomisario\n7. Inspector\n8. Subinspector\n9. Oficial de Policía\n10. Suboficial de Policía" },
                 { match: ['art 4', 'articulo 4', 'grupos', 'categorias'], text: "**Art. 4 (Agrupamientos)**: \n- **Ejecución**: Suboficial y Oficial.\n- **Coordinación**: Subinspector e Inspector.\n- **Supervisión**: Subcomisario y Comisario Supervisor.\n- **Dirección**: Subdirector, Director y Director General." },
-                { match: ['art 12', 'articulo 12', 'escalafones', 'subescalafones'], text: "**Art. 12 (Escalafones)**:\n- **General**: Seguridad, Judicial, Investigación Criminal.\n- **Profesional**: Jurídico, Sanidad, Administración.\n- **Técnico**: Criminalista, Comunicaciones e Informática, Bombeiro, Música, Administrativo Técnico, Sanidad Técnico.\n- **Servicios**: Servicios Especializados y Mantenimiento." },
+                { match: ['art 12', 'articulo 12', 'escalafones', 'subescalafones'], text: "**Art. 12 (Escalafones)**:\n- **General**: Seguridad, Judicial, Investigación Criminal.\n- **Profesional**: Jurídico, Sanidad, Administración.\n- **Técnico**: Criminalista, Comunicaciones e Informática, Bombeiro, Música, Administrativo Técnico, Sanidad Técnico.\n- **Servicios**: Servicios Especializados and Mantenimiento." },
                 { match: ['art 25', 'articulo 25', 'autoridad policial', 'funciones', 'que puedo hacer'], text: "**Art. 25 (Autoridad Policial)**: El personal del Escalafón General tiene autoridad para: defender la vida, libertad, propiedad e integridad de las personas; adoptar procedimientos para **prevenir el delito o interrumpir su ejecución**; identificar sospechosos y realizar aprehensiones en casos de flagrancia." },
-                { match: ['derechos', 'estabilidad', 'propiedad grado'], text: "**Derechos del Art. 47**: El personal tiene derecho a: estabilidad en el empleo, **propiedad del grado**, percepción de haberes según escala, licencias, cobertura de salud (IAPOS), y acceso a formación profesional en el ISeP." }
+                { match: ['art 46', 'articulo 46', 'deberes', 'obligaciones'], text: "**Deberes del Art. 46 (Ley 12521)**: Todo personal tiene la obligación de:\n- Defender la vida, bienes y derechos de las personas aun a riesgo de su propia vida.\n- Obedecer las órdenes legales de los superiores jerárquicos.\n- Portar el arma reglamentaria provista por la institución.\n- Guardar el secreto profesional sobre asuntos del servicio.\n- Mantener una conducta decorosa y actuar con imparcialidad." },
+                { match: ['derechos', 'estabilidad', 'propiedad grado'], text: "**Derechos del Art. 47**: El personal tiene derecho a: estabilidad en el empleo, **propiedad del grado**, percepción de haberes según escala, licencias, cobertura de salud (IAPOS), y acceso a formación profesional en el ISeP." },
+                { match: ['examen', 'concurso', 'isep', 'promocional', 'obligatorio'], text: "📝 **Exámenes Promocionales Obligatorios del ISeP**:\nPara acceder a los ascensos reglados por la Ley 12521, es de carácter obligatorio aprobar los cursos de capacitación y rendir los exámenes escritos correspondientes en las fechas estipuladas por el ISeP. El incumplimiento o desaprobación inhabilita automáticamente al agente para el Concurso de Ascenso de ese período." }
             ],
-            default: "Tengo conocimiento profundo de la Ley 12521. ¿Qué artículo específico, escalafón o agrupamiento necesitás consultar?"
+            default: "Tengo conocimiento profundo de la Ley 12521 (Artículos, deberes de Art. 46 y exámenes obligatorios del ISeP). ¿Qué artículo específico, escalafón o agrupamiento necesitás consultar?"
         },
         {
             category: 'decreto_461_profundizado',
-            keywords: ['decreto 461', 'falta', 'sancion', 'tribunal conducta', 'leve', 'grave', 'sumario', 'procedimiento disciplinario', 'defensa', 'plazo', 'descargo', 'asuntos internos', 'juzgamiento'],
+            keywords: ['decreto 461', 'falta', 'sancion', 'tribunal conducta', 'leve', 'grave', 'sumario', 'procedimiento disciplinario', 'defensa', 'plazo', 'descargo', 'asuntos internos', 'juzgamiento', 'ventana', 'dias', 'suspension', 'rango', 'composicion', 'miembros'],
             responses: [
                 { match: ['que es', 'decreto 461', 'reglamento'], text: "El **Decreto 461/2015** (Régimen de Responsabilidad Administrativa del Personal Policial) reglamentó el Título II cap. 2 de la Ley 12521. Define faltas, sanciones, procedimiento y el **Tribunal de Conducta Policial** para juzgar las graves." },
                 { match: ['faltas leves', 'leve', 'ejemplos'], text: "**FALTAS LEVES** (Dec. 461): Descuido en higiene personal o uniforme, fumar en servicio, uso indebido del celular, falta de puntualidad, no rendir novedades, trato incorrecto con ciudadanos. **Sanción**: Apercibimiento o hasta **10 días de arresto**. Tres leves equivalen a una grave." },
                 { match: ['faltas graves', 'grave', 'ejemplos'], text: "**FALTAS GRAVES** (Dec. 461): Inducir a engaño al superior, uso arbitrario del arma, falta de colaboración con la justicia, consumo de estupefacientes, permitir indisciplina bajo su mando, actos deshonestos, conducta indecorosa, incumplimiento de orden legal. **Sanción**: 11 a 30 días de suspensión o destitución." },
-                { match: ['descargo', 'defensa', 'plazo', 'recurso'], text: "Ante una sanción, tenés derecho a presentar **descargo escrito** en el plazo legal (generalmente 5 días hábiles desde la notificación). Podés solicitar vista del expediente. Para faltas graves, el **Tribunal de Conducta Policial** juzga el caso y podés ser asistido por abogado." },
-                { match: ['tribunal conducta', 'que hace', 'como funciona'], text: "El **Tribunal de Conducta Policial** es el órgano que juzga las **faltas graves**. Está compuesto por oficiales superiores y emite resolución elevada al Director General para aplicar la sanción (suspensión o destitución). Se puede recurrir ante la Secretaría de RRHH." },
+                { match: ['descargo', 'defensa', 'plazo', 'recurso', 'ventana', 'dias'], text: "⏱️ **Plazo de Descargo**: De acuerdo con el Decreto 461/15, el agente sumariado cuenta con una ventana estricta de **5 días hábiles** desde la notificación oficial de la imputación disciplinaria para presentar su descargo por escrito y proponer pruebas que sustenten su defensa." },
+                { match: ['suspension', 'rango', 'dias suspension'], text: "🚫 **Rangos de Suspensión**: Las sanciones disciplinarias según la gravedad de la falta se dividen en:\n- **Faltas Leves**: Apercibimiento o arresto de 1 a 10 días.\n- **Faltas Graves**: Suspensión de **11 a 30 días** con descuento de haberes, o destitución (cesantía/exoneración)." },
+                { match: ['composicion', 'miembros', 'quienes integran', 'tribunal conducta', 'que hace', 'como funciona'], text: "👥 **Composición del Tribunal de Conducta Policial**: El Tribunal está compuesto de forma mixta y tripartita por un Oficial Superior de Policía (en actividad o retiro), representantes del Ministerio de Justicia y Seguridad, y un letrado de la Dirección General de Asuntos Internos, garantizando la imparcialidad del juzgamiento de faltas graves. Las resoluciones se elevan al Director General." },
                 { match: ['modificacion', '3268', 'decreto 3268', '2018'], text: "El **Decreto 3268/2018** modificó parcialmente el Dec. 461/2015, ajustando plazos y criterios para ciertos procedimientos. La reforma 2018 buscó acelerar la resolución de sumarios sin afectar el derecho de defensa." }
             ],
-            default: "El Decreto 461/2015 regula el Régimen Disciplinario. Define faltas leves y graves, procedimientos y el Tribunal de Conducta. ¿Necesitás saber sobre sanciones, plazos o derecho de defensa?"
+            default: "El Decreto 461/2015 regula el Régimen Disciplinario. Define faltas leves y graves, la ventana de 5 días hábiles para descargo escrito, rangos de suspensión de 11 a 30 días y la composición del Tribunal de Conducta. ¿Qué necesitás saber?"
         },
         {
             category: 'trata_personas_protocolo',
@@ -1002,6 +1009,17 @@ function renderCentinela(container) {
                 { match: ['ley benigna', 'retroactividad'], text: "Siempre se aplica, por principio de Derecho Penal, la **ley más benigna** al imputado." }
             ],
             default: "El Código Penal Argentino detalla los tipos penales y penas. El uso del arma y la legítima defensa están sujetos al requisito ineludible de proporcionalidad en la agresión. ¿Sobre qué delito necesitás la tipificación?"
+        },
+        {
+            category: 'd4_logistica',
+            keywords: ['logistica', 'd4', 'd-4', 'chaleco', 'chalecos', 'rb3', 'armamento', 'bersa', 'glock', 'taurus', 'combustible', 'ypf', 'ypf ruta', 'patrullero', 'patrulleros', 'taller', 'talleres', 'kilometraje', 'nafta', 'fmk-3', 'escopeta', '12/70', 'municion', 'municiones'],
+            responses: [
+                { match: ['chaleco', 'rb3', 'vencimiento', 'vence'], text: "🛡️ **Chalecos Antibalas RB3 (D-4)**:\n- **Nivel de Protección**: RB3 (resiste de forma certificada impactos calibre 9mm de alta velocidad y .357 Magnum).\n- **Vencimiento**: Tienen una validez oficial de **5 años** desde su fecha de fabricación.\n- **Asignación**: Se realiza de forma individual y nominativa mediante el número de serie. Es obligatorio su uso en todo servicio operativo y adicional." },
+                { match: ['patrullero', 'taller', 'talleres', 'mantenimiento', 'kilometraje', 'movil', 'unidad'], text: "🚔 **Gestión de Patrulleros y Logística D-4**:\n- **Mantenimiento**: Todo service mecánico o reparación se coordina a través de la División Talleres de la Jefatura o talleres autorizados por la UR.\n- **Obligaciones**: Se debe realizar un control diario del estado de la unidad al tomar y entregar el turno (planillas de combustible, fluidos, luces y luces de emergencia).\n- **Kilometraje**: Registrar diariamente el millaje/kilometraje en el libro de guardia." },
+                { match: ['combustible', 'ypf', 'ruta', 'pin', 'nafta'], text: "⛽ **Carga de Combustible - Tarjeta YPF Ruta (D-4)**:\n- **Autenticación**: Cada conductor habilitado tiene asignado un código PIN personal e intransferible.\n- **Procedimiento**: En la estación de servicio se debe presentar la tarjeta de la unidad, ingresar el PIN del chofer e informar obligatoriamente el kilometraje exacto del patrullero.\n- **Cargas irregulares**: Desvíos en los consumos o kilometraje inexacto inician sumario administrativo." },
+                { match: ['armamento', 'bersa', 'glock', 'taurus', 'escopeta', 'fmk', 'mantenimiento', 'limpieza', 'portacion'], text: "🔫 **Armamento Reglamentario y Provisto (D-4)**:\n- **Pistola Provista**: Bersa Thunder 9mm, Taurus o Glock (según asignación de las unidades).\n- **Armas de Apoyo**: Subfusil FMK-3 (calibre 9mm) y Escopeta 12/70 para personal de grupos tácticos y patrulla.\n- **Mantenimiento**: La limpieza y lubricación periódica es obligación individual del agente. Está prohibido realizar modificaciones caseras al mecanismo de disparo o alzas.\n- **Portación**: La portación del arma reglamentaria y credencial es obligatoria tanto en servicio ordinario/adicional como fuera de servicio (salvo licencias médicas o suspensión)." }
+            ],
+            default: "El Departamento Logística (D-4) gestiona el armamento, chalecos antibalas RB3, combustible YPF Ruta y mantenimiento de patrulleros. ¿Qué consulta específica tenés sobre el equipamiento provisto?"
         }
     ];
 
@@ -1093,6 +1111,12 @@ function renderCentinela(container) {
         // --- CÓDIGO PENAL / PROCESAL ---
         { phrases: ['legitima defensa', 'defensa propia', 'me puedo defender', 'si me atacan'], category: 'codigo_penal_arg' },
         { phrases: ['que es el cpp', 'codigo procesal', 'como actuo penalmente'], category: 'codigo_procesal_penal_sf' },
+
+        // --- LOGÍSTICA D-4 ---
+        { phrases: ['chaleco antibalas', 'cuanto dura el chaleco', 'chaleco rb3', 'cuando vence el chaleco', 'me dieron chaleco', 'serie del chaleco'], category: 'd4_logistica' },
+        { phrases: ['patrullero roto', 'mantenimiento del movil', 'choque el patrullero', 'arreglar patrullero', 'taller policial', 'kilometraje del movil'], category: 'd4_logistica' },
+        { phrases: ['tarjeta ypf', 'cargar nafta', 'tarjeta ypf ruta', 'pin ypf', 'combustible de patrullero'], category: 'd4_logistica' },
+        { phrases: ['pistola reglamentaria', 'bersa 9mm', 'glock', 'taurus', 'limpiar arma', 'portar arma', 'credencial y arma', 'escopeta 12/70', 'fmk-3'], category: 'd4_logistica' },
 
         // --- ARMAS ---
         { phrases: ['como identifico un arma', 'que datos anoto del arma', 'clasificar un arma', 'calibre', 'numero de serie'], category: 'reglamentacion' },
@@ -1282,6 +1306,7 @@ function renderCentinela(container) {
             'trata_personas_protocolo': ['¿Cómo identifico trata?', 'Protocolo de actuación', '¿Quién investiga?'],
             'general_admin': ['¿Qué es la TAP?', '0810 TAP', 'Alias CBU'],
             'reglamentacion': ['MIRAF', 'Identificar un arma', 'Uso racional'],
+            'd4_logistica': ['¿Cuándo vence mi chaleco RB3?', 'Carga combustible YPF Ruta', 'Armamento reglamentario y provisto'],
             'jurisdiccion': ['¿Dónde queda la UR?', 'Listado de URs', 'Cabecera UR 2'],
             'codigo_faltas': ['Ruidos molestos', 'Código contravencional', 'Penas por falta'],
             'reforma_procesal_penal': ['Allanamiento urgente', 'Ley 14258', 'Plazos de detención'],
@@ -1445,14 +1470,14 @@ function renderCentinela(container) {
         div.className = role === 'user' ? 'flex justify-end' : 'flex gap-3 max-w-[85%]';
         div.innerHTML = role === 'user' ? `
             <div class="bg-primary p-3 rounded-2xl rounded-tr-none max-w-[85%] shadow-lg shadow-primary/10">
-                <p class="text-xs text-slate-900 dark:text-white leading-relaxed">${text}</p>
+                <p class="text-xs text-white font-medium leading-relaxed">${text}</p>
             </div>
         ` : `
             <div class="size-8 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
                 <span class="material-symbols-outlined text-sm">smart_toy</span>
             </div>
-            <div class="bg-white/10 border border-white/10 p-3 rounded-2xl rounded-tl-none" id="${id || ''}">
-                <p class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${text}</p>
+            <div class="bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-3 rounded-2xl rounded-tl-none shadow-sm" id="${id || ''}">
+                <p class="text-xs text-slate-900 dark:text-slate-200 leading-relaxed">${text}</p>
             </div>
         `;
         chat.appendChild(div);
@@ -1511,16 +1536,26 @@ function renderPartesInteligentes(container) {
             const container = document.getElementById('parte-result-container');
             const output = document.getElementById('parte-output');
             const now = new Date();
-            let parte = `PARTIDO PREVENTIVO - POLICÍA DE SANTA FE\n`;
-            parte += `FECHA: ${now.toLocaleDateString()} - HORA: ${now.toLocaleTimeString()}\n\n`;
-            parte += `DETALLES SEGÚN NOVEDAD:\n${input.toUpperCase()}\n\n`;
-            parte += `Se traslada lo actuado a la Comisaría correspondiente.`;
+            
+            // Professional Narrative Improvement
+            const refinedInput = window.improvePoliceNarrative(input);
+            
+            let parte = `═══════════════════════════════════════\n`;
+            parte += `   PARTIDO PREVENTIVO - POLICÍA DE SANTA FE\n`;
+            parte += `═══════════════════════════════════════\n\n`;
+            parte += `FECHA: ${now.toLocaleDateString('es-AR')} - HORA: ${now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}\n`;
+            parte += `DEP: ${store.user?.dependency || 'UNIDAD OPERATIVA'}\n\n`;
+            parte += `DETALLES DE LA INTERVENCIÓN:\n${refinedInput}\n\n`;
+            parte += `───────────────────────────────\n`;
+            parte += `Firma Funcionario: ${store.user?.name || '________________'}\n`;
+            parte += `Legajo: ${store.user?.badge || '________'}\n\n`;
+            parte += `Se traslada lo actuado a la Comisaría correspondiente para su prosecución legal.`;
 
             output.innerText = parte;
             container.classList.remove('hidden');
             btn.disabled = false;
-            btn.innerHTML = `Generar Parte Formal`;
-            showToast("✅ Parte redactado");
+            btn.innerHTML = `<span class="material-symbols-outlined text-xl">auto_awesome</span>Generar Parte Formal`;
+            showToast("✅ Parte profesional redactado");
         }, 1500);
     };
 
@@ -1530,9 +1565,540 @@ function renderPartesInteligentes(container) {
     };
 }
 
+function renderVademecum(container) {
+    const VADEMECUM_DATA = [
+        {
+            id: 'ruidos_molestos',
+            title: 'Ruidos Molestos',
+            type: 'convivencia',
+            article: 'Art. 65 - Ley 13774',
+            desc: 'Causar ruidos o sonidos que por su volumen, reiteración o persistencia excedan la normal tolerancia y afecten la tranquilidad pública.',
+            checklist: [
+                'Identificar al infractor y constatar el domicilio de origen.',
+                'Tomar datos de al menos un testigo o denunciante afectado (mencionar la molestia).',
+                'Medir o estimar la persistencia temporal (horarios de inicio y cese).',
+                'Secuestro preventivo de equipos de sonido (si corresponde y el fiscal lo ordena).'
+            ],
+            fiscalGuide: '“Doctor, le informo que nos constituimos en [Dirección] por ruidos molestos reiterados provenientes de [Origen]. Entablamos comunicación con el morador [Nombre], quien hace caso omiso al pedido de cese. Contamos con declaración del denunciante [Nombre de vecino] quien manifiesta no poder descansar. Solicito directivas sobre el cese de la falta y secuestro de elementos.”'
+        },
+        {
+            id: 'merodeo',
+            title: 'Merodeo en zona urbana o rural',
+            type: 'convivencia',
+            article: 'Art. 110 - Ley 13774',
+            desc: 'Permanencia en las inmediaciones de edificios o vehículos en actitud sospechosa, sin justificación razonable, portando herramientas o elementos idóneos para cometer delitos.',
+            checklist: [
+                'Describir detalladamente la actitud sospechosa previa en el acta de procedimiento.',
+                'Identificar al masculino/femenino y consultar antecedentes mediante el sistema 911 (Lince).',
+                'Secuestrar de forma preventiva elementos sospechosos (ganzúas, herramientas de efracción) bajo acta.',
+                'Tomar declaración de vecinos que alertaron de la situación.'
+            ],
+            fiscalGuide: '“Doctor, procedimos a la identificación de un masculino en [Dirección] que se encontraba observando el interior de los vehículos estacionados portando [Herramienta]. Al consultarle motivos, no brinda justificación coherente. El sistema 911 informa que posee antecedentes por robo. Solicito directivas para traslado por Art. 110 de la Ley de Convivencia y secuestro de las herramientas.”'
+        },
+        {
+            id: 'hurto',
+            title: 'Hurto',
+            type: 'penal',
+            article: 'Art. 162 - Código Penal',
+            desc: 'Apoderamiento ilegítimo de una cosa mueble, total o parcialmente ajena, realizado sin fuerza en las cosas ni violencia física en las personas.',
+            checklist: [
+                'Individualizar y secuestrar el elemento hurtado detallando marca, color y estado.',
+                'Recibir declaración de la víctima y actas de constatación ocular del lugar.',
+                'Relevamiento de cámaras de seguridad públicas o privadas en las inmediaciones.',
+                'Identificación y aprehensión del sospechoso si es in fraganti.'
+            ],
+            fiscalGuide: '“Doctor, nos comunicamos desde la Comisaría [Número] por un hecho de Hurto en [Dirección]. La víctima [Nombre] constató la sustracción de [Objeto] sin mediar violencia. Tras patrullaje por la zona, aprehendimos a un masculino de características coincidentes en posesión del elemento. Solicito directivas sobre el estado de detención del masculino y entrega de los elementos a la víctima.”'
+        },
+        {
+            id: 'robo',
+            title: 'Robo',
+            type: 'penal',
+            article: 'Art. 164 - Código Penal',
+            desc: 'Apoderamiento ilegítimo de una cosa mueble, total o parcialmente ajena, cometido con fuerza en las cosas o violencia física en las personas.',
+            checklist: [
+                'Fotografiar y detallar el daño físico en las cosas (puertas rotas, candados violentados, rejas dobladas).',
+                'Constatar las lesiones de la víctima mediante médico policial.',
+                'Secuestro del elemento utilizado para ejercer violencia (barretas, piedras, herramientas).',
+                'Declaración testimonial de la víctima y de terceros que presenciaron el hecho.'
+            ],
+            fiscalGuide: '“Doctor, le informo un hecho de Robo en [Dirección]. El morador manifiesta que rompieron la puerta de ingreso y le sustrajeron [Objetos], propinándole un golpe en [Zona del cuerpo]. El sospechoso fue aprehendido a pocas cuadras con [Objetos] y [Herramienta]. Contamos con actas de constatación de daños. Solicito directivas respecto al aprehendido.”'
+        },
+        {
+            id: 'resistencia_autoridad',
+            title: 'Resistencia a la Autoridad',
+            type: 'penal',
+            article: 'Art. 239 - Código Penal',
+            desc: 'Resistencia activa o desobediencia a un funcionario público en el ejercicio legítimo de sus funciones.',
+            checklist: [
+                'Describir con precisión la orden impartida (ej. "cese su actitud", "coloque las manos sobre el móvil").',
+                'Detallar la agresión física o resistencia activa del sujeto (empujones, patadas, forcejeo), diferenciándola de la mera discusión verbal.',
+                'Mencionar si hubo personal lesionado y constatar las lesiones con médico policial.',
+                'Testigos del procedimiento (civiles ajenos a la fuerza si los hubiera).'
+            ],
+            fiscalGuide: '“Doctor, nos comunicamos por un hecho de Resistencia a la Autoridad en [Dirección]. En circunstancias de proceder a identificar al masculino [Nombre], el mismo se niega, arroja golpes de puño e intenta darse a la fuga, forcejeando con el personal policial. Logramos su reducción mediante la fuerza mínima indispensable. Solicito directivas sobre su fichaje y si queda aprehendido.”'
+        },
+        {
+            id: 'amenazas',
+            title: 'Amenazas',
+            type: 'penal',
+            article: 'Art. 149 bis - Código Penal',
+            desc: 'Uso de amenazas para alarmar o amedrentar a una o más personas, o para obligar a otro a hacer, no hacer o tolerar algo contra su voluntad.',
+            checklist: [
+                'Declaración escrita detallada de la víctima indicando las palabras exactas o ademanes proferidos.',
+                'Identificar si la amenaza se realizó verbalmente, por escrito o mediante el uso de algún elemento intimidante (cuchillo, arma, palo).',
+                'Asegurar el secuestro del elemento intimidante si fue utilizado.',
+                'Relevamiento de testigos presenciales directos de la intimidación.'
+            ],
+            fiscalGuide: '“Doctor, le informo un hecho de Amenazas en [Dirección]. La víctima [Nombre] da cuenta de que su vecino [Nombre] la amenazó de muerte manifestándole textualmente [Frase] mientras empuñaba [Elemento]. Constatamos el hecho y procedimos a la aprehensión del causante. Solicito directivas y orden de secuestro.”'
+        }
+    ];
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Vademécum Procesal</h1>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
+            <div class="px-1 space-y-1">
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Código Penal y de Convivencia</h2>
+                <p class="text-[11px] text-slate-400">Consulta de encuadre legal, checklists de evidencia y guías de llamada fiscal.</p>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="space-y-3">
+                <div class="glass-card flex items-center px-4 py-2 border border-white/10 rounded-2xl">
+                    <span class="material-symbols-outlined text-slate-400 text-lg mr-2">search</span>
+                    <input type="text" id="vademecum-search" placeholder="Buscar delito o artículo..." 
+                        class="w-full bg-transparent border-none text-xs text-slate-900 dark:text-white focus:outline-none placeholder-slate-500 py-2" />
+                </div>
+                <div class="flex gap-2">
+                    <button id="filter-all" onclick="window.setVademecumFilter('all')" class="px-3.5 py-1.5 rounded-xl text-[10px] font-bold uppercase transition-all bg-primary text-white border border-primary/20">
+                        Todos
+                    </button>
+                    <button id="filter-penal" onclick="window.setVademecumFilter('penal')" class="px-3.5 py-1.5 rounded-xl text-[10px] font-bold uppercase transition-all bg-white/5 text-slate-400 border border-white/10 hover:text-white">
+                        Código Penal
+                    </button>
+                    <button id="filter-convivencia" onclick="window.setVademecumFilter('convivencia')" class="px-3.5 py-1.5 rounded-xl text-[10px] font-bold uppercase transition-all bg-white/5 text-slate-400 border border-white/10 hover:text-white">
+                        Convivencia
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results List -->
+            <div id="vademecum-list" class="space-y-4"></div>
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    window.setVademecumFilter = (filter) => {
+        currentFilter = filter;
+        const btnAll = document.getElementById('filter-all');
+        const btnPenal = document.getElementById('filter-penal');
+        const btnConv = document.getElementById('filter-convivencia');
+
+        [btnAll, btnPenal, btnConv].forEach(btn => {
+            if (btn) {
+                btn.className = 'px-3.5 py-1.5 rounded-xl text-[10px] font-bold uppercase transition-all bg-white/5 text-slate-400 border border-white/10 hover:text-white';
+            }
+        });
+
+        if (filter === 'all' && btnAll) btnAll.className = 'px-3.5 py-1.5 rounded-xl text-[10px] font-bold uppercase transition-all bg-primary text-white border border-primary/20';
+        if (filter === 'penal' && btnPenal) btnPenal.className = 'px-3.5 py-1.5 rounded-xl text-[10px] font-bold uppercase transition-all bg-primary text-white border border-primary/20';
+        if (filter === 'convivencia' && btnConv) btnConv.className = 'px-3.5 py-1.5 rounded-xl text-[10px] font-bold uppercase transition-all bg-primary text-white border border-primary/20';
+
+        renderList();
+    };
+
+    const searchInput = document.getElementById('vademecum-search');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            renderList();
+        });
+    }
+
+    function renderList() {
+        const listContainer = document.getElementById('vademecum-list');
+        if (!listContainer) return;
+
+        const filtered = VADEMECUM_DATA.filter(item => {
+            const matchesFilter = currentFilter === 'all' || item.type === currentFilter;
+            const matchesSearch = item.title.toLowerCase().includes(searchQuery) || 
+                                  item.article.toLowerCase().includes(searchQuery) ||
+                                  item.desc.toLowerCase().includes(searchQuery);
+            return matchesFilter && matchesSearch;
+        });
+
+        if (filtered.length === 0) {
+            listContainer.innerHTML = `
+                <div class="text-center py-10 space-y-2">
+                    <span class="material-symbols-outlined text-slate-600 text-4xl">search_off</span>
+                    <p class="text-xs text-slate-400 font-medium">No se encontraron artículos que coincidan.</p>
+                </div>
+            `;
+            return;
+        }
+
+        listContainer.innerHTML = filtered.map(item => {
+            const isPenal = item.type === 'penal';
+            const badgeClass = isPenal ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20';
+            const badgeText = isPenal ? 'Código Penal' : 'Ley 13774 Convivencia';
+            
+            const checklistHtml = item.checklist.map(step => `
+                <div class="flex gap-2 items-start text-[10px] text-slate-400 leading-relaxed">
+                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0">check_circle</span>
+                    <span class="font-medium">${step}</span>
+                </div>
+            `).join('');
+
+            return `
+                <div class="glass-card border border-white/5 rounded-3xl overflow-hidden transition-all duration-300">
+                    <!-- Header trigger -->
+                    <button onclick="window.toggleVademecumItem('${item.id}')" class="w-full text-left p-5 flex justify-between items-center bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+                        <div class="space-y-1.5 pr-2">
+                            <span class="px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-wider ${badgeClass}">
+                                ${badgeText}
+                            </span>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-xs leading-tight">${item.title}</h3>
+                            <span class="text-[10px] text-primary font-bold block">${item.article}</span>
+                        </div>
+                        <span id="icon-${item.id}" class="material-symbols-outlined text-slate-400 transition-transform duration-300">expand_more</span>
+                    </button>
+
+                    <!-- Body (Collapsed by default) -->
+                    <div id="body-${item.id}" class="hidden p-5 border-t border-white/5 space-y-4 bg-black/10">
+                        <div class="space-y-1">
+                            <span class="text-[9px] font-bold text-slate-500 uppercase tracking-wider block">Definición Contravencional</span>
+                            <p class="text-[11px] text-slate-400 leading-relaxed font-medium">${item.desc}</p>
+                        </div>
+
+                        <!-- Checklist -->
+                        <div class="space-y-2.5">
+                            <span class="text-[9px] font-bold text-primary uppercase tracking-wider block">📋 Checklist de Evidencia Física</span>
+                            <div class="space-y-2">
+                                ${checklistHtml}
+                            </div>
+                        </div>
+
+                        <!-- Call to Fiscal -->
+                        <div class="space-y-2.5">
+                            <div class="flex justify-between items-center">
+                                <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wider">📞 Guía de Llamada al Fiscal</span>
+                                <button onclick="window.copyFiscalGuide('${item.id}')" class="flex items-center gap-1 text-[9px] font-bold text-primary uppercase hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-xs">content_copy</span> Copiar
+                                </button>
+                            </div>
+                            <div class="bg-white/5 border border-white/5 rounded-2xl p-4 text-[10px] text-slate-300 font-mono italic leading-relaxed relative">
+                                <p id="guide-${item.id}">${item.fiscalGuide}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    window.toggleVademecumItem = (id) => {
+        const body = document.getElementById(`body-${id}`);
+        const icon = document.getElementById(`icon-${id}`);
+        if (!body) return;
+
+        if (body.classList.contains('hidden')) {
+            body.classList.remove('hidden');
+            icon.classList.add('rotate-180');
+        } else {
+            body.classList.add('hidden');
+            icon.classList.remove('rotate-180');
+        }
+    };
+
+    window.copyFiscalGuide = (id) => {
+        const guideEl = document.getElementById(`guide-${id}`);
+        if (guideEl) {
+            navigator.clipboard.writeText(guideEl.innerText);
+            showToast("Guía copiada al portapapeles");
+        }
+    };
+
+    renderList();
+}
+
+function renderDictadoNovedades(container) {
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Dictado de Novedades</h1>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
+            <div class="px-1 space-y-1">
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Libro de Guardia por Voz</h2>
+                <p class="text-[11px] text-slate-400">Dictá en lenguaje natural y la app estructurará la novedad policial formal.</p>
+            </div>
+
+            <!-- Dictation Box -->
+            <section class="space-y-4">
+                <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-4">
+                    <!-- Status / Microphone indicator -->
+                    <div class="flex items-center justify-between text-[10px] px-1">
+                        <span class="font-bold text-slate-500 uppercase tracking-wider">Estado del Micrófono</span>
+                        <div class="flex items-center gap-1.5" id="dictado-status">
+                            <span class="size-2 rounded-full bg-slate-600" id="status-dot"></span>
+                            <span class="text-slate-400 font-bold uppercase" id="status-text">Apagado</span>
+                        </div>
+                    </div>
+
+                    <!-- Visual Mic Area -->
+                    <div class="flex justify-center py-6">
+                        <div class="relative">
+                            <!-- Outer pulsing ring (hidden by default) -->
+                            <div id="mic-pulse" class="absolute inset-0 rounded-full bg-primary/20 scale-150 animate-ping hidden"></div>
+                            <button id="btn-toggle-mic" onclick="window.toggleSpeechDictado()" class="relative z-10 size-20 rounded-full bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/25 active:scale-95 transition-all">
+                                <span id="mic-icon" class="material-symbols-outlined text-3xl">mic</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Transcript Area -->
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-bold text-primary uppercase ml-1">Transcripción del Dictado</label>
+                        <textarea id="dictado-raw-text" placeholder="Presioná el micrófono y comenzá a hablar de forma natural... (ej. Vimos a un tipo robando cables y procedimos a la detención)" 
+                            class="w-full h-36 bg-white/5 border border-white/10 rounded-2xl p-4 text-xs text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex gap-2">
+                        <button onclick="window.clearDictado()" class="flex-1 py-3.5 bg-white/5 hover:bg-white/10 text-slate-400 font-bold rounded-2xl text-xs transition-colors">
+                            Limpiar
+                        </button>
+                        <button onclick="window.structureDictado()" id="btn-structure" class="flex-[2] py-3.5 bg-primary text-white font-bold rounded-2xl text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-sm">auto_awesome</span>Estructurar Novedad
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Structured Preview -->
+                <div id="novedad-result-container" class="hidden space-y-4">
+                    <div class="px-1">
+                        <span class="text-[9px] font-bold text-slate-500 uppercase tracking-widest block">Novedad Estructurada Formal</span>
+                    </div>
+                    <div class="glass-card p-5 rounded-3xl border border-primary/20 bg-primary/5 relative">
+                        <pre id="novedad-output" class="text-xs text-slate-800 dark:text-slate-200 whitespace-pre-wrap font-sans leading-relaxed select-all pr-12"></pre>
+                        <div class="absolute top-4 right-4 flex flex-col gap-2">
+                            <button onclick="window.copyNovedad()" class="size-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-900 dark:text-white active:scale-90 transition-all shadow-sm">
+                                <span class="material-symbols-outlined text-sm">content_copy</span>
+                            </button>
+                            <button onclick="window.shareNovedad()" class="size-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-slate-900 dark:text-white active:scale-90 transition-all shadow-sm">
+                                <span class="material-symbols-outlined text-sm">share</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+
+    // Check Speech Recognition support
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    let recognition = null;
+    let isRecording = false;
+
+    if (!SpeechRecognition) {
+        // Update status indicating lack of browser support
+        const statusText = document.getElementById('status-text');
+        const statusDot = document.getElementById('status-dot');
+        if (statusText) statusText.innerText = 'No Compatible';
+        if (statusDot) statusDot.className = 'size-2 rounded-full bg-red-500';
+    } else {
+        recognition = new SpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'es-AR';
+
+        recognition.onstart = () => {
+            isRecording = true;
+            updateMicUI(true);
+        };
+
+        recognition.onresult = (event) => {
+            let finalTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript + ' ';
+                }
+            }
+            if (finalTranscript) {
+                const textarea = document.getElementById('dictado-raw-text');
+                if (textarea) {
+                    textarea.value += finalTranscript;
+                    textarea.scrollTop = textarea.scrollHeight;
+                }
+            }
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Speech Recognition Error:", event.error);
+            if (event.error === 'not-allowed') {
+                showToast("❌ Permiso denegado al micrófono.");
+            } else {
+                showToast("❌ Error de dictado: " + event.error);
+            }
+            isRecording = false;
+            updateMicUI(false);
+        };
+
+        recognition.onend = () => {
+            isRecording = false;
+            updateMicUI(false);
+        };
+    }
+
+    // Stop recording on hashchange (navigation away)
+    const handleHashChange = () => {
+        if (isRecording && recognition) {
+            recognition.stop();
+        }
+        window.removeEventListener('hashchange', handleHashChange);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+
+    window.toggleSpeechDictado = () => {
+        if (!recognition) {
+            return showToast("Dictado por voz no disponible en este navegador. Escribí de forma manual.");
+        }
+
+        if (isRecording) {
+            recognition.stop();
+        } else {
+            try {
+                recognition.start();
+            } catch (e) {
+                console.error("Start speech error:", e);
+                recognition.stop();
+                setTimeout(() => {
+                    try { recognition.start(); } catch (err) { console.error(err); }
+                }, 200);
+            }
+        }
+    };
+
+    function updateMicUI(active) {
+        const dot = document.getElementById('status-dot');
+        const text = document.getElementById('status-text');
+        const pulse = document.getElementById('mic-pulse');
+        const icon = document.getElementById('mic-icon');
+        const btn = document.getElementById('btn-toggle-mic');
+
+        if (!dot || !text || !pulse || !icon || !btn) return;
+
+        if (active) {
+            dot.className = 'size-2 rounded-full bg-emerald-500 animate-pulse';
+            text.innerText = 'Escuchando...';
+            text.className = 'text-emerald-400 font-bold uppercase';
+            pulse.classList.remove('hidden');
+            icon.innerText = 'mic_off';
+            btn.className = 'relative z-10 size-20 rounded-full bg-red-500 flex items-center justify-center text-white shadow-xl shadow-red-500/25 active:scale-95 transition-all';
+        } else {
+            dot.className = 'size-2 rounded-full bg-slate-600';
+            text.innerText = 'Apagado';
+            text.className = 'text-slate-400 font-bold uppercase';
+            pulse.classList.add('hidden');
+            icon.innerText = 'mic';
+            btn.className = 'relative z-10 size-20 rounded-full bg-primary flex items-center justify-center text-white shadow-xl shadow-primary/25 active:scale-95 transition-all';
+        }
+    }
+
+    window.clearDictado = () => {
+        const rawTextarea = document.getElementById('dictado-raw-text');
+        if (rawTextarea) rawTextarea.value = '';
+        const container = document.getElementById('novedad-result-container');
+        if (container) container.classList.add('hidden');
+    };
+
+    window.structureDictado = () => {
+        const rawTextarea = document.getElementById('dictado-raw-text');
+        const rawText = rawTextarea ? rawTextarea.value.trim() : '';
+        if (!rawText) return showToast("Primero dictá o ingresá un texto");
+
+        if (isRecording && recognition) {
+            recognition.stop();
+        }
+
+        const btn = document.getElementById('btn-structure');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = `Estructurando...`;
+        }
+
+        setTimeout(() => {
+            const container = document.getElementById('novedad-result-container');
+            const output = document.getElementById('novedad-output');
+            const now = new Date();
+
+            const refined = window.improvePoliceNarrative(rawText);
+
+            let log = `═══════════════════════════════════════\n`;
+            log += `   LIBRO DE GUARDIA DIGITAL - NOVEDAD\n`;
+            log += `═══════════════════════════════════════\n\n`;
+            log += `FECHA: ${now.toLocaleDateString('es-AR')} - HORA: ${now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' })}\n`;
+            log += `DEP: ${window.store?.user?.dependency || 'UNIDAD OPERATIVA DE MÓVILES'}\n`;
+            log += `ACTUANTE: ${window.store?.user?.name || 'FUNCIONARIO POLICIAL'} - LEGAJO: ${window.store?.user?.badge || 'N/A'}\n\n`;
+            log += `DETALLE DE LA NOVEDAD:\n${refined}\n\n`;
+            log += `───────────────────────────────\n`;
+            log += `Estado de las actuaciones: Comunicado a la superioridad y fiscal de turno en caso de corresponder.`;
+
+            if (output) output.innerText = log;
+            if (container) container.classList.remove('hidden');
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = `<span class="material-symbols-outlined text-sm">auto_awesome</span>Estructurar Novedad`;
+            }
+            
+            showToast("✅ Novedad estructurada en lenguaje forense");
+        }, 1200);
+    };
+
+    window.copyNovedad = () => {
+        const output = document.getElementById('novedad-output');
+        if (output) {
+            navigator.clipboard.writeText(output.innerText);
+            showToast("Copiado al portapapeles");
+        }
+    };
+
+    window.shareNovedad = async () => {
+        const output = document.getElementById('novedad-output');
+        if (!output) return;
+        const text = output.innerText;
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: 'Novedad Policial',
+                    text: text
+                });
+            } catch (e) {
+                console.log("Share cancelled or failed", e);
+            }
+        } else {
+            showToast("La función de compartir no es compatible con este navegador. Usá copiar.");
+        }
+    };
+}
+
 // Global Exports
 window.renderAsistenteHub = renderAsistenteHub;
 window.renderPartesInteligentes = renderPartesInteligentes;
+window.renderVademecum = renderVademecum;
+window.renderDictadoNovedades = renderDictadoNovedades;
 
 window.showAnnouncementModal = () => {
     const currentVersion = 'v531.3-HARDENED';

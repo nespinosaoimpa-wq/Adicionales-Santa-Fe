@@ -3,6 +3,78 @@
  * Módulo de creación de documentos formales policiales
  */
 
+// ── AJUSTES DE FORMATO ──
+function getActaSettings() {
+    const defaults = {
+        header: `POLICÍA DE LA PROVINCIA DE SANTA FE\nADICIONALES SANTA FE - ASISTENTE VIRTUAL`,
+        footer: `Con lo que no siendo para más, se da por finalizada la presente actuación, previa lectura y ratificación de su contenido, firmando los intervinientes de plena conformidad por ante mí y testigos de actuación que certifican lo actuado.`,
+        signature: `${store.user?.name || 'FUNCIONARIO POLICIAL'}\nLegajo: ${store.user?.badge || '________'}`
+    };
+    try {
+        const saved = JSON.parse(localStorage.getItem('acta_format_settings') || 'null');
+        return saved ? { ...defaults, ...saved } : defaults;
+    } catch (e) {
+        return defaults;
+    }
+}
+
+function renderActasSettings(container) {
+    if (!container) container = document.getElementById('app');
+    const settings = getActaSettings();
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente/actas')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <div class="flex flex-col">
+                <h1 class="text-sm font-black text-white leading-none">Ajustes de Formato</h1>
+                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Membretes y Firmas</span>
+            </div>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto view-transition">
+            <div class="px-1 space-y-1">
+                <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Personalizar Acta</h2>
+                <p class="text-[11px] text-slate-400 leading-relaxed">Configurá el membrete de tu brigada y tu firma para que aparezcan en todos los documentos.</p>
+            </div>
+
+            <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-6">
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-primary uppercase ml-1">Encabezado / Membrete</label>
+                    <textarea id="set-acta-header" class="w-full h-24 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none" placeholder="Ej: BRIGADA MOTORIZADA - UR I">${settings.header}</textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-primary uppercase ml-1">Cierre de Acta (Pie)</label>
+                    <textarea id="set-acta-footer" class="w-full h-24 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none">${settings.footer}</textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold text-primary uppercase ml-1">Firma / Legajo</label>
+                    <textarea id="set-acta-signature" class="w-full h-20 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none" placeholder="Nombre y Legajo">${settings.signature}</textarea>
+                </div>
+
+                <button onclick="window._saveActaSettings()" class="w-full py-4 bg-primary text-white font-bold rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined">save</span>Guardar Cambios
+                </button>
+            </div>
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+
+    window._saveActaSettings = () => {
+        const header = document.getElementById('set-acta-header').value.trim();
+        const footer = document.getElementById('set-acta-footer').value.trim();
+        const signature = document.getElementById('set-acta-signature').value.trim();
+
+        localStorage.setItem('acta_format_settings', JSON.stringify({ header, footer, signature }));
+        showToast('✅ Formato actualizado');
+        router.navigateTo('#asistente/actas');
+    };
+}
+
+
 // ── PLANTILLAS DE ACTAS ──
 const ACTA_TEMPLATES = {
     allanamiento: {
@@ -23,18 +95,21 @@ const ACTA_TEMPLATES = {
         ]
     },
     custodia: {
-        title: 'Cadena de Custodia',
-        icon: 'lock',
+        title: 'Cadena de Custodia (Rótulo)',
+        icon: 'inventory',
         color: 'from-amber-500 to-orange-600',
         fields: [
-            { id: 'nro_causa', label: 'N° de Causa / Actuación', type: 'text', required: true },
-            { id: 'descripcion_evidencia', label: 'Descripción de la Evidencia', type: 'textarea', required: true },
-            { id: 'lugar_hallazgo', label: 'Lugar de Hallazgo', type: 'text', required: true },
+            { id: 'imputado', label: 'Imputado', type: 'text', required: true },
+            { id: 'cuij', label: 'CUIJ', type: 'text', required: true },
+            { id: 'victima', label: 'Víctima', type: 'text', required: true },
+            { id: 'fiscal', label: 'Fiscal Interviniente', type: 'text', required: true },
+            { id: 'procedimiento', label: 'Procedimiento (Allanamiento, Requisa, etc)', type: 'text', required: true },
+            { id: 'elementos', label: 'Detalle de Elementos (N°, Descrip, Lugar, Cant)', type: 'textarea', required: true },
+            { id: 'embalaje', label: 'Embalaje (Bolsa plástica/papel, Frasco, etc)', type: 'text', required: true },
             { id: 'recolector', label: 'Funcionario que Recolecta', type: 'text', required: true },
-            { id: 'recolector_jerarquia', label: 'Jerarquía / Legajo', type: 'text', required: true },
-            { id: 'destino', label: 'Destino de la Evidencia', type: 'text', required: true },
-            { id: 'estado_evidencia', label: 'Estado de la Evidencia', type: 'select', options: ['Intacta', 'Dañada', 'Fragmentada', 'Contaminada'], required: true },
-            { id: 'observaciones', label: 'Observaciones', type: 'textarea', required: false }
+            { id: 'recolector_cargo', label: 'Cargo y Dependencia', type: 'text', required: true },
+            { id: 'testigos', label: 'Testigos (Nombre, DNI, Tel)', type: 'textarea', required: false },
+            { id: 'observaciones', label: 'Observaciones / Estado', type: 'textarea', required: false }
         ]
     },
     procedimiento: {
@@ -102,27 +177,38 @@ const ACTA_TEMPLATES = {
             { id: 'denunciante_dni', label: 'DNI del Denunciante', type: 'text', required: true },
             { id: 'denunciante_domicilio', label: 'Domicilio', type: 'text', required: true },
             { id: 'denunciante_telefono', label: 'Teléfono de Contacto', type: 'text', required: false },
-            { id: 'hechos', label: 'Relato de los Hechos', type: 'textarea', required: true },
+            { id: 'hechos', label: 'Relato Circunstanciado de los Hechos', type: 'textarea', required: true },
             { id: 'lugar_hecho', label: 'Lugar del Hecho', type: 'text', required: true },
             { id: 'fecha_hecho', label: 'Fecha y Hora del Hecho', type: 'text', required: true },
             { id: 'testigos', label: 'Testigos (si los hubiere)', type: 'textarea', required: false },
             { id: 'observaciones', label: 'Observaciones', type: 'textarea', required: false }
+        ]
+    },
+    oficio: {
+        title: 'Oficio Judicial / Comunicación',
+        icon: 'mail',
+        color: 'from-slate-600 to-slate-800',
+        fields: [
+            { id: 'destinatario', label: 'Destinatario (Autoridad/Cargo)', type: 'text', required: true },
+            { id: 'dependencia', label: 'Dependencia / Organismo', type: 'text', required: true },
+            { id: 'referencia', label: 'Referencia (CUIJ / Nro. Causa)', type: 'text', required: true },
+            { id: 'objeto', label: 'Objeto de la Comunicación', type: 'text', required: true },
+            { id: 'cuerpo', label: 'Cuerpo del Mensaje (Narrativa)', type: 'textarea', required: true },
+            { id: 'anexos', label: 'Documentación Anexa', type: 'text', required: false }
         ]
     }
 };
 
 // ── GENERADOR DE TEXTO FORMAL ──
 function generateActaText(tipo, data) {
+    const settings = getActaSettings();
     const now = new Date();
     const fecha = now.toLocaleDateString('es-AR', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     const hora = now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
     const userName = store.user?.name || 'FUNCIONARIO POLICIAL';
-    const userEmail = store.user?.email || '';
 
-    const header = `═══════════════════════════════════════\n` +
-        `POLICÍA DE LA PROVINCIA DE SANTA FE\n` +
-        `${ACTA_TEMPLATES[tipo].title.toUpperCase()}\n` +
-        `═══════════════════════════════════════\n\n` +
+    const header = `${settings.header.toUpperCase()}\n` +
+        `${ACTA_TEMPLATES[tipo].title.toUpperCase()}\n\n` +
         `En la ciudad de ${data.localidad || data.zona || '________'}, Provincia de Santa Fe, ` +
         `a los ${now.getDate()} días del mes de ${now.toLocaleDateString('es-AR', { month: 'long' })} ` +
         `del año ${now.getFullYear()}, siendo las ${hora} horas, ` +
@@ -144,14 +230,15 @@ function generateActaText(tipo, data) {
                 `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
             break;
         case 'custodia':
-            body = `Se labra la presente a fin de dejar constancia de la CADENA DE CUSTODIA ` +
-                `de la evidencia recolectada en el marco de la actuación N° ${data.nro_causa}.\n\n` +
-                `DESCRIPCIÓN DE LA EVIDENCIA:\n${data.descripcion_evidencia}\n\n` +
-                `LUGAR DE HALLAZGO: ${data.lugar_hallazgo}\n` +
-                `ESTADO: ${data.estado_evidencia}\n\n` +
-                `FUNCIONARIO QUE RECOLECTA: ${data.recolector}\n` +
-                `JERARQUÍA / LEGAJO: ${data.recolector_jerarquia}\n` +
-                `DESTINO: ${data.destino}\n\n` +
+            body = `RÓTULO DE ELEMENTOS SECUESTRADOS\n` +
+                `IMPUTADO: ${data.imputado}\t\tCUIJ: ${data.cuij}\n` +
+                `VÍCTIMA: ${data.victima}\t\tFISCAL: ${data.fiscal}\n` +
+                `PROCEDIMIENTO: ${data.procedimiento}\n\n` +
+                `DETALLE DE ELEMENTOS:\n${data.elementos}\n\n` +
+                `EMBALAJE: ${data.embalaje}\n\n` +
+                `FUNCIONARIO QUE EFECTUÓ LA RECOLECCIÓN:\n` +
+                `${data.recolector} - ${data.recolector_cargo}\n\n` +
+                `TESTIGOS CIVILES:\n${data.testigos || 'Sin testigos registrados'}\n\n` +
                 `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
             break;
         case 'procedimiento':
@@ -190,31 +277,36 @@ function generateActaText(tipo, data) {
                 `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
             break;
         case 'denuncia':
-            body = `Comparece ante esta dependencia policial ${data.denunciante_nombre}, ` +
+            body = `Comparece ante esta dependencia policial el/la ciudadano/a ${data.denunciante_nombre}, ` +
                 `D.N.I. N° ${data.denunciante_dni}, con domicilio real en ${data.denunciante_domicilio}` +
                 `${data.denunciante_telefono ? ', teléfono de contacto: ' + data.denunciante_telefono : ''}, ` +
-                `quien MANIFIESTA:\n\n` +
-                `RELATO DE LOS HECHOS:\n${data.hechos}\n\n` +
+                `quien previa lectura de sus derechos y garantías legales, MANIFIESTA:\n\n` +
+                `RELATO CIRCUNSTANCIADO DE LOS HECHOS:\n${data.hechos}\n\n` +
                 `LUGAR DEL HECHO: ${data.lugar_hecho}\n` +
                 `FECHA Y HORA: ${data.fecha_hecho}\n\n` +
                 `${data.testigos ? 'TESTIGOS:\n' + data.testigos + '\n\n' : ''}` +
                 `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
             break;
+        case 'oficio':
+            body = `A: ${data.destinatario}\n` +
+                `DEPENDENCIA: ${data.dependencia}\n` +
+                `REF: ${data.referencia}\n` +
+                `OBJETO: ${data.objeto}\n\n` +
+                `Tengo el agrado de dirigirme a Usted, en el marco de la actuación de referencia, ` +
+                `a efectos de elevar a su conocimiento lo siguiente:\n\n` +
+                `${data.cuerpo}\n\n` +
+                `${data.anexos ? 'DOCUMENTACIÓN ANEXA: ' + data.anexos + '\n\n' : ''}` +
+                `Sin otro particular, saludo a Usted muy atentamente.\n\n`;
+            break;
     }
 
-    const footer = `Con lo que no siendo para más, se da por finalizada la presente ` +
-        `actuación, previa lectura y ratificación, firmando los intervinientes ` +
-        `al pie para constancia.\n\n` +
-        `───────────────────────────────\n` +
+    const footer = `\n${settings.footer}\n\n` +
         `Firma Funcionario Actuante\n` +
-        `${userName}\n` +
-        `───────────────────────────────\n` +
-        `Firma Interviniente/Notificado\n\n` +
-        `───────────────────────────────\n` +
-        `Firma Testigo 1\n\n` +
-        `───────────────────────────────\n` +
-        `Firma Testigo 2\n\n` +
-        `Generado por Adicionales Santa Fe - ${fecha} ${hora}`;
+        `${settings.signature}\n\n` +
+        `Firma Interviniente/Notificado\n\n\n` +
+        `Firma Testigo 1\n\n\n` +
+        `Firma Testigo 2\n\n\n` +
+        `Documento generado digitalmente por Adicionales Santa Fe - ${fecha} ${hora}`;
 
     return header + body + footer;
 }
@@ -226,14 +318,19 @@ function renderActasHub(container) {
     const actaTypes = Object.entries(ACTA_TEMPLATES);
 
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
-                <span class="material-symbols-outlined">arrow_back</span>
-            </button>
-            <div class="flex flex-col">
-                <h1 class="text-lg font-black text-white leading-none">Actas Policiales</h1>
-                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Generador de Documentos Formales</span>
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div class="flex flex-col">
+                    <h1 class="text-lg font-black text-white leading-none">Actas Policiales</h1>
+                    <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Generador de Documentos Formales</span>
+                </div>
             </div>
+            <button onclick="router.navigateTo('#asistente/actas/settings')" class="size-10 rounded-xl bg-white/5 flex items-center justify-center text-slate-400 hover:text-primary transition-all">
+                <span class="material-symbols-outlined">settings</span>
+            </button>
         </header>
 
         <main class="p-6 space-y-6 pb-32 max-w-md mx-auto view-transition">
@@ -299,9 +396,14 @@ function renderActaForm(container, tipo) {
                     ${tmpl.fields.map(f => {
                         if (f.type === 'textarea') {
                             return `<div class="space-y-1.5">
-                                <label class="text-[10px] font-bold text-primary uppercase ml-1">${f.label} ${f.required ? '*' : ''}</label>
+                                <div class="flex justify-between items-center px-1">
+                                    <label class="text-[10px] font-bold text-primary uppercase">${f.label} ${f.required ? '*' : ''}</label>
+                                    <button type="button" onclick="window._improveField('acta-${f.id}')" class="text-[9px] bg-primary/10 text-primary px-2 py-0.5 rounded-full flex items-center gap-1 hover:bg-primary/20 transition-all">
+                                        <span class="material-symbols-outlined text-[10px]">auto_awesome</span>Pulir Narrativa
+                                    </button>
+                                </div>
                                 <textarea id="acta-${f.id}" ${f.required ? 'required' : ''} placeholder="${f.label}..."
-                                    class="w-full h-24 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
+                                    class="w-full h-32 bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white focus:ring-1 focus:ring-primary outline-none transition-all resize-none"></textarea>
                             </div>`;
                         } else if (f.type === 'select') {
                             return `<div class="space-y-1.5">
@@ -331,6 +433,15 @@ function renderActaForm(container, tipo) {
             <div id="acta-result" class="hidden space-y-4">
                 <div class="glass-card p-5 rounded-3xl border border-primary/20 bg-primary/5 relative">
                     <pre id="acta-output" class="text-xs text-slate-200 whitespace-pre-wrap font-sans leading-relaxed"></pre>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <button onclick="window._downloadPDF()" class="py-3 rounded-xl bg-red-600/20 text-red-400 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all border border-red-500/30">
+                        <span class="material-symbols-outlined text-sm">picture_as_pdf</span>PDF
+                    </button>
+                    <button onclick="window._downloadWord()" class="py-3 rounded-xl bg-blue-600/20 text-blue-400 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all border border-blue-500/30">
+                        <span class="material-symbols-outlined text-sm">description</span>Word (.doc)
+                    </button>
                 </div>
 
                 <div class="grid grid-cols-2 gap-3">
@@ -382,12 +493,102 @@ function renderActaForm(container, tipo) {
         window.open('https://wa.me/?text=' + encodeURIComponent(text), '_blank');
     };
 
+    window._downloadPDF = () => {
+        const text = document.getElementById('acta-output').innerText;
+        const filename = `Acta_${tipo}_${new Date().getTime()}.pdf`;
+        
+        // Crear elemento temporal para renderizado PDF con formato sobrio (Estilo APA/Judicial)
+        const temp = document.createElement('div');
+        temp.style.padding = '50px 70px'; // Márgenes amplios
+        temp.style.fontFamily = '"Times New Roman", Times, serif';
+        temp.style.fontSize = '12pt';
+        temp.style.lineHeight = '1.6';
+        temp.style.color = '#000';
+        temp.style.backgroundColor = '#fff';
+        temp.style.textAlign = 'justify';
+        
+        // Formatear el texto para que el encabezado esté centrado
+        const lines = text.split('\n');
+        let formattedHtml = '';
+        lines.forEach((line, i) => {
+            if (i < 2) { // Encabezado y Título centrados y en negrita
+                formattedHtml += `<div style="text-align: center; font-weight: bold; margin-bottom: 5px;">${line}</div>`;
+            } else if (line.trim() === '') {
+                formattedHtml += '<br>';
+            } else {
+                formattedHtml += `<div>${line}</div>`;
+            }
+        });
+        
+        temp.innerHTML = formattedHtml;
+        
+        showToast('⏳ Generando documento profesional...');
+        html2pdf().from(temp).set({
+            margin: [0.75, 0.75, 0.75, 0.75], // Pulgadas (aprox normas APA)
+            filename: filename,
+            html2canvas: { scale: 3, logging: false, useCORS: true },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        }).save().then(() => showToast('✅ PDF Profesional Descargado'));
+    };
+
+    window._downloadWord = () => {
+        const text = document.getElementById('acta-output').innerText;
+        const filename = `Acta_${tipo}_${new Date().getTime()}.doc`;
+        
+        // Formatear el texto para Word (Centrar encabezado)
+        const lines = text.split('\n');
+        let formattedBody = '';
+        lines.forEach((line, i) => {
+            if (i < 2) {
+                formattedBody += `<p style="text-align: center; font-weight: bold; margin: 0;">${line}</p>`;
+            } else {
+                formattedBody += `<p style="margin: 0; min-height: 1em;">${line || '&nbsp;'}</p>`;
+            }
+        });
+
+        // HTML wrapper compatible con Word
+        const html = `
+            <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+            <head><meta charset='utf-8'><title>Acta</title></head>
+            <body style="font-family: 'Times New Roman', Times, serif; font-size: 12pt; text-align: justify; padding: 1in;">
+                ${formattedBody}
+            </body>
+            </html>
+        `;
+
+        const blob = new Blob(['\ufeff', html], { type: 'application/msword' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        showToast('✅ Archivo Word (.doc) generado');
+    };
+
     window._newActa = () => {
         renderActaForm(container, tipo);
+    };
+
+    window._improveField = (fieldId) => {
+        const el = document.getElementById(fieldId);
+        if (!el || !el.value.trim()) return showToast("Escribí algo primero");
+        
+        const original = el.value;
+        const improved = window.improvePoliceNarrative(original);
+        
+        if (original === improved) {
+            showToast("ℹ️ El texto ya es profesional");
+        } else {
+            el.value = improved;
+            showToast("✨ Narrativa profesionalizada");
+            el.classList.add('ring-2', 'ring-emerald-500/50');
+            setTimeout(() => el.classList.remove('ring-2', 'ring-emerald-500/50'), 2000);
+        }
     };
 }
 
 // ── EXPORTS ──
 window.renderActasHub = renderActasHub;
+window.renderActasSettings = renderActasSettings;
 window.renderActaForm = renderActaForm;
 window.ACTA_TEMPLATES = ACTA_TEMPLATES;

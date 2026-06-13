@@ -15,3 +15,8 @@ yarn-error.log*
 # Firebase
 *-firebase-adminsdk-*.json
 .firebase/
+dist/
+temp_deploy_dir_ghpages/
+gh-pages-deploy-*/
+gh-pages-*/
+

@@ -8,11 +8,15 @@
 document.addEventListener('DOMContentLoaded', async () => {
     console.log("🚀 Adicionales Santa Fe Modularized - Booting...");
 
+    // Initialize State & Data Logic
+    try {
+        await store.init();
+    } catch (error) {
+        console.error("❌ Store Init Error:", error);
+    }
+
     // Initialize Routing
     router.init();
-
-    // Initialize State & Data Logic
-    store.init();
 
     // Check Supabase session (OAuth Redirect Handling)
     try {

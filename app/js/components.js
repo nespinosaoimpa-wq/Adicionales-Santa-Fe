@@ -43,16 +43,21 @@ window.renderLogo = renderLogo;
 function renderAdBanner() {
     // 1. Native Custom Ad Check
     if (store.ads && store.ads.length > 0) {
+        console.log("📢 Rendering custom ad:", store.ads[0]);
         const ad = store.ads[0]; 
         return `
-            <div class="w-full my-4 flex justify-center group overflow-hidden">
+            <div class="w-full my-4 flex justify-center group overflow-hidden animate-fade-in">
                 <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-3xl overflow-hidden rounded-2xl shadow-lg border border-white/10 opacity-90 hover:opacity-100 transition-opacity relative">
-                    <img src="${ad.imageUrl}" class="w-full object-cover max-h-[140px]" alt="Patrocinado">
+                    <img src="${ad.imageUrl}" 
+                         onerror="this.parentElement.style.display='none'; console.warn('Ad image failed to load:', this.src)"
+                         class="w-full object-cover max-h-[140px]" alt="Patrocinado">
                     <div class="absolute top-1 right-2 px-1.5 rounded-sm bg-black/40 backdrop-blur-md text-[8px] text-white uppercase font-bold">Patrocinado</div>
                 </a>
             </div>
         `;
     }
+
+    console.log("📢 No custom ads found, falling back to AdSense");
 
     // 2. Google AdSense Fallback - Self-collapsing container
     return `

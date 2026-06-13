@@ -6,6 +6,7 @@ window.router = {
     currentRoute: '#login',
 
     init() {
+        this.initialized = true;
         window.addEventListener('hashchange', () => this.handleRoute());
         this.handleRoute(); // Initial load
     },
@@ -107,6 +108,15 @@ window.router = {
                 case '#asistente/fixture':
                     renderFixtureMundial(app);
                     break;
+                case '#asistente/vademecum':
+                    renderVademecum(app);
+                    break;
+                case '#asistente/dictado':
+                    renderDictadoNovedades(app);
+                    break;
+                case '#asistente/iapos':
+                    renderIAPOS(app);
+                    break;
                 case '#info':
                     renderInfoGuia(app);
                     break;
@@ -170,6 +180,8 @@ window.router = {
                         // Backward compat or alternative
                         const serviceId = route.split('/')[1];
                         renderServiceDetails(app, serviceId);
+                    } else if (route === '#asistente/actas/settings') {
+                        renderActasSettings(app);
                     } else if (route.startsWith('#asistente/actas/')) {
                         const actaTipo = route.split('/')[2];
                         renderActaForm(app, actaTipo);
