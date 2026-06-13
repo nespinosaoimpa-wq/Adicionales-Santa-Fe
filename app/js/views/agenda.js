@@ -60,9 +60,10 @@ function renderAgenda(container) {
                 <div class="flex items-center gap-2">
                     <span class="text-sm">🇦🇷</span>
                     <span class="text-xs font-extrabold tracking-widest text-slate-900 dark:text-white uppercase italic">¡Vamos Argentina!</span>
+                    <span class="text-[10px] flex gap-0.5 animate-pulse select-none" title="Tricampeón del Mundo">⭐.⭐.⭐</span>
                 </div>
                 <div class="flex items-center gap-1.5">
-                    <span class="text-[9px] font-bold text-[#F6B426] uppercase tracking-widest animate-pulse">🏆 Mundial 2026</span>
+                    <span class="text-[9px] font-bold text-[#F6B426] uppercase tracking-widest">🏆 Mundial 2026</span>
                     <span class="text-xs animate-spin" style="animation-duration: 4s;">⚽</span>
                 </div>
             </div>
