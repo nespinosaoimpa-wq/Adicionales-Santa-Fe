@@ -54,6 +54,18 @@ function renderAgenda(container) {
         </header>
 
         <main class="flex-1 overflow-y-auto px-6 space-y-5 pb-32">
+            
+            <!-- Vamos Argentina Banner -->
+            <div class="mt-4 p-3.5 rounded-2xl bg-gradient-to-r from-[#74ACDF]/20 via-white/5 to-[#74ACDF]/20 border border-[#74ACDF]/20 flex items-center justify-between shadow-md relative overflow-hidden">
+                <div class="flex items-center gap-2">
+                    <span class="text-sm">🇦🇷</span>
+                    <span class="text-xs font-extrabold tracking-widest text-slate-900 dark:text-white uppercase italic">¡Vamos Argentina!</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                    <span class="text-[9px] font-bold text-[#F6B426] uppercase tracking-widest animate-pulse">🏆 Mundial 2026</span>
+                    <span class="text-xs animate-spin" style="animation-duration: 4s;">⚽</span>
+                </div>
+            </div>
 
             <!-- Next Shift Hero Card -->
             ${nextShift ? `
