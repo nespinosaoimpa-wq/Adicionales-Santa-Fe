@@ -82,44 +82,61 @@ window.isInStandaloneMode = isInStandaloneMode;
 // Donation Modal (Global)
 window.showDonationModal = () => {
     const overlay = document.createElement('div');
-    overlay.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[200] flex items-end justify-center animate-fade-in';
+    overlay.className = 'fixed inset-0 bg-black/85 backdrop-blur-md z-[200] flex items-end justify-center animate-fade-in';
     overlay.innerHTML = `
-        <div class="bg-slate-900 w-full max-w-md rounded-t-[2.5rem] border-t border-white/10 p-8 pb-12 animate-slide-up shadow-2xl shadow-primary/20">
+        <div class="bg-slate-950 w-full max-w-md rounded-t-[2.5rem] border-t-4 border-[#74ACDF] p-8 pb-12 animate-slide-up shadow-2xl relative overflow-hidden">
+            <!-- Decorative Flag Background Elements -->
+            <div class="absolute -right-12 -top-12 size-36 bg-[#74ACDF]/10 rounded-full blur-2xl"></div>
+            <div class="absolute -left-12 -bottom-12 size-36 bg-[#F6B426]/10 rounded-full blur-2xl"></div>
+            
             <div class="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-6"></div>
-            <div class="flex items-center gap-4 mb-6">
-                <div class="size-14 rounded-2xl bg-amber-500/20 flex items-center justify-center text-amber-500 shadow-lg shadow-amber-500/10">
-                    <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+            
+            <!-- World Cup Header -->
+            <div class="flex items-center gap-4 mb-6 relative z-10">
+                <div class="size-14 rounded-2xl bg-gradient-to-br from-[#74ACDF] to-[#F6B426] flex items-center justify-center text-white shadow-lg shadow-[#74ACDF]/20 relative">
+                    <span class="material-symbols-outlined text-3xl animate-bounce">emoji_events</span>
+                    <!-- Small soccer ball badge -->
+                    <span class="absolute -bottom-1.5 -right-1.5 bg-slate-950 text-[10px] p-0.5 rounded-full border border-[#74ACDF]">⚽</span>
                 </div>
                 <div>
-                    <h3 class="font-bold text-white text-lg tracking-tight">Apoyar el Proyecto</h3>
-                    <p class="text-[10px] text-amber-500/70 font-black uppercase tracking-[0.2em]">Donaciones · Mantenimiento</p>
+                    <h3 class="font-extrabold text-white text-lg tracking-tight flex items-center gap-1.5">
+                        ¡Apoyá la App! <span class="text-sm">🇦🇷</span>
+                    </h3>
+                    <p class="text-[9px] text-[#F6B426] font-black uppercase tracking-[0.2em]">Colaboración · Modo Mundial 🏆</p>
                 </div>
             </div>
-            <p class="text-[13px] text-slate-400 leading-relaxed mb-8">
-                Mantener los servidores y el desarrollo constante lleva tiempo y costos. Si esta herramienta te ayuda, tu colaboración es fundamental. **Tocá para copiar los datos:**
+            
+            <p class="text-[12.5px] text-slate-300 leading-relaxed mb-6 relative z-10">
+                Desarrollar y mantener esta app sin publicidad molesta y con base de datos en tiempo real tiene costos mensuales. Si te es súper útil en tu día a día, tu colaboración nos ayuda a seguir firmes en la cancha. 
+                <br><br>
+                <strong class="text-white">Tocá cada dato para copiarlo:</strong>
             </p>
-            <div class="space-y-3 mb-8">
-                <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-[0.98] group">
+            
+            <!-- Donation Info Box -->
+            <div class="space-y-3 mb-8 relative z-10">
+                <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-[#74ACDF]/10 hover:border-[#74ACDF]/30 transition-all active:scale-[0.98] group">
                     <div>
-                        <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">Alias Mercado Pago</p>
-                        <p class="text-base font-mono font-black text-white group-hover:text-primary transition-colors">SmartFlow.Digital</p>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest mb-1">Alias Mercado Pago</p>
+                        <p class="text-base font-mono font-black text-white group-hover:text-[#74ACDF] transition-colors">SmartFlow.Digital</p>
                     </div>
-                    <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <div class="size-8 rounded-full bg-[#74ACDF]/10 flex items-center justify-center text-[#74ACDF] group-hover:bg-[#74ACDF] group-hover:text-slate-950 transition-colors">
                         <span class="material-symbols-outlined text-base">content_copy</span>
                     </div>
                 </div>
-                <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-[0.98] group">
+                
+                <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-[#74ACDF]/10 hover:border-[#74ACDF]/30 transition-all active:scale-[0.98] group">
                     <div>
-                        <p class="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">CVU</p>
-                        <p class="text-xs font-mono font-bold text-white group-hover:text-primary transition-colors">0000003100001906497190</p>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest mb-1">CVU</p>
+                        <p class="text-xs font-mono font-bold text-white group-hover:text-[#74ACDF] transition-colors">0000003100001906497190</p>
                     </div>
-                    <div class="size-8 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <div class="size-8 rounded-full bg-[#74ACDF]/10 flex items-center justify-center text-[#74ACDF] group-hover:bg-[#74ACDF] group-hover:text-slate-950 transition-colors">
                         <span class="material-symbols-outlined text-base">content_copy</span>
                     </div>
                 </div>
             </div>
+            
             <button onclick="this.closest('.fixed').remove()" class="w-full py-2 text-xs font-black text-slate-500 hover:text-white uppercase tracking-widest transition-colors">
-                Volver al Asistente
+                Volver
             </button>
         </div>
     `;

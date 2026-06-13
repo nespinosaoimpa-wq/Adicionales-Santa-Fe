@@ -109,14 +109,14 @@
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#0d59f2",
+                        "primary": "#5599e0",
                         "background-light": "#f5f6f8",
                         "background-dark": "#101622",
                         "service-public": "#10b981",
                         "service-private": "#3b82f6",
                         "service-ospe": "#f59e0b",
-                        "accent-cyan": "#06b6d4",
-                        "accent-warning": "#f59e0b"
+                        "accent-cyan": "#74ACDF",
+                        "accent-warning": "#F6B426"
                     },
                     fontFamily: {
                         "display": ["Public Sans", "Inter", "sans-serif"],
@@ -217,6 +217,19 @@
     <!-- Main App Container -->
     <div id="app"
         class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
+        <!-- Argentine Flag Decorative Top Bar -->
+        <div class="w-full h-2 flex flex-col shrink-0 relative z-[200]">
+            <div class="h-[30%] bg-[#74ACDF]"></div>
+            <div class="h-[40%] bg-white flex items-center justify-center relative">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <svg class="w-4 h-4 text-[#F6B426] animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="5" />
+                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+            <div class="h-[30%] bg-[#74ACDF]"></div>
+        </div>
         <div id="global-announcement-container" class="sticky top-0 z-[100] w-full">
             <div id="update-banner"
                 class="w-full bg-blue-600 text-white px-4 py-3 shadow-lg flex items-start flex-row gap-3 border-b border-white/20 animate-slide-down">

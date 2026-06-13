@@ -5,7 +5,20 @@
 function renderAsistenteHub(container) {
     if (!container) container = document.getElementById('app');
 
+    // Stats for Donation Section
+    const now = new Date();
+    const cm = now.getMonth();
+    const cy = now.getFullYear();
+    const currentMonthServices = (store.services || []).filter(s => {
+        if (!s.date) return false;
+        const d = new Date(s.date + 'T00:00:00');
+        return d.getMonth() === cm && d.getFullYear() === cy;
+    });
+    const currentMonthCount = currentMonthServices.length;
+    const currentMonthEarnings = currentMonthServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
+
     const tools = [
+        { id: 'fixture', title: 'Fixture Mundial 2026', desc: 'Consultá partidos, horarios y registrá tus pronósticos.', icon: 'sports_soccer', color: 'from-[#74ACDF] to-blue-500', route: '#asistente/fixture', badge: '🏆' },
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
         { id: 'actas', title: 'Actas Policiales', desc: 'Generá actas formales: allanamiento, custodia, procedimiento y más.', icon: 'description', color: 'from-red-500 to-rose-600', route: '#asistente/actas', badge: 'PRO' },
         { id: 'intervenciones', title: 'Intervenciones en Campo', desc: 'Registro en tiempo real con GPS y partes para WhatsApp.', icon: 'add_alert', color: 'from-blue-500 to-indigo-600', route: '#asistente/intervenciones', badge: 'PRO' },
@@ -90,20 +103,42 @@ function renderAsistenteHub(container) {
             </div>
 
             <!-- Donation Section -->
-            <div class="mt-6 p-6 rounded-3xl bg-gradient-to-br from-primary/20 to-accent-cyan/10 border border-primary/20 shadow-xl shadow-primary/5 animate-fade-in">
+            <div class="mt-6 p-6 rounded-3xl bg-gradient-to-br from-[#74ACDF]/20 to-[#F6B426]/10 border border-[#74ACDF]/30 shadow-xl shadow-[#74ACDF]/5 animate-fade-in relative overflow-hidden">
+                <!-- Football decoration -->
+                <div class="absolute -right-4 -bottom-4 size-20 bg-slate-900/10 dark:bg-white/5 rounded-full flex items-center justify-center rotate-12 opacity-40">
+                    <span class="text-5xl">⚽</span>
+                </div>
                 <div class="flex items-center gap-4 mb-4">
-                    <div class="size-12 rounded-2xl bg-primary flex items-center justify-center text-white shadow-lg shadow-primary/20">
-                        <span class="material-symbols-outlined">volunteer_activism</span>
+                    <div class="size-12 rounded-2xl bg-gradient-to-br from-[#74ACDF] to-[#F6B426] flex items-center justify-center text-slate-900 dark:text-white shadow-lg shadow-[#74ACDF]/20">
+                        <span class="material-symbols-outlined font-black">emoji_events</span>
                     </div>
                     <div>
-                        <h3 class="font-black text-slate-900 dark:text-white text-sm tracking-tight">Apoyá al Desarrollador</h3>
-                        <p class="text-[10px] text-primary font-bold uppercase tracking-widest">Sustento del Proyecto</p>
+                        <h3 class="font-extrabold text-slate-900 dark:text-white text-sm tracking-tight flex items-center gap-1">
+                            Apoyá la App <span class="text-xs">🇦🇷</span>
+                        </h3>
+                        <p class="text-[9px] text-[#5599e0] font-black uppercase tracking-widest">Mundial 2026 · Colaboración</p>
                     </div>
                 </div>
-                <p class="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed mb-5">
-                    Desarrollar sitios lleva tiempo, esfuerzo y frustración, como así también a veces las bases de datos generan gastos cuyo sustento corre por quien desarrolla la app. Esta app está pensada para hacer funcionales las tareas de los policías; si querés que sigamos creciendo, podés donar a nuestra cuenta:
+                
+                <!-- Dynamic Stats Box -->
+                <div class="mb-4 p-3 rounded-2xl bg-[#74ACDF]/10 dark:bg-white/5 border border-[#74ACDF]/20 text-[11px] leading-relaxed text-slate-700 dark:text-slate-300">
+                    📊 **Tu actividad este mes:**
+                    <div class="grid grid-cols-2 gap-2 mt-1.5 pt-1.5 border-t border-[#74ACDF]/20">
+                        <div>
+                            <span class="text-[9px] uppercase font-bold text-slate-400 block">Servicios</span>
+                            <span class="text-sm font-black text-slate-900 dark:text-white">${currentMonthCount} cargados</span>
+                        </div>
+                        <div>
+                            <span class="text-[9px] uppercase font-bold text-slate-400 block">Ganancia Est.</span>
+                            <span class="text-sm font-black text-[#F6B426]">$${currentMonthEarnings.toLocaleString('es-AR')}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed mb-5 relative z-10">
+                    Para que podamos mantener la base de datos en tiempo real, los servidores y el soporte constante sin llenarte de publicidad invasiva, tu colaboración al CVU de Mercado Pago es súper importante. ¡Unite al equipo de soporte!
                 </p>
-                <button onclick="window.showDonationModal()" class="w-full py-3.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-95 transition-all">
+                <button onclick="window.showDonationModal()" class="w-full py-3.5 rounded-2xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-2 hover:bg-primary/90 active:scale-95 transition-all relative z-10">
                     <span class="material-symbols-outlined text-sm">favorite</span>
                     Contribuir al Crecimiento
                 </button>
@@ -1529,4 +1564,182 @@ window.showAnnouncementModal = () => {
         overlay.remove();
     };
 };
+
+function renderFixtureMundial(container) {
+    if (!container) container = document.getElementById('app');
+
+    const matches = [
+        { id: 'match_arg_can', group: 'Grupo A', date: 'Viernes 12/06/2026', time: '21:00 hs', team1: 'Argentina', flag1: '🇦🇷', team2: 'Canadá', flag2: '🇨🇦', phase: 'groups' },
+        { id: 'match_per_chi', group: 'Grupo A', date: 'Sábado 13/06/2026', time: '19:00 hs', team1: 'Perú', flag1: '🇵🇪', team2: 'Chile', flag2: '🇨🇱', phase: 'groups' },
+        { id: 'match_chi_arg', group: 'Grupo A', date: 'Jueves 18/06/2026', time: '21:00 hs', team1: 'Chile', flag1: '🇨🇱', team2: 'Argentina', flag2: '🇦🇷', phase: 'groups' },
+        { id: 'match_per_can', group: 'Grupo A', date: 'Viernes 19/06/2026', time: '18:00 hs', team1: 'Perú', flag1: '🇵🇪', team2: 'Canadá', flag2: '🇨🇦', phase: 'groups' },
+        { id: 'match_arg_per', group: 'Grupo A', date: 'Miércoles 24/06/2026', time: '21:00 hs', team1: 'Argentina', flag1: '🇦🇷', team2: 'Perú', flag2: '🇵🇪', phase: 'groups' },
+        { id: 'match_can_chi', group: 'Grupo A', date: 'Miércoles 24/06/2026', time: '21:00 hs', team1: 'Canadá', flag1: '🇨🇦', team2: 'Chile', flag2: '🇨🇱', phase: 'groups' },
+        
+        // Final Phase
+        { id: 'match_o1', group: 'Octavos de Final', date: 'Lunes 29/06/2026', time: '18:00 hs', team1: '1A (Argentina?)', flag1: '🇦🇷', team2: '2B', flag2: '🏳️', phase: 'playoffs' },
+        { id: 'match_o2', group: 'Octavos de Final', date: 'Martes 30/06/2026', time: '21:00 hs', team1: '1B', flag1: '🏳️', team2: '2A', flag2: '🏳️', phase: 'playoffs' },
+        { id: 'match_cf1', group: 'Cuartos de Final', date: 'Domingo 05/07/2026', time: '21:00 hs', team1: 'Ganador O1', flag1: '🏆', team2: 'Ganador O2', flag2: '🏆', phase: 'playoffs' },
+        { id: 'match_sf1', group: 'Semifinal', date: 'Jueves 09/07/2026', time: '21:00 hs', team1: 'Ganador CF1', flag1: '🏆', team2: 'Ganador CF2', flag2: '🏆', phase: 'playoffs' },
+        { id: 'match_final', group: 'Gran Final', date: 'Domingo 19/07/2026', time: '16:00 hs', team1: 'Por definir', flag1: '⚽', team2: 'Por definir', flag2: '⚽', phase: 'playoffs' }
+    ];
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
+            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Fixture Mundial 2026</h1>
+        </header>
+
+        <main class="p-6 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
+            <!-- Sponsor Header (Smart Flow Digital) -->
+            <div class="flex flex-col items-center justify-center p-5 bg-white/5 dark:bg-slate-900/50 rounded-3xl border border-white/5 text-center">
+                <span class="text-[9px] text-slate-500 uppercase tracking-widest mb-1.5 font-bold">Presentado por</span>
+                <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-950 border border-white/10 shadow-lg shadow-[#74ACDF]/10 active:scale-95 transition-transform cursor-pointer" onclick="window.open('https://smartflow.digital', '_blank')">
+                    <span class="material-symbols-outlined text-[#74ACDF] text-base animate-pulse">waves</span>
+                    <span class="text-xs font-black tracking-wider text-white">Smart<span class="text-[#74ACDF]">Flow</span></span>
+                    <span class="text-[9px] font-bold text-slate-400">Digital</span>
+                </div>
+            </div>
+
+            <!-- Segmented Control for Phases -->
+            <div class="flex p-1.5 glass-card rounded-xl">
+                <button id="btn-phase-groups" onclick="window.switchFixturePhase('groups')" 
+                        class="flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all bg-primary text-white shadow-lg shadow-primary/20">
+                    Fase de Grupos (Arg)
+                </button>
+                <button id="btn-phase-playoffs" onclick="window.switchFixturePhase('playoffs')" 
+                        class="flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white">
+                    Fase Final
+                </button>
+            </div>
+
+            <!-- Matches List -->
+            <div id="fixture-list" class="space-y-4">
+                <!-- Will be dynamically filled -->
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="grid grid-cols-2 gap-3 pt-2">
+                <button onclick="window.saveFixtureProde()" class="w-full py-3.5 bg-primary text-white text-xs font-bold rounded-2xl shadow-lg shadow-primary/25 active:scale-95 transition-all">
+                    Guardar Pronósticos
+                </button>
+                <button onclick="window.resetFixtureProde()" class="w-full py-3.5 bg-slate-800 text-slate-400 hover:text-white text-xs font-bold rounded-2xl border border-white/5 active:scale-95 transition-all">
+                    Restablecer
+                </button>
+            </div>
+            
+            <!-- Sponsored footer -->
+            <div class="text-center pt-4 border-t border-white/5 opacity-50">
+                <p class="text-[10px] text-slate-500 font-mono">Smart Flow Digital © 2026 • Soporte al oficial de policía</p>
+            </div>
+        </main>
+        ${renderBottomNav('asistente')}
+    `;
+
+    // Local Handlers
+    let currentPhase = 'groups';
+
+    window.switchFixturePhase = (phase) => {
+        currentPhase = phase;
+        
+        // Update Buttons Styling
+        const btnG = document.getElementById('btn-phase-groups');
+        const btnP = document.getElementById('btn-phase-playoffs');
+        if (phase === 'groups') {
+            btnG.className = "flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all bg-primary text-white shadow-lg shadow-primary/20";
+            btnP.className = "flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white";
+        } else {
+            btnP.className = "flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all bg-primary text-white shadow-lg shadow-primary/20";
+            btnG.className = "flex-1 py-2 px-3 rounded-lg text-xs font-semibold transition-all text-slate-400 hover:text-white";
+        }
+
+        renderMatchesList();
+    };
+
+    const renderMatchesList = () => {
+        const list = document.getElementById('fixture-list');
+        if (!list) return;
+        const filtered = matches.filter(m => m.phase === currentPhase);
+        
+        const savedScores = JSON.parse(localStorage.getItem('worldcup_prode') || '{}');
+
+        list.innerHTML = filtered.map(m => {
+            const score1 = savedScores[`${m.id}_1`] !== undefined ? savedScores[`${m.id}_1`] : '';
+            const score2 = savedScores[`${m.id}_2`] !== undefined ? savedScores[`${m.id}_2`] : '';
+
+            return `
+                <div class="glass-card p-4 rounded-2xl border border-white/5 space-y-3 relative overflow-hidden animate-slide-up bg-gradient-to-b from-white/5 to-transparent">
+                    <div class="flex justify-between items-center text-[10px] text-slate-500 font-black tracking-wider border-b border-white/5 pb-2">
+                        <span>${m.group}</span>
+                        <span>${m.date} • ${m.time}</span>
+                    </div>
+                    
+                    <div class="flex items-center justify-between gap-2">
+                        <!-- Team 1 -->
+                        <div class="flex items-center gap-2 flex-1 min-w-0">
+                            <span class="text-xl shrink-0">${m.flag1}</span>
+                            <span class="text-xs font-bold text-slate-900 dark:text-white truncate">${m.team1}</span>
+                        </div>
+                        
+                        <!-- Prediction Inputs -->
+                        <div class="flex items-center gap-1.5 shrink-0 px-2">
+                            <input type="number" min="0" placeholder="-" 
+                                id="score_${m.id}_1" 
+                                value="${score1}"
+                                class="size-9 bg-slate-900/50 border border-white/10 rounded-xl text-center text-xs font-black text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none p-0">
+                            <span class="text-xs text-slate-600 font-bold">:</span>
+                            <input type="number" min="0" placeholder="-" 
+                                id="score_${m.id}_2" 
+                                value="${score2}"
+                                class="size-9 bg-slate-900/50 border border-white/10 rounded-xl text-center text-xs font-black text-white focus:border-primary focus:ring-1 focus:ring-primary outline-none p-0">
+                        </div>
+                        
+                        <!-- Team 2 -->
+                        <div class="flex items-center gap-2 flex-1 min-w-0 justify-end text-right">
+                            <span class="text-xs font-bold text-slate-900 dark:text-white truncate">${m.team2}</span>
+                            <span class="text-xl shrink-0">${m.flag2}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    };
+
+    window.saveFixtureProde = () => {
+        const savedScores = JSON.parse(localStorage.getItem('worldcup_prode') || '{}');
+        
+        matches.forEach(m => {
+            const input1 = document.getElementById(`score_${m.id}_1`);
+            const input2 = document.getElementById(`score_${m.id}_2`);
+            
+            if (input1 && input1.value !== '') {
+                savedScores[`${m.id}_1`] = parseInt(input1.value);
+            } else if (input1) {
+                delete savedScores[`${m.id}_1`];
+            }
+
+            if (input2 && input2.value !== '') {
+                savedScores[`${m.id}_2`] = parseInt(input2.value);
+            } else if (input2) {
+                delete savedScores[`${m.id}_2`];
+            }
+        });
+
+        localStorage.setItem('worldcup_prode', JSON.stringify(savedScores));
+        showToast("🏆 Pronósticos guardados con éxito");
+    };
+
+    window.resetFixtureProde = () => {
+        if (confirm("¿Seguro que querés limpiar todos tus pronósticos del fixture?")) {
+            localStorage.removeItem('worldcup_prode');
+            renderMatchesList();
+            showToast("Restablecido");
+        }
+    };
+
+    // Load initial phase list
+    renderMatchesList();
+}
 

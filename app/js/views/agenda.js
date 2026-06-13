@@ -95,6 +95,55 @@ function renderAgenda(container) {
 
             ${renderHomeBenefits()}
 
+            <!-- Argentine Theme Donation Card -->
+            ${(() => {
+                const isDismissed = localStorage.getItem('dismissed_mundial_donation') === 'true';
+                if (isDismissed) return '';
+
+                const now = new Date();
+                const cm = now.getMonth();
+                const cy = now.getFullYear();
+                const currentMonthServices = (store.services || []).filter(s => {
+                    if (!s.date) return false;
+                    const d = new Date(s.date + 'T00:00:00');
+                    return d.getMonth() === cm && d.getFullYear() === cy;
+                });
+                const count = currentMonthServices.length;
+                const earnings = currentMonthServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
+
+                if (count === 0) return '';
+
+                return `
+                <div id="mundial-donation-card" class="relative overflow-hidden rounded-3xl p-5 bg-gradient-to-br from-[#74ACDF]/15 to-[#F6B426]/5 border border-[#74ACDF]/30 shadow-xl mt-4 animate-slide-up">
+                    <button onclick="localStorage.setItem('dismissed_mundial_donation', 'true'); document.getElementById('mundial-donation-card').remove();" class="absolute top-3 right-3 text-slate-400 hover:text-slate-900 dark:text-slate-500 dark:hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-sm">close</span>
+                    </button>
+
+                    <div class="flex items-start gap-4 pr-6">
+                        <div class="size-11 rounded-2xl bg-gradient-to-br from-[#74ACDF] to-[#F6B426] flex items-center justify-center text-slate-900 dark:text-white shadow-lg shadow-[#74ACDF]/20 shrink-0">
+                            <span class="material-symbols-outlined text-xl">emoji_events</span>
+                        </div>
+                        <div class="space-y-1">
+                            <h3 class="font-extrabold text-sm text-slate-900 dark:text-white flex items-center gap-1">
+                                Apoyá la App <span class="text-xs">🇦🇷⚽</span>
+                            </h3>
+                            <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Este mes organizaste <strong class="text-[#5599e0]">${count} servicios</strong> y la app te ayudó a calcular <strong class="text-[#F6B426]">$${earnings.toLocaleString('es-AR')}</strong> de ganancias estimadas.
+                                <br><br>
+                                Si te es útil en tu trabajo, colaborá al CVU de Mercado Pago para mantener los servidores de base de datos activos.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 mt-4 pt-3 border-t border-[#74ACDF]/15">
+                        <button onclick="window.showDonationModal()" class="flex-1 py-2.5 rounded-xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-1.5 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-xs">volunteer_activism</span>
+                            Colaborar (Mercado Pago)
+                        </button>
+                    </div>
+                </div>
+                `;
+            })()}
+
             <!-- Ad Banner -->
             ${renderAdBanner()}
 

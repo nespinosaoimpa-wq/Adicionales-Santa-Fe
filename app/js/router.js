@@ -104,6 +104,9 @@ window.router = {
                 case '#asistente/centinela':
                     renderCentinela(app);
                     break;
+                case '#asistente/fixture':
+                    renderFixtureMundial(app);
+                    break;
                 case '#info':
                     renderInfoGuia(app);
                     break;
