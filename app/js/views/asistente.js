@@ -2099,6 +2099,7 @@ window.renderAsistenteHub = renderAsistenteHub;
 window.renderPartesInteligentes = renderPartesInteligentes;
 window.renderVademecum = renderVademecum;
 window.renderDictadoNovedades = renderDictadoNovedades;
+window.renderFixtureMundial = renderFixtureMundial;
 
 window.showAnnouncementModal = () => {
     const currentVersion = 'v531.3-HARDENED';
