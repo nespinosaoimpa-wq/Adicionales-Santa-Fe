@@ -2136,18 +2136,19 @@ function renderFixtureMundial(container) {
     if (!container) container = document.getElementById('app');
 
     const matches = [
-        { id: 'match_arg_can', group: 'Grupo A', date: 'Viernes 12/06/2026', time: '21:00 hs', team1: 'Argentina', flag1: '🇦🇷', team2: 'Canadá', flag2: '🇨🇦', phase: 'groups' },
-        { id: 'match_per_chi', group: 'Grupo A', date: 'Sábado 13/06/2026', time: '19:00 hs', team1: 'Perú', flag1: '🇵🇪', team2: 'Chile', flag2: '🇨🇱', phase: 'groups' },
-        { id: 'match_chi_arg', group: 'Grupo A', date: 'Jueves 18/06/2026', time: '21:00 hs', team1: 'Chile', flag1: '🇨🇱', team2: 'Argentina', flag2: '🇦🇷', phase: 'groups' },
-        { id: 'match_per_can', group: 'Grupo A', date: 'Viernes 19/06/2026', time: '18:00 hs', team1: 'Perú', flag1: '🇵🇪', team2: 'Canadá', flag2: '🇨🇦', phase: 'groups' },
-        { id: 'match_arg_per', group: 'Grupo A', date: 'Miércoles 24/06/2026', time: '21:00 hs', team1: 'Argentina', flag1: '🇦🇷', team2: 'Perú', flag2: '🇵🇪', phase: 'groups' },
-        { id: 'match_can_chi', group: 'Grupo A', date: 'Miércoles 24/06/2026', time: '21:00 hs', team1: 'Canadá', flag1: '🇨🇦', team2: 'Chile', flag2: '🇨🇱', phase: 'groups' },
+        { id: 'match_arg_alg', group: 'Grupo J', date: 'Martes 16/06/2026', time: '22:00 hs', team1: 'Argentina', flag1: '🇦🇷', team2: 'Argelia', flag2: '🇩🇿', phase: 'groups' },
+        { id: 'match_aut_jor', group: 'Grupo J', date: 'Martes 16/06/2026', time: '18:00 hs', team1: 'Austria', flag1: '🇦🇹', team2: 'Jordania', flag2: '🇯🇴', phase: 'groups' },
+        { id: 'match_arg_aut', group: 'Grupo J', date: 'Lunes 22/06/2026', time: '14:00 hs', team1: 'Argentina', flag1: '🇦🇷', team2: 'Austria', flag2: '🇦🇹', phase: 'groups' },
+        { id: 'match_jor_alg', group: 'Grupo J', date: 'Lunes 22/06/2026', time: '19:00 hs', team1: 'Jordania', flag1: '🇯🇴', team2: 'Argelia', flag2: '🇩🇿', phase: 'groups' },
+        { id: 'match_jor_arg', group: 'Grupo J', date: 'Sábado 27/06/2026', time: '23:00 hs', team1: 'Jordania', flag1: '🇯🇴', team2: 'Argentina', flag2: '🇦🇷', phase: 'groups' },
+        { id: 'match_aut_alg', group: 'Grupo J', date: 'Sábado 27/06/2026', time: '23:00 hs', team1: 'Austria', flag1: '🇦🇹', team2: 'Argelia', flag2: '🇩🇿', phase: 'groups' },
         
         // Final Phase
-        { id: 'match_o1', group: 'Octavos de Final', date: 'Lunes 29/06/2026', time: '18:00 hs', team1: '1A (Argentina?)', flag1: '🇦🇷', team2: '2B', flag2: '🏳️', phase: 'playoffs' },
-        { id: 'match_o2', group: 'Octavos de Final', date: 'Martes 30/06/2026', time: '21:00 hs', team1: '1B', flag1: '🏳️', team2: '2A', flag2: '🏳️', phase: 'playoffs' },
-        { id: 'match_cf1', group: 'Cuartos de Final', date: 'Domingo 05/07/2026', time: '21:00 hs', team1: 'Ganador O1', flag1: '🏆', team2: 'Ganador O2', flag2: '🏆', phase: 'playoffs' },
-        { id: 'match_sf1', group: 'Semifinal', date: 'Jueves 09/07/2026', time: '21:00 hs', team1: 'Ganador CF1', flag1: '🏆', team2: 'Ganador CF2', flag2: '🏆', phase: 'playoffs' },
+        { id: 'match_r32', group: 'Dieciseisavos de Final', date: '28/06 al 03/07', time: 'A definir', team1: 'Por definir', flag1: '🏳️', team2: 'Por definir', flag2: '🏳️', phase: 'playoffs' },
+        { id: 'match_r16', group: 'Octavos de Final', date: '04/07 al 07/07', time: 'A definir', team1: 'Por definir', flag1: '🏳️', team2: 'Por definir', flag2: '🏳️', phase: 'playoffs' },
+        { id: 'match_cf1', group: 'Cuartos de Final', date: '09/07 al 11/07', time: 'A definir', team1: 'Clasificado', flag1: '🏆', team2: 'Clasificado', flag2: '🏆', phase: 'playoffs' },
+        { id: 'match_sf1', group: 'Semifinal', date: '14/07 o 15/07', time: '21:00 hs', team1: 'Clasificado', flag1: '🏆', team2: 'Clasificado', flag2: '🏆', phase: 'playoffs' },
+        { id: 'match_third', group: 'Tercer Puesto', date: 'Sábado 18/07/2026', time: 'A definir', team1: 'Por definir', flag1: '🏳️', team2: 'Por definir', flag2: '🏳️', phase: 'playoffs' },
         { id: 'match_final', group: 'Gran Final', date: 'Domingo 19/07/2026', time: '16:00 hs', team1: 'Por definir', flag1: '⚽', team2: 'Por definir', flag2: '⚽', phase: 'playoffs' }
     ];
 
