@@ -17,13 +17,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731"
         crossorigin="anonymous"></script>
 
-    <meta name="app-version" content="v535.4.0">
-
-
-
-
-
-
+    <meta name="app-version" content="v535.4.1">
 
     <meta name="description"
         content="Adicionales Santa Fe: La herramienta definitiva para la gestión de servicios de policía adicional. Calculá tus ganancias, organizá tu agenda y consultá la guía de recursos oficial en un solo lugar.">
@@ -61,29 +55,36 @@
             console.log('🛡️ Utility running on primary domain. Performance optimized.');
         }
 
-        // 2. Nuclear Cache Killer & Recovery Logic (Updated)
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.getRegistrations().then(registrations => {
-                let needsHardReset = false;
-                for (let reg of registrations) {
-                    const url = reg.active?.scriptURL || reg.installing?.scriptURL || reg.waiting?.scriptURL || '';
-                    if (url && !url.includes('sw-v535-4.js')) {
-                        console.warn('☢️ SW Outdated:', url);
-                        reg.unregister();
-                        needsHardReset = true;
-                    }
-                }
-                if (needsHardReset || !localStorage.getItem('app_v535_4_initialized')) {
-                    if ('caches' in window) {
-                        caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
-                            .then(() => {
-                                localStorage.setItem('app_v535_4_initialized', 'true');
+        // 2. Dynamic PWA Cache Buster & Auto-Updater
+        const CURRENT_VERSION = 'v535.4.1';
+        fetch('./version.json?t=' + Date.now())
+            .then(res => res.json())
+            .then(data => {
+                if (data && data.version && data.version !== CURRENT_VERSION) {
+                    console.warn('⚠️ Nueva versión detectada:', data.version, '. Limpiando caché y actualizando...');
+                    if ('serviceWorker' in navigator) {
+                        navigator.serviceWorker.getRegistrations().then(registrations => {
+                            for (let reg of registrations) {
+                                reg.unregister();
+                            }
+                            if ('caches' in window) {
+                                caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
+                                    .then(() => {
+                                        localStorage.setItem('app_version', data.version);
+                                        window.location.reload(true);
+                                    });
+                            } else {
+                                localStorage.setItem('app_version', data.version);
                                 window.location.reload(true);
-                            });
+                            }
+                        });
+                    } else {
+                        localStorage.setItem('app_version', data.version);
+                        window.location.reload(true);
                     }
                 }
-            });
-        }
+            })
+            .catch(err => console.log('Bypass de verificación rápida (offline o local):', err));
     </script>
 
     <!-- PWA Manifest -->
@@ -136,28 +137,14 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // Registro estable sin timestamp dinámico para evitar el bucle infinito
-                navigator.serviceWorker.register('./sw-v535-4.js?v=535.4.0')
-
-
-
-
-
-
-
+                navigator.serviceWorker.register('./sw-v535-4-1.js?v=535.4.1')
                     .then(registration => {
-
-
-                        console.log('ServiceWorker v534.9.1 registrado con éxito: ', registration.scope);
-
-                        // Detectar si hay un nuevo worker instalándose
+                        console.log('ServiceWorker v535.4.1 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {
                                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                                     console.log('Nueva actualización de SW disponible.');
-                                    // En lugar de recargar forzosamente y crear un bucle, esperamos a la próxima visita
-                                    // o dejamos que el banner de actualización avise al usuario.
                                 }
                             });
                         });
@@ -170,8 +157,6 @@
             navigator.serviceWorker.addEventListener('controllerchange', () => {
                 if (!refreshing) {
                     refreshing = true;
-                    // Solo recargar una única vez si cambian los assets troncales, 
-                    // pero al haber fijado la URL del SW ya no entrará en bucle.
                     console.log('SW Controller change detectado.');
                 }
             });
@@ -179,7 +164,7 @@
     </script>
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="styles.css?v=535.2.3">
+    <link rel="stylesheet" href="styles.css?v=535.4.1">
 
 
 
@@ -272,42 +257,42 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Application Logic -->
-    <script src="firebase-config.js?v=535.4.0" defer></script>
-    <script src="supabase-config.js?v=535.4.0" defer></script>
-    <script src="db-v211.js?v=535.4.0" defer></script>
-    <script src="js/utils.js?v=535.4.0" defer></script>
-    <script src="js/components.js?v=535.4.0" defer></script>
-    <script src="js/store.js?v=535.4.0" defer></script>
-    <script src="js/router.js?v=535.4.0" defer></script>
-    <script src="js/data/directory.js?v=535.4.0" defer></script>
-    <script src="js/data/resources.js?v=535.4.0" defer></script>
-    <script src="js/views/auth.js?v=535.4.0" defer></script>
+    <script src="firebase-config.js?v=535.4.1" defer></script>
+    <script src="supabase-config.js?v=535.4.1" defer></script>
+    <script src="db-v211.js?v=535.4.1" defer></script>
+    <script src="js/utils.js?v=535.4.1" defer></script>
+    <script src="js/components.js?v=535.4.1" defer></script>
+    <script src="js/store.js?v=535.4.1" defer></script>
+    <script src="js/router.js?v=535.4.1" defer></script>
+    <script src="js/data/directory.js?v=535.4.1" defer></script>
+    <script src="js/data/resources.js?v=535.4.1" defer></script>
+    <script src="js/views/auth.js?v=535.4.1" defer></script>
 
-    <script src="js/views/legal.js?v=535.4.0" defer></script>
-    <script src="js/views/agenda.js?v=535.4.0" defer></script>
-    <script src="js/views/register.js?v=535.4.0" defer></script>
-    <script src="js/views/control_panel.js?v=535.4.0" defer></script>
-    <script src="js/views/financial.js?v=535.4.0" defer></script>
-    <script src="js/views/info_guia.js?v=535.4.0" defer></script>
-    <script src="js/views/profile.js?v=535.4.0" defer></script>
+    <script src="js/views/legal.js?v=535.4.1" defer></script>
+    <script src="js/views/agenda.js?v=535.4.1" defer></script>
+    <script src="js/views/register.js?v=535.4.1" defer></script>
+    <script src="js/views/control_panel.js?v=535.4.1" defer></script>
+    <script src="js/views/financial.js?v=535.4.1" defer></script>
+    <script src="js/views/info_guia.js?v=535.4.1" defer></script>
+    <script src="js/views/profile.js?v=535.4.1" defer></script>
 
-    <script src="js/views/stats.js?v=535.4.0" defer></script>
-    <script src="js/views/history.js?v=535.4.0" defer></script>
-    <script src="js/views/service_details.js?v=535.4.0" defer></script>
-    <script src="js/views/asistente.js?v=535.4.0" defer></script>
+    <script src="js/views/stats.js?v=535.4.1" defer></script>
+    <script src="js/views/history.js?v=535.4.1" defer></script>
+    <script src="js/views/service_details.js?v=535.4.1" defer></script>
+    <script src="js/views/asistente.js?v=535.4.1" defer></script>
 
     <!-- ── Módulos Asistente Operativo Policial PRO ── -->
-    <script src="js/views/actas.js?v=535.4.0" defer></script>
-    <script src="js/views/intervenciones.js?v=535.4.0" defer></script>
-    <script src="js/views/procedimiento.js?v=535.4.0" defer></script>
-    <script src="js/views/archivos.js?v=535.4.0" defer></script>
-    <script src="js/views/auditoria.js?v=535.4.0" defer></script>
-    <script src="js/views/iapos.js?v=535.4.0" defer></script>
+    <script src="js/views/actas.js?v=535.4.1" defer></script>
+    <script src="js/views/intervenciones.js?v=535.4.1" defer></script>
+    <script src="js/views/procedimiento.js?v=535.4.1" defer></script>
+    <script src="js/views/archivos.js?v=535.4.1" defer></script>
+    <script src="js/views/auditoria.js?v=535.4.1" defer></script>
+    <script src="js/views/iapos.js?v=535.4.1" defer></script>
 
-    <script src="js/views/admin.js?v=535.4.0" defer></script>
-    <script src="js/views/diagnostics.js?v=535.4.0" defer></script>
-    <script src="js/views/onboarding.js?v=535.4.0" defer></script>
-    <script src="app-v211.js?v=535.4.0" defer></script>
+    <script src="js/views/admin.js?v=535.4.1" defer></script>
+    <script src="js/views/diagnostics.js?v=535.4.1" defer></script>
+    <script src="js/views/onboarding.js?v=535.4.1" defer></script>
+    <script src="app-v211.js?v=535.4.1" defer></script>
 
 
 

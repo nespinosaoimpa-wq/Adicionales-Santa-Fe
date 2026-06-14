@@ -469,7 +469,7 @@ window.showDonationModal = () => {
             </div>
             
             <p class="text-[12.5px] text-slate-300 leading-relaxed mb-6 relative z-10">
-                Desarrollar y mantener esta app sin publicidad molesta y con base de datos en tiempo real tiene costos mensuales. Si te es súper útil en tu día a día, tu colaboración nos ayuda a seguir firmes en la cancha. 
+                Desarrollar y mejorar esta herramienta sin publicidad invasiva es posible gracias al apoyo voluntario de los oficiales. Si te resulta valiosa en tu día a día, tu colaboración nos ayuda a seguir sumando mejoras y mantener la infraestructura activa. ¡Cada granito de arena cuenta!
                 <br><br>
                 <strong class="text-white">Tocá cada dato para copiarlo:</strong>
             </p>

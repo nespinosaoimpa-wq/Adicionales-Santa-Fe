@@ -55,16 +55,42 @@ function renderAgenda(container) {
 
         <main class="flex-1 overflow-y-auto px-6 space-y-5 pb-32">
             
-            <!-- Vamos Argentina Banner -->
-            <div class="mt-4 p-3.5 rounded-2xl bg-gradient-to-r from-[#74ACDF]/20 via-white/5 to-[#74ACDF]/20 border border-[#74ACDF]/20 flex items-center justify-between shadow-md relative overflow-hidden">
-                <div class="flex items-center gap-2">
-                    <span class="text-sm">🇦🇷</span>
-                    <span class="text-xs font-extrabold tracking-widest text-slate-900 dark:text-white uppercase italic">¡Vamos Argentina!</span>
-                    <span class="text-[10px] flex gap-0.5 animate-pulse select-none" title="Tricampeón del Mundo">⭐.⭐.⭐</span>
+            <!-- Vamos Argentina Banner (Glorious World Cup Design) -->
+            <div class="mt-4 relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#74ACDF]/30 via-slate-900/40 to-[#74ACDF]/30 border border-[#74ACDF]/40 p-4 shadow-xl flex items-center justify-between group hover:border-[#F6B426]/50 transition-all duration-300">
+                <!-- Watermark Sun of May in background -->
+                <div class="absolute right-1/4 -bottom-6 opacity-[0.06] pointer-events-none scale-150 text-[#F6B426] select-none">
+                    <svg class="w-24 h-24" viewBox="0 0 24 24" fill="currentColor">
+                        <circle cx="12" cy="12" r="5" />
+                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
                 </div>
-                <div class="flex items-center gap-1.5">
-                    <span class="text-[9px] font-bold text-[#F6B426] uppercase tracking-widest">🏆 Mundial 2026</span>
-                    <span class="text-xs animate-spin" style="animation-duration: 4s;">⚽</span>
+                
+                <div class="flex items-center gap-3 relative z-10">
+                    <div class="flex flex-col">
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[10px] font-black text-[#74ACDF] tracking-widest uppercase">Selección Argentina</span>
+                            <div class="flex items-center gap-0.5">
+                                <svg class="w-3.5 h-3.5 text-[#F6B426] drop-shadow-[0_0_3px_rgba(246,180,38,0.8)] animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                </svg>
+                                <svg class="w-4 h-4 text-[#F6B426] drop-shadow-[0_0_5px_rgba(246,180,38,1)] animate-bounce" style="animation-duration: 2s;" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                </svg>
+                                <svg class="w-3.5 h-3.5 text-[#F6B426] drop-shadow-[0_0_3px_rgba(246,180,38,0.8)] animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <span class="text-base font-black tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-white via-[#74ACDF] to-white uppercase italic drop-shadow-[0_2px_10px_rgba(116,172,223,0.3)]">
+                            ¡Vamos Argentina!
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col items-end gap-1 relative z-10">
+                    <span class="text-[9px] font-black text-[#F6B426] uppercase tracking-widest bg-[#F6B426]/10 px-2.5 py-1 rounded-full border border-[#F6B426]/20 shadow-sm">
+                        🏆 Mundial 2026
+                    </span>
                 </div>
             </div>
 
@@ -143,12 +169,12 @@ function renderAgenda(container) {
                             <p class="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
                                 Este mes organizaste <strong class="text-[#5599e0]">${count} servicios</strong> y la app te ayudó a calcular <strong class="text-[#F6B426]">$${earnings.toLocaleString('es-AR')}</strong> de ganancias estimadas.
                                 <br><br>
-                                Si te es útil en tu trabajo, colaborá al CVU de Mercado Pago para mantener los servidores de base de datos activos.
+                                Si la app te es de gran utilidad en tu trabajo diario, podés colaborar con una contribución voluntaria al CVU de Mercado Pago para apoyar la continuidad de este proyecto independiente. ¡Cada granito de arena ayuda a mantener la app activa!
                             </p>
                         </div>
                     </div>
                     <div class="flex gap-2 mt-4 pt-3 border-t border-[#74ACDF]/15">
-                        <button onclick="window.showDonationModal()" class="flex-1 py-2.5 rounded-xl bg-primary text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-1.5 active:scale-95 transition-all">
+                        <button onclick="window.showDonationModal()" class="flex-1 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-white font-bold text-xs shadow-lg shadow-primary/20 flex items-center justify-center gap-1.5 active:scale-95 transition-all">
                             <span class="material-symbols-outlined text-xs">volunteer_activism</span>
                             Colaborar (Mercado Pago)
                         </button>
