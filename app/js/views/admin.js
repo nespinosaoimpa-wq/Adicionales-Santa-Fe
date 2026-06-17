@@ -17,8 +17,94 @@ async function renderAdmin(container) {
     let reviewsMap = new Map(); // id -> review
     let reviewsLoaded = false;
 
+    window._showAvatarModal = (avatarUrl, name, email) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-6';
+        overlay.innerHTML = `
+            <div class="bg-slate-900 border border-white/10 rounded-3xl p-6 max-w-sm w-full shadow-2xl flex flex-col items-center relative animate-fade-in">
+                <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 size-8 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-red-500 hover:border-red-500 transition-all active:scale-95">
+                    <span class="material-symbols-outlined text-sm">close</span>
+                </button>
+                <div class="size-48 rounded-full border-4 border-primary/30 overflow-hidden mb-4 shadow-xl">
+                    <img src="${avatarUrl}" class="w-full h-full object-cover animate-fade-in">
+                </div>
+                <h3 class="text-lg font-black text-white text-center">${name}</h3>
+                <p class="text-xs text-slate-400 font-mono mt-1">${email}</p>
+                <div class="mt-6 w-full flex justify-center">
+                    <button onclick="this.closest('.fixed').remove()" class="px-6 py-2 bg-primary text-white text-xs font-bold rounded-xl active:scale-95 hover:bg-primary/95 transition-all shadow-lg shadow-primary/20">Cerrar</button>
+                </div>
+            </div>
+        `;
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+        document.body.appendChild(overlay);
+    };
+
+    window.filterAdminUsers = () => {
+        const searchQuery = document.getElementById('adminUserSearch')?.value.toLowerCase().trim() || '';
+        const dateQuery = document.getElementById('adminUserDateFilter')?.value || '';
+        
+        const rows = document.querySelectorAll('#adminUserTableBody tr');
+        let visibleCount = 0;
+        
+        rows.forEach(row => {
+            const name = (row.getAttribute('data-name') || '').toLowerCase();
+            const email = (row.getAttribute('data-email') || '').toLowerCase();
+            const lastLoginIso = row.getAttribute('data-lastlogin');
+            
+            let matchSearch = true;
+            if (searchQuery) {
+                matchSearch = name.includes(searchQuery) || email.includes(searchQuery);
+            }
+            
+            let matchDate = true;
+            if (dateQuery && lastLoginIso) {
+                const d = new Date(lastLoginIso);
+                const userDateLocal = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+                matchDate = (userDateLocal === dateQuery);
+            } else if (dateQuery && !lastLoginIso) {
+                matchDate = false;
+            }
+            
+            if (matchSearch && matchDate) {
+                row.style.display = '';
+                visibleCount++;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+        
+        const badge = document.getElementById('userCountBadge');
+        if (badge) {
+            if (searchQuery || dateQuery) {
+                badge.textContent = `${visibleCount} de ${window.allUsers.length} FILTRADOS`;
+            } else {
+                badge.textContent = `${window.allUsers.length} TOTAL`;
+            }
+        }
+    };
+
+    window.resetAdminUserFilters = () => {
+        const searchInput = document.getElementById('adminUserSearch');
+        const dateInput = document.getElementById('adminUserDateFilter');
+        if (searchInput) searchInput.value = '';
+        if (dateInput) dateInput.value = '';
+        window.filterAdminUsers();
+    };
+
     const updateUI = () => {
         const stats = DB.calculateStats(window.allUsers, window.allServices, window.adminDateFilter);
+
+        // Calculate approval rating and average stars
+        const reviewsArray = Array.from(reviewsMap.values());
+        const totalReviews = reviewsArray.length;
+        let approvalRate = 0;
+        let averageRating = 0;
+        if (totalReviews > 0) {
+            const positiveReviews = reviewsArray.filter(r => r.rating >= 4).length;
+            approvalRate = Math.round((positiveReviews / totalReviews) * 100);
+            const sumRatings = reviewsArray.reduce((acc, r) => acc + (parseInt(r.rating) || 0), 0);
+            averageRating = (sumRatings / totalReviews).toFixed(1);
+        }
 
         container.innerHTML = `
         <div class="min-h-screen bg-background-light dark:bg-[#0f172a] text-slate-800 dark:text-slate-200 font-sans pb-24 animate-fade-in">
@@ -58,11 +144,12 @@ async function renderAdmin(container) {
             <main class="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
                 
                 <!-- KPI Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
                     ${_renderAdminKPICard('Usuarios Totales', stats.userCount, 'group', 'from-blue-500/20 to-blue-600/5', 'text-blue-400')}
                     ${_renderAdminKPICard('Activos 24h', stats.activeUsers, 'bolt', 'from-green-500/20 to-green-600/5', 'text-green-400')}
                     ${_renderAdminKPICard('Horas Globales', Math.round(stats.totalHours).toLocaleString(), 'schedule', 'from-cyan-500/20 to-cyan-600/5', 'text-cyan-400')}
                     ${_renderAdminKPICard('Caja Global estimada', formatMoney(stats.totalRevenue), 'payments', 'from-amber-500/20 to-amber-600/5', 'text-amber-400')}
+                    ${_renderAdminKPICard('Aprobación App', totalReviews > 0 ? `${approvalRate}% (${averageRating} ⭐)` : 'N/A', 'star', 'from-purple-500/20 to-purple-600/5', 'text-amber-400')}
                 </div>
 
                 <!-- Daily Summary Section -->
@@ -119,7 +206,7 @@ async function renderAdmin(container) {
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                      <!-- Reviews Panel -->
                     <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl h-[500px] flex flex-col">
                         <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center justify-between">
@@ -150,7 +237,7 @@ async function renderAdmin(container) {
                                             `).join('') : '<span class="material-symbols-outlined text-red-500 text-sm">warning</span>'}
                                         </div>
                                     </div>
-                                    <p class="text-[11px] ${isAlert ? 'text-red-200 font-bold' : 'text-slate-700 dark:text-slate-300'} leading-relaxed italic">"${displayComment}"</p>
+                                    ${displayComment ? `<p class="text-[11px] ${isAlert ? 'text-red-200 font-bold' : 'text-slate-700 dark:text-slate-300'} leading-relaxed italic">"${displayComment}"</p>` : ''}
                                     <p class="text-[8px] text-slate-600 mt-2 text-right uppercase font-bold">${_formatAdminDate(r.created_at || r.timestamp)}</p>
                                 </div>
                             `;
@@ -185,6 +272,47 @@ async function renderAdmin(container) {
                                     </div>
                                 </div>
                             `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Top Users by Usage Panel (Los que más le dan uso) -->
+                    <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl h-[500px] flex flex-col">
+                        <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center justify-between">
+                            <span>Más Activos (Uso de App)</span>
+                            <span class="px-2 py-0.5 rounded-full bg-primary/20 text-primary text-[10px]">Top 5</span>
+                        </h3>
+                        <div class="space-y-4 overflow-y-auto flex-1 pr-2 custom-scrollbar">
+                            ${!stats.topUsersByUsage || stats.topUsersByUsage.length === 0 ? '<p class="text-slate-500 text-xs italic text-center py-8">Sin registros de uso</p>' :
+                            stats.topUsersByUsage.map((u, index) => {
+                                const rankColors = [
+                                    'bg-amber-500/20 text-amber-400 border-amber-500/30',
+                                    'bg-slate-300/20 text-slate-300 border-slate-300/30',
+                                    'bg-amber-700/20 text-amber-600 border-amber-700/30',
+                                    'bg-white/5 text-slate-400 border-white/5',
+                                    'bg-white/5 text-slate-400 border-white/5'
+                                ];
+                                const rankBadge = index < 3 ? `🏆 ${index + 1}°` : `${index + 1}°`;
+                                
+                                return `
+                                    <div class="p-3 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between hover:bg-white/[0.08] transition-all duration-200">
+                                        <div class="flex items-center gap-3">
+                                            <div class="size-10 rounded-full bg-slate-700 cursor-pointer overflow-hidden border border-white/10 hover:scale-105 transition-all" onclick="window._showAvatarModal('${u.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(u.name)}', '${u.name}', '${u.email}')">
+                                                <img src="${u.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(u.name)}" class="w-full h-full object-cover">
+                                            </div>
+                                            <div class="min-w-0">
+                                                <p class="font-bold text-slate-900 dark:text-white text-xs truncate max-w-[120px]">${u.name}</p>
+                                                <p class="text-[9px] text-slate-500 font-mono truncate max-w-[120px]">${u.email}</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right flex flex-col items-end gap-1">
+                                            <span class="px-2 py-0.5 rounded-full text-[9px] font-black border ${rankColors[index]}">
+                                                ${rankBadge}
+                                            </span>
+                                            <p class="text-[10px] text-primary font-bold mt-1">${u.count} servicios</p>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
                         </div>
                     </div>
                 </div>
@@ -254,9 +382,29 @@ async function renderAdmin(container) {
 
                 <!-- User Table -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 overflow-hidden shadow-xl">
-                    <div class="p-6 border-b border-white/5 flex items-center justify-between">
-                        <h3 class="font-bold text-slate-900 dark:text-white text-lg italic">Oficiales Registrados</h3>
-                        <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-black text-slate-500">${allUsers.length} TOTAL</span>
+                    <div class="p-6 border-b border-white/5 flex flex-col gap-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-bold text-slate-900 dark:text-white text-lg italic">Oficiales Registrados</h3>
+                            <span class="px-3 py-1 bg-white/5 rounded-full text-[10px] font-black text-slate-500" id="userCountBadge">${allUsers.length} TOTAL</span>
+                        </div>
+                        
+                        <!-- Filter Controls -->
+                        <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
+                            <!-- Search Input -->
+                            <div class="relative w-full sm:w-64">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm">search</span>
+                                <input type="text" id="adminUserSearch" oninput="window.filterAdminUsers()" placeholder="Buscar por nombre o email..." class="w-full pl-9 pr-4 py-2 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-xs placeholder:text-slate-500 focus:border-primary/50 outline-none transition-all">
+                            </div>
+                            
+                            <!-- Date Filter -->
+                            <div class="flex items-center gap-2 w-full sm:w-auto">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap">Última conexión:</label>
+                                <input type="date" id="adminUserDateFilter" onchange="window.filterAdminUsers()" class="px-3 py-2 bg-white/5 border border-white/10 rounded-xl text-slate-900 dark:text-white text-xs outline-none focus:border-primary/50 transition-all w-full sm:w-auto">
+                                <button onclick="window.resetAdminUserFilters()" class="p-2 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 hover:text-white rounded-xl transition-all" title="Limpiar filtros">
+                                    <span class="material-symbols-outlined text-sm">filter_alt_off</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-sm">
@@ -268,13 +416,13 @@ async function renderAdmin(container) {
                                     <th class="px-6 py-4 text-right">Acción</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y divide-white/5">
+                            <tbody class="divide-y divide-white/5" id="adminUserTableBody">
                                 ${allUsers.map(u => `
-                                    <tr class="hover:bg-white/[0.02] transition-colors group">
+                                    <tr class="hover:bg-white/[0.02] transition-colors group" data-name="${u.name || 'Oficial'}" data-email="${u.email}" data-lastlogin="${u.lastLogin || ''}">
                                         <td class="px-6 py-4">
                                             <div class="flex items-center gap-3">
-                                                <div class="size-8 rounded-full bg-slate-700">
-                                                    <img src="${u.avatar || 'https://ui-avatars.com/api/?name=' + u.name}" class="w-full h-full rounded-full object-cover">
+                                                <div class="size-8 rounded-full bg-slate-700 cursor-pointer overflow-hidden border border-white/10 hover:scale-110 active:scale-95 transition-all duration-200" onclick="window._showAvatarModal('${u.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(u.name || 'Oficial')}', '${u.name || 'Oficial'}', '${u.email}')" title="Ver foto de perfil">
+                                                    <img src="${u.avatar || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(u.name || 'Oficial')}" class="w-full h-full object-cover">
                                                 </div>
                                                 <div>
                                                     <p class="font-bold text-slate-900 dark:text-white text-xs">${u.name || 'Oficial'}</p>

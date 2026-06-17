@@ -762,6 +762,25 @@ const DB = {
             .slice(0, 5)
             .map(([email, total]) => ({ email, total }));
 
+        const userServicesCount = services.reduce((acc, s) => {
+            const email = (s.userEmail || s.user_email || 'Desconocido').toLowerCase().trim();
+            acc[email] = (acc[email] || 0) + 1;
+            return acc;
+        }, {});
+
+        const sortedByUsage = Object.entries(userServicesCount)
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([email, count]) => {
+                const u = users.find(usr => (usr.email || '').toLowerCase().trim() === email) || {};
+                return {
+                    email,
+                    count,
+                    name: u.name || 'Oficial',
+                    avatar: u.avatar || ''
+                };
+            });
+
         const dates = Object.keys(servicesByDate).sort();
 
         const typeDistribution = services.reduce((acc, s) => {
@@ -778,6 +797,7 @@ const DB = {
             totalRevenue,
             totalHours,
             topUsers: sortedUsers,
+            topUsersByUsage: sortedByUsage,
             dailySummary: dailySummary,
             chartData: {
                 dates: dates,
