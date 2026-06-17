@@ -19,6 +19,7 @@ function renderAsistenteHub(container) {
 
     const tools = [
         { id: 'fixture', title: 'Fixture Mundial 2026', desc: 'Consultá partidos, horarios y registrá tus pronósticos.', icon: 'sports_soccer', color: 'from-[#74ACDF] to-blue-500', route: '#asistente/fixture', badge: '🏆' },
+        { id: 'calificar', title: 'Calificar la App', desc: 'Dejanos tu calificación y sugerencias para seguir mejorando la herramienta.', icon: 'reviews', color: 'from-amber-400 to-[#F6B426]', action: 'window.showSurveyBanner(true)', badge: 'Opiná' },
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
         { id: 'vademecum', title: 'Vademécum Contravencional', desc: 'Guía de actuación y consulta del Código Penal y Convivencia.', icon: 'gavel', color: 'from-amber-500 to-amber-600', route: '#asistente/vademecum', badge: 'Nuevo' },
         { id: 'dictado', title: 'Dictado de Novedades', desc: 'Dictá por voz y estructurá actas y libros de guardia.', icon: 'mic', color: 'from-blue-500 to-cyan-500', route: '#asistente/dictado', badge: 'Nuevo' },
@@ -57,7 +58,7 @@ function renderAsistenteHub(container) {
 
             <div class="grid gap-4">
                 ${tools.map((tool, i) => `
-                    <div onclick="router.navigateTo('${tool.route}')" 
+                    <div onclick="${tool.action ? tool.action : `router.navigateTo('${tool.route}')`}" 
                         class="group relative overflow-hidden glass-card p-5 rounded-3xl border border-white/5 hover:border-primary/30 transition-all active:scale-[0.98] cursor-pointer"
                         style="animation-delay: ${i * 100}ms">
                         

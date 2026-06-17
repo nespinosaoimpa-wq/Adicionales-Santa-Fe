@@ -1075,15 +1075,19 @@ window.store = {
     }
 };
 
-window.showSurveyBanner = () => {
-    // Check if already voted or dismissed
-    if (localStorage.getItem('survey_rating_submitted') === 'true' || 
-        localStorage.getItem('survey_rating_dismissed') === 'true') {
+window.showSurveyBanner = (force = false) => {
+    // Check if already voted or dismissed (ignored if forced)
+    if (!force && (localStorage.getItem('survey_rating_submitted') === 'true' || 
+        localStorage.getItem('survey_rating_dismissed') === 'true')) {
         return;
     }
 
     // Only show if user is authenticated
     if (!store.isAuthenticated()) return;
+
+    // Remove existing banner if already in DOM
+    const existing = document.getElementById('survey-rating-banner');
+    if (existing) existing.remove();
 
     // Create banner container
     const banner = document.createElement('div');

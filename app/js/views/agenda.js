@@ -136,7 +136,7 @@ function renderAgenda(container) {
 
             <!-- Argentine Theme Donation Card -->
             ${(() => {
-                const isDismissed = localStorage.getItem('dismissed_mundial_donation') === 'true';
+                const isDismissed = localStorage.getItem('dismissed_mundial_donation_v2') === 'true';
                 if (isDismissed) return '';
 
                 const now = new Date();
@@ -154,7 +154,7 @@ function renderAgenda(container) {
 
                 return `
                 <div id="mundial-donation-card" class="relative overflow-hidden rounded-3xl p-5 bg-gradient-to-br from-[#74ACDF]/15 to-[#F6B426]/5 border border-[#74ACDF]/30 shadow-xl mt-4 animate-slide-up">
-                    <button onclick="localStorage.setItem('dismissed_mundial_donation', 'true'); document.getElementById('mundial-donation-card').remove();" class="absolute top-3 right-3 text-slate-400 hover:text-slate-900 dark:text-slate-500 dark:hover:text-white transition-colors">
+                    <button onclick="localStorage.setItem('dismissed_mundial_donation_v2', 'true'); document.getElementById('mundial-donation-card').remove();" class="absolute top-3 right-3 text-slate-400 hover:text-slate-900 dark:text-slate-500 dark:hover:text-white transition-colors">
                         <span class="material-symbols-outlined text-sm">close</span>
                     </button>
 
