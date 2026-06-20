@@ -43,8 +43,9 @@ window.renderLogo = renderLogo;
 function renderAdBanner() {
     // 1. Native Custom Ad Check
     if (store.ads && store.ads.length > 0) {
-        console.log("📢 Rendering custom ad:", store.ads[0]);
-        const ad = store.ads[0]; 
+        const randomIndex = Math.floor(Math.random() * store.ads.length);
+        const ad = store.ads[randomIndex]; 
+        console.log("📢 Rendering custom ad (randomized):", ad);
         return `
             <div class="w-full my-4 flex justify-center group overflow-hidden animate-fade-in">
                 <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-3xl overflow-hidden rounded-2xl shadow-lg border border-white/10 opacity-90 hover:opacity-100 transition-opacity relative">
@@ -78,7 +79,8 @@ function renderAdBanner() {
 
 function renderAdBannerSmall() {
     if (store.ads && store.ads.length > 0) {
-        const ad = store.ads[0];
+        const randomIndex = Math.floor(Math.random() * store.ads.length);
+        const ad = store.ads[randomIndex];
         return `
             <div class="w-full my-3 flex justify-center relative group" style="min-height:50px;">
                 <a href="${ad.linkUrl || '#'}" ${ad.linkUrl ? 'target="_blank"' : ''} class="block w-full max-w-md overflow-hidden rounded-xl shadow-md border border-white/10 opacity-90 hover:opacity-100 transition-opacity">

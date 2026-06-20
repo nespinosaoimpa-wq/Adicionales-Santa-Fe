@@ -211,7 +211,11 @@ function renderStats(container) {
                     </div>
                 </section>
             </main>
+            <!-- Ad Banner -->
+            ${renderAdBanner()}
+
             ${renderBottomNav('stats')}
         </div>
     `;
+    initAds();
 }

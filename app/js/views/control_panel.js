@@ -41,6 +41,15 @@ function renderControlPanel(container) {
         renderControlPanel();
     };
 
+    window._showSetGoalModal = () => {
+        const currentGoal = (store.user && store.user.monthlyGoal) || '';
+        const val = prompt("Establecer tu meta financiera mensual ($):", currentGoal);
+        if (val !== null) {
+            store.setMonthlyGoal(val);
+            renderControlPanel();
+        }
+    };
+
     // Filter services by current month and selected quincena
     const periodServices = store.services.filter(s => {
         if (!s.date) return false;
@@ -67,6 +76,9 @@ function renderControlPanel(container) {
 
     // Sort all services by date desc for the recent feed
     const sortedServices = [...store.services].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // Get Goal Progress for the circular progress ring
+    const goal = store.getGoalProgress();
 
     const html = `
         <header class="sticky top-0 z-50 px-5 py-4 flex items-center justify-between border-b border-white/5 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
@@ -113,36 +125,72 @@ function renderControlPanel(container) {
 
             ${renderHomeBenefits()}
 
-            <!-- Main Earnings Card -->
-            <div class="relative overflow-hidden rounded-2xl glass-card p-6 border border-white/10">
-                <div class="absolute -top-12 -right-12 size-32 bg-primary/20 blur-3xl rounded-full"></div>
-                <div class="relative z-10 flex flex-col items-center">
-                    <p class="text-xs font-medium text-slate-400 uppercase tracking-widest mb-1">Total Acumulado Quincena</p>
-                    <div class="flex items-baseline gap-1 mb-6">
-                        <span class="text-2xl font-bold text-primary">$</span>
-                        <span class="text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white">${(totalEarnings || 0).toLocaleString('es-AR')}</span>
+            <!-- Main Earnings Card with Interactive Goal Ring -->
+            <div class="relative overflow-hidden rounded-[2.5rem] glass-card p-6 border border-white/10 shadow-xl bg-gradient-to-br from-slate-900/50 to-slate-955/50">
+                <div class="absolute -top-12 -right-12 size-32 bg-primary/10 blur-3xl rounded-full"></div>
+                <div class="relative z-10 flex gap-4 items-center justify-between">
+                    <!-- Left: Fortnite Earnings -->
+                    <div class="flex-1 space-y-1">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Acumulado Quincena</p>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-xl font-bold text-primary">$</span>
+                            <span class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">${(totalEarnings || 0).toLocaleString('es-AR')}</span>
+                        </div>
+                        <p class="text-[9px] text-slate-500 font-bold uppercase tracking-wider mt-2.5">Detalle:</p>
+                        <div class="flex flex-col gap-1.5">
+                            <div class="flex items-center justify-between text-[11px]">
+                                <span class="flex items-center gap-1.5 text-slate-400">
+                                    <span class="size-2 rounded-full bg-accent-cyan shadow-[0_0_6px_rgba(116,172,223,0.5)]"></span>
+                                    Público:
+                                </span>
+                                <span class="font-bold text-slate-900 dark:text-slate-300">$${(totalPublic || 0).toLocaleString('es-AR')} (${hoursPublic.toFixed(0)}h)</span>
+                            </div>
+                            <div class="flex items-center justify-between text-[11px]">
+                                <span class="flex items-center gap-1.5 text-slate-400">
+                                    <span class="size-2 rounded-full bg-service-ospe shadow-[0_0_6px_rgba(245,158,11,0.5)]"></span>
+                                    Privado:
+                                </span>
+                                <span class="font-bold text-slate-900 dark:text-slate-300">$${(totalPrivate || 0).toLocaleString('es-AR')} (${hoursPrivate.toFixed(0)}h)</span>
+                            </div>
+                        </div>
                     </div>
-                    
-                    <div class="grid grid-cols-2 gap-4 w-full">
-                        <div class="bg-white/5 rounded-xl p-3 border border-white/5">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="size-2 rounded-full bg-accent-cyan shadow-[0_0_8px_rgba(34,211,238,0.5)]"></span>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase">Público</p>
+
+                    <!-- Right: Monthly Goal Ring -->
+                    <div class="shrink-0 flex flex-col items-center justify-center bg-white/5 border border-white/5 p-4 rounded-3xl min-w-[110px] min-h-[110px] relative">
+                        ${goal.goal > 0 ? `
+                            <div class="relative size-20 flex items-center justify-center cursor-pointer" onclick="window._showSetGoalModal()" title="Haga clic para cambiar la meta">
+                                <svg class="size-20 transform -rotate-90 drop-shadow-[0_0_8px_rgba(13,89,242,0.3)]" viewBox="0 0 80 80">
+                                    <defs>
+                                        <linearGradient id="goalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#5599e0" />
+                                            <stop offset="100%" stop-color="#22d3ee" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle cx="40" cy="40" r="32" class="stroke-slate-200/10 dark:stroke-white/5" stroke-width="6" fill="none" />
+                                    <circle cx="40" cy="40" r="32" stroke="url(#goalGrad)" stroke-width="6" fill="none"
+                                            stroke-dasharray="201" stroke-dashoffset="${201 - (201 * Math.min(goal.percent, 100)) / 100}"
+                                            stroke-linecap="round" style="transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1);" />
+                                </svg>
+                                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                    <span class="text-[13px] font-black text-slate-900 dark:text-white leading-none">${goal.percent}%</span>
+                                    <span class="text-[7px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-wider mt-1">META</span>
+                                </div>
                             </div>
-                            <p class="text-lg font-bold text-slate-900 dark:text-white">$${(totalPublic || 0).toLocaleString('es-AR')}</p>
-                            <p class="text-[10px] text-slate-500">${hoursPublic.toFixed(1)} Horas</p>
-                        </div>
-                        <div class="bg-white/5 rounded-xl p-3 border border-white/5">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="size-2 rounded-full bg-service-ospe shadow-[0_0_8px_rgba(139,92,246,0.5)]"></span>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase">Privado</p>
-                            </div>
-                            <p class="text-lg font-bold text-slate-900 dark:text-white">$${(totalPrivate || 0).toLocaleString('es-AR')}</p>
-                            <p class="text-[10px] text-slate-500">${hoursPrivate.toFixed(1)} Horas</p>
-                        </div>
+                            <p class="text-[8px] text-slate-400 font-bold mt-2 uppercase tracking-wide">De $${(goal.goal / 1000).toFixed(0)}k</p>
+                        ` : `
+                            <button onclick="window._showSetGoalModal()" class="flex flex-col items-center justify-center gap-1 group active:scale-95 transition-all">
+                                <div class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shadow-lg shadow-primary/5">
+                                    <span class="material-symbols-outlined text-lg">flag</span>
+                                </div>
+                                <span class="text-[9px] font-black text-primary uppercase tracking-widest text-center mt-1.5 leading-none">Fijar<br>Meta</span>
+                            </button>
+                        `}
                     </div>
                 </div>
             </div>
+
+            <!-- Ad Banner -->
+            ${renderAdBannerSmall()}
 
             <!-- Recent Services Feed -->
             <section>
@@ -152,11 +200,11 @@ function renderControlPanel(container) {
                 </div>
                 <div class="space-y-3">
                     ${sortedServices.slice(0, 5).map(s => {
-        const isPub = s.type === 'Public';
-        const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
-        const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
-        const icon = isPub ? 'account_balance' : 'shopping_cart';
-        return `
+                        const isPub = s.type === 'Public';
+                        const colorClass = isPub ? 'text-accent-cyan' : 'text-service-ospe';
+                        const bgClass = isPub ? 'bg-accent-cyan/10' : 'bg-service-ospe/10';
+                        const icon = isPub ? 'account_balance' : 'shopping_cart';
+                        return `
                             <div onclick="router.navigateTo('#details?id=${s.id}')" class="cursor-pointer glass-card p-4 rounded-2xl flex items-center justify-between border-white/5 group active:scale-[0.98] transition-transform hover:bg-white/5">
                                 <div class="flex items-center gap-4">
                                     <div class="size-12 rounded-xl ${bgClass} flex items-center justify-center ${colorClass}">
@@ -168,27 +216,27 @@ function renderControlPanel(container) {
                                             <span class="text-[11px] text-slate-400 font-bold">${store.getFormattedDate(s.date)} • ${s.hours}h</span>
                                             <span class="size-1 rounded-full bg-slate-600"></span>
                                             ${(() => {
-                const todayStr = store.getLocalDateString();
-                const isFuture = s.date > todayStr;
-                let label = 'Pendiente';
-                let color = 'text-amber-400';
+                                                const todayStr = store.getLocalDateString();
+                                                const isFuture = s.date > todayStr;
+                                                let label = 'Pendiente';
+                                                let color = 'text-amber-400';
 
-                if (s.status === 'paid' || s.status === 'Pagado') {
-                    label = 'Liquidado';
-                    color = 'text-emerald-400';
-                } else if (isFuture) {
-                    label = 'Agendado';
-                    color = 'text-blue-400';
-                }
-                return `<span class="text-[11px] ${color} font-bold uppercase tracking-tighter">${label}</span>`;
-            })()}
+                                                if (s.status === 'paid' || s.status === 'Pagado') {
+                                                    label = 'Liquidado';
+                                                    color = 'text-emerald-400';
+                                                } else if (isFuture) {
+                                                    label = 'Agendado';
+                                                    color = 'text-blue-400';
+                                                }
+                                                return `<span class="text-[11px] ${color} font-bold uppercase tracking-tighter">${label}</span>`;
+                                            })()}
                                         </div>
                                     </div>
                                 </div>
                                 <p class="text-sm font-bold text-slate-900 dark:text-white">$${(s.total || 0).toLocaleString('es-AR')}</p>
                             </div>
                          `;
-    }).join('')}
+                    }).join('')}
                 </div>
             </section>
         </main>
@@ -196,6 +244,7 @@ function renderControlPanel(container) {
         ${renderBottomNav('control')}
     `;
     container.innerHTML = html;
+    initAds();
 }
 
 function renderHomeBenefits() {

@@ -255,11 +255,14 @@ function renderFinancial(container) {
                     Descargar CSV
                 </button>
              </div>
+             <!-- Ad Banner -->
+             ${renderAdBanner()}
 
         </main>
         ${renderBottomNav('financial')}
     `;
     container.innerHTML = html;
+    initAds();
 
     // Expense Chart
     setTimeout(() => {
