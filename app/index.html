@@ -17,7 +17,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731"
         crossorigin="anonymous"></script>
 
-    <meta name="app-version" content="v535.5.0">
+    <meta name="app-version" content="v535.5.1">
 
     <meta name="description"
         content="Adicionales Santa Fe: La herramienta definitiva para la gestión de servicios de policía adicional. Calculá tus ganancias, organizá tu agenda y consultá la guía de recursos oficial en un solo lugar.">
@@ -56,7 +56,7 @@
         }
 
         // 2. Dynamic PWA Cache Buster & Auto-Updater
-        const CURRENT_VERSION = 'v535.5.0';
+        const CURRENT_VERSION = 'v535.5.1';
         fetch('./version.json?t=' + Date.now())
             .then(res => res.json())
             .then(data => {
@@ -137,9 +137,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-5-0.js?v=535.5.0')
+                navigator.serviceWorker.register('./sw-v535-5-1.js?v=535.5.1')
                     .then(registration => {
-                        console.log('ServiceWorker v535.5.0 registrado con éxito: ', registration.scope);
+                        console.log('ServiceWorker v535.5.1 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {
@@ -164,7 +164,7 @@
     </script>
 
     <!-- Custom Styles -->
-    <link rel="stylesheet" href="styles.css?v=535.5.0">
+    <link rel="stylesheet" href="styles.css?v=535.5.1">
 
 
 
@@ -216,29 +216,34 @@
             <div class="h-[30%] bg-[#74ACDF]"></div>
         </div>
         <div id="global-announcement-container" class="sticky top-0 z-[100] w-full">
-            <div id="update-banner"
-                class="w-full bg-blue-600 text-white px-4 py-3 shadow-lg flex items-start flex-row gap-3 border-b border-white/20 animate-slide-down">
-                <span class="material-symbols-outlined shrink-0 mt-0.5">campaign</span>
-                <div class="flex-1">
-                    <p class="text-[13px] font-bold leading-tight">
-                        📢 ¡App Actualizada! Hemos solucionado el error de ingreso. Si continuás teniendo problemas al
-                        loguearte, cerrá la App por completo y volvé a abrirla para aplicar los cambios.
+            <div id="mundial-banner"
+                class="w-full bg-gradient-to-r from-[#74ACDF] via-white to-[#74ACDF] text-slate-900 px-4 py-2.5 flex flex-col items-center justify-center relative border-b-2 border-[#F6B426] shadow-[0_4px_15px_rgba(246,180,38,0.5)] animate-slide-down">
+                <div class="w-full flex flex-col items-center justify-center text-center gap-1 select-none">
+                    <!-- Estrellas del Sueño -->
+                    <div class="flex items-center justify-center gap-1 text-sm">
+                        <span class="drop-shadow-[0_1.5px_2px_rgba(246,180,38,0.8)]">⭐️⭐️⭐️</span>
+                        <span class="opacity-50 text-slate-400 font-bold ml-1 drop-shadow-[0_0_2px_rgba(150,150,150,0.5)]" title="La Cuarta Estrella">((⭐️))</span>
+                    </div>
+                    <!-- Mensaje de Hype -->
+                    <p class="text-[10px] sm:text-xs font-black tracking-tight leading-snug uppercase max-w-[95%]">
+                        ⚽ ¡DOMINGO DE FINAL MUNDIALISTA! 🇦🇷 ARGENTINA vs ESPAÑA 🇪🇸 | ¡Alentando a la Selección en busca de la Cuarta Estrella! 🏆✨
                     </p>
                 </div>
-                <button onclick="localStorage.setItem('banner_v534.9_dismissed', 'true'); this.closest('#update-banner').remove();"
-                    class="shrink-0 p-1 bg-black/10 hover:bg-black/20 transition-colors rounded-full flex items-center justify-center">
-                    <span class="material-symbols-outlined text-sm">close</span>
+                <!-- Close Button -->
+                <button onclick="localStorage.setItem('banner_mundial_final_dismissed', 'true'); this.closest('#mundial-banner').remove();"
+                    class="absolute right-1 top-1 p-0.5 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center justify-center text-slate-600">
+                    <span class="material-symbols-outlined text-[14px]">close</span>
                 </button>
             </div>
             <script>
-                if (localStorage.getItem('banner_v534.9_dismissed') === 'true') {
-                    document.getElementById('update-banner')?.remove();
+                if (localStorage.getItem('banner_mundial_final_dismissed') === 'true') {
+                    document.getElementById('mundial-banner')?.remove();
                 }
             </script>
         </div>
         <div class="flex flex-col items-center justify-center h-screen space-y-4">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p class="text-slate-500 animate-pulse">Cargando Adicionales Santa Fe v535.5.0...</p>
+            <p class="text-slate-500 animate-pulse">Cargando Adicionales Santa Fe v535.5.1...</p>
         </div>
     </div>
 
@@ -257,42 +262,42 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <!-- Application Logic -->
-    <script src="firebase-config.js?v=535.5.0" defer></script>
-    <script src="supabase-config.js?v=535.5.0" defer></script>
-    <script src="db-v211.js?v=535.5.0" defer></script>
-    <script src="js/utils.js?v=535.5.0" defer></script>
-    <script src="js/components.js?v=535.5.0" defer></script>
-    <script src="js/store.js?v=535.5.0" defer></script>
-    <script src="js/router.js?v=535.5.0" defer></script>
-    <script src="js/data/directory.js?v=535.5.0" defer></script>
-    <script src="js/data/resources.js?v=535.5.0" defer></script>
-    <script src="js/views/auth.js?v=535.5.0" defer></script>
+    <script src="firebase-config.js?v=535.5.1" defer></script>
+    <script src="supabase-config.js?v=535.5.1" defer></script>
+    <script src="db-v211.js?v=535.5.1" defer></script>
+    <script src="js/utils.js?v=535.5.1" defer></script>
+    <script src="js/components.js?v=535.5.1" defer></script>
+    <script src="js/store.js?v=535.5.1" defer></script>
+    <script src="js/router.js?v=535.5.1" defer></script>
+    <script src="js/data/directory.js?v=535.5.1" defer></script>
+    <script src="js/data/resources.js?v=535.5.1" defer></script>
+    <script src="js/views/auth.js?v=535.5.1" defer></script>
 
-    <script src="js/views/legal.js?v=535.5.0" defer></script>
-    <script src="js/views/agenda.js?v=535.5.0" defer></script>
-    <script src="js/views/register.js?v=535.5.0" defer></script>
-    <script src="js/views/control_panel.js?v=535.5.0" defer></script>
-    <script src="js/views/financial.js?v=535.5.0" defer></script>
-    <script src="js/views/info_guia.js?v=535.5.0" defer></script>
-    <script src="js/views/profile.js?v=535.5.0" defer></script>
+    <script src="js/views/legal.js?v=535.5.1" defer></script>
+    <script src="js/views/agenda.js?v=535.5.1" defer></script>
+    <script src="js/views/register.js?v=535.5.1" defer></script>
+    <script src="js/views/control_panel.js?v=535.5.1" defer></script>
+    <script src="js/views/financial.js?v=535.5.1" defer></script>
+    <script src="js/views/info_guia.js?v=535.5.1" defer></script>
+    <script src="js/views/profile.js?v=535.5.1" defer></script>
 
-    <script src="js/views/stats.js?v=535.5.0" defer></script>
-    <script src="js/views/history.js?v=535.5.0" defer></script>
-    <script src="js/views/service_details.js?v=535.5.0" defer></script>
-    <script src="js/views/asistente.js?v=535.5.0" defer></script>
+    <script src="js/views/stats.js?v=535.5.1" defer></script>
+    <script src="js/views/history.js?v=535.5.1" defer></script>
+    <script src="js/views/service_details.js?v=535.5.1" defer></script>
+    <script src="js/views/asistente.js?v=535.5.1" defer></script>
 
     <!-- ── Módulos Asistente Operativo Policial PRO ── -->
-    <script src="js/views/actas.js?v=535.5.0" defer></script>
-    <script src="js/views/intervenciones.js?v=535.5.0" defer></script>
-    <script src="js/views/procedimiento.js?v=535.5.0" defer></script>
-    <script src="js/views/archivos.js?v=535.5.0" defer></script>
-    <script src="js/views/auditoria.js?v=535.5.0" defer></script>
-    <script src="js/views/iapos.js?v=535.5.0" defer></script>
+    <script src="js/views/actas.js?v=535.5.1" defer></script>
+    <script src="js/views/intervenciones.js?v=535.5.1" defer></script>
+    <script src="js/views/procedimiento.js?v=535.5.1" defer></script>
+    <script src="js/views/archivos.js?v=535.5.1" defer></script>
+    <script src="js/views/auditoria.js?v=535.5.1" defer></script>
+    <script src="js/views/iapos.js?v=535.5.1" defer></script>
 
-    <script src="js/views/admin.js?v=535.5.0" defer></script>
-    <script src="js/views/diagnostics.js?v=535.5.0" defer></script>
-    <script src="js/views/onboarding.js?v=535.5.0" defer></script>
-    <script src="app-v211.js?v=535.5.0" defer></script>
+    <script src="js/views/admin.js?v=535.5.1" defer></script>
+    <script src="js/views/diagnostics.js?v=535.5.1" defer></script>
+    <script src="js/views/onboarding.js?v=535.5.1" defer></script>
+    <script src="app-v211.js?v=535.5.1" defer></script>
 
 
 
