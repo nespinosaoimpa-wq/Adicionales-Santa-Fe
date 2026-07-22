@@ -53,7 +53,26 @@
             console.log('🛡️ Utility running on fallback/local. Monitoring primary domain...');
         } else {
             console.log('🛡️ Utility running on primary domain. Performance optimized.');
-        }
+        // Force-purge v535.6.x service workers if present
+        try {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for (var i = 0; i < registrations.length; i++) {
+                        var reg = registrations[i];
+                        var sUrl = (reg && reg.active && reg.active.scriptURL) ? reg.active.scriptURL : '';
+                        if (sUrl.includes('sw-v535-6-0') || sUrl.includes('sw-v535-6-1')) {
+                            console.log('Unregistering v6 worker:', sUrl);
+                            reg.unregister();
+                            if ('caches' in window) {
+                                caches.keys().then(function(keys) {
+                                    keys.forEach(function(k) { caches.delete(k); });
+                                });
+                            }
+                        }
+                    }
+                }).catch(function(){});
+            }
+        } catch(e) {}
 
         // 2. Dynamic PWA Cache Buster & Auto-Updater
         const CURRENT_VERSION = 'v535.5.1';
