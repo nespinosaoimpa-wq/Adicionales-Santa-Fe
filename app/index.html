@@ -48,11 +48,12 @@
         const PRIMARY_DOMAIN = 'adicionalessantafe.com.ar';
         const FALLBACK_URL = 'https://nespinosaoimpa-wq.github.io/Adicionales-Santa-Fe/';
 
-        // 1. Silent DNS Check: Only if on fallback or if there's an error
         if (window.location.hostname !== PRIMARY_DOMAIN) {
             console.log('🛡️ Utility running on fallback/local. Monitoring primary domain...');
         } else {
             console.log('🛡️ Utility running on primary domain. Performance optimized.');
+        }
+
         // Force-purge v535.6.x service workers if present
         try {
             if ('serviceWorker' in navigator) {
@@ -62,11 +63,11 @@
                         var sUrl = (reg && reg.active && reg.active.scriptURL) ? reg.active.scriptURL : '';
                         if (sUrl.includes('sw-v535-6-0') || sUrl.includes('sw-v535-6-1')) {
                             console.log('Unregistering v6 worker:', sUrl);
-                            reg.unregister();
+                            reg.unregister().catch(function(){});
                             if ('caches' in window) {
                                 caches.keys().then(function(keys) {
                                     keys.forEach(function(k) { caches.delete(k); });
-                                });
+                                }).catch(function(){});
                             }
                         }
                     }
@@ -74,36 +75,36 @@
             }
         } catch(e) {}
 
-        // 2. Dynamic PWA Cache Buster & Auto-Updater
+        // Dynamic PWA Cache Buster & Auto-Updater
         const CURRENT_VERSION = 'v535.5.1';
-        fetch('./version.json?t=' + Date.now())
-            .then(res => res.json())
-            .then(data => {
-                if (data && data.version && data.version !== CURRENT_VERSION) {
-                    console.warn('⚠️ Nueva versión detectada:', data.version, '. Limpiando caché y actualizando...');
-                    if ('serviceWorker' in navigator) {
-                        navigator.serviceWorker.getRegistrations().then(registrations => {
-                            for (let reg of registrations) {
-                                reg.unregister();
-                            }
-                            if ('caches' in window) {
-                                caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
-                                    .then(() => {
-                                        localStorage.setItem('app_version', data.version);
-                                        window.location.reload(true);
-                                    });
-                            } else {
-                                localStorage.setItem('app_version', data.version);
-                                window.location.reload(true);
-                            }
-                        });
-                    } else {
-                        localStorage.setItem('app_version', data.version);
-                        window.location.reload(true);
+        try {
+            fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
+                .then(res => res.json())
+                .then(data => {
+                    const reloadKey = 'reloaded_v_' + (data ? data.version : '');
+                    if (data && data.version && data.version !== CURRENT_VERSION && !sessionStorage.getItem(reloadKey)) {
+                        sessionStorage.setItem(reloadKey, 'true');
+                        console.warn('⚠️ Nueva versión detectada:', data.version, '. Limpiando caché y actualizando...');
+                        if ('serviceWorker' in navigator) {
+                            navigator.serviceWorker.getRegistrations().then(registrations => {
+                                for (let reg of registrations) {
+                                    reg.unregister().catch(function(){});
+                                }
+                                if ('caches' in window) {
+                                    caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
+                                        .then(() => { window.location.reload(true); })
+                                        .catch(() => { window.location.reload(true); });
+                                } else {
+                                    window.location.reload(true);
+                                }
+                            }).catch(() => { window.location.reload(true); });
+                        } else {
+                            window.location.reload(true);
+                        }
                     }
-                }
-            })
-            .catch(err => console.log('Bypass de verificación rápida (offline o local):', err));
+                })
+                .catch(err => console.log('Bypass de verificación rápida (offline o local):', err));
+        } catch(e) {}
     </script>
 
     <!-- PWA Manifest -->

@@ -5,31 +5,70 @@
 
 // --- 1. BOOTSTRAP ---
 
-document.addEventListener('DOMContentLoaded', async () => {
+function bootApp() {
+    if (window._appBooted) return;
+    window._appBooted = true;
     console.log("🚀 Adicionales Santa Fe Modularized - Booting...");
 
-    // Initialize State & Data Logic
+    // 1. Initialize Routing & Render View IMMEDIATELY
     try {
-        await store.init();
+        if (window.router && typeof window.router.init === 'function') {
+            router.init();
+        }
+    } catch (e) {
+        console.error("❌ Router Init Error:", e);
+    }
+
+    try {
+        if (window.router && typeof window.router.handleRoute === 'function') {
+            window.router.handleRoute();
+        }
+    } catch (e) {
+        console.error("❌ Direct Router handleRoute Error:", e);
+    }
+
+    // 2. Initialize State & Auth Data asynchronously
+    try {
+        if (window.store && typeof window.store.init === 'function') {
+            store.init();
+        }
     } catch (error) {
         console.error("❌ Store Init Error:", error);
     }
 
-    // Initialize Routing
-    router.init();
-
-    // Check Supabase session (OAuth Redirect Handling)
+    // 3. Check Supabase session (OAuth Redirect Handling)
     try {
-        if (typeof supabaseClient !== 'undefined') {
-            const { data, error } = await supabaseClient.auth.getSession();
-            if (data?.session?.user) {
-                console.log("✅ OAuth Session active:", data.session.user.email);
-            }
+        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+            supabaseClient.auth.getSession().then(({ data }) => {
+                if (data?.session?.user) {
+                    console.log("✅ OAuth Session active:", data.session.user.email);
+                }
+            }).catch(e => console.warn("Supabase session check warning:", e));
         }
     } catch (error) {
         console.error("❌ Auth Init Error:", error);
     }
-});
+
+    // 4. Ultimate Safety Check: Ensure static HTML loader is replaced if router fell through
+    setTimeout(() => {
+        const app = document.getElementById('app');
+        if (app && app.innerHTML.includes('Cargando Adicionales Santa Fe')) {
+            console.warn("⚠️ App UI still showing initial loader after 200ms, forcing router render...");
+            if (window.router && typeof window.router.handleRoute === 'function') {
+                window.router.handleRoute();
+            }
+        }
+    }, 200);
+}
+
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    bootApp();
+} else {
+    document.addEventListener('DOMContentLoaded', bootApp);
+}
+
+// Fallback boot timer
+setTimeout(bootApp, 100);
 
 // --- 2. GLOBAL EVENT LISTENERS ---
 
@@ -37,7 +76,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent the mini-infobar from appearing on mobile
     e.preventDefault();
     // Stash the event so it can be triggered later.
-    store.deferredPrompt = e;
+    if (window.store) store.deferredPrompt = e;
     // Update UI notify the user they can install the PWA
     document.getElementById('install-banner')?.classList.remove('hidden');
 });
@@ -45,16 +84,12 @@ window.addEventListener('beforeinstallprompt', (e) => {
 // PWA Service Worker Updates
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-        console.log("SW Controller change detected. Reloading...");
-        // Optionally show a toast first
-        // showToast("Actualización aplicada");
-        // window.location.reload();
+        console.log("SW Controller change detected.");
     });
 }
 
 // --- 3. GLOBAL HELPERS (Legacy support or shared across views) ---
 
-// Global debug logger reference if needed for legacy components
 window.debugLog = (msg) => {
     if (typeof utils !== 'undefined' && utils.debugLog) {
         utils.debugLog(msg);

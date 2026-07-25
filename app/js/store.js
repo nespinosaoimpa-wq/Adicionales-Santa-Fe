@@ -416,10 +416,11 @@ window.store = {
             };
 
             const safetyTimeout = setTimeout(() => {
-                console.warn("⚠️ store.init auth observer timed out (12s fallback)");
+                console.warn("⚠️ store.init auth observer timed out (2s fallback)");
                 this.authInitialized = true;
                 finishResolve();
-            }, 12000);
+                if (window.router && window.router.initialized) router.handleRoute();
+            }, 2000);
 
             auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .catch((e) => console.error("Persistence Error:", e))
@@ -462,7 +463,11 @@ window.store = {
                                 this.serviceConfig = this.user.serviceConfig;
                                 this.notificationSettings = this.user.notificationSettings;
                                 console.log("✅ User data synchronized:", this.user.email);
-                                await DB.saveUser(this.user);
+                                DB.saveUser(this.user).catch(e => console.warn("Save user bg warning:", e));
+
+                                this.authInitialized = true;
+                                finishResolve();
+                                if (window.router && window.router.initialized) router.handleRoute();
 
                                 this.unsubscribeServices = DB.subscribeToServices(services => {
                                     this.services = services;
@@ -499,10 +504,6 @@ window.store = {
                                 // Ocultar banner de actualización ya que el usuario ingresó correctamente
                                 localStorage.setItem('banner_v534.9_dismissed', 'true');
                                 document.getElementById('update-banner')?.remove();
-
-                                this.authInitialized = true;
-                                finishResolve();
-                                if (window.router && window.router.initialized) router.handleRoute();
 
                                 // Trigger onboarding for new users (Mejora 4)
                                 setTimeout(() => { if (typeof showOnboarding === 'function') showOnboarding(); }, 1500);

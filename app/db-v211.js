@@ -59,15 +59,37 @@ const DB = {
     },
 
     async getUser(email) {
-        // Try Firestore first as it's the primary source for old users
-        const doc = await db.collection('users').doc(email).get();
-        if (doc.exists) return doc.data();
+        if (!email) return null;
+        const cleanEmail = email.toLowerCase().trim();
 
-        // Fallback to Supabase
-        const { data } = await supabaseClient.from('profiles').select('*').eq('email', email).single();
-        if (data) return { ...data, serviceConfig: data.service_config, notificationSettings: data.notification_settings };
+        const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(null), 1200));
 
-        return null;
+        const fetchPromise = (async () => {
+            // Try Firestore first as it's the primary source for old users
+            try {
+                if (typeof db !== 'undefined' && db) {
+                    const doc = await db.collection('users').doc(cleanEmail).get();
+                    if (doc.exists) return doc.data();
+                }
+            } catch (e) {
+                console.warn("Firestore getUser error:", e);
+            }
+
+            // Fallback to Supabase
+            try {
+                if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                    const { data, error } = await supabaseClient.from('profiles').select('*').eq('email', cleanEmail).maybeSingle();
+                    if (error) console.warn("Supabase getUser warning:", error);
+                    if (data) return { ...data, serviceConfig: data.service_config, notificationSettings: data.notification_settings };
+                }
+            } catch (e) {
+                console.warn("Supabase getUser error:", e);
+            }
+
+            return null;
+        })();
+
+        return Promise.race([fetchPromise, timeoutPromise]);
     },
 
     async updateUserConfig(serviceConfig) {
