@@ -318,23 +318,47 @@ window.renderGlobalAnnouncement = function () {
         return;
     }
 
-    let bg, text, icon;
-    switch (ann.type) {
-        case 'warning': bg = 'bg-yellow-500/95'; text = 'text-yellow-950'; icon = 'warning'; break;
-        case 'danger': bg = 'bg-red-500/95'; text = 'text-white'; icon = 'emergency'; break;
-        case 'success': bg = 'bg-emerald-500/95'; text = 'text-white'; icon = 'check_circle'; break;
-        default: bg = 'bg-blue-500/95'; text = 'text-white'; icon = 'campaign'; break;
+    // Trigger native web notification if granted
+    if ('Notification' in window && Notification.permission === 'granted' && !localStorage.getItem('notified_announcement_' + ann.id)) {
+        localStorage.setItem('notified_announcement_' + ann.id, 'true');
+        try {
+            if ('serviceWorker' in navigator && navigator.serviceWorker.controller) {
+                navigator.serviceWorker.ready.then(reg => {
+                    reg.showNotification("Adicionales Santa Fe", {
+                        body: ann.message,
+                        icon: "assets/icon-512.png",
+                        badge: "assets/icon-512.png",
+                        vibrate: [200, 100, 200],
+                        tag: 'announcement-' + ann.id,
+                        data: { url: './#agenda' }
+                    }).catch(() => {});
+                }).catch(() => {});
+            } else {
+                new Notification("Adicionales Santa Fe", {
+                    body: ann.message,
+                    icon: "assets/icon-512.png"
+                });
+            }
+        } catch(e) {}
     }
 
     container.innerHTML = `
-        <div class="w-full ${bg} ${text} backdrop-blur-xl px-4 py-3 shadow-lg flex items-start gap-3 animate-slide-down border-b border-white/20">
-            <span class="material-symbols-outlined shrink-0 mt-0.5">${icon}</span>
-            <div class="flex-1">
-                <p class="text-[13px] font-bold leading-tight">${ann.message}</p>
+        <div class="w-full p-2.5 z-[9999] animate-slide-down">
+            <div class="bg-[#111b21]/95 text-white backdrop-blur-2xl p-3.5 rounded-2xl shadow-[0_10px_35px_rgba(0,0,0,0.6)] border border-emerald-500/30 flex items-center gap-3">
+                <div class="size-10 rounded-full bg-emerald-500 flex items-center justify-center shrink-0 shadow-lg shadow-emerald-500/30">
+                    <span class="material-symbols-outlined text-white text-xl">chat</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2 mb-0.5">
+                        <p class="text-[11px] font-black uppercase tracking-wider text-emerald-400">Adicionales Santa Fe</p>
+                        <span class="text-[9px] font-bold text-slate-400">Ahora</span>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-100 leading-snug line-clamp-2">${ann.message}</p>
+                </div>
+                <button onclick="localStorage.setItem('dismissed_announcement_${ann.id}', 'true'); renderGlobalAnnouncement();" class="shrink-0 p-1.5 hover:bg-white/10 text-slate-400 hover:text-white rounded-full transition-colors">
+                    <span class="material-symbols-outlined text-sm">close</span>
+                </button>
             </div>
-            <button onclick="localStorage.setItem('dismissed_announcement_${ann.id}', 'true'); renderGlobalAnnouncement();" class="shrink-0 p-1 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center justify-center">
-                <span class="material-symbols-outlined text-sm">close</span>
-            </button>
         </div>
     `;
 };
