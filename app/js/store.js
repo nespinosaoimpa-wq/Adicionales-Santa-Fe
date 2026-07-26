@@ -449,8 +449,19 @@ window.store = {
                                     };
                                     if (this.user.name === 'undefined' || !this.user.name) this.user.name = baseUser.name;
                                     if (this.user.avatar === 'undefined' || !this.user.avatar) this.user.avatar = baseUser.avatar;
+                                    try { localStorage.setItem('cached_profile_' + user.email.toLowerCase(), JSON.stringify(this.user)); } catch(e){}
                                 } else {
-                                    this.user = baseUser;
+                                    const cachedStr = localStorage.getItem('cached_profile_' + user.email.toLowerCase());
+                                    if (cachedStr) {
+                                        try {
+                                            const cached = JSON.parse(cachedStr);
+                                            this.user = { ...baseUser, ...cached };
+                                        } catch(e) {
+                                            this.user = baseUser;
+                                        }
+                                    } else {
+                                        this.user = baseUser;
+                                    }
                                 }
 
                                 if (this.user.status === 'suspended') {

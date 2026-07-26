@@ -62,14 +62,16 @@ const DB = {
         if (!email) return null;
         const cleanEmail = email.toLowerCase().trim();
 
-        const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(null), 1200));
-
         const fetchPromise = (async () => {
-            // Try Firestore first as it's the primary source for old users
+            // Try Firestore first with exact email and cleanEmail
             try {
                 if (typeof db !== 'undefined' && db) {
-                    const doc = await db.collection('users').doc(cleanEmail).get();
+                    let doc = await db.collection('users').doc(email).get();
                     if (doc.exists) return doc.data();
+                    if (email !== cleanEmail) {
+                        doc = await db.collection('users').doc(cleanEmail).get();
+                        if (doc.exists) return doc.data();
+                    }
                 }
             } catch (e) {
                 console.warn("Firestore getUser error:", e);
@@ -78,8 +80,11 @@ const DB = {
             // Fallback to Supabase
             try {
                 if (typeof supabaseClient !== 'undefined' && supabaseClient) {
-                    const { data, error } = await supabaseClient.from('profiles').select('*').eq('email', cleanEmail).maybeSingle();
-                    if (error) console.warn("Supabase getUser warning:", error);
+                    let { data } = await supabaseClient.from('profiles').select('*').eq('email', email).maybeSingle();
+                    if (!data && email !== cleanEmail) {
+                        const res = await supabaseClient.from('profiles').select('*').eq('email', cleanEmail).maybeSingle();
+                        data = res.data;
+                    }
                     if (data) return { ...data, serviceConfig: data.service_config, notificationSettings: data.notification_settings };
                 }
             } catch (e) {
@@ -89,6 +94,7 @@ const DB = {
             return null;
         })();
 
+        const timeoutPromise = new Promise(resolve => setTimeout(() => resolve(null), 3000));
         return Promise.race([fetchPromise, timeoutPromise]);
     },
 
