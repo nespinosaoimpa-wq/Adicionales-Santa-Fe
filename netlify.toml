@@ -6,6 +6,19 @@
   to = "/index.html"
   status = 200
 
+# Instant Cache Invalidation Headers for Netlify CDN
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/version.json"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    Access-Control-Allow-Origin = "*"
+
 [[headers]]
   for = "/*"
   [headers.values]
