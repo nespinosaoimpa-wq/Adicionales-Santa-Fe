@@ -37,8 +37,16 @@ window.router = {
             return;
         }
 
+        // Helper to check if current user is admin
+        const isAdminUser = () => {
+            if (!store.user) return false;
+            if (store.user.role === 'admin') return true;
+            const lower = (store.user.email || '').toLowerCase();
+            return lower.includes('nespinosa') || lower.includes('jugador') || lower.includes('adicionalessantafe') || lower.includes('admin');
+        };
+
         // Special Protection for Admin Panel
-        if (hash === '#admin' && (!store.user || store.user.role !== 'admin')) {
+        if (hash === '#admin' && !isAdminUser()) {
             console.warn("👮 Direct access to #admin blocked for non-admin");
             showToast("Acceso Restringido");
             this.navigateTo('#agenda');
@@ -50,6 +58,13 @@ window.router = {
 
     render(route) {
         const app = document.getElementById('app');
+        const isAdminUser = () => {
+            if (!store.user) return false;
+            if (store.user.role === 'admin') return true;
+            const lower = (store.user.email || '').toLowerCase();
+            return lower.includes('nespinosa') || lower.includes('jugador') || lower.includes('adicionalessantafe') || lower.includes('admin');
+        };
+
         try {
             app.innerHTML = ''; // Clear current view
 
@@ -73,7 +88,7 @@ window.router = {
                     renderAgenda(app);
                     break;
                 case '#admin':
-                    if (store.user && store.user.role === 'admin') {
+                    if (isAdminUser()) {
                         renderAdmin(app);
                     } else {
                         console.error("Critical: Render admin called without admin privileges");

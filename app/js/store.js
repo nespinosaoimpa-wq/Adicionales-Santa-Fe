@@ -448,8 +448,9 @@ window.store = {
                                         notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
                                     };
                                     if (this.user.name === 'undefined' || !this.user.name) this.user.name = baseUser.name;
-                                    if (this.user.avatar === 'undefined' || !this.user.avatar) this.user.avatar = baseUser.avatar;
-                                    try { localStorage.setItem('cached_profile_' + user.email.toLowerCase(), JSON.stringify(this.user)); } catch(e){}
+                                    if (this.user.avatar === 'undefined' || !this.user.avatar || this.user.avatar.includes('ui-avatars.com')) {
+                                        if (user.photoURL) this.user.avatar = user.photoURL;
+                                    }
                                 } else {
                                     const cachedStr = localStorage.getItem('cached_profile_' + user.email.toLowerCase());
                                     if (cachedStr) {
@@ -463,6 +464,13 @@ window.store = {
                                         this.user = baseUser;
                                     }
                                 }
+
+                                // Auto-grant admin role to administrator emails
+                                const lowerEmail = (user.email || '').toLowerCase().trim();
+                                if (lowerEmail.includes('nespinosa') || lowerEmail.includes('jugador') || lowerEmail.includes('adicionalessantafe') || lowerEmail.includes('admin')) {
+                                    this.user.role = 'admin';
+                                }
+                                try { localStorage.setItem('cached_profile_' + user.email.toLowerCase(), JSON.stringify(this.user)); } catch(e){}
 
                                 if (this.user.status === 'suspended') {
                                     showToast("❌ Tu cuenta ha sido suspendida por un administrador.", 8000);
