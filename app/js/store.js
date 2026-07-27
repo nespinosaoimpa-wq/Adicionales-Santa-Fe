@@ -527,6 +527,9 @@ window.store = {
                                 // Trigger onboarding for new users (Mejora 4)
                                 setTimeout(() => { if (typeof showOnboarding === 'function') showOnboarding(); }, 1500);
 
+                                // Welcome back re-engagement for users returning after outage
+                                setTimeout(() => { if (typeof showWelcomeBackModal === 'function') showWelcomeBackModal(); }, 2500);
+
                                 // Trigger survey / rating banner (Cartel publicitario para opinar)
                                 setTimeout(() => { if (typeof showSurveyBanner === 'function') showSurveyBanner(); }, 6000);
 

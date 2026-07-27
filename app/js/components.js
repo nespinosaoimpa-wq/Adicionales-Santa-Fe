@@ -363,4 +363,65 @@ window.renderGlobalAnnouncement = function () {
     `;
 };
 
+window.showWelcomeBackModal = function() {
+    if (localStorage.getItem('welcome_back_v535_8_seen')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'welcome-back-modal';
+    overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-all duration-500 opacity-0';
+    
+    overlay.innerHTML = `
+        <div class="bg-slate-900 rounded-3xl p-6 shadow-2xl border border-white/10 w-full max-w-sm transform scale-90 transition-all duration-500 opacity-0 flex flex-col items-center text-center" id="welcome-back-card">
+            <div class="text-6xl mb-4 animate-bounce">🎉</div>
+            <h2 class="text-2xl font-bold text-white mb-1">¡Bienvenido de vuelta!</h2>
+            <p class="text-sm text-slate-400 font-medium mb-4">Estuvimos trabajando para vos</p>
+            <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                La plataforma fue completamente restablecida y mejorada. Tus datos, servicios y configuración están 100% intactos y seguros.
+            </p>
+            <div class="w-full bg-slate-800/50 rounded-2xl p-4 mb-6 text-left space-y-3 border border-white/5">
+                <div class="flex items-center gap-3">
+                    <span class="text-lg">🚀</span>
+                    <span class="text-xs font-semibold text-slate-200">Velocidad mejorada (carga instantánea)</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-lg">🔒</span>
+                    <span class="text-xs font-semibold text-slate-200">Tus datos siempre seguros y respaldados</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-lg">📱</span>
+                    <span class="text-xs font-semibold text-slate-200">Notificaciones push mejoradas</span>
+                </div>
+            </div>
+            <button id="welcome-back-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30">
+                ¡Vamos! <span class="text-xl leading-none">→</span>
+            </button>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    requestAnimationFrame(() => {
+        overlay.classList.remove('opacity-0');
+        overlay.classList.add('opacity-100');
+        const card = overlay.querySelector('#welcome-back-card');
+        card.classList.remove('scale-90', 'opacity-0');
+        card.classList.add('scale-100', 'opacity-100');
+    });
+
+    const btn = overlay.querySelector('#welcome-back-btn');
+    btn.addEventListener('click', () => {
+        localStorage.setItem('welcome_back_v535_8_seen', 'true');
+        
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0');
+        const card = overlay.querySelector('#welcome-back-card');
+        card.classList.remove('scale-100');
+        card.classList.add('scale-90');
+        
+        setTimeout(() => {
+            overlay.remove();
+        }, 300);
+    });
+};
+
 console.log("✅ components.js loaded & exported successfully");
