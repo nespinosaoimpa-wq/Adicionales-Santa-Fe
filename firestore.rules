@@ -73,10 +73,10 @@ service cloud.firestore {
       allow delete: if isAdmin();
       allow update: if false;
     }
-    // ── ANUNCIOS: lectura pública, escritura habilitada para avisos del sistema ──
+    // ── ANUNCIOS: lectura pública, escritura solo admin ──
     match /announcements/{announcementId} {
       allow read: if true;
-      allow write: if true;
+      allow write: if isAdmin();
     }
   }
 }
