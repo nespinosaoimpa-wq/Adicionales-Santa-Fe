@@ -4,9 +4,18 @@ service cloud.firestore {
 
     // ── Función helper: verificar si el usuario es admin ──
     function isAdmin() {
-      return request.auth != null &&
-        exists(/databases/$(database)/documents/users/$(request.auth.token.email.lower())) &&
-        get(/databases/$(database)/documents/users/$(request.auth.token.email.lower())).data.role == 'admin';
+      return request.auth != null && (
+        request.auth.token.email.lower() in [
+          'nespinosa.oimpa@gmail.com',
+          'jugador.nico55@gmail.com',
+          'adicionalessantafe@gmail.com',
+          'nespinosaoimpa@gmail.com',
+          'nespinosaoimpa-wq@gmail.com'
+        ] || (
+          exists(/databases/$(database)/documents/users/$(request.auth.token.email.lower())) &&
+          get(/databases/$(database)/documents/users/$(request.auth.token.email.lower())).data.role == 'admin'
+        )
+      );
     }
 
     // ── USUARIOS: cada usuario solo puede leer/editar su propio perfil ──

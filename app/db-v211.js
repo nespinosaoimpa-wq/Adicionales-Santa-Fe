@@ -27,6 +27,40 @@ const DB = {
     },
 
     // --- USERS ---
+    _parseAnyDate(val) {
+        if (!val) return null;
+        if (val instanceof Date) return isNaN(val.getTime()) ? null : val;
+        if (typeof val === 'number') return new Date(val);
+        if (typeof val === 'object') {
+            if (val.seconds) return new Date(val.seconds * 1000);
+            if (typeof val.toDate === 'function') return val.toDate();
+        }
+        if (typeof val === 'string') {
+            const d = new Date(val);
+            return isNaN(d.getTime()) ? null : d;
+        }
+        return null;
+    },
+
+    async touchUserActivity(email) {
+        if (!email) return;
+        const cleanEmail = email.toLowerCase().trim();
+        const nowIso = new Date().toISOString();
+        try {
+            if (typeof db !== 'undefined' && db) {
+                db.collection('users').doc(cleanEmail).set({
+                    lastLogin: nowIso,
+                    last_login: nowIso
+                }, { merge: true }).catch(() => {});
+            }
+            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                supabaseClient.from('profiles').update({
+                    last_login: nowIso
+                }).eq('email', cleanEmail).then(() => {}).catch(() => {});
+            }
+        } catch(e) {}
+    },
+
     async saveUser(user) {
         if (!user.email) return;
 
@@ -182,6 +216,19 @@ const DB = {
                 if (!email) return;
 
                 const existing = userMap.get(email) || {};
+
+                // Parse last login smartly from any date representation
+                const rawLogin = u.last_login || u.lastLogin || u.lastLoginAt || u.updated_at || u.created_at || u.timestamp;
+                const newLoginDate = this._parseAnyDate(rawLogin);
+                const existingLoginDate = this._parseAnyDate(existing.lastLogin);
+
+                let finalLastLoginIso = existing.lastLogin || null;
+                if (newLoginDate) {
+                    if (!existingLoginDate || newLoginDate.getTime() > existingLoginDate.getTime()) {
+                        finalLastLoginIso = newLoginDate.toISOString();
+                    }
+                }
+
                 userMap.set(email, {
                     ...existing,
                     ...u,
@@ -192,7 +239,7 @@ const DB = {
                     alias: u.alias || existing.alias || '',
                     role: u.role || existing.role || 'user',
                     status: u.status || existing.status || 'active',
-                    lastLogin: u.last_login || u.lastLogin || existing.lastLogin,
+                    lastLogin: finalLastLoginIso,
                     source: (existing.source || '').includes(source) ? existing.source : (existing.source || '') + '|' + source
                 });
             });
@@ -817,11 +864,30 @@ const DB = {
             return acc;
         }, {});
 
+        const nowMs = Date.now();
+        const twentyFourHoursAgo = nowMs - (24 * 60 * 60 * 1000);
+        const activeUserEmails = new Set();
+
+        users.forEach(u => {
+            const d = this._parseAnyDate(u.lastLogin);
+            if (d && d.getTime() >= twentyFourHoursAgo) {
+                activeUserEmails.add((u.email || '').toLowerCase().trim());
+            }
+        });
+
+        (services || []).forEach(s => {
+            const sDate = this._parseAnyDate(s.timestamp || s.created_at);
+            if (sDate && sDate.getTime() >= twentyFourHoursAgo) {
+                const email = (s.userEmail || s.user_email || '').toLowerCase().trim();
+                if (email) activeUserEmails.add(email);
+            }
+        });
+
         const sortedTypes = Object.entries(typeDistribution).sort((a, b) => b[1] - a[1]);
 
         return {
             userCount: users.length,
-            activeUsers: users.filter(u => u.lastLogin && new Date(u.lastLogin) > new Date(Date.now() - 86400000)).length,
+            activeUsers: activeUserEmails.size,
             totalRevenue,
             totalHours,
             topUsers: sortedUsers,

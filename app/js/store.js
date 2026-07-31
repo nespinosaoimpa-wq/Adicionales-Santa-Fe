@@ -483,6 +483,7 @@ window.store = {
                                 this.notificationSettings = this.user.notificationSettings;
                                 console.log("✅ User data synchronized:", this.user.email);
                                 DB.saveUser(this.user).catch(e => console.warn("Save user bg warning:", e));
+                                DB.touchUserActivity(this.user.email).catch(() => {});
 
                                 this.authInitialized = true;
                                 finishResolve();
