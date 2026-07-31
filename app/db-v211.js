@@ -246,17 +246,34 @@ const DB = {
             mergeAndCallback();
         };
 
-        // 1. Listen to Firebase (Real-time)
+        // 1. Listen to Firebase Users (Real-time)
         const fbUnsub = db.collection('users').onSnapshot(snapshot => {
             processUsers(snapshot.docs.map(doc => doc.data()), 'FB');
         }, error => {
             console.warn("Users access restricted:", error.message);
         });
 
-        // 2. Fetch Supabase users (Full list)
+        // 2. Fetch Supabase Users (Full profiles list)
         supabaseClient.from('profiles').select('*').then(({ data }) => {
             if (data) processUsers(data, 'SB');
         }).catch(e => console.warn("Supabase profiles fetch failed:", e.message));
+
+        // 3. Scan Firebase Services to uncover all users who registered guardias
+        if (typeof db !== 'undefined' && db) {
+            db.collection('services').get().then(snapshot => {
+                const serviceUsers = snapshot.docs.map(doc => {
+                    const d = doc.data();
+                    const email = (d.userEmail || d.user_email || '').toLowerCase().trim();
+                    if (!email) return null;
+                    return {
+                        email: email,
+                        name: d.userName || d.user_name || email.split('@')[0],
+                        lastLogin: d.timestamp || d.created_at || d.date
+                    };
+                }).filter(Boolean);
+                processUsers(serviceUsers, 'FB-Services');
+            }).catch(() => {});
+        }
 
         return fbUnsub;
     },
