@@ -246,14 +246,14 @@ const DB = {
             mergeAndCallback();
         };
 
-        // 1. Listen to Firebase Users (Real-time)
+        // 1. Listen to Firebase Users Collection (Real-time)
         const fbUnsub = db.collection('users').onSnapshot(snapshot => {
             processUsers(snapshot.docs.map(doc => doc.data()), 'FB');
         }, error => {
             console.warn("Users access restricted:", error.message);
         });
 
-        // 2. Fetch Supabase Users (Full profiles list)
+        // 2. Fetch Supabase Profiles (Full profiles list)
         supabaseClient.from('profiles').select('*').then(({ data }) => {
             if (data) processUsers(data, 'SB');
         }).catch(e => console.warn("Supabase profiles fetch failed:", e.message));
@@ -264,7 +264,7 @@ const DB = {
                 const serviceUsers = snapshot.docs.map(doc => {
                     const d = doc.data();
                     const email = (d.userEmail || d.user_email || '').toLowerCase().trim();
-                    if (!email) return null;
+                    if (!email || !email.includes('@')) return null;
                     return {
                         email: email,
                         name: d.userName || d.user_name || email.split('@')[0],
@@ -274,6 +274,42 @@ const DB = {
                 processUsers(serviceUsers, 'FB-Services');
             }).catch(() => {});
         }
+
+        // 4. Scan Supabase Services
+        supabaseClient.from('services').select('user_email, timestamp, date').then(({ data }) => {
+            if (data) {
+                const sbServiceUsers = data.map(d => {
+                    const email = (d.user_email || '').toLowerCase().trim();
+                    if (!email || !email.includes('@')) return null;
+                    return { email, lastLogin: d.timestamp || d.date };
+                }).filter(Boolean);
+                processUsers(sbServiceUsers, 'SB-Services');
+            }
+        }).catch(() => {});
+
+        // 5. Scan Supabase Query Logs (Centinela AI usage)
+        supabaseClient.from('query_logs').select('user_email, timestamp').then(({ data }) => {
+            if (data) {
+                const logUsers = data.map(d => {
+                    const email = (d.user_email || '').toLowerCase().trim();
+                    if (!email || !email.includes('@')) return null;
+                    return { email, lastLogin: d.timestamp };
+                }).filter(Boolean);
+                processUsers(logUsers, 'SB-Logs');
+            }
+        }).catch(() => {});
+
+        // 6. Scan Supabase User Reviews
+        supabaseClient.from('user_reviews').select('user_email, timestamp, created_at').then(({ data }) => {
+            if (data) {
+                const reviewUsers = data.map(d => {
+                    const email = (d.user_email || '').toLowerCase().trim();
+                    if (!email || !email.includes('@')) return null;
+                    return { email, lastLogin: d.timestamp || d.created_at };
+                }).filter(Boolean);
+                processUsers(reviewUsers, 'SB-Reviews');
+            }
+        }).catch(() => {});
 
         return fbUnsub;
     },
