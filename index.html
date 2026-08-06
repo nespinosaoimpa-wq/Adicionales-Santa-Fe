@@ -10,8 +10,13 @@
     <!-- Google AdSense Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731" crossorigin="anonymous"></script>
 
-    <!-- Cache Buster & Rogue SW Killer -->
+    <!-- Cache Buster & PWA Standalone Redirect -->
     <script>
+        // If opened from mobile home screen (Standalone PWA), automatically navigate into the app
+        if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+            window.location.replace('./app/');
+        }
+
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
                 for(let registration of registrations) {
