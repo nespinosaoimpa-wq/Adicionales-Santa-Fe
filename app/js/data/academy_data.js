@@ -1,111 +1,134 @@
 /**
- * Adicionales Santa Fe - Campus de Ascenso Policial (Materiales ISEP)
+ * Adicionales Santa Fe - Campus de Ascenso Policial (Materiales ISEP 2026 Oficiales)
  */
 
 window.academyData = {
+    manualSource: "3- Oficial de Policía - Escalafón General (ISEP 2026 - 344 Págs)",
     hierarchies: [
         {
             id: "oficial-subinspector",
             title: "Oficial de Policía ➔ Subinspector",
-            subtitle: "Concurso de Ascenso ISEP - Nivel Inicial a Medio",
+            subtitle: "Manual Oficial ISEP 2026 (344 Páginas - Agrupamiento Ejecución)",
             icon: "military_tech",
-            badge: "ISEP Concurso 1",
+            badge: "ISEP 2026 Oficial",
             color: "from-blue-600 to-indigo-700",
             summaries: [
                 {
                     id: "sum-of1-1",
-                    title: "Unidad 1: Ley N° 12.521 del Personal Policial",
-                    readTime: "10 min",
+                    title: "Unidad 1: Liderazgo Policial y Filosofía de Mando (Pág. 14 ISEP)",
+                    readTime: "12 min",
                     content: `
-                        <h3>1. Estado Policial y Deberes Fundamentales</h3>
-                        <p>El Estado Policial es la situación jurídica resultante del conjunto de deberes, obligaciones y derechos que establecen las leyes y reglamentos para el personal de la Policía de Santa Fe.</p>
+                        <h3>1. El Liderazgo como Desarrollo Continuo</h3>
+                        <p>El liderazgo policial no es un destino sino un camino de formación continua. Se define como <em>"la acción de influir audazmente para el logro de un objetivo común"</em> (Manual ISEP 2026, Pág. 14).</p>
+                        
+                        <h3>2. Las Cuatro Virtudes Fundamentales de la Autoridad Real</h3>
+                        <p>La autoridad reglamentaria (formal) es insuficiente. La verdadera autoridad se construye mediante cuatro virtudes cardinales:</p>
                         <ul>
-                            <li><strong>Art. 10:</strong> Defiende la subordinación a la Constitución Nacional y Provincial.</li>
-                            <li><strong>Art. 15:</strong> Prohibición de ejercer actividades incompatibles con la función pública o portación de armas sin autorización legal.</li>
-                            <li><strong>Art. 22:</strong> Obligatoriedad de intervenir en cualquier lugar y momento ante la comisión de un delito flagrante.</li>
+                            <li><strong>Prudencia:</strong> Discernimiento en la toma de decisiones bajo presión.</li>
+                            <li><strong>Justicia:</strong> Equidad en el trato al personal y a la ciudadanía.</li>
+                            <li><strong>Fortaleza:</strong> Firmeza ante la adversidad operativa.</li>
+                            <li><strong>Templanza:</strong> Autocontrol y templanza emocional en el ejercicio del mando.</li>
                         </ul>
 
-                        <h3>2. Régimen Disciplinario y Licencias</h3>
-                        <p>El personal policial está sujeto a sanciones disciplinarias según la gravedad de la falta:</p>
+                        <h3>3. Las Tres "C" de la Conducción Policial</h3>
                         <ul>
-                            <li><strong>Faltas Leves:</strong> Apercibimiento y Arresto hasta 10 días.</li>
-                            <li><strong>Faltas Graves:</strong> Arresto hasta 30 días, Suspensión de empleo.</li>
-                            <li><strong>Faltas Gravísimas:</strong> Destitución (Cesantía o Exoneración).</li>
+                            <li><strong>Competencia:</strong> Sobre los recursos materiales y conocimientos normativos.</li>
+                            <li><strong>Confianza:</strong> En el personal subalterno y mandos superiores.</li>
+                            <li><strong>Compromiso:</strong> Con la misión institucional logrando la adhesión voluntaria.</li>
                         </ul>
                     `
                 },
                 {
                     id: "sum-of1-2",
-                    title: "Unidad 2: Código Procesal Penal de Santa Fe (Ley 12.734)",
+                    title: "Unidad 2: Gestión de Armas de Fuego y Evidencia (Pág. 69 ISEP)",
                     readTime: "15 min",
                     content: `
-                        <h3>1. Aprehensión e Intervención Policial</h3>
-                        <p>Los oficiales de policía tienen la facultad de aprehender a una persona sin orden judicial previa únicamente en los siguientes casos de flagrancia:</p>
+                        <h3>1. Protocolo Obligatorio de Secuestro de Armas de Fuego</h3>
+                        <p>Según el Manual de Procedimientos ISEP 2026 (Pág. 69), ante el secuestro de un arma en la vía pública:</p>
                         <ul>
-                            <li>Cuando intentare cometer un delito, al momento de cometerlo o inmediatamente después.</li>
-                            <li>Cuando se fugare estando legalmente detenido.</li>
-                            <li>Cuando portare armas o elementos que hagan presumir su participación en un hecho punible reciente.</li>
+                            <li><strong>Inspección y Descarga:</strong> Verificar de inmediato que no se encuentre cargada. En caso de descargarse en el lugar, <strong>debe realizarse obligatoriamente en presencia de testigos o filmando todo el procedimiento</strong>.</li>
+                            <li><strong>Fotografía de Cartuchería:</strong> Los cartuchos alojados en recámara o tambor deben fotografiarse e individualizarse antes de ser embalados.</li>
+                            <li><strong>Manipulación Segura:</strong> Levantar la evidencia siempre con guantes de nitrilo o látex, evitando alterar huellas dactilares en el disparador o corredera.</li>
+                            <li><strong>Ubicación Espacial:</strong> Documentar coordenadas geográficas (GPS), croquis y plano del lugar exacto del hallazgo.</li>
                         </ul>
 
-                        <h3>2. Plazos Procesales y Comunicación al Fiscal</h3>
-                        <p>La aprehensión debe comunicarse <strong>de inmediato</strong> (sin dilaciones) al Fiscal de turno del MPA (Ministerio Público de la Acusación). El acta de procedimiento debe confeccionarse con precisión de hora, lugar, testigos y fijación fotográfica de secuestros.</p>
+                        <h3>2. Recepción de Muestras Biológicas desde Efectores Públicos de Salud</h3>
+                        <p>Las muestras remitidas por hospitales o centros de salud deben contar con el Formulario Oficial de Cadena de Custodia firmado por el médico interviniente y el preventor policial.</p>
+                    `
+                },
+                {
+                    id: "sum-of1-3",
+                    title: "Unidad 3: Régimen Disciplinario Policial y Decreto 461/15 (Pág. 99 ISEP)",
+                    readTime: "15 min",
+                    content: `
+                        <h3>1. Clasificación de Faltas Administrativas</h3>
+                        <p>El régimen disciplinario sanciona el incumplimiento de los deberes del estado policial:</p>
+                        <ul>
+                            <li><strong>Faltas Leves:</strong> Sancionables con Apercibimiento o Arresto de hasta 10 días.</li>
+                            <li><strong>Faltas Graves:</strong> Arresto de 11 a 30 días, Suspensión de empleo.</li>
+                            <li><strong>Faltas Gravísimas:</strong> Destitución mediante <strong>Cesantía</strong> (separación con conservación de aportes) o <strong>Exoneración</strong> (separación definitiva con pérdida total de derechos previsionales policiales).</li>
+                        </ul>
+
+                        <h3>2. Aplicación del Decreto N° 461/15</h3>
+                        <p>Reglamenta los sumarios administrativos relámpago y preventivos ante la imputación de delitos dolosos o faltas gravísimas en servicio.</p>
                     `
                 }
             ],
             flashcards: [
-                { id: "fc-1", front: "¿Cuál es el plazo máximo para notificar la aprehensión al Fiscal del MPA?", back: "De inmediato (sin dilaciones indeseadas).", category: "Procesal Penal" },
-                { id: "fc-2", front: "¿Qué artículo de la Ley 12.521 establece la obligación de intervenir ante delito flagrante?", back: "El Artículo 22 de la Ley 12.521.", category: "Ley Policial" },
-                { id: "fc-3", front: "¿Cuáles son los tipos de destitución en la Policía de Santa Fe?", back: "Cesantía (con opción a cómputo previsional) y Exoneración (pérdida total de derechos).", category: "Régimen Disciplinario" },
-                { id: "fc-4", front: "¿Qué se requiere para realizar una requisa personal sin orden judicial?", back: "Fundadas sospechas de que oculta cosas relacionadas a un delito y causa de urgencia (Art. 210 CPP).", category: "Procedimientos" }
+                { id: "fc-1", front: "¿Cuáles son las 4 virtudes en las que se sustenta la Autoridad Real según el ISEP?", back: "Prudencia, Justicia, Fortaleza y Templanza (Manual ISEP Pág. 15).", category: "Liderazgo" },
+                { id: "fc-2", front: "¿Qué requisito es OBLIGATORIO al descargar un arma de fuego secuestrada en el lugar del hecho?", back: "Presencia de testigos presenciales o filmación completa del procedimiento de descarga (ISEP Pág. 69).", category: "Procedimientos" },
+                { id: "fc-3", front: "¿Cuáles son las 3 'C' del paradigma de conducción policial?", back: "Competencia, Confianza y Compromiso (ISEP Pág. 15).", category: "Liderazgo" },
+                { id: "fc-4", front: "¿Qué diferencia existe entre Cesantía y Exoneración en la Ley 12.521?", back: "La Cesantía permite conservar el cómputo de aportes previsionales; la Exoneración provoca la pérdida total de derechos previsionales de la fuerza.", category: "Disciplinario" }
             ],
             exams: [
                 {
                     id: "q-1",
-                    question: "¿En cuál de los siguientes supuestos la Policía puede proceder a la aprehensión de una persona sin orden judicial?",
+                    question: "Según el Manual ISEP 2026 (Pág. 69), si un arma de fuego secuestrada en la vía pública se encuentra cargada, ¿cómo debe realizarse su descarga?",
                     options: [
-                        "Únicamente con autorización por escrito del Jefe de Comisaría.",
-                        "En caso de delito de acción privada previa denuncia.",
-                        "En flagrante delito o cuando la persona se fugare estando detenida.",
-                        "Cuando la persona tenga antecedentes penales anteriores."
+                        "Descargarla rápidamente en el móvil sin presencia de terceros.",
+                        "En presencia obligatoria de testigos o filmando todo el procedimiento de descarga.",
+                        "Llevarla cargada a la Comisaría e informar al armeró al día siguiente.",
+                        "Disparar al aire para vaciar la recámara."
                     ],
-                    correctIndex: 2,
-                    explanation: "Según el CPP de Santa Fe, la aprehensión sin orden judicial procede ante delito flagrante o fuga de detención legal."
+                    correctIndex: 1,
+                    explanation: "El protocolo ISEP exige que la descarga de un arma secuestrada en el lugar del hecho se efectúe ante testigos o mediante registro de filmación continuo."
                 },
                 {
                     id: "q-2",
-                    question: "¿Cuál es la sanción disciplinaria máxima prevista en la Ley 12.521?",
+                    question: "¿Cómo define el Manual de Estudio del ISEP a las tres 'C' del liderazgo policial?",
                     options: [
-                        "Arresto por 60 días en la Unidad Regional.",
-                        "Exoneración.",
-                        "Suspensión preventiva por 6 meses.",
-                        "Apercibimiento por escrito."
+                        "Comisaría, Comando y Cuadrante.",
+                        "Competencia sobre recursos, Confianza en subordinados y Compromiso con la misión.",
+                        "Control, Custodia y Código Penal.",
+                        "Capacitación, Cumplimiento y Coordinación."
                     ],
                     correctIndex: 1,
-                    explanation: "La Exoneración es la sanción de destitución más grave e implica la separación definitiva de la fuerza y pérdida de derechos del estado policial."
+                    explanation: "El Manual ISEP (Pág. 15) establece las 3 'C' como pilares del líder: Competencia, Confianza y Compromiso voluntario."
                 },
                 {
                     id: "q-3",
-                    question: "Ante la incautación de elementos en un procedimiento policial, ¿cuál es el protocolo obligatorio?",
+                    question: "En el Régimen Disciplinario Policial de Santa Fe (Decreto 461/15), ¿cuál es el alcance de la sanción de Exoneración?",
                     options: [
-                        "Entregar los elementos inmediatamente a los damnificados en el lugar.",
-                        "Confeccionar Acta de Secuestro, Cadena de Custodia y notificar al Fiscal.",
-                        "Guardar los elementos en el móvil hasta el cambio de guardia.",
-                        "Fotografiar los elementos sin confeccionar acta."
+                        "Suspensión del haber por 30 días.",
+                        "Separación definitiva de la institución con pérdida total de los derechos del estado policial y previsionales.",
+                        "Apercibimiento en la foja de servicio sin afectar el retiro.",
+                        "Traslado obligatorio a otra Unidad Regional."
                     ],
                     correctIndex: 1,
-                    explanation: "Todo elemento incautado debe contar con Acta de Secuestro formal, rótulo de Cadena de Custodia y comunicación inmediata al Fiscal."
+                    explanation: "La Exoneración es la sanción gravísima máxima de destitución y acarrea la pérdida completa de beneficios de la fuerza."
                 }
             ],
             mindmaps: [
                 {
-                    title: "Procedimiento de Aprehensión en Flagrancia",
+                    title: "Protocolo ISEP: Secuestro de Armas de Fuego en Vía Pública",
                     mermaid: `
 graph TD
-    A[Ocurrencia del Hecho Flagrante] --> B[Aprehensión e Inmovilización del Imputado]
-    B --> C[Lectura de Derechos de Imputado]
-    C --> D[Secuestro de Elementos y Fijación]
-    D --> E[Comunicación Inmediata al Fiscal del MPA]
-    E --> F[Traslado a Sede Policial y Confección de Sumario]
+    A[Hallazgo de Arma de Fuego] --> B[Inspección de Seguridad con Guantes de Nitrilo]
+    B --> C{¿Arma Cargada?}
+    C -- Sí --> D[Descarga Obligatoria ante Testigos o Filmación]
+    C -- No --> E[Fijación Fotográfica + Croquis GPS]
+    D --> E
+    E --> F[Rotulado de Cadena de Custodia y Notificación al MPA]
                     `
                 }
             ]
@@ -113,7 +136,7 @@ graph TD
         {
             id: "subinspector-inspector",
             title: "Subinspector ➔ Inspector",
-            subtitle: "Concurso de Ascenso ISEP - Mandos Medios Operativos",
+            subtitle: "Concurso ISEP 2026 - Mandos Medios Operativos",
             icon: "shield_person",
             badge: "ISEP Concurso 2",
             color: "from-emerald-600 to-teal-700",
@@ -127,7 +150,7 @@ graph TD
                         <p>El Subinspector ejerce la supervisión de los procedimientos en la vía pública, coordinando los móviles patrulleros y velando por la integridad del personal dependiente.</p>
                         <h3>2. Preservación del Lugar del Hecho (Manual de Criminalística ISEP)</h3>
                         <ul>
-                            <li>Cordon de seguridad primario y secundario.</li>
+                            <li>Cordón de seguridad primario y secundario.</li>
                             <li>Prohibición absoluta de ingresar sin equipamiento de protección al perímetro interno.</li>
                             <li>Planilla de registro de ingreso y egreso de personal asistencial o judicial.</li>
                         </ul>
@@ -168,7 +191,7 @@ graph TD
         {
             id: "inspector-subcomisario",
             title: "Inspector ➔ Subcomisario",
-            subtitle: "Concurso ISEP - Jefatura de Dependencia y Gestión de Recursos",
+            subtitle: "Concurso ISEP 2026 - Jefatura de Dependencia y Gestión de Recursos",
             icon: "admin_panel_settings",
             badge: "ISEP Concurso 3",
             color: "from-amber-600 to-orange-700",
@@ -215,7 +238,7 @@ graph TD
         {
             id: "subcomisario-comisario",
             title: "Subcomisario ➔ Comisario",
-            subtitle: "Concurso ISEP - Planeamiento Estratégico y Operativo",
+            subtitle: "Concurso ISEP 2026 - Planeamiento Estratégico y Operativo",
             icon: "stars",
             badge: "ISEP Concurso 4",
             color: "from-purple-600 to-indigo-800",
@@ -262,7 +285,7 @@ graph TD
         {
             id: "comisario-supervisor",
             title: "Comisario ➔ Comisario Supervisor",
-            subtitle: "Concurso ISEP - Alta Dirección Institucional y Seguridad Pública",
+            subtitle: "Concurso ISEP 2026 - Alta Dirección Institucional y Seguridad Pública",
             icon: "workspace_premium",
             badge: "ISEP Concurso 5 Superior",
             color: "from-amber-500 via-purple-700 to-slate-900",
