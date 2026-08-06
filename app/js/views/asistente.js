@@ -18,6 +18,7 @@ function renderAsistenteHub(container) {
     const currentMonthEarnings = currentMonthServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
 
     const tools = [
+        { id: 'academia', title: 'Campus Ascenso Policial', desc: 'Capacitación ISEP: Resúmenes, simulador de examen, flashcards y audiolibros.', icon: 'school', color: 'from-amber-500 via-orange-500 to-red-600', route: '#academia', badge: 'PRO 🎓' },
         { id: 'fixture', title: 'Fixture Mundial 2026', desc: 'Consultá partidos, horarios y registrá tus pronósticos.', icon: 'sports_soccer', color: 'from-[#74ACDF] to-blue-500', route: '#asistente/fixture', badge: '🏆' },
         { id: 'calificar', title: 'Calificar la App', desc: 'Dejanos tu calificación y sugerencias para seguir mejorando la herramienta.', icon: 'reviews', color: 'from-amber-400 to-[#F6B426]', action: 'window.showSurveyBanner(true)', badge: 'Opiná' },
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },

@@ -135,6 +135,9 @@ window.router = {
                 case '#info':
                     renderInfoGuia(app);
                     break;
+                case '#academia':
+                    renderAcademia(app);
+                    break;
                 case '#asistente/partes':
 
                     renderPartesInteligentes(app);

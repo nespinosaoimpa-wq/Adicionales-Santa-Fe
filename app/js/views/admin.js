@@ -317,6 +317,41 @@ async function renderAdmin(container) {
                     </div>
                 </div>
 
+                <!-- Aprobaciones Academia PRO ($10.000 ARS) -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-amber-500/20 p-6 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <span class="material-symbols-outlined text-amber-400">workspace_premium</span>
+                            Aprobación de Pagos Academia PRO ($10.000)
+                        </h3>
+                        <span class="text-[10px] font-black uppercase text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
+                            ${(window.academyPayments || []).filter(p => p.status === 'pending').length} Pendientes
+                        </span>
+                    </div>
+
+                    <div class="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
+                        ${!window.academyPayments || window.academyPayments.length === 0 ? '<p class="text-slate-500 text-xs italic text-center py-4">Sin notificaciones de pago por el momento</p>' :
+                        window.academyPayments.map(p => `
+                            <div class="p-3 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between">
+                                <div>
+                                    <p class="font-bold text-xs text-white">${p.user_name || 'Oficial'} <span class="text-[9px] text-slate-400 font-mono">(${p.user_email})</span></p>
+                                    <p class="text-[10px] text-amber-400 font-bold mt-0.5">Concurso: ${p.hierarchy || 'ISEP'} • CPO: ${p.cpo_number || 'N/A'}</p>
+                                    <p class="text-[8px] text-slate-500 mt-0.5">${_formatAdminDate(p.timestamp)}</p>
+                                </div>
+                                <div>
+                                    ${p.status === 'approved' ? `
+                                        <span class="text-[9px] font-black text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Aprobado ✓</span>
+                                    ` : `
+                                        <button onclick="window.approveAcademyPaymentAction('${p.id}', '${p.user_email}', '${p.hierarchy}')" class="px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-sm">check_circle</span> Aprobar $10k
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+
                 <!-- Global Announcements -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
                     <div class="flex items-center justify-between mb-6">
@@ -509,6 +544,22 @@ async function renderAdmin(container) {
         updateUI();
     });
 
+    const unsubAcademy = DB.subscribeToAcademyPayments(data => {
+        window.academyPayments = data;
+        updateUI();
+    });
+
+    window.approveAcademyPaymentAction = async (paymentId, email, hierarchy) => {
+        if (!confirm(`¿Confirmas aprobar el pago de $10.000 ARS para ${email} en el concurso ${hierarchy}?`)) return;
+        try {
+            await DB.approveAcademyPayment(paymentId, email, hierarchy);
+            showToast("✅ Pase PRO Academia activado para " + email);
+            if (window.location.hash === '#admin') router.handleRoute();
+        } catch(e) {
+            showToast("Error al aprobar pago: " + e.message);
+        }
+    };
+
     store.addAd = async () => {
         const imageUrl = prompt("URL de la Imagen (direct link):");
         if (!imageUrl) return;
@@ -533,6 +584,7 @@ async function renderAdmin(container) {
         unsubAds();
         unsubReviews();
         unsubLogs();
+        unsubAcademy();
         router.navigateTo = originalNavigate;
         router.navigateTo(route);
     };
