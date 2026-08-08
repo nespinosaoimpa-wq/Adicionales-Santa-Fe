@@ -505,3 +505,66 @@ window.showDonationModal = () => {
     overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
     document.body.appendChild(overlay);
 };
+
+// --- Google Gemini AI API Integration ---
+window.getGeminiAPIKey = function () {
+    return localStorage.getItem('gemini_api_key') || store.user?.geminiApiKey || "";
+};
+
+window.showGeminiKeyModal = function () {
+    const currentKey = window.getGeminiAPIKey();
+    const val = prompt("🔑 Ingresá tu Clave de API de Google Gemini (Gratuita):\n\nObtenela en 10 segundos gratis en aistudio.google.com/app/apikey", currentKey);
+    if (val !== null) {
+        localStorage.setItem('gemini_api_key', val.trim());
+        showToast(val.trim() ? "✅ Clave Gemini API guardada con éxito" : "ℹ️ Clave eliminada");
+    }
+};
+
+window.callGeminiAPI = async function (userPrompt, systemInstruction = "") {
+    let apiKey = window.getGeminiAPIKey();
+    if (!apiKey) {
+        window.showGeminiKeyModal();
+        apiKey = window.getGeminiAPIKey();
+        if (!apiKey) {
+            throw new Error("Se requiere una API Key de Google Gemini para usar esta función.");
+        }
+    }
+
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+
+    const defaultSystem = `Sos Centinela AI y Tutor de la Academia PRO ISEP de la Policía de la Provincia de Santa Fe (Argentina). Conocés a fondo el Manual Oficial ISEP 2026 de 344 páginas (Oficial de Policía - Escalafón General), Ley 12.521, Decreto 461/15, CPP Ley 12.734, Ley 14.283 de adicionales y reforma previsional. Respondés en español rioplatense, de forma precisa, clara, citando los artículos y leyes aplicables.`;
+
+    const payload = {
+        contents: [
+            {
+                role: "user",
+                parts: [{ text: userPrompt }]
+            }
+        ],
+        systemInstruction: {
+            parts: [{ text: systemInstruction || defaultSystem }]
+        }
+    };
+
+    try {
+        const res = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+            const errData = await res.json().catch(() => ({}));
+            throw new Error(errData.error?.message || `Error HTTP ${res.status}`);
+        }
+
+        const data = await res.json();
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!text) throw new Error("Respuesta vacía recibida de Gemini AI.");
+        return text;
+    } catch (err) {
+        console.error("Gemini API Error:", err);
+        throw err;
+    }
+};
+

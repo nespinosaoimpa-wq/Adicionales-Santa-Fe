@@ -1,5 +1,5 @@
 /**
- * Adicionales Santa Fe - Campus de Ascenso Policial (Academia PRO)
+ * Adicionales Santa Fe - Campus de Ascenso Policial (Academia PRO + Gemini AI)
  */
 
 function renderAcademia(container) {
@@ -13,7 +13,7 @@ function renderAcademia(container) {
 
     // State
     window.academySelectedHierarchy = window.academySelectedHierarchy || data.hierarchies[0].id;
-    window.academyActiveTab = window.academyActiveTab || 'summaries'; // 'summaries', 'exam', 'flashcards', 'mindmaps'
+    window.academyActiveTab = window.academyActiveTab || 'summaries'; // 'summaries', 'exam', 'flashcards', 'mindmaps', 'tutor'
     window.currentExamAnswers = window.currentExamAnswers || {};
     window.examSubmitted = window.examSubmitted || false;
     window.currentFlashcardIndex = window.currentFlashcardIndex || 0;
@@ -88,18 +88,21 @@ function renderAcademia(container) {
                 </div>
 
                 <!-- Tabs Switcher -->
-                <div class="flex p-1 bg-slate-200 dark:bg-white/5 rounded-2xl border border-white/5 shadow-inner">
-                    <button onclick="window.switchAcademyTab('summaries')" class="flex-1 py-2.5 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                <div class="flex p-1 bg-slate-200 dark:bg-white/5 rounded-2xl border border-white/5 shadow-inner overflow-x-auto scrollbar-none">
+                    <button onclick="window.switchAcademyTab('summaries')" class="flex-1 min-w-[70px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         📚 Resúmenes
                     </button>
-                    <button onclick="window.switchAcademyTab('exam')" class="flex-1 py-2.5 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'exam' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                    <button onclick="window.switchAcademyTab('exam')" class="flex-1 min-w-[70px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'exam' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         📝 Examen
                     </button>
-                    <button onclick="window.switchAcademyTab('flashcards')" class="flex-1 py-2.5 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                    <button onclick="window.switchAcademyTab('flashcards')" class="flex-1 min-w-[70px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         🎴 Tarjetas
                     </button>
-                    <button onclick="window.switchAcademyTab('mindmaps')" class="flex-1 py-2.5 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                    <button onclick="window.switchAcademyTab('mindmaps')" class="flex-1 min-w-[70px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         🗺️ Esquemas
+                    </button>
+                    <button onclick="window.switchAcademyTab('tutor')" class="flex-1 min-w-[80px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'text-purple-400 hover:text-white'}">
+                        🤖 Tutor IA
                     </button>
                 </div>
 
@@ -109,6 +112,7 @@ function renderAcademia(container) {
                     ${window.academyActiveTab === 'exam' ? renderExamTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'flashcards' ? renderFlashcardsTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'mindmaps' ? renderMindmapsTab(hierarchy, isPro) : ''}
+                    ${window.academyActiveTab === 'tutor' ? renderGeminiTutorTab(hierarchy, isPro) : ''}
                 </div>
 
                 ${renderAdBannerSmall()}
@@ -340,7 +344,119 @@ function renderAcademia(container) {
         `;
     }
 
+    // --- TAB 5: TUTOR IA GEMINI ---
+    function renderGeminiTutorTab(hierarchy, isPro) {
+        return `
+            <div class="space-y-4">
+                <div class="glass-card p-4 rounded-3xl border border-purple-500/30 bg-gradient-to-br from-slate-900 to-indigo-950 text-white shadow-xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="size-8 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-base">smart_toy</span>
+                            </span>
+                            <div>
+                                <h3 class="text-xs font-black text-white uppercase tracking-wider">Tutor IA Gemini (ISEP 2026)</h3>
+                                <p class="text-[9px] text-purple-300 font-medium">Conectado al Manual ISEP (344 págs) y Leyes PSF</p>
+                            </div>
+                        </div>
+                        <button onclick="window.showGeminiKeyModal()" class="px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-[9px] font-bold text-slate-300 border border-white/10 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">key</span> API Key
+                        </button>
+                    </div>
+
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Hacé cualquier pregunta sobre el concurso ISEP, Ley 12.521, Decreto 461/15, CPP Ley 12.734 o situaciones operativas. Gemini consultará la norma oficial y te responderá con fundamentación.
+                    </p>
+
+                    <!-- Pre-built question chips -->
+                    <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none text-[10px]">
+                        <button onclick="window.askGeminiTutor('¿Cuáles son las 4 virtudes de la Autoridad según el ISEP 2026?')" class="shrink-0 px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30">
+                            💡 4 Virtudes del Liderazgo
+                        </button>
+                        <button onclick="window.askGeminiTutor('¿Cómo debe ser la descarga de un arma de fuego secuestrada según el manual ISEP Pág. 69?')" class="shrink-0 px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30">
+                            🔫 Secuestro de Armas ISEP
+                        </button>
+                        <button onclick="window.askGeminiTutor('¿Qué faltas son gravísimas en la Ley 12.521 y Decreto 461/15 y cuál es la diferencia entre Cesantía y Exoneración?')" class="shrink-0 px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30">
+                            ⚖️ Faltas y Decreto 461/15
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Live Q&A Output Area -->
+                <div id="gemini-tutor-output" class="space-y-3"></div>
+
+                <form onsubmit="window.submitGeminiTutorForm(event)" class="relative flex items-center gap-2">
+                    <input type="text" id="gemini-tutor-input" placeholder="Preguntale a Gemini sobre el examen ISEP..." 
+                        class="w-full px-4 py-3.5 bg-slate-900 border border-purple-500/30 rounded-2xl text-xs text-white outline-none focus:border-purple-400 transition-all pr-12 shadow-inner">
+                    <button type="submit" class="absolute right-1.5 size-9 rounded-xl bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center shadow-lg shadow-purple-600/30 active:scale-90 transition-all">
+                        <span class="material-symbols-outlined text-sm">send</span>
+                    </button>
+                </form>
+            </div>
+        `;
+    }
+
     // --- ACTION HANDLERS ---
+    window.askGeminiTutor = (query) => {
+        const input = document.getElementById('gemini-tutor-input');
+        if (input) {
+            input.value = query;
+            window.submitGeminiTutorForm(new Event('submit'));
+        }
+    };
+
+    window.submitGeminiTutorForm = async (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const input = document.getElementById('gemini-tutor-input');
+        const output = document.getElementById('gemini-tutor-output');
+        if (!input || !output) return;
+
+        const query = input.value.trim();
+        if (!query) return;
+
+        // Append question
+        output.innerHTML += `
+            <div class="p-3 bg-purple-950/50 border border-purple-500/30 rounded-2xl space-y-1">
+                <p class="text-[10px] font-bold text-purple-300 uppercase tracking-widest">Pregunta del Oficial:</p>
+                <p class="text-xs text-white font-medium">${escapeHTML(query)}</p>
+            </div>
+        `;
+
+        const loadingId = 'tutor-load-' + Date.now();
+        output.innerHTML += `
+            <div id="${loadingId}" class="p-3 bg-slate-900 border border-white/10 rounded-2xl flex items-center gap-2 text-xs text-slate-400">
+                <span class="animate-spin material-symbols-outlined text-purple-400 text-sm">sync</span>
+                <span>Gemini IA analizando Manuales ISEP y Leyes PSF...</span>
+            </div>
+        `;
+
+        input.value = '';
+
+        try {
+            const answer = await window.callGeminiAPI(query);
+            const loadEl = document.getElementById(loadingId);
+            if (loadEl) loadEl.remove();
+
+            output.innerHTML += `
+                <div class="p-4 bg-slate-900 border border-purple-500/40 rounded-2xl space-y-2">
+                    <p class="text-[10px] font-black text-purple-400 uppercase tracking-widest flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">smart_toy</span> Respuesta Tutor Gemini ISEP:
+                    </p>
+                    <div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${answer}</div>
+                </div>
+            `;
+        } catch(err) {
+            const loadEl = document.getElementById(loadingId);
+            if (loadEl) loadEl.remove();
+
+            output.innerHTML += `
+                <div class="p-3 bg-red-950/50 border border-red-500/30 rounded-2xl text-xs text-red-300">
+                    ❌ ${err.message || 'Error de conexión con Gemini API'}
+                </div>
+            `;
+        }
+    };
+
     window.selectAcademyHierarchy = (id) => {
         window.academySelectedHierarchy = id;
         window.currentExamAnswers = {};

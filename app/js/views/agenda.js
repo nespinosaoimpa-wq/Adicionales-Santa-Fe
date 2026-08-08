@@ -94,6 +94,22 @@ function renderAgenda(container) {
                 </div>
             </div>
 
+            <!-- 🎓 Campus Ascenso Policial Banner -->
+            <div onclick="router.navigateTo('#academia')" class="cursor-pointer bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 p-4 rounded-2xl text-white shadow-xl flex items-center justify-between relative overflow-hidden group active:scale-[0.98] transition-all">
+                <div class="flex items-center gap-3 relative z-10">
+                    <div class="size-10 rounded-xl bg-white/20 border border-white/30 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-xl">school</span>
+                    </div>
+                    <div>
+                        <span class="text-[8px] font-black uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded-full">ISEP 2026</span>
+                        <h3 class="text-sm font-black leading-tight mt-0.5">Campus Ascenso Policial</h3>
+                    </div>
+                </div>
+                <button class="px-3 py-1.5 rounded-xl bg-white text-slate-900 font-bold text-xs shadow-md group-hover:bg-amber-100 transition-colors">
+                    Entrar
+                </button>
+            </div>
+
             <!-- Next Shift Hero Card -->
             ${nextShift ? `
             <section class="mt-4">

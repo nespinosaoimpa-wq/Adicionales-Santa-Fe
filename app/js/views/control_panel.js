@@ -104,6 +104,21 @@ function renderControlPanel(container) {
         </header>
 
         <main class="flex-1 px-4 py-6 space-y-6 max-w-md mx-auto w-full pb-32 animate-fade-in">
+            <!-- 🎓 Campus Ascenso Policial Banner (NUEVO) -->
+            <div onclick="router.navigateTo('#academia')" class="cursor-pointer bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 p-4 rounded-3xl text-white shadow-xl flex items-center justify-between relative overflow-hidden group active:scale-[0.98] transition-all">
+                <div class="absolute -right-6 -bottom-6 size-28 bg-white/10 blur-2xl rounded-full"></div>
+                <div class="relative z-10 space-y-1">
+                    <span class="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest bg-white/20 text-white flex items-center gap-1 w-fit">
+                        <span class="material-symbols-outlined text-xs">workspace_premium</span> NUEVO MÓDULO ISEP 2026
+                    </span>
+                    <h2 class="text-base font-black leading-tight text-white">Campus Ascenso Policial</h2>
+                    <p class="text-[10px] text-white/90 font-medium">Materiales ISEP 2026 (344 págs), Simulador Examen y Tutor IA Gemini</p>
+                </div>
+                <div class="size-11 rounded-2xl bg-white/20 border border-white/30 flex items-center justify-center shrink-0 text-white relative z-10 group-hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-2xl">school</span>
+                </div>
+            </div>
+
             <!-- Period Selector -->
 
             <div class="flex items-center justify-between mb-4 px-2">
