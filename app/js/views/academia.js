@@ -13,7 +13,7 @@ function renderAcademia(container) {
 
     // State
     window.academySelectedHierarchy = window.academySelectedHierarchy || data.hierarchies[0].id;
-    window.academyActiveTab = window.academyActiveTab || 'summaries'; // 'summaries', 'exam', 'flashcards', 'mindmaps', 'tutor'
+    window.academyActiveTab = window.academyActiveTab || 'summaries'; // 'summaries', 'exam', 'flashcards', 'mindmaps', 'library', 'tutor'
     window.currentExamAnswers = window.currentExamAnswers || {};
     window.examSubmitted = window.examSubmitted || false;
     window.currentFlashcardIndex = window.currentFlashcardIndex || 0;
@@ -88,20 +88,23 @@ function renderAcademia(container) {
                 </div>
 
                 <!-- Tabs Switcher -->
-                <div class="flex p-1 bg-slate-200 dark:bg-white/5 rounded-2xl border border-white/5 shadow-inner overflow-x-auto scrollbar-none">
-                    <button onclick="window.switchAcademyTab('summaries')" class="flex-1 min-w-[70px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                <div class="flex p-1 bg-slate-200 dark:bg-white/5 rounded-2xl border border-white/5 shadow-inner overflow-x-auto scrollbar-none gap-0.5">
+                    <button onclick="window.switchAcademyTab('summaries')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         📚 Resúmenes
                     </button>
-                    <button onclick="window.switchAcademyTab('exam')" class="flex-1 min-w-[70px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'exam' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                    <button onclick="window.switchAcademyTab('exam')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'exam' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         📝 Examen
                     </button>
-                    <button onclick="window.switchAcademyTab('flashcards')" class="flex-1 min-w-[70px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                    <button onclick="window.switchAcademyTab('flashcards')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         🎴 Tarjetas
                     </button>
-                    <button onclick="window.switchAcademyTab('mindmaps')" class="flex-1 min-w-[70px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                    <button onclick="window.switchAcademyTab('library')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'library' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                        📂 Biblioteca
+                    </button>
+                    <button onclick="window.switchAcademyTab('mindmaps')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         🗺️ Esquemas
                     </button>
-                    <button onclick="window.switchAcademyTab('tutor')" class="flex-1 min-w-[80px] py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'text-purple-400 hover:text-white'}">
+                    <button onclick="window.switchAcademyTab('tutor')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'text-purple-400 hover:text-white'}">
                         🤖 Tutor IA
                     </button>
                 </div>
@@ -111,6 +114,7 @@ function renderAcademia(container) {
                     ${window.academyActiveTab === 'summaries' ? renderSummariesTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'exam' ? renderExamTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'flashcards' ? renderFlashcardsTab(hierarchy, isPro) : ''}
+                    ${window.academyActiveTab === 'library' ? renderLibraryTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'mindmaps' ? renderMindmapsTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'tutor' ? renderGeminiTutorTab(hierarchy, isPro) : ''}
                 </div>
@@ -320,7 +324,95 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- TAB 4: MAPAS MENTALES Y ESQUEMAS ---
+    // --- TAB 4: BIBLIOTECA DE MANUALES ---
+    function renderLibraryTab(hierarchy, isPro) {
+        const libraryItems = [
+            {
+                title: "Manual Oficial ISEP 2026",
+                desc: "344 páginas de contenido oficial para Oficiales de Policía (Esc. General).",
+                file: "docs/3- Oficial de Policía - Escalafón General.pdf",
+                icon: "menu_book",
+                color: "from-blue-500/20 to-indigo-500/20 text-indigo-400 border-indigo-500/30"
+            },
+            {
+                title: "Ley de Personal Policial N° 12.521",
+                desc: "Estatuto, deberes, derechos, ascensos y régimen general policial de Santa Fe.",
+                file: "docs/marco_legal_policial_2026.md",
+                icon: "gavel",
+                color: "from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30"
+            },
+            {
+                title: "Ley de Adicionales & Jubilaciones N° 14.283",
+                desc: "Reforma Previsional de Santa Fe y escalas de servicios adicionales.",
+                file: "docs/Ley 14283.pdf",
+                icon: "shield_person",
+                color: "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30"
+            },
+            {
+                title: "Manual de Armamento y Tiro MIRAF",
+                desc: "Normativa oficial para el uso seguro y portación de armas reglamentarias.",
+                file: "docs/2012MIRAF.pdf",
+                icon: "explosion",
+                color: "from-red-500/20 to-rose-500/20 text-red-400 border-rose-500/30"
+            },
+            {
+                title: "Escala Salarial Decreto N° 411/26",
+                desc: "Planilla de sueldos básicos y adicionales vigentes a partir de 2026.",
+                file: "docs/DEC-2026-00000411-APPSF-PE (1).pdf",
+                icon: "payments",
+                color: "from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/30"
+            }
+        ];
+
+        return `
+            <div class="space-y-4">
+                <div class="glass-card p-4 rounded-3xl border border-white/5 bg-gradient-to-br from-slate-900 to-slate-950 text-white shadow-xl space-y-2">
+                    <h3 class="text-xs font-black uppercase text-amber-400 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm">library_books</span> Biblioteca Digital Oficial
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Accedé a toda la bibliografía y manuales en PDF para estudiar en cualquier momento.
+                    </p>
+                </div>
+
+                <div class="space-y-3">
+                    ${libraryItems.map((item, index) => {
+                        const isLocked = !isPro && index > 1; // First 2 items are free, others are locked
+                        return `
+                            <div class="glass-card p-4 rounded-2xl border border-white/5 flex items-center justify-between relative overflow-hidden">
+                                ${isLocked ? `
+                                    <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm z-20 flex items-center justify-between px-4">
+                                        <div class="flex items-center gap-2">
+                                            <span class="material-symbols-outlined text-amber-400 text-lg">lock</span>
+                                            <span class="text-[10px] font-black text-white uppercase">Manual Exclusivo PRO</span>
+                                        </div>
+                                        <button onclick="window.showAcademyPaymentModal()" class="px-2.5 py-1 rounded-lg bg-amber-500 text-white font-bold text-[9px] uppercase active:scale-95 transition-all">
+                                            Desbloquear
+                                        </button>
+                                    </div>
+                                ` : ''}
+
+                                <div class="flex items-center gap-3">
+                                    <div class="size-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center border shrink-0">
+                                        <span class="material-symbols-outlined text-lg">${item.icon}</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-xs text-slate-900 dark:text-white leading-snug">${item.title}</h4>
+                                        <p class="text-[9px] text-slate-400 leading-relaxed mt-0.5">${item.desc}</p>
+                                    </div>
+                                </div>
+                                <a href="${item.file}" download class="size-9 rounded-full bg-white/5 hover:bg-white/10 text-white flex items-center justify-center shrink-0 border border-white/10 active:scale-90 transition-all ml-2" title="Descargar PDF">
+                                    <span class="material-symbols-outlined text-sm">download</span>
+                                </a>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    // --- TAB 5: MAPAS MENTALES Y ESQUEMAS ---
     function renderMindmapsTab(hierarchy, isPro) {
         const mindmaps = hierarchy.mindmaps;
         return `
@@ -344,7 +436,7 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- TAB 5: TUTOR IA GEMINI ---
+    // --- TAB 6: TUTOR IA GEMINI ---
     function renderGeminiTutorTab(hierarchy, isPro) {
         return `
             <div class="space-y-4">
@@ -416,7 +508,7 @@ function renderAcademia(container) {
 
         // Append question
         output.innerHTML += `
-            <div class="p-3 bg-purple-950/50 border border-purple-500/30 rounded-2xl space-y-1">
+            <div class="p-3 bg-purple-950/50 border border-purple-500/30 rounded-2xl space-y-1 animate-fade-in">
                 <p class="text-[10px] font-bold text-purple-300 uppercase tracking-widest">Pregunta del Oficial:</p>
                 <p class="text-xs text-white font-medium">${escapeHTML(query)}</p>
             </div>
@@ -424,7 +516,7 @@ function renderAcademia(container) {
 
         const loadingId = 'tutor-load-' + Date.now();
         output.innerHTML += `
-            <div id="${loadingId}" class="p-3 bg-slate-900 border border-white/10 rounded-2xl flex items-center gap-2 text-xs text-slate-400">
+            <div id="${loadingId}" class="p-3 bg-slate-900 border border-white/10 rounded-2xl flex items-center gap-2 text-xs text-slate-400 animate-fade-in">
                 <span class="animate-spin material-symbols-outlined text-purple-400 text-sm">sync</span>
                 <span>Gemini IA analizando Manuales ISEP y Leyes PSF...</span>
             </div>
@@ -438,7 +530,7 @@ function renderAcademia(container) {
             if (loadEl) loadEl.remove();
 
             output.innerHTML += `
-                <div class="p-4 bg-slate-900 border border-purple-500/40 rounded-2xl space-y-2">
+                <div class="p-4 bg-slate-900 border border-purple-500/40 rounded-2xl space-y-2 animate-fade-in">
                     <p class="text-[10px] font-black text-purple-400 uppercase tracking-widest flex items-center gap-1">
                         <span class="material-symbols-outlined text-xs">smart_toy</span> Respuesta Tutor Gemini ISEP:
                     </p>
@@ -450,7 +542,7 @@ function renderAcademia(container) {
             if (loadEl) loadEl.remove();
 
             output.innerHTML += `
-                <div class="p-3 bg-red-950/50 border border-red-500/30 rounded-2xl text-xs text-red-300">
+                <div class="p-3 bg-red-950/50 border border-red-500/30 rounded-2xl text-xs text-red-300 animate-fade-in">
                     ❌ ${err.message || 'Error de conexión con Gemini API'}
                 </div>
             `;
