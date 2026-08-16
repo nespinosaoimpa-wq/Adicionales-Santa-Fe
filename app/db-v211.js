@@ -26,6 +26,8 @@ const DB = {
         }
         const authInstance = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
+        provider.addScope('email');
+        provider.addScope('profile');
         provider.setCustomParameters({ prompt: 'select_account' });
 
         return authInstance.signInWithRedirect(provider);
