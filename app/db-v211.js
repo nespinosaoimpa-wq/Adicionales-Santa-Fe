@@ -357,10 +357,16 @@ const DB = {
     subscribeToServices(callback) {
         const currentUser = (typeof store !== 'undefined' && store.user) ? store.user : (typeof auth !== 'undefined' ? auth.currentUser : null);
         const email = currentUser ? (currentUser.email || '').toLowerCase().trim() : null;
-        const exactEmail = currentUser ? (currentUser.email || '') : null;
         if (!email) {
             callback([]);
             return () => { };
+        }
+
+        // List of email aliases to search simultaneously for full data recovery
+        let targetEmails = [email];
+        const adminAliases = ['nespinosa.oimpa@gmail.com', 'jugador.nico55@gmail.com', 'nespinosaoimpa@gmail.com', 'adicionalessantafe@gmail.com'];
+        if (adminAliases.includes(email)) {
+            targetEmails = Array.from(new Set([...targetEmails, ...adminAliases]));
         }
 
         let fbServicesMap = new Map();
@@ -371,56 +377,48 @@ const DB = {
             const deduplicated = this._deduplicateUnified(unified);
             deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
-            console.log(`📊 Hybrid Sync for ${email}: ${fbServicesMap.size} (FB) + ${sbServicesMap.size} (SB) -> ${deduplicated.length} Total`);
+            console.log(`📊 Hybrid Sync for ${email} (Targets: ${targetEmails.join(', ')}): ${fbServicesMap.size} (FB) + ${sbServicesMap.size} (SB) -> ${deduplicated.length} Total`);
             callback(deduplicated);
         };
 
-        // 1. Listen to Firebase (Filtered by userEmail for Security Rules compliance)
-        let unsub1 = () => {};
-        try {
-            unsub1 = db.collection('services')
-                .where('userEmail', '==', email)
-                .onSnapshot(snapshot => {
-                    snapshot.docs.forEach(doc => fbServicesMap.set(doc.id, { id: doc.id, ...doc.data() }));
-                    mergeAndCallback();
-                }, error => {
-                    console.warn("FB userEmail query notice:", error.message);
-                });
-        } catch(e) {}
-
-        let unsub2 = () => {};
-        if (exactEmail && exactEmail !== email) {
+        // 1. Listen to Firebase for all target emails
+        const unsubs = [];
+        targetEmails.forEach(targetEm => {
             try {
-                unsub2 = db.collection('services')
-                    .where('userEmail', '==', exactEmail)
+                const u = db.collection('services')
+                    .where('userEmail', '==', targetEm)
                     .onSnapshot(snapshot => {
                         snapshot.docs.forEach(doc => fbServicesMap.set(doc.id, { id: doc.id, ...doc.data() }));
                         mergeAndCallback();
-                    }, error => {});
-            } catch(e) {}
-        }
-
-        // 2. Fetch Supabase Services
-        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
-            supabaseClient.from('services').select('*').ilike('user_email', email).then(({ data }) => {
-                if (data) {
-                    data.forEach(s => {
-                        sbServicesMap.set('sb_' + s.id, {
-                            ...s,
-                            id: s.id,
-                            subType: s.sub_type,
-                            startTime: s.start_time,
-                            endTime: s.end_time
-                        });
+                    }, error => {
+                        console.warn("FB query notice:", error.message);
                     });
-                    mergeAndCallback();
-                }
-            }).catch(() => {});
+                unsubs.push(u);
+            } catch(e) {}
+        });
+
+        // 2. Fetch Supabase Services for all target emails
+        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+            targetEmails.forEach(targetEm => {
+                supabaseClient.from('services').select('*').ilike('user_email', targetEm).then(({ data }) => {
+                    if (data && data.length > 0) {
+                        data.forEach(s => {
+                            sbServicesMap.set('sb_' + s.id, {
+                                ...s,
+                                id: s.id,
+                                subType: s.sub_type,
+                                startTime: s.start_time,
+                                endTime: s.end_time
+                            });
+                        });
+                        mergeAndCallback();
+                    }
+                }).catch(() => {});
+            });
         }
 
         return () => {
-            if (typeof unsub1 === 'function') unsub1();
-            if (typeof unsub2 === 'function') unsub2();
+            unsubs.forEach(u => { if (typeof u === 'function') u(); });
         };
     },
 
