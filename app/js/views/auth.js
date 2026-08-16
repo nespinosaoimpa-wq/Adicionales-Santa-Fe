@@ -95,16 +95,15 @@ function renderLogin(container) {
             .catch(e => {
                 if (btn) {
                     btn.disabled = false;
-                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
+                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                let msg = e.message || e.toString();
-                if (msg.includes('popup-closed-by-user')) {
-                    msg = "Inicio de sesión cancelado.";
-                } else if (msg.includes('unauthorized-domain')) {
-                    msg = "Redirigiendo para autenticar con Google...";
-                    return auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
+                console.error("Google auth error notice:", e);
+                let msg = e ? (e.message || e.toString()) : "";
+                if (msg.includes('popup-closed-by-user') || msg.includes('cancelled-popup-request')) {
+                    showToast("Inicio de sesión cancelado.");
+                } else {
+                    showToast("Redirigiendo a Google para autenticación...");
                 }
-                showToast(msg);
             });
     };
 

@@ -21,13 +21,20 @@ const DB = {
     },
 
     async loginWithGoogle() {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        provider.setCustomParameters({ prompt: 'select_account' });
+        if (typeof firebase === 'undefined' || !firebase.auth) {
+            throw new Error("Servicio de autenticación no disponible.");
+        }
+        const authInstance = firebase.auth();
+        const popupProvider = new firebase.auth.GoogleAuthProvider();
+        popupProvider.setCustomParameters({ prompt: 'select_account' });
+
         try {
-            return await auth.signInWithPopup(provider);
+            return await authInstance.signInWithPopup(popupProvider);
         } catch (e) {
-            console.warn("⚠️ Popup Google login fallback to redirect:", e);
-            return await auth.signInWithRedirect(provider);
+            console.warn("⚠️ Google Popup falló, cambiando a Redirección:", e);
+            const redirectProvider = new firebase.auth.GoogleAuthProvider();
+            redirectProvider.setCustomParameters({ prompt: 'select_account' });
+            return await authInstance.signInWithRedirect(redirectProvider);
         }
     },
 
