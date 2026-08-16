@@ -30,12 +30,22 @@ window.store = {
 
     // Actions
     async login(email, password) {
+        if (!email || !password || !email.trim()) {
+            showToast("Por favor, ingresa tu email y contraseña");
+            return;
+        }
         try {
-            await DB.login(email, password);
+            await DB.login(email.trim(), password);
             showToast("Sesión iniciada");
         } catch (e) {
             console.error(e);
-            showToast("Error: " + e.message);
+            let msg = e.message || e.toString();
+            if (msg.includes('user-not-found') || msg.includes('wrong-password') || msg.includes('invalid-credential')) {
+                msg = "Email o contraseña incorrectos.";
+            } else if (msg.includes('argument-error') || msg.includes('invalid-email')) {
+                msg = "Por favor, ingresa un email y contraseña válidos.";
+            }
+            showToast(msg);
         }
     },
 

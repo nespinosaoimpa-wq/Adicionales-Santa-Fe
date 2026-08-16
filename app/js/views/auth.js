@@ -83,9 +83,17 @@ function renderLogin(container) {
                 showToast("¡Bienvenido!");
             })
             .catch(e => {
-                btn.disabled = false;
-                btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
-                showToast("Error: " + e.message);
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
+                }
+                let msg = e.message || e.toString();
+                if (msg.includes('popup-closed-by-user')) {
+                    msg = "Inicio de sesión cancelado.";
+                } else if (msg.includes('unauthorized-domain')) {
+                    msg = "Dominio no autorizado en Firebase. Usa tu Email y Contraseña.";
+                }
+                showToast(msg);
             });
     };
 

@@ -1,0 +1,31 @@
+name: Deploy PWA to GitHub Pages & Production Domain
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+
+      - name: Build dual-path distribution directory
+        run: |
+          mkdir -p build/app
+          cp -r app/* build/
+          cp -r app/* build/app/
+          echo "adicionalessantafe.com.ar" > build/CNAME
+
+      - name: Deploy to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
+          cname: adicionalesantafe.com.ar
+          force_orphan: true
