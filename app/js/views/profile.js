@@ -213,20 +213,48 @@ function renderProfile(container) {
                 Guardar Cambios
             </button>
 
-            <!-- Logout & System Info -->
+            <!-- Super Admin & Logout Section -->
             <div class="pt-6 pb-2 space-y-4">
-                ${store.user?.role === 'admin' ? `
-                 <button onclick="router.navigateTo('#diagnostics')" class="w-full text-indigo-400 text-xs font-bold hover:text-indigo-300 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 active:scale-95">
-                    <span class="material-symbols-outlined text-lg">memory</span>
-                    Estado del Sistema (Diagnóstico)
-                </button>
-                ` : ''}
+                ${store.isAdmin() ? `
+                    <div class="p-5 rounded-3xl bg-gradient-to-br from-purple-950 via-slate-900 to-slate-950 border border-purple-500/30 text-white space-y-4 shadow-2xl">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="size-10 rounded-2xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-xl">shield_person</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-sm font-black text-white uppercase tracking-wider">Panel Super Admin</h3>
+                                    <p class="text-[10px] text-purple-300">Nivel de Control Global del Sistema</p>
+                                </div>
+                            </div>
+                            <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[9px] font-black uppercase tracking-wider">SUPER ADMIN</span>
+                        </div>
 
-                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10 mt-2">
+                        <div class="grid grid-cols-2 gap-2 pt-1">
+                            <button onclick="router.navigateTo('#admin')" class="py-3 px-3 rounded-2xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30 active:scale-95 transition-all">
+                                <span class="material-symbols-outlined text-sm">admin_panel_settings</span> Admin Hub
+                            </button>
+                            <button onclick="router.navigateTo('#admin/auditoria')" class="py-3 px-3 rounded-2xl bg-amber-600/80 hover:bg-amber-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg active:scale-95 transition-all">
+                                <span class="material-symbols-outlined text-sm">shield</span> Auditoría
+                            </button>
+                        </div>
+
+                        <button onclick="router.navigateTo('#diagnostics')" class="w-full py-2.5 rounded-2xl bg-slate-800/80 hover:bg-slate-700 text-purple-300 font-bold text-xs flex items-center justify-center gap-2 border border-white/5 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-sm">memory</span> Diagnóstico del Sistema
+                        </button>
+                    </div>
+                ` : `
+                    <button onclick="store.enableSuperAdminMode()" class="w-full py-3 rounded-2xl bg-slate-900/60 hover:bg-purple-950/40 text-slate-400 hover:text-purple-300 border border-slate-800 hover:border-purple-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 active:scale-95">
+                        <span class="material-symbols-outlined text-sm text-purple-400">key</span>
+                        Activar Modo Super Admin
+                    </button>
+                `}
+
+                <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10 mt-2">
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v531.5-FINAL • Adicionales Santa Fe</p>
+                <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v535.9-FINAL • Adicionales Santa Fe</p>
             </div>
             
             <!-- Ad Banner -->

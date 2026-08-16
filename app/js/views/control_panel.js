@@ -92,8 +92,8 @@ function renderControlPanel(container) {
                 </div>
             </div>
             <div class="flex gap-2">
-                ${store.user && store.user.role === 'admin' ? `
-                    <button onclick="router.navigateTo('#admin')" class="size-10 flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/30 transition-colors text-primary border border-primary/30">
+                ${store.isAdmin() ? `
+                    <button onclick="router.navigateTo('#admin')" class="size-10 flex items-center justify-center rounded-full bg-primary/20 hover:bg-primary/30 transition-colors text-primary border border-primary/30" title="Panel Super Admin">
                         <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
                     </button>
                 ` : ''}

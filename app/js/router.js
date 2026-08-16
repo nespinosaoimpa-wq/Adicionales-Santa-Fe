@@ -39,14 +39,11 @@ window.router = {
 
         // Helper to check if current user is admin
         const isAdminUser = () => {
-            if (!store.user) return false;
-            if (store.user.role === 'admin') return true;
-            const lower = (store.user.email || '').toLowerCase();
-            return lower.includes('nespinosa') || lower.includes('jugador') || lower.includes('adicionalessantafe') || lower.includes('admin');
+            return typeof store !== 'undefined' && store.isAdmin ? store.isAdmin() : false;
         };
 
         // Special Protection for Admin Panel
-        if (hash === '#admin' && !isAdminUser()) {
+        if ((hash === '#admin' || hash === '#admin/auditoria') && !isAdminUser()) {
             console.warn("👮 Direct access to #admin blocked for non-admin");
             showToast("Acceso Restringido");
             this.navigateTo('#agenda');
@@ -59,10 +56,7 @@ window.router = {
     render(route) {
         const app = document.getElementById('app');
         const isAdminUser = () => {
-            if (!store.user) return false;
-            if (store.user.role === 'admin') return true;
-            const lower = (store.user.email || '').toLowerCase();
-            return lower.includes('nespinosa') || lower.includes('jugador') || lower.includes('adicionalessantafe') || lower.includes('admin');
+            return typeof store !== 'undefined' && store.isAdmin ? store.isAdmin() : false;
         };
 
         try {
@@ -176,7 +170,7 @@ window.router = {
                     renderAboutUs(app);
                     break;
                 case '#diagnostics':
-                    if (store.user && store.user.role === 'admin') {
+                    if (store.isAdmin()) {
                         renderDiagnostics(app);
                     } else {
                         showToast("Acceso denegado. Se requiere nivel de Administrador.");

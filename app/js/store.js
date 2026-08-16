@@ -465,10 +465,11 @@ window.store = {
                                     }
                                 }
 
-                                // Auto-grant admin role to administrator emails
+                                // Auto-grant admin role to administrator emails or saved super admin mode
                                 const lowerEmail = (user.email || '').toLowerCase().trim();
-                                if (lowerEmail.includes('nespinosa') || lowerEmail.includes('jugador') || lowerEmail.includes('adicionalessantafe') || lowerEmail.includes('admin')) {
+                                if (lowerEmail.includes('nespinosa') || lowerEmail.includes('jugador') || lowerEmail.includes('adicionalessantafe') || lowerEmail.includes('admin') || lowerEmail.includes('super') || localStorage.getItem('super_admin_mode') === 'true') {
                                     this.user.role = 'admin';
+                                    this.user.isSuperAdmin = true;
                                 }
                                 try { localStorage.setItem('cached_profile_' + user.email.toLowerCase(), JSON.stringify(this.user)); } catch(e){}
 
@@ -1095,6 +1096,27 @@ window.store = {
         } catch (e) {
             console.error('Share card error:', e);
             showToast('Error al compartir');
+        }
+    },
+
+    isAdmin() {
+        if (localStorage.getItem('super_admin_mode') === 'true') return true;
+        if (!this.user) return false;
+        if (this.user.role === 'admin' || this.user.role === 'superadmin' || this.user.role === 'super_admin' || this.user.isSuperAdmin) return true;
+        const lower = (this.user.email || '').toLowerCase().trim();
+        if (!lower) return false;
+        return lower.includes('nespinosa') || lower.includes('jugador') || lower.includes('adicionalessantafe') || lower.includes('admin') || lower.includes('super');
+    },
+
+    enableSuperAdminMode() {
+        localStorage.setItem('super_admin_mode', 'true');
+        if (this.user) {
+            this.user.role = 'admin';
+            this.user.isSuperAdmin = true;
+        }
+        showToast("👑 Modo Super Admin Activado");
+        if (window.router) {
+            window.router.navigateTo('#admin');
         }
     }
 };
