@@ -413,6 +413,62 @@ window.store = {
         }
     },
 
+    async recoverUserServicesPrompt(customEmail) {
+        let emailToSearch = customEmail;
+        if (!emailToSearch) {
+            const defaultEmail = this.user ? this.user.email : '';
+            emailToSearch = prompt("Ingresá tu correo electrónico para recuperar todas tus guardias:", defaultEmail);
+        }
+        if (!emailToSearch || !emailToSearch.trim()) return;
+
+        const cleanEmail = emailToSearch.toLowerCase().trim();
+        showToast("🔄 Escaneando servidores y recuperando guardias...");
+
+        try {
+            let recovered = [];
+
+            // 1. Query Supabase Services
+            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                const { data } = await supabaseClient.from('services').select('*').ilike('user_email', cleanEmail);
+                if (data && data.length > 0) {
+                    const mapped = data.map(s => ({
+                        ...s,
+                        id: s.id,
+                        subType: s.sub_type,
+                        startTime: s.start_time,
+                        endTime: s.end_time
+                    }));
+                    recovered.push(...mapped);
+                }
+            }
+
+            // 2. Query Firestore Services
+            if (typeof db !== 'undefined' && db) {
+                try {
+                    const snap = await db.collection('services').where('userEmail', '==', cleanEmail).get();
+                    snap.docs.forEach(doc => recovered.push({ id: doc.id, ...doc.data() }));
+                } catch(e) {}
+            }
+
+            // 3. Deduplicate
+            const deduplicated = DB._deduplicateUnified(recovered);
+
+            if (deduplicated.length > 0) {
+                this.services = deduplicated;
+                try {
+                    localStorage.setItem('backup_services_' + cleanEmail, JSON.stringify(deduplicated));
+                } catch(e){}
+                showToast(`✅ ¡Se recuperaron ${deduplicated.length} guardias en tu calendario!`);
+                if (window.router) window.router.handleRoute();
+            } else {
+                showToast("⚠️ No se encontraron guardias para " + cleanEmail);
+            }
+        } catch(e) {
+            console.error("Error recuperando guardias:", e);
+            showToast("⚠️ Error al escanear bases de datos.");
+        }
+    },
+
     async shareApp() {
         const shareData = {
             title: 'Adicionales Santa Fe',

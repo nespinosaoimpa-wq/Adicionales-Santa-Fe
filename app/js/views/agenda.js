@@ -180,15 +180,20 @@ function renderAgenda(container) {
                 <h3 class="font-bold text-lg dark:text-slate-900 dark:text-white">Turnos para el ${store.getFormattedDate(selectedDate)}</h3>
                 <div class="space-y-3">
                     ${dayServices.length > 0 ? dayServices.map((s, i) => renderServiceCard(s, i)).join('') :
-            `<div class="flex flex-col items-center py-10 text-center animate-slide-up">
-                <div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                    <span class="material-symbols-outlined text-3xl text-primary/40">event_busy</span>
+            `<div class="flex flex-col items-center py-8 text-center animate-slide-up bg-slate-900/40 rounded-2xl p-6 border border-slate-800">
+                <div class="size-14 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+                    <span class="material-symbols-outlined text-3xl text-primary/60">event_busy</span>
                 </div>
-                <p class="text-sm font-semibold dark:text-slate-900 dark:text-white mb-1">Sin servicios</p>
-                <p class="text-xs text-slate-400 mb-4">No hay turnos para esta fecha</p>
-                <button onclick="router.navigateTo('#register')" class="px-5 py-2 bg-primary text-white text-xs font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
-                    + Registrar Servicio
-                </button>
+                <p class="text-sm font-semibold dark:text-slate-900 dark:text-white mb-1">Sin turnos agendados en esta fecha</p>
+                <p class="text-xs text-slate-400 mb-4">Podés agregar uno nuevo o restaurar tu historial anterior</p>
+                <div class="flex flex-wrap gap-2 justify-center">
+                    <button onclick="router.navigateTo('#register')" class="px-4 py-2 bg-primary text-white text-xs font-bold rounded-xl shadow-lg shadow-primary/20 active:scale-95 transition-transform">
+                        + Registrar Servicio
+                    </button>
+                    <button onclick="store.recoverUserServicesPrompt()" class="px-4 py-2 bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 text-xs font-bold rounded-xl shadow-sm active:scale-95 transition-transform flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm text-primary">sync</span> Recuperar Guardias
+                    </button>
+                </div>
             </div>`}
                 </div>
             </section>
