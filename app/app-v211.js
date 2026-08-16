@@ -49,16 +49,18 @@ function bootApp() {
         console.error("❌ Auth Init Error:", error);
     }
 
-    // 4. Ultimate Safety Check: Ensure static HTML loader is replaced if router fell through
+    // 4. Ultimate Safety Check: Ensure static HTML loader is removed if router fell through
     setTimeout(() => {
-        const app = document.getElementById('app');
-        if (app && app.innerHTML.includes('Cargando Adicionales Santa Fe')) {
-            console.warn("⚠️ App UI still showing initial loader after 200ms, forcing router render...");
+        const loader = document.getElementById('initial-loader');
+        if (loader) {
+            console.warn("⚠️ App UI initial loader timeout, forcing removal and router render...");
+            loader.classList.add('transition-opacity', 'duration-300', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => loader.remove(), 300);
             if (window.router && typeof window.router.handleRoute === 'function') {
                 window.router.handleRoute();
             }
         }
-    }, 200);
+    }, 500);
 }
 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {

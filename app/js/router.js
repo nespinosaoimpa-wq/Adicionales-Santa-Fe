@@ -54,7 +54,13 @@ window.router = {
     },
 
     render(route) {
-        const app = document.getElementById('app');
+        const app = document.getElementById('main-content') || document.getElementById('app');
+        const loader = document.getElementById('initial-loader');
+        if (loader) {
+            loader.classList.add('transition-opacity', 'duration-300', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => loader.remove(), 300);
+        }
+
         const isAdminUser = () => {
             return typeof store !== 'undefined' && store.isAdmin ? store.isAdmin() : false;
         };
