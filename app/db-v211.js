@@ -355,65 +355,70 @@ const DB = {
     subscribeToServices(callback) {
         const currentUser = (typeof store !== 'undefined' && store.user) ? store.user : (typeof auth !== 'undefined' ? auth.currentUser : null);
         const email = currentUser ? (currentUser.email || '').toLowerCase().trim() : null;
+        const exactEmail = currentUser ? (currentUser.email || '') : null;
         if (!email) {
             callback([]);
             return () => { };
         }
 
-        let fbServices = [];
-        let sbServices = [];
+        let fbServicesMap = new Map();
+        let sbServicesMap = new Map();
 
         const mergeAndCallback = () => {
-            const unified = [...fbServices, ...sbServices];
+            const unified = [...Array.from(fbServicesMap.values()), ...Array.from(sbServicesMap.values())];
             const deduplicated = this._deduplicateUnified(unified);
             deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
-            console.log(`📊 Hybrid Sync for ${email}: ${fbServices.length} (FB) + ${sbServices.length} (SB) -> ${deduplicated.length} Total`);
+            console.log(`📊 Hybrid Sync for ${email}: ${fbServicesMap.size} (FB) + ${sbServicesMap.size} (SB) -> ${deduplicated.length} Total`);
             callback(deduplicated);
         };
 
-        // 1. Listen to Firebase (Filtered case-insensitively)
-        const fbUnsub = db.collection('services')
-            .onSnapshot(snapshot => {
-                fbServices = snapshot.docs
-                    .map(doc => ({ id: doc.id, ...doc.data() }))
-                    .filter(s => {
-                        const sEmail = (s.userEmail || s.user_email || '').toLowerCase().trim();
-                        return sEmail === email;
-                    });
-                mergeAndCallback();
-            }, error => {
-                console.warn("Services access notice:", error.message);
-            });
+        // 1. Listen to Firebase (Filtered by userEmail for Security Rules compliance)
+        let unsub1 = () => {};
+        try {
+            unsub1 = db.collection('services')
+                .where('userEmail', '==', email)
+                .onSnapshot(snapshot => {
+                    snapshot.docs.forEach(doc => fbServicesMap.set(doc.id, { id: doc.id, ...doc.data() }));
+                    mergeAndCallback();
+                }, error => {
+                    console.warn("FB userEmail query notice:", error.message);
+                });
+        } catch(e) {}
 
-        // 2. Listen to Supabase
-        const channel = supabaseClient
-            .channel('services-hybrid')
-            .on('postgres_changes', {
-                event: '*',
-                schema: 'public',
-                table: 'services',
-                filter: `user_email=eq.${email}`
-            }, async () => {
-                const { data } = await supabaseClient.from('services').select('*').eq('user_email', email);
+        let unsub2 = () => {};
+        if (exactEmail && exactEmail !== email) {
+            try {
+                unsub2 = db.collection('services')
+                    .where('userEmail', '==', exactEmail)
+                    .onSnapshot(snapshot => {
+                        snapshot.docs.forEach(doc => fbServicesMap.set(doc.id, { id: doc.id, ...doc.data() }));
+                        mergeAndCallback();
+                    }, error => {});
+            } catch(e) {}
+        }
+
+        // 2. Fetch Supabase Services
+        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+            supabaseClient.from('services').select('*').ilike('user_email', email).then(({ data }) => {
                 if (data) {
-                    sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
+                    data.forEach(s => {
+                        sbServicesMap.set('sb_' + s.id, {
+                            ...s,
+                            id: s.id,
+                            subType: s.sub_type,
+                            startTime: s.start_time,
+                            endTime: s.end_time
+                        });
+                    });
                     mergeAndCallback();
                 }
-            })
-            .subscribe();
-
-        // Initial Supabase Fetch
-        supabaseClient.from('services').select('*').eq('user_email', email).then(({ data }) => {
-            if (data) {
-                sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
-                mergeAndCallback();
-            }
-        });
+            }).catch(() => {});
+        }
 
         return () => {
-            if (typeof fbUnsub === 'function') fbUnsub();
-            if (supabaseClient && typeof supabaseClient.removeChannel === 'function') supabaseClient.removeChannel(channel);
+            if (typeof unsub1 === 'function') unsub1();
+            if (typeof unsub2 === 'function') unsub2();
         };
     },
 

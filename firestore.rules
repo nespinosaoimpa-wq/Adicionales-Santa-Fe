@@ -37,13 +37,20 @@ service cloud.firestore {
 
     // ── SERVICIOS: solo el dueño puede leer/escribir sus servicios ──
     match /services/{serviceId} {
-      allow read, delete: if request.auth != null &&
-        request.auth.token.email.lower() == resource.data.userEmail.lower();
-      allow create: if request.auth != null &&
-        request.auth.token.email.lower() == request.resource.data.userEmail.lower();
-      allow update: if request.auth != null &&
-        request.auth.token.email.lower() == resource.data.userEmail.lower();
-      // Admin puede leer todos para el panel
+      allow read, delete: if request.auth != null && (
+        request.auth.token.email.lower() == resource.data.userEmail.lower() ||
+        request.auth.token.email.lower() == resource.data.user_email.lower() ||
+        isAdmin()
+      );
+      allow create: if request.auth != null && (
+        request.auth.token.email.lower() == request.resource.data.userEmail.lower() ||
+        request.auth.token.email.lower() == request.resource.data.user_email.lower()
+      );
+      allow update: if request.auth != null && (
+        request.auth.token.email.lower() == resource.data.userEmail.lower() ||
+        request.auth.token.email.lower() == resource.data.user_email.lower() ||
+        isAdmin()
+      );
       allow read: if isAdmin();
     }
 
