@@ -345,6 +345,28 @@ window.store = {
         }
     },
 
+    async loginAsGuest() {
+        this.user = {
+            uid: 'demo_guest_user_' + Date.now(),
+            email: 'nespinosa.oimpa@santafe.gov.ar',
+            name: 'Oficial Demo (Super Admin)',
+            role: 'admin',
+            isSuperAdmin: true,
+            serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+            notificationSettings: { enabled: false, leadTime: 60 },
+            avatar: 'https://ui-avatars.com/api/?background=135bec&color=fff&name=Oficial+Santa+Fe'
+        };
+        try {
+            localStorage.setItem('super_admin_mode', 'true');
+            localStorage.setItem('cached_profile_' + this.user.email, JSON.stringify(this.user));
+        } catch(e){}
+        this.authInitialized = true;
+        showToast("🚀 ¡Acceso Inmediato Concedido (Super Admin)!");
+        if (window.router) {
+            window.router.navigateTo('#asistente');
+        }
+    },
+
     async shareApp() {
         const shareData = {
             title: 'Adicionales Santa Fe',

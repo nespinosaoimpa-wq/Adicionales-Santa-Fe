@@ -13,10 +13,16 @@ function renderLogin(container) {
                 <p class="mt-2 text-sm text-slate-400">Ingresa a tu cuenta para continuar</p>
             </div>
 
-            <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
+            <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-4">
+                <!-- Instant Guest Access (Super Admin Demo) -->
+                <button onclick="store.loginAsGuest()" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-gradient-to-r from-primary via-blue-600 to-indigo-600 px-4 py-4 text-base font-extrabold text-white shadow-xl shadow-primary/30 hover:brightness-110 transition-all active:scale-95 border border-white/20">
+                    <span class="material-symbols-outlined text-2xl">rocket_launch</span>
+                    🚀 Acceso Inmediato (Modo Demo)
+                </button>
+
                 <!-- Google Button -->
-                <button onclick="handleGoogleLogin(event)" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-white px-4 py-4 text-base font-bold text-slate-900 shadow-xl border border-slate-200 hover:bg-slate-50 transition-all active:scale-95 ring-1 ring-slate-200 ring-offset-2">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6" alt="Google">
+                <button onclick="handleGoogleLogin(event)" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-white/10 dark:bg-white/10 px-4 py-3.5 text-sm font-bold text-white shadow-md border border-white/10 hover:bg-white/20 transition-all active:scale-95">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
                     Continuar con Google
                 </button>
                 
