@@ -25,17 +25,10 @@ const DB = {
             throw new Error("Servicio de autenticación no disponible.");
         }
         const authInstance = firebase.auth();
-        const popupProvider = new firebase.auth.GoogleAuthProvider();
-        popupProvider.setCustomParameters({ prompt: 'select_account' });
+        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: 'select_account' });
 
-        try {
-            return await authInstance.signInWithPopup(popupProvider);
-        } catch (e) {
-            console.warn("⚠️ Google Popup falló, cambiando a Redirección:", e);
-            const redirectProvider = new firebase.auth.GoogleAuthProvider();
-            redirectProvider.setCustomParameters({ prompt: 'select_account' });
-            return await authInstance.signInWithRedirect(redirectProvider);
-        }
+        return authInstance.signInWithRedirect(provider);
     },
 
     // --- USERS ---
