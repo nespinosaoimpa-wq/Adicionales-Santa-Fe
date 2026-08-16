@@ -51,9 +51,13 @@ function renderLogin(container) {
                         </div>
                     </div>
 
-                    <div>
-                        <button type="submit" class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all shadow-lg shadow-primary/20 active:scale-95">
+                    <div class="grid grid-cols-2 gap-2 pt-2">
+                        <button type="submit" class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-xs font-bold leading-6 text-white shadow-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-95">
                             Ingresar
+                        </button>
+                        <button type="button" onclick="handleRecoverByEmail(event)" class="flex w-full justify-center items-center gap-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-2 py-3 text-xs font-extrabold leading-6 text-white shadow-sm transition-all shadow-lg shadow-emerald-600/20 active:scale-95">
+                            <span class="material-symbols-outlined text-sm">database</span>
+                            Recuperar Datos
                         </button>
                     </div>
                 </form>
@@ -64,7 +68,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v534.8 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v535.9.5 (Suite Asistente Virtual PRO)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
@@ -97,17 +101,33 @@ function renderLogin(container) {
                 if (msg.includes('popup-closed-by-user')) {
                     msg = "Inicio de sesión cancelado.";
                 } else if (msg.includes('unauthorized-domain')) {
-                    msg = "Dominio no autorizado en Firebase. Usa tu Email y Contraseña.";
+                    msg = "Redirigiendo para autenticar con Google...";
+                    return auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
                 }
                 showToast(msg);
             });
+    };
+
+    window.handleRecoverByEmail = (e) => {
+        if (e) e.preventDefault();
+        const email = document.getElementById('email').value;
+        if (!email) {
+            showToast("⚠️ Ingresá tu Email o Legajo en el campo de arriba.");
+            document.getElementById('email').focus();
+            return;
+        }
+        store.loginByEmail(email);
     };
 
     window.handleLogin = (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        store.login(email, password);
+        if (!password) {
+            store.loginByEmail(email);
+        } else {
+            store.login(email, password);
+        }
     }
 }
 

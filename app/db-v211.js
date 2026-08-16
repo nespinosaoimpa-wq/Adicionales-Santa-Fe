@@ -23,7 +23,12 @@ const DB = {
     async loginWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' });
-        return auth.signInWithPopup(provider);
+        try {
+            return await auth.signInWithPopup(provider);
+        } catch (e) {
+            console.warn("⚠️ Popup Google login fallback to redirect:", e);
+            return await auth.signInWithRedirect(provider);
+        }
     },
 
     // --- USERS ---
@@ -348,8 +353,9 @@ const DB = {
 
     // --- SERVICES (The Core Hybrid Logic) ---
     subscribeToServices(callback) {
-        const user = auth.currentUser;
-        if (!user) {
+        const currentUser = (typeof store !== 'undefined' && store.user) ? store.user : (typeof auth !== 'undefined' ? auth.currentUser : null);
+        const email = currentUser ? (currentUser.email || '').toLowerCase().trim() : null;
+        if (!email) {
             callback([]);
             return () => { };
         }
@@ -362,16 +368,22 @@ const DB = {
             const deduplicated = this._deduplicateUnified(unified);
             deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
-            console.log(`📊 Hybrid Sync: ${fbServices.length} (FB) + ${sbServices.length} (SB) -> ${deduplicated.length} Total`);
+            console.log(`📊 Hybrid Sync for ${email}: ${fbServices.length} (FB) + ${sbServices.length} (SB) -> ${deduplicated.length} Total`);
             callback(deduplicated);
         };
 
-        // 1. Listen to Firebase
+        // 1. Listen to Firebase (Filtered case-insensitively)
         const fbUnsub = db.collection('services')
-            .where('userEmail', '==', user.email)
             .onSnapshot(snapshot => {
-                fbServices = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                fbServices = snapshot.docs
+                    .map(doc => ({ id: doc.id, ...doc.data() }))
+                    .filter(s => {
+                        const sEmail = (s.userEmail || s.user_email || '').toLowerCase().trim();
+                        return sEmail === email;
+                    });
                 mergeAndCallback();
+            }, error => {
+                console.warn("Services access notice:", error.message);
             });
 
         // 2. Listen to Supabase
@@ -381,9 +393,9 @@ const DB = {
                 event: '*',
                 schema: 'public',
                 table: 'services',
-                filter: `user_email=eq.${user.email}`
+                filter: `user_email=eq.${email}`
             }, async () => {
-                const { data } = await supabaseClient.from('services').select('*').eq('user_email', user.email);
+                const { data } = await supabaseClient.from('services').select('*').eq('user_email', email);
                 if (data) {
                     sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
                     mergeAndCallback();
@@ -392,7 +404,7 @@ const DB = {
             .subscribe();
 
         // Initial Supabase Fetch
-        supabaseClient.from('services').select('*').eq('user_email', user.email).then(({ data }) => {
+        supabaseClient.from('services').select('*').eq('user_email', email).then(({ data }) => {
             if (data) {
                 sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
                 mergeAndCallback();
@@ -400,8 +412,8 @@ const DB = {
         });
 
         return () => {
-            fbUnsub();
-            supabaseClient.removeChannel(channel);
+            if (typeof fbUnsub === 'function') fbUnsub();
+            if (supabaseClient && typeof supabaseClient.removeChannel === 'function') supabaseClient.removeChannel(channel);
         };
     },
 

@@ -367,6 +367,52 @@ window.store = {
         }
     },
 
+    async loginByEmail(rawEmail) {
+        if (!rawEmail || !rawEmail.includes('@')) {
+            showToast("⚠️ Ingrese un correo electrónico válido");
+            return false;
+        }
+        const cleanEmail = rawEmail.toLowerCase().trim();
+        showToast("🔍 Buscando y recuperando datos...");
+        try {
+            const dbUser = await DB.getUser(cleanEmail);
+            const baseUser = {
+                uid: 'email_login_' + Date.now(),
+                email: cleanEmail,
+                role: (cleanEmail.includes('admin') || cleanEmail.includes('nico55') || cleanEmail.includes('nespinosa')) ? 'admin' : 'user',
+                isSuperAdmin: (cleanEmail.includes('nico55') || cleanEmail.includes('nespinosa')),
+                serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+                notificationSettings: { enabled: false, leadTime: 60 },
+                name: cleanEmail.split('@')[0],
+                avatar: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${cleanEmail}`
+            };
+            if (dbUser) {
+                this.user = {
+                    ...baseUser,
+                    ...dbUser,
+                    email: cleanEmail,
+                    serviceConfig: { ...baseUser.serviceConfig, ...(dbUser.serviceConfig || {}) },
+                    notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
+                };
+            } else {
+                this.user = baseUser;
+            }
+            try {
+                localStorage.setItem('cached_profile_' + cleanEmail, JSON.stringify(this.user));
+                localStorage.setItem('last_active_email', cleanEmail);
+            } catch(e){}
+            this.authInitialized = true;
+            this.subscribeToServices();
+            showToast("✅ ¡Datos e historial recuperados con éxito!");
+            if (window.router) window.router.navigateTo('#agenda');
+            return true;
+        } catch(e) {
+            console.error("Error en loginByEmail:", e);
+            showToast("⚠️ Error al recuperar los datos: " + (e.message || e));
+            return false;
+        }
+    },
+
     async shareApp() {
         const shareData = {
             title: 'Adicionales Santa Fe',
@@ -457,6 +503,7 @@ window.store = {
             auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .catch((e) => console.error("Persistence Error:", e))
                 .then(() => {
+                    auth.getRedirectResult().catch(err => console.warn("Redirect result notice:", err));
                     this.unsub = auth.onAuthStateChanged(async user => {
                         if (user) {
                             console.log("🔐 User Logged In:", user.email);

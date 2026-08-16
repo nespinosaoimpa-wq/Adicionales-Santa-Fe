@@ -1,81 +1,10 @@
-const CACHE_NAME = 'asistentepro-v535.9.4';
-const ASSETS = [
-    './',
-    './index.html?v=535.9.4',
-    './styles.css?v=535.9.4',
-    './supabase-config.js?v=535.9.4',
-    './firebase-config.js?v=535.9.4',
-    './db-v211.js?v=535.9.4',
-    './js/utils.js?v=535.9.4',
-    './js/store.js?v=535.9.4',
-    './js/components.js?v=535.9.4',
-    './js/router.js?v=535.9.4',
-    './js/data/directory.js?v=535.9.4',
-    './js/data/resources.js?v=535.9.4',
-    './js/data/academy_data.js?v=535.9.4',
-    './js/views/auth.js?v=535.9.4',
-    './js/views/agenda.js?v=535.9.4',
-    './js/views/register.js?v=535.9.4',
-    './js/views/control_panel.js?v=535.9.4',
-    './js/views/financial.js?v=535.9.4',
-    './js/views/info_guia.js?v=535.9.4',
-    './js/views/profile.js?v=535.9.4',
-    './js/views/stats.js?v=535.9.4',
-    './js/views/history.js?v=535.9.4',
-    './js/views/service_details.js?v=535.9.4',
-    './js/views/asistente.js?v=535.9.4',
-    './js/views/actas.js?v=535.9.4',
-    './js/views/intervenciones.js?v=535.9.4',
-    './js/views/procedimiento.js?v=535.9.4',
-    './js/views/archivos.js?v=535.9.4',
-    './js/views/auditoria.js?v=535.9.4',
-    './js/views/academia.js?v=535.9.4',
-    './js/views/admin.js?v=535.9.4',
-    './js/views/diagnostics.js?v=535.9.4',
-    './js/views/onboarding.js?v=535.9.4',
-    './app-v211.js?v=535.9.4'
-];
-
-self.addEventListener('install', event => {
-    self.skipWaiting();
-    event.waitUntil(
-        caches.open(CACHE_NAME).then(cache => {
-            console.log('[SW v535.9.4] Pre-caching assets');
-            return cache.addAll(ASSETS).catch(err => {
-                console.warn('[SW v535.9.4] Cache addAll notice:', err);
-            });
-        })
-    );
-});
-
+// Kill switch for sw-v535-9-4.js: Clear all caches and unregister to upgrade to v535.9.5
+self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', event => {
     event.waitUntil(
-        caches.keys().then(cacheNames => {
-            return Promise.all(
-                cacheNames.map(cacheName => {
-                    if (cacheName !== CACHE_NAME) {
-                        console.log('[SW v535.9.4] Deleting old cache:', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
-        }).then(() => self.clients.claim())
-    );
-});
-
-self.addEventListener('fetch', event => {
-    if (event.request.url.includes('googleapis.com') || event.request.url.includes('firestore') || event.request.url.includes('supabase')) {
-        return;
-    }
-    event.respondWith(
-        fetch(event.request)
-            .then(networkResponse => {
-                if (networkResponse && networkResponse.status === 200 && event.request.method === 'GET') {
-                    const responseClone = networkResponse.clone();
-                    caches.open(CACHE_NAME).then(cache => cache.put(event.request, responseClone));
-                }
-                return networkResponse;
-            })
-            .catch(() => caches.match(event.request))
+        caches.keys().then(keys => Promise.all(keys.map(k => caches.delete(k))))
+            .then(() => self.registration.unregister())
+            .then(() => self.clients.matchAll({ type: 'window' }))
+            .then(clients => clients.forEach(c => c.navigate(c.url)))
     );
 });
