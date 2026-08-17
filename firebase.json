@@ -42,6 +42,10 @@
         ],
         "rewrites": [
             {
+                "source": "/__/auth/**",
+                "destination": "https://adicionales-santa-fe.firebaseapp.com/__/auth/**"
+            },
+            {
                 "source": "/app/**",
                 "destination": "/app/index.html"
             }

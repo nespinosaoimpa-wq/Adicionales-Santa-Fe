@@ -578,55 +578,58 @@ window.store = {
                     this.unsub = auth.onAuthStateChanged(async user => {
                         if (user) {
                             console.log("🔐 User Logged In:", user.email);
+                            const baseUser = {
+                                uid: user.uid,
+                                email: user.email,
+                                role: 'user',
+                                serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+                                notificationSettings: { enabled: false, leadTime: 60 },
+                                name: user.displayName || user.email.split('@')[0],
+                                avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                            };
+
+                            // Auto-grant admin role to administrator emails or saved super admin mode
+                            const lowerEmail = (user.email || '').toLowerCase().trim();
+                            if (lowerEmail.includes('nespinosa') || lowerEmail.includes('jugador') || lowerEmail.includes('adicionalessantafe') || lowerEmail.includes('admin') || lowerEmail.includes('super') || localStorage.getItem('super_admin_mode') === 'true') {
+                                baseUser.role = 'admin';
+                                baseUser.isSuperAdmin = true;
+                            }
+
+                            // 1. INSTANT SYNCHRONOUS ASSIGNMENT: Ensure store.isAuthenticated() is immediately true
+                            this.user = baseUser;
+                            try {
+                                const cachedStr = localStorage.getItem('cached_profile_' + lowerEmail);
+                                if (cachedStr) {
+                                    const cached = JSON.parse(cachedStr);
+                                    this.user = { ...this.user, ...cached };
+                                }
+                            } catch(e){}
+
+                            this.authInitialized = true;
+                            finishResolve();
+                            if (window.router && window.router.initialized) router.handleRoute();
+
+                            // 2. ASYNCHRONOUS DATABASE SYNC
                             try {
                                 const dbUser = await DB.getUser(user.email);
-                                const baseUser = {
-                                    uid: user.uid,
-                                    email: user.email,
-                                    role: 'user',
-                                    serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
-                                    notificationSettings: { enabled: false, leadTime: 60 },
-                                    name: user.displayName || user.email.split('@')[0],
-                                    avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                                };
-
                                 if (dbUser) {
                                     this.user = {
-                                        ...baseUser,
+                                        ...this.user,
                                         ...dbUser,
-                                        serviceConfig: { ...baseUser.serviceConfig, ...(dbUser.serviceConfig || {}) },
-                                        notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
+                                        serviceConfig: { ...this.user.serviceConfig, ...(dbUser.serviceConfig || {}) },
+                                        notificationSettings: { ...this.user.notificationSettings, ...(dbUser.notificationSettings || {}) }
                                     };
                                     if (this.user.name === 'undefined' || !this.user.name) this.user.name = baseUser.name;
                                     if (this.user.avatar === 'undefined' || !this.user.avatar || this.user.avatar.includes('ui-avatars.com')) {
                                         if (user.photoURL) this.user.avatar = user.photoURL;
                                     }
-                                } else {
-                                    const cachedStr = localStorage.getItem('cached_profile_' + user.email.toLowerCase());
-                                    if (cachedStr) {
-                                        try {
-                                            const cached = JSON.parse(cachedStr);
-                                            this.user = { ...baseUser, ...cached };
-                                        } catch(e) {
-                                            this.user = baseUser;
-                                        }
-                                    } else {
-                                        this.user = baseUser;
-                                    }
                                 }
 
-                                // Auto-grant admin role to administrator emails or saved super admin mode
-                                const lowerEmail = (user.email || '').toLowerCase().trim();
-                                if (lowerEmail.includes('nespinosa') || lowerEmail.includes('jugador') || lowerEmail.includes('adicionalessantafe') || lowerEmail.includes('admin') || lowerEmail.includes('super') || localStorage.getItem('super_admin_mode') === 'true') {
-                                    this.user.role = 'admin';
-                                    this.user.isSuperAdmin = true;
-                                }
-                                try { localStorage.setItem('cached_profile_' + user.email.toLowerCase(), JSON.stringify(this.user)); } catch(e){}
+                                try { localStorage.setItem('cached_profile_' + lowerEmail, JSON.stringify(this.user)); } catch(e){}
 
                                 if (this.user.status === 'suspended') {
                                     showToast("❌ Tu cuenta ha sido suspendida por un administrador.", 8000);
                                     this.logout();
-                                    finishResolve();
                                     return;
                                 }
 
