@@ -76,7 +76,7 @@
         } catch(e) {}
 
         // Dynamic PWA Cache Buster & Auto-Updater
-        const CURRENT_VERSION = 'v535.10.3';
+        const CURRENT_VERSION = 'v535.10.10';
         try {
             fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
                 .then(res => res.json())
@@ -161,9 +161,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-10-3.js?v=535.10.3')
+                navigator.serviceWorker.register('./sw-v535-10-10.js?v=535.10.10')
                     .then(registration => {
-                        console.log('ServiceWorker v535.10.3 registrado con éxito: ', registration.scope);
+                        console.log('ServiceWorker v535.10.10 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {
@@ -221,22 +221,6 @@
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
-
-    <!-- Main App Container -->
-    <div id="app"
-        class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
-        <!-- Argentine Flag Decorative Top Bar -->
-        <div class="w-full h-2 flex flex-col shrink-0 relative z-[200]">
-            <div class="h-[30%] bg-[#74ACDF]"></div>
-            <div class="h-[40%] bg-white flex items-center justify-center relative">
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <svg class="w-4 h-4 text-[#F6B426] animate-pulse" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="5" />
-                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
-                    </svg>
-                </div>
-            </div>
 <body class="bg-background-dark text-slate-100 font-body antialiased selection:bg-primary selection:text-white">
     <div id="app" class="min-h-screen flex flex-col">
         <!-- Main Loading State -->
@@ -303,7 +287,7 @@
     <div id="fallback-splash" class="fixed inset-0 bg-[#0a0c12] z-[9999] flex flex-col justify-between p-6 pointer-events-none transition-opacity duration-500 opacity-0 hidden">
         <div class="flex justify-between items-center text-xs text-slate-500 font-mono">
             <span>SANTA FE POLICÍA</span>
-            <span>V535.10.2</span>
+            <span>V535.10.10</span>
         </div>
         <div class="flex flex-col items-center text-center">
             <div class="w-20 h-20 bg-primary/10 rounded-2xl border border-primary/20 flex items-center justify-center text-primary mb-4 shadow-xl shadow-primary/5">

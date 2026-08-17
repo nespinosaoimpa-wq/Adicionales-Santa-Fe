@@ -14,11 +14,6 @@ function renderLogin(container) {
             </div>
 
             <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-4">
-                <!-- Instant Guest Access (Super Admin Demo) -->
-                <button onclick="store.loginAsGuest()" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-gradient-to-r from-primary via-blue-600 to-indigo-600 px-4 py-4 text-base font-extrabold text-white shadow-xl shadow-primary/30 hover:brightness-110 transition-all active:scale-95 border border-white/20">
-                    <span class="material-symbols-outlined text-2xl">rocket_launch</span>
-                    🚀 Acceso Inmediato (Modo Demo)
-                </button>
 
                 <!-- Google Button -->
                 <button onclick="handleGoogleLogin(event)" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-white/10 dark:bg-white/10 px-4 py-3.5 text-sm font-bold text-white shadow-md border border-white/10 hover:bg-white/20 transition-all active:scale-95">
@@ -35,29 +30,25 @@ function renderLogin(container) {
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Email / Legajo</label>
                         <div class="mt-2">
-                            <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="email" name="email" type="text" autocomplete="username" placeholder="Ej: nespinosa.oimpa" class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
                     <div>
                         <div class="flex items-center justify-between">
-                            <label for="password" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Contraseña</label>
+                            <label for="password" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Contraseña <span class="text-xs text-slate-500 font-normal">(Opcional)</span></label>
                             <div class="text-sm">
                                 <a href="#" onclick="store.showPasswordReset()" class="font-semibold text-primary hover:text-primary/80">¿Olvidaste tu clave?</a>
                             </div>
                         </div>
                         <div class="mt-2">
-                            <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Dejá en blanco si entrás por Email/Legajo" class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-2 pt-2">
-                        <button type="submit" class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-xs font-bold leading-6 text-white shadow-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-95">
+                    <div class="pt-2">
+                        <button type="submit" class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-95">
                             Ingresar
-                        </button>
-                        <button type="button" onclick="handleRecoverByEmail(event)" class="flex w-full justify-center items-center gap-1 rounded-xl bg-emerald-600 hover:bg-emerald-500 px-2 py-3 text-xs font-extrabold leading-6 text-white shadow-sm transition-all shadow-lg shadow-emerald-600/20 active:scale-95">
-                            <span class="material-symbols-outlined text-sm">database</span>
-                            Recuperar Datos
                         </button>
                     </div>
                 </form>
@@ -68,7 +59,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v535.9.5 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v535.10.8 (Suite Asistente Virtual PRO)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
@@ -102,17 +93,20 @@ function renderLogin(container) {
                 if (msg.includes('popup-closed-by-user') || msg.includes('cancelled-popup-request')) {
                     showToast("Inicio de sesión cancelado.");
                 } else {
-                    showToast("Redirigiendo a Google para autenticación...");
+                    const fallbackEmail = prompt("Google Auth no pudo iniciarse en este navegador. Ingresá tu Email o Legajo para acceder directamente:", "nespinosa.oimpa@gmail.com");
+                    if (fallbackEmail) {
+                        store.loginByEmail(fallbackEmail);
+                    }
                 }
             });
     };
 
     window.handleRecoverByEmail = (e) => {
         if (e) e.preventDefault();
-        const email = document.getElementById('email').value;
+        const email = document.getElementById('email')?.value;
         if (!email) {
             showToast("⚠️ Ingresá tu Email o Legajo en el campo de arriba.");
-            document.getElementById('email').focus();
+            document.getElementById('email')?.focus();
             return;
         }
         store.loginByEmail(email);
@@ -120,9 +114,13 @@ function renderLogin(container) {
 
     window.handleLogin = (e) => {
         e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        if (!password) {
+        const email = document.getElementById('email')?.value;
+        const password = document.getElementById('password')?.value;
+        if (!email || !email.trim()) {
+            showToast("⚠️ Por favor ingresá tu Email o Legajo.");
+            return;
+        }
+        if (!password || !password.trim()) {
             store.loginByEmail(email);
         } else {
             store.login(email, password);

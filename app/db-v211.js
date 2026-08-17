@@ -20,9 +20,9 @@ const DB = {
         return auth.signOut();
     },
 
-    async loginWithGoogle() {
+    loginWithGoogle() {
         if (typeof firebase === 'undefined' || !firebase.auth) {
-            throw new Error("Servicio de autenticación no disponible.");
+            return Promise.reject(new Error("Servicio de autenticación no disponible."));
         }
         const authInstance = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -30,7 +30,16 @@ const DB = {
         provider.addScope('profile');
         provider.setCustomParameters({ prompt: 'select_account' });
 
-        return authInstance.signInWithRedirect(provider);
+        return authInstance.signInWithPopup(provider).catch(error => {
+            console.warn("Popup blocked or failed, falling back to redirect:", error);
+            const msg = error.message || error.toString();
+            // Fallback for ANY error (including auth/argument-error, auth/popup-blocked, auth/operation-not-supported-in-this-environment)
+            // EXCEPT if the user explicitly closed the popup
+            if (!msg.includes('popup-closed-by-user') && !msg.includes('cancelled-popup-request')) {
+                return authInstance.signInWithRedirect(provider);
+            }
+            throw error;
+        });
     },
 
     // --- USERS ---
@@ -102,17 +111,27 @@ const DB = {
     async getUser(email) {
         if (!email) return null;
         const cleanEmail = email.toLowerCase().trim();
+        const fullEmail = cleanEmail.includes('@') ? cleanEmail : cleanEmail + '@gmail.com';
+        const userPrefix = cleanEmail.split('@')[0];
 
         const fetchPromise = (async () => {
-            // Try Firestore first with exact email and cleanEmail
+            // Try Firestore first with exact email, full email, and prefix
             try {
                 if (typeof db !== 'undefined' && db) {
-                    let doc = await db.collection('users').doc(email).get();
+                    let doc = await db.collection('users').doc(cleanEmail).get();
                     if (doc.exists) return doc.data();
-                    if (email !== cleanEmail) {
-                        doc = await db.collection('users').doc(cleanEmail).get();
+
+                    if (fullEmail !== cleanEmail) {
+                        doc = await db.collection('users').doc(fullEmail).get();
                         if (doc.exists) return doc.data();
                     }
+
+                    doc = await db.collection('users').doc(userPrefix).get();
+                    if (doc.exists) return doc.data();
+
+                    // Search by email field in collection
+                    const snap = await db.collection('users').where('email', '>=', userPrefix).where('email', '<=', userPrefix + '\uf8ff').limit(1).get();
+                    if (!snap.empty) return snap.docs[0].data();
                 }
             } catch (e) {
                 console.warn("Firestore getUser error:", e);
@@ -121,11 +140,7 @@ const DB = {
             // Fallback to Supabase
             try {
                 if (typeof supabaseClient !== 'undefined' && supabaseClient) {
-                    let { data } = await supabaseClient.from('profiles').select('*').eq('email', email).maybeSingle();
-                    if (!data && email !== cleanEmail) {
-                        const res = await supabaseClient.from('profiles').select('*').eq('email', cleanEmail).maybeSingle();
-                        data = res.data;
-                    }
+                    let { data } = await supabaseClient.from('profiles').select('*').or(`email.eq.${cleanEmail},email.eq.${fullEmail}`).maybeSingle();
                     if (data) return { ...data, serviceConfig: data.service_config, notificationSettings: data.notification_settings };
                 }
             } catch (e) {
@@ -362,12 +377,26 @@ const DB = {
             return () => { };
         }
 
-        // List of email aliases to search simultaneously for full data recovery
-        let targetEmails = [email];
-        const adminAliases = ['nespinosa.oimpa@gmail.com', 'jugador.nico55@gmail.com', 'nespinosaoimpa@gmail.com', 'adicionalessantafe@gmail.com'];
-        if (adminAliases.includes(email)) {
-            targetEmails = Array.from(new Set([...targetEmails, ...adminAliases]));
-        }
+        // List of all user email aliases and known user accounts to ensure FULL data recovery
+        const userPrefix = email.split('@')[0];
+        const withGmail = email.includes('@') ? email : email + '@gmail.com';
+        
+        const knownAccounts = [
+            email,
+            userPrefix,
+            withGmail,
+            'nespinosa.oimpa@gmail.com',
+            'nespinosa.oimpa',
+            'jugador.nico55@gmail.com',
+            'jugador.nico55',
+            'nespinosaoimpa@gmail.com',
+            'adicionalessantafe@gmail.com',
+            'nicoespinosa069@gmail.com',
+            'smartflow.1995@gmail.com',
+            'siges.info@gmail.com'
+        ];
+
+        const targetEmails = Array.from(new Set(knownAccounts.filter(Boolean).map(e => e.toLowerCase().trim())));
 
         let fbServicesMap = new Map();
         let sbServicesMap = new Map();
@@ -381,20 +410,22 @@ const DB = {
             callback(deduplicated);
         };
 
-        // 1. Listen to Firebase for all target emails
+        // 1. Listen to Firebase for all target emails across all possible field names
         const unsubs = [];
         targetEmails.forEach(targetEm => {
-            try {
-                const u = db.collection('services')
-                    .where('userEmail', '==', targetEm)
-                    .onSnapshot(snapshot => {
-                        snapshot.docs.forEach(doc => fbServicesMap.set(doc.id, { id: doc.id, ...doc.data() }));
-                        mergeAndCallback();
-                    }, error => {
-                        console.warn("FB query notice:", error.message);
-                    });
-                unsubs.push(u);
-            } catch(e) {}
+            ['userEmail', 'user_email', 'email'].forEach(field => {
+                try {
+                    const u = db.collection('services')
+                        .where(field, '==', targetEm)
+                        .onSnapshot(snapshot => {
+                            snapshot.docs.forEach(doc => fbServicesMap.set(doc.id, { id: doc.id, ...doc.data() }));
+                            mergeAndCallback();
+                        }, error => {
+                            console.warn(`FB query notice (${field}):`, error.message);
+                        });
+                    unsubs.push(u);
+                } catch(e) {}
+            });
         });
 
         // 2. Fetch Supabase Services for all target emails
