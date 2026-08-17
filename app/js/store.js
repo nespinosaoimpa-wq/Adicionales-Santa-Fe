@@ -353,7 +353,7 @@ window.store = {
     async loginAsGuest() {
         this.user = {
             uid: 'demo_guest_user_' + Date.now(),
-            email: 'nespinosa.oimpa@santafe.gov.ar',
+            email: 'demo.oficial@santafe.gov.ar',
             name: 'Oficial Demo (Super Admin)',
             role: 'admin',
             isSuperAdmin: true,

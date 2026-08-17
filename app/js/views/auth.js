@@ -33,7 +33,7 @@ function renderLogin(container) {
                     <div>
                         <label for="email" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Email / Legajo</label>
                         <div class="mt-2">
-                            <input id="email" name="email" type="text" autocomplete="username" placeholder="Ej: nespinosa.oimpa" class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="email" name="email" type="text" autocomplete="username" placeholder="Ej: juan.perez" class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
@@ -62,7 +62,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v535.10.17 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v535.10.19 (Suite Asistente Virtual PRO)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
