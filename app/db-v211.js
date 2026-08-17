@@ -30,15 +30,17 @@ const DB = {
         provider.addScope('profile');
         provider.setCustomParameters({ prompt: 'select_account' });
 
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || (window.innerWidth <= 768);
+
+        if (isMobile) {
+            console.log("📱 Mobile device detected: Using signInWithRedirect for Google Auth");
+            return authInstance.signInWithRedirect(provider);
+        }
+
+        console.log("💻 Desktop device detected: Using signInWithPopup for Google Auth");
         return authInstance.signInWithPopup(provider).catch(error => {
             console.warn("Popup blocked or failed, falling back to redirect:", error);
-            const msg = error.message || error.toString();
-            // Fallback for ANY error (including auth/argument-error, auth/popup-blocked, auth/operation-not-supported-in-this-environment)
-            // EXCEPT if the user explicitly closed the popup
-            if (!msg.includes('popup-closed-by-user') && !msg.includes('cancelled-popup-request')) {
-                return authInstance.signInWithRedirect(provider);
-            }
-            throw error;
+            return authInstance.signInWithRedirect(provider);
         });
     },
 

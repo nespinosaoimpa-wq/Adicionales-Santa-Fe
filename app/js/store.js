@@ -558,16 +558,23 @@ window.store = {
             };
 
             const safetyTimeout = setTimeout(() => {
-                console.warn("⚠️ store.init auth observer timed out (2s fallback)");
+                console.warn("⚠️ store.init auth observer timed out (10s fallback)");
                 this.authInitialized = true;
                 finishResolve();
                 if (window.router && window.router.initialized) router.handleRoute();
-            }, 2000);
+            }, 10000);
 
             auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .catch((e) => console.error("Persistence Error:", e))
-                .then(() => {
-                    auth.getRedirectResult().catch(err => console.warn("Redirect result notice:", err));
+                .then(async () => {
+                    try {
+                        const redirectResult = await auth.getRedirectResult();
+                        if (redirectResult && redirectResult.user) {
+                            console.log("✅ Google Auth Redirect Successful:", redirectResult.user.email);
+                        }
+                    } catch(err) {
+                        console.warn("Redirect result notice:", err);
+                    }
                     this.unsub = auth.onAuthStateChanged(async user => {
                         if (user) {
                             console.log("🔐 User Logged In:", user.email);
