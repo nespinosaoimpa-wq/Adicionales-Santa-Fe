@@ -59,7 +59,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v535.10.15 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v535.10.16 (Suite Asistente Virtual PRO)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
@@ -80,16 +80,24 @@ function renderLogin(container) {
         }
 
         store.loginWithGoogle()
-            .then(() => {
+            .then((userCred) => {
+                console.log("✅ Google Auth Completed:", userCred?.user?.email);
                 showToast("¡Bienvenido!");
+                if (window.router) {
+                    window.router.navigateTo('#agenda');
+                }
             })
             .catch(e => {
                 if (btn) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                console.error("Google auth notice:", e);
-                showToast("Procesando inicio de sesión con Google...");
+                const msg = e ? (e.message || e.toString()) : "";
+                if (msg.includes('popup-closed-by-user')) {
+                    console.log("User closed Google popup");
+                } else {
+                    console.warn("Google auth notice:", e);
+                }
             });
     };
 
