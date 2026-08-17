@@ -20,6 +20,9 @@ function renderLogin(container) {
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
                     Continuar con Google
                 </button>
+                <p class="text-[11px] text-center text-slate-400 px-2 leading-relaxed">
+                    💡 <b>Celulares:</b> Si Google se traba o vuelve al inicio, escribe tu Email/Legajo abajo y toca "Ingresar" (dejando la contraseña en blanco) para entrar directo.
+                </p>
 
                 <div class="relative my-2">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>

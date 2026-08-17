@@ -27,5 +27,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
-          cname: adicionalesantafe.com.ar
+          cname: adicionalessantafe.com.ar
           force_orphan: true
