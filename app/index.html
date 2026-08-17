@@ -76,7 +76,7 @@
         } catch(e) {}
 
         // Dynamic PWA Cache Buster & Auto-Updater
-        const CURRENT_VERSION = 'v535.10.10';
+        const CURRENT_VERSION = 'v535.10.11';
         try {
             fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
                 .then(res => res.json())
@@ -161,9 +161,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-10-10.js?v=535.10.10')
+                navigator.serviceWorker.register('./sw-v535-10-11.js?v=535.10.11')
                     .then(registration => {
-                        console.log('ServiceWorker v535.10.10 registrado con éxito: ', registration.scope);
+                        console.log('ServiceWorker v535.10.11 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {
@@ -287,7 +287,7 @@
     <div id="fallback-splash" class="fixed inset-0 bg-[#0a0c12] z-[9999] flex flex-col justify-between p-6 pointer-events-none transition-opacity duration-500 opacity-0 hidden">
         <div class="flex justify-between items-center text-xs text-slate-500 font-mono">
             <span>SANTA FE POLICÍA</span>
-            <span>V535.10.10</span>
+            <span>V535.10.11</span>
         </div>
         <div class="flex flex-col items-center text-center">
             <div class="w-20 h-20 bg-primary/10 rounded-2xl border border-primary/20 flex items-center justify-center text-primary mb-4 shadow-xl shadow-primary/5">
