@@ -17,6 +17,15 @@ async function renderAdmin(container) {
     let reviewsMap = new Map(); // id -> review
     let reviewsLoaded = false;
 
+    // Load initial Gemini status
+    if (window.adminGeminiApiKeyExists === undefined) {
+        window.adminGeminiApiKeyExists = false;
+        DB.getGlobalSetting('geminiApiKey').then(key => {
+            window.adminGeminiApiKeyExists = !!key;
+            updateUI();
+        });
+    }
+
     window._showAvatarModal = (avatarUrl, name, email) => {
         const overlay = document.createElement('div');
         overlay.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-6';
@@ -379,6 +388,28 @@ async function renderAdmin(container) {
                     </form>
                 </div>
 
+                <!-- Global IA Configuration (Gemini API Key) -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-purple-400">api</span>
+                            Clave Global de Gemini AI (Tutor Academia)
+                        </h3>
+                        <span class="text-[10px] font-black uppercase px-2.5 py-1 rounded-full ${window.adminGeminiApiKeyExists ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-red-500/10 text-red-400 border border-red-500/20'}">
+                            ${window.adminGeminiApiKeyExists ? 'CONFIGURADA' : 'NO CONFIGURADA'}
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Configurá la API Key de Google Gemini global del proyecto para que todos los oficiales tengan acceso automático al Tutor IA de la Academia sin necesidad de ingresar una clave personal.
+                    </p>
+                    <div class="flex gap-4 items-center">
+                        <input type="password" id="adminGeminiInput" placeholder="${window.adminGeminiApiKeyExists ? '••••••••••••••••••••••••' : 'Clave de API de Gemini (AIzaSy...)'}" class="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-2xl text-slate-950 dark:text-white text-xs outline-none focus:border-purple-500 transition-all">
+                        <button onclick="window.saveGlobalGeminiKey()" class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-2xl text-xs transition-all active:scale-95 shadow-lg shadow-purple-500/20">
+                            Guardar Clave
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Active Banners -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
                     <div class="flex items-center justify-between mb-6">
@@ -557,6 +588,28 @@ async function renderAdmin(container) {
             if (window.location.hash === '#admin') router.handleRoute();
         } catch(e) {
             showToast("Error al aprobar pago: " + e.message);
+        }
+    };
+
+    window.saveGlobalGeminiKey = async () => {
+        const inputEl = document.getElementById('adminGeminiInput');
+        const key = inputEl ? inputEl.value.trim() : "";
+        if (!key) {
+            alert("Por favor ingresa una clave de API de Gemini válida.");
+            return;
+        }
+
+        if (!confirm("¿Confirmas guardar esta clave de Gemini como la predeterminada del sistema?")) return;
+
+        try {
+            await DB.saveGlobalSetting('geminiApiKey', key);
+            showToast("✅ Clave API Global de Gemini guardada");
+            window.adminGeminiApiKeyExists = true;
+            window.globalSystemConfig = window.globalSystemConfig || {};
+            window.globalSystemConfig.geminiApiKey = key;
+            updateUI();
+        } catch(e) {
+            showToast("❌ Error al guardar la clave: " + e.message);
         }
     };
 

@@ -531,6 +531,7 @@ window.store = {
 
         // Fetch dynamic holidays from Supabase (Improvement #1)
         this.fetchHolidays();
+        this.fetchGlobalConfig();
 
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());
@@ -912,6 +913,17 @@ window.store = {
                 console.log("📅 Feriados dinámicos cargados exitosamente desde la nube.");
             } else {
                 console.log("📅 Feriados dinámicos no encontrados, usando calendario local (fallback).");
+            }
+        }
+    },
+
+    async fetchGlobalConfig() {
+        if (typeof DB !== 'undefined' && DB.getGlobalSetting) {
+            const key = await DB.getGlobalSetting('geminiApiKey');
+            if (key) {
+                window.globalSystemConfig = window.globalSystemConfig || {};
+                window.globalSystemConfig.geminiApiKey = key;
+                console.log("ℹ️ Clave global de Gemini AI cargada desde la base de datos.");
             }
         }
     },

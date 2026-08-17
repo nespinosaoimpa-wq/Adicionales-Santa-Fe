@@ -172,7 +172,8 @@ function renderAcademia(container) {
 
     // --- TAB 2: SIMULADOR DE EXAMEN MULTIPLE CHOICE ---
     function renderExamTab(hierarchy, isPro) {
-        const questions = hierarchy.exams;
+        const isCustom = !!window.customAIQuestions;
+        const questions = isCustom ? window.customAIQuestions : hierarchy.exams;
         const total = questions.length;
         let score = 0;
         let answeredCount = Object.keys(window.currentExamAnswers).length;
@@ -187,11 +188,77 @@ function renderAcademia(container) {
 
         return `
             <div class="space-y-4">
+                ${!isCustom ? `
+                    <!-- Generador de Examen IA (NotebookLM Style) -->
+                    <div class="glass-card p-5 rounded-3xl border border-purple-500/20 bg-gradient-to-br from-slate-900 to-indigo-950 text-white shadow-xl space-y-4">
+                        <div class="flex items-center gap-2">
+                            <div class="size-8 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-base">psychology</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-black text-white uppercase tracking-wider">Evaluador Dinámico IA</h3>
+                                <p class="text-[9px] text-purple-300 font-bold uppercase tracking-widest">Estilo Google NotebookLM 🧠</p>
+                            </div>
+                        </div>
+                        <p class="text-[11px] text-slate-300 leading-relaxed">
+                            Generá un cuestionario de opción múltiple instantáneo y único a partir del material oficial de ascenso de Santa Fe.
+                        </p>
+                        <div class="space-y-3 pt-1 text-xs">
+                            <div>
+                                <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Materia o Tema a Evaluar</label>
+                                <select id="iaExamTopic" class="w-full px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500">
+                                    <option value="Manual Oficial ISEP 2026 (Oficial de Policía - Escalafón General - Temas de Liderazgo, Armamento y Disciplinario)">Manual Oficial ISEP 2026 (Completo)</option>
+                                    <option value="Ley de Personal Policial N° 12.521 y Régimen Disciplinario Decreto 461/15">Ley de Personal 12.521 + Decreto 461/15</option>
+                                    <option value="Ley de Adicionales & Jubilaciones N° 14.283 y su impacto operativo">Ley de Adicionales N° 14.283 (Reforma)</option>
+                                    <option value="Manual de Armamiento y Tiro MIRAF Policial y reglas de seguridad">Manual de Armamento y Tiro MIRAF</option>
+                                    <option value="Código Procesal Penal Ley N° 12.734 de Santa Fe (Artículos aplicables al personal preventor de calle)">Código Procesal Penal Ley 12.734</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Preguntas</label>
+                                    <select id="iaExamQty" class="w-full px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500">
+                                        <option value="5">5 Preguntas</option>
+                                        <option value="10">10 Preguntas</option>
+                                        <option value="15">15 Preguntas</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Dificultad</label>
+                                    <select id="iaExamDiff" class="w-full px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500">
+                                        <option value="Intermedia (Nivel estándar concurso)">Intermedio</option>
+                                        <option value="Avanzada (Examen de Ascenso Oficial ISEP)">Avanzado</option>
+                                        <option value="Facilitada (Estudio inicial)">Inicial</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button onclick="window.generateAIExam(event)" class="w-full py-3 mt-1 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-purple-500/20 active:scale-95 transition-all flex items-center justify-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm animate-pulse">psychology</span>
+                                Generar Examen con IA
+                            </button>
+                        </div>
+                    </div>
+                ` : `
+                    <!-- IA Exam Active Banner -->
+                    <div class="p-4 rounded-3xl border border-purple-500/30 bg-purple-950/20 text-purple-300 flex items-center justify-between shadow-xl">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-purple-400">psychology</span>
+                            <div>
+                                <p class="text-[9px] font-black uppercase tracking-wider">Modo Evaluador Dinámico</p>
+                                <p class="text-xs font-bold text-white">Examen IA Generado</p>
+                            </div>
+                        </div>
+                        <button onclick="window.resetToOfficialExam()" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-white border border-white/10 rounded-xl text-[9px] font-bold uppercase transition-all">
+                            Volver al Programa
+                        </button>
+                    </div>
+                `}
+
                 <!-- Exam Header Banner -->
                 <div class="glass-card p-4 rounded-3xl border border-white/5 flex items-center justify-between">
                     <div>
-                        <p class="text-[9px] font-black uppercase text-slate-400 tracking-wider">Simulador Concurso ISEP</p>
-                        <p class="text-xs font-bold text-slate-900 dark:text-white">${total} Preguntas Oficiales</p>
+                        <p class="text-[9px] font-black uppercase text-slate-400 tracking-wider">${isCustom ? 'Autoevaluación con IA' : 'Simulador Concurso ISEP'}</p>
+                        <p class="text-xs font-bold text-slate-900 dark:text-white">${total} Preguntas</p>
                     </div>
                     ${window.examSubmitted ? `
                         <div class="text-right">
@@ -265,9 +332,16 @@ function renderAcademia(container) {
                             Entregar y Calificar Examen
                         </button>
                     ` : `
-                        <button onclick="window.resetAcademyExam()" class="w-full py-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider active:scale-95 transition-all flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-sm">restart_alt</span> Reiniciar Simulador
-                        </button>
+                        <div class="space-y-2">
+                            <button onclick="window.resetAcademyExam()" class="w-full py-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider active:scale-95 transition-all flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-sm">restart_alt</span> Reiniciar Simulador
+                            </button>
+                            ${isCustom ? `
+                                <button onclick="window.resetToOfficialExam()" class="w-full py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs uppercase tracking-wider active:scale-95 transition-all">
+                                    Volver al Programa del Concurso
+                                </button>
+                            ` : ''}
+                        </div>
                     `}
                 </div>
             </div>
@@ -489,6 +563,86 @@ function renderAcademia(container) {
     }
 
     // --- ACTION HANDLERS ---
+    window.resetToOfficialExam = () => {
+        window.customAIQuestions = null;
+        window.currentExamAnswers = {};
+        window.examSubmitted = false;
+        container.innerHTML = getHTML();
+        initAds();
+    };
+
+    window.generateAIExam = async (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        
+        const topic = document.getElementById('iaExamTopic')?.value || "Manual ISEP 2026";
+        const qty = parseInt(document.getElementById('iaExamQty')?.value || "5", 10);
+        const difficulty = document.getElementById('iaExamDiff')?.value || "Intermedia";
+
+        // Show premium full screen loader
+        const overlay = document.createElement('div');
+        overlay.className = 'fixed inset-0 bg-[#0a0c12]/95 z-[9999] flex flex-col items-center justify-center p-6 text-center animate-fade-in';
+        overlay.innerHTML = `
+            <div class="relative w-24 h-24 mb-6">
+                <div class="absolute inset-0 rounded-full border-4 border-purple-500/20 animate-ping"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-t-purple-500 border-r-transparent border-b-transparent border-l-transparent animate-spin" style="animation-duration: 1s;"></div>
+                <div class="absolute inset-2 rounded-full border-4 border-purple-400/10"></div>
+                <div class="absolute inset-2 rounded-full border-4 border-b-purple-400 border-t-transparent border-r-transparent border-l-transparent animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+                <div class="absolute inset-0 flex items-center justify-center text-purple-400 font-black text-xs tracking-widest animate-pulse">
+                    AI
+                </div>
+            </div>
+            <h3 class="text-lg font-black text-white leading-tight mb-2">Generador de Evaluaciones Centinela IA</h3>
+            <p class="text-xs text-slate-400 max-w-xs leading-relaxed animate-pulse">
+                Leyendo doctrina policial, estructurando preguntas y configurando simulador interactivo para la materia:<br>
+                <strong class="text-purple-300">${topic}</strong>
+            </p>
+        `;
+        document.body.appendChild(overlay);
+
+        const systemInstruction = `Sos un software evaluador de exámenes académicos del ISEP (Instituto de Seguridad Pública de Santa Fe, Argentina). Tu tarea es generar exámenes de opción múltiple con 4 opciones. Debes responder EXCLUSIVAMENTE con un array JSON válido, sin textos introductorios, sin explicaciones externas, y sin bloques de código markdown (NO uses \`\`\`json ni \`\`\`). El formato debe ser estrictamente un array de objetos con esta estructura de ejemplo:
+[
+  {
+    "id": "ai-q-1",
+    "question": "Texto de la pregunta...",
+    "options": ["Opción A", "Opción B", "Opción C", "Opción D"],
+    "correctIndex": 1,
+    "explanation": "Fundamentación legal con artículos o páginas del manual..."
+  }
+]`;
+
+        const userPrompt = `Generá un examen de exactamente ${qty} preguntas sobre la materia: "${topic}".
+Dificultad requerida: ${difficulty}.
+Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal argentina de Santa Fe. Asegúrate de retornar un JSON válido estructurado sin caracteres extraños de markdown.`;
+
+        try {
+            const answer = await window.callGeminiAPI(userPrompt, systemInstruction);
+            overlay.remove();
+
+            // Sanitize response to pull only JSON array
+            let cleanJSON = answer.trim();
+            if (cleanJSON.startsWith('```')) {
+                cleanJSON = cleanJSON.replace(/^```json|^```|```$/g, '').trim();
+            }
+
+            const questions = JSON.parse(cleanJSON);
+            if (!Array.isArray(questions) || questions.length === 0) {
+                throw new Error("El formato devuelto no es un array válido.");
+            }
+
+            window.customAIQuestions = questions;
+            window.currentExamAnswers = {};
+            window.examSubmitted = false;
+            
+            showToast("✨ Examen dinámico con IA generado con éxito");
+            container.innerHTML = getHTML();
+            initAds();
+        } catch(err) {
+            overlay.remove();
+            console.error("Failed to generate AI exam:", err);
+            alert("Hubo un problema al generar el examen con Gemini IA. Por favor, verifica tu clave de API y reintenta.\n\nError: " + err.message);
+        }
+    };
+
     window.askGeminiTutor = (query) => {
         const input = document.getElementById('gemini-tutor-input');
         if (input) {

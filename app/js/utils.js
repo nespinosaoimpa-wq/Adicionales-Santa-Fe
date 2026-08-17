@@ -508,7 +508,7 @@ window.showDonationModal = () => {
 
 // --- Google Gemini AI API Integration ---
 window.getGeminiAPIKey = function () {
-    return localStorage.getItem('gemini_api_key') || store.user?.geminiApiKey || "";
+    return localStorage.getItem('gemini_api_key') || store.user?.geminiApiKey || window.globalSystemConfig?.geminiApiKey || "";
 };
 
 window.showGeminiKeyModal = function () {

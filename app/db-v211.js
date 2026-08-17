@@ -1066,6 +1066,51 @@ const DB = {
         });
     },
 
+    // --- GLOBAL CONFIGURATION MANAGEMENT ---
+    async saveGlobalSetting(key, value) {
+        // Save to Firestore config/system
+        try {
+            await db.collection('config').doc('system').set({ [key]: value }, { merge: true });
+            console.log(`✅ Global setting '${key}' saved to Firestore.`);
+        } catch(e) {
+            console.warn("Firestore saveGlobalSetting warning:", e);
+        }
+
+        // Save to Supabase system_config
+        try {
+            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                await supabaseClient.from('system_config').upsert({ key, value });
+                console.log(`✅ Global setting '${key}' saved to Supabase.`);
+            }
+        } catch(e) {
+            console.warn("Supabase saveGlobalSetting warning:", e);
+        }
+    },
+
+    async getGlobalSetting(key) {
+        // Try Firestore first
+        try {
+            const doc = await db.collection('config').doc('system').get();
+            if (doc.exists && doc.data() && doc.data()[key] !== undefined) {
+                return doc.data()[key];
+            }
+        } catch(e) {
+            console.warn("Firestore getGlobalSetting warning:", e);
+        }
+
+        // Fallback to Supabase
+        try {
+            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                const { data } = await supabaseClient.from('system_config').select('value').eq('key', key).maybeSingle();
+                if (data) return data.value;
+            }
+        } catch(e) {
+            console.warn("Supabase getGlobalSetting warning:", e);
+        }
+
+        return null;
+    },
+
     // --- CONFIGURATION / DATA ---
     async getHolidays() {
         try {
