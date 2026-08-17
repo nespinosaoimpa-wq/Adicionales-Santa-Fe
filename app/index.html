@@ -76,7 +76,7 @@
         } catch(e) {}
 
         // Dynamic PWA Cache Buster & Auto-Updater
-        const CURRENT_VERSION = 'v535.10.14';
+        const CURRENT_VERSION = 'v535.10.15';
         try {
             fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
                 .then(res => res.json())
@@ -161,9 +161,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-10-14.js?v=535.10.14')
+                navigator.serviceWorker.register('./sw-v535-10-15.js?v=535.10.15')
                     .then(registration => {
-                        console.log('ServiceWorker v535.10.14 registrado con éxito: ', registration.scope);
+                        console.log('ServiceWorker v535.10.15 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {
@@ -287,7 +287,7 @@
     <div id="fallback-splash" class="fixed inset-0 bg-[#0a0c12] z-[9999] flex flex-col justify-between p-6 pointer-events-none transition-opacity duration-500 opacity-0 hidden">
         <div class="flex justify-between items-center text-xs text-slate-500 font-mono">
             <span>SANTA FE POLICÍA</span>
-            <span>V535.10.14</span>
+            <span>V535.10.15</span>
         </div>
         <div class="flex flex-col items-center text-center">
             <div class="w-20 h-20 bg-primary/10 rounded-2xl border border-primary/20 flex items-center justify-center text-primary mb-4 shadow-xl shadow-primary/5">
@@ -333,42 +333,42 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
     <!-- Application Logic -->
-    <script src="db-v211.js?v=535.10.14" defer></script>
-    <script src="js/utils.js?v=535.10.14" defer></script>
-    <script src="js/components.js?v=535.10.14" defer></script>
-    <script src="js/store.js?v=535.10.14" defer></script>
-    <script src="js/router.js?v=535.10.14" defer></script>
-    <script src="js/data/directory.js?v=535.10.14" defer></script>
-    <script src="js/data/resources.js?v=535.10.14" defer></script>
-    <script src="js/data/academy_data.js?v=535.10.14" defer></script>
-    <script src="js/views/auth.js?v=535.10.14" defer></script>
+    <script src="db-v211.js?v=535.10.15" defer></script>
+    <script src="js/utils.js?v=535.10.15" defer></script>
+    <script src="js/components.js?v=535.10.15" defer></script>
+    <script src="js/store.js?v=535.10.15" defer></script>
+    <script src="js/router.js?v=535.10.15" defer></script>
+    <script src="js/data/directory.js?v=535.10.15" defer></script>
+    <script src="js/data/resources.js?v=535.10.15" defer></script>
+    <script src="js/data/academy_data.js?v=535.10.15" defer></script>
+    <script src="js/views/auth.js?v=535.10.15" defer></script>
 
-    <script src="js/views/legal.js?v=535.10.14" defer></script>
-    <script src="js/views/agenda.js?v=535.10.14" defer></script>
-    <script src="js/views/register.js?v=535.10.14" defer></script>
-    <script src="js/views/control_panel.js?v=535.10.14" defer></script>
-    <script src="js/views/financial.js?v=535.10.14" defer></script>
-    <script src="js/views/info_guia.js?v=535.10.14" defer></script>
-    <script src="js/views/profile.js?v=535.10.14" defer></script>
+    <script src="js/views/legal.js?v=535.10.15" defer></script>
+    <script src="js/views/agenda.js?v=535.10.15" defer></script>
+    <script src="js/views/register.js?v=535.10.15" defer></script>
+    <script src="js/views/control_panel.js?v=535.10.15" defer></script>
+    <script src="js/views/financial.js?v=535.10.15" defer></script>
+    <script src="js/views/info_guia.js?v=535.10.15" defer></script>
+    <script src="js/views/profile.js?v=535.10.15" defer></script>
 
-    <script src="js/views/stats.js?v=535.10.14" defer></script>
-    <script src="js/views/history.js?v=535.10.14" defer></script>
-    <script src="js/views/service_details.js?v=535.10.14" defer></script>
-    <script src="js/views/asistente.js?v=535.10.14" defer></script>
+    <script src="js/views/stats.js?v=535.10.15" defer></script>
+    <script src="js/views/history.js?v=535.10.15" defer></script>
+    <script src="js/views/service_details.js?v=535.10.15" defer></script>
+    <script src="js/views/asistente.js?v=535.10.15" defer></script>
 
     <!-- ── Módulos Asistente Operativo Policial PRO ── -->
-    <script src="js/views/actas.js?v=535.10.14" defer></script>
-    <script src="js/views/intervenciones.js?v=535.10.14" defer></script>
-    <script src="js/views/procedimiento.js?v=535.10.14" defer></script>
-    <script src="js/views/archivos.js?v=535.10.14" defer></script>
-    <script src="js/views/auditoria.js?v=535.10.14" defer></script>
-    <script src="js/views/iapos.js?v=535.10.14" defer></script>
-    <script src="js/views/academia.js?v=535.10.14" defer></script>
+    <script src="js/views/actas.js?v=535.10.15" defer></script>
+    <script src="js/views/intervenciones.js?v=535.10.15" defer></script>
+    <script src="js/views/procedimiento.js?v=535.10.15" defer></script>
+    <script src="js/views/archivos.js?v=535.10.15" defer></script>
+    <script src="js/views/auditoria.js?v=535.10.15" defer></script>
+    <script src="js/views/iapos.js?v=535.10.15" defer></script>
+    <script src="js/views/academia.js?v=535.10.15" defer></script>
 
-    <script src="js/views/admin.js?v=535.10.14" defer></script>
-    <script src="js/views/diagnostics.js?v=535.10.14" defer></script>
-    <script src="js/views/onboarding.js?v=535.10.14" defer></script>
-    <script src="app-v211.js?v=535.10.14" defer></script>
+    <script src="js/views/admin.js?v=535.10.15" defer></script>
+    <script src="js/views/diagnostics.js?v=535.10.15" defer></script>
+    <script src="js/views/onboarding.js?v=535.10.15" defer></script>
+    <script src="app-v211.js?v=535.10.15" defer></script>
 
 
     <!-- Cookie Consent Banner -->

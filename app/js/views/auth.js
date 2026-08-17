@@ -15,33 +15,16 @@ function renderLogin(container) {
 
             <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-sm space-y-4">
 
-                <!-- Instant One-Tap Direct Login for Nicolás -->
-                <div class="bg-primary/15 border border-primary/30 p-4 rounded-2xl text-center shadow-lg shadow-primary/5">
-                    <div class="flex items-center justify-center gap-1.5 text-primary text-xs font-bold mb-2">
-                        <span class="material-symbols-outlined text-base">bolt</span>
-                        <span>ACCESO RÁPIDO SIN CONTRASEÑA</span>
-                    </div>
-                    <div class="space-y-2">
-                        <button onclick="store.loginByEmail('nespinosa.oimpa@gmail.com')" type="button" class="w-full py-3 px-4 bg-primary hover:bg-primary/90 text-white font-bold text-sm rounded-xl shadow-md transition-all active:scale-95 flex items-center justify-center gap-2">
-                            <span class="material-symbols-outlined text-lg">account_circle</span>
-                            Ingresar como Nicolás (nespinosa.oimpa)
-                        </button>
-                        <button onclick="store.loginByEmail('jugador.nico55@gmail.com')" type="button" class="w-full py-2.5 px-4 bg-white/10 hover:bg-white/15 text-slate-200 font-semibold text-xs rounded-xl border border-white/10 transition-all active:scale-95 flex items-center justify-center gap-2">
-                            Ingresar como Nico (jugador.nico55)
-                        </button>
-                    </div>
-                </div>
-
-                <div class="relative my-2">
-                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>
-                    <div class="relative flex justify-center text-xs"><span class="bg-background-dark px-3 text-slate-400 font-medium">O por Google / Email</span></div>
-                </div>
-
-                <!-- Google Button -->
+                <!-- Primary Google Login Button -->
                 <button onclick="handleGoogleLogin(event)" type="button" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-white/10 dark:bg-white/10 px-4 py-3.5 text-sm font-bold text-white shadow-md border border-white/10 hover:bg-white/20 transition-all active:scale-95">
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
                     Continuar con Google
                 </button>
+
+                <div class="relative my-2">
+                    <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>
+                    <div class="relative flex justify-center text-xs"><span class="bg-background-dark px-3 text-slate-400 font-medium">O con tu email o legajo</span></div>
+                </div>
 
                 <form class="space-y-4" onsubmit="handleLogin(event)">
                     <div>
@@ -76,7 +59,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v535.10.14 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v535.10.15 (Suite Asistente Virtual PRO)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
@@ -93,7 +76,7 @@ function renderLogin(container) {
         const btn = (event && event.currentTarget) ? event.currentTarget : document.querySelector('button[onclick*="handleGoogleLogin"]');
         if (btn) {
             btn.disabled = true;
-            btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-slate-900 mx-auto"></div>';
+            btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
         }
 
         store.loginWithGoogle()
@@ -105,16 +88,8 @@ function renderLogin(container) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                console.error("Google auth error notice:", e);
-                let msg = e ? (e.message || e.toString()) : "";
-                if (msg.includes('popup-closed-by-user') || msg.includes('cancelled-popup-request')) {
-                    showToast("Inicio de sesión cancelado.");
-                } else {
-                    const fallbackEmail = prompt("Google Auth no pudo iniciarse en este navegador. Ingresá tu Email o Legajo para acceder directamente:", "nespinosa.oimpa@gmail.com");
-                    if (fallbackEmail) {
-                        store.loginByEmail(fallbackEmail);
-                    }
-                }
+                console.error("Google auth notice:", e);
+                showToast("Procesando inicio de sesión con Google...");
             });
     };
 
