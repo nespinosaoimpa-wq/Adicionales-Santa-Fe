@@ -642,13 +642,17 @@ window.store = {
 
                                 this.authInitialized = true;
                                 finishResolve();
-                                if (window.router && window.router.initialized) router.handleRoute();
-
+                                let lastServicesSignature = '';
                                 this.unsubscribeServices = DB.subscribeToServices(services => {
+                                    const signature = services.map(s => s.id + '_' + (s.updatedAt || s.date || '')).join(',');
+                                    const hasChanged = signature !== lastServicesSignature;
                                     this.services = services;
                                     if (this.checkNotifications) this.checkNotifications();
                                     this.scheduleShiftAlarms(); // Schedule push notifications for upcoming shifts
-                                    if (this.authInitialized && window.router && window.router.initialized) router.handleRoute();
+                                    if (hasChanged && this.authInitialized && window.router && window.router.initialized) {
+                                        lastServicesSignature = signature;
+                                        router.handleRoute();
+                                    }
                                 });
 
                                 this.unsubscribeAds = DB.subscribeToAds(ads => {
@@ -666,9 +670,15 @@ window.store = {
                                     }
                                 });
 
+                                let lastExpensesSignature = '';
                                 this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
+                                    const signature = expenses.map(e => e.id + '_' + (e.amount || '')).join(',');
+                                    const hasChanged = signature !== lastExpensesSignature;
                                     this.expenses = expenses;
-                                    if (window.location.hash === '#financial' && window.router && window.router.initialized) router.handleRoute();
+                                    if (hasChanged && window.location.hash === '#financial' && window.router && window.router.initialized) {
+                                        lastExpensesSignature = signature;
+                                        router.handleRoute();
+                                    }
                                 });
 
                                 if (this.checkNotifications) {
