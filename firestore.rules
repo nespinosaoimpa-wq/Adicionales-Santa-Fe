@@ -94,5 +94,11 @@ service cloud.firestore {
       allow read: if true;
       allow write: if isAdmin();
     }
+
+    // ── CONFIGURACIÓN GLOBAL: lectura pública, escritura solo admin ──
+    match /config/{configId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
   }
 }
