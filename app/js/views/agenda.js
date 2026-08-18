@@ -255,7 +255,7 @@ function generateCalendarGrid(year, month, selectedDate) {
         const dayServices = store.services.filter(s => s.date === dateStr);
         let dots = '';
         dayServices.slice(0, 3).forEach(s => {
-            const dotColor = s.type === 'Public' ? 'bg-primary' : (s.type === 'Private' ? 'bg-service-private' : 'bg-service-ospe');
+            const dotColor = s.type === 'Public' ? 'bg-primary' : (s.type === 'Private' ? 'bg-purple-500' : 'bg-amber-500');
             dots += `<div class="size-1 rounded-full ${dotColor}"></div>`;
         });
         if (dayServices.length > 3) {

@@ -400,13 +400,17 @@ const DB = {
         let fbServicesMap = new Map();
         let sbServicesMap = new Map();
 
+        let debounceTimeout;
         const mergeAndCallback = () => {
-            const unified = [...Array.from(fbServicesMap.values()), ...Array.from(sbServicesMap.values())];
-            const deduplicated = this._deduplicateUnified(unified);
-            deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                const unified = [...Array.from(fbServicesMap.values()), ...Array.from(sbServicesMap.values())];
+                const deduplicated = this._deduplicateUnified(unified);
+                deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
-            console.log(`📊 Hybrid Sync for ${email} (Targets: ${targetEmails.join(', ')}): ${fbServicesMap.size} (FB) + ${sbServicesMap.size} (SB) -> ${deduplicated.length} Total`);
-            callback(deduplicated);
+                console.log(`📊 Hybrid Sync for ${email} (Targets: ${targetEmails.join(', ')} - Debounced): ${fbServicesMap.size} (FB) + ${sbServicesMap.size} (SB) -> ${deduplicated.length} Total`);
+                callback(deduplicated);
+            }, 60);
         };
 
         // 1. Listen to Firebase for all target emails across all possible field names
@@ -448,6 +452,7 @@ const DB = {
         }
 
         return () => {
+            clearTimeout(debounceTimeout);
             unsubs.forEach(u => { if (typeof u === 'function') u(); });
         };
     },
