@@ -61,9 +61,223 @@ function renderAcademia(container) {
         return;
     }
 
+    function renderAcademyOnboarding(container) {
+        window.academySetupStep = window.academySetupStep || 1;
+        window.academyTempHierarchy = window.academyTempHierarchy || 'oficial-subinspector';
+        window.academyTempPlan = window.academyTempPlan || 'intensivo';
+        window.academyTempTime = window.academyTempTime || '30';
+
+        const totalSteps = 3;
+        const progressPct = Math.round((window.academySetupStep / totalSteps) * 100);
+
+        let stepContent = '';
+        if (window.academySetupStep === 1) {
+            stepContent = `
+                <div class="space-y-4">
+                    <div class="text-center mb-6">
+                        <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">¿Qué concurso estás rindiendo?</h2>
+                        <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-wider">Elegí tu jerarquía de ascenso</p>
+                    </div>
+                    <div class="space-y-2.5 max-h-[300px] overflow-y-auto pr-1 scrollbar-none">
+                        ${data.hierarchies.map(h => {
+                            const isSelected = window.academyTempHierarchy === h.id;
+                            return `
+                                <div onclick="window.selectOnboardingHierarchy('${h.id}')"
+                                    class="p-4 rounded-2xl border transition-all active:scale-[0.98] flex items-center justify-between cursor-pointer ${isSelected ? 'bg-gradient-to-r ' + h.color + '/15 to-slate-900 border-primary text-white shadow-lg' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10 dark:hover:bg-slate-900/40'}">
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-lg ${isSelected ? 'text-primary' : 'text-slate-500'}">${h.icon}</span>
+                                        <div>
+                                            <p class="text-xs font-black text-slate-900 dark:text-slate-100">${h.title}</p>
+                                            <p class="text-[9px] text-slate-400 mt-0.5">${h.subtitle}</p>
+                                        </div>
+                                    </div>
+                                    ${isSelected ? '<span class="material-symbols-outlined text-primary text-sm">check_circle</span>' : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        } else if (window.academySetupStep === 2) {
+            const plans = [
+                { id: 'intensivo', title: 'Plan Intensivo (Recomendado)', desc: 'Enfoque ágil basado en autoevaluaciones rápidas, simuladores oficiales de examen y tarjetas dinámicas (Flashcards).', icon: 'offline_bolt', color: 'from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30' },
+                { id: 'teorico', title: 'Plan Teórico Completo', desc: 'Enfoque clásico centrado en la lectura detallada de resúmenes de estudio, glosarios legislativos y descarga de manuales.', icon: 'auto_stories', color: 'from-blue-500/20 to-indigo-500/20 text-blue-400 border-blue-500/30' },
+                { id: 'practico', title: 'Plan Práctico / Operativo', desc: 'Enfoque procedimental enfocado en flujogramas interactivos, protocolos de actuación policial (armas, escena) y casos.', icon: 'shield', color: 'from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30' }
+            ];
+            stepContent = `
+                <div class="space-y-4">
+                    <div class="text-center mb-6">
+                        <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">¿Cuál es tu método de estudio?</h2>
+                        <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-wider">Elegí tu ruta de aprendizaje</p>
+                    </div>
+                    <div class="space-y-2.5">
+                        ${plans.map(p => {
+                            const isSelected = window.academyTempPlan === p.id;
+                            return `
+                                <div onclick="window.selectOnboardingPlan('${p.id}')"
+                                    class="p-4 rounded-2xl border transition-all active:scale-[0.98] flex items-start gap-4 cursor-pointer ${isSelected ? 'bg-gradient-to-r ' + p.color + ' to-slate-900 border-primary text-white shadow-lg' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10 dark:hover:bg-slate-900/40'}">
+                                    <div class="size-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                                        <span class="material-symbols-outlined text-lg">${p.icon}</span>
+                                    </div>
+                                    <div class="min-w-0">
+                                        <p class="text-xs font-black text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
+                                            ${p.title}
+                                            ${isSelected ? '<span class="material-symbols-outlined text-primary text-xs">check_circle</span>' : ''}
+                                        </p>
+                                        <p class="text-[9px] text-slate-400 leading-normal mt-1">${p.desc}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        } else if (window.academySetupStep === 3) {
+            const times = [
+                { id: '15', title: '15 Minutos al día (Plan Express)', desc: 'Perfecto para repasar en guardias, recorridos o momentos de descanso.', badge: 'Rápido', icon: 'alarm_on' },
+                { id: '30', title: '30 Minutos al día (Plan Equilibrado)', desc: 'El ritmo ideal sugerido para cubrir todo el temario oficial del ISEP.', badge: 'Sugerido', icon: 'query_builder' },
+                { id: '60', title: '1 Hora o más al día (Inmersión Total)', desc: 'Para oficiales que buscan el mejor promedio en el orden de mérito.', badge: 'Foco', icon: 'fitness_center' }
+            ];
+            stepContent = `
+                <div class="space-y-4">
+                    <div class="text-center mb-6">
+                        <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">¿De cuánto tiempo disponés?</h2>
+                        <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-wider">Ajustaremos los repasos a tu tiempo libre</p>
+                    </div>
+                    <div class="space-y-2.5">
+                        ${times.map(t => {
+                            const isSelected = window.academyTempTime === t.id;
+                            return `
+                                <div onclick="window.selectOnboardingTime('${t.id}')"
+                                    class="p-4 rounded-2xl border transition-all active:scale-[0.98] flex items-start gap-4 cursor-pointer ${isSelected ? 'bg-gradient-to-r from-purple-500/20 to-slate-900 border-primary text-white shadow-lg' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10 dark:hover:bg-slate-900/40'}">
+                                    <div class="size-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                                        <span class="material-symbols-outlined text-lg text-purple-400">${t.icon}</span>
+                                    </div>
+                                    <div class="min-w-0 flex-1">
+                                        <div class="flex items-center justify-between">
+                                            <p class="text-xs font-black text-slate-900 dark:text-slate-100">${t.title}</p>
+                                            <span class="px-2 py-0.5 rounded-full text-[7px] font-black uppercase ${isSelected ? 'bg-primary text-white' : 'bg-white/10 text-slate-400'}">${t.badge}</span>
+                                        </div>
+                                        <p class="text-[9px] text-slate-400 leading-normal mt-1">${t.desc}</p>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        container.innerHTML = `
+            <!-- Onboarding Wizard Header -->
+            <header class="sticky top-0 z-50 bg-background-light/95 dark:bg-[#0c101b]/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <button onclick="router.navigateTo('#asistente')" class="size-9 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
+                        <span class="material-symbols-outlined text-lg">arrow_back</span>
+                    </button>
+                    <div>
+                        <h1 class="text-xs font-black text-slate-900 dark:text-white tracking-wide uppercase italic flex items-center gap-2">
+                            Configuración de la Academia
+                        </h1>
+                        <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest">
+                            Paso ${window.academySetupStep} de ${totalSteps}
+                        </p>
+                    </div>
+                </div>
+            </header>
+
+            <main class="p-4 space-y-6 max-w-md mx-auto animate-fade-in pb-24">
+                <!-- Progress Bar -->
+                <div class="h-1.5 w-full bg-slate-900/60 dark:bg-white/5 rounded-full overflow-hidden border border-white/5">
+                    <div class="h-full bg-gradient-to-r from-primary to-purple-500 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
+                </div>
+
+                <!-- Step Content Card -->
+                <div class="glass-card p-6 rounded-[2.5rem] border border-white/5 bg-gradient-to-b from-slate-900/50 to-slate-950/50 shadow-2xl relative overflow-hidden">
+                    <div class="absolute -top-12 -left-12 size-24 bg-primary/10 rounded-full blur-xl"></div>
+                    <div class="absolute -bottom-12 -right-12 size-24 bg-purple-500/10 rounded-full blur-xl"></div>
+                    
+                    ${stepContent}
+                </div>
+
+                <!-- Wizard Actions -->
+                <div class="flex items-center gap-4">
+                    ${window.academySetupStep > 1 ? `
+                        <button onclick="window.academyPrevStep()" class="flex-1 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider transition-all active:scale-95">
+                            Atrás
+                        </button>
+                    ` : ''}
+                    
+                    ${window.academySetupStep < 3 ? `
+                        <button onclick="window.academyNextStep()" class="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold text-xs uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-primary/20">
+                            Siguiente
+                        </button>
+                    ` : `
+                        <button onclick="window.finishAcademySetup()" class="flex-1 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-emerald-500/20">
+                            Finalizar y Comenzar Plan
+                        </button>
+                    `}
+                </div>
+            </main>
+            \${renderBottomNav('asistente')}
+        `;
+
+        // Register step handlers
+        window.selectOnboardingHierarchy = (id) => {
+            window.academyTempHierarchy = id;
+            renderAcademyOnboarding(container);
+        };
+        window.selectOnboardingPlan = (id) => {
+            window.academyTempPlan = id;
+            renderAcademyOnboarding(container);
+        };
+        window.selectOnboardingTime = (id) => {
+            window.academyTempTime = id;
+            renderAcademyOnboarding(container);
+        };
+        window.academyNextStep = () => {
+            window.academySetupStep++;
+            renderAcademyOnboarding(container);
+        };
+        window.academyPrevStep = () => {
+            window.academySetupStep--;
+            renderAcademyOnboarding(container);
+        };
+        window.finishAcademySetup = () => {
+            localStorage.setItem('academy_setup_hierarchy', window.academyTempHierarchy);
+            localStorage.setItem('academy_setup_plan', window.academyTempPlan);
+            localStorage.setItem('academy_setup_time', window.academyTempTime);
+            localStorage.setItem('academy_setup_completed', 'true');
+            // Clean temp
+            window.academySetupStep = 1;
+            // Set current state active
+            window.academySelectedHierarchy = window.academyTempHierarchy;
+            
+            // Default tab based on plan
+            if (window.academyTempPlan === 'intensivo') window.academyActiveTab = 'flashcards';
+            else if (window.academyTempPlan === 'teorico') window.academyActiveTab = 'summaries';
+            else window.academyActiveTab = 'mindmaps';
+
+            showToast("✨ Plan de estudio configurado con éxito!");
+            renderAcademia(container);
+        };
+    }
+
+    // Check if Onboarding Setup is completed
+    const isSetupCompleted = localStorage.getItem('academy_setup_completed') === 'true';
+    if (!isSetupCompleted) {
+        renderAcademyOnboarding(container);
+        return;
+    }
+
+    // Load configurations from setup
+    const hierarchyId = localStorage.getItem('academy_setup_hierarchy') || data.hierarchies[0].id;
+    const planId = localStorage.getItem('academy_setup_plan') || 'intensivo';
+    const timeId = localStorage.getItem('academy_setup_time') || '30';
+
     // State Initialization
-    window.academySelectedHierarchy = window.academySelectedHierarchy || data.hierarchies[0].id;
-    window.academyActiveTab = window.academyActiveTab || 'library'; // 'library' (Fuentes) as default for NotebookLM
+    window.academySelectedHierarchy = hierarchyId;
+    window.academyActiveTab = window.academyActiveTab || (planId === 'intensivo' ? 'flashcards' : planId === 'teorico' ? 'summaries' : 'mindmaps');
     window.currentExamAnswers = window.currentExamAnswers || {};
     window.examSubmitted = window.examSubmitted || false;
     window.currentFlashcardIndex = window.currentFlashcardIndex || 0;
@@ -117,6 +331,80 @@ function renderAcademia(container) {
     function getHTML() {
         // Count active sources
         const checkedCount = Object.values(window.academySelectedSources).filter(Boolean).length;
+        const hierarchyText = hierarchy.title;
+
+        // Dynamic Learning Path based on Plan
+        let pathHTML = '';
+        if (planId === 'intensivo') {
+            pathHTML = `
+                <div class="space-y-2">
+                    <p class="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Tu Ruta de Aprendizaje Personalizada</p>
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <button onclick="window.switchAcademyTab('flashcards')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">style</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">1. Tarjetas</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Memorización</span>
+                        </button>
+                        <button onclick="window.switchAcademyTab('exam')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'exam' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">quiz</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">2. Evaluación</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Simulador ISEP</span>
+                        </button>
+                        <button onclick="window.switchAcademyTab('tutor')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white border-purple-500 shadow-lg shadow-purple-500/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">psychology</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">3. Tutor IA</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Dudas de manual</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        } else if (planId === 'teorico') {
+            pathHTML = `
+                <div class="space-y-2">
+                    <p class="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Tu Ruta de Aprendizaje Personalizada</p>
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <button onclick="window.switchAcademyTab('summaries')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">menu_book</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">1. Unidades</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Resúmenes ISEP</span>
+                        </button>
+                        <button onclick="window.switchAcademyTab('library')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'library' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">folder_open</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">2. Biblioteca</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Manuales y Leyes</span>
+                        </button>
+                        <button onclick="window.switchAcademyTab('mindmaps')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">account_tree</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">3. Esquemas</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Flujogramas</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        } else { // practico
+            pathHTML = `
+                <div class="space-y-2">
+                    <p class="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Tu Ruta de Aprendizaje Personalizada</p>
+                    <div class="grid grid-cols-3 gap-2.5">
+                        <button onclick="window.switchAcademyTab('mindmaps')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">account_tree</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">1. Protocolos</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Flujos de acción</span>
+                        </button>
+                        <button onclick="window.switchAcademyTab('tutor')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white border-purple-500 shadow-lg shadow-purple-500/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">psychology</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">2. Tutor IA</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Casos situacionales</span>
+                        </button>
+                        <button onclick="window.switchAcademyTab('summaries')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
+                            <span class="material-symbols-outlined text-xl block mb-1">menu_book</span>
+                            <span class="text-[9px] font-black uppercase tracking-wider block">3. Doctrina</span>
+                            <span class="text-[7px] text-slate-500 block mt-0.5">Resúmenes clave</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
 
         return `
             ${styleBlock}
@@ -155,24 +443,42 @@ function renderAcademia(container) {
 
             <main class="p-4 space-y-5 pb-32 max-w-md mx-auto animate-fade-in">
 
-                <!-- Concurso Selector -->
-                <section>
-                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2.5 px-1">Concurso de Ascenso ISEP</p>
-                    <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
-                        ${data.hierarchies.map(h => `
-                            <button onclick="window.selectAcademyHierarchy('${h.id}')" 
-                                class="shrink-0 p-3.5 rounded-2xl border text-left transition-all active:scale-95 min-w-[170px] ${h.id === hierarchy.id ? 'bg-gradient-to-br ' + h.color + ' text-white border-white/20 shadow-xl' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10'}">
-                                <div class="flex items-center justify-between mb-1.5">
-                                    <span class="material-symbols-outlined text-xl">${h.icon}</span>
-                                    <span class="text-[8px] font-bold uppercase opacity-85">${h.badge}</span>
-                                </div>
-                                <p class="text-[11px] font-black leading-snug truncate">${h.title}</p>
-                            </button>
-                        `).join('')}
+                <!-- Personalization HUD -->
+                <div class="glass-card p-5 rounded-[2rem] border border-white/5 bg-gradient-to-br from-indigo-950/20 to-slate-900 text-white shadow-xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2.5">
+                            <span class="material-symbols-outlined text-primary text-xl">school</span>
+                            <div>
+                                <h3 class="text-xs font-black text-white uppercase tracking-wider leading-none mb-1">Tu Plan de Estudio ISEP</h3>
+                                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">${hierarchyText}</p>
+                            </div>
+                        </div>
+                        <button onclick="window.resetAcademySetup()" class="px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-red-500/10 hover:border-red-500/30 text-slate-400 hover:text-red-400 transition-all text-[8px] font-black uppercase tracking-wider">
+                            Cambiar Plan
+                        </button>
                     </div>
-                </section>
+                    <div class="grid grid-cols-2 gap-3 pt-1 text-[10px]">
+                        <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5">
+                            <span class="material-symbols-outlined text-xs text-primary">bookmark</span>
+                            <div>
+                                <span class="text-[8px] text-slate-500 block">Enfoque:</span>
+                                <span class="font-bold text-slate-200 capitalize">${planId}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5">
+                            <span class="material-symbols-outlined text-xs text-purple-400">timer</span>
+                            <div>
+                                <span class="text-[8px] text-slate-500 block">Meta Diaria:</span>
+                                <span class="font-bold text-slate-200">${timeId} minutos</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <!-- Premium Segmented Tabs Switcher (watchOS/iOS style) -->
+                <!-- Guided Learning Path -->
+                ${pathHTML}
+
+                <!-- Tabs Switcher (watchOS/iOS style) -->
                 <div class="flex p-1 bg-slate-900/60 backdrop-blur-md rounded-2xl border border-white/5 shadow-inner overflow-x-auto scrollbar-none gap-1">
                     <button onclick="window.switchAcademyTab('library')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'library' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
                         <span class="material-symbols-outlined text-[13px]">folder_open</span> Fuentes
@@ -209,6 +515,20 @@ function renderAcademia(container) {
             ${renderBottomNav('asistente')}
         `;
     }
+
+    // Register Reset Setup Action
+    window.resetAcademySetup = () => {
+        if (!confirm("¿Deseas restablecer tu plan de estudio y configurar tu concurso de ascenso nuevamente?")) return;
+        localStorage.removeItem('academy_setup_completed');
+        localStorage.removeItem('academy_setup_hierarchy');
+        localStorage.removeItem('academy_setup_plan');
+        localStorage.removeItem('academy_setup_time');
+        window.academySetupStep = 1;
+        window.customAIQuestions = null;
+        window.currentExamAnswers = {};
+        window.examSubmitted = false;
+        renderAcademia(viewContainer);
+    };
 
     // --- TAB 1: FUENTES DE ESTUDIO (NotebookLM Sources) ---
     function renderLibraryTab(hierarchy, isPro) {
@@ -826,7 +1146,11 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal de
             .filter(item => window.academySelectedSources[item.id])
             .map(item => item.title);
 
-        const systemInstruction = `Sos Centinela AI y Tutor de la Academia PRO ISEP de la Policía de Santa Fe (Argentina). Tus respuestas deben basarse estrictamente en las fuentes de estudio seleccionadas por el oficial: ${activeSourceTitles.join(', ')}. Cita los artículos o páginas correspondientes cuando fundamentes legalmente tus respuestas. Responde en español rioplatense.`;
+        const setupHierarchy = localStorage.getItem('academy_setup_hierarchy') || 'oficial-subinspector';
+        const hierarchyObj = data.hierarchies.find(h => h.id === setupHierarchy) || data.hierarchies[0];
+        const hierarchyLabel = hierarchyObj.title;
+
+        const systemInstruction = `Sos Centinela AI y Tutor de la Academia PRO ISEP de la Policía de Santa Fe (Argentina). Estás asistiendo a un oficial que está cursando y preparando el concurso de ascenso para la jerarquía de: ${hierarchyLabel}. Tus respuestas deben enfocarse de manera altamente personalizada en su temario y basarse estrictamente en las fuentes de estudio seleccionadas por el oficial: ${activeSourceTitles.join(', ')}. Cita los artículos o páginas correspondientes cuando fundamentes legalmente tus respuestas. Responde en español rioplatense de forma clara, técnica y profesional.`;
 
         try {
             const answer = await window.callGeminiAPI(query, systemInstruction);
