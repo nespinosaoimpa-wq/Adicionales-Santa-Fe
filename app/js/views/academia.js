@@ -1,9 +1,59 @@
 /**
  * Adicionales Santa Fe - Campus de Ascenso Policial (Academia PRO + Gemini AI)
+ * Inspirado en Google NotebookLM
  */
+
+const academyLibraryItems = [
+    {
+        id: "manual-isep",
+        title: "Manual Oficial ISEP 2026",
+        desc: "344 páginas de doctrina policial para Oficiales (Esc. General).",
+        file: "docs/3- Oficial de Policía - Escalafón General.pdf",
+        icon: "menu_book",
+        color: "from-blue-600/20 to-indigo-600/20 text-indigo-400 border-indigo-500/30",
+        badge: "Doctrina Oficial"
+    },
+    {
+        id: "ley-12521",
+        title: "Ley de Personal Policial N° 12.521",
+        desc: "Estatuto, deberes, derechos, ascensos y régimen disciplinario de Santa Fe.",
+        file: "docs/marco_legal_policial_2026.md",
+        icon: "gavel",
+        color: "from-amber-600/20 to-orange-600/20 text-amber-400 border-amber-500/30",
+        badge: "Régimen Disciplinario"
+    },
+    {
+        id: "ley-14283",
+        title: "Ley de Adicionales & Jubilaciones N° 14.283",
+        desc: "Reforma previsional de Santa Fe y escalas de servicios adicionales.",
+        file: "docs/Ley 14283.pdf",
+        icon: "shield_person",
+        color: "from-emerald-600/20 to-teal-600/20 text-emerald-400 border-emerald-500/30",
+        badge: "Servicios Adicionales"
+    },
+    {
+        id: "miraf",
+        title: "Manual de Armamento y Tiro MIRAF",
+        desc: "Normativa oficial para el uso seguro y portación de armas reglamentarias.",
+        file: "docs/2012MIRAF.pdf",
+        icon: "explosion",
+        color: "from-red-600/20 to-rose-600/20 text-red-400 border-rose-500/30",
+        badge: "Seguridad Operativa"
+    },
+    {
+        id: "decreto-411",
+        title: "Escala Salarial Decreto N° 411/26",
+        desc: "Planilla de sueldos básicos y adicionales vigentes a partir de 2026.",
+        file: "docs/DEC-2026-00000411-APPSF-PE (1).pdf",
+        icon: "payments",
+        color: "from-cyan-600/20 to-blue-600/20 text-cyan-400 border-cyan-500/30",
+        badge: "Sueldos y Tarifas"
+    }
+];
 
 function renderAcademia(container) {
     if (!container) container = document.getElementById('app');
+    let viewContainer = container;
 
     const data = window.academyData;
     if (!data) {
@@ -11,33 +61,81 @@ function renderAcademia(container) {
         return;
     }
 
-    // State
+    // State Initialization
     window.academySelectedHierarchy = window.academySelectedHierarchy || data.hierarchies[0].id;
-    window.academyActiveTab = window.academyActiveTab || 'summaries'; // 'summaries', 'exam', 'flashcards', 'mindmaps', 'library', 'tutor'
+    window.academyActiveTab = window.academyActiveTab || 'library'; // 'library' (Fuentes) as default for NotebookLM
     window.currentExamAnswers = window.currentExamAnswers || {};
     window.examSubmitted = window.examSubmitted || false;
     window.currentFlashcardIndex = window.currentFlashcardIndex || 0;
     window.flashcardFlipped = window.flashcardFlipped || false;
+    window.currentPlayingUnitId = window.currentPlayingUnitId || null;
+
+    // Source Selection (Default first 2 checked)
+    if (!window.academySelectedSources) {
+        window.academySelectedSources = {
+            'manual-isep': true,
+            'ley-12521': true,
+            'ley-14283': false,
+            'miraf': false,
+            'decreto-411': false
+        };
+    }
 
     const hierarchy = data.hierarchies.find(h => h.id === window.academySelectedHierarchy) || data.hierarchies[0];
     const isPro = store.user?.pro_member || store.user?.role === 'admin';
 
+    // CSS Styles injected inline for 3D Flashcards and animations
+    const styleBlock = `
+        <style>
+            .flashcard-wrapper {
+                perspective: 1200px;
+            }
+            .flashcard-card {
+                transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+                transform-style: preserve-3d;
+            }
+            .flashcard-card.is-flipped {
+                transform: rotateY(180deg);
+            }
+            .flashcard-face {
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
+            }
+            .flashcard-back {
+                transform: rotateY(180deg);
+            }
+            .equalizer-bar {
+                animation: equalizer 0.8s ease-in-out infinite alternate;
+            }
+            @keyframes equalizer {
+                0% { height: 4px; }
+                100% { height: 16px; }
+            }
+        </style>
+    `;
+
     function getHTML() {
+        // Count active sources
+        const checkedCount = Object.values(window.academySelectedSources).filter(Boolean).length;
+
         return `
+            ${styleBlock}
             <!-- Sticky Header -->
-            <header class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <header class="sticky top-0 z-50 bg-background-light/95 dark:bg-[#0c101b]/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <button onclick="router.navigateTo('#asistente')" class="size-9 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors active:scale-95">
                         <span class="material-symbols-outlined text-lg">arrow_back</span>
                     </button>
                     <div>
-                        <h1 class="text-sm font-black text-slate-900 dark:text-white tracking-wide uppercase italic flex items-center gap-2">
-                            Campus Ascenso
+                        <h1 class="text-xs font-black text-slate-900 dark:text-white tracking-wide uppercase italic flex items-center gap-2">
+                            Notebook IA
                             <span class="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-tighter ${isPro ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'}">
                                 ${isPro ? 'ACCESO PRO' : 'DEMO GRATUITA'}
                             </span>
                         </h1>
-                        <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest">Materiales ISEP 2026</p>
+                        <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest flex items-center gap-1">
+                            <span class="size-1.5 rounded-full bg-indigo-500"></span> ${checkedCount} Fuentes seleccionadas
+                        </p>
                     </div>
                 </div>
                 <div>
@@ -55,66 +153,53 @@ function renderAcademia(container) {
                 </div>
             </header>
 
-            <main class="p-4 space-y-6 pb-32 max-w-md mx-auto animate-fade-in">
+            <main class="p-4 space-y-5 pb-32 max-w-md mx-auto animate-fade-in">
 
-                <!-- Hierarchy Carousel Selector -->
+                <!-- Concurso Selector -->
                 <section>
-                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Seleccionar Concurso ISEP</p>
+                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2.5 px-1">Concurso de Ascenso ISEP</p>
                     <div class="flex gap-2 overflow-x-auto pb-2 scrollbar-none">
                         ${data.hierarchies.map(h => `
                             <button onclick="window.selectAcademyHierarchy('${h.id}')" 
-                                class="shrink-0 p-3 rounded-2xl border text-left transition-all active:scale-95 min-w-[170px] ${h.id === hierarchy.id ? 'bg-gradient-to-br ' + h.color + ' text-white border-white/20 shadow-xl' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10'}">
-                                <div class="flex items-center justify-between mb-1">
+                                class="shrink-0 p-3.5 rounded-2xl border text-left transition-all active:scale-95 min-w-[170px] ${h.id === hierarchy.id ? 'bg-gradient-to-br ' + h.color + ' text-white border-white/20 shadow-xl' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10'}">
+                                <div class="flex items-center justify-between mb-1.5">
                                     <span class="material-symbols-outlined text-xl">${h.icon}</span>
-                                    <span class="text-[8px] font-bold uppercase opacity-80">${h.badge}</span>
+                                    <span class="text-[8px] font-bold uppercase opacity-85">${h.badge}</span>
                                 </div>
-                                <p class="text-xs font-black leading-snug truncate">${h.title}</p>
+                                <p class="text-[11px] font-black leading-snug truncate">${h.title}</p>
                             </button>
                         `).join('')}
                     </div>
                 </section>
 
-                <!-- Active Hierarchy Banner -->
-                <div class="bg-gradient-to-r ${hierarchy.color} p-4 rounded-3xl text-white shadow-xl flex items-center justify-between relative overflow-hidden">
-                    <div class="absolute -right-6 -bottom-6 size-28 bg-white/10 blur-2xl rounded-full"></div>
-                    <div class="relative z-10">
-                        <span class="text-[8px] font-black uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded-full">Programa ISEP</span>
-                        <h2 class="text-base font-black leading-tight mt-1">${hierarchy.title}</h2>
-                        <p class="text-[10px] opacity-90 mt-0.5">${hierarchy.subtitle}</p>
-                    </div>
-                    <div class="size-12 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center shrink-0 text-white relative z-10">
-                        <span class="material-symbols-outlined text-2xl">${hierarchy.icon}</span>
-                    </div>
-                </div>
-
-                <!-- Tabs Switcher -->
-                <div class="flex p-1 bg-slate-200 dark:bg-white/5 rounded-2xl border border-white/5 shadow-inner overflow-x-auto scrollbar-none gap-0.5">
-                    <button onclick="window.switchAcademyTab('summaries')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        📚 Resúmenes
+                <!-- Premium Segmented Tabs Switcher (watchOS/iOS style) -->
+                <div class="flex p-1 bg-slate-900/60 backdrop-blur-md rounded-2xl border border-white/5 shadow-inner overflow-x-auto scrollbar-none gap-1">
+                    <button onclick="window.switchAcademyTab('library')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'library' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                        <span class="material-symbols-outlined text-[13px]">folder_open</span> Fuentes
                     </button>
-                    <button onclick="window.switchAcademyTab('exam')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'exam' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        📝 Examen
+                    <button onclick="window.switchAcademyTab('summaries')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                        <span class="material-symbols-outlined text-[13px]">menu_book</span> Resúmenes
                     </button>
-                    <button onclick="window.switchAcademyTab('flashcards')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        🎴 Tarjetas
+                    <button onclick="window.switchAcademyTab('exam')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'exam' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                        <span class="material-symbols-outlined text-[13px]">quiz</span> Evaluación
                     </button>
-                    <button onclick="window.switchAcademyTab('library')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'library' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        📂 Biblioteca
+                    <button onclick="window.switchAcademyTab('flashcards')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                        <span class="material-symbols-outlined text-[13px]">style</span> Tarjetas
                     </button>
-                    <button onclick="window.switchAcademyTab('mindmaps')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        🗺️ Esquemas
+                    <button onclick="window.switchAcademyTab('mindmaps')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                        <span class="material-symbols-outlined text-[13px]">account_tree</span> Esquemas
                     </button>
-                    <button onclick="window.switchAcademyTab('tutor')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'text-purple-400 hover:text-white'}">
-                        🤖 Tutor IA
+                    <button onclick="window.switchAcademyTab('tutor')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'text-purple-400 hover:text-white'}">
+                        <span class="material-symbols-outlined text-[13px] animate-pulse">psychology</span> Tutor IA
                     </button>
                 </div>
 
-                <!-- Tab Content -->
-                <div id="academy-tab-content" class="animate-fade-in">
+                <!-- Tab Content area -->
+                <div id="academy-tab-content" class="animate-fade-in min-h-[300px]">
+                    ${window.academyActiveTab === 'library' ? renderLibraryTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'summaries' ? renderSummariesTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'exam' ? renderExamTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'flashcards' ? renderFlashcardsTab(hierarchy, isPro) : ''}
-                    ${window.academyActiveTab === 'library' ? renderLibraryTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'mindmaps' ? renderMindmapsTab(hierarchy, isPro) : ''}
                     ${window.academyActiveTab === 'tutor' ? renderGeminiTutorTab(hierarchy, isPro) : ''}
                 </div>
@@ -125,38 +210,109 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- TAB 1: RESÚMENES & AUDIOBOOK ---
+    // --- TAB 1: FUENTES DE ESTUDIO (NotebookLM Sources) ---
+    function renderLibraryTab(hierarchy, isPro) {
+        return `
+            <div class="space-y-4">
+                <div class="glass-card p-4 rounded-3xl border border-indigo-500/10 bg-gradient-to-br from-indigo-950/20 to-slate-900 text-white shadow-xl space-y-1.5">
+                    <h3 class="text-xs font-black uppercase text-indigo-400 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm">folder_managed</span> Fuentes del Notebook
+                    </h3>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Selecciona qué manuales y leyes oficiales activarán las preguntas del evaluador y el Tutor IA.
+                    </p>
+                </div>
+
+                <div class="space-y-2.5">
+                    ${academyLibraryItems.map((item, index) => {
+                        const isLocked = !isPro && index > 1; // Free tier locks index > 1
+                        const isChecked = !!window.academySelectedSources[item.id];
+                        return `
+                            <div class="glass-card p-4 rounded-2xl border border-white/5 flex items-center justify-between relative overflow-hidden transition-all hover:border-indigo-500/30">
+                                ${isLocked ? `
+                                    <div class="absolute inset-0 bg-[#0a0c12]/90 backdrop-blur-sm z-20 flex items-center justify-between px-4">
+                                        <div class="flex items-center gap-2">
+                                            <span class="material-symbols-outlined text-amber-400 text-lg">lock</span>
+                                            <span class="text-[9px] font-black text-white uppercase tracking-wider">Manual PRO</span>
+                                        </div>
+                                        <button onclick="window.showAcademyPaymentModal()" class="px-2.5 py-1.5 rounded-lg bg-amber-500 text-white font-bold text-[9px] uppercase tracking-wider active:scale-95 transition-all shadow-md shadow-amber-500/10">
+                                            Desbloquear
+                                        </button>
+                                    </div>
+                                ` : ''}
+
+                                <div class="flex items-center gap-3.5 flex-1 pr-2">
+                                    <label class="relative flex items-center justify-center size-5 shrink-0 cursor-pointer">
+                                        <input type="checkbox" ${isChecked ? 'checked' : ''} 
+                                            onclick="window.toggleSourceSelection('${item.id}')"
+                                            class="sr-only peer">
+                                        <div class="absolute inset-0 rounded-md border-2 border-slate-500 peer-checked:border-indigo-500 peer-checked:bg-indigo-500 transition-all flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-white text-[12px] font-black scale-0 peer-checked:scale-100 transition-transform">check</span>
+                                        </div>
+                                    </label>
+                                    <div class="flex items-center gap-3">
+                                        <div class="size-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center border shrink-0">
+                                            <span class="material-symbols-outlined text-lg">${item.icon}</span>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-bold text-xs text-slate-900 dark:text-white leading-snug">${item.title}</h4>
+                                            <p class="text-[9px] text-slate-400 leading-relaxed mt-0.5">${item.desc}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="${item.file}" download class="size-9 rounded-full bg-white/5 hover:bg-white/10 text-white flex items-center justify-center shrink-0 border border-white/10 active:scale-90 transition-all ml-1" title="Descargar PDF">
+                                    <span class="material-symbols-outlined text-sm">download</span>
+                                </a>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+    }
+
+    // --- TAB 2: RESÚMENES & AUDIOBOOK ---
     function renderSummariesTab(hierarchy, isPro) {
         return `
             <div class="space-y-4">
                 <div class="flex items-center justify-between px-1">
-                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Unidades de Estudio Oficial</h3>
+                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Unidades de Estudio</h3>
                     <span class="text-[10px] text-slate-500 font-bold">${hierarchy.summaries.length} Unidades</span>
                 </div>
 
                 ${hierarchy.summaries.map((sum, index) => {
                     const isLocked = !isPro && index > 0;
+                    const isPlaying = window.currentPlayingUnitId === sum.id;
                     return `
-                        <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-3 relative overflow-hidden">
+                        <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-3 relative overflow-hidden transition-all hover:border-primary/20">
                             ${isLocked ? `
                                 <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md z-20 flex flex-col items-center justify-center p-4 text-center">
                                     <span class="material-symbols-outlined text-amber-400 text-3xl mb-1">lock</span>
                                     <p class="text-xs font-black text-white uppercase">Unidad Exclusiva PRO</p>
-                                    <p class="text-[10px] text-slate-400 mt-0.5 mb-3">Activá tu acceso ($10.000) por Alias para desbloquear todo el programa ISEP</p>
+                                    <p class="text-[10px] text-slate-400 mt-0.5 mb-3">Activa tu acceso ($10.000) por Alias para desbloquear todo el programa ISEP</p>
                                     <button onclick="window.showAcademyPaymentModal()" class="px-4 py-2 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
                                         Activar Acceso ISEP
                                     </button>
                                 </div>
                             ` : ''}
 
-                            <div class="flex items-start justify-between">
+                            <div class="flex items-start justify-between gap-3">
                                 <div>
                                     <span class="text-[8px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-full">${sum.readTime} de lectura</span>
                                     <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1 leading-snug">${sum.title}</h4>
                                 </div>
-                                <button onclick="window.playAudiobook('${encodeURIComponent(sum.title)}', '${encodeURIComponent(sum.content.replace(/<[^>]*>?/gm, ''))}')" 
-                                    class="size-10 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition-all active:scale-90 shrink-0" title="Escuchar Audiolibro TTS">
-                                    <span class="material-symbols-outlined text-xl">volume_up</span>
+                                <button onclick="window.playAudiobook('${encodeURIComponent(sum.title)}', '${encodeURIComponent(sum.content.replace(/<[^>]*>?/gm, ''))}', '${sum.id}')" 
+                                    class="size-10 rounded-2xl flex items-center justify-center transition-all active:scale-90 shrink-0 ${isPlaying ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500 hover:text-white'}" 
+                                    title="Escuchar Audiolibro TTS">
+                                    ${isPlaying ? `
+                                        <div class="flex items-center gap-0.5 h-3">
+                                            <div class="w-[2px] bg-white rounded-full equalizer-bar" style="animation-delay: 0.1s;"></div>
+                                            <div class="w-[2px] bg-white rounded-full equalizer-bar" style="animation-delay: 0.3s;"></div>
+                                            <div class="w-[2px] bg-white rounded-full equalizer-bar" style="animation-delay: 0.5s;"></div>
+                                        </div>
+                                    ` : `
+                                        <span class="material-symbols-outlined text-xl">volume_up</span>
+                                    `}
                                 </button>
                             </div>
 
@@ -170,7 +326,7 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- TAB 2: SIMULADOR DE EXAMEN MULTIPLE CHOICE ---
+    // --- TAB 3: EVALUACIÓN / SIMULADOR ---
     function renderExamTab(hierarchy, isPro) {
         const isCustom = !!window.customAIQuestions;
         const questions = isCustom ? window.customAIQuestions : hierarchy.exams;
@@ -201,19 +357,9 @@ function renderAcademia(container) {
                             </div>
                         </div>
                         <p class="text-[11px] text-slate-300 leading-relaxed">
-                            Generá un cuestionario de opción múltiple instantáneo y único a partir del material oficial de ascenso de Santa Fe.
+                            Generá un examen interactivo único a partir de las fuentes que marcaste en la pestaña anterior.
                         </p>
                         <div class="space-y-3 pt-1 text-xs">
-                            <div>
-                                <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Materia o Tema a Evaluar</label>
-                                <select id="iaExamTopic" class="w-full px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500">
-                                    <option value="Manual Oficial ISEP 2026 (Oficial de Policía - Escalafón General - Temas de Liderazgo, Armamento y Disciplinario)">Manual Oficial ISEP 2026 (Completo)</option>
-                                    <option value="Ley de Personal Policial N° 12.521 y Régimen Disciplinario Decreto 461/15">Ley de Personal 12.521 + Decreto 461/15</option>
-                                    <option value="Ley de Adicionales & Jubilaciones N° 14.283 y su impacto operativo">Ley de Adicionales N° 14.283 (Reforma)</option>
-                                    <option value="Manual de Armamiento y Tiro MIRAF Policial y reglas de seguridad">Manual de Armamento y Tiro MIRAF</option>
-                                    <option value="Código Procesal Penal Ley N° 12.734 de Santa Fe (Artículos aplicables al personal preventor de calle)">Código Procesal Penal Ley 12.734</option>
-                                </select>
-                            </div>
                             <div class="grid grid-cols-2 gap-3">
                                 <div>
                                     <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Preguntas</label>
@@ -245,7 +391,7 @@ function renderAcademia(container) {
                             <span class="material-symbols-outlined text-purple-400">psychology</span>
                             <div>
                                 <p class="text-[9px] font-black uppercase tracking-wider">Modo Evaluador Dinámico</p>
-                                <p class="text-xs font-bold text-white">Examen IA Generado</p>
+                                <p class="text-xs font-bold text-white">Examen IA Activo</p>
                             </div>
                         </div>
                         <button onclick="window.resetToOfficialExam()" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-white border border-white/10 rounded-xl text-[9px] font-bold uppercase transition-all">
@@ -254,29 +400,42 @@ function renderAcademia(container) {
                     </div>
                 `}
 
-                <!-- Exam Header Banner -->
-                <div class="glass-card p-4 rounded-3xl border border-white/5 flex items-center justify-between">
-                    <div>
-                        <p class="text-[9px] font-black uppercase text-slate-400 tracking-wider">${isCustom ? 'Autoevaluación con IA' : 'Simulador Concurso ISEP'}</p>
-                        <p class="text-xs font-bold text-slate-900 dark:text-white">${total} Preguntas</p>
-                    </div>
-                    ${window.examSubmitted ? `
-                        <div class="text-right">
-                            <span class="text-lg font-black ${pct >= 60 ? 'text-emerald-400' : 'text-red-400'}">${pct}%</span>
-                            <p class="text-[8px] font-bold uppercase text-slate-400">${pct >= 60 ? 'APROBADO' : 'REPROBADO'}</p>
+                <!-- SVG Circular Score Gauge Header -->
+                ${window.examSubmitted ? `
+                    <div class="flex items-center justify-between p-4 bg-slate-900 border border-white/10 rounded-3xl shadow-xl">
+                        <div class="space-y-1">
+                            <p class="text-[9px] font-black uppercase text-slate-400 tracking-wider">Resultado del Examen</p>
+                            <h4 class="text-sm font-bold text-white">${pct >= 60 ? 'Aprobado' : 'Reprobado'}</h4>
+                            <p class="text-[10px] text-slate-400">Calificación mínima: 60%</p>
                         </div>
-                    ` : `
+                        <div class="relative size-16 flex items-center justify-center shrink-0">
+                            <svg class="size-full -rotate-90">
+                                <circle cx="32" cy="32" r="28" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="5" />
+                                <circle cx="32" cy="32" r="28" fill="transparent" stroke="${pct >= 60 ? '#10b981' : '#ef4444'}" stroke-width="5"
+                                    stroke-dasharray="175.9" stroke-dashoffset="${175.9 - (175.9 * pct) / 100}" stroke-linecap="round" />
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center text-xs font-black text-white">
+                                ${pct}%
+                            </div>
+                        </div>
+                    </div>
+                ` : `
+                    <div class="glass-card p-4 rounded-3xl border border-white/5 flex items-center justify-between">
+                        <div>
+                            <p class="text-[9px] font-black uppercase text-slate-400 tracking-wider">${isCustom ? 'Autoevaluación con IA' : 'Simulador Concurso ISEP'}</p>
+                            <p class="text-xs font-bold text-slate-900 dark:text-white">${total} Preguntas</p>
+                        </div>
                         <span class="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">${answeredCount}/${total} Respondidas</span>
-                    `}
-                </div>
+                    </div>
+                `}
 
                 ${questions.map((q, idx) => {
                     const isLocked = !isPro && idx > 0;
                     const selectedOpt = window.currentExamAnswers[idx];
                     return `
-                        <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-3 relative overflow-hidden">
+                        <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-3 relative overflow-hidden transition-all">
                             ${isLocked ? `
-                                <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-md z-20 flex flex-col items-center justify-center p-4 text-center">
+                                <div class="absolute inset-0 bg-[#0c101b]/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-4 text-center">
                                     <span class="material-symbols-outlined text-amber-400 text-3xl mb-1">lock</span>
                                     <p class="text-xs font-black text-white uppercase">Pregunta Exclusiva PRO</p>
                                     <p class="text-[10px] text-slate-400 mt-0.5 mb-3">Desbloqueá el simulador completo de 50 preguntas con justificación ISEP</p>
@@ -295,13 +454,13 @@ function renderAcademia(container) {
                                 ${q.options.map((opt, optIdx) => {
                                     let btnStyle = "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10";
                                     if (selectedOpt === optIdx) {
-                                        btnStyle = "bg-primary/20 border-primary text-primary font-bold";
+                                        btnStyle = "bg-primary/20 border-primary text-primary font-bold shadow-lg shadow-primary/5";
                                     }
                                     if (window.examSubmitted) {
                                         if (optIdx === q.correctIndex) {
-                                            btnStyle = "bg-emerald-500/20 border-emerald-500 text-emerald-400 font-bold";
+                                            btnStyle = "bg-emerald-500/20 border-emerald-500/60 text-emerald-400 font-bold";
                                         } else if (selectedOpt === optIdx && selectedOpt !== q.correctIndex) {
-                                            btnStyle = "bg-red-500/20 border-red-500 text-red-400 font-bold";
+                                            btnStyle = "bg-red-500/20 border-red-500/60 text-red-400 font-bold";
                                         }
                                     }
                                     return `
@@ -315,9 +474,9 @@ function renderAcademia(container) {
                             </div>
 
                             ${window.examSubmitted ? `
-                                <div class="p-3 rounded-2xl bg-slate-900 border border-white/10 text-[11px] text-slate-300 leading-relaxed space-y-1">
+                                <div class="p-3 rounded-2xl bg-slate-950 border border-white/5 text-[11px] text-slate-300 leading-relaxed space-y-1">
                                     <p class="font-bold text-emerald-400 flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm">menu_book</span> Justificación ISEP:
+                                        <span class="material-symbols-outlined text-sm">menu_book</span> Fundamentación de la Fuente:
                                     </p>
                                     <p>${q.explanation}</p>
                                 </div>
@@ -348,7 +507,7 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- TAB 3: FLASHCARDS INTERACTIVAS ---
+    // --- TAB 4: FLASHCARDS INTERACTIVAS (3D Flip Effect) ---
     function renderFlashcardsTab(hierarchy, isPro) {
         const flashcards = hierarchy.flashcards;
         const current = flashcards[window.currentFlashcardIndex] || flashcards[0];
@@ -361,29 +520,46 @@ function renderAcademia(container) {
                     <span class="text-[10px] text-slate-500 font-bold">${window.currentFlashcardIndex + 1} de ${flashcards.length}</span>
                 </div>
 
-                <div onclick="window.flipFlashcard()" class="glass-card min-h-[220px] p-6 rounded-[2.5rem] border border-primary/30 bg-gradient-to-br from-slate-900 to-slate-950 text-white shadow-2xl flex flex-col items-center justify-center relative cursor-pointer group active:scale-95 transition-all">
-                    ${isLocked ? `
-                        <div class="absolute inset-0 bg-slate-950/90 backdrop-blur-md rounded-[2.5rem] z-20 flex flex-col items-center justify-center p-4 text-center">
-                            <span class="material-symbols-outlined text-amber-400 text-3xl mb-1">lock</span>
-                            <p class="text-xs font-black text-white uppercase">Tarjetas Exclusivas PRO</p>
-                            <p class="text-[10px] text-slate-400 mt-0.5 mb-3">Activa tu pase ($10.000) por Alias para practicar con todo el mazo</p>
-                            <button onclick="window.showAcademyPaymentModal()" class="px-4 py-2 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
-                                Desbloquear Mazo completo
-                            </button>
+                <div onclick="${isLocked ? '' : 'window.flipFlashcard()'}" class="flashcard-wrapper w-full min-h-[240px] cursor-pointer">
+                    <div class="flashcard-card relative w-full h-[240px] ${window.flashcardFlipped ? 'is-flipped' : ''}">
+                        
+                        <!-- FRONT FACE -->
+                        <div class="flashcard-face absolute inset-0 p-6 rounded-[2.5rem] border border-primary/20 bg-gradient-to-br from-slate-900 to-indigo-950 text-white shadow-2xl flex flex-col items-center justify-center">
+                            ${isLocked ? `
+                                <div class="absolute inset-0 bg-[#0a0c12]/95 backdrop-blur-md rounded-[2.5rem] z-20 flex flex-col items-center justify-center p-4 text-center">
+                                    <span class="material-symbols-outlined text-amber-400 text-3xl mb-1">lock</span>
+                                    <p class="text-xs font-black text-white uppercase">Tarjetas Exclusivas PRO</p>
+                                    <p class="text-[10px] text-slate-400 mt-0.5 mb-3">Activa tu pase ($10.000) por Alias para practicar con todo el mazo</p>
+                                    <button onclick="window.showAcademyPaymentModal()" class="px-4 py-2 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
+                                        Desbloquear Mazo completo
+                                    </button>
+                                </div>
+                            ` : ''}
+
+                            <span class="text-[8px] font-black uppercase tracking-widest bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/30 mb-5">
+                                ${current.category} • PREGUNTA
+                            </span>
+                            <p class="text-sm font-bold leading-snug px-2 text-slate-100 max-w-xs">
+                                ${current.front}
+                            </p>
+                            <p class="text-[9px] text-slate-500 mt-6 font-mono flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs">touch_app</span> Tocar para revelar respuesta
+                            </p>
                         </div>
-                    ` : ''}
 
-                    <span class="text-[8px] font-black uppercase tracking-widest bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/30 mb-4">
-                        ${current.category} • ${window.flashcardFlipped ? 'RESPUESTA / ARTÍCULO' : 'PREGUNTA (Tocá para girar)'}
-                    </span>
-
-                    <p class="text-sm md:text-base font-bold leading-snug px-2 text-slate-100">
-                        ${window.flashcardFlipped ? current.back : current.front}
-                    </p>
-
-                    <p class="text-[9px] text-slate-500 mt-6 font-mono flex items-center gap-1">
-                        <span class="material-symbols-outlined text-xs">touch_app</span> Tocar para dar vuelta
-                    </p>
+                        <!-- BACK FACE -->
+                        <div class="flashcard-face flashcard-back absolute inset-0 p-6 rounded-[2.5rem] border border-emerald-500/30 bg-gradient-to-br from-slate-900 to-emerald-950 text-white shadow-2xl flex flex-col items-center justify-center">
+                            <span class="text-[8px] font-black uppercase tracking-widest bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/30 mb-5">
+                                RESPUESTA OFICIAL
+                            </span>
+                            <p class="text-xs font-bold leading-relaxed px-2 text-slate-100 max-w-xs">
+                                ${current.back}
+                            </p>
+                            <p class="text-[9px] text-slate-500 mt-6 font-mono flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs">touch_app</span> Tocar para volver a la pregunta
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="flex items-center justify-between gap-4">
@@ -398,111 +574,42 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- TAB 4: BIBLIOTECA DE MANUALES ---
-    function renderLibraryTab(hierarchy, isPro) {
-        const libraryItems = [
-            {
-                title: "Manual Oficial ISEP 2026",
-                desc: "344 páginas de contenido oficial para Oficiales de Policía (Esc. General).",
-                file: "docs/3- Oficial de Policía - Escalafón General.pdf",
-                icon: "menu_book",
-                color: "from-blue-500/20 to-indigo-500/20 text-indigo-400 border-indigo-500/30"
-            },
-            {
-                title: "Ley de Personal Policial N° 12.521",
-                desc: "Estatuto, deberes, derechos, ascensos y régimen general policial de Santa Fe.",
-                file: "docs/marco_legal_policial_2026.md",
-                icon: "gavel",
-                color: "from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30"
-            },
-            {
-                title: "Ley de Adicionales & Jubilaciones N° 14.283",
-                desc: "Reforma Previsional de Santa Fe y escalas de servicios adicionales.",
-                file: "docs/Ley 14283.pdf",
-                icon: "shield_person",
-                color: "from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30"
-            },
-            {
-                title: "Manual de Armamento y Tiro MIRAF",
-                desc: "Normativa oficial para el uso seguro y portación de armas reglamentarias.",
-                file: "docs/2012MIRAF.pdf",
-                icon: "explosion",
-                color: "from-red-500/20 to-rose-500/20 text-red-400 border-rose-500/30"
-            },
-            {
-                title: "Escala Salarial Decreto N° 411/26",
-                desc: "Planilla de sueldos básicos y adicionales vigentes a partir de 2026.",
-                file: "docs/DEC-2026-00000411-APPSF-PE (1).pdf",
-                icon: "payments",
-                color: "from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-500/30"
-            }
-        ];
-
-        return `
-            <div class="space-y-4">
-                <div class="glass-card p-4 rounded-3xl border border-white/5 bg-gradient-to-br from-slate-900 to-slate-950 text-white shadow-xl space-y-2">
-                    <h3 class="text-xs font-black uppercase text-amber-400 flex items-center gap-1.5">
-                        <span class="material-symbols-outlined text-sm">library_books</span> Biblioteca Digital Oficial
-                    </h3>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Accedé a toda la bibliografía y manuales en PDF para estudiar en cualquier momento.
-                    </p>
-                </div>
-
-                <div class="space-y-3">
-                    ${libraryItems.map((item, index) => {
-                        const isLocked = !isPro && index > 1; // First 2 items are free, others are locked
-                        return `
-                            <div class="glass-card p-4 rounded-2xl border border-white/5 flex items-center justify-between relative overflow-hidden">
-                                ${isLocked ? `
-                                    <div class="absolute inset-0 bg-slate-950/85 backdrop-blur-sm z-20 flex items-center justify-between px-4">
-                                        <div class="flex items-center gap-2">
-                                            <span class="material-symbols-outlined text-amber-400 text-lg">lock</span>
-                                            <span class="text-[10px] font-black text-white uppercase">Manual Exclusivo PRO</span>
-                                        </div>
-                                        <button onclick="window.showAcademyPaymentModal()" class="px-2.5 py-1 rounded-lg bg-amber-500 text-white font-bold text-[9px] uppercase active:scale-95 transition-all">
-                                            Desbloquear
-                                        </button>
-                                    </div>
-                                ` : ''}
-
-                                <div class="flex items-center gap-3">
-                                    <div class="size-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center border shrink-0">
-                                        <span class="material-symbols-outlined text-lg">${item.icon}</span>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-bold text-xs text-slate-900 dark:text-white leading-snug">${item.title}</h4>
-                                        <p class="text-[9px] text-slate-400 leading-relaxed mt-0.5">${item.desc}</p>
-                                    </div>
-                                </div>
-                                <a href="${item.file}" download class="size-9 rounded-full bg-white/5 hover:bg-white/10 text-white flex items-center justify-center shrink-0 border border-white/10 active:scale-90 transition-all ml-2" title="Descargar PDF">
-                                    <span class="material-symbols-outlined text-sm">download</span>
-                                </a>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            </div>
-        `;
-    }
-
-    // --- TAB 5: MAPAS MENTALES Y ESQUEMAS ---
+    // --- TAB 5: MAPAS MENTALES Y ESQUEMAS (Dynamic Mermaid.js Rendering) ---
     function renderMindmapsTab(hierarchy, isPro) {
         const mindmaps = hierarchy.mindmaps;
+
+        // Load Mermaid dynamically from CDN
+        if (typeof mermaid === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
+            script.onload = () => {
+                mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+                setTimeout(() => {
+                    try { mermaid.run(); } catch(e) { console.warn("Mermaid execution warning:", e); }
+                }, 100);
+            };
+            document.head.appendChild(script);
+        } else {
+            setTimeout(() => {
+                try { mermaid.run(); } catch(e) { console.warn("Mermaid execution warning:", e); }
+            }, 100);
+        }
+
         return `
             <div class="space-y-4">
-                <div class="px-1">
-                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Esquemas de Procedimientos Policiales</h3>
+                <div class="px-1 flex items-center justify-between">
+                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Esquemas de Procedimiento</h3>
+                    <span class="text-[9px] bg-slate-800 text-slate-400 font-bold px-2 py-0.5 rounded-md">Vectorial</span>
                 </div>
 
                 ${mindmaps.map(mm => `
-                    <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-3">
+                    <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-4">
                         <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-2">
                             <span class="material-symbols-outlined text-primary text-sm">account_tree</span>
                             ${mm.title}
                         </h4>
-                        <div class="p-4 bg-slate-950 rounded-2xl border border-white/5 text-xs text-slate-300 font-mono overflow-x-auto">
-                            <pre class="whitespace-pre-wrap leading-relaxed">${mm.mermaid.trim()}</pre>
+                        <div class="mermaid bg-slate-950 p-4 rounded-2xl border border-white/5 flex justify-center overflow-x-auto text-[10px] leading-relaxed select-none">
+                            ${mm.mermaid.trim()}
                         </div>
                     </div>
                 `).join('')}
@@ -510,50 +617,60 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- TAB 6: TUTOR IA GEMINI ---
+    // --- TAB 6: TUTOR IA (Google NotebookLM Conversational Chat Room) ---
     function renderGeminiTutorTab(hierarchy, isPro) {
+        // Collect checked sources to display inside Chat Companion
+        const activeSourceTitles = academyLibraryItems
+            .filter(item => window.academySelectedSources[item.id])
+            .map(item => item.title);
+
         return `
             <div class="space-y-4">
-                <div class="glass-card p-4 rounded-3xl border border-purple-500/30 bg-gradient-to-br from-slate-900 to-indigo-950 text-white shadow-xl space-y-3">
+                <!-- Chat Header companion -->
+                <div class="glass-card p-4 rounded-3xl border border-purple-500/20 bg-gradient-to-br from-slate-900 to-indigo-950/80 text-white shadow-xl space-y-3">
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <span class="size-8 rounded-full bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-base">smart_toy</span>
-                            </span>
+                        <div class="flex items-center gap-2.5">
+                            <div class="relative">
+                                <div class="absolute inset-0 rounded-full bg-purple-500/30 blur-sm animate-pulse"></div>
+                                <span class="relative size-9 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-lg animate-pulse">psychology</span>
+                                </span>
+                            </div>
                             <div>
-                                <h3 class="text-xs font-black text-white uppercase tracking-wider">Tutor IA Gemini (ISEP 2026)</h3>
-                                <p class="text-[9px] text-purple-300 font-medium">Conectado al Manual ISEP (344 págs) y Leyes PSF</p>
+                                <h3 class="text-xs font-black text-white uppercase tracking-wider">Tutor Centinela IA</h3>
+                                <p class="text-[9px] text-purple-300 font-bold uppercase tracking-wider">Conectado a tus fuentes 🧠</p>
                             </div>
                         </div>
-                        <button onclick="window.showGeminiKeyModal()" class="px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/20 text-[9px] font-bold text-slate-300 border border-white/10 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-xs">key</span> API Key
-                        </button>
                     </div>
 
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Hacé cualquier pregunta sobre el concurso ISEP, Ley 12.521, Decreto 461/15, CPP Ley 12.734 o situaciones operativas. Gemini consultará la norma oficial y te responderá con fundamentación.
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Pregunta cualquier duda. Gemini responderá analizando tus fuentes seleccionadas:
+                        <span class="text-purple-300 font-bold font-mono text-[10px] break-words">
+                            (${activeSourceTitles.join(', ')})
+                        </span>.
                     </p>
 
                     <!-- Pre-built question chips -->
                     <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none text-[10px]">
-                        <button onclick="window.askGeminiTutor('¿Cuáles son las 4 virtudes de la Autoridad según el ISEP 2026?')" class="shrink-0 px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30">
-                            💡 4 Virtudes del Liderazgo
+                        <button onclick="window.askGeminiTutor('¿Cuáles son las 4 virtudes de la Autoridad según el ISEP 2026?')" class="shrink-0 px-3 py-1.5 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500 hover:text-white transition-all active:scale-95 font-bold">
+                            💡 Virtudes del Liderazgo
                         </button>
-                        <button onclick="window.askGeminiTutor('¿Cómo debe ser la descarga de un arma de fuego secuestrada según el manual ISEP Pág. 69?')" class="shrink-0 px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30">
-                            🔫 Secuestro de Armas ISEP
+                        <button onclick="window.askGeminiTutor('¿Cómo debe realizarse la descarga de un arma secuestrada según ISEP Pág. 69?')" class="shrink-0 px-3 py-1.5 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500 hover:text-white transition-all active:scale-95 font-bold">
+                            🔫 Descarga de Armas
                         </button>
-                        <button onclick="window.askGeminiTutor('¿Qué faltas son gravísimas en la Ley 12.521 y Decreto 461/15 y cuál es la diferencia entre Cesantía y Exoneración?')" class="shrink-0 px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 hover:bg-purple-500/30">
-                            ⚖️ Faltas y Decreto 461/15
+                        <button onclick="window.askGeminiTutor('Diferencia entre Cesantía y Exoneración en el Régimen Disciplinario')" class="shrink-0 px-3 py-1.5 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500 hover:text-white transition-all active:scale-95 font-bold">
+                            ⚖️ Faltas y Sanciones
                         </button>
                     </div>
                 </div>
 
-                <!-- Live Q&A Output Area -->
-                <div id="gemini-tutor-output" class="space-y-3"></div>
+                <!-- Live Chat Message Area -->
+                <div id="gemini-tutor-output" class="space-y-3.5 min-h-[100px] max-h-[350px] overflow-y-auto pr-1"></div>
 
+                <!-- Chat Form Input -->
                 <form onsubmit="window.submitGeminiTutorForm(event)" class="relative flex items-center gap-2">
-                    <input type="text" id="gemini-tutor-input" placeholder="Preguntale a Gemini sobre el examen ISEP..." 
-                        class="w-full px-4 py-3.5 bg-slate-900 border border-purple-500/30 rounded-2xl text-xs text-white outline-none focus:border-purple-400 transition-all pr-12 shadow-inner">
+                    <input type="text" id="gemini-tutor-input" placeholder="Pregunta a la IA sobre las fuentes..." 
+                        class="w-full px-4 py-3.5 bg-slate-900 border border-purple-500/20 rounded-2xl text-xs text-white placeholder:text-slate-500 outline-none focus:border-purple-500 transition-all pr-12 shadow-inner">
                     <button type="submit" class="absolute right-1.5 size-9 rounded-xl bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center shadow-lg shadow-purple-600/30 active:scale-90 transition-all">
                         <span class="material-symbols-outlined text-sm">send</span>
                     </button>
@@ -562,7 +679,22 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- ACTION HANDLERS ---
+    // --- VIEW INTERACTION EVENT HANDLERS ---
+
+    window.toggleSourceSelection = (sourceId) => {
+        window.academySelectedSources = window.academySelectedSources || {};
+        window.academySelectedSources[sourceId] = !window.academySelectedSources[sourceId];
+        // Ensure at least one source is checked
+        const anyChecked = Object.values(window.academySelectedSources).some(v => v);
+        if (!anyChecked) {
+            window.academySelectedSources[sourceId] = true;
+            showToast("⚠️ Debes seleccionar al menos una fuente");
+            return;
+        }
+        renderAcademia(viewContainer);
+        showToast("📂 Fuentes actualizadas");
+    };
+
     window.resetToOfficialExam = () => {
         window.customAIQuestions = null;
         window.currentExamAnswers = {};
@@ -574,27 +706,30 @@ function renderAcademia(container) {
     window.generateAIExam = async (e) => {
         if (e && e.preventDefault) e.preventDefault();
         
-        const topic = document.getElementById('iaExamTopic')?.value || "Manual ISEP 2026";
+        // Find checked sources titles
+        const activeSourceTitles = academyLibraryItems
+            .filter(item => window.academySelectedSources[item.id])
+            .map(item => item.title);
+
         const qty = parseInt(document.getElementById('iaExamQty')?.value || "5", 10);
         const difficulty = document.getElementById('iaExamDiff')?.value || "Intermedia";
 
         // Show premium full screen loader
         const overlay = document.createElement('div');
-        overlay.className = 'fixed inset-0 bg-[#0a0c12]/95 z-[9999] flex flex-col items-center justify-center p-6 text-center animate-fade-in';
+        overlay.className = 'fixed inset-0 bg-[#07090e]/96 z-[9999] flex flex-col items-center justify-center p-6 text-center animate-fade-in';
         overlay.innerHTML = `
             <div class="relative w-24 h-24 mb-6">
                 <div class="absolute inset-0 rounded-full border-4 border-purple-500/20 animate-ping"></div>
-                <div class="absolute inset-0 rounded-full border-4 border-t-purple-500 border-r-transparent border-b-transparent border-l-transparent animate-spin" style="animation-duration: 1s;"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-t-purple-500 border-r-transparent border-b-transparent border-l-transparent animate-spin" style="animation-duration: 0.8s;"></div>
                 <div class="absolute inset-2 rounded-full border-4 border-purple-400/10"></div>
-                <div class="absolute inset-2 rounded-full border-4 border-b-purple-400 border-t-transparent border-r-transparent border-l-transparent animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+                <div class="absolute inset-2 rounded-full border-4 border-b-purple-400 border-t-transparent border-r-transparent border-l-transparent animate-spin" style="animation-direction: reverse; animation-duration: 1.2s;"></div>
                 <div class="absolute inset-0 flex items-center justify-center text-purple-400 font-black text-xs tracking-widest animate-pulse">
                     AI
                 </div>
             </div>
-            <h3 class="text-lg font-black text-white leading-tight mb-2">Generador de Evaluaciones Centinela IA</h3>
+            <h3 class="text-lg font-black text-white leading-tight mb-2">Evaluador Inteligente Notebook IA</h3>
             <p class="text-xs text-slate-400 max-w-xs leading-relaxed animate-pulse">
-                Leyendo doctrina policial, estructurando preguntas y configurando simulador interactivo para la materia:<br>
-                <strong class="text-purple-300">${topic}</strong>
+                Analizando doctrina de: <br><strong class="text-purple-300">${activeSourceTitles.join(', ')}</strong>...
             </p>
         `;
         document.body.appendChild(overlay);
@@ -606,19 +741,18 @@ function renderAcademia(container) {
     "question": "Texto de la pregunta...",
     "options": ["Opción A", "Opción B", "Opción C", "Opción D"],
     "correctIndex": 1,
-    "explanation": "Fundamentación legal con artículos o páginas del manual..."
+    "explanation": "Fundamentación legal con artículos o páginas de los manuales oficiales..."
   }
 ]`;
 
-        const userPrompt = `Generá un examen de exactamente ${qty} preguntas sobre la materia: "${topic}".
+        const userPrompt = `Generá un examen de exactamente ${qty} preguntas sobre las siguientes fuentes de estudio seleccionadas: ${activeSourceTitles.join(', ')}.
 Dificultad requerida: ${difficulty}.
-Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal argentina de Santa Fe. Asegúrate de retornar un JSON válido estructurado sin caracteres extraños de markdown.`;
+Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal de la policía de Santa Fe. Asegúrate de retornar un JSON válido estructurado.`;
 
         try {
             const answer = await window.callGeminiAPI(userPrompt, systemInstruction);
             overlay.remove();
 
-            // Sanitize response to pull only JSON array
             let cleanJSON = answer.trim();
             if (cleanJSON.startsWith('```')) {
                 cleanJSON = cleanJSON.replace(/^```json|^```|```$/g, '').trim();
@@ -633,7 +767,7 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal ar
             window.currentExamAnswers = {};
             window.examSubmitted = false;
             
-            showToast("✨ Examen dinámico con IA generado con éxito");
+            showToast("✨ Examen dinámico con IA generado");
             container.innerHTML = getHTML();
             initAds();
         } catch(err) {
@@ -660,46 +794,72 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal ar
         const query = input.value.trim();
         if (!query) return;
 
-        // Append question
+        // Append User Message bubble
         output.innerHTML += `
-            <div class="p-3 bg-purple-950/50 border border-purple-500/30 rounded-2xl space-y-1 animate-fade-in">
-                <p class="text-[10px] font-bold text-purple-300 uppercase tracking-widest">Pregunta del Oficial:</p>
-                <p class="text-xs text-white font-medium">${escapeHTML(query)}</p>
+            <div class="flex gap-2.5 justify-end items-start animate-fade-in">
+                <div class="p-3 bg-indigo-600 border border-indigo-500/20 rounded-2xl rounded-tr-none text-xs text-white max-w-[80%] leading-relaxed">
+                    <p class="font-black text-[8px] opacity-80 uppercase tracking-widest mb-0.5">Tú</p>
+                    <p class="font-medium">${escapeHTML(query)}</p>
+                </div>
+                <div class="size-7 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center shrink-0 text-white border border-indigo-400/20">
+                    <span class="material-symbols-outlined text-xs">person</span>
+                </div>
             </div>
         `;
 
         const loadingId = 'tutor-load-' + Date.now();
         output.innerHTML += `
-            <div id="${loadingId}" class="p-3 bg-slate-900 border border-white/10 rounded-2xl flex items-center gap-2 text-xs text-slate-400 animate-fade-in">
-                <span class="animate-spin material-symbols-outlined text-purple-400 text-sm">sync</span>
-                <span>Gemini IA analizando Manuales ISEP y Leyes PSF...</span>
+            <div id="${loadingId}" class="flex gap-2.5 items-start animate-fade-in">
+                <div class="size-7 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shrink-0 text-white border border-purple-400/20">
+                    <span class="material-symbols-outlined text-xs animate-spin">sync</span>
+                </div>
+                <div class="p-3 bg-slate-900 border border-white/5 rounded-2xl rounded-tl-none text-xs text-slate-400 flex items-center gap-1.5">
+                    <span>Gemini IA consultando fuentes...</span>
+                </div>
             </div>
         `;
 
         input.value = '';
+        output.scrollTop = output.scrollHeight;
+
+        const activeSourceTitles = academyLibraryItems
+            .filter(item => window.academySelectedSources[item.id])
+            .map(item => item.title);
+
+        const systemInstruction = `Sos Centinela AI y Tutor de la Academia PRO ISEP de la Policía de Santa Fe (Argentina). Tus respuestas deben basarse estrictamente en las fuentes de estudio seleccionadas por el oficial: ${activeSourceTitles.join(', ')}. Cita los artículos o páginas correspondientes cuando fundamentes legalmente tus respuestas. Responde en español rioplatense.`;
 
         try {
-            const answer = await window.callGeminiAPI(query);
+            const answer = await window.callGeminiAPI(query, systemInstruction);
             const loadEl = document.getElementById(loadingId);
             if (loadEl) loadEl.remove();
 
             output.innerHTML += `
-                <div class="p-4 bg-slate-900 border border-purple-500/40 rounded-2xl space-y-2 animate-fade-in">
-                    <p class="text-[10px] font-black text-purple-400 uppercase tracking-widest flex items-center gap-1">
-                        <span class="material-symbols-outlined text-xs">smart_toy</span> Respuesta Tutor Gemini ISEP:
-                    </p>
-                    <div class="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap">${answer}</div>
+                <div class="flex gap-2.5 items-start animate-fade-in">
+                    <div class="size-7 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shrink-0 text-white border border-purple-400/20 shadow-md">
+                        <span class="material-symbols-outlined text-xs">psychology</span>
+                    </div>
+                    <div class="p-4.5 bg-slate-900 border border-purple-500/20 rounded-2xl rounded-tl-none text-xs text-slate-100 max-w-[80%] leading-relaxed space-y-1.5 shadow-lg">
+                        <p class="font-black text-[8px] text-purple-400 uppercase tracking-widest">Tutor Centinela IA</p>
+                        <div class="whitespace-pre-wrap">${answer}</div>
+                    </div>
                 </div>
             `;
+            output.scrollTop = output.scrollHeight;
         } catch(err) {
             const loadEl = document.getElementById(loadingId);
             if (loadEl) loadEl.remove();
 
             output.innerHTML += `
-                <div class="p-3 bg-red-950/50 border border-red-500/30 rounded-2xl text-xs text-red-300 animate-fade-in">
-                    ❌ ${err.message || 'Error de conexión con Gemini API'}
+                <div class="flex gap-2.5 items-start animate-fade-in">
+                    <div class="size-7 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-xs">warning</span>
+                    </div>
+                    <div class="p-3 bg-red-950/40 border border-red-500/20 rounded-2xl rounded-tl-none text-xs text-red-300">
+                        ❌ ${err.message || 'Error de conexión con la IA'}
+                    </div>
                 </div>
             `;
+            output.scrollTop = output.scrollHeight;
         }
     };
 
@@ -740,8 +900,11 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal ar
 
     window.flipFlashcard = () => {
         window.flashcardFlipped = !window.flashcardFlipped;
-        container.innerHTML = getHTML();
-        initAds();
+        const cardEl = document.querySelector('.flashcard-card');
+        if (cardEl) {
+            if (window.flashcardFlipped) cardEl.classList.add('is-flipped');
+            else cardEl.classList.remove('is-flipped');
+        }
     };
 
     window.prevFlashcard = (total) => {
@@ -758,7 +921,7 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal ar
         initAds();
     };
 
-    window.playAudiobook = (titleEnc, contentEnc) => {
+    window.playAudiobook = (titleEnc, contentEnc, unitId) => {
         const title = decodeURIComponent(titleEnc);
         const content = decodeURIComponent(contentEnc);
 
@@ -767,12 +930,33 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal ar
             return;
         }
 
+        if (window.currentPlayingUnitId === unitId) {
+            window.speechSynthesis.cancel();
+            window.currentPlayingUnitId = null;
+            showToast("🛑 Audio pausado");
+            renderAcademia(viewContainer);
+            return;
+        }
+
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(`${title}. ${content}`);
         utterance.lang = 'es-AR';
-        utterance.rate = 1.0;
+        utterance.rate = 1.05;
+
+        utterance.onend = () => {
+            window.currentPlayingUnitId = null;
+            renderAcademia(viewContainer);
+        };
+
+        utterance.onerror = () => {
+            window.currentPlayingUnitId = null;
+            renderAcademia(viewContainer);
+        };
+
+        window.currentPlayingUnitId = unitId;
         window.speechSynthesis.speak(utterance);
         showToast("🔊 Reproduciendo audiolibro ISEP...");
+        renderAcademia(viewContainer);
     };
 
     // --- MODAL DE PAGO ALIAS $10.000 & APROBACIÓN ---
