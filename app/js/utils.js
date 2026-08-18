@@ -530,7 +530,7 @@ window.callGeminiAPI = async function (userPrompt, systemInstruction = "") {
         }
     }
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
 
     const defaultSystem = `Sos Centinela AI y Tutor de la Academia PRO ISEP de la Policía de la Provincia de Santa Fe (Argentina). Conocés a fondo el Manual Oficial ISEP 2026 de 344 páginas (Oficial de Policía - Escalafón General), Ley 12.521, Decreto 461/15, CPP Ley 12.734, Ley 14.283 de adicionales y reforma previsional. Respondés en español rioplatense, de forma precisa, clara, citando los artículos y leyes aplicables.`;
 
