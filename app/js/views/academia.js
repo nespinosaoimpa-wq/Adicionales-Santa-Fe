@@ -505,7 +505,7 @@ function renderAcademia(container) {
                             <div class="flex items-start justify-between gap-4">
                                 <div>
                                     <span class="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                                        Unidad Didáctica
+                                        Materia de Cursado
                                     </span>
                                     <h4 class="font-bold text-sm text-white mt-1.5 leading-snug">${sum.title}</h4>
                                 </div>

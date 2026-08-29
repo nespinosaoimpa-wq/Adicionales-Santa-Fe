@@ -289,62 +289,143 @@ window.academyData = {
             color: "from-blue-600 to-indigo-700",
             summaries: [
                 {
-                    id: "sum-of1-1",
-                    title: "Unidad 1: Liderazgo Policial y Filosofía de Mando (ISEP Pág. 14)",
-                    readTime: "12 min",
+                    id: "sum-materia-1",
+                    title: "Materia 1: Liderazgo Policial, Conducción y Ética Profesional (ISEP Pág. 14-45)",
+                    readTime: "25 min",
                     content: `
-                        <h3>1. El Liderazgo como Desarrollo Continuo</h3>
-                        <p>El liderazgo policial no es un destino sino un camino de formación continua. Se define como <em>"la acción de influir audazmente para el logro de un objetivo común"</em> (Manual ISEP 2026, Pág. 14).</p>
+                        <h3>1. El Liderazgo como Proceso de Desarrollo Continuo</h3>
+                        <p>El liderazgo policial no se reduce a detentar un cargo o jerarquía reglamentaria. Es definido por el ISEP como <em>"la acción de influir audazmente para el logro de un objetivo común"</em>. El liderazgo moderno requiere guiar al personal subalterno promoviendo la adhesión voluntaria en lugar del mero acatamiento por temor a la sanción.</p>
                         
-                        <h3>2. Las Cuatro Virtudes Fundamentales de la Autoridad Real</h3>
-                        <p>La autoridad reglamentaria (formal) es insuficiente. La verdadera autoridad se construye mediante cuatro virtudes cardinales:</p>
+                        <h3>2. Las Cuatro Virtudes Cardinales del Mando Real</h3>
+                        <p>Para construir autoridad real (legítima), el oficial debe cultivar cuatro virtudes fundamentales:</p>
                         <ul>
-                            <li><strong>Prudencia:</strong> Discernimiento en la toma de decisiones bajo presión.</li>
-                            <li><strong>Justicia:</strong> Equidad en el trato al personal y a la ciudadanía.</li>
-                            <li><strong>Fortaleza:</strong> Firmeza ante la adversidad operativa.</li>
-                            <li><strong>Templanza:</strong> Autocontrol y templanza emocional en el ejercicio del mando.</li>
+                            <li><strong>Prudencia:</strong> Discernimiento para tomar la decisión correcta y legal bajo escenarios de extrema presión operativa.</li>
+                            <li><strong>Justicia:</strong> Equidad en el trato con el personal a cargo (ej. asignación de recargos y licencias) y absoluto respeto a las garantías ciudadanas.</li>
+                            <li><strong>Fortaleza:</strong> Firmeza de carácter, templanza y resiliencia ante la adversidad operativa o el riesgo físico.</li>
+                            <li><strong>Templanza:</strong> Autocontrol y moderación de los impulsos para evitar el abuso de autoridad y el uso desproporcionado de la fuerza.</li>
                         </ul>
 
-                        <h3>3. Las Tres "C" de la Conducción Policial</h3>
+                        <h3>3. Las Tres "C" del Paradigma de Conducción</h3>
                         <ul>
-                            <li><strong>Competencia:</strong> Sobre los recursos materiales y conocimientos normativos.</li>
-                            <li><strong>Confianza:</strong> En el personal subalterno y mandos superiores.</li>
-                            <li><strong>Compromiso:</strong> Con la misión institucional logrando la adhesión voluntaria.</li>
+                            <li><strong>Competencia:</strong> Dominio de los recursos materiales asignados y conocimiento profundo de la normativa vigente.</li>
+                            <li><strong>Confianza:</strong> Relación recíproca de respeto y credibilidad entre el mando superior y sus subalternos.</li>
+                            <li><strong>Compromiso:</strong> Involucramiento absoluto con la misión del servicio policial y el bienestar de la comunidad.</li>
+                        </ul>
+
+                        <h3>4. Normativa y Ética Internacional (Código de Conducta de la ONU)</h3>
+                        <p>Establecido mediante la Resolución 34/169 de la ONU. Obliga a todo funcionario policial a:</p>
+                        <ul>
+                            <li>Cumplir en todo momento los deberes de servicio impuestos por la ley.</li>
+                            <li>Respetar y proteger la dignidad humana y los derechos humanos fundamentales.</li>
+                            <li>No cometer, instigar ni tolerar ningún acto de tortura o tratos crueles, inhumanos o degradantes.</li>
+                            <li>Asegurar la plena protección de la salud de las personas bajo su custodia.</li>
                         </ul>
                     `
                 },
                 {
-                    id: "sum-of1-2",
-                    title: "Unidad 2: Gestión de Armas de Fuego y Evidencia (ISEP Pág. 69)",
-                    readTime: "15 min",
+                    id: "sum-materia-2",
+                    title: "Materia 2: Estatuto del Personal y Régimen Disciplinario (Ley N° 12.521 y Dec. 461/15)",
+                    readTime: "30 min",
                     content: `
-                        <h3>1. Protocolo Obligatorio de Secuestro de Armas de Fuego</h3>
-                        <p>Según el Manual de Procedimientos ISEP 2026 (Pág. 69), ante el secuestro de un arma en la vía pública:</p>
+                        <h3>1. Deberes Esenciales del Personal Policial (Ley N° 12.521)</h3>
+                        <p>Los deberes fundamentales del personal policial santafesino incluyen:</p>
                         <ul>
-                            <li><strong>Inspección y Descarga:</strong> Verificar de inmediato que no se encuentre cargada. En caso de descargarse en el lugar, <strong>debe realizarse obligatoriamente en presencia de testigos o filmando todo el procedimiento</strong>.</li>
-                            <li><strong>Fotografía de Cartuchería:</strong> Los cartuchos alojados en recámara o tambor deben fotografiarse e individualizarse antes de ser embalados.</li>
-                            <li><strong>Manipulación Segura:</strong> Levantar la evidencia siempre con guantes de nitrilo o látex, evitando alterar huellas dactilares en el disparador o corredera.</li>
-                            <li><strong>Ubicación Espacial:</strong> Documentar coordenadas geográficas (GPS), croquis y plano del lugar exacto del hallazgo.</li>
+                            <li><strong>Obediencia Jerárquica:</strong> Cumplir órdenes de superiores, siempre que no impliquen la comisión de un delito manifiesto.</li>
+                            <li><strong>Portación de Arma de Fuego:</strong> Obligación de portar el armamento reglamentario asignado y estar disponible para intervenir en resguardo de la vida/bienes, incluso franco de servicio.</li>
+                            <li><strong>Neutralidad Politica:</strong> Abstenerse de realizar actividades proselitistas o partidarias vistiendo uniforme o en servicio.</li>
                         </ul>
 
-                        <h3>2. Cadena de Custodia</h3>
-                        <p>Toda evidencia recolectada requiere el Formulario Oficial de Cadena de Custodia con firma del preventor, testigos y perito de recepción.</p>
+                        <h3>2. Clasificación de Faltas y Sanciones Administrativas</h3>
+                        <ul>
+                            <li><strong>Faltas Leves:</strong> Apercibimiento o Arresto de hasta 10 días. Ejemplos: desaliño menor en el uniforme, tardanzas o descuidos de menor cuantía.</li>
+                            <li><strong>Faltas Graves:</strong> Arresto de 11 a 30 días o Suspensión temporal de empleo y haberes. Ejemplos: negligencia en la custodia de elementos, malos tratos al personal subalterno o pérdida por descuido del arma/credencial.</li>
+                            <li><strong>Faltas Gravísimas:</strong> Destitución mediante Cesantía o Exoneración. Ejemplos: abandono de servicio, condena penal firme por delitos dolosos, o faltas éticas graves.</li>
+                        </ul>
+
+                        <h3>3. Cesantía vs. Exoneración (Efectos Previsionales)</h3>
+                        <p>Ambas son sanciones disciplinarias de destitución que causan la baja forzosa de la institución, pero con diferencias críticas:</p>
+                        <ul>
+                            <li><strong>Cesantía:</strong> Separación del cargo que permite al ex-agente conservar sus aportes previsionales acumulados para el cobro de una jubilación ordinaria.</li>
+                            <li><strong>Exoneración:</strong> Separación definitiva y máxima sanción de destitución. Acarrea la pérdida del estado policial y de la totalidad de los derechos previsionales inherentes a la fuerza (salvo pensión por derecho alimentario judicialmente decretado).</li>
+                        </ul>
+
+                        <h3>4. Sumarios Administrativos (Decreto N° 461/15)</h3>
+                        <p>Establece el procedimiento legal y transparente para investigar las faltas graves y gravísimas, garantizando el derecho a la defensa y los plazos de descargo del personal investigado.</p>
                     `
                 },
                 {
-                    id: "sum-of1-3",
-                    title: "Unidad 3: Régimen Disciplinario Policial y Decreto 461/15 (ISEP Pág. 99)",
-                    readTime: "15 min",
+                    id: "sum-materia-3",
+                    title: "Materia 3: Procedimientos Operativos en la Escena y Cadena de Custodia (ISEP)",
+                    readTime: "25 min",
                     content: `
-                        <h3>1. Clasificación de Faltas Administrativas (Ley 12.521)</h3>
+                        <h3>1. El Acta de Procedimiento Policial</h3>
+                        <p>Es el instrumento público fundamental (Art. 120, 121 y conc. del Código Procesal Penal de Santa Fe) que da inicio a las actuaciones sumariales y sustenta el proceso judicial.</p>
                         <ul>
-                            <li><strong>Faltas Leves:</strong> Apercibimiento o Arresto de hasta 10 días.</li>
-                            <li><strong>Faltas Graves:</strong> Arresto de 11 a 30 días, Suspensión de empleo.</li>
-                            <li><strong>Faltas Gravísimas:</strong> Destitución mediante <strong>Cesantía</strong> (separación con preservación de aportes) o <strong>Exoneración</strong> (separación definitiva con pérdida total de derechos previsionales de la fuerza).</li>
+                            <li><strong>Requisitos de Validez:</strong> Lugar, fecha, hora de inicio y cierre exacto. Datos de preventores intervinientes, descripción cronológica y detallada de lo sucedido (sin apreciaciones subjetivas).</li>
+                            <li><strong>Testigos de Actuación:</strong> Se requiere obligatoriamente la firma de al menos dos testigos independientes. De no ser posible por urgencia o peligro inminente, debe fundamentarse la razón exacta en el cuerpo del acta.</li>
                         </ul>
 
-                        <h3>2. Aplicación del Decreto N° 461/15</h3>
-                        <p>Reglamenta los sumarios administrativos preventivos ante la imputación de delitos dolosos o faltas gravísimas en servicio.</p>
+                        <h3>2. Protocolo de Preservación de la Escena del Hecho</h3>
+                        <p>Evitar la alteración, contaminación o pérdida de indicios es vital. Se aplica el sistema de Doble Perímetro (Cordón Doble):</p>
+                        <ul>
+                            <li><strong>Perímetro Interno (Zona de Exclusión):</strong> Área crítica donde se concentran los indicios y el hecho en sí. Solo ingresan peritos forenses oficiales con equipo de protección. Queda prohibido pisar, tocar, fumar o alterar la escena.</li>
+                            <li><strong>Perímetro Externo (Zona de Seguridad):</strong> Área de resguardo para patrulleros de apoyo, ambulancias, preventores que custodian el lugar y superiores a cargo.</li>
+                            <li><strong>Planilla de Registro:</strong> Es de carácter obligatorio registrar a toda persona que ingrese a la escena, detallando nombre, jerarquía, hora y motivo del ingreso.</li>
+                        </ul>
+
+                        <h3>3. Cadena de Custodia de Evidencias</h3>
+                        <p>Garantiza que la prueba presentada en juicio sea la misma recolectada en el hecho. Todo indicio secuestrado (vainas, estupefacientes, etc.) debe ser rotulado, embalado herméticamente de forma individual, y documentado en el Formulario de Cadena de Custodia desde el primer preventor hasta el perito de destino.</p>
+                    `
+                },
+                {
+                    id: "sum-materia-4",
+                    title: "Materia 4: Armamento, Portación y Uso Gradual de la Fuerza (Manual MIRAF)",
+                    readTime: "25 min",
+                    content: `
+                        <h3>1. Medidas de Seguridad Fundamentales (Manual MIRAF)</h3>
+                        <p>Normas obligatorias para el manejo de cualquier arma reglamentaria:</p>
+                        <ul>
+                            <li>Tratar toda arma de fuego como si estuviese cargada.</li>
+                            <li>Nunca dirigir la boca del cañón hacia personas a las que no se deba o pretenda disparar.</li>
+                            <li>Mantener el dedo índice estirado e inmóvil fuera del arco guardamonte hasta el momento en que se decida efectivamente efectuar el disparo.</li>
+                            <li>Cerciorarse del blanco y de lo que hay detrás o en sus proximidades antes de disparar.</li>
+                        </ul>
+
+                        <h3>2. Portación del Arma de Fuego en Franco de Servicio</h3>
+                        <p>De acuerdo a la Ley 12.521, la portación del armamento provisto por el Estado Provincial es un deber del estado policial, existiendo la obligación de intervenir en defensa de la vida y los bienes de la población las 24 horas del día.</p>
+
+                        <h3>3. Escala del Uso Progresivo y Gradual de la Fuerza</h3>
+                        <p>El empleo de la fuerza pública debe regirse por los principios de Legalidad, Necesidad y Proporcionalidad:</p>
+                        <ol>
+                            <li><strong>Presencia Policial:</strong> El oficial uniformado con actitud alerta e interrelación comunitaria (efecto disuasivo).</li>
+                            <li><strong>Comunicación Verbal (Persuasión):</strong> Empleo de órdenes verbales claras, diálogo y negociación (técnicas de desescalada).</li>
+                            <li><strong>Control Físico Activo:</strong> Empleo de técnicas de defensa personal policial para reducir o inmovilizar a sujetos hostiles no armados.</li>
+                            <li><strong>Armas Menos Letales:</strong> Uso de tonfa, esposas, gas pimienta, cartuchería anti-tumulto o armas de dispersión.</li>
+                            <li><strong>Fuerza Letal (Uso de Armas de Fuego):</strong> Último recurso y exclusivamente ante peligro inminente de vida para el oficial o para terceros civiles.</li>
+                        </ol>
+
+                        <h3>4. Protocolo de Descarga Segura de Armas Secuestradas</h3>
+                        <p>El arma secuestrada debe manipularse con guantes de látex/nitrilo. En caso de estar cargada, se debe realizar la descarga apuntando a una zona segura (tierra o cajón de arena), en presencia de testigos independientes o realizando registro fílmico continuo.</p>
+                    `
+                },
+                {
+                    id: "sum-materia-5",
+                    title: "Materia 5: Seguridad Interior, Cooperación y Derechos Humanos (Ley N° 24.059)",
+                    readTime: "20 min",
+                    content: `
+                        <h3>1. Ley Nacional de Seguridad Interior N° 24.059</h3>
+                        <p>Establece las bases jurídicas y orgánicas para la cooperación recíproca entre las fuerzas policiales provinciales (ej. Policía de Santa Fe) y las fuerzas federales (Gendarmería Nacional, Prefectura Naval, Policía Federal, PSA) bajo la dirección del Ministerio de Seguridad de la Nación.</p>
+                        <ul>
+                            <li><strong>Seguridad Interior vs. Defensa Nacional:</strong> La seguridad interior resguarda la paz social interna frente a delitos y disturbios (fuerzas de seguridad policiales). La defensa nacional protege la soberanía territorial ante agresiones militares extranjeras (fuerzas armadas).</li>
+                        </ul>
+
+                        <h3>2. Derechos Humanos del Detenido y Garantías Constitucionales</h3>
+                        <p>El accionar policial debe apegarse estrictamente a las garantías consagradas en la Constitución Nacional y tratados internacionales incorporados (Art. 75 inc. 22):</p>
+                        <ul>
+                            <li><strong>Trato Digno:</strong> Prohibición de torturas, vejaciones y tratos inhumanos a los arrestados o detenidos.</li>
+                            <li><strong>Derecho a la Información:</strong> Comunicar de manera inmediata al detenido los motivos de su detención y sus derechos procesales (designar defensor, abstenerse de declarar).</li>
+                            <li><strong>Comunicaciones Inmediatas:</strong> Informar de inmediato la detención al Fiscal de turno del MPA (Ministerio Público de la Acusación) y al Defensor Oficial para el control de la aprehensión.</li>
+                        </ul>
                     `
                 }
             ],
