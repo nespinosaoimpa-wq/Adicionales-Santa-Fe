@@ -174,6 +174,106 @@ window.academyLibraryItems = [
         color: "from-red-600/20 to-rose-600/20 text-red-400 border-rose-500/30",
         badge: "Seguridad Operativa",
         category: "manuales"
+    },
+    {
+        id: "oficial-prof-tec-cursado",
+        title: "Oficial - Esc. Profesional, Técnico y Servicios (Cursado)",
+        desc: "Manual del cursado de Oficial de Policía de Santa Fe para Escalafón Profesional, Técnico y Servicios.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/4-Oficial de Policia - Escalafon Profesional, Tecnico y Servicios.pdf",
+        icon: "school",
+        color: "from-cyan-600/20 to-blue-600/20 text-cyan-400 border-cyan-500/30",
+        badge: "Oficial Cursado",
+        category: "manuales-2026"
+    },
+    {
+        id: "acta-proc-ppt",
+        title: "Guía: Acta de Procedimiento Policial",
+        desc: "Redacción y formalidades reglamentarias del Acta de Procedimiento Penal y Operativo.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/ACTA DE PROCEDIMIENTO.pptx",
+        icon: "description",
+        color: "from-indigo-600/20 to-purple-600/20 text-indigo-400 border-indigo-500/30",
+        badge: "Procedimientos",
+        category: "manuales"
+    },
+    {
+        id: "apendice-fuerza",
+        title: "Apéndice: Uso Progresivo de la Fuerza",
+        desc: "Conceptos fundamentales y marco regulatorio del uso gradual y proporcional de la fuerza.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/Apendice - Uso progresivo y gradual de la fuerza.docx",
+        icon: "shield",
+        color: "from-red-600/20 to-orange-600/20 text-red-400 border-orange-500/30",
+        badge: "Uso de la Fuerza",
+        category: "manuales"
+    },
+    {
+        id: "bol-i",
+        title: "Bolilla I - Cursado Oficial de Policía",
+        desc: "Unidad temática I del cursado de ascenso obligatorio para oficiales.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/BOL I.pdf",
+        icon: "menu_book",
+        color: "from-amber-600/20 to-yellow-600/20 text-amber-400 border-amber-500/30",
+        badge: "Bolilla I",
+        category: "manuales"
+    },
+    {
+        id: "codigo-conducta-onu",
+        title: "Código de Conducta ONU para Funcionarios",
+        desc: "Normas de conducta y derechos humanos de Naciones Unidas para fuerzas de seguridad.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/Codigo-de-conducta-para-funcionarios-encargados-de-hacer-cumplir-la-ley-ONU.pdf",
+        icon: "public",
+        color: "from-sky-600/20 to-blue-600/20 text-sky-400 border-sky-500/30",
+        badge: "Derechos Humanos",
+        category: "manuales"
+    },
+    {
+        id: "ley-24059-cursado",
+        title: "Ley Nacional de Seguridad Interior N° 24.059",
+        desc: "Bases jurídicas y orgánicas del sistema de seguridad interior en la República Argentina.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/Ley Nacional de Seguridad Interior N 24.059.pdf",
+        icon: "gavel",
+        color: "from-slate-600/20 to-zinc-600/20 text-slate-300 border-slate-500/30",
+        badge: "Seguridad Interior",
+        category: "leyes"
+    },
+    {
+        id: "manual-leg-oficial-cursado",
+        title: "Manual Legislación Policial (Oficial de Policía)",
+        desc: "Compendio legal y normativo obligatorio para oficiales de la policía santafesina.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/Oficial de Policia - Manual Legislacion Policial.pdf",
+        icon: "menu_book",
+        color: "from-cyan-600/20 to-teal-600/20 text-cyan-300 border-cyan-500/30",
+        badge: "Legislación",
+        category: "manuales"
+    },
+    {
+        id: "doctrina-oficial-p1",
+        title: "Doctrina Policial (Parte 1) - Cursado Oficial",
+        desc: "Doctrina institucional, mando, ética profesional y reglamentos internos (Parte 1).",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/PARTE 1.pdf",
+        icon: "library_books",
+        color: "from-purple-600/20 to-indigo-600/20 text-purple-400 border-purple-500/30",
+        badge: "Doctrina P1",
+        category: "manuales"
+    },
+    {
+        id: "programa-materia",
+        title: "Programa de la Materia (Cursado Oficial)",
+        desc: "Objetivos de aprendizaje, unidades, bibliografía y pautas evaluativas del ISEP.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/PROGRAMA DE LA MATERIA.pdf",
+        icon: "list_alt",
+        color: "from-rose-600/20 to-pink-600/20 text-rose-400 border-rose-500/30",
+        badge: "Programa Cursado",
+        category: "manuales"
+    },
+    {
+        id: "protocolo-fuerza-cursado",
+        title: "Protocolo de Uso Progresivo de la Fuerza",
+        desc: "Disposiciones operativas oficiales y reglamentación práctica para el uso de la fuerza.",
+        file: "Material_de_Ascenso_ISEP/Cursado_Oficial/PROTOCOLO USO PROGRESIVO DE LA FUERZA.docx",
+        icon: "shield_with_heart",
+        color: "from-orange-600/20 to-red-600/20 text-orange-400 border-orange-500/30",
+        badge: "Protocolo Fuerza",
+        category: "manuales"
     }
 ];
 
