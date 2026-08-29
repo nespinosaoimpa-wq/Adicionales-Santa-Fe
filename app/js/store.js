@@ -322,6 +322,10 @@ window.store = {
     },
 
     async resetPassword(email) {
+        if (typeof auth === 'undefined' || !auth) {
+            showToast("⚠️ Recuperación de contraseña no disponible sin conexión.");
+            return;
+        }
         try {
             await auth.sendPasswordResetEmail(email);
             showToast(`Correo enviado a ${email}`);
@@ -564,12 +568,13 @@ window.store = {
                 }
             };
 
-            const safetyTimeout = setTimeout(() => {
-                console.warn("⚠️ store.init auth observer timed out (10s fallback)");
+            if (typeof auth === 'undefined' || !auth) {
+                console.warn("⚠️ Firebase Auth is not available. Skipping Firebase auth observer.");
                 this.authInitialized = true;
                 finishResolve();
                 if (window.router && window.router.initialized) router.handleRoute();
-            }, 10000);
+                return;
+            }
 
             auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .catch((e) => console.error("Persistence Error:", e))

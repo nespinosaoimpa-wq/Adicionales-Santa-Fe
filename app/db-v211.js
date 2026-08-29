@@ -164,7 +164,7 @@ const DB = {
     },
 
     async updateUserConfig(serviceConfig) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) return;
 
         // Update Firestore
@@ -175,7 +175,7 @@ const DB = {
     },
 
     async updateUser(profileData) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) return;
 
         await db.collection('users').doc(user.email).set({ ...profileData }, { merge: true });
@@ -379,7 +379,7 @@ const DB = {
 
     // --- SERVICES (The Core Hybrid Logic) ---
     subscribeToServices(callback) {
-        const currentUser = (typeof store !== 'undefined' && store.user) ? store.user : (typeof auth !== 'undefined' ? auth.currentUser : null);
+        const currentUser = (typeof store !== 'undefined' && store.user) ? store.user : ((typeof auth !== 'undefined' && auth) ? auth.currentUser : null);
         const email = currentUser ? (currentUser.email || '').toLowerCase().trim() : null;
         if (!email) {
             callback([]);
@@ -468,7 +468,7 @@ const DB = {
     },
 
     async addService(service) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) throw new Error("Debe iniciar sesión");
 
         try {
@@ -528,7 +528,7 @@ const DB = {
     },
 
     async deleteService(id) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) return;
 
         try {
@@ -588,7 +588,7 @@ const DB = {
 
     // --- EXPENSES ---
     subscribeToExpenses(callback) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) {
             callback([]);
             return () => { };
@@ -623,7 +623,7 @@ const DB = {
     },
 
     async addExpense(expense) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) throw new Error("Debe iniciar sesión");
 
         try {
@@ -655,7 +655,7 @@ const DB = {
     },
 
     async deleteExpense(id) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) return;
 
         try {
@@ -1019,7 +1019,7 @@ const DB = {
     },
 
     async addReview(rating, comment) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) {
             console.error("Review failed: No user logged in");
             return false;
