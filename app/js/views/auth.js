@@ -95,13 +95,14 @@ function renderLogin(container) {
             }
             // Clear specific PWA session cache keys
             sessionStorage.clear();
+            localStorage.clear(); // Clear all cached user profiles to ensure fresh reload
             showToast("✅ Listo. Recargando aplicación...");
             setTimeout(() => {
-                window.location.reload(true);
+                window.location.href = window.location.origin + window.location.pathname + '?t=' + Date.now() + window.location.hash;
             }, 1000);
         } catch (err) {
             console.error("Error destrabando app:", err);
-            window.location.reload(true);
+            window.location.href = window.location.origin + window.location.pathname + '?t=' + Date.now() + window.location.hash;
         }
     };
 
