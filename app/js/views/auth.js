@@ -121,9 +121,9 @@ function renderLogin(container) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                showToast("⚠️ Si Google no responde, escribe tu Email/Legajo abajo para entrar directo.");
+                window.promptFallbackGoogleEmail();
             }
-        }, 8000);
+        }, 5000);
 
         store.loginWithGoogle()
             .then((userCred) => {
@@ -145,9 +145,24 @@ function renderLogin(container) {
                     console.log("User closed Google popup");
                 } else {
                     console.warn("Google auth notice:", e);
-                    showToast("⚠️ Google no pudo iniciar sesión. Usa tu Email/Legajo abajo.");
+                    window.promptFallbackGoogleEmail();
                 }
             });
+    };
+
+    window.promptFallbackGoogleEmail = () => {
+        const inputEl = document.getElementById('email');
+        if (inputEl && inputEl.value && inputEl.value.trim()) {
+            store.loginByEmail(inputEl.value.trim());
+            return;
+        }
+        const userEmail = prompt("⚠️ El navegador o sistema bloqueó el inicio rápido de Google.\n\nIngresá tu Email o Legajo para entrar directo:");
+        if (userEmail && userEmail.trim()) {
+            if (inputEl) inputEl.value = userEmail.trim();
+            store.loginByEmail(userEmail.trim());
+        } else {
+            showToast("⚠️ Escribe tu Email/Legajo abajo y toca Ingresar.");
+        }
     };
 
     window.handleRecoverByEmail = (e) => {
