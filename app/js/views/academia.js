@@ -1372,13 +1372,45 @@ function renderAcademia(container) {
         }
 
         showToast("Sintetizando con Gemini IA...");
-        const prompt = `Generá un Resumen de Estudio sobre: "${topic}". Citá artículos o manuales de Santa Fe aplicables.`;
+        const prompt = `Generá un Resumen de Estudio extremadamente completo y estructurado sobre: "${topic}". Citá artículos o manuales de la Policía de Santa Fe (ej: Ley 12.521, Decreto 461/15, MIRAF, etc.) aplicables.`;
+        
+        let reportText = "";
         try {
-            const res = await window.callGeminiAPI(prompt);
-            alert(`--- RESUMEN EJECUTIVO IA ---\n\n${res}`);
+            reportText = await window.callGeminiAPI(prompt);
         } catch(err) {
-            alert(`Resumen Ejecutivo de ${topic}:\n\n- Fundamento Legal: Ley N° 12.521.\n- Procedimiento Operativo: Acta de constatación, doble encintado y testigos.\n- Sanciones aplicables ante faltas administrativas.`);
+            reportText = `### Resumen Ejecutivo de: ${topic}\n\n*   **Fundamento Legal Principal**: Ley de Personal Policial N° 12.521.\n*   **Procedimientos de Actuación**: Rigor formal en actas policiales de constatación, requerimiento obligatorio de dos testigos presenciales y preservación estricta de indicios mediante doble encintado.\n*   **Consecuencias Administrativas**: Sanciones aplicables según sumario bajo Decreto 461/15 ante incumplimiento de deberes policiales esenciales.`;
         }
+
+        // Show in a premium modal
+        const modal = document.createElement('div');
+        modal.id = 'premium-report-modal';
+        modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[9999] flex items-center justify-center p-4';
+        modal.innerHTML = `
+            <div class="glass-card-notebook p-6 max-w-lg w-full bg-slate-900 border border-white/10 rounded-3xl shadow-2xl flex flex-col max-h-[80vh] animate-fade-in text-left">
+                <div class="flex justify-between items-center pb-3 border-b border-white/5">
+                    <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm text-indigo-400">summarize</span>
+                        Resumen Ejecutivo IA: ${topic}
+                    </h3>
+                    <button onclick="this.closest('.fixed').remove()" class="size-8 rounded-full hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                        <span class="material-symbols-outlined text-sm">close</span>
+                    </button>
+                </div>
+                <div id="modal-report-content" class="flex-1 overflow-y-auto py-4 text-xs text-slate-200 leading-relaxed font-sans whitespace-pre-wrap select-text">
+${reportText}
+                </div>
+                <div class="pt-3 border-t border-white/5 flex gap-2">
+                    <button onclick="window.copyToClipboard(document.getElementById('modal-report-content').innerText, 'Resumen IA')" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5 shadow-lg shadow-indigo-600/20">
+                        <span class="material-symbols-outlined text-xs">content_copy</span>
+                        Copiar Resumen
+                    </button>
+                    <button onclick="document.getElementById('premium-report-modal').remove()" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95">
+                        Cerrar
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
     };
 
     window.generateISEPProject = async (e) => {
@@ -1501,15 +1533,30 @@ Falta de respuesta operativa inmediata en puntos calientes.
             .filter(item => window.academySelectedSources[item.id])
             .map(item => item.title);
 
+        let preIndexedContent = "";
+        const hierarchies = window.academyData?.hierarchies || [];
+        hierarchies.forEach(h => {
+            h.summaries.forEach(sum => {
+                preIndexedContent += `\n\n--- FUENTE OFICIAL ISEP [Jerarquía: ${h.title}] ---\nTema: ${sum.title}\nContenido:\n${sum.content.replace(/<[^>]*>/g, '').trim()}`;
+            });
+        });
+
         const activeCustomContents = customSources
             .filter(item => window.academySelectedSources[item.id] && item.content)
-            .map(item => `Documento: ${item.title}\nContenido:\n${item.content}`)
+            .map(item => `Documento subido por usuario: ${item.title}\nContenido:\n${item.content}`)
             .join('\n\n');
 
-        const system = `Sos el Tutor Centinela IA del ISEP. Respondés basándote en las fuentes oficiales: ${activeSourceTitles.join(', ')}. 
-A continuación tenés el texto completo de documentos/notas adicionales subidos por el usuario que también debés considerar si están activos:
+        const system = `Sos el Tutor Centinela IA de la Academia Policial (ISEP) de la Provincia de Santa Fe. Respondés basándote en las fuentes oficiales activas: ${activeSourceTitles.join(', ')}.
+A continuación tenés el contenido de referencia oficial que debés priorizar para dar respuestas precisas y apegadas a la doctrina de Santa Fe:
+${preIndexedContent}
+
+A continuación tenés el texto de documentos/notas adicionales subidos por el usuario que también debés considerar si están activos:
 ${activeCustomContents}
-Formatá con citas en el texto cuando uses este contenido.`;
+
+Reglas obligatorias de respuesta:
+1. Sé extremadamente profesional, preciso y descriptivo.
+2. Cita leyes (Ley 12.521, Decreto 461/15, Ley 14.283) y secciones específicas cuando corresponda.
+3. Si el usuario te hace una pregunta, utiliza la doctrina oficial del ISEP suministrada arriba para justificar y dar la respuesta exacta con terminología rioplatense y formal.`;
 
         try {
             const answer = await window.callGeminiAPI(query, system);
