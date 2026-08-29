@@ -32,12 +32,22 @@ const DB = {
 
         console.log("🔑 Initiating Google Auth via signInWithPopup...");
         return authInstance.signInWithPopup(provider).catch(error => {
-            console.warn("Popup closed, blocked, or failed; falling back to signInWithRedirect:", error);
-            const msg = error ? (error.code || error.message || '') : '';
-            if (msg.includes('popup-closed-by-user')) {
+            console.warn("Popup notice:", error);
+            const code = error ? (error.code || '') : '';
+            const msg = error ? (error.message || error.toString() || '') : '';
+            
+            if (code.includes('unauthorized-domain') || msg.includes('unauthorized-domain')) {
+                return Promise.reject(new Error("Dominio no autorizado en Firebase. Usa el campo Email/Legajo abajo para ingresar directo."));
+            }
+            if (code.includes('popup-closed-by-user') || msg.includes('popup-closed-by-user')) {
                 return Promise.reject(error);
             }
-            return authInstance.signInWithRedirect(provider);
+            if (code.includes('popup-blocked') || msg.includes('popup-blocked')) {
+                return Promise.reject(new Error("El navegador bloqueó la ventana emergente de Google. Usa tu Email/Legajo abajo."));
+            }
+            return authInstance.signInWithRedirect(provider).catch(redErr => {
+                return Promise.reject(new Error("No se pudo conectar con Google. Ingresá con tu Email/Legajo abajo."));
+            });
         });
     },
 
