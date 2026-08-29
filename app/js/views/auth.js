@@ -62,7 +62,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v535.10.19 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v535.10.34 (Suite Asistente Virtual PRO)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
@@ -70,10 +70,40 @@ function renderLogin(container) {
                         <span>•</span>
                         <a href="#legal/about" class="hover:underline">Sobre Nosotros</a>
                     </div>
+
+                    <button onclick="window.handleForceUpdateCache(event)" class="mt-6 px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-[9px] font-bold border border-red-500/20 transition-all uppercase tracking-wider mx-auto block active:scale-95">
+                        ⚠️ Destrabar App (Limpiar Caché y Actualizar)
+                    </button>
                 </div>
             </div>
         </div>
     `;
+
+    window.handleForceUpdateCache = async (e) => {
+        if (e) e.preventDefault();
+        showToast("⏳ Destrabando app, limpiando cachés...");
+        try {
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    await registration.unregister().catch(() => {});
+                }
+            }
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                await Promise.all(cacheNames.map(name => caches.delete(name))).catch(() => {});
+            }
+            // Clear specific PWA session cache keys
+            sessionStorage.clear();
+            showToast("✅ Listo. Recargando aplicación...");
+            setTimeout(() => {
+                window.location.reload(true);
+            }, 1000);
+        } catch (err) {
+            console.error("Error destrabando app:", err);
+            window.location.reload(true);
+        }
+    };
 
     window.handleGoogleLogin = (event) => {
         const btn = (event && event.currentTarget) ? event.currentTarget : document.querySelector('button[onclick*="handleGoogleLogin"]');
@@ -82,8 +112,22 @@ function renderLogin(container) {
             btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
         }
 
+        let resolved = false;
+
+        // Reset button and suggest fallback if it takes too long (e.g. redirect blocked silently or popup disabled)
+        setTimeout(() => {
+            if (!resolved) {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
+                }
+                showToast("⚠️ Si Google no responde, escribe tu Email/Legajo abajo para entrar directo.");
+            }
+        }, 8000);
+
         store.loginWithGoogle()
             .then((userCred) => {
+                resolved = true;
                 console.log("✅ Google Auth Completed:", userCred?.user?.email);
                 showToast("¡Bienvenido!");
                 if (window.router) {
@@ -91,6 +135,7 @@ function renderLogin(container) {
                 }
             })
             .catch(e => {
+                resolved = true;
                 if (btn) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
@@ -100,6 +145,7 @@ function renderLogin(container) {
                     console.log("User closed Google popup");
                 } else {
                     console.warn("Google auth notice:", e);
+                    showToast("⚠️ Google no pudo iniciar sesión. Usa tu Email/Legajo abajo.");
                 }
             });
     };
