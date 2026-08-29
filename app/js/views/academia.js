@@ -24,6 +24,15 @@ function renderAcademia(container) {
     }
 
     // --- STATE SYSTEM ---
+    if (!window.academySelectedSources) {
+        window.academySelectedSources = {
+            'ley-12521': true,
+            'decreto-461-15': true,
+            'ley-14283': false,
+            'decreto-411-26': false,
+            'miraf': false
+        };
+    }
     const hierarchyId = localStorage.getItem('academy_setup_hierarchy') || data.hierarchies[0].id;
     window.academySelectedHierarchy = hierarchyId;
     window.academyActiveTab = window.academyActiveTab || 'studio';
