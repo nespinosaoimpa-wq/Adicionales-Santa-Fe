@@ -1086,43 +1086,107 @@ function renderAcademia(container) {
     };
 
     window.showAddSourceModal = () => {
+        window.activeModalTab = 'file'; // 'file' | 'note'
+        window.tempUploadedFileContent = '';
+        window.tempUploadedFileName = '';
+
         const modal = document.createElement('div');
+        modal.id = 'add-source-modal-overlay';
         modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[999] flex items-center justify-center p-4';
-        modal.innerHTML = `
-            <div class="glass-card-notebook p-6 max-w-sm w-full bg-slate-900 border border-white/10 rounded-3xl shadow-2xl space-y-4 animate-fade-in">
-                <div class="flex justify-between items-center">
-                    <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
-                        <span class="material-symbols-outlined text-sm text-indigo-400">upload_file</span>
-                        Añadir Fuente / Nota
-                    </h3>
-                    <button onclick="this.closest('.fixed').remove()" class="size-8 rounded-full hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
-                        <span class="material-symbols-outlined text-sm">close</span>
-                    </button>
-                </div>
-
-                <!-- Drag & Drop Zone -->
-                <div class="border-2 border-dashed border-white/10 hover:border-indigo-500/40 rounded-2xl p-4 text-center cursor-pointer transition-all relative group bg-slate-950/40">
-                    <input type="file" id="newSourceFile" accept=".txt,.pdf,.md" onchange="window.handleSourceFileUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer">
-                    <span class="material-symbols-outlined text-2xl text-indigo-400 mb-1 group-hover:scale-110 transition-transform">upload_file</span>
-                    <p class="text-[10px] text-slate-300 font-bold">Subir archivo (PDF, TXT, MD)</p>
-                    <p class="text-[8px] text-slate-500 mt-0.5">Extrae texto automáticamente</p>
-                </div>
-
-                <div class="space-y-3">
-                    <div>
-                        <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Título de la nota o circular</label>
-                        <input type="text" id="newSourceTitle" placeholder="Ej: Circular 01/26 - Recargo de Servicios" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500 font-bold">
+        
+        window.renderModalInner = () => {
+            modal.innerHTML = `
+                <div class="glass-card-notebook p-6 max-w-sm w-full bg-slate-900 border border-white/10 rounded-3xl shadow-2xl space-y-4 animate-fade-in text-left">
+                    <!-- Modal Header -->
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-sm text-indigo-400">library_add</span>
+                            Nueva Fuente de Estudio
+                        </h3>
+                        <button onclick="this.closest('.fixed').remove()" class="size-8 rounded-full hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                            <span class="material-symbols-outlined text-sm">close</span>
+                        </button>
                     </div>
-                    <div>
-                        <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Contenido doctrinal o reglamentario</label>
-                        <textarea id="newSourceContent" placeholder="Pegá, redactá o subí un archivo para rellenar este campo..." class="w-full h-28 px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500 resize-none font-sans"></textarea>
+
+                    <!-- Modal Navigation Tabs -->
+                    <div class="flex p-1 bg-slate-950/80 rounded-xl border border-white/5 gap-1 text-[9px] font-black uppercase tracking-wider">
+                        <button onclick="window.switchModalTab('file')" class="flex-1 py-2 text-center rounded-lg transition-all ${window.activeModalTab === 'file' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}">
+                            📂 Subir Archivo
+                        </button>
+                        <button onclick="window.switchModalTab('note')" class="flex-1 py-2 text-center rounded-lg transition-all ${window.activeModalTab === 'note' ? 'bg-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-white'}">
+                            ✍️ Nota Manual
+                        </button>
                     </div>
-                    <button onclick="window.saveCustomSource(this)" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-600/20">
-                        Indexar en RAG Policial
-                    </button>
+
+                    <!-- Tab Content Container -->
+                    <div class="space-y-4 pt-1">
+                        ${window.activeModalTab === 'file' ? `
+                            <!-- Tab File Upload -->
+                            <div class="space-y-3">
+                                <p class="text-[9px] text-slate-400 leading-relaxed">Subí una circular, decreto o apunte en PDF o TXT. El sistema extraerá el texto automáticamente para que la IA pueda leerlo.</p>
+                                
+                                ${window.tempUploadedFileName ? `
+                                    <!-- File Details Card (Visible after upload) -->
+                                    <div class="p-4 rounded-xl border border-emerald-500/20 bg-emerald-500/5 flex items-center justify-between animate-scale-in">
+                                        <div class="flex items-center gap-3 min-w-0">
+                                            <span class="material-symbols-outlined text-2xl text-emerald-400 shrink-0">check_circle</span>
+                                            <div class="min-w-0">
+                                                <p class="text-[10px] font-bold text-white truncate max-w-[160px]">${window.tempUploadedFileName}</p>
+                                                <p class="text-[8px] text-emerald-400 font-bold uppercase tracking-wider">Archivo cargado e indexado</p>
+                                            </div>
+                                        </div>
+                                        <button onclick="window.clearUploadedFile()" class="size-6 text-slate-500 hover:text-white flex items-center justify-center rounded-full hover:bg-white/5 shrink-0">
+                                            <span class="material-symbols-outlined text-sm">close</span>
+                                        </button>
+                                    </div>
+                                ` : `
+                                    <!-- Drag & Drop Zone -->
+                                    <div class="border-2 border-dashed border-white/10 hover:border-indigo-500/40 rounded-2xl p-6 text-center cursor-pointer transition-all relative group bg-slate-950/40">
+                                        <input type="file" id="newSourceFile" accept=".txt,.pdf,.md" onchange="window.handleSourceFileUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer">
+                                        <span class="material-symbols-outlined text-3xl text-indigo-400 mb-1 group-hover:scale-110 transition-transform">upload_file</span>
+                                        <p class="text-[10px] text-slate-300 font-bold">Seleccioná un archivo de tu equipo</p>
+                                        <p class="text-[8px] text-slate-500 mt-0.5">Soporta PDF, TXT y Markdown (.md)</p>
+                                    </div>
+                                `}
+                                
+                                <button onclick="window.saveCustomFileSource()" ${!window.tempUploadedFileName ? 'disabled' : ''} class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-500 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-600/20">
+                                    Indexar Archivo en IA
+                                </button>
+                            </div>
+                        ` : `
+                            <!-- Tab Manual Note -->
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Título de la nota o circular</label>
+                                    <input type="text" id="newSourceTitle" placeholder="Ej: Circular 01/26 - Recargo de Servicios" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500 font-bold">
+                                </div>
+                                <div>
+                                    <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Contenido doctrinal o reglamentario</label>
+                                    <textarea id="newSourceContent" placeholder="Pegá o redactá las disposiciones oficiales de la fuerza aquí..." class="w-full h-28 px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500 resize-none font-sans"></textarea>
+                                </div>
+                                <button onclick="window.saveCustomNoteSource()" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-600/20">
+                                    Indexar Nota en IA
+                                </button>
+                            </div>
+                        `}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        };
+
+        window.switchModalTab = (tab) => {
+            window.activeModalTab = tab;
+            window.renderModalInner();
+        };
+
+        window.clearUploadedFile = () => {
+            window.tempUploadedFileContent = '';
+            window.tempUploadedFileName = '';
+            window.renderModalInner();
+            showToast("Archivo removido");
+        };
+
+        window.renderModalInner();
         document.body.appendChild(modal);
     };
 
@@ -1130,16 +1194,12 @@ function renderAcademia(container) {
         const file = event.target.files[0];
         if (!file) return;
 
-        const titleInput = document.getElementById('newSourceTitle');
-        if (titleInput) {
-            titleInput.value = file.name.replace(/\.[^/.]+$/, "");
-        }
-
         if (file.name.endsWith('.txt') || file.name.endsWith('.md')) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                const textarea = document.getElementById('newSourceContent');
-                if (textarea) textarea.value = e.target.result;
+                window.tempUploadedFileName = file.name;
+                window.tempUploadedFileContent = e.target.result;
+                window.renderModalInner();
                 showToast("✓ Archivo de texto cargado");
             };
             reader.readAsText(file);
@@ -1178,9 +1238,9 @@ function renderAcademia(container) {
                     );
                 }
                 Promise.all(textPromises).then(texts => {
-                    const fullText = texts.join('\n\n');
-                    const textarea = document.getElementById('newSourceContent');
-                    if (textarea) textarea.value = fullText;
+                    window.tempUploadedFileName = file.name;
+                    window.tempUploadedFileContent = texts.join('\n\n');
+                    window.renderModalInner();
                     showToast(`✓ PDF procesado (${pagesToRead} pgs)`);
                 });
             }).catch(err => {
@@ -1188,6 +1248,72 @@ function renderAcademia(container) {
             });
         };
         reader.readAsArrayBuffer(file);
+    };
+
+    window.saveCustomFileSource = () => {
+        if (!window.tempUploadedFileName || !window.tempUploadedFileContent) {
+            showToast("Por favor carga un archivo válido.");
+            return;
+        }
+
+        let custom = [];
+        try {
+            custom = JSON.parse(localStorage.getItem('academy_custom_sources') || '[]');
+        } catch(e) {}
+
+        const newSource = {
+            id: 'custom-' + Date.now(),
+            title: window.tempUploadedFileName.replace(/\.[^/.]+$/, ""),
+            desc: window.tempUploadedFileContent.slice(0, 80) + '...',
+            content: window.tempUploadedFileContent,
+            file: '#',
+            icon: 'upload_file',
+            color: 'from-emerald-600/20 to-teal-600/20 text-emerald-400 border-emerald-500/30',
+            badge: 'Archivo Subido',
+            category: 'custom'
+        };
+
+        custom.push(newSource);
+        localStorage.setItem('academy_custom_sources', JSON.stringify(custom));
+        window.academySelectedSources[newSource.id] = true;
+        
+        document.getElementById('add-source-modal-overlay')?.remove();
+        showToast("✓ Archivo indexado en RAG");
+        renderAcademia(viewContainer);
+    };
+
+    window.saveCustomNoteSource = () => {
+        const title = document.getElementById('newSourceTitle')?.value.trim();
+        const content = document.getElementById('newSourceContent')?.value.trim();
+        if (!title || !content) {
+            showToast("Por favor completa el título y el contenido.");
+            return;
+        }
+
+        let custom = [];
+        try {
+            custom = JSON.parse(localStorage.getItem('academy_custom_sources') || '[]');
+        } catch(e) {}
+
+        const newSource = {
+            id: 'custom-' + Date.now(),
+            title: title,
+            desc: content.slice(0, 80) + '...',
+            content: content,
+            file: '#',
+            icon: 'note_add',
+            color: 'from-purple-600/20 to-indigo-600/20 text-purple-400 border-purple-500/30',
+            badge: 'Nota Manual',
+            category: 'custom'
+        };
+
+        custom.push(newSource);
+        localStorage.setItem('academy_custom_sources', JSON.stringify(custom));
+        window.academySelectedSources[newSource.id] = true;
+        
+        document.getElementById('add-source-modal-overlay')?.remove();
+        showToast("✓ Nota indexada en RAG");
+        renderAcademia(viewContainer);
     };
 
     window.saveCustomSource = (btn) => {
