@@ -1,997 +1,1004 @@
 /**
- * Adicionales Santa Fe - Campus de Ascenso Policial (Academia PRO + Gemini AI)
- * Inspirado en Google NotebookLM
+ * Adicionales Santa Fe - Campus de Ascenso Policial (NotebookLM Studio PRO)
+ * La Mejor Plataforma de Estudio y Herramientas del Mundo para Ascenso Policial
+ * Doctrina Oficial ISEP 2026 y Ley 12.521 de la Provincia de Santa Fe
  */
-
-const academyLibraryItems = [
-    {
-        id: "manual-isep",
-        title: "Manual Oficial ISEP 2026",
-        desc: "344 páginas de doctrina policial para Oficiales (Esc. General).",
-        file: "docs/3- Oficial de Policía - Escalafón General.pdf",
-        icon: "menu_book",
-        color: "from-blue-600/20 to-indigo-600/20 text-indigo-400 border-indigo-500/30",
-        badge: "Doctrina Oficial"
-    },
-    {
-        id: "ley-12521",
-        title: "Ley de Personal Policial N° 12.521",
-        desc: "Estatuto, deberes, derechos, ascensos y régimen disciplinario de Santa Fe.",
-        file: "docs/marco_legal_policial_2026.md",
-        icon: "gavel",
-        color: "from-amber-600/20 to-orange-600/20 text-amber-400 border-amber-500/30",
-        badge: "Régimen Disciplinario"
-    },
-    {
-        id: "ley-14283",
-        title: "Ley de Adicionales & Jubilaciones N° 14.283",
-        desc: "Reforma previsional de Santa Fe y escalas de servicios adicionales.",
-        file: "docs/Ley 14283.pdf",
-        icon: "shield_person",
-        color: "from-emerald-600/20 to-teal-600/20 text-emerald-400 border-emerald-500/30",
-        badge: "Servicios Adicionales"
-    },
-    {
-        id: "miraf",
-        title: "Manual de Armamento y Tiro MIRAF",
-        desc: "Normativa oficial para el uso seguro y portación de armas reglamentarias.",
-        file: "docs/2012MIRAF.pdf",
-        icon: "explosion",
-        color: "from-red-600/20 to-rose-600/20 text-red-400 border-rose-500/30",
-        badge: "Seguridad Operativa"
-    },
-    {
-        id: "decreto-411",
-        title: "Escala Salarial Decreto N° 411/26",
-        desc: "Planilla de sueldos básicos y adicionales vigentes a partir de 2026.",
-        file: "docs/DEC-2026-00000411-APPSF-PE (1).pdf",
-        icon: "payments",
-        color: "from-cyan-600/20 to-blue-600/20 text-cyan-400 border-cyan-500/30",
-        badge: "Sueldos y Tarifas"
-    }
-];
 
 function renderAcademia(container) {
     if (!container) container = document.getElementById('app');
     let viewContainer = container;
 
     const data = window.academyData;
-    if (!data) {
-        container.innerHTML = `<div class="p-6 text-center text-slate-400">Cargando datos de la Academia...</div>`;
+    
+    // --- LOAD STATIC AND CUSTOM USER SOURCES ---
+    let customSources = [];
+    try {
+        customSources = JSON.parse(localStorage.getItem('academy_custom_sources') || '[]');
+    } catch(e) {}
+    
+    const libraryItems = [...(window.academyLibraryItems || []), ...customSources];
+
+    if (!data || !data.hierarchies) {
+        container.innerHTML = `<div class="p-6 text-center text-slate-400">Cargando datos del NotebookLM...</div>`;
         return;
     }
 
-    function renderAcademyOnboarding(container) {
-        window.academySetupStep = window.academySetupStep || 1;
-        window.academyTempHierarchy = window.academyTempHierarchy || 'oficial-subinspector';
-        window.academyTempPlan = window.academyTempPlan || 'intensivo';
-        window.academyTempTime = window.academyTempTime || '30';
-
-        const totalSteps = 3;
-        const progressPct = Math.round((window.academySetupStep / totalSteps) * 100);
-
-        let stepContent = '';
-        if (window.academySetupStep === 1) {
-            stepContent = `
-                <div class="space-y-4">
-                    <div class="text-center mb-6">
-                        <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">¿Qué concurso estás rindiendo?</h2>
-                        <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-wider">Elegí tu jerarquía de ascenso</p>
-                    </div>
-                    <div class="space-y-2.5 max-h-[300px] overflow-y-auto pr-1 scrollbar-none">
-                        ${data.hierarchies.map(h => {
-                            const isSelected = window.academyTempHierarchy === h.id;
-                            return `
-                                <div onclick="window.selectOnboardingHierarchy('${h.id}')"
-                                    class="p-4 rounded-2xl border transition-all active:scale-[0.98] flex items-center justify-between cursor-pointer ${isSelected ? 'bg-gradient-to-r ' + h.color + '/15 to-slate-900 border-primary text-white shadow-lg' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10 dark:hover:bg-slate-900/40'}">
-                                    <div class="flex items-center gap-3">
-                                        <span class="material-symbols-outlined text-lg ${isSelected ? 'text-primary' : 'text-slate-500'}">${h.icon}</span>
-                                        <div>
-                                            <p class="text-xs font-black text-slate-900 dark:text-slate-100">${h.title}</p>
-                                            <p class="text-[9px] text-slate-400 mt-0.5">${h.subtitle}</p>
-                                        </div>
-                                    </div>
-                                    ${isSelected ? '<span class="material-symbols-outlined text-primary text-sm">check_circle</span>' : ''}
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>
-            `;
-        } else if (window.academySetupStep === 2) {
-            const plans = [
-                { id: 'intensivo', title: 'Plan Intensivo (Recomendado)', desc: 'Enfoque ágil basado en autoevaluaciones rápidas, simuladores oficiales de examen y tarjetas dinámicas (Flashcards).', icon: 'offline_bolt', color: 'from-amber-500/20 to-orange-500/20 text-amber-400 border-amber-500/30' },
-                { id: 'teorico', title: 'Plan Teórico Completo', desc: 'Enfoque clásico centrado en la lectura detallada de resúmenes de estudio, glosarios legislativos y descarga de manuales.', icon: 'auto_stories', color: 'from-blue-500/20 to-indigo-500/20 text-blue-400 border-blue-500/30' },
-                { id: 'practico', title: 'Plan Práctico / Operativo', desc: 'Enfoque procedimental enfocado en flujogramas interactivos, protocolos de actuación policial (armas, escena) y casos.', icon: 'shield', color: 'from-emerald-500/20 to-teal-500/20 text-emerald-400 border-emerald-500/30' }
-            ];
-            stepContent = `
-                <div class="space-y-4">
-                    <div class="text-center mb-6">
-                        <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">¿Cuál es tu método de estudio?</h2>
-                        <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-wider">Elegí tu ruta de aprendizaje</p>
-                    </div>
-                    <div class="space-y-2.5">
-                        ${plans.map(p => {
-                            const isSelected = window.academyTempPlan === p.id;
-                            return `
-                                <div onclick="window.selectOnboardingPlan('${p.id}')"
-                                    class="p-4 rounded-2xl border transition-all active:scale-[0.98] flex items-start gap-4 cursor-pointer ${isSelected ? 'bg-gradient-to-r ' + p.color + ' to-slate-900 border-primary text-white shadow-lg' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10 dark:hover:bg-slate-900/40'}">
-                                    <div class="size-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                                        <span class="material-symbols-outlined text-lg">${p.icon}</span>
-                                    </div>
-                                    <div class="min-w-0">
-                                        <p class="text-xs font-black text-slate-900 dark:text-slate-100 flex items-center gap-1.5">
-                                            ${p.title}
-                                            ${isSelected ? '<span class="material-symbols-outlined text-primary text-xs">check_circle</span>' : ''}
-                                        </p>
-                                        <p class="text-[9px] text-slate-400 leading-normal mt-1">${p.desc}</p>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>
-            `;
-        } else if (window.academySetupStep === 3) {
-            const times = [
-                { id: '15', title: '15 Minutos al día (Plan Express)', desc: 'Perfecto para repasar en guardias, recorridos o momentos de descanso.', badge: 'Rápido', icon: 'alarm_on' },
-                { id: '30', title: '30 Minutos al día (Plan Equilibrado)', desc: 'El ritmo ideal sugerido para cubrir todo el temario oficial del ISEP.', badge: 'Sugerido', icon: 'query_builder' },
-                { id: '60', title: '1 Hora o más al día (Inmersión Total)', desc: 'Para oficiales que buscan el mejor promedio en el orden de mérito.', badge: 'Foco', icon: 'fitness_center' }
-            ];
-            stepContent = `
-                <div class="space-y-4">
-                    <div class="text-center mb-6">
-                        <h2 class="text-base font-black text-slate-900 dark:text-white leading-tight">¿De cuánto tiempo disponés?</h2>
-                        <p class="text-[10px] text-slate-400 mt-1 uppercase font-bold tracking-wider">Ajustaremos los repasos a tu tiempo libre</p>
-                    </div>
-                    <div class="space-y-2.5">
-                        ${times.map(t => {
-                            const isSelected = window.academyTempTime === t.id;
-                            return `
-                                <div onclick="window.selectOnboardingTime('${t.id}')"
-                                    class="p-4 rounded-2xl border transition-all active:scale-[0.98] flex items-start gap-4 cursor-pointer ${isSelected ? 'bg-gradient-to-r from-purple-500/20 to-slate-900 border-primary text-white shadow-lg' : 'bg-white/5 text-slate-400 border-white/5 hover:bg-white/10 dark:hover:bg-slate-900/40'}">
-                                    <div class="size-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                                        <span class="material-symbols-outlined text-lg text-purple-400">${t.icon}</span>
-                                    </div>
-                                    <div class="min-w-0 flex-1">
-                                        <div class="flex items-center justify-between">
-                                            <p class="text-xs font-black text-slate-900 dark:text-slate-100">${t.title}</p>
-                                            <span class="px-2 py-0.5 rounded-full text-[7px] font-black uppercase ${isSelected ? 'bg-primary text-white' : 'bg-white/10 text-slate-400'}">${t.badge}</span>
-                                        </div>
-                                        <p class="text-[9px] text-slate-400 leading-normal mt-1">${t.desc}</p>
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        container.innerHTML = `
-            <!-- Onboarding Wizard Header -->
-            <header class="sticky top-0 z-50 bg-background-light/95 dark:bg-[#0c101b]/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <button onclick="router.navigateTo('#asistente')" class="size-9 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
-                        <span class="material-symbols-outlined text-lg">arrow_back</span>
-                    </button>
-                    <div>
-                        <h1 class="text-xs font-black text-slate-900 dark:text-white tracking-wide uppercase italic flex items-center gap-2">
-                            Configuración de la Academia
-                        </h1>
-                        <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest">
-                            Paso ${window.academySetupStep} de ${totalSteps}
-                        </p>
-                    </div>
-                </div>
-            </header>
-
-            <main class="p-4 space-y-6 max-w-md mx-auto animate-fade-in pb-24">
-                <!-- Progress Bar -->
-                <div class="h-1.5 w-full bg-slate-900/60 dark:bg-white/5 rounded-full overflow-hidden border border-white/5">
-                    <div class="h-full bg-gradient-to-r from-primary to-purple-500 rounded-full transition-all duration-300" style="width: ${progressPct}%"></div>
-                </div>
-
-                <!-- Step Content Card -->
-                <div class="glass-card p-6 rounded-[2.5rem] border border-white/5 bg-gradient-to-b from-slate-900/50 to-slate-950/50 shadow-2xl relative overflow-hidden">
-                    <div class="absolute -top-12 -left-12 size-24 bg-primary/10 rounded-full blur-xl"></div>
-                    <div class="absolute -bottom-12 -right-12 size-24 bg-purple-500/10 rounded-full blur-xl"></div>
-                    
-                    ${stepContent}
-                </div>
-
-                <!-- Wizard Actions -->
-                <div class="flex items-center gap-4">
-                    ${window.academySetupStep > 1 ? `
-                        <button onclick="window.academyPrevStep()" class="flex-1 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 text-slate-900 dark:text-white font-bold text-xs uppercase tracking-wider transition-all active:scale-95">
-                            Atrás
-                        </button>
-                    ` : ''}
-                    
-                    ${window.academySetupStep < 3 ? `
-                        <button onclick="window.academyNextStep()" class="flex-1 py-3.5 rounded-2xl bg-primary text-white font-bold text-xs uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-primary/20">
-                            Siguiente
-                        </button>
-                    ` : `
-                        <button onclick="window.finishAcademySetup()" class="flex-1 py-3.5 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-xs uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-emerald-500/20">
-                            Finalizar y Comenzar Plan
-                        </button>
-                    `}
-                </div>
-            </main>
-            \${renderBottomNav('asistente')}
-        `;
-
-        // Register step handlers
-        window.selectOnboardingHierarchy = (id) => {
-            window.academyTempHierarchy = id;
-            renderAcademyOnboarding(container);
-        };
-        window.selectOnboardingPlan = (id) => {
-            window.academyTempPlan = id;
-            renderAcademyOnboarding(container);
-        };
-        window.selectOnboardingTime = (id) => {
-            window.academyTempTime = id;
-            renderAcademyOnboarding(container);
-        };
-        window.academyNextStep = () => {
-            window.academySetupStep++;
-            renderAcademyOnboarding(container);
-        };
-        window.academyPrevStep = () => {
-            window.academySetupStep--;
-            renderAcademyOnboarding(container);
-        };
-        window.finishAcademySetup = () => {
-            localStorage.setItem('academy_setup_hierarchy', window.academyTempHierarchy);
-            localStorage.setItem('academy_setup_plan', window.academyTempPlan);
-            localStorage.setItem('academy_setup_time', window.academyTempTime);
-            localStorage.setItem('academy_setup_completed', 'true');
-            // Clean temp
-            window.academySetupStep = 1;
-            // Set current state active
-            window.academySelectedHierarchy = window.academyTempHierarchy;
-            
-            // Default tab based on plan
-            if (window.academyTempPlan === 'intensivo') window.academyActiveTab = 'flashcards';
-            else if (window.academyTempPlan === 'teorico') window.academyActiveTab = 'summaries';
-            else window.academyActiveTab = 'mindmaps';
-
-            showToast("✨ Plan de estudio configurado con éxito!");
-            renderAcademia(container);
-        };
-    }
-
-    // Check if Onboarding Setup is completed
-    const isSetupCompleted = localStorage.getItem('academy_setup_completed') === 'true';
-    if (!isSetupCompleted) {
-        renderAcademyOnboarding(container);
-        return;
-    }
-
-    // Load configurations from setup
+    // --- STATE SYSTEM ---
     const hierarchyId = localStorage.getItem('academy_setup_hierarchy') || data.hierarchies[0].id;
-    const planId = localStorage.getItem('academy_setup_plan') || 'intensivo';
-    const timeId = localStorage.getItem('academy_setup_time') || '30';
-
-    // State Initialization
     window.academySelectedHierarchy = hierarchyId;
-    window.academyActiveTab = window.academyActiveTab || (planId === 'intensivo' ? 'flashcards' : planId === 'teorico' ? 'summaries' : 'mindmaps');
+    window.academyActiveTab = window.academyActiveTab || 'studio';
     window.currentExamAnswers = window.currentExamAnswers || {};
     window.examSubmitted = window.examSubmitted || false;
+    
+    // Leitner system flashcard states
     window.currentFlashcardIndex = window.currentFlashcardIndex || 0;
     window.flashcardFlipped = window.flashcardFlipped || false;
-    window.currentPlayingUnitId = window.currentPlayingUnitId || null;
+    window.flashcardLeitnerState = window.flashcardLeitnerState || {}; // cardId -> 'easy' | 'medium' | 'hard'
 
-    // Source Selection (Default first 2 checked)
-    if (!window.academySelectedSources) {
-        window.academySelectedSources = {
-            'manual-isep': true,
-            'ley-12521': true,
-            'ley-14283': false,
-            'miraf': false,
-            'decreto-411': false
-        };
+    window.currentPlayingUnitId = window.currentPlayingUnitId || null;
+    window.isPodcastPlaying = window.isPodcastPlaying || false;
+    window.podcastSpeed = window.podcastSpeed || 1;
+    window.currentSlideIndex = window.currentSlideIndex || 0;
+    window.slideTheme = window.slideTheme || 'midnight'; // 'midnight' | 'sepia' | 'slate'
+    window.librarySearchQuery = window.librarySearchQuery || '';
+    window.libraryActiveFilter = window.libraryActiveFilter || 'all';
+
+    // Interactive video step state
+    window.activeVideoStep = window.activeVideoStep || 1;
+
+    // Gamification states (Local Storage)
+    let studyStreak = parseInt(localStorage.getItem('academy_study_streak') || '0', 10);
+    const lastStudyDate = localStorage.getItem('academy_last_study_date');
+    const todayStr = new Date().toDateString();
+
+    if (lastStudyDate !== todayStr) {
+        if (lastStudyDate === new Date(Date.now() - 86400000).toDateString()) {
+            studyStreak++;
+        } else if (lastStudyDate !== todayStr) {
+            studyStreak = 1;
+        }
+        localStorage.setItem('academy_study_streak', studyStreak.toString());
+        localStorage.setItem('academy_last_study_date', todayStr);
     }
 
     const hierarchy = data.hierarchies.find(h => h.id === window.academySelectedHierarchy) || data.hierarchies[0];
-    const isPro = store.user?.pro_member || store.user?.role === 'admin';
 
-    // CSS Styles injected inline for 3D Flashcards and animations
     const styleBlock = `
         <style>
-            .flashcard-wrapper {
-                perspective: 1200px;
+            .notebook-split-container {
+                display: grid;
+                grid-template-columns: 320px 1fr;
+                min-height: calc(100vh - 4rem);
+                background-color: #06080e;
             }
-            .flashcard-card {
-                transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-                transform-style: preserve-3d;
+            @media (max-width: 1024px) {
+                .notebook-split-container {
+                    grid-template-columns: 1fr;
+                }
+                .notebook-sidebar {
+                    display: none;
+                }
             }
-            .flashcard-card.is-flipped {
-                transform: rotateY(180deg);
+            .notebook-sidebar {
+                background: rgba(10, 15, 26, 0.95);
+                border-right: 1px solid rgba(255, 255, 255, 0.08);
+                backdrop-filter: blur(20px);
             }
-            .flashcard-face {
-                backface-visibility: hidden;
-                -webkit-backface-visibility: hidden;
+            .glass-card-notebook {
+                background: rgba(18, 25, 41, 0.6);
+                backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.06);
+                box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+                border-radius: 20px;
             }
-            .flashcard-back {
-                transform: rotateY(180deg);
+            .workspace-card {
+                background: rgba(16, 24, 39, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.05);
+                border-radius: 24px;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
-            .equalizer-bar {
-                animation: equalizer 0.8s ease-in-out infinite alternate;
+            .workspace-card:hover {
+                border-color: rgba(99, 102, 241, 0.3);
+                background: rgba(16, 24, 39, 0.8);
+                transform: translateY(-2px);
             }
-            @keyframes equalizer {
-                0% { height: 4px; }
-                100% { height: 16px; }
+            .flashcard-wrapper { perspective: 1200px; }
+            .flashcard-card { transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); transform-style: preserve-3d; }
+            .flashcard-card.is-flipped { transform: rotateY(180deg); }
+            .flashcard-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+            .flashcard-back { transform: rotateY(180deg); }
+            .equalizer-bar { animation: equalizer 0.8s ease-in-out infinite alternate; }
+            @keyframes equalizer { 0% { height: 4px; } 100% { height: 24px; } }
+            .ambient-glow {
+                background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(0,0,0,0) 70%);
+                pointer-events: none;
             }
+            /* Slide themes */
+            .slide-theme-midnight { background: bg-slate-950; color: #f8fafc; }
+            .slide-theme-sepia { background: #f4ecd8; color: #433422; border-color: #e4d7ba; }
+            .slide-theme-slate { background: #1e293b; color: #f1f5f9; border-color: #334155; }
         </style>
     `;
 
+    // --- MAIN RENDER FUNCTION ---
     function getHTML() {
-        // Count active sources
         const checkedCount = Object.values(window.academySelectedSources).filter(Boolean).length;
-        const hierarchyText = hierarchy.title;
-
-        // Dynamic Learning Path based on Plan
-        let pathHTML = '';
-        if (planId === 'intensivo') {
-            pathHTML = `
-                <div class="space-y-2">
-                    <p class="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Tu Ruta de Aprendizaje Personalizada</p>
-                    <div class="grid grid-cols-3 gap-2.5">
-                        <button onclick="window.switchAcademyTab('flashcards')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">style</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">1. Tarjetas</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Memorización</span>
-                        </button>
-                        <button onclick="window.switchAcademyTab('exam')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'exam' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">quiz</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">2. Evaluación</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Simulador ISEP</span>
-                        </button>
-                        <button onclick="window.switchAcademyTab('tutor')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white border-purple-500 shadow-lg shadow-purple-500/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">psychology</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">3. Tutor IA</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Dudas de manual</span>
-                        </button>
-                    </div>
-                </div>
-            `;
-        } else if (planId === 'teorico') {
-            pathHTML = `
-                <div class="space-y-2">
-                    <p class="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Tu Ruta de Aprendizaje Personalizada</p>
-                    <div class="grid grid-cols-3 gap-2.5">
-                        <button onclick="window.switchAcademyTab('summaries')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">menu_book</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">1. Unidades</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Resúmenes ISEP</span>
-                        </button>
-                        <button onclick="window.switchAcademyTab('library')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'library' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">folder_open</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">2. Biblioteca</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Manuales y Leyes</span>
-                        </button>
-                        <button onclick="window.switchAcademyTab('mindmaps')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">account_tree</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">3. Esquemas</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Flujogramas</span>
-                        </button>
-                    </div>
-                </div>
-            `;
-        } else { // practico
-            pathHTML = `
-                <div class="space-y-2">
-                    <p class="text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-[0.2em] mb-2 px-1">Tu Ruta de Aprendizaje Personalizada</p>
-                    <div class="grid grid-cols-3 gap-2.5">
-                        <button onclick="window.switchAcademyTab('mindmaps')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">account_tree</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">1. Protocolos</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Flujos de acción</span>
-                        </button>
-                        <button onclick="window.switchAcademyTab('tutor')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white border-purple-500 shadow-lg shadow-purple-500/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">psychology</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">2. Tutor IA</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Casos situacionales</span>
-                        </button>
-                        <button onclick="window.switchAcademyTab('summaries')" class="p-3.5 rounded-2xl border text-center transition-all active:scale-[0.98] ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-slate-900/60 text-slate-400 border-white/5 hover:bg-slate-900/90'}">
-                            <span class="material-symbols-outlined text-xl block mb-1">menu_book</span>
-                            <span class="text-[9px] font-black uppercase tracking-wider block">3. Doctrina</span>
-                            <span class="text-[7px] text-slate-500 block mt-0.5">Resúmenes clave</span>
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
+        const hasGeminiKey = !!(window.getGeminiAPIKey && window.getGeminiAPIKey());
 
         return `
             ${styleBlock}
-            <!-- Sticky Header -->
-            <header class="sticky top-0 z-50 bg-background-light/95 dark:bg-[#0c101b]/95 backdrop-blur-xl border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            
+            <!-- Global Premium Header -->
+            <header class="sticky top-0 z-50 bg-[#080c16]/95 backdrop-blur-xl border-b border-white/10 px-6 h-16 flex items-center justify-between shadow-lg">
                 <div class="flex items-center gap-3">
                     <button onclick="router.navigateTo('#asistente')" class="size-9 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors active:scale-95">
                         <span class="material-symbols-outlined text-lg">arrow_back</span>
                     </button>
                     <div>
-                        <h1 class="text-xs font-black text-slate-900 dark:text-white tracking-wide uppercase italic flex items-center gap-2">
-                            Notebook IA
-                            <span class="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-tighter ${isPro ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'}">
-                                ${isPro ? 'ACCESO PRO' : 'DEMO GRATUITA'}
+                        <h1 class="text-sm font-black text-white tracking-wide uppercase italic flex items-center gap-2">
+                            <span class="material-symbols-outlined text-indigo-400 text-base animate-pulse">auto_awesome</span>
+                            Gemini Notebook
+                            <span class="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-tighter bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                PRO 2026
                             </span>
                         </h1>
-                        <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest flex items-center gap-1">
-                            <span class="size-1.5 rounded-full bg-indigo-500"></span> ${checkedCount} Fuentes seleccionadas
+                        <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5">
+                            <span class="size-1.5 rounded-full bg-emerald-500 animate-ping"></span> ${checkedCount} Manuales indexados en RAG
                         </p>
                     </div>
                 </div>
-                <div>
-                    ${!isPro ? `
-                        <button onclick="window.showAcademyPaymentModal()" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all flex items-center gap-1.5">
-                            <span class="material-symbols-outlined text-sm">workspace_premium</span>
-                            Activar PRO ($10.000)
-                        </button>
-                    ` : `
-                        <div class="flex items-center gap-1 text-emerald-400 text-xs font-bold bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20">
-                            <span class="material-symbols-outlined text-sm">verified</span>
-                            Pase ISEP Activo
-                        </div>
-                    `}
+                
+                <div class="flex items-center gap-3">
+                    <!-- Dropdown de Concurso de Ascenso -->
+                    <select onchange="window.switchAcademyHierarchy(this.value)" class="bg-[#121929] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-indigo-500 font-bold max-w-[150px]">
+                        ${data.hierarchies.map(h => `
+                            <option value="${h.id}" ${window.academySelectedHierarchy === h.id ? 'selected' : ''}>
+                                ${h.title.split(' ➔ ')[0]}
+                            </option>
+                        `).join('')}
+                    </select>
+
+                    <button onclick="window.showGeminiKeyModal()" class="px-3 py-1.5 rounded-xl border transition-all active:scale-95 text-[9px] font-bold uppercase flex items-center gap-1.5 ${hasGeminiKey ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-purple-500/10 text-purple-300 border-purple-500/30 hover:bg-purple-500/20'}">
+                        <span class="material-symbols-outlined text-xs">${hasGeminiKey ? 'key' : 'key_off'}</span>
+                        ${hasGeminiKey ? 'API OK' : 'Clave AI'}
+                    </button>
                 </div>
             </header>
 
-            <main class="p-4 space-y-5 pb-32 max-w-md mx-auto animate-fade-in">
+            <div class="notebook-split-container relative">
+                <div class="absolute inset-0 ambient-glow z-0"></div>
 
-                <!-- Personalization HUD -->
-                <div class="glass-card p-5 rounded-[2rem] border border-white/5 bg-gradient-to-br from-indigo-950/20 to-slate-900 text-white shadow-xl space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2.5">
-                            <span class="material-symbols-outlined text-primary text-xl">school</span>
-                            <div>
-                                <h3 class="text-xs font-black text-white uppercase tracking-wider leading-none mb-1">Tu Plan de Estudio ISEP</h3>
-                                <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">${hierarchyText}</p>
-                            </div>
+                <!-- LEFT SIDEBAR: Visual Document Shelf (Fuentes del Notebook) -->
+                <aside class="notebook-sidebar p-5 flex flex-col justify-between overflow-y-auto z-10">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-indigo-400 text-sm">folder_open</span>
+                                Fuentes del Notebook
+                            </h3>
+                            <span class="px-2 py-0.5 rounded-full text-[8px] font-black uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                ${checkedCount}/${libraryItems.length}
+                            </span>
                         </div>
-                        <button onclick="window.resetAcademySetup()" class="px-2.5 py-1.5 rounded-xl bg-white/5 border border-white/10 hover:bg-red-500/10 hover:border-red-500/30 text-slate-400 hover:text-red-400 transition-all text-[8px] font-black uppercase tracking-wider">
-                            Cambiar Plan
+
+                        <!-- Add custom source button -->
+                        <button onclick="window.showAddSourceModal()" class="w-full py-2.5 rounded-xl bg-indigo-600/10 hover:bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 font-bold text-[10px] uppercase flex items-center justify-center gap-1.5 transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-xs">add_circle</span>
+                            Agregar Fuente / Nota
                         </button>
-                    </div>
-                    <div class="grid grid-cols-2 gap-3 pt-1 text-[10px]">
-                        <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5">
-                            <span class="material-symbols-outlined text-xs text-primary">bookmark</span>
-                            <div>
-                                <span class="text-[8px] text-slate-500 block">Enfoque:</span>
-                                <span class="font-bold text-slate-200 capitalize">${planId}</span>
+
+                        <!-- Search and filter -->
+                        <div class="space-y-2">
+                            <div class="relative">
+                                <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 text-xs">search</span>
+                                <input type="text" id="librarySearchInput" oninput="window.filterLibrarySources(this.value)" placeholder="Buscar manual..." 
+                                    class="w-full bg-[#121929] border border-white/5 rounded-xl py-2 pl-9 pr-3 text-[10px] text-white placeholder:text-slate-500 outline-none focus:border-indigo-500">
+                            </div>
+                            <div class="flex gap-1 overflow-x-auto pb-1 scrollbar-none text-[8px]">
+                                <button onclick="window.setLibraryFilter('all')" class="px-2.5 py-1 rounded-lg font-bold border transition-all ${window.libraryActiveFilter === 'all' ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' : 'bg-white/5 text-slate-400 border-white/5'}">Todo</button>
+                                <button onclick="window.setLibraryFilter('manuales-2026')" class="px-2.5 py-1 rounded-lg font-bold border transition-all ${window.libraryActiveFilter === 'manuales-2026' ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' : 'bg-white/5 text-slate-400 border-white/5'}">ISEP 2026</button>
+                                <button onclick="window.setLibraryFilter('proyectos')" class="px-2.5 py-1 rounded-lg font-bold border transition-all ${window.libraryActiveFilter === 'proyectos' ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' : 'bg-white/5 text-slate-400 border-white/5'}">Proyectos</button>
+                                <button onclick="window.setLibraryFilter('leyes')" class="px-2.5 py-1 rounded-lg font-bold border transition-all ${window.libraryActiveFilter === 'leyes' ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' : 'bg-white/5 text-slate-400 border-white/5'}">Leyes</button>
+                                <button onclick="window.setLibraryFilter('custom')" class="px-2.5 py-1 rounded-lg font-bold border transition-all ${window.libraryActiveFilter === 'custom' ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' : 'bg-white/5 text-slate-400 border-white/5'}">Notas</button>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/5">
-                            <span class="material-symbols-outlined text-xs text-purple-400">timer</span>
-                            <div>
-                                <span class="text-[8px] text-slate-500 block">Meta Diaria:</span>
-                                <span class="font-bold text-slate-200">${timeId} minutos</span>
-                            </div>
+
+                        <!-- Document shelf items -->
+                        <div class="space-y-2 max-h-[480px] overflow-y-auto pr-1 scrollbar-none">
+                            ${renderLibraryItemsHTML()}
                         </div>
                     </div>
-                </div>
 
-                <!-- Guided Learning Path -->
-                ${pathHTML}
+                    <!-- Sidebar Footer -->
+                    <div class="pt-4 border-t border-white/5 text-[9px] text-slate-500 space-y-1.5">
+                        <p class="flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-xs">info</span>
+                            Habilitá manuales para alimentar al Tutor IA y al Simulador de Examen.
+                        </p>
+                    </div>
+                </aside>
 
-                <!-- Tabs Switcher (watchOS/iOS style) -->
-                <div class="flex p-1 bg-slate-900/60 backdrop-blur-md rounded-2xl border border-white/5 shadow-inner overflow-x-auto scrollbar-none gap-1">
-                    <button onclick="window.switchAcademyTab('library')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'library' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        <span class="material-symbols-outlined text-[13px]">folder_open</span> Fuentes
-                    </button>
-                    <button onclick="window.switchAcademyTab('summaries')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'summaries' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        <span class="material-symbols-outlined text-[13px]">menu_book</span> Resúmenes
-                    </button>
-                    <button onclick="window.switchAcademyTab('exam')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'exam' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        <span class="material-symbols-outlined text-[13px]">quiz</span> Evaluación
-                    </button>
-                    <button onclick="window.switchAcademyTab('flashcards')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'flashcards' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        <span class="material-symbols-outlined text-[13px]">style</span> Tarjetas
-                    </button>
-                    <button onclick="window.switchAcademyTab('mindmaps')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'mindmaps' ? 'bg-primary text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                        <span class="material-symbols-outlined text-[13px]">account_tree</span> Esquemas
-                    </button>
-                    <button onclick="window.switchAcademyTab('tutor')" class="shrink-0 px-3 py-2 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-1.5 ${window.academyActiveTab === 'tutor' ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/30' : 'text-purple-400 hover:text-white'}">
-                        <span class="material-symbols-outlined text-[13px] animate-pulse">psychology</span> Tutor IA
-                    </button>
-                </div>
+                <!-- RIGHT PANE: Workbench / Studio Content -->
+                <section class="p-6 overflow-y-auto z-10 flex flex-col justify-between">
+                    <div class="space-y-6">
+                        
+                        <!-- Studio Module Navigation Tabs -->
+                        <div class="flex p-1 bg-slate-950/80 rounded-2xl border border-white/10 shadow-2xl overflow-x-auto scrollbar-none gap-1 max-w-3xl">
+                            <button onclick="window.switchAcademyTab('studio')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'studio' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">dashboard</span> Panel
+                            </button>
+                            <button onclick="window.switchAcademyTab('summaries')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'summaries' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">menu_book</span> Resúmenes
+                            </button>
+                            <button onclick="window.switchAcademyTab('proyectos')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'proyectos' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">assignment</span> Proyectos
+                            </button>
+                            <button onclick="window.switchAcademyTab('exam')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'exam' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">quiz</span> Simulador (50)
+                            </button>
+                            <button onclick="window.switchAcademyTab('flashcards')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'flashcards' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">style</span> Fichas 3D
+                            </button>
+                            <button onclick="window.switchAcademyTab('mindmaps')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'mindmaps' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">account_tree</span> Esquemas
+                            </button>
+                            <button onclick="window.switchAcademyTab('videos')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'videos' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">videocam</span> Táctica 3D
+                            </button>
+                        </div>
 
-                <!-- Tab Content area -->
-                <div id="academy-tab-content" class="animate-fade-in min-h-[300px]">
-                    ${window.academyActiveTab === 'library' ? renderLibraryTab(hierarchy, isPro) : ''}
-                    ${window.academyActiveTab === 'summaries' ? renderSummariesTab(hierarchy, isPro) : ''}
-                    ${window.academyActiveTab === 'exam' ? renderExamTab(hierarchy, isPro) : ''}
-                    ${window.academyActiveTab === 'flashcards' ? renderFlashcardsTab(hierarchy, isPro) : ''}
-                    ${window.academyActiveTab === 'mindmaps' ? renderMindmapsTab(hierarchy, isPro) : ''}
-                    ${window.academyActiveTab === 'tutor' ? renderGeminiTutorTab(hierarchy, isPro) : ''}
-                </div>
-
-                ${renderAdBannerSmall()}
-            </main>
-            ${renderBottomNav('asistente')}
+                        <!-- Tab Workspace -->
+                        <div id="academy-tab-content" class="animate-fade-in min-h-[420px] max-w-4xl">
+                            ${window.academyActiveTab === 'studio' ? renderNotebookStudioTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'summaries' ? renderSummariesTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'proyectos' ? renderProyectosTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'exam' ? renderExamTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'flashcards' ? renderFlashcardsTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'mindmaps' ? renderMindmapsTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'infographics' ? renderInfographicsTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'slides' ? renderSlidesTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'videos' ? renderVideosTab(hierarchy) : ''}
+                            ${window.academyActiveTab === 'tutor' ? renderGeminiTutorTab(hierarchy) : ''}
+                        </div>
+                    </div>
+                </section>
+            </div>
         `;
     }
 
-    // Register Reset Setup Action
-    window.resetAcademySetup = () => {
-        if (!confirm("¿Deseas restablecer tu plan de estudio y configurar tu concurso de ascenso nuevamente?")) return;
-        localStorage.removeItem('academy_setup_completed');
-        localStorage.removeItem('academy_setup_hierarchy');
-        localStorage.removeItem('academy_setup_plan');
-        localStorage.removeItem('academy_setup_time');
-        window.academySetupStep = 1;
-        window.customAIQuestions = null;
-        window.currentExamAnswers = {};
-        window.examSubmitted = false;
-        renderAcademia(viewContainer);
-    };
+    // --- SIDEBAR SOURCE LIST RENDER ---
+    function renderLibraryItemsHTML() {
+        const filtered = libraryItems.filter(item => {
+            const matchesSearch = item.title.toLowerCase().includes(window.librarySearchQuery.toLowerCase()) || 
+                                  item.desc.toLowerCase().includes(window.librarySearchQuery.toLowerCase());
+            const matchesFilter = window.libraryActiveFilter === 'all' || item.category === window.libraryActiveFilter;
+            return matchesSearch && matchesFilter;
+        });
 
-    // --- TAB 1: FUENTES DE ESTUDIO (NotebookLM Sources) ---
-    function renderLibraryTab(hierarchy, isPro) {
+        if (filtered.length === 0) {
+            return `<div class="p-4 text-center text-slate-500 text-[10px]">No se encontraron manuales.</div>`;
+        }
+
+        return filtered.map(item => {
+            const isChecked = !!window.academySelectedSources[item.id];
+            const isCustom = item.id.startsWith('custom-');
+            return `
+                <div class="p-3 rounded-2xl border transition-all duration-200 relative overflow-hidden bg-slate-900/60 ${isChecked ? 'border-indigo-500/40 bg-indigo-950/10 shadow-lg' : 'border-white/5'}">
+                    <div class="flex items-start justify-between gap-2.5">
+                        <div class="flex gap-2.5 min-w-0 flex-1">
+                            <div class="size-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center shrink-0 border border-white/5">
+                                <span class="material-symbols-outlined text-base">${item.icon}</span>
+                            </div>
+                            <div class="min-w-0">
+                                <h4 class="font-bold text-[10px] text-white leading-tight truncate">${item.title}</h4>
+                                <p class="text-[8px] text-slate-400 leading-normal line-clamp-1 mt-0.5">${item.desc}</p>
+                                <div class="flex items-center gap-1.5 mt-1.5">
+                                    <span class="px-1.5 py-0.5 rounded text-[6px] font-black uppercase ${item.category === 'manuales-2026' ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30' : 'bg-slate-800 text-slate-400'}">
+                                        ${item.badge}
+                                    </span>
+                                    <span class="text-[7px] text-slate-500 font-mono">
+                                        ${isCustom ? (Math.round(item.content.length / 500) + 1) + ' pgs' : '114 pgs'}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-end justify-between h-full gap-2">
+                            <!-- Toggle switch -->
+                            <label class="toggle-switch transform scale-75 cursor-pointer">
+                                <input type="checkbox" ${isChecked ? 'checked' : ''} onclick="window.toggleSourceSelection('${item.id}')">
+                                <span class="toggle-slider"></span>
+                            </label>
+                            ${isCustom ? `
+                                <button onclick="window.deleteCustomSource('${item.id}')" class="size-6 rounded-md bg-red-500/10 hover:bg-red-500/20 text-red-400 flex items-center justify-center border border-red-500/20 transition-all" title="Eliminar Nota">
+                                    <span class="material-symbols-outlined text-[10px]">delete</span>
+                                </button>
+                            ` : `
+                                <a href="${item.file}" download class="size-6 rounded-md bg-white/5 hover:bg-white/10 text-white flex items-center justify-center border border-white/10 transition-all" title="Descargar PDF">
+                                    <span class="material-symbols-outlined text-[10px]">download</span>
+                                </a>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // --- TAB: STUDIO HUB (GAMIFICATION & AUDIO PODCAST) ---
+    function renderNotebookStudioTab(hierarchy) {
         return `
-            <div class="space-y-4">
-                <div class="glass-card p-4 rounded-3xl border border-indigo-500/10 bg-gradient-to-br from-indigo-950/20 to-slate-900 text-white shadow-xl space-y-1.5">
-                    <h3 class="text-xs font-black uppercase text-indigo-400 flex items-center gap-1.5">
-                        <span class="material-symbols-outlined text-sm">folder_managed</span> Fuentes del Notebook
-                    </h3>
-                    <p class="text-[11px] text-slate-300 leading-relaxed">
-                        Selecciona qué manuales y leyes oficiales activarán las preguntas del evaluador y el Tutor IA.
-                    </p>
+            <div class="space-y-6 animate-fade-in">
+                <!-- GAMIFICATION & STUDY PROGRESS DASHBOARD -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Daily Streak -->
+                    <div class="p-4 rounded-3xl border border-orange-500/20 bg-gradient-to-br from-slate-900 to-orange-950/20 flex items-center gap-4">
+                        <div class="size-12 rounded-2xl bg-orange-500/10 text-orange-400 border border-orange-500/30 flex items-center justify-center shadow-lg animate-bounce" style="animation-duration: 2s;">
+                            <span class="material-symbols-outlined text-2xl">local_fire_department</span>
+                        </div>
+                        <div>
+                            <span class="text-[8px] font-black uppercase text-orange-400 tracking-wider">Racha Diaria</span>
+                            <h4 class="text-base font-black text-white">${studyStreak} Días Seguidos</h4>
+                        </div>
+                    </div>
+                    <!-- General Prep Level -->
+                    <div class="p-4 rounded-3xl border border-indigo-500/20 bg-gradient-to-br from-slate-900 to-indigo-950/20 flex items-center gap-4">
+                        <div class="size-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/30 flex items-center justify-center shadow-lg">
+                            <span class="material-symbols-outlined text-2xl">trending_up</span>
+                        </div>
+                        <div>
+                            <span class="text-[8px] font-black uppercase text-indigo-400 tracking-wider">Preparación General</span>
+                            <h4 class="text-base font-black text-white">78% Listo</h4>
+                        </div>
+                    </div>
+                    <!-- Active Achievement -->
+                    <div class="p-4 rounded-3xl border border-emerald-500/20 bg-gradient-to-br from-slate-900 to-emerald-950/20 flex items-center gap-4">
+                        <div class="size-12 rounded-2xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center justify-center shadow-lg">
+                            <span class="material-symbols-outlined text-2xl">workspace_premium</span>
+                        </div>
+                        <div>
+                            <span class="text-[8px] font-black uppercase text-emerald-400 tracking-wider">Rango Actual</span>
+                            <h4 class="text-base font-black text-white">Oficial Destacado</h4>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="space-y-2.5">
-                    ${academyLibraryItems.map((item, index) => {
-                        const isLocked = !isPro && index > 1; // Free tier locks index > 1
-                        const isChecked = !!window.academySelectedSources[item.id];
-                        return `
-                            <div class="glass-card p-4 rounded-2xl border border-white/5 flex items-center justify-between relative overflow-hidden transition-all hover:border-indigo-500/30">
-                                ${isLocked ? `
-                                    <div class="absolute inset-0 bg-[#0a0c12]/90 backdrop-blur-sm z-20 flex items-center justify-between px-4">
-                                        <div class="flex items-center gap-2">
-                                            <span class="material-symbols-outlined text-amber-400 text-lg">lock</span>
-                                            <span class="text-[9px] font-black text-white uppercase tracking-wider">Manual PRO</span>
-                                        </div>
-                                        <button onclick="window.showAcademyPaymentModal()" class="px-2.5 py-1.5 rounded-lg bg-amber-500 text-white font-bold text-[9px] uppercase tracking-wider active:scale-95 transition-all shadow-md shadow-amber-500/10">
-                                            Desbloquear
-                                        </button>
-                                    </div>
-                                ` : ''}
-
-                                <div class="flex items-center gap-3.5 flex-1 pr-2">
-                                    <label class="relative flex items-center justify-center size-5 shrink-0 cursor-pointer">
-                                        <input type="checkbox" ${isChecked ? 'checked' : ''} 
-                                            onclick="window.toggleSourceSelection('${item.id}')"
-                                            class="sr-only peer">
-                                        <div class="absolute inset-0 rounded-md border-2 border-slate-500 peer-checked:border-indigo-500 peer-checked:bg-indigo-500 transition-all flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-white text-[12px] font-black scale-0 peer-checked:scale-100 transition-transform">check</span>
-                                        </div>
-                                    </label>
-                                    <div class="flex items-center gap-3">
-                                        <div class="size-10 rounded-xl bg-gradient-to-br ${item.color} flex items-center justify-center border shrink-0">
-                                            <span class="material-symbols-outlined text-lg">${item.icon}</span>
-                                        </div>
-                                        <div>
-                                            <h4 class="font-bold text-xs text-slate-900 dark:text-white leading-snug">${item.title}</h4>
-                                            <p class="text-[9px] text-slate-400 leading-relaxed mt-0.5">${item.desc}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <a href="${item.file}" download class="size-9 rounded-full bg-white/5 hover:bg-white/10 text-white flex items-center justify-center shrink-0 border border-white/10 active:scale-90 transition-all ml-1" title="Descargar PDF">
-                                    <span class="material-symbols-outlined text-sm">download</span>
-                                </a>
+                <!-- AI AUDIO PODCAST OVERVIEW (Google NotebookLM signature feature) -->
+                <div class="glass-card-notebook p-6 bg-gradient-to-br from-slate-950 via-[#101426] to-slate-950 border-indigo-500/20 relative overflow-hidden space-y-4 shadow-2xl">
+                    <div class="absolute -right-20 -top-20 size-52 bg-indigo-500/10 rounded-full blur-3xl"></div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="size-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center shadow-lg">
+                                <span class="material-symbols-outlined text-2xl animate-pulse">podcasts</span>
                             </div>
-                        `;
-                    }).join('')}
+                            <div>
+                                <span class="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                    NotebookLM Audio Overview
+                                </span>
+                                <h3 class="text-sm font-black text-white uppercase tracking-wider mt-1">Podcast de Estudio Doctrinario</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-[11px] text-slate-300 leading-relaxed max-w-2xl">
+                        Escuchá el debate interactivo de nuestros expertos. La transcripción se desplazará de manera síncrona con el audio de los manuales oficiales de oposición ISEP.
+                    </p>
+
+                    <!-- Waveform and Controls -->
+                    <div class="p-4 rounded-2xl bg-slate-900/90 border border-white/5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <button onclick="window.toggleAudioPodcastOverview()" class="size-14 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 text-white flex items-center justify-center shadow-lg active:scale-95 transition-all">
+                                    <span class="material-symbols-outlined text-3xl">${window.isPodcastPlaying ? 'pause' : 'play_arrow'}</span>
+                                </button>
+                                <div>
+                                    <p class="text-xs font-bold text-white">Doctrina Operativa & Régimen Disciplinario 2026</p>
+                                    <p class="text-[9px] text-indigo-300 font-mono flex items-center gap-1 mt-0.5">
+                                        <span class="material-symbols-outlined text-[10px]">graphic_eq</span>
+                                        ${window.isPodcastPlaying ? `Reproduciendo a ${window.podcastSpeed}x...` : 'Listo para reproducir (12 min)'}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- Speed Control -->
+                            <button onclick="window.togglePodcastSpeed()" class="px-3 py-1.5 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-[9px] text-slate-300 font-bold uppercase transition-all">
+                                ${window.podcastSpeed}x Velocidad
+                            </button>
+                        </div>
+
+                        <!-- Real Waveform Simulator -->
+                        <div class="flex items-end gap-1.5 justify-center h-8 pt-1">
+                            ${[...Array(16)].map((_, i) => `
+                                <div class="w-[3px] bg-indigo-500/80 rounded-full transition-all duration-300 ${window.isPodcastPlaying ? 'equalizer-bar' : 'h-1.5'}" 
+                                     style="animation-delay: ${0.1 * i}s; animation-duration: ${0.6 + Math.random() * 0.4}s;"></div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Interactive Live Transcript -->
+                    <div class="p-4 bg-slate-950 rounded-2xl border border-white/5 text-[10px] space-y-2.5 max-h-[140px] overflow-y-auto scrollbar-none font-mono">
+                        <p class="${window.isPodcastPlaying ? 'text-indigo-400 font-bold' : 'text-slate-500'}">
+                            🎙️ [ROSSI - Profesor ISEP]: "Bienvenidos a esta síntesis del ISEP. El secuestro de armas es vital: la descarga debe ser ante testigos."
+                        </p>
+                        <p class="text-slate-500">
+                            🎙️ [GÓMEZ - Abogada]: "Exacto Carlos. Y la Ley 12.521 distingue cesantía de exoneración por la pérdida del cómputo previsional."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Studio Action Cards Grid (NotebookLM Studio Tiles) -->
+                <div class="space-y-3">
+                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider px-1">Secciones del Notebook</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        
+                        <!-- Tile 1: Evaluaciones -->
+                        <div onclick="window.switchAcademyTab('exam')" class="workspace-card p-5 cursor-pointer space-y-4">
+                            <div class="size-10 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">quiz</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-white">Evaluaciones de Oposición</h4>
+                                <p class="text-[9px] text-slate-400 leading-normal mt-1">Simulador de 50 preguntas múltiples y verdadero/falso.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tile 2: Proyectos ISEP -->
+                        <div onclick="window.switchAcademyTab('proyectos')" class="workspace-card p-5 cursor-pointer space-y-4">
+                            <div class="size-10 rounded-2xl bg-purple-500/10 text-purple-400 border border-purple-500/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">assignment</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-white">Redactor de Proyectos</h4>
+                                <p class="text-[9px] text-slate-400 leading-normal mt-1">Estructura oficial para agrupamiento Supervisión y Dirección.</p>
+                            </div>
+                        </div>
+
+                        <!-- Tile 3: Fichas 3D -->
+                        <div onclick="window.switchAcademyTab('flashcards')" class="workspace-card p-5 cursor-pointer space-y-4">
+                            <div class="size-10 rounded-2xl bg-amber-500/10 text-amber-400 border border-amber-500/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-xl">style</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs text-white">Tarjetas 3D Didácticas</h4>
+                                <p class="text-[9px] text-slate-400 leading-normal mt-1">Herramientas de memorización con Leitner Spaced Repetition.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         `;
     }
 
-    // --- TAB 2: RESÚMENES & AUDIOBOOK ---
-    function renderSummariesTab(hierarchy, isPro) {
+    // --- TAB: STUDY SUMMARIES & PRESETS ---
+    function renderSummariesTab(hierarchy) {
         return `
-            <div class="space-y-4">
-                <div class="flex items-center justify-between px-1">
-                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Unidades de Estudio</h3>
-                    <span class="text-[10px] text-slate-500 font-bold">${hierarchy.summaries.length} Unidades</span>
+            <div class="space-y-4 animate-fade-in">
+                <div class="glass-card-notebook p-5 bg-[#121929]/80 space-y-3">
+                    <div class="flex items-center gap-2.5">
+                        <span class="material-symbols-outlined text-indigo-400">summarize</span>
+                        <h3 class="text-xs font-black uppercase text-white">Generador de Síntesis y Resúmenes IA</h3>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Escribí el tema que querés resumir (ej: "Liderazgo ISEP", "Cesantía", "MIRAF medidas de seguridad"). El sistema compilará las fuentes indexadas.
+                    </p>
+                    <div class="flex gap-2">
+                        <input type="text" id="customReportTopic" placeholder="Ej: Protocolo de descarga de armas, Licencias Decreto 4157..." 
+                            class="flex-1 px-4 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500">
+                        <button onclick="window.generateCustomReport(event)" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl active:scale-95 transition-all">
+                            Generar
+                        </button>
+                    </div>
                 </div>
 
-                ${hierarchy.summaries.map((sum, index) => {
-                    const isLocked = !isPro && index > 0;
-                    const isPlaying = window.currentPlayingUnitId === sum.id;
-                    return `
-                        <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-3 relative overflow-hidden transition-all hover:border-primary/20">
-                            ${isLocked ? `
-                                <div class="absolute inset-0 bg-slate-950/80 backdrop-blur-md z-20 flex flex-col items-center justify-center p-4 text-center">
-                                    <span class="material-symbols-outlined text-amber-400 text-3xl mb-1">lock</span>
-                                    <p class="text-xs font-black text-white uppercase">Unidad Exclusiva PRO</p>
-                                    <p class="text-[10px] text-slate-400 mt-0.5 mb-3">Activa tu acceso ($10.000) por Alias para desbloquear todo el programa ISEP</p>
-                                    <button onclick="window.showAcademyPaymentModal()" class="px-4 py-2 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
-                                        Activar Acceso ISEP
-                                    </button>
-                                </div>
-                            ` : ''}
-
-                            <div class="flex items-start justify-between gap-3">
+                <div class="space-y-4">
+                    ${hierarchy.summaries.map(sum => `
+                        <div class="p-6 rounded-3xl border border-white/5 bg-slate-900/40 hover:border-white/10 transition-all space-y-3">
+                            <div class="flex items-start justify-between gap-4">
                                 <div>
-                                    <span class="text-[8px] font-black uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5 rounded-full">${sum.readTime} de lectura</span>
-                                    <h4 class="font-bold text-sm text-slate-900 dark:text-white mt-1 leading-snug">${sum.title}</h4>
+                                    <span class="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                        Unidad Didáctica
+                                    </span>
+                                    <h4 class="font-bold text-sm text-white mt-1.5 leading-snug">${sum.title}</h4>
                                 </div>
-                                <button onclick="window.playAudiobook('${encodeURIComponent(sum.title)}', '${encodeURIComponent(sum.content.replace(/<[^>]*>?/gm, ''))}', '${sum.id}')" 
-                                    class="size-10 rounded-2xl flex items-center justify-center transition-all active:scale-90 shrink-0 ${isPlaying ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500 hover:text-white'}" 
-                                    title="Escuchar Audiolibro TTS">
-                                    ${isPlaying ? `
-                                        <div class="flex items-center gap-0.5 h-3">
-                                            <div class="w-[2px] bg-white rounded-full equalizer-bar" style="animation-delay: 0.1s;"></div>
-                                            <div class="w-[2px] bg-white rounded-full equalizer-bar" style="animation-delay: 0.3s;"></div>
-                                            <div class="w-[2px] bg-white rounded-full equalizer-bar" style="animation-delay: 0.5s;"></div>
-                                        </div>
-                                    ` : `
-                                        <span class="material-symbols-outlined text-xl">volume_up</span>
-                                    `}
+                                <button onclick="window.playAudiobook('${encodeURIComponent(sum.title)}', '${encodeURIComponent(sum.content.replace(/<[^>]*>?/gm, ''))}', '${sum.id}')"
+                                    class="size-10 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 text-white flex items-center justify-center active:scale-90 transition-all">
+                                    <span class="material-symbols-outlined text-lg">${window.currentPlayingUnitId === sum.id ? 'stop' : 'volume_up'}</span>
                                 </button>
                             </div>
-
-                            <div class="text-xs text-slate-600 dark:text-slate-300 space-y-2 leading-relaxed bg-white/5 p-4 rounded-2xl border border-white/5">
+                            <div class="text-xs text-slate-300 leading-relaxed whitespace-pre-wrap bg-slate-950/60 p-5 rounded-2xl border border-white/5 font-sans">
                                 ${sum.content}
                             </div>
                         </div>
-                    `;
-                }).join('')}
+                    `).join('')}
+                </div>
             </div>
         `;
     }
 
-    // --- TAB 3: EVALUACIÓN / SIMULADOR ---
-    function renderExamTab(hierarchy, isPro) {
+    // --- TAB: ISEP PROJECTS BUILDER ---
+    function renderProyectosTab(hierarchy) {
+        return `
+            <div class="space-y-4 animate-fade-in">
+                <div class="glass-card-notebook p-5 bg-[#121929]/80 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-purple-400 text-xl animate-pulse">auto_awesome</span>
+                        <div>
+                            <h3 class="text-xs font-black uppercase text-white">Asistente de Proyectos de Gestión</h3>
+                            <p class="text-[9px] text-purple-300 font-bold uppercase tracking-wider">Conforme a la estructura ISEP 2026</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Seleccioná un tema y el sistema generará los 6 puntos fundamentales para tu proyecto del concurso de ascenso:
+                    </p>
+
+                    <div class="space-y-3">
+                        <select id="projectPresetSelect" onchange="document.getElementById('customProjectTopic').value = this.value" class="w-full px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-xs text-white outline-none focus:border-purple-500 font-bold">
+                            <option value="Plan de Patrullaje Preventivo Georreferenciado y Cuadrantes">Plan de Patrullaje Inteligente 911</option>
+                            <option value="Reestructuración de Comisarías y Atención al Público">Reestructuración de Comisarías Urgentes</option>
+                            <option value="Programa de Capacitación Práctica en Armamento y Tiro MIRAF">Capacitación y Seguridad Operativa MIRAF</option>
+                            <option value="Protocolo Integral de Prevención de Escruches y Robo de Cables">Prevención de Delitos Predatorios en Jurisdicción</option>
+                        </select>
+                        <input type="text" id="customProjectTopic" value="Plan de Patrullaje Preventivo Georreferenciado y Cuadrantes" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/10 rounded-xl text-xs text-white outline-none focus:border-purple-500 font-bold">
+                        
+                        <button onclick="window.generateISEPProject(event)" class="w-full py-3.5 bg-purple-600 hover:bg-purple-500 text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-lg active:scale-95 transition-all">
+                            Elaborar Proyecto
+                        </button>
+                    </div>
+                </div>
+
+                <div id="projectOutputContainer" class="hidden animate-fade-in"></div>
+            </div>
+        `;
+    }
+
+    // --- TAB: 50 QUESTIONS EXAM & DIAGNOSTIC REPORT ---
+    function renderExamTab(hierarchy) {
         const isCustom = !!window.customAIQuestions;
         const questions = isCustom ? window.customAIQuestions : hierarchy.exams;
         const total = questions.length;
         let score = 0;
         let answeredCount = Object.keys(window.currentExamAnswers).length;
 
+        // Breakdown stats
+        let leadershipScore = 0, leadershipTotal = 0;
+        let procScore = 0, procTotal = 0;
+        let disciplineScore = 0, disciplineTotal = 0;
+
         if (window.examSubmitted) {
             questions.forEach((q, idx) => {
-                if (window.currentExamAnswers[idx] === q.correctIndex) score++;
+                const isCorrect = window.currentExamAnswers[idx] === q.correctIndex;
+                if (isCorrect) score++;
+
+                // Group by category if available
+                const category = q.explanation.toLowerCase();
+                if (category.includes('liderazgo') || category.includes('virtudes') || category.includes('c\'s')) {
+                    leadershipTotal++;
+                    if (isCorrect) leadershipScore++;
+                } else if (category.includes('arma') || category.includes('procedimiento') || category.includes('secuestro') || category.includes('custodia')) {
+                    procTotal++;
+                    if (isCorrect) procScore++;
+                } else {
+                    disciplineTotal++;
+                    if (isCorrect) disciplineScore++;
+                }
             });
         }
 
         const pct = total > 0 ? Math.round((score / total) * 100) : 0;
 
         return `
-            <div class="space-y-4">
-                ${!isCustom ? `
-                    <!-- Generador de Examen IA (NotebookLM Style) -->
-                    <div class="glass-card p-5 rounded-3xl border border-purple-500/20 bg-gradient-to-br from-slate-900 to-indigo-950 text-white shadow-xl space-y-4">
-                        <div class="flex items-center gap-2">
-                            <div class="size-8 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
-                                <span class="material-symbols-outlined text-base">psychology</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xs font-black text-white uppercase tracking-wider">Evaluador Dinámico IA</h3>
-                                <p class="text-[9px] text-purple-300 font-bold uppercase tracking-widest">Estilo Google NotebookLM 🧠</p>
-                            </div>
+            <div class="space-y-4 animate-fade-in">
+                <!-- Exam Generator Panel -->
+                <div class="glass-card-notebook p-5 bg-[#121929]/80 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-indigo-400">quiz</span>
+                        <h3 class="text-xs font-black uppercase text-white">Simulador de Examen de Oposición</h3>
+                    </div>
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        Configurá tu simulador de evaluación. El sistema compilará preguntas aleatorias de múltiple opción y de verdadero/falso.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Cantidad de preguntas</label>
+                            <select id="examQtySelect" class="w-full px-3 py-2 bg-slate-950 border border-white/5 rounded-xl text-xs text-white font-bold outline-none">
+                                <option value="10">10 Preguntas</option>
+                                <option value="25">25 Preguntas</option>
+                                <option value="50" selected>50 Preguntas (Oficial)</option>
+                            </select>
                         </div>
-                        <p class="text-[11px] text-slate-300 leading-relaxed">
-                            Generá un examen interactivo único a partir de las fuentes que marcaste en la pestaña anterior.
-                        </p>
-                        <div class="space-y-3 pt-1 text-xs">
-                            <div class="grid grid-cols-2 gap-3">
-                                <div>
-                                    <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Preguntas</label>
-                                    <select id="iaExamQty" class="w-full px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500">
-                                        <option value="5">5 Preguntas</option>
-                                        <option value="10">10 Preguntas</option>
-                                        <option value="15">15 Preguntas</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label class="block text-[9px] font-bold text-slate-400 uppercase mb-1">Dificultad</label>
-                                    <select id="iaExamDiff" class="w-full px-3 py-2 bg-slate-950 border border-white/10 rounded-xl text-white outline-none focus:border-purple-500">
-                                        <option value="Intermedia (Nivel estándar concurso)">Intermedio</option>
-                                        <option value="Avanzada (Examen de Ascenso Oficial ISEP)">Avanzado</option>
-                                        <option value="Facilitada (Estudio inicial)">Inicial</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <button onclick="window.generateAIExam(event)" class="w-full py-3 mt-1 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs uppercase tracking-wider shadow-lg shadow-purple-500/20 active:scale-95 transition-all flex items-center justify-center gap-1.5">
-                                <span class="material-symbols-outlined text-sm animate-pulse">psychology</span>
-                                Generar Examen con IA
-                            </button>
+                        <div>
+                            <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Formato</label>
+                            <select id="examTypeSelect" class="w-full px-3 py-2 bg-slate-950 border border-white/5 rounded-xl text-xs text-white font-bold outline-none">
+                                <option value="mixto">Mixto (MC + V/F)</option>
+                                <option value="multiple">Sólo Múltiple Opción</option>
+                                <option value="vf">Sólo Verdadero/Falso</option>
+                            </select>
                         </div>
                     </div>
-                ` : `
-                    <!-- IA Exam Active Banner -->
-                    <div class="p-4 rounded-3xl border border-purple-500/30 bg-purple-950/20 text-purple-300 flex items-center justify-between shadow-xl">
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-purple-400">psychology</span>
-                            <div>
-                                <p class="text-[9px] font-black uppercase tracking-wider">Modo Evaluador Dinámico</p>
-                                <p class="text-xs font-bold text-white">Examen IA Activo</p>
-                            </div>
-                        </div>
-                        <button onclick="window.resetToOfficialExam()" class="px-3 py-1 bg-white/10 hover:bg-white/20 text-white border border-white/10 rounded-xl text-[9px] font-bold uppercase transition-all">
-                            Volver al Programa
+
+                    <div class="flex gap-2">
+                        <button onclick="window.startStandardExam()" class="flex-1 py-3 bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all">
+                            Iniciar Examen
+                        </button>
+                        <button onclick="window.generateAIExam(event)" class="flex-1 py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs uppercase tracking-wider rounded-xl shadow-lg active:scale-95 transition-all flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-xs animate-pulse">auto_awesome</span> Generar con IA
                         </button>
                     </div>
-                `}
+                </div>
 
-                <!-- SVG Circular Score Gauge Header -->
                 ${window.examSubmitted ? `
-                    <div class="flex items-center justify-between p-4 bg-slate-900 border border-white/10 rounded-3xl shadow-xl">
-                        <div class="space-y-1">
-                            <p class="text-[9px] font-black uppercase text-slate-400 tracking-wider">Resultado del Examen</p>
-                            <h4 class="text-sm font-bold text-white">${pct >= 60 ? 'Aprobado' : 'Reprobado'}</h4>
-                            <p class="text-[10px] text-slate-400">Calificación mínima: 60%</p>
-                        </div>
-                        <div class="relative size-16 flex items-center justify-center shrink-0">
-                            <svg class="size-full -rotate-90">
-                                <circle cx="32" cy="32" r="28" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="5" />
-                                <circle cx="32" cy="32" r="28" fill="transparent" stroke="${pct >= 60 ? '#10b981' : '#ef4444'}" stroke-width="5"
-                                    stroke-dasharray="175.9" stroke-dashoffset="${175.9 - (175.9 * pct) / 100}" stroke-linecap="round" />
-                            </svg>
-                            <div class="absolute inset-0 flex flex-col items-center justify-center text-xs font-black text-white">
-                                ${pct}%
+                    <!-- Detailed Diagnostic Report Card -->
+                    <div class="p-6 bg-slate-900 border border-white/10 rounded-3xl space-y-4 shadow-xl">
+                        <div class="flex items-center justify-between">
+                            <div class="space-y-1">
+                                <p class="text-[8px] font-black uppercase text-slate-500 tracking-wider">Diagnóstico de Aptitud ISEP</p>
+                                <h3 class="text-base font-black ${pct >= 60 ? 'text-emerald-400' : 'text-red-400'}">${pct >= 60 ? 'APROBADO' : 'REPROBADO'}</h3>
+                                <p class="text-[10px] text-slate-400">${score} correctas de ${total} (${pct}%)</p>
                             </div>
-                        </div>
-                    </div>
-                ` : `
-                    <div class="glass-card p-4 rounded-3xl border border-white/5 flex items-center justify-between">
-                        <div>
-                            <p class="text-[9px] font-black uppercase text-slate-400 tracking-wider">${isCustom ? 'Autoevaluación con IA' : 'Simulador Concurso ISEP'}</p>
-                            <p class="text-xs font-bold text-slate-900 dark:text-white">${total} Preguntas</p>
-                        </div>
-                        <span class="text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full">${answeredCount}/${total} Respondidas</span>
-                    </div>
-                `}
-
-                ${questions.map((q, idx) => {
-                    const isLocked = !isPro && idx > 0;
-                    const selectedOpt = window.currentExamAnswers[idx];
-                    return `
-                        <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-3 relative overflow-hidden transition-all">
-                            ${isLocked ? `
-                                <div class="absolute inset-0 bg-[#0c101b]/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-4 text-center">
-                                    <span class="material-symbols-outlined text-amber-400 text-3xl mb-1">lock</span>
-                                    <p class="text-xs font-black text-white uppercase">Pregunta Exclusiva PRO</p>
-                                    <p class="text-[10px] text-slate-400 mt-0.5 mb-3">Desbloqueá el simulador completo de 50 preguntas con justificación ISEP</p>
-                                    <button onclick="window.showAcademyPaymentModal()" class="px-4 py-2 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
-                                        Desbloquear Simulador ($10.000)
-                                    </button>
+                            <div class="relative size-16 flex items-center justify-center shrink-0">
+                                <svg class="size-full -rotate-90">
+                                    <circle cx="32" cy="32" r="28" fill="transparent" stroke="rgba(255,255,255,0.05)" stroke-width="4" />
+                                    <circle cx="32" cy="32" r="28" fill="transparent" stroke="${pct >= 60 ? '#10b981' : '#ef4444'}" stroke-width="4"
+                                        stroke-dasharray="175.9" stroke-dashoffset="${175.9 - (175.9 * pct) / 100}" stroke-linecap="round" />
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center text-xs font-black text-white">
+                                    ${pct}%
                                 </div>
-                            ` : ''}
+                            </div>
+                        </div>
 
-                            <div class="flex items-start gap-3">
-                                <span class="size-6 rounded-full bg-primary/20 text-primary font-black text-xs flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
-                                <h4 class="font-bold text-xs text-slate-900 dark:text-white leading-snug">${q.question}</h4>
+                        <!-- Category breakdowns -->
+                        <div class="border-t border-white/5 pt-3.5 space-y-2.5 text-[10px]">
+                            <p class="font-bold text-slate-300 uppercase tracking-wider text-[9px]">Rendimiento por Categoría:</p>
+                            
+                            <div class="space-y-1">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Liderazgo & Conducción:</span>
+                                    <span class="font-bold text-white">${leadershipTotal > 0 ? Math.round((leadershipScore / leadershipTotal) * 100) : 100}%</span>
+                                </div>
+                                <div class="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden">
+                                    <div class="h-full bg-indigo-500 rounded-full" style="width: ${leadershipTotal > 0 ? (leadershipScore / leadershipTotal) * 100 : 100}%"></div>
+                                </div>
                             </div>
 
-                            <div class="space-y-2 pt-1">
-                                ${q.options.map((opt, optIdx) => {
-                                    let btnStyle = "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10";
-                                    if (selectedOpt === optIdx) {
-                                        btnStyle = "bg-primary/20 border-primary text-primary font-bold shadow-lg shadow-primary/5";
-                                    }
-                                    if (window.examSubmitted) {
-                                        if (optIdx === q.correctIndex) {
-                                            btnStyle = "bg-emerald-500/20 border-emerald-500/60 text-emerald-400 font-bold";
-                                        } else if (selectedOpt === optIdx && selectedOpt !== q.correctIndex) {
-                                            btnStyle = "bg-red-500/20 border-red-500/60 text-red-400 font-bold";
+                            <div class="space-y-1">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Procedimientos Operativos & Secuestros:</span>
+                                    <span class="font-bold text-white">${procTotal > 0 ? Math.round((procScore / procTotal) * 100) : 100}%</span>
+                                </div>
+                                <div class="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden">
+                                    <div class="h-full bg-emerald-500 rounded-full" style="width: ${procTotal > 0 ? (procScore / procTotal) * 100 : 100}%"></div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <div class="flex justify-between">
+                                    <span class="text-slate-400">Régimen Disciplinario & Leyes:</span>
+                                    <span class="font-bold text-white">${disciplineTotal > 0 ? Math.round((disciplineScore / disciplineTotal) * 100) : 100}%</span>
+                                </div>
+                                <div class="h-1.5 w-full bg-slate-950 rounded-full overflow-hidden">
+                                    <div class="h-full bg-purple-500 rounded-full" style="width: ${disciplineTotal > 0 ? (disciplineScore / disciplineTotal) * 100 : 100}%"></div>
+                                </div>
+                            </div>
+
+                            <p class="text-[9px] text-amber-300 italic pt-1 leading-relaxed">
+                                💡 <strong>Recomendación del Tutor:</strong> ${pct < 80 ? 'Reforzá tu repaso en la sección de Procedimientos y Fichas 3D del menú para asegurar la máxima calificación.' : '¡Excelente nivel doctrinal! Mantené el ritmo diario de estudio.'}
+                            </p>
+                        </div>
+                    </div>
+                ` : ''}
+
+                <!-- Question list -->
+                <div class="space-y-4">
+                    ${questions.map((q, idx) => {
+                        const selected = window.currentExamAnswers[idx];
+                        return `
+                            <div class="p-5 rounded-3xl border border-white/5 bg-slate-900/60 space-y-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="size-6 rounded-full bg-indigo-500/20 text-indigo-400 font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">${idx + 1}</span>
+                                    <div>
+                                        ${q.type === 'vf' ? '<span class="px-2 py-0.5 rounded text-[7px] font-black uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30 inline-block mb-1">Verdadero / Falso</span>' : ''}
+                                        <h4 class="font-bold text-xs text-white leading-relaxed">${q.question}</h4>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2 pl-9">
+                                    ${q.options.map((opt, optIdx) => {
+                                        let style = "bg-white/5 border-white/5 text-slate-300 hover:bg-white/10";
+                                        if (selected === optIdx) {
+                                            style = "bg-indigo-600/20 border-indigo-500 text-indigo-400 font-bold";
                                         }
-                                    }
-                                    return `
-                                        <button onclick="window.selectExamOption(${idx}, ${optIdx})" ${window.examSubmitted ? 'disabled' : ''}
-                                            class="w-full text-left p-3 rounded-2xl border text-xs transition-all active:scale-[0.98] flex items-center justify-between ${btnStyle}">
-                                            <span>${opt}</span>
-                                            ${window.examSubmitted && optIdx === q.correctIndex ? '<span class="material-symbols-outlined text-sm text-emerald-400">check_circle</span>' : ''}
-                                        </button>
-                                    `;
-                                }).join('')}
-                            </div>
-
-                            ${window.examSubmitted ? `
-                                <div class="p-3 rounded-2xl bg-slate-950 border border-white/5 text-[11px] text-slate-300 leading-relaxed space-y-1">
-                                    <p class="font-bold text-emerald-400 flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-sm">menu_book</span> Fundamentación de la Fuente:
-                                    </p>
-                                    <p>${q.explanation}</p>
+                                        if (window.examSubmitted) {
+                                            if (optIdx === q.correctIndex) {
+                                                style = "bg-emerald-500/20 border-emerald-500/60 text-emerald-400 font-bold";
+                                            } else if (selected === optIdx && selected !== q.correctIndex) {
+                                                style = "bg-red-500/20 border-red-500/60 text-red-400 font-bold";
+                                            }
+                                        }
+                                        return `
+                                            <button onclick="window.selectExamOption(${idx}, ${optIdx})" ${window.examSubmitted ? 'disabled' : ''}
+                                                class="w-full text-left p-3.5 rounded-2xl border text-xs transition-all active:scale-[0.98] flex items-center justify-between ${style}">
+                                                <span>${opt}</span>
+                                            </button>
+                                        `;
+                                    }).join('')}
                                 </div>
-                            ` : ''}
-                        </div>
-                    `;
-                }).join('')}
 
-                <div class="pt-2">
+                                ${window.examSubmitted ? `
+                                    <div class="p-3.5 rounded-2xl bg-slate-950 text-[10px] text-slate-400 leading-relaxed border border-white/5 space-y-1">
+                                        <p class="font-bold text-emerald-400 flex items-center gap-1.5">
+                                            <span class="material-symbols-outlined text-xs">gavel</span>
+                                            Fundamento Doctrinario y Legal:
+                                        </p>
+                                        <p>${q.explanation}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+
+                <div class="pt-3">
                     ${!window.examSubmitted ? `
-                        <button onclick="window.submitAcademyExam()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-sm uppercase tracking-wider shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
-                            Entregar y Calificar Examen
+                        <button onclick="window.submitAcademyExam()" class="w-full py-4 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black text-sm uppercase tracking-wider shadow-lg active:scale-95 transition-all">
+                            Entregar Examen
                         </button>
                     ` : `
-                        <div class="space-y-2">
-                            <button onclick="window.resetAcademyExam()" class="w-full py-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider active:scale-95 transition-all flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-sm">restart_alt</span> Reiniciar Simulador
-                            </button>
-                            ${isCustom ? `
-                                <button onclick="window.resetToOfficialExam()" class="w-full py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold text-xs uppercase tracking-wider active:scale-95 transition-all">
-                                    Volver al Programa del Concurso
-                                </button>
-                            ` : ''}
-                        </div>
+                        <button onclick="window.resetAcademyExam()" class="w-full py-4 rounded-2xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs uppercase tracking-wider rounded-2xl transition-all">
+                            Reiniciar Simulador
+                        </button>
                     `}
                 </div>
             </div>
         `;
     }
 
-    // --- TAB 4: FLASHCARDS INTERACTIVAS (3D Flip Effect) ---
-    function renderFlashcardsTab(hierarchy, isPro) {
+    // --- TAB: LEITNER FLASHCARDS 3D ---
+    function renderFlashcardsTab(hierarchy) {
         const flashcards = hierarchy.flashcards;
         const current = flashcards[window.currentFlashcardIndex] || flashcards[0];
-        const isLocked = !isPro && window.currentFlashcardIndex > 0;
+
+        // Leitner card mastery calculations
+        const totalCards = flashcards.length;
+        const masteredCount = Object.values(window.flashcardLeitnerState).filter(s => s === 'easy').length;
+        const reviewingCount = Object.values(window.flashcardLeitnerState).filter(s => s === 'medium').length;
+        const difficultCount = Object.values(window.flashcardLeitnerState).filter(s => s === 'hard').length;
 
         return `
-            <div class="space-y-6 text-center">
-                <div class="flex items-center justify-between px-1">
-                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Tarjetas Didácticas de Memorización</h3>
-                    <span class="text-[10px] text-slate-500 font-bold">${window.currentFlashcardIndex + 1} de ${flashcards.length}</span>
+            <div class="space-y-5 max-w-lg mx-auto animate-fade-in">
+                <!-- Leitner Card Tracker Deck -->
+                <div class="glass-card-notebook p-4 bg-slate-950/80 border border-white/5 flex items-center justify-between text-[9px] gap-2">
+                    <span class="font-bold text-slate-400 uppercase tracking-wider">Leitner Tracker:</span>
+                    <div class="flex gap-3">
+                        <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 font-bold border border-emerald-500/20">🟢 Dominadas: ${masteredCount}</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-amber-500/10 text-amber-400 font-bold border border-amber-500/20">🟡 Repaso: ${reviewingCount}</span>
+                        <span class="px-2.5 py-1 rounded-lg bg-red-500/10 text-red-400 font-bold border border-red-500/20">🔴 Difíciles: ${difficultCount}</span>
+                    </div>
                 </div>
 
-                <div onclick="${isLocked ? '' : 'window.flipFlashcard()'}" class="flashcard-wrapper w-full min-h-[240px] cursor-pointer">
+                <div onclick="window.flipFlashcard()" class="flashcard-wrapper w-full min-h-[240px] cursor-pointer">
                     <div class="flashcard-card relative w-full h-[240px] ${window.flashcardFlipped ? 'is-flipped' : ''}">
-                        
-                        <!-- FRONT FACE -->
-                        <div class="flashcard-face absolute inset-0 p-6 rounded-[2.5rem] border border-primary/20 bg-gradient-to-br from-slate-900 to-indigo-950 text-white shadow-2xl flex flex-col items-center justify-center">
-                            ${isLocked ? `
-                                <div class="absolute inset-0 bg-[#0a0c12]/95 backdrop-blur-md rounded-[2.5rem] z-20 flex flex-col items-center justify-center p-4 text-center">
-                                    <span class="material-symbols-outlined text-amber-400 text-3xl mb-1">lock</span>
-                                    <p class="text-xs font-black text-white uppercase">Tarjetas Exclusivas PRO</p>
-                                    <p class="text-[10px] text-slate-400 mt-0.5 mb-3">Activa tu pase ($10.000) por Alias para practicar con todo el mazo</p>
-                                    <button onclick="window.showAcademyPaymentModal()" class="px-4 py-2 rounded-xl bg-amber-500 text-white font-bold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
-                                        Desbloquear Mazo completo
-                                    </button>
-                                </div>
-                            ` : ''}
-
-                            <span class="text-[8px] font-black uppercase tracking-widest bg-primary/20 text-primary px-3 py-1 rounded-full border border-primary/30 mb-5">
-                                ${current.category} • PREGUNTA
-                            </span>
-                            <p class="text-sm font-bold leading-snug px-2 text-slate-100 max-w-xs">
+                        <!-- Front Face -->
+                        <div class="flashcard-face absolute inset-0 p-6 rounded-[2.5rem] border border-indigo-500/20 bg-gradient-to-br from-[#121626] to-slate-950 text-white shadow-2xl flex flex-col justify-between">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                    Pregunta de Examen
+                                </span>
+                                <span class="text-[9px] text-slate-500 font-mono">${current.category}</span>
+                            </div>
+                            <p class="text-xs font-bold leading-relaxed text-slate-100 text-center max-w-sm mx-auto">
                                 ${current.front}
                             </p>
-                            <p class="text-[9px] text-slate-500 mt-6 font-mono flex items-center gap-1">
-                                <span class="material-symbols-outlined text-xs">touch_app</span> Tocar para revelar respuesta
+                            <p class="text-[8px] text-center text-slate-500 font-bold uppercase tracking-wider flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-[10px] animate-pulse">touch_app</span> Tocar para revelar
                             </p>
                         </div>
 
-                        <!-- BACK FACE -->
-                        <div class="flashcard-face flashcard-back absolute inset-0 p-6 rounded-[2.5rem] border border-emerald-500/30 bg-gradient-to-br from-slate-900 to-emerald-950 text-white shadow-2xl flex flex-col items-center justify-center">
-                            <span class="text-[8px] font-black uppercase tracking-widest bg-emerald-500/20 text-emerald-400 px-3 py-1 rounded-full border border-emerald-500/30 mb-5">
-                                RESPUESTA OFICIAL
-                            </span>
-                            <p class="text-xs font-bold leading-relaxed px-2 text-slate-100 max-w-xs">
+                        <!-- Back Face -->
+                        <div class="flashcard-face flashcard-back absolute inset-0 p-6 rounded-[2.5rem] border border-emerald-500/30 bg-gradient-to-br from-slate-900 via-emerald-950 to-slate-950 text-white shadow-2xl flex flex-col justify-between">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                    Fundamento Doctrinario
+                                </span>
+                                <span class="text-[9px] text-emerald-400 font-bold">✓ Respuesta Oficial</span>
+                            </div>
+                            <p class="text-xs font-bold leading-relaxed text-slate-100 text-center max-w-sm mx-auto">
                                 ${current.back}
                             </p>
-                            <p class="text-[9px] text-slate-500 mt-6 font-mono flex items-center gap-1">
-                                <span class="material-symbols-outlined text-xs">touch_app</span> Tocar para volver a la pregunta
+                            <p class="text-[8px] text-center text-slate-500 font-bold uppercase tracking-wider flex items-center justify-center gap-1">
+                                <span class="material-symbols-outlined text-[10px]">touch_app</span> Tocar para volver
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between gap-4">
-                    <button onclick="window.prevFlashcard(${flashcards.length})" class="flex-1 py-3 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/5 text-white font-bold text-xs active:scale-95 transition-all flex items-center justify-center gap-1">
-                        <span class="material-symbols-outlined text-sm">arrow_back</span> Anterior
+                <!-- Spaced Repetition Leitner Rating System -->
+                <div class="grid grid-cols-3 gap-2">
+                    <button onclick="window.rateFlashcard('${current.id}', 'hard', ${totalCards})" class="py-3 rounded-2xl bg-red-500/10 hover:bg-red-500/20 border border-red-500/30 text-red-400 text-[10px] font-black uppercase tracking-wider transition-all active:scale-95">
+                        🔴 Difícil
                     </button>
-                    <button onclick="window.nextFlashcard(${flashcards.length})" class="flex-1 py-3 rounded-2xl bg-primary text-white font-bold text-xs active:scale-95 transition-all flex items-center justify-center gap-1 shadow-lg shadow-primary/20">
-                        Siguiente <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    <button onclick="window.rateFlashcard('${current.id}', 'medium', ${totalCards})" class="py-3 rounded-2xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-400 text-[10px] font-black uppercase tracking-wider transition-all active:scale-95">
+                        🟡 Regular
+                    </button>
+                    <button onclick="window.rateFlashcard('${current.id}', 'easy', ${totalCards})" class="py-3 rounded-2xl bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-[10px] font-black uppercase tracking-wider transition-all active:scale-95 shadow-lg shadow-emerald-500/5">
+                        🟢 Lo sé / Fácil
                     </button>
                 </div>
             </div>
         `;
     }
 
-    // --- TAB 5: MAPAS MENTALES Y ESQUEMAS (Dynamic Mermaid.js Rendering) ---
-    function renderMindmapsTab(hierarchy, isPro) {
+    // --- TAB: SCHEMAS & FLOWCHARTS (Mermaid.js) ---
+    function renderMindmapsTab(hierarchy) {
         const mindmaps = hierarchy.mindmaps;
 
-        // Load Mermaid dynamically from CDN
         if (typeof mermaid === 'undefined') {
             const script = document.createElement('script');
             script.src = 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js';
             script.onload = () => {
-                mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
-                setTimeout(() => {
-                    try { mermaid.run(); } catch(e) { console.warn("Mermaid execution warning:", e); }
-                }, 100);
+                try {
+                    mermaid.initialize({ startOnLoad: false, theme: 'dark', securityLevel: 'loose' });
+                    setTimeout(() => { try { mermaid.run(); } catch(e){} }, 100);
+                } catch(e){}
             };
             document.head.appendChild(script);
         } else {
-            setTimeout(() => {
-                try { mermaid.run(); } catch(e) { console.warn("Mermaid execution warning:", e); }
-            }, 100);
+            setTimeout(() => { try { mermaid.run(); } catch(e){} }, 100);
         }
 
         return `
-            <div class="space-y-4">
-                <div class="px-1 flex items-center justify-between">
-                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Esquemas de Procedimiento</h3>
-                    <span class="text-[9px] bg-slate-800 text-slate-400 font-bold px-2 py-0.5 rounded-md">Vectorial</span>
+            <div class="space-y-5 animate-fade-in">
+                <div class="px-1">
+                    <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Flujogramas Doctrinarios</h3>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Visualización estructurada de procedimientos legales obligatorios.</p>
                 </div>
 
-                ${mindmaps.map(mm => `
-                    <div class="glass-card p-5 rounded-3xl border border-white/5 space-y-4">
-                        <h4 class="font-bold text-xs text-slate-900 dark:text-white flex items-center gap-2">
-                            <span class="material-symbols-outlined text-primary text-sm">account_tree</span>
-                            ${mm.title}
-                        </h4>
-                        <div class="mermaid bg-slate-950 p-4 rounded-2xl border border-white/5 flex justify-center overflow-x-auto text-[10px] leading-relaxed select-none">
-                            ${mm.mermaid.trim()}
+                <div class="grid grid-cols-1 gap-4">
+                    ${mindmaps.map(mm => `
+                        <div class="p-5 rounded-3xl border border-white/5 bg-slate-900/60 space-y-3">
+                            <h4 class="font-bold text-xs text-white flex items-center gap-2">
+                                <span class="material-symbols-outlined text-indigo-400 text-sm">account_tree</span>
+                                ${mm.title}
+                            </h4>
+                            <div class="mermaid bg-slate-950 p-4 rounded-2xl border border-white/5 flex justify-center overflow-x-auto text-[10px]">
+                                ${mm.mermaid.trim()}
+                            </div>
                         </div>
-                    </div>
-                `).join('')}
+                    `).join('')}
+                </div>
             </div>
         `;
     }
 
-    // --- TAB 6: TUTOR IA (Google NotebookLM Conversational Chat Room) ---
-    function renderGeminiTutorTab(hierarchy, isPro) {
-        // Collect checked sources to display inside Chat Companion
-        const activeSourceTitles = academyLibraryItems
-            .filter(item => window.academySelectedSources[item.id])
-            .map(item => item.title);
-
+    // --- TAB: INTERACTIVE TACTICAL PROCEDURES SIMULATOR (SVG Animated Video Lesson) ---
+    function renderVideosTab(hierarchy) {
         return `
-            <div class="space-y-4">
-                <!-- Chat Header companion -->
-                <div class="glass-card p-4 rounded-3xl border border-purple-500/20 bg-gradient-to-br from-slate-900 to-indigo-950/80 text-white shadow-xl space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2.5">
-                            <div class="relative">
-                                <div class="absolute inset-0 rounded-full bg-purple-500/30 blur-sm animate-pulse"></div>
-                                <span class="relative size-9 rounded-xl bg-purple-500/20 text-purple-400 border border-purple-500/30 flex items-center justify-center">
-                                    <span class="material-symbols-outlined text-lg animate-pulse">psychology</span>
-                                </span>
-                            </div>
-                            <div>
-                                <h3 class="text-xs font-black text-white uppercase tracking-wider">Tutor Centinela IA</h3>
-                                <p class="text-[9px] text-purple-300 font-bold uppercase tracking-wider">Conectado a tus fuentes 🧠</p>
-                            </div>
+            <div class="space-y-5 animate-fade-in">
+                <div class="px-1 flex items-center justify-between">
+                    <div>
+                        <h3 class="text-xs font-black uppercase text-slate-400 tracking-wider">Lecciones Tácticas 3D Interactivas</h3>
+                        <p class="text-[10px] text-slate-500 mt-0.5">Simulador gráfico paso a paso de procedimientos policiales.</p>
+                    </div>
+                </div>
+
+                <div class="glass-card-notebook p-5 border-rose-500/20 bg-gradient-to-br from-slate-950 via-[#13111f] to-slate-950 space-y-4">
+                    <!-- Interactive Visual Canvas (Tactical Map) -->
+                    <div class="relative w-full h-56 rounded-2xl bg-slate-950 border border-white/10 overflow-hidden flex flex-col justify-between p-4 shadow-inner">
+                        
+                        <!-- Tactical Simulator Grid Map -->
+                        <div class="absolute inset-0 opacity-10 bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+                        
+                        <!-- Visual animated indicators according to current step -->
+                        <div class="absolute inset-0 flex items-center justify-center z-10">
+                            ${window.activeVideoStep === 1 ? `
+                                <!-- Step 1: Perimeter layout drawing -->
+                                <svg class="size-48 animate-pulse text-rose-500" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="35" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2" />
+                                    <rect x="42" y="42" width="16" height="16" fill="rgba(239, 68, 68, 0.2)" stroke="currentColor" stroke-width="1.5" rx="3" />
+                                    <text x="50" y="52" font-size="6" font-family="monospace" fill="white" text-anchor="middle" font-weight="bold">ARMA</text>
+                                    <text x="50" y="25" font-size="5" fill="currentColor" text-anchor="middle">PERÍMETRO DE SEGURIDAD</text>
+                                </svg>
+                            ` : ''}
+
+                            ${window.activeVideoStep === 2 ? `
+                                <!-- Step 2: Witness / Camera recording -->
+                                <div class="text-center space-y-2 animate-fade-in">
+                                    <div class="flex justify-center gap-6">
+                                        <div class="flex flex-col items-center">
+                                            <span class="material-symbols-outlined text-4xl text-amber-400 animate-pulse">videocam</span>
+                                            <span class="text-[8px] font-mono text-slate-400 mt-1">CÁMARA BODYCAM</span>
+                                        </div>
+                                        <div class="flex flex-col items-center">
+                                            <span class="material-symbols-outlined text-4xl text-blue-400">groups</span>
+                                            <span class="text-[8px] font-mono text-slate-400 mt-1">TESTIGOS</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-[9px] font-mono text-white bg-slate-900/90 px-3 py-1 rounded-xl border border-white/5">DESCARGA ANTE TESTIGOS</p>
+                                </div>
+                            ` : ''}
+
+                            ${window.activeVideoStep === 3 ? `
+                                <!-- Step 3: Evidencia & Chain of custody packaging -->
+                                <div class="text-center space-y-3 animate-fade-in">
+                                    <span class="material-symbols-outlined text-5xl text-emerald-400 animate-bounce">inventory_2</span>
+                                    <div class="space-y-1">
+                                        <p class="text-[10px] font-bold text-white">SOBRE DE EVIDENCIA N° 4821</p>
+                                        <p class="text-[8px] text-slate-400 font-mono">FORMULARIO DE CUSTODIA ELEVADO AL MPA</p>
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <!-- Top layout HUD -->
+                        <div class="flex justify-between items-center relative z-20">
+                            <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 text-[8px] font-mono border border-rose-500/30 tracking-wider">
+                                SIMULACIÓN INTERACTIVA
+                            </span>
+                            <span class="text-[9px] font-mono text-slate-400">PASO ${window.activeVideoStep} DE 3</span>
+                        </div>
+
+                        <!-- Bottom layout context text -->
+                        <div class="relative z-20 bg-slate-900/90 p-2.5 rounded-xl border border-white/5 text-[9px] leading-relaxed text-slate-300">
+                            ${window.activeVideoStep === 1 ? '<strong>Paso 1: Delimitación de Escena.</strong> Se asegura el área con doble encintado antes de procesar el arma.' : ''}
+                            ${window.activeVideoStep === 2 ? '<strong>Paso 2: Descarga y Despeje.</strong> La recámara debe vaciarse con registro fílmico ininterrumpido o dos testigos.' : ''}
+                            ${window.activeVideoStep === 3 ? '<strong>Paso 3: Rotulado.</strong> Se embala la evidencia física en bolsa sellada y se eleva la cadena de custodia al Fiscal.' : ''}
                         </div>
                     </div>
 
-                    <p class="text-[11px] text-slate-300 leading-relaxed">
-                        Pregunta cualquier duda. Gemini responderá analizando tus fuentes seleccionadas:
-                        <span class="text-purple-300 font-bold font-mono text-[10px] break-words">
-                            (${activeSourceTitles.join(', ')})
-                        </span>.
-                    </p>
+                    <!-- Step control pills -->
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="window.setVideoStep(1)" class="py-3 rounded-xl text-[9px] font-black uppercase border transition-all ${window.activeVideoStep === 1 ? 'bg-rose-500/20 border-rose-500 text-rose-300 shadow-md' : 'bg-white/5 border-white/5 text-slate-400'}">
+                            Paso 1: Perímetro
+                        </button>
+                        <button onclick="window.setVideoStep(2)" class="py-3 rounded-xl text-[9px] font-black uppercase border transition-all ${window.activeVideoStep === 2 ? 'bg-amber-500/20 border-amber-500 text-amber-300 shadow-md' : 'bg-white/5 border-white/5 text-slate-400'}">
+                            Paso 2: Descarga
+                        </button>
+                        <button onclick="window.setVideoStep(3)" class="py-3 rounded-xl text-[9px] font-black uppercase border transition-all ${window.activeVideoStep === 3 ? 'bg-emerald-500/20 border-emerald-500 text-emerald-300 shadow-md' : 'bg-white/5 border-white/5 text-slate-400'}">
+                            Paso 3: Custodia
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
 
-                    <!-- Pre-built question chips -->
-                    <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none text-[10px]">
-                        <button onclick="window.askGeminiTutor('¿Cuáles son las 4 virtudes de la Autoridad según el ISEP 2026?')" class="shrink-0 px-3 py-1.5 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500 hover:text-white transition-all active:scale-95 font-bold">
-                            💡 Virtudes del Liderazgo
+    // --- TAB: TUTOR CENTINELA IA ---
+    function renderGeminiTutorTab(hierarchy) {
+        return `
+            <div class="space-y-4 animate-fade-in">
+                <div class="glass-card-notebook p-5 bg-[#121929]/80 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="size-10 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-lg animate-pulse">psychology</span>
+                        </span>
+                        <div>
+                            <h3 class="text-xs font-black text-white">Tutor Centinela RAG IA</h3>
+                            <p class="text-[9px] text-indigo-300 font-bold uppercase tracking-wider">Preguntas basadas en tus manuales</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none text-[8px]">
+                        <button onclick="window.askGeminiTutor('¿Cuáles son las 4 virtudes cardinales según el manual de ascenso ISEP?')" class="shrink-0 px-2.5 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-bold">
+                            Virtudes del mando
                         </button>
-                        <button onclick="window.askGeminiTutor('¿Cómo debe realizarse la descarga de un arma secuestrada según ISEP Pág. 69?')" class="shrink-0 px-3 py-1.5 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500 hover:text-white transition-all active:scale-95 font-bold">
-                            🔫 Descarga de Armas
+                        <button onclick="window.askGeminiTutor('¿Qué dice el protocolo ISEP Pág. 69 sobre la descarga de armas de fuego?')" class="shrink-0 px-2.5 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-bold">
+                            Descarga de armas
                         </button>
-                        <button onclick="window.askGeminiTutor('Diferencia entre Cesantía y Exoneración en el Régimen Disciplinario')" class="shrink-0 px-3 py-1.5 rounded-xl bg-purple-500/10 text-purple-300 border border-purple-500/20 hover:bg-purple-500 hover:text-white transition-all active:scale-95 font-bold">
-                            ⚖️ Faltas y Sanciones
+                        <button onclick="window.askGeminiTutor('Diferencia entre Cesantía y Exoneración de la Ley 12.521')" class="shrink-0 px-2.5 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-bold">
+                            Cesantía vs Exoneración
                         </button>
                     </div>
                 </div>
 
-                <!-- Live Chat Message Area -->
-                <div id="gemini-tutor-output" class="space-y-3.5 min-h-[100px] max-h-[350px] overflow-y-auto pr-1"></div>
+                <!-- Chat history -->
+                <div id="gemini-tutor-output" class="space-y-3 min-h-[140px] max-h-[320px] overflow-y-auto pr-1"></div>
 
-                <!-- Chat Form Input -->
                 <form onsubmit="window.submitGeminiTutorForm(event)" class="relative flex items-center gap-2">
-                    <input type="text" id="gemini-tutor-input" placeholder="Pregunta a la IA sobre las fuentes..." 
-                        class="w-full px-4 py-3.5 bg-slate-900 border border-purple-500/20 rounded-2xl text-xs text-white placeholder:text-slate-500 outline-none focus:border-purple-500 transition-all pr-12 shadow-inner">
-                    <button type="submit" class="absolute right-1.5 size-9 rounded-xl bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-center shadow-lg shadow-purple-600/30 active:scale-90 transition-all">
+                    <input type="text" id="gemini-tutor-input" placeholder="Preguntale a la IA sobre la doctrina..." 
+                        class="w-full px-4 py-3.5 bg-slate-900 border border-white/5 rounded-2xl text-xs text-white placeholder:text-slate-500 outline-none focus:border-indigo-500 pr-12">
+                    <button type="submit" class="absolute right-1.5 size-9 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center active:scale-90 transition-all shadow-md">
                         <span class="material-symbols-outlined text-sm">send</span>
                     </button>
                 </form>
@@ -999,101 +1006,253 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- VIEW INTERACTION EVENT HANDLERS ---
+    // --- EVENT CONTROLLERS ---
+
+    window.setVideoStep = (step) => {
+        window.activeVideoStep = step;
+        renderAcademia(viewContainer);
+    };
+
+    window.rateFlashcard = (cardId, rating, total) => {
+        window.flashcardLeitnerState[cardId] = rating;
+        window.flashcardFlipped = false;
+        window.currentFlashcardIndex = (window.currentFlashcardIndex + 1) % total;
+        renderAcademia(viewContainer);
+        showToast(`Tarjeta marcada como ${rating === 'easy' ? 'Dominada 🟢' : rating === 'medium' ? 'Repaso 🟡' : 'Difícil 🔴'}`);
+    };
+
+    window.toggleAudioPodcastOverview = () => {
+        window.isPodcastPlaying = !window.isPodcastPlaying;
+        if (window.isPodcastPlaying) {
+            window.playAudiobook(
+                "Podcast ISEP 2026: Resumen de Doctrina y Procedimientos",
+                "Bienvenidos a la Guía de Audio ISEP. Hoy analizamos los temas centrales. El protocolo de secuestro de armas en vía pública exige de manera obligatoria la descarga de cartuchos únicamente ante testigos presenciales o filmación ininterrumpida (Manual Pág. 69). Además, la Ley de Personal Policial 12.521 regula las sanciones graves. La Cesantía separa al agente pero guarda sus aportes previsionales acumulados, mientras que la Exoneración extingue por completo todo derecho y cómputo de la fuerza policial.",
+                "podcast-overview"
+            );
+        } else {
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            showToast("Podcast pausado");
+        }
+        renderAcademia(viewContainer);
+    };
+
+    window.togglePodcastSpeed = () => {
+        const speeds = [1, 1.25, 1.5];
+        const nextIdx = (speeds.indexOf(window.podcastSpeed) + 1) % speeds.length;
+        window.podcastSpeed = speeds[nextIdx];
+        if (window.isPodcastPlaying) {
+            window.isPodcastPlaying = false;
+            window.toggleAudioPodcastOverview();
+        }
+        renderAcademia(viewContainer);
+        showToast(`Velocidad configurada en ${window.podcastSpeed}x`);
+    };
 
     window.toggleSourceSelection = (sourceId) => {
         window.academySelectedSources = window.academySelectedSources || {};
         window.academySelectedSources[sourceId] = !window.academySelectedSources[sourceId];
-        // Ensure at least one source is checked
-        const anyChecked = Object.values(window.academySelectedSources).some(v => v);
-        if (!anyChecked) {
-            window.academySelectedSources[sourceId] = true;
-            showToast("⚠️ Debes seleccionar al menos una fuente");
-            return;
-        }
         renderAcademia(viewContainer);
-        showToast("📂 Fuentes actualizadas");
     };
 
-    window.resetToOfficialExam = () => {
+    window.filterLibrarySources = (query) => {
+        window.librarySearchQuery = query;
+        const listEl = document.querySelector('.notebook-sidebar .space-y-2.5');
+        if (listEl) listEl.innerHTML = renderLibraryItemsHTML();
+    };
+
+    window.setLibraryFilter = (filter) => {
+        window.libraryActiveFilter = filter;
+        const listEl = document.querySelector('.notebook-sidebar .space-y-2.5');
+        if (listEl) listEl.innerHTML = renderLibraryItemsHTML();
+        renderAcademia(viewContainer);
+    };
+
+    window.switchAcademyHierarchy = (val) => {
+        localStorage.setItem('academy_setup_hierarchy', val);
+        window.academySelectedHierarchy = val;
+        window.currentExamAnswers = {};
+        window.examSubmitted = false;
+        renderAcademia(viewContainer);
+        showToast("✨ Jerarquía objetivo actualizada");
+    };
+
+    window.showAddSourceModal = () => {
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[999] flex items-center justify-center p-4';
+        modal.innerHTML = `
+            <div class="glass-card-notebook p-6 max-w-sm w-full bg-slate-900 border border-white/10 rounded-3xl shadow-2xl space-y-4 animate-fade-in">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm text-indigo-400">note_add</span>
+                        Añadir Fuente / Nota
+                    </h3>
+                    <button onclick="this.closest('.fixed').remove()" class="size-8 rounded-full hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                        <span class="material-symbols-outlined text-sm">close</span>
+                    </button>
+                </div>
+                <div class="space-y-3">
+                    <div>
+                        <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Título de la nota o circular</label>
+                        <input type="text" id="newSourceTitle" placeholder="Ej: Circular 01/26 - Recargo de Servicios" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500">
+                    </div>
+                    <div>
+                        <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Contenido doctrinal o reglamentario</label>
+                        <textarea id="newSourceContent" placeholder="Pegá o redactá las disposiciones oficiales de la fuerza aquí..." class="w-full h-32 px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500 resize-none"></textarea>
+                    </div>
+                    <button onclick="window.saveCustomSource(this)" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-600/20">
+                        Indexar en RAG Policial
+                    </button>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    };
+
+    window.saveCustomSource = (btn) => {
+        const title = document.getElementById('newSourceTitle')?.value.trim();
+        const content = document.getElementById('newSourceContent')?.value.trim();
+        if (!title || !content) {
+            showToast("Por favor completá título y contenido.");
+            return;
+        }
+
+        let custom = [];
+        try {
+            custom = JSON.parse(localStorage.getItem('academy_custom_sources') || '[]');
+        } catch(e) {}
+
+        const newSource = {
+            id: 'custom-' + Date.now(),
+            title: title,
+            desc: content.slice(0, 80) + '...',
+            content: content,
+            file: '#',
+            icon: 'note_add',
+            color: 'from-purple-600/20 to-indigo-600/20 text-purple-400 border-purple-500/30',
+            badge: 'Nota Manual',
+            category: 'custom'
+        };
+
+        custom.push(newSource);
+        localStorage.setItem('academy_custom_sources', JSON.stringify(custom));
+        window.academySelectedSources[newSource.id] = true;
+        btn.closest('.fixed').remove();
+        showToast("✓ Nota indexada en tu RAG local");
+        renderAcademia(viewContainer);
+    };
+
+    window.deleteCustomSource = (id) => {
+        if (!confirm("¿Seguro que querés eliminar esta nota de estudio?")) return;
+        let custom = [];
+        try {
+            custom = JSON.parse(localStorage.getItem('academy_custom_sources') || '[]');
+        } catch(e) {}
+
+        custom = custom.filter(item => item.id !== id);
+        localStorage.setItem('academy_custom_sources', JSON.stringify(custom));
+        delete window.academySelectedSources[id];
+        showToast("Fuente eliminada");
+        renderAcademia(viewContainer);
+    };
+
+    window.generateCustomReport = async (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const topic = document.getElementById('customReportTopic')?.value.trim();
+        if (!topic) {
+            showToast("Escribí un tema para sintetizar");
+            return;
+        }
+
+        showToast("Sintetizando con Gemini IA...");
+        const prompt = `Generá un Resumen de Estudio sobre: "${topic}". Citá artículos o manuales de Santa Fe aplicables.`;
+        try {
+            const res = await window.callGeminiAPI(prompt);
+            alert(`--- RESUMEN EJECUTIVO IA ---\n\n${res}`);
+        } catch(err) {
+            alert(`Resumen Ejecutivo de ${topic}:\n\n- Fundamento Legal: Ley N° 12.521.\n- Procedimiento Operativo: Acta de constatación, doble encintado y testigos.\n- Sanciones aplicables ante faltas administrativas.`);
+        }
+    };
+
+    window.generateISEPProject = async (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const topic = document.getElementById('customProjectTopic')?.value.trim() || "Plan de Patrullaje Inteligente 911";
+        const out = document.getElementById('projectOutputContainer');
+        if (!out) return;
+
+        out.classList.remove('hidden');
+        out.innerHTML = `
+            <div class="p-6 rounded-3xl border border-purple-500/20 bg-slate-950 animate-pulse text-xs text-slate-400">
+                Elaborando proyecto formal con Gemini RAG...
+            </div>
+        `;
+
+        const prompt = `Redactá un Proyecto Institucional de Gestión Policial (ISEP 2026) sobre: "${topic}". Incluí Diagnóstico, Objetivos, Plan de Acción, KPIs, Presupuesto e Impacto en Markdown.`;
+        let text = "";
+        try {
+            text = await window.callGeminiAPI(prompt);
+        } catch(err) {
+            text = `### PROYECTO INSTITUCIONAL ISEP 2026: ${topic}
+
+#### 1. DIAGNÓSTICO
+Falta de respuesta operativa inmediata en puntos calientes.
+
+#### 2. OBJETIVOS
+* Disminuir un 20% los ilícitos contra la propiedad.
+
+#### 3. PLAN DE ACCIÓN
+* Cuadrículas orientadas con apoyo de móviles y patrulla táctica.
+
+#### 4. KPIs
+* Tiempo de respuesta de móviles del 911 (< 10 minutos).
+
+#### 5. PRESUPUESTO
+* Recursos asignados por la Jefatura de Unidad Regional.
+
+#### 6. IMPACTO
+* Reducción verificada en el mapa del delito de la provincia.`;
+        }
+
+        out.innerHTML = `
+            <div class="p-5 rounded-3xl border border-purple-500/30 bg-slate-900/90 text-xs text-white space-y-4">
+                <div class="flex justify-between items-center border-b border-white/5 pb-2">
+                    <span class="font-bold text-purple-300">Proyecto de Gestión redactado</span>
+                    <button onclick="copyToClipboard(\`${escapeHTML(text)}\`, 'Proyecto ISEP')" class="px-3 py-1.5 bg-purple-600 text-white rounded-lg text-[9px] font-bold uppercase">Copiar</button>
+                </div>
+                <div class="whitespace-pre-wrap font-sans leading-relaxed text-slate-200">${text}</div>
+            </div>
+        `;
+    };
+
+    window.startStandardExam = () => {
         window.customAIQuestions = null;
         window.currentExamAnswers = {};
         window.examSubmitted = false;
-        container.innerHTML = getHTML();
-        initAds();
+        renderAcademia(viewContainer);
+        showToast("Examen estándar cargado");
     };
 
     window.generateAIExam = async (e) => {
         if (e && e.preventDefault) e.preventDefault();
-        
-        // Find checked sources titles
-        const activeSourceTitles = academyLibraryItems
-            .filter(item => window.academySelectedSources[item.id])
-            .map(item => item.title);
-
-        const qty = parseInt(document.getElementById('iaExamQty')?.value || "5", 10);
-        const difficulty = document.getElementById('iaExamDiff')?.value || "Intermedia";
-
-        // Show premium full screen loader
-        const overlay = document.createElement('div');
-        overlay.className = 'fixed inset-0 bg-[#07090e]/96 z-[9999] flex flex-col items-center justify-center p-6 text-center animate-fade-in';
-        overlay.innerHTML = `
-            <div class="relative w-24 h-24 mb-6">
-                <div class="absolute inset-0 rounded-full border-4 border-purple-500/20 animate-ping"></div>
-                <div class="absolute inset-0 rounded-full border-4 border-t-purple-500 border-r-transparent border-b-transparent border-l-transparent animate-spin" style="animation-duration: 0.8s;"></div>
-                <div class="absolute inset-2 rounded-full border-4 border-purple-400/10"></div>
-                <div class="absolute inset-2 rounded-full border-4 border-b-purple-400 border-t-transparent border-r-transparent border-l-transparent animate-spin" style="animation-direction: reverse; animation-duration: 1.2s;"></div>
-                <div class="absolute inset-0 flex items-center justify-center text-purple-400 font-black text-xs tracking-widest animate-pulse">
-                    AI
-                </div>
-            </div>
-            <h3 class="text-lg font-black text-white leading-tight mb-2">Evaluador Inteligente Notebook IA</h3>
-            <p class="text-xs text-slate-400 max-w-xs leading-relaxed animate-pulse">
-                Analizando doctrina de: <br><strong class="text-purple-300">${activeSourceTitles.join(', ')}</strong>...
-            </p>
-        `;
-        document.body.appendChild(overlay);
-
-        const systemInstruction = `Sos un software evaluador de exámenes académicos del ISEP (Instituto de Seguridad Pública de Santa Fe, Argentina). Tu tarea es generar exámenes de opción múltiple con 4 opciones. Debes responder EXCLUSIVAMENTE con un array JSON válido, sin textos introductorios, sin explicaciones externas, y sin bloques de código markdown (NO uses \`\`\`json ni \`\`\`). El formato debe ser estrictamente un array de objetos con esta estructura de ejemplo:
-[
-  {
-    "id": "ai-q-1",
-    "question": "Texto de la pregunta...",
-    "options": ["Opción A", "Opción B", "Opción C", "Opción D"],
-    "correctIndex": 1,
-    "explanation": "Fundamentación legal con artículos o páginas de los manuales oficiales..."
-  }
-]`;
-
-        const userPrompt = `Generá un examen de exactamente ${qty} preguntas sobre las siguientes fuentes de estudio seleccionadas: ${activeSourceTitles.join(', ')}.
-Dificultad requerida: ${difficulty}.
-Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal de la policía de Santa Fe. Asegúrate de retornar un JSON válido estructurado.`;
-
+        showToast("Generando 50 preguntas con Gemini RAG...");
+        const prompt = `Generá un examen en JSON de 10 preguntas sobre el temario oficial policial de Santa Fe (Ley 12521 y manual de ascenso). Formato:
+[{"type":"multiple","question":"P?","options":["A","B","C","D"],"correctIndex":1,"explanation":"F"}]`;
         try {
-            const answer = await window.callGeminiAPI(userPrompt, systemInstruction);
-            overlay.remove();
-
-            let cleanJSON = answer.trim();
-            if (cleanJSON.startsWith('```')) {
-                cleanJSON = cleanJSON.replace(/^```json|^```|```$/g, '').trim();
-            }
-
-            const questions = JSON.parse(cleanJSON);
-            if (!Array.isArray(questions) || questions.length === 0) {
-                throw new Error("El formato devuelto no es un array válido.");
-            }
-
-            window.customAIQuestions = questions;
+            const ans = await window.callGeminiAPI(prompt);
+            let clean = ans.trim();
+            if (clean.startsWith('```')) clean = clean.replace(/^```json|^```|```$/g, '').trim();
+            const questions = JSON.parse(clean);
+            if (Array.isArray(questions) && questions.length > 0) {
+                window.customAIQuestions = questions;
+                window.currentExamAnswers = {};
+                window.examSubmitted = false;
+                renderAcademia(viewContainer);
+                showToast("Simulador IA activado");
+            } else { throw new Error(); }
+        } catch(err) {
+            window.customAIQuestions = hierarchy.exams;
             window.currentExamAnswers = {};
             window.examSubmitted = false;
-            
-            showToast("✨ Examen dinámico con IA generado");
-            container.innerHTML = getHTML();
-            initAds();
-        } catch(err) {
-            overlay.remove();
-            console.error("Failed to generate AI exam:", err);
-            alert("Hubo un problema al generar el examen con Gemini IA. Por favor, verifica tu clave de API y reintenta.\n\nError: " + err.message);
+            renderAcademia(viewContainer);
         }
     };
 
@@ -1114,112 +1273,75 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal de
         const query = input.value.trim();
         if (!query) return;
 
-        // Append User Message bubble
         output.innerHTML += `
-            <div class="flex gap-2.5 justify-end items-start animate-fade-in">
-                <div class="p-3 bg-indigo-600 border border-indigo-500/20 rounded-2xl rounded-tr-none text-xs text-white max-w-[80%] leading-relaxed">
-                    <p class="font-black text-[8px] opacity-80 uppercase tracking-widest mb-0.5">Tú</p>
-                    <p class="font-medium">${escapeHTML(query)}</p>
-                </div>
-                <div class="size-7 rounded-lg bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center shrink-0 text-white border border-indigo-400/20">
-                    <span class="material-symbols-outlined text-xs">person</span>
-                </div>
+            <div class="flex justify-end p-3 bg-indigo-600 text-white rounded-2xl rounded-tr-none text-xs max-w-[80%] ml-auto font-medium">
+                ${escapeHTML(query)}
             </div>
         `;
 
         const loadingId = 'tutor-load-' + Date.now();
         output.innerHTML += `
-            <div id="${loadingId}" class="flex gap-2.5 items-start animate-fade-in">
-                <div class="size-7 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shrink-0 text-white border border-purple-400/20">
-                    <span class="material-symbols-outlined text-xs animate-spin">sync</span>
-                </div>
-                <div class="p-3 bg-slate-900 border border-white/5 rounded-2xl rounded-tl-none text-xs text-slate-400 flex items-center gap-1.5">
-                    <span>Gemini IA consultando fuentes...</span>
-                </div>
+            <div id="${loadingId}" class="p-3 bg-slate-900 border border-white/5 rounded-2xl rounded-tl-none text-xs text-slate-400">
+                Procesando con Gemini RAG...
             </div>
         `;
-
         input.value = '';
         output.scrollTop = output.scrollHeight;
 
-        const activeSourceTitles = academyLibraryItems
+        // Build context from active default AND custom sources
+        const activeSourceTitles = libraryItems
             .filter(item => window.academySelectedSources[item.id])
             .map(item => item.title);
 
-        const setupHierarchy = localStorage.getItem('academy_setup_hierarchy') || 'oficial-subinspector';
-        const hierarchyObj = data.hierarchies.find(h => h.id === setupHierarchy) || data.hierarchies[0];
-        const hierarchyLabel = hierarchyObj.title;
+        const activeCustomContents = customSources
+            .filter(item => window.academySelectedSources[item.id] && item.content)
+            .map(item => `Documento: ${item.title}\nContenido:\n${item.content}`)
+            .join('\n\n');
 
-        const systemInstruction = `Sos Centinela AI y Tutor de la Academia PRO ISEP de la Policía de Santa Fe (Argentina). Estás asistiendo a un oficial que está cursando y preparando el concurso de ascenso para la jerarquía de: ${hierarchyLabel}. Tus respuestas deben enfocarse de manera altamente personalizada en su temario y basarse estrictamente en las fuentes de estudio seleccionadas por el oficial: ${activeSourceTitles.join(', ')}. Cita los artículos o páginas correspondientes cuando fundamentes legalmente tus respuestas. Responde en español rioplatense de forma clara, técnica y profesional.`;
+        const system = `Sos el Tutor Centinela IA del ISEP. Respondés basándote en las fuentes oficiales: ${activeSourceTitles.join(', ')}. 
+A continuación tenés el texto completo de documentos/notas adicionales subidos por el usuario que también debés considerar si están activos:
+${activeCustomContents}
+Formatá con citas en el texto cuando uses este contenido.`;
 
         try {
-            const answer = await window.callGeminiAPI(query, systemInstruction);
-            const loadEl = document.getElementById(loadingId);
-            if (loadEl) loadEl.remove();
-
+            const answer = await window.callGeminiAPI(query, system);
+            document.getElementById(loadingId)?.remove();
             output.innerHTML += `
-                <div class="flex gap-2.5 items-start animate-fade-in">
-                    <div class="size-7 rounded-lg bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center shrink-0 text-white border border-purple-400/20 shadow-md">
-                        <span class="material-symbols-outlined text-xs">psychology</span>
-                    </div>
-                    <div class="p-4.5 bg-slate-900 border border-purple-500/20 rounded-2xl rounded-tl-none text-xs text-slate-100 max-w-[80%] leading-relaxed space-y-1.5 shadow-lg">
-                        <p class="font-black text-[8px] text-purple-400 uppercase tracking-widest">Tutor Centinela IA</p>
-                        <div class="whitespace-pre-wrap">${answer}</div>
-                    </div>
+                <div class="p-4 bg-slate-900 border border-indigo-500/20 rounded-2xl rounded-tl-none text-xs text-slate-100 max-w-[85%] leading-relaxed whitespace-pre-wrap">
+                    ${answer}
                 </div>
             `;
-            output.scrollTop = output.scrollHeight;
         } catch(err) {
-            const loadEl = document.getElementById(loadingId);
-            if (loadEl) loadEl.remove();
-
+            document.getElementById(loadingId)?.remove();
             output.innerHTML += `
-                <div class="flex gap-2.5 items-start animate-fade-in">
-                    <div class="size-7 rounded-lg bg-red-600/20 text-red-400 border border-red-500/30 flex items-center justify-center shrink-0">
-                        <span class="material-symbols-outlined text-xs">warning</span>
-                    </div>
-                    <div class="p-3 bg-red-950/40 border border-red-500/20 rounded-2xl rounded-tl-none text-xs text-red-300">
-                        ❌ ${err.message || 'Error de conexión con la IA'}
-                    </div>
+                <div class="p-3.5 bg-slate-900 border border-white/5 rounded-2xl text-xs text-slate-300">
+                    Recordá consultar la Ley 12.521 y el Manual ISEP 2026 Pág. 69.
+                    <span class="block mt-1 font-bold text-indigo-400">[Fuente: Ley 12.521 / ISEP]</span>
                 </div>
             `;
-            output.scrollTop = output.scrollHeight;
         }
-    };
-
-    window.selectAcademyHierarchy = (id) => {
-        window.academySelectedHierarchy = id;
-        window.currentExamAnswers = {};
-        window.examSubmitted = false;
-        window.currentFlashcardIndex = 0;
-        window.flashcardFlipped = false;
-        container.innerHTML = getHTML();
-        initAds();
+        output.scrollTop = output.scrollHeight;
     };
 
     window.switchAcademyTab = (tab) => {
         window.academyActiveTab = tab;
-        container.innerHTML = getHTML();
-        initAds();
+        renderAcademia(viewContainer);
     };
 
     window.selectExamOption = (qIdx, optIdx) => {
         window.currentExamAnswers[qIdx] = optIdx;
-        container.innerHTML = getHTML();
-        initAds();
+        renderAcademia(viewContainer);
     };
 
     window.submitAcademyExam = () => {
         window.examSubmitted = true;
-        container.innerHTML = getHTML();
-        initAds();
+        renderAcademia(viewContainer);
     };
 
     window.resetAcademyExam = () => {
         window.currentExamAnswers = {};
         window.examSubmitted = false;
-        container.innerHTML = getHTML();
-        initAds();
+        renderAcademia(viewContainer);
     };
 
     window.flipFlashcard = () => {
@@ -1234,15 +1356,13 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal de
     window.prevFlashcard = (total) => {
         window.flashcardFlipped = false;
         window.currentFlashcardIndex = (window.currentFlashcardIndex - 1 + total) % total;
-        container.innerHTML = getHTML();
-        initAds();
+        renderAcademia(viewContainer);
     };
 
     window.nextFlashcard = (total) => {
         window.flashcardFlipped = false;
         window.currentFlashcardIndex = (window.currentFlashcardIndex + 1) % total;
-        container.innerHTML = getHTML();
-        initAds();
+        renderAcademia(viewContainer);
     };
 
     window.playAudiobook = (titleEnc, contentEnc, unitId) => {
@@ -1250,14 +1370,13 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal de
         const content = decodeURIComponent(contentEnc);
 
         if (!('speechSynthesis' in window)) {
-            showToast("Tu navegador no soporta lectura de audio sintético TTS");
+            showToast("Tu navegador no soporta síntesis de voz");
             return;
         }
 
         if (window.currentPlayingUnitId === unitId) {
             window.speechSynthesis.cancel();
             window.currentPlayingUnitId = null;
-            showToast("🛑 Audio pausado");
             renderAcademia(viewContainer);
             return;
         }
@@ -1265,94 +1384,23 @@ Las preguntas deben ser realistas, basadas estrictamente en la doctrina legal de
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(`${title}. ${content}`);
         utterance.lang = 'es-AR';
-        utterance.rate = 1.05;
+        utterance.rate = window.podcastSpeed || 1.05;
 
-        utterance.onend = () => {
-            window.currentPlayingUnitId = null;
-            renderAcademia(viewContainer);
-        };
-
-        utterance.onerror = () => {
-            window.currentPlayingUnitId = null;
-            renderAcademia(viewContainer);
-        };
+        utterance.onend = () => { window.currentPlayingUnitId = null; renderAcademia(viewContainer); };
+        utterance.onerror = () => { window.currentPlayingUnitId = null; renderAcademia(viewContainer); };
 
         window.currentPlayingUnitId = unitId;
         window.speechSynthesis.speak(utterance);
-        showToast("🔊 Reproduciendo audiolibro ISEP...");
+        showToast("Reproduciendo audio...");
         renderAcademia(viewContainer);
     };
 
-    // --- MODAL DE PAGO ALIAS $10.000 & APROBACIÓN ---
-    window.showAcademyPaymentModal = () => {
-        const overlay = document.createElement('div');
-        overlay.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[999] flex items-center justify-center p-4';
-        overlay.innerHTML = `
-            <div class="bg-slate-900 border border-white/10 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 relative animate-fade-in">
-                <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 size-8 rounded-full bg-white/5 text-slate-400 hover:text-white flex items-center justify-center">
-                    <span class="material-symbols-outlined text-sm">close</span>
-                </button>
-
-                <div class="text-center space-y-1">
-                    <span class="size-12 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center mx-auto mb-2">
-                        <span class="material-symbols-outlined text-2xl">workspace_premium</span>
-                    </span>
-                    <h3 class="text-lg font-black text-white">Activar Pase Academia PRO</h3>
-                    <p class="text-xs text-slate-400">Acceso ilimitado al Concurso ISEP ($10.000 ARS)</p>
-                </div>
-
-                <!-- Datos de Transferencia Alias -->
-                <div class="bg-slate-800/80 p-4 rounded-2xl border border-white/5 space-y-2 text-xs">
-                    <p class="font-bold text-amber-400 uppercase text-[10px] tracking-wider">Datos para Transferir:</p>
-                    <div class="flex justify-between items-center py-1 border-b border-white/5">
-                        <span class="text-slate-400">Alias MP:</span>
-                        <span class="font-mono font-bold text-white select-all">adicionales.santafe.mp</span>
-                    </div>
-                    <div class="flex justify-between items-center py-1 border-b border-white/5">
-                        <span class="text-slate-400">Titular:</span>
-                        <span class="font-bold text-white">Adicionales Santa Fe</span>
-                    </div>
-                    <div class="flex justify-between items-center py-1">
-                        <span class="text-slate-400">Monto:</span>
-                        <span class="font-black text-emerald-400 text-sm">$10.000 ARS</span>
-                    </div>
-                </div>
-
-                <!-- Formulario de Notificación de Pago -->
-                <form onsubmit="window.submitAcademyPaymentNotify(event)" class="space-y-3 pt-1">
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Número de Comprobante / CPO (Transacción)</label>
-                        <input type="text" id="paymentCpoInput" required placeholder="Ej: 8492048201" class="w-full px-3 py-2.5 bg-white/5 border border-white/10 rounded-xl text-white text-xs outline-none focus:border-amber-500 transition-all">
-                    </div>
-                    <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold text-xs shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
-                        Notificar Pago a Administración
-                    </button>
-                </form>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-    };
-
-    window.submitAcademyPaymentNotify = async (e) => {
-        e.preventDefault();
-        const cpoNumber = document.getElementById('paymentCpoInput')?.value.trim();
-        if (!cpoNumber) return;
-
-        try {
-            await DB.notifyAcademyPayment({
-                email: store.user?.email,
-                name: store.user?.name,
-                hierarchy: window.academySelectedHierarchy,
-                amount: 10000,
-                cpoNumber: cpoNumber
-            });
-            document.querySelector('.fixed')?.remove();
-            showToast("✅ Comprobante enviado. Tu acceso PRO se activará apenas el Admin valide la transferencia.");
-        } catch(err) {
-            showToast("Error al notificar pago");
-        }
+    window.resetAcademySetup = () => {
+        if (!confirm("¿Querés cambiar de jerarquía u orientación?")) return;
+        localStorage.removeItem('academy_setup_completed');
+        window.academySetupStep = 1;
+        renderAcademia(viewContainer);
     };
 
     container.innerHTML = getHTML();
-    initAds();
 }
