@@ -1091,22 +1091,31 @@ function renderAcademia(container) {
         modal.innerHTML = `
             <div class="glass-card-notebook p-6 max-w-sm w-full bg-slate-900 border border-white/10 rounded-3xl shadow-2xl space-y-4 animate-fade-in">
                 <div class="flex justify-between items-center">
-                    <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1">
-                        <span class="material-symbols-outlined text-sm text-indigo-400">note_add</span>
+                    <h3 class="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm text-indigo-400">upload_file</span>
                         Añadir Fuente / Nota
                     </h3>
                     <button onclick="this.closest('.fixed').remove()" class="size-8 rounded-full hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
                         <span class="material-symbols-outlined text-sm">close</span>
                     </button>
                 </div>
+
+                <!-- Drag & Drop Zone -->
+                <div class="border-2 border-dashed border-white/10 hover:border-indigo-500/40 rounded-2xl p-4 text-center cursor-pointer transition-all relative group bg-slate-950/40">
+                    <input type="file" id="newSourceFile" accept=".txt,.pdf,.md" onchange="window.handleSourceFileUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer">
+                    <span class="material-symbols-outlined text-2xl text-indigo-400 mb-1 group-hover:scale-110 transition-transform">upload_file</span>
+                    <p class="text-[10px] text-slate-300 font-bold">Subir archivo (PDF, TXT, MD)</p>
+                    <p class="text-[8px] text-slate-500 mt-0.5">Extrae texto automáticamente</p>
+                </div>
+
                 <div class="space-y-3">
                     <div>
                         <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Título de la nota o circular</label>
-                        <input type="text" id="newSourceTitle" placeholder="Ej: Circular 01/26 - Recargo de Servicios" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500">
+                        <input type="text" id="newSourceTitle" placeholder="Ej: Circular 01/26 - Recargo de Servicios" class="w-full px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500 font-bold">
                     </div>
                     <div>
                         <label class="block text-[8px] font-bold text-slate-400 uppercase mb-1">Contenido doctrinal o reglamentario</label>
-                        <textarea id="newSourceContent" placeholder="Pegá o redactá las disposiciones oficiales de la fuerza aquí..." class="w-full h-32 px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500 resize-none"></textarea>
+                        <textarea id="newSourceContent" placeholder="Pegá, redactá o subí un archivo para rellenar este campo..." class="w-full h-28 px-3.5 py-2.5 bg-slate-950 border border-white/5 rounded-xl text-xs text-white outline-none focus:border-indigo-500 resize-none font-sans"></textarea>
                     </div>
                     <button onclick="window.saveCustomSource(this)" class="w-full py-3.5 bg-indigo-600 hover:bg-indigo-500 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-600/20">
                         Indexar en RAG Policial
@@ -1115,6 +1124,70 @@ function renderAcademia(container) {
             </div>
         `;
         document.body.appendChild(modal);
+    };
+
+    window.handleSourceFileUpload = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const titleInput = document.getElementById('newSourceTitle');
+        if (titleInput) {
+            titleInput.value = file.name.replace(/\.[^/.]+$/, "");
+        }
+
+        if (file.name.endsWith('.txt') || file.name.endsWith('.md')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const textarea = document.getElementById('newSourceContent');
+                if (textarea) textarea.value = e.target.result;
+                showToast("✓ Archivo de texto cargado");
+            };
+            reader.readAsText(file);
+        } else if (file.name.endsWith('.pdf')) {
+            showToast("Procesando PDF doctrinal...");
+            if (typeof pdfjsLib === 'undefined') {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js';
+                script.onload = () => {
+                    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+                    window.parsePDFFile(file);
+                };
+                document.head.appendChild(script);
+            } else {
+                window.parsePDFFile(file);
+            }
+        } else {
+            showToast("Formato de archivo no soportado.");
+        }
+    };
+
+    window.parsePDFFile = (file) => {
+        const reader = new FileReader();
+        reader.onload = function() {
+            const typedarray = new Uint8Array(this.result);
+            pdfjsLib.getDocument(typedarray).promise.then(pdf => {
+                let textPromises = [];
+                const pagesToRead = Math.min(pdf.numPages, 10);
+                for (let i = 1; i <= pagesToRead; i++) {
+                    textPromises.push(
+                        pdf.getPage(i).then(page => {
+                            return page.getTextContent().then(textContent => {
+                                return textContent.items.map(item => item.str).join(' ');
+                            });
+                        })
+                    );
+                }
+                Promise.all(textPromises).then(texts => {
+                    const fullText = texts.join('\n\n');
+                    const textarea = document.getElementById('newSourceContent');
+                    if (textarea) textarea.value = fullText;
+                    showToast(`✓ PDF procesado (${pagesToRead} pgs)`);
+                });
+            }).catch(err => {
+                showToast("Error al decodificar el archivo PDF.");
+            });
+        };
+        reader.readAsArrayBuffer(file);
     };
 
     window.saveCustomSource = (btn) => {
