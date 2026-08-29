@@ -410,7 +410,13 @@ window.store = {
                 localStorage.setItem('last_active_email', cleanEmail);
             } catch(e){}
             this.authInitialized = true;
-            this.subscribeToServices();
+            if (this.unsubscribeServices) this.unsubscribeServices();
+            this.unsubscribeServices = DB.subscribeToServices(services => {
+                this.services = services;
+                if (window.router && window.router.initialized) {
+                    window.router.handleRoute();
+                }
+            });
             showToast("✅ ¡Datos e historial recuperados con éxito!");
             if (window.router) window.router.navigateTo('#agenda');
             return true;
