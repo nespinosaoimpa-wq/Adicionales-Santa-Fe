@@ -123,43 +123,21 @@ function renderLogin(container) {
             return;
         }
 
-        let resolved = false;
-
-        // Safety timeout for popup block or silent cross-domain failure
-        const timer = setTimeout(() => {
-            if (!resolved) {
-                resolved = true;
+        store.loginWithGoogle()
+            .then((userCred) => {
+                console.log("✅ Google Auth Completed:", userCred?.user?.email);
+                showToast("¡Bienvenido!");
+                if (window.router) {
+                    window.router.navigateTo('#agenda');
+                }
+            })
+            .catch(e => {
                 if (btn) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
+                console.warn("Google Auth popup notice:", e);
                 window.promptFallbackGoogleEmail();
-            }
-        }, 3500);
-
-        store.loginWithGoogle()
-            .then((userCred) => {
-                if (!resolved) {
-                    resolved = true;
-                    clearTimeout(timer);
-                    console.log("✅ Google Auth Completed:", userCred?.user?.email);
-                    showToast("¡Bienvenido!");
-                    if (window.router) {
-                        window.router.navigateTo('#agenda');
-                    }
-                }
-            })
-            .catch(e => {
-                if (!resolved) {
-                    resolved = true;
-                    clearTimeout(timer);
-                    if (btn) {
-                        btn.disabled = false;
-                        btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
-                    }
-                    console.warn("Google Auth popup notice:", e);
-                    window.promptFallbackGoogleEmail();
-                }
             });
     };
 
