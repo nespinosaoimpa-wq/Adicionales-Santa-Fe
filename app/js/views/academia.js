@@ -35,7 +35,7 @@ function renderAcademia(container) {
     }
     const hierarchyId = localStorage.getItem('academy_setup_hierarchy') || data.hierarchies[0].id;
     window.academySelectedHierarchy = hierarchyId;
-    window.academyActiveTab = window.academyActiveTab || 'studio';
+    window.academyActiveTab = window.academyActiveTab || 'tutor';
     window.currentExamAnswers = window.currentExamAnswers || {};
     window.examSubmitted = window.examSubmitted || false;
     
@@ -76,22 +76,36 @@ function renderAcademia(container) {
         <style>
             .notebook-split-container {
                 display: grid;
-                grid-template-columns: 320px 1fr;
-                min-height: calc(100vh - 4rem);
-                background-color: #06080e;
+                grid-template-columns: 280px 1fr 340px;
+                height: calc(100vh - 4rem);
+                background-color: #080a11;
+                overflow: hidden;
             }
-            @media (max-width: 1024px) {
+            @media (max-width: 1200px) {
+                .notebook-split-container {
+                    grid-template-columns: 260px 1fr;
+                }
+                .notebook-studio-pane {
+                    display: none !important;
+                }
+            }
+            @media (max-width: 800px) {
                 .notebook-split-container {
                     grid-template-columns: 1fr;
                 }
-                .notebook-sidebar {
-                    display: none;
+                .notebook-sidebar, .notebook-studio-pane {
+                    display: none !important;
                 }
             }
             .notebook-sidebar {
-                background: rgba(10, 15, 26, 0.95);
+                background: #0d111b;
                 border-right: 1px solid rgba(255, 255, 255, 0.08);
-                backdrop-filter: blur(20px);
+                overflow-y: auto;
+            }
+            .notebook-studio-pane {
+                background: #0d111b;
+                border-left: 1px solid rgba(255, 255, 255, 0.08);
+                overflow-y: auto;
             }
             .glass-card-notebook {
                 background: rgba(18, 25, 41, 0.6);
@@ -122,8 +136,23 @@ function renderAcademia(container) {
                 background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(0,0,0,0) 70%);
                 pointer-events: none;
             }
+            /* Scrollbar styling */
+            .scrollbar-custom::-webkit-scrollbar {
+                width: 4px;
+                height: 4px;
+            }
+            .scrollbar-custom::-webkit-scrollbar-track {
+                background: transparent;
+            }
+            .scrollbar-custom::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 2px;
+            }
+            .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
             /* Slide themes */
-            .slide-theme-midnight { background: bg-slate-950; color: #f8fafc; }
+            .slide-theme-midnight { background: #020617; color: #f8fafc; border-color: rgba(255,255,255,0.05); }
             .slide-theme-sepia { background: #f4ecd8; color: #433422; border-color: #e4d7ba; }
             .slide-theme-slate { background: #1e293b; color: #f1f5f9; border-color: #334155; }
         </style>
@@ -133,6 +162,7 @@ function renderAcademia(container) {
     function getHTML() {
         const checkedCount = Object.values(window.academySelectedSources).filter(Boolean).length;
         const hasGeminiKey = !!(window.getGeminiAPIKey && window.getGeminiAPIKey());
+        const hierarchy = data.hierarchies.find(h => h.id === window.academySelectedHierarchy) || data.hierarchies[0];
 
         return `
             ${styleBlock}
@@ -143,65 +173,74 @@ function renderAcademia(container) {
                     <button onclick="router.navigateTo('#asistente')" class="size-9 rounded-full hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors active:scale-95">
                         <span class="material-symbols-outlined text-lg">arrow_back</span>
                     </button>
-                    <div>
-                        <h1 class="text-sm font-black text-white tracking-wide uppercase italic flex items-center gap-2">
-                            <span class="material-symbols-outlined text-indigo-400 text-base animate-pulse">auto_awesome</span>
-                            Gemini Notebook
-                            <span class="px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-tighter bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                                PRO 2026
-                            </span>
-                        </h1>
-                        <p class="text-[8px] text-slate-400 font-bold uppercase tracking-widest flex items-center gap-1.5 mt-0.5">
-                            <span class="size-1.5 rounded-full bg-emerald-500 animate-ping"></span> ${checkedCount} Manuales indexados en RAG
-                        </p>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-indigo-400 text-lg animate-pulse">auto_awesome</span>
+                        <select onchange="window.switchAcademyHierarchy(this.value)" class="bg-transparent border-none rounded-xl text-sm text-white outline-none font-black max-w-[280px] cursor-pointer">
+                            ${data.hierarchies.map(h => `
+                                <option value="${h.id}" ${window.academySelectedHierarchy === h.id ? 'selected' : ''} class="bg-[#0c0f17] text-white">
+                                    ${h.title}
+                                </option>
+                            `).join('')}
+                        </select>
                     </div>
                 </div>
                 
+                <!-- Center Actions exactly like NotebookLM -->
+                <div class="hidden md:flex items-center gap-2.5">
+                    <button class="bg-white/5 hover:bg-white/10 text-white border border-white/10 text-[9px] px-3.5 py-1.5 rounded-full font-black uppercase tracking-wider transition-all flex items-center gap-1.5 active:scale-95">
+                        <span class="material-symbols-outlined text-xs">add</span> Crear un cuaderno
+                    </button>
+                    <button class="bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 text-[9px] px-3 py-1.5 rounded-full font-bold uppercase transition-all">
+                        Copiar
+                    </button>
+                    <button onclick="window.switchAcademyTab('tutor')" class="bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 text-[9px] px-3 py-1.5 rounded-full font-bold uppercase transition-all">
+                        Estadísticas
+                    </button>
+                    <button class="bg-white/5 hover:bg-white/10 text-slate-300 border border-white/5 text-[9px] px-3 py-1.5 rounded-full font-bold uppercase transition-all">
+                        Compartir
+                    </button>
+                </div>
+                
                 <div class="flex items-center gap-3">
-                    <!-- Dropdown de Concurso de Ascenso -->
-                    <select onchange="window.switchAcademyHierarchy(this.value)" class="bg-[#121929] border border-white/10 rounded-xl px-3 py-1.5 text-xs text-white outline-none focus:border-indigo-500 font-bold max-w-[150px]">
-                        ${data.hierarchies.map(h => `
-                            <option value="${h.id}" ${window.academySelectedHierarchy === h.id ? 'selected' : ''}>
-                                ${h.title.split(' ➔ ')[0]}
-                            </option>
-                        `).join('')}
-                    </select>
-
                     <button onclick="window.showGeminiKeyModal()" class="px-3 py-1.5 rounded-xl border transition-all active:scale-95 text-[9px] font-bold uppercase flex items-center gap-1.5 ${hasGeminiKey ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30' : 'bg-purple-500/10 text-purple-300 border-purple-500/30 hover:bg-purple-500/20'}">
                         <span class="material-symbols-outlined text-xs">${hasGeminiKey ? 'key' : 'key_off'}</span>
                         ${hasGeminiKey ? 'API OK' : 'Clave AI'}
                     </button>
+                    <!-- Profile avatar exactly like NotebookLM -->
+                    <div class="size-8 rounded-full bg-indigo-600 border border-indigo-400 text-white font-black text-xs flex items-center justify-center shadow-md">
+                        N
+                    </div>
                 </div>
             </header>
 
             <div class="notebook-split-container relative">
                 <div class="absolute inset-0 ambient-glow z-0"></div>
 
-                <!-- LEFT SIDEBAR: Visual Document Shelf (Fuentes del Notebook) -->
-                <aside class="notebook-sidebar p-5 flex flex-col justify-between overflow-y-auto z-10">
+                <!-- COLUMN 1: LEFT SIDEBAR - Fuentes -->
+                <aside class="notebook-sidebar p-5 flex flex-col justify-between z-10 scrollbar-custom">
                     <div class="space-y-4">
-                        <div class="flex items-center justify-between">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-2">
                             <h3 class="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                                 <span class="material-symbols-outlined text-indigo-400 text-sm">folder_open</span>
-                                Fuentes del Notebook
+                                Fuentes
                             </h3>
                             <span class="px-2 py-0.5 rounded-full text-[8px] font-black uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
                                 ${checkedCount}/${libraryItems.length}
                             </span>
                         </div>
 
-                        <!-- Add custom source button -->
-                        <button onclick="window.showAddSourceModal()" class="w-full py-2.5 rounded-xl bg-indigo-600/10 hover:bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 font-bold text-[10px] uppercase flex items-center justify-center gap-1.5 transition-all active:scale-95">
-                            <span class="material-symbols-outlined text-xs">add_circle</span>
-                            Agregar Fuente / Nota
+                        <!-- Add Source Pill Button -->
+                        <button onclick="window.showAddSourceModal()" class="w-full py-3 rounded-full bg-[#1b2234] hover:bg-[#252f48] border border-white/10 text-white font-bold text-[10px] uppercase flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-md">
+                            <span class="material-symbols-outlined text-xs font-black">add</span>
+                            Agregar fuentes
                         </button>
 
-                        <!-- Search and filter -->
+                        <!-- Search Box like NotebookLM -->
                         <div class="space-y-2">
                             <div class="relative">
                                 <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-500 text-xs">search</span>
-                                <input type="text" id="librarySearchInput" oninput="window.filterLibrarySources(this.value)" placeholder="Buscar manual..." 
-                                    class="w-full bg-[#121929] border border-white/5 rounded-xl py-2 pl-9 pr-3 text-[10px] text-white placeholder:text-slate-500 outline-none focus:border-indigo-500">
+                                <input type="text" id="librarySearchInput" oninput="window.filterLibrarySources(this.value)" placeholder="Buscar fuentes nuevas en la Web..." 
+                                    class="w-full bg-[#121929] border border-white/5 rounded-full py-2.5 pl-9 pr-3 text-[10px] text-white placeholder:text-slate-500 outline-none focus:border-indigo-500">
                             </div>
                             <div class="flex gap-1 overflow-x-auto pb-1 scrollbar-none text-[8px]">
                                 <button onclick="window.setLibraryFilter('all')" class="px-2.5 py-1 rounded-lg font-bold border transition-all ${window.libraryActiveFilter === 'all' ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' : 'bg-white/5 text-slate-400 border-white/5'}">Todo</button>
@@ -212,8 +251,8 @@ function renderAcademia(container) {
                             </div>
                         </div>
 
-                        <!-- Document shelf items -->
-                        <div class="space-y-2 max-h-[480px] overflow-y-auto pr-1 scrollbar-none">
+                        <!-- Source List -->
+                        <div class="space-y-2 max-h-[360px] overflow-y-auto pr-1 scrollbar-custom">
                             ${renderLibraryItemsHTML()}
                         </div>
                     </div>
@@ -222,55 +261,68 @@ function renderAcademia(container) {
                     <div class="pt-4 border-t border-white/5 text-[9px] text-slate-500 space-y-1.5">
                         <p class="flex items-center gap-1.5">
                             <span class="material-symbols-outlined text-xs">info</span>
-                            Habilitá manuales para alimentar al Tutor IA y al Simulador de Examen.
+                            Habilita fuentes para alimentar tu cuaderno.
                         </p>
                     </div>
                 </aside>
 
-                <!-- RIGHT PANE: Workbench / Studio Content -->
-                <section class="p-6 overflow-y-auto z-10 flex flex-col justify-between">
-                    <div class="space-y-6">
-                        
-                        <!-- Studio Module Navigation Tabs -->
-                        <div class="flex p-1 bg-slate-950/80 rounded-2xl border border-white/10 shadow-2xl overflow-x-auto scrollbar-none gap-1 max-w-3xl">
-                            <button onclick="window.switchAcademyTab('studio')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'studio' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">dashboard</span> Panel
-                            </button>
-                            <button onclick="window.switchAcademyTab('summaries')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'summaries' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">menu_book</span> Resúmenes
-                            </button>
-                            <button onclick="window.switchAcademyTab('proyectos')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'proyectos' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">assignment</span> Proyectos
-                            </button>
-                            <button onclick="window.switchAcademyTab('exam')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'exam' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">quiz</span> Simulador (50)
-                            </button>
-                            <button onclick="window.switchAcademyTab('flashcards')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'flashcards' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">style</span> Fichas 3D
-                            </button>
-                            <button onclick="window.switchAcademyTab('mindmaps')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'mindmaps' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">account_tree</span> Esquemas
-                            </button>
-                            <button onclick="window.switchAcademyTab('videos')" class="shrink-0 px-4 py-3 rounded-xl text-[9px] uppercase tracking-wider font-black transition-all flex items-center gap-2 ${window.academyActiveTab === 'videos' ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">videocam</span> Táctica 3D
-                            </button>
+                <!-- COLUMN 2: MIDDLE PANE - Workspace -->
+                <main class="flex flex-col justify-between h-full overflow-hidden border-r border-white/5 bg-[#080a11] z-10">
+                    <!-- Workspace Header -->
+                    <div class="px-6 py-4 border-b border-white/5 flex items-center justify-between bg-[#0c101b]/80 backdrop-blur z-20">
+                        <div class="flex items-center gap-2">
+                            ${window.academyActiveTab !== 'tutor' ? `
+                                <button onclick="window.switchAcademyTab('tutor')" class="size-8 rounded-lg hover:bg-white/10 flex items-center justify-center text-slate-400 transition-colors">
+                                    <span class="material-symbols-outlined text-sm font-black">arrow_back</span>
+                                </button>
+                            ` : ''}
+                            <div>
+                                <h2 class="text-xs font-black uppercase text-white tracking-wider flex items-center gap-1.5">
+                                    ${window.academyActiveTab === 'tutor' ? 'Chat con IA' : 
+                                      window.academyActiveTab === 'podcast' ? 'Podcast de Doctrina' : 
+                                      window.academyActiveTab === 'summaries' ? 'Resúmenes de Materias' : 
+                                      window.academyActiveTab === 'proyectos' ? 'Asistente de Proyectos' : 
+                                      window.academyActiveTab === 'exam' ? 'Simulador de Examen' : 
+                                      window.academyActiveTab === 'flashcards' ? 'Fichas 3D Leitner' : 
+                                      window.academyActiveTab === 'mindmaps' ? 'Esquemas de Estudio' : 
+                                      window.academyActiveTab === 'videos' ? 'Táctica Operativa' : 
+                                      window.academyActiveTab === 'slides' ? 'Presentación ISEP' : 
+                                      window.academyActiveTab === 'infographics' ? 'Infografía Operativa' : 'Studio'}
+                                </h2>
+                                <p class="text-[8px] text-indigo-300 font-bold uppercase tracking-widest mt-0.5">
+                                    ${checkedCount} fuentes habilitadas
+                                </p>
+                            </div>
                         </div>
-
-                        <!-- Tab Workspace -->
-                        <div id="academy-tab-content" class="animate-fade-in min-h-[420px] max-w-4xl">
-                            ${window.academyActiveTab === 'studio' ? renderNotebookStudioTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'summaries' ? renderSummariesTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'proyectos' ? renderProyectosTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'exam' ? renderExamTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'flashcards' ? renderFlashcardsTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'mindmaps' ? renderMindmapsTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'infographics' ? renderInfographicsTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'slides' ? renderSlidesTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'videos' ? renderVideosTab(hierarchy) : ''}
-                            ${window.academyActiveTab === 'tutor' ? renderGeminiTutorTab(hierarchy) : ''}
+                        <div class="flex items-center gap-1">
+                            <button class="size-8 rounded-lg hover:bg-white/5 flex items-center justify-center text-slate-400">
+                                <span class="material-symbols-outlined text-sm">tune</span>
+                            </button>
+                            <button class="size-8 rounded-lg hover:bg-white/5 flex items-center justify-center text-slate-400">
+                                <span class="material-symbols-outlined text-sm">more_vert</span>
+                            </button>
                         </div>
                     </div>
-                </section>
+
+                    <!-- Workspace Scrollable Content Area -->
+                    <div class="flex-1 overflow-y-auto p-6 scrollbar-custom">
+                        ${window.academyActiveTab === 'tutor' ? renderGeminiTutorTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'podcast' ? renderPodcastTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'summaries' ? renderSummariesTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'proyectos' ? renderProyectosTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'exam' ? renderExamTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'flashcards' ? renderFlashcardsTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'mindmaps' ? renderMindmapsTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'videos' ? renderVideosTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'slides' ? renderSlidesTab(hierarchy) : ''}
+                        ${window.academyActiveTab === 'infographics' ? renderInfographicsTab(hierarchy) : ''}
+                    </div>
+                </main>
+
+                <!-- COLUMN 3: RIGHT PANEL - Studio -->
+                <aside class="notebook-studio-pane p-5 z-10 scrollbar-custom">
+                    ${renderStudioPaneHTML(hierarchy)}
+                </aside>
             </div>
         `;
     }
@@ -973,49 +1025,321 @@ function renderAcademia(container) {
         `;
     }
 
-    // --- TAB: TUTOR CENTINELA IA ---
+    // --- TAB: TUTOR CENTINELA IA (Google NotebookLM Style) ---
     function renderGeminiTutorTab(hierarchy) {
+        const checkedCount = Object.values(window.academySelectedSources).filter(Boolean).length;
         return `
-            <div class="space-y-4 animate-fade-in">
-                <div class="glass-card-notebook p-5 bg-[#121929]/80 space-y-4">
-                    <div class="flex items-center gap-3">
-                        <span class="size-10 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-lg animate-pulse">psychology</span>
-                        </span>
-                        <div>
-                            <h3 class="text-xs font-black text-white">Tutor Centinela RAG IA</h3>
-                            <p class="text-[9px] text-indigo-300 font-bold uppercase tracking-wider">Preguntas basadas en tus manuales</p>
+            <div class="space-y-5 animate-fade-in flex flex-col justify-between h-full min-h-[500px]">
+                
+                <!-- Chat Welcome Banner -->
+                <div class="space-y-4">
+                    <div class="flex items-start gap-4">
+                        <div class="size-16 rounded-2xl bg-indigo-600 flex items-center justify-center text-white text-3xl shadow-xl shrink-0">
+                            👮
+                        </div>
+                        <div class="space-y-1">
+                            <h1 class="text-xl font-bold text-white tracking-tight leading-snug">
+                                ${hierarchy.title.split(' ➔ ')[0]} Specialization Manual:<br>
+                                <span class="text-indigo-400">General Officer Training 2027</span>
+                            </h1>
+                            <p class="text-[9px] text-slate-400 font-mono">
+                                5 fuentes • ${new Date().toLocaleDateString('es-ES', { day: 'numeric', month: 'short', year: 'numeric' })}
+                            </p>
                         </div>
                     </div>
 
-                    <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none text-[8px]">
-                        <button onclick="window.askGeminiTutor('¿Cuáles son las 4 virtudes cardinales según el manual de ascenso ISEP?')" class="shrink-0 px-2.5 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-bold">
-                            Virtudes del mando
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Este manual de formación policial del Instituto de Seguridad Pública de Santa Fe funciona como una guía integral para el perfeccionamiento de los oficiales del Agrupamiento Ejecución durante el ciclo 2027. El documento establece las directrices normativas, leyes locales y protocolos procedimentales de Santa Fe.
+                    </p>
+
+                    <!-- Alert message -->
+                    <div class="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl flex items-center gap-2.5 text-[10px] text-indigo-300">
+                        <span class="material-symbols-outlined text-sm shrink-0">info</span>
+                        <span>Gemini Notebook ahora es más inteligente. Prueba pedirle que busque nuevas fuentes en la Web.</span>
+                    </div>
+
+                    <!-- Suggestion Chips -->
+                    <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none text-[9px] pt-2">
+                        <button onclick="window.askGeminiTutor('¿Cuáles son las 4 virtudes cardinales del mando según el manual ISEP?')" 
+                            class="shrink-0 px-3 py-2 rounded-full bg-slate-900 hover:bg-slate-800 border border-white/10 text-slate-200 transition-all font-medium">
+                            🔑 Virtudes del mando
                         </button>
-                        <button onclick="window.askGeminiTutor('¿Qué dice el protocolo ISEP Pág. 69 sobre la descarga de armas de fuego?')" class="shrink-0 px-2.5 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-bold">
-                            Descarga de armas
+                        <button onclick="window.askGeminiTutor('¿Qué protocolo establece el manual ISEP para la descarga de armas secuestradas?')" 
+                            class="shrink-0 px-3 py-2 rounded-full bg-slate-900 hover:bg-slate-800 border border-white/10 text-slate-200 transition-all font-medium">
+                            🔫 Descarga de armas
                         </button>
-                        <button onclick="window.askGeminiTutor('Diferencia entre Cesantía y Exoneración de la Ley 12.521')" class="shrink-0 px-2.5 py-1.5 rounded-lg bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 font-bold">
-                            Cesantía vs Exoneración
+                        <button onclick="window.askGeminiTutor('Explicar la diferencia legal entre Cesantía y Exoneración de la Ley 12.521')" 
+                            class="shrink-0 px-3 py-2 rounded-full bg-slate-900 hover:bg-slate-800 border border-white/10 text-slate-200 transition-all font-medium">
+                            ⚖️ Cesantía vs Exoneración
                         </button>
                     </div>
                 </div>
 
-                <!-- Chat history -->
-                <div id="gemini-tutor-output" class="space-y-3 min-h-[140px] max-h-[320px] overflow-y-auto pr-1"></div>
+                <!-- Chat history output -->
+                <div id="gemini-tutor-output" class="space-y-4 overflow-y-auto pr-1 max-h-[300px] empty:hidden"></div>
 
-                <form onsubmit="window.submitGeminiTutorForm(event)" class="relative flex items-center gap-2">
-                    <input type="text" id="gemini-tutor-input" placeholder="Preguntale a la IA sobre la doctrina..." 
-                        class="w-full px-4 py-3.5 bg-slate-900 border border-white/5 rounded-2xl text-xs text-white placeholder:text-slate-500 outline-none focus:border-indigo-500 pr-12">
-                    <button type="submit" class="absolute right-1.5 size-9 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center active:scale-90 transition-all shadow-md">
-                        <span class="material-symbols-outlined text-sm">send</span>
-                    </button>
+                <!-- Chat Prompt Bar at the bottom -->
+                <form onsubmit="window.submitGeminiTutorForm(event)" class="relative flex items-center gap-2 mt-4">
+                    <input type="text" id="gemini-tutor-input" placeholder="Haz una pregunta o crea algo..." 
+                        class="w-full pl-4 pr-24 py-4 bg-[#111625] border border-white/10 rounded-full text-xs text-white placeholder:text-slate-500 outline-none focus:border-indigo-500 shadow-xl font-medium">
+                    <div class="absolute right-2.5 flex items-center gap-2">
+                        <span class="text-[8px] font-bold text-slate-500 font-mono uppercase tracking-wider hidden sm:inline bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
+                            ${checkedCount} fuentes
+                        </span>
+                        <button type="submit" class="size-9 rounded-full bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center active:scale-90 transition-all shadow-md">
+                            <span class="material-symbols-outlined text-sm">arrow_upward</span>
+                        </button>
+                    </div>
                 </form>
             </div>
         `;
     }
 
+    // --- TAB: PODCAST DE ESTUDIO DOCTRINARIO ---
+    function renderPodcastTab(hierarchy) {
+        return `
+            <div class="space-y-4 animate-fade-in">
+                <div class="glass-card-notebook p-6 bg-gradient-to-br from-slate-950 via-[#101426] to-slate-950 border-indigo-500/20 relative overflow-hidden space-y-4 shadow-2xl">
+                    <div class="absolute -right-20 -top-20 size-52 bg-indigo-500/10 rounded-full blur-3xl"></div>
+                    
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="size-12 rounded-2xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 flex items-center justify-center shadow-lg">
+                                <span class="material-symbols-outlined text-2xl animate-pulse">podcasts</span>
+                            </div>
+                            <div>
+                                <span class="px-2.5 py-0.5 rounded-full text-[8px] font-black uppercase tracking-wider bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                                    NotebookLM Audio Overview
+                                </span>
+                                <h3 class="text-sm font-black text-white uppercase tracking-wider mt-1">Podcast de Estudio Doctrinario</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-[11px] text-slate-300 leading-relaxed max-w-2xl">
+                        Escuchá el debate interactivo de nuestros expertos. La transcripción se desplazará de manera síncrona con el audio de los manuales oficiales de oposición ISEP.
+                    </p>
+
+                    <!-- Waveform and Controls -->
+                    <div class="p-4 rounded-2xl bg-slate-900/90 border border-white/5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <button onclick="window.toggleAudioPodcastOverview()" class="size-14 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 text-white flex items-center justify-center shadow-lg active:scale-95 transition-all">
+                                    <span class="material-symbols-outlined text-3xl">${window.isPodcastPlaying ? 'pause' : 'play_arrow'}</span>
+                                </button>
+                                <div>
+                                    <p class="text-xs font-bold text-white">Doctrina Operativa & Régimen Disciplinario 2026</p>
+                                    <p class="text-[9px] text-indigo-300 font-mono flex items-center gap-1 mt-0.5">
+                                        <span class="material-symbols-outlined text-[10px]">graphic_eq</span>
+                                        ${window.isPodcastPlaying ? `Reproduciendo a ${window.podcastSpeed}x...` : 'Listo para reproducir (12 min)'}
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- Speed Control -->
+                            <button onclick="window.togglePodcastSpeed()" class="px-3 py-1.5 bg-white/5 border border-white/10 hover:bg-white/10 rounded-xl text-[9px] text-slate-300 font-bold uppercase transition-all">
+                                ${window.podcastSpeed}x Velocidad
+                            </button>
+                        </div>
+
+                        <!-- Real Waveform Simulator -->
+                        <div class="flex items-end gap-1.5 justify-center h-8 pt-1">
+                            ${[...Array(16)].map((_, i) => `
+                                <div class="w-[3px] bg-indigo-500/80 rounded-full transition-all duration-300 ${window.isPodcastPlaying ? 'equalizer-bar' : 'h-1.5'}" 
+                                     style="animation-delay: ${0.1 * i}s; animation-duration: ${0.6 + Math.random() * 0.4}s;"></div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <!-- Interactive Live Transcript -->
+                    <div class="p-4 bg-slate-950 rounded-2xl border border-white/5 text-[10px] space-y-2.5 max-h-[140px] overflow-y-auto scrollbar-none font-mono">
+                        <p class="${window.isPodcastPlaying ? 'text-indigo-400 font-bold' : 'text-slate-500'}">
+                            🎙️ [ROSSI - Profesor ISEP]: "Bienvenidos a esta síntesis del ISEP. El secuestro de armas es vital: la descarga debe ser ante testigos."
+                        </p>
+                        <p class="text-slate-500">
+                            🎙️ [GÓMEZ - Abogada]: "Exacto Carlos. Y la Ley 12.521 distingue cesantía de exoneración por la pérdida del cómputo previsional."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // --- TAB: PRESENTACION / SLIDES DE ESTUDIO ---
+    function renderSlidesTab(hierarchy) {
+        const slidesData = [
+            { title: "Diapositiva 1: Mando y Liderazgo Policial", content: "El liderazgo en la Policía de Santa Fe no es meramente formal o coercitivo. Se sustenta en el liderazgo moral y técnico (autoridad real), guiado por las Virtudes Cardinales: Prudencia, Justicia, Fortaleza y Templanza. La conducción exige el dominio de las 3 'C': Competencia, Confianza y Compromiso." },
+            { title: "Diapositiva 2: Estatuto y Derechos (Ley 12.521)", content: "La Ley 12.521 rige al personal de Santa Fe. Define deberes (obediencia, portación, neutralidad) y el catálogo de faltas administrativas. Es clave comprender que la destitución por Cesantía mantiene los aportes acumulados del agente, mientras que la Exoneración extingue todo derecho de la fuerza." },
+            { title: "Diapositiva 3: Actas y Preservación de Escenas", content: "El acta de procedimiento es un instrumento público crucial del CPP. Debe tener lugar, hora de inicio/cierre, firma de al menos dos testigos. Para preservar la escena se aplica el Cordón Doble: Zona de Exclusión (solo peritos) y Zona de Seguridad (apoyos y patrulleros)." },
+            { title: "Diapositiva 4: Armamento y MIRAF Operativo", content: "El manual MIRAF fija las 4 reglas ineludibles: tratar el arma siempre como cargada, no apuntar a quien no se deba, mantener el dedo fuera del disparador hasta decidir tirar, y verificar el blanco. El uso de la fuerza es progresivo: Presencia ➔ Verbalización ➔ Control Físico ➔ Menos Letal ➔ Letal." },
+            { title: "Diapositiva 5: Derechos Humanos del Aprehendido", content: "Todo detenido tiene derecho a trato digno. Prohibición absoluta de tortura o incomunicación indebida. Debe ser notificado inmediatamente de sus derechos procesales y se debe dar comunicación inmediata al Fiscal del MPA de turno y al Defensor Oficial." }
+        ];
+
+        const slide = slidesData[window.currentSlideIndex || 0];
+
+        return `
+            <div class="space-y-4 animate-fade-in">
+                <div class="glass-card-notebook p-6 bg-slate-900/80 border border-indigo-500/20 space-y-4 shadow-2xl">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-indigo-400">presentation_to_cat</span>
+                            <h3 class="text-xs font-black uppercase text-white">Presentación: Guía ISEP 2026</h3>
+                        </div>
+                        
+                        <!-- Slide Theme select -->
+                        <div class="flex gap-1.5 text-[8px]">
+                            <button onclick="window.changeSlideTheme('midnight')" class="px-2.5 py-1 rounded font-bold border ${window.slideTheme === 'midnight' ? 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30' : 'bg-[#0f172a] text-slate-400 border-white/5'}">Midnight</button>
+                            <button onclick="window.changeSlideTheme('sepia')" class="px-2.5 py-1 rounded font-bold border ${window.slideTheme === 'sepia' ? 'bg-amber-500/20 text-amber-800 border-amber-500/30' : 'bg-[#0f172a] text-slate-400 border-white/5'}">Sepia</button>
+                            <button onclick="window.changeSlideTheme('slate')" class="px-2.5 py-1 rounded font-bold border ${window.slideTheme === 'slate' ? 'bg-slate-700 text-white border-slate-600' : 'bg-[#0f172a] text-slate-400 border-white/5'}">Slate</button>
+                        </div>
+                    </div>
+
+                    <!-- Slide Screen -->
+                    <div class="p-8 rounded-2xl border text-center space-y-4 min-h-[180px] flex flex-col justify-center items-center transition-all ${
+                        window.slideTheme === 'sepia' ? 'slide-theme-sepia' : 
+                        window.slideTheme === 'slate' ? 'slide-theme-slate' : 'slide-theme-midnight bg-slate-950/80 border-white/5'
+                    }">
+                        <h4 class="font-bold text-sm leading-snug uppercase tracking-wider">${slide.title}</h4>
+                        <p class="text-xs max-w-xl leading-relaxed font-serif">${slide.content}</p>
+                    </div>
+
+                    <!-- Slide Navigation -->
+                    <div class="flex items-center justify-between pt-2">
+                        <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider">Diapositiva ${(window.currentSlideIndex || 0) + 1} de 5</span>
+                        <div class="flex gap-2">
+                            <button onclick="window.navigateSlides(-1)" class="size-8 rounded-xl bg-white/5 hover:bg-white/10 text-white flex items-center justify-center border border-white/10 active:scale-90 transition-all">
+                                <span class="material-symbols-outlined text-sm">chevron_left</span>
+                            </button>
+                            <button onclick="window.navigateSlides(1)" class="size-8 rounded-xl bg-white/5 hover:bg-white/10 text-white flex items-center justify-center border border-white/10 active:scale-90 transition-all">
+                                <span class="material-symbols-outlined text-sm">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // --- TAB: INFOGRAFIAS / CRONOGRAMAS ---
+    function renderInfographicsTab(hierarchy) {
+        return `
+            <div class="space-y-4 animate-fade-in">
+                <div class="glass-card-notebook p-6 bg-slate-900/80 border border-indigo-500/20 space-y-5 shadow-2xl">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-indigo-400">infographic</span>
+                        <h3 class="text-xs font-black uppercase text-white">Infografía: Mapa de Hitos del Concurso</h3>
+                    </div>
+
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Esquema visual y cronológico de los hitos normativos y procedimentales obligatorios para rendir oposición en el ISEP:
+                    </p>
+
+                    <!-- Timeline Infographic -->
+                    <div class="relative pl-6 border-l-2 border-indigo-500/30 space-y-6 text-xs text-slate-300">
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-0 size-4 rounded-full bg-indigo-600 border-4 border-[#0c101b] flex items-center justify-center"></div>
+                            <h4 class="font-bold text-white uppercase text-[10px] tracking-wider">Hito 1: Inscripción y Acreditación de Servicios</h4>
+                            <p class="text-[10px] text-slate-400 mt-1">Cumplimentar requisitos del Estatuto Policial (Decreto N° 461/15) y confirmación de apto médico/psicológico.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-0 size-4 rounded-full bg-purple-600 border-4 border-[#0c101b] flex items-center justify-center"></div>
+                            <h4 class="font-bold text-white uppercase text-[10px] tracking-wider">Hito 2: Cursado Virtual y Entrega de Proyectos</h4>
+                            <p class="text-[10px] text-slate-400 mt-1">Elaboración de Proyectos de Gestión y examen de contenidos teóricos en plataforma virtual.</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[31px] top-0 size-4 rounded-full bg-emerald-600 border-4 border-[#0c101b] flex items-center justify-center"></div>
+                            <h4 class="font-bold text-white uppercase text-[10px] tracking-wider">Hito 3: Examen de Oposición Práctica (MIRAF/Táctica)</h4>
+                            <p class="text-[10px] text-slate-400 mt-1">Demostración técnica en polígono de tiro y simulación táctica de incidentes bajo reglamento MIRAF.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // --- RIGHT SIDEBAR: STUDIO GRID RENDERING ---
+    function renderStudioPaneHTML(hierarchy) {
+        const activeTab = window.academyActiveTab;
+        const cards = [
+            { id: 'tutor', title: 'Tutor IA', subtitle: 'Chat Conversacional', icon: 'psychology', color: 'border-blue-500/30 text-blue-400 bg-blue-500/5 hover:bg-blue-500/10' },
+            { id: 'podcast', title: 'Podcast Doctrina', subtitle: 'Resumen de Audio', icon: 'podcasts', color: 'border-cyan-500/30 text-cyan-400 bg-cyan-500/5 hover:bg-cyan-500/10' },
+            { id: 'summaries', title: 'Resúmenes', subtitle: 'Síntesis de Materias', icon: 'menu_book', color: 'border-emerald-500/30 text-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/10' },
+            { id: 'mindmaps', title: 'Mapas Mentales', subtitle: 'Esquemas Mermaid', icon: 'account_tree', color: 'border-pink-500/30 text-pink-400 bg-pink-500/5 hover:bg-pink-500/10' },
+            { id: 'proyectos', title: 'Proyectos', subtitle: 'Redactor ISEP', icon: 'assignment', color: 'border-purple-500/30 text-purple-400 bg-purple-500/5 hover:bg-purple-500/10' },
+            { id: 'exam', title: 'Cuestionario', subtitle: 'Simulador ISEP (50)', icon: 'quiz', color: 'border-red-500/30 text-red-400 bg-red-500/5 hover:bg-red-500/10' },
+            { id: 'flashcards', title: 'Tarjetas 3D', subtitle: 'Memorización Leitner', icon: 'style', color: 'border-amber-500/30 text-amber-400 bg-amber-500/5 hover:bg-amber-500/10' },
+            { id: 'videos', title: 'Táctica 3D', subtitle: 'Simulador de Caso', icon: 'videocam', color: 'border-indigo-500/30 text-indigo-400 bg-indigo-500/5 hover:bg-indigo-500/10' },
+            { id: 'slides', title: 'Presentaciones', subtitle: 'Láminas de Hitos', icon: 'presentation_to_cat', color: 'border-yellow-500/30 text-yellow-400 bg-yellow-500/5 hover:bg-yellow-500/10' },
+            { id: 'infographics', title: 'Infografías', subtitle: 'Hitos del Concurso', icon: 'infographic', color: 'border-teal-500/30 text-teal-400 bg-teal-500/5 hover:bg-teal-500/10' }
+        ];
+
+        return `
+            <div class="space-y-5 flex flex-col justify-between h-full">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between border-b border-white/5 pb-2">
+                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-indigo-400 text-sm">dashboard</span>
+                            Studio
+                        </h3>
+                        <span class="px-2 py-0.5 rounded-full text-[8px] font-black uppercase bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                            Estudio Activo
+                        </span>
+                    </div>
+
+                    <!-- Cards Grid (2 Columns) -->
+                    <div class="grid grid-cols-2 gap-2">
+                        ${cards.map(card => {
+                            const isActive = activeTab === card.id;
+                            return `
+                                <button onclick="window.switchAcademyTab('${card.id}')" 
+                                    class="p-3 text-left rounded-xl border flex flex-col justify-between gap-1.5 transition-all duration-200 active:scale-95 text-xs ${card.color} ${isActive ? 'ring-2 ring-indigo-500 ring-offset-2 ring-offset-[#080c16]' : ''}">
+                                    <div class="flex items-center justify-between w-full">
+                                        <span class="material-symbols-outlined text-lg">${card.icon}</span>
+                                        ${isActive ? '<span class="size-1.5 rounded-full bg-indigo-400 animate-ping"></span>' : ''}
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-[10px] text-white leading-tight">${card.title}</h4>
+                                        <p class="text-[8px] text-slate-400 leading-normal line-clamp-1 mt-0.5">${card.subtitle}</p>
+                                    </div>
+                                </button>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+                <!-- Studio Output files / Generated Notes -->
+                <div class="space-y-3 pt-4 border-t border-white/5">
+                    <h4 class="text-[9px] font-black uppercase tracking-widest text-slate-500">Documentos Generados</h4>
+                    <div class="space-y-1.5 max-h-[160px] overflow-y-auto pr-1 scrollbar-none text-[10px]">
+                        <button onclick="window.switchAcademyTab('summaries')" class="w-full text-left p-2.5 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 text-slate-300 flex items-center gap-2 transition-all">
+                            <span class="material-symbols-outlined text-xs text-emerald-400">description</span>
+                            <span class="truncate">📋 Manual de Procedimiento Penal</span>
+                        </button>
+                        <button onclick="window.switchAcademyTab('summaries')" class="w-full text-left p-2.5 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 text-slate-300 flex items-center gap-2 transition-all">
+                            <span class="material-symbols-outlined text-xs text-emerald-400">description</span>
+                            <span class="truncate">📝 Guía de Responsabilidad Adm.</span>
+                        </button>
+                        <button onclick="window.switchAcademyTab('exam')" class="w-full text-left p-2.5 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 text-slate-300 flex items-center gap-2 transition-all">
+                            <span class="material-symbols-outlined text-xs text-purple-400">analytics</span>
+                            <span class="truncate">📊 Diagnóstico: Evaluación ISEP</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
     // --- EVENT CONTROLLERS ---
+    window.changeSlideTheme = (theme) => {
+        window.slideTheme = theme;
+        renderAcademia(viewContainer);
+    };
+
+    window.navigateSlides = (direction) => {
+        window.currentSlideIndex = (window.currentSlideIndex || 0);
+        window.currentSlideIndex = (window.currentSlideIndex + direction + 5) % 5;
+        renderAcademia(viewContainer);
+    };
 
     window.setVideoStep = (step) => {
         window.activeVideoStep = step;
