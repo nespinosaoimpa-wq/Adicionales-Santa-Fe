@@ -560,13 +560,22 @@ window.store = {
 
         return new Promise((resolve) => {
             let resolved = false;
+            let safetyTimeout;
+
             const finishResolve = () => {
                 if (!resolved) {
                     resolved = true;
-                    clearTimeout(safetyTimeout);
+                    if (safetyTimeout) clearTimeout(safetyTimeout);
                     resolve();
                 }
             };
+
+            safetyTimeout = setTimeout(() => {
+                console.warn("⚠️ store.init auth observer timed out (10s fallback)");
+                this.authInitialized = true;
+                finishResolve();
+                if (window.router && window.router.initialized) router.handleRoute();
+            }, 10000);
 
             if (typeof auth === 'undefined' || !auth) {
                 console.warn("⚠️ Firebase Auth is not available. Skipping Firebase auth observer.");
