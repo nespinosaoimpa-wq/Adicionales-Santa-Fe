@@ -79,6 +79,12 @@ function renderLogin(container) {
         </div>
     `;
 
+    const savedEmail = localStorage.getItem('last_active_email');
+    if (savedEmail) {
+        const emailInput = document.getElementById('email');
+        if (emailInput) emailInput.value = savedEmail;
+    }
+
     window.handleForceUpdateCache = async (e) => {
         if (e) e.preventDefault();
         showToast("⏳ Destrabando app, limpiando cachés...");
@@ -93,9 +99,8 @@ function renderLogin(container) {
                 const cacheNames = await caches.keys();
                 await Promise.all(cacheNames.map(name => caches.delete(name))).catch(() => {});
             }
-            // Clear specific PWA session cache keys
             sessionStorage.clear();
-            localStorage.clear(); // Clear all cached user profiles to ensure fresh reload
+            localStorage.clear();
             showToast("✅ Listo. Recargando aplicación...");
             setTimeout(() => {
                 window.location.href = window.location.origin + window.location.pathname + '?t=' + Date.now() + window.location.hash;
@@ -108,6 +113,25 @@ function renderLogin(container) {
 
     window.handleGoogleLogin = (event) => {
         const btn = (event && event.currentTarget) ? event.currentTarget : document.querySelector('button[onclick*="handleGoogleLogin"]');
+        
+        const saved = localStorage.getItem('last_active_email');
+        const typed = document.getElementById('email')?.value?.trim();
+        const targetEmail = typed || saved;
+
+        if (targetEmail) {
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
+            }
+            store.loginByEmail(targetEmail).finally(() => {
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
+                }
+            });
+            return;
+        }
+
         if (btn) {
             btn.disabled = true;
             btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
@@ -126,13 +150,13 @@ function renderLogin(container) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                const msg = e ? (e.message || e.toString()) : "";
-                if (msg.includes('popup-closed-by-user')) {
-                    console.log("User closed Google popup");
-                } else {
-                    console.warn("Google auth notice:", e);
-                    showToast(msg || "⚠️ No se pudo iniciar sesión con Google.");
+                console.warn("Google auth notice:", e);
+                const emailInput = document.getElementById('email');
+                if (emailInput) {
+                    emailInput.focus();
+                    emailInput.classList.add('ring-2', 'ring-primary');
                 }
+                showToast("💡 Por favor ingresá tu Email o Legajo en la casilla de abajo y tocá Ingresar.");
             });
     };
 
