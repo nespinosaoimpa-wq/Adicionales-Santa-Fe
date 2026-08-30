@@ -113,17 +113,6 @@ function renderLogin(container) {
             btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
         }
 
-        const typedEmail = document.getElementById('email')?.value?.trim();
-        if (typedEmail) {
-            store.loginByEmail(typedEmail).finally(() => {
-                if (btn) {
-                    btn.disabled = false;
-                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
-                }
-            });
-            return;
-        }
-
         store.loginWithGoogle()
             .then((userCred) => {
                 console.log("✅ Google Auth Completed:", userCred?.user?.email);
@@ -137,24 +126,14 @@ function renderLogin(container) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                console.warn("Google Auth popup notice:", e);
-                window.promptFallbackGoogleEmail();
+                const msg = e ? (e.message || e.toString()) : "";
+                if (msg.includes('popup-closed-by-user')) {
+                    console.log("User closed Google popup");
+                } else {
+                    console.warn("Google auth notice:", e);
+                    showToast(msg || "⚠️ No se pudo iniciar sesión con Google.");
+                }
             });
-    };
-
-    window.promptFallbackGoogleEmail = () => {
-        const inputEl = document.getElementById('email');
-        if (inputEl && inputEl.value && inputEl.value.trim()) {
-            store.loginByEmail(inputEl.value.trim());
-            return;
-        }
-        const userEmail = prompt("🔑 Inicio de Sesión con Google:\n\nIngresá tu correo de Google o Legajo para ingresar directamente:");
-        if (userEmail && userEmail.trim()) {
-            if (inputEl) inputEl.value = userEmail.trim();
-            store.loginByEmail(userEmail.trim());
-        } else {
-            showToast("⚠️ Escribe tu Email/Legajo en la casilla de abajo y toca Ingresar.");
-        }
     };
 
     window.handleRecoverByEmail = (e) => {

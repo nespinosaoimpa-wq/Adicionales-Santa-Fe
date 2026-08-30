@@ -45,8 +45,9 @@ const DB = {
             if (code.includes('popup-blocked') || msg.includes('popup-blocked')) {
                 return Promise.reject(new Error("El navegador bloqueó la ventana emergente de Google. Usa tu Email/Legajo abajo."));
             }
-            // Avoid broken signInWithRedirect which hangs indefinitely in desktop PWA wrappers
-            return Promise.reject(new Error("El inicio de sesión rápido con Google falló o no está disponible en este dispositivo. Ingresá tu correo o legajo abajo."));
+            return authInstance.signInWithRedirect(provider).catch(() => {
+                return Promise.reject(new Error("No se pudo iniciar sesión con Google. Escribe tu Email/Legajo abajo para ingresar directo."));
+            });
         });
     },
 
