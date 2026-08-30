@@ -422,6 +422,7 @@ window.store = {
                 }
             });
             showToast("✅ ¡Datos e historial recuperados con éxito!");
+            this.recoverUserServicesPrompt(cleanEmail);
             if (window.router) window.router.navigateTo('#agenda');
             return true;
         } catch(e) {
@@ -433,6 +434,7 @@ window.store = {
 
     async recoverUserServicesPrompt(customEmail) {
         let emailToSearch = customEmail;
+        const isSilent = !!customEmail;
         if (!emailToSearch) {
             const defaultEmail = this.user ? this.user.email : '';
             emailToSearch = prompt("Ingresá tu correo electrónico para recuperar todas tus guardias:", defaultEmail);
@@ -440,50 +442,54 @@ window.store = {
         if (!emailToSearch || !emailToSearch.trim()) return;
 
         const cleanEmail = emailToSearch.toLowerCase().trim();
-        showToast("🔄 Escaneando servidores y recuperando guardias...");
+        const userPrefix = cleanEmail.split('@')[0];
+        if (!isSilent) showToast("🔄 Escaneando servidores y recuperando guardias...");
 
         try {
             let recovered = [];
 
             // 1. Query Supabase Services
             if (typeof supabaseClient !== 'undefined' && supabaseClient) {
-                const { data } = await supabaseClient.from('services').select('*').ilike('user_email', cleanEmail);
-                if (data && data.length > 0) {
-                    const mapped = data.map(s => ({
-                        ...s,
-                        id: s.id,
-                        subType: s.sub_type,
-                        startTime: s.start_time,
-                        endTime: s.end_time
-                    }));
-                    recovered.push(...mapped);
-                }
+                try {
+                    const { data } = await supabaseClient.from('services').select('*').or(`user_email.ilike.%${cleanEmail}%,user_email.ilike.%${userPrefix}%`);
+                    if (data && data.length > 0) {
+                        const mapped = data.map(s => ({
+                            ...s,
+                            id: s.id,
+                            subType: s.sub_type,
+                            startTime: s.start_time,
+                            endTime: s.end_time
+                        }));
+                        recovered.push(...mapped);
+                    }
+                } catch(e) {}
             }
 
             // 2. Query Firestore Services
             if (typeof db !== 'undefined' && db) {
                 try {
-                    const snap = await db.collection('services').where('userEmail', '==', cleanEmail).get();
-                    snap.docs.forEach(doc => recovered.push({ id: doc.id, ...doc.data() }));
+                    const snap1 = await db.collection('services').where('userEmail', '==', cleanEmail).get();
+                    snap1.docs.forEach(doc => recovered.push({ id: doc.id, ...doc.data() }));
+
+                    const snap2 = await db.collection('services').where('userEmail', '==', userPrefix).get();
+                    snap2.docs.forEach(doc => recovered.push({ id: doc.id, ...doc.data() }));
                 } catch(e) {}
             }
 
-            // 3. Deduplicate
-            const deduplicated = DB._deduplicateUnified(recovered);
-
-            if (deduplicated.length > 0) {
-                this.services = deduplicated;
+            // 3. Deduplicate and Merge
+            if (recovered.length > 0) {
+                const combined = DB._deduplicateUnified([...(this.services || []), ...recovered]);
+                this.services = combined;
                 try {
-                    localStorage.setItem('backup_services_' + cleanEmail, JSON.stringify(deduplicated));
+                    localStorage.setItem('cached_services_' + cleanEmail, JSON.stringify(combined));
                 } catch(e){}
-                showToast(`✅ ¡Se recuperaron ${deduplicated.length} guardias en tu calendario!`);
-                if (window.router) window.router.handleRoute();
-            } else {
+                showToast(`✅ ¡Se recuperaron ${combined.length} guardias en tu agenda!`);
+                if (window.router && window.router.initialized) window.router.handleRoute();
+            } else if (!isSilent) {
                 showToast("⚠️ No se encontraron guardias para " + cleanEmail);
             }
         } catch(e) {
             console.error("Error recuperando guardias:", e);
-            showToast("⚠️ Error al escanear bases de datos.");
         }
     },
 
