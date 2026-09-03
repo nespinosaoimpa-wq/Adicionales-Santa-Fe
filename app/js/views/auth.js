@@ -112,26 +112,9 @@ function renderLogin(container) {
     };
 
     window.handleGoogleLogin = (event) => {
+        if (event) event.preventDefault();
         const btn = (event && event.currentTarget) ? event.currentTarget : document.querySelector('button[onclick*="handleGoogleLogin"]');
         
-        const saved = localStorage.getItem('last_active_email');
-        const typed = document.getElementById('email')?.value?.trim();
-        const targetEmail = typed || saved;
-
-        if (targetEmail) {
-            if (btn) {
-                btn.disabled = true;
-                btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
-            }
-            store.loginByEmail(targetEmail).finally(() => {
-                if (btn) {
-                    btn.disabled = false;
-                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
-                }
-            });
-            return;
-        }
-
         if (btn) {
             btn.disabled = true;
             btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
@@ -150,20 +133,10 @@ function renderLogin(container) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                console.warn("Google auth notice on mobile/PWA:", e);
-                
-                const promptEmail = prompt("📱 Inicio de Sesión con Google:\n\nIngresá tu correo de Google o Legajo:");
-                if (promptEmail && promptEmail.trim()) {
-                    const emailInput = document.getElementById('email');
-                    if (emailInput) emailInput.value = promptEmail.trim();
-                    store.loginByEmail(promptEmail.trim());
-                } else {
-                    const emailInput = document.getElementById('email');
-                    if (emailInput) {
-                        emailInput.focus();
-                        emailInput.classList.add('ring-2', 'ring-primary');
-                    }
-                    showToast("💡 Por favor ingresá tu Email o Legajo en la casilla de abajo y tocá Ingresar.");
+                console.warn("Google auth notice:", e);
+                const msg = e ? (e.message || e.toString()) : '';
+                if (!msg.includes('closed-by-user')) {
+                    showToast("⚠️ " + (msg || "Error al conectar con Google. Reintentá o ingresá tu email abajo."));
                 }
             });
     };

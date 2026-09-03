@@ -37,16 +37,16 @@ const DB = {
             const msg = error ? (error.message || error.toString() || '') : '';
             
             if (code.includes('unauthorized-domain') || msg.includes('unauthorized-domain')) {
-                return Promise.reject(new Error("Dominio no autorizado en Firebase. Usa el campo Email/Legajo abajo para ingresar directo."));
+                return Promise.reject(new Error("Dominio no autorizado en Firebase."));
             }
             if (code.includes('popup-closed-by-user') || msg.includes('popup-closed-by-user')) {
                 return Promise.reject(error);
             }
-            if (code.includes('popup-blocked') || msg.includes('popup-blocked')) {
-                return Promise.reject(new Error("El navegador bloqueó la ventana emergente de Google. Usa tu Email/Legajo abajo."));
-            }
-            return authInstance.signInWithRedirect(provider).catch(() => {
-                return Promise.reject(new Error("No se pudo iniciar sesión con Google. Escribe tu Email/Legajo abajo para ingresar directo."));
+
+            console.log("🔄 Fallback to signInWithRedirect...");
+            return authInstance.signInWithRedirect(provider).catch(err => {
+                console.error("signInWithRedirect error:", err);
+                return Promise.reject(new Error("No se pudo iniciar sesión con Google. Reintentá."));
             });
         });
     },
@@ -386,26 +386,28 @@ const DB = {
             return () => { };
         }
 
-        // List of all user email aliases and known user accounts to ensure FULL data recovery
+        // List of user email aliases for the logged-in user
         const userPrefix = email.split('@')[0];
         const withGmail = email.includes('@') ? email : email + '@gmail.com';
         
-        const knownAccounts = [
-            email,
-            userPrefix,
-            withGmail,
-            'nespinosa.oimpa@gmail.com',
-            'nespinosa.oimpa',
-            'jugador.nico55@gmail.com',
-            'jugador.nico55',
-            'nespinosaoimpa@gmail.com',
-            'adicionalessantafe@gmail.com',
-            'nicoespinosa069@gmail.com',
-            'smartflow.1995@gmail.com',
-            'siges.info@gmail.com'
-        ];
+        let targetAccounts = [email, userPrefix, withGmail];
 
-        const targetEmails = Array.from(new Set(knownAccounts.filter(Boolean).map(e => e.toLowerCase().trim())));
+        // Admin fallback targets are only queried for admin users
+        const isAdminUser = email.includes('nespinosa') || email.includes('jugador') || email.includes('admin') || email.includes('nico55') || email.includes('smartflow');
+        if (isAdminUser) {
+            targetAccounts.push(
+                'nespinosa.oimpa@gmail.com',
+                'nespinosa.oimpa',
+                'jugador.nico55@gmail.com',
+                'jugador.nico55',
+                'nespinosaoimpa@gmail.com',
+                'adicionalessantafe@gmail.com',
+                'nicoespinosa069@gmail.com',
+                'smartflow.1995@gmail.com'
+            );
+        }
+
+        const targetEmails = Array.from(new Set(targetAccounts.filter(Boolean).map(e => e.toLowerCase().trim())));
 
         let fbServicesMap = new Map();
         let sbServicesMap = new Map();
