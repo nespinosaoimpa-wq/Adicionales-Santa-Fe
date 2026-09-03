@@ -196,6 +196,39 @@ const ACTA_TEMPLATES = {
             { id: 'cuerpo', label: 'Cuerpo del Mensaje (Narrativa)', type: 'textarea', required: true },
             { id: 'anexos', label: 'Documentación Anexa', type: 'text', required: false }
         ]
+    },
+    aprehension: {
+        title: 'Acta de Aprehensión (Art. 268 CPP)',
+        icon: 'person_pin',
+        color: 'from-red-600 to-amber-600',
+        fields: [
+            { id: 'aprehendido_nombre', label: 'Nombre del Aprehendido/a', type: 'text', required: true },
+            { id: 'aprehendido_dni', label: 'DNI / Identificación', type: 'text', required: true },
+            { id: 'aprehendido_domicilio', label: 'Domicilio', type: 'text', required: true },
+            { id: 'causa_aprehension', label: 'Causa o Motivo de Aprehensión', type: 'textarea', required: true },
+            { id: 'lugar_aprehension', label: 'Lugar de Aprehensión', type: 'text', required: true },
+            { id: 'localidad', label: 'Localidad', type: 'text', required: true },
+            { id: 'fiscal', label: 'Fiscal de Turno Interviniente', type: 'text', required: true },
+            { id: 'testigo1', label: 'Testigo 1 (Nombre y DNI)', type: 'text', required: true },
+            { id: 'testigo2', label: 'Testigo 2 (Nombre y DNI)', type: 'text', required: false },
+            { id: 'observaciones', label: 'Estado Físico / Observaciones', type: 'textarea', required: false }
+        ]
+    },
+    requisa: {
+        title: 'Acta de Requisa Personal / Vehicular',
+        icon: 'manage_search',
+        color: 'from-blue-600 to-cyan-600',
+        fields: [
+            { id: 'persona_requisada', label: 'Persona Requisada (Nombre y DNI)', type: 'text', required: true },
+            { id: 'vehiculo_dominio', label: 'Dominio / Marca Vehículo (opcional)', type: 'text', required: false },
+            { id: 'lugar', label: 'Lugar del Procedimiento', type: 'text', required: true },
+            { id: 'localidad', label: 'Localidad', type: 'text', required: true },
+            { id: 'motivo_fundado', label: 'Motivo Fundado (Art. 212 / 213 CPP)', type: 'textarea', required: true },
+            { id: 'resultado', label: 'Resultado y Elementos Hallados', type: 'textarea', required: true },
+            { id: 'testigo1', label: 'Testigo 1 (Nombre y DNI)', type: 'text', required: true },
+            { id: 'testigo2', label: 'Testigo 2 (Nombre y DNI)', type: 'text', required: false },
+            { id: 'observaciones', label: 'Observaciones', type: 'textarea', required: false }
+        ]
     }
 };
 
@@ -298,6 +331,28 @@ function generateActaText(tipo, data) {
                 `${data.anexos ? 'DOCUMENTACIÓN ANEXA: ' + data.anexos + '\n\n' : ''}` +
                 `Sin otro particular, saludo a Usted muy atentamente.\n\n`;
             break;
+        case 'aprehension':
+            body = `Que en fecha y hora indicadas, en ${data.lugar_aprehension}, ${data.localidad}, ` +
+                `se procede a la APREHENSIÓN del/la ciudadano/a ${data.aprehendido_nombre}, D.N.I. N° ${data.aprehendido_dni}, ` +
+                `con domicilio en ${data.aprehendido_domicilio}, en estricto cumplimiento del Artículo 268 del Código Procesal Penal de Santa Fe.\n\n` +
+                `MOTIVO DE LA APREHENSIÓN:\n${data.causa_aprehension}\n\n` +
+                `LECTURA DE DERECHOS Y GARANTÍAS (ART. 268 CPP):\n` +
+                `Se le notifica formalmente al aprehendido sus derechos constitucionales: designar abogado defensor, comunicarse con allegados, abstenerse de declarar sin que ello implique presunción en su contra y ser examinado por facultativo médico.\n\n` +
+                `FISCALÍA DE TURNO INTERVINIENTE: ${data.fiscal}\n\n` +
+                `TESTIGOS DE ACTUACIÓN:\n1) ${data.testigo1}\n` +
+                `${data.testigo2 ? '2) ' + data.testigo2 + '\n' : ''}\n` +
+                `${data.observaciones ? 'ESTADO FÍSICO / OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
+            break;
+        case 'requisa':
+            body = `Que encontrándose el personal policial actuante en tareas de prevención en ${data.lugar}, ${data.localidad}, ` +
+                `se procede a la REQUISA (Art. 212 / 213 C.P.P. S.F.) de la persona ${data.persona_requisada}` +
+                `${data.vehiculo_dominio ? ' y del vehículo Dominio/Marca: ' + data.vehiculo_dominio : ''}.\n\n` +
+                `MOTIVO FUNDADO:\n${data.motivo_fundado}\n\n` +
+                `RESULTADO DEL PROCEDIMIENTO Y ELEMENTOS HALLADOS:\n${data.resultado}\n\n` +
+                `TESTIGOS DE ACTUACIÓN:\n1) ${data.testigo1}\n` +
+                `${data.testigo2 ? '2) ' + data.testigo2 + '\n' : ''}\n` +
+                `${data.observaciones ? 'OBSERVACIONES: ' + data.observaciones + '\n\n' : ''}`;
+            break;
     }
 
     const footer = `\n${settings.footer}\n\n` +
@@ -380,14 +435,19 @@ function renderActaForm(container, tipo) {
     if (!tmpl) { router.navigateTo('#asistente/actas'); return; }
 
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente/actas')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
-                <span class="material-symbols-outlined">arrow_back</span>
-            </button>
-            <div class="flex flex-col">
-                <h1 class="text-sm font-black text-white leading-none">${tmpl.title}</h1>
-                <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Completar Datos</span>
+        <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <button onclick="router.navigateTo('#asistente/actas')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div class="flex flex-col">
+                    <h1 class="text-sm font-black text-white leading-none">${tmpl.title}</h1>
+                    <span class="text-[10px] text-primary font-bold uppercase tracking-widest">Completar Datos</span>
+                </div>
             </div>
+            <button type="button" onclick="window._fillDemoActaData('${tipo}')" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-white/20 text-slate-300 font-bold text-[10px] border border-white/10 flex items-center gap-1 transition-all active:scale-95">
+                <span class="material-symbols-outlined text-xs text-amber-400">auto_awesome</span>Ejemplo
+            </button>
         </header>
 
         <main class="p-6 space-y-6 pb-32 max-w-md mx-auto view-transition">
@@ -599,6 +659,28 @@ function renderActaForm(container, tipo) {
             el.classList.add('ring-2', 'ring-emerald-500/50');
             setTimeout(() => el.classList.remove('ring-2', 'ring-emerald-500/50'), 2000);
         }
+    };
+
+    window._fillDemoActaData = (tipoActa) => {
+        const demos = {
+            allanamiento: { juzgado: "Juzgado de IPP 1ra Nominación Santa Fe", nro_causa: "CUIP 21-0849201-9", fiscal: "Dr. Carlos Zoppegni", direccion: "Av. Facundo Zuviría 4520", localidad: "Santa Fe", fecha_orden: new Date().toISOString().split('T')[0], testigo1: "Juan Carlos Gómez DNI 32.410.892", testigo2: "María Laura Rossi DNI 35.129.401", inventario: "1) Un arma de fuego tipo revólver calibre 38 serie N° 40291.\n2) 6 cartuchos intactos calibre 38.\n3) Dos teléfonos celulares marca Samsung.", observaciones: "Se dejó copia del acta a la moradora del domicilio." },
+            custodia: { imputado: "GARCIA, Pedro Esteban", cuij: "21-0849201-9", victima: "LA SOCIEDAD", fiscal: "Dra. Luciana Escobar", procedimiento: "Allanamiento Domiciliario", elementos: "1) Bolsa de polietileno transparente conteniendo un arma de fuego revólver cal 38 N° 40291.", embalaje: "Bolsa de polietileno termosellada con faja de seguridad N° 004921", recolector: "Of. Subinspector Pérez", recolector_cargo: "Perito Balístico - AIC", testigos: "Marcos Fernández DNI 31.902.114", observaciones: "Sin anomalías al momento del embalaje." },
+            procedimiento: { tipo_procedimiento: "Flagrancia", lugar: "Peñaloza y Gorriti", localidad: "Santa Fe", involucrados: "PÉREZ, Martín DNI 38.192.401", descripcion: "Observado en actitud sospechosa intentando sustraer motovehículo en vía pública.", resultado: "Aprehensión del masculino y secuestro del rodado marca Honda Wave 110cc.", testigos: "Esteban López DNI 29.401.592", observaciones: "Sin lesiones visibles." },
+            secuestro: { nro_causa: "CUIP 21-094102-1", lugar: "Aristóbulo del Valle 6700", elementos: "Motovehículo marca Motomel 150cc color negro dominio A049FKL.", depositario: "Comisaría 8va UR I", testigo1: "Lucas Roldán DNI 36.192.401", testigo2: "", observaciones: "Presenta aditamento de ignición violentado." },
+            notificacion: { notificado_nombre: "SÁNCHEZ, Rodrigo Nicolas", notificado_dni: "34.192.059", domicilio: "San Martín 1820 2do B", contenido: "Prohibición de acercamiento y acercamiento perimetral de 200 metros respecto de la víctima.", autoridad: "Tribunal de Familia N° 2 Santa Fe", observaciones: "Firmado en plena conformidad." },
+            campo: { objetivo: "Patrullaje preventivo en corredores comerciales", zona: "B° Candioti Sur", horario: "14:00 a 22:00 hs", personal: "Of. Insp. Gómez, Subof. Benítez - Móvil 8912", novedades: "Identificación de 18 personas y 12 motovehículos.", resultado: "Dos traslados por artículo 10 Bis L.O.P.", observaciones: "Sin novedades de gravedad." },
+            denuncia: { denunciante_nombre: "GIMÉNEZ, Andrea Soledad", denunciante_dni: "33.910.492", denunciante_domicilio: "Urquiza 3100", denunciante_telefono: "342-4910291", hechos: "Manifiesta que en fecha 02/09/2026 siendo las 20:30 hs autores ignorados le sustrajeron su bicicleta marca SLP de la vereda.", lugar_hecho: "Urquiza y Suipacha", fecha_hecho: "02/09/2026 20:30 hs", testigos: "Vecino del local comercial de enfrente.", observaciones: "Se remite copia a fiscalía." },
+            oficio: { destinatario: "Sr. Juez de la I.P.P. N° 1", dependencia: "Oficina de Gestión Judicial", referencia: "CUIP 21-084192-0", objeto: "Elevación de actuaciones complementarias", cuerpo: "Tengo el agrado de dirigirme a Ud. a fin de remitir adjunto el informe pericial balístico N° 402/26.", anexos: "Informe Pericial 4 fojas útiles." },
+            aprehension: { aprehendido_nombre: "TORRES, Gabriel Matías", aprehendido_dni: "40.192.831", aprehendido_domicilio: "Pasaje Los Hornos 5400", causa_aprehension: "Robo en grado de tentativa y resistencia a la autoridad.", lugar_aprehension: "Blvd. Pellegrini y 9 de Julio", localidad: "Santa Fe", fiscal: "Dr. Gustavo Arrieta", testigo1: "Mariano Paz DNI 33.192.401", testigo2: "Valeria Ríos DNI 37.902.114", observaciones: "Trasladado a medicina legal previo al alojado." },
+            requisa: { persona_requisada: "ROMERO, Javier Alberto DNI 39.102.941", vehiculo_dominio: "VW Gol Trend Dom AD912KL", lugar: "Ruta Prov 1 km 4", localidad: "San José del Rincón", motivo_fundado: "Maniobras peligrosas e intento de evasión en puesto de control vehicular.", resultado: "Secuestro de 1 cuchillo tipo trenzado de 20cm de hoja en debajo del asiento.", testigo1: "Jorge Peralta DNI 28.401.924", testigo2: "", observaciones: "Conducido a Subcomisaría 4ta." }
+        };
+        const d = demos[tipoActa];
+        if (!d) return;
+        Object.keys(d).forEach(k => {
+            const el = document.getElementById('acta-' + k);
+            if (el) el.value = d[k];
+        });
+        showToast("✨ Datos de ejemplo cargados");
     };
 }
 
