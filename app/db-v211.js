@@ -26,11 +26,16 @@ const DB = {
         }
         const authInstance = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope('email');
-        provider.addScope('profile');
         provider.setCustomParameters({ prompt: 'select_account' });
 
-        console.log("🔑 Initiating Google Auth via signInWithPopup...");
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            console.log("📱 Mobile device detected: Initiating Google Auth via signInWithRedirect...");
+            return authInstance.signInWithRedirect(provider);
+        }
+
+        console.log("💻 Desktop detected: Initiating Google Auth via signInWithPopup...");
         return authInstance.signInWithPopup(provider).catch(error => {
             console.warn("Popup notice:", error);
             const code = error ? (error.code || '') : '';
@@ -40,13 +45,14 @@ const DB = {
                 return Promise.reject(new Error("Dominio no autorizado en Firebase."));
             }
             if (code.includes('popup-closed-by-user') || msg.includes('popup-closed-by-user')) {
-                return Promise.reject(error);
+                return Promise.reject(new Error("Selección de cuenta cancelada."));
             }
 
-            console.log("🔄 Fallback to signInWithRedirect...");
-            return authInstance.signInWithRedirect(provider).catch(err => {
-                console.error("signInWithRedirect error:", err);
-                return Promise.reject(new Error("No se pudo iniciar sesión con Google. Reintentá."));
+            console.log("🔄 Fallback to signInWithRedirect via async macro-task...");
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    authInstance.signInWithRedirect(provider).then(resolve).catch(reject);
+                }, 150);
             });
         });
     },
