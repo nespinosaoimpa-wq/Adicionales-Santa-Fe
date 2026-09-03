@@ -1,6 +1,6 @@
 // Firebase Configuration
 const firebaseConfig = {
-    apiKey: atob("QUl6YVN5QVFjRkxvbUVZa0xqeDlkYTA4dTJtQWlPNDlwYnBuNndV"),
+    apiKey: atob("QUl6YVN5QVFjRkxvbUVZa0xqazlkYTA4dTJtQWlPNDlwYnBuNndV"),
     authDomain: "adicionales-santa-fe.firebaseapp.com",
     projectId: "adicionales-santa-fe",
     storageBucket: "adicionales-santa-fe.firebasestorage.app",
