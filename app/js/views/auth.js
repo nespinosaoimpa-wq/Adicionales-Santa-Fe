@@ -150,13 +150,21 @@ function renderLogin(container) {
                     btn.disabled = false;
                     btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                console.warn("Google auth notice:", e);
-                const emailInput = document.getElementById('email');
-                if (emailInput) {
-                    emailInput.focus();
-                    emailInput.classList.add('ring-2', 'ring-primary');
+                console.warn("Google auth notice on mobile/PWA:", e);
+                
+                const promptEmail = prompt("📱 Inicio de Sesión con Google:\n\nIngresá tu correo de Google o Legajo:");
+                if (promptEmail && promptEmail.trim()) {
+                    const emailInput = document.getElementById('email');
+                    if (emailInput) emailInput.value = promptEmail.trim();
+                    store.loginByEmail(promptEmail.trim());
+                } else {
+                    const emailInput = document.getElementById('email');
+                    if (emailInput) {
+                        emailInput.focus();
+                        emailInput.classList.add('ring-2', 'ring-primary');
+                    }
+                    showToast("💡 Por favor ingresá tu Email o Legajo en la casilla de abajo y tocá Ingresar.");
                 }
-                showToast("💡 Por favor ingresá tu Email o Legajo en la casilla de abajo y tocá Ingresar.");
             });
     };
 
