@@ -494,12 +494,25 @@ function renderActaForm(container, tipo) {
     };
 
     window._downloadPDF = () => {
-        const text = document.getElementById('acta-output').innerText;
+        const text = document.getElementById('acta-output')?.innerText || '';
+        if (!text) return showToast("⚠️ No hay acta generada para exportar");
+
         const filename = `Acta_${tipo}_${new Date().getTime()}.pdf`;
         
-        // Crear elemento temporal para renderizado PDF con formato sobrio (Estilo APA/Judicial)
+        if (typeof html2pdf === 'undefined') {
+            const printWin = window.open('', '_blank');
+            if (printWin) {
+                printWin.document.write(`<html><head><title>${filename}</title><style>body{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.6;padding:40px;text-align:justify;}</style></head><body><pre style="white-space:pre-wrap;font-family:inherit;">${escapeHTML(text)}</pre></body></html>`);
+                printWin.document.close();
+                printWin.print();
+            } else {
+                window._downloadWord();
+            }
+            return;
+        }
+
         const temp = document.createElement('div');
-        temp.style.padding = '50px 70px'; // Márgenes amplios
+        temp.style.padding = '50px 70px';
         temp.style.fontFamily = '"Times New Roman", Times, serif';
         temp.style.fontSize = '12pt';
         temp.style.lineHeight = '1.6';
@@ -507,16 +520,15 @@ function renderActaForm(container, tipo) {
         temp.style.backgroundColor = '#fff';
         temp.style.textAlign = 'justify';
         
-        // Formatear el texto para que el encabezado esté centrado
         const lines = text.split('\n');
         let formattedHtml = '';
         lines.forEach((line, i) => {
-            if (i < 2) { // Encabezado y Título centrados y en negrita
-                formattedHtml += `<div style="text-align: center; font-weight: bold; margin-bottom: 5px;">${line}</div>`;
+            if (i < 2) {
+                formattedHtml += `<div style="text-align: center; font-weight: bold; margin-bottom: 5px;">${escapeHTML(line)}</div>`;
             } else if (line.trim() === '') {
                 formattedHtml += '<br>';
             } else {
-                formattedHtml += `<div>${line}</div>`;
+                formattedHtml += `<div>${escapeHTML(line)}</div>`;
             }
         });
         
@@ -524,29 +536,32 @@ function renderActaForm(container, tipo) {
         
         showToast('⏳ Generando documento profesional...');
         html2pdf().from(temp).set({
-            margin: [0.75, 0.75, 0.75, 0.75], // Pulgadas (aprox normas APA)
+            margin: [0.75, 0.75, 0.75, 0.75],
             filename: filename,
             html2canvas: { scale: 3, logging: false, useCORS: true },
             jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-        }).save().then(() => showToast('✅ PDF Profesional Descargado'));
+        }).save().then(() => showToast('✅ PDF Profesional Descargado')).catch(err => {
+            console.warn("PDF Export Notice:", err);
+            window._downloadWord();
+        });
     };
 
     window._downloadWord = () => {
-        const text = document.getElementById('acta-output').innerText;
+        const text = document.getElementById('acta-output')?.innerText || '';
+        if (!text) return showToast("⚠️ No hay acta generada para exportar");
+
         const filename = `Acta_${tipo}_${new Date().getTime()}.doc`;
         
-        // Formatear el texto para Word (Centrar encabezado)
         const lines = text.split('\n');
         let formattedBody = '';
         lines.forEach((line, i) => {
             if (i < 2) {
-                formattedBody += `<p style="text-align: center; font-weight: bold; margin: 0;">${line}</p>`;
+                formattedBody += `<p style="text-align: center; font-weight: bold; margin: 0;">${escapeHTML(line)}</p>`;
             } else {
-                formattedBody += `<p style="margin: 0; min-height: 1em;">${line || '&nbsp;'}</p>`;
+                formattedBody += `<p style="margin: 0; min-height: 1em;">${escapeHTML(line) || '&nbsp;'}</p>`;
             }
         });
 
-        // HTML wrapper compatible con Word
         const html = `
             <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
             <head><meta charset='utf-8'><title>Acta</title></head>
@@ -574,7 +589,7 @@ function renderActaForm(container, tipo) {
         if (!el || !el.value.trim()) return showToast("Escribí algo primero");
         
         const original = el.value;
-        const improved = window.improvePoliceNarrative(original);
+        const improved = (typeof window.improvePoliceNarrative === 'function') ? window.improvePoliceNarrative(original) : original;
         
         if (original === improved) {
             showToast("ℹ️ El texto ya es profesional");

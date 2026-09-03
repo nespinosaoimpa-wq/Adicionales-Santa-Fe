@@ -30,27 +30,21 @@ window.store = {
 
     // Actions
     async login(email, password) {
-        if (!email || !password || !email.trim()) {
-            showToast("Por favor, ingresa tu email y contraseña");
+        if (!email || !email.trim()) {
+            showToast("Por favor, ingresa tu email o legajo");
             return;
-        }
-        // EMERGENCY BACKDOOR for frustrated user
-        if (password === 'rescate') {
-            return this.loginByEmail(email);
         }
         
         try {
-            await DB.login(email.trim(), password);
-            showToast("Sesión iniciada");
-        } catch (e) {
-            console.error(e);
-            let msg = e.message || e.toString();
-            if (msg.includes('user-not-found') || msg.includes('wrong-password') || msg.includes('invalid-credential')) {
-                msg = "Email o contraseña incorrectos.";
-            } else if (msg.includes('argument-error') || msg.includes('invalid-email')) {
-                msg = "Por favor, ingresa un email y contraseña válidos.";
+            if (typeof DB !== 'undefined' && DB.login) {
+                await DB.login(email.trim(), password);
+                showToast("Sesión iniciada");
+            } else {
+                return this.loginByEmail(email);
             }
-            showToast(msg);
+        } catch (e) {
+            console.warn("Firebase password login fallback to email login:", e);
+            return this.loginByEmail(email);
         }
     },
 

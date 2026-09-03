@@ -62,7 +62,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v535.10.34 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v535.10.47 (Suite Asistente Virtual PRO)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
