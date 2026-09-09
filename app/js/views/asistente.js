@@ -1368,6 +1368,9 @@ function renderCentinela(container) {
         </div>`;
     }
 
+    // ═══ HISTORIAL DE CONVERSACIÓN PARA GEMINI MULTI-TURN ═══
+    const geminiChatHistory = [];
+
     // ═══ MANEJADOR PRINCIPAL ═══
     form.onsubmit = async (e) => {
         e.preventDefault();
@@ -1378,15 +1381,24 @@ function renderCentinela(container) {
         input.value = '';
 
         const thinkingId = 'thinking-' + Date.now();
-        appendMessage('bot', '<span class="animate-pulse text-xs text-primary font-bold">✨ Centinela AI procesando con Motor Gemini...</span>', thinkingId);
+        appendMessage('bot', '<span class="animate-pulse text-xs text-primary font-bold flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">neurology</span>Generando respuesta con IA...</span>', thinkingId);
 
-        // --- 1. CONSULTA EN VIVO A GOOGLE GEMINI API ---
+        // --- 1. CONSULTA EN VIVO A GOOGLE GEMINI API (con historial conversacional) ---
         if (window.GeminiService && window.GeminiService.getApiKey()) {
             try {
-                const geminiRes = await window.GeminiService.query(msg);
+                // Send last 5 conversation turns for context
+                const historyForGemini = geminiChatHistory.slice(-10); // 5 turns = 10 messages (user+model)
+                const geminiRes = await window.GeminiService.query(msg, { history: historyForGemini });
                 const el = document.getElementById(thinkingId);
                 if (geminiRes.success && el) {
-                    el.innerHTML = `<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(geminiRes.text)}</div>`;
+                    // Store in conversation history for future context
+                    geminiChatHistory.push({ role: 'user', text: msg });
+                    geminiChatHistory.push({ role: 'model', text: geminiRes.text });
+                    // Keep history manageable (last 10 messages = 5 turns)
+                    while (geminiChatHistory.length > 10) geminiChatHistory.shift();
+
+                    const sourceBadge = `<span class="text-[9px] text-indigo-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">auto_awesome</span>Gemini AI · Respuesta generativa en vivo</span>`;
+                    el.innerHTML = `<div class="space-y-1">${sourceBadge}<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(geminiRes.text)}</div></div>`;
                     chat.scrollTop = chat.scrollHeight;
                     logQueryToAudit(msg, geminiRes.text, 100, 'gemini_api_live');
                     return;
@@ -1394,6 +1406,12 @@ function renderCentinela(container) {
             } catch (err) {
                 console.warn("Gemini API fallback to local intelligence:", err);
             }
+        }
+
+        // Update thinking indicator for local fallback
+        const thinkEl = document.getElementById(thinkingId);
+        if (thinkEl) {
+            thinkEl.innerHTML = '<span class="animate-pulse text-xs text-primary font-bold flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">menu_book</span>Consultando Base Legal local...</span>';
         }
 
         // --- 2. INTELIGENCIA LOCAL DE RESPALDO (OFFLINE / FALLBACK) ---
@@ -1411,7 +1429,8 @@ function renderCentinela(container) {
             const intent = detectIntent(normalizedMsg);
             if (intent && intentResponses[intent]) {
                 const intentText = intentResponses[intent]();
-                el.innerHTML = `<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(intentText)}</div>`;
+                const localBadge = `<span class="text-[9px] text-cyan-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">menu_book</span>Base Legal Local · Respuesta instantánea</span>`;
+                el.innerHTML = `<div class="space-y-1">${localBadge}<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(intentText)}</div></div>`;
                 chat.scrollTop = chat.scrollHeight;
                 logQueryToAudit(msg, intentText, 100, intent);
                 return;
@@ -1446,18 +1465,18 @@ function renderCentinela(container) {
                 suggestions = [];
             }
 
-            // --- F. BADGE DE CONFIANZA ---
-            let confidenceBadge = '';
+            // --- F. BADGE DE FUENTE + CONFIANZA ---
+            let sourceBadge = `<span class="text-[9px] text-cyan-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">menu_book</span>Base Legal Local</span>`;
             if (confidence >= CONFIDENCE_HIGH) {
-                confidenceBadge = `<span class="text-[9px] text-emerald-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">verified</span>Alta confianza · ${usedCategory.replace(/_/g, ' ')}</span>`;
+                sourceBadge = `<span class="text-[9px] text-emerald-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">verified</span>Base Legal Local · Alta confianza · ${usedCategory.replace(/_/g, ' ')}</span>`;
             } else if (confidence >= CONFIDENCE_MED) {
-                confidenceBadge = `<span class="text-[9px] text-amber-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">info</span>Confianza media · ${usedCategory.replace(/_/g, ' ')}</span>`;
+                sourceBadge = `<span class="text-[9px] text-amber-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">info</span>Base Legal Local · Confianza media · ${usedCategory.replace(/_/g, ' ')}</span>`;
             }
 
             // --- G. RENDER FINAL ---
             el.innerHTML = `
                 <div class="space-y-1">
-                    ${confidenceBadge}
+                    ${sourceBadge}
                     <div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(finalResponseText)}</div>
                     ${renderSuggestionChips(suggestions)}
                 </div>`;

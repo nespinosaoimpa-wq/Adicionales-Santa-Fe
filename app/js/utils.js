@@ -508,7 +508,8 @@ window.showDonationModal = () => {
 
 // --- Google Gemini AI API Integration ---
 window.getGeminiAPIKey = function () {
-    return localStorage.getItem('gemini_api_key') || store.user?.geminiApiKey || window.globalSystemConfig?.geminiApiKey || "";
+    if (window.GeminiService) return window.GeminiService.getApiKey();
+    return localStorage.getItem('gemini_api_key') || window.store?.user?.geminiApiKey || window.globalSystemConfig?.geminiApiKey || "";
 };
 
 window.showGeminiKeyModal = function () {
@@ -521,6 +522,18 @@ window.showGeminiKeyModal = function () {
 };
 
 window.callGeminiAPI = async function (userPrompt, systemInstruction = "") {
+    if (window.GeminiService) {
+        const result = await window.GeminiService.query(userPrompt, { systemPrompt: systemInstruction });
+        if (result.success && result.text) {
+            return result.text;
+        } else if (result.needApiKey) {
+            window.showGeminiKeyModal();
+            throw new Error(result.message);
+        } else {
+            throw new Error(result.error || "Error al conectar con Gemini AI.");
+        }
+    }
+
     let apiKey = window.getGeminiAPIKey();
     if (!apiKey) {
         window.showGeminiKeyModal();
@@ -530,20 +543,12 @@ window.callGeminiAPI = async function (userPrompt, systemInstruction = "") {
         }
     }
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`;
-
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
     const defaultSystem = `Sos Centinela AI y Tutor de la Academia PRO ISEP de la Policía de la Provincia de Santa Fe (Argentina). Conocés a fondo el Manual Oficial ISEP 2026 de 344 páginas (Oficial de Policía - Escalafón General), Ley 12.521, Decreto 461/15, CPP Ley 12.734, Ley 14.283 de adicionales y reforma previsional. Respondés en español rioplatense, de forma precisa, clara, citando los artículos y leyes aplicables.`;
 
     const payload = {
-        contents: [
-            {
-                role: "user",
-                parts: [{ text: userPrompt }]
-            }
-        ],
-        systemInstruction: {
-            parts: [{ text: systemInstruction || defaultSystem }]
-        }
+        contents: [{ role: "user", parts: [{ text: userPrompt }] }],
+        systemInstruction: { parts: [{ text: systemInstruction || defaultSystem }] }
     };
 
     try {
