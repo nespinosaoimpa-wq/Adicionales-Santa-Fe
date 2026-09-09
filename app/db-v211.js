@@ -9,11 +9,13 @@ const DB = {
     },
 
     async login(email, password) {
-        return auth.signInWithEmailAndPassword(email, password);
+        const cleanEmail = (email || '').trim().toLowerCase();
+        return auth.signInWithEmailAndPassword(cleanEmail, password);
     },
 
     async register(email, password) {
-        return auth.createUserWithEmailAndPassword(email, password);
+        const cleanEmail = (email || '').trim().toLowerCase();
+        return auth.createUserWithEmailAndPassword(cleanEmail, password);
     },
 
     async logout() {
@@ -23,7 +25,43 @@ const DB = {
     async loginWithGoogle() {
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' });
-        return auth.signInWithPopup(provider);
+        try {
+            return await auth.signInWithPopup(provider);
+        } catch (err) {
+            console.warn("Firebase Google Auth error:", err);
+            if (typeof supabaseClient !== 'undefined' && supabaseClient && supabaseClient.auth) {
+                try {
+                    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+                        provider: 'google',
+                        options: { redirectTo: window.location.origin + '/app/' }
+                    });
+                    if (!error) return data;
+                } catch(sbErr) {
+                    console.warn("Supabase OAuth fallback error:", sbErr);
+                }
+            }
+            throw err;
+        }
+    },
+
+    async handleRedirectResult() {
+        try {
+            if (!auth) return null;
+            const result = await auth.getRedirectResult();
+            if (result && result.user) {
+                console.log("✅ Google Redirect Login successful:", result.user.email);
+                if (typeof showToast === 'function') showToast("¡Bienvenido! Sesión iniciada con Google");
+                return result.user;
+            }
+        } catch (error) {
+            console.error("Google Redirect Result Error:", error);
+            if (error.code === 'auth/unauthorized-domain') {
+                if (typeof showToast === 'function') showToast("⚠️ Dominio no autorizado en Firebase. Contacta al administrador.");
+            } else if (error.code !== 'auth/popup-closed-by-user') {
+                if (typeof showToast === 'function') showToast("Error de inicio de sesión: " + error.message);
+            }
+        }
+        return null;
     },
 
     // --- USERS ---
@@ -354,6 +392,9 @@ const DB = {
             return () => { };
         }
 
+        const cleanEmail = (user.email || '').toLowerCase().trim();
+        const userEmails = Array.from(new Set([user.email, cleanEmail])).filter(Boolean);
+
         let fbServices = [];
         let sbServices = [];
 
@@ -362,13 +403,13 @@ const DB = {
             const deduplicated = this._deduplicateUnified(unified);
             deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
-            console.log(`📊 Hybrid Sync: ${fbServices.length} (FB) + ${sbServices.length} (SB) -> ${deduplicated.length} Total`);
+            console.log(`📊 Hybrid Sync for ${cleanEmail}: ${fbServices.length} (FB) + ${sbServices.length} (SB) -> ${deduplicated.length} Total`);
             callback(deduplicated);
         };
 
         // 1. Listen to Firebase
         const fbUnsub = db.collection('services')
-            .where('userEmail', '==', user.email)
+            .where('userEmail', 'in', userEmails)
             .onSnapshot(snapshot => {
                 fbServices = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 mergeAndCallback();
@@ -376,14 +417,14 @@ const DB = {
 
         // 2. Listen to Supabase
         const channel = supabaseClient
-            .channel('services-hybrid')
+            .channel('services-hybrid-' + cleanEmail)
             .on('postgres_changes', {
                 event: '*',
                 schema: 'public',
                 table: 'services',
-                filter: `user_email=eq.${user.email}`
+                filter: `user_email=eq.${cleanEmail}`
             }, async () => {
-                const { data } = await supabaseClient.from('services').select('*').eq('user_email', user.email);
+                const { data } = await supabaseClient.from('services').select('*').ilike('user_email', cleanEmail);
                 if (data) {
                     sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
                     mergeAndCallback();
@@ -392,7 +433,7 @@ const DB = {
             .subscribe();
 
         // Initial Supabase Fetch
-        supabaseClient.from('services').select('*').eq('user_email', user.email).then(({ data }) => {
+        supabaseClient.from('services').select('*').ilike('user_email', cleanEmail).then(({ data }) => {
             if (data) {
                 sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
                 mergeAndCallback();
@@ -532,6 +573,9 @@ const DB = {
             return () => { };
         }
 
+        const cleanEmail = (user.email || '').toLowerCase().trim();
+        const userEmails = Array.from(new Set([user.email, cleanEmail])).filter(Boolean);
+
         let fbExpenses = [];
         let sbExpenses = [];
 
@@ -543,14 +587,14 @@ const DB = {
         };
 
         const fbUnsub = db.collection('expenses')
-            .where('userEmail', '==', user.email)
+            .where('userEmail', 'in', userEmails)
             .onSnapshot(snapshot => {
                 fbExpenses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 mergeAndCallback();
             });
 
         // Supabase Fetch/Realtime for expenses
-        supabaseClient.from('expenses').select('*').eq('user_email', user.email).then(({ data }) => {
+        supabaseClient.from('expenses').select('*').ilike('user_email', cleanEmail).then(({ data }) => {
             if (data) {
                 sbExpenses = data;
                 mergeAndCallback();

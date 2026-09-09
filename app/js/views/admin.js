@@ -317,6 +317,28 @@ async function renderAdmin(container) {
                     </div>
                 </div>
 
+                <!-- Configuración Global Gemini API Key (Motor Centinela AI) -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-indigo-500/30 p-6 shadow-xl space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                            <span class="material-symbols-outlined text-indigo-400">key</span>
+                            Clave API Global Google Gemini (Centinela AI)
+                        </h3>
+                        <span class="text-[9px] font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full">
+                            Motor Generativo Activo
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Ingresá la clave API de tu cuenta de Google Gemini. Esta clave alimentará en tiempo real el chat de Centinela AI y el Cuaderno Centinela para **todos los policías que usen la app**, sin que ellos tengan que ingresar nada.
+                    </p>
+                    <form onsubmit="window.saveAdminGeminiKey(event)" class="flex gap-3">
+                        <input type="password" id="adminGeminiKeyInput" value="${window.GeminiService ? window.GeminiService.getApiKey() : ''}" placeholder="AIzaSy..." class="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-xs font-mono outline-none focus:border-indigo-500 transition-all">
+                        <button type="submit" class="px-6 py-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/20 active:scale-95 transition-all">
+                            Guardar Clave Admin
+                        </button>
+                    </form>
+                </div>
+
                 <!-- Aprobaciones Academia PRO ($10.000 ARS) -->
                 <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-amber-500/20 p-6 shadow-xl space-y-4">
                     <div class="flex items-center justify-between">
@@ -548,6 +570,15 @@ async function renderAdmin(container) {
         window.academyPayments = data;
         updateUI();
     });
+
+    window.saveAdminGeminiKey = (e) => {
+        e.preventDefault();
+        const key = document.getElementById('adminGeminiKeyInput')?.value.trim();
+        if (window.GeminiService) {
+            window.GeminiService.setApiKey(key);
+            showToast("✅ Clave API Global de Gemini guardada. ¡Centinela AI está activado para todos!");
+        }
+    };
 
     window.approveAcademyPaymentAction = async (paymentId, email, hierarchy) => {
         if (!confirm(`¿Confirmas aprobar el pago de $10.000 ARS para ${email} en el concurso ${hierarchy}?`)) return;

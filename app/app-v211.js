@@ -8,23 +8,15 @@
 function bootApp() {
     if (window._appBooted) return;
     window._appBooted = true;
-    console.log("🚀 Adicionales Santa Fe Modularized - Booting...");
+    console.log("🚀 Adicionales Santa Fe - Booting...");
 
-    // 1. Initialize Routing & Render View IMMEDIATELY
+    // 1. Initialize Routing & Render Initial View
     try {
         if (window.router && typeof window.router.init === 'function') {
             router.init();
         }
     } catch (e) {
         console.error("❌ Router Init Error:", e);
-    }
-
-    try {
-        if (window.router && typeof window.router.handleRoute === 'function') {
-            window.router.handleRoute();
-        }
-    } catch (e) {
-        console.error("❌ Direct Router handleRoute Error:", e);
     }
 
     // 2. Initialize State & Auth Data asynchronously
@@ -48,17 +40,6 @@ function bootApp() {
     } catch (error) {
         console.error("❌ Auth Init Error:", error);
     }
-
-    // 4. Ultimate Safety Check: Ensure static HTML loader is replaced if router fell through
-    setTimeout(() => {
-        const app = document.getElementById('app');
-        if (app && app.innerHTML.includes('Cargando Adicionales Santa Fe')) {
-            console.warn("⚠️ App UI still showing initial loader after 200ms, forcing router render...");
-            if (window.router && typeof window.router.handleRoute === 'function') {
-                window.router.handleRoute();
-            }
-        }
-    }, 200);
 }
 
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
@@ -66,9 +47,6 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
 } else {
     document.addEventListener('DOMContentLoaded', bootApp);
 }
-
-// Fallback boot timer
-setTimeout(bootApp, 100);
 
 // --- 2. GLOBAL EVENT LISTENERS ---
 

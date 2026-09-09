@@ -25,11 +25,11 @@ function renderLogin(container) {
                     <div class="relative flex justify-center text-sm"><span class="bg-background-dark px-2 text-slate-500">O con tu email</span></div>
                 </div>
 
-                <form class="space-y-4" onsubmit="handleLogin(event)">
+                <form class="space-y-4" onsubmit="handleLogin(event)" autocomplete="off">
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Email / Legajo</label>
+                        <label for="email" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Email o Usuario</label>
                         <div class="mt-2">
-                            <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="email" name="email" type="email" autocomplete="off" value="" placeholder="tu_email@gmail.com" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
@@ -41,7 +41,7 @@ function renderLogin(container) {
                             </div>
                         </div>
                         <div class="mt-2">
-                            <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="password" name="password" type="password" autocomplete="new-password" value="" placeholder="••••••••" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
@@ -58,7 +58,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v534.8 (Suite Asistente Virtual PRO)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v536.0.0 (Sistema Oficial Multi-Usuario Aislado)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
@@ -83,9 +83,18 @@ function renderLogin(container) {
                 showToast("¡Bienvenido!");
             })
             .catch(e => {
-                btn.disabled = false;
-                btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
-                showToast("Error: " + e.message);
+                if (btn) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
+                }
+                const msg = e ? (e.message || String(e)) : '';
+                if (msg.includes('popup-blocked') || msg.includes('popup-closed')) {
+                    showToast("⚠️ El navegador bloqueó la ventana de Google. Ingresá tu mail abajo.");
+                } else if (msg.includes('unauthorized-domain')) {
+                    showToast("⚠️ Usá el ingreso por Email/Legajo abajo para acceder directo.");
+                } else {
+                    showToast("⚠️ " + (msg || "Ingresá con tu email y clave abajo."));
+                }
             });
     };
 

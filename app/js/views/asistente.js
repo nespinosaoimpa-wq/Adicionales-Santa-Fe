@@ -1379,8 +1379,25 @@ function renderCentinela(container) {
         input.value = '';
 
         const thinkingId = 'thinking-' + Date.now();
-        appendMessage('bot', '<span class="animate-pulse text-xs">Analizando consulta...</span>', thinkingId);
+        appendMessage('bot', '<span class="animate-pulse text-xs text-primary font-bold">✨ Centinela AI procesando con Motor Gemini...</span>', thinkingId);
 
+        // --- 1. CONSULTA EN VIVO A GOOGLE GEMINI API ---
+        if (window.GeminiService && window.GeminiService.getApiKey()) {
+            try {
+                const geminiRes = await window.GeminiService.query(msg);
+                const el = document.getElementById(thinkingId);
+                if (geminiRes.success && el) {
+                    el.innerHTML = `<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(geminiRes.text)}</div>`;
+                    chat.scrollTop = chat.scrollHeight;
+                    logQueryToAudit(msg, geminiRes.text, 100, 'gemini_api_live');
+                    return;
+                }
+            } catch (err) {
+                console.warn("Gemini API fallback to local intelligence:", err);
+            }
+        }
+
+        // --- 2. INTELIGENCIA LOCAL DE RESPALDO (OFFLINE / FALLBACK) ---
         setTimeout(() => {
             const el = document.getElementById(thinkingId);
             const normalizedMsg = normalizeText(msg);

@@ -35,13 +35,29 @@
         }
     </script>
     <style>
-        body { font-family: 'Public Sans', sans-serif; background-color: #0a0c12; color: #f5f6f8; }
-        .glass-card { background: rgba(16, 22, 34, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        body { font-family: 'Public Sans', sans-serif; background-color: #07090e; color: #f5f6f8; }
+        .glass-card { background: rgba(14, 20, 32, 0.65); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .bg-watermark-fixed {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(13, 89, 242, 0.1) 0%, rgba(7, 9, 14, 0.9) 65%, #07090e 100%),
+                url('assets/watermark_police.png');
+            background-size: cover, cover;
+            background-position: center, center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            filter: contrast(1.1) brightness(0.85);
+        }
     </style>
 
     <!-- GDPR/Cookie Consent -->
     <script src="cookie-consent.js" defer></script></head>
-<body class="antialiased min-h-screen flex flex-col">
+<body class="antialiased min-h-screen flex flex-col relative">
+
+    <div class="bg-watermark-fixed"></div>
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">

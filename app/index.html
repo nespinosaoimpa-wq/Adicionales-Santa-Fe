@@ -76,34 +76,25 @@
         } catch(e) {}
 
         // Dynamic PWA Cache Buster & Auto-Updater
-        const CURRENT_VERSION = 'v535.8.0';
+        const CURRENT_VERSION = 'v536.0.0';
         try {
-            fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
-                .then(res => res.json())
-                .then(data => {
-                    const reloadKey = 'reloaded_v_' + (data ? data.version : '');
-                    if (data && data.version && data.version !== CURRENT_VERSION && !sessionStorage.getItem(reloadKey)) {
-                        sessionStorage.setItem(reloadKey, 'true');
-                        console.warn('⚠️ Nueva versión detectada:', data.version, '. Limpiando caché y actualizando...');
-                        if ('serviceWorker' in navigator) {
-                            navigator.serviceWorker.getRegistrations().then(registrations => {
-                                for (let reg of registrations) {
-                                    reg.unregister().catch(function(){});
-                                }
-                                if ('caches' in window) {
-                                    caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
-                                        .then(() => { window.location.reload(true); })
-                                        .catch(() => { window.location.reload(true); });
-                                } else {
-                                    window.location.reload(true);
-                                }
-                            }).catch(() => { window.location.reload(true); });
-                        } else {
-                            window.location.reload(true);
+            if (!sessionStorage.getItem('version_check_done')) {
+                sessionStorage.setItem('version_check_done', 'true');
+                fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data && data.version && data.version !== CURRENT_VERSION) {
+                            console.warn('⚠️ Nueva versión detectada:', data.version, '. Actualizando cache...');
+                            if ('serviceWorker' in navigator) {
+                                navigator.serviceWorker.getRegistrations().then(registrations => {
+                                    for (let reg of registrations) reg.unregister().catch(function(){});
+                                    if ('caches' in window) caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))));
+                                }).catch(() => {});
+                            }
                         }
-                    }
-                })
-                .catch(err => console.log('Bypass de verificación rápida (offline o local):', err));
+                    })
+                    .catch(err => console.log('Offline version check bypass:', err));
+            }
         } catch(e) {}
     </script>
 
@@ -201,8 +192,23 @@
             font-family: 'Public Sans', sans-serif;
             -webkit-tap-highlight-color: transparent;
             min-height: 100vh;
-            background-color: #0a0c12;
-            /* Default dark bg */
+            background-color: #07090e;
+        }
+
+        /* Capa de Marca de Agua Fija Policial */
+        .bg-watermark-app {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                radial-gradient(circle at 50% 30%, rgba(13, 89, 242, 0.1) 0%, rgba(7, 9, 14, 0.9) 65%, #07090e 100%),
+                url('assets/watermark_police.png');
+            background-size: cover, cover;
+            background-position: center, center;
+            background-repeat: no-repeat;
+            opacity: 0.15;
+            filter: contrast(1.1) brightness(0.85);
         }
 
         /* Hide Scrollbar but allow scroll */
@@ -217,7 +223,9 @@
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col relative">
+
+    <div class="bg-watermark-app"></div>
 
     <!-- Main App Container -->
     <div id="app"
@@ -285,8 +293,9 @@
     <script src="firebase-config.js?v=535.8.0" defer></script>
     <script src="supabase-config.js?v=535.8.0" defer></script>
     <script src="db-v211.js?v=535.8.0" defer></script>
-    <script src="js/utils.js?v=535.8.0" defer></script>
-    <script src="js/components.js?v=535.8.0" defer></script>
+    <script src="js/utils.js?v=535.9.0" defer></script>
+    <script src="js/utils/gemini_api.js?v=535.9.0" defer></script>
+    <script src="js/components.js?v=535.9.0" defer></script>
     <script src="js/store.js?v=535.8.0" defer></script>
     <script src="js/router.js?v=535.8.0" defer></script>
     <script src="js/data/directory.js?v=535.8.0" defer></script>

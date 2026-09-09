@@ -28,33 +28,69 @@ window.store = {
         return !!this.user;
     },
 
+    // Helper: Friendly Spanish Auth Errors
+    _formatAuthError(e) {
+        if (!e) return "Ocurrió un error inesperado.";
+        const code = e.code || '';
+        const msg = e.message || '';
+        if (code === 'auth/user-not-found' || msg.includes('user-not-found')) return "❌ No existe cuenta registrada con este correo. Registrate gratis.";
+        if (code === 'auth/wrong-password' || msg.includes('wrong-password')) return "❌ Contraseña incorrecta. Verificá tus datos.";
+        if (code === 'auth/invalid-credential' || msg.includes('invalid-credential')) return "❌ Correo o contraseña incorrectos. Verificá tus datos.";
+        if (code === 'auth/email-already-in-use' || msg.includes('email-already-in-use')) return "⚠️ Este correo ya está registrado. Probá iniciar sesión.";
+        if (code === 'auth/weak-password' || msg.includes('weak-password')) return "⚠️ La contraseña debe tener al menos 6 caracteres.";
+        if (code === 'auth/invalid-email' || msg.includes('invalid-email')) return "⚠️ Formato de correo electrónico inválido.";
+        if (code === 'auth/unauthorized-domain' || msg.includes('unauthorized-domain')) return "⚠️ Dominio no autorizado en Firebase. Contactá al administrador.";
+        if (code === 'auth/network-request-failed' || msg.includes('network-request-failed')) return "📡 Sin conexión a internet. Verificá tu red.";
+        return "Error: " + (e.message || e);
+    },
+
     // Actions
     async login(email, password) {
         try {
             await DB.login(email, password);
-            showToast("Sesión iniciada");
+            showToast("✅ Sesión iniciada con éxito");
         } catch (e) {
-            console.error(e);
-            showToast("Error: " + e.message);
+            console.error("Login error:", e);
+            const code = e.code || '';
+            const msg = e.message || '';
+            if (code === 'auth/user-not-found' || msg.includes('user-not-found')) {
+                try {
+                    const userCred = await DB.register(email, password);
+                    const defaultName = (email || '').split('@')[0];
+                    await DB.saveUser({
+                        email: userCred.user.email,
+                        name: defaultName,
+                        role: 'user',
+                        avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${encodeURIComponent(defaultName)}`,
+                        serviceConfig: this.serviceConfig,
+                        notificationSettings: this.notificationSettings
+                    });
+                    showToast("✅ ¡Cuenta creada e iniciada con éxito!");
+                    return;
+                } catch (regErr) {
+                    showToast(this._formatAuthError(regErr));
+                    return;
+                }
+            }
+            showToast(this._formatAuthError(e));
         }
     },
 
     async register(email, password, name) {
         try {
             const userCred = await DB.register(email, password);
-            // Save extra details
             await DB.saveUser({
                 email: userCred.user.email,
                 name: name,
                 role: 'user',
-                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${name}`,
+                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${encodeURIComponent(name)}`,
                 serviceConfig: this.serviceConfig,
                 notificationSettings: this.notificationSettings
             });
-            showToast("Cuenta creada");
+            showToast("✅ Cuenta creada con éxito");
         } catch (e) {
-            console.error(e);
-            showToast("Error: " + e.message);
+            console.error("Register error:", e);
+            showToast(this._formatAuthError(e));
         }
     },
 
@@ -323,14 +359,34 @@ window.store = {
     },
 
     async logout() {
+        try {
+            if (this.unsubscribeServices) this.unsubscribeServices();
+            if (this.unsubscribeUsers) this.unsubscribeUsers();
+            if (this.unsubscribeExpenses) this.unsubscribeExpenses();
+            if (this.unsubscribeAds) this.unsubscribeAds();
+            if (this.unsubscribeAnnouncements) this.unsubscribeAnnouncements();
+            if (this.notifInterval) clearInterval(this.notifInterval);
+        } catch(e) {}
+
+        this.user = null;
+        this.services = [];
+        this.expenses = [];
+        this.allUsers = [];
+        this.ads = [];
+
         await DB.logout();
+        showToast("Sesión cerrada");
+        if (window.router && window.router.initialized) {
+            router.navigateTo('#login');
+        }
     },
 
     async loginWithGoogle() {
         try {
             await DB.loginWithGoogle();
         } catch (e) {
-            console.error(e);
+            console.error("Google login error:", e);
+            showToast(this._formatAuthError(e));
             throw e;
         }
     },
@@ -407,15 +463,17 @@ window.store = {
 
         return new Promise((resolve) => {
             let resolved = false;
+            let safetyTimeout = null;
+
             const finishResolve = () => {
                 if (!resolved) {
                     resolved = true;
-                    clearTimeout(safetyTimeout);
+                    if (safetyTimeout) clearTimeout(safetyTimeout);
                     resolve();
                 }
             };
 
-            const safetyTimeout = setTimeout(() => {
+            safetyTimeout = setTimeout(() => {
                 console.warn("⚠️ store.init auth observer timed out (2s fallback)");
                 this.authInitialized = true;
                 finishResolve();
@@ -492,8 +550,17 @@ window.store = {
                                 this.unsubscribeServices = DB.subscribeToServices(services => {
                                     this.services = services;
                                     if (this.checkNotifications) this.checkNotifications();
-                                    this.scheduleShiftAlarms(); // Schedule push notifications for upcoming shifts
-                                    if (this.authInitialized && window.router && window.router.initialized) router.handleRoute();
+                                    this.scheduleShiftAlarms();
+                                    const activeEl = document.activeElement;
+                                    const isTyping = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'SELECT');
+                                    if (!isTyping && this.authInitialized && window.router && window.router.initialized) {
+                                        const h = window.location.hash || '#agenda';
+                                        if (h === '#agenda' && typeof renderAgenda === 'function') {
+                                            renderAgenda(document.getElementById('app'));
+                                        } else if (h === '#control' && typeof renderControlPanel === 'function') {
+                                            renderControlPanel(document.getElementById('app'));
+                                        }
+                                    }
                                 });
 
                                 this.unsubscribeAds = DB.subscribeToAds(ads => {
@@ -736,10 +803,32 @@ window.store = {
 
     getFormattedDate(dateStr) {
         if (!dateStr) return '';
-        const [year, month, day] = dateStr.split('-').map(Number);
-        const date = new Date(year, month - 1, day);
-        const options = { weekday: 'short', day: 'numeric', month: 'short' };
-        return date.toLocaleDateString('es-ES', options);
+        try {
+            const cleanStr = String(dateStr).split('T')[0];
+            const parts = cleanStr.split(/[\/\-]/);
+            let year, month, day;
+            if (parts.length === 3) {
+                if (parts[0].length === 4) {
+                    year = parseInt(parts[0], 10);
+                    month = parseInt(parts[1], 10) - 1;
+                    day = parseInt(parts[2], 10);
+                } else {
+                    day = parseInt(parts[0], 10);
+                    month = parseInt(parts[1], 10) - 1;
+                    year = parseInt(parts[2], 10);
+                }
+            } else {
+                const d = new Date(dateStr);
+                year = d.getFullYear();
+                month = d.getMonth();
+                day = d.getDate();
+            }
+            if (isNaN(year) || isNaN(month) || isNaN(day)) return String(dateStr);
+            const date = new Date(year, month, day);
+            return date.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' });
+        } catch (e) {
+            return String(dateStr);
+        }
     },
 
     getLocalDateString(date = new Date()) {

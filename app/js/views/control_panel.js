@@ -125,6 +125,23 @@ function renderControlPanel(container) {
 
             ${renderHomeBenefits()}
 
+            <!-- Campus Ascenso ISEP 2026 Featured Card -->
+            <div onclick="router.navigateTo('#academia')" class="cursor-pointer glass-card p-4 rounded-3xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-orange-500/10 to-red-500/10 hover:border-amber-500/50 transition-all flex items-center justify-between group active:scale-[0.98]">
+                <div class="flex items-center gap-3">
+                    <div class="size-11 rounded-2xl bg-gradient-to-br from-amber-500 to-red-600 flex items-center justify-center text-white shadow-lg shadow-amber-500/20 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-2xl">school</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1.5">
+                            <span class="text-[9px] font-black text-amber-400 uppercase tracking-wider">Campus Ascenso ISEP 2026</span>
+                            <span class="px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 text-[8px] font-black">NUEVO 🤖</span>
+                        </div>
+                        <p class="text-xs font-bold text-slate-900 dark:text-white leading-tight">Simulador, Manuales & Tutor IA Centinela</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-slate-400 group-hover:text-amber-400 transition-colors">chevron_right</span>
+            </div>
+
             <!-- Main Earnings Card with Interactive Goal Ring -->
             <div class="relative overflow-hidden rounded-[2.5rem] glass-card p-6 border border-white/10 shadow-xl bg-gradient-to-br from-slate-900/50 to-slate-955/50">
                 <div class="absolute -top-12 -right-12 size-32 bg-primary/10 blur-3xl rounded-full"></div>
