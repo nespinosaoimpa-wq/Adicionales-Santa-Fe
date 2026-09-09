@@ -237,30 +237,42 @@ function updateOfflineStatus(isOffline) {
 window.addEventListener('online', () => updateOfflineStatus(false));
 window.addEventListener('offline', () => updateOfflineStatus(true));
 function renderIOSInstallPrompt() {
+    const isWhatsAppOrInApp = /WhatsApp|FBAN|FBAV|Instagram|Line/i.test(navigator.userAgent);
+    
     return `
-        <div id="ios-install-banner" class="fixed bottom-32 left-4 right-4 z-[100] bg-white dark:bg-slate-900 rounded-[2.5rem] p-6 shadow-2xl border border-primary/20 transform translate-y-[200%] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] animate-ios-entry">
-            <div class="flex items-start gap-5 text-left">
-                <div class="size-14 bg-gradient-to-br from-primary to-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/20 shrink-0">
-                    <span class="material-symbols-outlined text-3xl">add_to_home_screen</span>
+        <div id="ios-install-banner" class="fixed bottom-24 left-4 right-4 z-[100] bg-slate-950 text-white rounded-[2.2rem] p-5 shadow-2xl border border-cyan-500/30 transform translate-y-[200%] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] backdrop-blur-2xl">
+            <div class="flex items-start gap-4 text-left">
+                <div class="size-12 bg-gradient-to-br from-primary via-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/30 shrink-0">
+                    <span class="material-symbols-outlined text-2xl">add_to_home_screen</span>
                 </div>
                 <div class="flex-1 space-y-2">
-                    <h3 class="text-base font-bold text-slate-900 dark:text-white leading-tight">Instalá Adicionales SF</h3>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">Para usar esta aplicación a pantalla completa en tu iPhone:</p>
+                    <h3 class="text-sm font-extrabold text-white leading-tight">Instalá Adicionales SF en tu iPhone</h3>
                     
-                    <div class="flex flex-col gap-2 pt-2">
-                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-700 dark:text-slate-300">
-                            <span class="size-6 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-primary font-bold">1</span>
-                            <span>Toca el botón <span class="bg-slate-100 dark:bg-white/10 px-1.5 py-0.5 rounded-md font-bold text-primary flex inline-flex items-center gap-1">Compartir <span class="material-symbols-outlined text-xs">ios_share</span></span></span>
+                    ${isWhatsAppOrInApp ? `
+                        <div class="bg-amber-500/20 border border-amber-500/40 rounded-xl p-2.5 text-[11px] text-amber-200 font-medium space-y-1 my-1">
+                            <p class="font-bold flex items-center gap-1 text-amber-300">
+                                <span class="material-symbols-outlined text-sm">warning</span> Abrir en Safari
+                            </p>
+                            <p>Para instalar en iPhone: Tocá los <strong>3 puntos (...) arriba</strong> y elegí <strong>"Abrir en Safari"</strong>.</p>
                         </div>
-                        <div class="flex items-center gap-3 text-[11px] font-medium text-slate-700 dark:text-slate-700 dark:text-slate-300">
-                            <span class="size-6 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-primary font-bold">2</span>
-                            <span>Elegí <span class="font-bold text-primary">"Añadir a panta. de inicio"</span></span>
+                    ` : `
+                        <p class="text-xs text-slate-300 leading-relaxed">Seguí estos 2 pasos para guardarla en tu pantalla:</p>
+                    `}
+                    
+                    <div class="flex flex-col gap-2 pt-1">
+                        <div class="flex items-center gap-2.5 text-[11px] font-semibold text-slate-200">
+                            <span class="size-5 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-bold">1</span>
+                            <span>Tocá el botón <span class="bg-white/10 px-2 py-0.5 rounded-md font-bold text-cyan-300 inline-flex items-center gap-1">Compartir <span class="material-symbols-outlined text-xs">ios_share</span></span> en Safari</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 text-[11px] font-semibold text-slate-200">
+                            <span class="size-5 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-bold">2</span>
+                            <span>Elegí <span class="font-bold text-santa-gold">"Añadir a panta. de inicio"</span></span>
                         </div>
                     </div>
                 </div>
             </div>
-            <button onclick="this.closest('#ios-install-banner').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600 dark:hover:text-slate-900 dark:text-white transition-colors">
-                <span class="material-symbols-outlined">close</span>
+            <button onclick="this.closest('#ios-install-banner').remove()" class="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors p-1">
+                <span class="material-symbols-outlined text-lg">close</span>
             </button>
         </div>
     `;
