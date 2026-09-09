@@ -13,40 +13,44 @@ function renderLogin(container) {
                 <p class="mt-2 text-sm text-slate-400">Ingresa a tu cuenta para continuar</p>
             </div>
 
-            <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm space-y-6">
-                <!-- Google Button -->
-                <button onclick="handleGoogleLogin(event)" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-white px-4 py-4 text-base font-bold text-slate-900 shadow-xl border border-slate-200 hover:bg-slate-50 transition-all active:scale-95 ring-1 ring-slate-200 ring-offset-2">
-                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6" alt="Google">
+            <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-sm space-y-4">
+
+                <!-- Primary Google Login Button -->
+                <button onclick="handleGoogleLogin(event)" type="button" class="flex w-full justify-center items-center gap-3 rounded-2xl bg-white/10 dark:bg-white/10 px-4 py-3.5 text-sm font-bold text-white shadow-md border border-white/10 hover:bg-white/20 transition-all active:scale-95">
+                    <img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5" alt="Google">
                     Continuar con Google
                 </button>
-                
-                <div class="relative">
+                <p class="text-[11px] text-center text-slate-400 px-2 leading-relaxed">
+                    💡 <b>Celulares:</b> Si Google se traba o vuelve al inicio, escribe tu Email/Legajo abajo y toca "Ingresar" (dejando la contraseña en blanco) para entrar directo.
+                </p>
+
+                <div class="relative my-2">
                     <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-white/10"></div></div>
-                    <div class="relative flex justify-center text-sm"><span class="bg-background-dark px-2 text-slate-500">O con tu email</span></div>
+                    <div class="relative flex justify-center text-xs"><span class="bg-background-dark px-3 text-slate-400 font-medium">O con tu email o legajo</span></div>
                 </div>
 
-                <form class="space-y-4" onsubmit="handleLogin(event)" autocomplete="off">
+                <form class="space-y-4" onsubmit="handleLogin(event)">
                     <div>
-                        <label for="email" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Email o Usuario</label>
+                        <label for="email" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Email / Legajo</label>
                         <div class="mt-2">
-                            <input id="email" name="email" type="email" autocomplete="off" value="" placeholder="tu_email@gmail.com" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="email" name="email" type="text" autocomplete="username" placeholder="Ej: juan.perez" class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
                     <div>
                         <div class="flex items-center justify-between">
-                            <label for="password" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Contraseña</label>
+                            <label for="password" class="block text-sm font-medium leading-6 text-slate-700 dark:text-slate-300">Contraseña <span class="text-xs text-slate-500 font-normal">(Opcional)</span></label>
                             <div class="text-sm">
                                 <a href="#" onclick="store.showPasswordReset()" class="font-semibold text-primary hover:text-primary/80">¿Olvidaste tu clave?</a>
                             </div>
                         </div>
                         <div class="mt-2">
-                            <input id="password" name="password" type="password" autocomplete="new-password" value="" placeholder="••••••••" required class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
+                            <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Dejá en blanco si entrás por Email/Legajo" class="block w-full rounded-xl border-0 bg-white/5 py-3 text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-white/10 placeholder:text-slate-500 focus:ring-2 focus:ring-inset focus:ring-primary sm:text-sm sm:leading-6 pl-4">
                         </div>
                     </div>
 
-                    <div>
-                        <button type="submit" class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all shadow-lg shadow-primary/20 active:scale-95">
+                    <div class="pt-2">
+                        <button type="submit" class="flex w-full justify-center rounded-xl bg-primary px-3 py-3 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 active:scale-95">
                             Ingresar
                         </button>
                     </div>
@@ -58,7 +62,7 @@ function renderLogin(container) {
                 </p>
 
                 <div class="mt-6 border-t border-white/5 pt-4 text-center">
-                    <p class="text-[10px] text-slate-500 font-mono">v536.0.0 (Sistema Oficial Multi-Usuario Aislado)</p>
+                    <p class="text-[10px] text-slate-500 font-mono">v535.10.47 (Suite Asistente Virtual PRO)</p>
                     <div class="mt-4 flex justify-center gap-4 text-[10px] text-slate-400">
                         <a href="#legal/privacy" class="hover:underline">Privacidad</a>
                         <span>•</span>
@@ -66,43 +70,101 @@ function renderLogin(container) {
                         <span>•</span>
                         <a href="#legal/about" class="hover:underline">Sobre Nosotros</a>
                     </div>
+
+                    <button onclick="window.handleForceUpdateCache(event)" class="mt-6 px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-red-400 text-[9px] font-bold border border-red-500/20 transition-all uppercase tracking-wider mx-auto block active:scale-95">
+                        ⚠️ Destrabar App (Limpiar Caché y Actualizar)
+                    </button>
                 </div>
             </div>
         </div>
     `;
 
+    const savedEmail = localStorage.getItem('last_active_email');
+    if (savedEmail) {
+        const emailInput = document.getElementById('email');
+        if (emailInput) emailInput.value = savedEmail;
+    }
+
+    window.handleForceUpdateCache = async (e) => {
+        if (e) e.preventDefault();
+        showToast("⏳ Destrabando app, limpiando cachés...");
+        try {
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                for (let registration of registrations) {
+                    await registration.unregister().catch(() => {});
+                }
+            }
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                await Promise.all(cacheNames.map(name => caches.delete(name))).catch(() => {});
+            }
+            sessionStorage.clear();
+            localStorage.clear();
+            showToast("✅ Listo. Recargando aplicación...");
+            setTimeout(() => {
+                window.location.href = window.location.origin + window.location.pathname + '?t=' + Date.now() + window.location.hash;
+            }, 1000);
+        } catch (err) {
+            console.error("Error destrabando app:", err);
+            window.location.href = window.location.origin + window.location.pathname + '?t=' + Date.now() + window.location.hash;
+        }
+    };
+
     window.handleGoogleLogin = (event) => {
+        if (event) event.preventDefault();
         const btn = (event && event.currentTarget) ? event.currentTarget : document.querySelector('button[onclick*="handleGoogleLogin"]');
+        
         if (btn) {
             btn.disabled = true;
-            btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-slate-900 mx-auto"></div>';
+            btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';
         }
 
         store.loginWithGoogle()
-            .then(() => {
+            .then((userCred) => {
+                console.log("✅ Google Auth Completed:", userCred?.user?.email);
                 showToast("¡Bienvenido!");
+                if (window.router) {
+                    window.router.navigateTo('#agenda');
+                }
             })
             .catch(e => {
                 if (btn) {
                     btn.disabled = false;
-                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-6 h-6 inline mr-2">Continuar con Google';
+                    btn.innerHTML = '<img src="https://www.svgrepo.com/show/475656/google-color.svg" class="w-5 h-5 inline mr-2">Continuar con Google';
                 }
-                const msg = e ? (e.message || String(e)) : '';
-                if (msg.includes('popup-blocked') || msg.includes('popup-closed')) {
-                    showToast("⚠️ El navegador bloqueó la ventana de Google. Ingresá tu mail abajo.");
-                } else if (msg.includes('unauthorized-domain')) {
-                    showToast("⚠️ Usá el ingreso por Email/Legajo abajo para acceder directo.");
-                } else {
-                    showToast("⚠️ " + (msg || "Ingresá con tu email y clave abajo."));
+                console.warn("Google auth notice:", e);
+                const msg = e ? (e.message || e.toString()) : '';
+                if (!msg.includes('closed-by-user')) {
+                    showToast("⚠️ " + (msg || "Error al conectar con Google. Reintentá o ingresá tu email abajo."));
                 }
             });
     };
 
+    window.handleRecoverByEmail = (e) => {
+        if (e) e.preventDefault();
+        const email = document.getElementById('email')?.value;
+        if (!email) {
+            showToast("⚠️ Ingresá tu Email o Legajo en el campo de arriba.");
+            document.getElementById('email')?.focus();
+            return;
+        }
+        store.loginByEmail(email);
+    };
+
     window.handleLogin = (e) => {
         e.preventDefault();
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        store.login(email, password);
+        const email = document.getElementById('email')?.value;
+        const password = document.getElementById('password')?.value;
+        if (!email || !email.trim()) {
+            showToast("⚠️ Por favor ingresá tu Email o Legajo.");
+            return;
+        }
+        if (!password || !password.trim()) {
+            store.loginByEmail(email);
+        } else {
+            store.login(email, password);
+        }
     }
 }
 

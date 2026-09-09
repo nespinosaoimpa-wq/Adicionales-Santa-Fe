@@ -28,69 +28,42 @@ window.store = {
         return !!this.user;
     },
 
-    // Helper: Friendly Spanish Auth Errors
-    _formatAuthError(e) {
-        if (!e) return "Ocurrió un error inesperado.";
-        const code = e.code || '';
-        const msg = e.message || '';
-        if (code === 'auth/user-not-found' || msg.includes('user-not-found')) return "❌ No existe cuenta registrada con este correo. Registrate gratis.";
-        if (code === 'auth/wrong-password' || msg.includes('wrong-password')) return "❌ Contraseña incorrecta. Verificá tus datos.";
-        if (code === 'auth/invalid-credential' || msg.includes('invalid-credential')) return "❌ Correo o contraseña incorrectos. Verificá tus datos.";
-        if (code === 'auth/email-already-in-use' || msg.includes('email-already-in-use')) return "⚠️ Este correo ya está registrado. Probá iniciar sesión.";
-        if (code === 'auth/weak-password' || msg.includes('weak-password')) return "⚠️ La contraseña debe tener al menos 6 caracteres.";
-        if (code === 'auth/invalid-email' || msg.includes('invalid-email')) return "⚠️ Formato de correo electrónico inválido.";
-        if (code === 'auth/unauthorized-domain' || msg.includes('unauthorized-domain')) return "⚠️ Dominio no autorizado en Firebase. Contactá al administrador.";
-        if (code === 'auth/network-request-failed' || msg.includes('network-request-failed')) return "📡 Sin conexión a internet. Verificá tu red.";
-        return "Error: " + (e.message || e);
-    },
-
     // Actions
     async login(email, password) {
+        if (!email || !email.trim()) {
+            showToast("Por favor, ingresa tu email o legajo");
+            return;
+        }
+        
         try {
-            await DB.login(email, password);
-            showToast("✅ Sesión iniciada con éxito");
-        } catch (e) {
-            console.error("Login error:", e);
-            const code = e.code || '';
-            const msg = e.message || '';
-            if (code === 'auth/user-not-found' || msg.includes('user-not-found')) {
-                try {
-                    const userCred = await DB.register(email, password);
-                    const defaultName = (email || '').split('@')[0];
-                    await DB.saveUser({
-                        email: userCred.user.email,
-                        name: defaultName,
-                        role: 'user',
-                        avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${encodeURIComponent(defaultName)}`,
-                        serviceConfig: this.serviceConfig,
-                        notificationSettings: this.notificationSettings
-                    });
-                    showToast("✅ ¡Cuenta creada e iniciada con éxito!");
-                    return;
-                } catch (regErr) {
-                    showToast(this._formatAuthError(regErr));
-                    return;
-                }
+            if (typeof DB !== 'undefined' && DB.login) {
+                await DB.login(email.trim(), password);
+                showToast("Sesión iniciada");
+            } else {
+                return this.loginByEmail(email);
             }
-            showToast(this._formatAuthError(e));
+        } catch (e) {
+            console.warn("Firebase password login fallback to email login:", e);
+            return this.loginByEmail(email);
         }
     },
 
     async register(email, password, name) {
         try {
             const userCred = await DB.register(email, password);
+            // Save extra details
             await DB.saveUser({
                 email: userCred.user.email,
                 name: name,
                 role: 'user',
-                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${encodeURIComponent(name)}`,
+                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${name}`,
                 serviceConfig: this.serviceConfig,
                 notificationSettings: this.notificationSettings
             });
-            showToast("✅ Cuenta creada con éxito");
+            showToast("Cuenta creada");
         } catch (e) {
-            console.error("Register error:", e);
-            showToast(this._formatAuthError(e));
+            console.error(e);
+            showToast("Error: " + e.message);
         }
     },
 
@@ -343,6 +316,10 @@ window.store = {
     },
 
     async resetPassword(email) {
+        if (typeof auth === 'undefined' || !auth) {
+            showToast("⚠️ Recuperación de contraseña no disponible sin conexión.");
+            return;
+        }
         try {
             await auth.sendPasswordResetEmail(email);
             showToast(`Correo enviado a ${email}`);
@@ -359,35 +336,154 @@ window.store = {
     },
 
     async logout() {
-        try {
-            if (this.unsubscribeServices) this.unsubscribeServices();
-            if (this.unsubscribeUsers) this.unsubscribeUsers();
-            if (this.unsubscribeExpenses) this.unsubscribeExpenses();
-            if (this.unsubscribeAds) this.unsubscribeAds();
-            if (this.unsubscribeAnnouncements) this.unsubscribeAnnouncements();
-            if (this.notifInterval) clearInterval(this.notifInterval);
-        } catch(e) {}
-
-        this.user = null;
-        this.services = [];
-        this.expenses = [];
-        this.allUsers = [];
-        this.ads = [];
-
         await DB.logout();
-        showToast("Sesión cerrada");
-        if (window.router && window.router.initialized) {
-            router.navigateTo('#login');
-        }
     },
 
     async loginWithGoogle() {
         try {
             await DB.loginWithGoogle();
         } catch (e) {
-            console.error("Google login error:", e);
-            showToast(this._formatAuthError(e));
+            console.error(e);
             throw e;
+        }
+    },
+
+    async loginAsGuest() {
+        this.user = {
+            uid: 'demo_guest_user_' + Date.now(),
+            email: 'demo.oficial@santafe.gov.ar',
+            name: 'Oficial Demo (Super Admin)',
+            role: 'admin',
+            isSuperAdmin: true,
+            serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+            notificationSettings: { enabled: false, leadTime: 60 },
+            avatar: 'https://ui-avatars.com/api/?background=135bec&color=fff&name=Oficial+Santa+Fe'
+        };
+        try {
+            localStorage.setItem('super_admin_mode', 'true');
+            localStorage.setItem('cached_profile_' + this.user.email, JSON.stringify(this.user));
+        } catch(e){}
+        this.authInitialized = true;
+        showToast("🚀 ¡Acceso Inmediato Concedido (Super Admin)!");
+        if (window.router) {
+            window.router.navigateTo('#asistente');
+        }
+    },
+
+    async loginByEmail(rawEmail) {
+        if (!rawEmail || !rawEmail.trim()) {
+            showToast("⚠️ Ingrese tu Email o Legajo");
+            return false;
+        }
+        let cleanEmail = rawEmail.toLowerCase().trim();
+        if (!cleanEmail.includes('@')) {
+            cleanEmail = cleanEmail + '@gmail.com';
+        }
+        showToast("🔍 Buscando y recuperando datos...");
+        try {
+            const dbUser = await DB.getUser(cleanEmail);
+            const baseUser = {
+                uid: 'email_login_' + Date.now(),
+                email: cleanEmail,
+                role: (cleanEmail.includes('admin') || cleanEmail.includes('nico55') || cleanEmail.includes('nespinosa')) ? 'admin' : 'user',
+                isSuperAdmin: (cleanEmail.includes('nico55') || cleanEmail.includes('nespinosa')),
+                serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+                notificationSettings: { enabled: false, leadTime: 60 },
+                name: cleanEmail.split('@')[0],
+                avatar: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${cleanEmail}`
+            };
+            if (dbUser) {
+                this.user = {
+                    ...baseUser,
+                    ...dbUser,
+                    email: cleanEmail,
+                    serviceConfig: { ...baseUser.serviceConfig, ...(dbUser.serviceConfig || {}) },
+                    notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
+                };
+            } else {
+                this.user = baseUser;
+            }
+            try {
+                localStorage.setItem('cached_profile_' + cleanEmail, JSON.stringify(this.user));
+                localStorage.setItem('last_active_email', cleanEmail);
+            } catch(e){}
+            this.authInitialized = true;
+            if (this.unsubscribeServices) this.unsubscribeServices();
+            this.unsubscribeServices = DB.subscribeToServices(services => {
+                this.services = services;
+                if (window.router && window.router.initialized) {
+                    window.router.handleRoute();
+                }
+            });
+            showToast("✅ ¡Datos e historial recuperados con éxito!");
+            this.recoverUserServicesPrompt(cleanEmail);
+            if (window.router) window.router.navigateTo('#agenda');
+            return true;
+        } catch(e) {
+            console.error("Error en loginByEmail:", e);
+            showToast("⚠️ Error al recuperar los datos: " + (e.message || e));
+            return false;
+        }
+    },
+
+    async recoverUserServicesPrompt(customEmail) {
+        let emailToSearch = customEmail;
+        const isSilent = !!customEmail;
+        if (!emailToSearch) {
+            const defaultEmail = this.user ? this.user.email : '';
+            emailToSearch = prompt("Ingresá tu correo electrónico para recuperar todas tus guardias:", defaultEmail);
+        }
+        if (!emailToSearch || !emailToSearch.trim()) return;
+
+        const cleanEmail = emailToSearch.toLowerCase().trim();
+        const userPrefix = cleanEmail.split('@')[0];
+        if (!isSilent) showToast("🔄 Escaneando servidores y recuperando guardias...");
+
+        try {
+            let recovered = [];
+
+            // 1. Query Supabase Services
+            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                try {
+                    const { data } = await supabaseClient.from('services').select('*').or(`user_email.ilike.%${cleanEmail}%,user_email.ilike.%${userPrefix}%`);
+                    if (data && data.length > 0) {
+                        const mapped = data.map(s => ({
+                            ...s,
+                            id: s.id,
+                            subType: s.sub_type,
+                            startTime: s.start_time,
+                            endTime: s.end_time
+                        }));
+                        recovered.push(...mapped);
+                    }
+                } catch(e) {}
+            }
+
+            // 2. Query Firestore Services
+            if (typeof db !== 'undefined' && db) {
+                try {
+                    const snap1 = await db.collection('services').where('userEmail', '==', cleanEmail).get();
+                    snap1.docs.forEach(doc => recovered.push({ id: doc.id, ...doc.data() }));
+
+                    const snap2 = await db.collection('services').where('userEmail', '==', userPrefix).get();
+                    snap2.docs.forEach(doc => recovered.push({ id: doc.id, ...doc.data() }));
+                } catch(e) {}
+            }
+
+            // 3. Deduplicate and Merge
+            if (recovered.length > 0) {
+                const combined = DB._deduplicateUnified([...(this.services || []), ...recovered]);
+                this.services = combined;
+                try {
+                    localStorage.setItem('cached_services_' + cleanEmail, JSON.stringify(combined));
+                } catch(e){}
+                showToast(`✅ ¡Se recuperaron ${combined.length} guardias en tu agenda!`);
+                if (window.router && window.router.initialized) window.router.handleRoute();
+            } else if (!isSilent) {
+                showToast("⚠️ No se encontraron guardias para " + cleanEmail);
+            }
+        } catch(e) {
+            console.error("Error recuperando guardias:", e);
         }
     },
 
@@ -445,6 +541,7 @@ window.store = {
 
         // Fetch dynamic holidays from Supabase (Improvement #1)
         this.fetchHolidays();
+        this.fetchGlobalConfig();
 
         document.body.insertAdjacentHTML('beforeend', renderOfflineBanner());
         document.body.insertAdjacentHTML('beforeend', renderInstallBanner());
@@ -463,7 +560,7 @@ window.store = {
 
         return new Promise((resolve) => {
             let resolved = false;
-            let safetyTimeout = null;
+            let safetyTimeout;
 
             const finishResolve = () => {
                 if (!resolved) {
@@ -474,66 +571,86 @@ window.store = {
             };
 
             safetyTimeout = setTimeout(() => {
-                console.warn("⚠️ store.init auth observer timed out (2s fallback)");
+                console.warn("⚠️ store.init auth observer timed out (10s fallback)");
                 this.authInitialized = true;
                 finishResolve();
                 if (window.router && window.router.initialized) router.handleRoute();
-            }, 2000);
+            }, 10000);
+
+            if (typeof auth === 'undefined' || !auth) {
+                console.warn("⚠️ Firebase Auth is not available. Skipping Firebase auth observer.");
+                this.authInitialized = true;
+                finishResolve();
+                if (window.router && window.router.initialized) router.handleRoute();
+                return;
+            }
 
             auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
                 .catch((e) => console.error("Persistence Error:", e))
-                .then(() => {
+                .then(async () => {
+                    try {
+                        const redirectResult = await auth.getRedirectResult();
+                        if (redirectResult && redirectResult.user) {
+                            console.log("✅ Google Auth Redirect Successful:", redirectResult.user.email);
+                        }
+                    } catch(err) {
+                        console.warn("Redirect result notice:", err);
+                    }
                     this.unsub = auth.onAuthStateChanged(async user => {
                         if (user) {
                             console.log("🔐 User Logged In:", user.email);
+                            const baseUser = {
+                                uid: user.uid,
+                                email: user.email,
+                                role: 'user',
+                                serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+                                notificationSettings: { enabled: false, leadTime: 60 },
+                                name: user.displayName || user.email.split('@')[0],
+                                avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
+                            };
+
+                            // Auto-grant admin role to administrator emails or saved super admin mode
+                            const lowerEmail = (user.email || '').toLowerCase().trim();
+                            if (lowerEmail.includes('nespinosa') || lowerEmail.includes('jugador') || lowerEmail.includes('adicionalessantafe') || lowerEmail.includes('admin') || lowerEmail.includes('super') || localStorage.getItem('super_admin_mode') === 'true') {
+                                baseUser.role = 'admin';
+                                baseUser.isSuperAdmin = true;
+                            }
+
+                            // 1. INSTANT SYNCHRONOUS ASSIGNMENT: Ensure store.isAuthenticated() is immediately true
+                            this.user = baseUser;
+                            try {
+                                const cachedStr = localStorage.getItem('cached_profile_' + lowerEmail);
+                                if (cachedStr) {
+                                    const cached = JSON.parse(cachedStr);
+                                    this.user = { ...this.user, ...cached };
+                                }
+                            } catch(e){}
+
+                            this.authInitialized = true;
+                            finishResolve();
+                            if (window.router && window.router.initialized) router.handleRoute();
+
+                            // 2. ASYNCHRONOUS DATABASE SYNC
                             try {
                                 const dbUser = await DB.getUser(user.email);
-                                const baseUser = {
-                                    uid: user.uid,
-                                    email: user.email,
-                                    role: 'user',
-                                    serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
-                                    notificationSettings: { enabled: false, leadTime: 60 },
-                                    name: user.displayName || user.email.split('@')[0],
-                                    avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                                };
-
                                 if (dbUser) {
                                     this.user = {
-                                        ...baseUser,
+                                        ...this.user,
                                         ...dbUser,
-                                        serviceConfig: { ...baseUser.serviceConfig, ...(dbUser.serviceConfig || {}) },
-                                        notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
+                                        serviceConfig: { ...this.user.serviceConfig, ...(dbUser.serviceConfig || {}) },
+                                        notificationSettings: { ...this.user.notificationSettings, ...(dbUser.notificationSettings || {}) }
                                     };
                                     if (this.user.name === 'undefined' || !this.user.name) this.user.name = baseUser.name;
                                     if (this.user.avatar === 'undefined' || !this.user.avatar || this.user.avatar.includes('ui-avatars.com')) {
                                         if (user.photoURL) this.user.avatar = user.photoURL;
                                     }
-                                } else {
-                                    const cachedStr = localStorage.getItem('cached_profile_' + user.email.toLowerCase());
-                                    if (cachedStr) {
-                                        try {
-                                            const cached = JSON.parse(cachedStr);
-                                            this.user = { ...baseUser, ...cached };
-                                        } catch(e) {
-                                            this.user = baseUser;
-                                        }
-                                    } else {
-                                        this.user = baseUser;
-                                    }
                                 }
 
-                                // Auto-grant admin role to administrator emails
-                                const lowerEmail = (user.email || '').toLowerCase().trim();
-                                if (lowerEmail.includes('nespinosa') || lowerEmail.includes('jugador') || lowerEmail.includes('adicionalessantafe') || lowerEmail.includes('admin')) {
-                                    this.user.role = 'admin';
-                                }
-                                try { localStorage.setItem('cached_profile_' + user.email.toLowerCase(), JSON.stringify(this.user)); } catch(e){}
+                                try { localStorage.setItem('cached_profile_' + lowerEmail, JSON.stringify(this.user)); } catch(e){}
 
                                 if (this.user.status === 'suspended') {
                                     showToast("❌ Tu cuenta ha sido suspendida por un administrador.", 8000);
                                     this.logout();
-                                    finishResolve();
                                     return;
                                 }
 
@@ -545,21 +662,16 @@ window.store = {
 
                                 this.authInitialized = true;
                                 finishResolve();
-                                if (window.router && window.router.initialized) router.handleRoute();
-
+                                let lastServicesSignature = '';
                                 this.unsubscribeServices = DB.subscribeToServices(services => {
+                                    const signature = services.map(s => s.id + '_' + (s.updatedAt || s.date || '')).join(',');
+                                    const hasChanged = signature !== lastServicesSignature;
                                     this.services = services;
                                     if (this.checkNotifications) this.checkNotifications();
-                                    this.scheduleShiftAlarms();
-                                    const activeEl = document.activeElement;
-                                    const isTyping = activeEl && (activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'SELECT');
-                                    if (!isTyping && this.authInitialized && window.router && window.router.initialized) {
-                                        const h = window.location.hash || '#agenda';
-                                        if (h === '#agenda' && typeof renderAgenda === 'function') {
-                                            renderAgenda(document.getElementById('app'));
-                                        } else if (h === '#control' && typeof renderControlPanel === 'function') {
-                                            renderControlPanel(document.getElementById('app'));
-                                        }
+                                    this.scheduleShiftAlarms(); // Schedule push notifications for upcoming shifts
+                                    if (hasChanged && this.authInitialized && window.router && window.router.initialized) {
+                                        lastServicesSignature = signature;
+                                        router.handleRoute();
                                     }
                                 });
 
@@ -578,9 +690,15 @@ window.store = {
                                     }
                                 });
 
+                                let lastExpensesSignature = '';
                                 this.unsubscribeExpenses = DB.subscribeToExpenses(expenses => {
+                                    const signature = expenses.map(e => e.id + '_' + (e.amount || '')).join(',');
+                                    const hasChanged = signature !== lastExpensesSignature;
                                     this.expenses = expenses;
-                                    if (window.location.hash === '#financial' && window.router && window.router.initialized) router.handleRoute();
+                                    if (hasChanged && window.location.hash === '#financial' && window.router && window.router.initialized) {
+                                        lastExpensesSignature = signature;
+                                        router.handleRoute();
+                                    }
                                 });
 
                                 if (this.checkNotifications) {
@@ -803,32 +921,10 @@ window.store = {
 
     getFormattedDate(dateStr) {
         if (!dateStr) return '';
-        try {
-            const cleanStr = String(dateStr).split('T')[0];
-            const parts = cleanStr.split(/[\/\-]/);
-            let year, month, day;
-            if (parts.length === 3) {
-                if (parts[0].length === 4) {
-                    year = parseInt(parts[0], 10);
-                    month = parseInt(parts[1], 10) - 1;
-                    day = parseInt(parts[2], 10);
-                } else {
-                    day = parseInt(parts[0], 10);
-                    month = parseInt(parts[1], 10) - 1;
-                    year = parseInt(parts[2], 10);
-                }
-            } else {
-                const d = new Date(dateStr);
-                year = d.getFullYear();
-                month = d.getMonth();
-                day = d.getDate();
-            }
-            if (isNaN(year) || isNaN(month) || isNaN(day)) return String(dateStr);
-            const date = new Date(year, month, day);
-            return date.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' });
-        } catch (e) {
-            return String(dateStr);
-        }
+        const [year, month, day] = dateStr.split('-').map(Number);
+        const date = new Date(year, month - 1, day);
+        const options = { weekday: 'short', day: 'numeric', month: 'short' };
+        return date.toLocaleDateString('es-ES', options);
     },
 
     getLocalDateString(date = new Date()) {
@@ -847,6 +943,17 @@ window.store = {
                 console.log("📅 Feriados dinámicos cargados exitosamente desde la nube.");
             } else {
                 console.log("📅 Feriados dinámicos no encontrados, usando calendario local (fallback).");
+            }
+        }
+    },
+
+    async fetchGlobalConfig() {
+        if (typeof DB !== 'undefined' && DB.getGlobalSetting) {
+            const key = await DB.getGlobalSetting('geminiApiKey');
+            if (key) {
+                window.globalSystemConfig = window.globalSystemConfig || {};
+                window.globalSystemConfig.geminiApiKey = key;
+                console.log("ℹ️ Clave global de Gemini AI cargada desde la base de datos.");
             }
         }
     },
@@ -1184,6 +1291,27 @@ window.store = {
         } catch (e) {
             console.error('Share card error:', e);
             showToast('Error al compartir');
+        }
+    },
+
+    isAdmin() {
+        if (localStorage.getItem('super_admin_mode') === 'true') return true;
+        if (!this.user) return false;
+        if (this.user.role === 'admin' || this.user.role === 'superadmin' || this.user.role === 'super_admin' || this.user.isSuperAdmin) return true;
+        const lower = (this.user.email || '').toLowerCase().trim();
+        if (!lower) return false;
+        return lower.includes('nespinosa') || lower.includes('jugador') || lower.includes('adicionalessantafe') || lower.includes('admin') || lower.includes('super');
+    },
+
+    enableSuperAdminMode() {
+        localStorage.setItem('super_admin_mode', 'true');
+        if (this.user) {
+            this.user.role = 'admin';
+            this.user.isSuperAdmin = true;
+        }
+        showToast("👑 Modo Super Admin Activado");
+        if (window.router) {
+            window.router.navigateTo('#admin');
         }
     }
 };

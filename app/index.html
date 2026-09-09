@@ -76,59 +76,72 @@
         } catch(e) {}
 
         // Dynamic PWA Cache Buster & Auto-Updater
-        const CURRENT_VERSION = 'v536.0.0';
+        const CURRENT_VERSION = 'v535.10.52';
         try {
-            if (!sessionStorage.getItem('version_check_done')) {
-                sessionStorage.setItem('version_check_done', 'true');
-                fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data && data.version && data.version !== CURRENT_VERSION) {
-                            console.warn('⚠️ Nueva versión detectada:', data.version, '. Actualizando cache...');
-                            if ('serviceWorker' in navigator) {
-                                navigator.serviceWorker.getRegistrations().then(registrations => {
-                                    for (let reg of registrations) reg.unregister().catch(function(){});
-                                    if ('caches' in window) caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))));
-                                }).catch(() => {});
-                            }
+            fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
+                .then(res => res.json())
+                .then(data => {
+                    const reloadKey = 'reloaded_v_' + (data ? data.version : '');
+                    if (data && data.version && data.version !== CURRENT_VERSION && !sessionStorage.getItem(reloadKey)) {
+                        sessionStorage.setItem(reloadKey, 'true');
+                        console.warn('⚠️ Nueva versión detectada:', data.version, '. Limpiando caché y actualizando...');
+                        if ('serviceWorker' in navigator) {
+                            navigator.serviceWorker.getRegistrations().then(registrations => {
+                                for (let reg of registrations) {
+                                    reg.unregister().catch(function(){});
+                                }
+                                if ('caches' in window) {
+                                    caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))))
+                                        .then(() => { window.location.reload(true); })
+                                        .catch(() => { window.location.reload(true); });
+                                } else {
+                                    window.location.reload(true);
+                                }
+                            }).catch(() => { window.location.reload(true); });
+                        } else {
+                            window.location.reload(true);
                         }
-                    })
-                    .catch(err => console.log('Offline version check bypass:', err));
-            }
+                    }
+                })
+                .catch(err => console.log('Bypass de verificación rápida (offline o local):', err));
         } catch(e) {}
     </script>
 
     <!-- PWA Manifest -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="assets/icon-512.png">
+    <link rel="manifest" href="manifest.json?v=535.10.52">
 
-    <!-- Skip legacy registration here as it's handled below -->
+    <!-- Tailwind Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css?v=535.10.52">
 
-    <!-- Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet">
+    <!-- Google Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+
+    <!-- Supabase JS Client v2 -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js?v=535.10.52"></script>
+
+    <!-- Firebase SDK (Modular Core v10.8.0 Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+    <script src="firebase-config.js?v=535.10.52"></script>
 
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
-            darkMode: "class",
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        "primary": "#5599e0",
+                        primary: "#135bec",
                         "background-light": "#f5f6f8",
-                        "background-dark": "#101622",
-                        "service-public": "#10b981",
-                        "service-private": "#3b82f6",
-                        "service-ospe": "#f59e0b",
-                        "accent-cyan": "#74ACDF",
-                        "accent-warning": "#F6B426"
+                        "background-dark": "#0a0c12",
+                        "card-dark": "#101622"
                     },
                     fontFamily: {
                         "display": ["Public Sans", "Inter", "sans-serif"],
@@ -148,9 +161,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-8-0.js?v=535.8.0')
+                navigator.serviceWorker.register('./sw-v535-10-52.js?v=535.10.52')
                     .then(registration => {
-                        console.log('ServiceWorker v535.8.0 registrado con éxito: ', registration.scope);
+                        console.log('ServiceWorker v535.10.52 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {
@@ -227,52 +240,109 @@
 
     <div class="bg-watermark-app"></div>
 
-    <!-- Main App Container -->
-    <div id="app"
-        class="flex-1 w-full max-w-md mx-auto relative bg-white dark:bg-background-dark shadow-2xl min-h-screen">
-        <!-- Argentine Flag Decorative Top Bar -->
-        <div class="w-full h-2 flex flex-col shrink-0 relative z-[200]">
-            <div class="h-[30%] bg-[#74ACDF]"></div>
-            <div class="h-[40%] bg-white flex items-center justify-center relative">
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <svg class="w-4 h-4 text-[#F6B426] animate-pulse" viewBox="0 0 24 24" fill="currentColor">
-                        <circle cx="12" cy="12" r="5" />
-                        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" />
-                    </svg>
+    <div id="app" class="min-h-screen flex flex-col">
+        <!-- Main Loading State -->
+        <div id="initial-loader" class="fixed inset-0 z-50 bg-background-dark flex flex-col items-center justify-center">
+            <div class="relative w-24 h-24 mb-4">
+                <div class="absolute inset-0 rounded-full border-4 border-primary/20 animate-ping"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-t-primary border-r-transparent border-b-transparent border-l-transparent animate-spin"></div>
+                <div class="absolute inset-2 rounded-full border-4 border-blue-400/20"></div>
+                <div class="absolute inset-2 rounded-full border-4 border-b-blue-400 border-t-transparent border-r-transparent border-l-transparent animate-spin" style="animation-direction: reverse; animation-duration: 1.5s;"></div>
+                <div class="absolute inset-0 flex items-center justify-center font-extrabold text-white text-xl tracking-tighter">
+                    ASF
                 </div>
             </div>
-            <div class="h-[30%] bg-[#74ACDF]"></div>
+            <div class="text-center">
+                <p class="text-white font-bold text-lg tracking-wide mb-1">Adicionales Santa Fe</p>
+                <p class="text-slate-400 text-xs font-mono">Cargando la suite de servicios...</p>
+            </div>
         </div>
-        <div id="global-announcement-container" class="sticky top-0 z-[100] w-full">
-            <div id="mundial-banner"
-                class="w-full bg-gradient-to-r from-[#74ACDF] via-white to-[#74ACDF] text-slate-900 px-4 py-2.5 flex flex-col items-center justify-center relative border-b-2 border-[#F6B426] shadow-[0_4px_15px_rgba(246,180,38,0.5)] animate-slide-down">
-                <div class="w-full flex flex-col items-center justify-center text-center gap-1 select-none">
-                    <!-- Estrellas del Sueño -->
-                    <div class="flex items-center justify-center gap-1 text-sm">
-                        <span class="drop-shadow-[0_1.5px_2px_rgba(246,180,38,0.8)]">⭐️⭐️⭐️</span>
-                        <span class="opacity-50 text-slate-400 font-bold ml-1 drop-shadow-[0_0_2px_rgba(150,150,150,0.5)]" title="La Cuarta Estrella">((⭐️))</span>
-                    </div>
-                    <!-- Mensaje de Hype -->
-                    <p class="text-[10px] sm:text-xs font-black tracking-tight leading-snug uppercase max-w-[95%]">
-                        ⚽ ¡DOMINGO DE FINAL MUNDIALISTA! 🇦🇷 ARGENTINA vs ESPAÑA 🇪🇸 | ¡Alentando a la Selección en busca de la Cuarta Estrella! 🏆✨
-                    </p>
+
+        <div id="pwa-update-toast" class="fixed bottom-20 left-4 right-4 z-50 bg-primary text-white p-4 rounded-xl shadow-2xl flex items-center justify-between transition-all duration-300 transform translate-y-32 opacity-0 pointer-events-none">
+            <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined animate-spin">refresh</span>
+                <div>
+                    <p class="font-bold text-sm">¡Nueva versión disponible!</p>
+                    <p class="text-xs text-blue-100">Actualizando automáticamente...</p>
                 </div>
-                <!-- Close Button -->
-                <button onclick="localStorage.setItem('banner_mundial_final_dismissed', 'true'); this.closest('#mundial-banner').remove();"
-                    class="absolute right-1 top-1 p-0.5 bg-black/5 hover:bg-black/10 transition-colors rounded-full flex items-center justify-center text-slate-600">
-                    <span class="material-symbols-outlined text-[14px]">close</span>
+            </div>
+            <button onclick="window.location.reload(true)" class="bg-white text-primary text-xs font-bold px-3 py-1.5 rounded-lg shadow hover:bg-blue-50">
+                Actualizar
+            </button>
+        </div>
+
+        <div id="offline-banner" class="hidden bg-amber-500 text-slate-950 text-xs font-bold px-4 py-2 text-center flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined text-sm">wifi_off</span>
+            Modo fuera de línea - Trabajando con datos guardados localmente
+        </div>
+
+        <div id="pwa-install-toast" class="hidden fixed bottom-6 left-4 right-4 z-50 bg-slate-900/90 backdrop-blur-md border border-slate-700 text-white p-4 rounded-2xl shadow-2xl flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-primary/20 p-2 rounded-xl text-primary">
+                    <span class="material-symbols-outlined">install_mobile</span>
+                </div>
+                <div>
+                    <p class="font-bold text-sm">Instalar Aplicación</p>
+                    <p class="text-xs text-slate-400">Instalá la app para un acceso más rápido</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="document.getElementById('pwa-install-toast').classList.add('hidden')" class="text-xs text-slate-400 hover:text-white px-2 py-1">
+                    Ahora no
+                </button>
+                <button id="pwa-install-btn" class="bg-primary hover:bg-primary/90 text-white text-xs font-bold px-3 py-1.5 rounded-xl shadow-lg shadow-primary/30">
+                    Instalar
                 </button>
             </div>
-            <script>
-                if (localStorage.getItem('banner_mundial_final_dismissed') === 'true') {
-                    document.getElementById('mundial-banner')?.remove();
-                }
-            </script>
         </div>
-        <div class="flex flex-col items-center justify-center h-screen space-y-4">
-            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            <p class="text-slate-500 animate-pulse">Cargando Adicionales Santa Fe v535.8.0...</p>
+
+        <main id="main-content" class="flex-1 pb-16">
+            <!-- Dynamic view content renders here -->
+        </main>
+    </div>
+
+    <!-- Script de splash screen temporal fallback -->
+    <div id="fallback-splash" class="fixed inset-0 bg-[#0a0c12] z-[9999] flex flex-col justify-between p-6 pointer-events-none transition-opacity duration-500 opacity-0 hidden">
+        <div class="flex justify-between items-center text-xs text-slate-500 font-mono">
+            <span>SANTA FE POLICÍA</span>
+            <span>V535.10.19</span>
         </div>
+        <div class="flex flex-col items-center text-center">
+            <div class="w-20 h-20 bg-primary/10 rounded-2xl border border-primary/20 flex items-center justify-center text-primary mb-4 shadow-xl shadow-primary/5">
+                <span class="material-symbols-outlined text-4xl">local_police</span>
+            </div>
+            <h1 class="text-xl font-bold text-white tracking-wide">ADICIONALES SANTA FE</h1>
+            <p class="text-xs text-slate-400 mt-1">Asistente Operativo Policial</p>
+        </div>
+        <div class="text-center text-[10px] text-slate-600 font-mono">
+            CARGANDO MÓDULOS DE AUTENTICACIÓN Y BASE DE DATOS...
+        </div>
+    </div>
+
+    <!-- Modal Container Global -->
+    <div id="modal-container" class="relative z-50"></div>
+
+    <div id="modal-backup" class="relative z-50"></div>
+
+    <!-- Escudo Policial Argentina de Fondo (Marca de Agua) -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.03] dark:opacity-[0.05]">
+        <div class="absolute -right-20 -bottom-20 w-96 h-96 rounded-full border-[16px] border-slate-500 flex items-center justify-center">
+            <div class="w-80 h-80 rounded-full border-[8px] border-slate-500 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[200px] text-slate-500">local_police</span>
+            </div>
+        </div>
+        <div class="absolute -left-20 -top-20 w-80 h-80 rounded-full border-[12px] border-slate-500 flex items-center justify-center">
+            <span class="material-symbols-outlined text-[160px] text-slate-500">shield</span>
+        </div>
+    </div>
+
+    <!-- Watermark / Bandera de Santa Fe (Sutil Bottom Bar) -->
+    <div class="fixed bottom-0 left-0 right-0 h-1 z-40 flex">
+        <div class="w-1/3 bg-[#74ACDF]"></div>
+        <div class="w-1/3 bg-white flex items-center justify-center">
+            <div class="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
+        </div>
+        <div class="w-1/3 bg-[#74ACDF]"></div>
     </div>
 
     <!-- External Libs -->
@@ -280,61 +350,43 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <!-- Firebase SDKs (Legacy & Auth) -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
-
-    <!-- Supabase SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <!-- Application Logic -->
-    <script src="firebase-config.js?v=535.8.0" defer></script>
-    <script src="supabase-config.js?v=535.8.0" defer></script>
-    <script src="db-v211.js?v=535.8.0" defer></script>
-    <script src="js/utils.js?v=535.9.0" defer></script>
-    <script src="js/utils/gemini_api.js?v=535.9.0" defer></script>
-    <script src="js/components.js?v=535.9.0" defer></script>
-    <script src="js/store.js?v=535.8.0" defer></script>
-    <script src="js/router.js?v=535.8.0" defer></script>
-    <script src="js/data/directory.js?v=535.8.0" defer></script>
-    <script src="js/data/resources.js?v=535.8.0" defer></script>
-    <script src="js/data/academy_data.js?v=535.8.0" defer></script>
-    <script src="js/views/auth.js?v=535.8.0" defer></script>
+    <script src="db-v211.js?v=535.10.52" defer></script>
+    <script src="js/utils.js?v=535.10.52" defer></script>
+    <script src="js/components.js?v=535.10.52" defer></script>
+    <script src="js/store.js?v=535.10.52" defer></script>
+    <script src="js/router.js?v=535.10.52" defer></script>
+    <script src="js/data/directory.js?v=535.10.52" defer></script>
+    <script src="js/data/resources.js?v=535.10.52" defer></script>
+    <script src="js/data/academy_data.js?v=535.10.52" defer></script>
+    <script src="js/views/auth.js?v=535.10.52" defer></script>
 
-    <script src="js/views/legal.js?v=535.8.0" defer></script>
-    <script src="js/views/agenda.js?v=535.8.0" defer></script>
-    <script src="js/views/register.js?v=535.8.0" defer></script>
-    <script src="js/views/control_panel.js?v=535.8.0" defer></script>
-    <script src="js/views/financial.js?v=535.8.0" defer></script>
-    <script src="js/views/info_guia.js?v=535.8.0" defer></script>
-    <script src="js/views/profile.js?v=535.8.0" defer></script>
+    <script src="js/views/legal.js?v=535.10.52" defer></script>
+    <script src="js/views/agenda.js?v=535.10.52" defer></script>
+    <script src="js/views/register.js?v=535.10.52" defer></script>
+    <script src="js/views/control_panel.js?v=535.10.52" defer></script>
+    <script src="js/views/financial.js?v=535.10.52" defer></script>
+    <script src="js/views/info_guia.js?v=535.10.52" defer></script>
+    <script src="js/views/profile.js?v=535.10.52" defer></script>
 
-    <script src="js/views/stats.js?v=535.8.0" defer></script>
-    <script src="js/views/history.js?v=535.8.0" defer></script>
-    <script src="js/views/service_details.js?v=535.8.0" defer></script>
-    <script src="js/views/asistente.js?v=535.8.0" defer></script>
+    <script src="js/views/stats.js?v=535.10.52" defer></script>
+    <script src="js/views/history.js?v=535.10.52" defer></script>
+    <script src="js/views/service_details.js?v=535.10.52" defer></script>
+    <script src="js/views/asistente.js?v=535.10.52" defer></script>
 
     <!-- ── Módulos Asistente Operativo Policial PRO ── -->
-    <script src="js/views/actas.js?v=535.8.0" defer></script>
-    <script src="js/views/intervenciones.js?v=535.8.0" defer></script>
-    <script src="js/views/procedimiento.js?v=535.8.0" defer></script>
-    <script src="js/views/archivos.js?v=535.8.0" defer></script>
-    <script src="js/views/auditoria.js?v=535.8.0" defer></script>
-    <script src="js/views/iapos.js?v=535.8.0" defer></script>
-    <script src="js/views/academia.js?v=535.8.0" defer></script>
+    <script src="js/views/actas.js?v=535.10.52" defer></script>
+    <script src="js/views/intervenciones.js?v=535.10.52" defer></script>
+    <script src="js/views/procedimiento.js?v=535.10.52" defer></script>
+    <script src="js/views/archivos.js?v=535.10.52" defer></script>
+    <script src="js/views/auditoria.js?v=535.10.52" defer></script>
+    <script src="js/views/iapos.js?v=535.10.52" defer></script>
+    <script src="js/views/academia.js?v=535.10.52" defer></script>
 
-    <script src="js/views/admin.js?v=535.8.0" defer></script>
-    <script src="js/views/diagnostics.js?v=535.8.0" defer></script>
-    <script src="js/views/onboarding.js?v=535.8.0" defer></script>
-    <script src="app-v211.js?v=535.8.0" defer></script>
-
-
-
-
-
-
+    <script src="js/views/admin.js?v=535.10.52" defer></script>
+    <script src="js/views/diagnostics.js?v=535.10.52" defer></script>
+    <script src="js/views/onboarding.js?v=535.10.52" defer></script>
+    <script src="app-v211.js?v=535.10.52" defer></script>
 
 
     <!-- Cookie Consent Banner -->

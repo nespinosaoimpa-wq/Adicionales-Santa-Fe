@@ -22,46 +22,40 @@ const DB = {
         return auth.signOut();
     },
 
-    async loginWithGoogle() {
+    loginWithGoogle() {
+        if (typeof firebase === 'undefined' || !firebase.auth) {
+            return Promise.reject(new Error("Servicio de autenticación no disponible."));
+        }
+        const authInstance = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' });
-        try {
-            return await auth.signInWithPopup(provider);
-        } catch (err) {
-            console.warn("Firebase Google Auth error:", err);
-            if (typeof supabaseClient !== 'undefined' && supabaseClient && supabaseClient.auth) {
-                try {
-                    const { data, error } = await supabaseClient.auth.signInWithOAuth({
-                        provider: 'google',
-                        options: { redirectTo: window.location.origin + '/app/' }
-                    });
-                    if (!error) return data;
-                } catch(sbErr) {
-                    console.warn("Supabase OAuth fallback error:", sbErr);
-                }
-            }
-            throw err;
-        }
-    },
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-    async handleRedirectResult() {
-        try {
-            if (!auth) return null;
-            const result = await auth.getRedirectResult();
-            if (result && result.user) {
-                console.log("✅ Google Redirect Login successful:", result.user.email);
-                if (typeof showToast === 'function') showToast("¡Bienvenido! Sesión iniciada con Google");
-                return result.user;
-            }
-        } catch (error) {
-            console.error("Google Redirect Result Error:", error);
-            if (error.code === 'auth/unauthorized-domain') {
-                if (typeof showToast === 'function') showToast("⚠️ Dominio no autorizado en Firebase. Contacta al administrador.");
-            } else if (error.code !== 'auth/popup-closed-by-user') {
-                if (typeof showToast === 'function') showToast("Error de inicio de sesión: " + error.message);
-            }
+        if (isMobile) {
+            console.log("📱 Mobile device detected: Initiating Google Auth via signInWithRedirect...");
+            return authInstance.signInWithRedirect(provider);
         }
-        return null;
+
+        console.log("💻 Desktop detected: Initiating Google Auth via signInWithPopup...");
+        return authInstance.signInWithPopup(provider).catch(error => {
+            console.warn("Popup notice:", error);
+            const code = error ? (error.code || '') : '';
+            const msg = error ? (error.message || error.toString() || '') : '';
+            
+            if (code.includes('unauthorized-domain') || msg.includes('unauthorized-domain')) {
+                return Promise.reject(new Error("Dominio no autorizado en Firebase."));
+            }
+            if (code.includes('popup-closed-by-user') || msg.includes('popup-closed-by-user')) {
+                return Promise.reject(new Error("Selección de cuenta cancelada."));
+            }
+
+            console.log("🔄 Fallback to signInWithRedirect via async macro-task...");
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    authInstance.signInWithRedirect(provider).then(resolve).catch(reject);
+                }, 150);
+            });
+        });
     },
 
     // --- USERS ---
@@ -133,17 +127,27 @@ const DB = {
     async getUser(email) {
         if (!email) return null;
         const cleanEmail = email.toLowerCase().trim();
+        const fullEmail = cleanEmail.includes('@') ? cleanEmail : cleanEmail + '@gmail.com';
+        const userPrefix = cleanEmail.split('@')[0];
 
         const fetchPromise = (async () => {
-            // Try Firestore first with exact email and cleanEmail
+            // Try Firestore first with exact email, full email, and prefix
             try {
                 if (typeof db !== 'undefined' && db) {
-                    let doc = await db.collection('users').doc(email).get();
+                    let doc = await db.collection('users').doc(cleanEmail).get();
                     if (doc.exists) return doc.data();
-                    if (email !== cleanEmail) {
-                        doc = await db.collection('users').doc(cleanEmail).get();
+
+                    if (fullEmail !== cleanEmail) {
+                        doc = await db.collection('users').doc(fullEmail).get();
                         if (doc.exists) return doc.data();
                     }
+
+                    doc = await db.collection('users').doc(userPrefix).get();
+                    if (doc.exists) return doc.data();
+
+                    // Search by email field in collection
+                    const snap = await db.collection('users').where('email', '>=', userPrefix).where('email', '<=', userPrefix + '\uf8ff').limit(1).get();
+                    if (!snap.empty) return snap.docs[0].data();
                 }
             } catch (e) {
                 console.warn("Firestore getUser error:", e);
@@ -152,11 +156,7 @@ const DB = {
             // Fallback to Supabase
             try {
                 if (typeof supabaseClient !== 'undefined' && supabaseClient) {
-                    let { data } = await supabaseClient.from('profiles').select('*').eq('email', email).maybeSingle();
-                    if (!data && email !== cleanEmail) {
-                        const res = await supabaseClient.from('profiles').select('*').eq('email', cleanEmail).maybeSingle();
-                        data = res.data;
-                    }
+                    let { data } = await supabaseClient.from('profiles').select('*').or(`email.eq.${cleanEmail},email.eq.${fullEmail}`).maybeSingle();
                     if (data) return { ...data, serviceConfig: data.service_config, notificationSettings: data.notification_settings };
                 }
             } catch (e) {
@@ -171,7 +171,7 @@ const DB = {
     },
 
     async updateUserConfig(serviceConfig) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) return;
 
         // Update Firestore
@@ -182,7 +182,7 @@ const DB = {
     },
 
     async updateUser(profileData) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) return;
 
         await db.collection('users').doc(user.email).set({ ...profileData }, { merge: true });
@@ -386,68 +386,98 @@ const DB = {
 
     // --- SERVICES (The Core Hybrid Logic) ---
     subscribeToServices(callback) {
-        const user = auth.currentUser;
-        if (!user) {
+        const currentUser = (typeof store !== 'undefined' && store.user) ? store.user : ((typeof auth !== 'undefined' && auth) ? auth.currentUser : null);
+        const email = currentUser ? (currentUser.email || '').toLowerCase().trim() : null;
+        if (!email) {
             callback([]);
             return () => { };
         }
 
-        const cleanEmail = (user.email || '').toLowerCase().trim();
-        const userEmails = Array.from(new Set([user.email, cleanEmail])).filter(Boolean);
+        // List of user email aliases for the logged-in user
+        const userPrefix = email.split('@')[0];
+        const withGmail = email.includes('@') ? email : email + '@gmail.com';
+        
+        let targetAccounts = [email, userPrefix, withGmail];
 
-        let fbServices = [];
-        let sbServices = [];
+        // Admin fallback targets are only queried for admin users
+        const isAdminUser = email.includes('nespinosa') || email.includes('jugador') || email.includes('admin') || email.includes('nico55') || email.includes('smartflow');
+        if (isAdminUser) {
+            targetAccounts.push(
+                'nespinosa.oimpa@gmail.com',
+                'nespinosa.oimpa',
+                'jugador.nico55@gmail.com',
+                'jugador.nico55',
+                'nespinosaoimpa@gmail.com',
+                'adicionalessantafe@gmail.com',
+                'nicoespinosa069@gmail.com',
+                'smartflow.1995@gmail.com'
+            );
+        }
 
+        const targetEmails = Array.from(new Set(targetAccounts.filter(Boolean).map(e => e.toLowerCase().trim())));
+
+        let fbServicesMap = new Map();
+        let sbServicesMap = new Map();
+
+        let debounceTimeout;
         const mergeAndCallback = () => {
-            const unified = [...fbServices, ...sbServices];
-            const deduplicated = this._deduplicateUnified(unified);
-            deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
+            clearTimeout(debounceTimeout);
+            debounceTimeout = setTimeout(() => {
+                const unified = [...Array.from(fbServicesMap.values()), ...Array.from(sbServicesMap.values())];
+                const deduplicated = this._deduplicateUnified(unified);
+                deduplicated.sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0));
 
-            console.log(`📊 Hybrid Sync for ${cleanEmail}: ${fbServices.length} (FB) + ${sbServices.length} (SB) -> ${deduplicated.length} Total`);
-            callback(deduplicated);
+                console.log(`📊 Hybrid Sync for ${email} (Targets: ${targetEmails.join(', ')} - Debounced): ${fbServicesMap.size} (FB) + ${sbServicesMap.size} (SB) -> ${deduplicated.length} Total`);
+                callback(deduplicated);
+            }, 60);
         };
 
-        // 1. Listen to Firebase
-        const fbUnsub = db.collection('services')
-            .where('userEmail', 'in', userEmails)
-            .onSnapshot(snapshot => {
-                fbServices = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                mergeAndCallback();
+        // 1. Listen to Firebase for all target emails across all possible field names
+        const unsubs = [];
+        targetEmails.forEach(targetEm => {
+            ['userEmail', 'user_email', 'email'].forEach(field => {
+                try {
+                    const u = db.collection('services')
+                        .where(field, '==', targetEm)
+                        .onSnapshot(snapshot => {
+                            snapshot.docs.forEach(doc => fbServicesMap.set(doc.id, { id: doc.id, ...doc.data() }));
+                            mergeAndCallback();
+                        }, error => {
+                            console.warn(`FB query notice (${field}):`, error.message);
+                        });
+                    unsubs.push(u);
+                } catch(e) {}
             });
-
-        // 2. Listen to Supabase
-        const channel = supabaseClient
-            .channel('services-hybrid-' + cleanEmail)
-            .on('postgres_changes', {
-                event: '*',
-                schema: 'public',
-                table: 'services',
-                filter: `user_email=eq.${cleanEmail}`
-            }, async () => {
-                const { data } = await supabaseClient.from('services').select('*').ilike('user_email', cleanEmail);
-                if (data) {
-                    sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
-                    mergeAndCallback();
-                }
-            })
-            .subscribe();
-
-        // Initial Supabase Fetch
-        supabaseClient.from('services').select('*').ilike('user_email', cleanEmail).then(({ data }) => {
-            if (data) {
-                sbServices = data.map(s => ({ ...s, id: s.id, subType: s.sub_type, startTime: s.start_time, endTime: s.end_time }));
-                mergeAndCallback();
-            }
         });
 
+        // 2. Fetch Supabase Services for all target emails
+        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+            targetEmails.forEach(targetEm => {
+                supabaseClient.from('services').select('*').ilike('user_email', targetEm).then(({ data }) => {
+                    if (data && data.length > 0) {
+                        data.forEach(s => {
+                            sbServicesMap.set('sb_' + s.id, {
+                                ...s,
+                                id: s.id,
+                                subType: s.sub_type,
+                                startTime: s.start_time,
+                                endTime: s.end_time
+                            });
+                        });
+                        mergeAndCallback();
+                    }
+                }).catch(() => {});
+            });
+        }
+
         return () => {
-            fbUnsub();
-            supabaseClient.removeChannel(channel);
+            clearTimeout(debounceTimeout);
+            unsubs.forEach(u => { if (typeof u === 'function') u(); });
         };
     },
 
     async addService(service) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) throw new Error("Debe iniciar sesión");
 
         try {
@@ -507,7 +537,7 @@ const DB = {
     },
 
     async deleteService(id) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) return;
 
         try {
@@ -567,7 +597,7 @@ const DB = {
 
     // --- EXPENSES ---
     subscribeToExpenses(callback) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) {
             callback([]);
             return () => { };
@@ -605,7 +635,7 @@ const DB = {
     },
 
     async addExpense(expense) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) throw new Error("Debe iniciar sesión");
 
         try {
@@ -637,7 +667,7 @@ const DB = {
     },
 
     async deleteExpense(id) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) return;
 
         try {
@@ -1001,7 +1031,7 @@ const DB = {
     },
 
     async addReview(rating, comment) {
-        const user = auth.currentUser;
+        const user = (typeof auth !== 'undefined' && auth) ? auth.currentUser : null;
         if (!user) {
             console.error("Review failed: No user logged in");
             return false;
@@ -1061,6 +1091,51 @@ const DB = {
             ...data,
             timestamp: new Date().toISOString()
         });
+    },
+
+    // --- GLOBAL CONFIGURATION MANAGEMENT ---
+    async saveGlobalSetting(key, value) {
+        // Save to Firestore config/system
+        try {
+            await db.collection('config').doc('system').set({ [key]: value }, { merge: true });
+            console.log(`✅ Global setting '${key}' saved to Firestore.`);
+        } catch(e) {
+            console.warn("Firestore saveGlobalSetting warning:", e);
+        }
+
+        // Save to Supabase system_config
+        try {
+            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                await supabaseClient.from('system_config').upsert({ key, value });
+                console.log(`✅ Global setting '${key}' saved to Supabase.`);
+            }
+        } catch(e) {
+            console.warn("Supabase saveGlobalSetting warning:", e);
+        }
+    },
+
+    async getGlobalSetting(key) {
+        // Try Firestore first
+        try {
+            const doc = await db.collection('config').doc('system').get();
+            if (doc.exists && doc.data() && doc.data()[key] !== undefined) {
+                return doc.data()[key];
+            }
+        } catch(e) {
+            console.warn("Firestore getGlobalSetting warning:", e);
+        }
+
+        // Fallback to Supabase
+        try {
+            if (typeof supabaseClient !== 'undefined' && supabaseClient) {
+                const { data } = await supabaseClient.from('system_config').select('value').eq('key', key).maybeSingle();
+                if (data) return data.value;
+            }
+        } catch(e) {
+            console.warn("Supabase getGlobalSetting warning:", e);
+        }
+
+        return null;
     },
 
     // --- CONFIGURATION / DATA ---

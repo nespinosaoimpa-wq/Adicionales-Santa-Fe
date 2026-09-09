@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sistema de Información de Normativa</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <meta name="author" content="" />
+        <meta name="copyright" content="&copy;" />
+        <meta name="robot" content="all" />
+        <base href="/normativa/" target="_blank">
+
+
+        <link rel="stylesheet"
+              href="//www.santafe.gov.ar/assets/standard/css/normalize.css"
+              type="text/css" />
+        <link rel="stylesheet"
+              href="//www.santafe.gov.ar/assets/standard/css/1140.css"
+              type="text/css" />
+        <link rel="stylesheet"
+              href="//www.santafe.gov.ar/assets/jquery-ui/jquery-ui-1.10.3/css/gobierno/jquery-ui-1.10.3.custom.css"
+              type="text/css" />
+        <link rel="stylesheet"
+              href="//www.santafe.gov.ar/assets/bootstrap/bootstrap-3.0.2-dist/tables-bootstrap/css/bootstrap.min.css"
+              type="text/css" />
+        <link rel="stylesheet"
+              href="//www.santafe.gov.ar/assets/standard/css/pagination/html5-pagination.css"
+              type="text/css" />
+        <link rel="stylesheet"
+              href="//www.santafe.gov.ar/assets/standard/css/menu/menu.css"
+              type="text/css" />
+
+
+        <!--script type="text/javascript" src="js/css3-mediaqueries.js"></script-->
+        <link rel="stylesheet" href="//www.santafe.gov.ar/assets/standard/css/styles-1.0.2.css" type="text/css" >
+
+        <link rel="icon" href="//www.santafe.gov.ar/assets/standard/images/favicon.ico">
+
+        <link rel="stylesheet" href="//www.santafe.gov.ar/assets/standard/css/fonts.css" type="text/css" >
+
+
+
+    </head>
+
+    <body id="top">
+
+        <div role="navigation" class="navbar navbar-sf navbar-fixed-top">
+            <div class="container row-top">
+                <div>
+                    <a href="//www.santafe.gov.ar" class="navbar-brand"><img alt="Gobierno de Santa Fe" src="//www.santafe.gov.ar/assets/standard/images/gob-santafe.png"></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="container">
+            <div class="row top-padding">
+                <div class="row">
+
+                    <ul class="icons_left ui-widget ui-helper-clearfix">
+
+                        <li>                            
+                            <h2 class="titulo_aplicativo">Sistema de Información de Normativa (SIN)</h2>
+                            <p class="organismo"></p>
+
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <div class="row">
+                    <div id="toolbars" class="twelvecol tool-bars">
+                        <ul class="ui-widget ui-helper-clearfix" id="icons">
+                            <li style="color:white;">  <a style="color:white;" href="//www.santafe.gov.ar/index.php/web/guia/contactenos"
+                                                          target="_blank" title="Contacto">Contacto</a></li>
+
+                        </ul>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                
+
+<div id='cssmenu'>
+    <ul>
+        <li class=''><a href="index.php" target="_self"><span>Inicio</span></a></li>
+        <li ><a href="index.php?tbusqueda=adv&organismo=" target="_self"  ><span>Búsqueda Avanzada</span></a> </li>
+    </ul>
+</div>
+
+<div class="row">
+    <div class="twelvecol ruta-name">
+
+        <div class="div_left">
+            <a target="_self" href="index.php">Inicio</a>
+        </div>
+
+    </div>
+</div>
+
+<div class="row form">
+    <form id="form_buscar" method="post">
+        <h3>Búsqueda de normativas</h3>
+
+
+        <div class="row">
+            <div class="fourcol last">                   
+                <label>Tipo de Norma: </label>
+                <select id="tipoNorma" name="tipoNorma" >
+                    <option value="1" > Leyes </option>
+                    <option value="2" > Decretos </option>
+                    <option value="4" > Disposiciones </option>
+                    <option value="5" > Resoluciones </option>
+                    <option value="6" > Dictámenes </option>
+                </select>               
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div id="campoOrganismo" class="fourcol last" style="display:none">              
+                <label>Organismo: </label>
+                <select id="organismoSelect" name="organismoSelect">                
+                    <!--<option value="">Todos</option>-->
+                </select>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="row">
+            <div class="twocol" style="margin-top: 10px;">
+                <label>Número:</label> <input name="numNorma" id="numNorma" type="text"
+                                              class="input" placeholder="Número de norma." value="">
+            </div>
+            <div class="twocol last" style="margin-top: 10px;">
+                <label>Año:</label> <input id="anio" name="anio" type="text"
+                                           class="input" placeholder="Año de la norma." value="">
+            </div>
+
+        </div>
+        <div class="ui-widget">
+            <div class="ui-state-highlight ui-corner-all"
+                 style="margin: 5px; padding: 10px;">
+                <p>
+                    <span class="ui-icon ui-icon-info"
+                          style="float: left; margin-right: .3em;"></span> <strong>Ayuda:</strong>
+                    Los ceros iniciales en el número de la norma no son necesarios.
+                </p>
+            </div>
+        </div>
+        
+         <div class="row">
+            <div class="fourcol last" style="margin-top: 10px;">
+                <label>Expediente:</label> <input name="numExpediente" id="numExpediente" type="text"
+                                              class="input" placeholder="Número de expediente." value="">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="sixcol">
+                <label>Texto:</label>
+                <textarea id="textoNorma" name="textoNorma" cols="" rows="" value=""></textarea>
+            </div>
+            <div class="twocol last">
+                <label>Coincidencia: </label>
+                <select id="frase" name="frase">
+                    <option value = alguna > Alguna palabra </option>
+                    <option value = todas > Todas las palabras </option>
+                    <option value = exacta > Frase exacta </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row" id="divTemas">  
+            <div class="eightcol last">
+                <label>Tema: </label>
+                <select multiple size='8' id="tema" name="tema[]"  style="height: auto" >
+                </select>  
+            </div>
+
+        </div>
+        <div class="ui-widget" id="divAyudaTemas">
+            <div class="ui-state-highlight ui-corner-all"
+                 style="margin: 5px; padding: 10px;">
+                <p>
+                    <span class="ui-icon ui-icon-info"
+                          style="float: left; margin-right: .3em;"></span> <strong>Ayuda:</strong>
+                    Puede seleccionar más de un tema utilizando la tecla "Ctrl".
+                </p>
+            </div>
+        </div>
+
+
+
+        <div class="row" id="divIniciador">
+            <div class="eightcol last">
+                <label>Iniciador: </label>
+                <select id="iniciador" name="iniciador">
+                    <option value="" >Sin especificar</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="fourcol">
+                <label>Desde: </label>
+                <input type="text" id="fechaDesde" name="fechaDesde" class="input"/>
+                <div id="errorFechaDesde" class="help-block with-errors" >
+                    <ul class="list-unstyled">
+                        <li></li>
+                    </ul>
+                </div>
+            </div> 
+            <div class="fourcol last">
+                <label>Hasta: </label>
+                <input type="text" id="fechaHasta" name="fechaHasta" class="input"/>
+                <div id="errorFechaHasta" class="help-block with-errors" >
+                    <ul class="list-unstyled">
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <input type="hidden" name="action" value="buscar" id="action"/>
+        <input type="hidden" name="pagina" value="1" id="pagina"/>
+        <input type="hidden" name="ordenarPor" value="2" id="ordenarPor"/>
+        <input type="hidden" name="ordenBusqueda" value="ASC" id="ordenBusqueda"/>
+
+        <div  class="row">
+            <button type="submit" name="boton" id="buscar">Buscar</button>
+            <button id="registro_boton_limpiar" name="registro_limpiar" class="nowait">Limpiar</button>
+            <div class="clear"></div>
+        </div> 
+    </form>
+
+    <div class="row">
+        <div id="results" class="last"></div>
+    </div>
+</div>
+
+<div
+    style="float: right; margin-top: 5px; margin-right: 5px; color: white;">
+    <a href="index.php#top" target="_self" class="link_white"> Ir arriba </a>
+</div>
+
+
+
+
+
+
+            </div>
+
+
+
+            <!-- Nuevo footer -->
+            <div class="footer">
+                <div class="row-back-none">
+                    <div class="div_left" id="sociales" style="width: 40%">
+                        <p><a href="/index.php/web/content/view/full/117678">RSS / SUSCRIPCIÓN A NOTICIAS</a></p>
+                        <ul class="inline footer-ul">
+                            <li><a target="_blank" href="http://www.twitter.com/GobSantaFe"><i class="icon-footertwitter"></i></a></li>
+                            <li><a target="_blank" href="http://www.facebook.com/GobSantaFe"><i class="icon-footerfacebook"></i></a></li>
+                            <li><a target="_blank" href="http://www.youtube.com/GobSantaFe"><i class="icon-footeryoutube"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="div_left" id="marca" style="width: 23%">
+                        <img src="//www.santafe.gob.ar/assets/standard/images/marca-footer.png" alt="Santa Fe" style="padding-bottom:10px;">                                               
+                    </div>
+
+                    <div class="stg-logos-contenedor">
+                        <div class="stg-logos">
+                        <p>Centro Único de Atención: 0800-777-0801 </p>
+                        <p>Lunes a viernes de 8 a 18 hs </p>
+                        <p><span class="cc">c</span> Atribución-CompartirIgual 2.5 Argentina</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--p>
+<span> &copy; 2013 - Todos los derechos reservados. Créditos | Términos y condiciones</span>
+</p-->
+
+
+
+
+        </div>
+
+
+        <div id="myProgressBar" style="visibility: hidden;"></div>
+
+        <!-- script
+                src="//www.santafe.gov.ar/assets/jquery-ui/jquery-ui-1.10.3/js/jquery-1.10.2.min.js"></script-->
+
+        <script src="//www.santafe.gov.ar/assets/jquery/jquery-1.11.1.min.js"></script>
+
+        <script
+        src="//www.santafe.gov.ar/assets/jquery-ui/jquery-ui-1.10.3/js/jquery-ui.min.js"></script>
+        <script
+        src="//www.santafe.gov.ar/assets/jquery-ui/jquery-ui-1.10.3/js/jquery.ui.datepicker-es.js"></script>
+        <script
+        src="//www.santafe.gov.ar/assets/jquery/jquery.ui.touch-punch.min.js"></script>
+
+        <script src="//www.santafe.gov.ar/assets/standard/js/match-media.js"></script>
+
+        <script src="//www.santafe.gov.ar/assets/standard/js/interface.js"></script>
+        <script src="./js/jquery.mask.min.js"></script>
+        <script src="./js/functions.js"></script>
+        <script>
+            $(document).ready(function () {
+                $.ajaxSetup({
+                    timeout: '60000',
+                    global: true
+                });
+
+                $("#ver_ayuda").click(function () {
+
+                    $("#dialog-message-info").dialog('open');
+
+                });
+
+                $("#dialog-message-info").dialog({
+                    autoOpen: false,
+                    width: 'auto', // overcomes width:'auto' and maxWidth bug
+                    height: 'auto',
+                    modal: true,
+                    fluid: true, //new option
+                    resizable: true,
+                    create: function (event, ui) {
+                        // Set maxWidth
+                        $(this).css("max-width", "660px");
+                    },
+                    open: function () {
+                        //fluidDialog();
+                    },
+                    buttons: {
+                        Aceptar: function () {
+                            $(this).dialog("close");
+                        }
+                    },
+                    close: function () {
+                    }
+                });
+
+                $.datepicker.setDefaults($.datepicker.regional[ "es" ]);
+                $("#fechaDesde").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "1978:+0",
+                    dateFormat: "dd-mm-yy",
+                    onClose: function (selectedDate) {
+                        $("#fechaHasta").datepicker("option", "minDate", selectedDate);
+                    }
+                }).mask("99-99-9999");
+                $("#fechaHasta").datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    yearRange: "1978:+0",
+                    dateFormat: "dd-mm-yy",
+                    onClose: function (selectedDate) {
+                        $("#fechaDesde").datepicker("option", "maxDate", selectedDate);
+                    }
+                }).mask("99-99-9999");
+
+                $('#anio').mask("9999");
+
+                $('#form_buscar').change(function () {
+                    $('#form_buscar #pagina').attr("value", 1);
+                });
+
+                $('#form_buscar').submit(function (event) {
+                    event.preventDefault();
+                    $("#errorFechaDesde ul li").text("");
+                    $("#errorFechaHasta ul li").text("");
+                    if ($("#fechaDesde").val()) {
+                        if (!$("#fechaHasta").val()) {
+                            $("#errorFechaHasta ul li").text("Debe ingresar hasta que fecha.");
+                            return false;
+                        }
+                    }
+                    if ($("#fechaHasta").val()) {
+                        if (!$("#fechaDesde").val()) {
+                            $("#errorFechaDesde ul li").text("Debe ingresar desde que fecha.");
+                            return false;
+                        }
+                    }
+                    waitModal(1);
+                    $.ajax({
+                        url: "./src/busqueda.php?organismo=&tbusqueda=",
+                        type: "POST",
+                        data: $(this).serialize()
+                    })
+                            .done(function (html) {
+                                $("#results").html(html);
+                                $(document).scrollTop($("#results").offset().top);
+                                waitModal(0);
+
+                            });
+
+                });
+                $('#registro_boton_limpiar').click(function (event) {
+                    event.preventDefault();
+//                    waitModal(0);
+                    $("#errorFechaDesde ul li").text("");
+                    $("#errorFechaHasta ul li").text("");
+                    $("#campoOrganismo").fadeOut();
+                    $('#form_buscar')[0].reset();
+                    $('#form_buscar #pagina').attr("value", 1);
+                    $("#results").html("");
+
+                });
+
+                $(document).tooltip({
+                    track: true
+                });
+
+                $('#tipoNorma').change(function () {
+                    $("#organismoSelect option").remove();
+                    $.ajax({
+                        url: "./src/ajaxServices.php",
+                        type: "get",
+                        async: false,
+                        data: {tipoNorma: $('#tipoNorma').val(), accion: "treeOrg"},
+                        success: function (result) {
+                            if (result == 0) {
+
+                                $("#campoOrganismo").fadeOut();
+                                listaTemas($("#tipoNorma").val(), null);
+                                listaIniciadores($('#tipoNorma').val(), null);
+
+                            } else {
+                                $("#organismoSelect").append(result);
+                                $("#campoOrganismo").fadeIn();
+                                $("#organismoSelect").val($("#organismoSelect option:first").val());
+                                listaTemas($("#tipoNorma").val(), $("#organismoSelect").val());
+                                listaIniciadores($('#tipoNorma').val(), $('#organismoSelect').val());
+                            }
+
+                        },
+                        error: function () {
+                            connectionError();
+                        }
+                    });
+
+
+//
+//                    $.get("./src/ajaxServices.php", {tipoNorma: $('#tipoNorma').val(), accion: "treeOrg"}).done(function (data) {
+//                        if (data == 0) {
+//                            $("#campoOrganismo").fadeOut();
+//                            listaTemas($("#tipoNorma").val(), $("#organismoSelect").val());
+//                            listaIniciadores($('#tipoNorma').val(), $('#organismoSelect').val());
+//                            return;
+//                        }
+////                        $("#organismoSelect").append(
+////                                $("<option></option>").attr("value", "").text("Todos")
+////                                );
+//                        $("#organismoSelect").append(data);
+//                        $("#campoOrganismo").fadeIn();
+//                        $("#organismoSelect").val($("#organismoSelect option:first").val());
+//
+//                    });
+//                    listaTemas($("#tipoNorma").val(), $("#organismoSelect").val());
+//                   listaIniciadores($('#tipoNorma').val(), $('#organismoSelect').val());
+
+                });
+                $('#organismoSelect').change(function () {
+                    listaTemas($('#tipoNorma').val(), $('#organismoSelect').val());
+                    listaIniciadores($('#tipoNorma').val(), $('#organismoSelect').val());
+                });
+                listaTemas($('#tipoNorma').val(), $('#organismoSelect').val());
+                listaIniciadores($('#tipoNorma').val(), $('#organismoSelect').val());
+                $('#form_buscar')[0].reset();
+
+
+
+                var max_fields = 10; //maximum input boxes allowed
+                var wrapper = $(".input_fields_wrap"); //Fields wrapper
+                var add_button = $(".add_field_button"); //Add button ID
+
+                var x = 1; //initlal text box count
+                $(add_button).click(function (e) { //on add input button click
+                    e.preventDefault();
+                    if (x < max_fields) { //max input box allowed
+                        x++; //text box increment
+                        $(wrapper).append('<div class="row"><div class="onecol"><label></label><select id="operador[]" \n\
+                                            name="operador[]" ><option value="AND" > Y </option><option value="OR" > O </option>\n\
+                                            <option value="NOT" > NO </option></select></div><div class="sevencol">\n\
+                                            <label>Texto:</label><input name="textoNorma[]" id="textoNorma[]" type="text" class="input" placeholder="Texto" value=""></div> \n\
+                                             <div class="onecol last"><a class="btn remove_field" style="margin-top:20px;">Quitar</a></div></div>'); //add input box
+                        $(".btn").button();
+                    }
+                });
+
+                $(wrapper).on("click", ".remove_field", function (e) { //user click on remove text
+                    e.preventDefault();
+                    $(this).parent('div').parent('div').remove();
+                    x--;
+                })
+
+
+            });
+
+            function listaTemas(tipoNormaVal, organismoVal) {
+                $("#tema option").remove();
+                $.getJSON("./src/ajaxServices.php", {tipoNorma: tipoNormaVal, organismoSelect: organismoVal, accion: "temas"}).done(function (data) {
+                    if (data == 0) {
+                        $("#divTemas").fadeOut();
+                        $("#divAyudaTemas").fadeOut();
+                        return;
+                    }
+                    $("#tema").append(
+                            $("<option></option>").attr("value", "").text("Seleccione uno o más temas")
+                            );
+                    $.each(data, function (i) {
+                        $("#tema").append(
+                                $("<option></option>").attr("value", data[i].id).text(data[i].descripcion)
+                                );
+                    });
+                    $("#divTemas").fadeIn();
+                    $("#divAyudaTemas").fadeIn();
+                })
+            }
+
+            function listaIniciadores(tipoNormaVal, organismoVal) {
+                $("#iniciador option").remove();
+                $.getJSON("./src/ajaxServices.php", {tipoNorma: tipoNormaVal, organismoSelect: organismoVal, accion: "iniciadores"}).done(function (data) {
+                    if (data == 0) {
+                        $("#divIniciador").fadeOut();
+                        return;
+                    }
+                    $("#iniciador").append(
+                            $("<option></option>").attr("value", "").text("Sin especificar")
+                            );
+                    $.each(data, function (i) {
+                        $("#iniciador").append(
+                                $("<option></option>").attr("value", data[i].id).text(data[i].nombre)
+                                );
+                    });
+                    $("#divIniciador").fadeIn();
+                })
+            }
+        </script>
+
+        <!-- Piwik -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            _paq.push(["trackPageView"]);
+            _paq.push(["enableLinkTracking"]);
+
+            (function () {
+                var u = (("https:" == document.location.protocol) ? "https" : "http") + "://westad.santafe.gov.ar/";
+                _paq.push(["setTrackerUrl", u + "piwik.php"]);
+                _paq.push(["setSiteId", "19"]);
+                var d = document, g = d.createElement("script"), s = d.getElementsByTagName("script")[0];
+                g.type = "text/javascript";
+                g.defer = true;
+                g.async = true;
+                g.src = u + "piwik.js";
+                s.parentNode.insertBefore(g, s);
+            })();
+        </script>
+        <!-- End Piwik Code --> 
+    </body>
+</html>

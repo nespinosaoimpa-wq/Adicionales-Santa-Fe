@@ -5,40 +5,37 @@
 
 // --- 1. BOOTSTRAP ---
 
-function bootApp() {
+async function bootApp() {
     if (window._appBooted) return;
     window._appBooted = true;
     console.log("🚀 Adicionales Santa Fe - Booting...");
 
-    // 1. Initialize Routing & Render Initial View
-    try {
-        if (window.router && typeof window.router.init === 'function') {
-            router.init();
-        }
-    } catch (e) {
-        console.error("❌ Router Init Error:", e);
-    }
-
-    // 2. Initialize State & Auth Data asynchronously
+    // 1. Initialize State & Auth Data FIRST and wait for Firebase Auth to settle
     try {
         if (window.store && typeof window.store.init === 'function') {
-            store.init();
+            await store.init();
         }
     } catch (error) {
         console.error("❌ Store Init Error:", error);
     }
 
-    // 3. Check Supabase session (OAuth Redirect Handling)
+    // 2. Initialize Routing & Render View ONLY AFTER Auth is settled
     try {
-        if (typeof supabaseClient !== 'undefined' && supabaseClient) {
-            supabaseClient.auth.getSession().then(({ data }) => {
-                if (data?.session?.user) {
-                    console.log("✅ OAuth Session active:", data.session.user.email);
-                }
-            }).catch(e => console.warn("Supabase session check warning:", e));
+        if (window.router && typeof window.router.init === 'function') {
+            router.init();
         }
-    } catch (error) {
-        console.error("❌ Auth Init Error:", error);
+        if (window.router && typeof window.router.handleRoute === 'function') {
+            window.router.handleRoute();
+        }
+    } catch (e) {
+        console.error("❌ Router Init Error:", e);
+    }
+
+    // 3. Remove static HTML initial loader smoothly
+    const loader = document.getElementById('initial-loader');
+    if (loader) {
+        loader.classList.add('transition-opacity', 'duration-300', 'opacity-0', 'pointer-events-none');
+        setTimeout(() => loader.remove(), 300);
     }
 }
 

@@ -18,8 +18,7 @@ function renderAsistenteHub(container) {
     const currentMonthEarnings = currentMonthServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
 
     const tools = [
-        { id: 'academia', title: 'Campus Ascenso Policial', desc: 'Capacitación ISEP: Resúmenes, simulador de examen, flashcards y audiolibros.', icon: 'school', color: 'from-amber-500 via-orange-500 to-red-600', route: '#academia', badge: 'PRO 🎓' },
-        { id: 'fixture', title: 'Fixture Mundial 2026', desc: 'Consultá partidos, horarios y registrá tus pronósticos.', icon: 'sports_soccer', color: 'from-[#74ACDF] to-blue-500', route: '#asistente/fixture', badge: '🏆' },
+        { id: 'academia', title: 'Gemini Notebook ISEP 2026', desc: 'Notebook IA Oficial: Resúmenes, proyectos, simulador 50 preguntas, flashcards 3D, esquemas, infografías y audiolibros.', icon: 'psychology', color: 'from-purple-600 via-indigo-600 to-blue-700', route: '#academia', badge: 'NOTEBOOK IA 🧠' },
         { id: 'calificar', title: 'Calificar la App', desc: 'Dejanos tu calificación y sugerencias para seguir mejorando la herramienta.', icon: 'reviews', color: 'from-amber-400 to-[#F6B426]', action: 'window.showSurveyBanner(true)', badge: 'Opiná' },
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
         { id: 'vademecum', title: 'Vademécum Contravencional', desc: 'Guía de actuación y consulta del Código Penal y Convivencia.', icon: 'gavel', color: 'from-amber-500 to-amber-600', route: '#asistente/vademecum', badge: 'Nuevo' },
@@ -40,8 +39,8 @@ function renderAsistenteHub(container) {
         <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center justify-between">
             <h1 class="text-xl font-bold text-slate-900 dark:text-white tracking-tight">Asistente Virtual</h1>
             <div class="flex items-center gap-2">
-                ${store.user && store.user.role === 'admin' ? `
-                    <button onclick="router.navigateTo('#admin')" class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all">
+                ${store.isAdmin() ? `
+                    <button onclick="router.navigateTo('#admin')" class="size-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all" title="Panel Super Admin">
                         <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
                     </button>
                 ` : ''}
