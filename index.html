@@ -205,6 +205,19 @@
         .tabular-numbers {
             font-variant-numeric: tabular-nums;
         }
+
+        /* AdSense Auto-Collapse (Prevents grey boxes or broken icons on mobile) */
+        .ad-container-box {
+            display: none;
+        }
+        .ad-container-box.ad-filled {
+            display: flex;
+        }
+        ins.adsbygoogle[data-ad-status="unfilled"],
+        ins.adsbygoogle:empty {
+            display: none !important;
+            height: 0 !important;
+        }
     </style>
 
     <!-- GDPR/Cookie Consent -->
@@ -350,16 +363,16 @@
             </div>
 
             <!-- AdSense Banner Top -->
-            <div class="max-w-4xl mx-auto px-4 mt-16 flex justify-center">
+            <div class="max-w-4xl mx-auto px-4 mt-16 flex justify-center ad-container-box">
                 <div class="w-full bg-[#0e1420]/60 backdrop-blur-md rounded-3xl border border-white/10 p-4 flex justify-center items-center overflow-hidden">
                     <ins class="adsbygoogle"
-                         style="display:block; width:100%; max-width:728px; height:90px;"
+                         style="display:block; width:100%; max-width:728px;"
                          data-ad-client="ca-pub-4261554477116731"
                          data-ad-slot="2506973015"
                          data-ad-format="horizontal"
                          data-full-width-responsive="true"></ins>
                     <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
+                         try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
                     </script>
                 </div>
             </div>
@@ -552,16 +565,16 @@
             </div>
 
             <!-- AdSense Banner Bottom -->
-            <div class="max-w-4xl mx-auto px-4 mt-16 flex justify-center">
+            <div class="max-w-4xl mx-auto px-4 mt-16 flex justify-center ad-container-box">
                 <div class="w-full bg-[#0e1420]/60 backdrop-blur-md rounded-3xl border border-white/10 p-4 flex justify-center items-center overflow-hidden">
                     <ins class="adsbygoogle"
-                         style="display:block; width:100%; max-width:728px; height:90px;"
+                         style="display:block; width:100%; max-width:728px;"
                          data-ad-client="ca-pub-4261554477116731"
                          data-ad-slot="2506973015"
                          data-ad-format="horizontal"
                          data-full-width-responsive="true"></ins>
                     <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
+                         try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
                     </script>
                 </div>
             </div>
@@ -676,6 +689,18 @@
                     centralBadge.style.opacity = opacity.toFixed(2);
                 }
             });
+
+            // Auto-detect AdSense slots: Show container ONLY if ad successfully loaded
+            setInterval(() => {
+                document.querySelectorAll('.ad-container-box').forEach(box => {
+                    const ins = box.querySelector('ins.adsbygoogle');
+                    if (ins && ins.getAttribute('data-ad-status') === 'filled') {
+                        box.classList.add('ad-filled');
+                    } else if (ins && (ins.getAttribute('data-ad-status') === 'unfilled' || ins.getAttribute('data-adsbygoogle-status') === 'done')) {
+                        box.style.display = 'none';
+                    }
+                });
+            }, 1000);
         });
     </script>
 </body>
