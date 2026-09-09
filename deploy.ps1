@@ -20,6 +20,7 @@ New-Item -ItemType Directory -Path ".\dist" -Force | Out-Null
 # Copy root static files
 Copy-Item -Path ".\*.html" -Destination ".\dist\" -Force
 Copy-Item -Path ".\*.txt" -Destination ".\dist\" -Force
+Copy-Item -Path ".\*.xml" -Destination ".\dist\" -Force
 Copy-Item -Path ".\*.json" -Destination ".\dist\" -Exclude "package.json", "package-lock.json", "firebase.json", "adicionales-santa-fe-firebase-adminsdk-fbsvc-112bd55a2a.json" -Force
 Copy-Item -Path ".\*.pdf" -Destination ".\dist\" -Force
 if (Test-Path ".\assets") { Copy-Item -Path ".\assets" -Destination ".\dist\assets" -Recurse -Force }
