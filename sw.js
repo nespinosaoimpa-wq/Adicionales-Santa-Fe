@@ -1,8 +1,8 @@
-const CACHE_NAME = 'centinela-v535.4.0-root';
+const CACHE_NAME = 'centinela-v535.5.0-root';
 const ASSETS = [
     './',
-    './index.html?v=535.4.0',
-    './app/styles.css?v=535.4.0',
+    './index.html?v=535.5.0',
+    './app/styles.css?v=535.5.0',
     './app/supabase-config.js?v=535.2.3',
     './app/firebase-config.js?v=535.2.3',
     './app/db-v211.js?v=535.2.3',
