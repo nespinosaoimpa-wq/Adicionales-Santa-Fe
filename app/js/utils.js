@@ -513,11 +513,121 @@ window.getGeminiAPIKey = function () {
 };
 
 window.showGeminiKeyModal = function () {
-    const currentKey = window.getGeminiAPIKey();
-    const val = prompt("🔑 Ingresá tu Clave de API de Google Gemini (Gratuita):\n\nObtenela en 10 segundos gratis en aistudio.google.com/app/apikey", currentKey);
-    if (val !== null) {
-        localStorage.setItem('gemini_api_key', val.trim());
-        showToast(val.trim() ? "✅ Clave Gemini API guardada con éxito" : "ℹ️ Clave eliminada");
+    const existing = document.getElementById('gemini-key-modal-overlay');
+    if (existing) existing.remove();
+
+    const rawKey = window.getGeminiAPIKey();
+    const hasKey = !!rawKey;
+
+    const modal = document.createElement('div');
+    modal.id = 'gemini-key-modal-overlay';
+    modal.className = 'fixed inset-0 bg-black/85 backdrop-blur-md z-[9999] flex items-center justify-center p-4 animate-fade-in';
+
+    modal.innerHTML = `
+        <div class="glass-card-notebook p-6 max-w-md w-full bg-slate-950 border border-white/10 rounded-3xl shadow-2xl space-y-5 text-left relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 size-36 bg-purple-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="flex justify-between items-center relative z-10">
+                <div class="flex items-center gap-2.5">
+                    <div class="size-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                        <span class="material-symbols-outlined text-xl">key</span>
+                    </div>
+                    <div>
+                        <h3 class="text-sm font-black text-white uppercase tracking-wider">Configurar API Key de Gemini</h3>
+                        <p class="text-[9px] text-slate-400 font-bold uppercase tracking-widest mt-0.5">Google Generative AI 2.0</p>
+                    </div>
+                </div>
+                <button onclick="document.getElementById('gemini-key-modal-overlay').remove()" class="size-8 rounded-full hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors">
+                    <span class="material-symbols-outlined text-sm">close</span>
+                </button>
+            </div>
+
+            <div class="p-3.5 rounded-2xl border ${hasKey ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-300' : 'bg-amber-500/10 border-amber-500/20 text-amber-300'} flex items-center justify-between text-xs font-semibold">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">${hasKey ? 'lock' : 'key_off'}</span>
+                    <span>${hasKey ? 'Estado: API Key Configurada' : 'Estado: Sin API Key Configurada'}</span>
+                </div>
+                ${hasKey ? '<span class="text-[9px] uppercase font-black px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Encriptado</span>' : ''}
+            </div>
+
+            <div class="space-y-3 relative z-10">
+                <label class="block text-[10px] font-bold text-slate-300 uppercase tracking-wider">
+                    Ingresar / Actualizar Clave de API
+                </label>
+                <div class="relative flex items-center">
+                    <input type="password" id="secureGeminiKeyInput" placeholder="${hasKey ? '••••••••••••••••••••••••••••••••' : 'AIzaSy...'}" 
+                        class="w-full bg-slate-900/90 border border-white/15 rounded-xl pl-4 pr-11 py-3 text-xs text-white placeholder-slate-500 font-mono outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 transition-all">
+                    <button type="button" onclick="window.toggleKeyVisibility()" class="absolute right-3 text-slate-400 hover:text-white p-1 transition-colors">
+                        <span id="keyVisibilityIcon" class="material-symbols-outlined text-lg">visibility</span>
+                    </button>
+                </div>
+                <p class="text-[10px] text-slate-400 leading-relaxed">
+                    Obtené tu clave gratuita de Google Gemini en 10 segundos en <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" class="text-indigo-400 hover:underline font-bold">Google AI Studio <span class="material-symbols-outlined text-[10px]">open_in_new</span></a>. Tu clave se almacena localmente de forma segura.
+                </p>
+            </div>
+
+            <div class="space-y-2 pt-2 relative z-10">
+                <button onclick="window.saveSecureGeminiKey()" class="w-full py-3.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-sm">save</span>
+                    Guardar Clave
+                </button>
+                ${hasKey ? `
+                    <button onclick="window.removeSecureGeminiKey()" class="w-full py-2.5 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 font-bold text-xs uppercase tracking-wider rounded-xl transition-all active:scale-95 flex items-center justify-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm">delete</span>
+                        Eliminar Clave del Dispositivo
+                    </button>
+                ` : ''}
+            </div>
+        </div>
+    `;
+
+    modal.onclick = (e) => { if (e.target === modal) modal.remove(); };
+    document.body.appendChild(modal);
+};
+
+window.toggleKeyVisibility = function () {
+    const input = document.getElementById('secureGeminiKeyInput');
+    const icon = document.getElementById('keyVisibilityIcon');
+    if (!input || !icon) return;
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.innerText = 'visibility_off';
+    } else {
+        input.type = 'password';
+        icon.innerText = 'visibility';
+    }
+};
+
+window.saveSecureGeminiKey = function () {
+    const input = document.getElementById('secureGeminiKeyInput');
+    const val = input ? input.value.trim() : '';
+    if (!val) {
+        showToast("⚠️ Ingresá una clave válida de Gemini");
+        return;
+    }
+    if (window.GeminiService) {
+        window.GeminiService.setApiKey(val);
+    } else {
+        localStorage.setItem('gemini_api_key', val);
+    }
+    document.getElementById('gemini-key-modal-overlay')?.remove();
+    showToast("🔒 Clave Gemini API guardada de forma segura");
+    if (typeof renderAcademia === 'function') {
+        const app = document.getElementById('app');
+        if (app && window.location.hash.includes('academia')) renderAcademia(app);
+    }
+};
+
+window.removeSecureGeminiKey = function () {
+    if (window.GeminiService) {
+        window.GeminiService.setApiKey('');
+    }
+    localStorage.removeItem('gemini_api_key');
+    document.getElementById('gemini-key-modal-overlay')?.remove();
+    showToast("ℹ️ Clave eliminada del dispositivo");
+    if (typeof renderAcademia === 'function') {
+        const app = document.getElementById('app');
+        if (app && window.location.hash.includes('academia')) renderAcademia(app);
     }
 };
 
