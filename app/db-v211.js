@@ -9,11 +9,13 @@ const DB = {
     },
 
     async login(email, password) {
-        return auth.signInWithEmailAndPassword(email, password);
+        const cleanEmail = (email || '').trim().toLowerCase();
+        return auth.signInWithEmailAndPassword(cleanEmail, password);
     },
 
     async register(email, password) {
-        return auth.createUserWithEmailAndPassword(email, password);
+        const cleanEmail = (email || '').trim().toLowerCase();
+        return auth.createUserWithEmailAndPassword(cleanEmail, password);
     },
 
     async logout() {
@@ -27,7 +29,6 @@ const DB = {
         const authInstance = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' });
-
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
         if (isMobile) {
@@ -602,6 +603,9 @@ const DB = {
             return () => { };
         }
 
+        const cleanEmail = (user.email || '').toLowerCase().trim();
+        const userEmails = Array.from(new Set([user.email, cleanEmail])).filter(Boolean);
+
         let fbExpenses = [];
         let sbExpenses = [];
 
@@ -613,14 +617,14 @@ const DB = {
         };
 
         const fbUnsub = db.collection('expenses')
-            .where('userEmail', '==', user.email)
+            .where('userEmail', 'in', userEmails)
             .onSnapshot(snapshot => {
                 fbExpenses = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                 mergeAndCallback();
             });
 
         // Supabase Fetch/Realtime for expenses
-        supabaseClient.from('expenses').select('*').eq('user_email', user.email).then(({ data }) => {
+        supabaseClient.from('expenses').select('*').ilike('user_email', cleanEmail).then(({ data }) => {
             if (data) {
                 sbExpenses = data;
                 mergeAndCallback();

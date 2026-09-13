@@ -18,6 +18,10 @@
     --text-secondary: #334155; /* Más oscuro para mejor contraste (slate-700) */
 }
 
+body {
+    font-family: 'Outfit', 'Plus Jakarta Sans', 'Inter', sans-serif;
+}
+
 /* Glassmorphism Utilities */
 .glass-card {
     background: rgba(255, 255, 255, 0.6);
@@ -269,4 +273,88 @@ html {
 /* 3D Chart perspective */
 .chart-3d {
     transform-style: preserve-3d;
+}
+
+/* ===================================
+   SAFE AREA INSETS (iPhone Notch/Dynamic Island)
+   =================================== */
+
+/* Bottom Nav padding for iPhones with home indicator */
+nav[class*="fixed bottom-0"],
+.fixed.bottom-0,
+[class*="fixed"][class*="bottom-0"] {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Chat input container safe area */
+form[class*="fixed bottom-0"],
+.chat-input-container {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* Main content bottom padding to avoid overlap with bottom nav on notched devices */
+main {
+    padding-bottom: max(2rem, calc(2rem + env(safe-area-inset-bottom, 0px)));
+}
+
+/* Top safe area for status bar */
+header.sticky {
+    padding-top: env(safe-area-inset-top, 0px);
+}
+
+/* ===================================
+   TOUCH TARGETS (Apple HIG / Material 3)
+   Minimum 44x44px for all interactive elements
+   =================================== */
+button, 
+a[href], 
+input[type="submit"], 
+input[type="button"],
+select,
+[role="button"],
+.cursor-pointer {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Exception for inline text links */
+p a[href],
+span a[href],
+li a[href] {
+    min-height: unset;
+    min-width: unset;
+}
+
+/* Exception for small icon buttons that use explicit sizing */
+button[class*="size-8"],
+button[class*="size-6"],
+[class*="text-[9px]"] button,
+.text-[9px] {
+    min-height: unset;
+    min-width: unset;
+}
+
+/* Ensure form inputs are comfortable on mobile */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+    min-height: 44px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+}
+
+/* PWA standalone mode adjustments */
+@media (display-mode: standalone) {
+    body {
+        padding-top: env(safe-area-inset-top, 0px);
+    }
+
+    /* Ensure bottom nav accounts for home indicator */
+    nav[class*="bottom-0"] {
+        padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
+    }
 }

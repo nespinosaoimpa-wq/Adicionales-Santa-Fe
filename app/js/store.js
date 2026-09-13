@@ -212,6 +212,14 @@ window.store = {
     },
 
     async addService(service) {
+        if (!this.user || !this.user.email) {
+            showToast("❌ Error: Sesión no válida");
+            throw new Error("Usuario no autenticado");
+        }
+
+        // Defensive user isolation: stamp active user email
+        service.userEmail = this.user.email;
+
         const tempId = 'temp-svc-' + Date.now();
         const optimisticService = {
             id: tempId,

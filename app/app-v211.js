@@ -8,7 +8,7 @@
 async function bootApp() {
     if (window._appBooted) return;
     window._appBooted = true;
-    console.log("🚀 Adicionales Santa Fe Modularized - Booting...");
+    console.log("🚀 Adicionales Santa Fe - Booting...");
 
     // 1. Initialize State & Auth Data FIRST and wait for Firebase Auth to settle
     try {
@@ -44,9 +44,6 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
 } else {
     document.addEventListener('DOMContentLoaded', bootApp);
 }
-
-// Fallback boot timer
-setTimeout(bootApp, 100);
 
 // --- 2. GLOBAL EVENT LISTENERS ---
 

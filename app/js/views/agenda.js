@@ -28,10 +28,14 @@ function renderAgenda(container) {
             <div class="flex justify-between items-center">
                 <div>
                     <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Mi Agenda</h1>
-                    <div class="flex items-center gap-2">
-                        <button id="btn-prev-month" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">arrow_back_ios</span></button>
-                        <p class="text-sm text-slate-500 dark:text-slate-400 capitalize w-24 text-center select-none">${currentMonthLabel}</p>
-                        <button id="btn-next-month" class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">arrow_forward_ios</span></button>
+                    <div class="flex items-center gap-1.5 mt-1">
+                        <button id="btn-prev-month" class="size-8 rounded-full bg-slate-800/80 hover:bg-primary/20 text-slate-300 hover:text-primary flex items-center justify-center border border-white/10 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-lg">chevron_left</span>
+                        </button>
+                        <span class="text-xs font-extrabold text-slate-200 capitalize min-w-[130px] text-center select-none tracking-tight">${currentMonthLabel}</span>
+                        <button id="btn-next-month" class="size-8 rounded-full bg-slate-800/80 hover:bg-primary/20 text-slate-300 hover:text-primary flex items-center justify-center border border-white/10 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-lg">chevron_right</span>
+                        </button>
                     </div>
                 </div>
                 <div class="flex gap-2">
@@ -156,9 +160,19 @@ function renderAgenda(container) {
             <!-- Calendar Section -->
             <section class="space-y-4">
                 <div class="flex justify-between items-center">
-                    <h3 class="font-bold text-lg dark:text-slate-900 dark:text-white">Calendario</h3>
-                    <div class="flex gap-1 bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                        <button onclick="store.viewDate = new Date(); renderAgenda(document.getElementById('app'))" class="px-3 py-1 text-xs font-semibold rounded-md bg-white dark:bg-slate-700 shadow-sm dark:text-slate-900 dark:text-white">Hoy</button>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
+                        <span>Calendario</span>
+                    </h3>
+                    <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200 dark:border-white/5">
+                        <button id="btn-prev-month-grid" class="size-7 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:text-primary flex items-center justify-center shadow-sm active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-base">chevron_left</span>
+                        </button>
+                        <button onclick="store.viewDate = new Date(); store.selectedDate = store.getLocalDateString(); renderAgenda(document.getElementById('app'))" class="px-2.5 py-1 text-xs font-bold rounded-lg bg-primary text-white shadow-sm active:scale-95 transition-all">
+                            Hoy
+                        </button>
+                        <button id="btn-next-month-grid" class="size-7 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:text-primary flex items-center justify-center shadow-sm active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-base">chevron_right</span>
+                        </button>
                     </div>
                 </div>
                 <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 shadow-sm">
@@ -222,16 +236,25 @@ function renderAgenda(container) {
         });
     });
 
-    // Month Nav Listeners
-    document.getElementById('btn-prev-month').addEventListener('click', () => {
-        store.viewDate.setMonth(store.viewDate.getMonth() - 1);
+    // Safe Month Navigation Handler
+    const navigateMonth = (delta) => {
+        const d = store.viewDate || new Date();
+        const curYear = d.getFullYear();
+        const curMonth = d.getMonth();
+        store.viewDate = new Date(curYear, curMonth + delta, 1);
         renderAgenda(container);
-    });
+    };
 
-    document.getElementById('btn-next-month').addEventListener('click', () => {
-        store.viewDate.setMonth(store.viewDate.getMonth() + 1);
-        renderAgenda(container);
-    });
+    // Month Nav Listeners (Header & Grid)
+    const prevBtnHeader = document.getElementById('btn-prev-month');
+    const nextBtnHeader = document.getElementById('btn-next-month');
+    const prevBtnGrid = document.getElementById('btn-prev-month-grid');
+    const nextBtnGrid = document.getElementById('btn-next-month-grid');
+
+    if (prevBtnHeader) prevBtnHeader.addEventListener('click', () => navigateMonth(-1));
+    if (nextBtnHeader) nextBtnHeader.addEventListener('click', () => navigateMonth(1));
+    if (prevBtnGrid) prevBtnGrid.addEventListener('click', () => navigateMonth(-1));
+    if (nextBtnGrid) nextBtnGrid.addEventListener('click', () => navigateMonth(1));
 }
 
 function generateCalendarGrid(year, month, selectedDate) {

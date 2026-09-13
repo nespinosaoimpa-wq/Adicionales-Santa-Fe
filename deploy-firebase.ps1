@@ -13,7 +13,10 @@ Copy-Item -Path ".\*.html" -Destination ".\dist\" -Force
 Copy-Item -Path ".\*.txt" -Destination ".\dist\" -Force
 Copy-Item -Path ".\*.json" -Destination ".\dist\" -Exclude "package.json", "package-lock.json", "firebase.json", "adicionales-santa-fe-firebase-adminsdk-fbsvc-112bd55a2a.json" -Force
 Copy-Item -Path ".\*.pdf" -Destination ".\dist\" -Force
+if (Test-Path ".\assets") { Copy-Item -Path ".\assets" -Destination ".\dist\assets" -Recurse -Force }
+if (Test-Path ".\watermark_police.png") { Copy-Item -Path ".\watermark_police.png" -Destination ".\dist\" -Force }
 if (Test-Path ".\sw.js") { Copy-Item -Path ".\sw.js" -Destination ".\dist\" -Force }
+if (Test-Path ".\cookie-consent.js") { Copy-Item -Path ".\cookie-consent.js" -Destination ".\dist\" -Force }
 
 # Copy app directory
 New-Item -ItemType Directory -Path ".\dist\app" -Force | Out-Null

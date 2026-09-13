@@ -644,20 +644,49 @@ function renderActaForm(container, tipo) {
         renderActaForm(container, tipo);
     };
 
-    window._improveField = (fieldId) => {
+    window._improveField = async (fieldId) => {
         const el = document.getElementById(fieldId);
         if (!el || !el.value.trim()) return showToast("Escribí algo primero");
         
-        const original = el.value;
-        const improved = (typeof window.improvePoliceNarrative === 'function') ? window.improvePoliceNarrative(original) : original;
-        
-        if (original === improved) {
-            showToast("ℹ️ El texto ya es profesional");
-        } else {
-            el.value = improved;
-            showToast("✨ Narrativa profesionalizada");
-            el.classList.add('ring-2', 'ring-emerald-500/50');
-            setTimeout(() => el.classList.remove('ring-2', 'ring-emerald-500/50'), 2000);
+        const original = el.value.trim();
+
+        // Check if Gemini API is available
+        if (!window.GeminiService || !window.GeminiService.getApiKey()) {
+            showToast("🔑 Configurá la API Key de Gemini para usar la IA");
+            return;
+        }
+
+        // Show loading state
+        el.disabled = true;
+        el.classList.add('opacity-50');
+        showToast("✨ Formalizando narrativa con IA...");
+
+        try {
+            // Detect acta type from the current URL
+            const actaType = (window.location.hash || '').split('/').pop() || 'procedimiento';
+            const result = await window.GeminiService.enhanceText(original, actaType);
+
+            if (result.success && result.text) {
+                // Clean up any markdown formatting from Gemini response
+                const cleanText = result.text
+                    .replace(/^```[\s\S]*?\n/g, '')
+                    .replace(/\n```$/g, '')
+                    .replace(/\*\*/g, '')
+                    .trim();
+                
+                el.value = cleanText;
+                showToast("✅ Narrativa formalizada con Gemini AI");
+                el.classList.add('ring-2', 'ring-emerald-500/50');
+                setTimeout(() => el.classList.remove('ring-2', 'ring-emerald-500/50'), 3000);
+            } else {
+                showToast("⚠️ No se pudo mejorar: " + (result.error || 'Error desconocido'));
+            }
+        } catch (err) {
+            console.error("Enhance text error:", err);
+            showToast("⚠️ Error al conectar con la IA");
+        } finally {
+            el.disabled = false;
+            el.classList.remove('opacity-50');
         }
     };
 

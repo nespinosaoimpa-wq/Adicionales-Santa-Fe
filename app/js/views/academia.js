@@ -83,17 +83,38 @@ function renderAcademia(container) {
             }
             @media (max-width: 1200px) {
                 .notebook-split-container {
-                    grid-template-columns: 260px 1fr;
+                    grid-template-columns: 240px 1fr;
                 }
                 .notebook-studio-pane {
-                    display: none !important;
+                    display: none;
                 }
             }
-            @media (max-width: 800px) {
+            @media (max-width: 900px) {
                 .notebook-split-container {
-                    grid-template-columns: 1fr;
+                    display: block !important;
+                    height: calc(100vh - 7.5rem) !important;
+                    overflow-y: auto;
                 }
                 .notebook-sidebar, .notebook-studio-pane {
+                    display: none;
+                }
+                .notebook-split-container.show-mobile-fuentes .notebook-sidebar {
+                    display: block !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                }
+                .notebook-split-container.show-mobile-studio .notebook-studio-pane {
+                    display: block !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                }
+                .notebook-split-container.show-mobile-workspace main {
+                    display: flex !important;
+                    width: 100% !important;
+                    height: 100% !important;
+                }
+                .notebook-split-container.show-mobile-fuentes main,
+                .notebook-split-container.show-mobile-studio main {
                     display: none !important;
                 }
             }
@@ -163,6 +184,8 @@ function renderAcademia(container) {
         const checkedCount = Object.values(window.academySelectedSources).filter(Boolean).length;
         const hasGeminiKey = !!(window.getGeminiAPIKey && window.getGeminiAPIKey());
         const hierarchy = data.hierarchies.find(h => h.id === window.academySelectedHierarchy) || data.hierarchies[0];
+        const currentMobileView = window.mobileAcademyView || 'workspace';
+        const containerMobileClass = `show-mobile-${currentMobileView}`;
 
         return `
             ${styleBlock}
@@ -213,7 +236,23 @@ function renderAcademia(container) {
                 </div>
             </header>
 
-            <div class="notebook-split-container relative">
+            <!-- Mobile Navigation Tabs (visible on screens <= 900px) -->
+            <div class="min-[901px]:hidden bg-[#0c101b] border-b border-white/10 px-3 py-2 flex items-center justify-around gap-1.5 z-40 text-xs">
+                <button onclick="window.switchMobileAcademyView('workspace')" class="flex-1 py-1.5 rounded-xl font-bold flex items-center justify-center gap-1.5 transition-all ${currentMobileView === 'workspace' ? 'bg-indigo-600 text-white shadow-md' : 'bg-white/5 text-slate-400 hover:text-white'}">
+                    <span class="material-symbols-outlined text-sm">laptop_mac</span>
+                    Workspace
+                </button>
+                <button onclick="window.switchMobileAcademyView('studio')" class="flex-1 py-1.5 rounded-xl font-bold flex items-center justify-center gap-1.5 transition-all ${currentMobileView === 'studio' ? 'bg-indigo-600 text-white shadow-md' : 'bg-white/5 text-slate-400 hover:text-white'}">
+                    <span class="material-symbols-outlined text-sm">grid_view</span>
+                    Studio
+                </button>
+                <button onclick="window.switchMobileAcademyView('fuentes')" class="flex-1 py-1.5 rounded-xl font-bold flex items-center justify-center gap-1.5 transition-all ${currentMobileView === 'fuentes' ? 'bg-indigo-600 text-white shadow-md' : 'bg-white/5 text-slate-400 hover:text-white'}">
+                    <span class="material-symbols-outlined text-sm">folder_open</span>
+                    Fuentes (${checkedCount})
+                </button>
+            </div>
+
+            <div class="notebook-split-container ${containerMobileClass} relative">
                 <div class="absolute inset-0 ambient-glow z-0"></div>
 
                 <!-- COLUMN 1: LEFT SIDEBAR - Fuentes -->
@@ -1182,7 +1221,7 @@ function renderAcademia(container) {
                 <div class="glass-card-notebook p-6 bg-slate-900/80 border border-indigo-500/20 space-y-4 shadow-2xl">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined text-indigo-400">presentation_to_cat</span>
+                            <span class="material-symbols-outlined text-indigo-400">slideshow</span>
                             <h3 class="text-xs font-black uppercase text-white">Presentación: Guía ISEP 2026</h3>
                         </div>
                         
@@ -1226,7 +1265,7 @@ function renderAcademia(container) {
             <div class="space-y-4 animate-fade-in">
                 <div class="glass-card-notebook p-6 bg-slate-900/80 border border-indigo-500/20 space-y-5 shadow-2xl">
                     <div class="flex items-center gap-2">
-                        <span class="material-symbols-outlined text-indigo-400">infographic</span>
+                        <span class="material-symbols-outlined text-indigo-400">analytics</span>
                         <h3 class="text-xs font-black uppercase text-white">Infografía: Mapa de Hitos del Concurso</h3>
                     </div>
 
@@ -1269,8 +1308,8 @@ function renderAcademia(container) {
             { id: 'exam', title: 'Cuestionario', subtitle: 'Simulador ISEP (50)', icon: 'quiz', color: 'border-red-500/30 text-red-400 bg-red-500/5 hover:bg-red-500/10' },
             { id: 'flashcards', title: 'Tarjetas 3D', subtitle: 'Memorización Leitner', icon: 'style', color: 'border-amber-500/30 text-amber-400 bg-amber-500/5 hover:bg-amber-500/10' },
             { id: 'videos', title: 'Táctica 3D', subtitle: 'Simulador de Caso', icon: 'videocam', color: 'border-indigo-500/30 text-indigo-400 bg-indigo-500/5 hover:bg-indigo-500/10' },
-            { id: 'slides', title: 'Presentaciones', subtitle: 'Láminas de Hitos', icon: 'presentation_to_cat', color: 'border-yellow-500/30 text-yellow-400 bg-yellow-500/5 hover:bg-yellow-500/10' },
-            { id: 'infographics', title: 'Infografías', subtitle: 'Hitos del Concurso', icon: 'infographic', color: 'border-teal-500/30 text-teal-400 bg-teal-500/5 hover:bg-teal-500/10' }
+            { id: 'slides', title: 'Presentaciones', subtitle: 'Láminas de Hitos', icon: 'slideshow', color: 'border-yellow-500/30 text-yellow-400 bg-yellow-500/5 hover:bg-yellow-500/10' },
+            { id: 'infographics', title: 'Infografías', subtitle: 'Hitos del Concurso', icon: 'analytics', color: 'border-teal-500/30 text-teal-400 bg-teal-500/5 hover:bg-teal-500/10' }
         ];
 
         return `
@@ -1904,6 +1943,12 @@ Reglas obligatorias de respuesta:
 
     window.switchAcademyTab = (tab) => {
         window.academyActiveTab = tab;
+        window.mobileAcademyView = 'workspace';
+        renderAcademia(viewContainer);
+    };
+
+    window.switchMobileAcademyView = (view) => {
+        window.mobileAcademyView = view;
         renderAcademia(viewContainer);
     };
 
