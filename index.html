@@ -1,18 +1,24 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es" class="dark scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Adicionales Santa Fe - Gestión y Cálculo de Policía Adicional</title>
-    <meta name="description" content="La herramienta definitiva para la gestión de servicios de policía adicional en Santa Fe. Calculá tus ganancias, organizá tu agenda y consultá la guía oficial.">
-    <meta name="keywords" content="policia santa fe, servicios adicionales, calculo adicionales, agenda policial, santa fe, argentina">
-    
+    <title>Adicionales Santa Fe - Asistente Operativo, Cálculo y Gestión Policial 2026</title>
+    <meta name="description" content="Plataforma operativa definitiva para la Policía de Santa Fe. Calculá servicios adicionales según Ley 14283, organizá tu agenda de tercios, consultá a Centinela AI y generá actas de procedimiento sin conexión.">
+    <meta name="keywords" content="policia santa fe, servicios adicionales, calculo adicionales, agenda policial, centinela ai, isep 2026, actas policiales, santa fe, argentina">
+    <meta name="theme-color" content="#0a0c12">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Adicionales Santa Fe - Plataforma Operativa Policial">
+    <meta property="og:description" content="Gestión de adicionales, agenda de tercios, asistente legal Centinela AI y generador de actas para la Policía de Santa Fe.">
+    <meta property="og:image" content="assets/landing_hero.png">
+    <meta property="og:type" content="website">
+
     <!-- Google AdSense Verification -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731" crossorigin="anonymous"></script>
 
     <!-- Cache Buster & PWA Standalone Redirect -->
     <script>
-        // If opened from mobile home screen (Standalone PWA), automatically navigate into the app
         if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
             window.location.replace('./app/');
         }
@@ -20,9 +26,8 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.getRegistrations().then(function(registrations) {
                 for(let registration of registrations) {
-                    // Only kill SWs registered at the root scope to free the landing page
                     if(registration.scope === window.location.origin + '/') {
-                        console.log('Unregistering rogue root Service Worker to show landing page');
+                        console.log('Desregistrando SW en raíz para la landing page');
                         registration.unregister();
                         window.location.reload(true);
                     }
@@ -34,9 +39,9 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,container-queries"></script>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Public+Sans:ital,wght@0,300..900;1,300..900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
 
     <!-- Tailwind Config -->
     <script>
@@ -46,13 +51,23 @@
                 extend: {
                     colors: {
                         "primary": "#0d59f2",
-                        "background-light": "#f5f6f8",
+                        "primary-hover": "#0b4cd4",
+                        "santa-blue": "#74ACDF",
+                        "accent-gold": "#F6B426",
+                        "background-light": "#f8fafc",
                         "background-dark": "#0a0c12",
-                        "card-dark": "#101622"
+                        "card-dark": "#101622",
+                        "card-border": "rgba(255, 255, 255, 0.08)"
                     },
                     fontFamily: {
+                        "stencil": ["'Black Ops One'", "cursive", "sans-serif"],
                         "display": ["Public Sans", "Inter", "sans-serif"],
                         "body": ["Inter", "sans-serif"]
+                    },
+                    boxShadow: {
+                        "glow-primary": "0 0 35px rgba(13, 89, 242, 0.35)",
+                        "glow-gold": "0 0 30px rgba(246, 180, 38, 0.25)",
+                        "glow-cyan": "0 0 30px rgba(6, 182, 212, 0.25)"
                     }
                 }
             }
@@ -60,66 +75,229 @@
     </script>
 
     <style>
-        body { font-family: 'Public Sans', sans-serif; background-color: #0a0c12; color: #f5f6f8; }
-        .glass-card { background: rgba(16, 22, 34, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .font-stencil {
+            font-family: 'Black Ops One', cursive, sans-serif;
+            letter-spacing: 0.05em;
+        }
+
+        .text-glow-police {
+            text-shadow: 0 0 20px rgba(116, 172, 223, 0.25), 0 4px 15px rgba(0, 0, 0, 0.9);
+        }
+
+        .text-glow-gold {
+            text-shadow: 0 0 25px rgba(246, 180, 38, 0.25), 0 4px 15px rgba(0, 0, 0, 0.9);
+        }
+
+        body { 
+            font-family: 'Public Sans', sans-serif; 
+            background-color: #0a0c12; 
+            color: #f8fafc;
+            overflow-x: hidden;
+        }
+
+        .glass-card { 
+            background: rgba(16, 22, 34, 0.75); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+        }
+
+        .glass-card-hover {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .glass-card-hover:hover {
+            transform: translateY(-6px);
+            border-color: rgba(13, 89, 242, 0.4);
+            box-shadow: 0 16px 40px -10px rgba(13, 89, 242, 0.25);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.92);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Stagger Delays */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-400 { transition-delay: 400ms; }
+        .delay-500 { transition-delay: 500ms; }
+
+        /* Animated Ambient Gradients */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.08); }
+        }
+
+        .ambient-glow {
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
     </style>
 
-    <!-- GDPR/Cookie Consent -->
-    <script src="cookie-consent.js" defer></script></head>
-<body class="antialiased min-h-screen flex flex-col">
+    <!-- Cookie Consent Banner -->
+    <script src="cookie-consent.js" defer></script>
+</head>
+<body class="antialiased min-h-screen flex flex-col bg-background-dark text-slate-100 selection:bg-primary selection:text-white">
 
-    <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-gradient-to-r from-santa-blue via-primary to-accent-gold z-[100] transition-all duration-150" style="width: 0%;"></div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10 transition-all duration-300" id="main-navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center gap-3">
-                    <div class="size-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30 shadow-[0_0_15px_rgba(13,89,242,0.3)]">
-                        <span class="material-symbols-outlined text-primary">security</span>
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Logo & Brand -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative size-11 bg-gradient-to-br from-primary/30 to-blue-900/40 rounded-2xl flex items-center justify-center border border-primary/40 shadow-glow-primary group-hover:scale-105 transition-transform">
+                        <span class="material-symbols-outlined text-primary text-2xl group-hover:rotate-12 transition-transform">local_police</span>
+                        <div class="absolute -top-1 -right-1 size-3 bg-accent-gold rounded-full border-2 border-background-dark animate-pulse"></div>
                     </div>
-                    <span class="font-bold text-lg tracking-tight">Adicionales <span class="text-primary">SF</span></span>
+                    <div class="flex flex-col">
+                        <span class="font-extrabold text-lg tracking-tight text-white flex items-center gap-1.5">
+                            Adicionales <span class="text-primary">SF</span>
+                        </span>
+                        <span class="text-[10px] font-mono text-santa-blue tracking-wider uppercase">Policía de Santa Fe</span>
+                    </div>
+                </a>
+
+                <!-- Nav Links (Desktop) -->
+                <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#caracteristicas" class="text-slate-300 hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Módulos PRO</a>
+                    <a href="#centinela" class="text-slate-300 hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-gold hover:after:w-full after:transition-all">Centinela AI</a>
+                    <a href="#capturas" class="text-slate-300 hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">Capturas</a>
+                    <a href="guias.html" class="text-slate-300 hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-santa-blue hover:after:w-full after:transition-all">Guías & Leyes</a>
+                    <a href="#faq" class="text-slate-300 hover:text-white transition-colors relative py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary hover:after:w-full after:transition-all">FAQ</a>
                 </div>
-                <div class="flex items-center gap-6">
-                    <a href="guias.html" class="hidden sm:block text-sm font-medium text-slate-300 hover:text-white transition-colors">Guías y Recursos</a>
-                    <a href="./app/" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all active:scale-95 flex items-center gap-2">
-                        Ingresar <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+
+                <!-- CTA Button -->
+                <div class="flex items-center gap-4">
+                    <a href="./app/" class="relative group overflow-hidden bg-primary hover:bg-primary-hover text-white px-6 py-3 rounded-2xl text-sm font-bold shadow-glow-primary transition-all active:scale-95 flex items-center gap-2">
+                        <span class="relative z-10 flex items-center gap-2">
+                            Ingresar a la App 
+                            <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                        </span>
+                        <div class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-primary opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <main class="flex-grow pt-24 pb-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mt-10 md:mt-20">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-primary mb-6 animate-pulse">
-                <span class="relative flex h-2 w-2">
-                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+    <!-- Main Content Container -->
+    <main class="flex-grow pt-28 pb-16 relative overflow-hidden">
+        
+        <!-- Ambient Background Light Orbs -->
+        <div class="absolute top-20 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-primary/15 rounded-full blur-[140px] pointer-events-none ambient-glow"></div>
+        <div class="absolute top-96 -left-40 w-[500px] h-[500px] bg-santa-blue/10 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-[1200px] -right-40 w-[600px] h-[600px] bg-accent-gold/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+        <!-- Hero Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 md:pt-16 pb-16 text-center relative z-10">
+            
+            <!-- Badge Pill -->
+            <div class="reveal-up inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-md text-xs font-semibold text-santa-blue mb-8 shadow-inner">
+                <span class="material-symbols-outlined text-accent-gold text-base">verified</span>
+                Plataforma Operativa y Financiera Oficial para la Policía de Santa Fe
+                <span class="flex h-2 w-2 relative">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
                 </span>
-                La plataforma definitiva para la Policía de Santa Fe
             </div>
             
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
-                Gestión Inteligente de <br class="hidden md:block" />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">Servicios Adicionales</span>
+            <!-- Hero Title -->
+            <h1 class="reveal-up delay-100 text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-stencil uppercase tracking-wide mb-8 leading-[1.15] select-none">
+                <span class="block text-white text-glow-police drop-shadow-[0_4px_10px_rgba(0,0,0,0.9)]">
+                    GESTIÓN INTELIGENTE DE
+                </span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-santa-blue via-primary via-60% to-accent-gold text-glow-gold drop-shadow-[0_4px_20px_rgba(13,89,242,0.4)]">
+                    SERVICIOS ADICIONALES
+                </span>
             </h1>
             
-            <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
-                Organizá tu agenda, calculá tus haberes exactos según las reglamentaciones vigentes y controlá tus ingresos en tiempo real. Todo desde una aplicación rápida, segura y que funciona sin conexión.
+            <!-- Hero Subtitle -->
+            <p class="reveal-up delay-200 text-base sm:text-xl text-slate-300 max-w-3xl mx-auto mb-10 leading-relaxed font-normal">
+                Organizá tu agenda de tercios, calculá tus haberes exactos de adicionales según la <strong class="text-white">Ley 14.283</strong> y Decretos 2026, generá actas de procedimiento en minutos y consultá al asistente legal <strong class="text-santa-blue">Centinela AI</strong>. Funciona <strong class="text-accent-gold">100% fuera de línea (PWA)</strong>.
             </p>
 
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="./app/" class="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-2xl text-base font-bold shadow-xl shadow-primary/30 transition-all active:scale-95 flex items-center justify-center gap-2">
-                    <span class="material-symbols-outlined">launch</span> Comenzar Gratis
+            <!-- Hero Buttons -->
+            <div class="reveal-up delay-300 flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="./app/" class="w-full sm:w-auto bg-gradient-to-r from-primary to-blue-600 hover:from-primary-hover hover:to-blue-700 text-white px-9 py-4 rounded-2xl text-base font-bold shadow-glow-primary transition-all active:scale-95 flex items-center justify-center gap-3 group">
+                    <span class="material-symbols-outlined text-xl">rocket_launch</span> 
+                    Abrir Aplicación Gratis
+                    <span class="material-symbols-outlined text-xl group-hover:translate-x-1 transition-transform">arrow_forward</span>
                 </a>
-                <a href="#caracteristicas" class="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white px-8 py-4 rounded-2xl text-base font-bold border border-white/10 transition-all">
-                    Saber Más
+                <a href="#capturas" class="w-full sm:w-auto glass-card hover:bg-white/10 text-white px-8 py-4 rounded-2xl text-base font-bold border border-white/10 transition-all flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-xl text-santa-blue">phonelink</span> 
+                    Ver Capturas y Módulos
                 </a>
             </div>
 
-            <!-- AdSense Banner Top -->
+            <!-- Hero Device Showcase Frame -->
+            <div class="reveal-scale delay-400 relative max-w-5xl mx-auto mt-6">
+                <!-- Outer Glow Backdrop -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-primary/30 via-santa-blue/20 to-accent-gold/20 rounded-[2.5rem] blur-2xl transform scale-95 opacity-80"></div>
+                
+                <!-- Main Showcase Card -->
+                <div class="relative glass-card p-4 sm:p-6 rounded-[2.5rem] border border-white/15 shadow-2xl overflow-hidden">
+                    <div class="relative rounded-2xl overflow-hidden border border-white/10 bg-slate-950">
+                        <img src="assets/landing_hero.png" alt="Adicionales Santa Fe App Preview" class="w-full h-auto object-cover rounded-2xl transform hover:scale-[1.01] transition-transform duration-700">
+                    </div>
+
+                    <!-- Floating Feature Badge 1 (Top Right) -->
+                    <div class="hidden sm:flex absolute top-10 right-10 glass-card p-3 px-4 rounded-2xl border border-white/20 items-center gap-3 shadow-xl backdrop-blur-xl animate-bounce" style="animation-duration: 4s;">
+                        <div class="size-10 rounded-xl bg-accent-gold/20 border border-accent-gold/40 flex items-center justify-center text-accent-gold">
+                            <span class="material-symbols-outlined text-xl">smart_toy</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-extrabold text-white">Centinela AI v10</p>
+                            <p class="text-[10px] text-slate-400">Ley 12.521 & ISEP Activos</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Feature Badge 2 (Bottom Left) -->
+                    <div class="hidden sm:flex absolute bottom-10 left-10 glass-card p-3 px-4 rounded-2xl border border-white/20 items-center gap-3 shadow-xl backdrop-blur-xl animate-bounce" style="animation-duration: 5s;">
+                        <div class="size-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                            <span class="material-symbols-outlined text-xl">verified</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-extrabold text-white">100% Precisión Salarial</p>
+                            <p class="text-[10px] text-slate-400">Ley 14283 & Dec. 0411/26</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Feature Badge 3 (Bottom Right) -->
+                    <div class="hidden sm:flex absolute bottom-10 right-10 glass-card p-3 px-4 rounded-2xl border border-white/20 items-center gap-3 shadow-xl backdrop-blur-xl">
+                        <div class="size-10 rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-xl">wifi_off</span>
+                        </div>
+                        <div class="text-left">
+                            <p class="text-xs font-extrabold text-white">Modo Offline PWA</p>
+                            <p class="text-[10px] text-slate-400">Sin consumo de datos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AdSense Top Banner Placement -->
             <div class="max-w-4xl mx-auto px-4 mt-16 flex justify-center">
-                <div class="w-full bg-[#101622]/40 backdrop-blur-md rounded-3xl border border-white/5 p-4 flex justify-center items-center overflow-hidden">
+                <div class="w-full glass-card rounded-3xl p-3 flex justify-center items-center overflow-hidden">
                     <ins class="adsbygoogle"
                          style="display:block; width:100%; max-width:728px; height:90px;"
                          data-ad-client="ca-pub-4261554477116731"
@@ -131,124 +309,365 @@
                     </script>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Features -->
-        <div id="caracteristicas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-32 mb-20">
-            <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">Herramientas diseñadas para el Oficial</h2>
+        <!-- Live Metrics Bar -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 relative z-10">
+            <div class="reveal-up glass-card p-8 rounded-3xl border border-white/10 shadow-2xl">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-white/5">
+                    
+                    <div class="space-y-1">
+                        <div class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-santa-blue to-primary">100%</div>
+                        <p class="text-xs font-medium text-slate-400">Ley 14283 & Dec. 0411/26</p>
+                    </div>
+
+                    <div class="space-y-1 pl-4">
+                        <div class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-accent-gold to-amber-300">15+</div>
+                        <p class="text-xs font-medium text-slate-400">Herramientas Policiales PRO</p>
+                    </div>
+
+                    <div class="space-y-1 pl-4">
+                        <div class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">0 ms</div>
+                        <p class="text-xs font-medium text-slate-400">Retardo Modo Sin Señal (PWA)</p>
+                    </div>
+
+                    <div class="space-y-1 pl-4">
+                        <div class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-400">24 / 7</div>
+                        <p class="text-xs font-medium text-slate-400">Asistente Legal Centinela AI</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- App Features Showcase Section -->
+        <section id="caracteristicas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 relative z-10">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="reveal-up text-xs font-bold text-accent-gold tracking-widest uppercase">Diseñado por y para el Efectivo</h2>
+                <h3 class="reveal-up delay-100 text-3xl sm:text-5xl font-black tracking-tight text-white">
+                    Herramientas Policiales de Alto Nivel
+                </h3>
+                <p class="reveal-up delay-200 text-base text-slate-400">
+                    Soluciones tecnológicas avanzadas diseñadas para simplificar el servicio operativo, las tareas administrativas en comisaría y la planificación financiera personal.
+                </p>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Feature 1: Centinela AI -->
+                <div class="reveal-up delay-100 glass-card p-8 rounded-3xl glass-card-hover relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 size-40 bg-accent-gold/10 rounded-full blur-3xl group-hover:bg-accent-gold/20 transition-all"></div>
+                    
+                    <div class="size-14 rounded-2xl bg-accent-gold/20 border border-accent-gold/30 flex items-center justify-center text-accent-gold mb-6 shadow-glow-gold">
+                        <span class="material-symbols-outlined text-3xl">smart_toy</span>
+                    </div>
+
+                    <span class="inline-block text-[10px] font-mono font-bold text-accent-gold px-2.5 py-1 rounded-full bg-accent-gold/10 border border-accent-gold/20 mb-3">INTELIGENCIA ARTIFICIAL</span>
+                    <h4 class="text-xl font-black text-white mb-3 group-hover:text-accent-gold transition-colors">Centinela AI v10</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Asistente legal virtual entrenado con la Ley 12.521, Decreto 461/15, Reforma Previsional 14.283, escalas salariales actualizadas y concursos ISEP. Respuestas inmediatas en servicio.
+                    </p>
+                </div>
+
+                <!-- Feature 2: Calculadora Salarial -->
+                <div class="reveal-up delay-200 glass-card p-8 rounded-3xl glass-card-hover relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 size-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all"></div>
+                    
+                    <div class="size-14 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center text-primary mb-6 shadow-glow-primary">
+                        <span class="material-symbols-outlined text-3xl">calculate</span>
+                    </div>
+
+                    <span class="inline-block text-[10px] font-mono font-bold text-primary px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 mb-3">FINANZAS & HABERES</span>
+                    <h4 class="text-xl font-black text-white mb-3 group-hover:text-primary transition-colors">Calculadora de Adicionales</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Cálculo automático de haberes para servicios adicionales Públicos, Privados, Bancarios y OSPE. Proyección de recargos nocturnos, fines de semana y liquidaciones finales.
+                    </p>
+                </div>
+
+                <!-- Feature 3: Generador de Actas PRO -->
+                <div class="reveal-up delay-300 glass-card p-8 rounded-3xl glass-card-hover relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 size-40 bg-emerald-500/10 rounded-full blur-3xl group-hover:bg-emerald-500/20 transition-all"></div>
+                    
+                    <div class="size-14 rounded-2xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-6">
+                        <span class="material-symbols-outlined text-3xl">description</span>
+                    </div>
+
+                    <span class="inline-block text-[10px] font-mono font-bold text-emerald-400 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-3">PROCEDIMIENTOS PRO</span>
+                    <h4 class="text-xl font-black text-white mb-3 group-hover:text-emerald-400 transition-colors">Generador de Actas Policiales</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Confección estandarizada de actas de aprehensión, requisa, allanamiento, inspección y custodia con GPS y firma digital. Exportación directa a PDF e informes de WhatsApp.
+                    </p>
+                </div>
+
+                <!-- Feature 4: Agenda & Tercios -->
+                <div class="reveal-up delay-100 glass-card p-8 rounded-3xl glass-card-hover relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 size-40 bg-santa-blue/10 rounded-full blur-3xl group-hover:bg-santa-blue/20 transition-all"></div>
+                    
+                    <div class="size-14 rounded-2xl bg-santa-blue/20 border border-santa-blue/30 flex items-center justify-center text-santa-blue mb-6">
+                        <span class="material-symbols-outlined text-3xl">calendar_month</span>
+                    </div>
+
+                    <span class="inline-block text-[10px] font-mono font-bold text-santa-blue px-2.5 py-1 rounded-full bg-santa-blue/10 border border-santa-blue/20 mb-3">ORGANIZACIÓN DE GUARDIA</span>
+                    <h4 class="text-xl font-black text-white mb-3 group-hover:text-santa-blue transition-colors">Agenda & Crono-Calendario</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Control total de tus tercios y ciclos de guardia (24x48, 12x36). Notificaciones previas a tomar servicio y prevención automática de superposiciones de turnos.
+                    </p>
+                </div>
+
+                <!-- Feature 5: Campus ISEP 2026 -->
+                <div class="reveal-up delay-200 glass-card p-8 rounded-3xl glass-card-hover relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 size-40 bg-purple-500/10 rounded-full blur-3xl group-hover:bg-purple-500/20 transition-all"></div>
+                    
+                    <div class="size-14 rounded-2xl bg-purple-500/20 border border-purple-500/30 flex items-center justify-center text-purple-400 mb-6">
+                        <span class="material-symbols-outlined text-3xl">psychology</span>
+                    </div>
+
+                    <span class="inline-block text-[10px] font-mono font-bold text-purple-400 px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 mb-3">NOTEBOOK IA ISEP</span>
+                    <h4 class="text-xl font-black text-white mb-3 group-hover:text-purple-400 transition-colors">Campus de Ascenso Policial</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Material de estudio oficial ISEP 2026 organizado por jerarquías: resúmenes sintéticos, flashcards 3D interactivas, simulador de 50 preguntas y guías de elaboración de proyectos.
+                    </p>
+                </div>
+
+                <!-- Feature 6: PWA & Resilience -->
+                <div class="reveal-up delay-300 glass-card p-8 rounded-3xl glass-card-hover relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 size-40 bg-cyan-500/10 rounded-full blur-3xl group-hover:bg-cyan-500/20 transition-all"></div>
+                    
+                    <div class="size-14 rounded-2xl bg-cyan-500/20 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-6">
+                        <span class="material-symbols-outlined text-3xl">signal_cellular_off</span>
+                    </div>
+
+                    <span class="inline-block text-[10px] font-mono font-bold text-cyan-400 px-2.5 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 mb-3">RESILIENCIA TOTAL</span>
+                    <h4 class="text-xl font-black text-white mb-3 group-hover:text-cyan-400 transition-colors">Funcionamiento Sin Señal</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed">
+                        Diseñada como PWA de máxima resiliencia. Accedé a tu agenda, simuladores y actas en patrullaje rural o zonas sin cobertura telefónica. Sincronización automática de respaldo.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Centinela AI Feature Highlight Section -->
+        <section id="centinela" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="reveal-scale glass-card p-8 sm:p-12 rounded-[2.5rem] border border-white/15 relative overflow-hidden bg-gradient-to-br from-card-dark via-slate-950 to-blue-950/40">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    
+                    <div class="space-y-6 text-left">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-gold/10 border border-accent-gold/20 text-xs font-mono font-bold text-accent-gold">
+                            <span class="material-symbols-outlined text-sm">smart_toy</span>
+                            TECNOLOGÍA CENTINELA AI V10
+                        </div>
+
+                        <h3 class="text-3xl sm:text-5xl font-black text-white leading-tight">
+                            Tu Asesor Legal Policial <br />
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-gold via-amber-300 to-white">
+                                Disponible 24/7 en Servicio
+                            </span>
+                        </h3>
+
+                        <p class="text-slate-300 text-base leading-relaxed">
+                            Resuelve dudas normativas al instante durante tu turno de guardia. Centinela AI comprende el marco legal específico de la Provincia de Santa Fe y te brinda asistencia en procedimientos penales y administrativos.
+                        </p>
+
+                        <div class="space-y-3 pt-2">
+                            <div class="flex items-center gap-3 text-sm font-semibold text-slate-200">
+                                <div class="size-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+                                    <span class="material-symbols-outlined text-xs">check</span>
+                                </div>
+                                Ley N° 12.521 (Estatuto y Derechos del Personal Policial)
+                            </div>
+                            <div class="flex items-center gap-3 text-sm font-semibold text-slate-200">
+                                <div class="size-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+                                    <span class="material-symbols-outlined text-xs">check</span>
+                                </div>
+                                Decreto N° 0461/15 (Régimen Disciplinario y Sumarios)
+                            </div>
+                            <div class="flex items-center gap-3 text-sm font-semibold text-slate-200">
+                                <div class="size-6 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 shrink-0">
+                                    <span class="material-symbols-outlined text-xs">check</span>
+                                </div>
+                                Código Procesal Penal (CPP) y Protocolo 0800 MPA
+                            </div>
+                        </div>
+
+                        <div class="pt-4">
+                            <a href="./app/#asistente/centinela" class="inline-flex items-center gap-3 bg-accent-gold hover:bg-amber-400 text-slate-950 font-black px-8 py-4 rounded-2xl text-sm shadow-glow-gold transition-all active:scale-95">
+                                Probá a Centinela AI Ahora
+                                <span class="material-symbols-outlined text-base">arrow_forward</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Simulated Chat Preview Box -->
+                    <div class="glass-card p-6 rounded-3xl border border-white/10 bg-slate-950/80 shadow-2xl space-y-4">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="size-10 rounded-full bg-accent-gold/20 border border-accent-gold/40 flex items-center justify-center text-accent-gold">
+                                    <span class="material-symbols-outlined text-xl">smart_toy</span>
+                                </div>
+                                <div class="text-left">
+                                    <h4 class="text-sm font-bold text-white leading-tight">Centinela AI</h4>
+                                    <span class="text-[10px] text-emerald-400 font-mono flex items-center gap-1">
+                                        <span class="size-1.5 rounded-full bg-emerald-400 animate-ping"></span> En línea · Base Legal 2026
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="text-[10px] font-mono text-slate-500 uppercase px-2 py-1 rounded-md bg-white/5">DEMO EN VIVO</span>
+                        </div>
+
+                        <div class="space-y-3 text-xs text-left">
+                            <!-- User Message -->
+                            <div class="flex justify-end">
+                                <div class="bg-primary text-white p-3 rounded-2xl rounded-tr-none max-w-[85%]">
+                                    ¿Cuál es el procedimiento obligatorio al aprehender en flagrancia y llamar al 0800 MPA?
+                                </div>
+                            </div>
+
+                            <!-- Centinela Response -->
+                            <div class="flex justify-start gap-2.5">
+                                <div class="size-7 rounded-full bg-accent-gold/20 flex items-center justify-center text-accent-gold shrink-0 mt-1">
+                                    <span class="material-symbols-outlined text-xs">smart_toy</span>
+                                </div>
+                                <div class="bg-white/5 border border-white/10 text-slate-200 p-3.5 rounded-2xl rounded-tl-none max-w-[85%] space-y-1.5 leading-relaxed">
+                                    <p class="font-bold text-accent-gold">Centinela AI:</p>
+                                    <p>Según el <strong>Art. 268 del CPP</strong> y la Resolución MPA 2026:</p>
+                                    <ol class="list-decimal list-inside space-y-1 text-slate-300">
+                                        <li>Informa de inmediato sus derechos al detenido.</li>
+                                        <li>Preservá el lugar del hecho sin alterar elementos.</li>
+                                        <li>Comunícate al <strong>0800 MPA</strong> para recibir la directiva grabada del fiscal de turno.</li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- App Screenshots / Capturas Showcase -->
+        <section id="capturas" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10 text-center">
+            
+            <div class="max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="reveal-up text-xs font-bold text-santa-blue tracking-widest uppercase">Experiencia de Usuario Premium</h2>
+                <h3 class="reveal-up delay-100 text-3xl sm:text-5xl font-black tracking-tight text-white">
+                    Interfaz Móvil Moderna & Fluida
+                </h3>
+                <p class="reveal-up delay-200 text-base text-slate-400">
+                    Construida con los últimos estándares de diseño moderno: glassmorphism, modo oscuro nativo y controles táctiles optimizados para guardias operativas.
+                </p>
+            </div>
+
+            <!-- Showcase Image Banner -->
+            <div class="reveal-scale delay-300 relative max-w-5xl mx-auto">
+                <div class="glass-card p-4 sm:p-6 rounded-[2.5rem] border border-white/15 shadow-2xl overflow-hidden group">
+                    <img src="assets/landing_features.png" alt="Capturas y Módulos de Adicionales Santa Fe" class="w-full h-auto object-cover rounded-2xl group-hover:scale-[1.01] transition-transform duration-500">
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Guides Section -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 gap-4">
+                <div>
+                    <h2 class="text-xs font-bold text-primary tracking-widest uppercase mb-2">Información Técnica & Legal</h2>
+                    <h3 class="text-3xl font-black text-white">Guías Destacadas para el Efectivo</h3>
+                </div>
+                <a href="guias.html" class="inline-flex items-center gap-2 text-primary hover:text-cyan-400 font-bold transition-colors">
+                    Ver Biblioteca Completa <span class="material-symbols-outlined text-base">arrow_forward</span>
+                </a>
+            </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Feature 1 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:border-primary/50 transition-colors">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
-                    <div class="size-14 bg-primary/20 rounded-2xl flex items-center justify-center mb-6 border border-primary/20">
-                        <span class="material-symbols-outlined text-primary text-3xl">calculate</span>
-                    </div>
-                    <h3 class="text-xl font-bold mb-3">Cálculo Automático</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Las tarifas y horas de tu servicio de policía adicional se calculan de manera automática y exacta de acuerdo a la Ley 14283 y normativas actuales.</p>
-                </div>
                 
-                <!-- Feature 2 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:border-cyan-500/50 transition-colors">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
-                    <div class="size-14 bg-cyan-500/20 rounded-2xl flex items-center justify-center mb-6 border border-cyan-500/20">
-                        <span class="material-symbols-outlined text-cyan-400 text-3xl">calendar_month</span>
+                <a href="guia-calculo-adicionales.html" class="reveal-up delay-100 glass-card p-6 rounded-3xl glass-card-hover flex flex-col justify-between group">
+                    <div>
+                        <span class="text-[10px] font-mono font-bold px-3 py-1 bg-primary/20 text-primary rounded-full mb-4 inline-block">NORMATIVA VIGENTE</span>
+                        <h4 class="text-lg font-bold text-white group-hover:text-primary transition-colors mb-2">Cálculo de Adicionales en Santa Fe</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Conocé la fórmula exacta para liquidar tus horas de servicio adicional según la Ley 14.283 y decretos provinciales.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Agenda Policial</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Gestiona tu calendario de guardias y turnos para evitar superposiciones, organizando tu jornada laboral de forma eficiente e inteligente.</p>
-                </div>
+                    <span class="text-xs font-bold text-primary flex items-center gap-1">Leer Guía Completa <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+                </a>
 
-                <!-- Feature 3 -->
-                <div class="glass-card p-8 rounded-3xl relative overflow-hidden group hover:border-emerald-500/50 transition-colors">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl -mr-10 -mt-10"></div>
-                    <div class="size-14 bg-emerald-500/20 rounded-2xl flex items-center justify-center mb-6 border border-emerald-500/20">
-                        <span class="material-symbols-outlined text-emerald-400 text-3xl">monitoring</span>
+                <a href="guia-organizacion-turnos.html" class="reveal-up delay-200 glass-card p-6 rounded-3xl glass-card-hover flex flex-col justify-between group">
+                    <div>
+                        <span class="text-[10px] font-mono font-bold px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full mb-4 inline-block">PRODUCTIVIDAD DE GUARDIA</span>
+                        <h4 class="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors mb-2">Organización de Tercios y Guardias</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Estrategias prácticas para prevenir el agotamiento físico, ordenar tus descansos y evitar superposiciones de turnos.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Estadísticas y Finanzas</h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">Obtén gráficos de tus ingresos mensuales, diferencia el estado de los cobros (OSPE, Municipios, Privados) y lleva el control absoluto de tu dinero.</p>
-                </div>
+                    <span class="text-xs font-bold text-cyan-400 flex items-center gap-1">Leer Guía Completa <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+                </a>
+
+                <a href="guia-tipos-servicios.html" class="reveal-up delay-300 glass-card p-6 rounded-3xl glass-card-hover flex flex-col justify-between group">
+                    <div>
+                        <span class="text-[10px] font-mono font-bold px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full mb-4 inline-block">CATEGORÍAS DE SERVICIO</span>
+                        <h4 class="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">Servicios Públicos vs. Privados</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-4">
+                            Diferencias entre los adicionales contratados por municipios, bancos y entidades privadas en la Provincia de Santa Fe.
+                        </p>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-400 flex items-center gap-1">Leer Guía Completa <span class="material-symbols-outlined text-sm">arrow_forward</span></span>
+                </a>
+
             </div>
-        </div>
+        </section>
 
-        <!-- Últimas Guías -->
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-20">
-            <div class="flex justify-between items-end mb-10">
-                <div>
-                    <h2 class="text-3xl font-bold mb-2">Recursos para el Efectivo</h2>
-                    <p class="text-slate-400">Mantente informado sobre reglamentaciones y mejora tu organización.</p>
-                </div>
-                <a href="guias.html" class="hidden sm:flex text-primary font-bold items-center gap-1 hover:gap-2 transition-all">Ver todas <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
+        <!-- FAQ Section -->
+        <section id="faq" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+            <div class="text-center mb-12 space-y-3">
+                <h2 class="reveal-up text-xs font-bold text-accent-gold tracking-widest uppercase">Transparencia & Respuestas</h2>
+                <h3 class="reveal-up delay-100 text-3xl font-black text-white">Preguntas Frecuentes</h3>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Guide 1 -->
-                <a href="guia-calculo-adicionales.html" class="glass-card p-6 rounded-3xl group hover:border-primary/50 transition-colors flex flex-col h-full">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-xs font-bold px-3 py-1 bg-primary/20 text-primary rounded-full">Normativa</span>
-                    </div>
-                    <h3 class="text-lg font-bold mb-2 group-hover:text-primary transition-colors">Cómo se calculan las horas de Policía Adicional en Santa Fe</h3>
-                    <p class="text-slate-400 text-sm flex-grow">Descubrí la fórmula oficial para calcular tus haberes según la Ley 14283, los decretos vigentes y cómo evitar errores en tus estimaciones.</p>
-                </a>
+            <div class="space-y-4">
                 
-                <!-- Guide 2 -->
-                <a href="guia-organizacion-turnos.html" class="glass-card p-6 rounded-3xl group hover:border-cyan-500/50 transition-colors flex flex-col h-full">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-xs font-bold px-3 py-1 bg-cyan-500/20 text-cyan-400 rounded-full">Productividad</span>
+                <div class="reveal-up delay-100 glass-card p-6 rounded-2xl text-left cursor-pointer group" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-base font-bold text-white flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">help</span> ¿Es una plataforma oficial del Gobierno de Santa Fe?
+                        </h4>
+                        <span class="material-symbols-outlined text-slate-400 group-hover:text-white transition-transform faq-icon">expand_more</span>
                     </div>
-                    <h3 class="text-lg font-bold mb-2 group-hover:text-cyan-400 transition-colors">Consejos para organizar tu agenda de turnos y guardias</h3>
-                    <p class="text-slate-400 text-sm flex-grow">Aprende estrategias prácticas para organizar tus servicios adicionales, evitar el agotamiento y llevar un registro ordenado de todo.</p>
-                </a>
-
-                <!-- Guide 3 -->
-                <a href="guia-tipos-servicios.html" class="glass-card p-6 rounded-3xl group hover:border-emerald-500/50 transition-colors flex flex-col h-full hidden md:flex">
-                    <div class="flex items-center gap-2 mb-3">
-                        <span class="text-xs font-bold px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full">Finanzas</span>
+                    <div class="faq-answer mt-3 text-slate-400 text-sm leading-relaxed hidden">
+                        No. Adicionales Santa Fe es una herramienta independiente desarrollada por y para el personal policial con el fin de brindar auxilio en la gestión del tiempo, estimaciones financieras y consulta normativa. Todos los montos calculados se basan strictly en decretos y leyes de alcance público.
                     </div>
-                    <h3 class="text-lg font-bold mb-2 group-hover:text-emerald-400 transition-colors">Diferencias entre servicios Públicos, Privados y Bancarios</h3>
-                    <p class="text-slate-400 text-sm flex-grow">Conoce las distintas categorías de servicio adicional en Santa Fe, sus tarifas correspondientes y los canales de cobro asociados.</p>
-                </a>
-            </div>
-            <div class="mt-6 text-center sm:hidden">
-                <a href="guias.html" class="inline-flex text-primary font-bold items-center gap-1">Ver todas las guías <span class="material-symbols-outlined text-[18px]">arrow_forward</span></a>
-            </div>
-        </div>
-
-        <!-- FAQ Section for AdSense Content Requirements -->
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-20 mb-20">
-            <h2 class="text-3xl font-bold text-center mb-10">Preguntas Frecuentes e Información Útil</h2>
-            
-            <div class="space-y-6">
-                <div class="glass-card p-6 rounded-2xl">
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">help</span> ¿Qué es Adicionales Santa Fe?
-                    </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Adicionales Santa Fe es una herramienta digital progresiva (PWA) desarrollada de forma independiente para asistir a los efectivos de la Policía de la Provincia de Santa Fe en la gestión, cálculo y organización de sus servicios de Policía Adicional. No es una plataforma gubernamental oficial, sino un servicio de utilidad diseñado para optimizar el control personal de las finanzas y el tiempo del personal policial.
-                    </p>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl">
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">gavel</span> ¿En qué normativas se basan los cálculos?
-                    </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        La calculadora y la agenda integran la lógica tarifaria estipulada en las reglamentaciones vigentes, tales como la <strong>Ley 14283</strong> y las disposiciones actualizadas sobre el servicio de Policía Adicional (incluyendo la clasificación de servicios Públicos, Privados y bancarios). Garantizamos que la plataforma se actualiza regularmente ante cada decreto salarial (ej. el Decreto 2026-00000411) para ofrecer estimaciones precisas de los montos a percibir.
-                    </p>
+                <div class="reveal-up delay-200 glass-card p-6 rounded-2xl text-left cursor-pointer group" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-base font-bold text-white flex items-center gap-3">
+                            <span class="material-symbols-outlined text-accent-gold">gavel</span> ¿En qué leyes se basan las respuestas de Centinela AI?
+                        </h4>
+                        <span class="material-symbols-outlined text-slate-400 group-hover:text-white transition-transform faq-icon">expand_more</span>
+                    </div>
+                    <div class="faq-answer mt-3 text-slate-400 text-sm leading-relaxed hidden">
+                        Centinela AI integra la Ley del Personal Policial N° 12.521, el Régimen Disciplinario Decreto N° 0461/15, la Reforma Previsional Ley N° 14.283, el Código Procesal Penal de Santa Fe, el Manual MIRAF y los contenidos de estudio oficial del ISEP 2026.
+                    </div>
                 </div>
 
-                <div class="glass-card p-6 rounded-2xl">
-                    <h3 class="text-lg font-bold text-white mb-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">wifi_off</span> ¿Funciona sin conexión a Internet?
-                    </h3>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Sí. Al estar construida como una Aplicación Web Progresiva (PWA), puedes instalarla directamente en la pantalla de inicio de tu celular (Android o iOS). Una vez cargada, su <em>Service Worker</em> permite utilizar la agenda, calcular servicios y ver tu historial incluso si te encuentras en zonas sin cobertura o sin conexión a datos móviles. Tus datos se sincronizarán al recuperar la señal.
-                    </p>
+                <div class="reveal-up delay-300 glass-card p-6 rounded-2xl text-left cursor-pointer group" onclick="toggleFaq(this)">
+                    <div class="flex justify-between items-center">
+                        <h4 class="text-base font-bold text-white flex items-center gap-3">
+                            <span class="material-symbols-outlined text-emerald-400">wifi_off</span> ¿Cómo se instala el modo sin conexión (PWA)?
+                        </h4>
+                        <span class="material-symbols-outlined text-slate-400 group-hover:text-white transition-transform faq-icon">expand_more</span>
+                    </div>
+                    <div class="faq-answer mt-3 text-slate-400 text-sm leading-relaxed hidden">
+                        Ingresá a la app desde tu celular (Chrome o Safari) y tocá en "Añadir a la pantalla de inicio" o "Instalar Aplicación". Una vez descargada, podrás usar la agenda, la calculadora y las guías de estudio sin depender de la señal celular.
+                    </div>
                 </div>
+
             </div>
 
-            <!-- AdSense Banner Bottom -->
+            <!-- AdSense Bottom Placement -->
             <div class="max-w-4xl mx-auto px-4 mt-16 flex justify-center">
-                <div class="w-full bg-[#101622]/40 backdrop-blur-md rounded-3xl border border-white/5 p-4 flex justify-center items-center overflow-hidden">
+                <div class="w-full glass-card rounded-3xl p-3 flex justify-center items-center overflow-hidden">
                     <ins class="adsbygoogle"
                          style="display:block; width:100%; max-width:728px; height:90px;"
                          data-ad-client="ca-pub-4261554477116731"
@@ -260,36 +679,92 @@
                     </script>
                 </div>
             </div>
-        </div>
+        </section>
+
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-white/10 glass-card mt-auto">
-        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+    <footer class="border-t border-white/10 glass-card mt-auto relative z-20">
+        <!-- Santa Fe Flag Watermark Line -->
+        <div class="h-1 w-full flex">
+            <div class="w-1/3 bg-santa-blue"></div>
+            <div class="w-1/3 bg-white flex items-center justify-center">
+                <div class="size-1.5 rounded-full bg-accent-gold"></div>
+            </div>
+            <div class="w-1/3 bg-santa-blue"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-2">
-                    <div class="size-8 bg-primary/20 rounded-lg flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[16px] text-primary">security</span>
+                
+                <div class="flex items-center gap-3">
+                    <div class="size-9 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30 text-primary">
+                        <span class="material-symbols-outlined text-lg">local_police</span>
                     </div>
-                    <span class="font-bold text-sm text-slate-300">Adicionales Santa Fe &copy; 2026</span>
+                    <div>
+                        <span class="font-bold text-sm text-slate-200 block">Adicionales Santa Fe &copy; 2026</span>
+                        <span class="text-[10px] text-slate-500 font-mono">Herramienta independiente para la Policía de Santa Fe</span>
+                    </div>
                 </div>
                 
-                <div class="flex flex-wrap justify-center gap-4 text-sm text-slate-400">
-                    <a href="guias.html" class="hover:text-white transition-colors">Guías</a>
-                    <span>•</span>
-                    <a href="privacy.html" class="hover:text-white transition-colors">Privacidad</a>
-                    <span>•</span>
-                    <a href="terms.html" class="hover:text-white transition-colors">Términos</a>
-                    <span>•</span>
-                    <a href="about.html" class="hover:text-white transition-colors">Contacto</a>
+                <div class="flex flex-wrap justify-center gap-6 text-xs font-semibold text-slate-400">
+                    <a href="guias.html" class="hover:text-white transition-colors">Biblioteca de Guías</a>
+                    <a href="privacy.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+                    <a href="terms.html" class="hover:text-white transition-colors">Términos de Servicio</a>
+                    <a href="about.html" class="hover:text-white transition-colors">Contacto & Desarrollador</a>
                 </div>
             </div>
-            <div class="mt-4 text-center text-xs text-slate-600 max-w-2xl mx-auto">
-                Herramienta no oficial. Los montos calculados son estimaciones y dependen estrictamente de los decretos y liquidaciones finales del gobierno provincial.
+
+            <div class="mt-8 border-t border-white/5 pt-4 text-center text-[11px] text-slate-500 max-w-3xl mx-auto leading-relaxed">
+                Descargo de responsabilidad: Esta aplicación no representa ni forma parte oficial del Gobierno de la Provincia de Santa Fe ni del Ministerio de Justicia y Seguridad. Es una iniciativa de asistencia independiente.
             </div>
         </div>
     </footer>
 
-    
+    <!-- Interactive Scripts for Scroll Reveal & Progress -->
+    <script>
+        // 1. Scroll Progress Bar Update
+        window.addEventListener('scroll', () => {
+            const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('scroll-progress').style.width = scrolled + '%';
+        });
+
+        // 2. Intersection Observer for Scroll Reveal Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('reveal-active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal-up, .reveal-scale');
+            revealElements.forEach(el => observer.observe(el));
+        });
+
+        // 3. FAQ Accordion Toggle Function
+        function toggleFaq(card) {
+            const answer = card.querySelector('.faq-answer');
+            const icon = card.querySelector('.faq-icon');
+            
+            const isHidden = answer.classList.contains('hidden');
+            if (isHidden) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+    </script>
 </body>
 </html>
