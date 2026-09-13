@@ -103,6 +103,42 @@
             text-shadow: 0 0 25px rgba(246, 180, 38, 0.25), 0 4px 15px rgba(0, 0, 0, 0.9);
         }
 
+        /* Estilo Metalizado 3D slanted (Referencia "POLICE") */
+        .font-police-metal {
+            font-family: 'Chakra Petch', 'Orbitron', 'Black Ops One', sans-serif;
+            font-weight: 900;
+            font-style: italic;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transform: skewX(-8deg);
+            display: inline-block;
+        }
+
+        /* Degradado Cromo Metalizado Plata */
+        .text-metal-chrome {
+            background: linear-gradient(180deg, #FFFFFF 0%, #E2E8F0 40%, #94A3B8 65%, #64748B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+        }
+
+        /* Degradado Cromo Azul/Dorado Policial SF */
+        .text-metal-sf {
+            background: linear-gradient(180deg, #FFFFFF 0%, #38BDF8 35%, #0D59F2 70%, #F6B426 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 6px rgba(13, 89, 242, 0.6)) drop-shadow(0 0 12px rgba(246, 180, 38, 0.5));
+        }
+
+        /* Barra de navegación con iluminación de sirena táctica */
+        .bg-navbar-siren {
+            background: linear-gradient(90deg, 
+                rgba(13, 89, 242, 0.25) 0%, 
+                rgba(9, 13, 22, 0.95) 25%, 
+                rgba(9, 13, 22, 0.95) 75%, 
+                rgba(239, 68, 68, 0.20) 100%);
+        }
+
         /* Capa de Ambient Mesh Gradients (Ultra Clean Executive) */
         .bg-ambient-executive {
             position: fixed;
@@ -244,19 +280,27 @@
 
     <!-- Navbar -->
     <header class="sticky top-0 w-full z-50 transition-all duration-300">
-        <nav class="bg-[#090d16]/90 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+        <nav class="bg-navbar-siren backdrop-blur-xl border-b border-white/10 shadow-2xl relative overflow-hidden">
+            <!-- Linea inferior degradada brillante -->
+            <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-santa-blue via-primary via-50% to-santa-gold opacity-80"></div>
+            
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center h-20">
-                    <!-- Logo / Identidad Institucional -->
+                    <!-- Logo / Identidad Institucional Metalizada 3D -->
                     <a href="#" class="flex items-center gap-3.5 group">
-                        <div class="size-11 bg-gradient-to-br from-primary via-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center border border-white/20 shadow-[0_0_20px_rgba(13,89,242,0.35)] group-hover:scale-105 transition-transform">
-                            <span class="material-symbols-outlined text-white text-2xl">shield</span>
+                        <!-- Escudo Oficial 3D de Santa Fe -->
+                        <div class="relative size-12 rounded-2xl bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 border border-santa-gold/40 shadow-[0_0_20px_rgba(246,180,38,0.35)] group-hover:scale-110 group-hover:border-santa-gold transition-all duration-300 flex items-center justify-center p-1 overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-tr from-primary/30 to-santa-gold/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <img src="assets/santa_fe_badge_gold.png" alt="Escudo Oficial Policía de Santa Fe" class="size-full object-contain filter drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] relative z-10">
                         </div>
                         <div class="flex flex-col">
-                            <span class="font-extrabold text-xl tracking-tight text-white group-hover:text-cyan-300 transition-colors font-heading">
-                                Adicionales <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-santa-gold">SF</span>
+                            <span class="font-police-metal text-xl sm:text-2xl tracking-wider text-white">
+                                <span class="text-metal-chrome">ADICIONALES</span> <span class="text-metal-sf">SF</span>
                             </span>
-                            <span class="font-mono-code text-[10px] uppercase font-bold tracking-[0.2em] text-slate-400">Policía de Santa Fe</span>
+                            <span class="font-mono-code text-[9px] sm:text-[10px] uppercase font-extrabold tracking-[0.22em] text-slate-300 flex items-center gap-1.5">
+                                <span class="size-1.5 rounded-full bg-cyan-400 animate-ping"></span>
+                                POLICÍA DE SANTA FE
+                            </span>
                         </div>
                     </a>
 
