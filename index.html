@@ -264,6 +264,17 @@
             font-variant-numeric: tabular-nums;
         }
 
+        /* 3D Scroll Morph Masking & Blending */
+        .mask-radial-vignette {
+            -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 82%);
+            mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 82%);
+        }
+
+        .morph-layer {
+            will-change: transform, opacity;
+            transition: opacity 0.15s cubic-bezier(0.25, 1, 0.5, 1), transform 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
         /* AdSense Auto-Collapse (Prevents grey boxes or broken icons on mobile) */
         .ad-container-box {
             display: none;
@@ -287,9 +298,22 @@
     <div class="bg-ambient-executive"></div>
     <div class="bg-grid-pattern"></div>
 
-    <!-- ESCUDO DE LA POLICÍA DE SANTA FE CENTRADO EN EL HERO (CRECE AL SCROLL) -->
-    <div id="hero-central-badge" class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 transition-transform duration-100 ease-out" style="opacity: 0.40;">
-        <img src="assets/santa_fe_badge_gold.png" alt="Escudo Oficial Policía de Santa Fe" class="w-80 sm:w-[480px] md:w-[620px] drop-shadow-[0_0_90px_rgba(246,180,38,0.5)] animate-pulse" style="mix-blend-mode: screen;">
+    <!-- LIENZO DE ANIMACIÓN SCROLL 3D MULTICAPA (MAPA SANTA FE -> PATRULLEROS -> ESCUDO POLICIAL) -->
+    <div id="scroll-morph-canvas" class="fixed inset-0 pointer-events-none z-0 overflow-hidden flex items-center justify-center">
+        <!-- Capa 1: Mapa Bota de Santa Fe (Etapa Inicial Hero: 0px - 500px) -->
+        <div id="morph-layer-map" class="morph-layer absolute w-[340px] sm:w-[500px] md:w-[680px]" style="opacity: 0.38; transform: translate(-50%, -50%) scale(1) rotate(0deg); mix-blend-mode: lighten; top: 50%; left: 50%;">
+            <img src="assets/santa_fe_map.jpeg" alt="Mapa Provincia de Santa Fe" class="w-full h-auto rounded-full filter drop-shadow-[0_0_90px_rgba(0,164,186,0.65)] mask-radial-vignette opacity-85">
+        </div>
+
+        <!-- Capa 2: Patrulleros Policiales (Etapa Intermedia Características: 350px - 1050px) -->
+        <div id="morph-layer-units" class="morph-layer absolute w-[340px] sm:w-[500px] md:w-[660px]" style="opacity: 0; transform: translate(-50%, -50%) scale(0.8) rotate(0deg); mix-blend-mode: screen; top: 50%; left: 50%;">
+            <img src="assets/patrulleros.jpeg" alt="Patrulleros de la Policía de Santa Fe" class="w-full h-auto rounded-3xl filter drop-shadow-[0_0_100px_rgba(13,89,242,0.75)] mask-radial-vignette opacity-90 border border-cyan-400/20">
+        </div>
+
+        <!-- Capa 3: Escudo Oficial Policial (Etapa Final Asistente / Cierre: > 800px) -->
+        <div id="morph-layer-badge" class="morph-layer absolute w-[320px] sm:w-[460px] md:w-[620px]" style="opacity: 0; transform: translate(-50%, -50%) scale(0.7) rotate(-5deg); mix-blend-mode: screen; top: 50%; left: 50%;">
+            <img src="assets/escudo_policia.jpeg" alt="Escudo Oficial de la Policía de Santa Fe" class="w-full h-auto rounded-full filter drop-shadow-[0_0_110px_rgba(246,180,38,0.85)] mask-radial-vignette">
+        </div>
     </div>
 
     <!-- Navbar 2026 Executive -->
@@ -745,20 +769,83 @@
                 horasInput.addEventListener('input', recalcular);
             }
 
-            // Scroll Scale & Rotate Effect for Central Gold Star Badge (Expands to fill entire background)
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                const centralBadge = document.getElementById('hero-central-badge');
-                if (centralBadge) {
-                    const rawScale = 1 + (scrolled / 280) * 1.3;
-                    const scale = Math.min(rawScale, 3.8);
-                    const opacity = Math.max(0.12, 0.40 - (scrolled / 1800));
-                    const rotation = scrolled * 0.02;
-                    
-                    centralBadge.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(3)}) rotate(${rotation.toFixed(2)}deg)`;
-                    centralBadge.style.opacity = opacity.toFixed(2);
+            // 3D Scroll-Morph Multi-Layer Animation Controller
+            const layerMap = document.getElementById('morph-layer-map');
+            const layerUnits = document.getElementById('morph-layer-units');
+            const layerBadge = document.getElementById('morph-layer-badge');
+
+            let ticking = false;
+
+            function updateScrollMorph() {
+                const scrolled = window.scrollY || window.pageYOffset;
+                
+                // --- CAPA 1: MAPA BOTA DE SANTA FE (0px -> 600px) ---
+                if (layerMap) {
+                    if (scrolled <= 650) {
+                        const progress = Math.min(scrolled / 550, 1);
+                        const opacity = Math.max(0, 0.42 - progress * 0.35);
+                        const scale = 1 + progress * 0.6;
+                        const rotate = scrolled * 0.015;
+                        layerMap.style.opacity = opacity.toFixed(3);
+                        layerMap.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(3)}) rotate(${rotate.toFixed(2)}deg)`;
+                        layerMap.style.display = 'block';
+                    } else {
+                        layerMap.style.display = 'none';
+                    }
                 }
-            });
+
+                // --- CAPA 2: PATRULLEROS POLICIALES (350px -> 1200px) ---
+                if (layerUnits) {
+                    if (scrolled >= 250 && scrolled <= 1250) {
+                        let opacity = 0;
+                        if (scrolled < 550) {
+                            // Fade in
+                            opacity = (scrolled - 250) / 300 * 0.45;
+                        } else if (scrolled <= 900) {
+                            // Mid hold
+                            opacity = 0.45;
+                        } else {
+                            // Fade out
+                            opacity = Math.max(0, 0.45 - (scrolled - 900) / 300 * 0.45);
+                        }
+                        const progress = (scrolled - 250) / 950;
+                        const scale = 0.82 + progress * 0.5;
+                        const translateY = (progress * -40).toFixed(1);
+                        layerUnits.style.opacity = opacity.toFixed(3);
+                        layerUnits.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale.toFixed(3)})`;
+                        layerUnits.style.display = 'block';
+                    } else {
+                        layerUnits.style.display = 'none';
+                    }
+                }
+
+                // --- CAPA 3: ESCUDO OFICIAL POLICIAL (> 800px) ---
+                if (layerBadge) {
+                    if (scrolled >= 750) {
+                        const progress = Math.min((scrolled - 750) / 600, 1);
+                        const opacity = Math.min(0.50, progress * 0.50);
+                        const scale = 0.75 + progress * 0.65;
+                        const rotate = -6 + progress * 12;
+                        layerBadge.style.opacity = opacity.toFixed(3);
+                        layerBadge.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(3)}) rotate(${rotate.toFixed(2)}deg)`;
+                        layerBadge.style.display = 'block';
+                    } else {
+                        layerBadge.style.display = 'none';
+                    }
+                }
+
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(updateScrollMorph);
+                    ticking = true;
+                }
+            }, { passive: true });
+
+            // Trigger initial state
+            updateScrollMorph();
 
             // Auto-detect AdSense slots: Show container ONLY if ad successfully loaded
             setInterval(() => {
