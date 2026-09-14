@@ -111,7 +111,10 @@ function renderAboutUs(container) {
                 </p>
                 <div class="pt-6 border-t border-white/5 space-y-2">
                     <p class="text-sm text-slate-500 italic">Contacto para soporte y consultas:</p>
-                    <a href="mailto:soporte@adicionalessantafe.com.ar" class="text-primary font-bold">soporte@adicionalessantafe.com.ar</a>
+                    <a href="mailto:siges.info@gmail.com" class="text-primary font-bold text-base hover:underline block">siges.info@gmail.com</a>
+                    <a href="tel:+543425162372" class="text-slate-300 font-mono text-sm hover:underline block flex items-center justify-center gap-1">
+                        <span class="material-symbols-outlined text-xs text-primary">phone</span> +54 342 5162372
+                    </a>
                 </div>
             </div>
         </div>
