@@ -519,21 +519,35 @@ function renderCronoCalendario(container) {
 }
 
 function renderCentinela(container) {
+    const hasKey = window.GeminiService && !!window.GeminiService.getApiKey();
+
     container.innerHTML = `
-        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5 px-4 h-16 flex items-center gap-4">
-            <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
-                <span class="material-symbols-outlined">arrow_back</span>
-            </button>
-            <div class="flex flex-col">
-                <h1 class="text-sm font-black text-slate-900 dark:text-white leading-none">Centinela AI v10</h1>
-                <span class="text-[10px] text-primary flex items-center gap-1">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-white/5 px-4 h-16 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <button onclick="router.navigateTo('#asistente')" class="p-2 -ml-2 text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div class="flex flex-col">
+                    <h1 class="text-sm font-black text-slate-900 dark:text-white leading-none flex items-center gap-1.5">
+                        Centinela AI v10
+                        <span class="text-[9px] font-bold px-2 py-0.5 rounded-full ${hasKey ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30' : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'}">
+                            ${hasKey ? 'Gemini 2.0 ⚡' : 'Base Local 📖'}
+                        </span>
+                    </h1>
+                    <span class="text-[10px] text-slate-400 flex items-center gap-1 mt-0.5">
+                        <span class="relative flex h-1.5 w-1.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full ${hasKey ? 'bg-indigo-400' : 'bg-emerald-400'} opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-1.5 w-1.5 ${hasKey ? 'bg-indigo-500' : 'bg-emerald-500'}"></span>
+                        </span>
+                        ${hasKey ? 'Motor Generativo Gemini en Vivo' : 'Base Legal & Normativas 2026'}
                     </span>
-                    Base Legal & ISeP 2025/26 Activa
-                </span>
+                </div>
             </div>
+
+            <button onclick="window.openGeminiKeyModal()" class="px-2.5 py-1.5 rounded-xl ${hasKey ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20'} text-[10px] font-bold transition-all flex items-center gap-1 active:scale-95">
+                <span class="material-symbols-outlined text-xs">${hasKey ? 'key' : 'key_off'}</span>
+                ${hasKey ? 'API Key ✓' : 'Configurar Clave'}
+            </button>
         </header>
 
         <main class="flex flex-col h-[calc(100vh-4rem)] bg-background-light dark:bg-background-dark overflow-hidden">
@@ -544,9 +558,9 @@ function renderCentinela(container) {
                     </div>
                     <div class="bg-slate-100 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 p-3 rounded-2xl rounded-tl-none shadow-sm">
                         <p class="text-xs text-slate-900 dark:text-slate-200 leading-relaxed">
-                            Hola, soy Centinela. Estoy entrenado con la **Ley 12.521**, **Decreto 461**, **Reforma Previsional (Ley 14.283)**, las escalas salariales de **Febrero 2026 (Decreto 142/26)**, el **Código Procesal Penal (CPP) de Santa Fe**, el **Código Penal Argentino (CP)** y los últimos listados y manuales del **ISeP 2025/2026**.
+                            Hola, oficial. Soy **Centinela AI v10**, capacitado con la **Ley 12.521**, **Decreto 461/15**, **Reforma Previsional (Ley 14.283)**, las escalas de **Febrero 2026 (Decreto 142/26 y Dec. 0075/25)**, el **Código Procesal Penal**, el **Código Penal** y el **Manual ISeP 2026**.
                             <br><br>
-                            Preguntame por normas, reglamentos, o las **últimas noticias y novedades del 2026**. ¿En qué te ayudo hoy?
+                            ${hasKey ? '✨ *Motor Generativo en vivo activo (Google Gemini 2.0 Flash).* Podés preguntarme libremente en tus palabras.' : '💡 *Modo Base Legal Offline activo.* Podés configurar tu API Key gratuita presionando el botón `Configurar Clave` en la barra superior para respuestas generativas sin límites.'}
                         </p>
                     </div>
                 </div>
@@ -554,7 +568,7 @@ function renderCentinela(container) {
 
             <div class="p-4 bg-slate-50 dark:bg-slate-900/50 border-t border-slate-200 dark:border-white/5 pb-10">
                 <form id="centinela-form" class="relative flex items-center gap-2">
-                    <input type="text" id="chat-input" placeholder="Sueldos, jubilación, ascensos..." 
+                    <input type="text" id="chat-input" placeholder="Sueldos, licencias, flagrancia, TAP, ascensos..." 
                         class="flex-1 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:ring-1 focus:ring-primary outline-none transition-all pr-12">
                     <button type="submit" class="absolute right-1 size-10 rounded-xl bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/20 active:scale-90 transition-all">
                         <span class="material-symbols-outlined">send</span>
@@ -1520,6 +1534,44 @@ function renderCentinela(container) {
         chat.appendChild(div);
         chat.scrollTop = chat.scrollHeight;
     }
+
+    window.openGeminiKeyModal = () => {
+        const currentKey = window.GeminiService ? window.GeminiService.getApiKey() : '';
+        const modal = document.createElement('div');
+        modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex items-center justify-center p-4 animate-fade-in';
+        modal.innerHTML = `
+            <div class="bg-slate-900 border border-indigo-500/30 rounded-3xl p-6 max-w-sm w-full shadow-2xl space-y-4 relative">
+                <button onclick="this.closest('.fixed').remove()" class="absolute top-4 right-4 size-8 rounded-full bg-white/5 border border-white/10 text-white flex items-center justify-center hover:bg-red-500 transition-all">
+                    <span class="material-symbols-outlined text-sm">close</span>
+                </button>
+                <div class="flex items-center gap-3">
+                    <div class="size-10 rounded-2xl bg-indigo-500/20 flex items-center justify-center text-indigo-400 border border-indigo-500/30">
+                        <span class="material-symbols-outlined text-xl">auto_awesome</span>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-white text-sm">Configurar Gemini 2.0 Flash</h3>
+                        <p class="text-[10px] text-slate-400">Motor de IA generativo en vivo para Centinela</p>
+                    </div>
+                </div>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Ingresá tu clave API gratuita de Google Gemini (<code class="text-indigo-300">AIzaSy...</code>). Permite respuestas libres, análisis legal avanzado y consultas sin límites.
+                </p>
+                <input type="password" id="modalGeminiInput" value="${currentKey}" placeholder="AIzaSy..." class="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white text-xs font-mono outline-none focus:border-indigo-500 transition-all">
+                <div class="flex gap-2">
+                    ${currentKey ? `
+                        <button onclick="window.GeminiService.setApiKey(''); showToast('API Key eliminada'); this.closest('.fixed').remove(); if(window.location.hash.includes('centinela')) router.handleRoute();" class="px-4 py-2.5 bg-red-500/10 text-red-400 border border-red-500/20 rounded-xl text-xs font-bold hover:bg-red-500/20 transition-all">
+                            Quitar
+                        </button>
+                    ` : ''}
+                    <button onclick="const val = document.getElementById('modalGeminiInput').value.trim(); if(!val){ alert('Ingresá una clave válida'); return; } window.GeminiService.setApiKey(val); showToast('✅ Clave de Gemini guardada'); this.closest('.fixed').remove(); if(window.location.hash.includes('centinela')) router.handleRoute();" class="flex-1 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white font-bold rounded-xl text-xs shadow-lg shadow-indigo-600/20 transition-all active:scale-95">
+                        Guardar Clave
+                    </button>
+                </div>
+                <p class="text-[9px] text-slate-500 text-center">Consiguela gratis en <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-indigo-400 underline">aistudio.google.com</a></p>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    };
 }
 
 function renderPartesInteligentes(container) {
