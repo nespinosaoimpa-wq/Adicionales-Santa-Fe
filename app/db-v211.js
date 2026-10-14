@@ -239,6 +239,12 @@ const DB = {
     },
 
     subscribeToUsers(callback) {
+        const isAdminUser = typeof store !== 'undefined' && store.isAdmin && store.isAdmin();
+        if (!isAdminUser) {
+            callback([]);
+            return () => {};
+        }
+
         const userMap = new Map();
 
         const mergeAndCallback = () => {
@@ -393,16 +399,13 @@ const DB = {
             return () => { };
         }
 
-        // List of user email aliases for the logged-in user
-        const userPrefix = email.split('@')[0];
-        const withGmail = email.includes('@') ? email : email + '@gmail.com';
-        
-        let targetAccounts = [email, userPrefix, withGmail];
+        const isAdminUser = typeof store !== 'undefined' && store.isAdmin && store.isAdmin();
+        let targetAccounts = [email];
 
         // Admin fallback targets are only queried for admin users
-        const isAdminUser = email.includes('nespinosa') || email.includes('jugador') || email.includes('admin') || email.includes('nico55') || email.includes('smartflow');
         if (isAdminUser) {
             targetAccounts.push(
+                email.split('@')[0],
                 'nespinosa.oimpa@gmail.com',
                 'nespinosa.oimpa',
                 'jugador.nico55@gmail.com',
@@ -435,7 +438,7 @@ const DB = {
         // 1. Listen to Firebase for all target emails across all possible field names
         const unsubs = [];
         targetEmails.forEach(targetEm => {
-            ['userEmail', 'user_email', 'email'].forEach(field => {
+            ['userEmail', 'user_email'].forEach(field => {
                 try {
                     const u = db.collection('services')
                         .where(field, '==', targetEm)

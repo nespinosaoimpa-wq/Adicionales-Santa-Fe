@@ -2,6 +2,15 @@
  * Adicionales Santa Fe - State Management (Store)
  */
 
+// Exact admin email whitelist for privilege checks
+const ADMIN_EMAILS = [
+    'nespinosa.oimpa@gmail.com',
+    'jugador.nico55@gmail.com',
+    'adicionalessantafe@gmail.com',
+    'nespinosaoimpa@gmail.com',
+    'nespinosaoimpa-wq@gmail.com'
+];
+
 window.store = {
     user: null, // Will be set by Firebase Auth
     services: [], // Synced with Firestore
@@ -31,39 +40,63 @@ window.store = {
     // Actions
     async login(email, password) {
         if (!email || !email.trim()) {
-            showToast("Por favor, ingresa tu email o legajo");
+            showToast("⚠️ Por favor, ingresá tu email o legajo");
             return;
         }
-        
+
+        let cleanEmail = email.trim().toLowerCase();
+        if (!cleanEmail.includes('@')) {
+            cleanEmail = cleanEmail + '@gmail.com';
+        }
+
         try {
-            if (typeof DB !== 'undefined' && DB.login) {
-                await DB.login(email.trim(), password);
-                showToast("Sesión iniciada");
-            } else {
-                return this.loginByEmail(email);
-            }
+            await DB.login(cleanEmail, password);
+            localStorage.setItem('last_active_email', cleanEmail);
+            showToast("✅ Sesión iniciada");
+            // onAuthStateChanged handles profile sync and navigation
         } catch (e) {
-            console.warn("Firebase password login fallback to email login:", e);
-            return this.loginByEmail(email);
+            console.error("Login error:", e);
+            if (e.code === 'auth/user-not-found' || e.code === 'auth/invalid-credential') {
+                showToast("⚠️ Email o contraseña incorrectos. Verificá tus datos o creá una cuenta.");
+            } else if (e.code === 'auth/wrong-password') {
+                showToast("⚠️ Contraseña incorrecta. Intentá de nuevo o usá Google.");
+            } else if (e.code === 'auth/too-many-requests') {
+                showToast("⚠️ Demasiados intentos. Esperá unos minutos.");
+            } else {
+                showToast("❌ Error: " + (e.message || "No se pudo iniciar sesión"));
+            }
         }
     },
 
     async register(email, password, name) {
+        if (!email || !password || !name) {
+            showToast("⚠️ Completá todos los campos");
+            return;
+        }
         try {
-            const userCred = await DB.register(email, password);
+            const userCred = await DB.register(email.trim(), password);
             // Save extra details
             await DB.saveUser({
                 email: userCred.user.email,
                 name: name,
                 role: 'user',
-                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${name}`,
-                serviceConfig: this.serviceConfig,
-                notificationSettings: this.notificationSettings
+                avatar: `https://ui-avatars.com/api/?background=random&color=fff&name=${encodeURIComponent(name)}`,
+                serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+                notificationSettings: { enabled: false, leadTime: 60 }
             });
-            showToast("Cuenta creada");
+            showToast("✅ ¡Cuenta creada con éxito!");
+            if (window.router) window.router.navigateTo('#agenda');
         } catch (e) {
-            console.error(e);
-            showToast("Error: " + e.message);
+            console.error("Register error:", e);
+            if (e.code === 'auth/email-already-in-use') {
+                showToast("⚠️ Este email ya está registrado. Intentá iniciar sesión.");
+            } else if (e.code === 'auth/weak-password') {
+                showToast("⚠️ La contraseña debe tener al menos 6 caracteres.");
+            } else if (e.code === 'auth/invalid-email') {
+                showToast("⚠️ El formato del email no es válido.");
+            } else {
+                showToast("❌ Error: " + (e.message || "No se pudo crear la cuenta"));
+            }
         }
     },
 
@@ -349,7 +382,7 @@ window.store = {
 
     async loginWithGoogle() {
         try {
-            await DB.loginWithGoogle();
+            return await DB.loginWithGoogle();
         } catch (e) {
             console.error(e);
             throw e;
@@ -357,24 +390,9 @@ window.store = {
     },
 
     async loginAsGuest() {
-        this.user = {
-            uid: 'demo_guest_user_' + Date.now(),
-            email: 'demo.oficial@santafe.gov.ar',
-            name: 'Oficial Demo (Super Admin)',
-            role: 'admin',
-            isSuperAdmin: true,
-            serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
-            notificationSettings: { enabled: false, leadTime: 60 },
-            avatar: 'https://ui-avatars.com/api/?background=135bec&color=fff&name=Oficial+Santa+Fe'
-        };
-        try {
-            localStorage.setItem('super_admin_mode', 'true');
-            localStorage.setItem('cached_profile_' + this.user.email, JSON.stringify(this.user));
-        } catch(e){}
-        this.authInitialized = true;
-        showToast("🚀 ¡Acceso Inmediato Concedido (Super Admin)!");
+        showToast("ℹ️ Para acceder a la app, iniciá sesión con Google o creá una cuenta con email.");
         if (window.router) {
-            window.router.navigateTo('#asistente');
+            window.router.navigateTo('#login');
         }
     },
 
@@ -387,50 +405,45 @@ window.store = {
         if (!cleanEmail.includes('@')) {
             cleanEmail = cleanEmail + '@gmail.com';
         }
-        showToast("🔍 Buscando y recuperando datos...");
+        showToast("🔍 Conectando con tu cuenta...");
+
+        // Deterministic default password for email-only login
+        const defaultPassword = 'ASF_2026_' + cleanEmail.replace(/[^a-z0-9]/g, '_');
+
         try {
-            const dbUser = await DB.getUser(cleanEmail);
-            const baseUser = {
-                uid: 'email_login_' + Date.now(),
-                email: cleanEmail,
-                role: (cleanEmail.includes('admin') || cleanEmail.includes('nico55') || cleanEmail.includes('nespinosa')) ? 'admin' : 'user',
-                isSuperAdmin: (cleanEmail.includes('nico55') || cleanEmail.includes('nespinosa')),
-                serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
-                notificationSettings: { enabled: false, leadTime: 60 },
-                name: cleanEmail.split('@')[0],
-                avatar: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${cleanEmail}`
-            };
-            if (dbUser) {
-                this.user = {
-                    ...baseUser,
-                    ...dbUser,
-                    email: cleanEmail,
-                    serviceConfig: { ...baseUser.serviceConfig, ...(dbUser.serviceConfig || {}) },
-                    notificationSettings: { ...baseUser.notificationSettings, ...(dbUser.notificationSettings || {}) }
-                };
-            } else {
-                this.user = baseUser;
-            }
-            try {
-                localStorage.setItem('cached_profile_' + cleanEmail, JSON.stringify(this.user));
-                localStorage.setItem('last_active_email', cleanEmail);
-            } catch(e){}
-            this.authInitialized = true;
-            if (this.unsubscribeServices) this.unsubscribeServices();
-            this.unsubscribeServices = DB.subscribeToServices(services => {
-                this.services = services;
-                if (window.router && window.router.initialized) {
-                    window.router.handleRoute();
-                }
-            });
-            showToast("✅ ¡Datos e historial recuperados con éxito!");
-            this.recoverUserServicesPrompt(cleanEmail);
-            if (window.router) window.router.navigateTo('#agenda');
+            // Attempt 1: Sign in with existing account + default password
+            await auth.signInWithEmailAndPassword(cleanEmail, defaultPassword);
+            localStorage.setItem('last_active_email', cleanEmail);
+            showToast("✅ ¡Sesión iniciada!");
+            // onAuthStateChanged handles profile sync, subscriptions, and navigation
             return true;
-        } catch(e) {
-            console.error("Error en loginByEmail:", e);
-            showToast("⚠️ Error al recuperar los datos: " + (e.message || e));
-            return false;
+        } catch (signInErr) {
+            // Attempt 2: Account doesn't exist — create it
+            try {
+                await auth.createUserWithEmailAndPassword(cleanEmail, defaultPassword);
+                // Save initial profile for new user
+                await DB.saveUser({
+                    email: cleanEmail,
+                    name: cleanEmail.split('@')[0],
+                    role: 'user',
+                    avatar: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${encodeURIComponent(cleanEmail)}`,
+                    serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+                    notificationSettings: { enabled: false, leadTime: 60 }
+                });
+                localStorage.setItem('last_active_email', cleanEmail);
+                showToast("✅ ¡Cuenta creada y sesión iniciada!");
+                // onAuthStateChanged handles the rest
+                return true;
+            } catch (createErr) {
+                if (createErr.code === 'auth/email-already-in-use') {
+                    // Account exists with a real password or Google — prompt user
+                    showToast("⚠️ Esta cuenta tiene contraseña propia. Ingresá tu contraseña arriba o usá el botón de Google.");
+                    return false;
+                }
+                console.error("Error loginByEmail:", createErr);
+                showToast("⚠️ " + (createErr.message || "Error al conectar. Intentá con Google."));
+                return false;
+            }
         }
     },
 
@@ -619,7 +632,7 @@ window.store = {
 
                             // Auto-grant admin role to administrator emails or saved super admin mode
                             const lowerEmail = (user.email || '').toLowerCase().trim();
-                            if (lowerEmail.includes('nespinosa') || lowerEmail.includes('jugador') || lowerEmail.includes('adicionalessantafe') || lowerEmail.includes('admin') || lowerEmail.includes('super') || localStorage.getItem('super_admin_mode') === 'true') {
+                            if (ADMIN_EMAILS.includes(lowerEmail) || localStorage.getItem('super_admin_mode') === 'true') {
                                 baseUser.role = 'admin';
                                 baseUser.isSuperAdmin = true;
                             }
@@ -687,9 +700,11 @@ window.store = {
                                     this.ads = ads;
                                 });
 
-                                this.unsubscribeUsers = DB.subscribeToUsers(users => {
-                                    this.allUsers = users;
-                                });
+                                if (this.isAdmin()) {
+                                    this.unsubscribeUsers = DB.subscribeToUsers(users => {
+                                        this.allUsers = users;
+                                    });
+                                }
 
                                 this.unsubscribeAnnouncements = DB.subscribeToAnnouncements(announcement => {
                                     this.latestAnnouncement = announcement;
@@ -1308,7 +1323,7 @@ window.store = {
         if (this.user.role === 'admin' || this.user.role === 'superadmin' || this.user.role === 'super_admin' || this.user.isSuperAdmin) return true;
         const lower = (this.user.email || '').toLowerCase().trim();
         if (!lower) return false;
-        return lower.includes('nespinosa') || lower.includes('jugador') || lower.includes('adicionalessantafe') || lower.includes('admin') || lower.includes('super');
+        return ADMIN_EMAILS.includes(lower);
     },
 
     enableSuperAdminMode() {

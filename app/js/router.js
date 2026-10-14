@@ -22,8 +22,8 @@ window.router = {
             return;
         }
 
-        // Auto-login: If user is authenticated and trying to access login, redirect to agenda
-        if (hash === '#login' && store.isAuthenticated()) {
+        // Auto-login: If user is authenticated and trying to access login or signup, redirect to agenda
+        if ((hash === '#login' || hash === '#signup') && store.isAuthenticated()) {
             console.log("🔐 User already logged in, redirecting to agenda");
             this.navigateTo('#agenda');
             return;

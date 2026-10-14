@@ -238,6 +238,7 @@ function renderSignup(container) {
         const email = document.getElementById('s-email').value;
         const password = document.getElementById('s-password').value;
         const name = document.getElementById('s-name').value;
-        store.register(email, password, name);
+        const lastname = document.getElementById('s-lastname').value;
+        store.register(email, password, (name + ' ' + lastname).trim());
     }
 }
