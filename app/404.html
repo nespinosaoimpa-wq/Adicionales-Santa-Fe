@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionales Santa Fe - Cargando...</title>
+    <script>
+        // SPA Fallback Redirect for GitHub Pages / Netlify static hosting
+        (function() {
+            var path = window.location.pathname;
+            var search = window.location.search;
+            var hash = window.location.hash;
+            // Determine if request was under /app/ or root /
+            if (path.indexOf('/app') !== -1) {
+                var route = path.replace(/.*\/app\/?/, '');
+                var targetHash = hash || (route ? '#' + route : '#agenda');
+                window.location.replace('./index.html' + search + targetHash);
+            } else {
+                window.location.replace('./app/index.html' + search + (hash || '#agenda'));
+            }
+        })();
+    </script>
+</head>
+<body style="background:#101622; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh; font-family:sans-serif; margin:0;">
+    <div style="text-align:center;">
+        <div style="width:40px; height:40px; border:3px solid #135bec; border-top-color:transparent; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 12px;"></div>
+        <p style="font-size:14px; color:#94a3b8;">Cargando Adicionales Santa Fe...</p>
+    </div>
+    <style>@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }</style>
+</body>
+</html>
