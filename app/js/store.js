@@ -380,11 +380,47 @@ window.store = {
         await DB.logout();
     },
 
+    _applyAuthenticatedUser(user) {
+        if (!user || !user.email) return null;
+        const lowerEmail = user.email.toLowerCase().trim();
+        const baseUser = {
+            uid: user.uid,
+            email: user.email,
+            role: 'user',
+            serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
+            notificationSettings: { enabled: false, leadTime: 60 },
+            name: user.displayName || user.email.split('@')[0],
+            avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${encodeURIComponent(user.email)}`
+        };
+
+        if (ADMIN_EMAILS.includes(lowerEmail) || localStorage.getItem('super_admin_mode') === 'true') {
+            baseUser.role = 'admin';
+            baseUser.isSuperAdmin = true;
+        }
+
+        this.user = baseUser;
+        try {
+            const cachedStr = localStorage.getItem('cached_profile_' + lowerEmail);
+            if (cachedStr) {
+                const cached = JSON.parse(cachedStr);
+                this.user = { ...this.user, ...cached };
+            }
+        } catch(e){}
+
+        this.authInitialized = true;
+        try { localStorage.setItem('last_active_email', lowerEmail); } catch(e){}
+        return this.user;
+    },
+
     async loginWithGoogle() {
         try {
-            return await DB.loginWithGoogle();
+            const userCred = await DB.loginWithGoogle();
+            if (userCred && userCred.user) {
+                this._applyAuthenticatedUser(userCred.user);
+            }
+            return userCred;
         } catch (e) {
-            console.error(e);
+            console.error("Google Auth Error:", e);
             throw e;
         }
     },
@@ -613,6 +649,7 @@ window.store = {
                         const redirectResult = await auth.getRedirectResult();
                         if (redirectResult && redirectResult.user) {
                             console.log("✅ Google Auth Redirect Successful:", redirectResult.user.email);
+                            this._applyAuthenticatedUser(redirectResult.user);
                         }
                     } catch(err) {
                         console.warn("Redirect result notice:", err);
@@ -620,34 +657,7 @@ window.store = {
                     this.unsub = auth.onAuthStateChanged(async user => {
                         if (user) {
                             console.log("🔐 User Logged In:", user.email);
-                            const baseUser = {
-                                uid: user.uid,
-                                email: user.email,
-                                role: 'user',
-                                serviceConfig: JSON.parse(JSON.stringify(this.serviceConfig)),
-                                notificationSettings: { enabled: false, leadTime: 60 },
-                                name: user.displayName || user.email.split('@')[0],
-                                avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.email}`
-                            };
-
-                            // Auto-grant admin role to administrator emails or saved super admin mode
-                            const lowerEmail = (user.email || '').toLowerCase().trim();
-                            if (ADMIN_EMAILS.includes(lowerEmail) || localStorage.getItem('super_admin_mode') === 'true') {
-                                baseUser.role = 'admin';
-                                baseUser.isSuperAdmin = true;
-                            }
-
-                            // 1. INSTANT SYNCHRONOUS ASSIGNMENT: Ensure store.isAuthenticated() is immediately true
-                            this.user = baseUser;
-                            try {
-                                const cachedStr = localStorage.getItem('cached_profile_' + lowerEmail);
-                                if (cachedStr) {
-                                    const cached = JSON.parse(cachedStr);
-                                    this.user = { ...this.user, ...cached };
-                                }
-                            } catch(e){}
-
-                            this.authInitialized = true;
+                            this._applyAuthenticatedUser(user);
                             finishResolve();
                             if (window.router && window.router.initialized) router.handleRoute();
 

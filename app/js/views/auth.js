@@ -21,7 +21,7 @@ function renderLogin(container) {
                     Continuar con Google
                 </button>
                 <p class="text-[11px] text-center text-slate-400 px-2 leading-relaxed">
-                    💡 <b>Celulares:</b> Si Google se traba o vuelve al inicio, escribe tu Email/Legajo abajo y toca "Ingresar" (dejando la contraseña en blanco) para entrar directo.
+                    Acceso instantáneo y seguro con tu cuenta de Google.
                 </p>
 
                 <div class="relative my-2">
@@ -122,8 +122,9 @@ function renderLogin(container) {
 
         store.loginWithGoogle()
             .then((userCred) => {
-                console.log("✅ Google Auth Completed:", userCred?.user?.email);
-                showToast("¡Bienvenido!");
+                const u = (userCred && userCred.user) ? userCred.user : store.user;
+                console.log("✅ Google Auth Completed:", u?.email);
+                showToast("¡Bienvenido " + (u?.displayName || "") + "!");
                 if (window.router) {
                     window.router.navigateTo('#agenda');
                 }
@@ -135,7 +136,7 @@ function renderLogin(container) {
                 }
                 console.warn("Google auth notice:", e);
                 const msg = e ? (e.message || e.toString()) : '';
-                if (!msg.includes('closed-by-user')) {
+                if (!msg.includes('cancelada') && !msg.includes('closed-by-user')) {
                     showToast("⚠️ " + (msg || "Error al conectar con Google. Reintentá o ingresá tu email abajo."));
                 }
             });

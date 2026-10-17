@@ -29,32 +29,30 @@ const DB = {
         const authInstance = firebase.auth();
         const provider = new firebase.auth.GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' });
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-        if (isMobile) {
-            console.log("📱 Mobile device detected: Initiating Google Auth via signInWithRedirect...");
-            return authInstance.signInWithRedirect(provider);
-        }
-
-        console.log("💻 Desktop detected: Initiating Google Auth via signInWithPopup...");
+        // Use signInWithPopup on ALL platforms (Mobile + Desktop).
+        // Avoids cross-origin redirect third-party cookie blockage on mobile browsers and PWAs.
+        console.log("🔑 Initiating Google Auth via signInWithPopup...");
         return authInstance.signInWithPopup(provider).catch(error => {
-            console.warn("Popup notice:", error);
             const code = error ? (error.code || '') : '';
             const msg = error ? (error.message || error.toString() || '') : '';
-            
+
+            console.warn("Popup result notice:", code, msg);
+
             if (code.includes('unauthorized-domain') || msg.includes('unauthorized-domain')) {
-                return Promise.reject(new Error("Dominio no autorizado en Firebase."));
+                return Promise.reject(new Error("Dominio no autorizado en Firebase Auth."));
             }
             if (code.includes('popup-closed-by-user') || msg.includes('popup-closed-by-user')) {
                 return Promise.reject(new Error("Selección de cuenta cancelada."));
             }
 
-            console.log("🔄 Fallback to signInWithRedirect via async macro-task...");
-            return new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    authInstance.signInWithRedirect(provider).then(resolve).catch(reject);
-                }, 150);
-            });
+            // Fallback to signInWithRedirect ONLY if popup was strictly blocked by in-app browser
+            if (code.includes('popup-blocked') || code.includes('operation-not-supported-in-this-environment')) {
+                console.log("🔄 Popup blocked by browser, attempting fallback to signInWithRedirect...");
+                return authInstance.signInWithRedirect(provider);
+            }
+
+            return Promise.reject(error);
         });
     },
 
