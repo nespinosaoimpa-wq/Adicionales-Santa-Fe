@@ -126,6 +126,16 @@ window.academyLibraryItems = [
         category: "proyectos"
     },
     {
+        id: "resolucion-0803-2026",
+        title: "Resolución N° 0803/2026 - Cronograma, Jurado y Reglamento",
+        desc: "Cronograma oficial de fechas de examen, designación de jurados y reglamento de evaluación de concurso de ascenso.",
+        file: "Material_de_Ascenso_ISEP/Resolucion_0803-2026_Cronograma_Jurado_Reglamento.pdf",
+        icon: "event_available",
+        color: "from-blue-600/20 to-indigo-600/20 text-blue-400 border-blue-500/30",
+        badge: "Resolución Oficial 2026",
+        category: "leyes"
+    },
+    {
         id: "ley-12521",
         title: "Ley de Personal Policial N° 12.521",
         desc: "Estatuto, deberes, derechos, ascensos, régimen de sueldos y régimen disciplinario.",

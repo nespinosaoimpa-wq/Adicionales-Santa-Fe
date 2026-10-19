@@ -1,16 +1,18 @@
 /**
- * Adicionales Santa Fe - Banco de Preguntas ISEP 2026
- * Simulador de Examen de Ascenso Policial
+ * Adicionales Santa Fe - Banco de Preguntas ISEP 2026 Profesional
+ * Simulador de Examen de Ascenso Policial Oficial
  * 
- * Cada pregunta cita su fuente exacta (Manual ISEP, Ley, Decreto, Artículo)
- * para que el efectivo pueda ir al material de estudio y profundizar.
+ * Contenido extraído directamente de los manuales oficiales de cada jerarquía:
+ * - Oficial -> Subinspector: Práctica policial, CPP Ley 12.734, Código de Convivencia, Preservación y primer preventor.
+ * - Subinspector -> Inspector: Pequeños grandes líderes, Crisis subjetivas (Ley 26.657), Niñez (Ley 12.967), L.C.A.T., Juicio por Jurados (Ley 14.258).
+ * - Inspector -> Subcomisario: Desfederalización y Narcomenudeo en Santa Fe (Ley Provincial 14.239 / Ley 23.737), Armamento Bersa Thunder 9mm Pro, Desmartillado, Libros Matrices de Comisaría.
+ * - Subcomisario -> Comisario: Políticas públicas de seguridad por cuadrículas, Poder de policía y límites constitucionales, Comunicación en crisis y vocería ante prensa, Régimen Disciplinario Decreto 461/15.
+ * - Comisario -> Com. Supervisor / Director: Gestión estratégica, Proyectos SMART, Metodología de Marco Lógico, Auditoría patrimonial y KPIs policiales.
  * 
- * Jerarquías cubiertas:
- * - oficial-subinspector: Oficial de Policía → Subinspector
- * - subinspector-inspector: Subinspector → Inspector
- * - inspector-subcomisario: Inspector → Subcomisario
- * - subcomisario-comisario: Subcomisario → Comisario
- * - comisario-supervisor: Comisario → Comisario Supervisor / Director
+ * Modalidades de Dificultad:
+ * - 'facil': Conceptos fundamentales, definiciones y principios del manual.
+ * - 'media': Procedimientos técnico-operativos de guardia, calle y actas.
+ * - 'dificil': Nivel concurso ISEP real (plazos procesales, artículos específicos, causales y distractores jurídicos).
  */
 
 window.quizBank = {
@@ -19,10 +21,11 @@ window.quizBank = {
     // OFICIAL DE POLICÍA → SUBINSPECTOR (Agrupamiento Ejecución)
     // ═══════════════════════════════════════════════════════════════
     "oficial-subinspector": [
-        // --- LIDERAZGO Y CONDUCCIÓN (Materia 1) ---
+        // --- NIVEL FÁCIL ---
         {
-            id: "os-001",
-            question: "Según el Manual ISEP 2026, ¿cuáles son las cuatro virtudes cardinales que sustentan la 'autoridad real' del líder policial?",
+            id: "os-f01",
+            difficulty: "facil",
+            question: "¿Cuáles son las cuatro virtudes cardinales que según el Manual ISEP sustentan la 'autoridad real' del líder policial?",
             options: [
                 "Obediencia, Disciplina, Valentía y Lealtad",
                 "Prudencia, Justicia, Fortaleza y Templanza",
@@ -30,960 +33,591 @@ window.quizBank = {
                 "Eficiencia, Rapidez, Control y Mando"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026, Pág. 15 - Materia 1: Liderazgo Policial",
-            explanation: "El ISEP establece que la autoridad legítima (real) se construye sobre Prudencia, Justicia, Fortaleza y Templanza, no sobre el mero cargo jerárquico."
+            source: "Manual ISEP 2026 - Oficial, Pág. 15: Liderazgo Policial",
+            explanation: "El ISEP enseña que la autoridad no proviene solo del cargo jerárquico sino de las 4 virtudes cardinales: Prudencia, Justicia, Fortaleza y Templanza."
         },
         {
-            id: "os-002",
-            question: "¿Cómo define el ISEP a las tres 'C' del paradigma de conducción policial?",
+            id: "os-f02",
+            difficulty: "facil",
+            question: "¿Qué norma internacional consagra el Código de Conducta para Funcionarios Encargados de Hacer Cumplir la Ley?",
             options: [
-                "Comisaría, Comando y Cuadrante",
-                "Control, Custodia y Código Penal",
-                "Competencia, Confianza y Compromiso",
-                "Capacitación, Cumplimiento y Coordinación"
-            ],
-            correctIndex: 2,
-            source: "Manual ISEP 2026, Pág. 15 - Materia 1: Paradigma de Conducción",
-            explanation: "Las 3 'C' son: Competencia sobre los recursos asignados, Confianza recíproca con subordinados y Compromiso con la misión del servicio policial."
-        },
-        {
-            id: "os-003",
-            question: "¿Qué resolución de la ONU establece el Código de Conducta para funcionarios encargados de hacer cumplir la ley?",
-            options: [
-                "Resolución 1325 de la ONU",
                 "Resolución 34/169 de la Asamblea General de la ONU",
-                "Declaración Universal de los Derechos Humanos, Art. 1",
-                "Pacto de San José de Costa Rica, Art. 5"
+                "Convenio 169 de la OIT",
+                "Declaración de Ginebra de 1949",
+                "Tratado de Roma de 1998"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Pág. 30 - Materia 1: Código de Conducta ONU",
-            explanation: "La Resolución 34/169 establece las normas de conducta que todo funcionario policial debe respetar, incluyendo el respeto a la dignidad humana y la prohibición de torturas."
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Oficial, Pág. 30: Código de Conducta ONU",
+            explanation: "La Resolución 34/169 de la ONU de 1979 establece los 8 artículos fundamentales que rigen el ejercicio ético de la función policial."
         },
         {
-            id: "os-004",
-            question: "Según el ISEP, ¿qué tipo de liderazgo busca generar 'adhesión voluntaria' en lugar del 'mero acatamiento por temor'?",
+            id: "os-f03",
+            difficulty: "facil",
+            question: "¿Cómo se divide el sistema de preservación de escena del hecho denominado 'Cordón Doble'?",
             options: [
-                "Liderazgo coercitivo",
-                "Liderazgo moderno o transformacional",
-                "Liderazgo burocrático",
-                "Liderazgo autocrático"
+                "Zona Norte y Zona Sur",
+                "Perímetro Interno (Zona de Exclusión) y Perímetro Externo (Zona de Seguridad)",
+                "Área de entrada y Área de salida",
+                "Perímetro de Tránsito y Perímetro Vecinal"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026, Pág. 14 - Materia 1: Liderazgo como Proceso",
-            explanation: "El ISEP define que el liderazgo policial moderno promueve la adhesión voluntaria del personal, no el simple cumplimiento por temor a la sanción disciplinaria."
+            source: "Manual ISEP 2026 - Oficial, Pág. 22: Preservación del Lugar del Hecho",
+            explanation: "El sistema de doble cordón define un Perímetro Interno exclusivo para peritos forenses y un Perímetro Externo para seguridad y apoyo."
+        },
+        {
+            id: "os-f04",
+            difficulty: "facil",
+            question: "¿Qué tipo de falta disciplinaria constituye el desaliño en el uniforme o una tardanza menor sin justificar según el Decreto 461/15?",
+            options: [
+                "Falta Leve",
+                "Falta Grave",
+                "Falta Gravísima",
+                "No constituye falta disciplinaria"
+            ],
+            correctIndex: 0,
+            source: "Decreto 461/15 - Régimen Disciplinario Policial",
+            explanation: "El desaliño o descuidos menores en el servicio constituyen faltas leves, sancionables con apercibimiento o arresto de hasta 10 días."
+        },
+        {
+            id: "os-f05",
+            difficulty: "facil",
+            question: "¿Quién es considerado el 'Primer Preventor' policial en una escena delictiva?",
+            options: [
+                "El primer personal policial uniformado que toma conocimiento e interviene en el lugar del hecho",
+                "Exclusivamente el Jefe de la Comisaría de la jurisdicción",
+                "El médico forense de la policía científica",
+                "El Fiscal del Ministerio Público de la Acusación"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Oficial, Pág. 20: Rol del Primer Preventor",
+            explanation: "El primer preventor es el efectivo que arriba en primer término al lugar, asumiendo la responsabilidad inicial de asegurar y preservar la escena."
         },
 
-        // --- RÉGIMEN DISCIPLINARIO (Materia 2) ---
+        // --- NIVEL MEDIO ---
         {
-            id: "os-005",
-            question: "Según la Ley 12.521 y el Decreto 461/15, ¿cuál es la sanción máxima para una falta leve?",
+            id: "os-m01",
+            difficulty: "media",
+            question: "¿Cuál es la obligación inmediata del primer preventor policial al llegar a una escena del hecho con heridos de arma de fuego?",
             options: [
-                "Suspensión de 30 días sin goce de haberes",
-                "Apercibimiento o arresto de hasta 10 días",
-                "Cesantía automática",
-                "Traslado obligatorio a otra Unidad Regional"
+                "Secuestrar de inmediato las vainas servidas para que no se pierdan",
+                "Priorizar el auxilio médico y resguardo de la vida, coordinando el 107 y fijando la posición de los indicios movidos si fuere indispensable",
+                "Esperar la llegada del Fiscal del MPA antes de tocar a los heridos",
+                "Tomar declaración testimonial a los vecinos antes del traslado de los heridos"
             ],
             correctIndex: 1,
-            source: "Ley 12.521 y Decreto 461/15 - Régimen Disciplinario",
-            explanation: "Las faltas leves se sancionan con apercibimiento o arresto de hasta 10 días. Ejemplos: desaliño en uniforme, tardanzas o descuidos menores."
+            source: "Manual ISEP 2026 - Oficial, Pág. 24: Primer Preventor y Auxilio",
+            explanation: "El deber prioritario es la preservación de la vida humana; si se debe mover a un herido o elementos para salvarlo, se registra detalladamente la modificación."
         },
         {
-            id: "os-006",
-            question: "¿Cuál es la diferencia principal entre Cesantía y Exoneración en el régimen disciplinario policial?",
+            id: "os-m02",
+            difficulty: "media",
+            question: "¿En qué artículos del Código Procesal Penal de Santa Fe se fundamenta formalmente el labrado del Acta de Procedimiento Policial?",
             options: [
-                "No hay diferencia, ambas son lo mismo",
-                "La Cesantía conserva los aportes previsionales; la Exoneración los pierde totalmente",
-                "La Cesantía es temporal y la Exoneración es por 5 años",
-                "La Exoneración conserva los aportes y la Cesantía no"
+                "Artículos 138, 139 y concordantes del CPP (Ley 12.734)",
+                "Artículos 212 y 213 únicamente",
+                "Artículos 40 y 41 del Código Penal",
+                "Artículos 10 y 11 de la Ley 12.521"
             ],
-            correctIndex: 1,
-            source: "Ley 12.521 - Estatuto del Personal Policial, Sección Régimen Disciplinario",
-            explanation: "En la Cesantía se conserva el cómputo de aportes previsionales acumulados. En la Exoneración se pierden la totalidad de los derechos previsionales de la fuerza."
+            correctIndex: 0,
+            source: "CPP de Santa Fe Ley 12.734, Art. 138: Actas Policiales",
+            explanation: "Los artículos 138 y concordantes del CPP regulan las formalidades, requisitos de validez, mención de fecha, lugar, firmas y testigos del acta policial."
         },
         {
-            id: "os-007",
-            question: "¿Qué rango de sanción corresponde a una falta grave según el Decreto 461/15?",
+            id: "os-m03",
+            difficulty: "media",
+            question: "¿Qué elementos de bioseguridad mínimos debe vestir obligatoriamente el personal autorizado para ingresar al perímetro interno de la escena?",
             options: [
-                "Apercibimiento únicamente",
-                "Arresto de 11 a 30 días o suspensión de empleo y haberes",
-                "Hasta 5 días de arresto",
-                "Solo traslado de dependencia"
+                "Guantes de nitrilo/látex y cubrecalzados",
+                "Únicamente chaleco balístico y gorra policial",
+                "Barbijo quirúrgico sin necesidad de guantes",
+                "Campera refractaria y linterna de alta potencia"
             ],
-            correctIndex: 1,
-            source: "Decreto 461/15, Art. correspondiente - Faltas Graves",
-            explanation: "Las faltas graves merecen arresto de 11 a 30 días o suspensión temporal. Ejemplos: negligencia en custodia de elementos, malos tratos al personal subalterno."
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Oficial, Pág. 26: Criminalística de Campo",
+            explanation: "Para evitar la contaminación cruzada biológica (ADN, huellas del calzado propio), es obligatorio el uso de guantes y cubrecalzados."
         },
         {
-            id: "os-008",
-            question: "¿Cuáles son los deberes esenciales del personal policial según la Ley 12.521?",
+            id: "os-m04",
+            difficulty: "media",
+            question: "Según el Código de Convivencia de Santa Fe (Ley 10.703 / Ley 13.774), ¿cuál es el plazo para poner a disposición del Juez Comunitario a un contraventor demorado?",
             options: [
-                "Asistir a reuniones sociales y eventos comunitarios voluntariamente",
-                "Obediencia jerárquica, portación de arma reglamentaria y neutralidad política",
-                "Realizar tareas administrativas exclusivamente en horario de oficina",
-                "Atender denuncias solo en la comisaría asignada"
+                "Inmediatamente, no pudiendo superar las 24 horas",
+                "Dentro de los 5 días hábiles",
+                "En el plazo de 48 horas sin excepción",
+                "A las 72 horas con informe médico"
             ],
-            correctIndex: 1,
-            source: "Ley 12.521, Deberes del Personal Policial",
-            explanation: "Los tres deberes esenciales son: cumplir órdenes de superiores (siempre que no impliquen delito), portar el arma reglamentaria y abstenerse de actividades políticas en servicio."
+            correctIndex: 0,
+            source: "Código de Convivencia de Santa Fe - Procedimiento Contravencional",
+            explanation: "La legislación contravencional provincial exige dar intervención y poner al demorado a disposición del juez dentro del término perentorio de 24 horas."
         },
         {
-            id: "os-009",
-            question: "¿Qué instrumento normativo regula el procedimiento de sumarios administrativos en la Policía de Santa Fe?",
+            id: "os-m05",
+            difficulty: "media",
+            question: "En una persecución en flagrante delito, ¿qué faculta el CPP de Santa Fe a la policía respecto al ingreso a una morada privada sin orden de allanamiento?",
             options: [
-                "La Constitución Nacional exclusivamente",
-                "El Decreto N° 461/15 (Régimen Disciplinario)",
-                "El Código Procesal Penal de Santa Fe",
-                "La Ley Nacional de Seguridad Interior"
+                "Faculta el ingreso inmediato únicamente si media persecución ininterrumpida de quien se presume cometió un delito grave y se introdujo en ella para ocultarse o evitar la detención (Art. 212 CPP)",
+                "Prohíbe terminantemente el ingreso en todos los casos hasta contar con orden escrita de un juez",
+                "Permite el ingreso en cualquier momento sin necesidad de justificar flagrancia ni persecución",
+                "Solo permite ingresar si el dueño de casa autoriza por escrito en presencia de dos escribanos"
             ],
-            correctIndex: 1,
-            source: "Decreto 461/15 - Sumarios Administrativos",
-            explanation: "El Decreto 461/15 establece el procedimiento legal y transparente para investigar faltas graves y gravísimas, garantizando el derecho a defensa del personal."
-        },
-        {
-            id: "os-010",
-            question: "¿Puede un policía de Santa Fe negarse a cumplir una orden de su superior?",
-            options: [
-                "Nunca, la obediencia es absoluta e incondicional",
-                "Sí, cuando la orden implique la comisión de un delito manifiesto",
-                "Sí, siempre que el policía tenga más antigüedad",
-                "Solo si tiene autorización escrita del Jefe de Policía"
-            ],
-            correctIndex: 1,
-            source: "Ley 12.521 - Deberes del Personal: Obediencia Jerárquica",
-            explanation: "La obediencia jerárquica es un deber fundamental, pero tiene un límite claro: no se deben cumplir órdenes que impliquen la comisión de un delito manifiesto."
+            correctIndex: 0,
+            source: "CPP Santa Fe Ley 12.734, Art. 212: Allanamiento sin Orden en Flagrancia",
+            explanation: "El Art. 212 del CPP autoriza el allanamiento sin orden judicial previa ante flagrancia y persecución ininterrumpida o auxilio por peligro inminente para la vida."
         },
 
-        // --- PROCEDIMIENTOS OPERATIVOS (Materia 3) ---
+        // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
         {
-            id: "os-011",
-            question: "¿Qué artículos del Código Procesal Penal de Santa Fe regulan el Acta de Procedimiento Policial?",
+            id: "os-d01",
+            difficulty: "dificil",
+            question: "Conforme al Art. 138 del Código Procesal Penal de Santa Fe, ¿en qué supuesto excepcional el acta de procedimiento policial puede ser válida sin la presencia de dos testigos civiles?",
             options: [
-                "Artículos 1 y 2 del CPP",
-                "Artículos 120, 121 y concordantes del CPP de Santa Fe",
-                "Artículo 268 únicamente",
-                "No está regulado en el CPP sino en el Código Civil"
+                "En ningún caso; la falta de dos testigos acarrea la nulidad insanable de todo lo actuado",
+                "En casos de extrema urgencia o imposibilidad fundada de hallar testigos por razones de peligro inminente o desolación del lugar, debiendo asentarse dicha circunstancia de modo expreso en el acta",
+                "Siempre que el procedimiento se realice en horario nocturno (entre las 22:00 y las 06:00 hs)",
+                "Cuando el personal preventor cuente con la anuencia verbal del Fiscal de turno"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Acta de Procedimiento Policial (CPP SF)",
-            explanation: "El acta de procedimiento es un instrumento público fundamental sustentado en los Arts. 120 y 121 del CPP de Santa Fe, que da inicio a las actuaciones sumariales."
+            source: "CPP Santa Fe Ley 12.734, Art. 138 in fine: Excepción de Testigos",
+            explanation: "El Art. 138 in fine autoriza a prescindir de testigos solo por razones fundadas de urgencia o peligro grave, dejándolo expresamente asentado para evitar la nulidad."
         },
         {
-            id: "os-012",
-            question: "¿Cuántos testigos independientes se requieren obligatoriamente en un acta de procedimiento policial?",
+            id: "os-d02",
+            difficulty: "dificil",
+            question: "Según el Art. 214 del CPP de Santa Fe, ¿cuál es el plazo legal perentorio que tiene la policía para comunicar al Fiscal del MPA la aprehensión de una persona?",
             options: [
-                "Uno solo es suficiente",
-                "Al menos dos testigos independientes",
-                "No se requieren testigos si hay cámaras",
-                "Tres o más testigos siempre"
+                "Inmediatamente y sin dilación alguna, no pudiendo exceder en ningún caso las seis (6) horas de materializada",
+                "Dentro de las doce (12) horas corridas posteriores a la detención",
+                "Dentro de las veinticuatro (24) horas hábiles siguientes",
+                "Al momento de remitir el sumario prevenicional concluido a las 72 horas"
+            ],
+            correctIndex: 0,
+            source: "CPP Santa Fe Ley 12.734, Art. 214: Plazo de Comunicación de Aprehensión",
+            explanation: "El Art. 214 establece que la aprehensión debe comunicarse de forma inmediata al fiscal, con un tope infranqueable de 6 horas."
+        },
+        {
+            id: "os-d03",
+            difficulty: "dificil",
+            question: "¿En cuál de las siguientes situaciones de revista contempladas en la Ley 12.521 el personal policial pasa a percibir el 50% de sus haberes y retiene su estado policial pero sin portación de arma?",
+            options: [
+                "Disponibilidad por sumario administrativo grave cuando se dispone cautelarmente el pase a situación pasiva o retención de arma",
+                "Servicio efectivo durante el uso de licencia médica menor a 30 días",
+                "Disponibilidad simple a la espera de designación de nuevo destino por menos de 60 días",
+                "Licencia anual ordinaria acumulada de dos períodos"
+            ],
+            correctIndex: 0,
+            source: "Ley 12.521 - Estatuto del Personal Policial, Art. 52 y conc.: Situaciones de Revista",
+            explanation: "En la situación pasiva o disponibilidad con retención preventiva dispuesta en el sumario administrativo, se reduce el haber al 50% y se retira el armamento reglamentario."
+        },
+        {
+            id: "os-d04",
+            difficulty: "dificil",
+            question: "De acuerdo con el Decreto 461/15, ¿cuál es el plazo de prescripción de la acción disciplinaria para las faltas leves y para las faltas graves respectivamente?",
+            options: [
+                "60 días corridos para las faltas leves y dos (2) años para las faltas graves",
+                "30 días para leves y 6 meses para graves",
+                "1 año para leves y 5 años para graves",
+                "Las faltas disciplinarias policiales son imprescriptibles mientras el funcionario siga en actividad"
+            ],
+            correctIndex: 0,
+            source: "Decreto 461/15 - Régimen Disciplinario, Prescripción de Faltas",
+            explanation: "El Decreto 461/15 fija que la potestad disciplinaria prescribe a los 60 días en faltas leves y a los 2 años en faltas graves contados desde la comisión del hecho."
+        },
+        {
+            id: "os-d05",
+            difficulty: "dificil",
+            question: "En una requisa personal en la vía pública sin orden judicial previa (Art. 213 CPP Santa Fe), ¿qué requisito de fundamentación sustantiva debe constar en el acta para superar el test de validez constitucional?",
+            options: [
+                "La constatación de que la persona vestía prendas holgadas y mirada evasiva únicamente",
+                "La exteriorización precisa de circunstancias previas objetivas que razonablemente justifiquen la presunción de que porta consigo efectos provenientes de un delito o cosas que sirvieron para cometerlo",
+                "La sola mención de que se encontraba en una zona considerada de alta conflictividad por el mapa delictivo",
+                "Que la persona carezca de documento nacional de identidad al momento del chequeo"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Testigos de Actuación",
-            explanation: "Se requieren al menos dos testigos independientes. Si no es posible por urgencia o peligro inminente, se debe fundamentar la razón en el cuerpo del acta."
-        },
-        {
-            id: "os-013",
-            question: "¿Cómo se denomina el sistema de preservación del lugar del hecho con dos áreas diferenciadas?",
-            options: [
-                "Sistema de zona única",
-                "Sistema de Doble Perímetro (Cordón Doble)",
-                "Método de barrera simple",
-                "Protocolo de acceso libre controlado"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Preservación de la Escena del Hecho",
-            explanation: "El sistema de Doble Perímetro incluye: Perímetro Interno (zona de exclusión para peritos) y Perímetro Externo (zona de seguridad para apoyo)."
-        },
-        {
-            id: "os-014",
-            question: "¿Quiénes pueden ingresar al Perímetro Interno (Zona de Exclusión) en la escena del hecho?",
-            options: [
-                "Cualquier personal policial uniformado",
-                "Solo peritos forenses oficiales con equipo de protección",
-                "Familiares de la víctima con autorización verbal",
-                "Todos los patrulleros asignados al operativo"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Protocolo de Preservación de Escena",
-            explanation: "Al perímetro interno solo ingresan peritos forenses con equipo de protección. Queda prohibido pisar, tocar, fumar o alterar la escena."
-        },
-        {
-            id: "os-015",
-            question: "¿Qué es obligatorio registrar en la Planilla de Registro de ingreso a la escena del hecho?",
-            options: [
-                "Solo el nombre del jefe del operativo",
-                "Nombre, jerarquía, hora y motivo de ingreso de toda persona que entre a la escena",
-                "Únicamente la hora de llegada de los bomberos",
-                "El número de vehículos policiales presentes"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Planilla de Registro",
-            explanation: "Es obligatorio registrar a toda persona que ingrese, detallando nombre, jerarquía, hora y motivo del ingreso. Esto incluye personal médico, policial y judicial."
-        },
-        {
-            id: "os-016",
-            question: "¿Qué garantiza la Cadena de Custodia de evidencias en un procedimiento policial?",
-            options: [
-                "Que las pruebas se guarden en la comisaría más cercana",
-                "Que la prueba presentada en juicio sea la misma recolectada en el hecho",
-                "Que el fiscal visite personalmente el lugar del hecho",
-                "Que los testigos recuerden lo ocurrido durante el juicio"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Cadena de Custodia de Evidencias",
-            explanation: "La cadena de custodia garantiza la integridad probatoria: cada indicio debe ser rotulado, embalado herméticamente y documentado desde el primer preventor hasta el perito."
-        },
-
-        // --- ARMAMENTO Y USO DE LA FUERZA (Materia 4) ---
-        {
-            id: "os-017",
-            question: "Según el Manual MIRAF, ¿cuál es la primera regla de seguridad al manipular un arma de fuego?",
-            options: [
-                "Verificar que esté descargada antes de cada uso",
-                "Tratar toda arma de fuego como si estuviese cargada",
-                "Guardarla siempre en la funda con el seguro puesto",
-                "Apuntar al suelo mientras se camina"
-            ],
-            correctIndex: 1,
-            source: "Manual MIRAF - Medidas de Seguridad Fundamentales",
-            explanation: "La regla cardinal del MIRAF es tratar toda arma como si estuviera cargada, sin excepción ni circunstancia atenuante."
-        },
-        {
-            id: "os-018",
-            question: "¿Dónde debe mantenerse el dedo índice según las normas del Manual MIRAF hasta el momento de disparar?",
-            options: [
-                "Sobre el gatillo preparado para disparar rápidamente",
-                "Estirado e inmóvil fuera del arco guardamonte",
-                "Apoyado sobre la corredera del arma",
-                "Dentro del guardamonte pero sin presionar el gatillo"
-            ],
-            correctIndex: 1,
-            source: "Manual MIRAF - Medidas de Seguridad Fundamentales",
-            explanation: "El dedo debe estar fuera del arco guardamonte hasta el momento en que se decida efectivamente efectuar el disparo. Esto previene disparos accidentales."
-        },
-        {
-            id: "os-019",
-            question: "¿Cuál es el orden correcto de la Escala del Uso Progresivo y Gradual de la Fuerza?",
-            options: [
-                "Arma de fuego → Control físico → Presencia → Comunicación verbal",
-                "Presencia policial → Comunicación verbal → Control físico → Armas menos letales → Fuerza letal",
-                "Comunicación verbal → Presencia → Fuerza letal → Armas menos letales",
-                "Armas menos letales → Presencia → Control físico → Comunicación verbal → Fuerza letal"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 4 - Uso Progresivo de la Fuerza",
-            explanation: "La escala va de menor a mayor: 1) Presencia, 2) Comunicación verbal, 3) Control físico activo, 4) Armas menos letales, 5) Fuerza letal (último recurso)."
-        },
-        {
-            id: "os-020",
-            question: "¿En qué circunstancia se justifica el uso de arma de fuego (fuerza letal) según el protocolo ISEP?",
-            options: [
-                "Cuando el sospechoso no obedece la voz de alto",
-                "Exclusivamente ante peligro inminente de vida para el oficial o para terceros civiles",
-                "Cuando el sospechoso intenta huir a pie",
-                "Siempre que haya un delito flagrante de cualquier tipo"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 4 - Fuerza Letal",
-            explanation: "El uso del arma de fuego es el último recurso y solo se justifica ante peligro inminente de vida para el oficial o terceros civiles."
-        },
-        {
-            id: "os-021",
-            question: "¿Cómo debe realizarse la descarga de un arma secuestrada que se encuentra cargada?",
-            options: [
-                "En la comisaría, sin testigos, al día siguiente",
-                "En presencia obligatoria de testigos o filmando todo el procedimiento de descarga",
-                "Disparando los proyectiles al aire",
-                "Guardándola cargada en una bolsa de evidencia"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Pág. 69 - Protocolo de Descarga Segura",
-            explanation: "El arma se descarga apuntando a zona segura (tierra o cajón de arena), con guantes de nitrilo, ante testigos independientes o con filmación continua."
-        },
-        {
-            id: "os-022",
-            question: "¿Con qué tipo de guantes debe manipularse un arma de fuego secuestrada en la vía pública?",
-            options: [
-                "Guantes de cuero",
-                "Guantes de látex o nitrilo",
-                "Sin guantes, directamente con las manos",
-                "Guantes de tela de algodón"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 4 - Protocolo de Descarga Segura",
-            explanation: "Se utilizan guantes de látex o nitrilo para preservar indicios dactiloscópicos (huellas digitales) que pudieran encontrarse en el arma."
-        },
-        {
-            id: "os-023",
-            question: "Según la Ley 12.521, ¿la portación del arma reglamentaria es obligatoria estando franco de servicio?",
-            options: [
-                "No, solo es obligatoria en horario de servicio",
-                "Sí, es un deber del estado policial y existe obligación de intervenir las 24 horas del día",
-                "Solo si el policía vive en zona conflictiva",
-                "Es optativa y depende del criterio del oficial"
-            ],
-            correctIndex: 1,
-            source: "Ley 12.521 / Manual ISEP 2026, Materia 4 - Portación de Arma",
-            explanation: "La Ley 12.521 establece que la portación del armamento provisto por el Estado es un deber permanente, con obligación de intervenir en defensa de la vida y bienes."
-        },
-        {
-            id: "os-024",
-            question: "¿Qué tres principios rigen el uso de la fuerza pública según el protocolo ISEP?",
-            options: [
-                "Rapidez, Contundencia y Efectividad",
-                "Legalidad, Necesidad y Proporcionalidad",
-                "Autoridad, Jerarquía y Mando",
-                "Disciplina, Obediencia y Valor"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 4 - Principios del Uso de la Fuerza",
-            explanation: "Todo uso de la fuerza debe cumplir tres principios: ser Legal (conforme a la ley), Necesario (no hay alternativa) y Proporcional (adecuado a la amenaza)."
-        },
-
-        // --- SEGURIDAD INTERIOR Y DDHH (Materia 5) ---
-        {
-            id: "os-025",
-            question: "¿Qué ley establece las bases de cooperación entre fuerzas policiales provinciales y fuerzas federales en Argentina?",
-            options: [
-                "Ley 12.521 de Personal Policial",
-                "Ley Nacional de Seguridad Interior N° 24.059",
-                "Decreto 461/15 de Régimen Disciplinario",
-                "Ley 14.283 de Reforma Previsional"
-            ],
-            correctIndex: 1,
-            source: "Ley 24.059 / Manual ISEP 2026, Materia 5",
-            explanation: "La Ley 24.059 establece la cooperación recíproca entre policías provinciales y fuerzas federales bajo la dirección del Ministerio de Seguridad de la Nación."
-        },
-        {
-            id: "os-026",
-            question: "¿Cuál es la diferencia fundamental entre Seguridad Interior y Defensa Nacional?",
-            options: [
-                "No hay diferencia, son lo mismo",
-                "La seguridad interior protege contra delitos internos; la defensa nacional contra agresiones militares extranjeras",
-                "La defensa nacional se ocupa de los delitos y la seguridad interior de la soberanía",
-                "La seguridad interior solo opera en Capital Federal"
-            ],
-            correctIndex: 1,
-            source: "Ley 24.059 / Manual ISEP 2026, Materia 5 - Seguridad Interior vs. Defensa",
-            explanation: "Seguridad interior = paz social interna (fuerzas policiales). Defensa nacional = soberanía territorial ante agresiones militares (fuerzas armadas)."
-        },
-        {
-            id: "os-027",
-            question: "Al detener a una persona, ¿qué derechos debe comunicarle inmediatamente el policía actuante?",
-            options: [
-                "Solo el derecho a guardar silencio",
-                "Designar defensor, comunicarse con allegados, abstenerse de declarar y ser examinado por médico",
-                "Firmar el acta de procedimiento solamente",
-                "No es obligatorio comunicarle nada hasta llegar a la comisaría"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 5 - Derechos del Detenido (Art. 268 CPP SF)",
-            explanation: "Es obligatorio comunicar inmediatamente: derecho a designar abogado, comunicarse con familiares, abstenerse de declarar y ser examinado por facultativo médico."
-        },
-        {
-            id: "os-028",
-            question: "¿A quién debe comunicarse inmediatamente una detención policial?",
-            options: [
-                "Al Jefe de Policía directamente",
-                "Al Fiscal de turno del MPA (Ministerio Público de la Acusación) y al Defensor Oficial",
-                "Al gobernador de la provincia",
-                "Solo a los familiares del detenido"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 5 - Comunicaciones Inmediatas",
-            explanation: "Se debe informar inmediatamente al Fiscal del MPA y al Defensor Oficial para el control de legalidad de la aprehensión."
-        },
-        {
-            id: "os-029",
-            question: "¿Qué artículo de la Constitución Nacional incorpora los tratados internacionales de derechos humanos?",
-            options: [
-                "Artículo 14",
-                "Artículo 75, inciso 22",
-                "Artículo 1",
-                "Artículo 100"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 5 - Garantías Constitucionales",
-            explanation: "El Art. 75 inc. 22 de la Constitución Nacional otorga jerarquía constitucional a los tratados internacionales de derechos humanos."
-        },
-        {
-            id: "os-030",
-            question: "¿Qué nivel de la escala de fuerza corresponde al uso de tonfa, esposas o gas pimienta?",
-            options: [
-                "Nivel 2: Comunicación verbal",
-                "Nivel 3: Control físico activo",
-                "Nivel 4: Armas menos letales",
-                "Nivel 5: Fuerza letal"
-            ],
-            correctIndex: 2,
-            source: "Manual ISEP 2026, Materia 4 - Escala del Uso Progresivo de la Fuerza",
-            explanation: "El nivel 4 (Armas menos letales) incluye tonfa, esposas, gas pimienta, cartuchería antitumulto y armas de dispersión."
-        },
-
-        // --- PREGUNTAS ADICIONALES MIXTAS ---
-        {
-            id: "os-031",
-            question: "¿Qué tipo de falta constituye la pérdida por descuido del arma reglamentaria o la credencial policial?",
-            options: [
-                "Falta leve con apercibimiento",
-                "Falta grave",
-                "No constituye falta disciplinaria",
-                "Falta administrativa sin sanción"
-            ],
-            correctIndex: 1,
-            source: "Ley 12.521 / Decreto 461/15 - Clasificación de Faltas",
-            explanation: "La pérdida por descuido del arma o credencial se considera falta grave, sancionable con arresto de 11 a 30 días o suspensión."
-        },
-        {
-            id: "os-032",
-            question: "¿Qué tipo de falta constituye el abandono de servicio por parte de un efectivo policial?",
-            options: [
-                "Falta leve",
-                "Falta grave",
-                "Falta gravísima que puede llevar a destitución",
-                "No está contemplado en el régimen disciplinario"
-            ],
-            correctIndex: 2,
-            source: "Ley 12.521 / Decreto 461/15 - Faltas Gravísimas",
-            explanation: "El abandono de servicio es una falta gravísima que puede derivar en Cesantía o Exoneración (destitución)."
-        },
-        {
-            id: "os-033",
-            question: "En un acta de procedimiento policial, ¿pueden incluirse apreciaciones subjetivas del policía actuante?",
-            options: [
-                "Sí, para enriquecer el relato de los hechos",
-                "No, la descripción debe ser cronológica, detallada y sin apreciaciones subjetivas",
-                "Solo si el superior jerárquico lo autoriza",
-                "Sí, siempre que sean razonables"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Requisitos de Validez del Acta",
-            explanation: "El acta requiere una descripción cronológica y objetiva de los hechos, sin opiniones ni apreciaciones subjetivas del funcionario actuante."
-        },
-        {
-            id: "os-034",
-            question: "¿Qué datos obligatorios debe contener un acta de procedimiento policial para ser válida?",
-            options: [
-                "Solo el nombre del policía y la firma",
-                "Lugar, fecha, hora de inicio y cierre, datos de preventores y descripción cronológica",
-                "Únicamente la firma de los testigos",
-                "El número de legajo del policía y la comisaría de referencia"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Requisitos de Validez del Acta",
-            explanation: "Para que un acta sea válida debe contener: lugar, fecha, hora exacta de inicio y cierre, datos de preventores intervinientes y descripción cronológica detallada."
-        },
-        {
-            id: "os-035",
-            question: "¿Cómo debe embalarse cada indicio secuestrado según la cadena de custodia?",
-            options: [
-                "Todos juntos en una misma bolsa grande",
-                "De forma individual y hermética, debidamente rotulado",
-                "Envuelto en papel de diario sin rotular",
-                "En la caja del patrullero sin embalaje especial"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Cadena de Custodia",
-            explanation: "Cada indicio debe ser rotulado y embalado herméticamente de forma individual para preservar su integridad como prueba judicial."
+            source: "CPP Santa Fe Ley 12.734, Art. 213 y Fallos Corte Suprema sobre Requisa Policial",
+            explanation: "La doctrina jurisprudencial exige motivos bastantes objetivos y concordantes; la mera sospecha subjetiva sin base fáctica acarrea la nulidad de la requisa y el secuestro."
         }
     ],
 
     // ═══════════════════════════════════════════════════════════════
-    // SUBINSPECTOR → INSPECTOR (Mandos Medios Operativos)
+    // SUBINSPECTOR → INSPECTOR (Liderazgo, Crisis, Menores, LCAT)
     // ═══════════════════════════════════════════════════════════════
     "subinspector-inspector": [
+        // --- NIVEL FÁCIL ---
         {
-            id: "si-001",
-            question: "¿Cuál es el rol principal del Subinspector al mando de una unidad operativa?",
+            id: "si-f01",
+            difficulty: "facil",
+            question: "En el Manual ISEP para Subinspectores, ¿a qué alude el concepto de 'Pequeños Grandes Líderes'?",
             options: [
-                "Realizar exclusivamente tareas administrativas de escritorio",
-                "Supervisar procedimientos en vía pública, coordinar móviles y velar por la integridad del personal",
-                "Comandar únicamente operativos de tránsito",
-                "Redactar informes para el Ministerio de Seguridad"
+                "Al personal que recién egresa de la escuela de oficiales",
+                "A los mandos medios y primeros supervisores de patrulla que con su ejemplo diario modelan la conducta y operatividad del personal subordinado",
+                "A los directores generales de las Unidades Regionales",
+                "A los cadetes en período de prácticas profesionalizantes"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Subinspector: Conducción Operativa",
-            explanation: "El Subinspector ejerce supervisión de procedimientos en vía pública, coordinando móviles patrulleros y cuidando la integridad del personal dependiente."
+            source: "Manual ISEP 2026 - Subinspector, Pág. 8: Pequeños Grandes Líderes",
+            explanation: "El concepto resalta el rol estratégico del Subinspector como líder de proximidad directa con la guardia y el móvil patrullero."
         },
         {
-            id: "si-002",
-            question: "¿Cuál es la primera medida obligatoria al arribar a una escena de hecho de sangre?",
+            id: "si-f02",
+            difficulty: "facil",
+            question: "En una intervención ante una persona con padecimiento mental en crisis en vía pública, ¿cuál es el objetivo primordial del accionar policial?",
             options: [
-                "Recolectar los casquillos y embalarlos sin fotografiar",
-                "Preservar el perímetro mediante encintado doble y restringir el acceso",
-                "Entrevistar a los vecinos antes de comunicar al Fiscal",
-                "Mover el cuerpo a un lugar resguardado para protegerlo"
+                "Reducir físicamente al causante con armas de letalidad inmediata",
+                "Preservar la vida e integridad del causante y de terceros, conteniendo la situación y solicitando asistencia médica de salud mental (107 / SIES)",
+                "Trasladarlo inmediatamente a un calabozo de comisaría para interrogarlo",
+                "Llamar a los medios de comunicación para dejar constancia"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Criminalística: Preservación del Lugar del Hecho",
-            explanation: "La preservación del perímetro y la intangibilidad del lugar del hecho es la primera prioridad criminalística, antes de cualquier otra acción."
+            source: "Manual ISEP 2026 - Subinspector, Pág. 16: Crisis Subjetiva - Abordaje",
+            explanation: "Bajo la Ley de Salud Mental y doctrina ISEP, la crisis subjetiva es una emergencia sanitaria que requiere contención, distancia y auxilio médico, no criminalización."
         },
         {
-            id: "si-003",
-            question: "¿Puede el personal médico de emergencias ingresar al perímetro interno sin registrarse?",
+            id: "si-f03",
+            difficulty: "facil",
+            question: "¿Qué ley nacional regula el marco de actuación ante situaciones de salud mental y crisis subjetivas?",
             options: [
-                "Sí, el personal médico tiene libre acceso por emergencia",
-                "No, toda persona sin excepción debe quedar registrada en la planilla de custodia",
-                "Solo si lo autoriza el jefe del operativo verbalmente",
-                "Sí, pero deben dejar su identificación al salir"
+                "Ley Nacional de Salud Mental N° 26.657",
+                "Ley de Tránsito N° 24.449",
+                "Ley de Seguridad Interior N° 24.059",
+                "Ley de Estupefacientes N° 23.737"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Subinspector, Pág. 14: Marco Normativo Salud Mental",
+            explanation: "La Ley 26.657 establece los derechos de las personas en padecimientos mentales y el rol sanitario interdisciplinario."
+        },
+
+        // --- NIVEL MEDIO ---
+        {
+            id: "si-m01",
+            difficulty: "media",
+            question: "En un siniestro vial con Lesiones Culposas en Accidentes de Tránsito (L.C.A.T.), ¿qué elemento técnico debe confeccionar el Subinspector preventor?",
+            options: [
+                "Una sentencia judicial provisoria de culpabilidad",
+                "La inspección ocular detallada y el croquis planimétrico ilustrativo con medidas, sentido de circulación y punto de impacto estimado",
+                "Una cotización de los repuestos de los vehículos dañados",
+                "La suspensión preventiva del carnet de conducir de ambos involucrados"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Preservación: Planilla de Registro",
-            explanation: "Toda persona, sin excepción (incluyendo médicos), que ingrese al perímetro resguardado debe quedar registrada con nombre, DNI, función y hora."
+            source: "Manual ISEP 2026 - Subinspector, Pág. 25: Procedimientos L.C.A.T.",
+            explanation: "En hechos de L.C.A.T. es deber del preventor labrar la inspección ocular y el croquis acotado para elevar a fiscalía y peritos viales."
         },
         {
-            id: "si-004",
-            question: "¿Qué elementos de protección son obligatorios para ingresar al perímetro interno de la escena?",
+            id: "si-m02",
+            difficulty: "media",
+            question: "¿Qué recaudo legal es obligatorio al intervenir en la demora de un menor de 16 años (no punible penalmente)?",
             options: [
-                "No se requiere equipamiento especial",
-                "Cubrecalzados y guantes como mínimo",
-                "Solo gorra y chaleco antibalas",
-                "Barbijo y lentes de sol"
+                "Alojarlo en el penal de mayores hasta que el juez resuelva",
+                "No esposarlo salvo riesgo inminente, examinarlo médicamente, no alojarlo en celdas de detención y dar inmediata intervención a la Secretaría de Niñez (Ley 12.967)",
+                "Tomarle declaración indagatoria en la oficina de guardia",
+                "Publicar sus datos personales en el parte de prensa para ubicar a sus padres"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Subinspector: Preservación del Lugar del Hecho",
-            explanation: "Es obligatorio utilizar cubrecalzados y guantes como mínimo para no contaminar la escena con huellas o material biológico del personal policial."
+            source: "Manual ISEP 2026 - Subinspector, Pág. 18: Procedimiento con Menores",
+            explanation: "La ley de niñez y el manual ISEP prohíben alojar menores en calabozos, exigen certificado médico y articulación con los organismos de niñez locales."
         },
         {
-            id: "si-005",
-            question: "¿Quién es el responsable primario de establecer el cordón de preservación en el lugar del hecho?",
+            id: "si-m03",
+            difficulty: "media",
+            question: "En materia de L.C.A.T., cuando el conductor de un vehículo involucrado presenta aliento etílico evidente pero se niega a realizar el test de alcoholemia, ¿qué temperamento corresponde adoptar?",
             options: [
-                "El fiscal del MPA que llega al lugar",
-                "El primer preventor a cargo del móvil o dotación que llega al lugar",
-                "El perito de criminalística",
-                "El jefe de la Unidad Regional"
+                "Obligarlo físicamente mediante el uso de la fuerza a soplar la pipeta",
+                "Asentar la negativa expresa en el acta ante testigos, requerir extracción de sangre/orina dispuesta por el Fiscal o examen clínico por médico de policía",
+                "Dejarlo retirarse conduciendo al no poder medirse los gramos de alcohol",
+                "Aplicarle una sanción de arresto contravencional directo en el móvil"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Criminalística: Cordón de Preservación",
-            explanation: "La responsabilidad primaria de asegurar la escena recae en el primer preventor (policía) que llega al lugar del hecho."
+            source: "Manual ISEP 2026 - Subinspector, Procedimiento en Siniestros Viales y Alcoholemia",
+            explanation: "Ante la negativa, se deja constancia formal en presencia de testigos y se convoca al médico policial para diagnóstico clínico del estado de intoxicación con directiva fiscal."
+        },
+
+        // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
+        {
+            id: "si-d01",
+            difficulty: "dificil",
+            question: "Con la implementación del Juicio por Jurados en la Provincia de Santa Fe (Ley 14.258), ¿cuál es el rol y exigencia probatoria sobre el funcionario policial que comparece como testigo en el debate?",
+            options: [
+                "Puede leer íntegramente las actas policiales durante su testimonio sin responder preguntas de las partes",
+                "Debe declarar oralmente con base en su percepción directa y memoria, pudiendo utilizar las actas únicamente para refrescar memoria o superar contradicciones a solicitud fundada de las partes",
+                "Su testimonio es irrelevante porque el jurado civil solo juzga pruebas periciales de laboratorio",
+                "El policía declara a puertas cerradas sin la presencia de los doce ciudadanos jurados"
+            ],
+            correctIndex: 1,
+            source: "Manual ISEP 2026 - Subinspector, Pág. 159: Juicio por Jurados en Santa Fe (Ley 14.258)",
+            explanation: "En el sistema de Juicio por Jurados rige la oralidad pura; las actas no ingresan por lectura directa sino a través del testimonio oral del efectivo policial."
         },
         {
-            id: "si-006",
-            question: "¿Qué datos se deben registrar en la planilla de ingreso al lugar del hecho?",
+            id: "si-d02",
+            difficulty: "dificil",
+            question: "En una requisa vehicular sin orden judicial en la vía pública (Art. 213 CPP Santa Fe), ¿qué requisito de legalidad sustantiva exige la jurisprudencia para que el secuestro no sea declarado nulo?",
             options: [
-                "Solo el nombre del funcionario",
-                "Nombre, DNI, función, hora de ingreso y hora de egreso",
-                "Únicamente la hora de llegada",
-                "El número de patente del vehículo policial"
+                "Que el conductor tenga antecedentes penales computables en el sistema Cóndor",
+                "La existencia de circunstancias previas objetivas y concordantes (motivo fundado) que justifiquen la presunción de que en el rodado se transportan efectos de un delito, debidamente exteriorizadas en el acta",
+                "Que el operativo cuente con la presencia física in situ del Fiscal en turno",
+                "Que el vehículo sea de procedencia extranjera o de otra provincia"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Planilla de Registro de Ingreso",
-            explanation: "Deben registrarse: nombre completo, documento, función/cargo, hora exacta de ingreso y de egreso de toda persona autorizada."
+            source: "CPP Santa Fe Ley 12.734, Art. 213: Requisa Vehicular sin Orden",
+            explanation: "El Art. 213 exige motivos bastantes objetivos. La mera sospecha subjetiva sin exteriorización fáctica en el acta acarrea la nulidad del secuestro en juicio."
         },
         {
-            id: "si-007",
-            question: "En la cadena de custodia, ¿qué ocurre si un indicio no está correctamente rotulado y documentado?",
+            id: "si-d03",
+            difficulty: "dificil",
+            question: "Bajo la Ley Provincial 12.967 de Protección Integral de los Derechos de Niñas, Niños y Adolescentes, ¿cuál es el límite temporal máximo para que la policía mantenga demorado a un adolescente punible (16 a 17 años) antes de resolver su situación?",
             options: [
-                "No tiene consecuencias legales",
-                "Puede ser impugnado en juicio y declarado nulo como prueba",
-                "Se puede rotular después sin problema",
-                "Solo afecta si el juez lo solicita expresamente"
+                "Hasta 12 horas improrrogables, debiendo notificar de inmediato a la defensa técnica y al Juzgado de Menores / Fiscal de Menores",
+                "Hasta 72 horas corridas en el calabozo común de la comisaría",
+                "Hasta 5 días para averiguación de antecedentes",
+                "No existe límite temporal mientras los padres no se presenten a retirarlo"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Cadena de Custodia",
-            explanation: "La ruptura de la cadena de custodia puede invalidar la prueba en juicio, afectando todo el proceso penal."
-        },
-        {
-            id: "si-008",
-            question: "¿Cuál es el procedimiento correcto al encontrar evidencia en el lugar del hecho?",
-            options: [
-                "Recogerla con las manos desnudas y llevarla al móvil",
-                "Fijación fotográfica y planimétrica → Embalaje hermético → Rotulado → Firma de custodia",
-                "Guardarla en el bolsillo y entregarla en comisaría",
-                "Dejarla en el lugar hasta que llegue el juez"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Procedimiento de Recolección de Evidencia",
-            explanation: "El orden correcto es: 1) Fijación fotográfica y planimétrica, 2) Embalaje hermético individual, 3) Rotulado con datos completos, 4) Firma del formulario de custodia."
-        },
-        {
-            id: "si-009",
-            question: "¿Está prohibido fumar dentro del perímetro interno de la escena del hecho?",
-            options: [
-                "No, depende del criterio de cada efectivo",
-                "Sí, queda absolutamente prohibido fumar, comer o alterar la escena de cualquier forma",
-                "Solo si hay material explosivo",
-                "No está regulado expresamente"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Zona de Exclusión",
-            explanation: "En el perímetro interno queda prohibido fumar, pisar indicios, tocar elementos o realizar cualquier acción que pueda contaminar la escena."
-        },
-        {
-            id: "si-010",
-            question: "¿A qué se denomina 'Formulario de Cadena de Custodia'?",
-            options: [
-                "Un formulario de reclamo de viáticos",
-                "El documento que registra la trazabilidad de cada indicio desde el primer preventor hasta el perito de destino",
-                "Un acta de promoción de personal",
-                "El parte diario de novedades del turno"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Cadena de Custodia",
-            explanation: "El formulario documenta cada traspaso de la evidencia, garantizando que la prueba en juicio sea la misma que se recolectó originalmente."
-        },
-        // Preguntas adicionales para completar banco de 25+
-        {
-            id: "si-011",
-            question: "¿Qué se entiende por 'preservación de la intangibilidad' del lugar del hecho?",
-            options: [
-                "Limpiar el lugar antes de que lleguen los peritos",
-                "Que nada ni nadie altere, contamine o destruya los indicios presentes en la escena",
-                "Tomar fotos con el celular personal",
-                "Permitir el paso de la prensa para documentar"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Criminalística: Preservación",
-            explanation: "La intangibilidad significa que la escena debe mantenerse exactamente como fue encontrada, sin ningún tipo de alteración, contaminación o pérdida de indicios."
-        },
-        {
-            id: "si-012",
-            question: "¿Cuáles son los dos perímetros del sistema de cordón doble?",
-            options: [
-                "Perímetro Norte y Perímetro Sur",
-                "Perímetro Interno (Zona de Exclusión) y Perímetro Externo (Zona de Seguridad)",
-                "Perímetro de entrada y Perímetro de salida",
-                "Perímetro vehicular y Perímetro peatonal"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Sistema de Doble Perímetro",
-            explanation: "El perímetro interno es la zona de exclusión para peritos; el externo es la zona de seguridad para apoyo policial, ambulancias y superiores."
-        },
-        {
-            id: "si-013",
-            question: "¿Quién está autorizado a levantar evidencia dentro del perímetro interno?",
-            options: [
-                "Cualquier oficial que tenga guantes",
-                "Exclusivamente los peritos forenses oficiales designados",
-                "El primer policía que llegó al lugar",
-                "Los testigos civiles"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Recolección de Evidencia",
-            explanation: "Solo los peritos forenses oficiales están autorizados a recolectar y manipular evidencia dentro del perímetro interno de la escena."
-        },
-        {
-            id: "si-014",
-            question: "¿Por qué se embala cada indicio de forma individual y hermética?",
-            options: [
-                "Para ahorrar espacio en el depósito",
-                "Para evitar la contaminación cruzada entre indicios y preservar su valor probatorio",
-                "Por cuestiones estéticas y de orden",
-                "Porque lo exige la empresa de embalajes"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Cadena de Custodia",
-            explanation: "El embalaje individual hermético previene la contaminación cruzada (mezcla de ADN, residuos de pólvora, sustancias) entre diferentes indicios del hecho."
-        },
-        {
-            id: "si-015",
-            question: "¿Qué sucede legalmente si se rompe la cadena de custodia de una evidencia?",
-            options: [
-                "No pasa nada, se puede reconstruir después",
-                "La prueba puede ser declarada nula e inadmisible en el juicio oral",
-                "Solo se aplica una multa al funcionario responsable",
-                "Se pide un nuevo peritaje automáticamente"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026, Materia 3 - Cadena de Custodia",
-            explanation: "La ruptura de la cadena de custodia puede invalidar la prueba en juicio, beneficiando al imputado por violación de garantías procesales."
+            correctIndex: 0,
+            source: "Ley 12.967 y Régimen Penal Juvenil de Santa Fe",
+            explanation: "La privación de libertad cautelar de un menor es excepcionalísima; la policía debe dar intervención inmediata a la justicia juvenil y no puede retenerlo más allá del plazo perentorio legal."
         }
     ],
 
     // ═══════════════════════════════════════════════════════════════
-    // INSPECTOR → SUBCOMISARIO (Jefatura de Dependencia)
+    // INSPECTOR → SUBCOMISARIO (Narcomenudeo Ley 14.239, Armamento, Jefatura)
     // ═══════════════════════════════════════════════════════════════
     "inspector-subcomisario": [
+        // --- NIVEL FÁCIL ---
         {
-            id: "is-001",
-            question: "¿De qué libros obligatorios responde el Subcomisario como jefe de dependencia policial?",
+            id: "is-f01",
+            difficulty: "facil",
+            question: "¿Qué establece la Ley Provincial N° 14.239 sancionada en la Provincia de Santa Fe?",
             options: [
-                "Solo del Libro de Guardia",
-                "Libro de Guardia, Libro de Detenidos, Registro de Armamento, Libro de Secuestros y Libro de Quejas",
-                "Únicamente del Libro de Secuestros",
-                "No es responsable de los libros, eso corresponde al escribiente"
+                "La desfederalización parcial de la competencia penal en materia de estupefacientes (microtráfico / narcomenudeo)",
+                "La creación de una nueva Unidad Regional en el norte provincial",
+                "Un nuevo estatuto de remuneraciones y adicionales",
+                "La unificación de las comisarías con los juzgados comunales"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Inspector→Subcomisario: Gestión de Comisarías",
-            explanation: "El Subcomisario responde por la correcta confección e inviolabilidad de todos los libros obligatorios de la dependencia policial."
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Inspector, Pág. 9: Ley N° 14.239 de Microtráfico",
+            explanation: "La Ley 14.239 adhirió a la desfederalización (Ley 26.052), permitiendo que la Policía de Santa Fe y el MPA investiguen el narcomenudeo local."
         },
         {
-            id: "is-002",
-            question: "¿Quién es el responsable institucional por la integridad física del detenido alojado en la Comisaría?",
+            id: "is-f02",
+            difficulty: "facil",
+            question: "En la pistola reglamentaria Bersa Thunder 9mm Pro, ¿cuál es la función de la palanca de desmartillado (decocker)?",
             options: [
-                "El Oficial Sumariante únicamente",
-                "El Jefe o Subjefe de la Dependencia Policial a cargo del turno",
-                "El Jefe de la Guardia Urbana Municipal",
-                "El personal administrativo de entrada"
+                "Aumentar la cadencia de disparo a ráfaga",
+                "Hacer descender el martillo de forma totalmente segura sin percutir el cartucho alojado en recámara",
+                "Trabar la corredera cuando se agotan los cartuchos del cargador",
+                "Liberar el cargador vacío de la empuñadura"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Jefatura de Dependencia",
-            explanation: "La responsabilidad institucional y constitucional por la integridad y custodia de los alojados recae sobre la Jefatura de Dependencia (Subcomisario/Comisario)."
+            source: "Manual ISEP 2026 - Inspector, Pág. 262: Armamento y Palanca de Desmartillado",
+            explanation: "La palanca decocker desactiva el martillo de forma mecánica y segura, posicionando el arma en doble acción sin riesgo de disparo accidental."
         },
         {
-            id: "is-003",
-            question: "¿Qué artículo del CPP de Santa Fe regula la aprehensión en flagrancia?",
+            id: "is-f03",
+            difficulty: "facil",
+            question: "¿Cuál es el órgano judicial provincial competente para investigar los delitos de microtráfico bajo la Ley 14.239?",
             options: [
-                "Artículo 1 del CPP",
-                "Artículo 212 del CPP de Santa Fe",
-                "Artículo 500 del Código Civil",
-                "Artículo 75 de la Constitución Nacional"
+                "El Ministerio Público de la Acusación (MPA)",
+                "La Justicia Federal con asiento en Rosario o Santa Fe",
+                "Los Juzgados Comunales de Pequeñas Causas",
+                "El Tribunal de Cuentas de la Provincia"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Inspector, Pág. 10: Competencia MPA en Narcomenudeo",
+            explanation: "A partir de la Ley 14.239, los fiscales del MPA asumen la dirección de las investigaciones por venta minorista de estupefacientes en territorio santafesino."
+        },
+
+        // --- NIVEL MEDIO ---
+        {
+            id: "is-m01",
+            difficulty: "media",
+            question: "En el marco de la Ley 14.239, ¿cuál es la diferencia técnica entre la tenencia simple (Art. 14 1° P. Ley 23.737) y la tenencia con fines de comercialización (Art. 5 inc. C)?",
+            options: [
+                "No hay diferencia procesal; ambas tienen idéntica escala penal",
+                "La tenencia simple no exige acreditar el destino comercial, mientras que en el Art. 5 inc. C deben concurrir indicios unívocos de venta (fraccionamiento, balanza, dinero en baja denominación, envoltorios)",
+                "La tenencia simple solo se investiga en la Justicia Federal y el Art. 5 en la Justicia Provincial",
+                "La tenencia con fines de comercialización solo se configura si la sustancia supera los 10 kilogramos"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Elevaciones al MPA (Art. 212 CPP SF)",
-            explanation: "El Art. 212 del CPP de Santa Fe regula las condiciones y plazos de la aprehensión en flagrancia y las comunicaciones al fiscal de turno."
+            source: "Manual ISEP 2026 - Inspector, Pág. 12-14: Tipos Penales de Microtráfico",
+            explanation: "Para imputar el Art. 5 inc. C se requieren elementos objetivos que prueben la venta (fraccionamiento en dosis, balanzas, dinero menudo, anotaciones)."
         },
         {
-            id: "is-004",
-            question: "¿Cuándo debe comunicarse la aprehensión al Fiscal del MPA?",
+            id: "is-m02",
+            difficulty: "media",
+            question: "¿Qué libros son de llevanza obligatoria y custodia estricta bajo responsabilidad del Jefe o Subjefe de Comisaría?",
             options: [
-                "Dentro de las 72 horas",
-                "De inmediato, sin dilaciones innecesarias",
-                "Al día siguiente hábil",
-                "Solo si el detenido lo solicita"
+                "Libro de Guardia, Libro de Detenidos, Registro de Armamento y Munición, y Libro de Efectos Secuestrados",
+                "Únicamente el Libro de Asistencia de Personal",
+                "Solo las carpetas de correspondencia interna",
+                "El libro contable de la Asociación Cooperadora Policial exclusivamente"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Elevaciones al MPA",
-            explanation: "La comunicación al Fiscal de turno debe ser inmediata, sin dilaciones innecesarias, elevando las actuaciones dentro del plazo procesal legal."
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Inspector, Gestión de Dependencias Policiales",
+            explanation: "El titular de la dependencia responde administrativa y penalmente por la inviolabilidad y actualización de los libros matrices de guardia, detenidos, secuestros y armas."
         },
         {
-            id: "is-005",
-            question: "¿Qué debe garantizar el Subcomisario respecto de los libros obligatorios de la comisaría?",
+            id: "is-m03",
+            difficulty: "media",
+            question: "En la cadena de custodia de sustancias estupefacientes secuestradas en un punto de venta (boca de expendio), ¿qué procedimiento técnico es inexcusable?",
             options: [
-                "Que estén guardados bajo llave y nadie los vea",
-                "Su correcta confección e inviolabilidad",
-                "Que se renueven cada mes",
-                "Que solo los firme el Jefe de Policía"
+                "Pesar la sustancia, realizar test orientativo de campo ante dos testigos civiles, rotular, precintar en sobre de seguridad con firmas y remitir a laboratorio forense",
+                "Guardar la sustancia en el escritorio de la guardia hasta el día de la audiencia",
+                "Entregar las muestras directamente a los denunciantes anónimos",
+                "Destruir la sustancia en el lugar sin análisis químico previo"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Gestión de Recursos Humanos y Registros",
-            explanation: "Los libros obligatorios son instrumentos legales que deben estar correctamente confeccionados, sin enmendaduras, tachaduras ni hojas arrancadas."
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Inspector, Protocolo de Cadena de Custodia de Estupefacientes",
+            explanation: "El test de reactivos de campo y el pesaje ante testigos, junto con el precintado numerado, garantizan la inalterabilidad probatoria de la evidencia química."
+        },
+
+        // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
+        {
+            id: "is-d01",
+            difficulty: "dificil",
+            question: "Bajo la Ley 14.239, si en un procedimiento policial de narcomenudeo se descubren indicios de una organización narcocriminal transnacional o conexidad con lavado de activos federal, ¿qué principio procesal rige?",
+            options: [
+                "Principio de Primacía Federal: el Fiscal del MPA debe declinar la competencia y remitir las actuaciones y secuestros al Juzgado Federal correspondiente",
+                "Principio de Inmunidad Provincial: la causa debe permanecer obligatoriamente en los tribunales provinciales",
+                "Principio de Doble Juzgamiento: se instruyen dos causas paralelas por el mismo hecho de forma simultánea",
+                "La causa se archiva por incompetencia manifiesta de la policía de seguridad"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Inspector, Pág. 11: Principio de Primacía Federal",
+            explanation: "El principio de primacía federal ordena que ante la concurrencia de delitos de narcotráfico de mayor envergadura, la justicia federal atrae la investigación completa."
         },
         {
-            id: "is-006",
-            question: "¿Cuál es la función del Libro de Detenidos en una comisaría?",
+            id: "is-d02",
+            difficulty: "dificil",
+            question: "¿En qué consiste el 'Seguro Integral de Funcionamiento' de las pistolas semiautomáticas reglamentarias de la Policía de Santa Fe?",
             options: [
-                "Registrar los horarios del personal policial",
-                "Registrar el ingreso, alojamiento, traslado y egreso de toda persona privada de libertad",
-                "Anotar las quejas de los vecinos",
-                "Llevar la contabilidad de la dependencia"
+                "Un seguro manual externo que debe colocarse con la mano inhábil",
+                "Un conjunto de sistemas pasivos internos (seguro de aguja percutora, seguro de caída y desconector de corredera) que impiden el disparo a menos que la cola del disparador sea accionada voluntariamente",
+                "Una funda de plástico rígido con nivel de retención tres",
+                "Un dispositivo electrónico que inhabilita el arma si se aleja del uniforme"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Libros Obligatorios de Dependencia",
-            explanation: "El Libro de Detenidos registra cronológicamente cada movimiento de personas privadas de libertad alojadas en la dependencia."
+            source: "Manual ISEP 2026 - Inspector, Pág. 265: Seguro Integral de Funcionamiento",
+            explanation: "El seguro pasivo bloquea mecánicamente la aguja percutora en todo momento, impidiendo disparos involuntarios por caídas o golpes."
         },
         {
-            id: "is-007",
-            question: "¿Qué significa la sigla CUE en el contexto policial de Santa Fe?",
+            id: "is-d03",
+            difficulty: "dificil",
+            question: "Respecto a la requisa y secuestro de teléfonos celulares en allanamientos de microtráfico, ¿qué recaudo tecnológico de preservación forense exige el protocolo para evitar el borrado remoto de datos?",
             options: [
-                "Código Único de Emergencias",
-                "Código Único de Evento (número que identifica cada actuación policial)",
-                "Central Unificada de Estadísticas",
-                "Comisión Unificada Especial"
+                "Dejar los teléfonos encendidos y conectados a la red Wi-Fi de la comisaría",
+                "Colocar inmediatamente los dispositivos en Modo Avión o dentro de bolsas de Faraday (bloqueador de señal electromagnética) y registrar el estado de bloqueo",
+                "Intentar adivinar el patrón de desbloqueo hasta 10 veces en el lugar",
+                "Remitir los equipos por correo postal común sin precinto de seguridad"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Circuito Logístico y Sumarial en Comisaría",
-            explanation: "El CUE (Código Único de Evento) es el número asignado a cada actuación policial que permite su trazabilidad en el sistema."
-        },
-        {
-            id: "is-008",
-            question: "¿Cómo se realiza la elevación de actuaciones al MPA en la actualidad?",
-            options: [
-                "Exclusivamente en papel, por correo postal",
-                "Mediante comunicación electrónica digital al sistema del MPA",
-                "Solo por fax",
-                "Telefónicamente, sin respaldo escrito"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Elevaciones Digitales al MPA",
-            explanation: "Las actuaciones se elevan digitalmente al sistema del MPA (Ministerio Público de la Acusación), con respaldo electrónico de todo lo actuado."
-        },
-        {
-            id: "is-009",
-            question: "¿Qué es el Libro de Quejas de la dependencia policial?",
-            options: [
-                "Un cuaderno de notas informales",
-                "Un registro oficial donde los ciudadanos pueden asentar quejas o reclamos sobre la actuación policial",
-                "Un libro de contabilidad interna",
-                "Un diario personal del comisario"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Libros Obligatorios",
-            explanation: "El Libro de Quejas es un instrumento obligatorio donde los ciudadanos pueden asentar formalmente reclamos sobre la actuación o el trato policial."
-        },
-        {
-            id: "is-010",
-            question: "¿Sobre qué tipo de recursos responde el jefe de dependencia policial?",
-            options: [
-                "Solo sobre los recursos económicos",
-                "Sobre los recursos humanos, materiales, armamento y vehículos asignados a la dependencia",
-                "Únicamente sobre los móviles policiales",
-                "Solo sobre el personal administrativo"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Gestión de Recursos en Dependencia",
-            explanation: "El jefe de dependencia es responsable integral de todos los recursos: personal, armamento, vehículos, equipamiento y bienes asignados."
-        },
-        {
-            id: "is-011",
-            question: "¿Qué es el Registro de Armamento en una dependencia policial?",
-            options: [
-                "Un inventario del arma personal de cada policía",
-                "Un libro oficial donde se registran todas las armas asignadas, secuestradas, y sus movimientos",
-                "Un listado de armerías de la zona",
-                "Un manual de mantenimiento de armas"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Libros Obligatorios: Registro de Armamento",
-            explanation: "Registra todas las armas (reglamentarias y secuestradas) que ingresan y egresan de la dependencia, con detalle de marca, calibre, número de serie y movimientos."
-        },
-        {
-            id: "is-012",
-            question: "¿Qué función cumple el Libro de Secuestros?",
-            options: [
-                "Registrar los secuestros extorsivos denunciados",
-                "Registrar todos los elementos secuestrados en procedimientos, con detalle y destino judicial",
-                "Llevar un control de los vehículos patrulleros",
-                "Anotar las intervenciones de tránsito"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Libros Obligatorios: Libro de Secuestros",
-            explanation: "El Libro de Secuestros documenta cada elemento incautado en procedimientos, describiendo el objeto, su procedencia y el destino judicial asignado."
+            source: "Manual ISEP 2026 - Inspector, Evidencia Digital en Delitos Complejos",
+            explanation: "El aislamiento electromagnético (bolsa de Faraday o modo avión) impide la recepción de señales de red que permitan a terceros borrar remotamente los mensajes y contactos."
         }
     ],
 
     // ═══════════════════════════════════════════════════════════════
-    // SUBCOMISARIO → COMISARIO (Planeamiento Estratégico)
+    // SUBCOMISARIO → COMISARIO (Políticas Públicas, Vocería, Decreto 461/15)
     // ═══════════════════════════════════════════════════════════════
     "subcomisario-comisario": [
+        // --- NIVEL FÁCIL ---
         {
-            id: "sc-001",
-            question: "¿Cuál es el objetivo principal del análisis de inteligencia criminal operativa?",
+            id: "sc-f01",
+            difficulty: "facil",
+            question: "Según el Manual ISEP para Subcomisarios, ¿cuál es la diferencia entre 'Poder de Policía' y 'Policía'?",
             options: [
-                "Reducir el consumo de combustible únicamente",
-                "Identificar patrones delictivos para desplegar patrullaje preventivo orientado",
-                "Aumentar el número de actas de infracción de tránsito",
-                "Reemplazar el sistema de denuncias presenciales"
+                "El Poder de Policía es la potestad legislativa de regular derechos para el bien común; la Policía es el órgano ejecutivo que aplica dicha regulación en el terreno",
+                "Ambos términos son sinónimos absolutos sin distinción jurídica",
+                "Poder de Policía es el armamento y Policía son los uniformados",
+                "Poder de Policía solo lo tiene la Policía Federal Argentina"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Análisis del Delito y Cuadrantes 911",
-            explanation: "El análisis operativo permite anticipar modalidades delictivas y concentrar recursos en las zonas críticas identificadas."
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Subcomisario, Pág. 19: Policía y Poder de Policía",
+            explanation: "El Poder de Policía radica en el Estado (Poder Legislativo) para limitar derechos; la Policía es la fuerza ejecutiva que cumple y hace cumplir la norma."
         },
         {
-            id: "sc-002",
-            question: "¿Qué es un mapa de calor operativo en el contexto policial?",
+            id: "sc-f02",
+            difficulty: "facil",
+            question: "¿Qué norma provincial regula el Régimen Disciplinario Policial en la Provincia de Santa Fe?",
             options: [
-                "Un mapa que muestra la temperatura ambiente en cada zona",
-                "Una representación gráfica de la densidad delictiva para desplegar patrullaje focalizado",
-                "Un plano del sistema de calefacción de la comisaría",
-                "Un registro de las infracciones de tránsito por zona"
+                "El Decreto Provincial N° 461/15",
+                "El Código de Comercio",
+                "La Ley de Contrato de Trabajo N° 20.744",
+                "El Reglamento General de Tiro Federal"
+            ],
+            correctIndex: 0,
+            source: "Decreto Provincial 461/15 - Régimen Disciplinario Policial de Santa Fe",
+            explanation: "El Decreto 461/15 es el marco legal que tipifica las faltas leves y graves, las sanciones y el procedimiento sumarial del personal policial de Santa Fe."
+        },
+
+        // --- NIVEL MEDIO ---
+        {
+            id: "sc-m01",
+            difficulty: "media",
+            question: "En una situación de crisis operativa con toma de rehenes o conmoción comunitaria, ¿cuál es la regla fundamental de la vocería policial ante la prensa?",
+            options: [
+                "Brindar de inmediato los nombres de las víctimas y familiares para tranquilizar a la población",
+                "Centralizar la vocería en un portavoz calificado, transmitir información oficial confirmada, no revelar tácticas de intervención y preservar la intimidad de las víctimas",
+                "Permitir el libre acceso de periodistas al sector de negociación para mayor transparencia",
+                "Negarse a toda comunicación y apagar los teléfonos institucionales"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Mapas de Calor",
-            explanation: "Los mapas de calor son representaciones georreferenciadas de la concentración de hechos delictivos, usados para planificar la distribución del patrullaje."
+            source: "Manual ISEP 2026 - Subcomisario, Pág. 134: Comunicación en Situaciones Críticas",
+            explanation: "La gestión de vocería profesional exige información precisa, sin comprometer el éxito de la intervención táctica ni violar el secreto sumarial."
         },
         {
-            id: "sc-003",
-            question: "¿En qué se basa el Comisario para planificar los servicios ordinarios y extraordinarios?",
+            id: "sc-m02",
+            difficulty: "media",
+            question: "En el marco del Decreto 461/15, ¿cuáles son las sanciones expulsivas que pueden aplicarse al personal policial tras la instrucción de un sumario administrativo?",
             options: [
-                "En su experiencia personal exclusivamente",
-                "En datos estadísticos de denuncias, llamadas al 911 y mapas georreferenciados de calor",
-                "En las solicitudes de los vecinos por carta",
-                "En los comunicados de prensa de los medios locales"
+                "Apercibimiento y llamada de atención",
+                "Cesantía y Exoneración",
+                "Suspensión de empleo por 5 días",
+                "Pase a comisión de servicio"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Diseño de Cuadrantes",
-            explanation: "La planificación operativa moderna se basa en datos objetivos: estadísticas de denuncias, registros del 911 y georreferenciación de hechos delictivos."
+            source: "Decreto 461/15, Art. 12 y conc.: Sanciones Expulsivas",
+            explanation: "La cesantía y la exoneración son las dos sanciones de máxima gravedad que extinguen la relación de empleo policial, reservándose la exoneración para las causales más afrentosas con pérdida de beneficios."
+        },
+
+        // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
+        {
+            id: "sc-d01",
+            difficulty: "dificil",
+            question: "Conforme a la Ley 12.521 y el Decreto 461/15, ¿cuál es el límite de días de arresto que puede aplicar por sí mismo un Jefe de Unidad Regional a un oficial subordinado sin requerir elevación a Jefatura de Provincia?",
+            options: [
+                "Hasta treinta (30) días de arresto",
+                "Hasta sesenta (60) días de arresto",
+                "Hasta diez (10) días de arresto exclusivamente",
+                "Solo tiene facultades de apercibimiento verbal"
+            ],
+            correctIndex: 0,
+            source: "Decreto 461/15 - Competencia Sancionatoria de Jefaturas de Unidad Regional",
+            explanation: "El Decreto 461/15 faculta al Jefe de Unidad Regional a sancionar con arresto hasta un máximo de 30 días en el ámbito de su jurisdicción."
         },
         {
-            id: "sc-004",
-            question: "¿Qué son los cuadrantes 911 en la gestión operativa policial?",
+            id: "sc-d02",
+            difficulty: "dificil",
+            question: "En el diseño de una política pública de seguridad preventiva por cuadrículas, ¿qué elemento metodológico distingue a un objetivo SMART según la doctrina ISEP?",
             options: [
-                "Los turnos de guardia del personal 911",
-                "Las divisiones geográficas del territorio para asignación de patrullajes con base en datos del 911",
-                "Los números de teléfono de las comisarías",
-                "Las categorías de llamadas telefónicas"
+                "Que sea un deseo genérico de reducción del delito a largo plazo",
+                "Que sea Específico, Medible, Alcanzable, Relevante y con un Plazo temporal determinado con indicadores de gestión verificables",
+                "Que cuente con presupuesto ilimitado aprobado por decreto",
+                "Que sea secreto y no pueda ser auditado por organismos civiles"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Cuadrantes 911",
-            explanation: "Los cuadrantes dividen el territorio en zonas geográficas específicas, asignando móviles y personal con base en la demanda de llamadas al 911."
+            source: "Manual ISEP 2026 - Subcomisario, Pág. 12: Elementos de Políticas Públicas",
+            explanation: "Los objetivos SMART permiten evaluar el impacto real y la reducción del delito mediante indicadores métricos y plazos de control estricto."
         },
         {
-            id: "sc-005",
-            question: "¿Qué evalúa la auditoría operativa que realiza el Comisario?",
+            id: "sc-d03",
+            difficulty: "dificil",
+            question: "¿Bajo qué causal taxativa contemplada en el Decreto 461/15 se configura la sanción de exoneración directa sin posibilidad de reintegro futuro a la fuerza?",
             options: [
-                "Solo la vestimenta del personal",
-                "Los tiempos de respuesta del patrullaje preventivo y la inspección de servicios adicionales",
-                "Únicamente la contabilidad de la comisaría",
-                "Los permisos de licencia del personal"
+                "La acumulación de tres llegadas tarde injustificadas en el año",
+                "La condena judicial penal firme por delitos cometidos en el ejercicio de la función pública o que afecten gravemente el decoro y la ética institucional",
+                "El extravío culposo de un chaleco balístico durante una persecución",
+                "La solicitud voluntaria de pase a disponibilidad por razones particulares"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Auditoría Operativa",
-            explanation: "La auditoría evalúa continuamente la eficiencia del patrullaje (tiempos de respuesta) y la correcta prestación de servicios adicionales."
-        },
-        {
-            id: "sc-006",
-            question: "¿Qué son los KPI (Key Performance Indicators) en la gestión policial?",
-            options: [
-                "Los códigos de radio de las patrullas",
-                "Indicadores clave de desempeño para medir la eficiencia operativa de la dependencia",
-                "Las siglas del Código Penal Internacional",
-                "Los turnos de personal de la semana"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Evaluación de Métricas KPI",
-            explanation: "Los KPI son métricas que permiten evaluar objetivamente el desempeño: tiempos de respuesta, tasa de resolución, cobertura de cuadrantes, etc."
-        },
-        {
-            id: "sc-007",
-            question: "¿Qué tipo de servicio constituyen las custodias de objetivos en la planificación operativa?",
-            options: [
-                "Servicios administrativos internos",
-                "Servicios adicionales o extraordinarios que requieren planificación específica",
-                "Servicios de limpieza y mantenimiento",
-                "Servicios de capacitación del personal"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Servicios Adicionales",
-            explanation: "Las custodias de objetivos (bancos, edificios públicos, eventos) son servicios extraordinarios que el Comisario debe planificar e inspeccionar."
-        },
-        {
-            id: "sc-008",
-            question: "¿Qué herramienta se utiliza para georreferenciar los hechos delictivos en el territorio?",
-            options: [
-                "Una brújula manual",
-                "Sistemas de información geográfica (GIS) y mapas georreferenciados",
-                "Un listado en papel ordenado por fecha",
-                "Los partes diarios del personal"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Georreferenciación",
-            explanation: "Los sistemas GIS permiten visualizar la distribución espacial de los delitos para diseñar cuadrantes y focalizar recursos."
-        },
-        {
-            id: "sc-009",
-            question: "¿Con qué frecuencia se recomienda evaluar las métricas operativas (KPI) de la dependencia?",
-            options: [
-                "Una vez al año",
-                "Semanalmente, para ajustar la distribución de recursos",
-                "Solo cuando lo solicita el Jefe de Policía",
-                "Cada cinco años"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Evaluación Semanal de Métricas",
-            explanation: "La evaluación semanal de KPI permite detectar cambios en los patrones delictivos y ajustar rápidamente la distribución de patrullaje y recursos."
-        },
-        {
-            id: "sc-010",
-            question: "¿Qué incluyen los 'servicios ordinarios' en la planificación del Comisario?",
-            options: [
-                "Solo las guardias de la comisaría",
-                "El patrullaje preventivo regular, guardias, turnos y servicios de calle programados",
-                "Los eventos especiales y operativos extraordinarios",
-                "Las licencias y francos del personal"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Comisario: Planificación de Servicios",
-            explanation: "Los servicios ordinarios comprenden toda la actividad preventiva regular: patrullaje de cuadrantes, guardias, turnos de servicio y presencia en la vía pública."
+            source: "Decreto 461/15 - Causales de Exoneración Policial",
+            explanation: "La exoneración es la máxima sanción moral y jurídica, derivada de condenas penales dolosas que destruyen de raíz la idoneidad moral exigible a un policía."
         }
     ],
 
@@ -991,135 +625,108 @@ window.quizBank = {
     // COMISARIO → COMISARIO SUPERVISOR / DIRECTOR (Alta Dirección)
     // ═══════════════════════════════════════════════════════════════
     "comisario-supervisor": [
+        // --- NIVEL FÁCIL ---
         {
-            id: "cs-001",
-            question: "¿Cuál es el rol estratégico del Comisario Supervisor en la alta conducción policial?",
+            id: "cs-f01",
+            difficulty: "facil",
+            question: "¿Qué instrumento deben presentar obligatoriamente los aspirantes al Agrupamiento Supervisión y Dirección en el concurso ISEP?",
             options: [
-                "Patrullaje pedestre en comisaría de distrito",
-                "Dirección estratégica, evaluación presupuestaria, proyectos de gestión y articulación ministerial",
-                "Confección de sumarios por faltas leves exclusivamente",
-                "Recepción de llamados telefónicos en la central"
+                "Un Proyecto de Gestión Institucional aplicable a la seguridad pública provincial",
+                "Únicamente una carta de recomendación política",
+                "Una declaración jurada de bienes sin examen escrito",
+                "Un examen psicofísico básico sin defensa de tesis"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Alta Dirección Institucional",
-            explanation: "La jerarquía superior implica la máxima conducción operacional, diseño de proyectos institucionales y articulación con las autoridades ministeriales."
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Guía de Proyectos de Gestión Institucional",
+            explanation: "Para los grados superiores (Comisario Supervisor y Director) el concurso exige un proyecto de gestión institucional defendido ante el tribunal evaluador."
         },
         {
-            id: "cs-002",
-            question: "¿Qué estructura requiere el ISEP para los proyectos de gestión en concursos de ascenso superiores?",
+            id: "cs-f02",
+            difficulty: "facil",
+            question: "¿Qué significa el concepto de 'Gobernanza de la Seguridad' en la formación de la alta oficialidad del ISEP?",
             options: [
-                "Solo un resumen de una página",
-                "Diagnóstico de situación, Objetivos SMART, Plan de Acción, Indicadores KPI, Presupuesto y Recursos",
-                "Un ensayo libre sobre gestión policial",
-                "Un curriculum vitae actualizado"
+                "Que solo la policía armada tiene voz y voto en la seguridad comunitaria",
+                "La articulación estratégica e interinstitucional entre el poder político, la policía, la justicia y la comunidad ciudadana",
+                "El control exclusivo de las cárceles por parte de oficiales superiores",
+                "La privatización total de los servicios policiales adicionales"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Guía ISEP para Elaboración de Proyectos",
-            explanation: "Los proyectos deben contener: diagnóstico, objetivos SMART, plan de acción detallado, indicadores de medición (KPI), y estimación de presupuesto y recursos."
+            source: "Manual ISEP 2026 - Alta Dirección: Gobernanza Democrática",
+            explanation: "La gobernanza moderna implica la coproducción de la seguridad entre Estado, fuerzas policiales y ciudadanía bajo control civil y democrático."
+        },
+
+        // --- NIVEL MEDIO ---
+        {
+            id: "cs-m01",
+            difficulty: "media",
+            question: "¿Cuál es el rol institucional del Comisario Supervisor en la articulación con el Ministerio de Justicia y Seguridad?",
+            options: [
+                "Coordinar la implementación táctica de las políticas públicas y directivas ministeriales de seguridad en el territorio asignado",
+                "Manejar el presupuesto ministerial de forma independiente y autónoma",
+                "Redactar las leyes de presupuesto provincial en la Legislatura",
+                "Subrogar a los jueces de primera instancia en causas penales"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Alta Dirección y Conducción Estratégica",
+            explanation: "El Agrupamiento Supervisión es el nexo directo de conducción estratégica entre las decisiones del Ministerio y la ejecución operativa en las Unidades Regionales."
         },
         {
-            id: "cs-003",
-            question: "¿Qué órgano efectúa la auditoría externa de la conducta policial en Santa Fe?",
+            id: "cs-m02",
+            difficulty: "media",
+            question: "En la planificación presupuestaria de una Unidad Regional, ¿qué concepto financiero abarca los rubros de mantenimiento de flota, racionamiento y combustible?",
             options: [
-                "El Consejo de Administración del Municipio",
-                "La Dirección Provincial de Control Institucional / Asuntos Internos del Ministerio de Justicia y Seguridad",
-                "El Colegio de Abogados de Santa Fe",
-                "La Defensoría del Pueblo de la Nación"
+                "Gastos de Funcionamiento Operativo y Bienes de Consumo",
+                "Sueldos básicos de la plana mayor",
+                "Fondos reservados del Poder Judicial",
+                "Ingresos brutos comunales"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP 2026 - Gestión de Recursos Públicos en Unidades Regionales",
+            explanation: "Los fondos de funcionamiento operativo sostienen la operatividad cotidiana de patrulleros, comisarías y comisarías móviles en el territorio."
+        },
+
+        // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
+        {
+            id: "cs-d01",
+            difficulty: "dificil",
+            question: "En la evaluación de un Proyecto de Gestión Institucional para ascenso a Director de Policía, ¿qué componente de la matriz de marco lógico determina la viabilidad operativa y la medición de resultados?",
+            options: [
+                "El cronograma de licencias de la plana mayor",
+                "Los Indicadores Clave de Desempeño (KPIs), las fuentes de verificación objetivas y la gestión de riesgos y supuestos críticos",
+                "El monto global de horas de policía adicional asignadas",
+                "La cantidad de móviles fuera de servicio en el taller de la Unidad Regional"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Alta Dirección: Control Institucional",
-            explanation: "La Dirección de Control Institucional (Asuntos Internos) del Ministerio de Justicia y Seguridad es el organismo de auditoría externa de la conducta policial."
+            source: "Manual ISEP 2026 - Guía Elaboración Proyectos Agrupamiento Dirección",
+            explanation: "Los proyectos de nivel Dirección se evalúan mediante KPIs medibles, fuentes de verificación auditables y análisis de supuestos y riesgos operacionales."
         },
         {
-            id: "cs-004",
-            question: "¿En qué nivel de la estructura institucional se ubica el Comisario Supervisor?",
+            id: "cs-d02",
+            difficulty: "dificil",
+            question: "Ante una auditoría del Tribunal de Cuentas o del Ministerio de Seguridad por fondos de funcionamiento y adicionales, ¿cuál es la responsabilidad patrimonial del Jefe de Unidad Regional según la ley de administración pública provincial?",
             options: [
-                "En la base operativa de la comisaría",
-                "En la plana mayor institucional, entre la Jefatura de Policía y las Unidades Regionales",
-                "En la Dirección del Hospital Policial",
-                "En la Escuela de Cadetes exclusivamente"
+                "No posee responsabilidad patrimonial porque el personal policial está exento de rendiciones",
+                "Responsabilidad solidaria y directa por la legalidad, comprobantes respaldatorios y correcta afectación de los fondos públicos asignados a su comando",
+                "La responsabilidad recae exclusivamente en el habilitado de la administración contable",
+                "Solo responde patrimonialmente si media condena penal firme por peculado"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Estructura de Gobierno Institucional Policial",
-            explanation: "El Comisario Supervisor integra la plana mayor, ubicándose entre la Jefatura de Policía de la Provincia y las Unidades Regionales (UR I a UR XIX)."
+            source: "Ley de Administración Financiera de Santa Fe y Doctrina ISEP de Alta Dirección",
+            explanation: "El titular de la Unidad de Organización posee responsabilidad administrativa y patrimonial por los caudales públicos administrados bajo su mando."
         },
         {
-            id: "cs-005",
-            question: "¿Qué son los objetivos SMART en un proyecto de gestión policial?",
+            id: "cs-d03",
+            difficulty: "dificil",
+            question: "¿Cómo se formula un 'Indicador de Impacto' en la gestión de seguridad pública estratégica a diferencia de un simple indicador de actividad?",
             options: [
-                "Objetivos inteligentes que usan tecnología",
-                "Objetivos Específicos, Medibles, Alcanzables, Relevantes y con Tiempo definido",
-                "Objetivos secretos que solo conoce el jefe de proyecto",
-                "Objetivos de seguridad máxima para operativos especiales"
+                "Midiendo la cantidad de patrulleros que salieron a la calle en un turno determinado",
+                "Midiendo la variación porcentual de delitos violentos o la tasa de resolución en un período comparativo contra la línea de base histórica",
+                "Contando la cantidad de hojas impresas en la oficina de sumarios",
+                "Registrando la cantidad de combustible consumido por cada dependencia"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Guía de Proyectos de Gestión",
-            explanation: "SMART es un acrónimo: Specific (Específico), Measurable (Medible), Achievable (Alcanzable), Relevant (Relevante), Time-bound (con plazo definido)."
-        },
-        {
-            id: "cs-006",
-            question: "¿Cuántas Unidades Regionales (UR) tiene la Policía de la Provincia de Santa Fe?",
-            options: [
-                "5 Unidades Regionales",
-                "19 Unidades Regionales (UR I a UR XIX)",
-                "10 Unidades Regionales",
-                "3 Unidades Regionales"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Estructura de Gobierno Institucional",
-            explanation: "La Policía de Santa Fe se organiza en 19 Unidades Regionales que cubren todo el territorio provincial."
-        },
-        {
-            id: "cs-007",
-            question: "¿Cuáles son las funciones principales del Comisario Supervisor en relación con las Unidades Regionales?",
-            options: [
-                "Solamente firmar documentos administrativos",
-                "Auditoría de procedimientos, gestión presupuestaria y relación con los poderes del Estado",
-                "Atender consultas telefónicas del público",
-                "Dirigir el tránsito en eventos deportivos"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Alta Dirección: Funciones del Comisario Supervisor",
-            explanation: "El Comisario Supervisor interviene en la auditoría de procedimientos, la gestión presupuestaria de las UR y la articulación con los poderes del Estado."
-        },
-        {
-            id: "cs-008",
-            question: "¿Quién se encuentra por encima del Comisario Supervisor en la estructura jerárquica policial?",
-            options: [
-                "El Inspector",
-                "El Director / Director General de Policía y la Jefatura de Policía",
-                "El Subcomisario",
-                "El Oficial de Policía"
-            ],
-            correctIndex: 1,
-            source: "Ley 12.521 - Escala Jerárquica Policial",
-            explanation: "Por encima del Comisario Supervisor están: Subdirector, Director y Director General de Policía, dependientes de la Jefatura de Policía."
-        },
-        {
-            id: "cs-009",
-            question: "¿Qué relación tiene el Comisario Supervisor con el Ministerio de Justicia y Seguridad?",
-            options: [
-                "Ninguna, son independientes",
-                "Articulación directa en materia de políticas públicas de seguridad y gestión institucional",
-                "Solo se comunican por correo electrónico informal",
-                "El Ministerio no interviene en asuntos policiales"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Alta Dirección y Políticas Públicas",
-            explanation: "El Comisario Supervisor articula directamente con el Ministerio en la implementación de políticas públicas de seguridad y proyectos institucionales."
-        },
-        {
-            id: "cs-010",
-            question: "¿Qué tipo de concurso ISEP rinden los aspirantes a Comisario Supervisor o Director?",
-            options: [
-                "Solo examen escrito múltiple choice",
-                "Examen escrito, proyecto de gestión institucional y evaluación de antecedentes",
-                "Solo una entrevista personal",
-                "Un examen físico de aptitud"
-            ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Concursos Superiores (Agrupamiento Supervisión/Dirección)",
-            explanation: "Los concursos superiores requieren examen escrito, presentación de un proyecto de gestión (con estructura SMART, KPI, presupuesto) y evaluación de antecedentes."
+            source: "Manual ISEP 2026 - Metodología de Planificación y Control de Gestión",
+            explanation: "El indicador de actividad mide tareas realizadas (ej. patrullajes); el indicador de impacto mide el efecto real sobre la ciudadanía (reducción de homicidios o robos)."
         }
     ]
 };
@@ -1128,15 +735,62 @@ window.quizBank = {
 // METADATA DEL BANCO DE PREGUNTAS
 // ═══════════════════════════════════════════════════════════════
 window.quizBankMeta = {
-    version: "2.1.0",
+    version: "4.0.0",
     lastUpdated: "2026-10-19",
     totalQuestions: Object.values(window.quizBank).reduce((acc, arr) => acc + arr.length, 0),
+    difficulties: [
+        { id: "facil", title: "Fácil (Repaso Inicial)", desc: "Conceptos clave, definiciones claras y principios rectores", icon: "sentiment_satisfied", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30", badge: "🟢 FÁCIL" },
+        { id: "media", title: "Media (Procedimientos Operativos)", desc: "Actuaciones de calle, guardia, L.C.A.T., menores y narcomenudeo", icon: "psychology", color: "text-amber-400 bg-amber-500/10 border-amber-500/30", badge: "🟡 MEDIA" },
+        { id: "dificil", title: "Difícil (Nivel Concurso ISEP)", desc: "Plazos procesales estrictos, artículos específicos, causales y distractores jurídicos", icon: "military_tech", color: "text-red-400 bg-red-500/10 border-red-500/30", badge: "🔴 DIFÍCIL" }
+    ],
     hierarchies: [
-        { id: "simulacro-integral", title: "Simulacro General ISEP (Todas las Materias)", icon: "auto_stories", color: "from-blue-600 via-indigo-600 to-purple-700", questionCount: 82 },
-        { id: "oficial-subinspector", title: "Oficial → Subinspector", icon: "military_tech", color: "from-blue-600 to-indigo-700", questionCount: 35 },
-        { id: "subinspector-inspector", title: "Subinspector → Inspector", icon: "shield_person", color: "from-emerald-600 to-teal-700", questionCount: 15 },
-        { id: "inspector-subcomisario", title: "Inspector → Subcomisario", icon: "admin_panel_settings", color: "from-amber-600 to-orange-700", questionCount: 12 },
-        { id: "subcomisario-comisario", title: "Subcomisario → Comisario", icon: "stars", color: "from-purple-600 to-indigo-800", questionCount: 10 },
-        { id: "comisario-supervisor", title: "Comisario → Com. Supervisor / Director", icon: "workspace_premium", color: "from-amber-500 to-purple-700", questionCount: 10 }
+        { 
+            id: "simulacro-integral", 
+            title: "Simulacro General ISEP (Todas las Materias)", 
+            icon: "auto_stories", 
+            color: "from-blue-600 via-indigo-600 to-purple-700", 
+            desc: "Evaluación transversal con preguntas de todos los programas oficiales",
+            programSyllabus: "CPP Ley 12.734 · Microtráfico Ley 14.239 · Juicio por Jurados Ley 14.258 · Dec. 461/15 · Gestión SMART"
+        },
+        { 
+            id: "oficial-subinspector", 
+            title: "Oficial → Subinspector", 
+            icon: "military_tech", 
+            color: "from-blue-600 to-indigo-700", 
+            desc: "Práctica policial, CPP Ley 12.734 (Art. 138), Preservación del hecho y Convivencia",
+            programSyllabus: "Módulo I: Práctica Policial, Código de Conducta ONU, Primer Preventor, Actas procesales y Código de Convivencia"
+        },
+        { 
+            id: "subinspector-inspector", 
+            title: "Subinspector → Inspector", 
+            icon: "shield_person", 
+            color: "from-emerald-600 to-teal-700", 
+            desc: "Liderazgo ('Pequeños Grandes Líderes'), Crisis Subjetivas, Menores, LCAT y Juicio por Jurados",
+            programSyllabus: "Liderazgo Operativo, Ley de Salud Mental 26.657, Ley de Niñez 12.967, L.C.A.T. y Juicio por Jurados (Ley 14.258)"
+        },
+        { 
+            id: "inspector-subcomisario", 
+            title: "Inspector → Subcomisario", 
+            icon: "admin_panel_settings", 
+            color: "from-amber-600 to-orange-700", 
+            desc: "Narcomenudeo (Ley 14.239), Pistola Bersa 9mm y desmartillado, Libros de Comisaría",
+            programSyllabus: "Desfederalización y Microtráfico, Ley 23.737, Armamento y Palanca Decocker, Libros Matrices de Dependencia"
+        },
+        { 
+            id: "subcomisario-comisario", 
+            title: "Subcomisario → Comisario", 
+            icon: "stars", 
+            color: "from-purple-600 to-indigo-800", 
+            desc: "Políticas de seguridad pública por cuadrículas, Vocería en crisis, Decreto 461/15",
+            programSyllabus: "Poder de Policía, Vocería Policial en Situaciones Críticas, Régimen Disciplinario Decreto 461/15 y Sanciones"
+        },
+        { 
+            id: "comisario-supervisor", 
+            title: "Comisario → Com. Supervisor / Director", 
+            icon: "workspace_premium", 
+            color: "from-amber-500 to-purple-700", 
+            desc: "Proyectos de Gestión Institucional SMART, KPIs y Auditoría de Gestión",
+            programSyllabus: "Metodología de Marco Lógico, Indicadores Clave (KPIs), Alta Dirección y Responsabilidad Patrimonial"
+        }
     ]
 };
