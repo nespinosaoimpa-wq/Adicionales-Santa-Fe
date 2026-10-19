@@ -648,7 +648,7 @@ function renderActaForm(container, tipo) {
             </button>
         </header>
 
-        <main class="p-5 space-y-5 pb-36 max-w-lg mx-auto view-transition">
+        <main class="p-5 space-y-5 pb-56 max-w-lg mx-auto view-transition">
             <!-- INSTRUCTIONS -->
             <div class="px-1 flex items-center justify-between">
                 <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Completá los campos requeridos</span>

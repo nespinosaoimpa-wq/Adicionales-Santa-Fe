@@ -103,7 +103,7 @@ function renderAcademia(container) {
             </button>
         </div>
 
-        <main id="quiz-tab-content" class="pb-32">
+        <main id="quiz-tab-content" class="pb-56">
         </main>
 
         ${typeof renderBottomNav === 'function' ? renderBottomNav('academia') : ''}
@@ -184,8 +184,8 @@ function _renderSimuladorTab(container) {
             </div>
 
             <!-- INICIAR EXAMEN -->
-            <button onclick="window._startQuiz()" 
-                class="w-full py-4 bg-gradient-to-r from-primary to-blue-600 text-white font-black text-sm rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all hover:shadow-2xl hover:shadow-primary/30"
+            <button id="btn-iniciar-simulacro" onclick="window._startQuiz()" 
+                class="w-full py-4 mb-12 bg-gradient-to-r from-primary to-blue-600 text-white font-black text-sm rounded-2xl shadow-xl shadow-primary/20 flex items-center justify-center gap-2 active:scale-95 transition-all hover:shadow-2xl hover:shadow-primary/30"
                 style="animation: fadeIn 0.3s ease-out 0.1s both">
                 <span class="material-symbols-outlined">rocket_launch</span>
                 INICIAR SIMULACRO
