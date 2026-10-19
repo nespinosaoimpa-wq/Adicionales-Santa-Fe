@@ -2,16 +2,17 @@
  * Adicionales Santa Fe - Banco de Preguntas ISEP 2026 Profesional
  * Simulador de Examen de Ascenso Policial Oficial
  * 
- * Contenido extraído directamente de los manuales oficiales de cada jerarquía:
- * - Oficial -> Subinspector: Práctica policial, CPP Ley 12.734, Código de Convivencia, Preservación y primer preventor.
- * - Subinspector -> Inspector: Pequeños grandes líderes, Crisis subjetivas (Ley 26.657), Niñez (Ley 12.967), L.C.A.T., Juicio por Jurados (Ley 14.258).
- * - Inspector -> Subcomisario: Desfederalización y Narcomenudeo en Santa Fe (Ley Provincial 14.239 / Ley 23.737), Armamento Bersa Thunder 9mm Pro, Desmartillado, Libros Matrices de Comisaría.
- * - Subcomisario -> Comisario: Políticas públicas de seguridad por cuadrículas, Poder de policía y límites constitucionales, Comunicación en crisis y vocería ante prensa, Régimen Disciplinario Decreto 461/15.
- * - Comisario -> Com. Supervisor / Director: Gestión estratégica, Proyectos SMART, Metodología de Marco Lógico, Auditoría patrimonial y KPIs policiales.
+ * Contenido extraído directamente de los manuales oficiales de cada jerarquía
+ * y enriquecido con los exámenes reales de perfeccionamiento policial (Daypo 2026):
+ * - Tiro y Armamento Policial (MIRAF, Bersa Thunder/TPR, Balística, Posición SUL).
+ * - Seguridad de la Información (Tríada CID, Protocolo de 5 pasos, Incidentes y Redes).
+ * - Comunicación y Redacción Institucional (Prensa sin Off The Record, Asertividad 7C, Lenguaje llano).
+ * - Conducción Policial y Orden Público (Mando, Comando, Conducción, OO, Inspecciones de Zona y Comisarías).
+ * - Leyes y Procedimiento (CPP Ley 12.734, Narcomenudeo Ley 14.239, Jurados Ley 14.258, Dec. 461/15, Ley 12.521).
  * 
  * Modalidades de Dificultad:
- * - 'facil': Conceptos fundamentales, definiciones y principios del manual.
- * - 'media': Procedimientos técnico-operativos de guardia, calle y actas.
+ * - 'facil': Conceptos fundamentales, definiciones y principios rectores del manual.
+ * - 'media': Procedimientos técnico-operativos de guardia, calle y tiro.
  * - 'dificil': Nivel concurso ISEP real (plazos procesales, artículos específicos, causales y distractores jurídicos).
  */
 
@@ -92,6 +93,34 @@ window.quizBank = {
             source: "Manual ISEP 2026 - Oficial, Pág. 20: Rol del Primer Preventor",
             explanation: "El primer preventor es el efectivo que arriba en primer término al lugar, asumiendo la responsabilidad inicial de asegurar y preservar la escena."
         },
+        {
+            id: "os-f06",
+            difficulty: "facil",
+            question: "¿Qué es la 'Munición' según la reglamentación de tiro policial y la Ley Nacional de Armas?",
+            options: [
+                "El conjunto de cartuchos que se proveen para ser utilizados en un arma de fuego",
+                "Únicamente la pólvora y el fulminante sin la vaina",
+                "El cargador metálico vacío",
+                "El dispositivo de puntería nocturna"
+            ],
+            correctIndex: 0,
+            source: "Manual MIRAF - Armamento y Tiro Policial / Daypo Tiro",
+            explanation: "La munición es el conjunto o provisión de cartuchos diseñados y aptos para ser disparados por las armas de fuego."
+        },
+        {
+            id: "os-f07",
+            difficulty: "facil",
+            question: "En las reglas cardinales de seguridad con armas de fuego, ¿cómo debe considerarse toda arma que se empuña?",
+            options: [
+                "Siempre cargada y lista para disparar, aun cuando se crea o sepa que está descargada",
+                "Descargada mientras tenga el seguro manual colocado",
+                "Inofensiva si se encuentra dentro de la dependencia policial",
+                "Segura si el cargador está desprendido aunque tenga cartucho en recámara"
+            ],
+            correctIndex: 0,
+            source: "Manual MIRAF - Reglas Cardinales de Seguridad",
+            explanation: "La regla de oro del tiro policial exige tratar a toda arma en todo momento como si estuviese cargada, sin excepciones."
+        },
 
         // --- NIVEL MEDIO ---
         {
@@ -125,16 +154,16 @@ window.quizBank = {
         {
             id: "os-m03",
             difficulty: "media",
-            question: "¿Qué elementos de bioseguridad mínimos debe vestir obligatoriamente el personal autorizado para ingresar al perímetro interno de la escena?",
+            question: "Para verificar con total certeza que un arma de fuego se encuentra descargada, ¿de qué tres maneras complementarias debe realizarse la comprobación?",
             options: [
-                "Guantes de nitrilo/látex y cubrecalzados",
-                "Únicamente chaleco balístico y gorra policial",
-                "Barbijo quirúrgico sin necesidad de guantes",
-                "Campera refractaria y linterna de alta potencia"
+                "Mecánica, visual y táctil (habiendo retirado previamente el cargador)",
+                "Únicamente disparando en seco hacia el piso",
+                "Solo retirando el cargador sin abrir la corredera",
+                "Pesando el arma con una balanza digital"
             ],
             correctIndex: 0,
-            source: "Manual ISEP 2026 - Oficial, Pág. 26: Criminalística de Campo",
-            explanation: "Para evitar la contaminación cruzada biológica (ADN, huellas del calzado propio), es obligatorio el uso de guantes y cubrecalzados."
+            source: "Manual MIRAF / Daypo Tiro - Verificación de Tres Vías",
+            explanation: "La verificación reglamentaria exige retirar el cargador, ciclar la corredera y comprobar de forma mecánica, visual y táctil que la recámara y el alvéolo estén vacíos."
         },
         {
             id: "os-m04",
@@ -163,6 +192,20 @@ window.quizBank = {
             correctIndex: 0,
             source: "CPP Santa Fe Ley 12.734, Art. 212: Allanamiento sin Orden en Flagrancia",
             explanation: "El Art. 212 del CPP autoriza el allanamiento sin orden judicial previa ante flagrancia y persecución ininterrumpida o auxilio por peligro inminente para la vida."
+        },
+        {
+            id: "os-m06",
+            difficulty: "media",
+            question: "¿Qué es la 'Posición SUL' en el tiro táctico policial y cuál es su finalidad operativa?",
+            options: [
+                "Una posición de descanso, traslado y retención donde el arma está pegada al pecho, codos cerrados y el cañón apunta a 90° hacia el suelo entre los pies",
+                "Una posición de tiro acrobático con una sola mano extendida",
+                "Una postura de puntería apoyando el arma sobre el hombro del compañero",
+                "Una posición en el suelo boca arriba para disparar hacia atrás"
+            ],
+            correctIndex: 0,
+            source: "Manual MIRAF / Daypo Conducción y Tiro - Posiciones Tácticas",
+            explanation: "La posición SUL (originada en Brasil) permite desplazarse en recintos cerrados o multitudes manteniendo el cañón en zona neutra y segura sin encañonar a terceros."
         },
 
         // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
@@ -197,16 +240,16 @@ window.quizBank = {
         {
             id: "os-d03",
             difficulty: "dificil",
-            question: "¿En cuál de las siguientes situaciones de revista contempladas en la Ley 12.521 el personal policial pasa a percibir el 50% de sus haberes y retiene su estado policial pero sin portación de arma?",
+            question: "¿Qué rama de la balística estudia el comportamiento del proyectil dentro del arma desde que se presiona la cola del disparador hasta que la ojiva abandona la boca del cañón?",
             options: [
-                "Disponibilidad por sumario administrativo grave cuando se dispone cautelarmente el pase a situación pasiva o retención de arma",
-                "Servicio efectivo durante el uso de licencia médica menor a 30 días",
-                "Disponibilidad simple a la espera de designación de nuevo destino por menos de 60 días",
-                "Licencia anual ordinaria acumulada de dos períodos"
+                "Balística Interior",
+                "Balística Exterior",
+                "Balística de Efectos",
+                "Balística Comparativa"
             ],
             correctIndex: 0,
-            source: "Ley 12.521 - Estatuto del Personal Policial, Art. 52 y conc.: Situaciones de Revista",
-            explanation: "En la situación pasiva o disponibilidad con retención preventiva dispuesta en el sumario administrativo, se reduce el haber al 50% y se retira el armamento reglamentario."
+            source: "Manual MIRAF / Daypo Tiro - Ramas de la Balística",
+            explanation: "La Balística Interior estudia los fenómenos físico-químicos dentro del arma (deflagración, presión de gases, estriado y desplazamiento en el ánima)."
         },
         {
             id: "os-d04",
@@ -225,16 +268,16 @@ window.quizBank = {
         {
             id: "os-d05",
             difficulty: "dificil",
-            question: "En una requisa personal en la vía pública sin orden judicial previa (Art. 213 CPP Santa Fe), ¿qué requisito de fundamentación sustantiva debe constar en el acta para superar el test de validez constitucional?",
+            question: "¿Cuál es el plazo de vencimiento legal de la Credencial de Legítimo Usuario (CLU) emitida por la ANMaC según la Ley Nacional 20.429?",
             options: [
-                "La constatación de que la persona vestía prendas holgadas y mirada evasiva únicamente",
-                "La exteriorización precisa de circunstancias previas objetivas que razonablemente justifiquen la presunción de que porta consigo efectos provenientes de un delito o cosas que sirvieron para cometerlo",
-                "La sola mención de que se encontraba en una zona considerada de alta conflictividad por el mapa delictivo",
-                "Que la persona carezca de documento nacional de identidad al momento del chequeo"
+                "Cinco (5) años",
+                "Tres (3) años",
+                "Diez (10) años",
+                "No vence nunca para personal policial en actividad"
             ],
-            correctIndex: 1,
-            source: "CPP Santa Fe Ley 12.734, Art. 213 y Fallos Corte Suprema sobre Requisa Policial",
-            explanation: "La doctrina jurisprudencial exige motivos bastantes objetivos y concordantes; la mera sospecha subjetiva sin base fáctica acarrea la nulidad de la requisa y el secuestro."
+            correctIndex: 0,
+            source: "Ley 20.429 / Manual MIRAF / Daypo Tiro",
+            explanation: "La Credencial de Legítimo Usuario (CLU) tiene una vigencia legal de 5 años corridos contados desde su fecha de emisión."
         }
     ],
 
@@ -274,16 +317,30 @@ window.quizBank = {
         {
             id: "si-f03",
             difficulty: "facil",
-            question: "¿Qué ley nacional regula el marco de actuación ante situaciones de salud mental y crisis subjetivas?",
+            question: "¿Cuáles son los componentes de la tríada fundamental de la Seguridad de la Información (Tríada CID)?",
             options: [
-                "Ley Nacional de Salud Mental N° 26.657",
-                "Ley de Tránsito N° 24.449",
-                "Ley de Seguridad Interior N° 24.059",
-                "Ley de Estupefacientes N° 23.737"
+                "Confidencialidad, Integridad y Disponibilidad (más Autenticidad)",
+                "Control, Identificación y Defensa",
+                "Comando, Instrucción y Disciplina",
+                "Confianza, Información y Datos"
             ],
             correctIndex: 0,
-            source: "Manual ISEP 2026 - Subinspector, Pág. 14: Marco Normativo Salud Mental",
-            explanation: "La Ley 26.657 establece los derechos de las personas en padecimientos mentales y el rol sanitario interdisciplinario."
+            source: "Manual ISEP 2026 - Seguridad de la Información / Daypo Informática",
+            explanation: "La tríada CID (Confidencialidad, Integridad y Disponibilidad) es el pilar internacional de la protección de la información física y digital."
+        },
+        {
+            id: "si-f04",
+            difficulty: "facil",
+            question: "En materia de redacción institucional policial, ¿cuáles son los tres procesos que se facilitan al utilizar un lenguaje llano y legible?",
+            options: [
+                "Leer, comprender y memorizar el texto con rapidez",
+                "Archivar, destruir y ocultar antecedentes",
+                "Firmar, sellar y foliar mecánicamente",
+                "Imprimir, fotocopiar y escanear legajos"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP - Redacción Institucional / Daypo Comunicación",
+            explanation: "La legibilidad garantiza que cualquier funcionario o ciudadano pueda leer, comprender y recordar con exactitud lo consignado en un acta o parte."
         },
 
         // --- NIVEL MEDIO ---
@@ -318,16 +375,30 @@ window.quizBank = {
         {
             id: "si-m03",
             difficulty: "media",
-            question: "En materia de L.C.A.T., cuando el conductor de un vehículo involucrado presenta aliento etílico evidente pero se niega a realizar el test de alcoholemia, ¿qué temperamento corresponde adoptar?",
+            question: "¿Cuál es la diferencia principal entre 'Seguridad Informática' y 'Seguridad de la Información'?",
             options: [
-                "Obligarlo físicamente mediante el uso de la fuerza a soplar la pipeta",
-                "Asentar la negativa expresa en el acta ante testigos, requerir extracción de sangre/orina dispuesta por el Fiscal o examen clínico por médico de policía",
-                "Dejarlo retirarse conduciendo al no poder medirse los gramos de alcohol",
-                "Aplicarle una sanción de arresto contravencional directo en el móvil"
+                "La seguridad informática protege exclusivamente computadoras, redes y software frente a ciberataques; la seguridad de la información protege los datos críticos, procesos, personas y documentos físicos y digitales",
+                "Son exactamente lo mismo sin ninguna distinción técnica",
+                "La seguridad informática solo protege documentos impresos en papel",
+                "La seguridad de la información es tarea exclusiva de la policía científica"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Subinspector, Procedimiento en Siniestros Viales y Alcoholemia",
-            explanation: "Ante la negativa, se deja constancia formal en presencia de testigos y se convoca al médico policial para diagnóstico clínico del estado de intoxicación con directiva fiscal."
+            correctIndex: 0,
+            source: "Manual ISEP - Seguridad de la Información / Daypo Informática",
+            explanation: "La seguridad informática es un subsistema técnico; la seguridad de la información es un concepto abarcativo que involucra políticas, personas, infraestructura y datos en cualquier soporte."
+        },
+        {
+            id: "si-m04",
+            difficulty: "media",
+            question: "En la resolución policial de conflictos interpersonales, ¿en base a qué enfoque se obtienen los acuerdos más sostenibles y pacíficos según la doctrina de comunicación?",
+            options: [
+                "Gestionando y negociando en base a los Intereses y necesidades reales de las partes",
+                "Imponiendo la solución exclusivamente por la fuerza y el poder de coerción",
+                "Ignorando el conflicto y dejando que los involucrados se retiren",
+                "Amenazando con arresto inmediato a ambas partes"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP - Gestión del Conflicto / Daypo Comunicación",
+            explanation: "El modelo de negociación colaborativa enseña que las soluciones más sostenibles a largo plazo surgen de trabajar sobre los intereses de fondo y no sobre posiciones de poder."
         },
 
         // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
@@ -348,6 +419,20 @@ window.quizBank = {
         {
             id: "si-d02",
             difficulty: "dificil",
+            question: "¿Cuál es el procedimiento inicial estándar de cinco pasos que debe seguir el personal policial ante un incidente de seguridad de la información en una dependencia?",
+            options: [
+                "1. Identificar el incidente, 2. Aislar el equipo/sistema, 3. Notificar a las autoridades competentes, 4. Evitar acciones que comprometan la evidencia y 5. Registrar el incidente",
+                "1. Apagar y formatear el disco duro inmediatamente, 2. No avisar a nadie, 3. Esperar una semana",
+                "1. Publicar el incidente en redes sociales para alertar a la población, 2. Denunciar al técnico",
+                "1. Desconectar la luz de toda la comisaría y quemar los libros de guardia"
+            ],
+            correctIndex: 0,
+            source: "Manual ISEP - Protocolo ante Incidentes / Daypo Informática",
+            explanation: "El protocolo de 5 pasos asegura la contención del ataque, preserva la evidencia digital forense y permite la trazabilidad del incidente."
+        },
+        {
+            id: "si-d03",
+            difficulty: "dificil",
             question: "En una requisa vehicular sin orden judicial en la vía pública (Art. 213 CPP Santa Fe), ¿qué requisito de legalidad sustantiva exige la jurisprudencia para que el secuestro no sea declarado nulo?",
             options: [
                 "Que el conductor tenga antecedentes penales computables en el sistema Cóndor",
@@ -358,20 +443,6 @@ window.quizBank = {
             correctIndex: 1,
             source: "CPP Santa Fe Ley 12.734, Art. 213: Requisa Vehicular sin Orden",
             explanation: "El Art. 213 exige motivos bastantes objetivos. La mera sospecha subjetiva sin exteriorización fáctica en el acta acarrea la nulidad del secuestro en juicio."
-        },
-        {
-            id: "si-d03",
-            difficulty: "dificil",
-            question: "Bajo la Ley Provincial 12.967 de Protección Integral de los Derechos de Niñas, Niños y Adolescentes, ¿cuál es el límite temporal máximo para que la policía mantenga demorado a un adolescente punible (16 a 17 años) antes de resolver su situación?",
-            options: [
-                "Hasta 12 horas improrrogables, debiendo notificar de inmediato a la defensa técnica y al Juzgado de Menores / Fiscal de Menores",
-                "Hasta 72 horas corridas en el calabozo común de la comisaría",
-                "Hasta 5 días para averiguación de antecedentes",
-                "No existe límite temporal mientras los padres no se presenten a retirarlo"
-            ],
-            correctIndex: 0,
-            source: "Ley 12.967 y Régimen Penal Juvenil de Santa Fe",
-            explanation: "La privación de libertad cautelar de un menor es excepcionalísima; la policía debe dar intervención inmediata a la justicia juvenil y no puede retenerlo más allá del plazo perentorio legal."
         }
     ],
 
@@ -397,30 +468,30 @@ window.quizBank = {
         {
             id: "is-f02",
             difficulty: "facil",
-            question: "En la pistola reglamentaria Bersa Thunder 9mm Pro, ¿cuál es la función de la palanca de desmartillado (decocker)?",
+            question: "En la pistola reglamentaria Bersa Thunder / TPR 9mm, ¿cuál es la función de la palanca de desmartillado (decocker)?",
             options: [
                 "Aumentar la cadencia de disparo a ráfaga",
-                "Hacer descender el martillo de forma totalmente segura sin percutir el cartucho alojado en recámara",
+                "Hacer descender o abatir el martillo de forma totalmente segura sin percutir el cartucho alojado en la recámara",
                 "Trabar la corredera cuando se agotan los cartuchos del cargador",
                 "Liberar el cargador vacío de la empuñadura"
             ],
             correctIndex: 1,
-            source: "Manual ISEP 2026 - Inspector, Pág. 262: Armamento y Palanca de Desmartillado",
+            source: "Manual ISEP 2026 / Daypo Tiro - Palanca Decocker Bersa",
             explanation: "La palanca decocker desactiva el martillo de forma mecánica y segura, posicionando el arma en doble acción sin riesgo de disparo accidental."
         },
         {
             id: "is-f03",
             difficulty: "facil",
-            question: "¿Cuál es el órgano judicial provincial competente para investigar los delitos de microtráfico bajo la Ley 14.239?",
+            question: "¿Cómo distingue la doctrina del ISEP los conceptos rectores de Mando, Comando y Conducción?",
             options: [
-                "El Ministerio Público de la Acusación (MPA)",
-                "La Justicia Federal con asiento en Rosario o Santa Fe",
-                "Los Juzgados Comunales de Pequeñas Causas",
-                "El Tribunal de Cuentas de la Provincia"
+                "Mando es la autoridad moral (persuasión y respeto); Comando es la autoridad legal (regulada por leyes según grado y cargo); Conducción es la autoridad operacional (arte y ciencia de aplicar el comando a un problema policial)",
+                "Los tres términos son exactamente lo mismo sin distinción legal",
+                "Mando solo lo tienen los cabos; Comando los comisarios y Conducción los choferes de patrullero",
+                "Mando es la fuerza física; Comando es el armamento y Conducción es el traslado de detenidos"
             ],
             correctIndex: 0,
-            source: "Manual ISEP 2026 - Inspector, Pág. 10: Competencia MPA en Narcomenudeo",
-            explanation: "A partir de la Ley 14.239, los fiscales del MPA asumen la dirección de las investigaciones por venta minorista de estupefacientes en territorio santafesino."
+            source: "Manual de Conducción Policial ISEP / Daypo Conducción 151",
+            explanation: "El Mando se apoya en la autoridad moral; el Comando en la atribución legal del cargo; la Conducción es la aplicación técnica-operacional de ambos a la misión."
         },
 
         // --- NIVEL MEDIO ---
@@ -441,30 +512,30 @@ window.quizBank = {
         {
             id: "is-m02",
             difficulty: "media",
-            question: "¿Qué libros son de llevanza obligatoria y custodia estricta bajo responsabilidad del Jefe o Subjefe de Comisaría?",
+            question: "En la estructura de las Unidades de Orden Público de Santa Fe, ¿cuál es la diferencia funcional entre una Comisaría y un Destacamento?",
             options: [
-                "Libro de Guardia, Libro de Detenidos, Registro de Armamento y Munición, y Libro de Efectos Secuestrados",
-                "Únicamente el Libro de Asistencia de Personal",
-                "Solo las carpetas de correspondencia interna",
-                "El libro contable de la Asociación Cooperadora Policial exclusivamente"
+                "La Comisaría tiene funciones plenas de policía de seguridad y judicial dentro de su jurisdicción; el Destacamento depende de una comisaría y ejecuta funciones de seguridad y solo excepcionalmente policiales judiciales",
+                "El Destacamento tiene mayor dotación de personal que una Comisaría",
+                "La Comisaría solo atiende faltas de tránsito y el Destacamento delitos graves",
+                "No existe diferencia, ambas tienen igual jerarquía de comando"
             ],
             correctIndex: 0,
-            source: "Manual ISEP 2026 - Inspector, Gestión de Dependencias Policiales",
-            explanation: "El titular de la dependencia responde administrativa y penalmente por la inviolabilidad y actualización de los libros matrices de guardia, detenidos, secuestros y armas."
+            source: "Manual de Conducción Policial ISEP / Daypo Conducción 151",
+            explanation: "La Comisaría es la unidad matriz de orden público (urbana o distrito rural); los destacamentos y puestos son extensiones territoriales dependientes con funciones acotadas."
         },
         {
             id: "is-m03",
             difficulty: "media",
-            question: "En la cadena de custodia de sustancias estupefacientes secuestradas en un punto de venta (boca de expendio), ¿qué procedimiento técnico es inexcusable?",
+            question: "¿Cuáles son las tres partes principales en que se divide formalmente una Orden de Operaciones (OO)?",
             options: [
-                "Pesar la sustancia, realizar test orientativo de campo ante dos testigos civiles, rotular, precintar en sobre de seguridad con firmas y remitir a laboratorio forense",
-                "Guardar la sustancia en el escritorio de la guardia hasta el día de la audiencia",
-                "Entregar las muestras directamente a los denunciantes anónimos",
-                "Destruir la sustancia en el lugar sin análisis químico previo"
+                "Encabezamiento (jefatura, fecha, clave), Cuerpo (Situación, Misión, Ejecución, SPAC, Comando/Comunicaciones) y Final (instrucciones de acuse, anexos y firmas)",
+                "Introducción, Desarrollo y Conclusión sin firmas",
+                "Carátula, Índice y Bibliografía",
+                "Parte diario, Nómina de personal y Planilla de combustible"
             ],
             correctIndex: 0,
-            source: "Manual ISEP 2026 - Inspector, Protocolo de Cadena de Custodia de Estupefacientes",
-            explanation: "El test de reactivos de campo y el pesaje ante testigos, junto con el precintado numerado, garantizan la inalterabilidad probatoria de la evidencia química."
+            source: "Manual de Conducción Policial ISEP / Daypo Conducción 151",
+            explanation: "La Orden de Operaciones policial responde a una estructura formal estricta: Encabezamiento, Cuerpo de 5 párrafos tácticos y Final de autenticación."
         },
 
         // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
@@ -550,16 +621,16 @@ window.quizBank = {
         {
             id: "sc-m01",
             difficulty: "media",
-            question: "En una situación de crisis operativa con toma de rehenes o conmoción comunitaria, ¿cuál es la regla fundamental de la vocería policial ante la prensa?",
+            question: "En la relación profesional del personal superior con la prensa y medios de comunicación, ¿cuál es la pauta rectora sobre los comentarios 'Off the Record'?",
             options: [
-                "Brindar de inmediato los nombres de las víctimas y familiares para tranquilizar a la población",
-                "Centralizar la vocería en un portavoz calificado, transmitir información oficial confirmada, no revelar tácticas de intervención y preservar la intimidad de las víctimas",
-                "Permitir el libre acceso de periodistas al sector de negociación para mayor transparencia",
-                "Negarse a toda comunicación y apagar los teléfonos institucionales"
+                "Evitar terminantemente los comentarios 'Off the Record', mantener una vocería oficial única y no discriminar a ningún medio de prensa",
+                "Filtrar datos extraoficiales a periodistas amigos para obtener mejor cobertura",
+                "Dar nombres de víctimas fatales antes de que sean notificadas sus familias",
+                "Permitir que los cronistas ingresen a la zona de exclusión de peritajes"
             ],
-            correctIndex: 1,
-            source: "Manual ISEP 2026 - Subcomisario, Pág. 134: Comunicación en Situaciones Críticas",
-            explanation: "La gestión de vocería profesional exige información precisa, sin comprometer el éxito de la intervención táctica ni violar el secreto sumarial."
+            correctIndex: 0,
+            source: "Manual de Comunicación Institucional ISEP / Daypo Comunicación",
+            explanation: "La doctrina de vocería policial prohíbe el 'Off the Record' ya que genera trascendidos no verificables y puede quebrar el secreto sumarial."
         },
         {
             id: "sc-m02",
@@ -735,7 +806,7 @@ window.quizBank = {
 // METADATA DEL BANCO DE PREGUNTAS
 // ═══════════════════════════════════════════════════════════════
 window.quizBankMeta = {
-    version: "4.0.0",
+    version: "5.0.0",
     lastUpdated: "2026-10-19",
     totalQuestions: Object.values(window.quizBank).reduce((acc, arr) => acc + arr.length, 0),
     difficulties: [
@@ -749,40 +820,40 @@ window.quizBankMeta = {
             title: "Simulacro General ISEP (Todas las Materias)", 
             icon: "auto_stories", 
             color: "from-blue-600 via-indigo-600 to-purple-700", 
-            desc: "Evaluación transversal con preguntas de todos los programas oficiales",
-            programSyllabus: "CPP Ley 12.734 · Microtráfico Ley 14.239 · Juicio por Jurados Ley 14.258 · Dec. 461/15 · Gestión SMART"
+            desc: "Evaluación integral con preguntas de Tiro, Conducción, Comunicación, Informática y Leyes",
+            programSyllabus: "Tiro MIRAF · Conducción Policial · Seguridad de la Información · CPP Ley 12.734 · Microtráfico Ley 14.239 · Jurados Ley 14.258"
         },
         { 
             id: "oficial-subinspector", 
             title: "Oficial → Subinspector", 
             icon: "military_tech", 
             color: "from-blue-600 to-indigo-700", 
-            desc: "Práctica policial, CPP Ley 12.734 (Art. 138), Preservación del hecho y Convivencia",
-            programSyllabus: "Módulo I: Práctica Policial, Código de Conducta ONU, Primer Preventor, Actas procesales y Código de Convivencia"
+            desc: "Práctica policial, Tiro MIRAF (Balística y SUL), Actas CPP (Art. 138), Preservación y Convivencia",
+            programSyllabus: "Módulo I: Práctica Policial, Tiro y Armamento MIRAF, Primer Preventor, Código de Conducta ONU y Código de Convivencia"
         },
         { 
             id: "subinspector-inspector", 
             title: "Subinspector → Inspector", 
             icon: "shield_person", 
             color: "from-emerald-600 to-teal-700", 
-            desc: "Liderazgo ('Pequeños Grandes Líderes'), Crisis Subjetivas, Menores, LCAT y Juicio por Jurados",
-            programSyllabus: "Liderazgo Operativo, Ley de Salud Mental 26.657, Ley de Niñez 12.967, L.C.A.T. y Juicio por Jurados (Ley 14.258)"
+            desc: "Liderazgo, Seguridad de la Información (Tríada CID), Comunicación, LCAT y Jurados",
+            programSyllabus: "Liderazgo Operativo, Seguridad de la Información e Incidentes, Niñez Ley 12.967, L.C.A.T. y Juicio por Jurados (Ley 14.258)"
         },
         { 
             id: "inspector-subcomisario", 
             title: "Inspector → Subcomisario", 
             icon: "admin_panel_settings", 
             color: "from-amber-600 to-orange-700", 
-            desc: "Narcomenudeo (Ley 14.239), Pistola Bersa 9mm y desmartillado, Libros de Comisaría",
-            programSyllabus: "Desfederalización y Microtráfico, Ley 23.737, Armamento y Palanca Decocker, Libros Matrices de Dependencia"
+            desc: "Narcomenudeo (Ley 14.239), Conducción de Comisarías y Orden Público, Pistola Bersa 9mm",
+            programSyllabus: "Desfederalización y Microtráfico, Conducción de Comisarías y Destacamentos, Órdenes de Operaciones y Armamento"
         },
         { 
             id: "subcomisario-comisario", 
             title: "Subcomisario → Comisario", 
             icon: "stars", 
             color: "from-purple-600 to-indigo-800", 
-            desc: "Políticas de seguridad pública por cuadrículas, Vocería en crisis, Decreto 461/15",
-            programSyllabus: "Poder de Policía, Vocería Policial en Situaciones Críticas, Régimen Disciplinario Decreto 461/15 y Sanciones"
+            desc: "Políticas de seguridad por cuadrículas, Vocería y Prensa sin 'Off The Record', Decreto 461/15",
+            programSyllabus: "Poder de Policía, Vocería Policial ante Medios Masivos, Régimen Disciplinario Decreto 461/15 y Sanciones"
         },
         { 
             id: "comisario-supervisor", 
