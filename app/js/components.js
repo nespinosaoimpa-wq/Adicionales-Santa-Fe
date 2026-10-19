@@ -376,36 +376,38 @@ window.renderGlobalAnnouncement = function () {
 };
 
 window.showWelcomeBackModal = function() {
-    if (localStorage.getItem('welcome_back_v535_8_seen')) return;
+    if (localStorage.getItem('welcome_back_migracion_2026_seen')) return;
 
     const overlay = document.createElement('div');
     overlay.id = 'welcome-back-modal';
-    overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 transition-all duration-500 opacity-0';
+    overlay.className = 'fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 backdrop-blur-md p-4 transition-all duration-500 opacity-0';
     
     overlay.innerHTML = `
         <div class="bg-slate-900 rounded-3xl p-6 shadow-2xl border border-white/10 w-full max-w-sm transform scale-90 transition-all duration-500 opacity-0 flex flex-col items-center text-center" id="welcome-back-card">
-            <div class="text-6xl mb-4 animate-bounce">🎉</div>
-            <h2 class="text-2xl font-bold text-white mb-1">¡Bienvenido de vuelta!</h2>
-            <p class="text-sm text-slate-400 font-medium mb-4">Estuvimos trabajando para vos</p>
-            <p class="text-sm text-slate-300 mb-6 leading-relaxed">
-                La plataforma fue completamente restablecida y mejorada. Tus datos, servicios y configuración están 100% intactos y seguros.
+            <div class="size-16 bg-gradient-to-br from-primary to-cyan-500 rounded-2xl mx-auto flex items-center justify-center text-white shadow-xl shadow-primary/30 mb-4">
+                <span class="material-symbols-outlined text-3xl">rocket_launch</span>
+            </div>
+            <h2 class="text-xl font-bold text-white mb-1">¡Plataforma Actualizada!</h2>
+            <p class="text-xs text-blue-400 font-semibold mb-3 tracking-wide uppercase">Mayor Ancho de Banda y Velocidad</p>
+            <p class="text-xs text-slate-300 mb-5 leading-relaxed">
+                Gracias al gran crecimiento de nuestra comunidad policial, migramos la aplicación a servidores de mayor capacidad y ancho de banda. Tu cuenta, adicionales y configuraciones están 100% seguros e intactos.
             </p>
-            <div class="w-full bg-slate-800/50 rounded-2xl p-4 mb-6 text-left space-y-3 border border-white/5">
+            <div class="w-full bg-slate-800/60 rounded-2xl p-3.5 mb-5 text-left space-y-2.5 border border-white/5">
                 <div class="flex items-center gap-3">
-                    <span class="text-lg">🚀</span>
-                    <span class="text-xs font-semibold text-slate-200">Velocidad mejorada (carga instantánea)</span>
+                    <span class="text-emerald-400 text-base material-symbols-outlined">bolt</span>
+                    <span class="text-[11px] font-semibold text-slate-200">Carga ultra rápida y máxima estabilidad</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <span class="text-lg">🔒</span>
-                    <span class="text-xs font-semibold text-slate-200">Tus datos siempre seguros y respaldados</span>
+                    <span class="text-blue-400 text-base material-symbols-outlined">security</span>
+                    <span class="text-[11px] font-semibold text-slate-200">Tus datos y cálculos totalmente protegidos</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <span class="text-lg">📱</span>
-                    <span class="text-xs font-semibold text-slate-200">Notificaciones push mejoradas</span>
+                    <span class="text-cyan-400 text-base material-symbols-outlined">login</span>
+                    <span class="text-[11px] font-semibold text-slate-200">Acceso fluido con Google o tu email</span>
                 </div>
             </div>
-            <button id="welcome-back-btn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3.5 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/30">
-                ¡Vamos! <span class="text-xl leading-none">→</span>
+            <button id="welcome-back-btn" class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 rounded-xl transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-primary/30 text-xs uppercase tracking-wider">
+                Continuar a la App <span class="text-sm">→</span>
             </button>
         </div>
     `;
@@ -422,7 +424,7 @@ window.showWelcomeBackModal = function() {
 
     const btn = overlay.querySelector('#welcome-back-btn');
     btn.addEventListener('click', () => {
-        localStorage.setItem('welcome_back_v535_8_seen', 'true');
+        localStorage.setItem('welcome_back_migracion_2026_seen', 'true');
         
         overlay.classList.remove('opacity-100');
         overlay.classList.add('opacity-0');
