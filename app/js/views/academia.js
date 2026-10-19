@@ -30,7 +30,7 @@ window._quizState = window._quizState || {
 // ══════════════════════════════════════════════════════════════
 const ISEP_FREE_LIMIT = 3;
 const ISEP_PRO_PRICE = "$2.000 / mes";
-const ISEP_WHATSAPP_PHONE = "5493425594737";
+const ISEP_WHATSAPP_PHONE = "5493425162372";
 
 function _getFreeAttemptsUsed() {
     try {
