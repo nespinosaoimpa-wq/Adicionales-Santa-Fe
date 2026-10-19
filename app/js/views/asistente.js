@@ -18,12 +18,12 @@ function renderAsistenteHub(container) {
     const currentMonthEarnings = currentMonthServices.reduce((sum, s) => sum + (parseFloat(s.total) || 0), 0);
 
     const tools = [
-        { id: 'academia', title: 'Gemini Notebook ISEP 2026', desc: 'Notebook IA Oficial: Resúmenes, proyectos, simulador 50 preguntas, flashcards 3D, esquemas, infografías y audiolibros.', icon: 'psychology', color: 'from-purple-600 via-indigo-600 to-blue-700', route: '#academia', badge: 'NOTEBOOK IA 🧠' },
+        { id: 'academia', title: 'Simulador Examen ISEP 2026', desc: 'Simulacros de ascenso oficial (25 y 50 preguntas), citas exactas del manual y biblioteca de descargas.', icon: 'school', color: 'from-blue-600 via-indigo-600 to-purple-700', route: '#academia', badge: 'OFICIAL 2026 🎯' },
         { id: 'calificar', title: 'Calificar la App', desc: 'Dejanos tu calificación y sugerencias para seguir mejorando la herramienta.', icon: 'reviews', color: 'from-amber-400 to-[#F6B426]', action: 'window.showSurveyBanner(true)', badge: 'Opiná' },
         { id: 'centinela', title: 'Centinela AI', desc: 'Asistente legal entrenado con la Ley 12.521.', icon: 'smart_toy', color: 'from-primary to-blue-500', route: '#asistente/centinela', badge: 'Nuevo' },
         { id: 'vademecum', title: 'Vademécum Contravencional', desc: 'Guía de actuación y consulta del Código Penal y Convivencia.', icon: 'gavel', color: 'from-amber-500 to-amber-600', route: '#asistente/vademecum', badge: 'Nuevo' },
         { id: 'dictado', title: 'Dictado de Novedades', desc: 'Dictá por voz y estructurá actas y libros de guardia.', icon: 'mic', color: 'from-blue-500 to-cyan-500', route: '#asistente/dictado', badge: 'Nuevo' },
-        { id: 'actas', title: 'Actas Policiales', desc: 'Generá actas formales: allanamiento, custodia, procedimiento y más.', icon: 'description', color: 'from-red-500 to-rose-600', route: '#asistente/actas', badge: 'PRO' },
+        { id: 'actas', title: 'Actas Policiales', desc: '12 Modelos Oficiales: Procedimiento, Aprehensión, Choque, Secuestro, Custodia, Allanamiento y más.', icon: 'description', color: 'from-red-600 to-rose-700', route: '#asistente/actas', badge: 'PERFECTAS' },
         { id: 'intervenciones', title: 'Intervenciones en Campo', desc: 'Registro en tiempo real con GPS y partes para WhatsApp.', icon: 'add_alert', color: 'from-blue-500 to-indigo-600', route: '#asistente/intervenciones', badge: 'PRO' },
         { id: 'procedimiento', title: 'Registro de Procedimiento', desc: 'Wizard guiado: GPS, fotos y PDF estructurado.', icon: 'local_police', color: 'from-emerald-500 to-green-600', route: '#asistente/procedimiento', badge: 'PRO' },
         { id: 'archivos', title: 'Archivos Digitales', desc: 'Historial personal de actas y procedimientos guardados.', icon: 'folder_open', color: 'from-amber-500 to-orange-500', route: '#asistente/archivos', badge: 'PRO' },

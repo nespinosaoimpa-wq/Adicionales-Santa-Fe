@@ -67,7 +67,7 @@ function renderAgenda(container) {
                     </div>
                     <div>
                         <span class="text-[8px] font-black uppercase tracking-widest bg-white/20 px-2 py-0.5 rounded-full">ISEP 2026</span>
-                        <h3 class="text-sm font-black leading-tight mt-0.5">Campus Ascenso Policial</h3>
+                        <h3 class="text-sm font-black leading-tight mt-0.5">Simulador ISEP: Examen y Biblioteca</h3>
                     </div>
                 </div>
                 <button class="px-3 py-1.5 rounded-xl bg-white text-slate-900 font-bold text-xs shadow-md group-hover:bg-amber-100 transition-colors">
