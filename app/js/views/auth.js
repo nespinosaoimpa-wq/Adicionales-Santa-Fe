@@ -123,6 +123,11 @@ function renderLogin(container) {
         store.loginWithGoogle()
             .then((userCred) => {
                 const u = (userCred && userCred.user) ? userCred.user : store.user;
+                if (!u) {
+                    console.log("🔄 Redirección de autenticación en curso...");
+                    if (btn) btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div> Conectando...';
+                    return;
+                }
                 console.log("✅ Google Auth Completed:", u?.email);
                 showToast("¡Bienvenido " + (u?.displayName || "") + "!");
                 if (window.router) {

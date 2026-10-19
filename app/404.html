@@ -14,9 +14,9 @@
             if (path.indexOf('/app') !== -1) {
                 var route = path.replace(/.*\/app\/?/, '');
                 var targetHash = hash || (route ? '#' + route : '#agenda');
-                window.location.replace('./index.html' + search + targetHash);
+                window.location.replace('/app/' + search + targetHash);
             } else {
-                window.location.replace('./app/index.html' + search + (hash || '#agenda'));
+                window.location.replace('/app/' + search + (hash || '#agenda'));
             }
         })();
     </script>

@@ -663,6 +663,7 @@ window.store = {
 
                             // 2. ASYNCHRONOUS DATABASE SYNC
                             try {
+                                const lowerEmail = (user.email || '').toLowerCase().trim();
                                 const dbUser = await DB.getUser(user.email);
                                 if (dbUser) {
                                     this.user = {
@@ -671,7 +672,9 @@ window.store = {
                                         serviceConfig: { ...this.user.serviceConfig, ...(dbUser.serviceConfig || {}) },
                                         notificationSettings: { ...this.user.notificationSettings, ...(dbUser.notificationSettings || {}) }
                                     };
-                                    if (this.user.name === 'undefined' || !this.user.name) this.user.name = baseUser.name;
+                                    if (this.user.name === 'undefined' || !this.user.name) {
+                                        this.user.name = user.displayName || user.email.split('@')[0];
+                                    }
                                     if (this.user.avatar === 'undefined' || !this.user.avatar || this.user.avatar.includes('ui-avatars.com')) {
                                         if (user.photoURL) this.user.avatar = user.photoURL;
                                     }

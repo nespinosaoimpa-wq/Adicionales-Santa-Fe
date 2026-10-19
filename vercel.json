@@ -1,32 +1,23 @@
 {
   "version": 2,
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/app",
+      "destination": "/app/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/__/auth/(.*)",
       "destination": "https://adicionales-santa-fe.firebaseapp.com/__/auth/$1"
-    },
-    {
-      "source": "/app",
-      "destination": "/app/index.html"
-    },
-    {
-      "source": "/app/(.*)",
-      "destination": "/app/index.html"
     }
   ],
   "headers": [
     {
       "source": "/(.*).html",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-        { "key": "Pragma", "value": "no-cache" },
-        { "key": "Expires", "value": "0" }
-      ]
-    },
-    {
-      "source": "/app/(.*).html",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
         { "key": "Pragma", "value": "no-cache" },
