@@ -401,7 +401,22 @@ function _renderSimuladorTab(container) {
 
         const shuffled = _shuffleArray(questionPool);
         const count = Math.min(state.questionCount, shuffled.length);
-        const questions = shuffled.slice(0, count);
+        const rawQuestions = shuffled.slice(0, count);
+
+        // Shuffle options within each question so the correct answer isn't always at the same index
+        const questions = rawQuestions.map(q => {
+            const indexMap = q.options.map((_, i) => i);
+            // Fisher-Yates shuffle the index map
+            for (let i = indexMap.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [indexMap[i], indexMap[j]] = [indexMap[j], indexMap[i]];
+            }
+            return {
+                ...q,
+                options: indexMap.map(i => q.options[i]),
+                correctIndex: indexMap.indexOf(q.correctIndex)
+            };
+        });
 
         state.currentExam = {
             hierarchy: state.selectedHierarchy,

@@ -282,7 +282,7 @@ function generateCalendarGrid(year, month, selectedDate) {
             dots += `<div class="size-1 rounded-full ${dotColor}"></div>`;
         });
         if (dayServices.length > 3) {
-             dots += `<div class="size-1 rounded-full bg-slate-400"></div>`;
+            dots += `<div class="size-1 rounded-full bg-slate-400"></div>`;
         }
 
         html += `

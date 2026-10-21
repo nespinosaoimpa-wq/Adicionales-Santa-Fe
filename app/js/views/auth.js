@@ -92,12 +92,12 @@ function renderLogin(container) {
             if ('serviceWorker' in navigator) {
                 const registrations = await navigator.serviceWorker.getRegistrations();
                 for (let registration of registrations) {
-                    await registration.unregister().catch(() => {});
+                    await registration.unregister().catch(() => { });
                 }
             }
             if ('caches' in window) {
                 const cacheNames = await caches.keys();
-                await Promise.all(cacheNames.map(name => caches.delete(name))).catch(() => {});
+                await Promise.all(cacheNames.map(name => caches.delete(name))).catch(() => { });
             }
             sessionStorage.clear();
             localStorage.clear();
@@ -114,7 +114,7 @@ function renderLogin(container) {
     window.handleGoogleLogin = (event) => {
         if (event) event.preventDefault();
         const btn = (event && event.currentTarget) ? event.currentTarget : document.querySelector('button[onclick*="handleGoogleLogin"]');
-        
+
         if (btn) {
             btn.disabled = true;
             btn.innerHTML = '<div class="animate-spin rounded-full h-5 w-5 border-b-2 border-white mx-auto"></div>';

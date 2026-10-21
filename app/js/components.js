@@ -236,47 +236,134 @@ function updateOfflineStatus(isOffline) {
 // --- Global Listeners ---
 window.addEventListener('online', () => updateOfflineStatus(false));
 window.addEventListener('offline', () => updateOfflineStatus(true));
+
 function renderIOSInstallPrompt() {
     const isWhatsAppOrInApp = /WhatsApp|FBAN|FBAV|Instagram|Line/i.test(navigator.userAgent);
     
     return `
-        <div id="ios-install-banner" class="fixed bottom-24 left-4 right-4 z-[100] bg-slate-950 text-white rounded-[2.2rem] p-5 shadow-2xl border border-cyan-500/30 transform translate-y-[200%] transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] backdrop-blur-2xl">
-            <div class="flex items-start gap-4 text-left">
-                <div class="size-12 bg-gradient-to-br from-primary via-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/30 shrink-0">
-                    <span class="material-symbols-outlined text-2xl">add_to_home_screen</span>
+        <div id="ios-install-banner" class="fixed bottom-24 left-4 right-4 z-[100] bg-slate-950/95 text-white rounded-[2rem] p-4 shadow-2xl border border-cyan-500/40 backdrop-blur-2xl transition-all duration-500 animate-slide-up">
+            <div class="flex items-start gap-3.5 text-left">
+                <div class="size-11 bg-gradient-to-br from-primary via-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/30 shrink-0">
+                    <span class="material-symbols-outlined text-2xl">phone_iphone</span>
                 </div>
-                <div class="flex-1 space-y-2">
-                    <h3 class="text-sm font-extrabold text-white leading-tight">Instalá Adicionales SF en tu iPhone</h3>
+                <div class="flex-1 min-w-0">
+                    <div class="flex items-center justify-between gap-2">
+                        <h3 class="text-xs font-black text-white leading-tight">¿Usás iPhone?</h3>
+                        <button onclick="this.closest('#ios-install-banner').remove()" class="text-slate-400 hover:text-white transition-colors p-0.5">
+                            <span class="material-symbols-outlined text-base">close</span>
+                        </button>
+                    </div>
+                    <p class="text-[11px] text-slate-300 mt-0.5 leading-snug">Guardá la app en tu pantalla de inicio en 2 toques (sin App Store).</p>
                     
-                    ${isWhatsAppOrInApp ? `
-                        <div class="bg-amber-500/20 border border-amber-500/40 rounded-xl p-2.5 text-[11px] text-amber-200 font-medium space-y-1 my-1">
-                            <p class="font-bold flex items-center gap-1 text-amber-300">
-                                <span class="material-symbols-outlined text-sm">warning</span> Abrir en Safari
-                            </p>
-                            <p>Para instalar en iPhone: Tocá los <strong>3 puntos (...) arriba</strong> y elegí <strong>"Abrir en Safari"</strong>.</p>
-                        </div>
-                    ` : `
-                        <p class="text-xs text-slate-300 leading-relaxed">Seguí estos 2 pasos para guardarla en tu pantalla:</p>
-                    `}
-                    
-                    <div class="flex flex-col gap-2 pt-1">
-                        <div class="flex items-center gap-2.5 text-[11px] font-semibold text-slate-200">
-                            <span class="size-5 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-bold">1</span>
-                            <span>Tocá el botón <span class="bg-white/10 px-2 py-0.5 rounded-md font-bold text-cyan-300 inline-flex items-center gap-1">Compartir <span class="material-symbols-outlined text-xs">ios_share</span></span> en Safari</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 text-[11px] font-semibold text-slate-200">
-                            <span class="size-5 rounded-full bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-300 font-bold">2</span>
-                            <span>Elegí <span class="font-bold text-santa-gold">"Añadir a panta. de inicio"</span></span>
-                        </div>
+                    <div class="mt-2.5 flex items-center gap-2">
+                        <button onclick="window.showIOSInstallModal(); document.getElementById('ios-install-banner')?.remove();" 
+                            class="px-3 py-1.5 bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-[11px] font-black rounded-xl shadow-md active:scale-95 transition-all flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">touch_app</span> Ver cómo instalarla
+                        </button>
+                        <button onclick="this.closest('#ios-install-banner').remove()" class="px-2.5 py-1.5 text-slate-400 text-[11px] font-bold hover:text-slate-200">
+                            Ahora no
+                        </button>
                     </div>
                 </div>
             </div>
-            <button onclick="this.closest('#ios-install-banner').remove()" class="absolute top-3 right-3 text-slate-400 hover:text-white transition-colors p-1">
-                <span class="material-symbols-outlined text-lg">close</span>
-            </button>
         </div>
     `;
 }
+
+window.showIOSInstallModal = function() {
+    const existing = document.getElementById('ios-install-modal');
+    if (existing) existing.remove();
+
+    const isWhatsAppOrInApp = /WhatsApp|FBAN|FBAV|Instagram|Line/i.test(navigator.userAgent);
+    const modal = document.createElement('div');
+    modal.id = 'ios-install-modal';
+    modal.className = 'fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in';
+    modal.innerHTML = `
+        <div class="glass-card w-full max-w-md p-6 rounded-3xl border border-cyan-500/30 bg-background-dark/95 shadow-2xl text-left relative overflow-hidden max-h-[90vh] overflow-y-auto" style="animation: scaleUp 0.3s ease-out">
+            <button onclick="document.getElementById('ios-install-modal').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-full transition-colors z-10">
+                <span class="material-symbols-outlined text-xl">close</span>
+            </button>
+
+            <div class="flex items-center gap-3 mb-4">
+                <div class="size-12 rounded-2xl bg-gradient-to-br from-primary to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-primary/30 shrink-0">
+                    <span class="material-symbols-outlined text-2xl">phone_iphone</span>
+                </div>
+                <div>
+                    <h3 class="text-base font-black text-white leading-tight">Instalar en tu iPhone</h3>
+                    <p class="text-[10px] text-cyan-400 font-bold uppercase tracking-wider">Paso a paso sin App Store</p>
+                </div>
+            </div>
+
+            <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                En iPhone no se descarga un archivo como en Android. 
+                La app se agrega desde <strong class="text-white">Safari</strong> a tu pantalla de inicio:
+            </p>
+
+            ${isWhatsAppOrInApp ? `
+                <div class="p-3 mb-4 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs space-y-1">
+                    <p class="font-bold flex items-center gap-1.5 text-amber-300">
+                        <span class="material-symbols-outlined text-sm">warning</span> ¡Atención! Estás dentro de WhatsApp
+                    </p>
+                    <p class="text-[11px] text-amber-200/90 leading-relaxed">
+                        WhatsApp bloquea la instalación. Tocá los <strong>tres puntos (...) arriba a la derecha</strong> y elegí <strong>"Abrir en Safari"</strong> o <strong>"Abrir en navegador"</strong>.
+                    </p>
+                </div>
+            ` : ''}
+
+            <div class="space-y-2.5 mb-5">
+                <!-- Paso 1 -->
+                <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="size-7 rounded-xl bg-cyan-500/20 text-cyan-300 font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+                    <div class="flex-1 text-xs">
+                        <strong class="text-white block mb-0.5">Abrí la web en Safari</strong>
+                        <p class="text-slate-400 text-[11px]">Asegurate de estar usando el navegador <strong class="text-white">Safari</strong> de tu iPhone (el ícono de la brújula azul). No funciona desde Chrome ni otros navegadores.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 2 -->
+                <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="size-7 rounded-xl bg-cyan-500/20 text-cyan-300 font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+                    <div class="flex-1 text-xs">
+                        <strong class="text-white block mb-0.5">Tocá el botón Compartir</strong>
+                        <p class="text-slate-400 text-[11px]">Es el ícono del <strong class="text-cyan-300">cuadradito con la flecha hacia arriba ⬆</strong> en la barra inferior de Safari.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 3 -->
+                <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="size-7 rounded-xl bg-cyan-500/20 text-cyan-300 font-black text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+                    <div class="flex-1 text-xs">
+                        <strong class="text-white block mb-0.5">Elegí "Agregar a pantalla de inicio"</strong>
+                        <p class="text-slate-400 text-[11px]">Deslizá hacia abajo en el menú y buscá la opción <strong class="text-white">"Añadir a pantalla de inicio"</strong> con el ícono <strong class="text-cyan-300">＋</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 4 -->
+                <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/5 border border-white/10">
+                    <div class="size-7 rounded-xl bg-cyan-500/20 text-cyan-300 font-black text-xs flex items-center justify-center shrink-0 mt-0.5">4</div>
+                    <div class="flex-1 text-xs">
+                        <strong class="text-white block mb-0.5">Tocá "Agregar" arriba a la derecha</strong>
+                        <p class="text-slate-400 text-[11px]">Te va a mostrar el nombre <strong class="text-cyan-300">Adicionales SF</strong>. Dejalo así y tocá <strong class="text-white">"Agregar"</strong>.</p>
+                    </div>
+                </div>
+
+                <!-- Paso 5 - DÓNDE ENCONTRARLA -->
+                <div class="flex items-start gap-3 p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30">
+                    <div class="size-7 rounded-xl bg-emerald-500/20 text-emerald-300 font-black text-xs flex items-center justify-center shrink-0 mt-0.5">5</div>
+                    <div class="flex-1 text-xs">
+                        <strong class="text-emerald-300 block mb-0.5">📍 ¿Dónde encontrarla?</strong>
+                        <p class="text-slate-300 text-[11px] leading-relaxed">El ícono de <strong class="text-white">Adicionales SF</strong> aparece en la <strong class="text-emerald-300">última página</strong> de tu pantalla de inicio. Si no lo ves, deslizá todas las páginas hacia la izquierda o buscalo en la <strong class="text-emerald-300">Biblioteca de Apps</strong> (deslizá hasta el final de las páginas). También podés buscarlo tirando hacia abajo en la pantalla de inicio y escribiendo "Adicionales".</p>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="document.getElementById('ios-install-modal').remove()" class="w-full py-3.5 bg-gradient-to-r from-primary to-blue-600 text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-lg shadow-primary/25 active:scale-95 transition-all text-center">
+                ¡Entendido!
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+};
 
 
 

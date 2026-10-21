@@ -6,9 +6,6 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0f172a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Adicionales SF">
     <title>Adicionales Santa Fe</title>
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https: wss:; object-src 'none';">
@@ -42,6 +39,12 @@
     <meta name="apple-mobile-web-app-title" content="Adicionales SF">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Apple Touch Icons (CRITICAL for iPhone home screen) -->
+    <link rel="apple-touch-icon" href="assets/icon-512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-512.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/icon-512.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/icon-512.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png">
 
     <!-- DOMAIN RESILIENCE & AUTO-FIX v1.0 -->
     <script>
@@ -167,9 +170,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-10-54.js?v=535.10.54')
+                navigator.serviceWorker.register('./sw-v535-10-59.js?v=535.10.59')
                     .then(registration => {
-                        console.log('ServiceWorker v535.10.54 registrado con éxito: ', registration.scope);
+                        console.log('ServiceWorker v535.10.59 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {

@@ -78,10 +78,10 @@ window.improvePoliceNarrative = function (text, returnDetails = false) {
     if (!text) {
         return returnDetails ? { refinedText: "", changes: [] } : "";
     }
-    
+
     let refined = text;
     const changes = [];
-    
+
     // Diccionario enriquecido de mejoras (términos comunes -> términos profesionales con fundamento)
     const rules = [
         {

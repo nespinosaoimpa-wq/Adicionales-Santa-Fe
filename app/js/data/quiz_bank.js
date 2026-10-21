@@ -2,13 +2,16 @@
  * Adicionales Santa Fe - Banco de Preguntas ISEP 2026 Profesional
  * Simulador de Examen de Ascenso Policial Oficial
  * 
- * Contenido extraído directamente de los manuales oficiales de cada jerarquía
- * y enriquecido con los exámenes reales de perfeccionamiento policial (Daypo 2026):
- * - Tiro y Armamento Policial (MIRAF, Bersa Thunder/TPR, Balística, Posición SUL).
- * - Seguridad de la Información (Tríada CID, Protocolo de 5 pasos, Incidentes y Redes).
- * - Comunicación y Redacción Institucional (Prensa sin Off The Record, Asertividad 7C, Lenguaje llano).
- * - Conducción Policial y Orden Público (Mando, Comando, Conducción, OO, Inspecciones de Zona y Comisarías).
- * - Leyes y Procedimiento (CPP Ley 12.734, Narcomenudeo Ley 14.239, Jurados Ley 14.258, Dec. 461/15, Ley 12.521).
+ * v6.0.0 - DISTRACTORES EQUILIBRADOS
+ * Todas las opciones tienen longitud y nivel de detalle similares.
+ * Las incorrectas son plausibles y técnicas para evitar adivinación por descarte visual.
+ * 
+ * Contenido basado en manuales oficiales ISEP 2026 y exámenes reales Daypo:
+ * - Tiro y Armamento Policial (MIRAF, Bersa Thunder/TPR, Balística, Posición SUL)
+ * - Seguridad de la Información (Tríada CID, Protocolo de 5 pasos, Incidentes y Redes)
+ * - Comunicación y Redacción Institucional (Prensa, Asertividad 7C, Lenguaje llano)
+ * - Conducción Policial y Orden Público (Mando, Comando, Conducción, OO, Inspecciones)
+ * - Leyes y Procedimiento (CPP Ley 12.734, Narcomenudeo Ley 14.239, Jurados Ley 14.258, Dec. 461/15, Ley 12.521)
  * 
  * Modalidades de Dificultad:
  * - 'facil': Conceptos fundamentales, definiciones y principios rectores del manual.
@@ -28,10 +31,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Cuáles son las cuatro virtudes cardinales que según el Manual ISEP sustentan la 'autoridad real' del líder policial?",
             options: [
-                "Obediencia, Disciplina, Valentía y Lealtad",
+                "Obediencia, Disciplina, Valentía y Lealtad institucional",
                 "Prudencia, Justicia, Fortaleza y Templanza",
-                "Respeto, Orden, Comando y Firmeza",
-                "Eficiencia, Rapidez, Control y Mando"
+                "Eficiencia, Rapidez, Control operativo y Mando efectivo",
+                "Respeto jerárquico, Orden, Comando de zona y Firmeza operativa"
             ],
             correctIndex: 1,
             source: "Manual ISEP 2026 - Oficial, Pág. 15: Liderazgo Policial",
@@ -42,10 +45,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Qué norma internacional consagra el Código de Conducta para Funcionarios Encargados de Hacer Cumplir la Ley?",
             options: [
-                "Resolución 34/169 de la Asamblea General de la ONU",
-                "Convenio 169 de la OIT",
-                "Declaración de Ginebra de 1949",
-                "Tratado de Roma de 1998"
+                "Resolución 34/169 de la Asamblea General de la ONU (1979)",
+                "Convenio 169 de la Organización Internacional del Trabajo (1989)",
+                "Protocolo Adicional II de los Convenios de Ginebra de 1949",
+                "Estatuto de Roma de la Corte Penal Internacional de 1998"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Oficial, Pág. 30: Código de Conducta ONU",
@@ -56,12 +59,12 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Cómo se divide el sistema de preservación de escena del hecho denominado 'Cordón Doble'?",
             options: [
-                "Zona Norte y Zona Sur",
+                "Zona de Ingreso controlado y Zona de Egreso supervisado por testigos civiles",
+                "Perímetro de Tránsito vehicular y Perímetro Vecinal restringido a civiles",
                 "Perímetro Interno (Zona de Exclusión) y Perímetro Externo (Zona de Seguridad)",
-                "Área de entrada y Área de salida",
-                "Perímetro de Tránsito y Perímetro Vecinal"
+                "Área de evidencia primaria y Área de contención perimetral secundaria"
             ],
-            correctIndex: 1,
+            correctIndex: 2,
             source: "Manual ISEP 2026 - Oficial, Pág. 22: Preservación del Lugar del Hecho",
             explanation: "El sistema de doble cordón define un Perímetro Interno exclusivo para peritos forenses y un Perímetro Externo para seguridad y apoyo."
         },
@@ -70,10 +73,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Qué tipo de falta disciplinaria constituye el desaliño en el uniforme o una tardanza menor sin justificar según el Decreto 461/15?",
             options: [
-                "Falta Leve",
-                "Falta Grave",
-                "Falta Gravísima",
-                "No constituye falta disciplinaria"
+                "Falta Leve, sancionable con apercibimiento o arresto menor",
+                "Falta Grave, sancionable con suspensión o pase a disponibilidad",
+                "Falta Gravísima, causal de instrucción de sumario administrativo",
+                "Irregularidad administrativa, causal de anotación en legajo personal"
             ],
             correctIndex: 0,
             source: "Decreto 461/15 - Régimen Disciplinario Policial",
@@ -85,9 +88,9 @@ window.quizBank = {
             question: "¿Quién es considerado el 'Primer Preventor' policial en una escena delictiva?",
             options: [
                 "El primer personal policial uniformado que toma conocimiento e interviene en el lugar del hecho",
-                "Exclusivamente el Jefe de la Comisaría de la jurisdicción",
-                "El médico forense de la policía científica",
-                "El Fiscal del Ministerio Público de la Acusación"
+                "El Jefe de la Comisaría jurisdiccional que asume la conducción operativa del procedimiento",
+                "El perito forense de la policía científica designado para el relevamiento de indicios",
+                "El Fiscal del Ministerio Público de la Acusación que dirige la investigación penal"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Oficial, Pág. 20: Rol del Primer Preventor",
@@ -99,9 +102,9 @@ window.quizBank = {
             question: "¿Qué es la 'Munición' según la reglamentación de tiro policial y la Ley Nacional de Armas?",
             options: [
                 "El conjunto de cartuchos que se proveen para ser utilizados en un arma de fuego",
-                "Únicamente la pólvora y el fulminante sin la vaina",
-                "El cargador metálico vacío",
-                "El dispositivo de puntería nocturna"
+                "El cargador metálico reglamentario con capacidad de 15 cartuchos calibre 9mm",
+                "El dispositivo de puntería nocturna tritio que equipa al arma de dotación",
+                "La vaina servida que se expulsa del arma tras la percusión del fulminante"
             ],
             correctIndex: 0,
             source: "Manual MIRAF - Armamento y Tiro Policial / Daypo Tiro",
@@ -112,10 +115,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "En las reglas cardinales de seguridad con armas de fuego, ¿cómo debe considerarse toda arma que se empuña?",
             options: [
-                "Siempre cargada y lista para disparar, aun cuando se crea o sepa que está descargada",
-                "Descargada mientras tenga el seguro manual colocado",
-                "Inofensiva si se encuentra dentro de la dependencia policial",
-                "Segura si el cargador está desprendido aunque tenga cartucho en recámara"
+                "Siempre cargada y lista para disparar, aun cuando se crea que está descargada",
+                "Descargada mientras tenga el seguro manual colocado y el cargador retirado",
+                "Inofensiva si el portador se encuentra dentro de una dependencia policial",
+                "Segura si se verificó visualmente al inicio del turno en la formación diaria"
             ],
             correctIndex: 0,
             source: "Manual MIRAF - Reglas Cardinales de Seguridad",
@@ -128,10 +131,10 @@ window.quizBank = {
             difficulty: "media",
             question: "¿Cuál es la obligación inmediata del primer preventor policial al llegar a una escena del hecho con heridos de arma de fuego?",
             options: [
-                "Secuestrar de inmediato las vainas servidas para que no se pierdan",
-                "Priorizar el auxilio médico y resguardo de la vida, coordinando el 107 y fijando la posición de los indicios movidos si fuere indispensable",
-                "Esperar la llegada del Fiscal del MPA antes de tocar a los heridos",
-                "Tomar declaración testimonial a los vecinos antes del traslado de los heridos"
+                "Secuestrar de inmediato las vainas servidas, fotografiarlas y embalarlas para la cadena de custodia",
+                "Priorizar el auxilio médico y resguardo de la vida, coordinando el 107 y fijando la posición de indicios",
+                "Esperar la llegada del Fiscal del MPA para recibir instrucciones antes de actuar en la escena",
+                "Tomar declaración testimonial detallada a los vecinos presentes antes de que se retiren del lugar"
             ],
             correctIndex: 1,
             source: "Manual ISEP 2026 - Oficial, Pág. 24: Primer Preventor y Auxilio",
@@ -142,10 +145,10 @@ window.quizBank = {
             difficulty: "media",
             question: "¿En qué artículos del Código Procesal Penal de Santa Fe se fundamenta formalmente el labrado del Acta de Procedimiento Policial?",
             options: [
-                "Artículos 138, 139 y concordantes del CPP (Ley 12.734)",
-                "Artículos 212 y 213 únicamente",
-                "Artículos 40 y 41 del Código Penal",
-                "Artículos 10 y 11 de la Ley 12.521"
+                "Artículos 138, 139 y concordantes del CPP (Ley 12.734) sobre formalidades de actas",
+                "Artículos 212 y 213 del CPP (Ley 12.734) sobre allanamientos y requisas de personas",
+                "Artículos 40 y 41 del Código Penal sobre determinación de la pena por el tribunal",
+                "Artículos 10 y 11 de la Ley 12.521 sobre derechos y deberes del personal policial"
             ],
             correctIndex: 0,
             source: "CPP de Santa Fe Ley 12.734, Art. 138: Actas Policiales",
@@ -156,10 +159,10 @@ window.quizBank = {
             difficulty: "media",
             question: "Para verificar con total certeza que un arma de fuego se encuentra descargada, ¿de qué tres maneras complementarias debe realizarse la comprobación?",
             options: [
-                "Mecánica, visual y táctil (habiendo retirado previamente el cargador)",
-                "Únicamente disparando en seco hacia el piso",
-                "Solo retirando el cargador sin abrir la corredera",
-                "Pesando el arma con una balanza digital"
+                "Mecánica, visual y táctil, habiendo retirado previamente el cargador del arma",
+                "Auditiva, ponderal y electrónica, utilizando el instrumental de la armería central",
+                "Fotográfica, digital y testimonial, con certificación del oficial de guardia diurna",
+                "Documental, radioscópica e instrumental, según protocolo de la policía científica"
             ],
             correctIndex: 0,
             source: "Manual MIRAF / Daypo Tiro - Verificación de Tres Vías",
@@ -168,12 +171,12 @@ window.quizBank = {
         {
             id: "os-m04",
             difficulty: "media",
-            question: "Según el Código de Convivencia de Santa Fe (Ley 10.703 / Ley 13.774), ¿cuál es el plazo para poner a disposición del Juez Comunitario a un contraventor demorado?",
+            question: "Según el Código de Convivencia de Santa Fe, ¿cuál es el plazo para poner a disposición del Juez Comunitario a un contraventor demorado?",
             options: [
-                "Inmediatamente, no pudiendo superar las 24 horas",
-                "Dentro de los 5 días hábiles",
-                "En el plazo de 48 horas sin excepción",
-                "A las 72 horas con informe médico"
+                "Inmediatamente, no pudiendo superar las 24 horas desde la demora efectiva",
+                "Dentro de las 48 horas hábiles contadas a partir de la comunicación formal",
+                "En el plazo de 72 horas corridas desde el labrado del acta contravencional",
+                "Dentro de los 5 días hábiles siguientes con informe médico de aptitud legal"
             ],
             correctIndex: 0,
             source: "Código de Convivencia de Santa Fe - Procedimiento Contravencional",
@@ -184,12 +187,12 @@ window.quizBank = {
             difficulty: "media",
             question: "En una persecución en flagrante delito, ¿qué faculta el CPP de Santa Fe a la policía respecto al ingreso a una morada privada sin orden de allanamiento?",
             options: [
-                "Faculta el ingreso inmediato únicamente si media persecución ininterrumpida de quien se presume cometió un delito grave y se introdujo en ella para ocultarse o evitar la detención (Art. 212 CPP)",
-                "Prohíbe terminantemente el ingreso en todos los casos hasta contar con orden escrita de un juez",
-                "Permite el ingreso en cualquier momento sin necesidad de justificar flagrancia ni persecución",
-                "Solo permite ingresar si el dueño de casa autoriza por escrito en presencia de dos escribanos"
+                "Permite el ingreso sin restricción si el operativo tiene al menos cuatro efectivos uniformados presentes",
+                "Faculta el ingreso si media persecución ininterrumpida y el sujeto se introdujo para ocultarse (Art. 212 CPP)",
+                "Autoriza el ingreso únicamente si el propietario autoriza verbalmente la entrada frente a un testigo civil",
+                "Prohíbe terminantemente el ingreso y obliga a establecer un cerco perimetral hasta la orden judicial"
             ],
-            correctIndex: 0,
+            correctIndex: 1,
             source: "CPP Santa Fe Ley 12.734, Art. 212: Allanamiento sin Orden en Flagrancia",
             explanation: "El Art. 212 del CPP autoriza el allanamiento sin orden judicial previa ante flagrancia y persecución ininterrumpida o auxilio por peligro inminente para la vida."
         },
@@ -198,10 +201,10 @@ window.quizBank = {
             difficulty: "media",
             question: "¿Qué es la 'Posición SUL' en el tiro táctico policial y cuál es su finalidad operativa?",
             options: [
-                "Una posición de descanso, traslado y retención donde el arma está pegada al pecho, codos cerrados y el cañón apunta a 90° hacia el suelo entre los pies",
-                "Una posición de tiro acrobático con una sola mano extendida",
-                "Una postura de puntería apoyando el arma sobre el hombro del compañero",
-                "Una posición en el suelo boca arriba para disparar hacia atrás"
+                "Una posición de retención donde el arma está pegada al pecho con codos cerrados y cañón al suelo",
+                "Una posición de tiro prono que se adopta para disparar desde el suelo con apoyo de codos en terreno",
+                "Una postura de puntería a dos manos donde los brazos se extienden completamente a la altura del pecho",
+                "Una técnica de desenfunde veloz donde el arma pasa del talabarte a la línea de fuego en un movimiento"
             ],
             correctIndex: 0,
             source: "Manual MIRAF / Daypo Conducción y Tiro - Posiciones Tácticas",
@@ -212,14 +215,14 @@ window.quizBank = {
         {
             id: "os-d01",
             difficulty: "dificil",
-            question: "Conforme al Art. 138 del Código Procesal Penal de Santa Fe, ¿en qué supuesto excepcional el acta de procedimiento policial puede ser válida sin la presencia de dos testigos civiles?",
+            question: "Conforme al Art. 138 del CPP de Santa Fe, ¿en qué supuesto excepcional el acta de procedimiento policial puede ser válida sin la presencia de dos testigos civiles?",
             options: [
-                "En ningún caso; la falta de dos testigos acarrea la nulidad insanable de todo lo actuado",
-                "En casos de extrema urgencia o imposibilidad fundada de hallar testigos por razones de peligro inminente o desolación del lugar, debiendo asentarse dicha circunstancia de modo expreso en el acta",
-                "Siempre que el procedimiento se realice en horario nocturno (entre las 22:00 y las 06:00 hs)",
-                "Cuando el personal preventor cuente con la anuencia verbal del Fiscal de turno"
+                "En casos de extrema urgencia o imposibilidad fundada de hallar testigos por peligro o desolación del lugar",
+                "En ningún caso; la falta de dos testigos acarrea siempre la nulidad insanable de todo lo actuado",
+                "Cuando el procedimiento se realice en horario nocturno comprendido entre las 22:00 y las 06:00 horas",
+                "Siempre que el personal preventor cuente con la anuencia verbal directa del Fiscal de turno del MPA"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "CPP Santa Fe Ley 12.734, Art. 138 in fine: Excepción de Testigos",
             explanation: "El Art. 138 in fine autoriza a prescindir de testigos solo por razones fundadas de urgencia o peligro grave, dejándolo expresamente asentado para evitar la nulidad."
         },
@@ -228,10 +231,10 @@ window.quizBank = {
             difficulty: "dificil",
             question: "Según el Art. 214 del CPP de Santa Fe, ¿cuál es el plazo legal perentorio que tiene la policía para comunicar al Fiscal del MPA la aprehensión de una persona?",
             options: [
-                "Inmediatamente y sin dilación alguna, no pudiendo exceder en ningún caso las seis (6) horas de materializada",
-                "Dentro de las doce (12) horas corridas posteriores a la detención",
-                "Dentro de las veinticuatro (24) horas hábiles siguientes",
-                "Al momento de remitir el sumario prevenicional concluido a las 72 horas"
+                "Inmediatamente y sin dilación, no pudiendo exceder en ningún caso las seis (6) horas",
+                "Dentro de las doce (12) horas corridas posteriores al momento de la detención efectiva",
+                "Dentro de las veinticuatro (24) horas hábiles siguientes contadas desde el acta labrada",
+                "Al momento de remitir el sumario prevenicional concluido dentro de las 72 horas corridas"
             ],
             correctIndex: 0,
             source: "CPP Santa Fe Ley 12.734, Art. 214: Plazo de Comunicación de Aprehensión",
@@ -240,12 +243,12 @@ window.quizBank = {
         {
             id: "os-d03",
             difficulty: "dificil",
-            question: "¿Qué rama de la balística estudia el comportamiento del proyectil dentro del arma desde que se presiona la cola del disparador hasta que la ojiva abandona la boca del cañón?",
+            question: "¿Qué rama de la balística estudia el comportamiento del proyectil dentro del arma desde la percusión hasta que abandona la boca del cañón?",
             options: [
-                "Balística Interior",
-                "Balística Exterior",
-                "Balística de Efectos",
-                "Balística Comparativa"
+                "Balística Interior, que analiza deflagración, presión de gases y estriado dentro del ánima",
+                "Balística Exterior, que analiza la trayectoria parabólica del proyectil fuera del cañón",
+                "Balística de Efectos (Terminal), que analiza el impacto del proyectil sobre el objetivo final",
+                "Balística Comparativa (Identificativa), que analiza la marca de rayas y campos del proyectil"
             ],
             correctIndex: 0,
             source: "Manual MIRAF / Daypo Tiro - Ramas de la Balística",
@@ -257,9 +260,9 @@ window.quizBank = {
             question: "De acuerdo con el Decreto 461/15, ¿cuál es el plazo de prescripción de la acción disciplinaria para las faltas leves y para las faltas graves respectivamente?",
             options: [
                 "60 días corridos para las faltas leves y dos (2) años para las faltas graves",
-                "30 días para leves y 6 meses para graves",
-                "1 año para leves y 5 años para graves",
-                "Las faltas disciplinarias policiales son imprescriptibles mientras el funcionario siga en actividad"
+                "30 días corridos para las faltas leves y seis (6) meses para las faltas graves",
+                "90 días hábiles para las faltas leves y un (1) año corrido para las graves",
+                "120 días corridos para las faltas leves y tres (3) años para las faltas graves"
             ],
             correctIndex: 0,
             source: "Decreto 461/15 - Régimen Disciplinario, Prescripción de Faltas",
@@ -270,10 +273,10 @@ window.quizBank = {
             difficulty: "dificil",
             question: "¿Cuál es el plazo de vencimiento legal de la Credencial de Legítimo Usuario (CLU) emitida por la ANMaC según la Ley Nacional 20.429?",
             options: [
-                "Cinco (5) años",
-                "Tres (3) años",
-                "Diez (10) años",
-                "No vence nunca para personal policial en actividad"
+                "Cinco (5) años corridos contados desde la fecha de emisión del documento",
+                "Tres (3) años corridos con renovación obligatoria y examen psicofísico",
+                "Diez (10) años corridos para personal de fuerzas de seguridad en actividad",
+                "Dos (2) años corridos con revalidación anual ante la autoridad de aplicación"
             ],
             correctIndex: 0,
             source: "Ley 20.429 / Manual MIRAF / Daypo Tiro",
@@ -291,10 +294,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "En el Manual ISEP para Subinspectores, ¿a qué alude el concepto de 'Pequeños Grandes Líderes'?",
             options: [
-                "Al personal que recién egresa de la escuela de oficiales",
-                "A los mandos medios y primeros supervisores de patrulla que con su ejemplo diario modelan la conducta y operatividad del personal subordinado",
-                "A los directores generales de las Unidades Regionales",
-                "A los cadetes en período de prácticas profesionalizantes"
+                "Al personal recién egresado de la escuela de oficiales en su primer destino operativo",
+                "A los mandos medios y primeros supervisores de patrulla que modelan la conducta del personal",
+                "A los directores generales de las Unidades Regionales que supervisan la estrategia global",
+                "A los instructores de la Escuela de Policía que forman a los futuros oficiales iniciales"
             ],
             correctIndex: 1,
             source: "Manual ISEP 2026 - Subinspector, Pág. 8: Pequeños Grandes Líderes",
@@ -305,12 +308,12 @@ window.quizBank = {
             difficulty: "facil",
             question: "En una intervención ante una persona con padecimiento mental en crisis en vía pública, ¿cuál es el objetivo primordial del accionar policial?",
             options: [
-                "Reducir físicamente al causante con armas de letalidad inmediata",
-                "Preservar la vida e integridad del causante y de terceros, conteniendo la situación y solicitando asistencia médica de salud mental (107 / SIES)",
-                "Trasladarlo inmediatamente a un calabozo de comisaría para interrogarlo",
-                "Llamar a los medios de comunicación para dejar constancia"
+                "Preservar la vida e integridad del causante y terceros, conteniendo y solicitando asistencia médica",
+                "Reducir físicamente al causante con técnicas de inmovilización y sujeción mecánica reglamentaria",
+                "Trasladarlo inmediatamente a la dependencia policial más cercana para confeccionar el informe",
+                "Documentar la situación mediante filmación y fotografía para elevar al juzgado competente"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Subinspector, Pág. 16: Crisis Subjetiva - Abordaje",
             explanation: "Bajo la Ley de Salud Mental y doctrina ISEP, la crisis subjetiva es una emergencia sanitaria que requiere contención, distancia y auxilio médico, no criminalización."
         },
@@ -319,10 +322,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Cuáles son los componentes de la tríada fundamental de la Seguridad de la Información (Tríada CID)?",
             options: [
-                "Confidencialidad, Integridad y Disponibilidad (más Autenticidad)",
-                "Control, Identificación y Defensa",
-                "Comando, Instrucción y Disciplina",
-                "Confianza, Información y Datos"
+                "Confidencialidad, Integridad y Disponibilidad (más Autenticidad como complemento)",
+                "Control de accesos, Identificación biométrica y Defensa perimetral de redes",
+                "Cifrado asimétrico, Inspección de paquetes y Detección de intrusiones en red",
+                "Contingencia operativa, Incidentes reportados y Datos clasificados por nivel"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Seguridad de la Información / Daypo Informática",
@@ -333,10 +336,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "En materia de redacción institucional policial, ¿cuáles son los tres procesos que se facilitan al utilizar un lenguaje llano y legible?",
             options: [
-                "Leer, comprender y memorizar el texto con rapidez",
-                "Archivar, destruir y ocultar antecedentes",
-                "Firmar, sellar y foliar mecánicamente",
-                "Imprimir, fotocopiar y escanear legajos"
+                "Leer, comprender y memorizar el texto con rapidez y exactitud por cualquier destinatario",
+                "Archivar, clasificar y recuperar expedientes de acuerdo a la normativa de mesa de entradas",
+                "Firmar, sellar y foliar mecánicamente cada foja del actuado conforme a la reglamentación",
+                "Imprimir, digitalizar y remitir los legajos al archivo histórico de la Unidad Regional"
             ],
             correctIndex: 0,
             source: "Manual ISEP - Redacción Institucional / Daypo Comunicación",
@@ -349,12 +352,12 @@ window.quizBank = {
             difficulty: "media",
             question: "En un siniestro vial con Lesiones Culposas en Accidentes de Tránsito (L.C.A.T.), ¿qué elemento técnico debe confeccionar el Subinspector preventor?",
             options: [
-                "Una sentencia judicial provisoria de culpabilidad",
-                "La inspección ocular detallada y el croquis planimétrico ilustrativo con medidas, sentido de circulación y punto de impacto estimado",
-                "Una cotización de los repuestos de los vehículos dañados",
-                "La suspensión preventiva del carnet de conducir de ambos involucrados"
+                "La inspección ocular detallada y el croquis planimétrico con medidas, sentido y punto de impacto",
+                "La sentencia judicial provisoria de culpabilidad indicando al conductor responsable del siniestro",
+                "La cotización pericial de los daños materiales en cada vehículo involucrado en el hecho vial",
+                "La suspensión cautelar del carnet de conducir de todos los conductores involucrados en el hecho"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Subinspector, Pág. 25: Procedimientos L.C.A.T.",
             explanation: "En hechos de L.C.A.T. es deber del preventor labrar la inspección ocular y el croquis acotado para elevar a fiscalía y peritos viales."
         },
@@ -363,12 +366,12 @@ window.quizBank = {
             difficulty: "media",
             question: "¿Qué recaudo legal es obligatorio al intervenir en la demora de un menor de 16 años (no punible penalmente)?",
             options: [
-                "Alojarlo en el penal de mayores hasta que el juez resuelva",
-                "No esposarlo salvo riesgo inminente, examinarlo médicamente, no alojarlo en celdas de detención y dar inmediata intervención a la Secretaría de Niñez (Ley 12.967)",
-                "Tomarle declaración indagatoria en la oficina de guardia",
-                "Publicar sus datos personales en el parte de prensa para ubicar a sus padres"
+                "No esposarlo salvo riesgo inminente, examinarlo médicamente y dar intervención a la Secretaría de Niñez",
+                "Alojarlo transitoriamente en la celda de contraventores de la comisaría hasta la audiencia del juez",
+                "Tomarle declaración indagatoria formal en la oficina de guardia con presencia de un letrado público",
+                "Registrar sus datos biométricos en el sistema CODIS y remitirlos al Registro Provincial de Menores"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Subinspector, Pág. 18: Procedimiento con Menores",
             explanation: "La ley de niñez y el manual ISEP prohíben alojar menores en calabozos, exigen certificado médico y articulación con los organismos de niñez locales."
         },
@@ -377,10 +380,10 @@ window.quizBank = {
             difficulty: "media",
             question: "¿Cuál es la diferencia principal entre 'Seguridad Informática' y 'Seguridad de la Información'?",
             options: [
-                "La seguridad informática protege exclusivamente computadoras, redes y software frente a ciberataques; la seguridad de la información protege los datos críticos, procesos, personas y documentos físicos y digitales",
-                "Son exactamente lo mismo sin ninguna distinción técnica",
-                "La seguridad informática solo protege documentos impresos en papel",
-                "La seguridad de la información es tarea exclusiva de la policía científica"
+                "La seguridad informática protege computadoras y redes; la de la información protege datos, procesos y personas",
+                "La seguridad informática abarca exclusivamente la protección de documentos impresos en soporte papel",
+                "Son conceptos idénticos sin ninguna distinción técnica ni operativa en la doctrina contemporánea",
+                "La seguridad de la información se ocupa solamente de la encriptación de comunicaciones por radio policial"
             ],
             correctIndex: 0,
             source: "Manual ISEP - Seguridad de la Información / Daypo Informática",
@@ -389,12 +392,12 @@ window.quizBank = {
         {
             id: "si-m04",
             difficulty: "media",
-            question: "En la resolución policial de conflictos interpersonales, ¿en base a qué enfoque se obtienen los acuerdos más sostenibles y pacíficos según la doctrina de comunicación?",
+            question: "En la resolución policial de conflictos interpersonales, ¿en base a qué enfoque se obtienen los acuerdos más sostenibles según la doctrina de comunicación?",
             options: [
-                "Gestionando y negociando en base a los Intereses y necesidades reales de las partes",
-                "Imponiendo la solución exclusivamente por la fuerza y el poder de coerción",
-                "Ignorando el conflicto y dejando que los involucrados se retiren",
-                "Amenazando con arresto inmediato a ambas partes"
+                "Gestionando y negociando en base a los intereses y necesidades reales de las partes involucradas",
+                "Imponiendo la solución exclusivamente mediante el ejercicio del poder legal de coerción estatal",
+                "Aplicando el protocolo de mediación formal obligatoria regulado por el Código Procesal Civil vigente",
+                "Derivando el conflicto íntegramente al juzgado comunitario sin intervención policial de ninguna clase"
             ],
             correctIndex: 0,
             source: "Manual ISEP - Gestión del Conflicto / Daypo Comunicación",
@@ -405,26 +408,26 @@ window.quizBank = {
         {
             id: "si-d01",
             difficulty: "dificil",
-            question: "Con la implementación del Juicio por Jurados en la Provincia de Santa Fe (Ley 14.258), ¿cuál es el rol y exigencia probatoria sobre el funcionario policial que comparece como testigo en el debate?",
+            question: "Con la implementación del Juicio por Jurados en Santa Fe (Ley 14.258), ¿cuál es el rol del funcionario policial que comparece como testigo en el debate?",
             options: [
-                "Puede leer íntegramente las actas policiales durante su testimonio sin responder preguntas de las partes",
-                "Debe declarar oralmente con base en su percepción directa y memoria, pudiendo utilizar las actas únicamente para refrescar memoria o superar contradicciones a solicitud fundada de las partes",
-                "Su testimonio es irrelevante porque el jurado civil solo juzga pruebas periciales de laboratorio",
-                "El policía declara a puertas cerradas sin la presencia de los doce ciudadanos jurados"
+                "Debe declarar oralmente con base en su percepción directa, usando actas solo para refrescar memoria",
+                "Puede leer íntegramente las actas policiales durante su testimonio sin responder preguntas cruzadas",
+                "Su testimonio oral queda excluido porque el jurado civil solo valora pruebas periciales de laboratorio",
+                "Declara por escrito mediante informe jurado remitido al presidente del tribunal antes de la audiencia"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Subinspector, Pág. 159: Juicio por Jurados en Santa Fe (Ley 14.258)",
             explanation: "En el sistema de Juicio por Jurados rige la oralidad pura; las actas no ingresan por lectura directa sino a través del testimonio oral del efectivo policial."
         },
         {
             id: "si-d02",
             difficulty: "dificil",
-            question: "¿Cuál es el procedimiento inicial estándar de cinco pasos que debe seguir el personal policial ante un incidente de seguridad de la información en una dependencia?",
+            question: "¿Cuál es el procedimiento inicial estándar de cinco pasos ante un incidente de seguridad de la información en una dependencia policial?",
             options: [
-                "1. Identificar el incidente, 2. Aislar el equipo/sistema, 3. Notificar a las autoridades competentes, 4. Evitar acciones que comprometan la evidencia y 5. Registrar el incidente",
-                "1. Apagar y formatear el disco duro inmediatamente, 2. No avisar a nadie, 3. Esperar una semana",
-                "1. Publicar el incidente en redes sociales para alertar a la población, 2. Denunciar al técnico",
-                "1. Desconectar la luz de toda la comisaría y quemar los libros de guardia"
+                "1. Identificar, 2. Aislar el sistema, 3. Notificar autoridades, 4. No comprometer evidencia, 5. Registrar",
+                "1. Apagar todos los equipos, 2. Formatear discos afectados, 3. Reinstalar sistema operativo, 4. Notificar, 5. Archivar",
+                "1. Publicar alerta interna, 2. Cambiar contraseñas globales, 3. Restaurar backup, 4. Auditar red, 5. Sancionar",
+                "1. Desconectar internet, 2. Trasladar equipos a armería, 3. Solicitar peritaje externo, 4. Labrar acta, 5. Informar"
             ],
             correctIndex: 0,
             source: "Manual ISEP - Protocolo ante Incidentes / Daypo Informática",
@@ -433,14 +436,14 @@ window.quizBank = {
         {
             id: "si-d03",
             difficulty: "dificil",
-            question: "En una requisa vehicular sin orden judicial en la vía pública (Art. 213 CPP Santa Fe), ¿qué requisito de legalidad sustantiva exige la jurisprudencia para que el secuestro no sea declarado nulo?",
+            question: "En una requisa vehicular sin orden judicial en la vía pública (Art. 213 CPP Santa Fe), ¿qué requisito sustantivo exige la jurisprudencia para su validez?",
             options: [
-                "Que el conductor tenga antecedentes penales computables en el sistema Cóndor",
-                "La existencia de circunstancias previas objetivas y concordantes (motivo fundado) que justifiquen la presunción de que en el rodado se transportan efectos de un delito, debidamente exteriorizadas en el acta",
-                "Que el operativo cuente con la presencia física in situ del Fiscal en turno",
-                "Que el vehículo sea de procedencia extranjera o de otra provincia"
+                "La existencia de circunstancias previas objetivas que justifiquen la presunción de transporte delictivo",
+                "Que el conductor presente antecedentes penales computables registrados en el sistema informático policial",
+                "Que el operativo cuente con la presencia física in situ del Fiscal de turno del Ministerio Público",
+                "Que el vehículo tenga las chapas patentes visiblemente adulteradas o la verificación técnica vencida"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "CPP Santa Fe Ley 12.734, Art. 213: Requisa Vehicular sin Orden",
             explanation: "El Art. 213 exige motivos bastantes objetivos. La mera sospecha subjetiva sin exteriorización fáctica en el acta acarrea la nulidad del secuestro en juicio."
         }
@@ -456,10 +459,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Qué establece la Ley Provincial N° 14.239 sancionada en la Provincia de Santa Fe?",
             options: [
-                "La desfederalización parcial de la competencia penal en materia de estupefacientes (microtráfico / narcomenudeo)",
-                "La creación de una nueva Unidad Regional en el norte provincial",
-                "Un nuevo estatuto de remuneraciones y adicionales",
-                "La unificación de las comisarías con los juzgados comunales"
+                "La desfederalización parcial de la competencia penal en materia de narcomenudeo",
+                "La creación de una nueva Unidad Regional de policía en el norte de la provincia",
+                "Un nuevo régimen de remuneraciones y adicionales para el personal de seguridad",
+                "La reforma integral del Código Procesal Penal de la Provincia de Santa Fe"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Inspector, Pág. 9: Ley N° 14.239 de Microtráfico",
@@ -470,12 +473,12 @@ window.quizBank = {
             difficulty: "facil",
             question: "En la pistola reglamentaria Bersa Thunder / TPR 9mm, ¿cuál es la función de la palanca de desmartillado (decocker)?",
             options: [
-                "Aumentar la cadencia de disparo a ráfaga",
-                "Hacer descender o abatir el martillo de forma totalmente segura sin percutir el cartucho alojado en la recámara",
-                "Trabar la corredera cuando se agotan los cartuchos del cargador",
-                "Liberar el cargador vacío de la empuñadura"
+                "Hacer descender el martillo de forma segura sin percutir el cartucho en recámara",
+                "Trabar la corredera automáticamente cuando se agota el último cartucho del cargador",
+                "Liberar el cargador vacío de la empuñadura para su recambio por uno completo",
+                "Activar el sistema de puntería nocturna tritio incorporado en la corredera del arma"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 / Daypo Tiro - Palanca Decocker Bersa",
             explanation: "La palanca decocker desactiva el martillo de forma mecánica y segura, posicionando el arma en doble acción sin riesgo de disparo accidental."
         },
@@ -484,10 +487,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Cómo distingue la doctrina del ISEP los conceptos rectores de Mando, Comando y Conducción?",
             options: [
-                "Mando es la autoridad moral (persuasión y respeto); Comando es la autoridad legal (regulada por leyes según grado y cargo); Conducción es la autoridad operacional (arte y ciencia de aplicar el comando a un problema policial)",
-                "Los tres términos son exactamente lo mismo sin distinción legal",
-                "Mando solo lo tienen los cabos; Comando los comisarios y Conducción los choferes de patrullero",
-                "Mando es la fuerza física; Comando es el armamento y Conducción es el traslado de detenidos"
+                "Mando es autoridad moral; Comando es autoridad legal por grado; Conducción es el arte de aplicar ambos",
+                "Mando es la fuerza de la ley; Comando es la capacidad de combate; Conducción es la logística operativa",
+                "Mando es exclusivo de oficiales superiores; Comando de subalternos; Conducción de agentes civiles",
+                "Mando es la capacidad táctica; Comando es la planificación estratégica; Conducción es la formación policial"
             ],
             correctIndex: 0,
             source: "Manual de Conducción Policial ISEP / Daypo Conducción 151",
@@ -498,14 +501,14 @@ window.quizBank = {
         {
             id: "is-m01",
             difficulty: "media",
-            question: "En el marco de la Ley 14.239, ¿cuál es la diferencia técnica entre la tenencia simple (Art. 14 1° P. Ley 23.737) y la tenencia con fines de comercialización (Art. 5 inc. C)?",
+            question: "En el marco de la Ley 14.239, ¿cuál es la diferencia técnica entre la tenencia simple (Art. 14) y la tenencia con fines de comercialización (Art. 5 inc. C)?",
             options: [
-                "No hay diferencia procesal; ambas tienen idéntica escala penal",
-                "La tenencia simple no exige acreditar el destino comercial, mientras que en el Art. 5 inc. C deben concurrir indicios unívocos de venta (fraccionamiento, balanza, dinero en baja denominación, envoltorios)",
-                "La tenencia simple solo se investiga en la Justicia Federal y el Art. 5 en la Justicia Provincial",
-                "La tenencia con fines de comercialización solo se configura si la sustancia supera los 10 kilogramos"
+                "La tenencia simple no exige acreditar destino comercial; el Art. 5 inc. C requiere indicios de venta",
+                "La tenencia simple solo se investiga en la Justicia Federal; el Art. 5 inc. C en la Justicia Provincial",
+                "No hay diferencia procesal entre ambas figuras ya que tienen idéntica escala penal establecida por ley",
+                "La tenencia con fines de comercialización solo se configura si la sustancia supera los 5 kilogramos"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Inspector, Pág. 12-14: Tipos Penales de Microtráfico",
             explanation: "Para imputar el Art. 5 inc. C se requieren elementos objetivos que prueben la venta (fraccionamiento en dosis, balanzas, dinero menudo, anotaciones)."
         },
@@ -514,10 +517,10 @@ window.quizBank = {
             difficulty: "media",
             question: "En la estructura de las Unidades de Orden Público de Santa Fe, ¿cuál es la diferencia funcional entre una Comisaría y un Destacamento?",
             options: [
-                "La Comisaría tiene funciones plenas de policía de seguridad y judicial dentro de su jurisdicción; el Destacamento depende de una comisaría y ejecuta funciones de seguridad y solo excepcionalmente policiales judiciales",
-                "El Destacamento tiene mayor dotación de personal que una Comisaría",
-                "La Comisaría solo atiende faltas de tránsito y el Destacamento delitos graves",
-                "No existe diferencia, ambas tienen igual jerarquía de comando"
+                "La Comisaría tiene funciones plenas de policía de seguridad y judicial; el Destacamento funciones acotadas",
+                "El Destacamento tiene mayor dotación de personal y autonomía operativa que una Comisaría jurisdiccional",
+                "La Comisaría solo atiende faltas contravencionales de tránsito; el Destacamento investiga delitos graves",
+                "No existe diferencia funcional entre ambas dependencias ya que tienen igual jerarquía de comando"
             ],
             correctIndex: 0,
             source: "Manual de Conducción Policial ISEP / Daypo Conducción 151",
@@ -528,10 +531,10 @@ window.quizBank = {
             difficulty: "media",
             question: "¿Cuáles son las tres partes principales en que se divide formalmente una Orden de Operaciones (OO)?",
             options: [
-                "Encabezamiento (jefatura, fecha, clave), Cuerpo (Situación, Misión, Ejecución, SPAC, Comando/Comunicaciones) y Final (instrucciones de acuse, anexos y firmas)",
-                "Introducción, Desarrollo y Conclusión sin firmas",
-                "Carátula, Índice y Bibliografía",
-                "Parte diario, Nómina de personal y Planilla de combustible"
+                "Encabezamiento, Cuerpo (Situación, Misión, Ejecución, SPAC, Comando) y Final con firmas y anexos",
+                "Introducción operativa, Desarrollo táctico pormenorizado y Conclusión con evaluación de resultados",
+                "Carátula institucional, Índice numerado de contenidos y Bibliografía normativa de referencia",
+                "Parte diario de novedades, Nómina de personal afectado y Planilla de combustible y logística"
             ],
             correctIndex: 0,
             source: "Manual de Conducción Policial ISEP / Daypo Conducción 151",
@@ -542,12 +545,12 @@ window.quizBank = {
         {
             id: "is-d01",
             difficulty: "dificil",
-            question: "Bajo la Ley 14.239, si en un procedimiento policial de narcomenudeo se descubren indicios de una organización narcocriminal transnacional o conexidad con lavado de activos federal, ¿qué principio procesal rige?",
+            question: "Bajo la Ley 14.239, si en un procedimiento de narcomenudeo se descubren indicios de una organización narcocriminal transnacional, ¿qué principio procesal rige?",
             options: [
-                "Principio de Primacía Federal: el Fiscal del MPA debe declinar la competencia y remitir las actuaciones y secuestros al Juzgado Federal correspondiente",
-                "Principio de Inmunidad Provincial: la causa debe permanecer obligatoriamente en los tribunales provinciales",
-                "Principio de Doble Juzgamiento: se instruyen dos causas paralelas por el mismo hecho de forma simultánea",
-                "La causa se archiva por incompetencia manifiesta de la policía de seguridad"
+                "Principio de Primacía Federal: el Fiscal debe declinar y remitir al Juzgado Federal competente",
+                "Principio de Inmunidad Provincial: la causa permanece obligatoriamente en tribunales de Santa Fe",
+                "Principio de Acumulación: se instruyen dos causas paralelas, una federal y otra provincial simultánea",
+                "Principio de Prevención: la jurisdicción corresponde al tribunal que primero tomó conocimiento del hecho"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Inspector, Pág. 11: Principio de Primacía Federal",
@@ -558,26 +561,26 @@ window.quizBank = {
             difficulty: "dificil",
             question: "¿En qué consiste el 'Seguro Integral de Funcionamiento' de las pistolas semiautomáticas reglamentarias de la Policía de Santa Fe?",
             options: [
-                "Un seguro manual externo que debe colocarse con la mano inhábil",
-                "Un conjunto de sistemas pasivos internos (seguro de aguja percutora, seguro de caída y desconector de corredera) que impiden el disparo a menos que la cola del disparador sea accionada voluntariamente",
-                "Una funda de plástico rígido con nivel de retención tres",
-                "Un dispositivo electrónico que inhabilita el arma si se aleja del uniforme"
+                "Un conjunto de sistemas pasivos internos que impiden el disparo sin acción voluntaria del disparador",
+                "Un seguro manual externo bilateral ubicado en la corredera que se opera con la mano inhábil",
+                "Una funda de retención nivel III con doble sistema de traba que envuelve completamente el arma",
+                "Un dispositivo electrónico RFID integrado en la empuñadura que inhabilita el arma a distancia"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Inspector, Pág. 265: Seguro Integral de Funcionamiento",
             explanation: "El seguro pasivo bloquea mecánicamente la aguja percutora en todo momento, impidiendo disparos involuntarios por caídas o golpes."
         },
         {
             id: "is-d03",
             difficulty: "dificil",
-            question: "Respecto a la requisa y secuestro de teléfonos celulares en allanamientos de microtráfico, ¿qué recaudo tecnológico de preservación forense exige el protocolo para evitar el borrado remoto de datos?",
+            question: "En el secuestro de teléfonos celulares en allanamientos de microtráfico, ¿qué recaudo forense evita el borrado remoto de datos?",
             options: [
-                "Dejar los teléfonos encendidos y conectados a la red Wi-Fi de la comisaría",
-                "Colocar inmediatamente los dispositivos en Modo Avión o dentro de bolsas de Faraday (bloqueador de señal electromagnética) y registrar el estado de bloqueo",
-                "Intentar adivinar el patrón de desbloqueo hasta 10 veces en el lugar",
-                "Remitir los equipos por correo postal común sin precinto de seguridad"
+                "Colocar los dispositivos en Modo Avión o dentro de bolsas de Faraday y registrar su estado",
+                "Dejar los teléfonos encendidos y conectados a la red Wi-Fi de la dependencia policial",
+                "Intentar desbloquear los equipos con hasta diez combinaciones posibles en el mismo lugar",
+                "Remitir los equipos por correo certificado al laboratorio forense sin precinto de cadena"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Inspector, Evidencia Digital en Delitos Complejos",
             explanation: "El aislamiento electromagnético (bolsa de Faraday o modo avión) impide la recepción de señales de red que permitan a terceros borrar remotamente los mensajes y contactos."
         }
@@ -593,10 +596,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "Según el Manual ISEP para Subcomisarios, ¿cuál es la diferencia entre 'Poder de Policía' y 'Policía'?",
             options: [
-                "El Poder de Policía es la potestad legislativa de regular derechos para el bien común; la Policía es el órgano ejecutivo que aplica dicha regulación en el terreno",
-                "Ambos términos son sinónimos absolutos sin distinción jurídica",
-                "Poder de Policía es el armamento y Policía son los uniformados",
-                "Poder de Policía solo lo tiene la Policía Federal Argentina"
+                "Poder de Policía es la potestad legislativa de regular derechos; Policía es el órgano que la ejecuta",
+                "Poder de Policía es la capacidad de detención; Policía es la institución que administra las cárceles",
+                "Ambos términos son sinónimos jurídicos sin distinción conceptual en la doctrina constitucional",
+                "Poder de Policía es la fuerza física coactiva; Policía es la estructura administrativa del Ministerio"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Subcomisario, Pág. 19: Policía y Poder de Policía",
@@ -607,10 +610,10 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Qué norma provincial regula el Régimen Disciplinario Policial en la Provincia de Santa Fe?",
             options: [
-                "El Decreto Provincial N° 461/15",
-                "El Código de Comercio",
-                "La Ley de Contrato de Trabajo N° 20.744",
-                "El Reglamento General de Tiro Federal"
+                "El Decreto Provincial N° 461/15 sobre faltas, sanciones y procedimiento sumarial",
+                "La Ley Provincial N° 12.521 sobre el Escalafón y Carrera del Personal Policial",
+                "El Código de Convivencia Provincial N° 10.703 sobre faltas contravencionales civiles",
+                "La Ley Provincial N° 14.239 sobre Narcomenudeo y Desfederalización de Estupefacientes"
             ],
             correctIndex: 0,
             source: "Decreto Provincial 461/15 - Régimen Disciplinario Policial de Santa Fe",
@@ -621,12 +624,12 @@ window.quizBank = {
         {
             id: "sc-m01",
             difficulty: "media",
-            question: "En la relación profesional del personal superior con la prensa y medios de comunicación, ¿cuál es la pauta rectora sobre los comentarios 'Off the Record'?",
+            question: "En la relación profesional del personal superior con la prensa, ¿cuál es la pauta rectora sobre los comentarios 'Off the Record'?",
             options: [
-                "Evitar terminantemente los comentarios 'Off the Record', mantener una vocería oficial única y no discriminar a ningún medio de prensa",
-                "Filtrar datos extraoficiales a periodistas amigos para obtener mejor cobertura",
-                "Dar nombres de víctimas fatales antes de que sean notificadas sus familias",
-                "Permitir que los cronistas ingresen a la zona de exclusión de peritajes"
+                "Evitar terminantemente los comentarios 'Off the Record' y mantener una vocería oficial única",
+                "Utilizar el 'Off the Record' estratégicamente para generar agenda favorable en medios aliados",
+                "Permitir comentarios extraoficiales solamente si el periodista firma un acuerdo de confidencialidad",
+                "Derivar todas las consultas periodísticas sin excepción al jefe de prensa del Ministerio provincial"
             ],
             correctIndex: 0,
             source: "Manual de Comunicación Institucional ISEP / Daypo Comunicación",
@@ -635,28 +638,28 @@ window.quizBank = {
         {
             id: "sc-m02",
             difficulty: "media",
-            question: "En el marco del Decreto 461/15, ¿cuáles son las sanciones expulsivas que pueden aplicarse al personal policial tras la instrucción de un sumario administrativo?",
+            question: "En el marco del Decreto 461/15, ¿cuáles son las sanciones expulsivas que pueden aplicarse al personal policial?",
             options: [
-                "Apercibimiento y llamada de atención",
-                "Cesantía y Exoneración",
-                "Suspensión de empleo por 5 días",
-                "Pase a comisión de servicio"
+                "Cesantía y Exoneración, que extinguen la relación de empleo policial de forma definitiva",
+                "Suspensión de empleo por 90 días y Retiro obligatorio con pérdida de la antigüedad",
+                "Apercibimiento público con anotación en legajo y llamada de atención por acta interna",
+                "Pase a comisión de servicio y traslado disciplinario a otra Unidad Regional provincial"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Decreto 461/15, Art. 12 y conc.: Sanciones Expulsivas",
-            explanation: "La cesantía y la exoneración son las dos sanciones de máxima gravedad que extinguen la relación de empleo policial, reservándose la exoneración para las causales más afrentosas con pérdida de beneficios."
+            explanation: "La cesantía y la exoneración son las dos sanciones de máxima gravedad que extinguen la relación de empleo policial."
         },
 
         // --- NIVEL DIFÍCIL (NIVEL CONCURSO ISEP) ---
         {
             id: "sc-d01",
             difficulty: "dificil",
-            question: "Conforme a la Ley 12.521 y el Decreto 461/15, ¿cuál es el límite de días de arresto que puede aplicar por sí mismo un Jefe de Unidad Regional a un oficial subordinado sin requerir elevación a Jefatura de Provincia?",
+            question: "Conforme a la Ley 12.521 y el Decreto 461/15, ¿cuál es el límite de días de arresto que puede aplicar un Jefe de Unidad Regional sin elevación a Jefatura de Provincia?",
             options: [
-                "Hasta treinta (30) días de arresto",
-                "Hasta sesenta (60) días de arresto",
-                "Hasta diez (10) días de arresto exclusivamente",
-                "Solo tiene facultades de apercibimiento verbal"
+                "Hasta treinta (30) días de arresto dentro del ámbito de su jurisdicción territorial",
+                "Hasta sesenta (60) días de arresto con informe fundado al Director General de Policía",
+                "Hasta diez (10) días de arresto exclusivamente para personal subalterno y de ejecución",
+                "Hasta quince (15) días de arresto con comunicación simultánea al Ministerio de Seguridad"
             ],
             correctIndex: 0,
             source: "Decreto 461/15 - Competencia Sancionatoria de Jefaturas de Unidad Regional",
@@ -665,28 +668,28 @@ window.quizBank = {
         {
             id: "sc-d02",
             difficulty: "dificil",
-            question: "En el diseño de una política pública de seguridad preventiva por cuadrículas, ¿qué elemento metodológico distingue a un objetivo SMART según la doctrina ISEP?",
+            question: "En el diseño de una política pública de seguridad preventiva por cuadrículas, ¿qué elemento metodológico distingue a un objetivo SMART?",
             options: [
-                "Que sea un deseo genérico de reducción del delito a largo plazo",
-                "Que sea Específico, Medible, Alcanzable, Relevante y con un Plazo temporal determinado con indicadores de gestión verificables",
-                "Que cuente con presupuesto ilimitado aprobado por decreto",
-                "Que sea secreto y no pueda ser auditado por organismos civiles"
+                "Que sea Específico, Medible, Alcanzable, Relevante y con un Plazo temporal determinado",
+                "Que sea Sistemático, Modular, Auditable, Replicable y Trazable en cada etapa del proceso",
+                "Que sea Social, Multidimensional, Adaptativo, Resiliente y Transversal a todas las áreas",
+                "Que sea Sintético, Metódico, Articulado, Racionalizado y Técnicamente fundamentado en datos"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Subcomisario, Pág. 12: Elementos de Políticas Públicas",
             explanation: "Los objetivos SMART permiten evaluar el impacto real y la reducción del delito mediante indicadores métricos y plazos de control estricto."
         },
         {
             id: "sc-d03",
             difficulty: "dificil",
-            question: "¿Bajo qué causal taxativa contemplada en el Decreto 461/15 se configura la sanción de exoneración directa sin posibilidad de reintegro futuro a la fuerza?",
+            question: "¿Bajo qué causal del Decreto 461/15 se configura la sanción de exoneración directa sin posibilidad de reintegro a la fuerza?",
             options: [
-                "La acumulación de tres llegadas tarde injustificadas en el año",
-                "La condena judicial penal firme por delitos cometidos en el ejercicio de la función pública o que afecten gravemente el decoro y la ética institucional",
-                "El extravío culposo de un chaleco balístico durante una persecución",
-                "La solicitud voluntaria de pase a disponibilidad por razones particulares"
+                "La condena penal firme por delitos en ejercicio de la función o que afecten gravemente la ética institucional",
+                "La acumulación de tres sanciones de arresto por faltas leves durante el mismo año calendario",
+                "El extravío culposo de material bélico durante una persecución vehicular de alta velocidad",
+                "La solicitud voluntaria de pase a disponibilidad por razones particulares de índole familiar"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Decreto 461/15 - Causales de Exoneración Policial",
             explanation: "La exoneración es la máxima sanción moral y jurídica, derivada de condenas penales dolosas que destruyen de raíz la idoneidad moral exigible a un policía."
         }
@@ -703,9 +706,9 @@ window.quizBank = {
             question: "¿Qué instrumento deben presentar obligatoriamente los aspirantes al Agrupamiento Supervisión y Dirección en el concurso ISEP?",
             options: [
                 "Un Proyecto de Gestión Institucional aplicable a la seguridad pública provincial",
-                "Únicamente una carta de recomendación política",
-                "Una declaración jurada de bienes sin examen escrito",
-                "Un examen psicofísico básico sin defensa de tesis"
+                "Una carta de recomendación formal avalada por tres oficiales superiores en actividad",
+                "Una declaración jurada de bienes patrimoniales sin examen escrito ni defensa oral",
+                "Un examen psicofísico integral básico sin presentación de proyecto ni defensa de tesis"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Guía de Proyectos de Gestión Institucional",
@@ -716,12 +719,12 @@ window.quizBank = {
             difficulty: "facil",
             question: "¿Qué significa el concepto de 'Gobernanza de la Seguridad' en la formación de la alta oficialidad del ISEP?",
             options: [
-                "Que solo la policía armada tiene voz y voto en la seguridad comunitaria",
-                "La articulación estratégica e interinstitucional entre el poder político, la policía, la justicia y la comunidad ciudadana",
-                "El control exclusivo de las cárceles por parte de oficiales superiores",
-                "La privatización total de los servicios policiales adicionales"
+                "La articulación estratégica entre el poder político, la policía, la justicia y la comunidad ciudadana",
+                "El control exclusivo de los centros penitenciarios provinciales por parte de la oficialidad superior",
+                "La privatización total de los servicios de policía adicional bajo supervisión del sector empresarial",
+                "La centralización de todas las decisiones de seguridad en una única autoridad policial provincial"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Alta Dirección: Gobernanza Democrática",
             explanation: "La gobernanza moderna implica la coproducción de la seguridad entre Estado, fuerzas policiales y ciudadanía bajo control civil y democrático."
         },
@@ -732,10 +735,10 @@ window.quizBank = {
             difficulty: "media",
             question: "¿Cuál es el rol institucional del Comisario Supervisor en la articulación con el Ministerio de Justicia y Seguridad?",
             options: [
-                "Coordinar la implementación táctica de las políticas públicas y directivas ministeriales de seguridad en el territorio asignado",
-                "Manejar el presupuesto ministerial de forma independiente y autónoma",
-                "Redactar las leyes de presupuesto provincial en la Legislatura",
-                "Subrogar a los jueces de primera instancia en causas penales"
+                "Coordinar la implementación táctica de las políticas públicas y directivas ministeriales en el territorio",
+                "Manejar el presupuesto ministerial de forma independiente, autónoma y sin rendición de cuentas",
+                "Redactar los proyectos de ley de presupuesto provincial para su tratamiento en la Legislatura",
+                "Subrogar a los jueces de primera instancia en causas penales complejas con múltiples imputados"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Alta Dirección y Conducción Estratégica",
@@ -746,10 +749,10 @@ window.quizBank = {
             difficulty: "media",
             question: "En la planificación presupuestaria de una Unidad Regional, ¿qué concepto financiero abarca los rubros de mantenimiento de flota, racionamiento y combustible?",
             options: [
-                "Gastos de Funcionamiento Operativo y Bienes de Consumo",
-                "Sueldos básicos de la plana mayor",
-                "Fondos reservados del Poder Judicial",
-                "Ingresos brutos comunales"
+                "Gastos de Funcionamiento Operativo y Bienes de Consumo para la operatividad cotidiana",
+                "Sueldos básicos y complementarios de la plana mayor y personal subalterno de la unidad",
+                "Fondos reservados del Poder Judicial asignados mediante resolución de la Corte Suprema",
+                "Ingresos brutos comunales recaudados por la municipalidad para convenios de seguridad"
             ],
             correctIndex: 0,
             source: "Manual ISEP 2026 - Gestión de Recursos Públicos en Unidades Regionales",
@@ -760,42 +763,42 @@ window.quizBank = {
         {
             id: "cs-d01",
             difficulty: "dificil",
-            question: "En la evaluación de un Proyecto de Gestión Institucional para ascenso a Director de Policía, ¿qué componente de la matriz de marco lógico determina la viabilidad operativa y la medición de resultados?",
+            question: "En un Proyecto de Gestión Institucional para ascenso a Director de Policía, ¿qué componente del marco lógico determina la viabilidad y medición de resultados?",
             options: [
-                "El cronograma de licencias de la plana mayor",
-                "Los Indicadores Clave de Desempeño (KPIs), las fuentes de verificación objetivas y la gestión de riesgos y supuestos críticos",
-                "El monto global de horas de policía adicional asignadas",
-                "La cantidad de móviles fuera de servicio en el taller de la Unidad Regional"
+                "Los Indicadores Clave de Desempeño (KPIs), fuentes de verificación y gestión de riesgos críticos",
+                "El cronograma de licencias anuales de la plana mayor y las dotaciones mínimas de cada guardia",
+                "El monto global de horas de policía adicional asignadas a los objetivos protegidos en el trimestre",
+                "La cantidad de móviles fuera de servicio registrados en el taller mecánico de la Unidad Regional"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Guía Elaboración Proyectos Agrupamiento Dirección",
             explanation: "Los proyectos de nivel Dirección se evalúan mediante KPIs medibles, fuentes de verificación auditables y análisis de supuestos y riesgos operacionales."
         },
         {
             id: "cs-d02",
             difficulty: "dificil",
-            question: "Ante una auditoría del Tribunal de Cuentas o del Ministerio de Seguridad por fondos de funcionamiento y adicionales, ¿cuál es la responsabilidad patrimonial del Jefe de Unidad Regional según la ley de administración pública provincial?",
+            question: "Ante una auditoría del Tribunal de Cuentas por fondos de funcionamiento, ¿cuál es la responsabilidad patrimonial del Jefe de Unidad Regional?",
             options: [
-                "No posee responsabilidad patrimonial porque el personal policial está exento de rendiciones",
-                "Responsabilidad solidaria y directa por la legalidad, comprobantes respaldatorios y correcta afectación de los fondos públicos asignados a su comando",
-                "La responsabilidad recae exclusivamente en el habilitado de la administración contable",
-                "Solo responde patrimonialmente si media condena penal firme por peculado"
+                "Responsabilidad solidaria y directa por la legalidad y correcta afectación de los fondos asignados",
+                "No posee responsabilidad patrimonial porque el personal policial está exento de rendiciones contables",
+                "La responsabilidad recae exclusivamente en el habilitado de la administración contable subordinado",
+                "Solo responde patrimonialmente si media condena penal firme por peculado o malversación dolosa"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Ley de Administración Financiera de Santa Fe y Doctrina ISEP de Alta Dirección",
             explanation: "El titular de la Unidad de Organización posee responsabilidad administrativa y patrimonial por los caudales públicos administrados bajo su mando."
         },
         {
             id: "cs-d03",
             difficulty: "dificil",
-            question: "¿Cómo se formula un 'Indicador de Impacto' en la gestión de seguridad pública estratégica a diferencia de un simple indicador de actividad?",
+            question: "¿Cómo se formula un 'Indicador de Impacto' en la gestión de seguridad pública a diferencia de un indicador de actividad?",
             options: [
-                "Midiendo la cantidad de patrulleros que salieron a la calle en un turno determinado",
-                "Midiendo la variación porcentual de delitos violentos o la tasa de resolución en un período comparativo contra la línea de base histórica",
-                "Contando la cantidad de hojas impresas en la oficina de sumarios",
-                "Registrando la cantidad de combustible consumido por cada dependencia"
+                "Midiendo la variación porcentual de delitos o la tasa de resolución contra la línea de base histórica",
+                "Contando la cantidad de patrulleros que salieron a la calle en cada turno de guardia del período",
+                "Registrando la cantidad de combustible consumido por cada dependencia policial en el mes calendario",
+                "Sumando la cantidad de hojas impresas y actuaciones labradas en la oficina de sumarios del distrito"
             ],
-            correctIndex: 1,
+            correctIndex: 0,
             source: "Manual ISEP 2026 - Metodología de Planificación y Control de Gestión",
             explanation: "El indicador de actividad mide tareas realizadas (ej. patrullajes); el indicador de impacto mide el efecto real sobre la ciudadanía (reducción de homicidios o robos)."
         }
@@ -806,8 +809,8 @@ window.quizBank = {
 // METADATA DEL BANCO DE PREGUNTAS
 // ═══════════════════════════════════════════════════════════════
 window.quizBankMeta = {
-    version: "5.0.0",
-    lastUpdated: "2026-10-19",
+    version: "6.0.0",
+    lastUpdated: "2026-10-21",
     totalQuestions: Object.values(window.quizBank).reduce((acc, arr) => acc + arr.length, 0),
     difficulties: [
         { id: "facil", title: "Fácil (Repaso Inicial)", desc: "Conceptos clave, definiciones claras y principios rectores", icon: "sentiment_satisfied", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30", badge: "🟢 FÁCIL" },
