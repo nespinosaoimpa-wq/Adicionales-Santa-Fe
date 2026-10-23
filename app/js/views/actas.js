@@ -545,6 +545,187 @@ function generateActaText(tipo, data) {
     return header + body + footer;
 }
 
+// ══════════════════════════════════════════════════════════════
+// 3.1. GENERADOR DE DOCUMENTO JUDICIAL FORMAL EN HTML (A4 LEGAL)
+// ══════════════════════════════════════════════════════════════
+function formatClauseHTML(paragraph) {
+    const trimmed = paragraph.trim();
+    if (!trimmed) return '';
+    
+    // Detectar si empieza con acápite procesal (ej: "PRIMERO (LUGAR): ...")
+    const colonIndex = trimmed.indexOf(':');
+    if (colonIndex > 0 && colonIndex < 80 && /^(PRIMERO|SEGUNDO|TERCERO|CUARTO|QUINTO|SEXTO|SÉPTIMO|OCTAVO|NOVENO|DÉCIMO|RÓTULO|\d+\.|\bA:|\bREF:|\bOBJETO:)/i.test(trimmed)) {
+        const title = trimmed.substring(0, colonIndex + 1);
+        const rest = trimmed.substring(colonIndex + 1).trim();
+        return `
+            <div style="margin: 9px 0; text-align: justify; text-indent: 26px; line-height: 1.55; font-size: 10.5pt; color: #0f172a;">
+                <strong style="text-decoration: underline;">${escapeHTML(title)}</strong> ${escapeHTML(rest).replace(/\n/g, '<br><span style="display:inline-block; width: 26px;"></span>')}
+            </div>
+        `;
+    }
+
+    return `
+        <div style="margin: 9px 0; text-align: justify; text-indent: 26px; line-height: 1.55; font-size: 10.5pt; color: #0f172a;">
+            ${escapeHTML(trimmed).replace(/\n/g, '<br>')}
+        </div>
+    `;
+}
+
+function generateOfficialActaHTML(tipo, data, tmpl, settings, isExport = false) {
+    const now = new Date();
+    const dias = ['cero', 'un', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve', 'diez', 'once', 'doce', 'trece', 'catorce', 'quince', 'dieciséis', 'diecisiete', 'dieciocho', 'diecinueve', 'veinte', 'veintiún', 'veintidós', 'veintitrés', 'veinticuatro', 'veinticinco', 'veintiséis', 'veintisiete', 'veintiocho', 'veintinueve', 'treinta', 'treinta y un'];
+    const diaLetras = dias[now.getDate()] || `${now.getDate()}`;
+    const mesNombre = now.toLocaleDateString('es-AR', { month: 'long' });
+    const anio = now.getFullYear();
+    const hora = now.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+    const fechaCompleta = `${now.toLocaleDateString('es-AR')} - ${hora} hs`;
+
+    const ur = (settings.ur || 'UNIDAD REGIONAL I - DEPTO. LA CAPITAL').toUpperCase();
+    const dependencia = (settings.dependencia || 'COMISARÍA DE DISTRITO').toUpperCase();
+    const title = (tmpl ? tmpl.title : 'ACTA POLICIAL').toUpperCase();
+
+    // Obtener texto completo generado
+    const fullText = generateActaText(tipo, data);
+    
+    // Separar cuerpo
+    const parts = fullText.split('======================================================================');
+    let bodyText = '';
+    if (parts.length >= 3) {
+        bodyText = parts[2].trim();
+    } else {
+        bodyText = fullText;
+    }
+
+    // Dividir en párrafos
+    const paragraphs = bodyText.split(/\n\s*\n/).filter(p => {
+        const t = p.trim();
+        return t && !t.startsWith('------') && !t.includes('FIRMA FUNCIONARIO ACTUANTE') && !t.includes('Documento formal emitido el');
+    });
+
+    const introText = paragraphs[0]?.includes('HACE CONSTAR') ? paragraphs[0] : 
+        `En la ciudad de ${data.localidad || 'Santa Fe'}, Provincia de Santa Fe, a los ${diaLetras} (${now.getDate()}) días del mes de ${mesNombre} del año ${anio}, siendo las ${hora} horas, en cumplimiento de los deberes funcionales conferidos por la Ley del Personal Policial N° 12.521 y las prescripciones del Código Procesal Penal de la Provincia de Santa Fe (Ley N° 12.734), el/la suscrito/a Oficial actuante, procediendo formalmente, HACE CONSTAR:`;
+
+    const clauseParagraphs = paragraphs.filter(p => !p.includes('HACE CONSTAR') && !p.includes('Con lo que no siendo para más'));
+
+    const closingText = settings.footer || 'Con lo que no siendo para más, se da por finalizado el presente acto, previa lectura y ratificación de su contenido por los intervinientes, firmando al pie de plena conformidad por ante mí y los testigos de actuación que certifican lo actuado.';
+
+    const intervinienteNombre = data.involucrados || data.aprehendido_nombre || data.persona_requisada || data.denunciante_nombre || data.conductor_a || data.morador || 'Interviniente / Causante';
+    const testigo1Nombre = data.testigo1 ? data.testigo1.split(',')[0].trim() : 'Testigo Civil de Actuación';
+    const testigo2Nombre = data.testigo2 ? data.testigo2.split(',')[0].trim() : 'Testigo Civil de Actuación';
+
+    return `
+        <div class="official-acta-sheet" style="position: relative; font-family: 'Times New Roman', Times, serif; color: #0f172a; line-height: 1.5; background: #ffffff; ${isExport ? 'width: 100%; max-width: 100%;' : ''}">
+            <!-- MARCA DE AGUA INSTITUCIONAL -->
+            <div style="position: absolute; top: 22%; left: 15%; width: 70%; height: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0.04; z-index: 0;">
+                <img src="assets/watermark_police.png" style="max-width: 300px; max-height: 300px; filter: grayscale(100%); object-fit: contain;">
+            </div>
+
+            <!-- CONTENIDO FORMAL (Z-INDEX SUPERIOR) -->
+            <div style="position: relative; z-index: 1;">
+                <!-- MEMBRETE OFICIAL SANTA FE -->
+                <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 16px;">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <img src="assets/santa_fe_badge_gold.png" alt="Escudo Policía" style="width: 58px; height: 58px; object-fit: contain;" onerror="this.onerror=null; this.src='assets/logo-splash.png';">
+                        <div style="text-transform: uppercase;">
+                            <div style="font-size: 10.5pt; font-weight: bold; letter-spacing: 0.5px; color: #0f172a;">GOBIERNO DE LA PROVINCIA DE SANTA FE</div>
+                            <div style="font-size: 9pt; font-weight: bold; color: #334155;">MINISTERIO DE JUSTICIA Y SEGURIDAD</div>
+                            <div style="font-size: 9.5pt; font-weight: bold; color: #0369a1; letter-spacing: 0.5px;">POLICÍA DE LA PROVINCIA DE SANTA FE</div>
+                            <div style="font-size: 8.5pt; color: #475569; margin-top: 1px;">${escapeHTML(ur)}</div>
+                            <div style="font-size: 8pt; color: #64748b; font-style: italic;">${escapeHTML(dependencia)}</div>
+                        </div>
+                    </div>
+
+                    <div style="border: 1.5px solid #0f172a; padding: 6px 12px; text-align: center; font-family: monospace; font-size: 8pt; background: #f8fafc; border-radius: 4px; min-width: 105px;">
+                        <div style="font-weight: bold; border-bottom: 1px solid #cbd5e1; padding-bottom: 2px; color: #0f172a;">ACTUACIÓN OFICIAL</div>
+                        <div style="margin-top: 3px; color: #475569;">FOJA N°: <strong>01</strong></div>
+                        <div style="color: #475569;">AÑO: <strong>${anio}</strong></div>
+                    </div>
+                </div>
+
+                <!-- TÍTULO DE LA ACTUACIÓN -->
+                <div style="text-align: center; margin: 16px 0 14px 0;">
+                    <div style="font-size: 12.5pt; font-weight: bold; letter-spacing: 0.8px; text-transform: uppercase; color: #0f172a;">
+                        ${escapeHTML(title)}
+                    </div>
+                    <div style="font-size: 8.5pt; font-style: italic; color: #475569; margin-top: 2px;">
+                        Instrumento Público Labrado en el Marco de la Ley Orgánica N° 12.521 y Ley N° 12.734 (C.P.P.P.S.F.)
+                    </div>
+                </div>
+
+                <!-- PÁRRAFO DE APERTURA -->
+                <div style="margin: 10px 0; text-align: justify; text-indent: 28px; line-height: 1.6; font-size: 10.5pt; color: #0f172a;">
+                    ${escapeHTML(introText)}
+                </div>
+
+                <!-- ACÁPITES Y CLÁUSULAS -->
+                <div style="margin: 6px 0;">
+                    ${clauseParagraphs.map(p => formatClauseHTML(p)).join('')}
+                </div>
+
+                <!-- PÁRRAFO DE CIERRE Y RATIFICACIÓN -->
+                <div style="margin: 14px 0 24px 0; text-align: justify; text-indent: 28px; line-height: 1.6; font-size: 10.5pt; font-style: italic; color: #1e293b;">
+                    ${escapeHTML(closingText)}
+                </div>
+
+                <!-- BLOQUE DE FIRMAS FORMALES (2x2) -->
+                <div style="margin-top: 28px; padding-top: 8px; page-break-inside: avoid;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 26px 20px;">
+                        <!-- FIRMA 1: FUNCIONARIO -->
+                        <div style="text-align: center; font-size: 8.5pt; color: #0f172a;">
+                            <div style="border-top: 1px dotted #475569; margin: 0 10px; padding-top: 6px; font-weight: bold; font-size: 9pt;">
+                                FIRMA Y SELLO FUNCIONARIO POLICIAL
+                            </div>
+                            <div style="color: #334155; margin-top: 2px; line-height: 1.3;">
+                                ${escapeHTML(settings.signature).replace(/\n/g, '<br>')}
+                            </div>
+                        </div>
+
+                        <!-- FIRMA 2: TESTIGO 1 -->
+                        <div style="text-align: center; font-size: 8.5pt; color: #0f172a;">
+                            <div style="border-top: 1px dotted #475569; margin: 0 10px; padding-top: 6px; font-weight: bold; font-size: 9pt;">
+                                FIRMA Y ACLARACIÓN TESTIGO 1
+                            </div>
+                            <div style="color: #475569; margin-top: 2px; line-height: 1.3;">
+                                ${escapeHTML(testigo1Nombre)}<br>
+                                <span style="font-size: 8pt; color: #64748b;">Testigo Hábil de Actuación</span>
+                            </div>
+                        </div>
+
+                        <!-- FIRMA 3: INTERVINIENTE -->
+                        <div style="text-align: center; font-size: 8.5pt; color: #0f172a; margin-top: 8px;">
+                            <div style="border-top: 1px dotted #475569; margin: 0 10px; padding-top: 6px; font-weight: bold; font-size: 9pt;">
+                                INTERVINIENTE / CAUSANTE / NOTIFICADO
+                            </div>
+                            <div style="color: #475569; margin-top: 2px; line-height: 1.3;">
+                                ${escapeHTML(intervinienteNombre)}<br>
+                                <span style="font-size: 8pt; color: #64748b;">Firma o Impresión Dígito-Pulgar</span>
+                            </div>
+                        </div>
+
+                        <!-- FIRMA 4: TESTIGO 2 -->
+                        <div style="text-align: center; font-size: 8.5pt; color: #0f172a; margin-top: 8px;">
+                            <div style="border-top: 1px dotted #475569; margin: 0 10px; padding-top: 6px; font-weight: bold; font-size: 9pt;">
+                                FIRMA Y ACLARACIÓN TESTIGO 2
+                            </div>
+                            <div style="color: #475569; margin-top: 2px; line-height: 1.3;">
+                                ${escapeHTML(testigo2Nombre)}<br>
+                                <span style="font-size: 8pt; color: #64748b;">Testigo Hábil de Actuación</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PIE DE SEGURIDAD INSTITUCIONAL -->
+                <div style="margin-top: 24px; padding-top: 8px; border-top: 1px solid #cbd5e1; display: flex; justify-content: space-between; align-items: center; font-size: 7.5pt; color: #64748b; font-family: monospace;">
+                    <span>POLICÍA DE LA PROVINCIA DE SANTA FE · INSTRUMENTO PÚBLICO OFICIAL</span>
+                    <span>EXPEDIDO: ${fechaCompleta}</span>
+                    <span>FOJA 1/1</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
 
 // ══════════════════════════════════════════════════════════════
 // 4. VISTA: HUB DE ACTAS POLICIALES (CATÁLOGO)
@@ -700,45 +881,67 @@ function renderActaForm(container, tipo) {
                 </button>
             </form>
 
-            <!-- RESULT CARD -->
-            <div id="acta-result" class="hidden space-y-4 pt-4 border-t border-white/10">
+            <!-- RESULT CARD: VISTA PREVIA Y EXPORTACIÓN -->
+            <div id="acta-result" class="hidden space-y-4 pt-4 border-t border-white/10 animate-fade-in">
                 <div class="flex items-center justify-between px-1">
-                    <h3 class="text-[11px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
-                        <span class="material-symbols-outlined text-sm">verified</span> Documento Oficial Generado
-                    </h3>
-                    <span class="text-[10px] text-slate-500">Hoja A4 Legal</span>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-emerald-400 text-base">verified</span>
+                        <h3 class="text-xs font-black text-white uppercase tracking-wider">Acta Oficial Generada</h3>
+                    </div>
+                    <!-- VIEW TOGGLE -->
+                    <div class="flex items-center bg-white/5 p-1 rounded-xl border border-white/10 text-[10px] font-bold">
+                        <button type="button" id="tab-acta-sheet" onclick="window._toggleActaView('sheet')" class="px-2.5 py-1 rounded-lg bg-primary text-white shadow transition-all">
+                            📄 Hoja A4
+                        </button>
+                        <button type="button" id="tab-acta-raw" onclick="window._toggleActaView('raw')" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition-all">
+                            📋 Texto Plano
+                        </button>
+                    </div>
                 </div>
 
-                <!-- OFFICIAL PREVIEW SHEET (White background for realistic feel) -->
-                <div class="p-6 rounded-2xl bg-white text-slate-900 shadow-2xl border border-slate-300 max-h-96 overflow-y-auto selection:bg-blue-200">
-                    <pre id="acta-output" class="text-[11px] font-mono leading-relaxed whitespace-pre-wrap select-text font-serif text-justify text-slate-900"></pre>
+                <!-- 1. VISTA PREVIA OFICIAL EN HOJA A4 -->
+                <div id="acta-sheet-view" class="p-6 sm:p-8 rounded-2xl bg-white text-slate-900 shadow-2xl border border-slate-300 max-h-[550px] overflow-y-auto selection:bg-blue-100 relative">
+                    <div id="acta-official-preview"></div>
+                </div>
+
+                <!-- 2. VISTA TEXTO PLANO (OCULTA POR DEFECTO) -->
+                <div id="acta-raw-view" class="hidden p-4 rounded-2xl bg-slate-900 text-slate-200 border border-white/10 max-h-[550px] overflow-y-auto">
+                    <pre id="acta-output" class="text-[11px] font-mono leading-relaxed whitespace-pre-wrap select-text text-slate-300"></pre>
                 </div>
 
                 <!-- EXPORT ACTIONS GRID -->
-                <div class="grid grid-cols-2 gap-2.5">
-                    <button onclick="window._downloadPDF()" class="py-3.5 px-4 rounded-xl bg-gradient-to-r from-red-600 to-rose-700 text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-lg shadow-red-600/20">
-                        <span class="material-symbols-outlined text-base">picture_as_pdf</span> Descargar PDF
+                <div class="space-y-2.5">
+                    <!-- BOTÓN PRINCIPAL DESTACADO: PDF OFICIAL -->
+                    <button onclick="window._downloadPDF()" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-red-600 via-rose-600 to-red-700 text-white text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2.5 active:scale-95 transition-all shadow-xl shadow-red-600/30 hover:shadow-2xl hover:shadow-red-600/40">
+                        <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
+                        Descargar PDF Oficial (A4 Impresión Legal)
                     </button>
-                    <button onclick="window._downloadWord()" class="py-3.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-700 text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all shadow-lg shadow-blue-600/20">
-                        <span class="material-symbols-outlined text-base">description</span> Descargar Word (.doc)
+
+                    <div class="grid grid-cols-2 gap-2.5">
+                        <button onclick="window._printActa()" class="py-3 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all border border-white/10 shadow-md">
+                            <span class="material-symbols-outlined text-base">print</span> Imprimir / Guardar
+                        </button>
+                        <button onclick="window._downloadWord()" class="py-3 px-3 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 text-xs font-bold flex items-center justify-center gap-2 active:scale-95 transition-all border border-blue-500/30">
+                            <span class="material-symbols-outlined text-base">description</span> Descargar Word (.doc)
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="window._copyActa()" class="py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-white text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all border border-white/5">
+                            <span class="material-symbols-outlined text-sm">content_copy</span> Copiar
+                        </button>
+                        <button onclick="window._shareActaWA()" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-md shadow-emerald-600/20">
+                            <span class="material-symbols-outlined text-sm">share</span> WhatsApp
+                        </button>
+                        <button onclick="router.navigateTo('#asistente/actas/settings')" class="py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 hover:text-white text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all border border-white/5">
+                            <span class="material-symbols-outlined text-sm">badge</span> Membrete
+                        </button>
+                    </div>
+
+                    <button onclick="window._newActa()" class="w-full py-2.5 rounded-xl bg-white/5 text-slate-400 hover:text-white text-xs font-semibold flex items-center justify-center gap-1.5 active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-sm">refresh</span> Limpiar y Nueva Acta
                     </button>
                 </div>
-
-                <div class="grid grid-cols-3 gap-2">
-                    <button onclick="window._copyActa()" class="py-3 rounded-xl bg-white/10 text-white text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all hover:bg-white/15">
-                        <span class="material-symbols-outlined text-sm">content_copy</span> Copiar
-                    </button>
-                    <button onclick="window._shareActaWA()" class="py-3 rounded-xl bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all hover:bg-emerald-500 shadow-lg shadow-emerald-600/20">
-                        <span class="material-symbols-outlined text-sm">share</span> WhatsApp
-                    </button>
-                    <button onclick="window._printActa()" class="py-3 rounded-xl bg-slate-700 text-white text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all hover:bg-slate-600">
-                        <span class="material-symbols-outlined text-sm">print</span> Imprimir
-                    </button>
-                </div>
-
-                <button onclick="window._newActa()" class="w-full py-3 rounded-xl bg-white/5 text-slate-400 text-xs font-bold flex items-center justify-center gap-1.5 active:scale-95 transition-all hover:text-white">
-                    <span class="material-symbols-outlined text-sm">refresh</span> Limpiar y Nueva Acta
-                </button>
             </div>
         </main>
         ${typeof renderBottomNav === 'function' ? renderBottomNav('asistente') : ''}
@@ -754,9 +957,19 @@ function renderActaForm(container, tipo) {
             data[f.id] = el ? el.value.trim() : '';
         });
 
+        const settings = getActaSettings();
         const text = generateActaText(tipo, data);
+        const html = generateOfficialActaHTML(tipo, data, tmpl, settings, false);
+
+        // Guardar estado actual en memoria
+        window._currentActaData = { tipo, data, tmpl, text };
+
+        // Actualizar vista previa oficial en hoja A4 y texto plano
+        const previewEl = document.getElementById('acta-official-preview');
+        if (previewEl) previewEl.innerHTML = html;
+
         const outputEl = document.getElementById('acta-output');
-        outputEl.textContent = text;
+        if (outputEl) outputEl.textContent = text;
         
         const resultCard = document.getElementById('acta-result');
         resultCard.classList.remove('hidden');
@@ -767,7 +980,7 @@ function renderActaForm(container, tipo) {
         btnGen.classList.remove('from-primary', 'to-blue-600');
         btnGen.classList.add('from-emerald-600', 'to-teal-700');
 
-        showToast('✅ Acta generada correctamente');
+        showToast('✅ Acta oficial generada correctamente');
 
         // Guardar en archivo digital local
         try {
@@ -787,7 +1000,30 @@ function renderActaForm(container, tipo) {
         }
     };
 
-    // ── FUNCIONES DE EXPORTACIÓN ──
+    // ── FUNCIONES DE EXPORTACIÓN Y VISTA ──
+
+    // Alternar entre Hoja A4 y Texto Plano
+    window._toggleActaView = (mode) => {
+        const sheetView = document.getElementById('acta-sheet-view');
+        const rawView = document.getElementById('acta-raw-view');
+        const tabSheet = document.getElementById('tab-acta-sheet');
+        const tabRaw = document.getElementById('tab-acta-raw');
+        if (mode === 'sheet') {
+            sheetView?.classList.remove('hidden');
+            rawView?.classList.add('hidden');
+            tabSheet?.classList.add('bg-primary', 'text-white', 'shadow');
+            tabSheet?.classList.remove('text-slate-400');
+            tabRaw?.classList.remove('bg-primary', 'text-white', 'shadow');
+            tabRaw?.classList.add('text-slate-400');
+        } else {
+            sheetView?.classList.add('hidden');
+            rawView?.classList.remove('hidden');
+            tabRaw?.classList.add('bg-primary', 'text-white', 'shadow');
+            tabRaw?.classList.remove('text-slate-400');
+            tabSheet?.classList.remove('bg-primary', 'text-white', 'shadow');
+            tabSheet?.classList.add('text-slate-400');
+        }
+    };
 
     // 1. Copiar al Portapapeles
     window._copyActa = () => {
@@ -802,38 +1038,23 @@ function renderActaForm(container, tipo) {
     window._shareActaWA = () => {
         const text = document.getElementById('acta-output')?.textContent || '';
         if (!text) return showToast('⚠️ No hay texto generado');
-        // Truncar si excede límite de URL
         const encoded = encodeURIComponent(text.substring(0, 4500));
         window.open('https://wa.me/?text=' + encoded, '_blank');
     };
 
-    // 3. Descargar Word (.doc editable nativo)
+    // 3. Descargar Word (.doc editable nativo con membrete)
     window._downloadWord = () => {
-        const text = document.getElementById('acta-output')?.textContent || '';
-        if (!text) return showToast('⚠️ No hay acta para exportar');
-
-        const filename = `Acta_${tipo}_${Date.now()}.doc`;
-        const lines = text.split('\n');
-        let formattedBody = '';
-
-        lines.forEach((line) => {
-            const trimmed = line.trim();
-            if (trimmed.startsWith('===')) {
-                formattedBody += `<hr style="border: 0; border-top: 1px solid #999; margin: 10px 0;">`;
-            } else if (trimmed === '') {
-                formattedBody += `<p style="margin: 0; min-height: 12pt;">&nbsp;</p>`;
-            } else if (trimmed === trimmed.toUpperCase() && trimmed.length < 80 && !trimmed.includes(':')) {
-                formattedBody += `<p style="text-align: center; font-weight: bold; margin: 6pt 0;">${escapeHTML(trimmed)}</p>`;
-            } else {
-                formattedBody += `<p style="text-align: justify; margin: 4pt 0; text-indent: 20pt; line-height: 1.5;">${escapeHTML(trimmed)}</p>`;
-            }
-        });
+        if (!window._currentActaData) return showToast('⚠️ No hay acta para exportar');
+        const { tipo: curTipo, data: curData, tmpl: curTmpl } = window._currentActaData;
+        const settings = getActaSettings();
+        const filename = `Acta_${curTipo.toUpperCase()}_${Date.now()}.doc`;
+        const htmlContent = generateOfficialActaHTML(curTipo, curData, curTmpl, settings, true);
 
         const wordHtml = `
             <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
             <head>
                 <meta charset='utf-8'>
-                <title>${tmpl.title}</title>
+                <title>${curTmpl.title}</title>
                 <!--[if gte mso 9]>
                 <xml>
                     <w:WordDocument>
@@ -843,12 +1064,12 @@ function renderActaForm(container, tipo) {
                 </xml>
                 <![endif]-->
                 <style>
-                    body { font-family: 'Times New Roman', Times, serif; font-size: 12pt; line-height: 1.5; padding: 2.5cm; }
-                    p { margin: 0; font-size: 12pt; }
+                    body { font-family: 'Times New Roman', Times, serif; font-size: 11pt; line-height: 1.5; padding: 2cm; background: #fff; color: #000; }
+                    p { margin: 0; font-size: 11pt; }
                 </style>
             </head>
             <body>
-                ${formattedBody}
+                ${htmlContent}
             </body>
             </html>
         `;
@@ -863,61 +1084,46 @@ function renderActaForm(container, tipo) {
         showToast('📄 Documento Word (.doc) descargado');
     };
 
-    // 4. Descargar PDF Profesional con html2pdf
+    // 4. Descargar PDF Profesional con html2pdf (A4 Legal Oficial)
     window._downloadPDF = () => {
-        const text = document.getElementById('acta-output')?.textContent || '';
-        if (!text) return showToast('⚠️ No hay acta para exportar');
+        if (!window._currentActaData) return showToast('⚠️ Primero generá el acta');
+        const { tipo: curTipo, data: curData, tmpl: curTmpl } = window._currentActaData;
+        const settings = getActaSettings();
+        const cleanLoc = (curData.localidad || 'SantaFe').replace(/[^a-zA-Z0-9]/g, '_');
+        const filename = `Acta_${curTipo.toUpperCase()}_${cleanLoc}_${Date.now()}.pdf`;
 
-        const filename = `Acta_${tipo}_${Date.now()}.pdf`;
-
-        // Crear elemento fuera de pantalla para renderizar
+        // Crear elemento fuera de pantalla con dimensiones exactas A4 a 96 DPI (794px ancho)
         const containerDiv = document.createElement('div');
         containerDiv.id = 'temp-pdf-render';
         containerDiv.style.position = 'fixed';
         containerDiv.style.left = '-9999px';
         containerDiv.style.top = '0';
-        containerDiv.style.width = '794px'; // Ancho exacto A4 a 96 DPI
+        containerDiv.style.width = '794px';
         containerDiv.style.backgroundColor = '#ffffff';
-        containerDiv.style.color = '#000000';
-        containerDiv.style.padding = '40px 50px';
+        containerDiv.style.color = '#0f172a';
+        containerDiv.style.padding = '35px 45px';
         containerDiv.style.fontFamily = '"Times New Roman", Times, serif';
-        containerDiv.style.fontSize = '11pt';
-        containerDiv.style.lineHeight = '1.5';
-        containerDiv.style.textAlign = 'justify';
+        containerDiv.style.boxSizing = 'border-box';
 
-        const lines = text.split('\n');
-        let htmlContent = '';
-        lines.forEach(l => {
-            const trimmed = l.trim();
-            if (trimmed.startsWith('===')) {
-                htmlContent += '<hr style="border:0;border-top:1px solid #666;margin:8px 0;">';
-            } else if (trimmed === '') {
-                htmlContent += '<div style="height:8px;"></div>';
-            } else if (trimmed === trimmed.toUpperCase() && trimmed.length < 80 && !trimmed.includes(':')) {
-                htmlContent += `<div style="text-align:center;font-weight:bold;margin:4px 0;">${escapeHTML(trimmed)}</div>`;
-            } else {
-                htmlContent += `<div style="text-align:justify;margin:3px 0;text-indent:15px;">${escapeHTML(trimmed)}</div>`;
-            }
-        });
-
-        containerDiv.innerHTML = htmlContent;
+        containerDiv.innerHTML = generateOfficialActaHTML(curTipo, curData, curTmpl, settings, true);
         document.body.appendChild(containerDiv);
 
-        showToast('⏳ Compilando PDF oficial...');
+        showToast('⏳ Compilando PDF oficial en alta resolución...');
 
         if (typeof html2pdf !== 'undefined') {
             html2pdf().from(containerDiv).set({
-                margin: [0.6, 0.6, 0.6, 0.6],
+                margin: [10, 10, 10, 10], // mm
                 filename: filename,
-                html2canvas: { scale: 2, logging: false, useCORS: true },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, logging: false, useCORS: true, letterRendering: true, allowTaint: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             }).save().then(() => {
                 showToast('✅ PDF Oficial Descargado');
                 containerDiv.remove();
             }).catch(err => {
                 console.warn('PDF export fallback:', err);
                 containerDiv.remove();
-                window._downloadWord();
+                window._printActa();
             });
         } else {
             containerDiv.remove();
@@ -925,10 +1131,12 @@ function renderActaForm(container, tipo) {
         }
     };
 
-    // 5. Imprimir nativo (diálogo del navegador con @media print)
+    // 5. Imprimir nativo (diálogo del navegador con @media print optimizado)
     window._printActa = () => {
-        const text = document.getElementById('acta-output')?.textContent || '';
-        if (!text) return showToast('⚠️ No hay acta para imprimir');
+        if (!window._currentActaData) return showToast('⚠️ Primero generá el acta');
+        const { tipo: curTipo, data: curData, tmpl: curTmpl } = window._currentActaData;
+        const settings = getActaSettings();
+        const html = generateOfficialActaHTML(curTipo, curData, curTmpl, settings, false);
 
         const printWin = window.open('', '_blank');
         if (!printWin) {
@@ -940,27 +1148,23 @@ function renderActaForm(container, tipo) {
             <html>
             <head>
                 <meta charset="utf-8">
-                <title>${tmpl.title}</title>
+                <title>${curTmpl.title}</title>
                 <style>
-                    @page { size: A4; margin: 2.5cm; }
+                    @page { size: A4 portrait; margin: 15mm 18mm; }
                     body {
+                        margin: 0;
+                        padding: 0;
                         font-family: 'Times New Roman', Times, serif;
-                        font-size: 12pt;
-                        line-height: 1.6;
-                        color: #000;
                         background: #fff;
-                        padding: 20px;
-                        text-align: justify;
+                        color: #0f172a;
                     }
-                    pre {
-                        white-space: pre-wrap;
-                        font-family: inherit;
-                        text-align: justify;
+                    @media print {
+                        body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
                     }
                 </style>
             </head>
             <body>
-                <pre>${escapeHTML(text)}</pre>
+                ${html}
             </body>
             </html>
         `);
@@ -968,11 +1172,12 @@ function renderActaForm(container, tipo) {
         printWin.focus();
         setTimeout(() => {
             printWin.print();
-        }, 300);
+        }, 400);
     };
 
     // 6. Limpiar y nueva acta
     window._newActa = () => {
+        window._currentActaData = null;
         renderActaForm(container, tipo);
     };
 

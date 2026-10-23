@@ -170,9 +170,9 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-10-59.js?v=535.10.59')
+                navigator.serviceWorker.register('./sw-v535-10-60.js?v=535.10.60')
                     .then(registration => {
-                        console.log('ServiceWorker v535.10.59 registrado con éxito: ', registration.scope);
+                        console.log('ServiceWorker v535.10.60 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
                             const newWorker = registration.installing;
                             newWorker.addEventListener('statechange', () => {

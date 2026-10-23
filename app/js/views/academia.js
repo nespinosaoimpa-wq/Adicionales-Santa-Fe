@@ -26,9 +26,9 @@ window._quizState = window._quizState || {
 };
 
 // ══════════════════════════════════════════════════════════════
-// MONETIZATION & FREE TRIAL HELPERS (3 intentos gratis -> $2.000/mes)
+// MONETIZATION & FREE TRIAL HELPERS (2 gratis → desde el 3° pago ISEP PRO $2.000/mes)
 // ══════════════════════════════════════════════════════════════
-const ISEP_FREE_LIMIT = 3;
+const ISEP_FREE_LIMIT = 2;
 const ISEP_PRO_PRICE = "$2.000 / mes";
 const ISEP_WHATSAPP_PHONE = "5493425162372";
 
@@ -103,6 +103,86 @@ function _saveQuizResult(result) {
     history.unshift(result);
     if (history.length > 50) history.length = 50; // Guardar últimos 50
     localStorage.setItem('quiz_history', JSON.stringify(history));
+}
+
+// ══════════════════════════════════════════════════════════════
+// FEEDBACK AGENT - RETROALIMENTACIÓN INTELIGENTE
+// Recopila estadísticas de cada examen para mejorar la experiencia:
+// - Temas débiles/fuertes del usuario
+// - Curva de aprendizaje temporal
+// - Dificultad sugerida adaptativa
+// ══════════════════════════════════════════════════════════════
+function _getFeedbackData() {
+    try { return JSON.parse(localStorage.getItem('isep_feedback_data') || '{}'); } catch { return {}; }
+}
+function _saveFeedbackData(d) {
+    try { localStorage.setItem('isep_feedback_data', JSON.stringify(d)); } catch {}
+}
+function _extractTopic(src) {
+    if (!src) return 'General';
+    const c = src.lastIndexOf(':');
+    if (c > -1) { const a = src.substring(c + 1).trim(); if (a.length > 3) return a; }
+    const d = src.indexOf(' - ');
+    if (d > -1) return src.substring(0, d).trim();
+    return src.substring(0, 40).trim();
+}
+function _updateFeedbackAgent(res) {
+    const fb = _getFeedbackData();
+    if (!fb.topicStats) fb.topicStats = {};
+    if (!fb.scoreHistory) fb.scoreHistory = [];
+    if (!fb.examCount) fb.examCount = 0;
+    fb.examCount++;
+    fb.scoreHistory.push({ date: new Date().toISOString(), score: res.percentage, difficulty: res.difficulty });
+    if (fb.scoreHistory.length > 30) fb.scoreHistory = fb.scoreHistory.slice(-30);
+    res.details.forEach(d => {
+        const t = _extractTopic(d.source);
+        if (!fb.topicStats[t]) fb.topicStats[t] = { correct: 0, total: 0, label: t };
+        fb.topicStats[t].total++;
+        if (d.isCorrect) fb.topicStats[t].correct++;
+    });
+    _saveFeedbackData(fb);
+}
+function _getWeakTopics() {
+    const fb = _getFeedbackData();
+    if (!fb.topicStats) return [];
+    return Object.values(fb.topicStats).filter(t => t.total >= 2)
+        .map(t => ({ ...t, rate: Math.round((t.correct / t.total) * 100) }))
+        .sort((a, b) => a.rate - b.rate).slice(0, 5);
+}
+function _getStrongTopics() {
+    const fb = _getFeedbackData();
+    if (!fb.topicStats) return [];
+    return Object.values(fb.topicStats).filter(t => t.total >= 2)
+        .map(t => ({ ...t, rate: Math.round((t.correct / t.total) * 100) }))
+        .sort((a, b) => b.rate - a.rate).slice(0, 3);
+}
+function _getSuggestedDifficulty() {
+    const fb = _getFeedbackData();
+    if (!fb.scoreHistory || fb.scoreHistory.length < 2) return null;
+    const last = fb.scoreHistory.slice(-3);
+    const avg = Math.round(last.reduce((s, e) => s + e.score, 0) / last.length);
+    if (avg >= 85) return { suggestion: 'dificil', reason: 'Tu promedio reciente es excelente (≥85%). Estás listo para el nivel Concurso ISEP.' };
+    if (avg >= 65) return { suggestion: 'media', reason: 'Tu rendimiento es sólido. El nivel Media te ayuda a consolidar antes de subir.' };
+    return { suggestion: 'facil', reason: 'Recomendamos reforzar los conceptos fundamentales antes de subir de nivel.' };
+}
+function _getLearningCurve() {
+    const fb = _getFeedbackData();
+    if (!fb.scoreHistory || fb.scoreHistory.length < 2) return null;
+    const sc = fb.scoreHistory.map(s => s.score);
+    const h = Math.ceil(sc.length / 2);
+    const a1 = Math.round(sc.slice(0, h).reduce((s, v) => s + v, 0) / h);
+    const a2 = Math.round(sc.slice(h).reduce((s, v) => s + v, 0) / (sc.length - h));
+    return { avgFirst: a1, avgSecond: a2, trend: a2 - a1, total: sc.length };
+}
+function _getTopicAnalysisFromDetails(details) {
+    const topics = {};
+    details.forEach(d => {
+        const t = _extractTopic(d.source);
+        if (!topics[t]) topics[t] = { label: t, correct: 0, total: 0 };
+        topics[t].total++;
+        if (d.isCorrect) topics[t].correct++;
+    });
+    return Object.values(topics).map(t => ({ ...t, rate: Math.round((t.correct / t.total) * 100) })).sort((a, b) => a.rate - b.rate);
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -399,9 +479,39 @@ function _renderSimuladorTab(container) {
             questionPool = questionPool.concat(_shuffleArray(allRemaining).slice(0, needed));
         }
 
-        const shuffled = _shuffleArray(questionPool);
-        const count = Math.min(state.questionCount, shuffled.length);
-        const rawQuestions = shuffled.slice(0, count);
+        // 4. Retroalimentación Inteligente: Ponderación adaptativa
+        // Si el agente detectó temas débiles en exámenes anteriores, prioriza hasta un 35% de preguntas de esos temas
+        const weakTopics = _getWeakTopics();
+        let selectedQuestions = [];
+        let adaptiveNotice = null;
+
+        if (weakTopics.length > 0) {
+            const weakLabels = weakTopics.map(w => w.label.toLowerCase());
+            const focusQuestions = questionPool.filter(q => {
+                const topic = _extractTopic(q.source).toLowerCase();
+                return weakLabels.some(wl => topic.includes(wl) || wl.includes(topic));
+            });
+            const otherQuestions = questionPool.filter(q => !focusQuestions.some(f => f.id === q.id));
+
+            if (focusQuestions.length > 0) {
+                const targetFocus = Math.min(Math.ceil(state.questionCount * 0.35), focusQuestions.length);
+                const pickedFocus = _shuffleArray(focusQuestions).slice(0, targetFocus);
+                const remainingNeeded = state.questionCount - pickedFocus.length;
+                const pickedOthers = _shuffleArray(otherQuestions).slice(0, remainingNeeded);
+                selectedQuestions = _shuffleArray([...pickedFocus, ...pickedOthers]);
+                adaptiveNotice = {
+                    count: pickedFocus.length,
+                    topics: weakTopics.slice(0, 2).map(w => w.label)
+                };
+            } else {
+                selectedQuestions = _shuffleArray(questionPool).slice(0, state.questionCount);
+            }
+        } else {
+            selectedQuestions = _shuffleArray(questionPool).slice(0, state.questionCount);
+        }
+
+        const count = selectedQuestions.length;
+        const rawQuestions = selectedQuestions;
 
         // Shuffle options within each question so the correct answer isn't always at the same index
         const questions = rawQuestions.map(q => {
@@ -424,7 +534,8 @@ function _renderSimuladorTab(container) {
             questions: questions,
             answers: new Array(questions.length).fill(null),
             startTime: Date.now(),
-            timeLimit: count === 25 ? 30 * 60 : 60 * 60 // 30min para 25 preguntas, 60min para 50 preguntas
+            timeLimit: count === 25 ? 30 * 60 : 60 * 60, // 30min para 25 preguntas, 60min para 50 preguntas
+            adaptiveNotice: adaptiveNotice
         };
         state.currentIndex = 0;
         state.examFinished = false;
@@ -567,7 +678,12 @@ function _renderExamView(container) {
             .quiz-option { transition: all 0.2s ease; }
             .quiz-option:hover { transform: translateX(4px); }
             .quiz-option.selected { background: rgba(var(--color-primary-rgb, 59, 130, 246), 0.15); border-color: rgba(var(--color-primary-rgb, 59, 130, 246), 0.5); }
-            .quiz-progress-fill { transition: width 0.3s ease; }
+            .quiz-progress-fill { transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+            @keyframes questionSlideIn {
+                from { opacity: 0; transform: translateY(6px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .question-anim { animation: questionSlideIn 0.2s ease-out; }
         </style>
 
         <!-- EXAM HEADER -->
@@ -580,7 +696,11 @@ function _renderExamView(container) {
                     <span class="material-symbols-outlined text-sm">timer</span>
                     <span class="text-sm font-mono font-bold" id="quiz-timer">${_formatTime(remaining)}</span>
                 </div>
-                <span class="text-xs font-bold text-slate-400">${answered}/${totalQ} respondidas</span>
+                <!-- QUESTION MAP BUTTON -->
+                <button onclick="window._showQuestionGrid()" class="flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-bold text-slate-300 hover:text-white transition-all active:scale-95">
+                    <span class="material-symbols-outlined text-sm text-primary">grid_view</span>
+                    <span>${answered}/${totalQ}</span>
+                </button>
             </div>
             <!-- Progress bar -->
             <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
@@ -588,13 +708,24 @@ function _renderExamView(container) {
             </div>
         </header>
 
-        <main class="p-5 pb-40 max-w-lg mx-auto">
+        <main class="p-5 pb-40 max-w-lg mx-auto question-anim">
+            <!-- AGENT ADAPTIVE BANNER -->
+            ${exam.adaptiveNotice ? `
+                <div class="mb-3.5 px-3 py-2 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center gap-2 text-[10px] text-blue-300">
+                    <span class="material-symbols-outlined text-sm text-blue-400 shrink-0">psychology</span>
+                    <span><strong>Agente Activo:</strong> Reforzando <em>${exam.adaptiveNotice.topics.join(', ')}</em> (${exam.adaptiveNotice.count} preguntas seleccionadas)</span>
+                </div>
+            ` : ''}
+
             <!-- QUESTION HEADER -->
-            <div class="flex items-center justify-between gap-2 mb-4">
+            <div class="flex items-center justify-between gap-2 mb-3">
                 <span class="px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">
                     Pregunta ${state.currentIndex + 1} de ${totalQ}
                 </span>
-                ${diffBadge}
+                <div class="flex items-center gap-2">
+                    <span class="text-[10px] text-slate-500 hidden sm:inline">Teclas: 1-4 o A-D</span>
+                    ${diffBadge}
+                </div>
             </div>
 
             <!-- QUESTION TEXT -->
@@ -608,12 +739,12 @@ function _renderExamView(container) {
                     return `
                         <button onclick="window._selectAnswer(${i})" 
                             class="quiz-option w-full text-left p-4 rounded-2xl border transition-all active:scale-[0.98] flex items-start gap-3
-                            ${isSelected ? 'selected bg-primary/10 border-primary/40' : 'glass-card border-white/5 hover:border-white/20'}">
-                            <span class="size-7 rounded-lg shrink-0 flex items-center justify-center text-xs font-bold mt-0.5
-                                ${isSelected ? 'bg-primary text-white' : 'bg-white/10 text-slate-400'}">
+                            ${isSelected ? 'selected bg-primary/15 border-primary shadow-lg shadow-primary/10' : 'glass-card border-white/5 hover:border-white/20'}">
+                            <span class="size-7 rounded-lg shrink-0 flex items-center justify-center text-xs font-black mt-0.5 transition-colors
+                                ${isSelected ? 'bg-primary text-white shadow-md shadow-primary/30' : 'bg-white/10 text-slate-400'}">
                                 ${letter}
                             </span>
-                            <span class="text-sm ${isSelected ? 'text-white font-semibold' : 'text-slate-300'}">${opt}</span>
+                            <span class="text-sm leading-relaxed ${isSelected ? 'text-white font-semibold' : 'text-slate-300'}">${opt}</span>
                         </button>
                     `;
                 }).join('')}
@@ -661,9 +792,79 @@ function _renderExamView(container) {
         }
     }, 1000);
 
+    // Keyboard navigation (1-4 / A-D to answer, Arrows to navigate)
+    if (window._quizKeyHandler) document.removeEventListener('keydown', window._quizKeyHandler);
+    window._quizKeyHandler = (e) => {
+        if (!state.currentExam || state.examFinished) return;
+        if (['1', '2', '3', '4'].includes(e.key)) {
+            const idx = parseInt(e.key, 10) - 1;
+            if (idx < q.options.length) window._selectAnswer(idx);
+        } else if (['a', 'b', 'c', 'd'].includes(e.key.toLowerCase())) {
+            const idx = e.key.toLowerCase().charCodeAt(0) - 97;
+            if (idx < q.options.length) window._selectAnswer(idx);
+        } else if (e.key === 'ArrowRight' || e.key === 'n' || e.key === 'N') {
+            window._nextQuestion();
+        } else if (e.key === 'ArrowLeft' || e.key === 'p' || e.key === 'P') {
+            window._prevQuestion();
+        }
+    };
+    document.addEventListener('keydown', window._quizKeyHandler);
+
+    // Question grid map modal
+    window._showQuestionGrid = () => {
+        const existing = document.getElementById('quiz-grid-modal');
+        if (existing) existing.remove();
+
+        const modal = document.createElement('div');
+        modal.id = 'quiz-grid-modal';
+        modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in';
+        modal.innerHTML = `
+            <div class="glass-card w-full max-w-md p-5 rounded-3xl border border-white/10 bg-background-dark/95 shadow-2xl flex flex-col max-h-[85vh]">
+                <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-lg">grid_view</span>
+                        <h3 class="text-xs font-bold text-white uppercase tracking-wider">Mapa de Preguntas</h3>
+                    </div>
+                    <button onclick="document.getElementById('quiz-grid-modal').remove()" class="text-slate-400 hover:text-white p-1 rounded-full">
+                        <span class="material-symbols-outlined text-lg">close</span>
+                    </button>
+                </div>
+                <p class="text-[11px] text-slate-400 my-2.5">Elegí cualquier pregunta para responderla o revisarla directamente:</p>
+                <div class="grid grid-cols-5 gap-2 overflow-y-auto p-1 flex-1 max-h-[50vh]">
+                    ${exam.questions.map((_, i) => {
+                        const isAns = exam.answers[i] !== null;
+                        const isCurr = state.currentIndex === i;
+                        return `
+                            <button onclick="window._jumpToQuestion(${i})" class="h-11 rounded-xl font-mono text-xs font-bold flex items-center justify-center transition-all active:scale-90
+                                ${isCurr ? 'ring-2 ring-primary bg-primary text-white shadow-lg shadow-primary/30' : 
+                                  isAns ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 
+                                  'bg-white/5 text-slate-400 border border-white/5 hover:border-white/20'}">
+                                ${i + 1}
+                            </button>
+                        `;
+                    }).join('')}
+                </div>
+                <div class="flex items-center justify-between pt-3 border-t border-white/10 text-[10px] text-slate-400">
+                    <span class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-emerald-400 inline-block"></span> Respondida</span>
+                    <span class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-white/20 inline-block"></span> Pendiente</span>
+                    <span class="flex items-center gap-1.5"><span class="size-2 rounded-full bg-primary inline-block"></span> Actual</span>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    };
+
+    window._jumpToQuestion = (i) => {
+        const m = document.getElementById('quiz-grid-modal');
+        if (m) m.remove();
+        state.currentIndex = i;
+        renderAcademia();
+    };
+
     // Handlers
     window._selectAnswer = (index) => {
         exam.answers[state.currentIndex] = index;
+        if (navigator.vibrate) try { navigator.vibrate(15); } catch {}
         renderAcademia();
     };
 
@@ -684,6 +885,7 @@ function _renderExamView(container) {
     window._exitExam = () => {
         if (confirm('¿Seguro que querés abandonar el simulacro? Se perderá tu progreso.')) {
             if (window._quizTimerInterval) clearInterval(window._quizTimerInterval);
+            if (window._quizKeyHandler) document.removeEventListener('keydown', window._quizKeyHandler);
             state.currentExam = null;
             state.examFinished = false;
             state.examResults = null;
@@ -693,6 +895,7 @@ function _renderExamView(container) {
 
     window._finishExam = () => {
         if (window._quizTimerInterval) clearInterval(window._quizTimerInterval);
+        if (window._quizKeyHandler) document.removeEventListener('keydown', window._quizKeyHandler);
 
         const unanswered = exam.answers.filter(a => a === null).length;
         if (unanswered > 0 && !confirm(`Tenés ${unanswered} pregunta(s) sin responder. ¿Finalizar igual?`)) {
@@ -744,6 +947,9 @@ function _renderExamView(container) {
             date: new Date().toISOString()
         });
 
+        // Actualizar agente de retroalimentación inteligente
+        _updateFeedbackAgent(state.examResults);
+
         // Contabilizar intento gratuito si no es PRO
         if (!_isIsepPro()) {
             const used = _incrementFreeAttempts();
@@ -779,6 +985,10 @@ function _renderResultsView(container) {
         : results.difficulty === 'media'
         ? '<span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-bold">🟡 Dificultad Media</span>'
         : '<span class="px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 text-[10px] font-bold">🔴 Nivel Concurso ISEP (Difícil)</span>';
+
+    // Feedback Agent: análisis por tema del examen actual
+    const topicBreakdown = _getTopicAnalysisFromDetails(results.details);
+    const suggestedDiff = _getSuggestedDifficulty();
 
     container.innerHTML = `
         <header class="sticky top-0 z-50 bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 h-16 flex items-center gap-4">
@@ -833,6 +1043,38 @@ function _renderResultsView(container) {
                     <p class="text-[9px] text-slate-500 uppercase font-bold">Tiempo</p>
                 </div>
             </div>
+
+            <!-- FEEDBACK AGENT: ANÁLISIS POR TEMA -->
+            ${topicBreakdown.length > 0 ? `
+                <div class="space-y-2">
+                    <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-xs text-blue-400">insights</span> Rendimiento por Tema
+                    </h3>
+                    <div class="glass-card rounded-2xl border border-white/5 p-3.5 space-y-2.5">
+                        ${topicBreakdown.map(t => `
+                            <div>
+                                <div class="flex items-center justify-between mb-1">
+                                    <span class="text-[10px] text-slate-300 font-medium truncate max-w-[70%]">${t.label}</span>
+                                    <span class="text-[10px] font-bold ${t.rate >= 80 ? 'text-emerald-400' : t.rate >= 50 ? 'text-amber-400' : 'text-red-400'}">${t.rate}% (${t.correct}/${t.total})</span>
+                                </div>
+                                <div class="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                    <div class="h-full rounded-full ${t.rate >= 80 ? 'bg-emerald-500' : t.rate >= 50 ? 'bg-amber-500' : 'bg-red-500'}" style="width: ${t.rate}%; transition: width 0.5s ease"></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+
+            ${suggestedDiff ? `
+                <div class="p-3.5 rounded-2xl bg-gradient-to-r from-blue-500/5 to-indigo-500/5 border border-blue-500/15 flex items-start gap-2.5" style="animation: fadeIn 0.5s ease-out">
+                    <span class="material-symbols-outlined text-blue-400 text-lg shrink-0 mt-0.5">psychology</span>
+                    <div>
+                        <p class="text-[10px] font-bold text-blue-300 uppercase tracking-wider mb-0.5">Recomendación del Agente</p>
+                        <p class="text-[11px] text-slate-300 leading-relaxed">${suggestedDiff.reason}</p>
+                    </div>
+                </div>
+            ` : ''}
 
             <!-- ACTIONS -->
             <div class="flex gap-2">
@@ -1011,6 +1253,13 @@ function _renderHistorialTab(container) {
     const avgScore = Math.round(history.reduce((acc, h) => acc + h.percentage, 0) / totalExams);
     const bestScore = Math.max(...history.map(h => h.percentage));
 
+    // Feedback Agent: insights para el historial
+    const _fbWeak = _getWeakTopics();
+    const _fbStrong = _getStrongTopics();
+    const _fbCurve = _getLearningCurve();
+    const _fbSuggested = _getSuggestedDifficulty();
+    const _fbHasInsights = _fbWeak.length > 0 || _fbCurve;
+
     container.innerHTML = `
         <div class="p-5 space-y-5 max-w-lg mx-auto">
             <!-- STATS CARDS -->
@@ -1028,6 +1277,43 @@ function _renderHistorialTab(container) {
                     <p class="text-[9px] text-slate-500 uppercase tracking-wider font-bold">Mejor</p>
                 </div>
             </div>
+
+            <!-- FEEDBACK AGENT: INSIGHTS -->
+            ${_fbHasInsights ? `
+                <div class="space-y-3 p-4 rounded-3xl bg-gradient-to-br from-blue-900/20 to-indigo-900/10 border border-blue-500/15" style="animation: fadeIn 0.4s ease-out">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="material-symbols-outlined text-blue-400 text-base">psychology</span>
+                        <h3 class="text-[10px] font-bold text-blue-300 uppercase tracking-widest">Agente de Retroalimentación</h3>
+                    </div>
+                    ${_fbCurve ? `
+                        <div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/5">
+                            <span class="material-symbols-outlined text-base ${_fbCurve.trend > 0 ? 'text-emerald-400' : _fbCurve.trend < 0 ? 'text-red-400' : 'text-slate-400'}">${_fbCurve.trend > 0 ? 'trending_up' : _fbCurve.trend < 0 ? 'trending_down' : 'trending_flat'}</span>
+                            <div>
+                                <p class="text-[11px] text-slate-200 font-medium">Curva de Aprendizaje</p>
+                                <p class="text-[10px] text-slate-400">${_fbCurve.trend > 0 ? 'Mejoraste +' + _fbCurve.trend + '% (de ' + _fbCurve.avgFirst + '% a ' + _fbCurve.avgSecond + '%)' : _fbCurve.trend < 0 ? 'Bajaste ' + _fbCurve.trend + '% — repasá los temas débiles' : 'Rendimiento estable en ' + _fbCurve.avgSecond + '%'}</p>
+                            </div>
+                        </div>
+                    ` : ''}
+                    ${_fbWeak.length > 0 ? `
+                        <div class="space-y-1.5">
+                            <p class="text-[10px] font-bold text-red-400 uppercase tracking-wider ml-0.5">⚠ Temas a Reforzar</p>
+                            ${_fbWeak.slice(0, 3).map(t => '<div class="flex items-center justify-between p-2 rounded-xl bg-red-500/5 border border-red-500/10"><span class="text-[10px] text-slate-300 truncate flex-1">' + t.label + '</span><span class="text-[10px] font-bold text-red-400 ml-2">' + t.rate + '% (' + t.correct + '/' + t.total + ')</span></div>').join('')}
+                        </div>
+                    ` : ''}
+                    ${_fbStrong.length > 0 ? `
+                        <div class="space-y-1.5">
+                            <p class="text-[10px] font-bold text-emerald-400 uppercase tracking-wider ml-0.5">✓ Temas Dominados</p>
+                            ${_fbStrong.slice(0, 2).map(t => '<div class="flex items-center justify-between p-2 rounded-xl bg-emerald-500/5 border border-emerald-500/10"><span class="text-[10px] text-slate-300 truncate flex-1">' + t.label + '</span><span class="text-[10px] font-bold text-emerald-400 ml-2">' + t.rate + '% (' + t.correct + '/' + t.total + ')</span></div>').join('')}
+                        </div>
+                    ` : ''}
+                    ${_fbSuggested ? `
+                        <div class="p-2.5 rounded-xl bg-blue-500/5 border border-blue-500/10 flex items-start gap-2">
+                            <span class="material-symbols-outlined text-blue-400 text-sm mt-0.5">school</span>
+                            <p class="text-[10px] text-blue-300 leading-relaxed">${_fbSuggested.reason}</p>
+                        </div>
+                    ` : ''}
+                </div>
+            ` : ''}
 
             <!-- HISTORY LIST -->
             <div class="space-y-2">
