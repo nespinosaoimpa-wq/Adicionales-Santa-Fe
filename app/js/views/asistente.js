@@ -544,10 +544,16 @@ function renderCentinela(container) {
                 </div>
             </div>
 
-            <button onclick="window.openGeminiKeyModal()" class="px-2.5 py-1.5 rounded-xl ${hasKey ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20'} text-[10px] font-bold transition-all flex items-center gap-1 active:scale-95">
-                <span class="material-symbols-outlined text-xs">${hasKey ? 'key' : 'key_off'}</span>
-                ${hasKey ? 'API Key ✓' : 'Configurar Clave'}
-            </button>
+            <div class="flex items-center gap-1.5">
+                <button onclick="window.openAgentMemoryModal && window.openAgentMemoryModal()" class="px-2 py-1.5 rounded-xl bg-purple-500/10 text-purple-400 border border-purple-500/20 hover:bg-purple-500/20 text-[10px] font-bold transition-all flex items-center gap-1 active:scale-95" title="Memoria IA local">
+                    <span class="material-symbols-outlined text-xs">psychology</span>
+                    🧠
+                </button>
+                <button onclick="window.openGeminiKeyModal()" class="px-2.5 py-1.5 rounded-xl ${hasKey ? 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 hover:bg-indigo-500/20' : 'bg-amber-500/10 text-amber-400 border border-amber-500/20 hover:bg-amber-500/20'} text-[10px] font-bold transition-all flex items-center gap-1 active:scale-95">
+                    <span class="material-symbols-outlined text-xs">${hasKey ? 'key' : 'key_off'}</span>
+                    ${hasKey ? 'API Key ✓' : 'Configurar Clave'}
+                </button>
+            </div>
         </header>
 
         <main class="flex flex-col h-[calc(100vh-4rem)] bg-background-light dark:bg-background-dark overflow-hidden">
@@ -1411,8 +1417,13 @@ function renderCentinela(container) {
                     // Keep history manageable (last 10 messages = 5 turns)
                     while (geminiChatHistory.length > 10) geminiChatHistory.shift();
 
+                    // Aprendizaje del agente
+                    if (window.AgentLearningService) window.AgentLearningService.learnFromQuery(msg, 'gemini_live');
+
+                    const feedbackId = 'fb-' + Date.now();
+                    const feedbackBtns = `<div class="flex items-center gap-2 mt-2 pt-2 border-t border-white/5"><button onclick="window.AgentLearningService && window.AgentLearningService.recordPositiveFeedback(); this.parentElement.innerHTML='<span class=\'text-[9px] text-emerald-400\'>✅ Gracias por tu feedback</span>'" class="text-[9px] px-2 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all active:scale-95">👍 Útil</button><button onclick="window.openCorrectionFeedbackModal && window.openCorrectionFeedbackModal('${msg.replace(/'/g, "\\'").substring(0,100)}','${(geminiRes.text||'').replace(/'/g, "\\'").substring(0,80)}'); this.parentElement.innerHTML='<span class=\'text-[9px] text-amber-400\'>📝 Corregida</span>'" class="text-[9px] px-2 py-1 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 transition-all active:scale-95">👎 Corregir</button></div>`;
                     const sourceBadge = `<span class="text-[9px] text-indigo-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">auto_awesome</span>Gemini AI · Respuesta generativa en vivo</span>`;
-                    el.innerHTML = `<div class="space-y-1">${sourceBadge}<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(geminiRes.text)}</div></div>`;
+                    el.innerHTML = `<div class="space-y-1">${sourceBadge}<div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(geminiRes.text)}</div>${feedbackBtns}</div>`;
                     chat.scrollTop = chat.scrollHeight;
                     logQueryToAudit(msg, geminiRes.text, 100, 'gemini_api_live');
                     return;
@@ -1487,12 +1498,18 @@ function renderCentinela(container) {
                 sourceBadge = `<span class="text-[9px] text-amber-400 flex items-center gap-1 mb-2"><span class="material-symbols-outlined text-[11px]">info</span>Base Legal Local · Confianza media · ${usedCategory.replace(/_/g, ' ')}</span>`;
             }
 
-            // --- G. RENDER FINAL ---
+            // --- G. APRENDIZAJE LOCAL ---
+            if (window.AgentLearningService) window.AgentLearningService.learnFromQuery(msg, usedCategory);
+
+            // --- H. RENDER FINAL ---
+            const localFbId = 'lfb-' + Date.now();
+            const localFeedbackBtns = `<div class="flex items-center gap-2 mt-2 pt-2 border-t border-white/5"><button onclick="window.AgentLearningService && window.AgentLearningService.recordPositiveFeedback(); this.parentElement.innerHTML='<span class=\'text-[9px] text-emerald-400\'>✅ Gracias</span>'" class="text-[9px] px-2 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 hover:bg-emerald-500/20 transition-all active:scale-95">👍 Útil</button><button onclick="window.openCorrectionFeedbackModal && window.openCorrectionFeedbackModal('${msg.replace(/'/g, "\\'").substring(0,100)}',''); this.parentElement.innerHTML='<span class=\'text-[9px] text-amber-400\'>📝 Corregida</span>'" class="text-[9px] px-2 py-1 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 transition-all active:scale-95">👎 Corregir</button></div>`;
             el.innerHTML = `
                 <div class="space-y-1">
                     ${sourceBadge}
                     <div class="text-xs text-slate-800 dark:text-slate-200 leading-relaxed">${renderMarkdown(finalResponseText)}</div>
                     ${renderSuggestionChips(suggestions)}
+                    ${localFeedbackBtns}
                 </div>`;
 
             chat.scrollTop = chat.scrollHeight;

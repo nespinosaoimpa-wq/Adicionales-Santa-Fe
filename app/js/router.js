@@ -43,7 +43,7 @@ window.router = {
         };
 
         // Special Protection for Admin Panel
-        if ((hash === '#admin' || hash === '#admin/auditoria') && !isAdminUser()) {
+        if ((hash === '#admin' || hash === '#admin/auditoria' || hash === '#admin/metricas') && !isAdminUser()) {
             console.warn("👮 Direct access to #admin blocked for non-admin");
             showToast("Acceso Restringido");
             this.navigateTo('#agenda');
@@ -64,6 +64,11 @@ window.router = {
         const isAdminUser = () => {
             return typeof store !== 'undefined' && store.isAdmin ? store.isAdmin() : false;
         };
+
+        // Telemetría de visitas y vistas de pantalla en tiempo real
+        if (window.TelemetryService && typeof window.TelemetryService.trackPageView === 'function') {
+            window.TelemetryService.trackPageView(route);
+        }
 
         try {
             app.innerHTML = ''; // Clear current view
@@ -156,6 +161,9 @@ window.router = {
                     break;
                 case '#admin/auditoria':
                     renderAuditoria(app);
+                    break;
+                case '#admin/metricas':
+                    renderAdminMetrics(app);
                     break;
                 case '#profile':
                     renderProfile(app);

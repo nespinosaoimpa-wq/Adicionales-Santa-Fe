@@ -6,8 +6,8 @@
 function renderAuditoria(container) {
     if (!container) container = document.getElementById('app');
 
-    // Only allow if admin
-    if (store.user?.role !== 'admin') {
+    // Only allow if exclusive admin
+    if (!store.isAdmin || !store.isAdmin()) {
         router.navigateTo('#agenda');
         return;
     }

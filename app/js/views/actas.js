@@ -340,8 +340,166 @@ const ACTA_TEMPLATES = {
 
 
 // ══════════════════════════════════════════════════════════════
-// 3. GENERADOR DE TEXTO JURÍDICO-POLICIAL FORMAL
+// 3. GENERADOR DE CUERPO NARRATIVO JURÍDICO-POLICIAL FORMAL
 // ══════════════════════════════════════════════════════════════
+function generateActaBody(tipo, data, fechaCompleta) {
+    let body = '';
+
+    switch (tipo) {
+        case 'procedimiento':
+            body = `Que hallándose el personal policial preventor en cumplimiento de servicios de prevención en ${data.lugar}, en el marco de: ${data.motivo_intervencion}.\n\n` +
+                   `Que en tales circunstancias y de conformidad con lo actuado: ${data.descripcion}\n\n` +
+                   `Que en el lugar se individualiza formalmente a el/los causante/s:\n${data.involucrados}\n\n` +
+                   `Que consecuentemente se adoptan las medidas y temperamento de rigor: ${data.resultado}\n\n` +
+                   (data.elementos_secuestrados ? `Que asimismo, en el lugar se procede al formal secuestro preventivo bajo correspondiente cadena de custodia de:\n${data.elementos_secuestrados}\n\n` : '') +
+                   (data.fiscal ? `Que de forma inmediata se estableció comunicación telefónica con el Ministerio Público de la Acusación, siendo atendido por el/la Fiscal de turno ${data.fiscal}, quien interiorizado/a de los pormenores, dispuso las directivas procesales pertinentes.\n\n` : '') +
+                   `Que todo lo actuado se lleva a cabo en presencia ininterrumpida de los testigos hábiles de actuación convocados al efecto (Art. 138 de la Ley N° 12.734):\n` +
+                   `• Primer Testigo: ${data.testigo1}\n` +
+                   (data.testigo2 ? `• Segundo Testigo: ${data.testigo2}\n\n` : '\n') +
+                   (data.observaciones ? `Que en cuanto a constancias complementarias y examen médico: ${data.observaciones}\n\n` : '');
+            break;
+
+        case 'aprehension':
+            body = `Que siendo la hora precedentemente indicada, en calle ${data.lugar_aprehension}, de la localidad de ${data.localidad}, se procede formalmente a la APREHENSIÓN del/la ciudadano/a ${data.aprehendido_nombre}, D.N.I. N° ${data.aprehendido_dni}, de nacionalidad ${data.aprehendido_nacionalidad || 'Argentina'}, con domicilio real en ${data.aprehendido_domicilio}, en estricto cumplimiento del Artículo 268 del Código Procesal Penal de la Provincia de Santa Fe.\n\n` +
+                   `Que la presente privación de la libertad se funda en la presunta comisión del delito de: ${data.delito_atribuido}.\nCircunstancias fácticas: ${data.causa_aprehension}.\n\n` +
+                   `Que en presencia de los testigos de actuación, se le hace saber expresamente al aprehendido los derechos y garantías constitucionales que le asisten por mandato legal (Art. 268 C.P.P.P.S.F.):\n` +
+                   `a) A que se le informe en forma comprensible el motivo de su privación de la libertad.\n` +
+                   `b) A guardar silencio, no estando obligado a declarar contra sí mismo, sin que su negativa constituya presunción de culpabilidad.\n` +
+                   `c) A designar de inmediato abogado defensor de su confianza o, en su defecto, ser asistido por el Servicio Público Provincial de Defensa Penal (SPPDP).\n` +
+                   `d) A comunicarse telefónicamente de inmediato con una persona de su elección para anoticiarla de su situación procesal.\n` +
+                   `e) A ser examinado a la brevedad por el médico policial legista para certificar su estado psicofísico.\n\n` +
+                   `Que notificado/a formalmente de sus derechos, manifiesta en cuanto a su defensa técnica: ${data.abogado_designado || 'SPPDP (Defensor Público Oficial)'}; respecto a la comunicación telefónica: ${data.llamada_familiar || 'Realizada en el acto de plena conformidad'}.\n\n` +
+                   `Que se da inmediata intervención y conocimiento al Ministerio Público de la Acusación: ${data.fiscal}.\n\n` +
+                   `Que todo lo actuado es presenciado por los testigos hábiles de actuación:\n` +
+                   `• Primer Testigo: ${data.testigo1}\n` +
+                   (data.testigo2 ? `• Segundo Testigo: ${data.testigo2}\n\n` : '\n') +
+                   (data.observaciones ? `Que en cuanto al estado psicofísico y observaciones pertinentes: ${data.observaciones}\n\n` : '');
+            break;
+
+        case 'requisa':
+            body = `Que encontrándose el personal policial actuante en ${data.lugar}, de la localidad de ${data.localidad}, se procede a la ejecución de ${data.tipo_requisa.toUpperCase()}, con sujeción estricta a los Artículos 212 y 213 del Código Procesal Penal de Santa Fe.\n\n` +
+                   `Que la medida se practica respecto de: ${data.persona_requisada}` + (data.vehiculo_datos ? `, y sobre el vehículo involucrado: ${data.vehiculo_datos}.\n\n` : '.\n\n') +
+                   `Que de acuerdo a lo normado, la diligencia se fundamenta en motivos previos y fundados: ${data.motivo_fundado}.\n\n` +
+                   `Que de conformidad con la ley de rito, ${data.intimacion_previa.toLowerCase()}.\n\n` +
+                   `Que practicada la inspección minuciosa, se arriba al siguiente resultado y/o efectos habidos:\n${data.resultado}\n\n` +
+                   `Que el acto cuenta con la asistencia de los testigos hábiles de actuación:\n` +
+                   `• Primer Testigo: ${data.testigo1}\n` +
+                   (data.testigo2 ? `• Segundo Testigo: ${data.testigo2}\n\n` : '\n') +
+                   (data.observaciones ? `Que se deja constancia complementaria: ${data.observaciones}\n\n` : '');
+            break;
+
+        case 'siniestro':
+            body = `Que siendo comisionado el personal policial a constituirse en ${data.lugar}, ${data.localidad}, se constata la producción de un siniestro vial sobre la calzada.\n\n` +
+                   `Que se individualizan los rodados y conductores protagonistas:\n` +
+                   `• PARTE A: Vehículo: ${data.vehiculo_a} - Conductor: ${data.conductor_a} - Seguro Obligatorio: ${data.seguro_a}.\n` +
+                   `• PARTE B: Vehículo: ${data.vehiculo_b} - Conductor: ${data.conductor_b} - Seguro Obligatorio: ${data.seguro_b}.\n\n` +
+                   `Que en relación a las personas involucradas y lesionados:\n${data.lesionados}\n\n` +
+                   `Que se aprecian a simple vista los siguientes daños materiales en las unidades:\n${data.danos_materiales}\n\n` +
+                   `Que en cuanto a la mecánica preliminar apreciada del hecho: ${data.mecanica}.\n\n` +
+                   (data.intervencion_peritos ? `Que se solicitó la intervención de las áreas periciales pertinentes: ${data.intervencion_peritos}.\n\n` : '') +
+                   (data.fiscal ? `Que se puso en conocimiento de la Fiscalía en turno: ${data.fiscal}.\n\n` : '');
+            break;
+
+        case 'secuestro':
+            body = `Que en el marco del CUIJ / Legajo de Investigación N° ${data.nro_causa}, constituidos en ${data.lugar}, localidad de ${data.localidad}, se procede al formal SECUESTRO (Art. 217 CPP) de los efectos que seguidamente se detallan:\n\n` +
+                   (data.imputado_victima ? `Que se consignan como partes vinculadas: ${data.imputado_victima}.\n\n` : '') +
+                   `Que los elementos secuestrados preventivamente se discriminan de la siguiente manera:\n${data.elementos_detalle}\n\n` +
+                   `Que dichos efectos han sido debidamente embalados, rotulados y precintados conforme protocolo técnico: ${data.embalaje_precinto}, garantizándose su inalterabilidad y cadena de custodia.\n\n` +
+                   `Que se designa en carácter de depositario / destino judicial: ${data.depositario}.\n\n` +
+                   `Que la presente incautación se realiza con la asistencia de los testigos hábiles de actuación:\n` +
+                   `• Primer Testigo: ${data.testigo1}\n` +
+                   (data.testigo2 ? `• Segundo Testigo: ${data.testigo2}\n\n` : '\n') +
+                   (data.observaciones ? `Que como constancia final: ${data.observaciones}\n\n` : '');
+            break;
+
+        case 'custodia':
+            body = `PROTOCOLO OFICIAL DE REGISTRO Y RESGUARDO (M.P.A. SANTA FE)\n\n` +
+                   `• DATOS DE LA CAUSA:\n` +
+                   `  CUIJ: ${data.cuij}\n` +
+                   `  FISCALÍA: ${data.fiscal}\n` +
+                   `  IMPUTADO: ${data.imputado || 'A DETERMINAR'}\n` +
+                   `  VÍCTIMA: ${data.victima || 'LA SOCIEDAD'}\n` +
+                   `  PROCEDIMIENTO ORIGEN: ${data.procedimiento}\n\n` +
+                   `• RECOLECCIÓN DEL INDICIO:\n` +
+                   `  LUGAR EXACTO: ${data.lugar_recoleccion}\n` +
+                   `  FECHA Y HORA: ${fechaCompleta}\n` +
+                   `  FUNCIONARIO RECOLECTOR: ${data.recolector}\n` +
+                   `  DEPENDENCIA: ${data.dependencia_recolector}\n\n` +
+                   `• DESCRIPCIÓN TÉCNICA DEL INDICIO:\n${data.descripcion_indicio}\n\n` +
+                   `• SEGURIDAD DEL EMBALAJE:\n` +
+                   `  TIPO DE EMBALAJE: ${data.embalaje}\n` +
+                   `  N° DE PRECINTO DE SEGURIDAD: ${data.precinto}\n\n` +
+                   `• DESTINO / DERIVACIÓN: ${data.destino}\n\n` +
+                   `REGISTRO DE TRAZABILIDAD (ENTREGA Y RECEPCIÓN):\n` +
+                   `Entregado por: ${data.recolector}  - Firma: _______________\n` +
+                   `Recibido por: ____________________________  - Firma: _______________\n` +
+                   `Fecha/Hora de Recepción: ____/____/2026 a las ____:____ hs.\n\n`;
+            break;
+
+        case 'allanamiento':
+            body = `Que en cumplimiento estricto de la Orden de Allanamiento y Registro dispuesta por el ${data.juzgado}, con intervención de la Unidad Fiscal a cargo de ${data.fiscal}, librada en fecha ${data.fecha_orden}, dentro del CUIJ N° ${data.nro_causa}, el personal policial actuante se constituye en el domicilio sito en calle ${data.direccion}, de la localidad de ${data.localidad}.\n\n` +
+                   `Que en el inmueble atiende el/la llamado/a ${data.morador}, a quien en presencia de los testigos hábiles se le impone del mandato judicial que motiva la diligencia: ${data.notificacion_orden}.\n\n` +
+                   `Que la diligencia se lleva a cabo con la intervención y contralor de los testigos civiles de actuación:\n` +
+                   `• Primer Testigo: ${data.testigo1}\n` +
+                   `• Segundo Testigo: ${data.testigo2}\n\n` +
+                   `Que practicado el registro del inmueble se obtiene el siguiente inventario de lo hallado:\n${data.inventario}\n\n` +
+                   (data.observaciones ? `Que como observaciones y constancia de cierre: ${data.observaciones}\n\n` : '');
+            break;
+
+        case 'constatacion':
+            body = `Que en fecha y hora indicadas, el suscrito funcionario policial se hace presente en ${data.lugar}, de la localidad de ${data.localidad}, a los fines de labrar formal constatación ocular por motivo de: ${data.motivo_constatacion}.\n\n` +
+                   `Que en el lugar se encuentra presente el/la requirente: ${data.requirente}.\n\n` +
+                   `Que se constata ocularmente lo siguiente:\n${data.estado_observado}\n\n` +
+                   `Que como constancia técnica y registro fotográfico: ${data.tomas_fotograficas}.\n\n` +
+                   `Que presenció la diligencia el testigo de actuación:\n• Testigo: ${data.testigo1}\n\n` +
+                   (data.observaciones ? `Que se deja constancia complementaria: ${data.observaciones}\n\n` : '');
+            break;
+
+        case 'entrega_menor':
+            body = `Que en sede de esta dependencia policial, se encuentra resguardado/a el/la menor ${data.menor_nombre}, D.N.I. N° ${data.menor_dni}, habiéndose intervenido en razón de: ${data.motivo_intervencion}.\n\n` +
+                   `Que previo a la entrega, el/la menor fue examinado/a medicamente conforme a protocolo: ${data.examen_medico}.\n\n` +
+                   `Que se dio conocimiento e inmediata intervención al Organismo de Niñez competente: ${data.organismo_ninez}.\n\n` +
+                   `Que se hace presente en la dependencia policial el/la ciudadano/a ${data.progenitor_nombre}, D.N.I. N° ${data.progenitor_dni}, con domicilio en ${data.progenitor_domicilio}, quien acredita fehacientemente su carácter y vínculo legal mediante: ${data.parentesco_acreditado}.\n\n` +
+                   `Que notificado/a de su responsabilidad, el/la compareciente asume formalmente el compromiso legal de guarda y cuidado: ${data.compromiso_guarda}.\n\n` +
+                   (data.observaciones ? `Que se deja constancia además: ${data.observaciones}\n\n` : '');
+            break;
+
+        case 'notificacion':
+            body = `Que en la fecha y hora indicadas, en calle ${data.domicilio}, de la localidad de ${data.localidad}, se procede a notificar de forma fehaciente y personal al ciudadano ${data.notificado_nombre}, D.N.I. N° ${data.notificado_dni}, de lo ordenado por: ${data.autoridad_ordenante}, en autos caratulados con el Expediente/CUIJ N° ${data.expediente}.\n\n` +
+                   `Que en este acto se le hace saber en forma clara y circunstanciada el contenido de las medidas resueltas:\n${data.contenido_medida}\n\n` +
+                   `Que se le hace saber expresamente el apercibimiento legal en caso de desobediencia: ${data.apercibimiento_art239}.\n\n` +
+                   `Que respecto a la constancia de notificación y recepción: ${data.actitud_notificado}.\n\n` +
+                   (data.testigo1 ? `Que presenció el acto el testigo de actuación:\n• Testigo: ${data.testigo1}\n\n` : '');
+            break;
+
+        case 'denuncia':
+            body = `Que comparece espontáneamente ante esta oficina de guardia policial el/la ciudadano/a ${data.denunciante_nombre}, titular del D.N.I. N° ${data.denunciante_dni}, de nacionalidad y estado civil: ${data.denunciante_nacionalidad_edad}, con domicilio real en ${data.denunciante_domicilio}, de ocupación ${data.denunciante_ocupacion || 'Empleado/a'}.\n\n` +
+                   `Que previamente se le informa formalmente de las penalidades previstas en el Artículo 245 del Código Penal para quienes dieren falsas denuncias o acusaren falsamente a inocentes, enterado/a de lo cual presta juramento de decir verdad de cuanto supiere y le fuere preguntado.\n\n` +
+                   `Que en cuanto a las circunstancias de tiempo y lugar del suceso:\n` +
+                   `• Lugar del hecho: ${data.lugar_hecho}\n` +
+                   `• Fecha y Hora: ${data.fecha_hora_hecho}\n\n` +
+                   `Que respecto al relato circunstanciado de los hechos, manifiesta:\n${data.hechos}\n\n` +
+                   (data.elementos_sustraidos ? `Que en cuanto a los efectos sustraídos y/o daños causados:\n${data.elementos_sustraidos}\n\n` : '') +
+                   (data.autores_sospechosos ? `Que sobre datos de presuntos autores o partícipes:\n${data.autores_sospechosos}\n\n` : '') +
+                   (data.testigos_pruebas ? `Que ofrece en calidad de testigos y/o medios de prueba:\n${data.testigos_pruebas}\n\n` : '') +
+                   `Que en orden a la acción penal y constancia: ${data.instancia_penal}.\n\n`;
+            break;
+
+        case 'oficio':
+            body = `A: ${data.destinatario.toUpperCase()}\n` +
+                   `ORGANISMO: ${data.organismo.toUpperCase()}\n` +
+                   `REF: ${data.referencia}\n` +
+                   `OBJETO: ${data.objeto}\n\n` +
+                   `Tengo el agrado de dirigirme a Usted, en el marco de la actuación sumarial de referencia, a efectos de elevar para su conocimiento y demás fines legales que estime corresponder lo siguiente:\n\n` +
+                   `${data.cuerpo}\n\n` +
+                   `DOCUMENTACIÓN ANEXA Y FOJAS:\n${data.anexos_fojas}\n\n` +
+                   `Sin otro particular, saludo a Usted con mi más distinguida consideración funcional.\n\n`;
+            break;
+    }
+
+    return body;
+}
+
 function generateActaText(tipo, data) {
     const settings = getActaSettings();
     const now = new Date();
@@ -367,170 +525,7 @@ function generateActaText(tipo, data) {
                  `                              ${titulo}\n\n` +
                  `En la ciudad de ${data.localidad || 'Santa Fe'}, Provincia de Santa Fe, a los ${diaLetras} (${now.getDate()}) días del mes de ${mesNombre} del año ${anio}, siendo las ${hora} horas, en cumplimiento de los deberes funcionales conferidos por la Ley del Personal Policial N° 12.521 y las prescripciones del Código Procesal Penal de la Provincia de Santa Fe (Ley N° 12.734), el/la suscrito/a Oficial actuante, procediendo formalmente, HACE CONSTAR:\n\n`;
 
-    let body = '';
-
-    switch (tipo) {
-        case 'procedimiento':
-            body = `PRIMERO (LUGAR Y CIRCUNSTANCIAS): Que hallándose el personal policial preventor en cumplimiento de servicios de prevención en ${data.lugar}, en el marco de: ${data.motivo_intervencion}.\n\n` +
-                   `SEGUNDO (IDENTIFICACIÓN DEL/LOS CAUSANTE/S): En el lugar se individualiza formalmente a:\n${data.involucrados}\n\n` +
-                   `TERCERO (DESCRIPCIÓN CIRCUNSTANCIADA): ${data.descripcion}\n\n` +
-                   `CUARTO (MEDIDAS ADOPTADAS Y RESULTADO): ${data.resultado}\n\n` +
-                   (data.elementos_secuestrados ? `QUINTO (ELEMENTOS SECUESTRADOS PREVENTIVAMENTE):\n${data.elementos_secuestrados}\n\n` : '') +
-                   (data.fiscal ? `SEXTO (COMUNICACIÓN AL MINISTERIO PÚBLICO DE LA ACUSACIÓN): Se estableció inmediata comunicación con el/la Fiscal de turno ${data.fiscal}, quien enterado de los pormenores, dispuso las directivas procesales pertinentes.\n\n` : '') +
-                   `SÉPTIMO (TESTIGOS HÁBILES DE ACTUACIÓN - ART. 138 CPP):\n` +
-                   `1) Testigo: ${data.testigo1}\n` +
-                   (data.testigo2 ? `2) Testigo: ${data.testigo2}\n\n` : '\n') +
-                   (data.observaciones ? `OCTAVO (OBSERVACIONES Y EXAMEN MÉDICO):\n${data.observaciones}\n\n` : '');
-            break;
-
-        case 'aprehension':
-            body = `PRIMERO (LUGAR Y FECHA): Que siendo la hora precedentemente indicada, en calle ${data.lugar_aprehension}, de la localidad de ${data.localidad}, se procede formalmente a la APREHENSIÓN del/la ciudadano/a ${data.aprehendido_nombre}, D.N.I. N° ${data.aprehendido_dni}, de nacionalidad ${data.aprehendido_nacionalidad || 'Argentina'}, con domicilio real en ${data.aprehendido_domicilio}, en estricto cumplimiento del Artículo 268 del Código Procesal Penal de la Provincia de Santa Fe.\n\n` +
-                   `SEGUNDO (MOTIVO Y HECHO ATRIBUIDO): La presente privación de la libertad se funda en la presunta comisión del delito de: ${data.delito_atribuido}.\nCircunstancias fácticas: ${data.causa_aprehension}\n\n` +
-                   `TERCERO (INFORMACIÓN DE DERECHOS CONSTITUCIONALES - ART. 268 CPP):\n` +
-                   `En presencia de los testigos de actuación, se le hace saber expresamente al aprehendido los derechos que le asisten por mandato constitucional y procesal:\n` +
-                   `a) A que se le informe en forma comprensible el motivo de su privación de la libertad.\n` +
-                   `b) A guardar silencio, no estando obligado a declarar contra sí mismo, sin que su negativa constituya presunción de culpabilidad.\n` +
-                   `c) A designar de inmediato abogado defensor de su confianza o, en su defecto, ser asistido por el Servicio Público Provincial de Defensa Penal (SPPDP).\n` +
-                   `d) A comunicarse telefónicamente de inmediato con una persona de su elección para anoticiarla de su situación procesal.\n` +
-                   `e) A ser examinado a la brevedad por el médico policial legista para acreditar su estado psicofísico.\n\n` +
-                   `CUARTO (COMUNICACIÓN Y DEFENSA):\n` +
-                   `Defensa técnica manifestada: ${data.abogado_designado || 'SPPDP (Defensor Público Oficial)'}.\n` +
-                   `Comunicación telefónica otorgada: ${data.llamada_familiar || 'Realizada de conformidad'}.\n\n` +
-                   `QUINTO (COMUNICACIÓN FISCAL): ${data.fiscal}\n\n` +
-                   `SEXTO (TESTIGOS DE ACTUACIÓN):\n` +
-                   `1) Testigo: ${data.testigo1}\n` +
-                   (data.testigo2 ? `2) Testigo: ${data.testigo2}\n\n` : '\n') +
-                   (data.observaciones ? `SÉPTIMO (ESTADO DE SALUD Y OBSERVACIONES):\n${data.observaciones}\n\n` : '');
-            break;
-
-        case 'requisa':
-            body = `PRIMERO (LUGAR Y TIPO DE PROCEDIMIENTO): Que encontrándose el personal policial actuante en ${data.lugar}, de la localidad de ${data.localidad}, se procede a la ejecución de ${data.tipo_requisa.toUpperCase()}, con sujeción estricta a los Artículos 212 y 213 del Código Procesal Penal de Santa Fe.\n\n` +
-                   `SEGUNDO (PERSONA Y/O VEHÍCULO INTERVENIDO):\n` +
-                   `Persona identificada: ${data.persona_requisada}\n` +
-                   (data.vehiculo_datos ? `Vehículo involucrado: ${data.vehiculo_datos}\n\n` : '\n') +
-                   `TERCERO (MOTIVO FUNDADO PREVIO - ART. 212 CPP): ${data.motivo_fundado}\n\n` +
-                   `CUARTO (INTIMACIÓN PREVIA): De conformidad con la ley de rito, ${data.intimacion_previa.toLowerCase()}.\n\n` +
-                   `QUINTO (RESULTADO DE LA INSPECCIÓN Y ELEMENTOS HABIDOS):\n${data.resultado}\n\n` +
-                   `SEXTO (TESTIGOS DE ACTUACIÓN):\n` +
-                   `1) Testigo: ${data.testigo1}\n` +
-                   (data.testigo2 ? `2) Testigo: ${data.testigo2}\n\n` : '\n') +
-                   (data.observaciones ? `SÉPTIMO (OBSERVACIONES):\n${data.observaciones}\n\n` : '');
-            break;
-
-        case 'siniestro':
-            body = `PRIMERO (LUGAR Y CARACTERÍSTICAS DE LA CALZADA): Que el personal policial es comisionado a ${data.lugar}, ${data.localidad}, donde se constata la producción de un siniestro vial.\n\n` +
-                   `SEGUNDO (PARTE A - VEHÍCULO Y CONDUCTOR):\n` +
-                   `Vehículo A: ${data.vehiculo_a}\n` +
-                   `Conductor A: ${data.conductor_a}\n` +
-                   `Seguro Obligatorio A: ${data.seguro_a}\n\n` +
-                   `TERCERO (PARTE B - VEHÍCULO Y CONDUCTOR):\n` +
-                   `Vehículo B: ${data.vehiculo_b}\n` +
-                   `Conductor B: ${data.conductor_b}\n` +
-                   `Seguro Obligatorio B: ${data.seguro_b}\n\n` +
-                   `CUARTO (LESIONADOS Y ATENCIÓN MÉDICA DE URGENCIA):\n${data.lesionados}\n\n` +
-                   `QUINTO (DAÑOS MATERIALES VISIBLES):\n${data.danos_materiales}\n\n` +
-                   `SEXTO (MECÁNICA PRELIMINAR DEL HECHO):\n${data.mecanica}\n\n` +
-                   (data.intervencion_peritos ? `SÉPTIMO (PERITAJES Y CIENTÍFICA): ${data.intervencion_peritos}\n\n` : '') +
-                   (data.fiscal ? `OCTAVO (COMUNICACIÓN FISCAL): Interviene ${data.fiscal}.\n\n` : '');
-            break;
-
-        case 'secuestro':
-            body = `PRIMERO (CAUSA Y ACTUACIÓN): Que en el marco del CUIJ / Legajo de Investigación N° ${data.nro_causa}, en ${data.lugar}, localidad de ${data.localidad}, se procede al formal SECUESTRO (Art. 217 CPP) de los efectos que a continuación se discriminan:\n\n` +
-                   (data.imputado_victima ? `Partes vinculadas: ${data.imputado_victima}\n\n` : '') +
-                   `SEGUNDO (INVENTARIO DETALLADO DE ELEMENTOS SECUESTRADOS):\n${data.elementos_detalle}\n\n` +
-                   `TERCERO (EMBALAJE, ROTULADO Y PRECINTO):\n` +
-                   `Los efectos descriptos han sido embalados conforme protocolo técnico: ${data.embalaje_precinto}, garantizando su inalterabilidad y custodia.\n\n` +
-                   `CUARTO (DEPOSITARIO / DESTINO JUDICIAL): ${data.depositario}\n\n` +
-                   `QUINTO (TESTIGOS DE ACTUACIÓN):\n` +
-                   `1) Testigo: ${data.testigo1}\n` +
-                   (data.testigo2 ? `2) Testigo: ${data.testigo2}\n\n` : '\n') +
-                   (data.observaciones ? `SEXTO (OBSERVACIONES):\n${data.observaciones}\n\n` : '');
-            break;
-
-        case 'custodia':
-            body = `RÓTULO OFICIAL DE CADENA DE CUSTODIA (PROTOCOLO MPA SANTA FE)\n\n` +
-                   `1. DATOS DE LA CAUSA:\n` +
-                   `   CUIJ: ${data.cuij}\n` +
-                   `   FISCALÍA: ${data.fiscal}\n` +
-                   `   IMPUTADO: ${data.imputado || 'A DETERMINAR'}\n` +
-                   `   VÍCTIMA: ${data.victima || 'LA SOCIEDAD'}\n` +
-                   `   PROCEDIMIENTO ORIGEN: ${data.procedimiento}\n\n` +
-                   `2. RECOLECCIÓN DEL INDICIO:\n` +
-                   `   LUGAR EXACTO: ${data.lugar_recoleccion}\n` +
-                   `   FECHA Y HORA: ${fechaCompleta}\n` +
-                   `   FUNCIONARIO RECOLECTOR: ${data.recolector}\n` +
-                   `   DEPENDENCIA: ${data.dependencia_recolector}\n\n` +
-                   `3. DESCRIPCIÓN TÉCNICA DEL INDICIO:\n${data.descripcion_indicio}\n\n` +
-                   `4. SEGURIDAD DEL EMBALAJE:\n` +
-                   `   TIPO DE EMBALAJE: ${data.embalaje}\n` +
-                   `   N° DE PRECINTO DE SEGURIDAD: ${data.precinto}\n\n` +
-                   `5. DESTINO / DERIVACIÓN: ${data.destino}\n\n` +
-                   `REGISTRO DE TRAZABILIDAD (ENTREGA Y RECEPCIÓN):\n` +
-                   `Entregado por: ${data.recolector}  - Firma: _______________\n` +
-                   `Recibido por: ____________________________  - Firma: _______________\n` +
-                   `Fecha/Hora de Recepción: ____/____/2026 a las ____:____ hs.\n\n`;
-            break;
-
-        case 'allanamiento':
-            body = `PRIMERO (MANDATO JUDICIAL): Que en cumplimiento estricto de la Orden de Allanamiento y Registro dispuesta por el ${data.juzgado}, con intervención de la Unidad Fiscal a cargo de ${data.fiscal}, librada en fecha ${data.fecha_orden}, dentro del CUIJ N° ${data.nro_causa}, el personal policial actuante se constituye en el domicilio sito en calle ${data.direccion}, de la localidad de ${data.localidad}.\n\n` +
-                   `SEGUNDO (NOTIFICACIÓN Y MORADOR): En el lugar atiende el/la llamado/a ${data.morador}, a quien en presencia de los testigos hábiles se le impone del mandato judicial que motiva la diligencia: ${data.notificacion_orden}.\n\n` +
-                   `TERCERO (TESTIGOS CIVILES DE ACTUACIÓN):\n` +
-                   `1) Testigo: ${data.testigo1}\n` +
-                   `2) Testigo: ${data.testigo2}\n\n` +
-                   `CUARTO (REGISTRO DEL INMUEBLE E INVENTARIO DE LO HALLADO):\n${data.inventario}\n\n` +
-                   (data.observaciones ? `QUINTO (OBSERVACIONES Y CIERRE):\n${data.observaciones}\n\n` : '');
-            break;
-
-        case 'constatacion':
-            body = `PRIMERO (LUGAR Y OBJETO): Que en fecha y hora indicadas, el suscrito se hace presente en ${data.lugar}, de la localidad de ${data.localidad}, a los fines de labrar formal constatación por motivo de: ${data.motivo_constatacion}.\n\n` +
-                   `SEGUNDO (REQUIRENTE / COMPARECIENTE): Se encuentra presente en el lugar ${data.requirente}.\n\n` +
-                   `TERCERO (ESTADO FÍSICO OBSERVADO Y COMPROBADO):\n${data.estado_observado}\n\n` +
-                   `CUARTO (REGISTRO TÉCNICO Y FOTOGRÁFICO): ${data.tomas_fotograficas}.\n\n` +
-                   `QUINTO (TESTIGO DE ACTUACIÓN):\nTestigo: ${data.testigo1}\n\n` +
-                   (data.observaciones ? `SEXTO (OBSERVACIONES):\n${data.observaciones}\n\n` : '');
-            break;
-
-        case 'entrega_menor':
-            body = `PRIMERO (INDIVIDUALIZACIÓN DEL MENOR): Que en sede de esta dependencia policial, se encuentra resguardado/a el/la menor ${data.menor_nombre}, D.N.I. N° ${data.menor_dni}, quien fuera trasladado en razón de: ${data.motivo_intervencion}.\n\n` +
-                   `SEGUNDO (ESTADO DE SALUD Y CONTROL MÉDICO): Previo a la entrega, el menor fue examinado conforme protocolo: ${data.examen_medico}.\n\n` +
-                   `TERCERO (INTERVENCIÓN DEL SERVICIO DE NIÑEZ): ${data.organismo_ninez}.\n\n` +
-                   `CUARTO (ENTREGA FORMAL BAJO RECIBO): Se hace presente el/la ciudadano/a ${data.progenitor_nombre}, D.N.I. N° ${data.progenitor_dni}, con domicilio en ${data.progenitor_domicilio}, quien acredita fehacientemente su carácter mediante: ${data.parentesco_acreditado}.\n\n` +
-                   `QUINTO (COMPROMISO DE GUARDA): El compareciente se notifica formalmente y asume: ${data.compromiso_guarda}.\n\n` +
-                   (data.observaciones ? `SEXTO (OBSERVACIONES):\n${data.observaciones}\n\n` : '');
-            break;
-
-        case 'notificacion':
-            body = `PRIMERO (MANDAMIENTO Y DESTINATARIO): Que en la fecha y hora indicadas, en calle ${data.domicilio}, de la localidad de ${data.localidad}, se procede a notificar de forma fehaciente y personal al ciudadano ${data.notificado_nombre}, D.N.I. N° ${data.notificado_dni}, de lo ordenado por: ${data.autoridad_ordenante}, en autos caratulados con el Expediente/CUIJ N° ${data.expediente}.\n\n` +
-                   `SEGUNDO (MEDIDAS NOTIFICADAS):\n${data.contenido_medida}\n\n` +
-                   `TERCERO (APERCIBIMIENTO PENAL): ${data.apercibimiento_art239}.\n\n` +
-                   `CUARTO (CONSTANCIA DE NOTIFICACIÓN): ${data.actitud_notificado}.\n\n` +
-                   (data.testigo1 ? `QUINTO (TESTIGO DE ACTUACIÓN):\n${data.testigo1}\n\n` : '');
-            break;
-
-        case 'denuncia':
-            body = `PRIMERO (COMPARECENCIA DEL DENUNCIANTE): Comparece espontáneamente ante esta oficina de guardia policial el/la ciudadano/a ${data.denunciante_nombre}, titular del D.N.I. N° ${data.denunciante_dni}, de nacionalidad y estado civil: ${data.denunciante_nacionalidad_edad}, con domicilio real en ${data.denunciante_domicilio}, de ocupación ${data.denunciante_ocupacion || 'Empleado/a'}.\n\n` +
-                   `SEGUNDO (ADVERTENCIA LEGAL DEL ART. 245 DEL CÓDIGO PENAL): Previo a serle tomada la manifestación, se le informa formalmente de las penalidades previstas en el Artículo 245 del Código Penal para quienes dieren falsas denuncias o acusaren falsamente a inocentes, enterado de lo cual presta juramento de decir verdad de cuanto supiere y le fuere preguntado.\n\n` +
-                   `TERCERO (LUGAR, FECHA Y HORA DEL HECHO):\n` +
-                   `Lugar: ${data.lugar_hecho}\n` +
-                   `Fecha y Hora: ${data.fecha_hora_hecho}\n\n` +
-                   `CUARTO (RELATO CIRCUNSTANCIADO DE LOS HECHOS):\n${data.hechos}\n\n` +
-                   (data.elementos_sustraidos ? `QUINTO (BIENES SUSTRAÍDOS / DAÑOS RECLAMADOS):\n${data.elementos_sustraidos}\n\n` : '') +
-                   (data.autores_sospechosos ? `SEXTO (DATOS DE SOSPECHOSOS / PARTÍCIPES):\n${data.autores_sospechosos}\n\n` : '') +
-                   (data.testigos_pruebas ? `SÉPTIMO (TESTIGOS O CÁMARAS DISPONIBLES):\n${data.testigos_pruebas}\n\n` : '') +
-                   `OCTAVO (PETITORIO Y COPIA): ${data.instancia_penal}.\n\n`;
-            break;
-
-        case 'oficio':
-            body = `A: ${data.destinatario.toUpperCase()}\n` +
-                   `ORGANISMO: ${data.organismo.toUpperCase()}\n` +
-                   `REF: ${data.referencia}\n` +
-                   `OBJETO: ${data.objeto}\n\n` +
-                   `Tengo el agrado de dirigirme a Usted, en el marco de la actuación sumarial de referencia, a efectos de elevar para su conocimiento y demás fines legales que estime corresponder lo siguiente:\n\n` +
-                   `${data.cuerpo}\n\n` +
-                   `DOCUMENTACIÓN ANEXA Y FOJAS:\n${data.anexos_fojas}\n\n` +
-                   `Sin otro particular, saludo a Usted con mi más distinguida consideración funcional.\n\n`;
-            break;
-    }
+    let body = generateActaBody(tipo, data, fechaCompleta);
 
     const footer = `${settings.footer}\n\n\n` +
                    `---------------------------------------             ---------------------------------------\n` +
@@ -552,21 +547,39 @@ function formatClauseHTML(paragraph) {
     const trimmed = paragraph.trim();
     if (!trimmed) return '';
     
-    // Detectar si empieza con acápite procesal (ej: "PRIMERO (LUGAR): ...")
-    const colonIndex = trimmed.indexOf(':');
-    if (colonIndex > 0 && colonIndex < 80 && /^(PRIMERO|SEGUNDO|TERCERO|CUARTO|QUINTO|SEXTO|SÉPTIMO|OCTAVO|NOVENO|DÉCIMO|RÓTULO|\d+\.|\bA:|\bREF:|\bOBJETO:)/i.test(trimmed)) {
-        const title = trimmed.substring(0, colonIndex + 1);
-        const rest = trimmed.substring(colonIndex + 1).trim();
+    // Encabezados en mayúsculas de custodia o trámites
+    if (trimmed.startsWith('RÓTULO OFICIAL') || trimmed.startsWith('REGISTRO DE TRAZABILIDAD')) {
         return `
-            <div style="margin: 9px 0; text-align: justify; text-indent: 26px; line-height: 1.55; font-size: 10.5pt; color: #0f172a;">
-                <strong style="text-decoration: underline;">${escapeHTML(title)}</strong> ${escapeHTML(rest).replace(/\n/g, '<br><span style="display:inline-block; width: 26px;"></span>')}
+            <div style="margin: 14px 0 8px 0; text-align: center; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; color: #0f172a; text-decoration: underline;">
+                ${escapeHTML(trimmed)}
             </div>
         `;
     }
 
+    // Listas con viñetas (• o -)
+    if (trimmed.includes('\n•') || trimmed.startsWith('•') || trimmed.startsWith('-')) {
+        const lines = trimmed.split('\n');
+        return `
+            <div style="margin: 8px 0 10px 0; text-align: justify; line-height: 1.6; font-size: 10.5pt; color: #0f172a; padding-left: 18px;">
+                ${lines.map(l => {
+                    const lineTrim = l.trim();
+                    if (lineTrim.startsWith('•') || lineTrim.startsWith('-')) {
+                        const colon = lineTrim.indexOf(':');
+                        if (colon > 0) {
+                            return `<div style="margin: 3px 0;"><strong style="color: #0f172a;">${escapeHTML(lineTrim.substring(0, colon + 1))}</strong> ${escapeHTML(lineTrim.substring(colon + 1))}</div>`;
+                        }
+                        return `<div style="margin: 3px 0;">${escapeHTML(lineTrim)}</div>`;
+                    }
+                    return `<div>${escapeHTML(l)}</div>`;
+                }).join('')}
+            </div>
+        `;
+    }
+
+    // Párrafos procesales formales con sangría legal de 28px
     return `
-        <div style="margin: 9px 0; text-align: justify; text-indent: 26px; line-height: 1.55; font-size: 10.5pt; color: #0f172a;">
-            ${escapeHTML(trimmed).replace(/\n/g, '<br>')}
+        <div style="margin: 10px 0; text-align: justify; text-indent: 28px; line-height: 1.6; font-size: 10.5pt; color: #0f172a;">
+            ${escapeHTML(trimmed).replace(/\n/g, '<br><span style="display:inline-block; width: 28px;"></span>')}
         </div>
     `;
 }
@@ -584,28 +597,11 @@ function generateOfficialActaHTML(tipo, data, tmpl, settings, isExport = false) 
     const dependencia = (settings.dependencia || 'COMISARÍA DE DISTRITO').toUpperCase();
     const title = (tmpl ? tmpl.title : 'ACTA POLICIAL').toUpperCase();
 
-    // Obtener texto completo generado
-    const fullText = generateActaText(tipo, data);
-    
-    // Separar cuerpo
-    const parts = fullText.split('======================================================================');
-    let bodyText = '';
-    if (parts.length >= 3) {
-        bodyText = parts[2].trim();
-    } else {
-        bodyText = fullText;
-    }
+    // Obtener párrafos procesales del cuerpo directamente sin duplicar título ni apertura
+    const bodyText = generateActaBody(tipo, data, fechaCompleta);
+    const bodyParagraphs = bodyText.split(/\n\s*\n/).map(p => p.trim()).filter(p => p.length > 0);
 
-    // Dividir en párrafos
-    const paragraphs = bodyText.split(/\n\s*\n/).filter(p => {
-        const t = p.trim();
-        return t && !t.startsWith('------') && !t.includes('FIRMA FUNCIONARIO ACTUANTE') && !t.includes('Documento formal emitido el');
-    });
-
-    const introText = paragraphs[0]?.includes('HACE CONSTAR') ? paragraphs[0] : 
-        `En la ciudad de ${data.localidad || 'Santa Fe'}, Provincia de Santa Fe, a los ${diaLetras} (${now.getDate()}) días del mes de ${mesNombre} del año ${anio}, siendo las ${hora} horas, en cumplimiento de los deberes funcionales conferidos por la Ley del Personal Policial N° 12.521 y las prescripciones del Código Procesal Penal de la Provincia de Santa Fe (Ley N° 12.734), el/la suscrito/a Oficial actuante, procediendo formalmente, HACE CONSTAR:`;
-
-    const clauseParagraphs = paragraphs.filter(p => !p.includes('HACE CONSTAR') && !p.includes('Con lo que no siendo para más'));
+    const introText = `En la ciudad de ${data.localidad || 'Santa Fe'}, Provincia de Santa Fe, a los ${diaLetras} (${now.getDate()}) días del mes de ${mesNombre} del año ${anio}, siendo las ${hora} horas, en cumplimiento de los deberes funcionales conferidos por la Ley del Personal Policial N° 12.521 y las prescripciones del Código Procesal Penal de la Provincia de Santa Fe (Ley N° 12.734), el/la suscrito/a Oficial actuante, procediendo formalmente, HACE CONSTAR:`;
 
     const closingText = settings.footer || 'Con lo que no siendo para más, se da por finalizado el presente acto, previa lectura y ratificación de su contenido por los intervinientes, firmando al pie de plena conformidad por ante mí y los testigos de actuación que certifican lo actuado.';
 
@@ -615,10 +611,10 @@ function generateOfficialActaHTML(tipo, data, tmpl, settings, isExport = false) 
 
     return `
         <div class="official-acta-sheet" style="position: relative; font-family: 'Times New Roman', Times, serif; color: #0f172a; line-height: 1.5; background: #ffffff; ${isExport ? 'width: 100%; max-width: 100%;' : ''}">
-            <!-- MARCA DE AGUA INSTITUCIONAL -->
-            <div style="position: absolute; top: 22%; left: 15%; width: 70%; height: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0.04; z-index: 0;">
+            <!-- MARCA DE AGUA INSTITUCIONAL (sólo en vista previa en pantalla) -->
+            ${!isExport ? `<div style="position: absolute; top: 22%; left: 15%; width: 70%; height: 50%; display: flex; align-items: center; justify-content: center; pointer-events: none; opacity: 0.04; z-index: 0;">
                 <img src="assets/watermark_police.png" style="max-width: 300px; max-height: 300px; filter: grayscale(100%); object-fit: contain;">
-            </div>
+            </div>` : ''}
 
             <!-- CONTENIDO FORMAL (Z-INDEX SUPERIOR) -->
             <div style="position: relative; z-index: 1;">
@@ -653,19 +649,21 @@ function generateOfficialActaHTML(tipo, data, tmpl, settings, isExport = false) 
                 </div>
 
                 <!-- PÁRRAFO DE APERTURA -->
+                ${tipo !== 'oficio' ? `
                 <div style="margin: 10px 0; text-align: justify; text-indent: 28px; line-height: 1.6; font-size: 10.5pt; color: #0f172a;">
                     ${escapeHTML(introText)}
-                </div>
+                </div>` : ''}
 
-                <!-- ACÁPITES Y CLÁUSULAS -->
+                <!-- ACÁPITES Y CLÁUSULAS NARRATIVAS -->
                 <div style="margin: 6px 0;">
-                    ${clauseParagraphs.map(p => formatClauseHTML(p)).join('')}
+                    ${bodyParagraphs.map(p => formatClauseHTML(p)).join('')}
                 </div>
 
                 <!-- PÁRRAFO DE CIERRE Y RATIFICACIÓN -->
+                ${tipo !== 'oficio' && tipo !== 'custodia' ? `
                 <div style="margin: 14px 0 24px 0; text-align: justify; text-indent: 28px; line-height: 1.6; font-size: 10.5pt; font-style: italic; color: #1e293b;">
                     ${escapeHTML(closingText)}
-                </div>
+                </div>` : ''}
 
                 <!-- BLOQUE DE FIRMAS FORMALES (2x2) -->
                 <div style="margin-top: 28px; padding-top: 8px; page-break-inside: avoid;">
@@ -982,6 +980,15 @@ function renderActaForm(container, tipo) {
 
         showToast('✅ Acta oficial generada correctamente');
 
+        // Aprendizaje del agente IA a partir de actas generadas (estilo, localidades, fórmulas legales)
+        if (window.AgentLearningService) {
+            window.AgentLearningService.learnFromActa(tipo, data);
+        }
+        // Registro de telemetría
+        if (window.TelemetryService) {
+            window.TelemetryService.trackEvent('acta', 'generated', tipo);
+        }
+
         // Guardar en archivo digital local
         try {
             const saved = JSON.parse(localStorage.getItem('police_actas') || '[]');
@@ -1085,18 +1092,20 @@ function renderActaForm(container, tipo) {
     };
 
     // 4. Descargar PDF Profesional con html2pdf (A4 Legal Oficial)
-    window._downloadPDF = () => {
+    window._downloadPDF = async () => {
         if (!window._currentActaData) return showToast('⚠️ Primero generá el acta');
         const { tipo: curTipo, data: curData, tmpl: curTmpl } = window._currentActaData;
         const settings = getActaSettings();
         const cleanLoc = (curData.localidad || 'SantaFe').replace(/[^a-zA-Z0-9]/g, '_');
         const filename = `Acta_${curTipo.toUpperCase()}_${cleanLoc}_${Date.now()}.pdf`;
 
-        // Crear elemento fuera de pantalla con dimensiones exactas A4 a 96 DPI (794px ancho)
+        showToast('⏳ Compilando PDF oficial en alta resolución...');
+
+        // Crear elemento A4 enfocado con dimensiones estándar 794px a 96 DPI
         const containerDiv = document.createElement('div');
         containerDiv.id = 'temp-pdf-render';
         containerDiv.style.position = 'fixed';
-        containerDiv.style.left = '-9999px';
+        containerDiv.style.left = '0';
         containerDiv.style.top = '0';
         containerDiv.style.width = '794px';
         containerDiv.style.backgroundColor = '#ffffff';
@@ -1104,29 +1113,51 @@ function renderActaForm(container, tipo) {
         containerDiv.style.padding = '35px 45px';
         containerDiv.style.fontFamily = '"Times New Roman", Times, serif';
         containerDiv.style.boxSizing = 'border-box';
+        containerDiv.style.zIndex = '999999';
+        containerDiv.style.opacity = '1';
 
         containerDiv.innerHTML = generateOfficialActaHTML(curTipo, curData, curTmpl, settings, true);
         document.body.appendChild(containerDiv);
 
-        showToast('⏳ Compilando PDF oficial en alta resolución...');
+        // Asegurar que las imágenes institucionales se encuentren completamente decodificadas
+        const images = Array.from(containerDiv.querySelectorAll('img'));
+        await Promise.race([
+            Promise.all(images.map(img => {
+                if (img.complete && img.naturalHeight !== 0) return Promise.resolve();
+                return new Promise(res => { img.onload = res; img.onerror = res; });
+            })),
+            new Promise(r => setTimeout(r, 700))
+        ]);
+
+        await new Promise(r => setTimeout(r, 100));
 
         if (typeof html2pdf !== 'undefined') {
-            html2pdf().from(containerDiv).set({
-                margin: [10, 10, 10, 10], // mm
-                filename: filename,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, logging: false, useCORS: true, letterRendering: true, allowTaint: true },
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            }).save().then(() => {
+            try {
+                await html2pdf().set({
+                    margin: [10, 10, 10, 10], // mm
+                    filename: filename,
+                    image: { type: 'jpeg', quality: 0.98 },
+                    html2canvas: {
+                        scale: 2,
+                        logging: false,
+                        useCORS: true,
+                        scrollX: 0,
+                        scrollY: 0,
+                        windowWidth: 794
+                    },
+                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                }).from(containerDiv).save();
+
                 showToast('✅ PDF Oficial Descargado');
-                containerDiv.remove();
-            }).catch(err => {
-                console.warn('PDF export fallback:', err);
-                containerDiv.remove();
+            } catch (err) {
+                console.warn('PDF export error:', err);
+                showToast('⚠️ Hubo un error al generar PDF, abriendo diálogo de impresión');
                 window._printActa();
-            });
+            } finally {
+                if (containerDiv.parentNode) containerDiv.remove();
+            }
         } else {
-            containerDiv.remove();
+            if (containerDiv.parentNode) containerDiv.remove();
             window._printActa();
         }
     };

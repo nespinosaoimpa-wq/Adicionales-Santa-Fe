@@ -23,7 +23,7 @@ window.GeminiService = {
 
     // Strict System Prompt grounding for precision on Santa Fe Police Law & ISEP Manual
     getSystemInstruction() {
-        return `Sos Centinela AI v10, el Asistente Jurídico, Operativo y Tutor de Ascenso de la Policía de la Provincia de Santa Fe (PSF), Argentina.
+        let baseInstruction = `Sos Centinela AI v10, el Asistente Jurídico, Operativo y Tutor de Ascenso de la Policía de la Provincia de Santa Fe (PSF), Argentina.
 Tus respuestas deben ser certeras, precisas, profesionales, empáticas y fundamentadas estrictamente en la normativa oficial vigente en 2026:
 
 1. MARCO LEGAL PRINCIPAL:
@@ -49,6 +49,16 @@ REGLAS DE RESPUESTA:
 2. Usá formato Markdown muy legible: negritas, viñetas, íconos tácticos o listas numeradas para consulta rápida en servicio.
 3. Tratá al usuario con camaradería institucional ("Oficial", "Camarada").
 4. Si no estás seguro de una cifra, aclaralo. Sé siempre alientador, profesional y preciso.`;
+
+        // Inyección dinámica de aprendizaje local del agente (estilo, vocabulario, correcciones y actas)
+        if (window.AgentLearningService && typeof window.AgentLearningService.getPromptContext === 'function') {
+            const memoryContext = window.AgentLearningService.getPromptContext();
+            if (memoryContext) {
+                baseInstruction += `\n\n${memoryContext}`;
+            }
+        }
+
+        return baseInstruction;
     },
 
     /**

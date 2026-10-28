@@ -3,6 +3,13 @@
  */
 
 async function renderAdmin(container) {
+    if (!container) container = document.getElementById('app');
+    if (typeof store !== 'undefined' && (!store.isAdmin || !store.isAdmin())) {
+        if (window.showToast) showToast("Acceso Restringido: Administrador exclusivo");
+        if (window.router) window.router.navigateTo('#agenda');
+        return;
+    }
+
     container.innerHTML = `
         <div class="flex flex-col items-center justify-center h-screen space-y-4 bg-background-light dark:bg-background-dark">
             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -143,6 +150,9 @@ async function renderAdmin(container) {
                     </button>
                     <button onclick="router.navigateTo('#admin/auditoria')" class="px-4 py-2 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-xs font-bold transition-all flex items-center gap-2 text-amber-600 dark:text-amber-400">
                         <span class="material-symbols-outlined text-sm">shield</span> Auditoría
+                    </button>
+                    <button onclick="router.navigateTo('#admin/metricas')" class="px-4 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-xs font-bold transition-all flex items-center gap-2 text-cyan-600 dark:text-cyan-400">
+                        <span class="material-symbols-outlined text-sm">monitoring</span> Métricas
                     </button>
                     <button onclick="router.navigateTo('#agenda')" class="size-10 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
                         <span class="material-symbols-outlined">close</span>
@@ -944,3 +954,229 @@ window._showAddAdModal = () => {
         }
     };
 };
+
+// ══════════════════════════════════════════════════════════
+// VISTA DEDICADA: MÉTRICAS & VISITAS POR DÍA (Chart.js)
+// ══════════════════════════════════════════════════════════
+function renderAdminMetrics(container) {
+    if (!container) container = document.getElementById('app');
+    if (typeof store !== 'undefined' && (!store.isAdmin || !store.isAdmin())) {
+        if (window.showToast) showToast("Acceso Restringido: Administrador exclusivo");
+        if (window.router) window.router.navigateTo('#agenda');
+        return;
+    }
+
+    if (!window.TelemetryService) {
+        container.innerHTML = '<div class="p-12 text-center text-slate-400">TelemetryService no disponible</div>';
+        return;
+    }
+
+    const summary = window.TelemetryService.getMetricsSummary(14);
+    const t = summary.today;
+    const totals = summary.totals;
+
+    // Nombres legibles de rutas
+    const routeLabels = {
+        'agenda': 'Agenda', 'asistente': 'Asistente Hub', 'asistente/actas': 'Actas',
+        'asistente/centinela': 'Centinela IA', 'financial': 'Finanzas', 'academia': 'Academia ISeP',
+        'asistente/dictado': 'Dictado', 'asistente/vademecum': 'Vademécum', 'asistente/iapos': 'IAPOS',
+        'control': 'Control', 'register': 'Registro', 'admin': 'Admin', 'profile': 'Perfil',
+        'asistente/partes': 'Partes', 'asistente/crono': 'Crono', 'asistente/intervenciones': 'Intervenciones'
+    };
+    const getRouteName = (r) => routeLabels[r] || r;
+
+    // Ordenar módulos por uso
+    const sortedRoutes = Object.entries(totals.routesAggregation)
+        .sort((a, b) => b[1] - a[1]).slice(0, 8);
+
+    container.innerHTML = `
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 px-6 h-20 flex items-center justify-between shadow-2xl">
+            <div class="flex items-center gap-4">
+                <button onclick="router.navigateTo('#admin')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div>
+                    <h1 class="text-xl font-black text-slate-900 dark:text-white tracking-tight uppercase italic flex items-center gap-2">
+                        <span class="material-symbols-outlined text-cyan-400">monitoring</span>
+                        Métricas & Visitas por Día
+                    </h1>
+                    <p class="text-[10px] text-slate-500 font-bold tracking-widest uppercase">Últimos 14 días · Analítica en Tiempo Real</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="window.TelemetryService.exportMetricsCSV()" class="px-4 py-2 rounded-xl bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-xs font-bold transition-all flex items-center gap-2 text-cyan-400">
+                    <span class="material-symbols-outlined text-sm">download</span> CSV 30d
+                </button>
+                <button onclick="router.navigateTo('#admin')" class="size-10 rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </header>
+
+        <main class="p-4 md:p-8 max-w-7xl mx-auto space-y-8 animate-fade-in">
+            <!-- KPI Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="bg-gradient-to-br from-cyan-500/20 to-cyan-600/5 rounded-2xl p-5 border border-cyan-500/10">
+                    <p class="text-[9px] font-black text-cyan-400 uppercase tracking-widest mb-1">Visitas Hoy</p>
+                    <p class="text-3xl font-black text-white">${t.visits}</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-500/20 to-blue-600/5 rounded-2xl p-5 border border-blue-500/10">
+                    <p class="text-[9px] font-black text-blue-400 uppercase tracking-widest mb-1">Total Semanal</p>
+                    <p class="text-3xl font-black text-white">${summary.dailyRecords.slice(-7).reduce((s,r) => s + (r.visits||0), 0)}</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/5 rounded-2xl p-5 border border-purple-500/10">
+                    <p class="text-[9px] font-black text-purple-400 uppercase tracking-widest mb-1">Páginas Vistas 14d</p>
+                    <p class="text-3xl font-black text-white">${totals.pageViews.toLocaleString()}</p>
+                </div>
+                <div class="bg-gradient-to-br from-amber-500/20 to-amber-600/5 rounded-2xl p-5 border border-amber-500/10">
+                    <p class="text-[9px] font-black text-amber-400 uppercase tracking-widest mb-1">Módulo Líder</p>
+                    <p class="text-xl font-black text-white truncate">${getRouteName(totals.topRoute)}</p>
+                    <p class="text-[10px] text-slate-400">${totals.topRouteCount} vistas</p>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Daily Visits Trend -->
+                <div class="lg:col-span-2 bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                    <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-cyan-400 text-sm">trending_up</span>
+                        Visitas Diarias (14 Días)
+                    </h3>
+                    <div class="h-64 relative"><canvas id="metricsVisitChart"></canvas></div>
+                </div>
+
+                <!-- Module Doughnut -->
+                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                    <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-purple-400 text-sm">pie_chart</span>
+                        Uso por Módulo
+                    </h3>
+                    <div class="h-64 relative"><canvas id="metricsModuleChart"></canvas></div>
+                </div>
+            </div>
+
+            <!-- Shifts Bar Chart -->
+            <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-amber-400 text-sm">schedule</span>
+                    Distribución por Turno Policial
+                </h3>
+                <div class="h-48 relative"><canvas id="metricsShiftChart"></canvas></div>
+            </div>
+
+            <!-- Daily Table -->
+            <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-white/5 p-6 shadow-xl">
+                <h3 class="text-sm font-black text-slate-500 uppercase tracking-widest mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-emerald-400 text-sm">table_chart</span>
+                    Desglose Diario
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs">
+                        <thead>
+                            <tr class="border-b border-white/10 text-slate-500 uppercase tracking-widest text-[9px]">
+                                <th class="py-3 text-left">Fecha</th>
+                                <th class="py-3 text-center">Visitas</th>
+                                <th class="py-3 text-center">Páginas</th>
+                                <th class="py-3 text-center">Mañana</th>
+                                <th class="py-3 text-center">Tarde</th>
+                                <th class="py-3 text-center">Noche</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${summary.dailyRecords.slice().reverse().map(r => `
+                                <tr class="border-b border-white/5 hover:bg-white/5 transition-colors">
+                                    <td class="py-2.5 text-slate-300 font-bold">${r.date}</td>
+                                    <td class="py-2.5 text-center text-cyan-400 font-bold">${r.visits || 0}</td>
+                                    <td class="py-2.5 text-center text-slate-400">${r.pageViews || 0}</td>
+                                    <td class="py-2.5 text-center text-amber-400">${r.shifts ? r.shifts.morning || 0 : 0}</td>
+                                    <td class="py-2.5 text-center text-blue-400">${r.shifts ? r.shifts.afternoon || 0 : 0}</td>
+                                    <td class="py-2.5 text-center text-indigo-400">${r.shifts ? r.shifts.night || 0 : 0}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    `;
+
+    // ── RENDER CHARTS (Chart.js) ──
+    setTimeout(() => {
+        const chartDefaults = { responsive: true, maintainAspectRatio: false };
+
+        // 1. Daily Visits Line Chart
+        const visitCtx = document.getElementById('metricsVisitChart');
+        if (visitCtx && typeof Chart !== 'undefined') {
+            new Chart(visitCtx, {
+                type: 'line',
+                data: {
+                    labels: summary.dailyRecords.map(r => { const parts = r.date.split('-'); return parts[2] + '/' + parts[1]; }),
+                    datasets: [
+                        {
+                            label: 'Visitas Únicas',
+                            data: summary.dailyRecords.map(r => r.visits || 0),
+                            borderColor: '#06b6d4',
+                            backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                            borderWidth: 2.5,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointBackgroundColor: '#06b6d4'
+                        },
+                        {
+                            label: 'Páginas Vistas (÷10)',
+                            data: summary.dailyRecords.map(r => Math.round((r.pageViews || 0) / 10)),
+                            borderColor: '#a855f7',
+                            backgroundColor: 'rgba(168, 85, 247, 0.05)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.4,
+                            pointRadius: 3,
+                            borderDash: [5, 3]
+                        }
+                    ]
+                },
+                options: { ...chartDefaults, plugins: { legend: { labels: { color: '#94a3b8', font: { size: 10 } } } }, scales: { x: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.03)' } }, y: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.03)' }, beginAtZero: true } } }
+            });
+        }
+
+        // 2. Module Doughnut Chart
+        const modCtx = document.getElementById('metricsModuleChart');
+        if (modCtx && typeof Chart !== 'undefined') {
+            const modColors = ['#06b6d4', '#3b82f6', '#a855f7', '#f59e0b', '#10b981', '#ef4444', '#ec4899', '#6366f1'];
+            new Chart(modCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: sortedRoutes.map(([r]) => getRouteName(r)),
+                    datasets: [{
+                        data: sortedRoutes.map(([, c]) => c),
+                        backgroundColor: modColors.slice(0, sortedRoutes.length),
+                        borderWidth: 0
+                    }]
+                },
+                options: { ...chartDefaults, cutout: '65%', plugins: { legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 9 }, padding: 8, usePointStyle: true } } } }
+            });
+        }
+
+        // 3. Shift Bar Chart
+        const shiftCtx = document.getElementById('metricsShiftChart');
+        if (shiftCtx && typeof Chart !== 'undefined') {
+            new Chart(shiftCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Mañana (06-14hs)', 'Tarde (14-22hs)', 'Noche (22-06hs)'],
+                    datasets: [{
+                        label: 'Páginas vistas por turno (14d)',
+                        data: [totals.shiftsAggregation.morning, totals.shiftsAggregation.afternoon, totals.shiftsAggregation.night],
+                        backgroundColor: ['rgba(245, 158, 11, 0.6)', 'rgba(59, 130, 246, 0.6)', 'rgba(99, 102, 241, 0.6)'],
+                        borderColor: ['#f59e0b', '#3b82f6', '#6366f1'],
+                        borderWidth: 1.5,
+                        borderRadius: 8
+                    }]
+                },
+                options: { ...chartDefaults, indexAxis: 'y', plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.03)' }, beginAtZero: true }, y: { ticks: { color: '#94a3b8', font: { size: 10, weight: 'bold' } }, grid: { display: false } } } }
+            });
+        }
+    }, 150);
+}

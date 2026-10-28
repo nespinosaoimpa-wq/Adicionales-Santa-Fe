@@ -405,13 +405,7 @@ const DB = {
             targetAccounts.push(
                 email.split('@')[0],
                 'nespinosa.oimpa@gmail.com',
-                'nespinosa.oimpa',
-                'jugador.nico55@gmail.com',
-                'jugador.nico55',
-                'nespinosaoimpa@gmail.com',
-                'adicionalessantafe@gmail.com',
-                'nicoespinosa069@gmail.com',
-                'smartflow.1995@gmail.com'
+                'nespinosa.oimpa'
             );
         }
 

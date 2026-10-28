@@ -2,13 +2,9 @@
  * Adicionales Santa Fe - State Management (Store)
  */
 
-// Exact admin email whitelist for privilege checks
+// Exact admin email whitelist for privilege checks - EXCLUSIVO nespinosa.oimpa@gmail.com
 const ADMIN_EMAILS = [
-    'nespinosa.oimpa@gmail.com',
-    'jugador.nico55@gmail.com',
-    'adicionalessantafe@gmail.com',
-    'nespinosaoimpa@gmail.com',
-    'nespinosaoimpa-wq@gmail.com'
+    'nespinosa.oimpa@gmail.com'
 ];
 
 window.store = {
@@ -393,7 +389,7 @@ window.store = {
             avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${encodeURIComponent(user.email)}`
         };
 
-        if (ADMIN_EMAILS.includes(lowerEmail) || localStorage.getItem('super_admin_mode') === 'true') {
+        if (lowerEmail === 'nespinosa.oimpa@gmail.com') {
             baseUser.role = 'admin';
             baseUser.isSuperAdmin = true;
         }
@@ -404,6 +400,11 @@ window.store = {
             if (cachedStr) {
                 const cached = JSON.parse(cachedStr);
                 this.user = { ...this.user, ...cached };
+                // Garantizar que ningún otro usuario tenga rol admin desde caché
+                if (lowerEmail !== 'nespinosa.oimpa@gmail.com') {
+                    this.user.role = 'user';
+                    this.user.isSuperAdmin = false;
+                }
             }
         } catch(e){}
 
@@ -1331,20 +1332,20 @@ window.store = {
     },
 
     isAdmin() {
-        if (localStorage.getItem('super_admin_mode') === 'true') return true;
         if (!this.user) return false;
-        if (this.user.role === 'admin' || this.user.role === 'superadmin' || this.user.role === 'super_admin' || this.user.isSuperAdmin) return true;
         const lower = (this.user.email || '').toLowerCase().trim();
-        if (!lower) return false;
-        return ADMIN_EMAILS.includes(lower);
+        return lower === 'nespinosa.oimpa@gmail.com';
     },
 
     enableSuperAdminMode() {
-        localStorage.setItem('super_admin_mode', 'true');
-        if (this.user) {
-            this.user.role = 'admin';
-            this.user.isSuperAdmin = true;
+        const lower = (this.user?.email || '').toLowerCase().trim();
+        if (lower !== 'nespinosa.oimpa@gmail.com') {
+            showToast("Acceso denegado: cuenta no autorizada como Administrador");
+            return;
         }
+        localStorage.setItem('super_admin_mode', 'true');
+        this.user.role = 'admin';
+        this.user.isSuperAdmin = true;
         showToast("👑 Modo Super Admin Activado");
         if (window.router) {
             window.router.navigateTo('#admin');
