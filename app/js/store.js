@@ -269,6 +269,11 @@ window.store = {
                 if (idx !== -1) this.services[idx].id = result.id;
             }
 
+            // Telemetría operacional
+            if (window.TelemetryService) {
+                window.TelemetryService.trackEvent('service', 'created', service.type || 'standard');
+            }
+
             showToast("✅ Servicio guardado");
         } catch (e) {
             console.error("Error saving service:", e);
@@ -410,6 +415,29 @@ window.store = {
 
         this.authInitialized = true;
         try { localStorage.setItem('last_active_email', lowerEmail); } catch(e){}
+
+        // Sincronizar usuario autenticado con Google / Firebase Analytics
+        try {
+            if (window.analytics && typeof window.analytics.setUserId === 'function') {
+                window.analytics.setUserId(user.uid || lowerEmail);
+                window.analytics.setUserProperties({
+                    user_role: this.user.role || 'user',
+                    is_admin: lowerEmail === 'nespinosa.oimpa@gmail.com'
+                });
+                window.analytics.logEvent('login', { method: 'firebase_auth' });
+            }
+            if (typeof gtag === 'function') {
+                gtag('set', {
+                    'user_id': user.uid || lowerEmail,
+                    'user_properties': {
+                        'user_role': this.user.role || 'user',
+                        'is_admin': lowerEmail === 'nespinosa.oimpa@gmail.com'
+                    }
+                });
+                gtag('event', 'login', { method: 'firebase_auth' });
+            }
+        } catch(e) {}
+
         return this.user;
     },
 
