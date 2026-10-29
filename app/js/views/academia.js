@@ -32,6 +32,22 @@ const ISEP_FREE_LIMIT = 2;
 const ISEP_PRO_PRICE = "$2.000 / mes";
 const ISEP_WHATSAPP_PHONE = "5493425162372";
 
+// ══════════════════════════════════════════════════════════════
+// ANTI-REPETITION ROTATION RING BUFFER (Deduplicación de Exámenes)
+// ══════════════════════════════════════════════════════════════
+const SEEN_QUESTIONS_KEY = 'asf_quiz_seen_history_v1';
+function _getSeenQuestionIds() {
+    try { return JSON.parse(localStorage.getItem(SEEN_QUESTIONS_KEY) || '[]'); } catch { return []; }
+}
+function _markQuestionsAsSeen(ids) {
+    if (!ids || !ids.length) return;
+    try {
+        let seen = _getSeenQuestionIds();
+        seen = [...ids, ...seen.filter(x => !ids.includes(x))].slice(0, 90);
+        localStorage.setItem(SEEN_QUESTIONS_KEY, JSON.stringify(seen));
+    } catch {}
+}
+
 function _getFreeAttemptsUsed() {
     try {
         const val = localStorage.getItem('isep_free_attempts_used');
@@ -449,34 +465,51 @@ function _renderSimuladorTab(container) {
             return;
         }
 
-        // 2. Filtrar preguntas priorizando la dificultad seleccionada
+        // 2. Filtrar preguntas priorizando la dificultad seleccionada y ANTI-REPETICIÓN
         const exactDifficultyQuestions = bank.filter(q => q.difficulty === state.difficulty);
-        let questionPool = [...exactDifficultyQuestions];
+        const seenIds = new Set(_getSeenQuestionIds());
+
+        // Ordenar primero preguntas NO vistas en exámenes anteriores
+        const unseenExact = exactDifficultyQuestions.filter(q => !seenIds.has(q.id));
+        const seenExact = exactDifficultyQuestions.filter(q => seenIds.has(q.id));
+        let questionPool = [..._shuffleArray(unseenExact), ..._shuffleArray(seenExact)];
 
         // 3. Si faltan preguntas para la jerarquía y dificultad elegidas:
-        // a) Complementar con preguntas de la MISMA dificultad de las demás jerarquías
+        // a) Complementar con preguntas de la MISMA dificultad de las demás jerarquías (priorizando no vistas)
         if (questionPool.length < state.questionCount) {
             const othersSameDiff = Object.entries(window.quizBank)
                 .filter(([k]) => k !== state.selectedHierarchy)
                 .flatMap(([_, list]) => list)
                 .filter(q => q.difficulty === state.difficulty && !questionPool.some(p => p.id === q.id));
             
+            const unseenOthers = othersSameDiff.filter(q => !seenIds.has(q.id));
+            const seenOthers = othersSameDiff.filter(q => seenIds.has(q.id));
+            const sortedOthers = [..._shuffleArray(unseenOthers), ..._shuffleArray(seenOthers)];
+
             const needed = state.questionCount - questionPool.length;
-            questionPool = questionPool.concat(_shuffleArray(othersSameDiff).slice(0, needed));
+            questionPool = questionPool.concat(sortedOthers.slice(0, needed));
         }
 
         // b) Si aún faltan preguntas, sumar de la misma jerarquía en otras dificultades
         if (questionPool.length < state.questionCount) {
             const otherDiffSameHier = bank.filter(q => !questionPool.some(p => p.id === q.id));
+            const unseenDiff = otherDiffSameHier.filter(q => !seenIds.has(q.id));
+            const seenDiff = otherDiffSameHier.filter(q => seenIds.has(q.id));
+            const sortedDiff = [..._shuffleArray(unseenDiff), ..._shuffleArray(seenDiff)];
+
             const needed = state.questionCount - questionPool.length;
-            questionPool = questionPool.concat(_shuffleArray(otherDiffSameHier).slice(0, needed));
+            questionPool = questionPool.concat(sortedDiff.slice(0, needed));
         }
 
         // c) Si aún faltara alguna (para alcanzar 50), complementar con el banco general
         if (questionPool.length < state.questionCount) {
             const allRemaining = Object.values(window.quizBank).flat().filter(q => !questionPool.some(p => p.id === q.id));
+            const unseenRem = allRemaining.filter(q => !seenIds.has(q.id));
+            const seenRem = allRemaining.filter(q => seenIds.has(q.id));
+            const sortedRem = [..._shuffleArray(unseenRem), ..._shuffleArray(seenRem)];
+
             const needed = state.questionCount - questionPool.length;
-            questionPool = questionPool.concat(_shuffleArray(allRemaining).slice(0, needed));
+            questionPool = questionPool.concat(sortedRem.slice(0, needed));
         }
 
         // 4. Retroalimentación Inteligente: Ponderación adaptativa
@@ -512,6 +545,9 @@ function _renderSimuladorTab(container) {
 
         const count = selectedQuestions.length;
         const rawQuestions = selectedQuestions;
+
+        // Registrar preguntas como vistas para que no se repitan en los próximos intentos
+        _markQuestionsAsSeen(selectedQuestions.map(q => q.id));
 
         // Shuffle options within each question so the correct answer isn't always at the same index
         const questions = rawQuestions.map(q => {
@@ -616,11 +652,19 @@ window._showIsepProModal = function() {
 
             <!-- ACTION BUTTONS -->
             <div class="space-y-2.5">
+                <!-- BOTÓN PAGO DIRECTO MERCADO PAGO -->
+                <a href="https://mpago.la/2S5kF9N" target="_blank" rel="noopener noreferrer"
+                    onclick="localStorage.setItem('isep_pro_subscriber', 'true'); showToast('¡Gracias por suscribirte a ISEP PRO!'); setTimeout(() => { document.getElementById('isep-pro-modal')?.remove(); renderAcademia(); }, 1200);"
+                    class="w-full py-3.5 bg-[#009EE3] hover:bg-[#0088c6] text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl shadow-[#009EE3]/30 flex items-center justify-center gap-2 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-lg">payment</span>
+                    Pagar con Mercado Pago ($2.000)
+                </a>
+
                 <a href="https://wa.me/${ISEP_WHATSAPP_PHONE}?text=${encodeURIComponent('Hola! Quiero activar mi suscripción a ISEP PRO ($2.000 / mes) para el Simulador de Ascenso en Adicionales Santa Fe. Mi email registrado es: ' + (typeof store !== 'undefined' && store.user ? store.user.email : ''))}" 
                     target="_blank" rel="noopener noreferrer"
-                    class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl shadow-emerald-500/20 flex items-center justify-center gap-2 active:scale-95 transition-all">
-                    <span class="material-symbols-outlined text-lg">chat</span>
-                    Activar por WhatsApp ($2.000)
+                    class="w-full py-3 bg-white/5 hover:bg-white/10 text-slate-300 font-bold text-xs uppercase tracking-wider rounded-2xl border border-white/10 flex items-center justify-center gap-2 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-lg text-emerald-400">chat</span>
+                    Consultar o Transferir por WhatsApp
                 </a>
 
                 <button onclick="window._promptActivationCode()" class="w-full py-3 bg-white/10 hover:bg-white/15 text-slate-300 font-bold text-xs rounded-2xl transition-all">
@@ -966,6 +1010,21 @@ function _renderExamView(container) {
 }
 
 // ══════════════════════════════════════════════════════════════
+// VIRAL LOOP: COMPARTIR RESULTADO EN WHATSAPP
+// ══════════════════════════════════════════════════════════════
+window._shareExamResultWhatsApp = function() {
+    const state = window._quizState;
+    const r = state.examResults;
+    if (!r) return;
+    const diffMap = { facil: 'Fácil', media: 'Media', dificil: 'Difícil (Concurso ISEP)' };
+    const diff = diffMap[r.difficulty] || r.difficulty;
+    const emoji = r.percentage >= 80 ? '🎖️' : r.percentage >= 60 ? '📝' : '📖';
+    const text = `👮‍♂️ *Simulador de Ascenso Policial ISeP 2026*\n\n${emoji} Obtuve *${r.percentage}%* (${r.correct}/${r.total} correctas) en nivel *${diff}*.\n\n¿Te animás a superarme en el examen? Hacé tu simulacro gratis en *Adicionales Santa Fe*:\n👉 https://adicionales-santafe.web.app/#academia`;
+    const url = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+};
+
+// ══════════════════════════════════════════════════════════════
 // VIEW: RESULTADOS DEL EXAMEN
 // ══════════════════════════════════════════════════════════════
 function _renderResultsView(container) {
@@ -1011,6 +1070,12 @@ function _renderResultsView(container) {
                 <p class="text-xs text-slate-400 mt-2">${message}</p>
                 <p class="text-[10px] text-slate-500 mt-1">Tiempo empleado: ${_formatTime(results.totalTime)}</p>
             </div>
+
+            <!-- BOTÓN VIRAL: DESAFIAR EN WHATSAPP -->
+            <button onclick="window._shareExamResultWhatsApp()" class="w-full py-3.5 px-4 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 active:scale-95 transition-all">
+                <span class="material-symbols-outlined text-lg">share</span>
+                Desafiar a un Colega en WhatsApp
+            </button>
 
             <!-- PRO UPSELL NOTICE IF FREE LIMIT REACHED -->
             ${!isPro && used >= ISEP_FREE_LIMIT ? `

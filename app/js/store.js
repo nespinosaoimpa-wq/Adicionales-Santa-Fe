@@ -1150,6 +1150,84 @@ window.store = {
         if (router && router.currentRoute) router.handleRoute();
     },
 
+    // --- CALENDAR SYNC & EXPORT (.ICS / Google Calendar) ---
+    exportShiftsToICS() {
+        if (!this.services || this.services.length === 0) {
+            showToast("⚠️ No hay servicios registrados para exportar");
+            return;
+        }
+
+        const escapeICS = (str) => (str || '').replace(/[\\;,]/g, '\\$&').replace(/\n/g, '\\n');
+        const formatICSDate = (dateStr, timeStr) => {
+            const [y, m, d] = (dateStr || '').split('-').map(Number);
+            const [hh, mm] = (timeStr || '00:00').split(':').map(Number);
+            const dt = new Date(y, m - 1, d, hh, mm, 0);
+            return dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        };
+
+        const nowStamp = formatICSDate(new Date().toISOString().slice(0, 10), '00:00');
+        let ics = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//Adicionales Santa Fe//Servicios Policiales//ES',
+            'CALSCALE:GREGORIAN',
+            'METHOD:PUBLISH'
+        ];
+
+        this.services.forEach(s => {
+            if (!s.date) return;
+            const startFmt = formatICSDate(s.date, s.startTime || s.time || '08:00');
+            const endFmt = formatICSDate(s.date, s.endTime || '14:00');
+            const typeLabel = s.type === 'Public' ? 'Público' : s.type === 'Private' ? 'Privado' : (s.type || 'Adicional');
+            const summary = `Guardia Policial: ${typeLabel} (${s.hours || 0}hs)`;
+            const desc = `Servicio de Policía Adicional Santa Fe\\nLugar: ${s.location || 'Asignado'}\\nHorario: ${s.startTime || '00:00'} - ${s.endTime || '00:00'}\\nPago estimado: $${(s.total || 0).toLocaleString()}`;
+            
+            ics.push(
+                'BEGIN:VEVENT',
+                `UID:shift-${s.id || s.date + Math.random()}@adicionalessantafe.com`,
+                `DTSTAMP:${nowStamp}`,
+                `DTSTART:${startFmt}`,
+                `DTEND:${endFmt}`,
+                `SUMMARY:${escapeICS(summary)}`,
+                `DESCRIPTION:${escapeICS(desc)}`,
+                `LOCATION:${escapeICS(s.location || 'Santa Fe')}`,
+                'STATUS:CONFIRMED',
+                'BEGIN:VALARM',
+                'TRIGGER:-PT60M',
+                'ACTION:DISPLAY',
+                'DESCRIPTION:Recordatorio de Servicio Adicional en 60 minutos',
+                'END:VALARM',
+                'END:VEVENT'
+            );
+        });
+
+        ics.push('END:VCALENDAR');
+        const blob = new Blob([ics.join('\r\n')], { type: 'text/calendar;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `Guardias_Policiales_${new Date().toISOString().slice(0, 7)}.ics`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        showToast("📅 Calendario descargado. Abrilo para sincronizar en tu celular");
+    },
+
+    openInGoogleCalendar(service) {
+        if (!service || !service.date) return;
+        const [y, m, d] = service.date.split('-');
+        const [sh, sm] = (service.startTime || service.time || '08:00').split(':');
+        const [eh, em] = (service.endTime || '14:00').split(':');
+        const dtStart = `${y}${m}${d}T${sh}${sm}00`;
+        const dtEnd = `${y}${m}${d}T${eh}${em}00`;
+        const title = encodeURIComponent(`Guardia Policial: ${service.type || 'Adicional'} (${service.hours || 0}hs)`);
+        const details = encodeURIComponent(`Servicio de Policía Adicional Santa Fe\nLugar: ${service.location || 'Asignado'}\nPago Estimado: $${(service.total || 0).toLocaleString()}`);
+        const location = encodeURIComponent(service.location || 'Santa Fe');
+        const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=${dtStart}/${dtEnd}&details=${details}&location=${location}`;
+        window.open(url, '_blank');
+    },
+
     // --- RETENTION & NOTIFICATION CHECKS ---
     checkNotifications() {
         if (window.RetentionNotifications && typeof window.RetentionNotifications.runRetentionChecks === 'function') {

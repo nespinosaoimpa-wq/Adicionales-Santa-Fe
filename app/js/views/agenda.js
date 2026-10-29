@@ -39,6 +39,9 @@ function renderAgenda(container) {
                     </div>
                 </div>
                 <div class="flex gap-2">
+                    <button onclick="store.exportShiftsToICS()" class="size-10 rounded-full bg-blue-600/10 text-blue-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center border border-blue-500/20 shadow-md active:scale-95" title="Sincronizar con Calendario (.ICS / Google Calendar)">
+                        <span class="material-symbols-outlined text-xl">event_available</span>
+                    </button>
                     <button onclick="store.shareApp()" class="size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
                         <span class="material-symbols-outlined text-xl">share</span>
                     </button>
