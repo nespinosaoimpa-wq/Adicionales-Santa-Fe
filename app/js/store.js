@@ -1150,8 +1150,16 @@ window.store = {
         if (router && router.currentRoute) router.handleRoute();
     },
 
+    // --- RETENTION & NOTIFICATION CHECKS ---
+    checkNotifications() {
+        if (window.RetentionNotifications && typeof window.RetentionNotifications.runRetentionChecks === 'function') {
+            window.RetentionNotifications.runRetentionChecks();
+        }
+    },
+
     // --- SHIFT ALARMS: Schedule push notifications for upcoming shifts ---
     scheduleShiftAlarms() {
+        this.checkNotifications();
         if (!this.notificationSettings?.enabled) return;
         if (Notification.permission !== 'granted') return;
 

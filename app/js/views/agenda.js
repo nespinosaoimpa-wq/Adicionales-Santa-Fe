@@ -45,8 +45,11 @@ function renderAgenda(container) {
                     <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-slate-900 dark:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl">
                         <span class="material-symbols-outlined text-xl">terminal</span>
                     </button>
-                    <button onclick="showToast('Sin notificaciones nuevas')" class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300">
+                    <button onclick="window.RetentionNotifications ? window.RetentionNotifications.openCenter() : showToast('Sin notificaciones nuevas')" 
+                            class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 relative active:scale-95 transition-transform" 
+                            title="Centro de Alertas y Notificaciones">
                         <span class="material-symbols-outlined">notifications</span>
+                        <span id="notif-bell-badge" class="absolute top-2 right-2 size-2 bg-red-500 rounded-full ring-2 ring-white dark:ring-slate-900 ${(window.RetentionNotifications && window.RetentionNotifications.hasUnread()) ? '' : 'hidden'} animate-pulse"></span>
                     </button>
                     <div class="flex items-center gap-2">
                         <div onclick="router.navigateTo('#profile')" class="hover:scale-105 transition-transform cursor-pointer">
@@ -74,6 +77,9 @@ function renderAgenda(container) {
                     Entrar
                 </button>
             </div>
+
+            <!-- 🔔 Alertas Operativas Opt-In Card -->
+            ${window.RetentionNotifications ? window.RetentionNotifications.renderOptInCard() : ''}
 
             <!-- Next Shift Hero Card -->
             ${nextShift ? `
