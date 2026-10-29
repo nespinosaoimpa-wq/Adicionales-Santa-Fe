@@ -5,7 +5,8 @@ const firebaseConfig = {
     projectId: "adicionales-santa-fe",
     storageBucket: "adicionales-santa-fe.firebasestorage.app",
     messagingSenderId: "633828043228",
-    appId: "1:633828043228:web:c417d3a92ae07a2e550719"
+    appId: "1:633828043228:web:c417d3a92ae07a2e550719",
+    measurementId: "G-Z882W79NHZ"
 };
 
 try {
@@ -23,6 +24,17 @@ try {
         });
         window.auth = firebase.auth();
         window.storage = firebase.storage();
+
+        // Inicializar Google Analytics para Firebase
+        if (typeof firebase.analytics === 'function') {
+            try {
+                window.analytics = firebase.analytics();
+                console.log("Firebase Analytics Connected:", firebaseConfig.measurementId);
+            } catch (aErr) {
+                console.warn("Analytics init notice (likely offline/local):", aErr);
+            }
+        }
+
         console.log("Firebase Connected");
     } else {
         console.error("Critical: Firebase SDK not loaded before firebase-config.js!");

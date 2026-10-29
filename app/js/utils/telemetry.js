@@ -111,6 +111,28 @@ window.TelemetryService = {
             data[today].shifts[shift] = (data[today].shifts[shift] || 0) + 1;
 
             this.saveData(data);
+
+            // Enviar vista de pantalla a Google Analytics / Firebase Analytics en tiempo real
+            try {
+                const locHref = (typeof window !== 'undefined' && window.location) ? (window.location.href || '') : '';
+                const locHash = (typeof window !== 'undefined' && window.location && window.location.hash) ? window.location.hash : ('#' + cleanRoute);
+                if (typeof gtag === 'function') {
+                    gtag('event', 'page_view', {
+                        page_title: cleanRoute,
+                        page_path: locHash,
+                        page_location: locHref
+                    });
+                    gtag('event', 'screen_view', {
+                        app_name: 'AdicionalesSF',
+                        screen_name: cleanRoute
+                    });
+                } else if (window.analytics && typeof window.analytics.logEvent === 'function') {
+                    window.analytics.logEvent('page_view', {
+                        page_title: cleanRoute,
+                        page_path: locHash
+                    });
+                }
+            } catch(e) {}
         } catch (err) {
             console.warn('[Telemetry] Error tracking page view:', err);
         }
@@ -129,6 +151,23 @@ window.TelemetryService = {
             const eventKey = `${category}:${action}`;
             data[today].events[eventKey] = (data[today].events[eventKey] || 0) + 1;
             this.saveData(data);
+
+            // Enviar evento personalizado a Firebase Analytics en tiempo real
+            try {
+                const safeEventName = `${category}_${action}`.replace(/[^a-zA-Z0-9_]/g, '_').toLowerCase();
+                if (typeof gtag === 'function') {
+                    gtag('event', safeEventName, {
+                        event_category: category,
+                        event_label: String(label || '')
+                    });
+                } else if (window.analytics && typeof window.analytics.logEvent === 'function') {
+                    window.analytics.logEvent(safeEventName, {
+                        category,
+                        action,
+                        label: String(label || '')
+                    });
+                }
+            } catch(e) {}
         } catch (err) {
             console.warn('[Telemetry] Error tracking event:', err);
         }
