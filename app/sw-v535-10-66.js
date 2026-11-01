@@ -40,6 +40,7 @@ const ASSETS = [
     './js/views/admin.js?v=535.10.66',
     './js/views/diagnostics.js?v=535.10.66',
     './js/views/onboarding.js?v=535.10.66',
+    './assets/badge_police_print.png',
     './app-v211.js?v=535.10.66'
 ];
 
