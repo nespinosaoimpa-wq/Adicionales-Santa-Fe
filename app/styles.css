@@ -1,88 +1,302 @@
 /* ===================================
-   ADICIONALES SANTA FE - STYLES
-   New Design System (Stitch)
+   ADICIONALES SANTA FE - DESIGN SYSTEM
+   Behance-Grade Mobile & Web UI/UX
    =================================== */
 
-/* CSS Variables */
+/* CSS Variables & Tokens */
 :root {
-    --primary: #5599e0;
-    --primary-hover: #3e82c7;
+    --primary: #135bec;
+    --primary-hover: #1048b6;
+    --primary-light: #3b82f6;
+    --primary-glow: rgba(19, 91, 236, 0.4);
+    
     --background-light: #f8fafc;
-    /* Más limpio (slate-50) */
-    --background-dark: #101622;
-    --card-light: #ffffff;
-    --card-dark: rgba(85, 153, 224, 0.05);
-    --border-light: #e2e8f0;
-    --border-dark: rgba(85, 153, 224, 0.1);
+    --background-dark: #07090e;
+    
+    --card-light: rgba(255, 255, 255, 0.85);
+    --card-dark: rgba(18, 25, 41, 0.75);
+    
+    --border-light: rgba(226, 232, 240, 0.8);
+    --border-dark: rgba(255, 255, 255, 0.08);
+    --border-dark-highlight: rgba(255, 255, 255, 0.14);
+    
     --text-primary: #0f172a;
-    --text-secondary: #334155; /* Más oscuro para mejor contraste (slate-700) */
+    --text-secondary: #334155;
+    --text-dark-primary: #f8fafc;
+    --text-dark-secondary: #9ab0ce;
+    --text-dark-muted: #72849d;
 }
 
+/* ===================================
+   TYPOGRAPHY HIERARCHY (LETRAS)
+   Behance Sharp Text Rendering
+   =================================== */
 body {
-    font-family: 'Outfit', 'Plus Jakarta Sans', 'Inter', sans-serif;
+    font-family: 'Plus Jakarta Sans', 'Outfit', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
-/* Glassmorphism Utilities */
+/* Crisp Heading Hierarchy */
+h1, h2, h3, h4, .font-heading {
+    letter-spacing: -0.025em;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+h1 {
+    font-weight: 800;
+}
+
+h2 {
+    font-weight: 700;
+}
+
+h3 {
+    font-weight: 700;
+}
+
+/* Precision Tabular Numbers (Fintech & Police Duty Times) */
+.tabular-nums,
+[class*="text-4xl"],
+[class*="text-3xl"],
+[class*="text-2xl"],
+[class*="text-xl font-bold"],
+[class*="text-xl font-extrabold"],
+#txt-total,
+#txt-subtotal,
+.font-mono {
+    font-variant-numeric: tabular-nums lining-nums;
+}
+
+/* Tactical Micro-Labels & Badges */
+.micro-label,
+[class*="text-[8px]"],
+[class*="text-[9px]"],
+[class*="text-[10px]"],
+.tracking-widest,
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+
+/* Behance Vibrant Text Gradients */
+.text-gradient-primary {
+    background: linear-gradient(135deg, #60a5fa 0%, #1d6bf3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-amber {
+    background: linear-gradient(135deg, #fde047 0%, #f59e0b 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-emerald {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Dark mode text readability enhancement */
+.dark .text-slate-400 {
+    color: #9ab0ce;
+}
+
+.dark .text-slate-500 {
+    color: #72849d;
+}
+
+/* ===================================
+   CUADROS & TARJETAS (CARDS & CONTAINERS)
+   Frosted Glassmorphism with Dual Rim Lighting
+   =================================== */
 .glass-card {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.82);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);
+    border: 1px solid rgba(226, 232, 240, 0.85);
+    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    border-radius: 1rem;
+    transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 
 .dark .glass-card {
-    background: rgba(24, 34, 52, 0.4);
+    background: linear-gradient(145deg, rgba(20, 28, 46, 0.72) 0%, rgba(12, 17, 29, 0.85) 100%);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: none;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+.dark .glass-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 14px 34px -8px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* High-Impact Elevated Cards (Featured modules, hero balance) */
+.glass-card-elevated,
+.card-elevated {
+    background: linear-gradient(145deg, rgba(26, 37, 60, 0.8) 0%, rgba(13, 19, 33, 0.92) 100%);
+    backdrop-filter: blur(24px) saturate(190%);
+    -webkit-backdrop-filter: blur(24px) saturate(190%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    border-radius: 1.5rem;
 }
 
 .glass-light {
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .ios-blur {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
 }
 
-/* Animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Tactile Interactive Cards */
+.service-card,
+[onclick].glass-card,
+button.glass-card {
+    transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease, border-color 0.18s ease;
 }
 
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+.service-card:active,
+[onclick].glass-card:active,
+button.glass-card:active {
+    transform: scale(0.98) translateY(1px);
 }
 
-.view-transition {
-    animation: fadeIn 0.3s ease-out forwards;
+.dark .service-card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Form Elements */
+.dark .service-card:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ===================================
+   BOTONES & ACCIONES (BUTTONS & PILLS)
+   Tactile Feedback, Specular Sheen & Depth
+   =================================== */
+button,
+[role="button"],
+a.btn {
+    touch-action: manipulation;
+    transition: transform 0.15s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease, border-color 0.18s ease, filter 0.15s ease;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+button:active:not(:disabled),
+[role="button"]:active:not(:disabled),
+a.btn:active {
+    transform: scale(0.97) translateY(1px);
+}
+
+/* Primary Action Buttons */
+.btn-primary,
+button.bg-primary:not(.segmented-control button):not(nav button),
+a.bg-primary {
+    background: linear-gradient(135deg, #1d6bf3 0%, #1048b6 100%) !important;
+    box-shadow: 0 4px 16px -2px rgba(29, 107, 243, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.24) !important;
+    border: 1px solid rgba(255, 255, 255, 0.14) !important;
+    color: #ffffff !important;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.btn-primary:hover,
+button.bg-primary:not(.segmented-control button):not(nav button):hover,
+a.bg-primary:hover {
+    box-shadow: 0 6px 22px -2px rgba(29, 107, 243, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+    filter: brightness(1.05);
+}
+
+.btn-primary:active,
+button.bg-primary:not(.segmented-control button):not(nav button):active,
+a.bg-primary:active {
+    box-shadow: 0 2px 8px -1px rgba(29, 107, 243, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
+    transform: scale(0.97) translateY(1px);
+}
+
+/* Secondary / Translucent Buttons */
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Floating Bottom Navigation Bar */
+nav button {
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.2s ease, color 0.2s ease !important;
+}
+
+nav button.bg-primary {
+    background: linear-gradient(135deg, #1d6bf3 0%, #1048b6 100%) !important;
+    box-shadow: 0 4px 18px -2px rgba(29, 107, 243, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+    border: 1px solid rgba(255, 255, 255, 0.16) !important;
+}
+
+/* ===================================
+   CUADROS DE ENTRADA & FORMULARIOS
+   Sleek Dark Inputs with Ambient Glow Ring
+   =================================== */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+textarea,
+select {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.dark input[type="text"],
+.dark input[type="number"],
+.dark input[type="date"],
+.dark input[type="time"],
+.dark input[type="email"],
+.dark input[type="tel"],
+.dark input[type="password"],
+.dark textarea,
+.dark select {
+    background-color: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 0.875rem;
+    color: #f8fafc;
+}
+
+.dark input:focus,
+.dark textarea:focus,
+.dark select:focus {
+    border-color: #1d6bf3 !important;
+    background-color: rgba(255, 255, 255, 0.07) !important;
+    box-shadow: 0 0 0 3px rgba(29, 107, 243, 0.25), 0 2px 10px rgba(0, 0, 0, 0.3) !important;
+    outline: none;
+}
+
 input[type="date"]::-webkit-calendar-picker-indicator {
     filter: invert(1);
-    opacity: 0.6;
+    opacity: 0.65;
+    cursor: pointer;
 }
 
 input::-webkit-outer-spin-button,
@@ -94,6 +308,48 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
     appearance: textfield;
     -moz-appearance: textfield;
+}
+
+/* ===================================
+   SEGMENTED CONTROLS & SWITCHES
+   Tactile Switchers with Smooth Slide
+   =================================== */
+.segmented-control {
+    display: flex;
+    padding: 3px;
+    background: rgba(148, 163, 184, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    gap: 3px;
+}
+
+.dark .segmented-control {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.segmented-control button {
+    flex: 1;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    color: #64748b;
+}
+
+.segmented-control button.active {
+    background: #ffffff;
+    color: #0f172a;
+    box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.12), 0 2px 4px -2px rgba(0, 0, 0, 0.08);
+}
+
+.dark .segmented-control button.active {
+    background: linear-gradient(135deg, #1d6bf3 0%, #1048b6 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 12px -2px rgba(29, 107, 243, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* iOS-Style Toggle Switch */
@@ -132,110 +388,72 @@ input[type="number"] {
     background-color: white;
     transition: 0.3s;
     border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-input:checked+.toggle-slider {
+input:checked + .toggle-slider {
     background-color: var(--primary);
 }
 
-input:checked+.toggle-slider:before {
+input:checked + .toggle-slider:before {
     transform: translateX(20px);
 }
 
-/* Segmented Control */
-.segmented-control {
-    display: flex;
-    padding: 2px;
-    background: rgba(148, 163, 184, 0.2);
-    border-radius: 8px;
-    gap: 2px;
+/* ===================================
+   MODERN DARK SCROLLBAR (BEHANCE SPEC)
+   =================================== */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }
 
-.dark .segmented-control {
-    background: rgba(13, 89, 242, 0.1);
+::-webkit-scrollbar-track {
+    background: transparent;
 }
 
-.segmented-control button {
-    flex: 1;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 6px;
-    transition: all 0.2s;
-    color: #64748b;
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
 }
 
-.segmented-control button.active {
-    background: white;
-    color: #0f172a;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
 }
 
-.dark .segmented-control button.active {
-    background: var(--primary);
-    color: white;
-}
-
-/* AdSense Fixes */
-.ad-container {
-    transition: all 0.3s ease;
-}
-
-ins.adsbygoogle[data-ad-status="unfilled"] {
-    display: none !important;
-}
-
-.ad-container:has(ins[data-ad-status="unfilled"]) {
-    display: none !important;
-}
-
-/* Fallback for when AdSense doesn't provide the attribute yet */
-ins.adsbygoogle:empty {
-    height: 0 !important;
-}
-
-/* Utilities */
-.text-xxs {
-    font-size: 0.75rem; /* 12px */
-    line-height: 1rem;
-}
-
-/* Smooth Scrolling */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Tap Highlight */
-* {
-    -webkit-tap-highlight-color: transparent;
-}
-
-/* Selection */
-::selection {
-    background-color: var(--primary);
-    color: white;
-}
-
-/* Stats Bar Chart Animation */
-@keyframes barGrow {
+/* ===================================
+   ANIMATIONS & KEYFRAMES
+   =================================== */
+@keyframes fadeIn {
     from {
-        height: 0%;
-        transform: scaleY(0);
+        opacity: 0;
+        transform: translateY(8px);
     }
-
     to {
-        height: 100%;
-        transform: scaleY(1);
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* Slide-up Animation */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.view-transition {
+    animation: fadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
 @keyframes slideUp {
     from {
         opacity: 0;
         transform: translateY(16px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -243,24 +461,40 @@ html {
 }
 
 .animate-slide-up {
-    animation: slideUp 0.4s ease-out both;
+    animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* Service Card Hover */
-.service-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.96) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
-.service-card:active {
-    transform: scale(0.98);
+#modal-container > div > div,
+#modal-backup > div > div {
+    animation: modalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* iOS-Specific Prompt Animation */
+@keyframes barGrow {
+    from {
+        height: 0%;
+        transform: scaleY(0);
+    }
+    to {
+        height: 100%;
+        transform: scaleY(1);
+    }
+}
+
 @keyframes iosEntry {
     0% {
         transform: translateY(200%);
     }
-
     100% {
         transform: translateY(0);
     }
@@ -270,41 +504,65 @@ html {
     animation: iosEntry 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
-/* 3D Chart perspective */
 .chart-3d {
     transform-style: preserve-3d;
+}
+
+/* Selection & Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+    background-color: var(--primary);
+    color: white;
+}
+
+.text-xxs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+}
+
+/* AdSense Fixes */
+.ad-container {
+    transition: all 0.3s ease;
+}
+
+ins.adsbygoogle[data-ad-status="unfilled"],
+.ad-container:has(ins[data-ad-status="unfilled"]),
+ins.adsbygoogle:empty {
+    display: none !important;
+    height: 0 !important;
 }
 
 /* ===================================
    SAFE AREA INSETS (iPhone Notch/Dynamic Island)
    =================================== */
-
-/* Bottom Nav padding for iPhones with home indicator */
 nav[class*="fixed bottom-0"],
 .fixed.bottom-0,
 [class*="fixed"][class*="bottom-0"] {
     padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Chat input container safe area */
 form[class*="fixed bottom-0"],
 .chat-input-container {
     padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-/* Main content bottom padding to avoid overlap with bottom nav on notched devices */
 main {
     padding-bottom: max(2rem, calc(2rem + env(safe-area-inset-bottom, 0px)));
 }
 
-/* Top safe area for status bar */
 header.sticky {
     padding-top: env(safe-area-inset-top, 0px);
 }
 
 /* ===================================
    TOUCH TARGETS (Apple HIG / Material 3)
-   Minimum 44x44px for all interactive elements
    =================================== */
 button, 
 a[href], 
@@ -317,7 +575,6 @@ select,
     min-width: 44px;
 }
 
-/* Exception for inline text links */
 p a[href],
 span a[href],
 li a[href] {
@@ -325,16 +582,18 @@ li a[href] {
     min-width: unset;
 }
 
-/* Exception for small icon buttons that use explicit sizing */
-button[class*="size-8"],
-button[class*="size-6"],
+button[class*="size-"],
+button[class*="w-"],
+button[class*="h-"],
+button[class*="text-[8px]"],
+button[class*="text-[9px]"],
+button[class*="text-[10px]"],
 [class*="text-[9px]"] button,
 .text-[9px] {
     min-height: unset;
     min-width: unset;
 }
 
-/* Ensure form inputs are comfortable on mobile */
 input[type="text"],
 input[type="number"],
 input[type="date"],
@@ -344,16 +603,13 @@ input[type="password"],
 textarea,
 select {
     min-height: 44px;
-    font-size: 16px; /* Prevents iOS zoom on focus */
+    font-size: 16px;
 }
 
-/* PWA standalone mode adjustments */
 @media (display-mode: standalone) {
     body {
         padding-top: env(safe-area-inset-top, 0px);
     }
-
-    /* Ensure bottom nav accounts for home indicator */
     nav[class*="bottom-0"] {
         padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
     }
