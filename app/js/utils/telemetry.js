@@ -141,6 +141,13 @@ window.TelemetryService = {
     /**
      * Registra un evento operacional específico (ej: generar acta, consultar IA)
      */
+    /**
+     * Registra click en un beneficio o sponsor comercial
+     */
+    trackBenefitClick(storeName, category = 'comercio') {
+        this.trackEvent('sponsor', 'click', `${storeName} [${category}]`);
+    },
+
     trackEvent(category, action, label = '') {
         try {
             const today = this.getTodayKey();

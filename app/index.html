@@ -25,7 +25,7 @@
         });
     </script>
 
-    <meta name="app-version" content="v535.10.68">
+    <meta name="app-version" content="v535.10.69">
 
     <meta name="description"
         content="Adicionales Santa Fe: La herramienta definitiva para la gestión de servicios de policía adicional. Calculá tus ganancias, organizá tu agenda y consultá la guía de recursos oficial en un solo lugar.">
@@ -94,7 +94,7 @@
         } catch(e) {}
 
         // Dynamic PWA Cache Buster & Auto-Updater
-        const CURRENT_VERSION = 'v535.10.68';
+        const CURRENT_VERSION = 'v535.10.69';
         try {
             fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
                 .then(res => res.json())
@@ -182,7 +182,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-10-66.js?v=535.10.68')
+                navigator.serviceWorker.register('./sw-v535-10-66.js?v=535.10.69')
                     .then(registration => {
                         console.log('ServiceWorker v535.10.66 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
@@ -375,13 +375,13 @@
     <script src="js/utils.js?v=535.10.66" defer></script>
     <script src="js/utils/gemini_api.js?v=535.10.66" defer></script>
     <script src="js/utils/agent_learning.js?v=535.10.66" defer></script>
-    <script src="js/utils/telemetry.js?v=535.10.66" defer></script>
+    <script src="js/utils/telemetry.js?v=535.10.69" defer></script>
     <script src="js/utils/retention_notifications.js?v=535.10.66" defer></script>
-    <script src="js/components.js?v=535.10.66" defer></script>
+    <script src="js/components.js?v=535.10.69" defer></script>
     <script src="js/store.js?v=535.10.66" defer></script>
     <script src="js/router.js?v=535.10.66" defer></script>
     <script src="js/data/directory.js?v=535.10.66" defer></script>
-    <script src="js/data/resources.js?v=535.10.66" defer></script>
+    <script src="js/data/resources.js?v=535.10.69" defer></script>
     <script src="js/data/academy_data.js?v=535.10.66" defer></script>
     <script src="js/data/quiz_bank.js?v=535.10.66" defer></script>
     <script src="js/views/auth.js?v=535.10.66" defer></script>
@@ -389,15 +389,15 @@
     <script src="js/views/legal.js?v=535.10.66" defer></script>
     <script src="js/views/agenda.js?v=535.10.66" defer></script>
     <script src="js/views/register.js?v=535.10.66" defer></script>
-    <script src="js/views/control_panel.js?v=535.10.66" defer></script>
+    <script src="js/views/control_panel.js?v=535.10.69" defer></script>
     <script src="js/views/financial.js?v=535.10.66" defer></script>
-    <script src="js/views/info_guia.js?v=535.10.66" defer></script>
+    <script src="js/views/info_guia.js?v=535.10.69" defer></script>
     <script src="js/views/profile.js?v=535.10.66" defer></script>
 
     <script src="js/views/stats.js?v=535.10.66" defer></script>
     <script src="js/views/history.js?v=535.10.66" defer></script>
     <script src="js/views/service_details.js?v=535.10.66" defer></script>
-    <script src="js/views/asistente.js?v=535.10.66" defer></script>
+    <script src="js/views/asistente.js?v=535.10.69" defer></script>
 
     <!-- ── Módulos Asistente Operativo Policial PRO ── -->
     <script src="js/views/actas.js?v=535.10.67" defer></script>
