@@ -25,7 +25,7 @@
         });
     </script>
 
-    <meta name="app-version" content="v535.10.66">
+    <meta name="app-version" content="v535.10.68">
 
     <meta name="description"
         content="Adicionales Santa Fe: La herramienta definitiva para la gestión de servicios de policía adicional. Calculá tus ganancias, organizá tu agenda y consultá la guía de recursos oficial en un solo lugar.">
@@ -94,7 +94,7 @@
         } catch(e) {}
 
         // Dynamic PWA Cache Buster & Auto-Updater
-        const CURRENT_VERSION = 'v535.10.66';
+        const CURRENT_VERSION = 'v535.10.68';
         try {
             fetch('./version.json?t=' + Date.now(), { cache: 'no-store' })
                 .then(res => res.json())
@@ -182,7 +182,7 @@
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw-v535-10-66.js?v=535.10.67')
+                navigator.serviceWorker.register('./sw-v535-10-66.js?v=535.10.68')
                     .then(registration => {
                         console.log('ServiceWorker v535.10.66 registrado con éxito: ', registration.scope);
                         registration.addEventListener('updatefound', () => {
