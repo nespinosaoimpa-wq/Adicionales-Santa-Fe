@@ -2,6 +2,7 @@
 Unit tests for Adicionales Santa Fe - Admin Security & Access Control
 Guarantees strictly that only 'nespinosa.oimpa@gmail.com' has admin privileges,
 and that NO ordinary user ever sees admin triggers or accesses global data.
+Also tests that ISEP PRO subscription cannot be hacked or bypassed client-side.
 """
 
 import unittest
@@ -12,6 +13,7 @@ import json
 WORKSPACE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 STORE_PATH = os.path.join(WORKSPACE_ROOT, "app", "js", "store.js")
 PROFILE_PATH = os.path.join(WORKSPACE_ROOT, "app", "js", "views", "profile.js")
+ACADEMIA_PATH = os.path.join(WORKSPACE_ROOT, "app", "js", "views", "academia.js")
 
 class TestAdminSecurity(unittest.TestCase):
 
@@ -63,6 +65,23 @@ class TestAdminSecurity(unittest.TestCase):
         self.assertFalse(res["attacker_admin"], "Other admin-sounding email must NEVER be admin")
         self.assertFalse(res["no_user"], "Null user must NEVER be admin")
         self.assertFalse(res["empty_user"], "Empty user must NEVER be admin")
+
+    def test_isep_pro_security_and_no_dummy_links(self):
+        """Verify that broken placeholder payment links and client-side auto-activations are eradicated."""
+        with open(ACADEMIA_PATH, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        # Broken placeholder link must never exist
+        self.assertNotIn("mpago.la/2S5kF9N", content,
+            "Broken placeholder Mercado Pago link must not exist in academia.js")
+
+        # Fake activation on click must never exist
+        self.assertNotIn("localStorage.setItem('isep_pro_subscriber'", content,
+            "CRITICAL: localStorage.setItem('isep_pro_subscriber') must not exist")
+
+        # Official transfer alias must be present
+        self.assertIn("SmartFlow.Digital", content,
+            "Official transfer Alias 'SmartFlow.Digital' must be present in payment modal")
 
 if __name__ == "__main__":
     unittest.main()

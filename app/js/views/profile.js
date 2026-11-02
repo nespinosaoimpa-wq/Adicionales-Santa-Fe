@@ -249,7 +249,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v535.10.71 • Adicionales Santa Fe</p>
+                <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v535.10.72 • Adicionales Santa Fe</p>
             </div>
             
             <!-- Ad Banner -->
