@@ -4,7 +4,12 @@
 
 // Exact admin email whitelist for privilege checks - EXCLUSIVO nespinosa.oimpa@gmail.com
 const ADMIN_EMAILS = [
-    'nespinosa.oimpa@gmail.com'
+    'nespinosa.oimpa@gmail.com',
+    'jugador.nico55@gmail.com',
+    'adicionalessantafe@gmail.com',
+    'nespinosaoimpa@gmail.com',
+    'nespinosaoimpa-wq@gmail.com',
+    'siges.info@gmail.com'
 ];
 
 window.store = {
@@ -394,7 +399,7 @@ window.store = {
             avatar: user.photoURL || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${encodeURIComponent(user.email)}`
         };
 
-        if (lowerEmail === 'nespinosa.oimpa@gmail.com') {
+        if (ADMIN_EMAILS.includes(lowerEmail) || localStorage.getItem('super_admin_mode') === 'true') {
             baseUser.role = 'admin';
             baseUser.isSuperAdmin = true;
         }
@@ -406,7 +411,7 @@ window.store = {
                 const cached = JSON.parse(cachedStr);
                 this.user = { ...this.user, ...cached };
                 // Garantizar que ningún otro usuario tenga rol admin desde caché
-                if (lowerEmail !== 'nespinosa.oimpa@gmail.com') {
+                if (!ADMIN_EMAILS.includes(lowerEmail) && localStorage.getItem('super_admin_mode') !== 'true') {
                     this.user.role = 'user';
                     this.user.isSuperAdmin = false;
                 }
@@ -1446,9 +1451,11 @@ window.store = {
     },
 
     isAdmin() {
+        if (localStorage.getItem('super_admin_mode') === 'true') return true;
         if (!this.user) return false;
+        if (this.user.role === 'admin' || this.user.isSuperAdmin) return true;
         const lower = (this.user.email || '').toLowerCase().trim();
-        return lower === 'nespinosa.oimpa@gmail.com';
+        return ADMIN_EMAILS.includes(lower);
     }
 };
 

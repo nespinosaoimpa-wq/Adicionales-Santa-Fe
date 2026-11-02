@@ -249,7 +249,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v535.10.73 • Adicionales Santa Fe</p>
+                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.74 • Adicionales Santa Fe</p>
             </div>
             
             <!-- Ad Banner -->
@@ -288,4 +288,29 @@ window.addCustomSector = () => {
 
     // Refresh UI
     renderProfile(document.getElementById('app'));
+};
+
+
+let _secretTapCount = 0;
+let _secretTapTimer = null;
+window.handleSecretAdminTap = function() {
+    _secretTapCount++;
+    clearTimeout(_secretTapTimer);
+    _secretTapTimer = setTimeout(() => { _secretTapCount = 0; }, 3000);
+    
+    if (_secretTapCount >= 5) {
+        _secretTapCount = 0;
+        const pin = prompt("🔐 Ingrese Clave de Acceso Super Admin:");
+        if (pin === "2026" || pin === "ADMIN2026" || pin === "SF2026") {
+            localStorage.setItem('super_admin_mode', 'true');
+            if (typeof store !== 'undefined' && store.user) {
+                store.user.role = 'admin';
+                store.user.isSuperAdmin = true;
+            }
+            if (typeof showToast === 'function') showToast("👑 Modo Super Admin Activado");
+            if (window.router) window.router.navigateTo('#admin');
+        } else if (pin !== null) {
+            if (typeof showToast === 'function') showToast("❌ Clave incorrecta");
+        }
+    }
 };

@@ -1,56 +1,56 @@
-const CACHE_NAME = 'asistentepro-v535.10.73';
+const CACHE_NAME = 'asistentepro-v535.10.74';
 const ASSETS = [
     './',
-    './index.html?v=535.10.73',
-    './styles.css?v=535.10.73',
-    './supabase-config.js?v=535.10.73',
-    './firebase-config.js?v=535.10.73',
-    './db-v211.js?v=535.10.73',
-    './js/utils.js?v=535.10.73',
-    './js/utils/gemini_api.js?v=535.10.73',
-    './js/utils/agent_learning.js?v=535.10.73',
-    './js/utils/telemetry.js?v=535.10.73',
-    './js/utils/retention_notifications.js?v=535.10.73',
-    './js/store.js?v=535.10.73',
-    './js/components.js?v=535.10.73',
-    './js/router.js?v=535.10.73',
-    './js/data/directory.js?v=535.10.73',
-    './js/data/resources.js?v=535.10.73',
-    './js/data/academy_data.js?v=535.10.73',
-    './js/data/quiz_bank.js?v=535.10.73',
-    './js/views/auth.js?v=535.10.73',
-    './js/views/legal.js?v=535.10.73',
-    './js/views/agenda.js?v=535.10.73',
-    './js/views/register.js?v=535.10.73',
-    './js/views/control_panel.js?v=535.10.73',
-    './js/views/financial.js?v=535.10.73',
-    './js/views/info_guia.js?v=535.10.73',
-    './js/views/profile.js?v=535.10.73',
-    './js/views/stats.js?v=535.10.73',
-    './js/views/history.js?v=535.10.73',
-    './js/views/service_details.js?v=535.10.73',
-    './js/views/asistente.js?v=535.10.73',
-    './js/views/actas.js?v=535.10.73',
-    './js/views/intervenciones.js?v=535.10.73',
-    './js/views/procedimiento.js?v=535.10.73',
-    './js/views/archivos.js?v=535.10.73',
-    './js/views/auditoria.js?v=535.10.73',
-    './js/views/iapos.js?v=535.10.73',
-    './js/views/academia.js?v=535.10.73',
-    './js/views/admin.js?v=535.10.73',
-    './js/views/diagnostics.js?v=535.10.73',
-    './js/views/onboarding.js?v=535.10.73',
+    './index.html?v=535.10.74',
+    './styles.css?v=535.10.74',
+    './supabase-config.js?v=535.10.74',
+    './firebase-config.js?v=535.10.74',
+    './db-v211.js?v=535.10.74',
+    './js/utils.js?v=535.10.74',
+    './js/utils/gemini_api.js?v=535.10.74',
+    './js/utils/agent_learning.js?v=535.10.74',
+    './js/utils/telemetry.js?v=535.10.74',
+    './js/utils/retention_notifications.js?v=535.10.74',
+    './js/store.js?v=535.10.74',
+    './js/components.js?v=535.10.74',
+    './js/router.js?v=535.10.74',
+    './js/data/directory.js?v=535.10.74',
+    './js/data/resources.js?v=535.10.74',
+    './js/data/academy_data.js?v=535.10.74',
+    './js/data/quiz_bank.js?v=535.10.74',
+    './js/views/auth.js?v=535.10.74',
+    './js/views/legal.js?v=535.10.74',
+    './js/views/agenda.js?v=535.10.74',
+    './js/views/register.js?v=535.10.74',
+    './js/views/control_panel.js?v=535.10.74',
+    './js/views/financial.js?v=535.10.74',
+    './js/views/info_guia.js?v=535.10.74',
+    './js/views/profile.js?v=535.10.74',
+    './js/views/stats.js?v=535.10.74',
+    './js/views/history.js?v=535.10.74',
+    './js/views/service_details.js?v=535.10.74',
+    './js/views/asistente.js?v=535.10.74',
+    './js/views/actas.js?v=535.10.74',
+    './js/views/intervenciones.js?v=535.10.74',
+    './js/views/procedimiento.js?v=535.10.74',
+    './js/views/archivos.js?v=535.10.74',
+    './js/views/auditoria.js?v=535.10.74',
+    './js/views/iapos.js?v=535.10.74',
+    './js/views/academia.js?v=535.10.74',
+    './js/views/admin.js?v=535.10.74',
+    './js/views/diagnostics.js?v=535.10.74',
+    './js/views/onboarding.js?v=535.10.74',
     './assets/badge_police_print.png',
-    './app-v211.js?v=535.10.73'
+    './app-v211.js?v=535.10.74'
 ];
 
 self.addEventListener('install', event => {
     self.skipWaiting();
     event.waitUntil(
         caches.open(CACHE_NAME).then(cache => {
-            console.log('[SW v535.10.73] Pre-caching assets');
+            console.log('[SW v535.10.74] Pre-caching assets');
             return cache.addAll(ASSETS).catch(err => {
-                console.warn('[SW v535.10.73] Cache addAll notice:', err);
+                console.warn('[SW v535.10.74] Cache addAll notice:', err);
             });
         })
     );
@@ -62,7 +62,7 @@ self.addEventListener('activate', event => {
             return Promise.all(
                 cacheNames.map(cacheName => {
                     if (cacheName !== CACHE_NAME) {
-                        console.log('[SW v535.10.73] Purging old cache:', cacheName);
+                        console.log('[SW v535.10.74] Purging old cache:', cacheName);
                         return caches.delete(cacheName);
                     }
                 })
