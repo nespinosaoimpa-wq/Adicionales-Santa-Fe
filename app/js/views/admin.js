@@ -2,6 +2,81 @@
  * Adicionales Santa Fe - Admin Views
  */
 
+function _formatAdminDate(iso) {
+    if (!iso) return 'N/A';
+    try {
+        const d = new Date(iso);
+        if (isNaN(d.getTime())) return 'N/A';
+        return d.toLocaleDateString('es-AR') + ' ' + d.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+    } catch (e) {
+        return 'N/A';
+    }
+}
+
+function _getCombinedAcademyPayments() {
+    const list = [];
+    const seen = new Set();
+
+    if (Array.isArray(window.academyPayments)) {
+        window.academyPayments.forEach(p => {
+            if (p && (p.user_email || p.email)) {
+                const email = (p.user_email || p.email).toLowerCase().trim();
+                const key = (p.id || email + '_' + (p.timestamp || '')).toLowerCase();
+                if (!seen.has(key)) {
+                    seen.add(key);
+                    list.push({
+                        id: p.id || key,
+                        user_email: email,
+                        user_name: p.user_name || p.name || 'Oficial',
+                        hierarchy: p.hierarchy || 'ISEP PRO 2026',
+                        amount: p.amount || 2000,
+                        cpo_number: p.cpo_number || p.cpoNumber || '',
+                        payment_proof: p.payment_proof || p.paymentProof || '',
+                        status: p.status || 'pending',
+                        timestamp: p.timestamp || new Date().toISOString()
+                    });
+                }
+            }
+        });
+    }
+
+    if (Array.isArray(window.allUsers)) {
+        window.allUsers.forEach(u => {
+            if (u && (u.academy_payment_request || (u.pro_status === 'pending' && !u.pro_member))) {
+                const req = u.academy_payment_request || {};
+                const email = (u.email || '').toLowerCase().trim();
+                if (email) {
+                    const key = ('usr_' + email).toLowerCase();
+                    const alreadyPresent = list.some(item => (item.user_email || '').toLowerCase() === email && item.status === 'pending');
+                    if (!alreadyPresent && !seen.has(key)) {
+                        seen.add(key);
+                        list.push({
+                            id: key,
+                            user_email: email,
+                            user_name: u.name || req.user_name || 'Oficial',
+                            hierarchy: req.hierarchy || u.pro_hierarchy || 'ISEP PRO 2026',
+                            amount: req.amount || 2000,
+                            cpo_number: req.cpo_number || '',
+                            payment_proof: req.payment_proof || '',
+                            status: req.status || u.pro_status || 'pending',
+                            timestamp: req.timestamp || u.lastLogin || new Date().toISOString()
+                        });
+                    }
+                }
+            }
+        });
+    }
+
+    return list.sort((a, b) => {
+        if (a.status === 'pending' && b.status !== 'pending') return -1;
+        if (a.status !== 'pending' && b.status === 'pending') return 1;
+        const timeA = new Date(a.timestamp || 0).getTime();
+        const timeB = new Date(b.timestamp || 0).getTime();
+        return timeB - timeA;
+    });
+}
+
+
 async function renderAdmin(container) {
     if (!container) container = document.getElementById('app');
     if (typeof store !== 'undefined' && (!store.isAdmin || !store.isAdmin())) {
@@ -19,6 +94,7 @@ async function renderAdmin(container) {
 
     window.allUsers = window.allUsers || [];
     window.allServices = window.allServices || [];
+    window.academyPayments = window.academyPayments || [];
     if (window.queryLogs === undefined) window.queryLogs = null;
     window.adminDateFilter = window.adminDateFilter || 'all';
     let reviewsMap = new Map(); // id -> review
@@ -108,7 +184,10 @@ async function renderAdmin(container) {
     };
 
     const updateUI = () => {
-        const stats = DB.calculateStats(window.allUsers, window.allServices, window.adminDateFilter);
+        try {
+            const allUsers = window.allUsers || [];
+            const allServices = window.allServices || [];
+            const stats = DB.calculateStats(allUsers, allServices, window.adminDateFilter);
 
         // Calculate approval rating and average stars
         const reviewsArray = Array.from(reviewsMap.values());
@@ -583,6 +662,9 @@ async function renderAdmin(container) {
         `;
 
         _mountAdminCharts(stats.chartData);
+        } catch (err) {
+            console.error('Error en updateUI Admin Hub:', err);
+        }
     };
 
     // Subscriptions
@@ -635,6 +717,10 @@ async function renderAdmin(container) {
         updateUI();
     });
 
+    // Render inicial inmediato: nunca colgarse en el spinner
+    updateUI();
+    setTimeout(() => { try { updateUI(); } catch(e) {} }, 1200);
+
     window.saveAdminGeminiKey = (e) => {
         e.preventDefault();
         const key = document.getElementById('adminGeminiKeyInput')?.value.trim();
@@ -645,13 +731,30 @@ async function renderAdmin(container) {
     };
 
     window.approveAcademyPaymentAction = async (paymentId, email, hierarchy) => {
-        if (!confirm(`¿Confirmas aprobar el pago de $10.000 ARS para ${email} en el concurso ${hierarchy}?`)) return;
+        if (!confirm("¿Confirmas aprobar el pase PRO para " + email + " (" + hierarchy + ")?")) return;
         try {
             await DB.approveAcademyPayment(paymentId, email, hierarchy);
-            showToast("✅ Pase PRO Academia activado para " + email);
-            if (window.location.hash === '#admin') router.handleRoute();
+            if (window.showToast) showToast("✅ Pase PRO Academia activado para " + email);
+            if (Array.isArray(window.academyPayments)) {
+                window.academyPayments = window.academyPayments.map(p => {
+                    if (p.id === paymentId || (p.user_email || '').toLowerCase() === (email || '').toLowerCase()) {
+                        return { ...p, status: 'approved' };
+                    }
+                    return p;
+                });
+            }
+            if (Array.isArray(window.allUsers)) {
+                window.allUsers = window.allUsers.map(u => {
+                    if ((u.email || '').toLowerCase() === (email || '').toLowerCase()) {
+                        return { ...u, pro_member: true, isep_pro: true, pro_status: 'approved' };
+                    }
+                    return u;
+                });
+            }
+            updateUI();
+            if (window.location.hash === '#admin' && window.router) router.handleRoute();
         } catch(e) {
-            showToast("Error al aprobar pago: " + e.message);
+            if (window.showToast) showToast("Error al aprobar pago: " + e.message);
         }
     };
 
@@ -782,10 +885,7 @@ function _mountAdminCharts(data) {
     }
 }
 
-function _formatAdminDate(iso) {
-    const d = new Date(iso);
-    return d.toLocaleDateString() + ' ' + d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
+// _formatAdminDate defined at top level
 
 store.changeUserRole = async (email, newRole) => {
     if (!confirm(`¿Confirmas cambiar a ${email} al rol: ${newRole}?`)) return;

@@ -83,5 +83,18 @@ class TestAdminSecurity(unittest.TestCase):
         self.assertIn("SmartFlow.Digital", content,
             "Official transfer Alias 'SmartFlow.Digital' must be present in payment modal")
 
+    def test_admin_hub_payments_and_helpers_defined(self):
+        """Verify that _getCombinedAcademyPayments and _formatAdminDate are properly defined in admin.js."""
+        admin_path = os.path.join(WORKSPACE_ROOT, "app", "js", "views", "admin.js")
+        with open(admin_path, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        self.assertIn("function _getCombinedAcademyPayments", content,
+            "_getCombinedAcademyPayments must be defined as a function in admin.js")
+        self.assertIn("function _formatAdminDate", content,
+            "_formatAdminDate must be defined as a function in admin.js")
+        self.assertIn("updateUI();", content,
+            "renderAdmin must call updateUI() immediately to prevent infinite spinner")
+
 if __name__ == "__main__":
     unittest.main()

@@ -744,6 +744,8 @@ const DB = {
         const fbUnsub = db.collection('services').onSnapshot(snapshot => {
             fbServices = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             mergeAndCallback();
+        }, error => {
+            console.warn("Global services FB snapshot error:", error.message);
         });
 
         // SB Global
@@ -909,7 +911,9 @@ const DB = {
         });
     },
 
-    calculateStats(users, allServices, dateFilter = 'all') {
+    calculateStats(users = [], allServices = [], dateFilter = 'all') {
+        if (!Array.isArray(users)) users = [];
+        if (!Array.isArray(allServices)) allServices = [];
         let services = allServices;
         if (dateFilter !== 'all') {
             const now = new Date();
@@ -1312,54 +1316,6 @@ const DB = {
             if (paymentId && !paymentId.startsWith('usr_')) {
                 await supabaseClient.from('academy_payments').update({ status: 'approved', approved_at: nowIso }).eq('id', paymentId);
             }
-        } catch(e) {}
-
-        return true;
-    },
-
-    subscribeToAcademyPayments(callback) {
-        let paymentsMap = new Map();
-
-        const mergeAndCallback = () => {
-            const list = Array.from(paymentsMap.values()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            callback(list);
-        };
-
-        const unsubFB = db.collection('academy_payments').onSnapshot(snapshot => {
-            snapshot.docs.forEach(doc => {
-                paymentsMap.set(doc.id, { id: doc.id, ...doc.data() });
-            });
-            mergeAndCallback();
-        }, () => {});
-
-        supabaseClient.from('academy_payments').select('*').then(({ data }) => {
-            if (data) {
-                data.forEach(p => paymentsMap.set(p.id || p.cpo_number, p));
-                mergeAndCallback();
-            }
-        }).catch(() => {});
-
-        return unsubFB;
-    },
-
-    async approveAcademyPayment(paymentId, userEmail, hierarchy) {
-        const cleanEmail = (userEmail || '').toLowerCase().trim();
-        const nowIso = new Date().toISOString();
-
-        const userUpdate = {
-            pro_member: true,
-            pro_hierarchy: hierarchy,
-            pro_approved_at: nowIso
-        };
-
-        await db.collection('users').doc(cleanEmail).set(userUpdate, { merge: true }).catch(console.warn);
-        await supabaseClient.from('profiles').update(userUpdate).eq('email', cleanEmail).catch(console.warn);
-
-        try {
-            await db.collection('academy_payments').doc(paymentId).update({ status: 'approved', approved_at: nowIso });
-        } catch(e) {}
-        try {
-            await supabaseClient.from('academy_payments').update({ status: 'approved', approved_at: nowIso }).eq('id', paymentId);
         } catch(e) {}
 
         return true;
