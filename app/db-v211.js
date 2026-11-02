@@ -1223,17 +1223,31 @@ const DB = {
 
     // --- ACADEMIA PRO PAYMENTS & APPROVALS ---
     async notifyAcademyPayment(paymentData) {
+        const cleanEmail = (paymentData.email || store.user?.email || '').toLowerCase().trim();
         const payload = {
-            user_email: paymentData.email || store.user?.email,
+            user_email: cleanEmail,
             user_name: paymentData.name || store.user?.name || 'Oficial',
-            hierarchy: paymentData.hierarchy,
-            amount: paymentData.amount || 10000,
+            hierarchy: paymentData.hierarchy || 'ISEP PRO 2026',
+            amount: paymentData.amount || 2000,
             cpo_number: paymentData.cpoNumber || '',
             payment_proof: paymentData.paymentProof || '',
             status: 'pending',
             timestamp: new Date().toISOString()
         };
 
+        // 1. Guardar en el documento de usuario (100% garantizado con reglas de auth)
+        if (cleanEmail) {
+            try {
+                await db.collection('users').doc(cleanEmail).set({
+                    academy_payment_request: payload,
+                    pro_status: 'pending'
+                }, { merge: true });
+            } catch(e) {
+                console.warn("Firestore user pending payment notify error:", e.message);
+            }
+        }
+
+        // 2. Guardar en colecciones dedicadas
         try {
             await db.collection('academy_payments').add(payload);
         } catch(e) {
@@ -1245,6 +1259,61 @@ const DB = {
         } catch(e) {
             console.warn("Supabase academy payment notify error:", e.message);
         }
+        return true;
+    },
+
+    subscribeToAcademyPayments(callback) {
+        let paymentsMap = new Map();
+
+        const mergeAndCallback = () => {
+            const list = Array.from(paymentsMap.values()).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            callback(list);
+        };
+
+        const unsubFB = db.collection('academy_payments').onSnapshot(snapshot => {
+            snapshot.docs.forEach(doc => {
+                paymentsMap.set(doc.id, { id: doc.id, ...doc.data() });
+            });
+            mergeAndCallback();
+        }, () => {});
+
+        supabaseClient.from('academy_payments').select('*').then(({ data }) => {
+            if (data) {
+                data.forEach(p => paymentsMap.set(p.id || p.cpo_number, p));
+                mergeAndCallback();
+            }
+        }).catch(() => {});
+
+        return unsubFB;
+    },
+
+    async approveAcademyPayment(paymentId, userEmail, hierarchy) {
+        const cleanEmail = (userEmail || '').toLowerCase().trim();
+        const nowIso = new Date().toISOString();
+
+        const userUpdate = {
+            pro_member: true,
+            isep_pro: true,
+            pro_hierarchy: hierarchy || 'ISEP PRO 2026',
+            pro_approved_at: nowIso,
+            pro_status: 'approved',
+            academy_payment_request: null
+        };
+
+        await db.collection('users').doc(cleanEmail).set(userUpdate, { merge: true }).catch(console.warn);
+        await supabaseClient.from('profiles').update(userUpdate).eq('email', cleanEmail).catch(console.warn);
+
+        try {
+            if (paymentId && !paymentId.startsWith('usr_')) {
+                await db.collection('academy_payments').doc(paymentId).update({ status: 'approved', approved_at: nowIso });
+            }
+        } catch(e) {}
+        try {
+            if (paymentId && !paymentId.startsWith('usr_')) {
+                await supabaseClient.from('academy_payments').update({ status: 'approved', approved_at: nowIso }).eq('id', paymentId);
+            }
+        } catch(e) {}
+
         return true;
     },
 

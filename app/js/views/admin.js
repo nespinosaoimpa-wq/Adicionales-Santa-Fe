@@ -196,6 +196,64 @@ async function renderAdmin(container) {
                     </div>
                 </div>
 
+                <!-- Aprobaciones Academia PRO (DESTACADO SUPERIOR) -->
+                ${(() => {
+                    const combinedPayments = _getCombinedAcademyPayments();
+                    const pendingCount = combinedPayments.filter(p => p.status === 'pending').length;
+                    return `
+                        <div class="rounded-3xl border ${pendingCount > 0 ? 'bg-gradient-to-br from-amber-950/60 via-slate-900 to-slate-900 border-amber-500/40 shadow-2xl shadow-amber-500/10' : 'bg-slate-800/40 border-white/5 shadow-xl'} backdrop-blur-md p-6 space-y-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="size-11 rounded-2xl ${pendingCount > 0 ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30 shadow-lg shadow-amber-500/20' : 'bg-white/5 text-slate-400'} flex items-center justify-center shrink-0">
+                                        <span class="material-symbols-outlined text-2xl">workspace_premium</span>
+                                    </div>
+                                    <div>
+                                        <h3 class="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">
+                                            Aprobación de Pagos Academia PRO
+                                        </h3>
+                                        <p class="text-[11px] text-slate-400">Suscripciones ISEP ($2.000 / mes o $10.000 concurso)</p>
+                                    </div>
+                                </div>
+                                <span class="text-[10px] font-black uppercase px-3 py-1 rounded-full ${pendingCount > 0 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse' : 'bg-white/5 text-slate-400 border border-white/10'}">
+                                    ${pendingCount} Pendiente${pendingCount !== 1 ? 's' : ''}
+                                </span>
+                            </div>
+
+                            <div class="space-y-3 max-h-[350px] overflow-y-auto pr-1 custom-scrollbar">
+                                ${combinedPayments.length === 0 ? `
+                                    <div class="py-6 text-center">
+                                        <span class="material-symbols-outlined text-3xl text-slate-600 mb-1 block">check_circle</span>
+                                        <p class="text-xs text-slate-500 italic">No hay solicitudes de pago por el momento</p>
+                                    </div>
+                                ` : combinedPayments.map(p => `
+                                    <div class="p-4 rounded-2xl ${p.status === 'pending' ? 'bg-amber-500/10 border border-amber-500/20 shadow-md' : 'bg-white/5 border border-white/5 opacity-75'} flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                                        <div class="min-w-0">
+                                            <div class="flex items-center gap-2">
+                                                <p class="font-bold text-xs text-white truncate">${p.user_name || 'Oficial'}</p>
+                                                <span class="text-[9px] text-slate-400 font-mono">(${p.user_email})</span>
+                                            </div>
+                                            <p class="text-[10px] text-amber-400 font-bold mt-0.5">Monto: $${(p.amount || 2000).toLocaleString('es-AR')} · Jerarquía: ${p.hierarchy || 'ISEP PRO'}</p>
+                                            <p class="text-[9px] text-slate-500 mt-0.5">${_formatAdminDate(p.timestamp)}</p>
+                                        </div>
+                                        <div class="shrink-0 flex items-center gap-2">
+                                            ${p.status === 'approved' ? `
+                                                <span class="text-[10px] font-black text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-xl border border-emerald-500/20 flex items-center gap-1">
+                                                    <span class="material-symbols-outlined text-sm">check</span> Habilitado
+                                                </span>
+                                            ` : `
+                                                <button onclick="window.approveAcademyPaymentAction('${p.id}', '${p.user_email}', '${p.hierarchy}')" 
+                                                    class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all flex items-center gap-1.5">
+                                                    <span class="material-symbols-outlined text-base">verified</span> Aprobar Pase PRO
+                                                </button>
+                                            `}
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                })()}
+
                 <!-- Charts & Stats -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     <!-- Trend Chart -->
@@ -356,41 +414,6 @@ async function renderAdmin(container) {
                             Guardar Clave Admin
                         </button>
                     </form>
-                </div>
-
-                <!-- Aprobaciones Academia PRO ($10.000 ARS) -->
-                <div class="bg-slate-800/40 backdrop-blur-md rounded-3xl border border-amber-500/20 p-6 shadow-xl space-y-4">
-                    <div class="flex items-center justify-between">
-                        <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                            <span class="material-symbols-outlined text-amber-400">workspace_premium</span>
-                            Aprobación de Pagos Academia PRO ($10.000)
-                        </h3>
-                        <span class="text-[10px] font-black uppercase text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
-                            ${(window.academyPayments || []).filter(p => p.status === 'pending').length} Pendientes
-                        </span>
-                    </div>
-
-                    <div class="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                        ${!window.academyPayments || window.academyPayments.length === 0 ? '<p class="text-slate-500 text-xs italic text-center py-4">Sin notificaciones de pago por el momento</p>' :
-                        window.academyPayments.map(p => `
-                            <div class="p-3 bg-white/5 border border-white/5 rounded-2xl flex items-center justify-between">
-                                <div>
-                                    <p class="font-bold text-xs text-white">${p.user_name || 'Oficial'} <span class="text-[9px] text-slate-400 font-mono">(${p.user_email})</span></p>
-                                    <p class="text-[10px] text-amber-400 font-bold mt-0.5">Concurso: ${p.hierarchy || 'ISEP'} • CPO: ${p.cpo_number || 'N/A'}</p>
-                                    <p class="text-[8px] text-slate-500 mt-0.5">${_formatAdminDate(p.timestamp)}</p>
-                                </div>
-                                <div>
-                                    ${p.status === 'approved' ? `
-                                        <span class="text-[9px] font-black text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-full border border-emerald-500/20">Aprobado ✓</span>
-                                    ` : `
-                                        <button onclick="window.approveAcademyPaymentAction('${p.id}', '${p.user_email}', '${p.hierarchy}')" class="px-3 py-1.5 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all flex items-center gap-1">
-                                            <span class="material-symbols-outlined text-sm">check_circle</span> Aprobar $10k
-                                        </button>
-                                    `}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
                 </div>
 
                 <!-- Global Announcements -->
