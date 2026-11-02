@@ -243,18 +243,13 @@ function renderProfile(container) {
                             <span class="material-symbols-outlined text-sm">memory</span> Diagnóstico del Sistema
                         </button>
                     </div>
-                ` : `
-                    <button onclick="store.enableSuperAdminMode()" class="w-full py-3 rounded-2xl bg-slate-900/60 hover:bg-purple-950/40 text-slate-400 hover:text-purple-300 border border-slate-800 hover:border-purple-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 active:scale-95">
-                        <span class="material-symbols-outlined text-sm text-purple-400">key</span>
-                        Activar Modo Super Admin
-                    </button>
-                `}
+                ` : ''}
 
                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10 mt-2">
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v535.9-FINAL • Adicionales Santa Fe</p>
+                <p class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono">v535.10.71 • Adicionales Santa Fe</p>
             </div>
             
             <!-- Ad Banner -->

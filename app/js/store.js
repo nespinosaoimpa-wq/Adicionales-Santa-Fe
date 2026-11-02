@@ -1449,21 +1449,6 @@ window.store = {
         if (!this.user) return false;
         const lower = (this.user.email || '').toLowerCase().trim();
         return lower === 'nespinosa.oimpa@gmail.com';
-    },
-
-    enableSuperAdminMode() {
-        const lower = (this.user?.email || '').toLowerCase().trim();
-        if (lower !== 'nespinosa.oimpa@gmail.com') {
-            showToast("Acceso denegado: cuenta no autorizada como Administrador");
-            return;
-        }
-        localStorage.setItem('super_admin_mode', 'true');
-        this.user.role = 'admin';
-        this.user.isSuperAdmin = true;
-        showToast("👑 Modo Super Admin Activado");
-        if (window.router) {
-            window.router.navigateTo('#admin');
-        }
     }
 };
 
@@ -1601,4 +1586,4 @@ window.showSurveyBanner = (force = false) => {
     };
 };
 
-window.store = store;
+var store = window.store;

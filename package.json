@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node -e \"console.log('Build OK')\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "python -m unittest discover -s tests -p \"test_*.py\"",
     "deploy": "powershell -ExecutionPolicy Bypass -File .\\deploy-ghpages.ps1"
   },
   "repository": {
