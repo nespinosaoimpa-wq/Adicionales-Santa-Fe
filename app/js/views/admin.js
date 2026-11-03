@@ -29,7 +29,7 @@ function _getCombinedAcademyPayments() {
                         user_email: email,
                         user_name: p.user_name || p.name || 'Oficial',
                         hierarchy: p.hierarchy || 'ISEP PRO 2026',
-                        amount: p.amount || 2000,
+                        amount: p.amount || 5000,
                         cpo_number: p.cpo_number || p.cpoNumber || '',
                         payment_proof: p.payment_proof || p.paymentProof || '',
                         status: p.status || 'pending',
@@ -55,7 +55,7 @@ function _getCombinedAcademyPayments() {
                             user_email: email,
                             user_name: u.name || req.user_name || 'Oficial',
                             hierarchy: req.hierarchy || u.pro_hierarchy || 'ISEP PRO 2026',
-                            amount: req.amount || 2000,
+                            amount: req.amount || 5000,
                             cpo_number: req.cpo_number || '',
                             payment_proof: req.payment_proof || '',
                             status: req.status || u.pro_status || 'pending',
@@ -290,7 +290,7 @@ async function renderAdmin(container) {
                                         <h3 class="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">
                                             Aprobación de Pagos Academia PRO
                                         </h3>
-                                        <p class="text-[11px] text-slate-400">Suscripciones ISEP ($2.000 / mes o $10.000 concurso)</p>
+                                        <p class="text-[11px] text-slate-400">Suscripciones ISEP ($5.000 / mes - Promo 50% OFF o $10.000 regular)</p>
                                     </div>
                                 </div>
                                 <span class="text-[10px] font-black uppercase px-3 py-1 rounded-full ${pendingCount > 0 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse' : 'bg-white/5 text-slate-400 border border-white/10'}">

@@ -1232,7 +1232,7 @@ const DB = {
             user_email: cleanEmail,
             user_name: paymentData.name || store.user?.name || 'Oficial',
             hierarchy: paymentData.hierarchy || 'ISEP PRO 2026',
-            amount: paymentData.amount || 2000,
+            amount: paymentData.amount || 5000,
             cpo_number: paymentData.cpoNumber || '',
             payment_proof: paymentData.paymentProof || '',
             status: 'pending',

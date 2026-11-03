@@ -443,68 +443,101 @@ window.isInStandaloneMode = isInStandaloneMode;
 window.improvePoliceNarrative = improvePoliceNarrative;
 // Donation Modal (Global)
 window.showDonationModal = () => {
+    const existing = document.getElementById('donation-modal-overlay');
+    if (existing) existing.remove();
+
     const overlay = document.createElement('div');
-    overlay.className = 'fixed inset-0 bg-black/85 backdrop-blur-md z-[200] flex items-end justify-center animate-fade-in';
+    overlay.id = 'donation-modal-overlay';
+    overlay.className = 'fixed inset-0 bg-black/85 backdrop-blur-md z-[200] flex items-center justify-center p-4 animate-fade-in';
     overlay.innerHTML = `
-        <div class="bg-slate-950 w-full max-w-md rounded-t-[2.5rem] border-t-4 border-[#74ACDF] p-8 pb-12 animate-slide-up shadow-2xl relative overflow-hidden">
-            <!-- Decorative Flag Background Elements -->
-            <div class="absolute -right-12 -top-12 size-36 bg-[#74ACDF]/10 rounded-full blur-2xl"></div>
-            <div class="absolute -left-12 -bottom-12 size-36 bg-[#F6B426]/10 rounded-full blur-2xl"></div>
-            
-            <div class="w-12 h-1.5 bg-white/10 rounded-full mx-auto mb-6"></div>
-            
-            <!-- World Cup Header -->
-            <div class="flex items-center gap-4 mb-6 relative z-10">
-                <div class="size-14 rounded-2xl bg-gradient-to-br from-[#74ACDF] to-[#F6B426] flex items-center justify-center text-white shadow-lg shadow-[#74ACDF]/20 relative">
-                    <span class="material-symbols-outlined text-3xl animate-bounce">emoji_events</span>
-                    <!-- Small soccer ball badge -->
-                    <span class="absolute -bottom-1.5 -right-1.5 bg-slate-950 text-[10px] p-0.5 rounded-full border border-[#74ACDF]">⚽</span>
-                </div>
-                <div>
-                    <h3 class="font-extrabold text-white text-lg tracking-tight flex items-center gap-1.5">
-                        ¡Apoyá la App! <span class="text-sm">🇦🇷</span>
-                    </h3>
-                    <p class="text-[9px] text-[#F6B426] font-black uppercase tracking-[0.2em]">Colaboración · Modo Mundial 🏆</p>
-                </div>
-            </div>
-            
-            <p class="text-[12.5px] text-slate-300 leading-relaxed mb-6 relative z-10">
-                Desarrollar y mejorar esta herramienta sin publicidad invasiva es posible gracias al apoyo voluntario de los oficiales. Si te resulta valiosa en tu día a día, tu colaboración nos ayuda a seguir sumando mejoras y mantener la infraestructura activa. ¡Cada granito de arena cuenta!
-                <br><br>
-                <strong class="text-white">Tocá cada dato para copiarlo:</strong>
-            </p>
-            
-            <!-- Donation Info Box -->
-            <div class="space-y-3 mb-8 relative z-10">
-                <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-[#74ACDF]/10 hover:border-[#74ACDF]/30 transition-all active:scale-[0.98] group">
-                    <div>
-                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest mb-1">Alias Mercado Pago</p>
-                        <p class="text-base font-mono font-black text-white group-hover:text-[#74ACDF] transition-colors">SmartFlow.Digital</p>
-                    </div>
-                    <div class="size-8 rounded-full bg-[#74ACDF]/10 flex items-center justify-center text-[#74ACDF] group-hover:bg-[#74ACDF] group-hover:text-slate-950 transition-colors">
-                        <span class="material-symbols-outlined text-base">content_copy</span>
-                    </div>
-                </div>
-                
-                <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-4 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-[#74ACDF]/10 hover:border-[#74ACDF]/30 transition-all active:scale-[0.98] group">
-                    <div>
-                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest mb-1">CVU</p>
-                        <p class="text-xs font-mono font-bold text-white group-hover:text-[#74ACDF] transition-colors">0000003100001906497190</p>
-                    </div>
-                    <div class="size-8 rounded-full bg-[#74ACDF]/10 flex items-center justify-center text-[#74ACDF] group-hover:bg-[#74ACDF] group-hover:text-slate-950 transition-colors">
-                        <span class="material-symbols-outlined text-base">content_copy</span>
-                    </div>
-                </div>
-            </div>
-            
-            <button onclick="this.closest('.fixed').remove()" class="w-full py-2 text-xs font-black text-slate-500 hover:text-white uppercase tracking-widest transition-colors">
-                Volver
+        <div class="glass-card w-full max-w-md p-6 rounded-3xl border border-amber-500/30 bg-slate-950/95 shadow-2xl shadow-amber-500/20 text-center relative overflow-hidden max-h-[90vh] overflow-y-auto custom-scrollbar" style="animation: scaleUp 0.3s ease-out">
+            <!-- Decorative Glow Elements -->
+            <div class="absolute -top-24 -left-24 size-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 size-48 bg-blue-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <button onclick="document.getElementById('donation-modal-overlay').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-full transition-colors">
+                <span class="material-symbols-outlined text-xl">close</span>
             </button>
+
+            <!-- Police Community Header -->
+            <div class="inline-flex items-center justify-center size-16 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 font-black shadow-lg shadow-amber-500/30 mb-3">
+                <span class="material-symbols-outlined text-3xl">volunteer_activism</span>
+            </div>
+            
+            <h2 class="text-xl font-black text-white">Apoyá el Desarrollo</h2>
+            <p class="text-xs text-amber-300 font-bold uppercase tracking-wider mt-0.5">Proyecto Independiente · Policía de Santa Fe</p>
+
+            <p class="text-xs text-slate-300 leading-relaxed mt-3 mb-4 text-left">
+                <strong>Adicionales Santa Fe</strong> es una herramienta creada a pulmón por y para la Policía provincial, sin subsidios ni publicidad invasiva. Tu colaboración voluntaria nos permite costear los servidores en la nube de Google, el motor de Inteligencia Artificial Centinela y el soporte técnico continuo.
+            </p>
+
+            <!-- SUGGESTED TIERS -->
+            <div class="text-left mb-4">
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">Montos Sugeridos de Colaboración:</p>
+                <div class="grid grid-cols-3 gap-2">
+                    <div class="p-3 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-amber-500/40 transition-all cursor-pointer" onclick="copyToClipboard('SmartFlow.Digital', 'Alias'); showToast('☕ Alias copiado para $1.000');">
+                        <p class="text-base mb-0.5">☕</p>
+                        <p class="text-xs font-black text-white">$1.000</p>
+                        <p class="text-[9px] text-slate-400">Un café</p>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center hover:border-amber-500/60 transition-all cursor-pointer relative" onclick="copyToClipboard('SmartFlow.Digital', 'Alias'); showToast('🛡️ Alias copiado para $2.500');">
+                        <span class="absolute -top-1.5 right-2 px-1.5 py-0.2 rounded-full bg-amber-500 text-slate-950 text-[7px] font-black uppercase">Popular</span>
+                        <p class="text-base mb-0.5">🛡️</p>
+                        <p class="text-xs font-black text-amber-300">$2.500</p>
+                        <p class="text-[9px] text-slate-300">Servidores</p>
+                    </div>
+                    <div class="p-3 rounded-2xl bg-white/5 border border-white/10 text-center hover:border-amber-500/40 transition-all cursor-pointer" onclick="copyToClipboard('SmartFlow.Digital', 'Alias'); showToast('🚀 Alias copiado para $5.000');">
+                        <p class="text-base mb-0.5">🚀</p>
+                        <p class="text-xs font-black text-white">$5.000</p>
+                        <p class="text-[9px] text-slate-400">Destacado</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TRANSFER DATA -->
+            <div class="space-y-2 mb-4 text-left">
+                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-wider ml-1">Datos oficiales de transferencia:</p>
+                
+                <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-amber-500/20 cursor-pointer hover:bg-amber-500/10 transition-all active:scale-[0.98] group">
+                    <div>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest mb-0.5">Alias Mercado Pago</p>
+                        <p class="text-xs font-mono font-black text-amber-300 group-hover:text-amber-200 transition-colors">SmartFlow.Digital</p>
+                    </div>
+                    <div class="size-7 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-400 group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors">
+                        <span class="material-symbols-outlined text-sm">content_copy</span>
+                    </div>
+                </div>
+
+                <div onclick="copyToClipboard('0000003100001906497190', 'CVU')" class="flex items-center justify-between p-3 rounded-2xl bg-white/5 border border-white/10 cursor-pointer hover:bg-white/10 transition-all active:scale-[0.98] group">
+                    <div>
+                        <p class="text-[9px] text-slate-400 uppercase font-black tracking-widest mb-0.5">CVU (Mercado Pago)</p>
+                        <p class="text-[11px] font-mono font-bold text-slate-300 group-hover:text-white transition-colors">0000003100001906497190</p>
+                    </div>
+                    <div class="size-7 rounded-full bg-white/10 flex items-center justify-center text-slate-400 group-hover:bg-white group-hover:text-slate-950 transition-colors">
+                        <span class="material-symbols-outlined text-sm">content_copy</span>
+                    </div>
+                </div>
+                <p class="text-[9px] text-slate-500 italic ml-1">Titular: Nicolás Espinosa · SmartFlow Digital</p>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <div class="space-y-2">
+                <a href="https://wa.me/5493425162372?text=" + encodeURIComponent("Hola Nico! Te acabo de enviar un aporte voluntario para apoyar el desarrollo de Adicionales Santa Fe. ¡Muchas gracias por la app y por el esfuerzo para la policía!") target="_blank"
+                    class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2 active:scale-95 transition-all">
+                    <span class="material-symbols-outlined text-lg">chat</span>
+                    Avisar Aporte por WhatsApp
+                </a>
+
+                <button onclick="document.getElementById('donation-modal-overlay').remove()" class="w-full py-2.5 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white font-bold text-xs rounded-2xl border border-white/5 transition-all">
+                    Cerrar
+                </button>
+            </div>
         </div>
     `;
     overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
     document.body.appendChild(overlay);
 };
+window._showDonationModal = window.showDonationModal;
 
 // --- Google Gemini AI API Integration ---
 window.getGeminiAPIKey = function () {

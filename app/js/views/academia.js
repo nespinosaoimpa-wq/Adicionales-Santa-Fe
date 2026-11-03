@@ -60,7 +60,9 @@ window._quizState = window._quizState || {
 
 const ISEP_FREE_LIMIT = 2;
 
-const ISEP_PRO_PRICE = "$2.000 / mes";
+const ISEP_PRO_REGULAR_PRICE = "$10.000 / mes";
+const ISEP_PRO_PRICE = "$5.000 / mes";
+const ISEP_PRO_DISCOUNT = "50% OFF";
 
 const ISEP_WHATSAPP_PHONE = "5493425162372";
 
@@ -685,7 +687,7 @@ function renderAcademia(container) {
 
                     <button onclick="window._showIsepProModal()" class="px-2.5 py-1 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 border border-amber-500/40 text-amber-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1 hover:brightness-110 active:scale-95 transition-all">
 
-                        <span class="material-symbols-outlined text-xs">workspace_premium</span> PRO $2.000
+                        <span class="material-symbols-outlined text-xs">workspace_premium</span> PRO 50% OFF ($5.000)
 
                     </button>
 
@@ -1516,136 +1518,79 @@ function _renderSimuladorTab(container) {
 // ══════════════════════════════════════════════════════════════
 
 window._showIsepProModal = function() {
-
     const existing = document.getElementById('isep-pro-modal');
-
     if (existing) existing.remove();
 
-
-
     const used = _getFreeAttemptsUsed();
-
     const modal = document.createElement('div');
-
     modal.id = 'isep-pro-modal';
-
     modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in';
-
     
-
     modal.innerHTML = `
-
-        <div class="glass-card w-full max-w-md p-6 rounded-3xl border border-amber-500/30 bg-background-dark/95 shadow-2xl shadow-amber-500/20 text-center relative overflow-hidden" style="animation: scaleUp 0.3s ease-out">
-
+        <div class="glass-card w-full max-w-md p-6 rounded-3xl border border-amber-500/40 bg-background-dark/95 shadow-2xl shadow-amber-500/20 text-center relative overflow-hidden max-h-[92vh] overflow-y-auto custom-scrollbar" style="animation: scaleUp 0.3s ease-out">
             <!-- GLOW BACKGROUND -->
-
             <div class="absolute -top-24 -left-24 size-48 rounded-full bg-amber-500/20 blur-3xl pointer-events-none"></div>
-
             <div class="absolute -bottom-24 -right-24 size-48 rounded-full bg-blue-500/20 blur-3xl pointer-events-none"></div>
 
-
-
             <button onclick="document.getElementById('isep-pro-modal').remove()" class="absolute top-4 right-4 text-slate-400 hover:text-white p-1 rounded-full transition-colors">
-
                 <span class="material-symbols-outlined text-xl">close</span>
-
             </button>
 
-
-
             <!-- ICON & HEADER -->
-
-            <div class="inline-flex items-center justify-center size-16 rounded-3xl bg-gradient-to-br from-amber-400 to-orange-500 text-slate-950 font-black shadow-lg shadow-amber-500/30 mb-3">
-
+            <div class="inline-flex items-center justify-center size-16 rounded-3xl bg-gradient-to-br from-amber-400 via-orange-500 to-amber-600 text-slate-950 font-black shadow-lg shadow-amber-500/30 mb-2">
                 <span class="material-symbols-outlined text-3xl">workspace_premium</span>
-
             </div>
 
-            <h2 class="text-xl font-black text-white">ISEP PRO 2026</h2>
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-red-500/20 border border-red-500/40 text-amber-300 text-[10px] font-black uppercase tracking-wider mb-2 animate-pulse">
+                <span>🔥 50% OFF · OFERTA CONCURSO 2026</span>
+            </div>
 
-            <p class="text-xs text-amber-300 font-bold uppercase tracking-wider mt-0.5">Suscripción Exclusiva para Ascenso</p>
-
-
+            <h2 class="text-xl font-black text-white">ISEP PRO 2026: Tu Ascenso Seguro</h2>
+            <p class="text-xs text-amber-300 font-bold uppercase tracking-wider mt-0.5">Suscripción Exclusiva Concurso Policial</p>
 
             ${used >= ISEP_FREE_LIMIT ? `
-
                 <div class="mt-3 p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-300">
-
-                    Completaste tus <strong>${ISEP_FREE_LIMIT} simulacros de prueba gratuitos</strong>. Suscribite para continuar practicando sin límites.
-
+                    Completaste tus <strong>${ISEP_FREE_LIMIT} simulacros de prueba gratuitos</strong>. Suscribite para desbloquear el banco completo sin límites.
                 </div>
-
             ` : `
-
-                <p class="text-xs text-slate-400 mt-2">Acceso completo e ilimitado para preparar tu examen de jerarquía con la máxima exigencia.</p>
-
+                <p class="text-xs text-slate-400 mt-2">La única herramienta pedagógica diseñada estrictamente para el examen de ascenso en Santa Fe.</p>
             `}
 
-
-
-            <!-- PRICE TAG -->
-
-            <div class="my-4 py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-500/15 via-orange-500/15 to-amber-500/15 border border-amber-500/30">
-
+            <!-- PRICE TAG CON ANCLAJE (50% OFF) -->
+            <div class="my-3 py-3 px-4 rounded-2xl bg-gradient-to-r from-amber-500/15 via-orange-500/20 to-amber-500/15 border border-amber-500/40">
+                <div class="flex items-center justify-center gap-2 mb-0.5">
+                    <span class="text-xs text-slate-400 line-through font-bold">${ISEP_PRO_REGULAR_PRICE}</span>
+                    <span class="px-2 py-0.2 rounded-full bg-red-500 text-white font-black text-[9px] uppercase tracking-wider">Ahorrás $5.000</span>
+                </div>
                 <div class="flex items-baseline justify-center gap-1">
-
                     <span class="text-3xl font-black text-amber-300">${ISEP_PRO_PRICE}</span>
-
                 </div>
-
-                <p class="text-[10px] text-amber-400/80 mt-0.5 uppercase tracking-wider font-semibold">Cancela cuando quieras · Sin permanencia</p>
-
+                <p class="text-[10px] text-amber-400/90 mt-0.5 uppercase tracking-wider font-semibold">Menos de media hora de adicional ordinario · Cancela cuando quieras</p>
             </div>
 
-
-
-            <!-- BENEFITS LIST -->
-
-            <div class="text-left space-y-2 mb-5 text-xs text-slate-300">
-
-                <div class="flex items-center gap-2.5">
-
-                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0">check_circle</span>
-
-                    <span>Simulacros <strong>ilimitados</strong> en Fácil, Media y Difícil</span>
-
+            <!-- UNBEATABLE BENEFITS LIST -->
+            <div class="text-left space-y-2 mb-4 text-xs text-slate-300">
+                <div class="flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-emerald-400 text-base shrink-0 mt-0.5">verified</span>
+                    <span><strong>180+ Preguntas Oficiales 2026:</strong> con citas exactas de artículos (CPP Ley 12.734, Narcomenudeo Ley 14.239, Ley 12.521).</span>
                 </div>
-
-                <div class="flex items-center gap-2.5">
-
-                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0">check_circle</span>
-
-                    <span>Preguntas técnicas basadas en los manuales de <strong>cada jerarquía</strong></span>
-
+                <div class="flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-amber-400 text-base shrink-0 mt-0.5">psychology</span>
+                    <span><strong>Cuaderno Inteligente de Errores:</strong> repetición espaciada que te entrena exclusivamente en tus fallas hasta el 100%.</span>
                 </div>
-
-                <div class="flex items-center gap-2.5">
-
-                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0">check_circle</span>
-
-                    <span>Cita exacta de artículos (CPP Ley 12.734, Narcomenudeo Ley 14.239)</span>
-
+                <div class="flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-cyan-400 text-base shrink-0 mt-0.5">smart_toy</span>
+                    <span><strong>Tutor Centinela IA:</strong> explicaciones pedagógicas y jurídicas instantáneas en cada pregunta dudosa.</span>
                 </div>
-
-                <div class="flex items-center gap-2.5">
-
-                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0">check_circle</span>
-
-                    <span>Descarga directa de todos los <strong>manuales en PDF</strong></span>
-
+                <div class="flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-blue-400 text-base shrink-0 mt-0.5">timer</span>
+                    <span><strong>Simulador Modo Sede ISEP:</strong> 50 preguntas aleatorias en 60 minutos con cronómetro real de examen.</span>
                 </div>
-
-                <div class="flex items-center gap-2.5">
-
-                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0">check_circle</span>
-
-                    <span>Exámenes completos de 25 y 50 preguntas con cronómetro real</span>
-
+                <div class="flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-purple-400 text-base shrink-0 mt-0.5">menu_book</span>
+                    <span><strong>Biblioteca Oficial en PDF:</strong> descarga directa de manuales de todas las jerarquías en tu celular.</span>
                 </div>
-
             </div>
-
-
 
             <!-- DATOS DE TRANSFERENCIA MERCADO PAGO / BANCO -->
             <div class="space-y-2 mb-4 text-left">
@@ -1678,21 +1623,23 @@ window._showIsepProModal = function() {
                 <button onclick="window._handleNotifyIsepProPayment()"
                     class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2 active:scale-95 transition-all">
                     <span class="material-symbols-outlined text-lg">send</span>
-                    Notificar Pago y Enviar Comprobante
+                    Notificar Pago ($5.000) y Enviar Comprobante
                 </button>
 
-                <button onclick="window._promptActivationCode()" class="w-full py-2.5 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white font-bold text-xs rounded-2xl border border-white/5 transition-all">
-                    Tengo un Código de Activación
-                </button>
+                <div class="flex gap-2">
+                    <button onclick="window._promptActivationCode()" class="flex-1 py-2.5 bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white font-bold text-[11px] rounded-2xl border border-white/5 transition-all">
+                        Tengo un Código
+                    </button>
+                    <button onclick="if(window.showDonationModal) showDonationModal();" class="flex-1 py-2.5 bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 font-bold text-[11px] rounded-2xl border border-amber-500/20 transition-all flex items-center justify-center gap-1">
+                        <span class="material-symbols-outlined text-xs">volunteer_activism</span> Donar al Proyecto
+                    </button>
+                </div>
             </div>
         </div>
     `;
 
     document.body.appendChild(modal);
-
 };
-
-
 
 window._promptActivationCode = function() {
 
@@ -2546,7 +2493,7 @@ function _renderResultsView(container) {
 
                     <button onclick="window._showIsepProModal()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-lg shadow-amber-500/25 active:scale-95 transition-all">
 
-                        Activar ISEP PRO · $2.000 / mes
+                        Activar ISEP PRO · 50% OFF ($5.000 / mes)
 
                     </button>
 

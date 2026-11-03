@@ -245,11 +245,33 @@ function renderProfile(container) {
                     </div>
                 ` : ''}
 
+                <!-- ☕ Aporte al Desarrollo Independiente -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800/90 border border-amber-500/30 rounded-3xl p-5 shadow-xl space-y-3 relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 size-24 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-xl">volunteer_activism</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xs font-black text-white uppercase tracking-wider">Aporte al Desarrollo Policial</h3>
+                                <p class="text-[10px] text-slate-400">Apoyá el mantenimiento y servidores de la app</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Esta aplicación es un proyecto independiente desarrollado para toda la Policía de Santa Fe. Si la herramienta te resulta útil, podés colaborar voluntariamente para mantener los servidores en la nube y el desarrollo de nuevas funciones.
+                    </p>
+                    <button onclick="window.showDonationModal()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
+                        <span class="material-symbols-outlined text-base">favorite</span> Colaborar con el Proyecto
+                    </button>
+                </div>
+
                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10 mt-2">
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.75 • Adicionales Santa Fe</p>
+                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.76 • Adicionales Santa Fe</p>
             </div>
             
             <!-- Ad Banner -->
