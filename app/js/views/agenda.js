@@ -45,8 +45,12 @@ function renderAgenda(container) {
                     <button onclick="store.shareApp()" class="size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
                         <span class="material-symbols-outlined text-xl">share</span>
                     </button>
-                    <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-slate-900 dark:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl">
+${store.isAdmin() ? `
+                    <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl" title="Consola de depuración">
                         <span class="material-symbols-outlined text-xl">terminal</span>
+                    </button>` : ''}
+                    <button onclick="window.showDonationModal()" class="size-10 rounded-full bg-amber-500/15 text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-all flex items-center justify-center border border-amber-500/30 shadow-md active:scale-95" title="Apoyar el proyecto ☕">
+                        <span class="material-symbols-outlined text-xl">volunteer_activism</span>
                     </button>
                     <button onclick="window.RetentionNotifications ? window.RetentionNotifications.openCenter() : showToast('Sin notificaciones nuevas')" 
                             class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 relative active:scale-95 transition-transform" 

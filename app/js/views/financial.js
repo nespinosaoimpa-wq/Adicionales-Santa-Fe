@@ -170,6 +170,22 @@ function renderFinancial(container) {
                 <span class="material-symbols-outlined text-4xl ${balance >= 0 ? 'text-emerald-500/30' : 'text-red-500/30'}">${balance >= 0 ? 'trending_up' : 'trending_down'}</span>
             </div>
 
+            <!-- ☕ Comunidad Policial: Aporte al Desarrollo -->
+            <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-3 shadow-lg">
+                <div class="flex items-center gap-3">
+                    <div class="size-10 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-xl">volunteer_activism</span>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-white leading-tight">¿La app te ayuda a ordenar tus adicionales?</p>
+                        <p class="text-[10px] text-amber-300/80">Apoyá los servidores y el desarrollo independiente</p>
+                    </div>
+                </div>
+                <button onclick="window.showDonationModal()" class="px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shrink-0 flex items-center gap-1 active:scale-95 transition-all shadow-md shadow-amber-500/20">
+                    <span>☕</span> Colaborar
+                </button>
+            </div>
+
             <!-- Expense Control -->
             <section class="space-y-4">
                  <div class="flex justify-between items-center">

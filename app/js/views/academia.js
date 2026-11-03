@@ -1195,6 +1195,18 @@ function _renderSimuladorTab(container) {
 
             </button>
 
+            <!-- ☕ Comunidad Policial: Aporte al Desarrollo -->
+            <div onclick="window.showDonationModal()" class="cursor-pointer p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 transition-all flex items-center justify-between gap-3 text-left">
+                <div class="flex items-center gap-3">
+                    <span class="text-xl">☕</span>
+                    <div>
+                        <p class="text-xs font-bold text-white">¿Te sirve la plataforma para preparar tu ascenso?</p>
+                        <p class="text-[10px] text-amber-300/80">Herramienta independiente · Podés apoyar con un café o servidores</p>
+                    </div>
+                </div>
+                <span class="px-2.5 py-1 rounded-xl bg-amber-500/20 text-amber-300 text-[10px] font-black uppercase tracking-wider shrink-0">Apoyar</span>
+            </div>
+
         </div>
 
     `;
@@ -2813,6 +2825,18 @@ function _renderResultsView(container) {
 
                 `).join('')}
 
+            </div>
+
+            <!-- ☕ Comunidad Policial: Aporte al Desarrollo -->
+            <div onclick="window.showDonationModal()" class="mt-4 cursor-pointer p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 transition-all flex items-center justify-between gap-3 text-left shadow-lg">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">☕</span>
+                    <div>
+                        <p class="text-xs font-bold text-white">¿Te sirvió la explicación de Centinela IA?</p>
+                        <p class="text-[10px] text-amber-300/80">Desarrollo 100% independiente de Santa Fe · Apoyá los servidores</p>
+                    </div>
+                </div>
+                <span class="px-2.5 py-1.5 rounded-xl bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider shrink-0 shadow-sm">Apoyar</span>
             </div>
 
         </main>

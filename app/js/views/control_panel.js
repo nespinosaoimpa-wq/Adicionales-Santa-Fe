@@ -97,6 +97,9 @@ function renderControlPanel(container) {
                         <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
                     </button>
                 ` : ''}
+                <button onclick="window.showDonationModal()" class="size-10 flex items-center justify-center rounded-full bg-amber-500/15 hover:bg-amber-500 hover:text-slate-950 text-amber-400 transition-all border border-amber-500/30 active:scale-95 shadow-sm" title="Apoyar el proyecto ☕">
+                    <span class="material-symbols-outlined text-xl">volunteer_activism</span>
+                </button>
                 <button onclick="router.navigateTo('#stats')" class="size-10 flex items-center justify-center rounded-full bg-slate-200 dark:bg-white/10 transition-colors text-slate-600 dark:text-slate-900 dark:text-white">
                     <span class="material-symbols-outlined text-xl">visibility</span>
                 </button>
