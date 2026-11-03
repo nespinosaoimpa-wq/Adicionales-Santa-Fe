@@ -24,50 +24,41 @@ function renderAgenda(container) {
 
     const html = `
         <!-- Header -->
-        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 pt-12 pb-4">
-            <div class="flex justify-between items-center">
-                <div>
-                    <h1 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Mi Agenda</h1>
-                    <div class="flex items-center gap-1.5 mt-1">
-                        <button id="btn-prev-month" class="size-8 rounded-full bg-slate-800/80 hover:bg-primary/20 text-slate-300 hover:text-primary flex items-center justify-center border border-white/10 active:scale-95 transition-all">
-                            <span class="material-symbols-outlined text-lg">chevron_left</span>
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-4 pt-10 pb-3 border-b border-white/5">
+            <div class="flex justify-between items-center max-w-md mx-auto w-full">
+                <div class="min-w-0">
+                    <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">Mi Agenda</h1>
+                    <div class="flex items-center gap-1 mt-1">
+                        <button id="btn-prev-month" class="size-7 rounded-full bg-slate-800/80 hover:bg-primary/20 text-slate-300 hover:text-primary flex items-center justify-center border border-white/10 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-base">chevron_left</span>
                         </button>
-                        <span class="text-xs font-extrabold text-slate-200 capitalize min-w-[130px] text-center select-none tracking-tight">${currentMonthLabel}</span>
-                        <button id="btn-next-month" class="size-8 rounded-full bg-slate-800/80 hover:bg-primary/20 text-slate-300 hover:text-primary flex items-center justify-center border border-white/10 active:scale-95 transition-all">
-                            <span class="material-symbols-outlined text-lg">chevron_right</span>
+                        <span class="text-xs font-extrabold text-slate-200 capitalize min-w-[100px] text-center select-none tracking-tight">${currentMonthLabel}</span>
+                        <button id="btn-next-month" class="size-7 rounded-full bg-slate-800/80 hover:bg-primary/20 text-slate-300 hover:text-primary flex items-center justify-center border border-white/10 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-base">chevron_right</span>
                         </button>
                     </div>
                 </div>
-                <div class="flex gap-2">
-                    <button onclick="store.exportShiftsToICS()" class="size-10 rounded-full bg-blue-600/10 text-blue-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center border border-blue-500/20 shadow-md active:scale-95" title="Sincronizar con Calendario (.ICS / Google Calendar)">
-                        <span class="material-symbols-outlined text-xl">event_available</span>
+                <div class="flex items-center gap-1.5 shrink-0">
+                    <!-- Apoyo voluntario ☕ -->
+                    <button onclick="window.showDonationModal()" class="size-9 rounded-2xl bg-amber-500/15 text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-all flex items-center justify-center border border-amber-500/30 shadow-md active:scale-95" title="Apoyar el proyecto ☕">
+                        <span class="material-symbols-outlined text-lg">volunteer_activism</span>
                     </button>
-                    <button onclick="store.shareApp()" class="size-10 rounded-full bg-primary/10 text-primary hover:bg-primary hover:text-white transition-all flex items-center justify-center border border-primary/20 shadow-lg shadow-primary/10">
-                        <span class="material-symbols-outlined text-xl">share</span>
-                    </button>
-${store.isAdmin() ? `
-                    <button onclick="store.toggleDebug()" class="size-10 rounded-full bg-slate-800/50 text-slate-400 hover:bg-slate-700 hover:text-white transition-all flex items-center justify-center border border-white/5 shadow-xl" title="Consola de depuración">
-                        <span class="material-symbols-outlined text-xl">terminal</span>
-                    </button>` : ''}
-                    <button onclick="window.showDonationModal()" class="size-10 rounded-full bg-amber-500/15 text-amber-400 hover:bg-amber-500 hover:text-slate-950 transition-all flex items-center justify-center border border-amber-500/30 shadow-md active:scale-95" title="Apoyar el proyecto ☕">
-                        <span class="material-symbols-outlined text-xl">volunteer_activism</span>
-                    </button>
+                    <!-- Alertas / Notificaciones -->
                     <button onclick="window.RetentionNotifications ? window.RetentionNotifications.openCenter() : showToast('Sin notificaciones nuevas')" 
-                            class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 relative active:scale-95 transition-transform" 
+                            class="size-9 rounded-2xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-300 relative active:scale-95 transition-all border border-white/5" 
                             title="Centro de Alertas y Notificaciones">
-                        <span class="material-symbols-outlined">notifications</span>
-                        <span id="notif-bell-badge" class="absolute top-2 right-2 size-2 bg-red-500 rounded-full ring-2 ring-white dark:ring-slate-900 ${(window.RetentionNotifications && window.RetentionNotifications.hasUnread()) ? '' : 'hidden'} animate-pulse"></span>
+                        <span class="material-symbols-outlined text-lg">notifications</span>
+                        <span id="notif-bell-badge" class="absolute top-1.5 right-1.5 size-2 bg-red-500 rounded-full ring-2 ring-white dark:ring-slate-900 ${(window.RetentionNotifications && window.RetentionNotifications.hasUnread()) ? '' : 'hidden'} animate-pulse"></span>
                     </button>
-                    <div class="flex items-center gap-2">
-                        <div onclick="router.navigateTo('#profile')" class="hover:scale-105 transition-transform cursor-pointer">
-                            ${renderLogo('medium')}
-                        </div>
+                    <!-- Logo / Perfil -->
+                    <div onclick="router.navigateTo('#profile')" class="hover:scale-105 transition-transform cursor-pointer">
+                        ${renderLogo('small')}
                     </div>
                 </div>
             </div>
         </header>
 
-        <main class="flex-1 overflow-y-auto px-6 space-y-5 pb-32">
+        <main class="flex-1 overflow-y-auto px-4 space-y-5 pb-32 max-w-md mx-auto w-full">
 
             <!-- 🎓 Campus Ascenso Policial Banner (50% OFF Promo) -->
             <div onclick="router.navigateTo('#academia')" class="cursor-pointer bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 p-4 rounded-3xl text-white shadow-xl shadow-amber-500/20 flex items-center justify-between relative overflow-hidden group active:scale-[0.98] transition-all border border-amber-400/30">
@@ -177,9 +168,15 @@ ${store.isAdmin() ? `
             <!-- Calendar Section -->
             <section class="space-y-4">
                 <div class="flex justify-between items-center">
-                    <h3 class="font-bold text-lg text-slate-900 dark:text-white flex items-center gap-2">
-                        <span>Calendario</span>
-                    </h3>
+                    <div class="flex items-center gap-2">
+                        <h3 class="font-bold text-lg text-slate-900 dark:text-white">Calendario</h3>
+                        <button onclick="store.exportShiftsToICS()" class="size-7 rounded-lg bg-blue-600/15 text-blue-400 hover:bg-blue-600 hover:text-white transition-all flex items-center justify-center border border-blue-500/20 active:scale-95 shadow-sm" title="Sincronizar con Google Calendar (.ICS)">
+                            <span class="material-symbols-outlined text-sm">event_available</span>
+                        </button>
+                        <button onclick="store.shareApp()" class="size-7 rounded-lg bg-primary/15 text-primary hover:bg-primary hover:text-white transition-all flex items-center justify-center border border-primary/20 active:scale-95 shadow-sm" title="Compartir la app">
+                            <span class="material-symbols-outlined text-sm">share</span>
+                        </button>
+                    </div>
                     <div class="flex items-center gap-1.5 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl border border-slate-200 dark:border-white/5">
                         <button id="btn-prev-month-grid" class="size-7 rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:text-primary flex items-center justify-center shadow-sm active:scale-95 transition-all">
                             <span class="material-symbols-outlined text-base">chevron_left</span>

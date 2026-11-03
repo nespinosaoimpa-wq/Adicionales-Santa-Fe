@@ -85,7 +85,7 @@ function renderFinancial(container) {
         : 'flex-1 py-2 text-xs font-bold text-slate-400 hover:text-white transition-colors';
 
     const html = `
-        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4">
+        <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-white/5 px-4 pt-6 pb-4 max-w-md mx-auto w-full">
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center justify-between w-full">
                     <div class="flex flex-col">
@@ -112,7 +112,7 @@ function renderFinancial(container) {
             <p class="text-[10px] text-primary/70 font-bold text-center mt-3">${paymentLabel}</p>
         </header>
 
-        <main class="flex-1 px-4 py-6 space-y-6 overflow-y-auto pb-32">
+        <main class="flex-1 px-4 py-6 space-y-6 overflow-y-auto pb-32 max-w-md mx-auto w-full">
             <!-- Liquidity Widget (Mejora 5) -->
             ${(() => {
             const allMonthSvcs = filterByPeriod(store.services, 'date');
