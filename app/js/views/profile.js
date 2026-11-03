@@ -322,7 +322,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.79 • Adicionales Santa Fe</p>
+                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.80 • Adicionales Santa Fe</p>
             </div>
             
             <!-- Ad Banner -->

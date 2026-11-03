@@ -71,7 +71,7 @@ function renderAgenda(container) {
                             <span class="text-[8px] font-black uppercase tracking-widest bg-white/20 text-white px-2 py-0.5 rounded-full border border-white/20">ISEP 2026</span>
                             <span class="text-[8px] font-black uppercase tracking-widest bg-red-950/80 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/40 animate-pulse">🔥 50% OFF</span>
                         </div>
-                        <h3 class="text-sm font-black leading-tight mt-1">Simulador Ascenso Oficial</h3>
+                        <h3 class="text-sm font-black leading-tight mt-1">Simulador de Ascenso</h3>
                         <p class="text-[10px] text-amber-100 font-medium">De <span class="line-through opacity-75">$10.000</span> a sólo <strong class="text-white">$5.000/mes</strong></p>
                     </div>
                 </div>
