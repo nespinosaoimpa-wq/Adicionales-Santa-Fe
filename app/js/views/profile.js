@@ -246,32 +246,83 @@ function renderProfile(container) {
                 ` : ''}
 
                 <!-- ☕ Aporte al Desarrollo Independiente -->
-                <div class="bg-gradient-to-br from-slate-900 to-slate-800/90 border border-amber-500/30 rounded-3xl p-5 shadow-xl space-y-3 relative overflow-hidden">
-                    <div class="absolute -top-10 -right-10 size-24 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800/95 border-2 border-amber-500/40 rounded-3xl p-5 shadow-2xl space-y-4 relative overflow-hidden">
+                    <div class="absolute -top-10 -right-10 size-28 bg-amber-500/15 rounded-full blur-2xl pointer-events-none"></div>
+                    
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-3">
-                            <div class="size-10 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0">
-                                <span class="material-symbols-outlined text-xl">volunteer_activism</span>
+                            <div class="size-11 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center shrink-0 shadow-lg shadow-amber-500/20">
+                                <span class="material-symbols-outlined text-2xl">volunteer_activism</span>
                             </div>
                             <div>
-                                <h3 class="text-xs font-black text-white uppercase tracking-wider">Aporte al Desarrollo Policial</h3>
-                                <p class="text-[10px] text-slate-400">Apoyá el mantenimiento y servidores de la app</p>
+                                <h3 class="text-sm font-black text-white uppercase tracking-wider">Aporte al Desarrollo Policial</h3>
+                                <p class="text-[10px] text-amber-300/80 font-bold">Desarrollo 100% independiente de Santa Fe</p>
+                            </div>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30 text-[9px] font-black uppercase">Comunidad</span>
+                    </div>
+                    
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Adicionales Santa Fe es una herramienta creada a pulmón por y para la Policía provincial, sin subsidios ni publicidad invasiva. Tu colaboración voluntaria nos permite pagar los servidores de Google y el soporte continuo.
+                    </p>
+
+                    <!-- 3 BOTONES DE MONTO DIRECTOS A LA VISTA -->
+                    <div class="space-y-2">
+                        <p class="text-[10px] font-black text-amber-400 uppercase tracking-widest flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-sm">touch_app</span>
+                            Montos sugeridos con 1 toque:
+                        </p>
+                        <div class="grid grid-cols-3 gap-2">
+                            <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias'); showToast('☕ Alias SmartFlow.Digital copiado ($1.000)');" 
+                                class="p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/60 hover:bg-amber-500/10 text-center cursor-pointer transition-all active:scale-95 group shadow-md">
+                                <p class="text-lg mb-0.5">☕</p>
+                                <p class="text-sm font-black text-white group-hover:text-amber-300">$1.000</p>
+                                <p class="text-[8px] text-slate-400 uppercase font-black tracking-tight mt-0.5">Un café</p>
+                            </div>
+                            <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias'); showToast('🛡️ Alias SmartFlow.Digital copiado ($2.500)');" 
+                                class="p-3 rounded-2xl bg-amber-500/15 border-2 border-amber-500/50 hover:border-amber-400 hover:bg-amber-500/25 text-center cursor-pointer transition-all active:scale-95 relative group shadow-lg shadow-amber-500/10">
+                                <span class="absolute -top-2 right-2 px-1.5 py-0.2 rounded-full bg-amber-500 text-slate-950 text-[7px] font-black uppercase shadow-sm">Popular</span>
+                                <p class="text-lg mb-0.5">🛡️</p>
+                                <p class="text-sm font-black text-amber-300">$2.500</p>
+                                <p class="text-[8px] text-amber-200 uppercase font-black tracking-tight mt-0.5">Servidores</p>
+                            </div>
+                            <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias'); showToast('🚀 Alias SmartFlow.Digital copiado ($5.000)');" 
+                                class="p-3 rounded-2xl bg-white/5 border border-white/10 hover:border-amber-500/60 hover:bg-amber-500/10 text-center cursor-pointer transition-all active:scale-95 group shadow-md">
+                                <p class="text-lg mb-0.5">🚀</p>
+                                <p class="text-sm font-black text-white group-hover:text-amber-300">$5.000</p>
+                                <p class="text-[8px] text-slate-400 uppercase font-black tracking-tight mt-0.5">Destacado</p>
                             </div>
                         </div>
                     </div>
-                    <p class="text-[11px] text-slate-300 leading-relaxed">
-                        Esta aplicación es un proyecto independiente desarrollado para toda la Policía de Santa Fe. Si la herramienta te resulta útil, podés colaborar voluntariamente para mantener los servidores en la nube y el desarrollo de nuevas funciones.
-                    </p>
-                    <button onclick="window.showDonationModal()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all">
-                        <span class="material-symbols-outlined text-base">favorite</span> Colaborar con el Proyecto
-                    </button>
+
+                    <!-- DATOS DE TRANSFERENCIA RÁPIDA -->
+                    <div onclick="copyToClipboard('SmartFlow.Digital', 'Alias')" class="flex items-center justify-between p-3.5 rounded-2xl bg-white/5 border border-amber-500/30 cursor-pointer hover:bg-amber-500/10 transition-all active:scale-[0.98]">
+                        <div>
+                            <p class="text-[8px] text-slate-400 uppercase font-black tracking-widest mb-0.5">Alias Mercado Pago (Tocá para copiar)</p>
+                            <p class="text-xs font-mono font-black text-amber-300">SmartFlow.Digital</p>
+                        </div>
+                        <div class="size-8 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-sm">content_copy</span>
+                        </div>
+                    </div>
+
+                    <!-- BOTONES DE ACCIÓN -->
+                    <div class="flex gap-2">
+                        <button onclick="window.showDonationModal()" class="flex-1 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-sm text-amber-400">info</span> Ver CVU y Más
+                        </button>
+                        <a href="https://wa.me/5493425162372?text=Hola%20Nico!%20Te%20acabo%20de%20enviar%20un%20aporte%20voluntario%20para%20apoyar%20el%20desarrollo%20de%20Adicionales%20Santa%20Fe." target="_blank" 
+                           class="py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs flex items-center justify-center gap-1 shadow-md shadow-emerald-500/20 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-sm">chat</span> Avisar WhatsApp
+                        </a>
+                    </div>
                 </div>
 
                 <button onclick="store.logout()" class="w-full text-red-400/80 text-xs font-bold hover:text-red-400 transition-colors flex items-center justify-center gap-2 py-3 rounded-xl hover:bg-red-500/10 mt-2">
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.76 • Adicionales Santa Fe</p>
+                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.77 • Adicionales Santa Fe</p>
             </div>
             
             <!-- Ad Banner -->

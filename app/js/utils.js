@@ -522,7 +522,7 @@ window.showDonationModal = () => {
 
             <!-- ACTION BUTTONS -->
             <div class="space-y-2">
-                <a href="https://wa.me/5493425162372?text=" + encodeURIComponent("Hola Nico! Te acabo de enviar un aporte voluntario para apoyar el desarrollo de Adicionales Santa Fe. ¡Muchas gracias por la app y por el esfuerzo para la policía!") target="_blank"
+                <a href="https://wa.me/5493425162372?text=Hola%20Nico!%20Te%20acabo%20de%20enviar%20un%20aporte%20voluntario%20para%20apoyar%20el%20desarrollo%20de%20Adicionales%20Santa%20Fe.%20%C2%A1Muchas%20gracias%20por%20la%20app!" target="_blank"
                     class="w-full py-3 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs uppercase tracking-wider rounded-2xl shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2 active:scale-95 transition-all">
                     <span class="material-symbols-outlined text-lg">chat</span>
                     Avisar Aporte por WhatsApp
