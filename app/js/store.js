@@ -581,7 +581,7 @@ window.store = {
     async shareApp() {
         const shareData = {
             title: 'Adicionales Santa Fe',
-            text: 'Gestiona tus servicios de policía adicional y calcula tus ganancias fácil.',
+            text: '👮‍♂️ Adicionales Santa Fe: App para organizar tus guardias, calcular tus adicionales al instante y prepararte con el Simulador de Ascenso ISEP.',
             url: 'https://adicionalessantafe.com.ar/'
         };
 
@@ -590,7 +590,7 @@ window.store = {
                 await navigator.share(shareData);
                 showToast("¡Gracias por compartir!");
             } else {
-                const text = `¡Probá esta App para Adicionales! ${shareData.url}`;
+                const text = `${shareData.text}\n👉 ${shareData.url}`;
                 window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
             }
         } catch (e) {
