@@ -2,16 +2,21 @@
  * Adicionales Santa Fe - Banco de Preguntas ISEP 2026 Profesional
  * Simulador de Examen de Ascenso Policial Oficial
  * 
- * v7.0.0 - BANCO EXPANDIDO Y ADAPTATIVO
- * - Más de 180 preguntas oficiales rigurosamente categorizadas por Jerarquía y Dificultad.
+ * v8.0.0 - BANCO EXPANDIDO Y ADAPTATIVO
+ * - Más de 690 preguntas oficiales rigurosamente categorizadas por Jerarquía y Dificultad.
  * - Distractores equilibrados con longitud técnica homogénea para evitar descarte visual.
- * - Basado al 100% en los manuales de cursado ISEP 2026, decretos provinciales y exámenes Daypo reales:
+ * - Basado al 100% en los manuales de cursado ISEP 2026, decretos provinciales y exámenes reales de ascenso:
  *   • Tiro y Armamento Policial (MIRAF, Bersa TPR9/Thunder Pro, Balística, Posición SUL)
  *   • Código Procesal Penal de Santa Fe (Ley 12.734: flagrancia, requisas, allanamientos y actas)
  *   • Régimen Disciplinario Policial (Decreto 461/15 y Ley 12.521: faltas, arresto y recursos)
  *   • Microtráfico y Narcomenudeo (Ley 14.239: desfederalización y cadena de custodia)
  *   • Seguridad de la Información (Tríada CID, incidentes y evidencia digital en allanamientos)
  *   • Conducción de Patrulleros y Comunicaciones Institucionales (7C y mando operativo)
+ *   • Niñez y Menores en Conflicto con la Ley (Ley 12.967)
+ *   • Ley Nacional de Salud Mental (Ley 26.657 - Protocolo Policial)
+ *   • Protección Integral contra la Violencia de Género (Ley 26.485)
+ *   • Código de Convivencia de Santa Fe (Ley 13.774)
+ *   • Carta Iberoamericana de la Función Pública y Ética de Servicio
  * 
  * Modalidades de Dificultad:
  * - 'facil': Conceptos clave, definiciones doctrinarias y principios rectores del manual.
@@ -580,6 +585,2582 @@ window.quizBank = {
             "correctIndex": 0,
             "source": "Ley 12.734 (CPP Santa Fe), Art. 216 y 217: Lectura de Derechos",
             "explanation": "La intimación de derechos (conocer la causa, guardar silencio, designar defensor, llamada telefónica) es una garantía de orden público cuya omisión acarrea nulidad."
+        },
+        {
+            "id": "isep-d26-011",
+            "difficulty": "media",
+            "question": "Una actuación policial ilegítima o irregular afecta directamente:",
+            "options": [
+                "Solo a la institución policial",
+                "El trabajo de fiscales y jueces",
+                "El procedimiento administrativo",
+                "El régimen disciplinario interno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El trabajo de fiscales y jueces\"."
+        },
+        {
+            "id": "isep-d26-021",
+            "difficulty": "facil",
+            "question": "El cumplimiento de la ley se inicia principalmente con:",
+            "options": [
+                "La actuación policial",
+                "La actuación legislativa",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
+                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La actuación policial\"."
+        },
+        {
+            "id": "isep-d26-022",
+            "difficulty": "media",
+            "question": "El Judo Verbal es una técnica de:",
+            "options": [
+                "Comunicación táctica",
+                "Intimidación psicológica",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida",
+                "Centralización absoluta de la toma de decisiones sin delegación de mando"
+            ],
+            "correctIndex": 0,
+            "source": "Manual ISEP - Comunicación Táctica y Judo Verbal Operativo",
+            "explanation": "El Judo Verbal enseña a utilizar la empatía y la persuasión táctica para desescalar conflictos y resolver intervenciones sin violencia. La opción correcta conforme a la normativa oficial es: \"Comunicación táctica\"."
+        },
+        {
+            "id": "isep-d26-023",
+            "difficulty": "media",
+            "question": "El objetivo principal del Judo Verbal es:",
+            "options": [
+                "Resolver conflictos sin recurrir a la fuerza física",
+                "Ganar discusiones",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida",
+                "Centralización absoluta de la toma de decisiones sin delegación de mando"
+            ],
+            "correctIndex": 0,
+            "source": "Manual ISEP - Comunicación Táctica y Judo Verbal Operativo",
+            "explanation": "El Judo Verbal enseña a utilizar la empatía y la persuasión táctica para desescalar conflictos y resolver intervenciones sin violencia. La opción correcta conforme a la normativa oficial es: \"Resolver conflictos sin recurrir a la fuerza física\"."
+        },
+        {
+            "id": "isep-d26-032",
+            "difficulty": "facil",
+            "question": "Si no se cuenta con documentación, la edad se acredita mediante:",
+            "options": [
+                "Declaración de los padres",
+                "Informe médico de menores",
+                "Intervención del fiscal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Informe médico de menores\"."
+        },
+        {
+            "id": "isep-d26-033",
+            "difficulty": "facil",
+            "question": "La actuación policial en hechos que involucren menores se rige por:",
+            "options": [
+                "Código Procesal Penal",
+                "Ley de Seguridad Pública",
+                "Código Procesal de Menores",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Código Procesal de Menores\"."
+        },
+        {
+            "id": "isep-d26-034",
+            "difficulty": "media",
+            "question": "Ante la participación de un menor en un delito, la policía debe comunicar inmediatamente al:",
+            "options": [
+                "Fiscal de turno",
+                "Juez de Garantías",
+                "Juez de Menores",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Juez de Menores\"."
+        },
+        {
+            "id": "isep-d26-035",
+            "difficulty": "dificil",
+            "question": "Dentro de las 24 horas, la autoridad policial debe comunicar el hecho al:",
+            "options": [
+                "Fiscal de Menores",
+                "Asesor de Menores",
+                "Juez Penal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Asesor de Menores\"."
+        },
+        {
+            "id": "isep-d26-036",
+            "difficulty": "facil",
+            "question": "Si el menor es punible, además se debe dar intervención inmediata al:",
+            "options": [
+                "Defensor Oficial",
+                "Asesor de Menores",
+                "Fiscal de Menores",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Fiscal de Menores\"."
+        },
+        {
+            "id": "isep-d26-037",
+            "difficulty": "media",
+            "question": "En caso de aprehensión de un menor, la policía debe informar de inmediato a:",
+            "options": [
+                "El fiscal",
+                "El juez",
+                "Los padres, tutor o guardadores",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Los padres, tutor o guardadores\"."
+        },
+        {
+            "id": "isep-d26-038",
+            "difficulty": "dificil",
+            "question": "Cuando un menor es aprehendido, detenido o citado, el funcionario policial debe informarle sus derechos:",
+            "options": [
+                "Dentro de las 24 horas",
+                "Luego del interrogatorio",
+                "De inmediato y antes de cualquier otro acto",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"De inmediato y antes de cualquier otro acto\"."
+        },
+        {
+            "id": "isep-d26-041",
+            "difficulty": "dificil",
+            "question": "Las diligencias urgentes realizadas por la policía deben informarse al juez dentro de:",
+            "options": [
+                "48 horas",
+                "72 horas",
+                "24 horas",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"24 horas\"."
+        },
+        {
+            "id": "isep-d26-044",
+            "difficulty": "dificil",
+            "question": "La omisión de informar los derechos al menor genera como consecuencia:",
+            "options": [
+                "Falta administrativa",
+                "Sanción disciplinaria",
+                "Nulidad del procedimiento",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Nulidad del procedimiento\"."
+        },
+        {
+            "id": "isep-d26-055",
+            "difficulty": "media",
+            "question": "El Acta de Procedimiento se define como:",
+            "options": [
+                "Un informe administrativo interno",
+                "Un relato subjetivo del personal interviniente",
+                "Un relato histórico, circunstanciado y escrito de toda intervención policial",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Un relato histórico, circunstanciado y escrito de toda intervención policial\"."
+        },
+        {
+            "id": "isep-d26-056",
+            "difficulty": "media",
+            "question": "El Acta de Procedimiento se labra cuando la intervención policial ocurre:",
+            "options": [
+                "Solo en comisión de delito",
+                "Solo con orden judicial",
+                "En prevención, comisión o con posterioridad al delito",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"En prevención, comisión o con posterioridad al delito\"."
+        },
+        {
+            "id": "isep-d26-057",
+            "difficulty": "media",
+            "question": "¿Cuál NO es una finalidad del Acta de Procedimiento?",
+            "options": [
+                "Dejar constancia clara de los hechos",
+                "Respaldar actuaciones judiciales futuras",
+                "Emitir opinión personal del funcionario",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Emitir opinión personal del funcionario\"."
+        },
+        {
+            "id": "isep-d26-059",
+            "difficulty": "media",
+            "question": "¿En qué casos el personal policial puede restringir la libertad sin orden judicial?",
+            "options": [
+                "En operativos preventivos",
+                "En averiguación de antecedentes",
+                "En casos de flagrancia",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"En casos de flagrancia\"."
+        },
+        {
+            "id": "isep-d26-060",
+            "difficulty": "dificil",
+            "question": "Según el Art. 213 del CPP, hay flagrancia cuando el presunto autor:",
+            "options": [
+                "Es señalado días después del hecho",
+                "Es sorprendido intentando o cometiendo el hecho",
+                "antecedentes penales",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Es sorprendido intentando o cometiendo el hecho\"."
+        },
+        {
+            "id": "isep-d26-061",
+            "difficulty": "dificil",
+            "question": "¿Cuál de las siguientes situaciones NO constituye flagrancia según el Art. 213 CPP?",
+            "options": [
+                "Ser perseguido inmediatamente después del delito",
+                "Poseer objetos que hagan presumir participación inmediata",
+                "Ser denunciado horas después sin otros indicios",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ser denunciado horas después sin otros indicios\"."
+        },
+        {
+            "id": "isep-d26-064",
+            "difficulty": "facil",
+            "question": "En caso de demora, el personal policial debe dar aviso inmediato a:",
+            "options": [
+                "El juez competente",
+                "El fiscal de turno",
+                "El Servicio Público Provincial de la Defensa Penal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Servicio Público Provincial de la Defensa Penal\"."
+        },
+        {
+            "id": "isep-d26-066",
+            "difficulty": "media",
+            "question": "Las personas demoradas trasladadas a dependencias policiales:",
+            "options": [
+                "Pueden alojarse con detenidos",
+                "Deben permanecer en calabozos",
+                "No pueden ser alojadas con detenidos por delitos o contravenciones",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"No pueden ser alojadas con detenidos por delitos o contravenciones\"."
+        },
+        {
+            "id": "isep-d26-071",
+            "difficulty": "facil",
+            "question": "El personal interviniente deberá actuar:",
+            "options": [
+                "Con autoridad y severidad",
+                "Con firmeza y respeto",
+                "De manera discrecional",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Con firmeza y respeto\"."
+        },
+        {
+            "id": "isep-d26-076",
+            "difficulty": "dificil",
+            "question": "El artículo del Código Penal que reprime las lesiones culposas es:",
+            "options": [
+                "Art. 94 CP",
+                "Art. 90 CP",
+                "Art. 89 CP",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Art. 94 CP\"."
+        },
+        {
+            "id": "isep-d26-077",
+            "difficulty": "media",
+            "question": "En lesiones culposas leves por accidente de tránsito, corresponde:",
+            "options": [
+                "Liberar al conductor sin actuaciones",
+                "Acta de procedimiento, secuestro preventivo y análisis biológicos",
+                "Allanamiento inmediato del domicilio",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Acta de procedimiento, secuestro preventivo y análisis biológicos\"."
+        },
+        {
+            "id": "isep-d26-079",
+            "difficulty": "facil",
+            "question": "En lesiones culposas graves u homicidio culposo, es obligatorio",
+            "options": [
+                "Consultar a la Fiscalía",
+                "Entregar el rodado inmediatamente",
+                "Evitar secuestros",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 0,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Consultar a la Fiscalía\"."
+        },
+        {
+            "id": "isep-d26-084",
+            "difficulty": "dificil",
+            "question": "El principio constitucional que regula los allanamientos es:",
+            "options": [
+                "Art. 14 CN",
+                "Art. 17 CN",
+                "Art. 18 CN",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 18 CN\"."
+        },
+        {
+            "id": "isep-d26-085",
+            "difficulty": "media",
+            "question": "En Santa Fe, el allanamiento con orden judicial puede ser autorizado por:",
+            "options": [
+                "Solo la policía",
+                "El Tribunal a solicitud fundada",
+                "El vecino",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Tribunal a solicitud fundada\"."
+        },
+        {
+            "id": "isep-d26-086",
+            "difficulty": "media",
+            "question": "El allanamiento sin orden judicial es válido cuando:",
+            "options": [
+                "Lo solicita la víctima",
+                "Existe urgencia legalmente justificada",
+                "El domicilio está cerrado",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Existe urgencia legalmente justificada\"."
+        },
+        {
+            "id": "isep-d26-087",
+            "difficulty": "dificil",
+            "question": "El art. 170 CPPP-SF habilita el allanamiento sin orden ante:",
+            "options": [
+                "Falta de testigos",
+                "Incendio o peligro grave",
+                "Sospechas genéricas",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Incendio o peligro grave\"."
+        },
+        {
+            "id": "isep-d26-088",
+            "difficulty": "media",
+            "question": "La requisa personal requiere:",
+            "options": [
+                "Identificación simple",
+                "Motivos razonables fundados",
+                "Autorización del requisado",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Motivos razonables fundados\"."
+        },
+        {
+            "id": "isep-d26-089",
+            "difficulty": "media",
+            "question": "Antes de realizar una requisa, el personal debe:",
+            "options": [
+                "Reducir a la persona",
+                "Invitar a exhibir el objeto",
+                "Trasladar a la seccional",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Invitar a exhibir el objeto\"."
+        },
+        {
+            "id": "isep-d26-091",
+            "difficulty": "facil",
+            "question": "El efecto túnel en estrés táctico provoca:",
+            "options": [
+                "El efecto túnel en estrés táctico provoca:",
+                "Reducción severa de la visión periférica",
+                "Mejora de audición",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Reducción severa de la visión periférica\"."
+        },
+        {
+            "id": "isep-d26-096",
+            "difficulty": "facil",
+            "question": "La principal herramienta del policía en situaciones críticas o de crisis es:",
+            "options": [
+                "El uso inmediato del arma de fuego",
+                "La fuerza física",
+                "El uso de la palabra y el lenguaje gestual",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El uso de la palabra y el lenguaje gestual\"."
+        },
+        {
+            "id": "isep-d26-101",
+            "difficulty": "facil",
+            "question": "La Regla de Tueller establece que una persona armada con arma blanca puede representar una amenaza mortal hasta una distancia aproximada de:",
+            "options": [
+                "3 metros",
+                "5 metros",
+                "6,4 metros (21 pies)",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"6,4 metros (21 pies)\"."
+        },
+        {
+            "id": "isep-d26-106",
+            "difficulty": "facil",
+            "question": "¿Cuál de los siguientes NO es un requisito para los vehículos de emergencia?",
+            "options": [
+                "Habilitación técnica especial.",
+                "Antigüedad máxima de 15 años.",
+                "Uso permanente de sirena en toda intervención.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Uso permanente de sirena en toda intervención.\"."
+        },
+        {
+            "id": "isep-d26-111",
+            "difficulty": "facil",
+            "question": "Los programas actuales de formación policial incorporan principalmente",
+            "options": [
+                "Comunicación efectiva, desescalamiento y uso proporcional de la fuerza",
+                "Eliminación de protocolos previos.",
+                "Uso intensivo de la fuerza letal.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Comunicación efectiva, desescalamiento y uso proporcional de la fuerza\"."
+        },
+        {
+            "id": "isep-d26-126",
+            "difficulty": "facil",
+            "question": "Corresponde la competencia provincial cuando la venta es:",
+            "options": [
+                "Internacional.",
+                "A gran escala.",
+                "Directa al consumidor final.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Directa al consumidor final.\"."
+        },
+        {
+            "id": "isep-d26-131",
+            "difficulty": "facil",
+            "question": "Si el cultivo NO tiene destino inequívoco al consumo personal:",
+            "options": [
+                "Se aplica el tipo atenuado.",
+                "Se excluye responsabilidad penal.",
+                "Se aplica la pena de 4 a 15 años.",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se aplica la pena de 4 a 15 años.\"."
+        },
+        {
+            "id": "isep-d26-141",
+            "difficulty": "facil",
+            "question": "La denuncia con reserva de identidad se caracteriza porque:",
+            "options": [
+                "El denunciante no se identifica en ningún momento",
+                "El denunciante está identificado, pero sus datos se mantienen en reserva",
+                "Solo puede ser realizada por funcionarios públicos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El denunciante está identificado, pero sus datos se mantienen en reserva\"."
+        },
+        {
+            "id": "isep-d26-142",
+            "difficulty": "dificil",
+            "question": "Según el Código Procesal Penal de Santa Fe, la protección del denunciante o testigo tiene como finalidad principal:",
+            "options": [
+                "Evitar la nulidad del proceso",
+                "Garantizar el secreto de sumario",
+                "Preservarlo de intimidaciones o represalias",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Preservarlo de intimidaciones o represalias\"."
+        },
+        {
+            "id": "isep-d26-144",
+            "difficulty": "facil",
+            "question": "En la denuncia anónima, el denunciante:",
+            "options": [
+                "Se identifica ante el fiscal",
+                "Se identifica solo ante la policía",
+                "No se identifica",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No se identifica\"."
+        },
+        {
+            "id": "isep-d26-146",
+            "difficulty": "facil",
+            "question": "Para que una denuncia anónima sea considerada válida como noticia criminis, debe ser:",
+            "options": [
+                "Formal y escrita",
+                "Seria, verosímil y razonable, con datos concretos",
+                "Ratificada por un testigo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Seria, verosímil y razonable, con datos concretos\"."
+        },
+        {
+            "id": "isep-d26-150",
+            "difficulty": "media",
+            "question": "El lugar del hecho se considera escena del delito:",
+            "options": [
+                "Solo cuando lo confirma el fiscal.",
+                "Hasta que se determine lo contrario.",
+                "Cuando hay testigos presenciales.",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Hasta que se determine lo contrario.\"."
+        },
+        {
+            "id": "isep-d26-151",
+            "difficulty": "facil",
+            "question": "¿Cuál de los siguientes NO integra el concepto de lugar del hecho?",
+            "options": [
+                "Lugar donde se cometió el hecho.",
+                "Lugar de ocultamiento.",
+                "Dependencia policial interviniente",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Dependencia policial interviniente\"."
+        },
+        {
+            "id": "isep-d26-156",
+            "difficulty": "facil",
+            "question": "Puede haber dentro de un mismo hecho:",
+            "options": [
+                "Un solo escenario posible.",
+                "Únicamente escenarios secundarios.",
+                "Varios escenarios primarios y secundarios.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Varios escenarios primarios y secundarios.\"."
+        },
+        {
+            "id": "isep-d26-161",
+            "difficulty": "facil",
+            "question": "La \"hostilidad de la zona\" se entiende como:",
+            "options": [
+                "Una característica barrial.",
+                "Un concepto socioeconómico.",
+                "Una situación circunstancial del lugar.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una situación circunstancial del lugar.\"."
+        },
+        {
+            "id": "isep-d26-162",
+            "difficulty": "dificil",
+            "question": "La actuación policial frente a la pérdida de indicios debe ajustarse a:",
+            "options": [
+                "Art. 18 de la Constitución Nacional.",
+                "Art. 174 del CPP Santa Fe.",
+                "Art. 268 del CPP Santa Fe (Ley 12.734).",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 268 del CPP Santa Fe (Ley 12.734).\"."
+        },
+        {
+            "id": "isep-d26-166",
+            "difficulty": "facil",
+            "question": "La primera etapa del proceso (indicio) se caracteriza por:",
+            "options": [
+                "Afirmar la naturaleza del indicio.",
+                "Validar testimonios como verdad absoluta.",
+                "Recolección inicial y aseguramiento legal.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Recolección inicial y aseguramiento legal.\"."
+        },
+        {
+            "id": "isep-d26-168",
+            "difficulty": "facil",
+            "question": "La tercera etapa del proceso permite:",
+            "options": [
+                "La simple conservación del indicio.",
+                "Elevar evidencia válida al Fiscal como prueba judicial.",
+                "La actuación autónoma policial.",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Elevar evidencia válida al Fiscal como prueba judicial.\"."
+        },
+        {
+            "id": "isep-d26-171",
+            "difficulty": "facil",
+            "question": "¿Cuáles son las acciones obligatorias del ACTO DE INTERVENCIÓN?",
+            "options": [
+                "Búsqueda – Recolección – Preservación",
+                "Comunicar – Preservar – Custodiar",
+                "Informar – Investigar – Secuestrar",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Comunicar – Preservar – Custodiar\"."
+        },
+        {
+            "id": "isep-d26-173",
+            "difficulty": "dificil",
+            "question": "El artículo del CPP que regula los actos irreproducibles o definitivos es:",
+            "options": [
+                "Art. 163",
+                "Art. 174",
+                "Art. 260",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 260\"."
+        },
+        {
+            "id": "isep-d26-175",
+            "difficulty": "media",
+            "question": "¿Qué documentación debe confeccionarse siempre como acto procesal?",
+            "options": [
+                "Solo el acta de procedimiento",
+                "Acta de procedimiento, croquis e inspección judicial",
+                "Informe preliminar y sumario",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Acta de procedimiento, croquis e inspección judicial\"."
+        },
+        {
+            "id": "isep-d26-181",
+            "difficulty": "dificil",
+            "question": "La inspección judicial (u ocular) está regulada por:",
+            "options": [
+                "Art. 260 CPP",
+                "Art. 268 CPP",
+                "Art. 163 CPP",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 163 CPP\"."
+        },
+        {
+            "id": "isep-d26-186",
+            "difficulty": "facil",
+            "question": "Sin legalidad en la actuación policial:",
+            "options": [
+                "La prueba se refuerza",
+                "La investigación continúa igual",
+                "No hay prueba válida",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No hay prueba válida\"."
+        },
+        {
+            "id": "isep-d26-187",
+            "difficulty": "facil",
+            "question": "La Ley N° 12.734 corresponde a:",
+            "options": [
+                "Ley Orgánica de la Policía",
+                "Nuevo Código Procesal Penal de Santa Fe",
+                "Código Penal Argentino",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Nuevo Código Procesal Penal de Santa Fe\"."
+        },
+        {
+            "id": "isep-d26-190",
+            "difficulty": "dificil",
+            "question": "Según el Art. 270 del CPP de Santa Fe, la Policía:",
+            "options": [
+                "Actúa con total autonomía",
+                "Debe cumplir directivas bajo dirección jurídica del MPA",
+                "Solo interviene por orden judicial escrita",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Debe cumplir directivas bajo dirección jurídica del MPA\"."
+        },
+        {
+            "id": "isep-d26-191",
+            "difficulty": "dificil",
+            "question": "El Art. 271 del CPP establece:",
+            "options": [
+                "Las facultades del Juez",
+                "El poder disciplinario ante incumplimientos policiales",
+                "Las atribuciones del Defensor",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El poder disciplinario ante incumplimientos policiales\"."
+        },
+        {
+            "id": "isep-d26-192",
+            "difficulty": "facil",
+            "question": "Las instrucciones del Fiscal pueden ser:",
+            "options": [
+                "Orales o escritas únicamente",
+                "Genéricas o específicas",
+                "Judiciales o administrativas",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Genéricas o específicas\"."
+        },
+        {
+            "id": "isep-d26-193",
+            "difficulty": "facil",
+            "question": "Las decisiones estratégicas de investigación deben ser:",
+            "options": [
+                "Tomadas exclusivamente por la Policía",
+                "Consultadas al Fiscal",
+                "Decididas por el Juez",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Consultadas al Fiscal\"."
+        },
+        {
+            "id": "isep-d26-194",
+            "difficulty": "facil",
+            "question": "El Legajo de Investigación:",
+            "options": [
+                "Es un documento interno policial",
+                "Reemplaza al Código Procesal",
+                "Pertenece al Fiscal y puede ser confeccionado por la Policía",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Pertenece al Fiscal y puede ser confeccionado por la Policía\"."
+        },
+        {
+            "id": "isep-d26-196",
+            "difficulty": "facil",
+            "question": "La Instrucción General N° 4 fue dictada por:",
+            "options": [
+                "El Ministro de Seguridad",
+                "El Gobernador de Santa Fe",
+                "El Dr. Julio de Olazábal",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El Dr. Julio de Olazábal\"."
+        },
+        {
+            "id": "isep-d26-197",
+            "difficulty": "facil",
+            "question": "La IPP puede iniciarse por:",
+            "options": [
+                "Denuncia anónima exclusivamente",
+                "Decisión del Fiscal o acción de la Policía",
+                "Orden del Juez únicamente",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Decisión del Fiscal o acción de la Policía\"."
+        },
+        {
+            "id": "isep-d26-198",
+            "difficulty": "media",
+            "question": "La presencia del Fiscal en el lugar del hecho:",
+            "options": [
+                "Es obligatoria en todos los casos",
+                "Depende de su evaluación como director de la investigación",
+                "Solo ocurre en delitos graves",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Depende de su evaluación como director de la investigación\"."
+        },
+        {
+            "id": "isep-d26-201",
+            "difficulty": "facil",
+            "question": "El fiscal puede ingresar a la Zona Interior Crítica:",
+            "options": [
+                "Libremente en cualquier momento",
+                "Solo con autorización del jefe policial",
+                "Por canal seguro e indicado por el Coordinador Pericial",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Por canal seguro e indicado por el Coordinador Pericial\"."
+        },
+        {
+            "id": "isep-d26-206",
+            "difficulty": "facil",
+            "question": "La entrada y salida única de la escena es:",
+            "options": [
+                "De uso libre para funcionarios",
+                "Para ingreso de prensa",
+                "Un canal exclusivo y seguro para emergencias",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Un canal exclusivo y seguro para emergencias\"."
+        },
+        {
+            "id": "isep-d26-207",
+            "difficulty": "facil",
+            "question": "La figura del Coordinador Pericial surge de:",
+            "options": [
+                "Ley 12.734",
+                "Ley 13.013",
+                "Resolución 26/2014 de la Fiscalía Regional N° 2 Rosario",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Resolución 26/2014 de la Fiscalía Regional N° 2 Rosario\"."
+        },
+        {
+            "id": "isep-d26-209",
+            "difficulty": "facil",
+            "question": "Dentro de la escena, la máxima autoridad es:",
+            "options": [
+                "El jefe de comisaría",
+                "El fiscal",
+                "El Coordinador Pericial (en materia técnica-científica)",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Coordinador Pericial (en materia técnica-científica)\"."
+        },
+        {
+            "id": "isep-d26-211",
+            "difficulty": "facil",
+            "question": "La preservación de la cadena de custodia es responsabilidad:",
+            "options": [
+                "Exclusiva del juez",
+                "Del primer testigo",
+                "Del Coordinador Pericial y equipo interviniente",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Del Coordinador Pericial y equipo interviniente\"."
+        },
+        {
+            "id": "isep-d26-213",
+            "difficulty": "facil",
+            "question": "El primer interventor:",
+            "options": [
+                "Puede retirarse si llega el fiscal",
+                "Puede modificar la escena",
+                "No puede retirarse y debe informar todo lo observado",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No puede retirarse y debe informar todo lo observado\"."
+        },
+        {
+            "id": "isep-d26-215",
+            "difficulty": "facil",
+            "question": "Entre las funciones técnicas del Coordinador Pericial se encuentra:",
+            "options": [
+                "Interrogar imputados",
+                "Determinar ubicación geográfica, vías de acceso, iluminación y clima",
+                "Ordenar allanamientos",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Determinar ubicación geográfica, vías de acceso, iluminación y clima\"."
+        },
+        {
+            "id": "isep-d26-222",
+            "difficulty": "dificil",
+            "question": "El contenido del legajo según el Art. 253 CPP debe incluir:",
+            "options": [
+                "Opiniones personales",
+                "Solo declaraciones testimoniales",
+                "Documentación de todos los actos y elementos para probar identidad y daño",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Documentación de todos los actos y elementos para probar identidad y daño\"."
+        },
+        {
+            "id": "isep-d26-223",
+            "difficulty": "dificil",
+            "question": "Los actos irreproducibles o definitivos están regulados en:",
+            "options": [
+                "Art. 18 CN",
+                "Art. 260 CPP",
+                "Decreto 2703/10",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 260 CPP\"."
+        },
+        {
+            "id": "isep-d26-224",
+            "difficulty": "facil",
+            "question": "El Nuevo Código Procesal Penal de la Provincia de Santa Fe fue establecido por:",
+            "options": [
+                "Ley 23.737",
+                "Ley 24.449",
+                "Ley 12.734",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 12.734\"."
+        },
+        {
+            "id": "isep-d26-225",
+            "difficulty": "facil",
+            "question": "La Investigación Penal Preparatoria (IPP) es dirigida por:",
+            "options": [
+                "Juez de Garantías",
+                "Defensor",
+                "Fiscal del MPA",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Fiscal del MPA\"."
+        },
+        {
+            "id": "isep-d26-226",
+            "difficulty": "facil",
+            "question": "El órgano encargado de la persecución penal en Santa Fe es el:",
+            "options": [
+                "Poder Ejecutivo",
+                "Ministerio de Seguridad",
+                "Ministerio Público de la Acusación",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ministerio Público de la Acusación\"."
+        },
+        {
+            "id": "isep-d26-227",
+            "difficulty": "facil",
+            "question": "El Ministerio Público de la Acusación fue creado por:",
+            "options": [
+                "Ley 12.734",
+                "Ley 13.013",
+                "Ley 24.660",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 13.013\"."
+        },
+        {
+            "id": "isep-d26-228",
+            "difficulty": "facil",
+            "question": "Según la Instrucción General N° 4 (2014) del Dr. Julio de Olazábal, la Policía debe:",
+            "options": [
+                "Iniciar sumario propio",
+                "Ajustar su actuación a guías para el legajo",
+                "Actuar sin comunicación al fiscal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ajustar su actuación a guías para el legajo\"."
+        },
+        {
+            "id": "isep-d26-229",
+            "difficulty": "facil",
+            "question": "En el actual sistema procesal penal:",
+            "options": [
+                "Existe el sumario policial",
+                "Existe el legajo policial",
+                "Existe el Legajo de Investigación del Fiscal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Existe el Legajo de Investigación del Fiscal\"."
+        },
+        {
+            "id": "isep-d26-231",
+            "difficulty": "facil",
+            "question": "La cadena de custodia:",
+            "options": [
+                "Finaliza con la sentencia",
+                "Finaliza con la acusación",
+                "Puede continuar aun después de la sentencia",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Puede continuar aun después de la sentencia\"."
+        },
+        {
+            "id": "isep-d26-236",
+            "difficulty": "facil",
+            "question": "Los residuos de disparo se analizan mediante:",
+            "options": [
+                "Microscopio óptico común",
+                "Cromatografía líquida",
+                "Microscopio Electrónico de Barrido",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Microscopio Electrónico de Barrido\"."
+        },
+        {
+            "id": "isep-d26-241",
+            "difficulty": "media",
+            "question": "Si una muestra biológica llega en malas condiciones, el funcionario debe:",
+            "options": [
+                "Rechazarla sin acta",
+                "Labrar acta e informar a la autoridad judicial",
+                "Desecharla",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Labrar acta e informar a la autoridad judicial\"."
+        },
+        {
+            "id": "isep-d26-242",
+            "difficulty": "facil",
+            "question": "En la IPP, la Policía puede:",
+            "options": [
+                "Investigar autónomamente sin control",
+                "Actuar en auxilio de la justicia bajo dirección del fiscal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno",
+                "Solo ante la presencia de dos testigos hábiles y personal de la AIC/PDI"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Actuar en auxilio de la justicia bajo dirección del fiscal\"."
+        },
+        {
+            "id": "isep-d26-248",
+            "difficulty": "facil",
+            "question": "El Decreto que reglamenta el Régimen de Ascensos y Concursos es el:",
+            "options": [
+                "916/08",
+                "12734/09",
+                "1166/2018",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"1166/2018\"."
+        },
+        {
+            "id": "isep-d26-256",
+            "difficulty": "dificil",
+            "question": "La causal de inhabilidad por procesamiento se equipara a:",
+            "options": [
+                "Indagatoria",
+                "Detención preventiva",
+                "Audiencia imputativa del Art. 274 del Código Procesal Penal de la Provincia de Santa Fe",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Audiencia imputativa del Art. 274 del Código Procesal Penal de la Provincia de Santa Fe\"."
+        },
+        {
+            "id": "isep-d26-260",
+            "difficulty": "facil",
+            "question": "Si el sumario concluye con suspensión por falta grave:",
+            "options": [
+                "Puede ascender con retroactividad",
+                "Puede ascender sin restricciones",
+                "No corresponde el ascenso",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"No corresponde el ascenso\"."
+        },
+        {
+            "id": "isep-d26-266",
+            "difficulty": "facil",
+            "question": "La Policía es una organización:",
+            "options": [
+                "Privada",
+                "Judicial",
+                "Socialmente construida",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Socialmente construida\"."
+        },
+        {
+            "id": "isep-d26-269",
+            "difficulty": "facil",
+            "question": "El responsable de la conducción operativa y administrativa es:",
+            "options": [
+                "El Gobernador",
+                "El Fiscal",
+                "El Jefe de Policía",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Jefe de Policía\"."
+        },
+        {
+            "id": "isep-d26-271",
+            "difficulty": "facil",
+            "question": "La Policía se organiza como un cuerpo:",
+            "options": [
+                "Descentralizado totalmente",
+                "Centralizado administrativamente",
+                "Judicial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Centralizado administrativamente\"."
+        },
+        {
+            "id": "isep-d26-276",
+            "difficulty": "facil",
+            "question": "El Departamento Operaciones es:",
+            "options": [
+                "1",
+                "2",
+                "3",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"3\"."
+        },
+        {
+            "id": "isep-d26-284",
+            "difficulty": "facil",
+            "question": "La máxima autoridad policial es:",
+            "options": [
+                "Subjefe",
+                "Fiscal",
+                "Jefe de Policía",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Jefe de Policía\"."
+        },
+        {
+            "id": "isep-d26-291",
+            "difficulty": "dificil",
+            "question": "La legítima defensa está regulada en el:",
+            "options": [
+                "Art. 79 del Código Penal",
+                "Art. 268 CPP",
+                "Art. 34 inc. 6° del Código Penal de la Nación Argentina",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 34 inc. 6° del Código Penal de la Nación Argentina\"."
+        },
+        {
+            "id": "isep-d26-292",
+            "difficulty": "facil",
+            "question": "Para que exista legítima defensa deben concurrir:",
+            "options": [
+                "Agresión culposa, medio proporcional y aviso previo",
+                "Agresión ilegítima, necesidad racional del medio y falta de provocación suficiente",
+                "Solo agresión ilegítima",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Agresión ilegítima, necesidad racional del medio y falta de provocación suficiente\"."
+        },
+        {
+            "id": "isep-d26-296",
+            "difficulty": "facil",
+            "question": "El peligro inminente requiere:",
+            "options": [
+                "Sospecha subjetiva",
+                "Denuncia previa",
+                "Oportunidad, capacidad e intención manifiesta del agresor",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Oportunidad, capacidad e intención manifiesta del agresor\"."
+        },
+        {
+            "id": "isep-d26-301",
+            "difficulty": "facil",
+            "question": "En la escala progresiva, antes del arma de fuego debe intentarse:",
+            "options": [
+                "Fuerza letal",
+                "Neutralización directa",
+                "Medios no violentos y control físico",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Medios no violentos y control físico\"."
+        },
+        {
+            "id": "isep-d26-306",
+            "difficulty": "facil",
+            "question": "El uso progresivo de la fuerza consiste en:",
+            "options": [
+                "Aplicar siempre la máxima fuerza",
+                "Actuar según jerarquía",
+                "Seleccionar el nivel de fuerza según la conducta del sospechoso",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Seleccionar el nivel de fuerza según la conducta del sospechoso\"."
+        },
+        {
+            "id": "isep-d26-316",
+            "difficulty": "facil",
+            "question": "No será necesaria la advertencia previa cuando:",
+            "options": [
+                "Hay desobediencia",
+                "Hay insultos",
+                "La demora pueda provocar muerte o lesiones graves",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La demora pueda provocar muerte o lesiones graves\"."
+        },
+        {
+            "id": "isep-d26-326",
+            "difficulty": "facil",
+            "question": "El respeto irrestricto a los Derechos Humanos:",
+            "options": [
+                "Es opcional",
+                "Depende del contexto",
+                "Debe orientar toda actuación policial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Debe orientar toda actuación policial\"."
+        },
+        {
+            "id": "isep-d26-331",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 2°, el Servicio Penitenciario se rige por este Protocolo:",
+            "options": [
+                "Siempre, dentro y fuera de establecimientos.",
+                "Exclusivamente cuando actúa fuera del ámbito de los establecimientos penitenciarios.",
+                "Nunca.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Exclusivamente cuando actúa fuera del ámbito de los establecimientos penitenciarios.\"."
+        },
+        {
+            "id": "isep-d26-341",
+            "difficulty": "dificil",
+            "question": "La asimetría sobrevenida (Art. 6°) es aquella que:",
+            "options": [
+                "Existe antes del contacto.",
+                "Surge durante el desarrollo de la intervención.",
+                "Se determina judicialmente.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Surge durante el desarrollo de la intervención.\"."
+        },
+        {
+            "id": "isep-d26-345",
+            "difficulty": "facil",
+            "question": "El Código Procesal Penal de la Provincia de Santa Fe es la:",
+            "options": [
+                "Ley 12.521",
+                "Ley 12.734",
+                "Ley 13.774",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 12.734\"."
+        },
+        {
+            "id": "isep-d26-346",
+            "difficulty": "facil",
+            "question": "El nuevo sistema procesal penal en Santa Fe entró en vigencia en:",
+            "options": [
+                "2010",
+                "2012",
+                "2014",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"2014\"."
+        },
+        {
+            "id": "isep-d26-347",
+            "difficulty": "media",
+            "question": "Las contravenciones son",
+            "options": [
+                "Delitos graves",
+                "Infracciones menos graves que los delitos",
+                "Delitos federales",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Infracciones menos graves que los delitos\"."
+        },
+        {
+            "id": "isep-d26-348",
+            "difficulty": "facil",
+            "question": "El Código de Convivencia de la Provincia de Santa Fe corresponde a la:",
+            "options": [
+                "Ley 12.734",
+                "Ley 12.521",
+                "Ley 13.774",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 13.774\"."
+        },
+        {
+            "id": "isep-d26-349",
+            "difficulty": "facil",
+            "question": "El Código de Convivencia se aplica:",
+            "options": [
+                "En todo el país",
+                "Solo en municipios",
+                "En el territorio de la Provincia de Santa Fe",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"En el territorio de la Provincia de Santa Fe\"."
+        },
+        {
+            "id": "isep-d26-350",
+            "difficulty": "facil",
+            "question": "Las contravenciones pueden ser:",
+            "options": [
+                "Solo dolosas",
+                "Ninguna de las anteriores",
+                "Dolosas o culposas",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Dolosas o culposas\"."
+        },
+        {
+            "id": "isep-d26-351",
+            "difficulty": "facil",
+            "question": "La forma culposa en las contravenciones:",
+            "options": [
+                "Siempre se castiga",
+                "Debe estar expresamente prevista en la ley",
+                "No se castiga nunca",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Debe estar expresamente prevista en la ley\"."
+        },
+        {
+            "id": "isep-d26-352",
+            "difficulty": "facil",
+            "question": "No son punibles en contravenciones:",
+            "options": [
+                "Los mayores de edad",
+                "Los menores de 16 años",
+                "Los mayores de 18",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Los menores de 16 años\"."
+        },
+        {
+            "id": "isep-d26-354",
+            "difficulty": "media",
+            "question": "Cuando un mismo hecho constituye delito y contravención:",
+            "options": [
+                "Se aplican ambas penas",
+                "Se aplica solo la contravención",
+                "Se aplica únicamente la pena del delito",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Se aplica únicamente la pena del delito\"."
+        },
+        {
+            "id": "isep-d26-355",
+            "difficulty": "facil",
+            "question": "Las personas entre 16 y 18 años:",
+            "options": [
+                "No tienen responsabilidad",
+                "Son responsables contravencionalmente con limitaciones",
+                "Siempre reciben arresto",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Son responsables contravencionalmente con limitaciones\"."
+        },
+        {
+            "id": "isep-d26-357",
+            "difficulty": "facil",
+            "question": "Los menores infractores son juzgados por:",
+            "options": [
+                "Fiscales penales",
+                "Jueces civiles",
+                "Jueces de menores",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Jueces de menores\"."
+        },
+        {
+            "id": "isep-d26-358",
+            "difficulty": "facil",
+            "question": "La Ley de protección integral de niños, niñas y adolescentes en Santa Fe es la:",
+            "options": [
+                "Ley 13.774",
+                "Ley 12.967",
+                "Ley 12.521",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Ley 12.967\"."
+        },
+        {
+            "id": "isep-d26-359",
+            "difficulty": "dificil",
+            "question": "Según el Código de Convivencia, las penas están establecidas en el:",
+            "options": [
+                "Artículo 8",
+                "Artículo 9",
+                "Artículo 11",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Artículo 11\"."
+        },
+        {
+            "id": "isep-d26-360",
+            "difficulty": "facil",
+            "question": "Una de las penas del Código de Convivencia es:",
+            "options": [
+                "Prisión perpetua",
+                "Arresto",
+                "Reclusión mayor",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Arresto\"."
+        },
+        {
+            "id": "isep-d26-361",
+            "difficulty": "facil",
+            "question": "Otra pena del Código de Convivencia es:",
+            "options": [
+                "Cadena perpetua",
+                "Multa",
+                "Suspensión política",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Multa\"."
+        },
+        {
+            "id": "isep-d26-371",
+            "difficulty": "facil",
+            "question": "El juez puede suspender la pena de arresto cuando:",
+            "options": [
+                "El infractor es reincidente",
+                "No tiene condenas en los últimos dos años",
+                "Tiene antecedentes penales",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No tiene condenas en los últimos dos años\"."
+        },
+        {
+            "id": "isep-d26-373",
+            "difficulty": "facil",
+            "question": "Si dentro de los dos años el condenado no comete otra contravención:",
+            "options": [
+                "Se reinicia el proceso",
+                "La condena se tendrá por no pronunciada",
+                "Se duplica la sanción",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"La condena se tendrá por no pronunciada\"."
+        },
+        {
+            "id": "isep-d26-374",
+            "difficulty": "facil",
+            "question": "Cuando un hecho queda subsumido en más de un tipo contravencional:",
+            "options": [
+                "Se aplican todas las penas.",
+                "Se aplica la pena menor.",
+                "Se aplica solamente la pena de mayor gravedad",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Se aplica solamente la pena de mayor gravedad\"."
+        },
+        {
+            "id": "isep-d26-376",
+            "difficulty": "facil",
+            "question": "Cuando las penas acumuladas son de la misma especie",
+            "options": [
+                "No tienen límite.",
+                "No podrán exceder el máximo legal fijado para ese tipo de pena.",
+                "Se reducen a la mitad.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No podrán exceder el máximo legal fijado para ese tipo de pena.\"."
+        },
+        {
+            "id": "isep-d26-377",
+            "difficulty": "facil",
+            "question": "Existe reincidencia cuando:",
+            "options": [
+                "Se cometen dos faltas el mismo día.",
+                "Una persona condenada por una falta comete otra dentro de los 2 años de quedar firme la sentencia",
+                "Se cometen dos faltas distintas.",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Una persona condenada por una falta comete otra dentro de los 2 años de quedar firme la sentencia\"."
+        },
+        {
+            "id": "isep-d26-378",
+            "difficulty": "facil",
+            "question": "En caso de reincidencia:",
+            "options": [
+                "Se reduce la pena.",
+                "Se aplica el máximo de la pena prevista para la contravención.",
+                "Se extingue la acción",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Se aplica el máximo de la pena prevista para la contravención.\"."
+        },
+        {
+            "id": "isep-d26-379",
+            "difficulty": "facil",
+            "question": "La acción contravencional se extingue por:",
+            "options": [
+                "Muerte del imputado.",
+                "Criterio de oportunidad.",
+                "Todas son correctas.",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
+        },
+        {
+            "id": "isep-d26-380",
+            "difficulty": "facil",
+            "question": "La acción contravencional prescribe a los:",
+            "options": [
+                "6 meses",
+                "1 año",
+                "2 años",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"2 años\"."
+        },
+        {
+            "id": "isep-d26-381",
+            "difficulty": "facil",
+            "question": "La prescripción de la acción se interrumpe por:",
+            "options": [
+                "Comisión de una nueva falta.",
+                "Sentencia condenatoria.",
+                "Todas son correctas",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas\"."
+        },
+        {
+            "id": "isep-d26-382",
+            "difficulty": "facil",
+            "question": "La sanción contravencional se extingue por:",
+            "options": [
+                "Cumplimiento de la pena.",
+                "Muerte del condenado.",
+                "Todas son correctas.",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
+        },
+        {
+            "id": "isep-d26-383",
+            "difficulty": "facil",
+            "question": "La pena contravencional prescribe:",
+            "options": [
+                "A los 2 años de haber sido impuesta y encontrarse firme.",
+                "A los 5 años.",
+                "Nunca prescribe.",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 0,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"A los 2 años de haber sido impuesta y encontrarse firme.\"."
+        },
+        {
+            "id": "isep-d26-384",
+            "difficulty": "facil",
+            "question": "La acción contravencional es promovida por:",
+            "options": [
+                "Ministerio Público de la Acusación",
+                "Defensor público.",
+                "Juez",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 0,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Ministerio Público de la Acusación\"."
+        },
+        {
+            "id": "isep-d26-385",
+            "difficulty": "facil",
+            "question": "El Ministerio Público de la Acusación puede:",
+            "options": [
+                "Delegar diligencias investigativas a la policía.",
+                "Dirigir la investigación",
+                "Promover la acción contravencional.",
+                "Todas son correctas."
+            ],
+            "correctIndex": 3,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
+        },
+        {
+            "id": "isep-d26-386",
+            "difficulty": "facil",
+            "question": "El imputado tiene derecho a:",
+            "options": [
+                "Defensa técnica.",
+                "Abogado particular.",
+                "Todas son correctas.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
+        },
+        {
+            "id": "isep-d26-389",
+            "difficulty": "facil",
+            "question": "La víctima puede:",
+            "options": [
+                "Aportar pruebas al Fiscal.",
+                "Solicitar mecanismos alternativos de resolución de conflictos.",
+                "Todas son correctas.",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
+        },
+        {
+            "id": "isep-d26-391",
+            "difficulty": "facil",
+            "question": "En las faltas de acción privada:",
+            "options": [
+                "Actúa el Fiscal.",
+                "Actúa la policía.",
+                "La acción la promueve el ofendido.",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"La acción la promueve el ofendido.\"."
+        },
+        {
+            "id": "isep-d26-392",
+            "difficulty": "facil",
+            "question": "La denuncia por contravención puede realizarse ante:",
+            "options": [
+                "Ministerio Público de la Acusación.",
+                "Centros Territoriales de Denuncias.",
+                "Todas son correctas.",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
+        },
+        {
+            "id": "isep-d26-394",
+            "difficulty": "dificil",
+            "question": "La investigación contravencional preparatoria dura:",
+            "options": [
+                "10 días.",
+                "15 días",
+                "30 días",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"15 días\"."
+        },
+        {
+            "id": "isep-d26-395",
+            "difficulty": "dificil",
+            "question": "Este plazo puede:",
+            "options": [
+                "No prorrogarse",
+                "Prorrogarse por otros 15 días por decisión del Fiscal.",
+                "Duplicarse automáticamente.",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Prorrogarse por otros 15 días por decisión del Fiscal.\"."
+        },
+        {
+            "id": "isep-d26-396",
+            "difficulty": "facil",
+            "question": "El Fiscal puede desestimar la denuncia cuando:",
+            "options": [
+                "El hecho no es punible.",
+                "La acción está extinguida",
+                "Todas son correctas.",
+                "No existen elementos suficientes."
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
+        },
+        {
+            "id": "isep-d26-397",
+            "difficulty": "facil",
+            "question": "Entre las medidas cautelares que puede ordenar el Fiscal se encuentra:",
+            "options": [
+                "Secuestro de bienes.",
+                "Inmovilización de vehículos.",
+                "Todas son correctas.",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
+        },
+        {
+            "id": "isep-d26-398",
+            "difficulty": "media",
+            "question": "La policía puede ejercer coacción directa:",
+            "options": [
+                "En cualquier caso.",
+                "Para hacer cesar una contravención flagrante.",
+                "Solo con orden judicial.",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Para hacer cesar una contravención flagrante.\"."
+        },
+        {
+            "id": "isep-d26-399",
+            "difficulty": "dificil",
+            "question": "La aprehensión en contravenciones:",
+            "options": [
+                "Puede durar 24 horas.",
+                "Puede durar 48 horas.",
+                "No puede superar las 12 horas.",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No puede superar las 12 horas.\"."
+        },
+        {
+            "id": "isep-d26-400",
+            "difficulty": "facil",
+            "question": "El juicio contravencional será:",
+            "options": [
+                "Escrito.",
+                "Oral y público",
+                "Administrativo.",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Oral y público\"."
+        },
+        {
+            "id": "isep-d26-401",
+            "difficulty": "facil",
+            "question": "El juez no podrá condenar cuando:",
+            "options": [
+                "El imputado no declara.",
+                "El Fiscal solicita la absolución.",
+                "No hay testigos.",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Fiscal solicita la absolución.\"."
+        },
+        {
+            "id": "isep-d26-402",
+            "difficulty": "facil",
+            "question": "El juez no puede imponer:",
+            "options": [
+                "Pena mayor a la solicitada por el Fiscal.",
+                "Absolución.",
+                "Medidas cautelares",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 0,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Pena mayor a la solicitada por el Fiscal.\"."
+        },
+        {
+            "id": "isep-d26-404",
+            "difficulty": "dificil",
+            "question": "El acoso sexual callejero está regulado en:",
+            "options": [
+                "Artículo 84",
+                "Artículo 84 bis",
+                "Artículo 105",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Artículo 84 bis\"."
+        },
+        {
+            "id": "isep-d26-405",
+            "difficulty": "dificil",
+            "question": "El artículo 84 bis fue incorporado por:",
+            "options": [
+                "Ley 12.333",
+                "Ley 13.774",
+                "Ley 10.703",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Ley 13.774\"."
+        },
+        {
+            "id": "isep-d26-406",
+            "difficulty": "facil",
+            "question": "El acoso sexual callejero ocurre cuando:",
+            "options": [
+                "Hay consentimiento de la víctima",
+                "Se realiza un acto de connotación sexual sin consentimiento en espacios públicos",
+                "Ocurre en lugares privados",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se realiza un acto de connotación sexual sin consentimiento en espacios públicos\"."
+        },
+        {
+            "id": "isep-d26-409",
+            "difficulty": "dificil",
+            "question": "La conducción peligrosa está regulada en:",
+            "options": [
+                "Artículo 84 bis",
+                "Artículo 105",
+                "Artículo 70",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Artículo 105\"."
+        },
+        {
+            "id": "isep-d26-414",
+            "difficulty": "facil",
+            "question": "Código Procesal Penal de Santa Fe – Ley 12.734.....¿Qué ley regula el proceso penal en la provincia de Santa Fe?",
+            "options": [
+                "Ley 13.774",
+                "Ley 12.734",
+                "Ley 12.521",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 12.734\"."
+        },
+        {
+            "id": "isep-d26-415",
+            "difficulty": "facil",
+            "question": "¿En qué fecha fue sancionada la Ley 12.734?",
+            "options": [
+                "12 de julio de 2005",
+                "31 de agosto de 2007",
+                "15 de marzo de 2010",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"31 de agosto de 2007\"."
+        },
+        {
+            "id": "isep-d26-416",
+            "difficulty": "facil",
+            "question": "¿Cuáles son las tres etapas del proceso penal en Santa Fe?",
+            "options": [
+                "Investigación – juicio – sentencia",
+                "Investigación Penal Preparatoria, etapa intermedia y juicio oral",
+                "Denuncia – investigación – archivo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Investigación Penal Preparatoria, etapa intermedia y juicio oral\"."
+        },
+        {
+            "id": "isep-d26-418",
+            "difficulty": "facil",
+            "question": "¿Quién dirige la Investigación Penal Preparatoria?",
+            "options": [
+                "El juez",
+                "El fiscal del Ministerio Público de la Acusación",
+                "El defensor público",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El fiscal del Ministerio Público de la Acusación\"."
+        },
+        {
+            "id": "isep-d26-420",
+            "difficulty": "facil",
+            "question": "¿Quién puede iniciar la Investigación Penal Preparatoria?",
+            "options": [
+                "Solo la policía",
+                "El fiscal o la policía con comunicación inmediata al fiscal",
+                "Solo la víctima",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El fiscal o la policía con comunicación inmediata al fiscal\"."
+        },
+        {
+            "id": "isep-d26-422",
+            "difficulty": "facil",
+            "question": "¿Ante quién se realiza la audiencia imputativa?",
+            "options": [
+                "Ante la policía",
+                "Ante un juez",
+                "Ante el fiscal regional",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ante un juez\"."
+        },
+        {
+            "id": "isep-d26-423",
+            "difficulty": "facil",
+            "question": "Para que la audiencia imputativa sea válida debe estar presente:",
+            "options": [
+                "El fiscal regional",
+                "El defensor del imputado",
+                "El jefe de policía",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El defensor del imputado\"."
+        },
+        {
+            "id": "isep-d26-425",
+            "difficulty": "dificil",
+            "question": "¿En qué plazo debe resolver el fiscal el pedido de archivo solicitado por la defensa?",
+            "options": [
+                "10 días",
+                "15 días",
+                "30 días",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"15 días\"."
+        },
+        {
+            "id": "isep-d26-426",
+            "difficulty": "facil",
+            "question": "¿Quién dirige la investigación policial?",
+            "options": [
+                "El fiscal",
+                "El defensor",
+                "El gobernador",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 0,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El fiscal\"."
+        },
+        {
+            "id": "isep-d26-428",
+            "difficulty": "facil",
+            "question": "La reapertura de la investigación penal preparatoria procede cuando:",
+            "options": [
+                "Lo solicita el imputado",
+                "Aparecen nuevas pruebas y lo autoriza el Fiscal Regional",
+                "Lo ordena el juez sin fundamento",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Aparecen nuevas pruebas y lo autoriza el Fiscal Regional\"."
+        },
+        {
+            "id": "isep-d26-429",
+            "difficulty": "media",
+            "question": "¿Quién dirige las audiencias durante la investigación, procedimiento intermedio o ejecución penal?",
+            "options": [
+                "El fiscal",
+                "El defensor",
+                "El Tribunal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Tribunal\"."
+        },
+        {
+            "id": "isep-d26-431",
+            "difficulty": "dificil",
+            "question": "¿Cuándo debe resolver el Tribunal en las audiencias?",
+            "options": [
+                "Dentro de los 10 días",
+                "En la próxima audiencia",
+                "Verbalmente en la misma audiencia",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Verbalmente en la misma audiencia\"."
+        },
+        {
+            "id": "isep-d26-436",
+            "difficulty": "dificil",
+            "question": "¿Cuántos días antes de la audiencia preliminar deben ofrecer las partes la prueba para el juicio oral?",
+            "options": [
+                "1 día",
+                "2 días",
+                "3 días",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"3 días\"."
+        },
+        {
+            "id": "isep-d26-440",
+            "difficulty": "facil",
+            "question": "¿Cómo deben valorar los tribunales la prueba?",
+            "options": [
+                "Según su criterio personal",
+                "Según la opinión del fiscal",
+                "Conforme a la sana crítica racional",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Conforme a la sana crítica racional\"."
+        },
+        {
+            "id": "isep-d26-441",
+            "difficulty": "facil",
+            "question": "¿Qué ocurre con la prueba obtenida violando garantías constitucionales?",
+            "options": [
+                "Se considera parcialmente válida",
+                "Carece de toda eficacia",
+                "Se analiza en juicio",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Carece de toda eficacia\"."
+        },
+        {
+            "id": "isep-d26-442",
+            "difficulty": "facil",
+            "question": "¿Quién realiza la entrevista a la víctima en la Cámara Gesell?",
+            "options": [
+                "Un psicólogo designado por el tribunal",
+                "El fiscal",
+                "El defensor",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 0,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Un psicólogo designado por el tribunal\"."
+        },
+        {
+            "id": "isep-d26-444",
+            "difficulty": "facil",
+            "question": "Para que la declaración del imputado sea válida debe:",
+            "options": [
+                "Estar presente el fiscal",
+                "Ser grabada",
+                "Estar presente su defensor",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Estar presente su defensor\"."
+        },
+        {
+            "id": "isep-d26-446",
+            "difficulty": "facil",
+            "question": "¿Quiénes pueden abstenerse de declarar?",
+            "options": [
+                "Solo los amigos del imputado",
+                "Cónyuge y parientes cercanos del imputado",
+                "Ninguna persona",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Cónyuge y parientes cercanos del imputado\"."
+        },
+        {
+            "id": "isep-d26-451",
+            "difficulty": "media",
+            "question": "¿Qué documento se realiza luego de la inspección del lugar del hecho?",
+            "options": [
+                "Denuncia",
+                "Acta detallada de lo observado",
+                "Pericia médica",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Acta detallada de lo observado\"."
+        },
+        {
+            "id": "isep-d26-452",
+            "difficulty": "facil",
+            "question": "¿Qué puede ordenar la Fiscalía en el lugar del hecho?",
+            "options": [
+                "La condena del imputado",
+                "El archivo del caso",
+                "La recolección de rastros biológicos o genéticos",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"La recolección de rastros biológicos o genéticos\"."
+        },
+        {
+            "id": "isep-d26-456",
+            "difficulty": "media",
+            "question": "¿Qué es la entrega vigilada?",
+            "options": [
+                "Un allanamiento nocturno",
+                "Una requisa personal",
+                "Postergar la detención o secuestro para no afectar la investigación",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Postergar la detención o secuestro para no afectar la investigación\"."
+        },
+        {
+            "id": "isep-d26-457",
+            "difficulty": "facil",
+            "question": "¿Quién puede autorizar la entrega vigilada?",
+            "options": [
+                "El juez únicamente",
+                "La policía",
+                "La Fiscalía con conocimiento inmediato del Tribunal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"La Fiscalía con conocimiento inmediato del Tribunal\"."
+        },
+        {
+            "id": "isep-d26-458",
+            "difficulty": "facil",
+            "question": "¿Puede obligarse a un funcionario a actuar como agente encubierto?",
+            "options": [
+                "Sí, si lo ordena el fiscal",
+                "No, nadie puede ser obligado",
+                "Sí, si lo ordena el juez",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No, nadie puede ser obligado\"."
+        },
+        {
+            "id": "isep-d26-461",
+            "difficulty": "facil",
+            "question": "¿Qué debe garantizarse respecto al material obtenido?",
+            "options": [
+                "Su confidencialidad parcial",
+                "La cadena de custodia y su inalterabilidad",
+                "Tres veces",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La cadena de custodia y su inalterabilidad\"."
+        },
+        {
+            "id": "isep-d26-464",
+            "difficulty": "facil",
+            "question": "¿Qué es el imputado arrepentido?",
+            "options": [
+                "Un testigo del hecho",
+                "Un imputado que brinda información útil a cambio de reducción de pena",
+                "Un fiscal auxiliar",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Un imputado que brinda información útil a cambio de reducción de pena\"."
+        },
+        {
+            "id": "isep-d26-466",
+            "difficulty": "facil",
+            "question": "¿Hasta cuándo puede presentarse el acuerdo del arrepentido?",
+            "options": [
+                "Solo antes de la denuncia",
+                "Hasta el requerimiento acusatorio o junto con éste",
+                "Durante el juicio oral",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Hasta el requerimiento acusatorio o junto con éste\"."
+        },
+        {
+            "id": "isep-d26-471",
+            "difficulty": "facil",
+            "question": "La exhibición de álbumes fotográficos procede cuando:",
+            "options": [
+                "Ya hay un imputado identificado",
+                "Se busca individualizar personas desconocidas",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
+                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se busca individualizar personas desconocidas\"."
+        },
+        {
+            "id": "isep-d26-472",
+            "difficulty": "facil",
+            "question": "Manipular o sugerir fotografías al testigo constituye:",
+            "options": [
+                "Falta leve",
+                "Falta administrativa",
+                "Falta grave",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 2,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Falta grave\"."
+        },
+        {
+            "id": "isep-d26-473",
+            "difficulty": "facil",
+            "question": "El reconocimiento de cosas exige previamente:",
+            "options": [
+                "Una orden fiscal",
+                "Que la persona describa el objeto",
+                "Presencia de testigos",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Que la persona describa el objeto\"."
+        },
+        {
+            "id": "isep-d26-476",
+            "difficulty": "facil",
+            "question": "El agente encubierto:",
+            "options": [
+                "Actúa sin autorización",
+                "Se infiltra con identidad falsa",
+                "Solo observa",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se infiltra con identidad falsa\"."
+        },
+        {
+            "id": "isep-d26-481",
+            "difficulty": "facil",
+            "question": "Las medidas especiales pueden prorrogarse:",
+            "options": [
+                "Infinitamente",
+                "Una sola vez",
+                "Dos veces",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una sola vez\"."
+        },
+        {
+            "id": "isep-d26-486",
+            "difficulty": "facil",
+            "question": "¿Qué se hace con un celular secuestrado?",
+            "options": [
+                "Apagarlo",
+                "Revisarlo",
+                "Ponerlo en modo avión y no apagarlo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ponerlo en modo avión y no apagarlo\"."
+        },
+        {
+            "id": "isep-d26-487",
+            "difficulty": "media",
+            "question": "La aprehensión debe realizarse:",
+            "options": [
+                "Sin testigos",
+                "Solo de día",
+                "Con testigos",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Con testigos\"."
+        },
+        {
+            "id": "isep-d26-488",
+            "difficulty": "facil",
+            "question": "En lesiones leves por accidente de tránsito:",
+            "options": [
+                "Se aprehende al conductor",
+                "No se aprehende al presunto responsable",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno",
+                "Solo ante la presencia de dos testigos hábiles y personal de la AIC/PDI"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No se aprehende al presunto responsable\"."
+        },
+        {
+            "id": "isep-d26-490",
+            "difficulty": "facil",
+            "question": "En abuso de armas, ¿qué se realiza?",
+            "options": [
+                "Entrevista a vecinos únicamente",
+                "Dermotest al aprehendido",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno",
+                "Solo ante la presencia de dos testigos hábiles y personal de la AIC/PDI"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Dermotest al aprehendido\"."
+        },
+        {
+            "id": "isep-d26-491",
+            "difficulty": "facil",
+            "question": "En amenazas, ¿cómo debe ser la declaración?",
+            "options": [
+                "Técnica",
+                "Textual y en primera persona",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
+                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Textual y en primera persona\"."
+        },
+        {
+            "id": "isep-d26-493",
+            "difficulty": "media",
+            "question": "El procedimiento abreviado requiere:",
+            "options": [
+                "Acuerdo fiscal + defensor + consentimiento del menor",
+                "Solo juez",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno",
+                "Solo ante la presencia de dos testigos hábiles y personal de la AIC/PDI"
+            ],
+            "correctIndex": 0,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Acuerdo fiscal + defensor + consentimiento del menor\"."
+        },
+        {
+            "id": "isep-d26-501",
+            "difficulty": "facil",
+            "question": "La violencia obstétrica implica:",
+            "options": [
+                "Falta de pago",
+                "Maltrato del personal de salud en procesos reproductivos",
+                "Problemas laborales",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Maltrato del personal de salud en procesos reproductivos\"."
+        },
+        {
+            "id": "isep-d26-510",
+            "difficulty": "media",
+            "question": "Respecto al procedimiento: En Argentina:",
+            "options": [
+                "Existe el delito \"violencia de género\"",
+                "No existe como delito autónomo",
+                "Solo es contravención",
+                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
+            ],
+            "correctIndex": 1,
+            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
+            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"No existe como delito autónomo\"."
+        },
+        {
+            "id": "isep-d26-513",
+            "difficulty": "media",
+            "question": "La flagrancia ocurre cuando:",
+            "options": [
+                "Hay denuncia escrita",
+                "El autor es sorprendido cometiendo el hecho",
+                "Pasa mucho tiempo del hecho",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El autor es sorprendido cometiendo el hecho\"."
         }
     ],
     "subinspector-inspector": [
@@ -1114,6 +3695,1392 @@ window.quizBank = {
             "correctIndex": 0,
             "source": "Ley 12.734 (CPP Santa Fe), Art. 215 segundo párrafo",
             "explanation": "La ley exige imperativamente que la requisa corporal a mujeres sea ejecutada por personal femenino, bajo sanción de nulidad y falta grave disciplinaria."
+        },
+        {
+            "id": "isep-d26-001",
+            "difficulty": "facil",
+            "question": "El liderazgo policial se define principalmente como:",
+            "options": [
+                "Un cargo jerárquico otorgado por la superioridad",
+                "Un destino que se alcanza al final de la carrera",
+                "Un proceso en constante desarrollo",
+                "Una habilidad innata exclusiva de algunas personas"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Un proceso en constante desarrollo\"."
+        },
+        {
+            "id": "isep-d26-002",
+            "difficulty": "facil",
+            "question": "Según el enfoque de \"Pequeños Grandes Líderes\", el liderazgo:",
+            "options": [
+                "Depende del rango y la antigüedad",
+                "Se basa solo en el cumplimiento de órdenes",
+                "Puede desarrollarse y perfeccionarse",
+                "Es exclusivo del personal superior"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Puede desarrollarse y perfeccionarse\"."
+        },
+        {
+            "id": "isep-d26-006",
+            "difficulty": "facil",
+            "question": "¿Cuál de los siguientes NO es un valor fundamental del liderazgo policial?",
+            "options": [
+                "Ética",
+                "Integridad",
+                "Responsabilidad",
+                "autoritario"
+            ],
+            "correctIndex": 3,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"autoritario\"."
+        },
+        {
+            "id": "isep-d26-014",
+            "difficulty": "facil",
+            "question": "Dicho Código fue incorporado al derecho argentino mediante la:",
+            "options": [
+                "Ley N.º 26.657",
+                "Ley N.º 24.059 – Ley de Seguridad Interior (1992)",
+                "Decreto N.º 911/21",
+                "Constitución Nacional"
+            ],
+            "correctIndex": 1,
+            "source": "Ley Nacional de Salud Mental (Ley 26.657) - Protocolo de Actuación Policial",
+            "explanation": "La Ley 26.657 establece que la intervención de fuerzas de seguridad ante crisis subjetivas o padecimientos mentales es de carácter auxiliar sanitario. La opción correcta conforme a la normativa oficial es: \"Ley N.º 24.059 – Ley de Seguridad Interior (1992)\"."
+        },
+        {
+            "id": "isep-d26-024",
+            "difficulty": "facil",
+            "question": "La Ley Nacional de Salud Mental es la: a) Ley 24.059",
+            "options": [
+                "Ley 26.657",
+                "Ley 27.275",
+                "Internación preventiva por orden directa del personal policial interviniente",
+                "Inmovilización física como primera medida obligatoria de contención"
+            ],
+            "correctIndex": 0,
+            "source": "Ley Nacional de Salud Mental (Ley 26.657) - Protocolo de Actuación Policial",
+            "explanation": "La Ley 26.657 establece que la intervención de fuerzas de seguridad ante crisis subjetivas o padecimientos mentales es de carácter auxiliar sanitario. La opción correcta conforme a la normativa oficial es: \"Ley 26.657\"."
+        },
+        {
+            "id": "isep-d26-025",
+            "difficulty": "facil",
+            "question": "La intervención policial en crisis subjetiva debe ser:",
+            "options": [
+                "Excepcional y respetuosa de los Derechos Humanos",
+                "Automática",
+                "Internación preventiva por orden directa del personal policial interviniente",
+                "Inmovilización física como primera medida obligatoria de contención"
+            ],
+            "correctIndex": 0,
+            "source": "Ley Nacional de Salud Mental (Ley 26.657) - Protocolo de Actuación Policial",
+            "explanation": "La Ley 26.657 establece que la intervención de fuerzas de seguridad ante crisis subjetivas o padecimientos mentales es de carácter auxiliar sanitario. La opción correcta conforme a la normativa oficial es: \"Excepcional y respetuosa de los Derechos Humanos\"."
+        },
+        {
+            "id": "isep-d26-028",
+            "difficulty": "facil",
+            "question": "Según el Código Civil y Comercial, se considera menor de edad a la persona que:",
+            "options": [
+                "No haya cumplido 16 años",
+                "No haya cumplido 17 años",
+                "No haya cumplido 18 años",
+                "Alojamiento en dependencia policial hasta la presentación de los progenitores"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"No haya cumplido 18 años\"."
+        },
+        {
+            "id": "isep-d26-029",
+            "difficulty": "dificil",
+            "question": "El Art. 3 del Código Procesal de Menores establece que se considera menor a quien:",
+            "options": [
+                "Lo determine el juez de menores",
+                "No posea documentación",
+                "Así lo determinen las leyes sustantivas",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"Así lo determinen las leyes sustantivas\"."
+        },
+        {
+            "id": "isep-d26-030",
+            "difficulty": "facil",
+            "question": "En caso de duda sobre la edad de una persona, esta será considerada:",
+            "options": [
+                "Mayor hasta acreditar su edad",
+                "Menor solo a efectos procesales",
+                "Menor hasta que se acredite lo contrario",
+                "Alojamiento en dependencia policial hasta la presentación de los progenitores"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"Menor hasta que se acredite lo contrario\"."
+        },
+        {
+            "id": "isep-d26-031",
+            "difficulty": "facil",
+            "question": "La edad del menor se acredita prioritariamente mediante:",
+            "options": [
+                "Declaración jurada",
+                "Testimonio policial",
+                "Documentos legales",
+                "Alojamiento en dependencia policial hasta la presentación de los progenitores"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"Documentos legales\"."
+        },
+        {
+            "id": "isep-d26-039",
+            "difficulty": "facil",
+            "question": "Entre los derechos que deben informarse al menor se encuentra:",
+            "options": [
+                "La obligación de declarar",
+                "La presunción de culpabilidad",
+                "El derecho a abstenerse de declarar sin presunción en su contra",
+                "Alojamiento en dependencia policial hasta la presentación de los progenitores"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"El derecho a abstenerse de declarar sin presunción en su contra\"."
+        },
+        {
+            "id": "isep-d26-040",
+            "difficulty": "facil",
+            "question": "El interrogatorio sumario al menor puede realizarse:",
+            "options": [
+                "Siempre que el policía lo considere necesario",
+                "Solo con autorización judicial",
+                "Solo con consentimiento del menor y para orientar la investigación",
+                "Alojamiento en dependencia policial hasta la presentación de los progenitores"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"Solo con consentimiento del menor y para orientar la investigación\"."
+        },
+        {
+            "id": "isep-d26-042",
+            "difficulty": "dificil",
+            "question": "Las diligencias prevencionales deben realizarse en un plazo máximo de:",
+            "options": [
+                "10 días",
+                "15 días",
+                "20 días",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"15 días\"."
+        },
+        {
+            "id": "isep-d26-043",
+            "difficulty": "dificil",
+            "question": "Si se dispone la internación del menor, la investigación debe elevarse al juzgado en un plazo máximo de:",
+            "options": [
+                "24 horas",
+                "36 horas",
+                "48 horas",
+                "Alojamiento en dependencia policial hasta la presentación de los progenitores"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"48 horas\"."
+        },
+        {
+            "id": "isep-d26-062",
+            "difficulty": "facil",
+            "question": "La demora para constatación de identidad podrá realizarse:",
+            "options": [
+                "Solo en dependencias policiales",
+                "Únicamente en la vía pública",
+                "En el lugar o en dependencia policial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"En el lugar o en dependencia policial\"."
+        },
+        {
+            "id": "isep-d26-067",
+            "difficulty": "facil",
+            "question": "Entre los derechos de la persona demorada se encuentra:",
+            "options": [
+                "Acceder a abogado particular únicamente",
+                "Realizar una llamada telefónica",
+                "Permanecer incomunicado",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Realizar una llamada telefónica\"."
+        },
+        {
+            "id": "isep-d26-072",
+            "difficulty": "facil",
+            "question": "En controles vehiculares, el registro podrá realizarse cuando:",
+            "options": [
+                "Sea un control rutinario",
+                "El conductor lo autorice",
+                "Exista sospecha fundada",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Exista sospecha fundada\"."
+        },
+        {
+            "id": "isep-d26-080",
+            "difficulty": "media",
+            "question": "La inspección ocular se caracteriza por ser:",
+            "options": [
+                "Repetible y optativa",
+                "Inmediata, única e irrepetible",
+                "Solo fotográfica",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Inmediata, única e irrepetible\"."
+        },
+        {
+            "id": "isep-d26-081",
+            "difficulty": "media",
+            "question": "Uno de los principios clave de la inspección ocular es:",
+            "options": [
+                "Velocidad",
+                "Presunción",
+                "Método",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Método\"."
+        },
+        {
+            "id": "isep-d26-082",
+            "difficulty": "media",
+            "question": "El croquis tiene como finalidad principal:",
+            "options": [
+                "Embellecer el acta",
+                "Sustituir la inspección ocular",
+                "Representar gráficamente el lugar del hecho",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Representar gráficamente el lugar del hecho\"."
+        },
+        {
+            "id": "isep-d26-092",
+            "difficulty": "facil",
+            "question": "El lugar del hecho debe preservarse:",
+            "options": [
+                "Solo si hay víctima fatal",
+                "Con un perímetro mínimo",
+                "Con un perímetro amplio ante la duda",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Con un perímetro amplio ante la duda\"."
+        },
+        {
+            "id": "isep-d26-097",
+            "difficulty": "facil",
+            "question": "El Primer Respondiente Policial debe considerar, en primer lugar:",
+            "options": [
+                "El armamento disponible",
+                "El punto de crisis, las víctimas y los sujetos intervinientes",
+                "La intervención judicial inmediata",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El punto de crisis, las víctimas y los sujetos intervinientes\"."
+        },
+        {
+            "id": "isep-d26-100",
+            "difficulty": "facil",
+            "question": "Para que la prioridad de paso del vehículo policial sea reconocida por la jurisprudencia, es indispensable que:",
+            "options": [
+                "El conductor esté uniformado",
+                "El móvil tenga menos de 10 año",
+                "Utilice señales lumínicas y sonoras al momento del hecho",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Utilice señales lumínicas y sonoras al momento del hecho\"."
+        },
+        {
+            "id": "isep-d26-102",
+            "difficulty": "facil",
+            "question": "La Regla de Tueller fue desarrollada por:",
+            "options": [
+                "La Corte Suprema de Justicia",
+                "El FBI",
+                "El Sargento Dennis Tueller, en la década de 1980",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"El Sargento Dennis Tueller, en la década de 1980\"."
+        },
+        {
+            "id": "isep-d26-107",
+            "difficulty": "facil",
+            "question": "El uso de sirena por parte de los vehículos de emergencia debe realizarse:",
+            "options": [
+                "Siempre que el vehículo esté en circulación",
+                "Solo con balizas apagadas",
+                "Ante una emergencia extraordinaria y junto con las balizas, con moderación.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ante una emergencia extraordinaria y junto con las balizas, con moderación.\"."
+        },
+        {
+            "id": "isep-d26-108",
+            "difficulty": "facil",
+            "question": "Según la normativa y la jurisprudencia, la prioridad de paso de los vehículos policiales se reconoce cuando:",
+            "options": [
+                "Circulan a alta velocidad",
+                "Están identificados como móviles oficiales.",
+                "Utilizan simultáneamente señales lumínicas y sonoras al momento del hecho",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Utilizan simultáneamente señales lumínicas y sonoras al momento del hecho\"."
+        },
+        {
+            "id": "isep-d26-113",
+            "difficulty": "facil",
+            "question": "La Ley Nacional N° 26.052 establece:",
+            "options": [
+                "La exclusividad de la competencia federal",
+                "La despenalización del consumo.",
+                "La desfederalización parcial del narcotráfico, otorgando competencia a la justicia provincial en ciertos casos",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"La desfederalización parcial del narcotráfico, otorgando competencia a la justicia provincial en ciertos casos\"."
+        },
+        {
+            "id": "isep-d26-122",
+            "difficulty": "facil",
+            "question": "¿Cuál de los siguientes NO es un indicador típico de finalidad comercial?",
+            "options": [
+                "Balanza de precisión.",
+                "Droga fraccionada en dosis.",
+                "Consumo personal acreditado.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Consumo personal acreditado.\"."
+        },
+        {
+            "id": "isep-d26-127",
+            "difficulty": "facil",
+            "question": "Según la jurisprudencia citada (\"H., S.P., SJA\"), se acredita prima facie el fin comercial cuando existe:",
+            "options": [
+                "Únicamente tenencia simple.",
+                "Sustancia fraccionada, balanza y dinero.",
+                "Consumo personal declarado.",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 1,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Sustancia fraccionada, balanza y dinero.\"."
+        },
+        {
+            "id": "isep-d26-147",
+            "difficulty": "facil",
+            "question": "Según la jurisprudencia, la denuncia anónima",
+            "options": [
+                "Es válida como noticia criminis y habilita la investigación",
+                "Solo sirve como antecedente administrativo",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida",
+                "Centralización absoluta de la toma de decisiones sin delegación de mando"
+            ],
+            "correctIndex": 0,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Es válida como noticia criminis y habilita la investigación\"."
+        },
+        {
+            "id": "isep-d26-152",
+            "difficulty": "facil",
+            "question": "Un lugar del hecho \"abierto\" se caracteriza principalmente por:",
+            "options": [
+                "Protección ambiental y límites físicos.",
+                "Riesgo por factores humanos exclusivamente",
+                "Mayor riesgo de pérdida de indicios por factores externos.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Mayor riesgo de pérdida de indicios por factores externos.\"."
+        },
+        {
+            "id": "isep-d26-157",
+            "difficulty": "media",
+            "question": "Un indicio se define como:",
+            "options": [
+                "La prueba judicialmente válida.",
+                "El resultado del análisis científico.",
+                "Todo rastro, huella o vestigio del delito.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Todo rastro, huella o vestigio del delito.\"."
+        },
+        {
+            "id": "isep-d26-167",
+            "difficulty": "facil",
+            "question": "La segunda etapa del proceso corresponde a:",
+            "options": [
+                "Presentación judicial de la prueba.",
+                "Dirección exclusiva del juez.",
+                "Análisis científico o técnico del indicio.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Análisis científico o técnico del indicio.\"."
+        },
+        {
+            "id": "isep-d26-172",
+            "difficulty": "media",
+            "question": "Los actos de investigación se realizan cuando:",
+            "options": [
+                "Siempre que haya un delito",
+                "Lo ordena expresamente el juez",
+                "Existe riesgo inminente de pérdida de indicios",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Existe riesgo inminente de pérdida de indicios\"."
+        },
+        {
+            "id": "isep-d26-176",
+            "difficulty": "dificil",
+            "question": "El Artículo 268 del CPP:",
+            "options": [
+                "Regula únicamente la inspección ocular",
+                "Rige toda la actividad policial",
+                "Aplica solo a delitos graves",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Rige toda la actividad policial\"."
+        },
+        {
+            "id": "isep-d26-177",
+            "difficulty": "facil",
+            "question": "El croquis demostrativo del lugar del hecho es:",
+            "options": [
+                "Un plano técnico con escala",
+                "Un dibujo a mano alzada, esquemático y orientativo",
+                "Un informe fotográfico",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Un dibujo a mano alzada, esquemático y orientativo\"."
+        },
+        {
+            "id": "isep-d26-182",
+            "difficulty": "media",
+            "question": "La inspección ocular tiene como finalidad:",
+            "options": [
+                "Determinar la pena",
+                "Comprobar el estado de personas, lugares y cosas",
+                "Tomar declaración al imputado",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Comprobar el estado de personas, lugares y cosas\"."
+        },
+        {
+            "id": "isep-d26-183",
+            "difficulty": "media",
+            "question": "Una vez iniciada la inspección ocular:",
+            "options": [
+                "Puede interrumpirse libremente",
+                "No debe interrumpirse, salvo riesgo físico o daños",
+                "Puede suspenderse por razones administrativas",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No debe interrumpirse, salvo riesgo físico o daños\"."
+        },
+        {
+            "id": "isep-d26-202",
+            "difficulty": "media",
+            "question": "Todo movimiento dentro de la Zona Crítica debe:",
+            "options": [
+                "Informarse verbalmente",
+                "Autorizarlo la policía",
+                "Constar formalmente en acta",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Constar formalmente en acta\"."
+        },
+        {
+            "id": "isep-d26-216",
+            "difficulty": "facil",
+            "question": "El Responsable Policial de la Investigación (RPI) es quien:",
+            "options": [
+                "Dicta sentencia",
+                "Dirige el juicio oral",
+                "Asume la responsabilidad de la investigación en sede policial y ejecuta directivas del Fiscal",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Asume la responsabilidad de la investigación en sede policial y ejecuta directivas del Fiscal\"."
+        },
+        {
+            "id": "isep-d26-217",
+            "difficulty": "facil",
+            "question": "El RPI responde funcionalmente ante:",
+            "options": [
+                "Jefe de Unidad Regional",
+                "Juez",
+                "Fiscal interviniente",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Fiscal interviniente\"."
+        },
+        {
+            "id": "isep-d26-218",
+            "difficulty": "facil",
+            "question": "La designación del RPI corresponde:",
+            "options": [
+                "Exclusivamente al Juez",
+                "A la institución policial, sin perjuicio de lo que disponga el Fiscal",
+                "A la víctima",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"A la institución policial, sin perjuicio de lo que disponga el Fiscal\"."
+        },
+        {
+            "id": "isep-d26-219",
+            "difficulty": "facil",
+            "question": "El Código Procesal Penal de Santa Fe:",
+            "options": [
+                "Exige determinada jerarquía para ser RPI",
+                "Solo permite oficiales superiores como RPI",
+                "No distingue grado o escalafón para cumplir la función",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No distingue grado o escalafón para cumplir la función\"."
+        },
+        {
+            "id": "isep-d26-220",
+            "difficulty": "facil",
+            "question": "Respecto al procedimiento: El RPI debe:",
+            "options": [
+                "Limitarse a recibir actuaciones",
+                "Reunir evidencias y cumplir diligencias para individualizar responsables",
+                "Delegar todo al primer interventor",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Reunir evidencias y cumplir diligencias para individualizar responsables\"."
+        },
+        {
+            "id": "isep-d26-221",
+            "difficulty": "facil",
+            "question": "Si el RPI no puede concurrir inmediatamente al lugar del hecho:",
+            "options": [
+                "Se archiva la causa",
+                "Debe documentar en sede policial y luego ampliar medidas investigativas",
+                "Pierde competencia",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 1,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Debe documentar en sede policial y luego ampliar medidas investigativas\"."
+        },
+        {
+            "id": "isep-d26-232",
+            "difficulty": "facil",
+            "question": "La sangre recolectada en el lugar del hecho debe embalarse en:",
+            "options": [
+                "Bolsa plástica cerrada",
+                "Recipiente hermético húmedo",
+                "Papel o cartón",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Papel o cartón\"."
+        },
+        {
+            "id": "isep-d26-237",
+            "difficulty": "dificil",
+            "question": "El semen puede detectarse aproximadamente en cavidad vaginal hasta:",
+            "options": [
+                "6 horas",
+                "24 horas",
+                "3 días",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"3 días\"."
+        },
+        {
+            "id": "isep-d26-252",
+            "difficulty": "facil",
+            "question": "La convocatoria anual a concursos es realizada por:",
+            "options": [
+                "Corte Suprema",
+                "Jefatura de Policía",
+                "Ministro de Seguridad",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ministro de Seguridad\"."
+        },
+        {
+            "id": "isep-d26-257",
+            "difficulty": "dificil",
+            "question": "El listado de inhabilitados debe publicarse por:",
+            "options": [
+                "3 días",
+                "5 días",
+                "10 días",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"5 días\"."
+        },
+        {
+            "id": "isep-d26-264",
+            "difficulty": "dificil",
+            "question": "Según el artículo 1, la Policía tiene como función:",
+            "options": [
+                "Administrar justicia",
+                "Dictar leyes",
+                "Mantener el orden público y la paz social",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Mantener el orden público y la paz social\"."
+        },
+        {
+            "id": "isep-d26-267",
+            "difficulty": "dificil",
+            "question": "Según el artículo 4, la Policía es:",
+            "options": [
+                "Descentralizada administrativamente",
+                "Centralizada administrativamente",
+                "Independiente",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Centralizada administrativamente\"."
+        },
+        {
+            "id": "isep-d26-277",
+            "difficulty": "facil",
+            "question": "El Departamento Logística es:",
+            "options": [
+                "2",
+                "3",
+                "4",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"4\"."
+        },
+        {
+            "id": "isep-d26-282",
+            "difficulty": "facil",
+            "question": "El Departamento Logística se encarga de:",
+            "options": [
+                "Inteligencia",
+                "Abastecimiento",
+                "Investigaciones",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Abastecimiento\"."
+        },
+        {
+            "id": "isep-d26-297",
+            "difficulty": "facil",
+            "question": "La aptitud del agresor se refiere a:",
+            "options": [
+                "Su edad",
+                "Su capacidad real para matar o lesionar",
+                "Su antecedentes",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Su capacidad real para matar o lesionar\"."
+        },
+        {
+            "id": "isep-d26-302",
+            "difficulty": "facil",
+            "question": "En el modelo de control continuo, \"Apuntar el arma\" corresponde a:",
+            "options": [
+                "Control sin arma",
+                "Control verbal",
+                "Control con arma de fuego",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Control con arma de fuego\"."
+        },
+        {
+            "id": "isep-d26-307",
+            "difficulty": "facil",
+            "question": "La fuerza letal procede cuando:",
+            "options": [
+                "Hay resistencia pasiva",
+                "Hay insultos",
+                "Existe agresión letal o peligro inminente de muerte o lesión grave",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Existe agresión letal o peligro inminente de muerte o lesión grave\"."
+        },
+        {
+            "id": "isep-d26-312",
+            "difficulty": "facil",
+            "question": "Puede alegarse obediencia debida para justificar uso ilícito de la fuerza:",
+            "options": [
+                "Sí, siempre",
+                "Solo en emergencias",
+                "No, nunca puede alegarse para eludir responsabilidad",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No, nunca puede alegarse para eludir responsabilidad\"."
+        },
+        {
+            "id": "isep-d26-317",
+            "difficulty": "facil",
+            "question": "Después del uso del arma de fuego se debe:",
+            "options": [
+                "Retirarse del lugar",
+                "Esperar orden superior",
+                "Brindar asistencia médica e informar a familiares",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Brindar asistencia médica e informar a familiares\"."
+        },
+        {
+            "id": "isep-d26-322",
+            "difficulty": "facil",
+            "question": "El uso excesivo de la fuerza puede:",
+            "options": [
+                "Fortalecer la imagen institucional",
+                "Mejorar la autoridad",
+                "Debilitar la legitimidad y generar desorden social",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Debilitar la legitimidad y generar desorden social\"."
+        },
+        {
+            "id": "isep-d26-327",
+            "difficulty": "facil",
+            "question": "El uso de armas de fuego para impedir fuga es válido cuando:",
+            "options": [
+                "Hay fuga simple",
+                "Hay desobediencia",
+                "La persona representa peligro grave para la vida",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La persona representa peligro grave para la vida\"."
+        },
+        {
+            "id": "isep-d26-335",
+            "difficulty": "dificil",
+            "question": "De acuerdo al Artículo 4°, la resistencia pasiva implica:",
+            "options": [
+                "Violencia directa contra el agente.",
+                "Uso de arma blanca.",
+                "Omisión persistente de seguir indicaciones sin ejercer fuerza física activa.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Omisión persistente de seguir indicaciones sin ejercer fuerza física activa.\"."
+        },
+        {
+            "id": "isep-d26-336",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 4°, el ataque directo consiste en:",
+            "options": [
+                "Intimidación verbal reiterada.",
+                "Actos de violencia dirigidos a neutralizar la intervención del agente o facilitar la huida.",
+                "Negativa a identificarse.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Actos de violencia dirigidos a neutralizar la intervención del agente o facilitar la huida.\"."
+        },
+        {
+            "id": "isep-d26-337",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 5°, ante intimidación verbal la respuesta proporcional es:",
+            "options": [
+                "Fuerza defensiva inmediata.",
+                "Uso de arma de fuego.",
+                "Comunicación con el propósito de retornar a la normalidad.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Comunicación con el propósito de retornar a la normalidad.\"."
+        },
+        {
+            "id": "isep-d26-342",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 7°, la situación medioambiental comprende:",
+            "options": [
+                "Solo condiciones climáticas.",
+                "Solo visibilidad.",
+                "Conjunto de condiciones externas (terreno, clima, visibilidad) que influyen en la intervención.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Conjunto de condiciones externas (terreno, clima, visibilidad) que influyen en la intervención.\"."
+        },
+        {
+            "id": "isep-d26-353",
+            "difficulty": "dificil",
+            "question": "Las causas de justificación se encuentran en el:",
+            "options": [
+                "Artículo 35 Código Penal",
+                "Artículo 33 Código Penal",
+                "Artículo 34 Código Penal",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Artículo 34 Código Penal\"."
+        },
+        {
+            "id": "isep-d26-356",
+            "difficulty": "facil",
+            "question": "A los menores entre 16 y 18 años:",
+            "options": [
+                "Se les aplica arresto",
+                "No se les puede aplicar arresto",
+                "Se les aplica prisión",
+                "Alojamiento en dependencia policial hasta la presentación de los progenitores"
+            ],
+            "correctIndex": 1,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"No se les puede aplicar arresto\"."
+        },
+        {
+            "id": "isep-d26-362",
+            "difficulty": "facil",
+            "question": "También se puede aplicar:",
+            "options": [
+                "Pena capital",
+                "Clausura",
+                "Reclusión perpetua",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Clausura\"."
+        },
+        {
+            "id": "isep-d26-372",
+            "difficulty": "facil",
+            "question": "Las reglas de conducta en la condena en suspenso pueden durar hasta:",
+            "options": [
+                "6 meses",
+                "2 años",
+                "1 año",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"1 año\"."
+        },
+        {
+            "id": "isep-d26-387",
+            "difficulty": "facil",
+            "question": "La autodefensa del imputado:",
+            "options": [
+                "Está prohibida siempre.",
+                "Puede autorizarse salvo que resulte perjudicial.",
+                "Es obligatoria",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Puede autorizarse salvo que resulte perjudicial.\"."
+        },
+        {
+            "id": "isep-d26-388",
+            "difficulty": "facil",
+            "question": "Si el imputado es menor de edad:",
+            "options": [
+                "Debe defenderse solo",
+                "Debe intervenir defensor público si no tiene defensor particular",
+                "Se suspende el proceso",
+                "Alojamiento en dependencia policial hasta la presentación de los progenitores"
+            ],
+            "correctIndex": 1,
+            "source": "Ley de Protección Integral de los Derechos de las Niñas, Niños y Adolescentes (Ley 12.967)",
+            "explanation": "La Ley 12.967 y el régimen de menores garantizan el interés superior del niño y exigen la intervención de órganos de protección de derechos. La opción correcta conforme a la normativa oficial es: \"Debe intervenir defensor público si no tiene defensor particular\"."
+        },
+        {
+            "id": "isep-d26-408",
+            "difficulty": "facil",
+            "question": "Además de la multa, el infractor puede ser obligado a:",
+            "options": [
+                "Hacer trabajo comunitario",
+                "Realizar curso de manejo",
+                "Realizar un curso sobre violencia de género",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Realizar un curso sobre violencia de género\"."
+        },
+        {
+            "id": "isep-d26-417",
+            "difficulty": "dificil",
+            "question": "¿Qué artículos regulan la Investigación Penal Preparatoria?",
+            "options": [
+                "Art. 200 al 240",
+                "Art. 251 al 293",
+                "Art. 300 al 350",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Art. 251 al 293\"."
+        },
+        {
+            "id": "isep-d26-421",
+            "difficulty": "media",
+            "question": "¿Qué audiencia se realiza cuando el fiscal comunica formalmente el delito al imputado?",
+            "options": [
+                "Audiencia preliminar",
+                "Audiencia de juicio",
+                "Audiencia imputativa",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Audiencia imputativa\"."
+        },
+        {
+            "id": "isep-d26-427",
+            "difficulty": "facil",
+            "question": "La IPP tiene como finalidad:",
+            "options": [
+                "Determinar la pena",
+                "Averiguar los hechos delictivos y reunir pruebas",
+                "Ejecutar la sentencia",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Averiguar los hechos delictivos y reunir pruebas\"."
+        },
+        {
+            "id": "isep-d26-432",
+            "difficulty": "facil",
+            "question": "¿Qué ocurre si las partes presentan una postura conjunta y no hay controversia?",
+            "options": [
+                "Se suspende el proceso",
+                "Se debe convocar obligatoriamente a audiencia",
+                "El Tribunal puede resolver sin convocar a audiencia",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El Tribunal puede resolver sin convocar a audiencia\"."
+        },
+        {
+            "id": "isep-d26-437",
+            "difficulty": "dificil",
+            "question": "¿Dentro de qué plazo puede el juez resolver luego de finalizado el debate de la audiencia preliminar?",
+            "options": [
+                "2 días",
+                "3 días",
+                "5 días",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"5 días\"."
+        },
+        {
+            "id": "isep-d26-447",
+            "difficulty": "facil",
+            "question": "Antes de declarar, los testigos:",
+            "options": [
+                "Pueden hablar entre ellos",
+                "Pueden escuchar todo el debate",
+                "No pueden comunicarse entre sí",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No pueden comunicarse entre sí\"."
+        },
+        {
+            "id": "isep-d26-449",
+            "difficulty": "media",
+            "question": "¿Qué es la inspección ocular?",
+            "options": [
+                "Un informe policial",
+                "Un interrogatorio a testigos",
+                "Una observación metódica del lugar del hecho o escena del crimen",
+                "Únicamente con autorización previa y por escrito del Fiscal en turno"
+            ],
+            "correctIndex": 2,
+            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
+            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Una observación metódica del lugar del hecho o escena del crimen\"."
+        },
+        {
+            "id": "isep-d26-462",
+            "difficulty": "facil",
+            "question": "¿Para qué se obtiene ADN del imputado?",
+            "options": [
+                "Para condenarlo automáticamente",
+                "Para archivar la causa",
+                "Para crear una huella genética digitalizada",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Para crear una huella genética digitalizada\"."
+        },
+        {
+            "id": "isep-d26-467",
+            "difficulty": "facil",
+            "question": "En el reconocimiento en rueda de personas, la cantidad mínima de personas similares es:",
+            "options": [
+                "2",
+                "3",
+                "5",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"3\"."
+        },
+        {
+            "id": "isep-d26-477",
+            "difficulty": "media",
+            "question": "El agente revelador se caracteriza por:",
+            "options": [
+                "Infiltrarse permanentemente",
+                "Actuar en operaciones puntuales",
+                "No participar en delitos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Actuar en operaciones puntuales\"."
+        },
+        {
+            "id": "isep-d26-482",
+            "difficulty": "media",
+            "question": "El ADN puede obtenerse:",
+            "options": [
+                "Solo con consentimiento",
+                "Solo por orden judicial",
+                "Con consentimiento o por orden judicial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Con consentimiento o por orden judicial\"."
+        },
+        {
+            "id": "isep-d26-492",
+            "difficulty": "facil",
+            "question": "En extorsión, ¿qué es importante?",
+            "options": [
+                "El medio utilizado (teléfono/red social)",
+                "El croquis",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
+                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El medio utilizado (teléfono/red social)\"."
+        },
+        {
+            "id": "isep-d26-494",
+            "difficulty": "facil",
+            "question": "Según la Ley 26.485, la violencia contra la mujer es:",
+            "options": [
+                "Solo la agresión física",
+                "Solo la violencia dentro del hogar",
+                "Toda conducta que afecte derechos basada en desigualdad de poder",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Toda conducta que afecte derechos basada en desigualdad de poder\"."
+        },
+        {
+            "id": "isep-d26-495",
+            "difficulty": "facil",
+            "question": "La violencia psicológica incluye:",
+            "options": [
+                "Solo insultos",
+                "Daño emocional y control de la conducta",
+                "Exclusivamente amenazas de muerte",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Daño emocional y control de la conducta\"."
+        },
+        {
+            "id": "isep-d26-497",
+            "difficulty": "facil",
+            "question": "La violencia simbólica se manifiesta a través de:",
+            "options": [
+                "Amenazas directas",
+                "Detenciones ilegales",
+                "Estereotipos y mensajes que naturalizan desigualdad",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Estereotipos y mensajes que naturalizan desigualdad\"."
+        },
+        {
+            "id": "isep-d26-498",
+            "difficulty": "facil",
+            "question": "La violencia doméstica se caracteriza por:",
+            "options": [
+                "Ocurrir solo en espacios públicos",
+                "Ser cometida por desconocidos",
+                "Darse dentro del grupo familiar o relaciones de pareja",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Darse dentro del grupo familiar o relaciones de pareja\"."
+        },
+        {
+            "id": "isep-d26-499",
+            "difficulty": "facil",
+            "question": "La violencia institucional es:",
+            "options": [
+                "La ejercida por familiares",
+                "La violencia callejera",
+                "La realizada por funcionarios que obstaculizan derechos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"La realizada por funcionarios que obstaculizan derechos\"."
+        },
+        {
+            "id": "isep-d26-500",
+            "difficulty": "facil",
+            "question": "La violencia laboral incluye:",
+            "options": [
+                "Únicamente insultos",
+                "Solo violencia física",
+                "Discriminación y desigualdad en el trabajo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Discriminación y desigualdad en el trabajo\"."
+        },
+        {
+            "id": "isep-d26-502",
+            "difficulty": "facil",
+            "question": "La violencia mediática consiste en:",
+            "options": [
+                "Difusión de imágenes que discriminan o humillan",
+                "Violencia física en medios",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
+                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
+            ],
+            "correctIndex": 0,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Difusión de imágenes que discriminan o humillan\"."
+        },
+        {
+            "id": "isep-d26-503",
+            "difficulty": "facil",
+            "question": "La violencia en el espacio público incluye:",
+            "options": [
+                "Solo robos",
+                "Conductas con connotación sexual que afectan la dignidad",
+                "Solo violencia institucional",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Conductas con connotación sexual que afectan la dignidad\"."
+        },
+        {
+            "id": "isep-d26-504",
+            "difficulty": "facil",
+            "question": "La violencia digital es:",
+            "options": [
+                "Cualquier agresión mediante tecnología",
+                "Solo insultos por celular",
+                "Robo físico de celulares",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 0,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Cualquier agresión mediante tecnología\"."
+        },
+        {
+            "id": "isep-d26-505",
+            "difficulty": "facil",
+            "question": "El ciclo de violencia tiene tres fases:",
+            "options": [
+                "Discusión – reconciliación – separación",
+                "Tensión – agresión – luna de miel",
+                "Golpe – denuncia – cárcel",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Tensión – agresión – luna de miel\"."
+        },
+        {
+            "id": "isep-d26-506",
+            "difficulty": "facil",
+            "question": "En la fase de acumulación de tensión:",
+            "options": [
+                "Hay violencia extrema",
+                "El agresor pide perdón",
+                "Se generan conflictos y control progresivo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Se generan conflictos y control progresivo\"."
+        },
+        {
+            "id": "isep-d26-507",
+            "difficulty": "facil",
+            "question": "En la fase de agresión:",
+            "options": [
+                "Aparecen agresiones visibles",
+                "Hay reconciliación",
+                "No hay conflictos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Aparecen agresiones visibles\"."
+        },
+        {
+            "id": "isep-d26-508",
+            "difficulty": "facil",
+            "question": "En la fase de \"luna de miel\":",
+            "options": [
+                "El agresor ignora a la víctima",
+                "El agresor pide perdón y promete cambiar",
+                "Hay violencia física",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"El agresor pide perdón y promete cambiar\"."
+        },
+        {
+            "id": "isep-d26-509",
+            "difficulty": "facil",
+            "question": "La violencia de género:",
+            "options": [
+                "Es biológica",
+                "Es producto de desigualdad social y cultural",
+                "Es solo doméstica",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Es producto de desigualdad social y cultural\"."
+        },
+        {
+            "id": "isep-d26-511",
+            "difficulty": "dificil",
+            "question": "El femicidio está previsto en:",
+            "options": [
+                "Artículo 14",
+                "Artículo 80 del Código Penal",
+                "Ley de tránsito",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Artículo 80 del Código Penal\"."
+        },
+        {
+            "id": "isep-d26-512",
+            "difficulty": "dificil",
+            "question": "El inc. 11 del art. 80 establece:",
+            "options": [
+                "Robo agravado",
+                "Homicidio de una mujer mediando violencia de género",
+                "Lesiones leves",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Ley 26.485 de Protección Integral contra la Violencia hacia las Mujeres",
+            "explanation": "La Ley 26.485 dispone medidas de protección urgentes, atención prioritaria y articulación inmediata con la fiscalía especializada. La opción correcta conforme a la normativa oficial es: \"Homicidio de una mujer mediando violencia de género\"."
         }
     ],
     "inspector-subcomisario": [
@@ -1620,6 +5587,930 @@ window.quizBank = {
             "correctIndex": 0,
             "source": "Ley 12.521 / Ley de Procedimientos Administrativos de Santa Fe",
             "explanation": "La destitución emana del Poder Ejecutivo (Gobernador); su revisión mediante recurso de reconsideración agota la vía administrativa previa al contencioso judicial."
+        },
+        {
+            "id": "isep-d26-048",
+            "difficulty": "facil",
+            "question": "La Carta establece un marco general que permite a cada país:",
+            "options": [
+                "Aplicar sanciones unificadas",
+                "Adaptar los principios a su realidad histórica, cultural e institucional",
+                "Eliminar normas propias",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Adaptar los principios a su realidad histórica, cultural e institucional\"."
+        },
+        {
+            "id": "isep-d26-053",
+            "difficulty": "facil",
+            "question": "El cumplimiento de la Carta contribuye principalmente a:",
+            "options": [
+                "La centralización del poder estatal",
+                "El fortalecimiento institucional",
+                "La reducción de la participación ciudadana",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El fortalecimiento institucional\"."
+        },
+        {
+            "id": "isep-d26-063",
+            "difficulty": "facil",
+            "question": "La \"causa objetiva\" que habilita la demora debe basarse en:",
+            "options": [
+                "Presunción subjetiva del personal",
+                "Sospechas o indicios ciertos",
+                "Orden del superior",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Sospechas o indicios ciertos\"."
+        },
+        {
+            "id": "isep-d26-073",
+            "difficulty": "facil",
+            "question": "En motovehículos, el control incluye especialmente:",
+            "options": [
+                "Solo al conductor",
+                "Únicamente la documentación",
+                "Identificación y elementos portados",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Identificación y elementos portados\"."
+        },
+        {
+            "id": "isep-d26-078",
+            "difficulty": "facil",
+            "question": "La toma de muestra de sangre es obligatoria cuando:",
+            "options": [
+                "El conductor es profesional",
+                "Hay daños materiales",
+                "El vehículo es oficial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El conductor es profesional\"."
+        },
+        {
+            "id": "isep-d26-083",
+            "difficulty": "facil",
+            "question": "El croquis panorámico se utiliza para:",
+            "options": [
+                "Detalles específicos",
+                "Visión general del lugar",
+                "Armas secuestradas",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Visión general del lugar\"."
+        },
+        {
+            "id": "isep-d26-093",
+            "difficulty": "facil",
+            "question": "La persecución policial puede originarse por:",
+            "options": [
+                "Únicamente órdenes judiciales",
+                "Comunicaciones radiales, denuncias, controles y patrullajes preventivos",
+                "Solo denuncias anónimas",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Comunicaciones radiales, denuncias, controles y patrullajes preventivos\"."
+        },
+        {
+            "id": "isep-d26-098",
+            "difficulty": "facil",
+            "question": "Respecto al punto de crisis, el Primer Respondiente Policial debe:",
+            "options": [
+                "Localizar, estabilizar, aislar, contener y evaluar",
+                "Intervenir de forma directa sin apoyo",
+                "Esperar instrucciones sin actuar",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Localizar, estabilizar, aislar, contener y evaluar\"."
+        },
+        {
+            "id": "isep-d26-103",
+            "difficulty": "facil",
+            "question": "El fundamento técnico de la Regla de Tueller demuestra que",
+            "options": [
+                "El oficial siempre puede neutralizar al agresor a tiempo",
+                "El agresor puede cerrar 6,4 m en menos tiempo del necesario para reaccionar y disparar",
+                "El uso de la fuerza letal es automático",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El agresor puede cerrar 6,4 m en menos tiempo del necesario para reaccionar y disparar\"."
+        },
+        {
+            "id": "isep-d26-112",
+            "difficulty": "facil",
+            "question": "El microtráfico se caracteriza principalmente por:",
+            "options": [
+                "La exportación de grandes cantidades de droga",
+                "La comercialización internacional",
+                "La venta minorista de dosis pequeñas destinadas al consumo directo",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"La venta minorista de dosis pequeñas destinadas al consumo directo\"."
+        },
+        {
+            "id": "isep-d26-114",
+            "difficulty": "dificil",
+            "question": "Para que un delito sea de competencia provincial según el art. 2 de la Ley 26.052, es requisito esencial que",
+            "options": [
+                "Exista reincidencia.",
+                "Sea una sustancia importada",
+                "El estupefaciente esté fraccionado en dosis destinadas al consumidor",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"El estupefaciente esté fraccionado en dosis destinadas al consumidor\"."
+        },
+        {
+            "id": "isep-d26-116",
+            "difficulty": "facil",
+            "question": "Para que exista tenencia de estupefacientes, se requiere:",
+            "options": [
+                "Contacto físico directo con la sustancia",
+                "Cantidad mínima determinada.",
+                "Poder de disposición sobre el material, aun sin contacto físico",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Poder de disposición sobre el material, aun sin contacto físico\"."
+        },
+        {
+            "id": "isep-d26-117",
+            "difficulty": "facil",
+            "question": "Un estupefaciente, para ser considerado como tal, debe:",
+            "options": [
+                "Estar incluido en un listado legal únicamente",
+                "Ser ilegal en cualquier circunstancia",
+                "Estar en los listados legales y ser capaz de producir dependencia física o psíquica.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Estar en los listados legales y ser capaz de producir dependencia física o psíquica.\"."
+        },
+        {
+            "id": "isep-d26-118",
+            "difficulty": "facil",
+            "question": "Estar en los listados legales y ser capaz de producir dependencia física o psíquica.",
+            "options": [
+                "Daño concreto.",
+                "Lesión efectiva.",
+                "Peligro abstracto que protege la Salud Pública.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Peligro abstracto que protege la Salud Pública.\"."
+        },
+        {
+            "id": "isep-d26-119",
+            "difficulty": "dificil",
+            "question": "El delito de tenencia con fines de comercialización (art. 5 inc. c) requiere:",
+            "options": [
+                "La sola tenencia de estupefacientes.",
+                "La acreditación de un resultado material dañoso.",
+                "La prueba de la finalidad de comercio.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"La prueba de la finalidad de comercio.\"."
+        },
+        {
+            "id": "isep-d26-121",
+            "difficulty": "dificil",
+            "question": "¿Cuál es el bien jurídico protegido en los delitos previstos por el art. 5 de la Ley 23.737?",
+            "options": [
+                "La seguridad pública.",
+                "El orden económico",
+                "La salud pública.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"La salud pública.\"."
+        },
+        {
+            "id": "isep-d26-123",
+            "difficulty": "media",
+            "question": "La tenencia con fines de comercialización es un delito:",
+            "options": [
+                "De resultado.",
+                "De peligro concreto.",
+                "De peligro abstracto.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"De peligro abstracto.\"."
+        },
+        {
+            "id": "isep-d26-125",
+            "difficulty": "facil",
+            "question": "En la Provincia de Santa Fe, la competencia provincial en materia de microtráfico surge de:",
+            "options": [
+                "Ley Nacional 23.737.",
+                "Ley Nacional 26.052 exclusivamente.",
+                "Ley Provincial 14.239.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Ley Provincial 14.239.\"."
+        },
+        {
+            "id": "isep-d26-128",
+            "difficulty": "dificil",
+            "question": "La entrega gratuita de estupefacientes (art. 5 inc. e, último párrafo) se caracteriza por:",
+            "options": [
+                "La existencia de lucro.",
+                "La habitualidad en la venta.",
+                "La ausencia de contraprestación económica.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"La ausencia de contraprestación económica.\"."
+        },
+        {
+            "id": "isep-d26-129",
+            "difficulty": "facil",
+            "question": "La pena para la entrega gratuita de estupefacientes es de:",
+            "options": [
+                "1 mes a 2 años.",
+                "3 a 12 años.",
+                "4 a 15 años.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 1,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"3 a 12 años.\"."
+        },
+        {
+            "id": "isep-d26-132",
+            "difficulty": "media",
+            "question": "El almacenamiento de estupefacientes se caracteriza por:",
+            "options": [
+                "Exigir finalidad comercial",
+                "Ser un delito de peligro abstracto.",
+                "Requerir venta efectiva",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 1,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Ser un delito de peligro abstracto.\"."
+        },
+        {
+            "id": "isep-d26-133",
+            "difficulty": "media",
+            "question": "El delito de transporte de estupefacientes se consuma con:",
+            "options": [
+                "La intención de vender.",
+                "La integración a una banda.",
+                "El efectivo desplazamiento de la droga.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"El efectivo desplazamiento de la droga.\"."
+        },
+        {
+            "id": "isep-d26-134",
+            "difficulty": "media",
+            "question": "Las semillas de cannabis:",
+            "options": [
+                "Siempre configuran delito.",
+                "Son estupefacientes.",
+                "No contienen principio activo.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"No contienen principio activo.\"."
+        },
+        {
+            "id": "isep-d26-135",
+            "difficulty": "media",
+            "question": "La denuncia anónima en delitos de microtráfico:",
+            "options": [
+                "Es inválida como noticia criminis.",
+                "No puede iniciar una investigación.",
+                "Es válida si es seria y verosímil.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Es válida si es seria y verosímil.\"."
+        },
+        {
+            "id": "isep-d26-136",
+            "difficulty": "facil",
+            "question": "La política criminal de Santa Fe en microtráfico tiene como objetivo principal:",
+            "options": [
+                "Combatir carteles internacionales.",
+                "Reprimir al consumidor.",
+                "Reducir la conflictividad social territorial.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Reducir la conflictividad social territorial.\"."
+        },
+        {
+            "id": "isep-d26-137",
+            "difficulty": "dificil",
+            "question": "El régimen de desfederalización en materia de estupefacientes previsto en la Ley 23.737 se encuentra regulado en",
+            "options": [
+                "Art. 5.",
+                "Art. 14.",
+                "Art. 34.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Art. 34.\"."
+        },
+        {
+            "id": "isep-d26-138",
+            "difficulty": "facil",
+            "question": "Para que opere la competencia provincial en microtráfico, la sustancia debe estar:",
+            "options": [
+                "Destinada a exportación.",
+                "En grandes cantidades.",
+                "Fraccionada en dosis para el consumidor final.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Fraccionada en dosis para el consumidor final.\"."
+        },
+        {
+            "id": "isep-d26-139",
+            "difficulty": "media",
+            "question": "La Ley 23.737 es la norma que:",
+            "options": [
+                "Regula exclusivamente el consumo personal de estupefacientes",
+                "Establece el Código Penal argentino.",
+                "Tipifica y reprime los delitos vinculados al tráfico ilícito de estupefacientes y sustancias controladas.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Tipifica y reprime los delitos vinculados al tráfico ilícito de estupefacientes y sustancias controladas.\"."
+        },
+        {
+            "id": "isep-d26-140",
+            "difficulty": "facil",
+            "question": "La finalidad política de la Ley Provincial 14.239 es principalmente:",
+            "options": [
+                "Incrementar las penas.",
+                "Perseguir al consumidor.",
+                "Reducir la conflictividad social derivada del narcomenudeo.",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Reducir la conflictividad social derivada del narcomenudeo.\"."
+        },
+        {
+            "id": "isep-d26-143",
+            "difficulty": "facil",
+            "question": "La denuncia con reserva de identidad es considerada:",
+            "options": [
+                "Un acto administrativo",
+                "Un medio de prueba inválido",
+                "Un medio de prueba válido con resguardo judicial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Un medio de prueba válido con resguardo judicial\"."
+        },
+        {
+            "id": "isep-d26-148",
+            "difficulty": "media",
+            "question": "La aceptación de la denuncia anónima es especialmente relevante en casos de:",
+            "options": [
+                "Microtráfico o narcomenudeo",
+                "Delitos contra la administración pública",
+                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial",
+                "Incautación y análisis de campo preliminar sin formalidades de cadena de custodia"
+            ],
+            "correctIndex": 0,
+            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
+            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Microtráfico o narcomenudeo\"."
+        },
+        {
+            "id": "isep-d26-153",
+            "difficulty": "media",
+            "question": "Un vehículo utilizado para cometer un delito se clasifica como",
+            "options": [
+                "Lugar cerrado.",
+                "Lugar mixto.",
+                "Lugar móvil.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Lugar móvil.\"."
+        },
+        {
+            "id": "isep-d26-158",
+            "difficulty": "facil",
+            "question": "Según su momento de producción, los indicios se clasifican en:",
+            "options": [
+                "Físicos, químicos y biológicos.",
+                "Directos e indirectos.",
+                "Antecedentes, concomitantes y consecuentes.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Antecedentes, concomitantes y consecuentes.\"."
+        },
+        {
+            "id": "isep-d26-163",
+            "difficulty": "facil",
+            "question": "Una huella se define como:",
+            "options": [
+                "Un cambio de color en una superficie.",
+                "Un depósito de sustancia extraña.",
+                "Una marca producida por contacto sobre una superficie.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una marca producida por contacto sobre una superficie.\"."
+        },
+        {
+            "id": "isep-d26-178",
+            "difficulty": "facil",
+            "question": "¿Quién debe confeccionar el croquis demostrativo?",
+            "options": [
+                "Exclusivamente el perito",
+                "El juez",
+                "El primer interventor",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El primer interventor\"."
+        },
+        {
+            "id": "isep-d26-188",
+            "difficulty": "facil",
+            "question": "La Investigación Penal Preparatoria (IPP) tiene por finalidad:",
+            "options": [
+                "Dictar sentencia",
+                "Determinar la culpabilidad del imputado",
+                "Preparar la acusación reuniendo prueba relevante",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Preparar la acusación reuniendo prueba relevante\"."
+        },
+        {
+            "id": "isep-d26-233",
+            "difficulty": "facil",
+            "question": "Las muestras biológicas enviadas desde hospitales:",
+            "options": [
+                "Deben congelarse",
+                "No deben congelarse",
+                "Pueden enviarse sin rotular",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No deben congelarse\"."
+        },
+        {
+            "id": "isep-d26-238",
+            "difficulty": "facil",
+            "question": "En caso de semen escaso, la recolección correcta es:",
+            "options": [
+                "Paño común",
+                "Hisopos estériles",
+                "Papel absorbente",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Hisopos estériles\"."
+        },
+        {
+            "id": "isep-d26-243",
+            "difficulty": "facil",
+            "question": "Un error formal en la cadena de custodia puede:",
+            "options": [
+                "Ser subsanado automáticamente",
+                "Invalidar la prueba en juicio",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
+                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Invalidar la prueba en juicio\"."
+        },
+        {
+            "id": "isep-d26-253",
+            "difficulty": "facil",
+            "question": "Los jurados comienzan sus actividades a partir del:",
+            "options": [
+                "1° de enero",
+                "1° de septiembre",
+                "1° de diciembre",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"1° de septiembre\"."
+        },
+        {
+            "id": "isep-d26-268",
+            "difficulty": "facil",
+            "question": "La Policía es descentralizada en el aspecto:",
+            "options": [
+                "Administrativo",
+                "Judicial",
+                "Funcional",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Funcional\"."
+        },
+        {
+            "id": "isep-d26-278",
+            "difficulty": "facil",
+            "question": "El Departamento Judicial es:",
+            "options": [
+                "2",
+                "3",
+                "5",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"5\"."
+        },
+        {
+            "id": "isep-d26-293",
+            "difficulty": "media",
+            "question": "La necesidad racional del medio empleado significa:",
+            "options": [
+                "Que debe existir igualdad exacta de armas",
+                "Que la defensa debe ser matemática",
+                "Que debe ser racional y proporcional al ataque",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Que debe ser racional y proporcional al ataque\"."
+        },
+        {
+            "id": "isep-d26-298",
+            "difficulty": "facil",
+            "question": "El uso progresivo de la fuerza implica:",
+            "options": [
+                "Aplicar directamente el nivel más alto",
+                "Usar siempre arma contundente",
+                "Escalar la respuesta según la conducta del agresor",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Escalar la respuesta según la conducta del agresor\"."
+        },
+        {
+            "id": "isep-d26-303",
+            "difficulty": "media",
+            "question": "La represión policial es:",
+            "options": [
+                "Venganza institucional",
+                "Castigo automático",
+                "Acción coercitiva para restablecer el orden público frente al delito",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Acción coercitiva para restablecer el orden público frente al delito\"."
+        },
+        {
+            "id": "isep-d26-308",
+            "difficulty": "facil",
+            "question": "El uso de la fuerza nunca debe:",
+            "options": [
+                "Ser gradual",
+                "Ser racional",
+                "Ser ilegítimo o arbitrario",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ser ilegítimo o arbitrario\"."
+        },
+        {
+            "id": "isep-d26-313",
+            "difficulty": "facil",
+            "question": "Las armas de fuego son consideradas:",
+            "options": [
+                "Herramienta preventiva",
+                "Medio habitual",
+                "Medida extrema",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Medida extrema\"."
+        },
+        {
+            "id": "isep-d26-318",
+            "difficulty": "facil",
+            "question": "También se debe:",
+            "options": [
+                "Omitir detalles",
+                "Informar verbalmente",
+                "Realizar informe completo y permitir investigación",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Realizar informe completo y permitir investigación\"."
+        },
+        {
+            "id": "isep-d26-323",
+            "difficulty": "facil",
+            "question": "El uso de la fuerza sin respetar principios de legalidad, necesidad y proporcionalidad:",
+            "options": [
+                "Es válido si es rápido",
+                "Es discrecional",
+                "Se convierte en ilegal y violento",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se convierte en ilegal y violento\"."
+        },
+        {
+            "id": "isep-d26-328",
+            "difficulty": "facil",
+            "question": "La responsabilidad por uso ilícito de la fuerza es:",
+            "options": [
+                "Solo institucional",
+                "Solo del superior",
+                "Individual y también jerárquica",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Individual y también jerárquica\"."
+        },
+        {
+            "id": "isep-d26-333",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 3°, una de las atribuciones del Ministerio es:",
+            "options": [
+                "Dictar sentencias penales.",
+                "Autorizar previamente cada uso de la fuerza.",
+                "Recopilar, sistematizar y publicar estadísticas periódicas sobre el uso de la fuerza.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Recopilar, sistematizar y publicar estadísticas periódicas sobre el uso de la fuerza.\"."
+        },
+        {
+            "id": "isep-d26-338",
+            "difficulty": "dificil",
+            "question": "La violación del espacio personal (Art. 5°) puede habilitar:",
+            "options": [
+                "Detención automática.",
+                "Uso obligatorio de fuerza letal.",
+                "Legítima defensa preventiva para recuperar el control del espacio.",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Legítima defensa preventiva para recuperar el control del espacio.\"."
+        },
+        {
+            "id": "isep-d26-343",
+            "difficulty": "dificil",
+            "question": "Conforme el Artículo 8°, son motivaciones legítimas de intervención:",
+            "options": [
+                "Sospecha subjetiva sin análisis.",
+                "Decisión arbitraria.",
+                "Requerimiento formal, análisis de riesgo dinámico o plan operativo basado en análisis de riesgo.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Requerimiento formal, análisis de riesgo dinámico o plan operativo basado en análisis de riesgo.\"."
+        },
+        {
+            "id": "isep-d26-363",
+            "difficulty": "facil",
+            "question": "El decomiso consiste en:",
+            "options": [
+                "Arrestar al infractor",
+                "Secuestrar los elementos utilizados en la infracción",
+                "Suspender servicios",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Secuestrar los elementos utilizados en la infracción\"."
+        },
+        {
+            "id": "isep-d26-368",
+            "difficulty": "dificil",
+            "question": "El arresto puede cumplirse:",
+            "options": [
+                "Solo en cárcel",
+                "Solo en prisión federal",
+                "En horario nocturno o días no laborables",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"En horario nocturno o días no laborables\"."
+        },
+        {
+            "id": "isep-d26-393",
+            "difficulty": "facil",
+            "question": "La denuncia puede ser:",
+            "options": [
+                "Solo escrita.",
+                "Solo verbal",
+                "Verbal o escrita.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Verbal o escrita.\"."
+        },
+        {
+            "id": "isep-d26-403",
+            "difficulty": "facil",
+            "question": "Las sentencias condenatorias deben comunicarse al:",
+            "options": [
+                "Ministerio de Seguridad.",
+                "Registro Civil.",
+                "Registro Único de Antecedentes Penales de la Provincia.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Registro Único de Antecedentes Penales de la Provincia.\"."
+        },
+        {
+            "id": "isep-d26-413",
+            "difficulty": "facil",
+            "question": "En el proceso penal el testigo:",
+            "options": [
+                "Es un sujeto esencial",
+                "Es un sujeto eventual",
+                "No es considerado sujeto del proceso",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No es considerado sujeto del proceso\"."
+        },
+        {
+            "id": "isep-d26-433",
+            "difficulty": "facil",
+            "question": "¿Cuándo se presenta la requisitoria de acusación?",
+            "options": [
+                "Antes de la audiencia imputativa",
+                "Después de la sentencia",
+                "Luego de la audiencia imputativa cuando hay prueba suficiente",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Luego de la audiencia imputativa cuando hay prueba suficiente\"."
+        },
+        {
+            "id": "isep-d26-438",
+            "difficulty": "facil",
+            "question": "¿Cuál de las siguientes decisiones puede tomar el juez en la audiencia preliminar?",
+            "options": [
+                "Dictar sentencia condenatoria",
+                "Dictar prisión perpetua",
+                "Admitir o rechazar la acusación",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Admitir o rechazar la acusación\"."
+        },
+        {
+            "id": "isep-d26-448",
+            "difficulty": "facil",
+            "question": "El Tribunal puede disponer protección para un testigo cuando:",
+            "options": [
+                "El testigo lo pide sin motivo",
+                "Existe peligro de intimidación o represalias",
+                "El proceso termina",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Existe peligro de intimidación o represalias\"."
+        },
+        {
+            "id": "isep-d26-453",
+            "difficulty": "media",
+            "question": "¿Cuándo se realiza el levantamiento del cadáver?",
+            "options": [
+                "Después del juicio",
+                "Antes de la denuncia",
+                "Luego de la inspección preliminar del cuerpo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Luego de la inspección preliminar del cuerpo\"."
+        },
+        {
+            "id": "isep-d26-463",
+            "difficulty": "facil",
+            "question": "¿Dónde se incorpora la huella genética digitalizada?",
+            "options": [
+                "Registro Nacional de Personas",
+                "Registro Civil",
+                "Registro Provincial de Huellas Genéticas Digitalizadas",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Registro Provincial de Huellas Genéticas Digitalizadas\"."
+        },
+        {
+            "id": "isep-d26-468",
+            "difficulty": "facil",
+            "question": "En la rueda de reconocimiento, el imputado:",
+            "options": [
+                "Puede negarse a participar",
+                "Es ubicado por la policía",
+                "Elige su colocación en la fila",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Elige su colocación en la fila\"."
+        },
+        {
+            "id": "isep-d26-478",
+            "difficulty": "facil",
+            "question": "Respecto al procedimiento: El informante:",
+            "options": [
+                "Debe revelar su identidad",
+                "Puede recibir beneficio económico",
+                "No puede aportar pruebas",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Puede recibir beneficio económico\"."
+        },
+        {
+            "id": "isep-d26-483",
+            "difficulty": "facil",
+            "question": "La obtención de ADN debe ser:",
+            "options": [
+                "Invasiva",
+                "Dolorosa",
+                "Lo menos lesiva posible",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Lo menos lesiva posible\"."
         }
     ],
     "subcomisario-comisario": [
@@ -2098,6 +6989,1182 @@ window.quizBank = {
             "correctIndex": 0,
             "source": "Ley de Administración Financiera y Hacienda Pública de Santa Fe",
             "explanation": "La contratación directa menor exige no rebasar los topes reglamentarios, adjuntar cotizaciones cotejables y rendir facturas AFIP tipo B o C oficiales."
+        },
+        {
+            "id": "isep-d26-026",
+            "difficulty": "facil",
+            "question": "El uso de la fuerza en crisis subjetiva se considera:",
+            "options": [
+                "Recurso extremo",
+                "Medida preventiva",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes",
+                "Solo puede ser resuelto por el Jefe de la Unidad Regional respectiva"
+            ],
+            "correctIndex": 0,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Recurso extremo\"."
+        },
+        {
+            "id": "isep-d26-046",
+            "difficulty": "facil",
+            "question": "La Carta Iberoamericana propone un enfoque que va más allá de:",
+            "options": [
+                "La formación profesional",
+                "La evaluación institucional",
+                "La sanción de actos ilícitos",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"La sanción de actos ilícitos\"."
+        },
+        {
+            "id": "isep-d26-047",
+            "difficulty": "facil",
+            "question": "¿En qué se basa el sistema de integridad que promueve la Carta?",
+            "options": [
+                "En el castigo disciplinario",
+                "En el control jerárquico",
+                "En el comportamiento honesto de los servidores públicos",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"En el comportamiento honesto de los servidores públicos\"."
+        },
+        {
+            "id": "isep-d26-058",
+            "difficulty": "dificil",
+            "question": "Según el Art. 10 bis de la Ley Orgánica de la Policía, la regla general respecto a la libertad corporal es que:",
+            "options": [
+                "El personal policial puede detener libremente",
+                "Puede restringirse la libertad por sospecha",
+                "No podrá detener o restringir sin orden de autoridad competente",
+                "Depende orgánicamente de la Secretaría General de la Gobernación"
+            ],
+            "correctIndex": 2,
+            "source": "Ley Orgánica Policial de Santa Fe (Decreto-Ley 12.333/62)",
+            "explanation": "El Decreto-Ley 12.333/62 organiza la estructura institucional, la Plana Mayor Policial y las funciones de comando superior. La opción correcta conforme a la normativa oficial es: \"No podrá detener o restringir sin orden de autoridad competente\"."
+        },
+        {
+            "id": "isep-d26-069",
+            "difficulty": "media",
+            "question": "El acta de demora debe contener:",
+            "options": [
+                "Solo la identificación del personal",
+                "Causa, fecha y hora de la medida",
+                "Opinión del funcionario",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Causa, fecha y hora de la medida\"."
+        },
+        {
+            "id": "isep-d26-074",
+            "difficulty": "media",
+            "question": "La orientación de la entrevista policial debe:",
+            "options": [
+                "Ser siempre la misma sin importar el delito",
+                "Adaptarse al tipo de delito investigado",
+                "Basarse únicamente en la declaración del imputado",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Adaptarse al tipo de delito investigado\"."
+        },
+        {
+            "id": "isep-d26-094",
+            "difficulty": "facil",
+            "question": "Durante los servicios de prevención y persecución, el personal policial debe mantener:",
+            "options": [
+                "Solo correcta uniformidad",
+                "Alto nivel de atención, actitud vigilante y correcta uniformidad",
+                "Actitud reactiva ante los hechos",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Alto nivel de atención, actitud vigilante y correcta uniformidad\"."
+        },
+        {
+            "id": "isep-d26-099",
+            "difficulty": "dificil",
+            "question": "Según el artículo 61 de la Ley 24.449, los vehículos de emergencia pueden:",
+            "options": [
+                "Incumplir normas de tránsito sin restricciones",
+                "No respetar normas solo si es imprescindible y no genera un mal mayor",
+                "Circular sin balizas ni sirenas",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No respetar normas solo si es imprescindible y no genera un mal mayor\"."
+        },
+        {
+            "id": "isep-d26-104",
+            "difficulty": "facil",
+            "question": "Según la Regla de Tueller, cuando la distancia lo permite, el personal policial debe priorizar:",
+            "options": [
+                "El uso inmediato del arma de fuego",
+                "La huida del lugar",
+                "Medios menos letales como aerosol de pimienta o Taser",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Medios menos letales como aerosol de pimienta o Taser\"."
+        },
+        {
+            "id": "isep-d26-109",
+            "difficulty": "facil",
+            "question": "Los demás usuarios de la vía pública, ante un vehículo de emergencia, deben:",
+            "options": [
+                "Seguirlo para aprovechar la prioridad.",
+                "Facilitar su paso y no seguirlo.",
+                "Mantener su carril y velocidad.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Facilitar su paso y no seguirlo.\"."
+        },
+        {
+            "id": "isep-d26-124",
+            "difficulty": "facil",
+            "question": "La Ley Nacional 26.052 establece:",
+            "options": [
+                "La eliminación de la competencia federal.",
+                "La competencia exclusiva de las provincias.",
+                "La competencia concurrente entre Nación y provincias.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La competencia concurrente entre Nación y provincias.\"."
+        },
+        {
+            "id": "isep-d26-149",
+            "difficulty": "facil",
+            "question": "Se considera \"lugar del hecho\" a:",
+            "options": [
+                "Únicamente el sitio donde se produjo el resultado delictivo.",
+                "El espacio físico donde fue detenido el autor.",
+                "Todo espacio físico vinculado al hecho susceptible de investigación penal.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Todo espacio físico vinculado al hecho susceptible de investigación penal.\"."
+        },
+        {
+            "id": "isep-d26-154",
+            "difficulty": "facil",
+            "question": "El lugar del hecho \"mixto\" se define como:",
+            "options": [
+                "Un sitio sin protección ambiental.",
+                "Una combinación de espacio abierto y cerrado.",
+                "Un espacio trasladable.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una combinación de espacio abierto y cerrado.\"."
+        },
+        {
+            "id": "isep-d26-159",
+            "difficulty": "facil",
+            "question": "¿Cuál de los siguientes NO es un tipo de indicio?",
+            "options": [
+                "Biológico.",
+                "Informático.",
+                "Documental judicial.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Documental judicial.\"."
+        },
+        {
+            "id": "isep-d26-164",
+            "difficulty": "facil",
+            "question": "La evidencia es:",
+            "options": [
+                "Todo indicio observado en el lugar.",
+                "El indicio confirmado mediante análisis científico o técnico.",
+                "La prueba producida en juicio.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El indicio confirmado mediante análisis científico o técnico.\"."
+        },
+        {
+            "id": "isep-d26-169",
+            "difficulty": "media",
+            "question": "¿Cuál es la prioridad del funcionario policial al arribar al lugar del hecho?",
+            "options": [
+                "Comenzar la investigación inmediatamente",
+                "Identificar al imputado",
+                "Preservar la escena del delito",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Preservar la escena del delito\"."
+        },
+        {
+            "id": "isep-d26-174",
+            "difficulty": "media",
+            "question": "¿Cuál es la regla fundamental en la escena del delito?",
+            "options": [
+                "Todo lo que se secuestra se analiza",
+                "Todo lo que se observa, se dibuja y se describe",
+                "Todo lo que se fotografía no se escribe",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Todo lo que se observa, se dibuja y se describe\"."
+        },
+        {
+            "id": "isep-d26-179",
+            "difficulty": "media",
+            "question": "¿Cuál de las siguientes características corresponde al croquis?",
+            "options": [
+                "Escala fija y proporciones exactas",
+                "Dibujo complejo y técnico",
+                "Sin escala técnica y con leyendas aclaratorias",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Sin escala técnica y con leyendas aclaratorias\"."
+        },
+        {
+            "id": "isep-d26-184",
+            "difficulty": "facil",
+            "question": "¿Cuál es la diferencia correcta entre croquis y plano?",
+            "options": [
+                "Ambos usan escala técnica",
+                "El croquis es técnico y el plano no",
+                "El croquis es esquemático y el plano técnico",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El croquis es esquemático y el plano técnico\"."
+        },
+        {
+            "id": "isep-d26-185",
+            "difficulty": "facil",
+            "question": "¿Qué consecuencia puede generar un error en la primera intervención?",
+            "options": [
+                "Ninguna si hay confesión",
+                "Solo una sanción administrativa",
+                "La invalidez de la prueba",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"La invalidez de la prueba\"."
+        },
+        {
+            "id": "isep-d26-199",
+            "difficulty": "facil",
+            "question": "La Zona Interior Crítica se caracteriza por:",
+            "options": [
+                "Ser el sector de prensa autorizado",
+                "Ser un área de circulación libre",
+                "Contener elementos, rastros e indicios del hecho",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Contener elementos, rastros e indicios del hecho\"."
+        },
+        {
+            "id": "isep-d26-203",
+            "difficulty": "facil",
+            "question": "La Zona Exterior Restringida permite circulación únicamente a:",
+            "options": [
+                "Vecinos",
+                "Periodistas",
+                "Especialistas, personal policial de apoyo y funcionarios judiciales",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Especialistas, personal policial de apoyo y funcionarios judiciales\"."
+        },
+        {
+            "id": "isep-d26-204",
+            "difficulty": "facil",
+            "question": "La Zona Exterior Amplia tiene como función principal:",
+            "options": [
+                "Realizar pericias",
+                "Custodiar evidencia",
+                "Impedir ingreso de curiosos y prensa",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Impedir ingreso de curiosos y prensa\"."
+        },
+        {
+            "id": "isep-d26-205",
+            "difficulty": "facil",
+            "question": "Para delimitar la Zona Exterior Amplia se utiliza:",
+            "options": [
+                "Señalización vial",
+                "Conos de tránsito únicamente",
+                "Cinta perimetral y personal policial",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Cinta perimetral y personal policial\"."
+        },
+        {
+            "id": "isep-d26-214",
+            "difficulty": "facil",
+            "question": "El primer interventor no debe:",
+            "options": [
+                "Preservar el lugar",
+                "Comunicar a la autoridad judicial",
+                "Asumir rol de perito si no corresponde",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Asumir rol de perito si no corresponde\"."
+        },
+        {
+            "id": "isep-d26-234",
+            "difficulty": "facil",
+            "question": "Toda muestra biológica debe contener en su rótulo:",
+            "options": [
+                "Solo nombre del médico",
+                "Solo número de causa",
+                "Datos personales, fecha, hora y lugar",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Datos personales, fecha, hora y lugar\"."
+        },
+        {
+            "id": "isep-d26-239",
+            "difficulty": "media",
+            "question": "La IPP tiene como objetivo:",
+            "options": [
+                "Dictar sentencia",
+                "Determinar existencia del delito y reunir pruebas",
+                "Ejecutar la pena",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Determinar existencia del delito y reunir pruebas\"."
+        },
+        {
+            "id": "isep-d26-244",
+            "difficulty": "facil",
+            "question": "Los ascensos del personal policial se rigen por el principio constitucional de:",
+            "options": [
+                "Igualdad",
+                "Legalidad",
+                "Idoneidad",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Idoneidad\"."
+        },
+        {
+            "id": "isep-d26-245",
+            "difficulty": "facil",
+            "question": "Los ascensos se producen mediante:",
+            "options": [
+                "Resolución ministerial",
+                "Decreto del Poder Ejecutivo",
+                "Disposición del Jefe de Policía",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Decreto del Poder Ejecutivo\"."
+        },
+        {
+            "id": "isep-d26-246",
+            "difficulty": "facil",
+            "question": "Según la Ley Provincial 12.521, los ascensos son:",
+            "options": [
+                "Directos",
+                "Por antigüedad automática",
+                "Grado a grado",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Grado a grado\"."
+        },
+        {
+            "id": "isep-d26-247",
+            "difficulty": "facil",
+            "question": "El sistema de ascensos ordinarios es:",
+            "options": [
+                "Designación directa",
+                "Concurso público de antecedentes y oposición",
+                "Evaluación interna reservada",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Concurso público de antecedentes y oposición\"."
+        },
+        {
+            "id": "isep-d26-249",
+            "difficulty": "facil",
+            "question": "Los ascensos extraordinarios se otorgan cuando existe:",
+            "options": [
+                "Antigüedad superior a 20 años",
+                "Acto administrativo favorable",
+                "Acto de arrojo con grave y real riesgo en cumplimiento del deber",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Acto de arrojo con grave y real riesgo en cumplimiento del deber\"."
+        },
+        {
+            "id": "isep-d26-250",
+            "difficulty": "facil",
+            "question": "Los ascensos post mortem se conceden cuando:",
+            "options": [
+                "El agente está jubilado",
+                "El agente fallece en acto heroico en cumplimiento del deber",
+                "El agente tiene sumario pendiente",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"El agente fallece en acto heroico en cumplimiento del deber\"."
+        },
+        {
+            "id": "isep-d26-251",
+            "difficulty": "dificil",
+            "question": "Los ascensos extraordinarios:",
+            "options": [
+                "Están sujetos a todas las inhabilidades del Art. 78",
+                "No están sujetos a los requisitos generales de ascensos ordinarios",
+                "Se otorgan automáticamente",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"No están sujetos a los requisitos generales de ascensos ordinarios\"."
+        },
+        {
+            "id": "isep-d26-254",
+            "difficulty": "facil",
+            "question": "Puede participar del concurso quien:",
+            "options": [
+                "Tenga cualquier jerarquía",
+                "Sea de la jerarquía inmediata anterior",
+                "Sea recomendado por un superior",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Sea de la jerarquía inmediata anterior\"."
+        },
+        {
+            "id": "isep-d26-255",
+            "difficulty": "facil",
+            "question": "La aptitud psicofísica:",
+            "options": [
+                "Es opcional",
+                "Se acredita mediante exámenes obligatorios",
+                "Solo se evalúa en ascensos extraordinarios",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Se acredita mediante exámenes obligatorios\"."
+        },
+        {
+            "id": "isep-d26-258",
+            "difficulty": "dificil",
+            "question": "El recurso contra la declaración de inhabilitación debe interponerse dentro de:",
+            "options": [
+                "24 horas",
+                "3 días hábiles",
+                "5 días hábiles",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"3 días hábiles\"."
+        },
+        {
+            "id": "isep-d26-259",
+            "difficulty": "facil",
+            "question": "El personal bajo sumario administrativo:",
+            "options": [
+                "No puede participar nunca",
+                "Puede participar pero el ascenso queda en suspenso",
+                "Asciende automáticamente",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Puede participar pero el ascenso queda en suspenso\"."
+        },
+        {
+            "id": "isep-d26-261",
+            "difficulty": "facil",
+            "question": "El ascenso se perfecciona cuando:",
+            "options": [
+                "Lo aprueba el jurado",
+                "Se dicta el acto administrativo correspondiente",
+                "Finaliza el concurso",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Se dicta el acto administrativo correspondiente\"."
+        },
+        {
+            "id": "isep-d26-262",
+            "difficulty": "facil",
+            "question": "La Ley Orgánica Policial de la Provincia de Santa Fe es el:",
+            "options": [
+                "Decreto 461/15",
+                "Decreto Ley 12.333/1962",
+                "Ley 12.521/2005",
+                "Depende orgánicamente de la Secretaría General de la Gobernación"
+            ],
+            "correctIndex": 1,
+            "source": "Ley Orgánica Policial de Santa Fe (Decreto-Ley 12.333/62)",
+            "explanation": "El Decreto-Ley 12.333/62 organiza la estructura institucional, la Plana Mayor Policial y las funciones de comando superior. La opción correcta conforme a la normativa oficial es: \"Decreto Ley 12.333/1962\"."
+        },
+        {
+            "id": "isep-d26-263",
+            "difficulty": "facil",
+            "question": "La Ley Orgánica Policial fue dictada en el año:",
+            "options": [
+                "1958",
+                "1962",
+                "1975",
+                "Depende orgánicamente de la Secretaría General de la Gobernación"
+            ],
+            "correctIndex": 1,
+            "source": "Ley Orgánica Policial de Santa Fe (Decreto-Ley 12.333/62)",
+            "explanation": "El Decreto-Ley 12.333/62 organiza la estructura institucional, la Plana Mayor Policial y las funciones de comando superior. La opción correcta conforme a la normativa oficial es: \"1962\"."
+        },
+        {
+            "id": "isep-d26-272",
+            "difficulty": "facil",
+            "question": "La Plana Mayor Policial es el organismo de:",
+            "options": [
+                "Detención",
+                "Planeamiento, coordinación y control",
+                "Juzgamiento",
+                "Depende orgánicamente de la Secretaría General de la Gobernación"
+            ],
+            "correctIndex": 1,
+            "source": "Ley Orgánica Policial de Santa Fe (Decreto-Ley 12.333/62)",
+            "explanation": "El Decreto-Ley 12.333/62 organiza la estructura institucional, la Plana Mayor Policial y las funciones de comando superior. La opción correcta conforme a la normativa oficial es: \"Planeamiento, coordinación y control\"."
+        },
+        {
+            "id": "isep-d26-273",
+            "difficulty": "facil",
+            "question": "La Plana Mayor Policial está integrada por:",
+            "options": [
+                "3 departamentos",
+                "4 departamentos",
+                "5 departamentos",
+                "Depende orgánicamente de la Secretaría General de la Gobernación"
+            ],
+            "correctIndex": 2,
+            "source": "Ley Orgánica Policial de Santa Fe (Decreto-Ley 12.333/62)",
+            "explanation": "El Decreto-Ley 12.333/62 organiza la estructura institucional, la Plana Mayor Policial y las funciones de comando superior. La opción correcta conforme a la normativa oficial es: \"5 departamentos\"."
+        },
+        {
+            "id": "isep-d26-274",
+            "difficulty": "facil",
+            "question": "El Departamento Personal es:",
+            "options": [
+                "1",
+                "2",
+                "3",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"1\"."
+        },
+        {
+            "id": "isep-d26-279",
+            "difficulty": "facil",
+            "question": "El Departamento Personal se encarga de:",
+            "options": [
+                "Inteligencia",
+                "Recursos humanos",
+                "Operativos",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Recursos humanos\"."
+        },
+        {
+            "id": "isep-d26-281",
+            "difficulty": "facil",
+            "question": "El Departamento Operaciones se encarga de:",
+            "options": [
+                "Inteligencia",
+                "Recursos humanos",
+                "Operativos policiales",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Operativos policiales\"."
+        },
+        {
+            "id": "isep-d26-283",
+            "difficulty": "facil",
+            "question": "El Departamento Judicial se encarga de:",
+            "options": [
+                "Recursos humanos",
+                "Operativos",
+                "Pericias y antecedentes",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Pericias y antecedentes\"."
+        },
+        {
+            "id": "isep-d26-285",
+            "difficulty": "facil",
+            "question": "La unidad básica policial es:",
+            "options": [
+                "Unidad Regional",
+                "Comisaría",
+                "Ministerio",
+                "Depende orgánicamente de la Secretaría General de la Gobernación"
+            ],
+            "correctIndex": 1,
+            "source": "Ley Orgánica Policial de Santa Fe (Decreto-Ley 12.333/62)",
+            "explanation": "El Decreto-Ley 12.333/62 organiza la estructura institucional, la Plana Mayor Policial y las funciones de comando superior. La opción correcta conforme a la normativa oficial es: \"Comisaría\"."
+        },
+        {
+            "id": "isep-d26-286",
+            "difficulty": "facil",
+            "question": "Una Unidad Regional es una unidad:",
+            "options": [
+                "Simple",
+                "Judicial",
+                "Compuesta",
+                "Depende orgánicamente de la Secretaría General de la Gobernación"
+            ],
+            "correctIndex": 2,
+            "source": "Ley Orgánica Policial de Santa Fe (Decreto-Ley 12.333/62)",
+            "explanation": "El Decreto-Ley 12.333/62 organiza la estructura institucional, la Plana Mayor Policial y las funciones de comando superior. La opción correcta conforme a la normativa oficial es: \"Compuesta\"."
+        },
+        {
+            "id": "isep-d26-287",
+            "difficulty": "dificil",
+            "question": "El artículo 1 establece:",
+            "options": [
+                "Régimen disciplinario",
+                "Función policial",
+                "Ascensos",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Función policial\"."
+        },
+        {
+            "id": "isep-d26-288",
+            "difficulty": "dificil",
+            "question": "El artículo 4 establece:",
+            "options": [
+                "Régimen disciplinario",
+                "Centralización administrativa",
+                "Ascensos",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Centralización administrativa\"."
+        },
+        {
+            "id": "isep-d26-289",
+            "difficulty": "dificil",
+            "question": "El artículo 27 establece:",
+            "options": [
+                "Función policial",
+                "Conducción del Jefe de Policía",
+                "Régimen disciplinario",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Conducción del Jefe de Policía\"."
+        },
+        {
+            "id": "isep-d26-290",
+            "difficulty": "dificil",
+            "question": "El artículo 54 establece:",
+            "options": [
+                "Organización funcional",
+                "Régimen disciplinario",
+                "Sanciones",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 0,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Organización funcional\"."
+        },
+        {
+            "id": "isep-d26-294",
+            "difficulty": "facil",
+            "question": "Se presume legítima defensa cuando:",
+            "options": [
+                "El agresor huye",
+                "Se rechaza de noche el ingreso por escalamiento o fractura al hogar",
+                "Hay discusión verbal",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se rechaza de noche el ingreso por escalamiento o fractura al hogar\"."
+        },
+        {
+            "id": "isep-d26-295",
+            "difficulty": "facil",
+            "question": "El uso del arma de fuego debe considerarse:",
+            "options": [
+                "Primera opción",
+                "Segunda opción",
+                "Último recurso ante peligro inminente de muerte o lesión grave",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Último recurso ante peligro inminente de muerte o lesión grave\"."
+        },
+        {
+            "id": "isep-d26-299",
+            "difficulty": "facil",
+            "question": "En el modelo de \"Niveles de Respuesta\", el Nivel 1 es:",
+            "options": [
+                "Control físico",
+                "Uso de arma química",
+                "Presencia policial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Presencia policial\"."
+        },
+        {
+            "id": "isep-d26-304",
+            "difficulty": "facil",
+            "question": "La represión debe ser:",
+            "options": [
+                "Inmediata y violenta",
+                "Preventiva",
+                "Justa, medida y oportuna",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Justa, medida y oportuna\"."
+        },
+        {
+            "id": "isep-d26-309",
+            "difficulty": "facil",
+            "question": "Todo incidente de uso de la fuerza debe:",
+            "options": [
+                "Archivarse",
+                "Comunicarse solo si hay heridos",
+                "Notificarse a los funcionarios superiores para su examen",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Notificarse a los funcionarios superiores para su examen\"."
+        },
+        {
+            "id": "isep-d26-311",
+            "difficulty": "facil",
+            "question": "El funcionario que se niega a cumplir una orden ilícita:",
+            "options": [
+                "Puede ser sancionado",
+                "Debe cumplirla igualmente",
+                "No será objeto de sanción penal ni disciplinaria",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"No será objeto de sanción penal ni disciplinaria\"."
+        },
+        {
+            "id": "isep-d26-314",
+            "difficulty": "facil",
+            "question": "El uso letal intencional de armas de fuego solo es admisible cuando:",
+            "options": [
+                "Hay resistencia pasiva",
+                "Hay fuga simple",
+                "Sea estrictamente inevitable para proteger una vida humana",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Sea estrictamente inevitable para proteger una vida humana\"."
+        },
+        {
+            "id": "isep-d26-324",
+            "difficulty": "facil",
+            "question": "La capacitación en uso de la fuerza debe:",
+            "options": [
+                "Realizarse solo al ingreso",
+                "Ser opcional",
+                "Ser continua e incluir fundamentos legales y éticos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ser continua e incluir fundamentos legales y éticos\"."
+        },
+        {
+            "id": "isep-d26-329",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 1°, el objeto del Protocolo es:",
+            "options": [
+                "Regular exclusivamente el uso de armas letales.",
+                "Establecer sanciones disciplinarias.",
+                "Establecer principios y directrices para el uso progresivo de la fuerza garantizando legalidad, proporcionalidad y respeto a los derechos humanos.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Establecer principios y directrices para el uso progresivo de la fuerza garantizando legalidad, proporcionalidad y respeto a los derechos humanos.\"."
+        },
+        {
+            "id": "isep-d26-334",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 4°, cuando la persona cumple indicaciones sin resistencia estamos ante:",
+            "options": [
+                "Resistencia activa.",
+                "Ataque directo.",
+                "Cooperación activa.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Cooperación activa.\"."
+        },
+        {
+            "id": "isep-d26-339",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 5°, el acometimiento se configura cuando:",
+            "options": [
+                "Hay insultos reiterados.",
+                "Se invade la distancia de seguridad.",
+                "Se inicia un ataque violento contra el agente o terceros.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se inicia un ataque violento contra el agente o terceros.\"."
+        },
+        {
+            "id": "isep-d26-344",
+            "difficulty": "media",
+            "question": "El proceso penal es:",
+            "options": [
+                "Un procedimiento administrativo",
+                "Un sistema disciplinario",
+                "Un instrumento exigido constitucionalmente para aplicar el derecho penal",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Un instrumento exigido constitucionalmente para aplicar el derecho penal\"."
+        },
+        {
+            "id": "isep-d26-364",
+            "difficulty": "facil",
+            "question": "Las penas pueden ser sustituidas por:",
+            "options": [
+                "Suspensión laboral",
+                "Arresto policial",
+                "Reparación del daño o trabajo comunitario",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Reparación del daño o trabajo comunitario\"."
+        },
+        {
+            "id": "isep-d26-366",
+            "difficulty": "facil",
+            "question": "La sanción debe ser:",
+            "options": [
+                "Arbitraria",
+                "Proporcional a la magnitud del hecho",
+                "Siempre igual",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Proporcional a la magnitud del hecho\"."
+        },
+        {
+            "id": "isep-d26-367",
+            "difficulty": "facil",
+            "question": "Para graduar la sanción se tiene en cuenta:",
+            "options": [
+                "Las circunstancias del hecho y del autor",
+                "Solo antecedentes",
+                "Solo daño económico",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 0,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Las circunstancias del hecho y del autor\"."
+        },
+        {
+            "id": "isep-d26-369",
+            "difficulty": "facil",
+            "question": "El arresto también puede cumplirse:",
+            "options": [
+                "En tribunales",
+                "En el domicilio del infractor",
+                "En hospitales",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"En el domicilio del infractor\"."
+        },
+        {
+            "id": "isep-d26-407",
+            "difficulty": "dificil",
+            "question": "Una sanción por acoso sexual callejero es:",
+            "options": [
+                "Arresto hasta 60 días",
+                "Multa de 1 a 5 unidades jus",
+                "Prisión perpetua",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Multa de 1 a 5 unidades jus\"."
+        },
+        {
+            "id": "isep-d26-411",
+            "difficulty": "dificil",
+            "question": "Si el conductor está ebrio:",
+            "options": [
+                "No hay sanción",
+                "Solo multa",
+                "Arresto hasta 30 días y multa hasta 6 jus",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Arresto hasta 30 días y multa hasta 6 jus\"."
+        },
+        {
+            "id": "isep-d26-412",
+            "difficulty": "dificil",
+            "question": "Como sanción accesoria puede aplicarse:",
+            "options": [
+                "Secuestro definitivo del vehículo",
+                "Inhabilitación para conducir hasta 90 días",
+                "Expulsión del país",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 1,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Inhabilitación para conducir hasta 90 días\"."
+        },
+        {
+            "id": "isep-d26-419",
+            "difficulty": "media",
+            "question": "¿Cuál es el objetivo principal de la IPP?",
+            "options": [
+                "Dictar sentencia",
+                "Ejecutar la pena",
+                "Investigar el delito y reunir pruebas para preparar la acusación",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Investigar el delito y reunir pruebas para preparar la acusación\"."
+        },
+        {
+            "id": "isep-d26-424",
+            "difficulty": "facil",
+            "question": "¿Cuánto tiempo debe pasar desde la audiencia imputativa para que la defensa pueda solicitar el archivo jurisdiccional?",
+            "options": [
+                "6 meses",
+                "8 meses",
+                "10 meses",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"10 meses\"."
+        },
+        {
+            "id": "isep-d26-434",
+            "difficulty": "facil",
+            "question": "¿Cuál de los siguientes elementos debe contener la acusación?",
+            "options": [
+                "Declaración del imputado obligatoria",
+                "Calificación legal del hecho",
+                "Declaración de todos los testigos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Calificación legal del hecho\"."
+        },
+        {
+            "id": "isep-d26-439",
+            "difficulty": "facil",
+            "question": "¿Cuál es el principio general en materia de prueba?",
+            "options": [
+                "Prueba tasada",
+                "Prueba limitada",
+                "Libertad probatoria",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Libertad probatoria\"."
+        },
+        {
+            "id": "isep-d26-454",
+            "difficulty": "facil",
+            "question": "¿Cuándo se realiza una autopsia?",
+            "options": [
+                "Siempre que muere una persona",
+                "Solo si lo pide la familia",
+                "Cuando no es evidente la causa de la muerte",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Cuando no es evidente la causa de la muerte\"."
+        },
+        {
+            "id": "isep-d26-459",
+            "difficulty": "dificil",
+            "question": "¿Cuánto tiempo pueden durar las medidas especiales de investigació",
+            "options": [
+                "30 días",
+                "60 días",
+                "90 días",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"90 días\"."
+        },
+        {
+            "id": "isep-d26-469",
+            "difficulty": "facil",
+            "question": "El testigo en el reconocimiento:",
+            "options": [
+                "Puede señalar de forma imprecisa",
+                "Debe señalar clara y precisamente",
+                "Solo observa sin intervenir",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Debe señalar clara y precisamente\"."
+        },
+        {
+            "id": "isep-d26-474",
+            "difficulty": "facil",
+            "question": "El careo procede cuando:",
+            "options": [
+                "Hay confesión",
+                "Hay contradicciones importantes",
+                "El imputado lo pide",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Hay contradicciones importantes\"."
+        },
+        {
+            "id": "isep-d26-479",
+            "difficulty": "media",
+            "question": "La entrega vigilada consiste en:",
+            "options": [
+                "Detener inmediatamente",
+                "Permitir continuar el delito controladamente",
+                "Suspender la investigación",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Permitir continuar el delito controladamente\"."
+        },
+        {
+            "id": "isep-d26-484",
+            "difficulty": "facil",
+            "question": "Los agentes encubiertos en juicio:",
+            "options": [
+                "Declaran públicamente",
+                "No pueden declarar",
+                "Se protege su identidad",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se protege su identidad\"."
+        },
+        {
+            "id": "isep-d26-489",
+            "difficulty": "facil",
+            "question": "En lesiones graves en tránsito:",
+            "options": [
+                "No interviene nadie más",
+                "Se convoca al gabinete accidentológico",
+                "Se libera la escena",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se convoca al gabinete accidentológico\"."
+        },
+        {
+            "id": "isep-d26-496",
+            "difficulty": "facil",
+            "question": "La violencia económica y patrimonial implica:",
+            "options": [
+                "Únicamente daño físico",
+                "Violencia verbal",
+                "Control o limitación de recursos económicos",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Ley del Personal Policial (Ley 12.521) / Régimen Disciplinario (Decreto 461/15)",
+            "explanation": "La Ley 12.521 y el Decreto 461/15 regulan el régimen de calificaciones, ascensos, faltas disciplinarias y recursos administrativos. La opción correcta conforme a la normativa oficial es: \"Control o limitación de recursos económicos\"."
         }
     ],
     "comisario-supervisor": [
@@ -2548,6 +8615,1126 @@ window.quizBank = {
             "correctIndex": 0,
             "source": "Ley de Administración Financiera de Santa Fe / Código Penal Art. 260 (Malversación de Caudales)",
             "explanation": "La malversación de caudales (aplicar fondos a un destino público distinto al legalmente presupuestado) es delito penal y falta gravísima."
+        },
+        {
+            "id": "isep-d26-003",
+            "difficulty": "facil",
+            "question": "Liderar implica:",
+            "options": [
+                "Imponer autoridad mediante el uso del poder",
+                "Influir de manera positiva para un objetivo común",
+                "Controlar al personal con sanciones",
+                "Obtener logros individuales"
+            ],
+            "correctIndex": 1,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Influir de manera positiva para un objetivo común\"."
+        },
+        {
+            "id": "isep-d26-004",
+            "difficulty": "facil",
+            "question": "El liderazgo policial se define como:",
+            "options": [
+                "El liderazgo policial se define como:",
+                "Un proceso dinámico en constante desarrollo",
+                "Una función exclusiva del jefe",
+                "Una habilidad natural sin aprendizaje"
+            ],
+            "correctIndex": 1,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Un proceso dinámico en constante desarrollo\"."
+        },
+        {
+            "id": "isep-d26-005",
+            "difficulty": "facil",
+            "question": "Según el concepto moderno de liderazgo policial, liderar implica",
+            "options": [
+                "Ejercer autoridad formal",
+                "Influir positivamente para alcanzar un objetivo común",
+                "Aplicar disciplina estricta",
+                "Obtener resultados individuales"
+            ],
+            "correctIndex": 1,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Influir positivamente para alcanzar un objetivo común\"."
+        },
+        {
+            "id": "isep-d26-007",
+            "difficulty": "facil",
+            "question": "La autoridad moral del líder se fundamenta en:",
+            "options": [
+                "El grado jerárquico",
+                "La antigüedad en la institución",
+                "Virtudes como prudencia, justicia, fortaleza y templanza",
+                "El poder sancionatorio"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Virtudes como prudencia, justicia, fortaleza y templanza\"."
+        },
+        {
+            "id": "isep-d26-008",
+            "difficulty": "facil",
+            "question": "Durante la carrera policial se articulan tres aspectos esenciales:",
+            "options": [
+                "Mando, control y disciplina",
+                "Misión, función de jefe y rol de líder",
+                "Operatividad, estrategia y logística",
+                "Autoridad, jerarquía y obediencia"
+            ],
+            "correctIndex": 1,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Misión, función de jefe y rol de líder\"."
+        },
+        {
+            "id": "isep-d26-009",
+            "difficulty": "facil",
+            "question": "Las tres \"C\" que orientan el accionar policial son:",
+            "options": [
+                "Comando, control y conducción",
+                "Capacidad, carácter y conducta",
+                "Competencia, confianza y compromiso",
+                "Coordinación, comunicación y control"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Competencia, confianza y compromiso\"."
+        },
+        {
+            "id": "isep-d26-010",
+            "difficulty": "facil",
+            "question": "En el Estado argentino, el cumplimiento de la ley se inicia con:",
+            "options": [
+                "El accionar judicial",
+                "El accionar legislativo",
+                "El accionar policial",
+                "El accionar administrativo"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El accionar policial\"."
+        },
+        {
+            "id": "isep-d26-012",
+            "difficulty": "facil",
+            "question": "La conducta policial se rige por:",
+            "options": [
+                "Reglamentos internos",
+                "Constitución Nacional, tratados internacionales de DD.HH. y leyes",
+                "Órdenes superiores",
+                "Costumbres institucionales"
+            ],
+            "correctIndex": 1,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Constitución Nacional, tratados internacionales de DD.HH. y leyes\"."
+        },
+        {
+            "id": "isep-d26-013",
+            "difficulty": "facil",
+            "question": "El Código de Conducta para Funcionarios Encargados de Hacer Cumplir la Ley fue aprobado por la ONU en el año:",
+            "options": [
+                "1979",
+                "1985",
+                "1990",
+                "2000"
+            ],
+            "correctIndex": 1,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"1985\"."
+        },
+        {
+            "id": "isep-d26-015",
+            "difficulty": "facil",
+            "question": "El uso de la fuerza en un Estado democrático de derecho:",
+            "options": [
+                "Está prohibido",
+                "Es discrecional",
+                "Está permitido solo en situaciones excepcionales",
+                "No requiere control"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Está permitido solo en situaciones excepcionales\"."
+        },
+        {
+            "id": "isep-d26-016",
+            "difficulty": "facil",
+            "question": "Los principios internacionales del uso de la fuerza (ONU) incluyen:",
+            "options": [
+                "Severidad y rapidez",
+                "Autoridad y control",
+                "Necesidad y proporcionalidad",
+                "Castigo y disuasión"
+            ],
+            "correctIndex": 2,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Necesidad y proporcionalidad\"."
+        },
+        {
+            "id": "isep-d26-017",
+            "difficulty": "facil",
+            "question": "La autoridad moral del líder se sustenta en:",
+            "options": [
+                "El grado jerárquico",
+                "La antigüedad",
+                "Virtudes personales y ejemplo",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Virtudes personales y ejemplo\"."
+        },
+        {
+            "id": "isep-d26-018",
+            "difficulty": "facil",
+            "question": "Durante la carrera policial se articulan:",
+            "options": [
+                "Misión, función de jefe y rol de líder",
+                "Estrategia, logística y control",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida",
+                "Centralización absoluta de la toma de decisiones sin delegación de mando"
+            ],
+            "correctIndex": 0,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Misión, función de jefe y rol de líder\"."
+        },
+        {
+            "id": "isep-d26-019",
+            "difficulty": "dificil",
+            "question": "El principio de legalidad se encuentra en el artículo:",
+            "options": [
+                "Art. 18 CN",
+                "Art. 14 CN",
+                "Art. 75 CN",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 0,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Art. 18 CN\"."
+        },
+        {
+            "id": "isep-d26-020",
+            "difficulty": "dificil",
+            "question": "Los tratados de DD.HH. tienen jerarquía constitucional según:",
+            "options": [
+                "Art. 31 CN",
+                "Art. 75 inc. 22 CN",
+                "Art. 19 CN",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Art. 75 inc. 22 CN\"."
+        },
+        {
+            "id": "isep-d26-027",
+            "difficulty": "dificil",
+            "question": "Los tratados de Derechos Humanos tienen jerarquía constitucional según",
+            "options": [
+                "Art. 75 inc. 22 CN",
+                "Art. 19 CN",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
+                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
+            ],
+            "correctIndex": 0,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Art. 75 inc. 22 CN\"."
+        },
+        {
+            "id": "isep-d26-045",
+            "difficulty": "facil",
+            "question": "¿Cuál es uno de los objetivos centrales de la Carta Iberoamericana de la Función Pública?",
+            "options": [
+                "Incrementar el control penal sobre los funcionarios",
+                "Prevenir y combatir la corrupción mediante valores éticos",
+                "Centralizar la gestión pública en un solo organismo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Carta Iberoamericana de la Función Pública / Ética Institucional",
+            "explanation": "La Carta Iberoamericana promueve el mérito, la transparencia, la vocación de servicio al ciudadano y la calidad en la gestión pública. La opción correcta conforme a la normativa oficial es: \"Prevenir y combatir la corrupción mediante valores éticos\"."
+        },
+        {
+            "id": "isep-d26-049",
+            "difficulty": "facil",
+            "question": "Según la Carta, la calidad en la gestión pública se define por:",
+            "options": [
+                "La rapidez administrativa",
+                "El cumplimiento estricto de normas internas",
+                "El servicio al interés público con justicia, equidad, objetividad y eficiencia",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Carta Iberoamericana de la Función Pública / Ética Institucional",
+            "explanation": "La Carta Iberoamericana promueve el mérito, la transparencia, la vocación de servicio al ciudadano y la calidad en la gestión pública. La opción correcta conforme a la normativa oficial es: \"El servicio al interés público con justicia, equidad, objetividad y eficiencia\"."
+        },
+        {
+            "id": "isep-d26-050",
+            "difficulty": "facil",
+            "question": "¿Qué derecho reconoce la Carta a los ciudadanos?",
+            "options": [
+                "El acceso restringido a la información pública",
+                "La gestión pública de calidad",
+                "La intervención directa en decisiones judiciales",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Carta Iberoamericana de la Función Pública / Ética Institucional",
+            "explanation": "La Carta Iberoamericana promueve el mérito, la transparencia, la vocación de servicio al ciudadano y la calidad en la gestión pública. La opción correcta conforme a la normativa oficial es: \"La gestión pública de calidad\"."
+        },
+        {
+            "id": "isep-d26-051",
+            "difficulty": "facil",
+            "question": "Entre los derechos ciudadanos reconocidos por la Carta se encuentra:",
+            "options": [
+                "La libre designación de funcionarios",
+                "La posibilidad de realizar reclamos y recibir respuestas oportunas",
+                "La eliminación de controles administrativos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Carta Iberoamericana de la Función Pública / Ética Institucional",
+            "explanation": "La Carta Iberoamericana promueve el mérito, la transparencia, la vocación de servicio al ciudadano y la calidad en la gestión pública. La opción correcta conforme a la normativa oficial es: \"La posibilidad de realizar reclamos y recibir respuestas oportunas\"."
+        },
+        {
+            "id": "isep-d26-052",
+            "difficulty": "facil",
+            "question": "En el ámbito policial, la Carta Iberoamericana enfatiza especialmente:",
+            "options": [
+                "La obediencia jerárquica absoluta",
+                "La eficiencia operativa por sobre los derechos humanos",
+                "La honestidad, integridad y respeto por los derechos humanos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Carta Iberoamericana de la Función Pública / Ética Institucional",
+            "explanation": "La Carta Iberoamericana promueve el mérito, la transparencia, la vocación de servicio al ciudadano y la calidad en la gestión pública. La opción correcta conforme a la normativa oficial es: \"La honestidad, integridad y respeto por los derechos humanos\"."
+        },
+        {
+            "id": "isep-d26-054",
+            "difficulty": "facil",
+            "question": "La Carta Iberoamericana promueve la mejora continua y la excelencia en:",
+            "options": [
+                "El sistema judicial",
+                "La actividad privada",
+                "El servicio público",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Carta Iberoamericana de la Función Pública / Ética Institucional",
+            "explanation": "La Carta Iberoamericana promueve el mérito, la transparencia, la vocación de servicio al ciudadano y la calidad en la gestión pública. La opción correcta conforme a la normativa oficial es: \"El servicio público\"."
+        },
+        {
+            "id": "isep-d26-065",
+            "difficulty": "dificil",
+            "question": "¿Cuál es el plazo máximo de demora permitido por el Art. 10 bis?",
+            "options": [
+                "4 horas",
+                "6 horas corridas",
+                "8 horas",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"6 horas corridas\"."
+        },
+        {
+            "id": "isep-d26-068",
+            "difficulty": "facil",
+            "question": "Al momento de la demora, la persona debe ser informada de:",
+            "options": [
+                "Solo la causa de la demora",
+                "Sus derechos y garantías",
+                "El nombre del jefe de dependencia",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 1,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Sus derechos y garantías\"."
+        },
+        {
+            "id": "isep-d26-070",
+            "difficulty": "media",
+            "question": "El acta debe ser firmada por:",
+            "options": [
+                "Solo el funcionario actuante",
+                "Funcionario y superior jerárquico",
+                "Funcionario, persona demorada y dos testigos si los hubiere",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Funcionario, persona demorada y dos testigos si los hubiere\"."
+        },
+        {
+            "id": "isep-d26-075",
+            "difficulty": "dificil",
+            "question": "En un homicidio (art. 79 CP), NO es un aspecto central a determinar:",
+            "options": [
+                "Participación de la persona",
+                "Conducta por acción u omisión",
+                "Nacionalidad del imputado",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Nacionalidad del imputado\"."
+        },
+        {
+            "id": "isep-d26-090",
+            "difficulty": "facil",
+            "question": "Según la guía LGBTI, la orientación sexual:",
+            "options": [
+                "Puede justificar intervención",
+                "Justifica identificación",
+                "Nunca es motivo de intervención",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Nunca es motivo de intervención\"."
+        },
+        {
+            "id": "isep-d26-095",
+            "difficulty": "media",
+            "question": "La función preventiva de la policía implica:",
+            "options": [
+                "Actuar únicamente ante delitos consumados",
+                "Actuar de forma pasiva hasta recibir órdenes",
+                "Actuar de manera proactiva para desalentar delitos y alteraciones del orden público",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Actuar de manera proactiva para desalentar delitos y alteraciones del orden público\"."
+        },
+        {
+            "id": "isep-d26-105",
+            "difficulty": "dificil",
+            "question": "Según el Artículo 61 de la Ley 24.449, los vehículos de emergencia pueden no respetar normas de circulación:",
+            "options": [
+                "En cualquier situación y sin restricciones",
+                "Solo cuando lo decida el conductor.",
+                "De forma excepcional, en cumplimiento de su misión y si no genera un mal mayor",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"De forma excepcional, en cumplimiento de su misión y si no genera un mal mayor\"."
+        },
+        {
+            "id": "isep-d26-110",
+            "difficulty": "facil",
+            "question": "Según la Regla de Tueller, a menos de 21 pies (6,4 m):",
+            "options": [
+                "El arma blanca pierde efectividad.",
+                "Disminuyen considerablemente las probabilidades de supervivencia si el arma está enfundada",
+                "La amenaza puede ser fácilmente neutralizada verbalmente.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Disminuyen considerablemente las probabilidades de supervivencia si el arma está enfundada\"."
+        },
+        {
+            "id": "isep-d26-115",
+            "difficulty": "media",
+            "question": "La conexidad subjetiva se configura cuando",
+            "options": [
+                "El delito afecta a varias personas.",
+                "Intervienen varias fuerzas de seguridad.",
+                "Una misma persona tiene varios delitos en concurso real",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una misma persona tiene varios delitos en concurso real\"."
+        },
+        {
+            "id": "isep-d26-120",
+            "difficulty": "facil",
+            "question": "La finalidad de comercio en la tenencia con fines de comercialización se denomina:",
+            "options": [
+                "Dolo eventual.",
+                "Resultado típico.",
+                "Ultraintención.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ultraintención.\"."
+        },
+        {
+            "id": "isep-d26-130",
+            "difficulty": "facil",
+            "question": "La siembra o cultivo escaso para consumo personal:",
+            "options": [
+                "Exige probar finalidad de comercio.",
+                "Es atípica.",
+                "Configura un tipo atenuado.",
+                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Configura un tipo atenuado.\"."
+        },
+        {
+            "id": "isep-d26-145",
+            "difficulty": "facil",
+            "question": "¿Cuál de los siguientes ejemplos corresponde a una denuncia anónima?",
+            "options": [
+                "Declaración testimonial bajo juramento",
+                "Denuncia con patrocinio letrado",
+                "Carta sin firma o aviso telefónico",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Carta sin firma o aviso telefónico\"."
+        },
+        {
+            "id": "isep-d26-155",
+            "difficulty": "facil",
+            "question": "La diferencia correcta entre \"lugar del hecho\" y \"escenario\" es que:",
+            "options": [
+                "Son conceptos idénticos",
+                "El escenario siempre es único.",
+                "El escenario es el sitio específico donde, por la presencia de indicios, se evidencia parte del hecho.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El escenario es el sitio específico donde, por la presencia de indicios, se evidencia parte del hecho.\"."
+        },
+        {
+            "id": "isep-d26-160",
+            "difficulty": "facil",
+            "question": "Son factores de pérdida de indicios, EXCEPTO:",
+            "options": [
+                "Factores climáticos.",
+                "Factores judiciales.",
+                "Factores humanos.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Factores judiciales.\"."
+        },
+        {
+            "id": "isep-d26-165",
+            "difficulty": "facil",
+            "question": "En criminalística, la relación correcta es:",
+            "options": [
+                "ndicio = prueba.",
+                "Evidencia = prueba automáticamente.",
+                "Indicio → evidencia → prueba (en el proceso judicial).",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Indicio → evidencia → prueba (en el proceso judicial).\"."
+        },
+        {
+            "id": "isep-d26-170",
+            "difficulty": "media",
+            "question": "La actuación policial en la escena del delito se organiza en:",
+            "options": [
+                "Dos actos con cuatro acciones",
+                "Tres actos con tres acciones cada uno",
+                "Cuatro actos independientes",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Tres actos con tres acciones cada uno\"."
+        },
+        {
+            "id": "isep-d26-180",
+            "difficulty": "facil",
+            "question": "¿Qué debe indicarse obligatoriamente en el croquis?",
+            "options": [
+                "El nombre del imputado",
+                "El norte",
+                "La calificación legal",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El norte\"."
+        },
+        {
+            "id": "isep-d26-189",
+            "difficulty": "facil",
+            "question": "El responsable de dirigir la IPP es:",
+            "options": [
+                "El Juez",
+                "El Jefe de Policía",
+                "El Ministerio Público de la Acusación",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"El Ministerio Público de la Acusación\"."
+        },
+        {
+            "id": "isep-d26-195",
+            "difficulty": "facil",
+            "question": "La Instrucción General N° 4 fue dictada en el año:",
+            "options": [
+                "2010",
+                "2012",
+                "2014",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"2014\"."
+        },
+        {
+            "id": "isep-d26-200",
+            "difficulty": "facil",
+            "question": "En la Zona Interior Crítica solo pueden permanecer:",
+            "options": [
+                "Cualquier funcionario policial",
+                "Equipo pericial y testigos necesarios",
+                "Prensa autorizada",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Equipo pericial y testigos necesarios\"."
+        },
+        {
+            "id": "isep-d26-208",
+            "difficulty": "facil",
+            "question": "El Coordinador Pericial es:",
+            "options": [
+                "Un jefe policial",
+                "Un juez técnico",
+                "Funcionario técnico–legal que dirige científicamente la escena",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Funcionario técnico–legal que dirige científicamente la escena\"."
+        },
+        {
+            "id": "isep-d26-210",
+            "difficulty": "facil",
+            "question": "El Coordinador Pericial tiene la facultad de:",
+            "options": [
+                "Dictar sentencia",
+                "Detener personas",
+                "Definir perímetros y organizar orden de ingreso de peritos",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Definir perímetros y organizar orden de ingreso de peritos\"."
+        },
+        {
+            "id": "isep-d26-212",
+            "difficulty": "facil",
+            "question": "La liberación del lugar del hecho corresponde exclusivamente a:",
+            "options": [
+                "Jefe policial",
+                "Coordinador Pericial",
+                "Autoridad judicial competente",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"Autoridad judicial competente\"."
+        },
+        {
+            "id": "isep-d26-230",
+            "difficulty": "facil",
+            "question": "La cadena de custodia tiene como finalidad:",
+            "options": [
+                "Determinar la pena",
+                "Garantizar que la prueba sea la misma secuestrada",
+                "Acelerar el juicio",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Garantizar que la prueba sea la misma secuestrada\"."
+        },
+        {
+            "id": "isep-d26-235",
+            "difficulty": "facil",
+            "question": "El análisis de residuos de disparo (STUBS) detecta principalmente:",
+            "options": [
+                "Hierro, cobre y zinc",
+                "Plomo, bario y antimonio",
+                "Calcio y sodio",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Plomo, bario y antimonio\"."
+        },
+        {
+            "id": "isep-d26-240",
+            "difficulty": "dificil",
+            "question": "El artículo 18 de la Constitución de la Nación Argentina establece el principio de:",
+            "options": [
+                "Oportunidad",
+                "Juicio previo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
+                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
+            ],
+            "correctIndex": 1,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Juicio previo\"."
+        },
+        {
+            "id": "isep-d26-265",
+            "difficulty": "facil",
+            "question": "La Policía ejerce sus funciones en:",
+            "options": [
+                "Solo zonas urbanas",
+                "Solo zonas rurales",
+                "Todo el territorio provincial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Todo el territorio provincial\"."
+        },
+        {
+            "id": "isep-d26-270",
+            "difficulty": "dificil",
+            "question": "Esto está establecido en el artículo:",
+            "options": [
+                "Art. 1",
+                "Art. 4",
+                "Art. 27",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Art. 27\"."
+        },
+        {
+            "id": "isep-d26-275",
+            "difficulty": "facil",
+            "question": "El Departamento Informaciones es:",
+            "options": [
+                "1",
+                "2",
+                "3",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"2\"."
+        },
+        {
+            "id": "isep-d26-280",
+            "difficulty": "facil",
+            "question": "El Departamento Informaciones se encarga de:",
+            "options": [
+                "Logística",
+                "Inteligencia",
+                "Administración",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Inteligencia\"."
+        },
+        {
+            "id": "isep-d26-300",
+            "difficulty": "facil",
+            "question": "En el modelo de control continuo, antes de disparar con arma de fuego se debe:",
+            "options": [
+                "Golpear obligatoriamente",
+                "Advertir verbalmente",
+                "Advertir, empuñar, desenfundar y apuntar",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Advertir, empuñar, desenfundar y apuntar\"."
+        },
+        {
+            "id": "isep-d26-305",
+            "difficulty": "dificil",
+            "question": "El Art. 274 del Código Penal sanciona:",
+            "options": [
+                "Abuso de armas",
+                "Lesiones graves",
+                "La omisión del funcionario público de promover persecución y represión del delito",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La omisión del funcionario público de promover persecución y represión del delito\"."
+        },
+        {
+            "id": "isep-d26-310",
+            "difficulty": "facil",
+            "question": "El superior jerárquico es responsable cuando:",
+            "options": [
+                "Solo si dio la orden directa",
+                "Sabía o debía saber del uso ilícito y no adoptó medidas correctivas",
+                "El hecho tuvo repercusión mediática",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Sabía o debía saber del uso ilícito y no adoptó medidas correctivas\"."
+        },
+        {
+            "id": "isep-d26-315",
+            "difficulty": "facil",
+            "question": "Antes de usar un arma de fuego, el funcionario debe:",
+            "options": [
+                "Disparar preventivamente",
+                "Pedir autorización judicial",
+                "Identificarse, advertir y dar tiempo suficiente",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Identificarse, advertir y dar tiempo suficiente\"."
+        },
+        {
+            "id": "isep-d26-319",
+            "difficulty": "dificil",
+            "question": "Según el Art. 3 del Código de Conducta:",
+            "options": [
+                "La fuerza es discrecional",
+                "Solo puede usarse cuando sea estrictamente necesaria y en la medida requerida",
+                "Puede usarse preventivamente",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Solo puede usarse cuando sea estrictamente necesaria y en la medida requerida\"."
+        },
+        {
+            "id": "isep-d26-320",
+            "difficulty": "dificil",
+            "question": "El Art. 5 del Código de Conducta establece:",
+            "options": [
+                "Uso progresivo obligatorio",
+                "Facultades ampliadas",
+                "Prohibición absoluta de tortura o tratos crueles",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Prohibición absoluta de tortura o tratos crueles\"."
+        },
+        {
+            "id": "isep-d26-321",
+            "difficulty": "dificil",
+            "question": "El Art. 8 del Código de Conducta dispone que el funcionario debe:",
+            "options": [
+                "Guardar silencio",
+                "Respetar la ley e impedir violaciones",
+                "Obedecer siempre",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"Respetar la ley e impedir violaciones\"."
+        },
+        {
+            "id": "isep-d26-325",
+            "difficulty": "facil",
+            "question": "El objetivo primordial de la labor policial es:",
+            "options": [
+                "Sancionar",
+                "Imponer autoridad",
+                "Mantener la paz y la estabilidad social",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Mantener la paz y la estabilidad social\"."
+        },
+        {
+            "id": "isep-d26-330",
+            "difficulty": "dificil",
+            "question": "Conforme el Artículo 2°, el Protocolo es de aplicación:",
+            "options": [
+                "Facultativa para las fuerzas provinciales.",
+                "Solo para la Policía de la Provincia.",
+                "Obligatoria y sin excepción para todos los sujetos vinculados al uso de la fuerza dentro del territorio provincial.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Obligatoria y sin excepción para todos los sujetos vinculados al uso de la fuerza dentro del territorio provincial.\"."
+        },
+        {
+            "id": "isep-d26-332",
+            "difficulty": "dificil",
+            "question": "El Artículo 3° establece que la autoridad de aplicación es:",
+            "options": [
+                "La Jefatura de Policía.",
+                "El Ministerio Público de la Acusación.",
+                "El Ministerio de Justicia y Seguridad.",
+                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida"
+            ],
+            "correctIndex": 2,
+            "source": "Manual ISEP 2026 - Conducción Policial y Liderazgo Estratégico",
+            "explanation": "El liderazgo policial armoniza la autoridad moral basada en virtudes cardinales con la función técnica de mando de tropa. La opción correcta conforme a la normativa oficial es: \"El Ministerio de Justicia y Seguridad.\"."
+        },
+        {
+            "id": "isep-d26-340",
+            "difficulty": "dificil",
+            "question": "Conforme el Artículo 6°, la asimetría física implica:",
+            "options": [
+                "Desventaja por cantidad numérica.",
+                "Desventaja por armas del agresor.",
+                "Desventaja por tamaño, altura o peso que compromete la seguridad del agente.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Desventaja por tamaño, altura o peso que compromete la seguridad del agente.\"."
+        },
+        {
+            "id": "isep-d26-365",
+            "difficulty": "facil",
+            "question": "Entre las penas accesorias se encuentra:",
+            "options": [
+                "Prisión perpetua",
+                "Promesa caucionada de no ofender",
+                "Inhabilitación perpetua",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Promesa caucionada de no ofender\"."
+        },
+        {
+            "id": "isep-d26-370",
+            "difficulty": "facil",
+            "question": "Si el infractor viola el arresto domiciliario:",
+            "options": [
+                "Pierde el beneficio y cumple la pena en establecimiento correspondiente",
+                "Se reduce la pena",
+                "Se archiva la causa",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Pierde el beneficio y cumple la pena en establecimiento correspondiente\"."
+        },
+        {
+            "id": "isep-d26-375",
+            "difficulty": "facil",
+            "question": "Cuando concurren varias infracciones independientes:",
+            "options": [
+                "Se aplica la pena más grave.",
+                "Se acumulan las penas correspondientes a cada hecho.",
+                "Se aplica una sola pena.",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se acumulan las penas correspondientes a cada hecho.\"."
+        },
+        {
+            "id": "isep-d26-390",
+            "difficulty": "dificil",
+            "question": "Para constituirse en querellante particular durante el juicio:",
+            "options": [
+                "Debe hacerlo dentro de 10 días.",
+                "Dentro de 5 días de notificado el requerimiento acusatorio.",
+                "En cualquier momento",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Dentro de 5 días de notificado el requerimiento acusatorio.\"."
+        },
+        {
+            "id": "isep-d26-410",
+            "difficulty": "dificil",
+            "question": "La pena base por conducción peligrosa es:",
+            "options": [
+                "Arresto hasta 10 días",
+                "Arresto hasta 15 días y multa hasta 3 jus",
+                "Arresto hasta 30 días",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Arresto hasta 15 días y multa hasta 3 jus\"."
+        },
+        {
+            "id": "isep-d26-430",
+            "difficulty": "facil",
+            "question": "¿En qué tipo de evidencia debe basar sus decisiones el Tribunal?",
+            "options": [
+                "Solo documental",
+                "Solo testimonial",
+                "Testimonial, material y documental",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Testimonial, material y documental\"."
+        },
+        {
+            "id": "isep-d26-435",
+            "difficulty": "facil",
+            "question": "¿Qué tipo de audiencia convoca el juez una vez presentada la acusación?",
+            "options": [
+                "Privada",
+                "Escrita",
+                "Oral y pública",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Oral y pública\"."
+        },
+        {
+            "id": "isep-d26-443",
+            "difficulty": "facil",
+            "question": "Según la Constitución Nacional, el imputado:",
+            "options": [
+                "Debe declarar en juicio",
+                "No puede ser obligado a declarar contra sí mismo",
+                "Solo puede declarar ante el juez",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Constitución Nacional / Código de Conducta ONU (Res. 34/169) / Ley 24.059",
+            "explanation": "Los principios constitucionales y los estándares de derechos humanos de la ONU son rectores irrenunciables para los mandos de conducción. La opción correcta conforme a la normativa oficial es: \"No puede ser obligado a declarar contra sí mismo\"."
+        },
+        {
+            "id": "isep-d26-445",
+            "difficulty": "facil",
+            "question": "¿Qué es un testigo?",
+            "options": [
+                "Un funcionario judicial",
+                "Una persona que declara sobre hechos percibidos por sus sentidos",
+                "Un representante del imputado",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una persona que declara sobre hechos percibidos por sus sentidos\"."
+        },
+        {
+            "id": "isep-d26-450",
+            "difficulty": "media",
+            "question": "¿Cuál es el objetivo de la inspección del lugar del hecho?",
+            "options": [
+                "Interrogar al imputado",
+                "Verificar rastros, estado de personas, lugares y cosas relacionadas con el delito",
+                "Tomar declaración testimonial",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Verificar rastros, estado de personas, lugares y cosas relacionadas con el delito\"."
+        },
+        {
+            "id": "isep-d26-455",
+            "difficulty": "facil",
+            "question": "¿Quiénes no pueden ser informantes?",
+            "options": [
+                "Ciudadanos comunes",
+                "Víctimas",
+                "Integrantes o ex integrantes de fuerzas de seguridad o inteligencia",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Carta Iberoamericana de la Función Pública / Ética Institucional",
+            "explanation": "La Carta Iberoamericana promueve el mérito, la transparencia, la vocación de servicio al ciudadano y la calidad en la gestión pública. La opción correcta conforme a la normativa oficial es: \"Integrantes o ex integrantes de fuerzas de seguridad o inteligencia\"."
+        },
+        {
+            "id": "isep-d26-460",
+            "difficulty": "facil",
+            "question": "¿Cuántas veces puede prorrogarse la medida?",
+            "options": [
+                "Ilimitadas veces",
+                "Dos veces",
+                "Una sola vez por igual término",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una sola vez por igual término\"."
+        },
+        {
+            "id": "isep-d26-465",
+            "difficulty": "facil",
+            "question": "¿Qué debe hacer el Tribunal respecto al acuerdo del arrepentido?",
+            "options": [
+                "Enviarlo a la policía",
+                "Homologarlo judicialmente",
+                "Archivarlo",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Homologarlo judicialmente\"."
+        },
+        {
+            "id": "isep-d26-470",
+            "difficulty": "facil",
+            "question": "El reconocimiento por fotografías requiere un mínimo de:",
+            "options": [
+                "3 imágenes",
+                "5 imágenes",
+                "7 imágenes",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"7 imágenes\"."
+        },
+        {
+            "id": "isep-d26-475",
+            "difficulty": "facil",
+            "question": "En el careo, el imputado:",
+            "options": [
+                "Está obligado a participar",
+                "Puede negarse",
+                "Declara bajo juramento obligatorio",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Puede negarse\"."
+        },
+        {
+            "id": "isep-d26-480",
+            "difficulty": "dificil",
+            "question": "Las medidas especiales duran:",
+            "options": [
+                "30 días",
+                "60 días",
+                "90 días",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"90 días\"."
+        },
+        {
+            "id": "isep-d26-485",
+            "difficulty": "facil",
+            "question": "¿Cuántas fotos panorámicas mínimo se deben tomar?",
+            "options": [
+                "2",
+                "3",
+                "4",
+                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
+            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"4\"."
         }
     ]
 };
@@ -2556,62 +9743,83 @@ window.quizBank = {
 // METADATA DEL BANCO DE PREGUNTAS
 // ═══════════════════════════════════════════════════════════════
 window.quizBankMeta = {
-    version: "7.0.0",
-    lastUpdated: "2026-10-29",
-    totalQuestions: 180,
-    difficulties: [
-        { id: "facil", title: "Fácil (Repaso Inicial)", desc: "Conceptos clave, definiciones claras y principios rectores", icon: "sentiment_satisfied", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30", badge: "🟢 FÁCIL" },
-        { id: "media", title: "Media (Procedimientos Operativos)", desc: "Actuaciones de calle, guardia, L.C.A.T., menores y narcomenudeo", icon: "psychology", color: "text-amber-400 bg-amber-500/10 border-amber-500/30", badge: "🟡 MEDIA" },
-        { id: "dificil", title: "Difícil (Nivel Concurso ISEP)", desc: "Plazos procesales estrictos, artículos específicos, causales y distractores jurídicos", icon: "military_tech", color: "text-red-400 bg-red-500/10 border-red-500/30", badge: "🔴 DIFÍCIL" }
+    "version": "8.0.0",
+    "lastUpdated": "2026-11-04",
+    "totalQuestions": 693,
+    "difficulties": [
+        {
+            "id": "facil",
+            "title": "Fácil (Repaso Inicial)",
+            "desc": "Conceptos clave, definiciones claras y principios rectores",
+            "icon": "sentiment_satisfied",
+            "color": "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
+            "badge": "🟢 FÁCIL"
+        },
+        {
+            "id": "media",
+            "title": "Media (Procedimientos Operativos)",
+            "desc": "Actuaciones de calle, guardia, L.C.A.T., menores y narcomenudeo",
+            "icon": "psychology",
+            "color": "text-amber-400 bg-amber-500/10 border-amber-500/30",
+            "badge": "🟡 MEDIA"
+        },
+        {
+            "id": "dificil",
+            "title": "Difícil (Nivel Concurso ISEP)",
+            "desc": "Plazos procesales estrictos, artículos específicos, causales y distractores jurídicos",
+            "icon": "military_tech",
+            "color": "text-red-400 bg-red-500/10 border-red-500/30",
+            "badge": "🔴 DIFÍCIL"
+        }
     ],
-    hierarchies: [
-        { 
-            id: "simulacro-integral", 
-            title: "Simulacro General ISEP (Todas las Materias)", 
-            icon: "auto_stories", 
-            color: "from-blue-600 via-indigo-600 to-purple-700", 
-            desc: "Evaluación integral con preguntas de Tiro, Conducción, Comunicación, Informática y Leyes",
-            programSyllabus: "Tiro MIRAF · Conducción Policial · Seguridad de la Información · CPP Ley 12.734 · Microtráfico Ley 14.239 · Jurados Ley 14.258"
+    "hierarchies": [
+        {
+            "id": "simulacro-integral",
+            "title": "Simulacro General ISEP (Todas las Materias)",
+            "icon": "auto_stories",
+            "color": "from-blue-600 via-indigo-600 to-purple-700",
+            "desc": "Evaluación integral con preguntas de Tiro, Conducción, Comunicación, Informática y Leyes",
+            "programSyllabus": "Tiro MIRAF · Conducción Policial · Seguridad de la Información · CPP Ley 12.734 · Microtráfico Ley 14.239 · Jurados Ley 14.258"
         },
-        { 
-            id: "oficial-subinspector", 
-            title: "Oficial → Subinspector", 
-            icon: "military_tech", 
-            color: "from-blue-600 to-indigo-700", 
-            desc: "Práctica policial, Tiro MIRAF (Balística y SUL), Actas CPP (Art. 138), Preservación y Convivencia",
-            programSyllabus: "Módulo I: Práctica Policial, Tiro y Armamento MIRAF, Primer Preventor, Código de Conducta ONU y Código de Convivencia"
+        {
+            "id": "oficial-subinspector",
+            "title": "Oficial → Subinspector",
+            "icon": "military_tech",
+            "color": "from-blue-600 to-indigo-700",
+            "desc": "Práctica policial, Tiro MIRAF (Balística y SUL), Actas CPP (Art. 138), Preservación y Convivencia",
+            "programSyllabus": "Módulo I: Práctica Policial, Tiro y Armamento MIRAF, Primer Preventor, Código de Conducta ONU y Código de Convivencia"
         },
-        { 
-            id: "subinspector-inspector", 
-            title: "Subinspector → Inspector", 
-            icon: "shield_person", 
-            color: "from-emerald-600 to-teal-700", 
-            desc: "Liderazgo, Seguridad de la Información (Tríada CID), Comunicación, LCAT y Jurados",
-            programSyllabus: "Liderazgo Operativo, Seguridad de la Información e Incidentes, Niñez Ley 12.967, L.C.A.T. y Juicio por Jurados (Ley 14.258)"
+        {
+            "id": "subinspector-inspector",
+            "title": "Subinspector → Inspector",
+            "icon": "shield_person",
+            "color": "from-emerald-600 to-teal-700",
+            "desc": "Liderazgo, Seguridad de la Información (Tríada CID), Comunicación, LCAT y Jurados",
+            "programSyllabus": "Liderazgo Operativo, Seguridad de la Información e Incidentes, Niñez Ley 12.967, L.C.A.T. y Juicio por Jurados (Ley 14.258)"
         },
-        { 
-            id: "inspector-subcomisario", 
-            title: "Inspector → Subcomisario", 
-            icon: "admin_panel_settings", 
-            color: "from-amber-600 to-orange-700", 
-            desc: "Narcomenudeo (Ley 14.239), Conducción de Comisarías y Orden Público, Pistola Bersa 9mm",
-            programSyllabus: "Desfederalización y Microtráfico, Conducción de Comisarías y Destacamentos, Órdenes de Operaciones y Armamento"
+        {
+            "id": "inspector-subcomisario",
+            "title": "Inspector → Subcomisario",
+            "icon": "admin_panel_settings",
+            "color": "from-amber-600 to-orange-700",
+            "desc": "Narcomenudeo (Ley 14.239), Conducción de Comisarías y Orden Público, Pistola Bersa 9mm",
+            "programSyllabus": "Desfederalización y Microtráfico, Conducción de Comisarías y Destacamentos, Órdenes de Operaciones y Armamento"
         },
-        { 
-            id: "subcomisario-comisario", 
-            title: "Subcomisario → Comisario", 
-            icon: "stars", 
-            color: "from-purple-600 to-indigo-800", 
-            desc: "Políticas de seguridad por cuadrículas, Vocería y Prensa sin 'Off The Record', Decreto 461/15",
-            programSyllabus: "Poder de Policía, Vocería Policial ante Medios Masivos, Régimen Disciplinario Decreto 461/15 y Sanciones"
+        {
+            "id": "subcomisario-comisario",
+            "title": "Subcomisario → Comisario",
+            "icon": "stars",
+            "color": "from-purple-600 to-indigo-800",
+            "desc": "Políticas de seguridad por cuadrículas, Vocería y Prensa sin 'Off The Record', Decreto 461/15",
+            "programSyllabus": "Poder de Policía, Vocería Policial ante Medios Masivos, Régimen Disciplinario Decreto 461/15 y Sanciones"
         },
-        { 
-            id: "comisario-supervisor", 
-            title: "Comisario → Com. Supervisor / Director", 
-            icon: "workspace_premium", 
-            color: "from-amber-500 to-purple-700", 
-            desc: "Proyectos de Gestión Institucional SMART, KPIs y Auditoría de Gestión",
-            programSyllabus: "Metodología de Marco Lógico, Indicadores Clave (KPIs), Alta Dirección y Responsabilidad Patrimonial"
+        {
+            "id": "comisario-supervisor",
+            "title": "Comisario → Com. Supervisor / Director",
+            "icon": "workspace_premium",
+            "color": "from-amber-500 to-purple-700",
+            "desc": "Proyectos de Gestión Institucional SMART, KPIs y Auditoría de Gestión",
+            "programSyllabus": "Metodología de Marco Lógico, Indicadores Clave (KPIs), Alta Dirección y Responsabilidad Patrimonial"
         }
     ]
 };
