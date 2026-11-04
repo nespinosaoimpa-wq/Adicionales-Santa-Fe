@@ -370,7 +370,7 @@ function _isIsepPro() {
 
 function _activateIsepProWithCode(code) {
     const clean = (code || '').trim().toUpperCase();
-    const validCodes = ['ISEP2026', 'ASCENSO2026', 'PRO2000', 'SANTAFE2026', 'ADMINISEP'];
+    const validCodes = ['ISEP2026', 'ASCENSO2026', 'PRO5000', 'PRO2000', 'SANTAFE2026', 'ADMINISEP'];
     if (validCodes.includes(clean)) {
         localStorage.setItem('isep_pro_code_active', 'true');
         return true;
@@ -3690,7 +3690,7 @@ window._handleNotifyIsepProPayment = async function() {
             await DB.notifyAcademyPayment({
                 email: userEmail,
                 name: userName,
-                amount: 2000,
+                amount: 5000,
                 hierarchy: hierarchy
             });
         } catch(e) {
@@ -3699,7 +3699,7 @@ window._handleNotifyIsepProPayment = async function() {
     }
 
     // 2. Abrir WhatsApp oficial con comprobante
-    const msg = `Hola! Quiero activar mi suscripción a ISEP PRO ($2.000 / mes) para el Simulador de Ascenso en Adicionales Santa Fe.\n\n👤 Oficial: ${userName}\n📧 Email registrado: ${userEmail}\n\nAdjunto comprobante de transferencia a SmartFlow.Digital.`;
+    const msg = `Hola! Quiero activar mi suscripción a ISEP PRO ($5.000 / mes - Promo 50% OFF) para el Simulador de Ascenso en Adicionales Santa Fe.\n\n👤 Oficial: ${userName}\n📧 Email registrado: ${userEmail}\n\nAdjunto comprobante de transferencia a SmartFlow.Digital.`;
     const waUrl = `https://wa.me/5493425162372?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
 
