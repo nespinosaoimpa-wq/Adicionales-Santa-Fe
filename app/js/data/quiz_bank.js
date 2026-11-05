@@ -1144,6 +1144,343 @@ window.quizBank = {
             "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 267-268",
             "explanation": "La 'doble acción' cumple dos fases mecánicas en una sola tracción del disparador: monta el percutor/martillo y acto seguido lo libera para producir el disparo."
         }
+    ,
+        {
+            "id": "so-080",
+            "difficulty": "facil",
+            "question": "Según el modelo de Daniel Goleman detallado en el manual de estudio, ¿cuál es el componente de la inteligencia emocional definido como la capacidad de reconocer, comprender y conectar con las emociones de los demás?",
+            "options": [
+                "Autoconciencia primaria",
+                "Autorregulación",
+                "Coeficiente Intelectual",
+                "Empatía"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 38 y 69",
+            "explanation": "Daniel Goleman establece que la empatía es el componente interpersonal clave que permite reconocer las emociones ajenas, comprender las perspectivas del ciudadano y brindar una respuesta policial humana y adecuada."
+        },
+        {
+            "id": "so-081",
+            "difficulty": "media",
+            "question": "De acuerdo a los autores Lazarus & Folkman citados en el manual de perfeccionamiento, ¿en qué circunstancia se produce el estrés en la función policial?",
+            "options": [
+                "Cuando debe prestar declaración testimonial ante el Ministerio Público de la Acusación",
+                "Exclusivamente al producirse un enfrentamiento armado con personas armadas",
+                "Cuando el funcionario percibe que las exigencias y demandas del entorno superan sus recursos para afrontarlas",
+                "Únicamente cuando recibe una sanción disciplinaria de arresto o suspensión de empleo"
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 41-42",
+            "explanation": "Lazarus y Folkman (1984) definen el estrés como una respuesta psicofisiológica generada cuando el individuo evalúa que las demandas operativas o laborales desbordan los recursos de afrontamiento disponibles."
+        },
+        {
+            "id": "so-082",
+            "difficulty": "media",
+            "question": "En el marco de la comunicación asertiva y resolución de conflictos, ¿en qué consiste la técnica de 'parafraseo' según el método de Gordon citado en el manual?",
+            "options": [
+                "En elevar el tono de voz para interrumpir el reclamo y hacer valer la autoridad del uniforme",
+                "En citar de memoria artículos contravencionales en forma reiterada hasta que el sujeto guarde silencio",
+                "En labrar de forma inmediata un acta de infracción sin permitir el descargo verbal",
+                "En reformular con palabras propias lo expresado por el ciudadano para corroborar la comprensión mutua y descomprimir hostilidad"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 59-60",
+            "explanation": "El parafraseo (Gordon, 2001) consiste en repetir de manera constructiva el núcleo de lo expresado por el interlocutor ('Si le entiendo bien, lo que usted manifiesta es...'), lo que valida la escucha activa y reduce la tensión emocional."
+        },
+        {
+            "id": "so-083",
+            "difficulty": "dificil",
+            "question": "Frente a un incidente operativo de alta peligrosidad, ¿a qué fenómeno neuropsicológico se refiere el manual cuando una emoción intensa desactiva temporalmente el razonamiento lógico del lóbulo prefrontal?",
+            "options": [
+                "Bloqueo neuromuscular periférico",
+                "Inhibición vasovagal del hipocampo",
+                "Secuestro amigdalino (Amígdala cerebral)",
+                "Shock hipovolémico transitorio"
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 44-46",
+            "explanation": "El secuestro amigdalino describe la activación automática del sistema límbico donde la amígdala toma el control ante una amenaza percibida, anulando momentáneamente el análisis racional de la corteza prefrontal salvo que se apliquen técnicas de autorregulación y respiración."
+        },
+        {
+            "id": "so-084",
+            "difficulty": "dificil",
+            "question": "Según el manual de perfeccionamiento, ¿cuál es la distinción conceptual clave entre 'estrés' y 'ansiedad' formulada por Selye (1974) y Spielberger (1983)?",
+            "options": [
+                "El estrés ocurre exclusivamente en el personal de calle y la ansiedad solo en personal administrativo",
+                "El estrés es siempre perjudicial e incurable mientras que la ansiedad es una respuesta fisiológica placentera",
+                "La ansiedad se produce por órdenes judiciales y el estrés por falta de equipamiento logístico",
+                "El estrés suele estar vinculado a demandas y estímulos externos presentes, mientras que la ansiedad es más interna y ligada a preocupaciones anticipatorias"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 42",
+            "explanation": "El texto resalta que mientras el estrés responde a exigencias objetivas del entorno actual, la ansiedad es un estado emocional de carácter interno vinculado al temor anticipatorio sobre eventos futuros inciertos."
+        },
+        {
+            "id": "so-085",
+            "difficulty": "dificil",
+            "question": "Al realizar análisis de casos y dinámicas de simulación operativa según los postulados de Brookfield y Belbin citados en el texto, ¿cuál es la finalidad primordial de la evaluación post-intervención (debriefing)?",
+            "options": [
+                "Determinar responsabilidades sumarias automáticas para sancionar con arresto al personal con menor destreza",
+                "Identificar únicamente qué dependencias policiales registraron mayor índice delictivo durante la guardia",
+                "Sustituir de manera definitiva el entrenamiento táctico y de tiro con evaluaciones teóricas escritas",
+                "Fomentar el pensamiento crítico analizando decisiones adoptadas y fijando estrategias de mejora continua para futuras intervenciones"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 63-66",
+            "explanation": "El debriefing o evaluación reflexiva post-incidente persigue cuestionar supuestos, procesar el impacto emocional y consolidar el aprendizaje crítico grupal para optimizar el accionar en futuras situaciones análogas."
+        },
+        {
+            "id": "so-086",
+            "difficulty": "media",
+            "question": "En el marco de la Ley Provincial N° 14.239 de Desfederalización del Microtráfico en Santa Fe, ¿a qué organismo le compete la dirección de la investigación penal sobre comercio minorista de estupefacientes?",
+            "options": [
+                "A la Justicia Federal de los Tribunales de Retiro en CABA",
+                "A la Dirección Nacional de Aduanas",
+                "Al Ministerio Público de la Acusación (MPA) de la Provincia de Santa Fe",
+                "A los Juzgados de Faltas Comunales y Municipales"
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 151-153 / Ley 14.239",
+            "explanation": "La adhesión de Santa Fe a la desfederalización mediante Ley 14.239 asignó a los fiscales del MPA la persecución e investigación penal preparatoria del delito de narcomenudeo o microtráfico en el territorio provincial."
+        },
+        {
+            "id": "so-087",
+            "difficulty": "dificil",
+            "question": "En una intervención por presunta infracción a la Ley de Microtráfico N° 14.239, ¿cuál es el procedimiento formal que garantiza la legalidad probatoria del material estupefaciente secuestrado?",
+            "options": [
+                "Guardar los envoltorios en el chaleco balístico y realizar el pesaje recién en el laboratorio central sin testigos",
+                "Entregar los estupefacientes a familiares del imputado para su posterior presentación judicial espontánea",
+                "Realizar prueba de orientación química de campo y pesaje ante testigos hábiles, empaquetar con precinto inviolable y labrar planilla de cadena de custodia",
+                "Proceder a la quema inmediata de la sustancia en la vía pública para evitar su contaminación o pérdida"
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 153-156",
+            "explanation": "La normativa procesal y el protocolo de microtráfico exigen reactivo de campo (narcotest orientativo), pesaje con balanza calibrada, precintado con rúbricas de testigos y acta de cadena de custodia formal."
+        },
+        {
+            "id": "so-088",
+            "difficulty": "dificil",
+            "question": "Según el desarrollo técnico de la Regla de Tueller en el manual de estudio, ¿cuál es el factor determinante que convierte a un agresor con arma blanca a 6,4 metros en una amenaza letal inminente?",
+            "options": [
+                "Que el tiempo medio de reacción psicofísica, desenfunde y disparo defensivo (1,5 segundos) es igual o mayor al tiempo que tarda el agresor en recorrer esa distancia a la carrera",
+                "Que la normativa internacional prohíbe el uso de armas de fuego si el sospechoso no tiene un arma de guerra",
+                "Que las armas blancas poseen un alcance lesivo mayor al de los proyectiles calibre 9x19mm Parabellum",
+                "Que a esa distancia el chaleco de protección balística pierde su capacidad de resistencia contra impactos cortantes"
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 148-150",
+            "explanation": "Dennis Tueller demostró empíricamente que un atacante promedio cubre 21 pies (6,4 metros) en tan solo 1,5 segundos, tiempo que apenas alcanza para que un efectivo perciba, decida, desenfunde y dispare de forma controlada."
+        },
+        {
+            "id": "so-089",
+            "difficulty": "facil",
+            "question": "¿Cuál es la naturaleza y valor legal del Acta de Procedimiento labrada por el personal policial actuante en el lugar del hecho?",
+            "options": [
+                "Es una nota de carácter interno confidencial que no puede remitirse a la fiscalía",
+                "Es un borrador transitorio que debe ser descartado una vez ingresado el aprehendido a la seccional",
+                "Es un instrumento público formal que da fe de los actos y hechos observados directamente por los funcionarios intervinientes",
+                "Es un documento de opinión personal sin ninguna fuerza de prueba testimonial ni documental"
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 159-160 y 174",
+            "explanation": "El acta de procedimiento constituye un instrumento público con presunción de veracidad que documenta las actuaciones policiales iniciales y funda la validez probatoria de la IPP."
+        },
+        {
+            "id": "so-090",
+            "difficulty": "media",
+            "question": "Al redactar un Acta Policial o Parte de Novedades de guardia, ¿qué exigencia técnica demanda relatar los hechos siguiendo estrictamente el orden temporal de su ocurrencia?",
+            "options": [
+                "Uso de lenguaje retórico y figuras poéticas",
+                "Criterio de redacción hipotética o presuntiva",
+                "Estructura narrativa circular y subjetiva",
+                "Principio de cronología y secuencia lógica temporal"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 165-167",
+            "explanation": "La claridad y fehaciencia de la documentación policial requieren exponer los acontecimientos minuto a minuto en riguroso orden cronológico, evitando saltos temporales que generen confusiones o nulidades."
+        },
+        {
+            "id": "so-091",
+            "difficulty": "media",
+            "question": "Según el manual de perfeccionamiento, ¿qué documento formal es el indicado para remitir actuaciones o someter a consideración de un superior jerárquico una cuestión administrativa?",
+            "options": [
+                "Boletín sindical interno",
+                "Edicto judicial contravencional",
+                "Folleto o cartelera informativa comunitaria",
+                "Nota o Provisoria de Elevación de estilo institucional"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 172-174",
+            "explanation": "La nota y la providencia de elevación son los canales formales y protocolizados para cursar peticiones, informes y actuaciones entre distintas jerarquías y dependencias policiales."
+        },
+        {
+            "id": "so-092",
+            "difficulty": "dificil",
+            "question": "Si una persona que debe intervenir o atestiguar en un Acta de Procedimiento manifiesta no saber firmar por ser analfabeta, ¿cómo debe procederse formalmente según el manual y el CPP?",
+            "options": [
+                "Se omite mencionar la presencia del testigo para evitar complicaciones de redacción",
+                "El funcionario policial falsifica la firma para no demorar la remisión del sumario a la fiscalía",
+                "Se deja constancia expresa de dicha circunstancia, se estampa su impresión dígito pulgar derecha y firma un testigo a ruego",
+                "Se anula el acta de inmediato y se deja sin efecto la aprehensión del sospechoso"
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 174-176 / CPP Art. 165",
+            "explanation": "El CPP y los protocolos policiales prescriben que si un interviniente no sabe o no puede firmar, se deja expresa constancia, se inserta su huella dactilar y suscribe otra persona a su ruego."
+        },
+        {
+            "id": "so-093",
+            "difficulty": "dificil",
+            "question": "¿Qué consecuencia procesal acarrea en un acta policial la presencia de raspaduras, borrones o sobreescrituras que no hayan sido debidamente salvadas al final antes de las firmas?",
+            "options": [
+                "Se subsana automáticamente de palabra en la audiencia preliminar sin que las partes puedan objetarlo",
+                "Genera únicamente una sanción pecuniaria mínima sin afectar en absoluto la validez del acta",
+                "Ninguna consecuencia jurídica, ya que las correcciones en actas policiales no requieren ser salvadas",
+                "Puede dar origen a tachas de falsedad material o planteos judiciales de nulidad por adulteración de instrumento público"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 166-168",
+            "explanation": "Toda enmienda, tachadura o agregado en un instrumento público debe salvarse expresamente al pie de las actuaciones ('Vale', 'No vale'); su omisión abre la puerta a incidentes de nulidad procesal."
+        },
+        {
+            "id": "so-094",
+            "difficulty": "dificil",
+            "question": "¿Cuál es la trascendencia procesal fundamental del 'Acta de Lectura y Notificación de Derechos del Imputado' prevista en el Art. 268 del CPP Santa Fe?",
+            "options": [
+                "Garantiza el debido proceso constitucional al notificar al aprehendido el hecho atribuido, su derecho a no declarar y la asistencia de un defensor técnico",
+                "Otorga autorización expresa a la policía para someter a interrogatorio incriminatorio al sujeto aprehendido",
+                "Impone al sospechoso la obligación ineludible de confesar la autoría del hecho para acceder a juicio abreviado",
+                "Exime al fiscal interviniente de convocar a la audiencia imputativa ante el Juez de la IPP"
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 175-177 / CPP Art. 268",
+            "explanation": "La notificación fehaciente de derechos resguarda la garantía de defensa en juicio (Art. 18 CN y Art. 268 CPP), asegurando que el imputado conozca sus derechos a no autoincriminarse y a contar con patrocinio letrado."
+        },
+        {
+            "id": "so-095",
+            "difficulty": "facil",
+            "question": "En el procesador de textos LibreOffice Writer utilizado en las dependencias policiales, ¿cuál es la combinación rápida de teclas para guardar los cambios en un documento?",
+            "options": [
+                "Shift + Esc",
+                "Ctrl + G (o Ctrl + S)",
+                "Ctrl + Z",
+                "Alt + Tab"
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 213-215",
+            "explanation": "En las versiones en español de LibreOffice Writer, el atajo estándar de teclado para guardar el documento es Ctrl + G (guardar) o Ctrl + S de forma equivalente."
+        },
+        {
+            "id": "so-096",
+            "difficulty": "media",
+            "question": "¿Cuál es la extensión de archivo predeterminada que emplea el programa LibreOffice Calc para guardar libros y hojas de cálculo?",
+            "options": [
+                ".odt",
+                ".jpg",
+                ".pdf",
+                ".ods"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 223-225",
+            "explanation": "LibreOffice Calc utiliza nativamente la extensión .ods (OpenDocument Spreadsheet), mientras que Writer utiliza .odt (OpenDocument Text)."
+        },
+        {
+            "id": "so-097",
+            "difficulty": "media",
+            "question": "Al trabajar en LibreOffice Calc confeccionando una planilla de guardias o adicionales policiales, ¿qué carácter debe colocarse al inicio de la celda para que se reconozca una fórmula de cálculo?",
+            "options": [
+                "El signo pesos ($)",
+                "El signo ampersand (&)",
+                "El signo igual (=)",
+                "El signo de porcentaje (%)"
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 228-230",
+            "explanation": "Para que Calc efectúe un cómputo aritmético (como =SUMA(A1:A10)), la celda debe iniciarse obligatoriamente con el signo igual (=)."
+        },
+        {
+            "id": "so-098",
+            "difficulty": "dificil",
+            "question": "En una fórmula de LibreOffice Calc, ¿cuál es la función técnica de anteponer el símbolo pesos ($) antes de la columna o fila de una celda (por ejemplo: $C$5)?",
+            "options": [
+                "Restringir la lectura de la celda únicamente a los usuarios con permisos de administrador",
+                "Indicar que la celda corresponde a un gasto presupuestario no reintegrable de la unidad",
+                "Formatear automáticamente el número como moneda de curso legal argentino",
+                "Fijar la celda como referencia absoluta para que no varíe al arrastrar o copiar la fórmula a otras posiciones"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 235-238",
+            "explanation": "El símbolo $ bloquea la coordenada de fila y/o columna, convirtiendo la referencia relativa en absoluta para que permanezca inalterable al replicar la fórmula."
+        },
+        {
+            "id": "so-099",
+            "difficulty": "dificil",
+            "question": "En relación a las pautas de seguridad informática y resguardo documental en el almacenamiento en la nube policial (Drive / Nextcloud), ¿cuál de las siguientes acciones constituye una vulneración grave a la seguridad de la información?",
+            "options": [
+                "Compartir carpetas con sumarios de investigación o legajos policiales mediante enlaces públicos accesibles por cualquier persona sin clave",
+                "Utilizar contraseñas seguras que incluyan combinación alfanumérica y caracteres especiales",
+                "Cerrar la sesión de correo institucional al finalizar el turno de guardia policial",
+                "Realizar copias de respaldo periódicas en soportes institucionales debidamente inventariados"
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 206 y 248-250",
+            "explanation": "La difusión pública de datos reservados mediante enlaces no controlados vulnera el secreto sumarial, la seguridad funcional y la Ley N° 25.326 de Protección de los Datos Personales."
+        },
+        {
+            "id": "so-100",
+            "difficulty": "dificil",
+            "question": "¿Cuál es la diferencia estructural entre el 'software de sistema' y el 'software de aplicación' conforme a los conceptos fundamentales desarrollados en el manual?",
+            "options": [
+                "El software de sistema (como el sistema operativo) administra los recursos de hardware y la plataforma del equipo, mientras que el de aplicación resuelve tareas concretas del usuario (como redactar o calcular)",
+                "No existe distinción conceptual, ambos corresponden a programas creados para escanear huellas dactilares",
+                "El software de aplicación controla el arranque de la BIOS y el de sistema es el procesador de texto",
+                "El software de sistema es todo componente físico tangible y el de aplicación son los cables periféricos"
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 199-204",
+            "explanation": "El Sistema Operativo sirve de base y enlace entre el hardware y el resto de los programas, en tanto que las aplicaciones (Writer, Calc, browsers) están diseñadas para que el usuario opere utilidades específicas."
+        },
+        {
+            "id": "so-101",
+            "difficulty": "media",
+            "question": "De acuerdo al marco regulatorio de la ANMaC y el Decreto 395/75, ¿cómo se define el funcionamiento de un arma de fuego 'semiautomática'?",
+            "options": [
+                "Es aquella donde el tirador oprime el disparador para cada disparo y el ciclo de carga y descarga de recámara se produce mecánicamente sin nueva intervención manual",
+                "Es aquella que solo admite disparar un único cartucho por sesión de tiro y carece de almacén cargador",
+                "Es aquella donde el tirador debe accionar un cerrojo o palanca manual antes de efectuar cada disparo individual",
+                "Es aquella que dispara ráfagas continuas e ininterrumpidas mientras se mantenga presionada la cola del disparador"
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 266-267 / Dto. 395/75",
+            "explanation": "En las armas semiautomáticas policiales (Bersa Thunder 9mm), los gases u oscilación expulsan la vaina y recargan el nuevo cartucho de forma automática, requiriéndose una acción de gatillo por cada disparo."
+        },
+        {
+            "id": "so-102",
+            "difficulty": "dificil",
+            "question": "En balística aplicada y tecnología del armamento policial, ¿cuál es la diferencia técnica precisa entre el 'calibre real' y el 'calibre nominal' de un arma de fuego?",
+            "options": [
+                "El calibre real se refiere al peso total del arma con cargador lleno y el nominal a la cantidad de estrías del cañón",
+                "El calibre real solo se aplica a escopetas de caza y el calibre nominal a pistolas reglamentarias de puño",
+                "El calibre nominal es la distancia de penetración balística y el calibre real la longitud de la corredera",
+                "El calibre real es la medida milimétrica interior del cañón tomada entre los campos o macizos opuestos, mientras que el nominal es la designación comercial normalizada del cartucho"
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 272-273",
+            "explanation": "El calibre real corresponde a la cota geométrica interna entre los puntos más cercanos del ánima (campos o macizos), en tanto que el nominal es el nombre convencional del calibre adoptado por la industria y la norma (ej. 9x19mm Parabellum)."
+        },
+        {
+            "id": "so-103",
+            "difficulty": "dificil",
+            "question": "Conforme a la Ley Nacional de Armas y Explosivos N° 20.429 y su Decreto Reglamentario 395/75 reseñados en el manual, ¿qué clasificación legal le corresponde a las escopetas con longitud de cañón menor a 380 mm?",
+            "options": [
+                "Arma de puño de venta libre en locales comerciales",
+                "Arma no letal de entrenamiento y disuasión recreativa",
+                "Arma de guerra de uso prohibido (reservadas con exclusividad a dotaciones policiales o militares habilitadas)",
+                "Arma de uso civil condicional autorizada para caza menor civil sin registro"
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 269 / Dto. 395/75",
+            "explanation": "El Decreto 395/75 cataloga a las escopetas con cañones inferiores a 380 mm como armas de guerra de uso prohibido para civiles, por su elevado poder destructivo y facilidad para ser ocultadas entre prendas."
+        }
     ],
     "oficial-subinspector": [
         {
@@ -10865,7 +11202,7 @@ window.quizBank = {
 window.quizBankMeta = {
     "version": "8.1.0",
     "lastUpdated": "2026-11-05",
-    "totalQuestions": 773,
+    "totalQuestions": 797,
     "difficulties": [
         {
             "id": "facil",
