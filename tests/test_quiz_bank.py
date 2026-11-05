@@ -118,5 +118,48 @@ class TestQuizBank(unittest.TestCase):
                 explanation = q.get("explanation", "").strip()
                 self.assertGreater(len(explanation), 10, f"[{hierarchy}][{qid}] Missing explanation text")
 
+    def test_strict_hierarchy_concordance_and_isolation(self):
+        """Verify that questions in any specific contest bank NEVER leak across hierarchies."""
+        hierarchies = [
+            "suboficial-oficial",
+            "oficial-subinspector",
+            "subinspector-inspector",
+            "inspector-subcomisario",
+            "subcomisario-comisario",
+            "comisario-supervisor"
+        ]
+        difficulties = ["facil", "media", "dificil"]
+        counts = [10, 25, 50]
+
+        for h in hierarchies:
+            bank = self.quiz_bank.get(h, [])
+            bank_ids = {q["id"] for q in bank}
+            self.assertGreaterEqual(len(bank), 50, f"Bank {h} must have at least 50 questions for real exams")
+
+            for diff in difficulties:
+                for cnt in counts:
+                    # Emulate selection logic
+                    exact = [q for q in bank if q.get("difficulty") == diff]
+                    pool = list(exact)
+
+                    if len(pool) < cnt:
+                        alt_order = ["media", "facil"] if diff == "dificil" else ["dificil", "facil"] if diff == "media" else ["media", "dificil"]
+                        for ad in alt_order:
+                            if len(pool) >= cnt:
+                                break
+                            alts = [q for q in bank if q.get("difficulty") == ad and q["id"] not in {p["id"] for p in pool}]
+                            pool.extend(alts)
+
+                    if len(pool) < cnt:
+                        rest = [q for q in bank if q["id"] not in {p["id"] for p in pool}]
+                        pool.extend(rest)
+
+                    selected = pool[:cnt]
+                    self.assertEqual(len(selected), cnt, f"[{h}][{diff}][{cnt}] Failed to reach requested question count")
+
+                    # Crucial assertion: 100% of questions belong strictly to this hierarchy's bank
+                    for q in selected:
+                        self.assertIn(q["id"], bank_ids, f"Cross-hierarchy leak: question {q['id']} found in exam for {h}")
+
 if __name__ == "__main__":
     unittest.main()

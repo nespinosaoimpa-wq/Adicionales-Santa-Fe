@@ -15,6 +15,35 @@ function renderProfile(container) {
     const userEmail = user.email || 'No email';
     const userAvatar = safeString(user.avatar) || safeString(user.photoURL) || `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${encodeURIComponent(userName)}`;
 
+    const targetHierarchy = (() => {
+        try {
+            return localStorage.getItem('isep_selected_hierarchy_v1') || 'suboficial-oficial';
+        } catch(e) {
+            return 'suboficial-oficial';
+        }
+    })();
+
+    window.saveUserTargetConcurso = (val) => {
+        try {
+            localStorage.setItem('isep_selected_hierarchy_v1', val);
+            if (window._quizState) {
+                window._quizState.selectedHierarchy = val;
+            }
+            if (typeof showToast === 'function') {
+                const hierNames = {
+                    'suboficial-oficial': 'Suboficial → Oficial de Policía',
+                    'oficial-subinspector': 'Oficial → Subinspector',
+                    'subinspector-inspector': 'Subinspector → Inspector',
+                    'inspector-subcomisario': 'Inspector → Subcomisario',
+                    'subcomisario-comisario': 'Subcomisario → Comisario',
+                    'comisario-supervisor': 'Comisario → Com. Supervisor',
+                    'simulacro-integral': 'Simulacro General ISEP'
+                };
+                showToast('🎯 Concurso fijado: ' + (hierNames[val] || val));
+            }
+        } catch(e){}
+    };
+
     // Clone config (Defensive copy)
     const config = store.serviceConfig ? JSON.parse(JSON.stringify(store.serviceConfig)) : {
         'Public': { 'Ordinaria': 0, 'Extraordinaria': 0 },
@@ -91,6 +120,39 @@ function renderProfile(container) {
                         <span class="material-symbols-outlined text-lg">picture_as_pdf</span>
                         Exportar PDF
                     </button>
+                </div>
+            </div>
+
+            <!-- 🎯 Mi Concurso de Ascenso Policial ISEP -->
+            <div class="glass-card p-4 rounded-3xl border border-white/5 space-y-3">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2.5">
+                        <div class="size-9 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-lg">military_tech</span>
+                        </div>
+                        <div>
+                            <h3 class="text-xs font-black text-white uppercase tracking-wider">Mi Concurso de Ascenso ISEP</h3>
+                            <p class="text-[10px] text-slate-400">Personalizá tu programa y simulador</p>
+                        </div>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-300 text-[9px] font-black uppercase">Santa Fe</span>
+                </div>
+
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold text-slate-400 uppercase tracking-widest block ml-1">Jerarquía a Concursar:</label>
+                    <select id="profile-concurso-select" onchange="window.saveUserTargetConcurso(this.value)"
+                        class="w-full bg-slate-900 border border-white/10 rounded-2xl px-3.5 py-2.5 text-xs font-bold text-white focus:outline-none focus:border-primary transition-all">
+                        <option value="suboficial-oficial" ${targetHierarchy === 'suboficial-oficial' ? 'selected' : ''}>Suboficial → Oficial de Policía</option>
+                        <option value="oficial-subinspector" ${targetHierarchy === 'oficial-subinspector' ? 'selected' : ''}>Oficial → Subinspector</option>
+                        <option value="subinspector-inspector" ${targetHierarchy === 'subinspector-inspector' ? 'selected' : ''}>Subinspector → Inspector</option>
+                        <option value="inspector-subcomisario" ${targetHierarchy === 'inspector-subcomisario' ? 'selected' : ''}>Inspector → Subcomisario</option>
+                        <option value="subcomisario-comisario" ${targetHierarchy === 'subcomisario-comisario' ? 'selected' : ''}>Subcomisario → Comisario</option>
+                        <option value="comisario-supervisor" ${targetHierarchy === 'comisario-supervisor' ? 'selected' : ''}>Comisario → Comisario Supervisor / Director</option>
+                        <option value="simulacro-integral" ${targetHierarchy === 'simulacro-integral' ? 'selected' : ''}>Simulacro General (Todas las Materias)</option>
+                    </select>
+                    <p class="text-[10px] text-slate-500 mt-1 ml-1 leading-snug">
+                        El simulador y la academia adaptarán el 100% de las preguntas de examen para ser estrictamente concordantes con este proceso.
+                    </p>
                 </div>
             </div>
 
@@ -322,7 +384,7 @@ function renderProfile(container) {
                     <span class="material-symbols-outlined text-lg">logout</span>
                     Cerrar Sesión
                 </button>
-                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.89 • Adicionales Santa Fe</p>
+                <p onclick="window.handleSecretAdminTap()" class="text-center text-[10px] text-slate-700 dark:text-slate-600 font-mono cursor-pointer select-none py-2 hover:text-slate-400 transition-colors" title="Toque 5 veces para acceso administrativo">v535.10.90 • Adicionales Santa Fe</p>
             </div>
             
             <!-- Ad Banner -->

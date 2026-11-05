@@ -30,24 +30,43 @@
 
 // ══════════════════════════════════════════════════════════════
 
+const SAVED_HIERARCHY_KEY = 'isep_selected_hierarchy_v1';
+const SAVED_DIFFICULTY_KEY = 'isep_difficulty_v1';
+const SAVED_COUNT_KEY = 'isep_question_count_v1';
+
+const _savedHier = (() => {
+    try {
+        const s = localStorage.getItem(SAVED_HIERARCHY_KEY);
+        if (s) return s;
+    } catch(e){}
+    return 'suboficial-oficial';
+})();
+
+const _savedDiff = (() => {
+    try {
+        const d = localStorage.getItem(SAVED_DIFFICULTY_KEY);
+        if (['facil', 'media', 'dificil'].includes(d)) return d;
+    } catch(e){}
+    return 'media';
+})();
+
+const _savedCount = (() => {
+    try {
+        const c = parseInt(localStorage.getItem(SAVED_COUNT_KEY), 10);
+        if ([10, 25, 50].includes(c)) return c;
+    } catch(e){}
+    return 25;
+})();
+
 window._quizState = window._quizState || {
-
     activeTab: 'simulador',       // 'simulador' | 'novedades' | 'biblioteca' | 'historial'
-
-    selectedHierarchy: 'simulacro-integral',
-
-    difficulty: 'media',         // 'facil' | 'media' | 'dificil'
-
-    questionCount: 25,           // 10 | 25 | 50
-
+    selectedHierarchy: _savedHier,
+    difficulty: _savedDiff,       // 'facil' | 'media' | 'dificil'
+    questionCount: _savedCount,   // 10 | 25 | 50
     currentExam: null,           // { hierarchy, difficulty, questions, answers, startTime, timeLimit }
-
     currentIndex: 0,
-
     examFinished: false,
-
     examResults: null
-
 };
 
 
@@ -983,7 +1002,7 @@ function _renderSimuladorTab(container) {
 
                         return `
 
-                        <button onclick="window._quizState.selectedHierarchy='${h.id}'; renderAcademia()" 
+                        <button onclick="window._selectHierarchy('${h.id}')" 
 
                             class="group w-full text-left p-3.5 rounded-2xl border transition-all active:scale-[0.98] ${isSelected 
 
@@ -1043,7 +1062,7 @@ function _renderSimuladorTab(container) {
 
                     <!-- Fácil -->
 
-                    <button onclick="window._quizState.difficulty='facil'; renderAcademia()" 
+                    <button onclick="window._selectDifficulty('facil')" 
 
                         class="p-3 rounded-2xl text-center border transition-all active:scale-95 ${state.difficulty === 'facil' 
 
@@ -1061,7 +1080,7 @@ function _renderSimuladorTab(container) {
 
                     <!-- Media -->
 
-                    <button onclick="window._quizState.difficulty='media'; renderAcademia()" 
+                    <button onclick="window._selectDifficulty('media')" 
 
                         class="p-3 rounded-2xl text-center border transition-all active:scale-95 ${state.difficulty === 'media' 
 
@@ -1079,7 +1098,7 @@ function _renderSimuladorTab(container) {
 
                     <!-- Difícil -->
 
-                    <button onclick="window._quizState.difficulty='dificil'; renderAcademia()" 
+                    <button onclick="window._selectDifficulty('dificil')" 
 
                         class="p-3 rounded-2xl text-center border transition-all active:scale-95 ${state.difficulty === 'dificil' 
 
@@ -1129,7 +1148,7 @@ function _renderSimuladorTab(container) {
 
                 <div class="grid grid-cols-3 gap-2">
 
-                    <button onclick="window._quizState.questionCount=10; renderAcademia()"
+                    <button onclick="window._selectQuestionCount(10)"
 
                         class="p-3 rounded-2xl text-center font-bold transition-all active:scale-95 ${state.questionCount === 10
 
@@ -1145,7 +1164,7 @@ function _renderSimuladorTab(container) {
 
                     </button>
 
-                    <button onclick="window._quizState.questionCount=25; renderAcademia()"
+                    <button onclick="window._selectQuestionCount(25)"
 
                         class="p-3 rounded-2xl text-center font-bold transition-all active:scale-95 ${state.questionCount === 25
 
@@ -1161,7 +1180,7 @@ function _renderSimuladorTab(container) {
 
                     </button>
 
-                    <button onclick="window._quizState.questionCount=50; renderAcademia()"
+                    <button onclick="window._selectQuestionCount(50)"
 
                         class="p-3 rounded-2xl text-center font-bold transition-all active:scale-95 ${state.questionCount === 50
 
@@ -1215,6 +1234,24 @@ function _renderSimuladorTab(container) {
 
     // Handler para iniciar examen
 
+        window._selectHierarchy = (hId) => {
+        state.selectedHierarchy = hId;
+        try { localStorage.setItem(SAVED_HIERARCHY_KEY, hId); } catch(e){}
+        renderAcademia();
+    };
+
+    window._selectDifficulty = (diff) => {
+        state.difficulty = diff;
+        try { localStorage.setItem(SAVED_DIFFICULTY_KEY, diff); } catch(e){}
+        renderAcademia();
+    };
+
+    window._selectQuestionCount = (cnt) => {
+        state.questionCount = cnt;
+        try { localStorage.setItem(SAVED_COUNT_KEY, cnt.toString()); } catch(e){}
+        renderAcademia();
+    };
+
     window._startQuiz = () => {
 
         // 1. Verificar límite freemium
@@ -1230,124 +1267,81 @@ function _renderSimuladorTab(container) {
 
 
         let bank;
+        const isIntegral = state.selectedHierarchy === 'simulacro-integral';
 
-        if (state.selectedHierarchy === 'simulacro-integral') {
-
+        if (isIntegral) {
             bank = Object.values(window.quizBank).flat();
-
         } else {
-
             bank = window.quizBank[state.selectedHierarchy] || [];
-
         }
-
-
 
         if (!bank || bank.length === 0) {
-
             showToast('No hay preguntas disponibles para esta jerarquía');
-
             return;
-
         }
 
-
-
-        // 2. Filtrar preguntas priorizando la dificultad seleccionada y ANTI-REPETICIÓN
-
-        const exactDifficultyQuestions = bank.filter(q => q.difficulty === state.difficulty);
-
+        // 2. Selección estricta y concordante según el concurso/proceso elegido
         const seenIds = new Set(_getSeenQuestionIds());
+        let questionPool = [];
 
+        if (!isIntegral) {
+            // ══════════════════════════════════════════════════════════════════
+            // CONCORDANCIA ESTRICTA (100%): PROCESO Y JERARQUÍA ELEGIDA
+            // Cada pregunta debe pertenecer única y exclusivamente al banco de
+            // este proceso concursado. NUNCA mezclar preguntas de otras jerarquías.
+            // ══════════════════════════════════════════════════════════════════
 
+            // a) Preguntas de ESTA jerarquía con la dificultad elegida (priorizando no vistas)
+            const exactDiffQuestions = bank.filter(q => q.difficulty === state.difficulty);
+            const unseenExact = exactDiffQuestions.filter(q => !seenIds.has(q.id));
+            const seenExact = exactDiffQuestions.filter(q => seenIds.has(q.id));
+            questionPool = [..._shuffleArray(unseenExact), ..._shuffleArray(seenExact)];
 
-        // Ordenar primero preguntas NO vistas en exámenes anteriores
+            // b) Si faltan para la cantidad solicitada (10, 25 o 50),
+            // completar EXCLUSIVAMENTE con el MISMO BANCO DE ESTA JERARQUÍA en otras dificultades
+            if (questionPool.length < state.questionCount) {
+                const altDiffOrder = state.difficulty === 'dificil' ? ['media', 'facil'] :
+                                     state.difficulty === 'media' ? ['dificil', 'facil'] : ['media', 'dificil'];
+                
+                for (const altDiff of altDiffOrder) {
+                    if (questionPool.length >= state.questionCount) break;
+                    const altQuestions = bank.filter(q => q.difficulty === altDiff && !questionPool.some(p => p.id === q.id));
+                    const unseenAlt = altQuestions.filter(q => !seenIds.has(q.id));
+                    const seenAlt = altQuestions.filter(q => seenIds.has(q.id));
+                    const sortedAlt = [..._shuffleArray(unseenAlt), ..._shuffleArray(seenAlt)];
+                    const needed = state.questionCount - questionPool.length;
+                    questionPool = questionPool.concat(sortedAlt.slice(0, needed));
+                }
+            }
 
-        const unseenExact = exactDifficultyQuestions.filter(q => !seenIds.has(q.id));
+            // c) Si aún faltaran (caso extremo), tomar restantes de este MISMO banco
+            if (questionPool.length < state.questionCount) {
+                const restSameHier = bank.filter(q => !questionPool.some(p => p.id === q.id));
+                const needed = state.questionCount - questionPool.length;
+                questionPool = questionPool.concat(_shuffleArray(restSameHier).slice(0, needed));
+            }
 
-        const seenExact = exactDifficultyQuestions.filter(q => seenIds.has(q.id));
+            // Recortar estrictamente a state.questionCount
+            questionPool = questionPool.slice(0, state.questionCount);
 
-        let questionPool = [..._shuffleArray(unseenExact), ..._shuffleArray(seenExact)];
+        } else {
+            // Modo Simulacro Integral: Combina preguntas de todos los programas
+            const exactDiffQuestions = bank.filter(q => q.difficulty === state.difficulty);
+            const unseenExact = exactDiffQuestions.filter(q => !seenIds.has(q.id));
+            const seenExact = exactDiffQuestions.filter(q => seenIds.has(q.id));
+            questionPool = [..._shuffleArray(unseenExact), ..._shuffleArray(seenExact)];
 
-
-
-        // 3. Si faltan preguntas para la jerarquía y dificultad elegidas:
-
-        // a) Complementar con preguntas de la MISMA dificultad de las demás jerarquías (priorizando no vistas)
-
-        if (questionPool.length < state.questionCount) {
-
-            const othersSameDiff = Object.entries(window.quizBank)
-
-                .filter(([k]) => k !== state.selectedHierarchy)
-
-                .flatMap(([_, list]) => list)
-
-                .filter(q => q.difficulty === state.difficulty && !questionPool.some(p => p.id === q.id));
-
-            
-
-            const unseenOthers = othersSameDiff.filter(q => !seenIds.has(q.id));
-
-            const seenOthers = othersSameDiff.filter(q => seenIds.has(q.id));
-
-            const sortedOthers = [..._shuffleArray(unseenOthers), ..._shuffleArray(seenOthers)];
-
-
-
-            const needed = state.questionCount - questionPool.length;
-
-            questionPool = questionPool.concat(sortedOthers.slice(0, needed));
-
+            if (questionPool.length < state.questionCount) {
+                const otherDiffs = bank.filter(q => q.difficulty !== state.difficulty && !questionPool.some(p => p.id === q.id));
+                const unseenOther = otherDiffs.filter(q => !seenIds.has(q.id));
+                const seenOther = otherDiffs.filter(q => seenIds.has(q.id));
+                const needed = state.questionCount - questionPool.length;
+                questionPool = questionPool.concat([..._shuffleArray(unseenOther), ..._shuffleArray(seenOther)].slice(0, needed));
+            }
+            questionPool = questionPool.slice(0, state.questionCount);
         }
 
-
-
-        // b) Si aún faltan preguntas, sumar de la misma jerarquía en otras dificultades
-
-        if (questionPool.length < state.questionCount) {
-
-            const otherDiffSameHier = bank.filter(q => !questionPool.some(p => p.id === q.id));
-
-            const unseenDiff = otherDiffSameHier.filter(q => !seenIds.has(q.id));
-
-            const seenDiff = otherDiffSameHier.filter(q => seenIds.has(q.id));
-
-            const sortedDiff = [..._shuffleArray(unseenDiff), ..._shuffleArray(seenDiff)];
-
-
-
-            const needed = state.questionCount - questionPool.length;
-
-            questionPool = questionPool.concat(sortedDiff.slice(0, needed));
-
-        }
-
-
-
-        // c) Si aún faltara alguna (para alcanzar 50), complementar con el banco general
-
-        if (questionPool.length < state.questionCount) {
-
-            const allRemaining = Object.values(window.quizBank).flat().filter(q => !questionPool.some(p => p.id === q.id));
-
-            const unseenRem = allRemaining.filter(q => !seenIds.has(q.id));
-
-            const seenRem = allRemaining.filter(q => seenIds.has(q.id));
-
-            const sortedRem = [..._shuffleArray(unseenRem), ..._shuffleArray(seenRem)];
-
-
-
-            const needed = state.questionCount - questionPool.length;
-
-            questionPool = questionPool.concat(sortedRem.slice(0, needed));
-
-        }
-
-
-
-                // 4. Ponderación por Eje Central: PRIORIDAD MANUAL DE POLICÍA ISEP (>= 80%)
+        // 4. Ponderación por Eje Central: PRIORIDAD MANUAL DE POLICÍA ISEP (>= 80%)
 
         // En los exámenes de ascenso santafesinos, el manual del ISEP es la base de las preguntas; las leyes son complementarias.
 
@@ -1489,9 +1483,19 @@ function _renderSimuladorTab(container) {
 
 
 
-        state.currentExam = {
+        // Verificación estricta de concordancia final:
+        if (!isIntegral) {
+            selectedQuestions = selectedQuestions.map(q => {
+                if (bank.some(b => b.id === q.id)) return q;
+                const fallback = bank.find(b => !selectedQuestions.some(sq => sq.id === b.id));
+                return fallback || q;
+            });
+        }
 
+        const hierMeta = window.quizBankMeta?.hierarchies?.find(h => h.id === state.selectedHierarchy);
+        state.currentExam = {
             hierarchy: state.selectedHierarchy,
+            hierarchyTitle: hierMeta?.title || (isIntegral ? 'Simulacro General ISEP' : state.selectedHierarchy),
 
             difficulty: state.difficulty,
 
@@ -1776,10 +1780,13 @@ function _renderExamView(container) {
             <div class="flex items-center justify-between mb-2">
 
                 <button onclick="window._exitExam()" class="text-slate-400 hover:text-red-400 transition-colors flex items-center gap-1 text-xs">
-
                     <span class="material-symbols-outlined text-sm">close</span> Salir
-
                 </button>
+
+                <div class="hidden xs:flex items-center gap-1 px-2.5 py-1 rounded-xl bg-primary/10 border border-primary/20 text-primary text-[10px] font-black uppercase truncate max-w-[170px]" title="${exam.hierarchyTitle || exam.hierarchy}">
+                    <span class="material-symbols-outlined text-xs">military_tech</span>
+                    <span class="truncate">${exam.hierarchyTitle || exam.hierarchy}</span>
+                </div>
 
                 <div class="flex items-center gap-1.5 ${timerColor}">
 
@@ -1835,16 +1842,15 @@ function _renderExamView(container) {
 
             <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
 
-                <div class="flex items-center gap-2">
-
+                <div class="flex items-center gap-2 flex-wrap">
                     <span class="px-2.5 py-1 rounded-lg bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-wider">
-
                         Pregunta ${state.currentIndex + 1} de ${totalQ}
-
                     </span>
-
+                    <span class="px-2 py-0.5 rounded-md bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[9px] font-black uppercase flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[11px]">shield</span>
+                        ${exam.hierarchyTitle || exam.hierarchy}
+                    </span>
                     ${sourceBadge}
-
                 </div>
 
                 <div class="flex items-center gap-2">
@@ -3575,7 +3581,7 @@ function _renderNovedadesTab(container) {
 
                         <p class="text-[11px] text-slate-400 mt-1">Efectividad actual: ${weakTopics[0].rate}% (${weakTopics[0].correct}/${weakTopics[0].total}). Te recomendamos repasar ese módulo en el manual de tu jerarquía.</p>
 
-                        <button onclick="window._quizState.activeTab='simulador'; window._quizState.questionCount=10; renderAcademia();" class="mt-2.5 w-full py-2.5 bg-primary hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-1.5 active:scale-95">
+                        <button onclick="window._quizState.activeTab='simulador'; window._selectQuestionCount(10);" class="mt-2.5 w-full py-2.5 bg-primary hover:bg-blue-600 text-white font-black text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-primary/20 flex items-center justify-center gap-1.5 active:scale-95">
 
                             <span class="material-symbols-outlined text-sm">bolt</span> Lanzar Flash Guardia (10 preguntas)
 
