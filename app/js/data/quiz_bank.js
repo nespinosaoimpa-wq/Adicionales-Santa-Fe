@@ -8670,6 +8670,679 @@ window.quizBank = {
             "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
             "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Lo menos lesiva posible\"."
         }
+    ,
+        {
+            "id": "isc-001",
+            "difficulty": "facil",
+            "question": "En el marco de la Policía Orientada a la Solución de Problemas (POP), ¿cuáles son las cuatro etapas consecutivas que componen el 'Modelo SARA'?",
+            "options": [
+                "Seguridad, Autoridad, Responsabilidad y Acción disciplinaria",
+                "Supervisión, Allanamientos, Requisas y Aprehensiones inmediatas",
+                "Scanning (Detección), Analysis (Análisis), Response (Respuesta) y Assessment (Evaluación)",
+                "Sanción, Auditoría, Rendición y Archivo del sumario"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Seguridad Pública, Pág. 29-30",
+            "explanation": "El Modelo SARA es el método científico de resolución comunitaria estructurado en 4 fases: Scanning (detección y priorización), Analysis (estudio de causas y condiciones), Response (diseño de soluciones) y Assessment (evaluación de impacto)."
+        },
+        {
+            "id": "isc-002",
+            "difficulty": "facil",
+            "question": "Según la doctrina criminológica del manual, ¿cuál es la diferencia primordial entre el Control Social Formal y el Control Social Informal?",
+            "options": [
+                "El control formal lo ejercen agencias estatales con funciones normadas (policía, jueces, servicio penitenciario), mientras que el informal lo ejerce la comunidad (familia, escuela, vecinos y transeúntes)",
+                "El control formal depende de intendentes municipales y el informal de los jueces de la Corte Suprema",
+                "El control informal solo se aplica a delitos graves y el formal únicamente a faltas de tránsito",
+                "El control formal es gratuito y el informal requiere el cobro de una tasa comunal de seguridad"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Seguridad Pública, Pág. 28-29",
+            "explanation": "El control social informal surge de las relaciones cotidianas comunitarias (familia, escuela, trabajo), mientras que el formal interviene coactivamente mediante las instituciones del Estado cuando los mecanismos informales fracasan."
+        },
+        {
+            "id": "isc-003",
+            "difficulty": "media",
+            "question": "En la implementación del Modelo SARA en una comisaría, ¿qué tareas específicas corresponden a la primera etapa denominada 'Scanning' (Detección del problema)?",
+            "options": [
+                "Identificar problemas recurrentes que afecten a la comunidad, determinar su frecuencia, priorizarlos y fijar objetivos amplios",
+                "Evaluar estadísticamente si los delitos disminuyeron tras seis meses de patrullaje",
+                "Redactar las sanciones disciplinarias del personal que no cumplió con el servicio de parada",
+                "Efectuar detenciones masivas en la vía pública sin orden fiscal previa"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Seguridad Pública, Pág. 29-30",
+            "explanation": "En el Scanning el oficial a cargo no responde mecánicamente al incidente aislado, sino que detecta patrones delictivos reiterados, mide su frecuencia temporal y prioriza cuáles abordar prioritariamente con recursos de la dependencia."
+        },
+        {
+            "id": "isc-004",
+            "difficulty": "media",
+            "question": "¿Qué postula la 'Prevención Situacional' del delito desarrollada en el manual de seguridad ciudadana?",
+            "options": [
+                "Derivar a todos los sospechosos de delitos contra la propiedad a centros de detención juvenil",
+                "Incrementar de manera exclusiva las penas privativas de la libertad en el Código Penal",
+                "Eliminar el patrullaje policial preventivo en zonas comerciales y bancarias",
+                "Modificar las condiciones del entorno físico y ambiental para reducir las oportunidades delictivas, aumentar el esfuerzo y elevar el riesgo percibido por el agresor"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Seguridad Pública, Pág. 25-26",
+            "explanation": "La prevención situacional (Clarke y Cornish) busca intervenir en el diseño ambiental (iluminación, accesos, cámaras, visibilidad) para dificultar la consumación del delito y disuadir la oportunidad delictual."
+        },
+        {
+            "id": "isc-005",
+            "difficulty": "media",
+            "question": "En la clasificación de los niveles de prevención del delito, ¿cuál es el ámbito y objetivo de la 'Prevención Terciaria'?",
+            "options": [
+                "Impartir charlas de educación cívica y vial en jardines de infantes y escuelas primarias",
+                "Realizar operativos de alcoholemia preventivos durante los fines de semana",
+                "Intervenir con programas criminológicos y asistenciales sobre individuos que ya cometieron delitos o transitan medidas judiciales para evitar su reincidencia",
+                "Comprar nuevo armamento letal para las unidades tácticas de asalto"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Seguridad Pública, Pág. 26-27",
+            "explanation": "La prevención terciaria opera a posteriori, actuando sobre la población infractora condenada o judicializada para favorecer su reinserción y desestimar la reiteración de conductas delictivas."
+        },
+        {
+            "id": "isc-006",
+            "difficulty": "dificil",
+            "question": "En la cuarta y última fase del Modelo SARA, 'Assessment' (Evaluación), ¿qué parámetro metodológico debe verificar el mando policial?",
+            "options": [
+                "Verificar si el personal policial completó los partes diarios de racionamiento de comida",
+                "Comprobar que no existan expedientes administrativos pendientes de archivo en la fiscalía",
+                "Determinar el costo monetario en combustibles de los móviles asignados al operativo",
+                "Medir si la respuesta implementada resolvió o mitigó el problema original, si hubo desplazamiento delictivo y si se requieren ajustes tácticos"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Seguridad Pública, Pág. 30-31",
+            "explanation": "El Assessment mide el impacto cualitativo y cuantitativo de las intervenciones, comprobando si el delito disminuyó en la zona o si simplemente se trasladó a barrios adyacentes (efecto desplazamiento)."
+        },
+        {
+            "id": "isc-007",
+            "difficulty": "dificil",
+            "question": "Conforme al Decreto Provincial N° 0224/2019 analizado en el manual, ¿cuál es la finalidad estratégica de los dispositivos territoriales y mesas de seguridad ciudadana en Santa Fe?",
+            "options": [
+                "Autorizar al personal policial a cobrar aranceles extraordinarios por patrullaje comercial barrial",
+                "Crear policías municipales armadas e independientes de la Jefatura de Provincia",
+                "Articular transversalmente al Ministerio de Seguridad con gobiernos locales, organizaciones comunitarias y áreas sociales para abordar las violencias desde la multicausalidad",
+                "Sustituir a los jueces penales por comités de vecinos en el juzgamiento de robos y hurtos"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Seguridad Pública, Pág. 31-33 / Dec. 0224/2019",
+            "explanation": "El Decreto 0224/19 institucionaliza mesas de coordinación intersectorial donde la seguridad se gestiona articulando al Estado, las comunas/municipios y actores vecinales para intervenir sobre factores socioeconómicos y territoriales."
+        },
+        {
+            "id": "isc-008",
+            "difficulty": "facil",
+            "question": "Según el Título VI de la Ley de Administración, Eficiencia y Control del Estado N° 12.510 de Santa Fe, ¿cuál es el órgano de Control Externo del Sector Público Provincial?",
+            "options": [
+                "El Tribunal de Cuentas de la Provincia de Santa Fe",
+                "El Departamento Personal (D-1) de la Jefatura de Policía",
+                "La Sindicatura General de la Provincia",
+                "La Dirección Provincial de Asuntos Internos"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Finanzas y Logística, Pág. 48-50 / Ley 12.510",
+            "explanation": "La Ley 12.510 establece al Tribunal de Cuentas como órgano de control externo constitucional, con personería para auditar la gestión económico-financiera y sustanciar juicios de cuentas y responsabilidad."
+        },
+        {
+            "id": "isc-009",
+            "difficulty": "facil",
+            "question": "En el marco del Sistema de Control Interno regulado en el Título V de la Ley 12.510, ¿qué organismo técnico ejerce la supervisión dentro del Poder Ejecutivo provincial?",
+            "options": [
+                "La Honorable Cámara de Senadores",
+                "La Dirección General de Museos y Archivos Policiales",
+                "La Sindicatura General de la Provincia (SIGEP)",
+                "El Juzgado Laboral de turno"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Finanzas y Logística, Pág. 48-49 / Ley 12.510",
+            "explanation": "La Sindicatura General es el órgano rector del sistema de control interno del Poder Ejecutivo, coordinando auditorías preventivas y operacionales."
+        },
+        {
+            "id": "isc-010",
+            "difficulty": "media",
+            "question": "Conforme a la Ley N° 12.510 de Santa Fe, ¿cuál es el principio general que debe regir para las contrataciones y compras de bienes del Estado provincial?",
+            "options": [
+                "La Contratación Directa discrecional por parte de los jefes de comisarías",
+                "El canje de bienes en desuso por insumos informáticos en comercios locales",
+                "La Licitación Pública o Remate Público, constituyendo los restantes procedimientos excepciones expresamente regladas",
+                "La compra exclusiva sin factura para agilizar la logística de patrulleros"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Finanzas y Logística, Pág. 45-47 / Ley 12.510",
+            "explanation": "La Licitación Pública es la regla general obligatoria de contratación para garantizar concurrencia, transparencia e igualdad de oferentes; las demás figuras (concurso de precios, contratación directa) son excepciones taxativas."
+        },
+        {
+            "id": "isc-011",
+            "difficulty": "media",
+            "question": "En la gestión logística de una Comisaría, ¿cuáles son las principales partidas presupuestarias cuya administración y rendición ante Habilitación / Tribunal de Cuentas debe supervisar el Subcomisario?",
+            "options": [
+                "Gastos de Funcionamiento (caja chica), Combustibles y Lubricantes, Racionamiento y Fondos SPA / OSESP",
+                "Partidas de Coparticipación Federal de Impuestos",
+                "Aportes de Jubilaciones de Docentes Provinciales",
+                "Presupuesto de Obras Viales e Hidráulicas Provinciales"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Finanzas y Logística, Pág. 41-43",
+            "explanation": "El titular de dependencia y su habilitado responden patrimonial y administrativamente por los comprobantes y rendiciones en término de funcionamiento de la comisaría, combustibles de móviles, racionamiento y policía adicional."
+        },
+        {
+            "id": "isc-012",
+            "difficulty": "media",
+            "question": "De acuerdo al Art. 219 de la Ley 12.510, ¿qué procedimiento aplica el Contador Fiscal del Tribunal de Cuentas si al examinar una rendición policial detecta defectos u omisión de comprobantes?",
+            "options": [
+                "Formula un requerimiento conminatorio (reparo) al obligado para que subsane el defecto o acompañe la documentación en plazo perentorio",
+                "Clausura la dependencia policial de manera preventiva",
+                "Ordena de forma automática el arresto del jefe de comisaría por 30 días",
+                "Condena al sumariante a pagar el triple del valor del presupuesto anual de la Unidad Regional"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Finanzas y Logística, Pág. 50 / Ley 12.510",
+            "explanation": "El Contador Fiscal formula un requerimiento conminatorio (reparo) otorgando plazo al obligado directo o indirecto para aclarar u subsanar la observación contable."
+        },
+        {
+            "id": "isc-013",
+            "difficulty": "dificil",
+            "question": "En el marco del Juicio de Cuentas ante el Tribunal de Cuentas (Art. 223 Ley 12.510), ¿qué efectos produce una 'resolución condenatoria' sobre el funcionario obligado?",
+            "options": [
+                "Ordena su pase a retiro obligatorio sin derecho a haber jubilatorio",
+                "Convoca a un jury de enjuiciamiento en la Legislatura provincial",
+                "Dispone la suspensión preventiva del cobro de sueldo por el lapso de un año",
+                "Fija un cargo patrimonial líquido e intima su pago dentro del término de treinta (30) días corridos"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Finanzas y Logística, Pág. 51 / Ley 12.510",
+            "explanation": "El fallo condenatorio del Tribunal de Cuentas determina el cargo patrimonial que debe abonar el responsable dentro de los 30 días hábiles bajo apercibimiento de ejecución compulsiva."
+        },
+        {
+            "id": "isc-014",
+            "difficulty": "dificil",
+            "question": "Si el funcionario policial obligado en un fallo condenatorio del Tribunal de Cuentas no efectiviza el reintegro dentro del plazo de 30 días fijado por ley, ¿a qué organismo se gira el expediente para iniciar el cobro ejecutivo judicial?",
+            "options": [
+                "A la Fiscalía de Estado de la Provincia de Santa Fe",
+                "A la Asociación Mutual Policial",
+                "A la Defensoría del Pueblo de Santa Fe",
+                "Al Colegio de Abogados de la circunscripción"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Finanzas y Logística, Pág. 51 / Ley 12.510 Art. 224",
+            "explanation": "El Art. 224 de la Ley 12.510 prescribe que vencido el plazo sin verificarse el ingreso de los fondos, se da intervención formal a Fiscalía de Estado para ejecutar judicialmente el título de deuda pública."
+        },
+        {
+            "id": "isc-015",
+            "difficulty": "dificil",
+            "question": "En la sistemática de la Ley 12.510 de Santa Fe, ¿cuál es la distinción sustancial entre el 'Juicio de Cuentas' y el 'Juicio de Responsabilidad'?",
+            "options": [
+                "No existe ninguna diferencia; la Ley 12.510 derogó el Juicio de Cuentas en 2018",
+                "El Juicio de Cuentas es penal y el de Responsabilidad es civil",
+                "El Juicio de Cuentas solo juzga a ministros y el de Responsabilidad a policías subalternos",
+                "El Juicio de Cuentas audita la legalidad y respaldo documental de la rendición periódica de fondos asignados; el Juicio de Responsabilidad se promueve por daños o perjuicios patrimoniales causados al Estado por actos u omisiones de los agentes"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Finanzas y Logística, Pág. 50-52 / Ley 12.510",
+            "explanation": "El Juicio de Cuentas versa sobre el examen de rendiciones de quienes manejan fondos públicos (cuentadantes); el de Responsabilidad investiga actos ilícitos, omisiones o negligencias que causen perjuicio económico a la hacienda pública provincial."
+        },
+        {
+            "id": "isc-016",
+            "difficulty": "facil",
+            "question": "En la teoría del liderazgo policial contemporáneo, ¿cuál es el rasgo distintivo del modelo de 'Liderazgo Transformacional'?",
+            "options": [
+                "Imponer castigos de arresto automáticos para infundir temor disciplinario constante",
+                "Inspirar, motivar y movilizar al equipo hacia objetivos superiores de servicio, fomentando la innovación, el compromiso ético y el desarrollo profesional del subordinado",
+                "Delegar todas las responsabilidades operativas en el personal de menor jerarquía sin supervisar",
+                "Limitar la labor del jefe a firmar expedientes en su despacho sin tomar contacto con la guardia"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Liderazgo y Salud Mental, Pág. 69-72",
+            "explanation": "El liderazgo transformacional trasciende la mera obediencia jerárquica transaccional, logrando que el personal policial se identifique con la misión institucional y desarrolle su máximo potencial ético y operativo."
+        },
+        {
+            "id": "isc-017",
+            "difficulty": "facil",
+            "question": "En el cuidado de la salud mental del personal policial, ¿qué es el Síndrome de Burnout o de desgaste profesional?",
+            "options": [
+                "Un estado pasajero de cansancio muscular que desaparece tras 4 horas de sueño",
+                "Un trastorno adaptativo crónico derivado del estrés laboral continuo, caracterizado por agotamiento emocional, despersonalización y sensación de ineficacia o baja realización personal",
+                "Una sanción disciplinaria impuesta por ausentarse sin aviso al servicio de guardia",
+                "Una lesión articular provocada por el uso prolongado del chaleco balístico"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Liderazgo y Salud Mental, Pág. 103-106",
+            "explanation": "El Burnout es reconocido por la OMS y el manual como un padecimiento psicofisiológico ocupacional que deteriora la respuesta empática, la lucidez y el rendimiento operativo de los uniformados."
+        },
+        {
+            "id": "isc-018",
+            "difficulty": "media",
+            "question": "Según el modelo de Maslach y Jackson detallado en el manual, ¿cuáles son las tres dimensiones esenciales que configuran el Síndrome de Burnout en las fuerzas policiales?",
+            "options": [
+                "Falta de armamento, Baja remuneración y Falta de móviles",
+                "Insomnio, Pérdida de apetito y Gastritis aguda",
+                "Insubordinación, Deserción y Abandono de servicio",
+                "Agotamiento emocional, Despersonalización (cinismo y distanciamiento) y Reducida realización personal"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Liderazgo y Salud Mental, Pág. 104-106",
+            "explanation": "La tríada del burnout comprende: el vacío de energía psicofísica (agotamiento), actitudes frías e insensibles hacia víctimas o colegas (despersonalización) y sentimientos de frustración profesional (baja realización)."
+        },
+        {
+            "id": "isc-019",
+            "difficulty": "media",
+            "question": "¿De qué manera impacta la 'Inteligencia Práctica y Emocional' en un oficial que asume la Jefatura o Subjefatura de una comisaría?",
+            "options": [
+                "Le asegura un ascenso automático al grado inmediato superior sin rendir concurso ISEP",
+                "Le otorga facultades para modificar las leyes del Código Procesal Penal a criterio propio",
+                "Le permite autorregular su reactividad ante la hostilidad externa, tomar decisiones reflexivas bajo presión y gestionar eficazmente los conflictos interpersonales de la dotación",
+                "Le permite prescindir de la elaboración de órdenes de operaciones en allanamientos"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Liderazgo y Salud Mental, Pág. 91-95",
+            "explanation": "La inteligencia emocional del conductor previene el secuestro amigdalino en momentos críticos, reduce el estrés de los subordinados y mejora el clima organizacional de la dependencia."
+        },
+        {
+            "id": "isc-020",
+            "difficulty": "media",
+            "question": "En el capítulo dedicado a 'Liderazgo y Género' en la institución policial, ¿cuál es el postulado institucional que destaca el manual de perfeccionamiento?",
+            "options": [
+                "La incorporación plena y equitativa de las mujeres en los mandos operativos y de conducción estratégica aporta diversidad de enfoques y enriquece la resolución de conflictos complejos",
+                "Que las oficiales mujeres deben ser destinadas con exclusividad a labores administrativas de oficina",
+                "Que la perspectiva de género es incompatible con la disciplina castrense de la policía",
+                "Que las jefaturas de comisarías solo pueden ser ocupadas por personal masculino de mayor antigüedad"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Liderazgo y Salud Mental, Pág. 78-84",
+            "explanation": "El manual enfatiza la demolición de sesgos de género, reconociendo que el liderazgo policial se basa en competencias éticas, tácticas y gerenciales, integrando a mujeres en puestos de alta dirección operativa."
+        },
+        {
+            "id": "isc-021",
+            "difficulty": "dificil",
+            "question": "¿Cómo define el manual el 'Liderazgo Estratégico' que debe desplegar el Subcomisario frente a las demandas de seguridad del territorio a su cargo?",
+            "options": [
+                "Como el cumplimiento estricto y ciego de la rutina diaria sin planificar cambios operativos",
+                "Como la aplicación irrestricta de castigos disciplinarios sin evaluar las causas del error",
+                "Como la delegación de las decisiones operacionales complejas en los comisarios retirados",
+                "Como la capacidad de anticipar tendencias delictivas, alinear recursos limitados hacia objetivos claros a mediano y largo plazo, y articular con actores externos sosteniendo la legitimidad institucional"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Liderazgo y Salud Mental, Pág. 85-90",
+            "explanation": "El líder estratégico no se limita a 'apagar incendios' diarios; diagnóstica patrones en su jurisdicción, proyecta escenarios futuros y maximiza la eficiencia de sus recursos operativos y humanos."
+        },
+        {
+            "id": "isc-022",
+            "difficulty": "dificil",
+            "question": "Tras un enfrentamiento armado con heridos o fallecidos, ¿qué intervención primaria de contención de salud mental debe ordenar el jefe de dependencia conforme a las pautas de manejo del estrés post-incidente?",
+            "options": [
+                "Publicar las fotografías de los efectivos intervinientes en redes sociales institucionales",
+                "Obligar al efectivo a continuar inmediatamente el patrullaje de guardia para que no pierda la concentración",
+                "Separar preventivamente al personal del teatro de operaciones, asegurar asistencia médica y psicológica inmediata, desarmar en ambiente seguro y realizar un debriefing de contención sin emitir juicios de valor",
+                "Iniciar de oficio un sumario disciplinario con sanción de arresto preventivo"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Liderazgo y Salud Mental, Pág. 105-109",
+            "explanation": "La intervención inmediata en incidentes críticos (CISD/debriefing) reduce el riesgo de Trastorno por Estrés Postraumático (TEPT), brindando contención profesional antes de cualquier indagatoria disciplinaria."
+        },
+        {
+            "id": "isc-023",
+            "difficulty": "facil",
+            "question": "En la oratoria y retórica clásica institucional, ¿cuál es la función central del 'Exordio' al inicio de un discurso policial?",
+            "options": [
+                "Captar la atención, despertar el interés y ganar la predisposición favorable o benevolencia del auditorio hacia el mensaje que se va a transmitir",
+                "Leer de memoria las leyes provinciales y números de artículos procesales",
+                "Amenazar a los oyentes con iniciar actuaciones penales si interrumpen la exposición",
+                "Cerrar la reunión despidiéndose apresuradamente de los presentes"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Comunicación y Oratoria, Pág. 134-137",
+            "explanation": "El exordio es la apertura estratégica del discurso: establece el tono emocional, genera empatía y predispone positivamente al público oyente hacia el expositor."
+        },
+        {
+            "id": "isc-024",
+            "difficulty": "facil",
+            "question": "Según el manual en su apartado 'Un discurso no es un escrito', ¿por qué el orador policial debe evitar la lectura monótona de textos?",
+            "options": [
+                "Porque los vecinos de la comunidad no comprenden el idioma español formal",
+                "Porque la lectura rígida destruye el contacto visual, desconecta al orador de la audiencia y transmite frialdad e inseguridad institucional",
+                "Porque la lectura oral de un documento escrito constituye una falta disciplinaria grave",
+                "Porque el reglamento policial prohíbe que los oficiales utilicen papeles en público"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Comunicación y Oratoria, Pág. 139-140",
+            "explanation": "La oratoria requiere ritmo verbal, modulación, gestualidad y contacto visual directo con la audiencia, elementos incompatibles con la lectura de memoria o de corrido de un documento plano."
+        },
+        {
+            "id": "isc-025",
+            "difficulty": "media",
+            "question": "Al comunicar frente a los medios de prensa en una situación de crisis operativa (ej. homicidio resonante o toma de rehenes), ¿qué pautas de vocería exige el manual?",
+            "options": [
+                "Culpar a las autoridades judiciales por la falta de celeridad procesal",
+                "Dar a conocer de inmediato la identidad de sospechosos no aprehendidos para que los vecinos los busquen",
+                "Ocultar los hechos afirmando ante las cámaras que en la ciudad no ocurren delitos",
+                "Transmitir serenidad, empatía hacia las víctimas, precisión técnica, responsabilidad institucional y ceñirse a hechos verificados sin aventurar hipótesis"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Comunicación y Oratoria, Pág. 134-136",
+            "explanation": "La comunicación en crisis demanda cautela, contención y respeto a la legalidad procesal, evitando generar pánico social o contaminar la investigación penal en curso."
+        },
+        {
+            "id": "isc-026",
+            "difficulty": "media",
+            "question": "De acuerdo a las reglas del Exordio analizadas en el manual, si el auditorio se encuentra 'desfavorable por contradicción' (convencido de una postura contraria o molesto por un reclamo barrial), ¿cómo debe iniciar su discurso el jefe policial?",
+            "options": [
+                "No contradecir de entrada al auditorio; reconocer sus preocupaciones legítimas, mostrar serenidad y desde allí ir reencauzando la argumentación con seriedad",
+                "Abandonar el recinto sin emitir palabra hasta que los vecinos cambien de opinión",
+                "Exigir el desalojo compulsivo de la sala mediante la fuerza pública",
+                "Gritar más fuerte que los presentes para imponer autoridad de mando"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Comunicación y Oratoria, Pág. 137-138",
+            "explanation": "Ante públicos adversos o irritados, el orador inteligente utiliza el principio de desescalamiento: valida las inquietudes comunitarias, establece contraste y demuestra vocación de escucha antes de fundamentar las acciones institucionales."
+        },
+        {
+            "id": "isc-027",
+            "difficulty": "media",
+            "question": "En la adaptación del discurso a la audiencia comunitaria, ¿qué regla lingüística impone el manual al funcionario a cargo de una comisaría?",
+            "options": [
+                "Traducir la jerga y tecnicismos procesales a un lenguaje ciudadano claro, directo y comprensible, sin perder la rigurosidad conceptual ni la dignidad del cargo",
+                "Utilizar modismos callejeros y lenguaje vulgar para parecer más cercano a la gente",
+                "Utilizar únicamente códigos alfanuméricos de radiofrecuencia (QTH, QAP)",
+                "Hablar exclusivamente mediante citas en latín forense para intimidar a los vecinos"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Comunicación y Oratoria, Pág. 134-136",
+            "explanation": "El exceso de tecnicismos genera barreras comunicativas; el líder policial debe comunicar con claridad pedagógica para que los ciudadanos entiendan cabalmente las medidas preventivas dispuestas."
+        },
+        {
+            "id": "isc-028",
+            "difficulty": "dificil",
+            "question": "En materia de ética comunicacional y normas legales, ¿qué trascendencia penal y administrativa tiene la filtración de información policial o fotografías de sumarios a canales informales o redes?",
+            "options": [
+                "Constituye una falta disciplinaria gravísima y el delito de violación de secretos (Art. 157 CP), comprometiendo el éxito investigativo y los derechos constitucionales de las personas",
+                "Es una práctica permitida si el oficial recibe autorización verbal del periodista local",
+                "Solamente acarrea un llamado de atención verbal interno sin consecuencias en el legajo",
+                "No genera ninguna responsabilidad si la fotografía se envía a un grupo de mensajería privado"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Comunicación y Oratoria, Pág. 141-143 / CP Art. 157",
+            "explanation": "La difusión no autorizada de piezas de la IPP o datos sensibles lesiona el principio de inocencia, el debido proceso y la confidencialidad sumarial, ameritando destitución e imputación penal."
+        },
+        {
+            "id": "isc-029",
+            "difficulty": "dificil",
+            "question": "Frente a la rápida viralización de noticias falsas ('fake news') o rumores sobre hechos delictivos inexistentes que generan alarma pública, ¿cuál es el protocolo institucional de respuesta?",
+            "options": [
+                "Emitir un comunicado oficial oportuno, veraz y respaldado por datos objetivos desde los canales institucionales formales, desmintiendo el rumor sin amplificar la confrontación",
+                "Publicar desmentidos informales desde cuentas anónimas o perfiles particulares del personal",
+                "Amenazar a los administradores de redes sociales con la clausura de las antenas de telefonía",
+                "Ignorar las redes sociales ya que la policía no debe involucrarse en entornos virtuales"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Comunicación y Oratoria, Pág. 141-143",
+            "explanation": "El vacío de información oficial potencia el rumor; la respuesta institucional debe ser rápida, profesional, verificable y canalizada a través de vocerías y gacetillas formales."
+        },
+        {
+            "id": "isc-030",
+            "difficulty": "facil",
+            "question": "De acuerdo al Régimen de Sanciones Administrativas (Decreto N° 461/2015), ¿cuál es el objetivo primordial de la 'Información Sumaria'?",
+            "options": [
+                "Sustituir a los tribunales penales en el juzgamiento de crímenes federales",
+                "Registrar las asistencias del personal a los cursos de capacitación voluntaria",
+                "Comprobar sumariamente la existencia de un hecho presuntamente irregular, individualizar a sus partícipes y determinar si corresponde iniciar sumario administrativo formal o desestimar las actuaciones",
+                "Aplicar de inmediato la sanción de cesantía o exoneración sin escuchar al agente"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Régimen Disciplinario, Pág. 266-270 / Dec. 461/15",
+            "explanation": "La Información Sumaria es una etapa preliminar de investigación ágil para esclarecer la verosimilitud de la falta y determinar si amerita elevar a sumario disciplinario formal o archivar por inexistencia de infracción."
+        },
+        {
+            "id": "isc-031",
+            "difficulty": "media",
+            "question": "En el procedimiento disciplinario policial (RSA - Dec. 461/15), ¿qué carácter reviste la Audiencia de Atribución de Responsabilidad Administrativa regulada en el Artículo 40°?",
+            "options": [
+                "Es un examen escrito de preguntas múltiples sobre leyes policiales",
+                "Es el acto procesal obligatorio donde se intima formalmente al imputado sobre los hechos y faltas atribuidas, recibiéndosele declaración con plenas garantías de defensa bajo pena de nulidad",
+                "Es una reunión informal voluntaria donde el sumariado decide si acepta pagar un arancel",
+                "Es una audiencia pública transmitida por televisión comunitaria para escarnio del efectivo"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Régimen Disciplinario, Pág. 270 / Dec. 461/15",
+            "explanation": "La audiencia del Art. 40° RSA constituye el núcleo de la garantía constitucional del debido proceso (Art. 18 CN): su omisión indefectiblemente genera la nulidad absoluta de todo el sumario."
+        },
+        {
+            "id": "isc-032",
+            "difficulty": "media",
+            "question": "Si el personal policial sumariado no comparece a la Audiencia del Art. 40° del RSA encontrándose debidamente notificado y sin causa justificada, ¿qué consecuencia procesal prevé el reglamento?",
+            "options": [
+                "Se lo declara cesante de forma automática sin producir la prueba pendiente",
+                "Se remite al sospechoso a prisión preventiva en una cárcel federal de máxima seguridad",
+                "Se declara su rebeldía procesal y se continúa con la sustanciación de la causa en el estado en que se encuentre",
+                "Se archiva el expediente disciplinario considerándose que el silencio equivale a inocencia"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Régimen Disciplinario, Pág. 270 / Dec. 461/15",
+            "explanation": "La incomparecencia injustificada habilita la declaración de rebeldía, prosiguiendo el trámite disciplinario; si el imputado comparece luego, asume la causa en el estado en que se halle."
+        },
+        {
+            "id": "isc-033",
+            "difficulty": "dificil",
+            "question": "Según el régimen disciplinario policial de Santa Fe (Ley 12.521 y Dec. 461/15), ¿cuál es el plazo de prescripción general de la potestad disciplinaria para investigar y sancionar faltas graves?",
+            "options": [
+                "Dos (2) años contados desde la fecha de comisión de la falta o desde que la superioridad tomó conocimiento",
+                "Diez (10) años equiparados al homicidio calificado",
+                "Seis (6) meses improrrogables desde el hecho",
+                "Las faltas disciplinarias policiales son imprescriptibles en todos los casos"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Régimen Disciplinario, Pág. 265-268 / Dec. 461/15",
+            "explanation": "La acción disciplinaria para faltas graves prescribe a los 2 años, extinguiéndose la potestad punitiva estatal si no mediaren causales formales de suspensión o interrupción del trámite."
+        },
+        {
+            "id": "isc-034",
+            "difficulty": "dificil",
+            "question": "Durante la instrucción de una Información Sumaria iniciada en la comisaría, si el instructor constata elementos concluyentes de que se configuró una falta gravísima que amerita destitución (cesantía o exoneración), ¿qué medida procesal imperativa debe adoptar?",
+            "options": [
+                "Destruir las pruebas para no perjudicar la foja de servicio de la dependencia",
+                "Clausurar la información sumaria y remitir de inmediato las actuaciones a la Jefatura para que el órgano competente ordene la conversión a Sumario Administrativo formal",
+                "Derivar el expediente a un centro de mediación comunitaria municipal",
+                "Imponer directamente la cesantía mediante resolución de la comisaría"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Régimen Disciplinario, Pág. 270-272 / Dec. 461/15",
+            "explanation": "Las penas expulsivas (destitución) solo pueden imponerse mediante sumario formal con intervención de la División Judicial / Asuntos Internos y dictamen letrado; la información sumaria no puede sustanciar destituciones."
+        },
+        {
+            "id": "isc-035",
+            "difficulty": "dificil",
+            "question": "Frente a una sanción disciplinaria de arresto o suspensión de empleo impuesta por el Jefe de Unidad Regional, ¿qué recursos administrativos tiene a su disposición el personal sancionado para impugnar la medida?",
+            "options": [
+                "No cabe ningún recurso, ya que las sanciones policiales causan estado de forma inapelable",
+                "Recurso de Revocatoria ante la misma autoridad que dictó la resolución y Recurso de Apelación en subsidio ante el Jefe de Policía de Provincia",
+                "Demanda contravencional ante el Ministerio Público de la Acusación",
+                "Acción de Hábeas Data ante los juzgados de paz vecinales"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Régimen Disciplinario, Pág. 273-276 / Dec. 461/15",
+            "explanation": "El sancionado puede interponer revocatoria con apelación en subsidio dentro de los plazos reglamentarios, garantizando el control jerárquico de legitimidad y razonabilidad."
+        },
+        {
+            "id": "isc-036",
+            "difficulty": "facil",
+            "question": "De acuerdo con el Decreto 395/75 y el manual policial, ¿cómo se clasifica técnica y operativamente a la Pistola Ametralladora FMK3 de dotación institucional?",
+            "options": [
+                "Fusil de cerrojo de grueso calibre para francotiradores",
+                "Arma de fuego automática con recámara alineada permanentemente con el cañón, diseñada para emplearse con ambas manos apoyada o no en el cuerpo, alimentada por cargador removible en calibre 9x19mm",
+                "Arma de puño de tiro a tiro de ánima lisa exclusiva para caza deportiva",
+                "Arma de lanzamiento de proyectiles no letales de fogueo impulsada por aire comprimido"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Tiro y Armamento, Pág. 341 / Dto. 395/75",
+            "explanation": "La FMK3 es una pistola ametralladora calibre 9mm Parabellum que dispara en tiro a tiro o ráfaga mediante selector de tiro, alimentada por almacén cargador de 25 o 40 cartuchos."
+        },
+        {
+            "id": "isc-037",
+            "difficulty": "facil",
+            "question": "Según el manual de armamento, ¿cuál es la diferencia visual y mecánica fundamental entre la Pistola Ametralladora FMK3 y su variante FMK5?",
+            "options": [
+                "La FMK5 dispara únicamente en tiro semiautomático (tiro a tiro), posee terminación fosfatada marrón oscuro con la inscripción amarilla 'SEMI-AUTO' y selector con posiciones solo 'R' y 'S'",
+                "La FMK5 fue fabricada exclusivamente para uso subacuático por buzos tácticos",
+                "La FMK5 utiliza cartuchos calibre 12/70 de escopeta en lugar de 9mm",
+                "La FMK5 posee dos cañones superpuestos y carece de disparador mecánico"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Tiro y Armamento, Pág. 350",
+            "explanation": "La FMK5 es la versión civil/policial semiautomática de la FMK3: carece de la opción de fuego automático en ráfaga ('A'), contando únicamente con Seguro ('S') y Repetición ('R')."
+        },
+        {
+            "id": "isc-038",
+            "difficulty": "media",
+            "question": "¿Cuáles son las características técnicas y sistema de funcionamiento de la Escopeta Hatsan modelo Escort provista a las dependencias policiales?",
+            "options": [
+                "Lanzagranadas de humo accionado por cerrojo giratorio Mauser",
+                "Arma corta de puño calibre .22 de tiro tiro para polígonos cerrados",
+                "Arma larga de hombro de origen turco, calibre 12/76 (3 pulgadas) de cañón liso, cuyo ciclo de recarga lo efectúa manualmente el tirador mediante el movimiento de la chimaza (acción a trombón)",
+                "Escopeta automática accionada por retroceso corto con selector de ráfagas libres"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Tiro y Armamento, Pág. 350",
+            "explanation": "La Hatsan Escort calibre 12/76 opera por acción pump action (trombón manual sobre chimaza), con capacidad para cartuchos de perdigones, postas de goma (antitumulto) o proyectiles monobloque."
+        },
+        {
+            "id": "isc-039",
+            "difficulty": "media",
+            "question": "Conforme al Artículo 2° del Protocolo del Uso Progresivo de la Fuerza de la Provincia de Santa Fe, ¿cuál es el ámbito de aplicación respecto al personal del Servicio Penitenciario Provincial?",
+            "options": [
+                "Solo se aplica a penitenciarios que revistan jerarquía de Oficiales Superiores",
+                "El Protocolo es de aplicación obligatoria para el Servicio Penitenciario exclusivamente cuando actúe fuera del ámbito de los establecimientos penitenciarios (ej. traslados y custodias externas)",
+                "El Servicio Penitenciario está totalmente exento de cumplir este Protocolo en cualquier circunstancia",
+                "Se aplica en todo momento dentro y fuera de las cárceles sin excepción alguna"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Protocolo Uso de la Fuerza, Pág. 371 Art. 2°",
+            "explanation": "El Art. 2° establece que dentro de las cárceles rigen los reglamentos penitenciarios internos, pero fuera de ellas (vía pública, traslados, custodias) el Protocolo Provincial de Uso de la Fuerza es vinculante."
+        },
+        {
+            "id": "isc-040",
+            "difficulty": "media",
+            "question": "En la escala de conductas y niveles de intervención del Protocolo Provincial de Uso de la Fuerza (Art. 4°), ¿qué conducta describe el término 'Cooperación'?",
+            "options": [
+                "El infractor se niega a abrir la puerta de su vehículo durante un control de tránsito",
+                "La persona sujeta a control policial da cumplimiento voluntario e inmediato a las órdenes e instrucciones verbales del funcionario",
+                "El agresor extrae un arma blanca exigiendo que el policía se retire",
+                "El ciudadano intenta huir a la carrera arrojando objetos contundentes al personal"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Protocolo Uso de la Fuerza, Pág. 372-373 Art. 4°",
+            "explanation": "La 'Cooperación' es el nivel basal donde no media resistencia física ni desobediencia, respondiéndose con presencia policial y comunicación verbal profesional."
+        },
+        {
+            "id": "isc-041",
+            "difficulty": "media",
+            "question": "Según el Protocolo de Santa Fe, ¿qué se entiende operativamente por 'Violación del espacio personal' de un agente de seguridad?",
+            "options": [
+                "El estacionamiento de un vehículo civil frente al portón de salida del patrullero",
+                "La publicación de comentarios críticos hacia la policía en redes sociales",
+                "La transgresión injustificada de la distancia de seguridad del agente, entendida como el radio mínimo indispensable para evitar un contacto físico no deseado o ataque sorpresivo",
+                "El ingreso no autorizado a la sala de guardia de la comisaría en horario nocturno"
+],
+            "correctIndex": 2,
+            "source": "Manual Subcomisario ISEP - Protocolo Uso de la Fuerza, Pág. 374",
+            "explanation": "El espacio personal es la zona perimétrica de seguridad táctica; su invasión por parte de un sujeto hostil activa alertas operativas ante la inminencia de un contacto lesivo."
+        },
+        {
+            "id": "isc-042",
+            "difficulty": "dificil",
+            "question": "Cuando un individuo transgrede la distancia de seguridad del efectivo policial y existen indicios razonables de inminencia de ataque, ¿qué respuesta táctica proporcional habilita expresamente el Protocolo de Santa Fe?",
+            "options": [
+                "Efectuar disparos directos con arma de fuego hacia el rostro del sospechoso",
+                "Retirarse corriendo abandonando el armamento y los pertrechos policiales",
+                "Permitir la agresión física hasta recibir autorización judicial por escrito",
+                "La activación de una respuesta de 'legítima defensa preventiva', mediante una postura defensiva firme para recuperar el control de la distancia y el empleo de fuerza proporcionada si persiste la amenaza"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Protocolo Uso de la Fuerza, Pág. 374",
+            "explanation": "El Protocolo autoriza la 'legítima defensa preventiva' táctica para impedir la consumación del ataque, restableciendo la distancia de seguridad con técnicas de control y uso gradual de la fuerza."
+        },
+        {
+            "id": "isc-043",
+            "difficulty": "dificil",
+            "question": "En el marco conceptual del enfrentamiento armado policial, ¿cuál es la distinción técnica que formula el Protocolo entre 'Asimetría Inicial' y 'Asimetría Sobrevenida'?",
+            "options": [
+                "La Asimetría Inicial aplica en delitos comunes y la Sobrevenida en faltas contravencionales",
+                "La Asimetría Inicial se refiere a la diferencia de edad y la Sobrevenida a la estatura física de los intervinientes",
+                "La Asimetría Sobrevenida se produce únicamente cuando interviene el helicóptero policial",
+                "La Asimetría Inicial es la ventaja o desventaja competitiva preexistente desde el primer contacto (ej. superioridad numérica, armamento, posición); la Sobrevenida es la desventaja táctica que surge intempestivamente durante el desarrollo de la intervención"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Protocolo Uso de la Fuerza, Pág. 375 Art. 6°",
+            "explanation": "El análisis de asimetrías permite justificar jurídicamente el nivel de fuerza desplegado: una desventaja sobrevenida (ej. traba de arma o aparición de cómplices armados) legitima elevar inmediatamente el nivel defensivo."
+        },
+        {
+            "id": "isc-044",
+            "difficulty": "dificil",
+            "question": "¿Cuáles son las características mecánicas principales y sistema de disparo del Fusil Automático Liviano (FAL) analizado en el manual policial?",
+            "options": [
+                "Fusil de aire precomprimido PCP calibre 5,5mm para competencias de tiro al blanco",
+                "Subfusil automático accionado por masa sin retroceso que dispara proyectiles de perdigones",
+                "Carabina de caza de cerrojo manual tiro a tiro con cañón de ánima lisa",
+                "Fusil de combate calibre 7,62x51mm NATO, accionado por toma de gases en un punto del cañón con pistón y regulador de escape, cerrojo basculante y cargador de 20 cartuchos"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Tiro y Armamento, Pág. 345-352",
+            "explanation": "El FAL opera por derivación de gases con pistón independiente y regulador mecánico, alimentado por cargador de 20 proyectiles 7,62mm OTAN, con selector de seguro, repetición y ráfaga."
+        },
+        {
+            "id": "isc-045",
+            "difficulty": "facil",
+            "question": "A partir de la adhesión de Santa Fe a la desfederalización mediante Ley N° 14.239, ¿qué delitos de la Ley 23.737 pasaron a ser competencia directa de los Fiscales del MPA?",
+            "options": [
+                "El contrabando aéreo y marítimo interprovincial de sustancias ilícitas",
+                "Los delitos cometidos por cárteles extranjeros en aguas internacionales",
+                "La fabricación transnacional a gran escala de precursores químicos y el lavado internacional de activos",
+                "El comercio minorista, distribución y tenencia de estupefacientes fraccionados para consumo o venta directa al consumidor (narcomenudeo o microtráfico)"
+],
+            "correctIndex": 3,
+            "source": "Manual Subcomisario ISEP - Narcomenudeo y CPP, Pág. 146-150 / Ley 14.239",
+            "explanation": "La Ley 14.239 asumió para la provincia la persecución del último eslabón de la cadena de comercialización (puntos de venta barriales y dosis fraccionadas), quedando el gran tráfico reservado al fuero federal."
+        },
+        {
+            "id": "isc-046",
+            "difficulty": "media",
+            "question": "En un allanamiento fiscal donde se secuestran envoltorios con polvo blanco y picadura vegetal, ¿qué diligencia es obligatoria para acreditar prima facie que se trata de estupefacientes según la Ley 14.239?",
+            "options": [
+                "Incinar todo el material en una hoguera pública sin realizar reactivo previo",
+                "Someter una muestra representativa al test de orientación química de campo (narcotest reactivo) en presencia de testigos hábiles, labrando acta y pesaje respectivo",
+                "Esperar 180 días a que el laboratorio forense central autorice abrir las bolsas",
+                "Probar el sabor de la sustancia en la boca del instructor sumariante"
+],
+            "correctIndex": 1,
+            "source": "Manual Subcomisario ISEP - Narcomenudeo y CPP, Pág. 150-155",
+            "explanation": "El reactivo orientativo de campo (Scott para cocaína, Duquenois-Levine para marihuana) constata la presencia de alcaloides y legitima procesalmente la medida cautelar y la imputación fiscal."
+        },
+        {
+            "id": "isc-047",
+            "difficulty": "dificil",
+            "question": "De acuerdo con el Artículo 167 del Código Procesal Penal de Santa Fe (Ley 12.734), ¿cuándo puede el funcionario policial realizar la requisa de un vehículo en la vía pública SIN orden previa de allanamiento?",
+            "options": [
+                "Cuando existan motivos suficientes y fundados para presumir que en el vehículo se ocultan cosas relacionadas con un delito o efectos de un ilícito en curso o flagrancia",
+                "Únicamente si el conductor del rodado acepta por escrito pagar una multa de tránsito",
+                "En cualquier circunstancia de rutina sin necesidad de fundamentar sospecha alguna",
+                "Solo si el vehículo pertenece a una empresa de transporte internacional de cargas"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Narcomenudeo y CPP, Pág. 180-185 / CPP Art. 167",
+            "explanation": "La requisa sin orden judicial exige fundadas sospechas y urgencia (Arts. 167 y 268 inc. 2 CPP); su ejercicio arbitrario o sin causas objetivas acarrea la nulidad de los secuestros."
+        },
+        {
+            "id": "isc-048",
+            "difficulty": "dificil",
+            "question": "Conforme al régimen procesal de Santa Fe (Art. 214 del CPP), ¿en qué plazo debe el jefe de procedimiento comunicar al Fiscal del MPA la aprehensión en flagrancia de un ciudadano?",
+            "options": [
+                "De manera inmediata y sin dilación, dentro de un plazo que no exceda las primeras horas de efectivizada la medida de privación de la libertad",
+                "A los diez (10) días hábiles administrativos siguientes al procedimiento",
+                "Solo si el aprehendido cuenta con antecedentes condenatorios en el prontuario policial",
+                "Únicamente cuando el imputado designe formalmente a su abogado defensor particular"
+],
+            "correctIndex": 0,
+            "source": "Manual Subcomisario ISEP - Narcomenudeo y CPP, Pág. 185-190 / CPP Art. 214",
+            "explanation": "El deber de comunicación inmediata al fiscal director de la IPP es taxativo: garantiza el control judicial de la legalidad de la aprehensión y el cómputo de los plazos constitucionales."
+        }
     ],
     "subcomisario-comisario": [
         {
@@ -11903,7 +12576,7 @@ window.quizBank = {
 window.quizBankMeta = {
     "version": "8.1.0",
     "lastUpdated": "2026-11-05",
-    "totalQuestions": 847,
+    "totalQuestions": 895,
     "difficulties": [
         {
             "id": "facil",
@@ -11968,8 +12641,8 @@ window.quizBankMeta = {
             "title": "Inspector → Subcomisario",
             "icon": "admin_panel_settings",
             "color": "from-amber-600 to-orange-700",
-            "desc": "Narcomenudeo (Ley 14.239), Conducción de Comisarías y Orden Público, Pistola Bersa 9mm",
-            "programSyllabus": "Desfederalización y Microtráfico, Conducción de Comisarías y Destacamentos, Órdenes de Operaciones y Armamento"
+            "desc": "Modelo SARA, Ley 12.510, Liderazgo Estratégico, Oratoria en Crisis, Sumarios Dto. 461/15, FMK3 y Uso de la Fuerza",
+            "programSyllabus": "Seguridad Pública y Modelo SARA · Finanzas Ley 12.510 y Tribunal de Cuentas · Liderazgo y Salud Mental · Oratoria Policial · Microtráfico y CPP · Sumarios Dto. 461/15 · Armamento FMK3/FAL y Uso de la Fuerza"
         },
         {
             "id": "subcomisario-comisario",

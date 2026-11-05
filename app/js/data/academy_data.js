@@ -1069,13 +1069,101 @@ graph TD
             summaries: [
                 {
                     id: "sum-subcom-1",
-                    title: "Unidad 1: Gestión de Recursos Humanos y Libros Obligatorios",
-                    readTime: "15 min",
+                    title: "Módulo 1: Seguridad Pública, Prevención y Modelo SARA (Págs. 8-33)",
+                    readTime: "25 min",
                     content: `
-                        <h3>1. Administración de Comisarías y Registros Legales</h3>
-                        <p>El Subcomisario responde por la correcta confección e inviolabilidad de los libros obligatorios de la dependencia policial (Libro de Guardia, Libro de Detenidos, Registro de Armamento, Libro de Secuestros y Libro de Quejas).</p>
-                        <h3>2. Elevaciones al Ministerio Público de la Acusación (MPA)</h3>
-                        <p>Manejo de plazos procesales para la aprehensión en flagrancia (Art. 212 CPP SF) y comunicaciones electrónicas inmediatas al fiscal de turno.</p>
+                        <h3>1. Modelo SARA (Scanning, Analysis, Response, Assessment)</h3>
+                        <p>Herramienta clave de la Policía Orientada a la Solución de Problemas (POP). Se divide en cuatro fases:</p>
+                        <ul>
+                            <li><strong>Scanning (Detección):</strong> Identificar problemas recurrentes que impactan en la comunidad y priorizarlos.</li>
+                            <li><strong>Analysis (Análisis):</strong> Investigar causas subyacentes, condiciones que preceden al delito y recursos disponibles.</li>
+                            <li><strong>Response (Respuesta):</strong> Diseñar e implementar soluciones intersectoriales a medida.</li>
+                            <li><strong>Assessment (Evaluación):</strong> Medir objetivamente si el problema se redujo, si hubo desplazamiento delictivo y ajustar la respuesta.</li>
+                        </ul>
+                        <h3>2. Niveles de Prevención del Delito</h3>
+                        <ul>
+                            <li><strong>Primaria:</strong> Disuasión general a través del sistema penal e intervención comunitaria temprana.</li>
+                            <li><strong>Secundaria:</strong> Acciones focalizadas sobre grupos en situación de vulnerabilidad o riesgo delictual.</li>
+                            <li><strong>Terciaria:</strong> Intervención criminológica sobre infractores condenados para evitar la reincidencia.</li>
+                            <li><strong>Situacional:</strong> Modificación del entorno físico para elevar el esfuerzo y riesgo del delincuente.</li>
+                        </ul>
+                        <h3>3. Control Social Formal e Informal</h3>
+                        <p>El control informal (familia, vecinos, escuela) actúa cotidianamente. Cuando fracasa, interviene coactivamente el control formal del Estado (Policía, Justicia, Cárceles).</p>
+                    `
+                },
+                {
+                    id: "sum-subcom-2",
+                    title: "Módulo 2: Administración, Finanzas (Ley 12.510) y Tribunal de Cuentas (Págs. 34-66)",
+                    readTime: "25 min",
+                    content: `
+                        <h3>1. Ley N° 12.510 de Administración, Eficiencia y Control del Estado</h3>
+                        <p>Rige el régimen de contrataciones públicas en Santa Fe. La <strong>Licitación Pública</strong> es la regla general obligatoria; las restantes vías (Licitación Privada, Concurso de Precios y Contratación Directa) son excepciones tasadas.</p>
+                        <h3>2. Rendición de Cuentas de Comisarías</h3>
+                        <p>El titular de dependencia y su habilitado responden patrimonialmente por la custodia y debida rendición de comprobantes de: <strong>Gastos de Funcionamiento (caja chica)</strong>, <strong>Combustibles y Lubricantes</strong>, <strong>Racionamiento</strong> y fondos de <strong>Policía Adicional (SPA)</strong>.</p>
+                        <h3>3. Tribunal de Cuentas de la Provincia</h3>
+                        <ul>
+                            <li><strong>Contador Fiscal y Reparo:</strong> Formula requerimientos conminatorios ante omisiones de comprobantes (Art. 219).</li>
+                            <li><strong>Juicio de Cuentas:</strong> Audita la legalidad de los cuentadantes que administran fondos públicos. La resolución condenatoria intima el pago en 30 días corridos (Art. 223).</li>
+                            <li><strong>Juicio de Responsabilidad:</strong> Determina la obligación de resarcir perjuicios patrimoniales causados al erario provincial. Su cobro judicial corresponde a la Fiscalía de Estado (Art. 224).</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: "sum-subcom-3",
+                    title: "Módulo 3: Liderazgo Estratégico Policial y Salud Mental (Págs. 67-110)",
+                    readTime: "20 min",
+                    content: `
+                        <h3>1. Liderazgo Transformacional y Estratégico</h3>
+                        <p>El mando policial moderno trasciende la imposición castrense ciega. El líder transformacional inspira a sus subordinados, promueve la ética y anticipa tendencias delictivas asignando recursos eficientemente.</p>
+                        <h3>2. Liderazgo y Perspectiva de Género</h3>
+                        <p>Integración plena y equitativa de las mujeres en los puestos de conducción operativa, reconociendo competencias profesionales y desarticulando sesgos discriminatorios.</p>
+                        <h3>3. Salud Mental y Prevención del Burnout</h3>
+                        <p>El síndrome de desgaste profesional se manifiesta en 3 dimensiones: <strong>Agotamiento emocional</strong>, <strong>Despersonalización / cinismo</strong> y <strong>Baja realización personal</strong>. El jefe de dependencia debe monitorear el bienestar de su tropa y coordinar atención psicológica tras incidentes armados críticos.</p>
+                    `
+                },
+                {
+                    id: "sum-subcom-4",
+                    title: "Módulo 4: Comunicación, Oratoria y Vocería en Crisis (Págs. 111-143)",
+                    readTime: "20 min",
+                    content: `
+                        <h3>1. Estructura de la Oratoria: El Exordio</h3>
+                        <p>La apertura del discurso busca captar la atención y ganar la benevolencia del público. Ante un auditorio hostil o adverso, el orador no debe chocar directamente; debe validar las inquietudes vecinales y reencauzar serenamente la exposición.</p>
+                        <h3>2. Lenguaje Institucional vs Lenguaje Ciudadano</h3>
+                        <p>El Subcomisario debe traducir la jerga legal a términos sencillos y comprensibles para la ciudadanía en asambleas barriales, evitando la lectura monótona de informes escritos.</p>
+                        <h3>3. Ética y Secreto de Sumario</h3>
+                        <p>La filtración de datos de sumarios o fotografías no autorizadas constituye falta gravísima y delito de violación de secretos (Art. 157 CP). Frente a noticias falsas, la respuesta debe ser oficial, veraz y oportuna.</p>
+                    `
+                },
+                {
+                    id: "sum-subcom-5",
+                    title: "Módulo 5: Régimen Disciplinario, Sumarios e Información Sumaria (Págs. 231-280)",
+                    readTime: "25 min",
+                    content: `
+                        <h3>1. Información Sumaria vs Sumario Administrativo</h3>
+                        <p>La Información Sumaria es una instrucción ágil y preliminar para comprobar un hecho irregular leve. Si surgen faltas gravísimas pasibles de destitución (cesantía o exoneración), es obligatorio elevar a Sumario formal.</p>
+                        <h3>2. Audiencia del Artículo 40° RSA (Decreto 461/15)</h3>
+                        <p>Audiencia de atribución de responsabilidad donde se imputan formalmente los hechos. Es obligatoria bajo apercibimiento de nulidad absoluta. Rige el derecho de defensa y patrocinio letrado.</p>
+                        <h3>3. Prescripción de Faltas</h3>
+                        <p>La potestad sancionatoria disciplinaria para faltas graves prescribe a los 2 años. Contra las resoluciones sancionatorias proceden los recursos de Revocatoria y Apelación en subsidio.</p>
+                    `
+                },
+                {
+                    id: "sum-subcom-6",
+                    title: "Módulo 6: Armamento Táctico y Protocolo del Uso de la Fuerza (Págs. 281-379)",
+                    readTime: "25 min",
+                    content: `
+                        <h3>1. Pistola Ametralladora FMK3 y FMK5</h3>
+                        <p>Arma automática en calibre 9x19mm Parabellum, acerrojamiento por masa, cargadores de 25/40 cartuchos. La FMK5 es su versión semiautomática exclusiva (selector con posiciones 'R' y 'S').</p>
+                        <h3>2. Escopeta Hatsan Escort 12/76</h3>
+                        <p>Arma larga de hombro turca de cañón liso, accionada por trombón (chimaza manual), apta para postas de goma (antitumulto) o postas de guerra.</p>
+                        <h3>3. Fusil Automático Liviano (FAL)</h3>
+                        <p>Calibre 7,62x51mm NATO, operado por toma de gases con pistón y regulador, cerrojo basculante y cargador de 20 tiros.</p>
+                        <h3>4. Protocolo del Uso Progresivo de la Fuerza de Santa Fe</h3>
+                        <ul>
+                            <li><strong>Ámbito:</strong> Obligatorio para Policía, PDI y Servicio Penitenciario fuera de cárceles (Art. 2).</li>
+                            <li><strong>Violación del espacio personal:</strong> Habilita la 'legítima defensa preventiva' para recuperar la distancia de seguridad ante peligro inminente de ataque (Art. 5).</li>
+                            <li><strong>Asimetría Inicial vs Sobrevenida:</strong> Evalúa la ventaja o desventaja táctica inicial frente a la que surge imprevistamente en el choque (Art. 6).</li>
+                        </ul>
                     `
                 }
             ],
