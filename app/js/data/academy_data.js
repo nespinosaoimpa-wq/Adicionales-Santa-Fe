@@ -15,6 +15,16 @@ window.academyLibraryItems = [
         badge: "Manual Oficial Suboficial",
         category: "manuales-2026"
     },
+    {
+        id: "cuestionario-integral-suboficial",
+        title: "Cuestionario Integral: Criminalística y Marco Legal (50 Preguntas ISEP)",
+        desc: "Cuestionario integral oficial de 50 preguntas dividido en 4 módulos con clave y fundamentación jurídica: Criminalística, Dactiloscopía, Escena del Crimen y CPP Santa Fe.",
+        file: "Material_de_Ascenso_ISEP/MANUAL DE ESTUDIO PERFECCIONAMIENTO SUBOFICIAL.pdf",
+        icon: "fact_check",
+        color: "from-emerald-600/20 to-teal-600/20 text-emerald-400 border-emerald-500/30",
+        badge: "50 Preguntas ISEP",
+        category: "manuales-2026"
+    },
     // Concurso 2026 (Manuales Oficiales Vigentes)
     {
         id: "manual-01-oficial-gen",
@@ -406,7 +416,335 @@ window.academyData = {
                         <h3>3. Informática Policial</h3>
                         <p>LibreOffice Writer para actas y notas; LibreOffice Calc para planillas numéricas con fórmulas (ej. '=SUMA(A1:A20)'). Medidas de ciberseguridad y protocolo seguro HTTPS.</p>
                     `
+                },
+                {
+                    id: "sum-subof-6-cuestionario-integral",
+                    title: "Cuestionario Integral de Estudio: Criminalística y Marco Legal (50 Preguntas ISEP)",
+                    readTime: "40 min",
+                    content: `
+                        <div class="mb-4 p-4 rounded-xl bg-sky-500/10 border border-sky-500/30 text-sky-200 text-sm">
+                            <strong class="text-sky-300 font-bold block mb-1">📋 Cuestionario Oficial de Perfeccionamiento</strong>
+                            50 preguntas integrales divididas en 4 módulos temáticos con clave de respuestas y fundamentación técnico-jurídica según el Manual de Estudio de Suboficiales de Santa Fe.
+                        </div>
+
+                        <h3 class="text-base font-bold text-sky-400 mt-6 mb-3">MÓDULO I: Criminalística, Criminología y Principios Científicos</h3>
+                        <div class="space-y-4 text-xs">
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">1. ¿Cuál es la definición formal de Criminalística según el manual?</p>
+                                <p class="text-slate-400 mb-2">A) Ciencia normativa penal · B) <strong>Ciencia que confirma la prueba mediante metodología científica para descubrir la verdad histórica e identificar autores y víctimas</strong> · C) Disciplina preventiva mental · D) Autopsia cadavérica exclusiva.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 7 / 17)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Metodología científica para reconstruir hechos y llegar a la verdad histórica.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">2. ¿En qué consiste el "Principio de Intercambio" enunciado por Edmond Locard en 1910?</p>
+                                <p class="text-slate-400 mb-2">A) Intercambio de objetos de valor · B) <strong>Intercambio de indicios entre el autor, la víctima y el lugar de los hechos</strong> · C) Fuerzas mecánicas simétricas · D) Comparación pericial de escenas.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 7 / 18)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Todo criminal deja indicios en la escena y se lleva elementos consigo.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">3. El Principio de Correspondencia establece que:</p>
+                                <p class="text-slate-400 mb-2">A) Testimonio directo coincidente · B) Cantidad de testigos · C) <strong>La acción dinámica de los agentes mecánicos vulnerantes sobre cuerpos deja impresas sus características, reproduciendo su forma</strong> · D) Apertura inmediata de cartas.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: C (Manual Pág. 8 / 19)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: La acción del agente mecánico imprime su relieve en la superficie receptora.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">4. ¿Cuál es un ejemplo de agente vulnerante de tipo mecánico?</p>
+                                <p class="text-slate-400 mb-2">A) Ácidos o álcalis · B) Radiación o electricidad · C) <strong>Barretas, garrotes, martillos o sogas</strong> · D) Armas bacteriológicas.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: C (Manual Pág. 8 / 19)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Herramientas físicas y elementos contundentes o constrictores de fuerza.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">5. Diferencia fundamental entre Criminalística y Criminología:</p>
+                                <p class="text-slate-400 mb-2">A) Preventiva vs Reconstructiva · B) Cómo vs Por qué social · C) <strong>La Criminalística investiga a posteriori para probar cómo ocurrió e identificar autores; la Criminología estudia las causas antisociales a priori</strong> · D) Sinónimos.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: C (Manual Pág. 9 / 29)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Criminalística = el CÓMO del delito (hecho consumado); Criminología = el POR QUÉ del delito (conducta y prevención).</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">6. Las 7 preguntas fundamentales de la investigación criminalística:</p>
+                                <p class="text-slate-400 mb-2">A) <strong>¿Qué?, ¿Cuándo?, ¿Cómo?, ¿Dónde?, ¿Por qué?, ¿Quiénes?, ¿Con qué?</strong> · B) Quién, cuánto, para qué... · C) Preguntas judiciales de juzgado · D) Preguntas operativas de guardia.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: A (Manual Pág. 8 / 21-27)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Hecho, cronología, mecánica, lugar, móvil, sujetos intervinientes e instrumentos.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">7. En criminalística, la pregunta ¿CÓMO? responde a:</p>
+                                <p class="text-slate-400 mb-2">A) Sujetos activos y pasivos · B) <strong>El tipo de acciones y la forma en que se desarrollaron los hechos</strong> · C) Móvil del comportamiento · D) Delimitación temporal.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 8 / 23)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Establece la secuencia fáctica y dinámica del acontecimiento.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">8. Disciplinas auxiliares fijadoras principales en la escena:</p>
+                                <p class="text-slate-400 mb-2">A) Odontología y Entomología · B) <strong>Fotografía pericial y Planimetría</strong> · C) Criminología y Sociología · D) Informática y Psicología.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 10 / 31)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Registran fotográficamente y dibujan a escala/esquemáticamente los indicios in situ.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">9. Abordaje de la investigación: dos formas principales:</p>
+                                <p class="text-slate-400 mb-2">A) Preventivo y Represivo · B) <strong>De Campo y De Laboratorio</strong> · C) Directo e Indirecto · D) Táctico y Operativo.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 10 / 32)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Campo (lugar del hecho físico) y Laboratorio (análisis instrumental y comparativo).</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">10. ¿Qué estudia la Criminología Ambiental?</p>
+                                <p class="text-slate-400 mb-2">A) Contaminación tóxica · B) <strong>Cómo el medio ambiente y los factores del entorno influencian el comportamiento delictivo individual o grupal</strong> · C) Clima en huellas · D) Fauna cadavérica.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 9 / 28)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Analiza la relación espacial y urbana entre agresores, víctimas y oportunidades delictivas.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">11. El Principio de Certeza en Criminalística se logra cuando:</p>
+                                <p class="text-slate-400 mb-2">A) Testigo sin dudas · B) <strong>La identificación cualitativa, cuantitativa y comparativa de los agentes vulnerantes se efectúa con metodología y tecnología adecuada</strong> · C) Auto de procesamiento · D) 3 indicios biológicos.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 8 / 20)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Conclusión científica basada en instrumental y cotejos periciales verificables.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">12. Diferencia entre indicios intrínsecos y extrínsecos:</p>
+                                <p class="text-slate-400 mb-2">A) De la víctima vs imputado · B) <strong>Si la característica es propia de la cosa (intrínseca) o no propia de la cosa (extrínseca)</strong> · C) Abierto o cerrado · D) Campo o laboratorio.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 8 / 21)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: La cualidad intrínseca es inherente a la materia misma del indicio.</span>
+                            </div>
+                        </div>
+
+                        <h3 class="text-base font-bold text-sky-400 mt-6 mb-3">MÓDULO II: Sistema Dactiloscópico Argentino e Identificación Humana</h3>
+                        <div class="space-y-4 text-xs">
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">13. Creador y año del Sistema Dactiloscópico Argentino:</p>
+                                <p class="text-slate-400 mb-2">A) Edmond Locard 1910 · B) <strong>Juan Vucetich en 1891</strong> · C) Alphonse Bertillon 1882 · D) Pedro Lago 1984.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 11 / 38)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Creado por Vucetich en La Plata y adoptado mundialmente como sistema decadactilar insuperable.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">14. Los tres principios científicos de la identificación dactiloscópica:</p>
+                                <p class="text-slate-400 mb-2">A) Intercambio, Correspondencia, Probabilidad · B) <strong>Perennidad, Inmutabilidad y Variedad</strong> · C) Legalidad, Proporcionalidad, Necesidad · D) Oralidad, Publicidad, Celeridad.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 11 / 37)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Duran toda la vida (perennidad), no cambian sus dibujos (inmutabilidad) y no hay dos iguales en el mundo (variedad).</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">15. El principio de "Inmutabilidad" dactilar establece que:</p>
+                                <p class="text-slate-400 mb-2">A) Huellas en vivos únicamente · B) <strong>Las crestas papilares permanecen idénticas a sí mismas desde la gestación hasta la putrefacción cadavérica</strong> · C) Cambian cada 10 años · D) Varían según profesión.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 11 / 37)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Las crestas dérmicas se forman en el cuarto mes embrionario y se mantienen inalterables.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">16. Los 4 tipos fundamentales del Sistema Dactiloscópico Argentino:</p>
+                                <p class="text-slate-400 mb-2">A) Bucle, Espiral, Mixto, Plano · B) <strong>Arco, Presilla Interna, Presilla Externa y Verticilo</strong> · C) Deltas centrales, izquierdos... · D) Basilar, Marginal...</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 12 / 40)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Clasificación vucetichiana universal (A/1, I/2, E/3, V/4).</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">17. ¿Cómo se define el "Delta" en un dactilogramo?</p>
+                                <p class="text-slate-400 mb-2">A) Círculo cerrado central · B) <strong>La figura triangular o piramidal que resulta de la aproximación o fusión de las regiones basilar, nuclear y marginal</strong> · C) Espacio interpapilar · D) Cicatriz permanente.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 12 / 40)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Vértice de confluencia entre los tres sistemas de crestas de la yema digital.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">18. ¿Qué caracteriza al tipo fundamental "Arco"?</p>
+                                <p class="text-slate-400 mb-2">A) Delta a la izquierda · B) Delta a la derecha · C) <strong>Carece de deltas y sus crestas van de un lado a otro encorvándose en el centro</strong> · D) Dos o más deltas opuestos.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: C (Manual Pág. 12 / 40)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Es un tipo adéltico (sin deltas), crestas transversales arqueadas.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">19. Puntos característicos coincidentes exigidos para identidad indubitable:</p>
+                                <p class="text-slate-400 mb-2">A) 3 a 5 · B) <strong>De 10 a 13 puntos</strong> · C) Exactamente 25 · D) 50 a 100.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 13 / 40)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Estándar forense argentino para aseverar certeza dactiloscópica ante tribunales.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">20. Las tres regiones en que se divide un dactilogramo:</p>
+                                <p class="text-slate-400 mb-2">A) Superior, Media, Inferior · B) <strong>Basilar, Nuclear y Marginal</strong> · C) Epidérmica, Dérmica... · D) Apical, Central...</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 12 / 40)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Basilar (apoyada en el pliegue), Nuclear (centro del dibujo) y Marginal (contorno superior y lateral).</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">21. ¿Por qué el DNI o datos verbales no son científicos para certificar identidad?</p>
+                                <p class="text-slate-400 mb-2">A) Vence a 15 años · B) <strong>Porque los datos pueden ser apócrifos o falsos; la huella dactilar aporta certeza física e indubitable</strong> · C) Sin foto digital · D) Prohibición reglamentaria.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 11 / 34)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: La identidad papilar es inmodificable y resiste cualquier engaño nominal o documental.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">22. Función del uso de guantes por el personal policial en la escena:</p>
+                                <p class="text-slate-400 mb-2">A) Solo bioseguridad · B) <strong>Evitar dejar rastros papilares propios en el lugar del hecho</strong> · C) Reemplazar bolsas · D) Manipular sin constancia.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 13 / 41)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Previene la transferencia de dactilogramas involuntarios del personal policial sobre las evidencias.</span>
+                            </div>
+                        </div>
+
+                        <h3 class="text-base font-bold text-sky-400 mt-6 mb-3">MÓDULO III: Escena del Crimen, Indicios y Cadena de Custodia</h3>
+                        <div class="space-y-4 text-xs">
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">23. Clasificación del Lugar del Hecho según características físicas:</p>
+                                <p class="text-slate-400 mb-2">A) Urbano, Rural... · B) <strong>Abierto, Cerrado, Mixto y Móvil</strong> · C) Primario, Secundario... · D) Público, Privado...</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 14 / 42-44)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Determina la estrategia de acordonamiento y preservación perimétrica.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">24. Diferencia entre Indicio, Evidencia y Prueba:</p>
+                                <p class="text-slate-400 mb-2">A) Idénticos · B) <strong>Indicio es el material sensible hallado; Evidencia es el indicio analizado relacionado al hecho; Prueba es la validada en juicio</strong> · C) Distinción judicial · D) Distinción por delito.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 16 / 46-53)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Evolución procesal de la materia: indicio (hallazgo) ➔ evidencia (peritada) ➔ prueba (admitida en juicio oral).</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">25. Los tres perímetros de preservación de la escena:</p>
+                                <p class="text-slate-400 mb-2">A) Rojo, Amarillo, Verde · B) <strong>Zona Interior Crítica, Zona Exterior Restringida y Zona Exterior Amplia</strong> · C) Círculos concéntricos · D) Disparo, impacto, fuga.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 24 / 79-81)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Interior crítica (evidencias directas), restringida (puesto de mando), amplia (público y prensa).</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">26. En la "Zona Interior Crítica" solo deben permanecer:</p>
+                                <p class="text-slate-400 mb-2">A) Prensa y familiares · B) <strong>El Equipo Pericial y Testigos (y autoridades por canal seguro)</strong> · C) Toda la superioridad policial · D) Solo fiscal y defensor.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 24 / 79)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Máxima restricción para impedir contaminación o destrucción de microindicios.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">27. Tres preocupaciones básicas del primer policía al arribar a la escena:</p>
+                                <p class="text-slate-400 mb-2">A) Detener, prensa, acta · B) <strong>Seguridad del Funcionario, Preservación de la Vida y Protección de la Escena</strong> · C) Fotos, mover cuerpo... · D) Allanar y requisar.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 21 / 69-70)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Prioridad táctica: primero autopreservación y víctimas; luego aseguramiento del lugar.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">28. ¿Por qué NO cubrir el cadáver con sábana o manta en muertes sospechosas?</p>
+                                <p class="text-slate-400 mb-2">A) Propiedad hospitalaria · B) <strong>Porque altera los patrones de manchas de sangre y puede depositar fibras ajenas</strong> · C) Delito penal · D) Impide transporte.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 22 / 73)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Modifica la morfología hemática y contamina la ropa de la víctima con material foráneo.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">29. Medida que debe tomar el primer interventor respecto al ingreso:</p>
+                                <p class="text-slate-400 mb-2">A) Ingreso libre · B) <strong>Crear una vía única de acceso y salida</strong> · C) Clausurar todo sin peritos · D) Dejar pasar prensa.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 23 / 76, 81)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Garantiza un pasillo seguro y controlado para no pisar ni pisar dos veces rastros.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">30. Los tres actos del primer funcionario policial (Acto de Intervención):</p>
+                                <p class="text-slate-400 mb-2">A) Allanar, requisar, detener · B) <strong>Comunicar, Preservar y Custodiar</strong> · C) Investigar e interrogar · D) Fotografiar y secuestrar.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 19 / 58)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Tríada de actuación primaria: avisar a fiscalía/central, aislar el lugar y custodiarlo.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">31. Manipulación de un arma de fuego hallada en la escena:</p>
+                                <p class="text-slate-400 mb-2">A) Disparar al aire · B) <strong>Desactivarla de forma segura, manipularla lo mínimo posible, envasarla en soporte con sujeción y rotularla</strong> · C) Limpiar con paño · D) Con ropa ensangrentada.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 29 / 88)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Resguarda huellas latentes y restos de pólvora sin generar riesgo de disparo accidental.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">32. Secado y embalaje de prendas con manchas de sangre húmedas:</p>
+                                <p class="text-slate-400 mb-2">A) Secador con calor y bolsa plástica · B) <strong>Dejarlas secar de forma natural al aire (sin sol directo ni calor) y embalarlas por separado en bolsas/sobres de papel o cartón</strong> · C) Lavarlas · D) Freezer comercial.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 30 / 90)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: El plástico pudre las muestras orgánicas; el papel transpirable evita putrefacción biológica.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">33. Definición de Cadena de Custodia:</p>
+                                <p class="text-slate-400 mb-2">A) Traslado penitenciario · B) <strong>Procedimiento de seguridad y control que garantiza la autenticidad e inalterabilidad de indicios desde su hallazgo hasta el juicio</strong> · C) Libro de guardia · D) Red telefónica.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 30 / 92)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Asegura la trazabilidad e indemnidad de la prueba material frente a impugnaciones judiciales.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">34. Dos formularios homologados por el MPA de Santa Fe para secuestros:</p>
+                                <p class="text-slate-400 mb-2">A) Acta y cédula · B) <strong>Formulario de Rótulo de Elemento Secuestrado y Formulario de Cadena de Custodia</strong> · C) Conducta y prontuario · D) Tránsito y dactilar.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 30 / 92-93)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Instrumentos formales obligatorios protocolizados por el Ministerio Público de la Acusación.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">35. Máxima autoridad técnica dentro de la escena del crimen:</p>
+                                <p class="text-slate-400 mb-2">A) Comisario de la seccional · B) <strong>El Coordinador Pericial de la escena</strong> · C) Intendente · D) Primer policía que llegó.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 27 / 85)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Posee la dirección científica exclusiva sobre el procesamiento de la escena.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">36. Métodos de búsqueda o recorrido en criminalística de campo:</p>
+                                <p class="text-slate-400 mb-2">A) <strong>Zonal, Lineal, Strip (franjas), Espiral, Radial y Grilla</strong> · B) Rápido, lento... · C) Móvil, helicóptero... · D) Perimetral y rural.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: A (Manual Pág. 27 / 84)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Metodologías estandarizadas de rastrillaje según el tipo de terreno y visibilidad.</span>
+                            </div>
+                        </div>
+
+                        <h3 class="text-base font-bold text-sky-400 mt-6 mb-3">MÓDULO IV: Marco Legal, CPP Santa Fe (Art. 268 y 260) y Actuación Policial</h3>
+                        <div class="space-y-4 text-xs">
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">37. El Artículo 268 del Código Procesal Penal de Santa Fe (Ley 12.734) establece:</p>
+                                <p class="text-slate-400 mb-2">A) Faltas policiales · B) <strong>Los Deberes y Atribuciones de la Policía en la investigación penal</strong> · C) Escalas de ascensos · D) Código de Convivencia.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 17 / 54)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Delimita taxativamente las facultades policiales como auxiliar del MPA.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">38. Según Art. 268 inc. 2) CPP, si hay peligro de que huellas desaparezcan por retardo:</p>
+                                <p class="text-slate-400 mb-2">A) Esperar orden escrita sin tocar nada · B) <strong>Practicar sin demora las diligencias necesarias para hacer constar las huellas o rastros</strong> · C) Derivar a municipio · D) Clausurar comisaría.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 17 / 55 inc. 2)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Obligación policial urgente de aseguramiento periculum in mora para salvar la prueba.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">39. El Artículo 260 del CPP Santa Fe regula formalidades para:</p>
+                                <p class="text-slate-400 mb-2">A) Licencias médicas · B) <strong>Actos irreproducibles o definitivos (inspecciones, registros, secuestros, aprehensiones)</strong> · C) Tránsito · D) Plana Mayor.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 20 / 59)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Diligencias que no pueden repetirse en juicio y exigen estricta formalidad instrumental.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">40. Fidelidad de acto irreproducible en ausencia de testigos civiles (Arts. 260 y 268 inc. 7):</p>
+                                <p class="text-slate-400 mb-2">A) <strong>Firma de dos funcionarios actuantes y registro fílmico/fotográfico corroborante, con constancia expresa de la causa de ausencia</strong> · B) Firma de intendente · C) Boletín oficial · D) Imputado sin abogado.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: A (Manual Pág. 17 / 55 inc. 7 y Pág. 34 / 108)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Doble firma policial + filmación/fotografía para suplir legalmente la falta de testigos civiles.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">41. ¿Qué es el Croquis Demostrativo del Lugar del Hecho labrado por el interventor?</p>
+                                <p class="text-slate-400 mb-2">A) Plano de arquitecto a escala · B) <strong>Un dibujo a mano alzada esquemático, con orientación (Norte), medidas referenciales y leyendas</strong> · C) Foto aérea · D) Mapa comunal.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 20 / 62)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Bosquejo preliminar inmediato para ilustrar al fiscal y peritos sobre la distribución física.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">42. Definición y director técnico de la Investigación Penal Preparatoria (IPP):</p>
+                                <p class="text-slate-400 mb-2">A) Administrativa policial del Jefe UR · B) <strong>Etapa procesal que prepara la acusación, dirigida por el Fiscal del MPA</strong> · C) Juicio oral · D) Juez de Faltas.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 32 / 96)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: El Fiscal ejerce la dirección técnica exclusiva de la acción penal pública.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">43. ¿Existe el "Legajo Policial" independiente en Santa Fe?</p>
+                                <p class="text-slate-400 mb-2">A) Sí, sumario secreto policial · B) <strong>No; las actuaciones policiales integran y alimentan el Legajo de Investigación del Fiscal</strong> · C) Solo federal · D) Según jerarquía.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 32 / 97)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: El sistema acusatorio eliminó el expediente policial autónomo; todo nutre la carpeta fiscal.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">44. El Responsable Policial de la Investigación (RPI) es:</p>
+                                <p class="text-slate-400 mb-2">A) Comisario General · B) <strong>El funcionario policial designado para asumir la responsabilidad de la investigación en sede policial bajo directivas fiscales</strong> · C) Médico forense · D) Abogado defensor.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 33 / 102)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Enlace operativo directo entre la dependencia policial y el fiscal de la causa.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">45. Demora de identidad por Art. 10 bis Ley Orgánica Policial (Ley 11.516):</p>
+                                <p class="text-slate-400 mb-2">A) 24 horas · B) <strong>Por un plazo máximo de 6 horas corridas</strong> · C) 72 horas · D) 30 días.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 87 / 153)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Plazo legal improrrogable para averiguar antecedentes ante negativa o falta de identificación en vía pública.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">46. Plazo máximo de la Aprehensión Policial antes de juez/fiscal (Art. 268 inc. 5):</p>
+                                <p class="text-slate-400 mb-2">A) 6 horas · B) <strong>24 horas</strong> · C) 96 horas · D) 15 días.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 17 / 55 inc. 5)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Término perentorio para poner al aprehendido a disposición de la autoridad judicial.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">47. Ingreso a domicilio SIN orden judicial de allanamiento (Art. 170 CPP):</p>
+                                <p class="text-slate-400 mb-2">A) Verificar impuestos · B) <strong>Voces desde el interior solicitando socorro o indicios manifiestos de que se está cometiendo un delito grave</strong> · C) Sospecha simple · D) Controles nocturnos.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 108 / 215)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Excepciones constitucionales de urgencia extrema: peligro inminente para la vida o flagrancia delictual.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">48. La "Regla de Tueller" o regla de los 21 pies (6,4 metros) establece:</p>
+                                <p class="text-slate-400 mb-2">A) El arma siempre gana · B) <strong>Un agresor con arma blanca puede recorrer 6,4 m en el tiempo que un policía tarda en desenfundar y disparar (aprox. 1,5 segundos)</strong> · C) Distancia de cinta · D) Alcance pistola 9mm.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 148 / 318)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Fundamento táctico de la distancia de reacción y seguridad ante armas blancas o punzocortantes.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">49. Tres principios rectores del Uso Progresivo y Proporcional de la Fuerza:</p>
+                                <p class="text-slate-400 mb-2">A) Rapidez, Fuerza, Letalidad · B) <strong>Legalidad, Oportunidad y Proporcionalidad/Moderación</strong> · C) Autoridad y Mando · D) Secreto y Sorpresa.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 129 / 265, 270)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Principios universales de la ONU y doctrina policial democrática.</span>
+                            </div>
+                            <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/60">
+                                <p class="font-semibold text-slate-200 mb-1">50. Diferencia entre Falta Leve (Art. 41) y Falta Grave (Art. 43) en Ley 12.521:</p>
+                                <p class="text-slate-400 mb-2">A) Juez de Paz vs Fiscal · B) <strong>Faltas leves son incorrecciones menores de servicio; faltas graves atentan contra orden constitucional, DDHH, delitos o insubordinación</strong> · C) Destitución vs apercibimiento · D) No existen leves.</p>
+                                <span class="text-emerald-400 font-semibold block">✔ Correcta: B (Manual Pág. 82-83 / 139-142)</span>
+                                <span class="text-slate-400 text-[11px]">Fundamento: Gravedad institucional, afectación de derechos fundamentales y tipificación disciplinaria.</span>
+                            </div>
+                        </div>
+                    `
                 }
+
             ]
         },
 

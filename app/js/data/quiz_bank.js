@@ -1481,6 +1481,707 @@ window.quizBank = {
             "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 269 / Dto. 395/75",
             "explanation": "El Decreto 395/75 cataloga a las escopetas con cañones inferiores a 380 mm como armas de guerra de uso prohibido para civiles, por su elevado poder destructivo y facilidad para ser ocultadas entre prendas."
         }
+    ,
+        {
+            "id": "so-104",
+            "difficulty": "facil",
+            "question": "¿Cuál es la definición formal de Criminalística según el manual?",
+            "options": [
+                "Ciencia que centra su objetivo en la confirmación de la prueba a través de la metodología científica, descubriendo, explicando e identificando autores y víctimas.",
+                "Ciencia normativa que regula las penas a aplicar a los delincuentes en el proceso penal.",
+                "Disciplina preventiva que estudia la mente del delincuente antes de la comisión del hecho.",
+                "Rama de la medicina legal encargada únicamente de la autopsia cadavérica."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "7 / 17. La Criminalística confirma la prueba a través de metodología científica para reconstruir los hechos y descubrir la verdad histórica."
+        },
+        {
+            "id": "so-105",
+            "difficulty": "facil",
+            "question": "¿En qué consiste el \"Principio de Intercambio\" enunciado por Edmond Locard en 1910?",
+            "options": [
+                "Los peritos intercambian evidencias entre distintas escenas del crimen para comparar patrones.",
+                "El autor del hecho siempre intercambia objetos de valor con la víctima antes del delito.",
+                "Se origina un intercambio de indicios entre el autor, la víctima y el lugar de los hechos (o entre el autor y el lugar).",
+                "Las fuerzas físicas involucradas se intercambian de forma simétrica entre el agente vulnerante y la superficie."
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "7 / 18. El Principio de Intercambio de Locard postula que todo criminal deja indicios en la escena y se lleva elementos consigo."
+        },
+        {
+            "id": "so-106",
+            "difficulty": "media",
+            "question": "El Principio de Correspondencia establece que:",
+            "options": [
+                "Cada indicio encontrado debe corresponderse estrictamente con un testimonio directo.",
+                "La probabilidad de reconstrucción es correspondiente a la cantidad de testigos presentes.",
+                "Toda correspondencia epistolar hallada en la escena debe ser abierta inmediatamente por el primer interventor.",
+                "La acción dinámica de los agentes mecánicos vulnerables sobre determinados cuerpos deja impresas sus características, reproduciendo su cara o forma."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "8 / 19. El Principio de Correspondencia explica que la acción dinámica vulnerante deja impresas sus características en la superficie de impacto."
+        },
+        {
+            "id": "so-107",
+            "difficulty": "facil",
+            "question": "¿Cuál de los siguientes es un ejemplo de agente vulnerante de tipo mecánico?",
+            "options": [
+                "Barretas, garrotes, martillos o sogas.",
+                "Ácidos o álcalis fuertes.",
+                "Armas bacteriológicas o toxinas.",
+                "Radiación o electricidad."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "8 / 19. Son agentes mecánicos las herramientas físicas como barretas, garrotes, martillos, herramientas de fuerza, etc."
+        },
+        {
+            "id": "so-108",
+            "difficulty": "dificil",
+            "question": "¿Cuál es la diferencia fundamental entre Criminalística y Criminología en su aplicación al Derecho?",
+            "options": [
+                "La Criminalística investiga el hecho a posteriori para probar cómo ocurrió e identificar autores; la Criminología estudia las causas y la conducta antisocial a priori o preventivamente.",
+                "La Criminalística actúa a priori de forma preventiva; la Criminología actúa a posteriori reconstruyendo los hechos.",
+                "La Criminología determina cómo se cometió el delito; la Criminalística analiza por qué la sociedad reacciona.",
+                "No existe diferencia; ambas son sinónimos en el Código Procesal Penal."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "9 / 29. La Criminalística se centra en el cómo (esclarecimiento posterior del hecho) y la Criminología en el por qué (causas del comportamiento antisocial y prevención)."
+        },
+        {
+            "id": "so-109",
+            "difficulty": "facil",
+            "question": "¿Cuáles son las 7 preguntas fundamentales o básicas de la investigación criminalística?",
+            "options": [
+                "¿Qué delito es?, ¿Quién es el juez?, ¿Cuánto vale?, ¿Dónde está el fiscal?, ¿Cuándo declara?, ¿Cómo fue detenido?, ¿Por qué huyó?",
+                "¿Qué?, ¿Cuándo?, ¿Cómo?, ¿Dónde?, ¿Por qué?, ¿Quiénes?, ¿Con qué?",
+                "¿Dónde ocurrió?, ¿Quién llamó?, ¿Qué patrullero fue?, ¿Cuándo llegó?, ¿Cómo ingresó?, ¿Con qué acta?, ¿Por qué no firmó?",
+                "¿Quién?, ¿Cuánto?, ¿Para qué?, ¿A qué hora?, ¿Con quién?, ¿Por dónde?, ¿Hasta cuándo?"
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "8 / 21-27. Las 7 preguntas fundamentales son: ¿Qué?, ¿Cuándo?, ¿Cómo?, ¿Dónde?, ¿Por qué?, ¿Quiénes? y ¿Con qué?."
+        },
+        {
+            "id": "so-110",
+            "difficulty": "media",
+            "question": "En la investigación criminalística, la pregunta ¿CÓMO? responde a:",
+            "options": [
+                "El tipo de acciones y la forma en que se desarrollaron los hechos.",
+                "La identificación de los sujetos activos y pasivos.",
+                "El móvil o elemento provocador del comportamiento.",
+                "La delimitación temporal y hora de los hechos."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "8 / 23. El \"¿Cómo?\" establece la secuencia y el tipo de acciones desarrolladas durante el hecho."
+        },
+        {
+            "id": "so-111",
+            "difficulty": "facil",
+            "question": "Las disciplinas auxiliares fijadoras principales en la escena del hecho son:",
+            "options": [
+                "Informática forense y Psicología.",
+                "Criminología ambiental y Sociología.",
+                "Odontología forense y Entomología.",
+                "Fotografía pericial y Planimetría."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "10 / 31. La Fotografía pericial y la Planimetría fijan la escena e indicios de forma metódica."
+        },
+        {
+            "id": "so-112",
+            "difficulty": "facil",
+            "question": "El abordaje de la investigación se clasifica en dos formas principales:",
+            "options": [
+                "Preventivo y Represivo.",
+                "Directo e Indirecto.",
+                "Táctico y Operativo.",
+                "De Campo y De Laboratorio."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "10 / 32. Se clasifica en abordaje de Campo (en la escena) y de Laboratorio (análisis científico posterior)."
+        },
+        {
+            "id": "so-113",
+            "difficulty": "dificil",
+            "question": "¿Qué estudia la Criminología Ambiental?",
+            "options": [
+                "La flora y fauna cadavérica para determinar el intervalo post mortem.",
+                "Las condiciones meteorológicas que alteran las huellas dactilares.",
+                "Cómo el medio ambiente y los factores del entorno influencian el comportamiento individual o grupal en relación con el delito.",
+                "El impacto de la contaminación tóxica en los delitos contra la salud pública."
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "9 / 28. La Criminología Ambiental estudia la relación entre entorno físico, víctimas, victimarios y la ocurrencia del delito."
+        },
+        {
+            "id": "so-114",
+            "difficulty": "dificil",
+            "question": "El Principio de Certeza en Criminalística se logra cuando:",
+            "options": [
+                "Se encuentran al menos tres indicios biológicos en el lugar del hecho.",
+                "La identificación cualitativa, cuantitativa y comparativa de los agentes vulnerantes se efectúa con metodología y tecnología adecuada.",
+                "El fiscal dicta el auto de procesamiento del detenido.",
+                "Un testigo presencial identifica sin dudas al imputado."
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "8 / 20. El Principio de Certeza se logra mediante la metodología y tecnología científica aplicadas a los agentes vulnerantes."
+        },
+        {
+            "id": "so-115",
+            "difficulty": "dificil",
+            "question": "La diferencia entre indicios intrínsecos y extrínsecos radica en:",
+            "options": [
+                "Si la característica es propia de la cosa (intrínseca) o no es propia de la cosa (extrínseca).",
+                "Si se recolectan en lugar abierto o cerrado.",
+                "Si se analizan en el campo o en el laboratorio.",
+                "Si provienen de la víctima o del imputado."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "8 / 21. Intrínseca es la característica propia del elemento; extrínseca es la no inherente al elemento."
+        },
+        {
+            "id": "so-116",
+            "difficulty": "facil",
+            "question": "¿Quién y en qué año creó el Sistema Dactiloscópico Argentino?",
+            "options": [
+                "Alphonse Bertillon en 1882.",
+                "Edmond Locard en 1910.",
+                "Pedro Lago en 1984.",
+                "Juan Vucetich en 1891."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "11 / 38. Juan Vucetich creó el sistema en 1891, aplicándolo oficialmente el 1 de septiembre de ese año."
+        },
+        {
+            "id": "so-117",
+            "difficulty": "facil",
+            "question": "¿Cuáles son los tres principios científicos en los que se fundamenta la identificación dactiloscópica?",
+            "options": [
+                "Perennidad, Inmutabilidad y Variedad.",
+                "Legalidad, Proporcionalidad y Necesidad.",
+                "Intercambio, Correspondencia y Probabilidad.",
+                "Oralidad, Publicidad y Celeridad."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "11 / 37. Los 3 pilares son Perennidad (de por vida), Inmutabilidad (no cambia) y Variedad (infinita diversidad)."
+        },
+        {
+            "id": "so-118",
+            "difficulty": "media",
+            "question": "El principio de \"Inmutabilidad\" dactilar establece que:",
+            "options": [
+                "Las huellas cambian cada 10 años según la regeneración celular.",
+                "Las crestas papilares permanecen idénticas a sí mismas desde la gestación hasta la putrefacción cadavérica.",
+                "Las huellas duran únicamente mientras la persona esté viva.",
+                "Los dactilogramas varían según la profesión del individuo."
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "11 / 37. Inmutabilidad significa que las crestas permanecen idénticas desde el 4°-5° mes intrauterino hasta la putrefacción."
+        },
+        {
+            "id": "so-119",
+            "difficulty": "facil",
+            "question": "¿Cuáles son los 4 tipos fundamentales del Sistema Dactiloscópico Argentino?",
+            "options": [
+                "Arco, Presilla Interna, Presilla Externa y Verticilo.",
+                "Delta Central, Delta Izquierdo, Delta Derecho y Sin Delta.",
+                "Basilar, Marginal, Nuclear y Periférico.",
+                "Bucle, Espiral, Mixto y Plano."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "12 / 40. Los 4 tipos fundamentales son Arco, Presilla Interna, Presilla Externa y Verticilo."
+        },
+        {
+            "id": "so-120",
+            "difficulty": "media",
+            "question": "¿Cómo se define el \"Delta\" en un dactilogramo?",
+            "options": [
+                "La figura triangular o piramidal que resulta de la aproximación o fusión de las regiones basilar, nuclear y marginal.",
+                "El espacio hundido entre dos crestas papilares donde no se deposita tinta.",
+                "La línea central que forma un círculo cerrado.",
+                "La cicatriz permanente dejada por un corte profundo en la yema del dedo."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "12 / 40. El Delta es la formación triangular por la aproximación de las regiones basilar, nuclear y marginal."
+        },
+        {
+            "id": "so-121",
+            "difficulty": "media",
+            "question": "¿Qué caracteriza al tipo fundamental \"Arco\"?",
+            "options": [
+                "Posee un delta a la izquierda del observador.",
+                "Posee un delta a la derecha del observador.",
+                "Posee dos o más deltas opuestos.",
+                "Carece de deltas y sus crestas van de un lado a otro encorvándose en el centro."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "12 / 40. El Arco carece de deltas y sus crestas atraviesan el dactilogramas en forma de arco."
+        },
+        {
+            "id": "so-122",
+            "difficulty": "media",
+            "question": "¿Cuántos puntos característicos coincidentes exigen habitualmente los dactilóscopos para probar identidad entre dos dactilogramas?",
+            "options": [
+                "De 50 a 100 puntos.",
+                "Exactamente 25 puntos.",
+                "De 3 a 5 puntos.",
+                "De 10 a 13 puntos."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "13 / 40. Se exigen de 10 a 13 puntos característicos coincidentes para establecer identidad indubitable."
+        },
+        {
+            "id": "so-123",
+            "difficulty": "facil",
+            "question": "¿Cuáles son los nombres de las tres regiones en que se divide un dactilogramo?",
+            "options": [
+                "Basilar, Nuclear y Marginal.",
+                "Apical, Central y Cubital.",
+                "Superior, Media e Inferior.",
+                "Epidérmica, Dérmica y Subcutánea."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "12 / 40. Las tres regiones son Basilar (inferior), Nuclear (centro) y Marginal (superior/externa)."
+        },
+        {
+            "id": "so-124",
+            "difficulty": "media",
+            "question": "¿Por qué el uso de datos filiatorios verbales o del DNI no es científico para certificar la identidad de un investigado?",
+            "options": [
+                "Porque el DNI vence cada 15 años.",
+                "Porque el DNI no contiene fotografía digitalizada.",
+                "Porque la Ley Orgánica Policial prohíbe mirar el DNI en la vía pública.",
+                "Porque los datos pueden ser apócrifos o falsos; la huella dactilar aporta certeza científica indubitable."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "11 / 34. La filiación verbal o DNI puede ser apócrifa; la dactiloscopia otorga certeza física e indubitable."
+        },
+        {
+            "id": "so-125",
+            "difficulty": "facil",
+            "question": "¿Cuál es la función del uso de guantes por parte del funcionario policial en la escena?",
+            "options": [
+                "Evitar contagiarse de enfermedades biológicas únicamente.",
+                "Reemplazar el uso de bolsas para secuestrar armas.",
+                "Permitir la manipulación excesiva de objetos sin dejar constancia.",
+                "Evitar dejar rastros papilares propios en el lugar del hecho."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "13 / 41. El guante evita la contaminación con impresiones dactilares del propio personal policial actuante."
+        },
+        {
+            "id": "so-126",
+            "difficulty": "facil",
+            "question": "¿Cómo se clasifica el \"Lugar del Hecho\" según sus características físicas?",
+            "options": [
+                "Abierto, Cerrado, Mixto y Móvil.",
+                "Primario, Secundario, Terciario y Cuaternario.",
+                "Público, Privado, Judicial y Policial.",
+                "Urbano, Rural, Suburbano y Comercial."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "14 / 42-44. Se clasifica en Abierto, Cerrado, Mixto y Móvil."
+        },
+        {
+            "id": "so-127",
+            "difficulty": "dificil",
+            "question": "¿Cuál es la diferencia entre \"Indicio\", \"Evidencia\" y \"Prueba\"?",
+            "options": [
+                "Prueba es lo que junta la policía; Evidencia lo que dice la víctima; Indicio lo que supone el juez.",
+                "Indicio es el material sensible hallado; Evidencia es el indicio analizado que demuestra relación con el hecho; Prueba es la evidencia validada en el proceso judicial.",
+                "Son tres términos idénticos que significan lo mismo en el juicio.",
+                "Indicio se aplica a homicidios; Evidencia a robos; Prueba a contravenciones."
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "16 / 46-53. Indicio es la huella/rastro; Evidencia es el indicio analizado con valor probatorio; Prueba es la validada por el tribunal en juicio."
+        },
+        {
+            "id": "so-128",
+            "difficulty": "media",
+            "question": "¿Cuáles son los tres perímetros de preservación en la escena del hecho?",
+            "options": [
+                "Círculo Interno, Círculo Medio y Círculo Externo.",
+                "Zona de Disparo, Zona de Impacto y Zona de Fuga.",
+                "Perímetro Rojo, Perímetro Amarillo y Perímetro Verde.",
+                "Zona Interior Crítica, Zona Exterior Restringida y Zona Exterior Amplia."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "24 / 79-81. Las tres zonas son: Zona Interior Crítica, Zona Exterior Restringida y Zona Exterior Amplia."
+        },
+        {
+            "id": "so-129",
+            "difficulty": "media",
+            "question": "En la \"Zona Interior Crítica\" solo deben permanecer:",
+            "options": [
+                "Únicamente el fiscal y el abogado defensor.",
+                "El personal de medios de prensa y familiares de la víctima.",
+                "Todos los funcionarios policiales de mayor jerarquía de la Unidad Regional.",
+                "El Equipo Pericial y Testigos (y autoridades autorizadas por canal seguro)."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "24 / 79. En la Zona Interior Crítica solo ingresa el Equipo Pericial y Testigos (y autoridades por canal seguro)."
+        },
+        {
+            "id": "so-130",
+            "difficulty": "facil",
+            "question": "Las \"Tres Preocupaciones Básicas\" del primer policía al arribar a la escena son:",
+            "options": [
+                "Seguridad del Funcionario, Preservación de la Vida y Protección de la Escena.",
+                "Detener sospechosos, buscar prensa y labrar el acta.",
+                "Tomar fotografías, mover el cadáver y llamar al juez.",
+                "Persecución, Allanamiento y Secuestro."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "21 / 69-70. Las preocupaciones básicas son: 1) Seguridad del Funcionario, 2) Preservación de la Vida, 3) Protección de la Escena."
+        },
+        {
+            "id": "so-131",
+            "difficulty": "dificil",
+            "question": "¿Por qué NO se debe cubrir un cadáver con una sábana o manta en muertes sospechosas?",
+            "options": [
+                "Porque impide la llegada del transporte forense.",
+                "Porque altera los patrones de manchas de sangre y puede depositar fibras ajenas.",
+                "Porque el Código Penal sanciona la ocultación de cadáveres.",
+                "Porque la manta es propiedad del hospital o familiar."
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "22 / 73. Cubrir el cuerpo puede alterar los patrones de manchas de sangre y depositar fibras ajenas."
+        },
+        {
+            "id": "so-132",
+            "difficulty": "media",
+            "question": "¿Qué medida debe tomar el primer interventor respecto al ingreso a la escena?",
+            "options": [
+                "Permitir el ingreso libre por cualquier sector para ganar tiempo.",
+                "Crear una vía única de acceso y salida.",
+                "Dejar ingresar a los medios periodísticos si están acreditados.",
+                "Clausurar todos los accesos sin permitir la entrada ni del equipo pericial."
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "23 / 76, 81. Debe establecerse una vía única de acceso y salida para evitar contaminación."
+        },
+        {
+            "id": "so-133",
+            "difficulty": "facil",
+            "question": "¿Cuáles son los tres actos que debe desplegar el primer funcionario policial al intervenir (Acto de Intervención)?",
+            "options": [
+                "Investigar, Interrogar y Juzgar.",
+                "Allanar, Requisar y Detener.",
+                "Fotografiar, Dibujar y Secuestrar.",
+                "Comunicar, Preservar y Custodiar."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "19 / 58. El Acto de Intervención comprende tres acciones: Comunicar, Preservar y Custodiar."
+        },
+        {
+            "id": "so-134",
+            "difficulty": "media",
+            "question": "Si se encuentra un arma de fuego en la escena, la regla general de manipulación es:",
+            "options": [
+                "Limpiarla con un paño para ver el número de serie antes de entregarla.",
+                "Colocarla en el mismo contenedor que las prendas ensangrentadas.",
+                "Dispararla al aire para verificar si está cargada.",
+                "Desactivarla de forma segura, manipularla lo mínimo posible, envasarla en soporte con sujeción y rotularla."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "29 / 88. Se debe desactivar, manipular lo mínimo, sujetar en caja/bolsa transparente y rotular con fajas firmadas."
+        },
+        {
+            "id": "so-135",
+            "difficulty": "media",
+            "question": "¿Cómo se deben secar y embalar las prendas de vestir con manchas de sangre húmedas?",
+            "options": [
+                "Lavarlas antes de enviar al laboratorio.",
+                "Secarlas con secador de pelo a calor máximo y embalar en bolsa plástica hermética.",
+                "Congelarlas inmediatamente en un freezer comercial.",
+                "Dejarlas secar de forma natural al aire (sin sol directo ni calor) y embalarlas por separado en bolsas/sobres de papel o cartón."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "30 / 90. Secado natural al aire a la sombra, embalado por separado en contenedores respirables de papel o cartón."
+        },
+        {
+            "id": "so-136",
+            "difficulty": "facil",
+            "question": "¿Qué es la \"Cadena de Custodia\"?",
+            "options": [
+                "La red telefónica interna entre el fiscal y la Jefatura.",
+                "El libro de guardia donde se anotan las novedades del turno.",
+                "El traslado de detenidos desde la comisaría hacia el servicio penitenciario.",
+                "El procedimiento de seguridad y control que garantiza la autenticidad e inalterabilidad de los indicios desde su hallazgo hasta el juicio."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "30 / 92. Es el sistema documentado de control que garantiza la autenticidad e inalterabilidad de los elementos secuestrados."
+        },
+        {
+            "id": "so-137",
+            "difficulty": "facil",
+            "question": "¿Cuáles son los dos formularios homologados por el MPA de Santa Fe para el secuestro de elementos?",
+            "options": [
+                "Formulario de Rótulo de Elemento Secuestrado y Formulario de Cadena de Custodia.",
+                "Guía de Tránsito y Ficha Dactilar.",
+                "Acta de Infracción y Cédula de Notificación.",
+                "Certificado de Conducta y Planilla Prontuarial."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "30 / 92-93. Formularios homologados del MPA: Rótulo de Elemento Secuestrado y Formulario de Cadena de Custodia."
+        },
+        {
+            "id": "so-138",
+            "difficulty": "media",
+            "question": "¿Quién es la máxima autoridad técnica dentro de la escena del crimen, aun por encima de personal de mayor jerarquía?",
+            "options": [
+                "El Coordinador Pericial de la escena.",
+                "El Intendente municipal.",
+                "El primer policía que llegó al lugar.",
+                "El Comisario de la jurisdicción."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "27 / 85. El Coordinador Pericial dirige el procesamiento técnico de la escena por encima de jerarquías administrativas."
+        },
+        {
+            "id": "so-139",
+            "difficulty": "media",
+            "question": "¿Cuáles son los métodos de búsqueda o recorrido de la escena reconocidos en criminalística de campo?",
+            "options": [
+                "Rápido, Lento, Directo y Cruzado.",
+                "A pie, En móvil, En helicóptero y Dron.",
+                "Zonal, Lineal, Strip (franjas), Espiral, Radial y Grilla.",
+                "Perimetral, Urbano y Rural."
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "27 / 84. Los métodos de recorrido son Zonal, Lineal, Strip, Espiral, Radial y Grilla."
+        },
+        {
+            "id": "so-140",
+            "difficulty": "media",
+            "question": "El Artículo 268 del Código Procesal Penal de Santa Fe (Ley 12.734) establece:",
+            "options": [
+                "El régimen disciplinario y las faltas administrativas policiales.",
+                "Los Deberes y Atribuciones de la Policía en la investigación penal.",
+                "El Código de Convivencia Ciudadana.",
+                "Las escalas salariales y concursos de ascenso."
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "17 / 54. El Art. 268 del CPP establece las Atribuciones y Deberes de la Policía en la investigación."
+        },
+        {
+            "id": "so-141",
+            "difficulty": "dificil",
+            "question": "Según el Art. 268 inc. 2) del CPP, si hay peligro de que las huellas o rastros desaparezcan por retardo, la Policía debe:",
+            "options": [
+                "Clausurar la comisaría y convocar a la prensa.",
+                "Derivar el caso a la policía municipal.",
+                "Practicar sin demora las diligencias necesarias para hacer constar las huellas o rastros.",
+                "Esperar la orden escrita del juez de garantías sin tocar nada."
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "17 / 55 (inc. 2). La policía debe practicar sin demora las diligencias necesarias para hacer constar huellas o rastros en riesgo."
+        },
+        {
+            "id": "so-142",
+            "difficulty": "dificil",
+            "question": "El Artículo 260 del CPP de Santa Fe regula las formalidades para:",
+            "options": [
+                "Las reuniones de Plana Mayor Policial.",
+                "El juzgamiento de contravenciones de tránsito.",
+                "La toma de licencias médicas.",
+                "Actos irreproducibles o definitivos (inspecciones, registros, secuestros, aprehensiones)."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "20 / 59. El Art. 260 regula los Actos Irreproducibles o Definitivos y sus requisitos de formalidad."
+        },
+        {
+            "id": "so-143",
+            "difficulty": "dificil",
+            "question": "Para acreditar la fidelidad de un acto irreproducible en ausencia de testigos civiles, el Art. 260 y 268 inc. 7) exige:",
+            "options": [
+                "Que el imputado acepte firmar sin abogado.",
+                "Que el acta se publique en el boletín oficial.",
+                "La autorización del intendente local.",
+                "La firma de dos funcionarios actuantes y registro fílmico / fotografico corroborante, dejando constancia de la causa de la ausencia."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "17 / 55 (inc. 7), pág. 34 / 108. Exige dos funcionarios actuantes, material fílmico/fotográfico y fundamentación expresa en acta."
+        },
+        {
+            "id": "so-144",
+            "difficulty": "media",
+            "question": "¿Qué es el Croquis Demostrativo del Lugar del Hecho labrado por el primer interventor?",
+            "options": [
+                "Una fotografía aérea tomada con un dron institucional.",
+                "Un plano arquitectónico hecho a escala profesional por un ingeniero.",
+                "Un mapa catastral del municipio.",
+                "Un dibujo a mano alzada de tipo esquemático, con orientaciones (Norte), medidas referenciales y leyendas explicativas."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "20 / 62. Es un esquema a mano alzada con orientación Norte, referencias, dimensiones aproximadas y leyendas."
+        },
+        {
+            "id": "so-145",
+            "difficulty": "media",
+            "question": "¿Qué es la Investigación Penal Preparatoria (IPP) y quién es su director técnico/jurídico en Santa Fe?",
+            "options": [
+                "La etapa contravencional dirigida por el Juez de Faltas.",
+                "Etapa administrativa policial dirigida por el Jefe de Unidad Regional.",
+                "El juicio oral y público dirigido por el Tribunal de Juicio.",
+                "Etapa del proceso penal que prepara la acusación, dirigida por el Fiscal del Ministerio Público de la Acusación (MPA)."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "32 / 96. La IPP prepara la acusación y está bajo la dirección del Fiscal del MPA."
+        },
+        {
+            "id": "so-146",
+            "difficulty": "dificil",
+            "question": "¿Existe el \"Legajo Policial\" de investigación independiente en el nuevo sistema procesal de Santa Fe?",
+            "options": [
+                "Sí, la Policía lleva su propio sumario secreto e independiente del Fiscal.",
+                "No; las actuaciones policiales integran y alimentan el \"Legajo de Investigación del Fiscal\".",
+                "Sí, pero solo para delitos de competencia federal.",
+                "Depende de la jerarquía del oficial sumariante."
+],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "32 / 97. No existe sumario policial paralelo; las actuaciones componen el Legajo de Investigación del Fiscal."
+        },
+        {
+            "id": "so-147",
+            "difficulty": "media",
+            "question": "El Responsable Policial de la Investigación (RPI) es:",
+            "options": [
+                "El funcionario policial designado para asumir la responsabilidad de la investigación en sede policial bajo directivas del Fiscal.",
+                "El abogado defensor del imputado.",
+                "Únicamente el Comisario General de la provincia.",
+                "El médico forense de turno."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "33 / 102. El RPI es el policía designado para coordinar y ejecutar las medidas investigativas dispuestas por la fiscalía."
+        },
+        {
+            "id": "so-148",
+            "difficulty": "dificil",
+            "question": "La Ley 10 bis de la Ley Orgánica Policial (Ley 7395 / Modif. Ley 11.516) autoriza a demorar a una persona en dependencia policial para verificar su identidad por un plazo máximo de:",
+            "options": [
+                "6 horas corridas.",
+                "24 horas corridas.",
+                "72 horas con prórroga.",
+                "30 días en prisión preventiva."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "87 / 153. La Ley 10 bis autoriza la demora para identificación en sede policial por un máximo de 6 horas corridas."
+        },
+        {
+            "id": "so-149",
+            "difficulty": "media",
+            "question": "Según el Código Procesal Penal de Santa Fe, ¿cuál es el plazo máximo de la Aprehensión Policial antes de poner al detenido a disposición del fiscal/juez?",
+            "options": [
+                "15 días.",
+                "6 horas.",
+                "96 horas.",
+                "24 horas."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "17 / 55 (inc. 5). La policía debe poner al aprehendido a disposición del juez dentro de las 24 horas."
+        },
+        {
+            "id": "so-150",
+            "difficulty": "dificil",
+            "question": "¿En cuál de los siguientes casos la Policía puede ingresar a un domicilio SIN orden judicial de allanamiento (Art. 170 CPP Santa Fe)?",
+            "options": [
+                "Para verificar si los residentes pagaron los impuestos municipales.",
+                "Siempre que el policía tenga sospechas de que hay objetos robados sin requerir urgencia.",
+                "Durante la noche para realizar controles de rutina.",
+                "Cuando hay voces desde el interior solicitando socorro o indicios manifiestos de que se está cometiendo un delito grave."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "108 / 215. El Art. 170 CPP autoriza allanamiento sin orden ante llamadas de socorro, emergencias o flagrancia."
+        },
+        {
+            "id": "so-151",
+            "difficulty": "media",
+            "question": "La \"Regla de Tueller\" o regla de los 21 pies (6.4 metros) en la práctica policial establece que:",
+            "options": [
+                "El alcance máximo eficaz de una pistola 9mm.",
+                "Un tirador con arma de fuego siempre gana a cualquier distancia.",
+                "La distancia mínima para colocar la cinta de preservación perimetral.",
+                "Un agresor con arma blanca puede recorrer 6.4 metros en el tiempo que un policía promedio tarda en desenfundar y disparar (aprox. 1.5 segundos)."
+],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "148 / 318. La Regla de Tueller demuestra que en 6.4m un atacante con arma blanca alcanza al oficial en ~1.5 segundos."
+        },
+        {
+            "id": "so-152",
+            "difficulty": "facil",
+            "question": "¿Cuáles son los tres principios rectores del Uso Progresivo y Proporcional de la Fuerza Policial?",
+            "options": [
+                "Secreto, Cautela y Sorpresa.",
+                "Rapidez, Fuerza y Letalidad.",
+                "Legalidad, Oportunidad y Proporcionalidad/Moderación.",
+                "Autoridad, Mando y Obediencia."
+],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "129 / 265, 270. Los principios son Legalidad, Oportunidad y Proporcionalidad / Moderación."
+        },
+        {
+            "id": "so-153",
+            "difficulty": "dificil",
+            "question": "La diferencia entre una Falta Leve (Art. 41) y una Falta Grave (Art. 43) en la Ley de Personal Policial N° 12.521 radica en:",
+            "options": [
+                "Las faltas leves son incorrecciones menores de servicio; las graves atentan contra el orden constitucional, derechos humanos, o implican delitos e insubordinación.",
+                "Las faltas leves las juzga el Fiscal; las graves el Juez de Paz.",
+                "No existen faltas leves en la legislación de Santa Fe.",
+                "Las faltas leves imponen destitución; las graves apercibimiento."
+],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Manual, pág",
+            "explanation": "82-83 / 139-142. Las leves son faltas menores de conducta; las graves afectan el orden constitucional, deberes esenciales o configuran delitos."
+        }
     ],
     "oficial-subinspector": [
         {
@@ -11202,7 +11903,7 @@ window.quizBank = {
 window.quizBankMeta = {
     "version": "8.1.0",
     "lastUpdated": "2026-11-05",
-    "totalQuestions": 797,
+    "totalQuestions": 847,
     "difficulties": [
         {
             "id": "facil",
