@@ -7747,930 +7747,929 @@ window.quizBank = {
             "explanation": "La destitución emana del Poder Ejecutivo (Gobernador); su revisión mediante recurso de reconsideración agota la vía administrativa previa al contencioso judicial."
         },
         {
-            "id": "isep-d26-048",
-            "difficulty": "facil",
-            "question": "La Carta establece un marco general que permite a cada país:",
-            "options": [
-                "Aplicar sanciones unificadas",
-                "Adaptar los principios a su realidad histórica, cultural e institucional",
-                "Eliminar normas propias",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Adaptar los principios a su realidad histórica, cultural e institucional\"."
-        },
-        {
-            "id": "isep-d26-053",
-            "difficulty": "facil",
-            "question": "El cumplimiento de la Carta contribuye principalmente a:",
-            "options": [
-                "La centralización del poder estatal",
-                "El fortalecimiento institucional",
-                "La reducción de la participación ciudadana",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El fortalecimiento institucional\"."
-        },
-        {
-            "id": "isep-d26-063",
-            "difficulty": "facil",
-            "question": "La \"causa objetiva\" que habilita la demora debe basarse en:",
-            "options": [
-                "Presunción subjetiva del personal",
-                "Sospechas o indicios ciertos",
-                "Orden del superior",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Sospechas o indicios ciertos\"."
-        },
-        {
-            "id": "isep-d26-073",
-            "difficulty": "facil",
-            "question": "En motovehículos, el control incluye especialmente:",
-            "options": [
-                "Solo al conductor",
-                "Únicamente la documentación",
-                "Identificación y elementos portados",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Identificación y elementos portados\"."
-        },
-        {
-            "id": "isep-d26-078",
-            "difficulty": "facil",
-            "question": "La toma de muestra de sangre es obligatoria cuando:",
-            "options": [
-                "El conductor es profesional",
-                "Hay daños materiales",
-                "El vehículo es oficial",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 0,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El conductor es profesional\"."
-        },
-        {
-            "id": "isep-d26-083",
-            "difficulty": "facil",
-            "question": "El croquis panorámico se utiliza para:",
-            "options": [
-                "Detalles específicos",
-                "Visión general del lugar",
-                "Armas secuestradas",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Visión general del lugar\"."
-        },
-        {
-            "id": "isep-d26-093",
-            "difficulty": "facil",
-            "question": "La persecución policial puede originarse por:",
-            "options": [
-                "Únicamente órdenes judiciales",
-                "Comunicaciones radiales, denuncias, controles y patrullajes preventivos",
-                "Solo denuncias anónimas",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Comunicaciones radiales, denuncias, controles y patrullajes preventivos\"."
-        },
-        {
-            "id": "isep-d26-098",
-            "difficulty": "facil",
-            "question": "Respecto al punto de crisis, el Primer Respondiente Policial debe:",
-            "options": [
-                "Localizar, estabilizar, aislar, contener y evaluar",
-                "Intervenir de forma directa sin apoyo",
-                "Esperar instrucciones sin actuar",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 0,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Localizar, estabilizar, aislar, contener y evaluar\"."
-        },
-        {
-            "id": "isep-d26-103",
-            "difficulty": "facil",
-            "question": "El fundamento técnico de la Regla de Tueller demuestra que",
-            "options": [
-                "El oficial siempre puede neutralizar al agresor a tiempo",
-                "El agresor puede cerrar 6,4 m en menos tiempo del necesario para reaccionar y disparar",
-                "El uso de la fuerza letal es automático",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El agresor puede cerrar 6,4 m en menos tiempo del necesario para reaccionar y disparar\"."
-        },
-        {
-            "id": "isep-d26-112",
-            "difficulty": "facil",
-            "question": "El microtráfico se caracteriza principalmente por:",
-            "options": [
-                "La exportación de grandes cantidades de droga",
-                "La comercialización internacional",
-                "La venta minorista de dosis pequeñas destinadas al consumo directo",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"La venta minorista de dosis pequeñas destinadas al consumo directo\"."
-        },
-        {
-            "id": "isep-d26-114",
-            "difficulty": "dificil",
-            "question": "Para que un delito sea de competencia provincial según el art. 2 de la Ley 26.052, es requisito esencial que",
-            "options": [
-                "Exista reincidencia.",
-                "Sea una sustancia importada",
-                "El estupefaciente esté fraccionado en dosis destinadas al consumidor",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"El estupefaciente esté fraccionado en dosis destinadas al consumidor\"."
-        },
-        {
-            "id": "isep-d26-116",
-            "difficulty": "facil",
-            "question": "Para que exista tenencia de estupefacientes, se requiere:",
-            "options": [
-                "Contacto físico directo con la sustancia",
-                "Cantidad mínima determinada.",
-                "Poder de disposición sobre el material, aun sin contacto físico",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Poder de disposición sobre el material, aun sin contacto físico\"."
-        },
-        {
-            "id": "isep-d26-117",
-            "difficulty": "facil",
-            "question": "Un estupefaciente, para ser considerado como tal, debe:",
-            "options": [
-                "Estar incluido en un listado legal únicamente",
-                "Ser ilegal en cualquier circunstancia",
-                "Estar en los listados legales y ser capaz de producir dependencia física o psíquica.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Estar en los listados legales y ser capaz de producir dependencia física o psíquica.\"."
-        },
-        {
-            "id": "isep-d26-118",
-            "difficulty": "facil",
-            "question": "Estar en los listados legales y ser capaz de producir dependencia física o psíquica.",
-            "options": [
-                "Daño concreto.",
-                "Lesión efectiva.",
-                "Peligro abstracto que protege la Salud Pública.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Peligro abstracto que protege la Salud Pública.\"."
-        },
-        {
-            "id": "isep-d26-119",
-            "difficulty": "dificil",
-            "question": "El delito de tenencia con fines de comercialización (art. 5 inc. c) requiere:",
-            "options": [
-                "La sola tenencia de estupefacientes.",
-                "La acreditación de un resultado material dañoso.",
-                "La prueba de la finalidad de comercio.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"La prueba de la finalidad de comercio.\"."
-        },
-        {
-            "id": "isep-d26-121",
-            "difficulty": "dificil",
-            "question": "¿Cuál es el bien jurídico protegido en los delitos previstos por el art. 5 de la Ley 23.737?",
-            "options": [
-                "La seguridad pública.",
-                "El orden económico",
-                "La salud pública.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"La salud pública.\"."
-        },
-        {
-            "id": "isep-d26-123",
-            "difficulty": "media",
-            "question": "La tenencia con fines de comercialización es un delito:",
-            "options": [
-                "De resultado.",
-                "De peligro concreto.",
-                "De peligro abstracto.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"De peligro abstracto.\"."
-        },
-        {
-            "id": "isep-d26-125",
-            "difficulty": "facil",
-            "question": "En la Provincia de Santa Fe, la competencia provincial en materia de microtráfico surge de:",
-            "options": [
-                "Ley Nacional 23.737.",
-                "Ley Nacional 26.052 exclusivamente.",
-                "Ley Provincial 14.239.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Ley Provincial 14.239.\"."
-        },
-        {
-            "id": "isep-d26-128",
-            "difficulty": "dificil",
-            "question": "La entrega gratuita de estupefacientes (art. 5 inc. e, último párrafo) se caracteriza por:",
-            "options": [
-                "La existencia de lucro.",
-                "La habitualidad en la venta.",
-                "La ausencia de contraprestación económica.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"La ausencia de contraprestación económica.\"."
-        },
-        {
-            "id": "isep-d26-129",
-            "difficulty": "facil",
-            "question": "La pena para la entrega gratuita de estupefacientes es de:",
-            "options": [
-                "1 mes a 2 años.",
-                "3 a 12 años.",
-                "4 a 15 años.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 1,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"3 a 12 años.\"."
-        },
-        {
-            "id": "isep-d26-132",
-            "difficulty": "media",
-            "question": "El almacenamiento de estupefacientes se caracteriza por:",
-            "options": [
-                "Exigir finalidad comercial",
-                "Ser un delito de peligro abstracto.",
-                "Requerir venta efectiva",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 1,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Ser un delito de peligro abstracto.\"."
-        },
-        {
-            "id": "isep-d26-133",
-            "difficulty": "media",
-            "question": "El delito de transporte de estupefacientes se consuma con:",
-            "options": [
-                "La intención de vender.",
-                "La integración a una banda.",
-                "El efectivo desplazamiento de la droga.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"El efectivo desplazamiento de la droga.\"."
-        },
-        {
-            "id": "isep-d26-134",
-            "difficulty": "media",
-            "question": "Las semillas de cannabis:",
-            "options": [
-                "Siempre configuran delito.",
-                "Son estupefacientes.",
-                "No contienen principio activo.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"No contienen principio activo.\"."
-        },
-        {
-            "id": "isep-d26-135",
-            "difficulty": "media",
-            "question": "La denuncia anónima en delitos de microtráfico:",
-            "options": [
-                "Es inválida como noticia criminis.",
-                "No puede iniciar una investigación.",
-                "Es válida si es seria y verosímil.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Es válida si es seria y verosímil.\"."
-        },
-        {
-            "id": "isep-d26-136",
-            "difficulty": "facil",
-            "question": "La política criminal de Santa Fe en microtráfico tiene como objetivo principal:",
-            "options": [
-                "Combatir carteles internacionales.",
-                "Reprimir al consumidor.",
-                "Reducir la conflictividad social territorial.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Reducir la conflictividad social territorial.\"."
-        },
-        {
-            "id": "isep-d26-137",
-            "difficulty": "dificil",
-            "question": "El régimen de desfederalización en materia de estupefacientes previsto en la Ley 23.737 se encuentra regulado en",
-            "options": [
-                "Art. 5.",
-                "Art. 14.",
-                "Art. 34.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Art. 34.\"."
-        },
-        {
-            "id": "isep-d26-138",
-            "difficulty": "facil",
-            "question": "Para que opere la competencia provincial en microtráfico, la sustancia debe estar:",
-            "options": [
-                "Destinada a exportación.",
-                "En grandes cantidades.",
-                "Fraccionada en dosis para el consumidor final.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Fraccionada en dosis para el consumidor final.\"."
-        },
-        {
-            "id": "isep-d26-139",
-            "difficulty": "media",
-            "question": "La Ley 23.737 es la norma que:",
-            "options": [
-                "Regula exclusivamente el consumo personal de estupefacientes",
-                "Establece el Código Penal argentino.",
-                "Tipifica y reprime los delitos vinculados al tráfico ilícito de estupefacientes y sustancias controladas.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Tipifica y reprime los delitos vinculados al tráfico ilícito de estupefacientes y sustancias controladas.\"."
-        },
-        {
-            "id": "isep-d26-140",
-            "difficulty": "facil",
-            "question": "La finalidad política de la Ley Provincial 14.239 es principalmente:",
-            "options": [
-                "Incrementar las penas.",
-                "Perseguir al consumidor.",
-                "Reducir la conflictividad social derivada del narcomenudeo.",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial"
-            ],
-            "correctIndex": 2,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Reducir la conflictividad social derivada del narcomenudeo.\"."
-        },
-        {
-            "id": "isep-d26-143",
-            "difficulty": "facil",
-            "question": "La denuncia con reserva de identidad es considerada:",
-            "options": [
-                "Un acto administrativo",
-                "Un medio de prueba inválido",
-                "Un medio de prueba válido con resguardo judicial",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Un medio de prueba válido con resguardo judicial\"."
-        },
-        {
-            "id": "isep-d26-148",
-            "difficulty": "media",
-            "question": "La aceptación de la denuncia anónima es especialmente relevante en casos de:",
-            "options": [
-                "Microtráfico o narcomenudeo",
-                "Delitos contra la administración pública",
-                "Competencia exclusiva del Fuero Federal sin intervención de la justicia provincial",
-                "Incautación y análisis de campo preliminar sin formalidades de cadena de custodia"
-            ],
-            "correctIndex": 0,
-            "source": "Ley de Desfederalización de Narcomenudeo (Ley 14.239) / Ley 23.737",
-            "explanation": "La Ley 14.239 facultó a la Policía de Santa Fe y al MPA a intervenir directamente en causas de narcomenudeo y venta minorista de estupefacientes. La opción correcta conforme a la normativa oficial es: \"Microtráfico o narcomenudeo\"."
-        },
-        {
-            "id": "isep-d26-153",
-            "difficulty": "media",
-            "question": "Un vehículo utilizado para cometer un delito se clasifica como",
-            "options": [
-                "Lugar cerrado.",
-                "Lugar mixto.",
-                "Lugar móvil.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Lugar móvil.\"."
-        },
-        {
-            "id": "isep-d26-158",
-            "difficulty": "facil",
-            "question": "Según su momento de producción, los indicios se clasifican en:",
-            "options": [
-                "Físicos, químicos y biológicos.",
-                "Directos e indirectos.",
-                "Antecedentes, concomitantes y consecuentes.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Antecedentes, concomitantes y consecuentes.\"."
-        },
-        {
-            "id": "isep-d26-163",
-            "difficulty": "facil",
-            "question": "Una huella se define como:",
-            "options": [
-                "Un cambio de color en una superficie.",
-                "Un depósito de sustancia extraña.",
-                "Una marca producida por contacto sobre una superficie.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una marca producida por contacto sobre una superficie.\"."
-        },
-        {
-            "id": "isep-d26-178",
-            "difficulty": "facil",
-            "question": "¿Quién debe confeccionar el croquis demostrativo?",
-            "options": [
-                "Exclusivamente el perito",
-                "El juez",
-                "El primer interventor",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El primer interventor\"."
-        },
-        {
-            "id": "isep-d26-188",
-            "difficulty": "facil",
-            "question": "La Investigación Penal Preparatoria (IPP) tiene por finalidad:",
-            "options": [
-                "Dictar sentencia",
-                "Determinar la culpabilidad del imputado",
-                "Preparar la acusación reuniendo prueba relevante",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Preparar la acusación reuniendo prueba relevante\"."
-        },
-        {
-            "id": "isep-d26-233",
-            "difficulty": "facil",
-            "question": "Las muestras biológicas enviadas desde hospitales:",
-            "options": [
-                "Deben congelarse",
-                "No deben congelarse",
-                "Pueden enviarse sin rotular",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No deben congelarse\"."
-        },
-        {
-            "id": "isep-d26-238",
-            "difficulty": "facil",
-            "question": "En caso de semen escaso, la recolección correcta es:",
-            "options": [
-                "Paño común",
-                "Hisopos estériles",
-                "Papel absorbente",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Hisopos estériles\"."
-        },
-        {
-            "id": "isep-d26-243",
-            "difficulty": "facil",
-            "question": "Un error formal en la cadena de custodia puede:",
-            "options": [
-                "Ser subsanado automáticamente",
-                "Invalidar la prueba en juicio",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
-                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Invalidar la prueba en juicio\"."
-        },
-        {
-            "id": "isep-d26-253",
-            "difficulty": "facil",
-            "question": "Los jurados comienzan sus actividades a partir del:",
-            "options": [
-                "1° de enero",
-                "1° de septiembre",
-                "1° de diciembre",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"1° de septiembre\"."
-        },
-        {
-            "id": "isep-d26-268",
-            "difficulty": "facil",
-            "question": "La Policía es descentralizada en el aspecto:",
-            "options": [
-                "Administrativo",
-                "Judicial",
-                "Funcional",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Funcional\"."
-        },
-        {
-            "id": "isep-d26-278",
-            "difficulty": "facil",
-            "question": "El Departamento Judicial es:",
-            "options": [
-                "2",
-                "3",
-                "5",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"5\"."
-        },
-        {
-            "id": "isep-d26-293",
-            "difficulty": "media",
-            "question": "La necesidad racional del medio empleado significa:",
-            "options": [
-                "Que debe existir igualdad exacta de armas",
-                "Que la defensa debe ser matemática",
-                "Que debe ser racional y proporcional al ataque",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Que debe ser racional y proporcional al ataque\"."
-        },
-        {
-            "id": "isep-d26-298",
-            "difficulty": "facil",
-            "question": "El uso progresivo de la fuerza implica:",
-            "options": [
-                "Aplicar directamente el nivel más alto",
-                "Usar siempre arma contundente",
-                "Escalar la respuesta según la conducta del agresor",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Escalar la respuesta según la conducta del agresor\"."
-        },
-        {
-            "id": "isep-d26-303",
-            "difficulty": "media",
-            "question": "La represión policial es:",
-            "options": [
-                "Venganza institucional",
-                "Castigo automático",
-                "Acción coercitiva para restablecer el orden público frente al delito",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Acción coercitiva para restablecer el orden público frente al delito\"."
-        },
-        {
-            "id": "isep-d26-308",
-            "difficulty": "facil",
-            "question": "El uso de la fuerza nunca debe:",
-            "options": [
-                "Ser gradual",
-                "Ser racional",
-                "Ser ilegítimo o arbitrario",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ser ilegítimo o arbitrario\"."
-        },
-        {
-            "id": "isep-d26-313",
-            "difficulty": "facil",
-            "question": "Las armas de fuego son consideradas:",
-            "options": [
-                "Herramienta preventiva",
-                "Medio habitual",
-                "Medida extrema",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Medida extrema\"."
-        },
-        {
-            "id": "isep-d26-318",
-            "difficulty": "facil",
-            "question": "También se debe:",
-            "options": [
-                "Omitir detalles",
-                "Informar verbalmente",
-                "Realizar informe completo y permitir investigación",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Realizar informe completo y permitir investigación\"."
-        },
-        {
-            "id": "isep-d26-323",
-            "difficulty": "facil",
-            "question": "El uso de la fuerza sin respetar principios de legalidad, necesidad y proporcionalidad:",
-            "options": [
-                "Es válido si es rápido",
-                "Es discrecional",
-                "Se convierte en ilegal y violento",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se convierte en ilegal y violento\"."
-        },
-        {
-            "id": "isep-d26-328",
-            "difficulty": "facil",
-            "question": "La responsabilidad por uso ilícito de la fuerza es:",
-            "options": [
-                "Solo institucional",
-                "Solo del superior",
-                "Individual y también jerárquica",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Individual y también jerárquica\"."
-        },
-        {
-            "id": "isep-d26-333",
-            "difficulty": "dificil",
-            "question": "Según el Artículo 3°, una de las atribuciones del Ministerio es:",
-            "options": [
-                "Dictar sentencias penales.",
-                "Autorizar previamente cada uso de la fuerza.",
-                "Recopilar, sistematizar y publicar estadísticas periódicas sobre el uso de la fuerza.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Recopilar, sistematizar y publicar estadísticas periódicas sobre el uso de la fuerza.\"."
-        },
-        {
-            "id": "isep-d26-338",
-            "difficulty": "dificil",
-            "question": "La violación del espacio personal (Art. 5°) puede habilitar:",
-            "options": [
-                "Detención automática.",
-                "Uso obligatorio de fuerza letal.",
-                "Legítima defensa preventiva para recuperar el control del espacio.",
-                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Legítima defensa preventiva para recuperar el control del espacio.\"."
-        },
-        {
-            "id": "isep-d26-343",
-            "difficulty": "dificil",
-            "question": "Conforme el Artículo 8°, son motivaciones legítimas de intervención:",
-            "options": [
-                "Sospecha subjetiva sin análisis.",
-                "Decisión arbitraria.",
-                "Requerimiento formal, análisis de riesgo dinámico o plan operativo basado en análisis de riesgo.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Requerimiento formal, análisis de riesgo dinámico o plan operativo basado en análisis de riesgo.\"."
-        },
-        {
-            "id": "isep-d26-363",
-            "difficulty": "facil",
-            "question": "El decomiso consiste en:",
-            "options": [
-                "Arrestar al infractor",
-                "Secuestrar los elementos utilizados en la infracción",
-                "Suspender servicios",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Secuestrar los elementos utilizados en la infracción\"."
-        },
-        {
-            "id": "isep-d26-368",
-            "difficulty": "dificil",
-            "question": "El arresto puede cumplirse:",
-            "options": [
-                "Solo en cárcel",
-                "Solo en prisión federal",
-                "En horario nocturno o días no laborables",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"En horario nocturno o días no laborables\"."
-        },
-        {
-            "id": "isep-d26-393",
-            "difficulty": "facil",
-            "question": "La denuncia puede ser:",
-            "options": [
-                "Solo escrita.",
-                "Solo verbal",
-                "Verbal o escrita.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Verbal o escrita.\"."
-        },
-        {
-            "id": "isep-d26-403",
-            "difficulty": "facil",
-            "question": "Las sentencias condenatorias deben comunicarse al:",
-            "options": [
-                "Ministerio de Seguridad.",
-                "Registro Civil.",
-                "Registro Único de Antecedentes Penales de la Provincia.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Registro Único de Antecedentes Penales de la Provincia.\"."
-        },
-        {
-            "id": "isep-d26-413",
-            "difficulty": "facil",
-            "question": "En el proceso penal el testigo:",
-            "options": [
-                "Es un sujeto esencial",
-                "Es un sujeto eventual",
-                "No es considerado sujeto del proceso",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No es considerado sujeto del proceso\"."
-        },
-        {
-            "id": "isep-d26-433",
-            "difficulty": "facil",
-            "question": "¿Cuándo se presenta la requisitoria de acusación?",
-            "options": [
-                "Antes de la audiencia imputativa",
-                "Después de la sentencia",
-                "Luego de la audiencia imputativa cuando hay prueba suficiente",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Luego de la audiencia imputativa cuando hay prueba suficiente\"."
-        },
-        {
-            "id": "isep-d26-438",
-            "difficulty": "facil",
-            "question": "¿Cuál de las siguientes decisiones puede tomar el juez en la audiencia preliminar?",
-            "options": [
-                "Dictar sentencia condenatoria",
-                "Dictar prisión perpetua",
-                "Admitir o rechazar la acusación",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Admitir o rechazar la acusación\"."
-        },
-        {
-            "id": "isep-d26-448",
-            "difficulty": "facil",
-            "question": "El Tribunal puede disponer protección para un testigo cuando:",
-            "options": [
-                "El testigo lo pide sin motivo",
-                "Existe peligro de intimidación o represalias",
-                "El proceso termina",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Existe peligro de intimidación o represalias\"."
-        },
-        {
-            "id": "isep-d26-453",
-            "difficulty": "media",
-            "question": "¿Cuándo se realiza el levantamiento del cadáver?",
-            "options": [
-                "Después del juicio",
-                "Antes de la denuncia",
-                "Luego de la inspección preliminar del cuerpo",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Luego de la inspección preliminar del cuerpo\"."
-        },
-        {
-            "id": "isep-d26-463",
-            "difficulty": "facil",
-            "question": "¿Dónde se incorpora la huella genética digitalizada?",
-            "options": [
-                "Registro Nacional de Personas",
-                "Registro Civil",
-                "Registro Provincial de Huellas Genéticas Digitalizadas",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Registro Provincial de Huellas Genéticas Digitalizadas\"."
-        },
-        {
-            "id": "isep-d26-468",
-            "difficulty": "facil",
-            "question": "En la rueda de reconocimiento, el imputado:",
-            "options": [
-                "Puede negarse a participar",
-                "Es ubicado por la policía",
-                "Elige su colocación en la fila",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Elige su colocación en la fila\"."
-        },
-        {
-            "id": "isep-d26-478",
-            "difficulty": "facil",
-            "question": "Respecto al procedimiento: El informante:",
-            "options": [
-                "Debe revelar su identidad",
-                "Puede recibir beneficio económico",
-                "No puede aportar pruebas",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Puede recibir beneficio económico\"."
-        },
-        {
-            "id": "isep-d26-483",
-            "difficulty": "facil",
-            "question": "La obtención de ADN debe ser:",
-            "options": [
-                "Invasiva",
-                "Dolorosa",
-                "Lo menos lesiva posible",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Lo menos lesiva posible\"."
-        }
-    ,
+                "id": "isc-049",
+                "difficulty": "media",
+                "question": "En el marco del Modelo SARA (POP) aplicado a la jefatura de una seccional policial, ¿en qué consiste específicamente la fase de 'Escaneo' (Scanning)?",
+                "options": [
+                        "En la identificación, detección y priorización sistemática de problemas recurrentes de seguridad comunitaria en base a datos del 911 y reclamos vecinales.",
+                        "En la aplicación inmediata de patrullajes saturados sin análisis previo en toda la jurisdicción.",
+                        "En la redacción del sumario administrativo posterior a la detención de autores de delitos complejos.",
+                        "En el escaneo digital de las actas de procedimiento para su elevación informática al MPA."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Módulo Seguridad Pública: Modelo SARA y Policía Orientada a Problemas",
+                "explanation": "La fase de Escaneo (Scanning) es el primer paso del modelo SARA donde el conductor policial identifica problemas recurrentes que preocupan a la comunidad, agrupando incidentes en patrones antes de actuar."
+        },
+        {
+                "id": "isc-050",
+                "difficulty": "dificil",
+                "question": "Durante la fase de 'Análisis' (Analysis) del Modelo SARA, el 'Triángulo del Delito' o Triángulo de Problemas requiere que el mando policial investigue la convergencia en tiempo y espacio de:",
+                "options": [
+                        "El fiscal en turno, el oficial instructor y el imputado detenido.",
+                        "Un ofensor motivado, un blanco/víctima apropiado y la ausencia de un custodio o guardián capaz.",
+                        "El personal de guardia, el móvil policial operativo y los vales de racionamiento disponibles.",
+                        "La falta disciplinaria leve, la negligencia en el servicio y la sanción de arresto policial."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Módulo Seguridad Pública: Triángulo del Delito (Felson y Clarke)",
+                "explanation": "El Triángulo del Delito (rutinas de actividad) sostiene que para que ocurra un delito debe coincidir un delincuente motivado con un blanco vulnerable en un lugar sin control o guardián capaz; actuar sobre cualquiera de los tres lados previene el hecho."
+        },
+        {
+                "id": "isc-051",
+                "difficulty": "media",
+                "question": "Al planificar la fase de 'Respuesta' (Response) en el modelo SARA, ¿cuál es el error común de la policía tradicional que el Subcomisario debe evitar?",
+                "options": [
+                        "Coordinar acciones con las vecinales y las áreas de alumbrado municipal.",
+                        "Utilizar mapas de calor georreferenciados para la distribución de los turnos de guardia.",
+                        "Limitarse exclusivamente a aumentar el patrullaje visible reactivo en lugar de abordar las causas estructurales y situacionales del problema.",
+                        "Fijar metas cuantificables de reducción de hechos para evaluar luego los resultados."
+                ],
+                "correctIndex": 2,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Módulo Seguridad Pública: Respuesta Estratégica",
+                "explanation": "El modelo POP advierte que limitarse a incrementar patrullas sin alterar los factores ambientales ni articular con otros organismos genera alivio temporal o desplazamiento, pero no resuelve el problema de raíz."
+        },
+        {
+                "id": "isc-052",
+                "difficulty": "media",
+                "question": "En la fase de 'Evaluación' (Assessment) del SARA, ¿qué indicador cualitativo y cuantitativo confirma que la intervención policial fue exitosa sin mero desplazamiento del delito?",
+                "options": [
+                        "El aumento del 100% de las actas de contravención elevadas al juzgado.",
+                        "La rotación semanal obligatoria de todo el personal de la guardia de prevención.",
+                        "El gasto completo e inmediato del fondo de caja chica asignado a la dependencia.",
+                        "La reducción sostenida de llamadas de emergencia en la zona intervenida sin un incremento paralelo en las cuadrículas linderas."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Módulo Seguridad Pública: Evaluación y Desplazamiento",
+                "explanation": "La evaluación rigurosa monitorea tanto el área blanco como las zonas adyacentes para comprobar si hubo solución real, difusión de beneficios o desplazamiento espacial, temporal o de modalidad."
+        },
+        {
+                "id": "isc-053",
+                "difficulty": "facil",
+                "question": "Conforme a la doctrina criminológica del manual, la 'Prevención Primaria' de la seguridad pública se enfoca en:",
+                "options": [
+                        "Las condiciones estructurales, sociales, educativas y ambientales antes de que surjan conductas delictivas.",
+                        "El tratamiento penitenciario individualizado del condenado reincidente.",
+                        "La custodia armada de bancos y entidades financieras.",
+                        "La intervención reactiva del Comando Radioeléctrico ante un robo en proceso."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Tipologías de Prevención del Delito",
+                "explanation": "La prevención primaria actúa sobre el conjunto de la sociedad incidiendo en causas profundas y ambientales; la secundaria sobre grupos en riesgo inminente; y la terciaria sobre la reinserción para evitar la reincidencia."
+        },
+        {
+                "id": "isc-054",
+                "difficulty": "dificil",
+                "question": "La 'Prevención Situacional' del delito (Clarke / Espacio Defendible) busca reducir las oportunidades de comisión modificando el entorno mediante:",
+                "options": [
+                        "El aumento indiscriminado de las penas privativas de la libertad en el Código Penal.",
+                        "Aumentar el esfuerzo percibido y el riesgo del agresor, reduciendo las recompensas esperadas y eliminando provocaciones.",
+                        "La supresión total de los controles vehiculares en accesos urbanos.",
+                        "La eliminación de cámaras de videovigilancia para no perturbar la privacidad vecinal."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Prevención Situacional y CPTED",
+                "explanation": "La prevención situacional altera el diseño urbano (iluminación, cerramientos, despeje visual) para que al infractor le resulte más difícil, riesgoso y menos rentable delinquir."
+        },
+        {
+                "id": "isc-055",
+                "difficulty": "media",
+                "question": "¿Cuál es la distinción fundamental entre el 'Control Social Formal' y el 'Control Social Informal' en una comunidad?",
+                "options": [
+                        "El control formal lo ejercen empresas privadas de seguridad y el informal las comisarías.",
+                        "El control formal es ilegal y el informal es legal conforme al Código Procesal.",
+                        "El control formal es ejercido por instituciones estatutarias (policía, justicia, leyes); el informal por la familia, la escuela y la presión de pares.",
+                        "El control formal se aplica solo de día y el informal durante la nocturnidad."
+                ],
+                "correctIndex": 2,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Teoría del Control Social",
+                "explanation": "El control social informal es el primer anillo de contención ética y normativa de la sociedad; cuando este falla, interviene el control formal coactivo del Estado."
+        },
+        {
+                "id": "isc-056",
+                "difficulty": "media",
+                "question": "El Decreto Provincial 0224/19 establece las bases organizativas para el despliegue policial por cuadrantes. ¿Qué rol operativo tiene el Subcomisario de Seccional?",
+                "options": [
+                        "Permanecer de manera continua en la oficina de sumarios sin fiscalizar los móviles.",
+                        "Negarse a recibir denuncias vecinales delegándolas enteramente en centros de mediación comunitaria.",
+                        "Dictar de manera autónoma resoluciones modificatorias de las leyes provinciales vigentes.",
+                        "Supervisar la continuidad del patrullaje asignado a cada cuadrícula, garantizando presencia territorial y respuesta coordinada ante incidencias críticas."
+                ],
+                "correctIndex": 3,
+                "source": "Decreto Provincial 0224/19 y Manual Subcomisario ISEP (379 págs.)",
+                "explanation": "El Decreto 0224/19 organiza el servicio por cuadrantes con responsabilidad territorial directa del mando de supervisión sobre la constancia y georreferenciación de los patrullajes."
+        },
+        {
+                "id": "isc-057",
+                "difficulty": "dificil",
+                "question": "En el marco de la Policía Comunitaria y de Proximidad, ¿cuál es el objetivo central de las 'Mesas de Seguridad Barrial' que encabeza la autoridad de la dependencia?",
+                "options": [
+                        "Construir corresponsabilidad ciudadana, recopilar información cualitativa del delito y consensuar prioridades operativas de prevención con los vecinos.",
+                        "Exponer públicamente los nombres de los testigos de identidad reservada para que el barrio los apoye.",
+                        "Vender rifas institucionales para comprar insumos de librería de la comisaría.",
+                        "Exigir a los vecinos que realicen guardias nocturnas armadas en reemplazo del móvil policial."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Participación Ciudadana y Gestión Policial",
+                "explanation": "Las mesas de seguridad barrial son instancias de articulación institucional donde la policía rinde cuentas, detecta puntos oscuros o 'zonas calientes' y coordina acciones de prevención con el entramado social."
+        },
+        {
+                "id": "isc-058",
+                "difficulty": "facil",
+                "question": "Cuando un Subcomisario aplica el concepto de 'Policía Basada en la Evidencia' (Evidence-Based Policing), sus decisiones operativas se fundamentan en:",
+                "options": [
+                        "La mera intuición y las costumbres tradicionales no registradas.",
+                        "El análisis científico y estadístico de datos empíricos de denuncias, llamadas al 911 e investigaciones evaluadas.",
+                        "Los rumores no verificados publicados en perfiles anónimos de redes sociales.",
+                        "La orden verbal de un ciudadano influyente de la zona sin respaldo legal."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Módulo Seguridad Pública: Evidence-Based Policing",
+                "explanation": "La policía basada en evidencia utiliza datos rigurosos y metodologías testeadas para desplegar recursos donde mayor impacto positivo tengan sobre la reducción criminal."
+        },
+        {
+                "id": "isc-059",
+                "difficulty": "media",
+                "question": "Según la Ley Provincial 12.510, ¿cuál es la condición jurídica del titular o subjefe de una comisaría que percibe y administra fondos de caja chica o bienes del Estado?",
+                "options": [
+                        "Agente voluntario sin deberes de rendición.",
+                        "Fiscal de Instrucción Administrativa con inmunidad patrimonial.",
+                        "Responsable Cuentadante, obligado a custodiar los bienes y rendir cuenta documentada de su gestión ante el Tribunal de Cuentas.",
+                        "Contratista privado tercerizado del Ministerio de Justicia y Seguridad."
+                ],
+                "correctIndex": 2,
+                "source": "Ley Provincial 12.510 - Título Responsabilidad Patrimonial y Régimen de Cuentadantes",
+                "explanation": "Todo funcionario que reciba, administre o custodie fondos o bienes públicos asume legalmente el carácter de cuentadante, respondiendo personal y patrimonialmente por su debida custodia y rendición."
+        },
+        {
+                "id": "isc-060",
+                "difficulty": "dificil",
+                "question": "En el régimen de contrataciones de la Ley 12.510, ¿cuál es la regla general ordinaria para las adquisiciones de bienes y servicios en el Estado Provincial?",
+                "options": [
+                        "La Contratación Directa por urgencia declarada verbalmente.",
+                        "La compra directa a comercios familiares del personal de la dependencia.",
+                        "El Concurso de Precios sin publicación de pliegos.",
+                        "La Licitación Pública, asegurando concurrencia, publicidad, igualdad y transparencia."
+                ],
+                "correctIndex": 3,
+                "source": "Ley Provincial 12.510 - Sistema de Contrataciones y Gestión de Bienes",
+                "explanation": "La Licitación Pública es el procedimiento general y obligatorio; las excepciones (licitación privada, concurso de precios o contratación directa) proceden solo por montos tasados o supuestos expresamente tipificados en la ley."
+        },
+        {
+                "id": "isc-061",
+                "difficulty": "media",
+                "question": "¿En qué supuesto taxativo autoriza la Ley 12.510 a recurrir a la 'Contratación Directa'?",
+                "options": [
+                        "Casos de probada urgencia o emergencia que no admitan dilación, especialidad técnica exclusiva, o montos dentro del límite reglamentario.",
+                        "Siempre que el jefe de seccional prefiera evitar demoras administrativas de rutina.",
+                        "Cuando se adquieran bienes para uso personal del personal policial franco de servicio.",
+                        "Para renovar toda la flota de patrulleros de la Unidad Regional sin intervención del Ministerio."
+                ],
+                "correctIndex": 0,
+                "source": "Ley Provincial 12.510 - Excepciones a la Licitación Pública",
+                "explanation": "La contratación directa es excepcional y exige fundamentación sólida: urgencia manifiesta no imputable a desidia previa, exclusividad de proveedor acreditada o compras de bajo monto legalmente habilitadas."
+        },
+        {
+                "id": "isc-062",
+                "difficulty": "media",
+                "question": "Al rendir comprobantes de la 'Caja Chica' de una dependencia policial, ¿qué requisito formal inexcusable deben cumplir las facturas para ser aprobadas?",
+                "options": [
+                        "Ser tickets provisorios escritos a mano sin CUIT ni validez fiscal.",
+                        "Comprobantes fiscales electrónicos legalmente emitidos (Factura B o C a nombre de la repartición oficial con CUIT de la Provincia), con detalle de los bienes y firma de recepción conforme.",
+                        "Presupuestos informales sin número de autorización de AFIP/ARCA.",
+                        "Notas de pedido firmadas exclusivamente por el proveedor sin sellado."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) y Normas de Rendición del Tribunal de Cuentas (Ley 12.510)",
+                "explanation": "Los comprobantes deben cumplir con toda la normativa fiscal oficial (AFIP/ARCA y API), emitidos a nombre de la repartición y con constancia de ingreso efectivo del bien o servicio prestado."
+        },
+        {
+                "id": "isc-063",
+                "difficulty": "dificil",
+                "question": "¿Cuál es la diferencia sustancial entre el 'Juicio de Cuentas' y el 'Juicio de Responsabilidad' ante el Tribunal de Cuentas de la Provincia (TCP)?",
+                "options": [
+                        "El Juicio de Cuentas juzga delitos penales; el de Responsabilidad aplica sanciones de arresto disciplinario.",
+                        "El Juicio de Cuentas se hace en el MPA y el de Responsabilidad en la comisaría.",
+                        "El Juicio de Cuentas revisa la regularidad contable y documental de la rendición de fondos; el Juicio de Responsabilidad determina el daño patrimonial y la condena a resarcir económicamente al Estado por actos u omisiones negligentes o dolosas.",
+                        "No existe diferencia; son sinónimos administrativos sin consecuencias patrimoniales."
+                ],
+                "correctIndex": 2,
+                "source": "Ley Provincial 12.510 - Régimen del Tribunal de Cuentas de Santa Fe",
+                "explanation": "El Juicio de Cuentas tiene por objeto la rendición formal y aritmética de los fondos recibidos; el Juicio de Responsabilidad busca resarcir el daño económico concreto causado a las arcas públicas por culpa o dolo del agente."
+        },
+        {
+                "id": "isc-064",
+                "difficulty": "media",
+                "question": "Si una auditoría detecta faltantes de bienes o combustible en una seccional, ¿cuál es la obligación procesal inmediata del Subcomisario a cargo?",
+                "options": [
+                        "Ocultar el hecho y compensar la diferencia con aportes del personal subalterno.",
+                        "Esperar al cierre del año calendario para regularizar los números sin aviso.",
+                        "Destruir los libros de guardia y las planillas de registro de kilometraje.",
+                        "Iniciar inmediatamente Información Sumaria o sumario administrativo, dar noticia a la superioridad y efectuar la correspondiente denuncia penal si presumiere delito."
+                ],
+                "correctIndex": 3,
+                "source": "Ley Provincial 12.510 y Reglamento Disciplinario Decreto 461/15",
+                "explanation": "El titular de la dependencia tiene el deber inexcusable de preservar la legalidad y denunciar las irregularidades patrimoniales; encubrirlas lo convierte en solidariamente responsable administrativa y penalmente."
+        },
+        {
+                "id": "isc-065",
+                "difficulty": "facil",
+                "question": "En la gestión logística de la comisaría, el racionamiento de las personas alojadas en carácter de aprehendidas o detenidas:",
+                "options": [
+                        "Es un derecho fundamental bajo custodia estatal cuya provisión, calidad y rendición formal debe garantizar y controlar la jefatura de la dependencia.",
+                        "Es optativo y depende de si los detenidos cuentan con dinero propio.",
+                        "Se canjea por vales de combustible de los móviles de patrulla.",
+                        "Debe ser provisto obligatoriamente por los familiares del imputado."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Administración y Derechos Humanos",
+                "explanation": "El Estado es garante de la vida y salud de las personas bajo su custodia; el racionamiento diario debe suministrarse en condiciones de higiene y registrarse con estricto apego documental."
+        },
+        {
+                "id": "isc-066",
+                "difficulty": "dificil",
+                "question": "Conforme a la Ley 12.510, ¿en qué momento prescribe la acción para iniciar el Juicio de Responsabilidad patrimonial por daños al Fisco, contados desde la comisión del hecho o cese de la gestión?",
+                "options": [
+                        "A los 30 días hábiles de producido el hecho.",
+                        "A los 5 años, sin perjuicio de la prescripción de las acciones penales que puedan corresponder.",
+                        "A los 6 meses de asumida la jefatura.",
+                        "No prescribe nunca bajo ninguna circunstancia procesal."
+                ],
+                "correctIndex": 1,
+                "source": "Ley Provincial 12.510 - Prescripción de la Responsabilidad Patrimonial",
+                "explanation": "El artículo pertinente de la Ley 12.510 establece el plazo general de prescripción de 5 años para hacer efectiva la responsabilidad patrimonial del funcionario ante el Tribunal de Cuentas."
+        },
+        {
+                "id": "isc-067",
+                "difficulty": "facil",
+                "question": "¿Qué es el 'Fondo Rotatorio' en la estructura presupuestaria de la administración policial?",
+                "options": [
+                        "Un fondo clandestino no declarado utilizado para pagos sin factura.",
+                        "El dinero retenido de las horas OSPE de los agentes para gastos del casino de oficiales.",
+                        "Un régimen especial de anticipo con fondos públicos para atender erogaciones periódicas urgentes que se repone periódicamente contra rendición aprobada.",
+                        "Una cuenta bancaria personal a nombre del subjefe de seccional."
+                ],
+                "correctIndex": 2,
+                "source": "Ley Provincial 12.510 - Fondos Rotatorios y Cajas Chicas",
+                "explanation": "Los fondos rotatorios permiten agilidad en erogaciones urgentes y regladas; su funcionamiento exige rendiciones periódicas y su reposición depende de la estricta aprobación de los gastos efectuados."
+        },
+        {
+                "id": "isc-068",
+                "difficulty": "media",
+                "question": "Si un proveedor ofrece donar bienes o equipamiento a la comisaría, ¿cómo debe proceder legalmente el Subcomisario?",
+                "options": [
+                        "Aceptarlos inmediatamente de manera privada y usarlos sin asentar en ningún registro.",
+                        "Rechazar la donación mediante el uso de la fuerza pública.",
+                        "Vender el equipamiento donado para comprar pintura para la guardia.",
+                        "Elevar la propuesta de donación a la Superioridad para que sea formalmente aceptada por resolución ministerial e inventariada como patrimonio del Estado."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) y Ley 12.510 - Gestión de Bienes Patrimoniales",
+                "explanation": "Toda incorporación de bienes al Estado, aun a título gratuito, requiere acto administrativo de aceptación del órgano competente e incorporación formal al inventario patrimonial de la Provincia."
+        },
+        {
+                "id": "isc-069",
+                "difficulty": "media",
+                "question": "El modelo de 'Liderazgo Transformacional' en la gestión de una dependencia policial se caracteriza prioritariamente por:",
+                "options": [
+                        "Inspirar, motivar, fomentar el compromiso ético y desarrollar las competencias individuales del personal para alcanzar metas colectivas.",
+                        "El castigo disciplinario sistemático como único incentivo laboral.",
+                        "Delegar el mando en los presos alojados en el penal de la comisaría.",
+                        "Evitar cualquier contacto con los subordinados limitándose a firmar órdenes por escrito."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Módulo Liderazgo Estratégico y Conducción",
+                "explanation": "El liderazgo transformacional supera la mera transacción de premios y castigos, generando una visión compartida, sentido de pertenencia y elevación de los estándares profesionales de la dotación."
+        },
+        {
+                "id": "isc-070",
+                "difficulty": "dificil",
+                "question": "¿Cuáles son las tres dimensiones características del 'Síndrome de Burnout' (agotamiento profesional) que el mando policial debe detectar en su tropa?",
+                "options": [
+                        "Insomnio temporal, apetito aumentado y optimismo exagerado.",
+                        "Agotamiento emocional, despersonalización (cinismo hacia la comunidad) y baja realización personal o sensación de ineficacia en el rol.",
+                        "Hiperactividad motora, euforia operativa y aumento del rendimiento en tiro.",
+                        "Negligencia contable, extravío de comprobantes y desobediencia civil."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Salud Mental Operativa y Detección de Riesgo",
+                "explanation": "El Burnout se manifiesta en policías sometidos a estrés crónico mediante fatiga extrema, trato distante o cínico hacia las víctimas y pérdida de vocación; su detección temprana previene incidentes críticos."
+        },
+        {
+                "id": "isc-071",
+                "difficulty": "media",
+                "question": "Tras un enfrentamiento armado con resultado de personas heridas o fallecidas, ¿cuál es el procedimiento inmediato respecto al personal policial involucrado?",
+                "options": [
+                        "Obligarlo a continuar inmediatamente la guardia de patrullaje como si nada hubiera ocurrido.",
+                        "Sancionarlo preventivamente con 15 días de arresto sin sumario previo.",
+                        "Desafectar preventivamente su armamento reglamentario para las pericias de rigor, brindar contención médica y psicológica, y activar el debriefing post-evento crítico.",
+                        "Exigirle que redacte declaraciones públicas en redes sociales defendiendo su actuación."
+                ],
+                "correctIndex": 2,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Protocolo Post-Enfrentamiento y Asistencia al Personal",
+                "explanation": "El protocolo policial exige resguardar las pruebas forenses de manera objetiva y, a la vez, proteger la integridad psíquica del efectivo mediante asistencia psicológica profesional inmediata."
+        },
+        {
+                "id": "isc-072",
+                "difficulty": "media",
+                "question": "¿En qué consiste la técnica de 'Debriefing Psicológico' aplicada al equipo de trabajo tras una intervención altamente traumática?",
+                "options": [
+                        "Un interrogatorio acusatorio para determinar responsabilidades penales del agente.",
+                        "Una sesión de fotos para la página web de la Unidad Regional.",
+                        "Una prueba física de resistencia con trote de 10 kilómetros.",
+                        "Una reunión estructurada y confidencial de descarga emocional guiada por especialistas para procesar el impacto del hecho, mitigar el estrés postraumático y fortalecer la cohesión grupal."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Manejo de Estrés en Situaciones de Crisis",
+                "explanation": "El debriefing no es una instancia judicial ni disciplinaria; es un dispositivo de salud mental operativo que ayuda al personal a asimilar el trauma y prevenir secuelas psicológicas incapacitantes."
+        },
+        {
+                "id": "isc-073",
+                "difficulty": "facil",
+                "question": "La incorporación de la perspectiva de género en la organización de los servicios y guardias de una seccional implica:",
+                "options": [
+                        "Garantizar igualdad de oportunidades en asignaciones operativas, respetando la legislación vigente, erradicando conductas discriminatorias o de acoso y asegurando condiciones edilicias dignas.",
+                        "Asignar las tareas administrativas exclusivamente a las mujeres y las tareas operativas a los hombres.",
+                        "Eximir de todo servicio a las empleadas policiales sin causa legal.",
+                        "Prohibir el ingreso de personal femenino a las unidades de patrulla."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Perspectiva de Género en la Gestión Policial",
+                "explanation": "La perspectiva de género derriba estereotipos segregacionistas, profesionaliza el reparto de responsabilidades operativas y tutela activamente los derechos laborales del personal."
+        },
+        {
+                "id": "isc-074",
+                "difficulty": "media",
+                "question": "Cuando surge un conflicto interpersonal severo entre suboficiales de la guardia que afecta el servicio, ¿cómo debe actuar el Subcomisario?",
+                "options": [
+                        "Ignorar la situación hasta que se produzca una agresión física.",
+                        "Intervenir de forma temprana mediante la escucha activa, mediación profesional de mando, clarificación de roles y, de ser necesario, medidas organizativas o disciplinarias.",
+                        "Sancionar a toda la guardia sin averiguar lo ocurrido.",
+                        "Delegar la resolución del conflicto en los detenidos de la seccional."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Conducción de Personal y Clima Laboral",
+                "explanation": "El mando debe abordar proactivamente las fricciones internas; la inacción deteriora el clima de trabajo, desmotiva a la tropa y expone la seguridad de la dependencia."
+        },
+        {
+                "id": "isc-075",
+                "difficulty": "facil",
+                "question": "¿Cuál es el impacto directo de un adecuado clima laboral y trato digno por parte del jefe de dependencia hacia sus subordinados?",
+                "options": [
+                        "Pérdida de autoridad y debilitamiento de la disciplina obligatoria.",
+                        "Aumento automático de los sueldos en el recibo de haberes.",
+                        "Mayor compromiso institucional, reducción del ausentismo y licencias médicas, y mejor calidad de atención ciudadana.",
+                        "Exención del uso obligatorio del chaleco balístico durante el servicio."
+                ],
+                "correctIndex": 2,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Gestión de Recursos Humanos en Seguridad",
+                "explanation": "La conducción empática y profesional fortalece la disciplina consciente, eleva la moral y se traduce en una mayor efectividad operativa de cara a la sociedad."
+        },
+        {
+                "id": "isc-076",
+                "difficulty": "dificil",
+                "question": "Si un efectivo policial presenta signos evidentes de ideación suicida, crisis emocional aguda o abuso de sustancias, ¿cuál es la medida precautoria urgente del jefe de servicio?",
+                "options": [
+                        "Asignarle más horas de servicio nocturno en solitario.",
+                        "Obligarlo a rendir un examen de tiro de combate de inmediato.",
+                        "Burlarse del efectivo frente a sus pares para templar su carácter.",
+                        "Proceder a la retención preventiva y documentada de su arma reglamentaria de dotación, derivación médica urgente y dar intervención al área de Bienestar Policial y Medicina Laboral."
+                ],
+                "correctIndex": 3,
+                "source": "Protocolos de Prevención de Suicidio Policial y Salud Laboral Santa Fe",
+                "explanation": "La retención preventiva del arma de fuego ante riesgo cierto para sí o para terceros es una medida de protección prioritaria e ineludible que debe acompañarse de atención psicológica y médica."
+        },
+        {
+                "id": "isc-077",
+                "difficulty": "media",
+                "question": "En la evaluación de desempeño del personal subordinado para ascensos, el mando debe basar su calificación en:",
+                "options": [
+                        "Criterios objetivos de profesionalismo, aptitud operativa, disciplina, contracción al trabajo y apego irrestricto a los derechos humanos.",
+                        "Afinidades personales o favores particulares extralaborales.",
+                        "La edad biológica del agente con exclusión de su legajo.",
+                        "El número de veces que el efectivo pagó el café de la guardia."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) y Ley del Personal Policial de Santa Fe",
+                "explanation": "La objetividad en las fojas de calificación es una obligación ética y legal del calificador que garantiza la meritocracia y la transparencia en la carrera policial."
+        },
+        {
+                "id": "isc-078",
+                "difficulty": "media",
+                "question": "En la oratoria policial clásica y la estructura de un discurso formal, ¿qué función cumple el 'Exordio'?",
+                "options": [
+                        "Concluir la alocución y pedir aplausos del público presente.",
+                        "Captar la atención, predisponer favorablemente al auditorio (captatio benevolentiae) y fijar el marco y legitimidad de la exposición.",
+                        "Enumerar exhaustivamente las pruebas periciales de un expediente penal.",
+                        "Notificar la resolución de exoneración a un sumariado."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Módulo Comunicación y Oratoria Policial",
+                "explanation": "El Exordio es la parte inicial del discurso; su propósito es conectar con el auditorio, ganar credibilidad inicial y preparar el terreno para presentar el mensaje central de forma clara y respetuosa."
+        },
+        {
+                "id": "isc-079",
+                "difficulty": "dificil",
+                "question": "Durante una conferencia de prensa en el lugar de un hecho violento de alto impacto, ¿cuál debe ser la conducta del vocero policial designado?",
+                "options": [
+                        "Especular sobre hipótesis personales y adelantar la identidad de personas aún no imputadas formalmente.",
+                        "Culpar públicamente a los jueces y legisladores por el hecho acontecido.",
+                        "Aportar información fáctica confirmada y autorizada por el Fiscal, preservar la reserva legal de la investigación y transmitir serenidad a la población sin conjeturas.",
+                        "Cobrar una tarifa de exclusividad al medio periodístico que llegó primero."
+                ],
+                "correctIndex": 2,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Vocería Institucional y Relación con Medios",
+                "explanation": "La vocería policial exige prudencia extrema: solo se transmiten datos objetivos verificados con aval del MPA, protegiendo las garantías del debido proceso y evitando entorpecer la pesquisa judicial."
+        },
+        {
+                "id": "isc-080",
+                "difficulty": "media",
+                "question": "La violación del 'Secreto de Sumario' o la revelación de actuaciones judiciales reservadas por parte de un funcionario policial (Art. 157 CP):",
+                "options": [
+                        "Es una práctica aconsejable para mejorar la imagen institucional en medios televisivos.",
+                        "Se subsana simplemente con una disculpa informal al fiscal actuante.",
+                        "Está permitida si se trata de periodistas amigos del jefe de la comisaría.",
+                        "Constituye un delito penal que acarrea prisión e inhabilitación especial, además de severas sanciones disciplinarias de cesantía o exoneración."
+                ],
+                "correctIndex": 3,
+                "source": "Código Penal de la Nación (Art. 157) y Régimen Disciplinario Decreto 461/15",
+                "explanation": "El Art. 157 del Código Penal tipifica la violación de secretos; filtrar actuaciones judiciales confidenciales vulnera la legalidad, arruina allanamientos y destruye pruebas procesales."
+        },
+        {
+                "id": "isc-081",
+                "difficulty": "media",
+                "question": "Ante una ola de pánico vecinal provocada por audios falsos ('fake news') en grupos de mensajería instantánea sobre supuestos secuestros, ¿cuál es la respuesta comunicacional correcta?",
+                "options": [
+                        "Emitir un comunicado oficial claro y desmentir con datos fácticos el contenido falso, reforzando los canales institucionales de denuncia (911/comisaría).",
+                        "Reenviar los audios para que la gente tome más precauciones.",
+                        "Clausurar el acceso al barrio cortando el suministro eléctrico.",
+                        "Ordenar a los efectivos que apaguen sus teléfonos para no recibir llamadas."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Gestión de Comunicación en Crisis y Redes Sociales",
+                "explanation": "Frente a rumores y desinformación que generan zozobra comunitaria, la institución debe emitir información veraz y contundente por vías oficiales, evitando amplificar el alarmismo injustificado."
+        },
+        {
+                "id": "isc-082",
+                "difficulty": "facil",
+                "question": "¿Cuál de las siguientes es una técnica recomendada de 'Escucha Activa' en reuniones con vecinos que reclaman mayor seguridad?",
+                "options": [
+                        "Interrumpir constantemente a los vecinos y descalificar sus temores.",
+                        "Mantener contacto visual, tomar notas de las inquietudes, validar sus emociones de preocupación y sintetizar los puntos acordados antes de responder.",
+                        "Mirar el teléfono celular durante toda la asamblea comunitaria.",
+                        "Levantarse abruptamente y abandonar la reunión sin dar explicaciones."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Técnicas de Comunicación Asertiva y Resolución de Conflictos",
+                "explanation": "La escucha activa demuestra respeto genuino hacia el vecino, descomprime la agresividad inicial y permite recabar información valiosa para redirigir la prevención."
+        },
+        {
+                "id": "isc-083",
+                "difficulty": "media",
+                "question": "En el discurso retórico, la fase de 'Confirmación' (o demostración) tiene como finalidad principal:",
+                "options": [
+                        "Saludar protocolarmente a las autoridades de mesa.",
+                        "Despedirse formalmente del auditorio.",
+                        "Presentar los argumentos sólidos, datos objetivos y pruebas que respaldan la postura o el plan de acción propuesto.",
+                        "Hacer silencio durante 15 minutos para que el público reflexione."
+                ],
+                "correctIndex": 2,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Estructura Retórica de la Oratoria",
+                "explanation": "La confirmación es el cuerpo argumentativo donde se despliegan los fundamentos y evidencias que sostienen la propuesta o el informe operativo presentado."
+        },
+        {
+                "id": "isc-084",
+                "difficulty": "dificil",
+                "question": "Al redactar un informe circunstanciado de alta dirección para el Jefe de Unidad Regional, ¿qué característica de redacción técnica debe primar?",
+                "options": [
+                        "Uso excesivo de adjetivos subjetivos, dramatizaciones y apreciaciones personales vagas.",
+                        "Omitir deliberadamente los horarios y lugares de los procedimientos.",
+                        "Escritura en verso o lenguaje poético para embellecer el parte de novedades.",
+                        "Claridad conceptual, precisión cronológica, concisión, objetividad fáctica y fundamentación normativa expresa."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Redacción Administrativa y Policial Superior",
+                "explanation": "El informe oficial superior debe ser sobrio, exacto y objetivo; las opiniones personales sin base empírica desvirtúan la toma de decisiones estratégicas del Comando Superior."
+        },
+        {
+                "id": "isc-085",
+                "difficulty": "facil",
+                "question": "¿Por qué es crucial la comunicación interna descendente (de jefes a subalternos) antes de iniciar un operativo cerrojo o allanamiento múltiple?",
+                "options": [
+                        "Para asegurar que cada participante conozca con exactitud su rol, las medidas de seguridad, los límites legales y las vías de escape del objetivo.",
+                        "Para cumplir un formulismo sin que importe si el personal prestó atención.",
+                        "Para postergar el inicio del operativo hasta que los delincuentes se retiren del lugar.",
+                        "Para asignar el cobro de adicionales de manera preferencial."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Briefing Operativo y Conducción Táctica",
+                "explanation": "El 'briefing' previo al despliegue alinea los esfuerzos tácticos, minimiza los riesgos de incidentes por fuego cruzado y garantiza la estricta sujeción a la orden de operaciones."
+        },
+        {
+                "id": "isc-086",
+                "difficulty": "media",
+                "question": "El término 'Epílogo' en la comunicación oral policial hace referencia a:",
+                "options": [
+                        "La presentación inicial de la identidad del orador.",
+                        "La parte final de cierre donde se sintetizan las ideas clave, se apela a la acción y se agradece la atención brindada.",
+                        "El debate acalorado sin moderador entre los asistentes.",
+                        "El acta de secuestro confeccionada por los testigos periciales."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Oratoria y Comunicación Estratégica",
+                "explanation": "El epílogo o conclusión refuerza el mensaje principal, resume los compromisos asumidos y deja una impresión perdurable de solidez y profesionalismo."
+        },
+        {
+                "id": "isc-087",
+                "difficulty": "media",
+                "question": "La Ley Provincial 14.239 de Santa Fe adhiere a la desfederalización parcial de la Ley Nacional 23.737. ¿Qué delitos específicos asume la justicia penal ordinaria santafesina?",
+                "options": [
+                        "El narcotráfico internacional de cargamentos marítimos en alta mar.",
+                        "La fabricación a gran escala de precursores químicos industriales en laboratorios clandestinos multinacionales.",
+                        "El microtráfico o narcomenudeo: comercialización, entrega, suministro o tenencia de estupefacientes fraccionados en dosis destinadas directamente al consumidor.",
+                        "El lavado de activos transfronterizo de organizaciones criminales complejas."
+                ],
+                "correctIndex": 2,
+                "source": "Ley Provincial 14.239 y Ley Nacional 23.737 (Art. 34)",
+                "explanation": "Santa Fe asumió la persecución local del último eslabón de la cadena delictiva: la venta fraccionada para consumo inmediato y la comercialización barrial directa, coordinando con el MPA."
+        },
+        {
+                "id": "isc-088",
+                "difficulty": "dificil",
+                "question": "En un procedimiento de microtráfico en vía pública, ¿cuál es el reactivo químico colorimétrico de campo utilizado como prueba de orientación preliminar para cocaína?",
+                "options": [
+                        "Reactivo de Marquis (que vira a violeta).",
+                        "Agua oxigenada de 10 volúmenes.",
+                        "Reactivo de Duquenois-Levine para derivados opiáceos.",
+                        "Reactivo de Scott (tiocianato de cobalto), que produce una coloración azul brillante en presencia de sales de cocaína."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) y Protocolo de Actuación en Narcomenudeo",
+                "explanation": "La prueba de campo con el reactivo de Scott ofrece una presunción orientativa inmediata; posteriormente el Laboratorio Químico Forense certifica la sustancia con análisis cromatográfico cuantitativo indubitable."
+        },
+        {
+                "id": "isc-089",
+                "difficulty": "media",
+                "question": "¿En qué condiciones faculta el Artículo 167 del Código Procesal Penal de Santa Fe a la policía a requisar un vehículo sin orden judicial previa?",
+                "options": [
+                        "Cuando existan motivos urgentes, graves y fundados para presumir que en él se ocultan cosas relacionadas con un delito o que puedan servir para cometerlo, labrando acta y comunicando de inmediato al Fiscal.",
+                        "Siempre que el conductor tenga aspecto sospechoso sin ninguna justificación objetiva.",
+                        "Únicamente con autorización escrita del intendente municipal.",
+                        "Nunca; la policía provincial no tiene facultades de inspección vehicular bajo ningún concepto."
+                ],
+                "correctIndex": 0,
+                "source": "Código Procesal Penal de Santa Fe - Art. 167 (Inspección y requisa sin orden)",
+                "explanation": "El Art. 167 CPP exige circunstancias objetivas, graves y fundadas de urgencia que imposibiliten pedir orden judicial sin frustrar el procedimiento, debiendo documentarse todo en acta circunstanciada."
+        },
+        {
+                "id": "isc-090",
+                "difficulty": "dificil",
+                "question": "El Artículo 170 del Código Procesal Penal de Santa Fe contempla el allanamiento de morada sin orden judicial. ¿Cuál de los siguientes es un supuesto legal taxativo?",
+                "options": [
+                        "Cuando la policía sospeche que dentro de la vivienda se consumen bebidas alcohólicas después de medianoche.",
+                        "En caso de incendio, explosión, inundación u otro estrago con riesgo para la vida, o ante voces de socorro que indiquen que se está cometiendo un delito grave o cuando se persiga a un imputado en flagrante delito que se introduzca en ella.",
+                        "Por pedido verbal de un vecino molesto por ruidos musicales.",
+                        "Para verificar si los habitantes de la vivienda pagaron el impuesto inmobiliario provincial."
+                ],
+                "correctIndex": 1,
+                "source": "Código Procesal Penal de Santa Fe - Art. 170 (Allanamiento sin orden)",
+                "explanation": "El ingreso domiciliario sin orden judicial es de interpretación restrictiva extrema: solo procede ante flagrancia flagrante con persecución inmediata o situaciones de auxilio inminente por peligro de vida o estragos."
+        },
+        {
+                "id": "isc-091",
+                "difficulty": "media",
+                "question": "Conforme al Artículo 214 del Código Procesal Penal de Santa Fe, ¿cuál es el plazo y deber de comunicación tras practicar la aprehensión en flagrancia de un sospechoso?",
+                "options": [
+                        "La policía puede mantener incomunicado al aprehendido por 72 horas sin avisar a nadie.",
+                        "Basta con enviar una carta postal certificada dentro de los 10 días siguientes.",
+                        "Debe comunicarse la aprehensión de forma inmediata al Fiscal en turno del MPA, quien resolverá si convalida la detención, ordena medidas o dispone el cese de la aprehensión dentro de los plazos legales.",
+                        "Se debe esperar a que el aprehendido solicite hablar con el juez de cámara."
+                ],
+                "correctIndex": 2,
+                "source": "Código Procesal Penal de Santa Fe - Art. 214 (Aprehensión y control de la detención)",
+                "explanation": "El control de la privación de la libertad es inmediato; la omisión de avisar al Fiscal configura privación ilegítima de la libertad o incumplimiento de los deberes de funcionario público."
+        },
+        {
+                "id": "isc-092",
+                "difficulty": "media",
+                "question": "En el procedimiento de secuestro de sustancias ilícitas en un búnker de microtráfico, ¿qué recaudo de Cadena de Custodia es imperativo para evitar nulidades?",
+                "options": [
+                        "Mezclar las sustancias secuestradas a distintos individuos en una sola bolsa común.",
+                        "Dejar las sustancias guardadas en el baúl del patrullero por varios días antes de elevarlas.",
+                        "Permitir que los curiosos manipulen los envoltorios antes de peritarlos.",
+                        "El pesaje individualizado en balanza de precisión, colocación en sobres de evidencia inviolables con precinto numerado, firma del secuestrador, testigos civiles y descripción exhaustiva en el acta de procedimiento."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) y Guía de Cadena de Custodia del MPA",
+                "explanation": "La cadena de custodia garantiza la autenticidad e indemnidad de la evidencia desde el hallazgo hasta el debate oral; cualquier rotura injustificada del precinto vicia la prueba."
+        },
+        {
+                "id": "isc-093",
+                "difficulty": "facil",
+                "question": "¿Qué establece la doctrina jurisprudencial del fallo 'Arriola' de la CSJN respecto a la tenencia de estupefacientes para consumo personal?",
+                "options": [
+                        "Que no es punible la tenencia para consumo personal que se desarrolle en el ámbito privado y sin trascendencia ni peligro para la salud de terceras personas (Art. 19 CN).",
+                        "Que la tenencia para consumo personal en la vía pública frente a escuelas es lícita.",
+                        "Que el Estado debe distribuir drogas de diseño gratuitamente en comisarías.",
+                        "Que toda persona que porte cualquier cantidad debe ser condenada a reclusión perpetua."
+                ],
+                "correctIndex": 0,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Jurisprudencia Penal: Fallo Arriola (CSJN)",
+                "explanation": "El fallo 'Arriola' declaró la inconstitucionalidad de penar la tenencia de escasa cantidad para consumo personal en el ámbito privado cuando no lesione derechos de terceros ni afecte la salud colectiva."
+        },
+        {
+                "id": "isc-094",
+                "difficulty": "dificil",
+                "question": "En Santa Fe, cuando el MPA y la policía proceden a la 'inutilización o derribo de un búnker' utilizado para el expendio minorista de drogas, ¿cuál es el marco legal habilitante?",
+                "options": [
+                        "La decisión autónoma e inconsulta del oficial de guardia de la seccional.",
+                        "La intervención y resolución judicial fundada a requerimiento del MPA en el marco de la persecución penal del microtráfico y la neutralización del peligro comunitario.",
+                        "La petición informal de un grupo de vecinos sin intervención de la fiscalía.",
+                        "Una disposición del Código de Faltas municipal sobre ruidos molestos."
+                ],
+                "correctIndex": 1,
+                "source": "Ley Provincial 14.239 y Protocolo MPA de Desactivación de Puntos de Venta",
+                "explanation": "La demolición o clausura de un búnker requiere orden de la autoridad judicial a solicitud del Ministerio Público de la Acusación, asegurando que se hayan asegurado previamente todas las pruebas periciales."
+        },
+        {
+                "id": "isc-095",
+                "difficulty": "media",
+                "question": "Si durante una requisa de rutina por el Art. 167 CPP SF se hallan 50 dosis fraccionadas de cocaína y dinero de baja denominación, ¿qué juzgado interviene primariamente?",
+                "options": [
+                        "El Fuero Federal con asiento en Capital Federal de manera exclusiva.",
+                        "El Tribunal de Cuentas de la Provincia de Santa Fe.",
+                        "El Ministerio Público de la Acusación (MPA) y la Justicia Penal Ordinaria de la Provincia de Santa Fe en virtud de la Ley 14.239 de desfederalización del microtráfico.",
+                        "El Tribunal de Ética Médica de la Policía."
+                ],
+                "correctIndex": 2,
+                "source": "Ley Provincial 14.239 - Competencia Material",
+                "explanation": "Al tratarse de estupefacientes fraccionados en dosis para consumo final (comercialización minorista barrial), la competencia es provincial santafesina bajo la órbita de los fiscales de microtráfico del MPA."
+        },
+        {
+                "id": "isc-096",
+                "difficulty": "facil",
+                "question": "El pesaje preliminar de estupefacientes secuestrados en el acta de procedimiento policial debe consignar siempre:",
+                "options": [
+                        "Un cálculo aproximado a simple vista sin usar balanza.",
+                        "La marca comercial del nylon empleado en el envoltorio.",
+                        "El precio de reventa de la droga en el mercado clandestino.",
+                        "El peso bruto (sustancia con envoltorio) y, de ser factible técnicamente, el peso neto aproximado, dejando constancia del instrumento de pesaje utilizado."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Técnicas de Actuación Judicial",
+                "explanation": "La discriminación entre peso bruto y neto es fundamental para calificar legalmente el delito (dosis umbral, tenencia simple vs comercio) y evitar cuestionamientos en las audiencias preliminares."
+        },
+        {
+                "id": "isc-097",
+                "difficulty": "media",
+                "question": "Conforme al Decreto Provincial 461/15 (Reglamento del Sumario Administrativo - RSA), ¿cuál es la diferencia principal entre una 'Información Sumaria' y un 'Sumario Administrativo'?",
+                "options": [
+                        "La Información Sumaria es un procedimiento abreviado para esclarecer hechos dudosos o faltas menores; el Sumario Administrativo es el proceso formal para juzgar faltas graves pasibles de sanciones segregativas (cesantía o exoneración).",
+                        "La Información Sumaria se aplica a oficiales superiores y el Sumario a suboficiales.",
+                        "La Información Sumaria no tiene validez legal y el Sumario Administrativo es penal.",
+                        "No existe diferencia; son términos idénticos regulados en el Código Civil."
+                ],
+                "correctIndex": 0,
+                "source": "Decreto Provincial 461/15 (RSA) - Ámbito y Tipología de Actuaciones Disciplinarias",
+                "explanation": "La Información Sumaria busca averiguar la verosimilitud inicial de un hecho; si de ella surgen faltas graves atribuibles a personal determinado, se ordena la instrucción formal del Sumario Administrativo."
+        },
+        {
+                "id": "isc-098",
+                "difficulty": "dificil",
+                "question": "En el marco del Decreto 461/15, ¿en qué consiste la declaración prestada por el sumariado bajo el 'Artículo 40° del RSA'?",
+                "options": [
+                        "En una confesión compulsiva bajo juramento de decir verdad.",
+                        "En la audiencia formal de imputación disciplinaria donde se le hace saber la falta atribuida, las pruebas en su contra y ejerce su derecho constitucional de defensa con asistencia letrada.",
+                        "En una charla informal sin labrado de acta con el chofer del patrullero.",
+                        "En la notificación de la cesantía inmediata sin posibilidad de descargo."
+                ],
+                "correctIndex": 1,
+                "source": "Decreto Provincial 461/15 - Art. 40° RSA (Audiencia del Imputado)",
+                "explanation": "El Art. 40° RSA materializa el derecho de defensa en el proceso disciplinario policial; el imputado no presta juramento de decir verdad y tiene derecho a no declarar sin que ello implique presunción de culpabilidad."
+        },
+        {
+                "id": "isc-099",
+                "difficulty": "media",
+                "question": "Si el efectivo policial citado en debida forma para la audiencia del Art. 40° del Decreto 461/15 no comparece sin causa justificada, ¿qué situación procesal corresponde dictar?",
+                "options": [
+                        "El archivo definitivo de las actuaciones por prescripción inmediata.",
+                        "El envío de un grupo de asalto táctico para detenerlo en su domicilio civil.",
+                        "La declaración de Rebeldía, continuando la tramitación del sumario con designación de un defensor de oficio institucional.",
+                        "La baja deshonrosa automática sin dictamen jurídico."
+                ],
+                "correctIndex": 2,
+                "source": "Decreto Provincial 461/15 - De la Rebeldía y Defensa de Oficio",
+                "explanation": "La rebeldía evita que la incomparecencia injustificada paralice la acción punitiva estatal; el proceso continúa con la garantía de un defensor oficial designado para tutelar los derechos del encausado."
+        },
+        {
+                "id": "isc-100",
+                "difficulty": "media",
+                "question": "Conforme a las disposiciones del Decreto 461/15, ¿cuál es el plazo general de prescripción de la acción disciplinaria policial, contado desde la comisión de la falta?",
+                "options": [
+                        "30 días corridos.",
+                        "6 meses desde que el sumariado ascendió de jerarquía.",
+                        "10 años improrrogables.",
+                        "2 años desde la fecha en que se cometió la falta o desde el cese de su ejecución continua."
+                ],
+                "correctIndex": 3,
+                "source": "Decreto Provincial 461/15 - Prescripción de la Acción Disciplinaria",
+                "explanation": "El plazo de prescripción general de la acción disciplinaria en la Policía de Santa Fe es de 2 años, extinguiéndose la potestad punitiva administrativa si no medió interrupción o suspensión reglamentaria."
+        },
+        {
+                "id": "isc-101",
+                "difficulty": "dificil",
+                "question": "Durante la instrucción de un sumario administrativo, el Oficial Instructor designado como Subcomisario:",
+                "options": [
+                        "Debe investigar con objetividad e imparcialidad, reuniendo tanto las pruebas de cargo como de descargo para la averiguación de la verdad real.",
+                        "Puede aplicar directamente la sanción de exoneración sin elevar el expediente.",
+                        "Debe ocultar los testimonios favorables al sumariado para acelerar la condena.",
+                        "No puede ordenar peritajes ni requerir informes a reparticiones públicas."
+                ],
+                "correctIndex": 0,
+                "source": "Decreto Provincial 461/15 - Deberes del Instructor Sumariante",
+                "explanation": "El instructor actúa como auxiliar de la verdad jurídica objetiva; su función no es incriminar a ultranza sino reconstruir fidedignamente los hechos respetando el debido proceso legal."
+        },
+        {
+                "id": "isc-102",
+                "difficulty": "facil",
+                "question": "Contra una sanción disciplinaria notificada a un funcionario policial, ¿cuál es el primer recurso ordinario que puede interponer para que la misma autoridad reconsidere su decisión?",
+                "options": [
+                        "Acción de amparo internacional ante la OEA.",
+                        "Recurso de Revocatoria o Reconsideración con apelación en subsidio.",
+                        "Habeas Corpus correctivo en juzgado de turno.",
+                        "Demanda de juicio político al Jefe de Policía."
+                ],
+                "correctIndex": 1,
+                "source": "Decreto Provincial 461/15 y Ley de Trámite Administrativo de Santa Fe",
+                "explanation": "El recurso de revocatoria permite a la propia autoridad emisora del acto subsanar errores de hecho o de derecho; si no lo admite, tramita el recurso jerárquico o de apelación ante el superior."
+        },
+        {
+                "id": "isc-103",
+                "difficulty": "media",
+                "question": "¿En qué circunstancias puede el jefe de dependencia disponer la 'Suspensión Preventiva' de un efectivo involucrado en un hecho grave?",
+                "options": [
+                        "Por capricho personal sin que exista falta disciplinaria documentada.",
+                        "Únicamente cuando el efectivo se niegue a barrer la seccional.",
+                        "Cuando la permanencia del imputado en servicio activo resulte perjudicial para la investigación, configure peligro o afecte gravemente el prestigio institucional, solicitando su convalidación superior.",
+                        "La suspensión preventiva está terminantemente prohibida por las leyes de Santa Fe."
+                ],
+                "correctIndex": 2,
+                "source": "Decreto Provincial 461/15 - Medidas Cautelares Disciplinarias",
+                "explanation": "La suspensión preventiva es una medida cautelar y provisoria, no una sanción definitiva; resguarda la investigación y el buen orden del servicio mientras se sustancian las actuaciones."
+        },
+        {
+                "id": "isc-104",
+                "difficulty": "dificil",
+                "question": "¿Qué consecuencia procesal acarrea en el sumario administrativo la omisión de notificar formalmente los cargos y conceder vista del expediente al imputado antes del alegato?",
+                "options": [
+                        "Ninguna, porque la policía no está sujeta al debido proceso.",
+                        "El ascenso inmediato por antigüedad del oficial instructor.",
+                        "La duplicación automática de la sanción de arresto al inculpado.",
+                        "La nulidad absoluta e insubsanable de todo lo actuado con posterioridad por violación directa de la garantía constitucional del derecho de defensa."
+                ],
+                "correctIndex": 3,
+                "source": "Decreto Provincial 461/15 - Principios y Garantías del Debido Proceso",
+                "explanation": "El desconocimiento de las garantías básicas del sumariado (derecho a ser oído, conocer cargos y ofrecer prueba) vicía el trámite de nulidad absoluta ante la justicia contencioso-administrativa."
+        },
+        {
+                "id": "isc-105",
+                "difficulty": "facil",
+                "question": "¿Quién tiene la competencia exclusiva en la Provincia de Santa Fe para aplicar las sanciones expulsivas de 'Cesantía' o 'Exoneración' al personal policial?",
+                "options": [
+                        "El Poder Ejecutivo Provincial (Gobernador / Ministro de Justicia y Seguridad) mediante decreto o resolución fundada previo dictamen técnico vinculante.",
+                        "El Subcomisario jefe de la comisaría local.",
+                        "El jefe de cuartel de bomberos voluntarios de la zona.",
+                        "El presidente del club social del barrio."
+                ],
+                "correctIndex": 0,
+                "source": "Ley del Personal Policial de Santa Fe y Decreto 461/15",
+                "explanation": "La separación definitiva de la fuerza estatal mediante cesantía o exoneración es atribución privativa de la máxima autoridad del Poder Ejecutivo Provincial conforme al ordenamiento constitucional."
+        },
+        {
+                "id": "isc-106",
+                "difficulty": "media",
+                "question": "En el subfusil reglamentario FMK-3 calibre 9x19 mm, ¿cuál es el principio mecánico de funcionamiento y acerrojado?",
+                "options": [
+                        "Toma de gases en un punto del cañón con cerrojo rotativo.",
+                        "Retroceso simple de masas (Blowback) con cerrojo envolvente (telescópico) y percusión con cierre abierto.",
+                        "Cerrojo a cerrojo manual de tiro a tiro por palanca lateral.",
+                        "Accionamiento por corredera manual a trombón como en escopetas de repetición."
+                ],
+                "correctIndex": 1,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Armamento Táctico Policial: Subfusil FMK-3",
+                "explanation": "El FMK-3 funciona por masa inercial y cerrojo telescópico envolvente que cubre gran parte del cañón, reduciendo la longitud total del arma y disparando a cerrojo abierto."
+        },
+        {
+                "id": "isc-107",
+                "difficulty": "dificil",
+                "question": "Durante un patrullaje urbano regular en móvil policial, ¿cuál es la condición reglamentaria de seguridad para el transporte del subfusil FMK-3?",
+                "options": [
+                        "Con cargador colocado, cerrojo retenido atrás montado y palanca selectora en Ráfaga libre.",
+                        "Arma armada sin seguro apuntando permanentemente por la ventanilla del móvil.",
+                        "Cargador colocado, recámara vacía (cerrojo adelantado descargado), selector de tiro en Seguro y guardamonte libre de contacto de dedos.",
+                        "Desarmada completamente en piezas sueltas en la guantera."
+                ],
+                "correctIndex": 2,
+                "source": "Manual Subcomisario ISEP (379 págs.) y Normas de Seguridad en el Manejo de Armas de Fuego",
+                "explanation": "Al disparar a cerrojo abierto, llevar el cerrojo retenido atrás con cartuchos en el cargador dentro de un vehículo en movimiento constituye un riesgo extremo de disparo accidental por caída o sacudida."
+        },
+        {
+                "id": "isc-108",
+                "difficulty": "dificil",
+                "question": "El Fusil Automático Liviano (FAL) calibre 7,62x51 mm OTAN posee un gran alcance eficaz y alto poder de penetración. ¿En qué escenario táctico está desaconsejado su empleo por mandos de seccionales urbanas?",
+                "options": [
+                        "Puestos de bloqueo carretero en zonas rurales despobladas.",
+                        "En polígonos de tiro habilitados para armas largas de grueso calibre.",
+                        "Interdicción perimetral de pistas de aterrizaje clandestinas en campos abiertos.",
+                        "En áreas urbanas densamente pobladas o barrios periféricos conglomerados con viviendas de materiales precarios, debido al alto riesgo de sobrepenetración y bajas colaterales inocentes."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Empleo Táctico de Fusiles y Seguridad Operativa",
+                "explanation": "El proyectil 7,62x51 mm perfora múltiples paredes de ladrillo hueco y chapas; su uso en zonas urbanas pobladas genera un peligro colateral inaceptable para terceros inocentes."
+        },
+        {
+                "id": "isc-109",
+                "difficulty": "media",
+                "question": "Con la escopeta de dotación policial Hatsan Escort calibre 12/76 y cartuchería Antitumulto (AT - postas de goma), ¿cuál es la distancia mínima operativa recomendada de disparo para evitar lesiones graves o mortales?",
+                "options": [
+                        "Al menos 15 a 20 metros de distancia, apuntando a miembros inferiores o zonas musculares no vitales (rebote de suelo o directos bajos).",
+                        "A quemarropa o menos de 2 metros de distancia.",
+                        "Exactamente a 50 centímetros directamente al rostro de los manifestantes.",
+                        "Las postas de goma nunca producen lesiones sin importar la distancia."
+                ],
+                "correctIndex": 0,
+                "source": "Protocolo de Actuación Policial para el Uso Gradual de la Fuerza en Santa Fe",
+                "explanation": "A distancias menores a 15 metros, las postas de goma se comportan como proyectiles de alta energía cinética capaces de fracturar huesos, vaciar globos oculares o causar heridas penetrantes letales."
+        },
+        {
+                "id": "isc-110",
+                "difficulty": "facil",
+                "question": "Según el Protocolo Provincial del Uso de la Fuerza, ¿cuál es el primer nivel del uso progresivo de la fuerza pública?",
+                "options": [
+                        "El disparo intimidatorio con munición de plomo al aire.",
+                        "La Presencia Policial visible, uniformada, atenta y la comunicación verbal persuasiva.",
+                        "El golpe directo de bastón táctico extensible a la cabeza.",
+                        "El esposamiento de pies y manos contra el suelo."
+                ],
+                "correctIndex": 1,
+                "source": "Protocolo de Actuación Policial para el Uso Gradual de la Fuerza en Santa Fe",
+                "explanation": "La presencia policial profesional y la orden verbal clara resuelven la gran mayoría de las intervenciones ciudadanas sin necesidad de contacto físico ni medios coercitivos superiores."
+        },
+        {
+                "id": "isc-111",
+                "difficulty": "media",
+                "question": "La doctrina táctica de 'Violación del Espacio Personal' (Regla de Tueller / Art. 5° del Protocolo de Santa Fe) establece que ante un sujeto armado con arma blanca o elemento contundente que avanza a corta distancia:",
+                "options": [
+                        "El funcionario policial debe arrodillarse y esperar pasivamente la agresión.",
+                        "Se debe invitar al agresor a tomar café dentro de la patrulla.",
+                        "El funcionario policial está habilitado a desplegar acciones tácticas proporcionales (desplazamiento, advertencia armada o disparo defensivo) para salvaguardar su vida y restablecer la distancia de seguridad crítica.",
+                        "El policía debe entregar inmediatamente su arma de fuego al agresor."
+                ],
+                "correctIndex": 2,
+                "source": "Manual Subcomisario ISEP (379 págs.) y Protocolo de Uso de la Fuerza de Santa Fe",
+                "explanation": "Un agresor con arma blanca a menos de 6-7 metros puede alcanzar e infligir heridas mortales al policía antes de que este logre desenfundar y efectuar un disparo certero; violar esa distancia de seguridad justifica la defensa activa."
+        },
+        {
+                "id": "isc-112",
+                "difficulty": "dificil",
+                "question": "¿Qué se entiende por 'Asimetría Sobrevenida' en el curso de una intervención policial armada?",
+                "options": [
+                        "La diferencia de sueldos entre un oficial inspector y un subcomisario.",
+                        "El error gramatical en la redacción del acta de defunción.",
+                        "La falta de pintura simétrica en las puertas del patrullero.",
+                        "La mutación súbita de las condiciones del enfrentamiento (aparición sorpresiva de más atacantes armados, superioridad de calibre o despojo de equipo defensivo) que obliga al personal a escalar de inmediato el nivel de fuerza para repeler la agresión."
+                ],
+                "correctIndex": 3,
+                "source": "Manual Subcomisario ISEP (379 págs.) - Táctica y Análisis Dinámico de Riesgo",
+                "explanation": "La asimetría sobrevenida ocurre cuando una situación aparentemente controlada o de baja intensidad escala repentinamente en letalidad contra el personal, habilitando respuestas tácticas defensivas de mayor entidad."
+        },
+        {
+                "id": "isc-113",
+                "difficulty": "facil",
+                "question": "El principio de 'Proporcionalidad' en el uso de la fuerza policial significa que:",
+                "options": [
+                        "El nivel de fuerza empleado debe ser equilibrado y equivalente a la gravedad de la agresión que se enfrenta y al objetivo legítimo que se busca salvaguardar.",
+                        "La policía debe usar siempre mayor violencia que el infractor para demostrar superioridad.",
+                        "Se debe disparar un tiro por cada piedra arrojada por una multitud.",
+                        "La fuerza letal debe usarse siempre en cualquier intervención sin excepción."
+                ],
+                "correctIndex": 0,
+                "source": "Código de Conducta para Funcionarios Encargados de Hacer Cumplir la Ley y Protocolo Provincial",
+                "explanation": "Proporcionalidad no es simetría matemática de armas, sino equilibrio racional entre la gravedad del peligro que se enfrenta y la intensidad de la fuerza aplicada para neutralizarlo con el menor daño posible."
+        },
+        {
+                "id": "isc-114",
+                "difficulty": "media",
+                "question": "¿Bajo qué presupuesto jurídico de extrema ratio autorizan las leyes y protocolos de Santa Fe el uso de la fuerza potencialmente letal (armas de fuego cargadas con proyectiles de plomo)?",
+                "options": [
+                        "Para dispersar una manifestación pacífica en la vereda.",
+                        "Únicamente ante peligro inminente y actual de muerte o lesiones gravísimas para el funcionario o terceras personas, cuando hayan fracasado todos los medios menos lesivos.",
+                        "Para sancionar a un conductor que no tiene la póliza de seguro vehicular.",
+                        "Para evitar que un sospechoso salte un alambrado sin portar armas ni representar peligro."
+                ],
+                "correctIndex": 1,
+                "source": "Protocolo de Actuación Policial para el Uso Gradual de la Fuerza en Santa Fe y Art. 34 CP",
+                "explanation": "El disparo letal es el último y más extremo recurso legal; solo se justifica moral y normativamente para salvar una vida humana inocente amenazada de muerte inminente."
+        },
         {
             "id": "isc-001",
             "difficulty": "facil",
