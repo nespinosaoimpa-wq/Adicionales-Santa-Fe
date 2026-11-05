@@ -2,21 +2,19 @@
  * Adicionales Santa Fe - Banco de Preguntas ISEP 2026 Profesional
  * Simulador de Examen de Ascenso Policial Oficial
  * 
- * v8.0.0 - BANCO EXPANDIDO Y ADAPTATIVO
- * - Más de 690 preguntas oficiales rigurosamente categorizadas por Jerarquía y Dificultad.
- * - Distractores equilibrados con longitud técnica homogénea para evitar descarte visual.
+ * v8.1.0 - BANCO EXPANDIDO: MÓDULO SUBOFICIAL A OFICIAL INCORPORADO
+ * - Más de 770 preguntas oficiales rigurosamente categorizadas por Jerarquía y Dificultad.
  * - Basado al 100% en los manuales de cursado ISEP 2026, decretos provinciales y exámenes reales de ascenso:
+ *   • MANUAL DE ESTUDIO PERFECCIONAMIENTO SUBOFICIAL (ISEP 2026 - 273 págs.)
+ *   • Escena del Crimen, RPI, 7 Preguntas de Oro, Locard y Perímetros de Seguridad
  *   • Tiro y Armamento Policial (MIRAF, Bersa TPR9/Thunder Pro, Balística, Posición SUL)
  *   • Código Procesal Penal de Santa Fe (Ley 12.734: flagrancia, requisas, allanamientos y actas)
  *   • Régimen Disciplinario Policial (Decreto 461/15 y Ley 12.521: faltas, arresto y recursos)
  *   • Microtráfico y Narcomenudeo (Ley 14.239: desfederalización y cadena de custodia)
- *   • Seguridad de la Información (Tríada CID, incidentes y evidencia digital en allanamientos)
- *   • Conducción de Patrulleros y Comunicaciones Institucionales (7C y mando operativo)
- *   • Niñez y Menores en Conflicto con la Ley (Ley 12.967)
- *   • Ley Nacional de Salud Mental (Ley 26.657 - Protocolo Policial)
- *   • Protección Integral contra la Violencia de Género (Ley 26.485)
- *   • Código de Convivencia de Santa Fe (Ley 13.774)
- *   • Carta Iberoamericana de la Función Pública y Ética de Servicio
+ *   • Regla de Tueller (21 pies / 6,4 m), empleo de la fuerza y Carta Iberoamericana
+ *   • Redacción de Actas de Procedimiento, Notas y Partes de Novedades
+ *   • Informática Policial (LibreOffice Writer, Calc, Ciberseguridad y Google Drive)
+ *   • Inteligencia Emocional, empatía y desescalada de conflictos
  * 
  * Modalidades de Dificultad:
  * - 'facil': Conceptos clave, definiciones doctrinarias y principios rectores del manual.
@@ -25,6 +23,1128 @@
  */
 
 window.quizBank = {
+    "suboficial-oficial": [
+        {
+            "id": "so-001",
+            "difficulty": "facil",
+            "question": "¿Cuál es el principio fundamental de la Criminalística postulado por Edmond Locard en 1910?",
+            "options": [
+                "Principio de Correspondencia: el daño mecánico siempre es idéntico al elemento utilizado",
+                "Principio de Inocencia: todo imputado es inocente hasta sentencia firme",
+                "Principio de Inmutabilidad: las huellas dactilares nunca cambian con el tiempo",
+                "Principio de Intercambio: el autor deja indicios en el lugar y se lleva rastros del mismo"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 7",
+            "explanation": "El Principio de Intercambio de Edmond Locard establece que cuando dos objetos entran en contacto, siempre hay una transferencia mutua de materia entre el autor, la víctima y el lugar del hecho."
+        },
+        {
+            "id": "so-002",
+            "difficulty": "facil",
+            "question": "¿Cuáles son las conocidas 'Siete Preguntas de Oro' de la investigación criminalística según el manual?",
+            "options": [
+                "Qué ley se violó, Cuándo prescribe, Quién denuncia, Quién detiene, Dónde se aloja, Cómo y Con qué",
+                "Quién es el juez, Quién es el fiscal, Dónde ocurrió, Cuántos disparos hubo, Quién vio, Cuándo y Por qué",
+                "Qué, Quién, Cómo, Cuándo, Dónde, Con qué y Por qué",
+                "Dónde, Cuándo, Por orden de quién, Con qué testigos, A qué hora, Cuánto y Para qué"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 8",
+            "explanation": "Las 7 preguntas fundamentales son: ¿Qué sucedió? ¿Quién lo cometió o fue víctima? ¿Cómo ocurrió? ¿Cuándo fue? ¿Dónde tuvo lugar? ¿Con qué instrumentos se ejecutó? y ¿Por qué motivo o móvil se produjo?"
+        },
+        {
+            "id": "so-003",
+            "difficulty": "media",
+            "question": "¿Cómo se delimita y qué función cumple la 'Zona Interior Crítica' en la preservación del lugar del hecho?",
+            "options": [
+                "Área para estacionamiento exclusivo de los móviles policiales y ambulancias de traslado",
+                "Zona externa donde el personal de guardia realiza la identificación preventiva de transeúntes",
+                "Sector donde se ubican los familiares y medios de prensa para brindar conferencias informativas",
+                "Área donde se concentran las evidencias físicas directas; acceso restringido exclusivamente a peritos y médico forense"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 24-25",
+            "explanation": "La Zona Interior Crítica es el perímetro primario que contiene el cuerpo y las evidencias materiales; ningún funcionario no pericial debe ingresar para evitar contaminación por el Principio de Intercambio."
+        },
+        {
+            "id": "so-004",
+            "difficulty": "dificil",
+            "question": "En el lugar del hecho, ¿cuál es el método de búsqueda criminalística más recomendado para espacios abiertos y amplios como campos o descampados?",
+            "options": [
+                "Método de espiral excéntrica desde el centro hacia afuera",
+                "Método de punto a punto aleatorio según criterio visual del preventor",
+                "Método de franjas o líneas paralelas con avance sincronizado de los inspectores",
+                "Método radial circular exclusivo para recintos cerrados"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 27",
+            "explanation": "El método de franjas o líneas permite un rastrillaje exhaustivo y coordinado en grandes superficies abiertas sin dejar zonas muertas sin inspeccionar."
+        },
+        {
+            "id": "so-005",
+            "difficulty": "facil",
+            "question": "¿Cuáles son los tres postulados científicos universales en los que se fundamenta la Dactiloscopía para la identificación humana?",
+            "options": [
+                "Elasticidad, Visibilidad y Homogeneidad genética",
+                "Simetría, Profundidad epidérmica y Regeneración celular",
+                "Linearidad, Proporcionalidad y Correspondencia anatómica",
+                "Perennidad, Inmutabilidad y Diversidad (o Variedad infinita)"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 12",
+            "explanation": "La dactiloscopía se basa en que las papilas se forman en el cuarto mes de vida intrauterina y duran hasta la descomposición (perennidad), no cambian sus dibujos (inmutabilidad) y son únicas en cada individuo (diversidad)."
+        },
+        {
+            "id": "so-006",
+            "difficulty": "media",
+            "question": "Según el Art. 268 del CPP de Santa Fe (Ley 12.734), ¿cuál es el primer deber del preventor policial al arribar al lugar del hecho?",
+            "options": [
+                "Tomar declaración testimonial jurada al imputado en el móvil",
+                "Proceder al secuestro inmediato de armas sin confeccionar acta ni croquis",
+                "Convocar obligatoriamente a los medios de comunicación para transparentar la labor",
+                "Prestar inmediato auxilio a las víctimas y asegurar la escena para evitar la alteración de rastros"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 17-19",
+            "explanation": "El Art. 268 inc. 1 y 2 del CPP obliga al personal policial a prestar auxilio prioritario a los heridos y asegurar la conservación del lugar del hecho y de los elementos materiales del delito."
+        },
+        {
+            "id": "so-007",
+            "difficulty": "dificil",
+            "question": "¿Qué establece el Art. 260 del Código Procesal Penal respecto a la formalidad y validez de las actuaciones policiales de prevención?",
+            "options": [
+                "Determina la nulidad absoluta de todo procedimiento si el testigo es menor de 21 años",
+                "Exige firma obligatoria de un escribano público para convalidar el acta en sede judicial",
+                "Las actuaciones de prevención no exigirán formalidades sacramentales, pero deberán consignar lugar, fecha, hora, personas intervinientes y circunstancias relevantes",
+                "Prohíbe terminantemente el uso de croquis ilustrativo o fotografías complementarias"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 19-20 / CPP Art. 260",
+            "explanation": "El Art. 260 del CPP consagra la flexibilidad formal pero exige rigurosa precisión en circunstancias de tiempo, lugar, personas y relatos fácticos para garantizar el derecho de defensa."
+        },
+        {
+            "id": "so-008",
+            "difficulty": "media",
+            "question": "Al embalar prendas con presuntas manchas de sangre húmeda en la escena del hecho, ¿cuál es la pauta técnica correcta de preservación?",
+            "options": [
+                "Guardarlas inmediatamente en bolsa plástica hermética sellada al vacío",
+                "Lavar con agua fría para aislar los glóbulos rojos antes del envío al laboratorio",
+                "Dejarlas secar a temperatura ambiente bajo sombra y luego embalar en bolsa de papel madera permeable",
+                "Aplicar alcohol etílico al 70% para evitar la putrefacción de las bacterias"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 29-30",
+            "explanation": "Las evidencias biológicas húmedas nunca deben confinarse en bolsas plásticas porque la humedad produce hongos que destruyen el ADN; deben secarse a la sombra y guardarse en papel transpirable."
+        },
+        {
+            "id": "so-009",
+            "difficulty": "facil",
+            "question": "¿Qué delimita la 'Zona Intermedia' en el esquema de tres perímetros de preservación policial?",
+            "options": [
+                "El área de comando operativo, descanso pericial, depósito de instrumental y enlace con autoridades",
+                "La zona exterior abierta al tránsito vehicular y transporte público",
+                "El lugar exacto donde cayó el cuerpo de la víctima y los casquillos",
+                "El sector donde se encierra a los sospechosos aprehendidos para su requisa"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 24-25",
+            "explanation": "La Zona Intermedia rodea a la zona crítica y sirve como buffer de seguridad donde opera el jefe de servicio, la logística, los peritos antes de ingresar y los equipos de apoyo."
+        },
+        {
+            "id": "so-010",
+            "difficulty": "dificil",
+            "question": "Conforme al Art. 270 y 271 del CPP de Santa Fe, ¿cuál es la relación funcional de la policía frente al Ministerio Público de la Acusación (MPA)?",
+            "options": [
+                "Dependencia exclusiva de las instrucciones directas del Juez de Paz comunal",
+                "Subordinación jerárquica al Ministerio de Justicia de la Nación en todas las causas",
+                "Subordinación funcional y jurídica a las directivas del Fiscal en la Investigación Penal Preparatoria",
+                "Autonomía operativa absoluta e independencia decisoria frente a los magistrados judiciales"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 33",
+            "explanation": "En el sistema acusatorio santafesino, la policía actúa como auxiliar subordinada a la dirección jurídica y fáctica de los fiscales del MPA durante toda la IPP."
+        },
+        {
+            "id": "so-011",
+            "difficulty": "media",
+            "question": "En criminalística, ¿qué diferencia sustancial existe entre un 'indicio' y una 'evidencia'?",
+            "options": [
+                "El indicio lo aporta el testigo civil y la evidencia es exclusiva de los peritos de parte",
+                "El indicio solo existe en delitos dolosos y la evidencia en delitos culposos",
+                "No existe ninguna diferencia técnica ni jurídica entre ambos términos",
+                "El indicio es una señal o vestigio probable que requiere peritaje; la evidencia es el indicio ya analizado y vinculado científicamente al hecho"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 15-16",
+            "explanation": "El indicio es todo objeto o marca perceptible que sugiere una relación con el hecho (elemento orientador). Al comprobarse fehacientemente su nexo causal mediante pericia científica, adquiere el rango de evidencia."
+        },
+        {
+            "id": "so-012",
+            "difficulty": "facil",
+            "question": "¿Quién es el único funcionario facultado para modificar o levantar los perímetros de seguridad en la escena del hecho?",
+            "options": [
+                "Cualquier periodista acreditado en la Unidad Regional",
+                "El testigo presencial de mayor edad en el vecindario",
+                "El conductor del móvil policial que llegó primero",
+                "El Coordinador o Perito de Criminalística a cargo con conocimiento del Fiscal interviniente"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 25",
+            "explanation": "El manual establece que los peritos criminalísticos y el coordinador del relevamiento son quienes disponen la ampliación, reducción o levantamiento final del perímetro resguardado."
+        },
+        {
+            "id": "so-013",
+            "difficulty": "media",
+            "question": "Cuando se debe trasladar de urgencia a una persona herida desde el lugar del hecho, ¿qué constancia debe asentar el preventor policial?",
+            "options": [
+                "Únicamente el nombre de pila de la persona herida sin registrar hora ni destino",
+                "El pronóstico médico definitivo emitido por el chofer del móvil sanitario",
+                "Datos de la ambulancia, matrícula, médico interviniente, hospital de destino y posición original de la víctima",
+                "La renuncia formal de la víctima a iniciar acciones penales"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 23",
+            "explanation": "El personal policial debe registrar con exactitud la unidad sanitaria, móvil, profesional a cargo, centro de salud receptor y demarcar o fotografiar la posición en que yacía la víctima antes del auxilio."
+        },
+        {
+            "id": "so-014",
+            "difficulty": "dificil",
+            "question": "¿Qué establece el Principio de Correspondencia de Características en balística y accidentología?",
+            "options": [
+                "La velocidad del impacto es siempre proporcional a la masa del proyectil",
+                "Las huellas de frenada corresponden exclusivamente al peso del eje trasero del vehículo",
+                "Todo disparo de arma de fuego produce exactamente la misma trayectoria balística en cualquier condición",
+                "La acción de un agente vulnerable deja impresas sus características morfológicas particulares sobre el cuerpo o superficie que impacta"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 7-8",
+            "explanation": "El principio de correspondencia demuestra que las irregularidades y marcas particulares del agente vulnerante (ej. estrías de un cañón o huellas de calzado) se reproducen en el soporte de impacto."
+        },
+        {
+            "id": "so-015",
+            "difficulty": "facil",
+            "question": "Según el modelo de Daniel Goleman adoptado por el ISEP, ¿cuál de los siguientes es un componente esencial de la Inteligencia Emocional?",
+            "options": [
+                "Autoconocimiento y Autorregulación emocional",
+                "Imposición de autoridad mediante castigos ejemplares",
+                "Memoria fotográfica y velocidad de tipeo en actas",
+                "Supresión absoluta de sentimientos y frialdad psicológica"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 38",
+            "explanation": "Goleman postula cinco pilares: Autoconocimiento, Autorregulación, Motivación, Empatía y Habilidades Sociales, fundamentales para la gestión del estrés y el trato ciudadano."
+        },
+        {
+            "id": "so-016",
+            "difficulty": "media",
+            "question": "En una intervención de alta hostilidad en la vía pública, ¿cómo contribuye la 'autorregulación emocional' al accionar del suboficial?",
+            "options": [
+                "Obliga a delegar el mando en los transeúntes que presencian el hecho",
+                "Permite modular las respuestas impulsivas, evitar provocaciones y mantener la calma para tomar decisiones racionales y proporcionadas",
+                "Habilita a retirarse del lugar de inmediato sin dar cuenta a la superioridad",
+                "Exige responder con la misma agresividad verbal para doblegar al oponente"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 41-43",
+            "explanation": "La autorregulación evita que el funcionario policial caiga en el 'secuestro amigdalino' o reacción visceral ante insultos, garantizando el profesionalismo y la legitimidad del procedimiento."
+        },
+        {
+            "id": "so-017",
+            "difficulty": "facil",
+            "question": "¿Qué define a la 'comunicación asertiva' en el trato policial con la comunidad?",
+            "options": [
+                "Hablar en voz muy alta e intimidar físicamente para exigir obediencia",
+                "Utilizar lenguaje técnico incomprensible para confundir a los ciudadanos",
+                "Aceptar pasivamente cualquier reclamo sin hacer cumplir las leyes vigentes",
+                "Expresar derechos, órdenes o límites con firmeza, claridad y respeto, sin ser sumiso ni agresivo"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 54-56",
+            "explanation": "La asertividad es el punto de equilibrio donde el efectivo hace valer su autoridad legal sin avasallar la dignidad de la otra persona, desescalando situaciones conflictivas."
+        },
+        {
+            "id": "so-018",
+            "difficulty": "media",
+            "question": "La 'escucha activa' como herramienta policial implica fundamentalmente:",
+            "options": [
+                "Interrumpir constantemente al vecino para indicarle que está equivocado",
+                "Tomar nota textual sin mirar a los ojos a la víctima que relata el suceso",
+                "Prestar atención integral al mensaje verbal y no verbal, demostrando comprensión antes de responder o actuar",
+                "Oír pasivamente mientras se revisan las redes sociales en el teléfono celular"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 48-50",
+            "explanation": "La escucha activa transmite empatía y respeto, desarma la hostilidad del interlocutor y permite recabar información táctica fidedigna y de calidad."
+        },
+        {
+            "id": "so-019",
+            "difficulty": "dificil",
+            "question": "Respecto a la retroalimentación ('feedback') en el ámbito policial, ¿qué método promueve el ISEP para corregir desvíos de un compañero o subalterno?",
+            "options": [
+                "Publicar el desvío en el grupo de mensajería informal de la seccional",
+                "Ignorar el error para no generar mal clima interno en la guardia de tercio",
+                "Amonestación verbal enérgica delante de los vecinos para marcar autoridad",
+                "Método constructivo: resaltar aspectos positivos, señalar concretamente la conducta a mejorar y acordar pautas futuras"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 60-61",
+            "explanation": "La doctrina ISEP enseña que el feedback efectivo debe ser específico, oportuno, enfocado en conductas objetivas (no en la persona) y orientado a la mejora continua."
+        },
+        {
+            "id": "so-020",
+            "difficulty": "facil",
+            "question": "¿Qué técnica psicofísica básica se enseña para controlar la taquicardia y el túnel de visión ante un evento crítico con armas?",
+            "options": [
+                "Respiración táctica consciente y controlada (inhalación profunda, retención y exhalación pausada)",
+                "Ingesta rápida de bebidas energizantes con alto contenido de cafeína",
+                "Cerrar los ojos durante 10 segundos en plena zona de peligro",
+                "Acelerar el ritmo respiratorio para aumentar la agresividad física"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Inteligencia Emocional, Pág. 43-45",
+            "explanation": "La respiración diafragmática o táctica reactiva el sistema parasimpático, reduce las pulsaciones y devuelve la agudeza sensorial y visual al operador policial."
+        },
+        {
+            "id": "so-021",
+            "difficulty": "facil",
+            "question": "¿Cuál es la ley que rige los deberes, derechos, estabilidad y régimen de la carrera policial en Santa Fe?",
+            "options": [
+                "Ley del Personal Policial N° 12.521",
+                "Ley de Procedimientos Administrativos N° 11.516",
+                "Ley Orgánica de Ministerios N° 13.013",
+                "Ley de Seguridad Social N° 10.703"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 72",
+            "explanation": "La Ley 12.521, sancionada en 2006, derogó la antigua Ley 6.769 y constituye el estatuto fundamental del personal policial de la Provincia de Santa Fe."
+        },
+        {
+            "id": "so-022",
+            "difficulty": "media",
+            "question": "Según la escala jerárquica de la Ley 12.521, ¿a qué grado asciende de forma inmediata un Suboficial de Policía?",
+            "options": [
+                "Oficial de Policía",
+                "Sargento de Policía",
+                "Inspector de Policía",
+                "Subinspector de Policía"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 72-73",
+            "explanation": "La escala jerárquica de la Ley 12.521 inicia en Suboficial de Policía, continuando sucesivamente con Oficial de Policía, Subinspector, Inspector, Subcomisario, Comisario, Comisario Supervisor, Subdirector, Director y Director General."
+        },
+        {
+            "id": "so-023",
+            "difficulty": "dificil",
+            "question": "En el Régimen Disciplinario Policial (Decreto N° 0461/2015), ¿cuáles son las sanciones expulsivas que pueden aplicarse al personal?",
+            "options": [
+                "Apercibimiento y Reconvención",
+                "Traslado de jurisdicción y recargo de servicio de guardia",
+                "Suspensión de empleo de hasta 15 días y Arresto policial",
+                "Cesantía y Exoneración"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 82-84 / Dec. 461/15",
+            "explanation": "Las sanciones disciplinarias se dividen en correctivas (reconvención y apercibimiento), segregativas (suspensión de empleo y arresto) y expulsivas (cesantía y exoneración)."
+        },
+        {
+            "id": "so-024",
+            "difficulty": "media",
+            "question": "¿Qué causal transforma a una falta leve del Art. 41 de la Ley 12.521 en una falta grave según el Art. 42?",
+            "options": [
+                "Cuando el autor tenga menos de 5 años de antigüedad en la repartición",
+                "Cuando el superior directo no se encuentre presente al momento del hecho",
+                "Cuando por sus consecuencias produzca un perjuicio grave al servicio o afecte seriamente el prestigio institucional",
+                "Cuando se cometa en un día domingo o feriado nacional"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 84",
+            "explanation": "El Art. 42 de la Ley 12.521 establece como agravante que las faltas leves muten a graves cuando sus efectos causen grave daño a la disciplina, a terceros o a la imagen pública de la Institución."
+        },
+        {
+            "id": "so-025",
+            "difficulty": "facil",
+            "question": "Conforme al Art. 29 de la Ley 12.521, ¿cuál es la obligación del personal con autoridad policial respecto al arma de fuego reglamentaria?",
+            "options": [
+                "Utilizar únicamente municiones de caza mayor no homologadas por la institución",
+                "Portar el arma provista en todo momento durante la prestación del servicio ordinario o extraordinario",
+                "Dejar el arma bajo custodia en su domicilio particular al salir de servicio",
+                "Prestar el armamento provisto a familiares para seguridad de la vivienda"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 75",
+            "explanation": "El personal policial con autoridad policial tiene el deber inexcusable de portar el armamento reglamentario provisto durante la prestación activa del servicio de seguridad."
+        },
+        {
+            "id": "so-026",
+            "difficulty": "dificil",
+            "question": "¿Qué establece el Decreto N° 1166/2018 respecto al personal policial bajo sumario administrativo frente al concurso de ascenso?",
+            "options": [
+                "Queda automáticamente exonerado de la fuerza sin derecho a reclamo alguno",
+                "Se le prohíbe de por vida presentarse a cualquier concurso de perfeccionamiento",
+                "Puede concursar, pero si está llamado a prestar declaración indagatoria por falta grave su ascenso quedará condicionado al resultado final del sumario",
+                "Asciende de forma automática para evitar violar su derecho de defensa"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 81 / Dec. 1166/18",
+            "explanation": "El Decreto 1166/18 resguarda la vacante si el agente aprueba el concurso, supeditando la efectivización del decreto de ascenso a que resulte sobreseído o con sanción que no inhabilite el ascenso."
+        },
+        {
+            "id": "so-027",
+            "difficulty": "media",
+            "question": "¿Qué principio de organización institucional consagra el Decreto-Ley 12.333/62 para la Policía de Santa Fe?",
+            "options": [
+                "Comando rotativo elegido por asamblea vecinal cada seis meses",
+                "Independencia absoluta de cada comisaría respecto de la Jefatura Provincial",
+                "Descentralización política y cobro de aranceles jurisdiccionales propios",
+                "Centralización administrativa y descentralización funcional y operativa"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 85-86",
+            "explanation": "La Policía de Santa Fe es centralizada en lo administrativo (Jefatura de Policía) y descentralizada en lo funcional (Unidades Regionales y Direcciones Generales operativas)."
+        },
+        {
+            "id": "so-028",
+            "difficulty": "dificil",
+            "question": "En el marco de la Ley N° 11.516 (incorporada como Art. 10 bis a la Ley 7.395), ¿cuáles son los requisitos estrictos para demorar a una persona para averiguación de antecedentes?",
+            "options": [
+                "Mero disgusto personal del funcionario policial, con plazo de alojamiento libre de hasta 72 horas",
+                "Haber cometido una falta de tránsito menor en zona rural sin testigos",
+                "Existencia de sospecha fundada sobre delito o contravención, negativa a identificarse, plazo máximo de 6 horas y comunicación inmediata",
+                "Orden escrita de un concejal comunal con retención de DNI por 48 horas"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 87-88",
+            "explanation": "El Art. 10 bis es excepcional: requiere sospecha razonable de preparación de hecho ilícito, renuencia o imposibilidad de identificación fehaciente, plazo perentorio de 6 horas y notificación fiscal."
+        },
+        {
+            "id": "so-029",
+            "difficulty": "facil",
+            "question": "¿Cómo se integran las Direcciones que conforman la Plana Mayor Policial (D-1 a D-5)?",
+            "options": [
+                "D-1 Informática, D-2 Patrulleros, D-3 Balística, D-4 Bomberos y D-5 Custodias",
+                "D-1 Finanzas, D-2 Tránsito, D-3 Armería, D-4 Prensa y D-5 Protocolo",
+                "D-1 Personal, D-2 Inteligencia, D-3 Operaciones Policiales, D-4 Logística y D-5 Asuntos Judiciales",
+                "D-1 Asistentes, D-2 Guardias, D-3 Adicionales, D-4 Salud y D-5 Escuelas"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 86",
+            "explanation": "La Plana Mayor Policial asesora al Jefe de Policía a través de sus cinco departamentos clásicos: Personal (D1), Inteligencia (D2), Operaciones (D3), Logística (D4) y Judicial (D5)."
+        },
+        {
+            "id": "so-029b",
+            "difficulty": "media",
+            "question": "Bajo el Decreto 461/15, ¿constituye falta administrativa para un superior no sancionar a un subalterno que comete una falta disciplinaria comprobada?",
+            "options": [
+                "Sí, expresamente tipificada como omisión sancionatoria que acarrea responsabilidad disciplinaria para el superior",
+                "No, el superior tiene discrecionalidad absoluta para perdonar cualquier falta sin límite",
+                "Solo si el subalterno pertenece a un escalafón administrativo o profesional",
+                "Únicamente si la falta fue publicada previamente en un medio de prensa escrito"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 74 / Dec. 461/15",
+            "explanation": "El Decreto 461/15 establece la obligatoriedad del ejercicio del poder disciplinario; la tolerancia o encubrimiento de faltas por parte del superior constituye en sí misma una falta administrativa grave."
+        },
+        {
+            "id": "so-030",
+            "difficulty": "facil",
+            "question": "¿Cuál es la norma de fondo que sanciona las conductas contravencionales en el territorio de la Provincia de Santa Fe?",
+            "options": [
+                "Ley de Seguridad Interior N° 24.059",
+                "Código de Convivencia Provincial (Ley N° 13.774)",
+                "Código Civil y Comercial de la Nación",
+                "Código Penal de la Nación Argentina (Ley N° 11.179)"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 90-91",
+            "explanation": "La Ley 13.774 modificó sustancialmente la antigua Ley 10.703, instaurando el Código de Convivencia santafesino con enfoque en la mediación y respeto comunitario."
+        },
+        {
+            "id": "so-031",
+            "difficulty": "media",
+            "question": "En el Código de Convivencia (Ley 13.774), ¿cuál es la unidad utilizada para tasar los montos de las multas contravencionales?",
+            "options": [
+                "La Unidad Jus (arancel regulatorio judicial vigente en la provincia)",
+                "Un porcentaje fijo de los haberes brutos del personal policial",
+                "El valor del litro de nafta súper en estaciones oficiales",
+                "El Salario Mínimo, Vital y Móvil nacional"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 94",
+            "explanation": "El Art. 16 de la Ley 13.774 establece la Unidad Jus como medida de valor actualizada para fijar multas contravencionales, evitando la depreciación por inflación."
+        },
+        {
+            "id": "so-032",
+            "difficulty": "dificil",
+            "question": "Según el Art. 4 del Código de Convivencia y la Ley 12.967, ¿se puede aplicar pena de arresto a menores de 18 años por infracciones contravencionales?",
+            "options": [
+                "No, bajo ninguna circunstancia se les aplica pena de arresto, rigiendo medidas socioeducativas y protección de derechos",
+                "Sí, hasta un máximo de 30 días en celdas individuales de comisaría",
+                "Únicamente con autorización verbal del oficial de servicio de guardia",
+                "Solo si el menor cometió la contravención en horario nocturno"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 92",
+            "explanation": "El Art. 4 del Código de Convivencia exime a los menores de 18 años de la pena de arresto contravencional, supeditando su abordaje a los principios de la Ley 12.967 de protección integral."
+        },
+        {
+            "id": "so-033",
+            "difficulty": "media",
+            "question": "Conforme al Art. 213 del Código Procesal Penal de Santa Fe, ¿cuándo se considera que existe 'flagrancia'?",
+            "options": [
+                "Cuando un denunciante anónimo relata un hecho ocurrido la semana anterior",
+                "Cuando se sospecha de una persona sin haber presenciado ningún acto ilícito",
+                "Cuando el autor es sorprendido en el momento de cometer el delito, inmediatamente después, o perseguido con rastros concluyentes",
+                "Cuando el imputado se presenta espontáneamente a consultar por su legajo"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 109-111",
+            "explanation": "La flagrancia (Art. 213) y la cuasiflagrancia facultan la aprehensión inmediata sin orden previa de juez cuando el sujeto es sorprendido in fraganti o perseguido clamorosamente."
+        },
+        {
+            "id": "so-034",
+            "difficulty": "dificil",
+            "question": "El Art. 211 del CPP faculta al arresto preventivo en el lugar del hecho por un plazo máximo de:",
+            "options": [
+                "Hasta setenta y dos (72) horas sin dar aviso a ninguna autoridad judicial",
+                "Quince (15) días corridos en dependencias de la Unidad Regional",
+                "Hasta ocho (8) horas para individualizar personas o recibir declaraciones urgentes en los primeros momentos de la investigación",
+                "Veinticuatro (24) horas prorrogables automáticamente por el jefe de destacamento"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 94 / CPP Art. 211",
+            "explanation": "El Art. 211 del CPP autoriza el arresto excepcional de los presentes en la escena hasta por 8 horas para identificar partícipes y evitar que se fuguen o entorpezcan el inicio de la pesquisa."
+        },
+        {
+            "id": "so-035",
+            "difficulty": "media",
+            "question": "De acuerdo al Art. 170 del CPP, ¿en qué caso puede la policía allanar una morada habitada SIN orden judicial previa?",
+            "options": [
+                "Cuando el vecino del frente tenga sospechas de que en la casa juegan cartas",
+                "Para verificar el pago regular de las tasas municipales de la propiedad",
+                "Por orden verbal de un inspector municipal sin firma de magistrado alguno",
+                "Para evitar un estrago grave, responder a pedidos de auxilio del interior o persecución de imputado flagrante que se introdujo en la vivienda"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 107-108 / CPP Art. 170",
+            "explanation": "El allanamiento sin orden es taxativo y excepcional: incendio, inundación u otro estrago, gritos de auxilio que indiquen comisión de delito, o ingreso en persecución continua de un sospechoso en flagrancia."
+        },
+        {
+            "id": "so-036",
+            "difficulty": "facil",
+            "question": "En el Derecho Penal argentino, ¿qué causal de justificación consagra el Art. 34 inc. 6 del Código Penal?",
+            "options": [
+                "La obediencia jerárquica a órdenes manifiestamente delictivas",
+                "La Legítima Defensa propia (ante agresión ilegítima, necesidad racional del medio empleado y falta de provocación)",
+                "El perdón espontáneo otorgado por el policía de turno",
+                "La venganza personal inmediata ante un agravio moral"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 116-118",
+            "explanation": "El Art. 34 inc. 6 exime de pena a quien obra en legítima defensa de su persona o derechos, siempre que medie agresión ilegítima, racionalidad en el medio defensivo y ausencia de provocación."
+        },
+        {
+            "id": "so-037",
+            "difficulty": "dificil",
+            "question": "¿En qué figura penal incurre el funcionario policial que no cesa una detención ilegal o prolonga la aprehensión más allá de los plazos legales?",
+            "options": [
+                "Privación ilegítima de la libertad cometida por funcionario público (Art. 143 y 144 bis del Código Penal)",
+                "Falta meramente administrativa no punible en sede judicial penal",
+                "Incumplimiento civil menor sancionable solo con llamada de atención",
+                "Insubordinación militar conforme al Código de Justicia Militar derogado"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 122-123",
+            "explanation": "El Art. 144 bis tipifica con severas penas de prisión e inhabilitación especial al funcionario que retiene indebidamente a una persona o retarda hacer cesar una medida coercitiva indebida."
+        },
+        {
+            "id": "so-038",
+            "difficulty": "media",
+            "question": "En el Código Procesal Penal santafesino, ¿qué garantía emana del principio constitucional 'In dubio pro reo' (Art. 7 CPP)?",
+            "options": [
+                "En caso de duda, se debe ordenar la prisión preventiva inmediata por precaución",
+                "En caso de duda razonable e insalvable sobre los hechos, el tribunal debe decidir siempre a favor del imputado",
+                "El fiscal puede imponer penas de arresto sin necesidad de debate ni juicio oral",
+                "El policía siempre tiene la presunción legal de culpabilidad del sospechoso"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 97",
+            "explanation": "El Art. 7 del CPP consagra que la duda probatoria insuperable beneficia al acusado, en consonancia con la presunción de inocencia garantizada en el Art. 18 de la Constitución Nacional."
+        },
+        {
+            "id": "so-039",
+            "difficulty": "facil",
+            "question": "¿Quién tiene la atribución exclusiva de dirigir la investigación penal preparatoria en la Provincia de Santa Fe?",
+            "options": [
+                "El Jefe de la Unidad Especial de Bomberos Zapadores",
+                "El Comisario de la seccional de la jurisdicción respectiva",
+                "El Intendente municipal o Presidente comunal de la ciudad",
+                "El Fiscal del Ministerio Público de la Acusación (MPA)"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 99-101",
+            "explanation": "En el modelo procesal penal santafesino (acusatorio), el fiscal del MPA lidera y orienta estratégicamente la IPP, siendo la policía su órgano ejecutor especializado."
+        },
+        {
+            "id": "so-040",
+            "difficulty": "facil",
+            "question": "¿Qué establece la reconocida 'Regla de Tueller' en la táctica operacional policial?",
+            "options": [
+                "Las esposas de seguridad deben colocarse exclusivamente a 6,4 centímetros de las muñecas",
+                "Un móvil policial debe mantener 100 metros de distancia en persecuciones urbanas",
+                "Un agresor con arma blanca puede cubrir una distancia de 21 pies (6,4 metros) en 1,5 segundos, tiempo mínimo para desenfundar y disparar",
+                "El policía debe esperar 21 minutos antes de ingresar a un domicilio allanado"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 148-150",
+            "explanation": "Desarrollada por el sargento Dennis Tueller en 1983, determina que dentro de los 6,4 metros un atacante con cuchillo o elemento punzocortante impactará al policía antes de que este pueda reaccionar con su arma."
+        },
+        {
+            "id": "so-041",
+            "difficulty": "media",
+            "question": "¿Qué innovación jurídica introdujo la Ley Provincial N° 14.239 en la Provincia de Santa Fe?",
+            "options": [
+                "La transferencia del control de rutas a los juzgados de paz comunales",
+                "La prohibición total del empleo de chalecos balísticos por el personal policial",
+                "La desfederalización de la persecución penal del narcomenudeo o microtráfico de estupefacientes hacia el fuero penal provincial",
+                "El reemplazo del Código Procesal Penal por ordenanzas de cada municipio"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 151-154",
+            "explanation": "La Ley 14.239 adhirió a la desfederalización de la Ley Nacional 23.737, facultando a la Policía de Santa Fe y a los fiscales del MPA a intervenir y allanar 'búnkers' y puntos de venta minorista."
+        },
+        {
+            "id": "so-042",
+            "difficulty": "facil",
+            "question": "En el uso progresivo y gradual de la fuerza policial, ¿cuál es el primer nivel de control táctico?",
+            "options": [
+                "La aplicación directa de gas pimienta sin aviso verbal",
+                "El disparo disuasivo con posta de goma hacia el pecho",
+                "El derribo inmediato con llave marcial sobre la calzada",
+                "La presencia policial uniformada y la persuasión verbal"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 128-129",
+            "explanation": "El continuo del uso de la fuerza inicia con la presencia policial (uniforme, porte y equipo) y la verbalización táctica disuasiva, escalando solo si la resistencia del sujeto lo amerita."
+        },
+        {
+            "id": "so-043",
+            "difficulty": "dificil",
+            "question": "¿Cuáles son los tres principios rectores del empleo de la fuerza pública consagrados por los estándares internacionales de la ONU?",
+            "options": [
+                "Publicidad, Discrecionalidad y Conveniencia política",
+                "Legalidad, Necesidad y Proporcionalidad",
+                "Rigidez, Fuerza letal preventiva y Silencio administrativo",
+                "Inmediatez, Velocidad y Celeridad sancionatoria"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 127-129",
+            "explanation": "Todo uso de fuerza debe estar amparado en la ley (legalidad), ser el último recurso disponible sin alternativa viable (necesidad) y adecuarse a la gravedad de la amenaza (proporcionalidad)."
+        },
+        {
+            "id": "so-044",
+            "difficulty": "media",
+            "question": "Conforme a la Ley 26.485 y los protocolos vigentes, ¿cómo debe actuar el personal de guardia ante una denuncia por Violencia de Género?",
+            "options": [
+                "Exigir que la víctima regrese a su hogar a mediar y reconciliarse con el agresor",
+                "Brindar atención prioritaria en ambiente reservado, evitar la revictimización, recepcionar la denuncia y dar intervención inmediata a la fiscalía",
+                "Cobrar un arancel de estampilla médica para autorizar la remisión del parte",
+                "Demorar la recepción del acta hasta que la denunciante traiga dos testigos presenciales"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 138-140",
+            "explanation": "La normativa de violencia contra la mujer exige escucha empática, confidencialidad, celeridad y la solicitud inmediata de medidas de protección cautelares (exclusión de hogar, perimetral)."
+        },
+        {
+            "id": "so-045",
+            "difficulty": "facil",
+            "question": "En el marco de la preservación en microtráfico, ¿qué recaudo esencial debe tomarse al secuestrar sustancias estupefacientes?",
+            "options": [
+                "Guardar la droga en el bolsillo del uniforme hasta el final del turno de guardia",
+                "Pesaje fehaciente, prueba orientativa de campo (narcotest), faja de seguridad con firmas y cadena de custodia",
+                "Trasladar los envoltorios sueltos en el asiento delantero del móvil policial",
+                "Tirar la sustancia por la rejilla pluvial si es una cantidad menor a 5 gramos"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 153-156",
+            "explanation": "En delitos de narcomenudeo, la prueba de campo, el pesaje exacto, el precintado numerado y la cadena de custodia inviolable son indispensables para evitar nulidades en el juicio."
+        },
+        {
+            "id": "so-046",
+            "difficulty": "facil",
+            "question": "¿En qué tiempo verbal y persona gramatical debe redactarse de forma general un Acta de Procedimiento Policial?",
+            "options": [
+                "En tono imperativo en segunda persona singular dirigido exclusivamente al fiscal",
+                "En tiempo futuro imperfecto y en primera persona del plural de forma coloquial",
+                "En tiempo presente continuo utilizando metáforas literarias para embellecer el texto",
+                "En tiempo pretérito (pasado) y en tercera persona gramatical, con absoluta objetividad fáctica"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 173-175",
+            "explanation": "Las actas policiales son instrumentos públicos que dan fe de hechos sucedidos; su redacción debe ser objetiva, despojada de apreciaciones subjetivas, en pasado ('se constituyó', 'procedió') y tercera persona."
+        },
+        {
+            "id": "so-047",
+            "difficulty": "media",
+            "question": "Si al confeccionar un acta manuscrita se comete un error involuntario de escritura, ¿cuál es el procedimiento formal correcto?",
+            "options": [
+                "Aplicar corrector líquido blanco abundante y volver a escribir encima",
+                "Tachar intensamente con bolígrafo hasta que no se lea la palabra equivocada",
+                "Salvar el error con una línea suave (testado) y consignar al pie del acta 'Testado... No vale. Enmendado... Vale' antes de las firmas",
+                "Romper el acta completa aunque ya contenga firmas de testigos forenses"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 175-177",
+            "explanation": "Las tachaduras o el uso de corrector en actas procesales pueden acarrear tachas de falsedad o nulidades probatorias; toda corrección debe salvarse formalmente al pie antes de firmar."
+        },
+        {
+            "id": "so-048",
+            "difficulty": "dificil",
+            "question": "¿Cuál es la función principal del 'Parte Diario o Parte de Novedades' en una dependencia policial?",
+            "options": [
+                "Registrar únicamente los consumos de combustible de los móviles asignados",
+                "Registrar cronológica y detalladamente todas las intervenciones, ingresos, egresos, consignas y novedades acaecidas durante el servicio",
+                "Publicar avisos comerciales de vecinos del barrio que soliciten auspicio",
+                "Servir de borrador desechable que se destruye semanalmente sin archivo"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 174-175",
+            "explanation": "El libro de partes y guardia es el asiento oficial y permanente que da cuenta de la actividad de la unidad, con valor documental para auditorías, sumarios y requerimientos judiciales."
+        },
+        {
+            "id": "so-049",
+            "difficulty": "facil",
+            "question": "¿Cuáles son los requisitos de validez indispensables que deben figurar al encabezar un Acta de Procedimiento (Art. 138 CPP)?",
+            "options": [
+                "El estado del clima, la marca de neumáticos del móvil y el signo zodiacal de los testigos",
+                "La opinión personal del policía sobre si el detenido merece condena judicial",
+                "Únicamente la firma del oficial de guardia sin asentar lugar ni horario",
+                "Lugar exacto, ciudad, fecha y hora de inicio, identificación del preventor actuante y personal interviniente"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 175-176 / CPP Art. 138",
+            "explanation": "El Art. 138 del CPP exige con rigor legal fecha, hora, lugar, identidad funcional de los actuantes, relato circunstanciado de los actos cumplidos y firmas de ley."
+        },
+        {
+            "id": "so-050",
+            "difficulty": "facil",
+            "question": "En la suite ofimática LibreOffice de uso habitual en dependencias públicas de Santa Fe, ¿cuál es el programa equivalente a Microsoft Word para procesar textos?",
+            "options": [
+                "LibreOffice Base",
+                "LibreOffice Calc",
+                "LibreOffice Impress",
+                "LibreOffice Writer"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 207-208",
+            "explanation": "Writer es el procesador de textos de LibreOffice utilizado para confeccionar informes, notas y actuaciones policiales en formato de código abierto y estándares provinciales."
+        },
+        {
+            "id": "so-051",
+            "difficulty": "media",
+            "question": "En la hoja de cálculo LibreOffice Calc, ¿cómo se denomina a la intersección de una columna y una fila donde se ingresan datos o fórmulas?",
+            "options": [
+                "Párrafo de edición",
+                "Cursor de hardware",
+                "Directorio raíz",
+                "Celda (ejemplo: B4)"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 224-226",
+            "explanation": "Una celda es la unidad básica de almacenamiento de una hoja de cálculo, identificada por la letra de la columna y el número de la fila correspondiente."
+        },
+        {
+            "id": "so-052",
+            "difficulty": "facil",
+            "question": "En LibreOffice Calc o Excel, ¿con qué símbolo obligatorio debe comenzar siempre una fórmula matemática para que el sistema realice el cálculo?",
+            "options": [
+                "Con el signo igual (=)",
+                "Con un signo de interrogación (?)",
+                "Con un punto y coma (;)",
+                "Con el signo arroba (@)"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 228-230",
+            "explanation": "El signo '=' le indica al programa que el contenido posterior no es texto plano, sino una operación aritmética o función de cálculo (ej. '=SUMA(A1:A10)')."
+        },
+        {
+            "id": "so-053",
+            "difficulty": "dificil",
+            "question": "Respecto a la seguridad en el manejo de correos electrónicos y cuentas institucionales en comisaría, ¿cuál es una regla de ciberseguridad indispensable?",
+            "options": [
+                "No abrir archivos adjuntos sospechosos ni enlaces no verificados, cerrar la sesión al retirarse y no compartir contraseñas",
+                "Descargar e instalar programas de videojuegos en las terminales de guardia",
+                "Reenviar información judicial confidencial a casillas de correo personales sin encriptar",
+                "Anotar la contraseña en un papel pegado en el monitor para que todos puedan usar la cuenta"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 206-207 y 248-250",
+            "explanation": "La protección de las terminales operativas exige evitar ataques de phishing, resguardar las credenciales personales y preservar la confidencialidad de la información procesal."
+        },
+        {
+            "id": "so-054",
+            "difficulty": "facil",
+            "question": "¿Qué representa la regla nemotécnica 'MIRAF' en la doctrina de seguridad con armas de fuego del ISEP?",
+            "options": [
+                "Mando inmediato, Resistencia física, Aceleración, Firmeza y Acción directa",
+                "Manipular como cargada, Índice fuera del disparador, Rayo láser a lugar seguro, Asegurarse del blanco y Familiarizarse con el arma",
+                "Munición blindada, Intervención veloz, Recarga táctica, Apoyo de tercio y Fuego",
+                "Miras iluminadas, Inspección rápida, Respaldo táctico, Armadura de combate y Fuerza"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 254-256",
+            "explanation": "Las normas universales MIRAF previenen disparos involuntarios: tratar siempre el arma como cargada, dedo en el armazón hasta apuntar, boca del cañón siempre a lugar seguro y verificar blanco y fondo."
+        },
+        {
+            "id": "so-055",
+            "difficulty": "media",
+            "question": "¿Cuáles son los cuatro componentes esenciales que componen un cartucho de proyectil único para pistola reglamentaria 9x19mm?",
+            "options": [
+                "Vaina, Cápsula fulminante o iniciador, Pólvora o carga propulsora y Proyectil o bala",
+                "Blindaje exterior, Miras nocturnas, Cinta transportadora y Pistón",
+                "Tubo cañón, Corredera, Resorte recuperador y Cargador",
+                "Alza, Guión, Percutor y Fiador de seguridad"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 270-272",
+            "explanation": "El cartucho metálico moderno está integrado por la vaina (contenedor), el fulminante (ignición), la pólvora (combustión de gases) y la bala (elemento lanzado por el cañón)."
+        },
+        {
+            "id": "so-056",
+            "difficulty": "facil",
+            "question": "Según la clasificación legal de la ANMaC, ¿qué define a una 'Pistola Semiautomática' como la Bersa TPR9 o Thunder Pro?",
+            "options": [
+                "Aquella en la que el tirador debe oprimir la cola del disparador para cada disparo individual, realizándose la recarga en forma automática",
+                "Aquella que mantiene fuego continuo e ininterrumpido mientras el disparador permanezca presionado",
+                "Aquella que requiere amartillar manualmente con el pulgar para cada disparo",
+                "Aquella que almacena los cartuchos en un tambor giratorio accionado por resorte"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 266-269 / ANMaC",
+            "explanation": "En las armas semiautomáticas, cada disparo exige accionar la cola del disparador una vez; el retroceso de los gases eyecta la vaina servida y monta un nuevo cartucho en la recámara."
+        },
+        {
+            "id": "so-057",
+            "difficulty": "media",
+            "question": "¿En qué consiste la posición táctica preventiva de tiro conocida como 'Posición SUL'?",
+            "options": [
+                "El arma se mantiene extendida con un solo brazo apuntando directamente a la cabeza del sospechoso",
+                "El arma se apoya sobre el capot del móvil policial para hacer puntería a larga distancia",
+                "El arma se sostiene con el cañón hacia arriba pegada a la oreja del tirador",
+                "El arma se ubica pegada al pecho con ambas manos, cañón apuntando 45 grados hacia el suelo entre los pies del operador"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 256-258",
+            "explanation": "La posición SUL ('sur' en portugués) es una posición segura de alerta que permite proteger el arma de forcejeos, no barrer con el cañón a compañeros o civiles y reaccionar velozmente ante peligro letal."
+        },
+        {
+            "id": "so-058",
+            "difficulty": "dificil",
+            "question": "Ante una interrupción de tiro en la pistola reglamentaria por encasquillamiento simple ('falla de alimentación'), ¿cuál es la maniobra táctica inmediata a ejecutar?",
+            "options": [
+                "Desarmar la pistola por completo aflojando la palanca de desarme en plena vía pública",
+                "Guardar el arma en la funda de inmediato y emprender la retirada",
+                "Mirar por la boca del cañón para verificar si hay un plomo atascado",
+                "Golpe firme a la base del cargador, jalar la corredera hacia atrás hasta el tope y soltar ('Tap, Rack & Assess')"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 258-260",
+            "explanation": "La técnica 'Golpe y Tracción' (Tap and Rack) asienta el cargador deficientemente trabado y cicla la corredera expulsando el cartucho fallido y alimentando uno fresco para reanudar el fuego si es necesario."
+        },
+        {
+            "id": "so-059",
+            "difficulty": "facil",
+            "question": "¿Cuál es la primera medida de seguridad obligatoria antes de iniciar la limpieza o desarme básico de campaña del arma reglamentaria?",
+            "options": [
+                "Pasar la baqueta metálica por el cañón con el cargador colocado",
+                "Extraer el cargador, ciclar la corredera repetidas veces y verificar visual y táctilmente la recámara vacía",
+                "Sumergir el arma completa en solvente químico inflamable con cartuchos puestos",
+                "Apretar el disparador hacia el suelo para ver si suena el percutor"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 255-256",
+            "explanation": "Toda inspección de seguridad exige retirar la fuente de alimentación (cargador) y comprobar visualmente y al tacto que no haya cartucho en la recámara."
+        },
+        {
+            "id": "so-060",
+            "difficulty": "media",
+            "question": "En la clasificación de los indicios según su naturaleza física, ¿qué son los 'indicios determinables'?",
+            "options": [
+                "Sustancias químicas complejas que forzosamente requieren cromatografía de gases para saber qué son",
+                "Meras hipótesis abstractas formuladas verbalmente por los denunciantes",
+                "Indicios que carecen de todo valor probatorio en el juicio penal",
+                "Aquellos que por su morfología y estructura pueden identificarse a simple vista o con aumento menor (armas, casquillos, huellas)"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 16",
+            "explanation": "Los indicios determinables requieren solo un análisis macroscópico directo para su reconocimiento (ej. una vaina servida, un cuchillo, un proyectil)."
+        },
+        {
+            "id": "so-061",
+            "difficulty": "dificil",
+            "question": "¿Quién es el responsable de mantener la 'Cadena de Custodia' de un elemento probatorio secuestrado en un procedimiento?",
+            "options": [
+                "El fabricante industrial del elemento secuestrado",
+                "El chofer del patrullero de forma única y excluyente",
+                "Cada uno de los funcionarios policiales o judiciales que sucesivamente reciban, trasladen o periten el objeto, documentando el pase",
+                "Exclusivamente el juez de primera instancia que dicte la sentencia definitiva"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 30-31",
+            "explanation": "La cadena de custodia es un procedimiento riguroso e ininterrumpido donde cada custodio asume la responsabilidad formal de la integridad del indicio mediante actas y planillas de pase."
+        },
+        {
+            "id": "so-062",
+            "difficulty": "facil",
+            "question": "¿Qué función cumple el 'Perímetro Exterior' en el aseguramiento de un hecho en la vía pública?",
+            "options": [
+                "Servir como área de autopsia preliminar al aire libre",
+                "Alojar a los sospechosos aprehendidos para que declaren ante los vecinos",
+                "Contener al público general, desviar el tránsito vehicular y aislar a los curiosos para resguardar la labor pericial",
+                "Permitir el libre ingreso y egreso de cualquier transeúnte"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Escena del Crimen, Pág. 24",
+            "explanation": "El perímetro exterior es el límite más amplio, custodiado por personal operativo con cinta y vallas, impidiendo que civiles interfieran en las zonas intermedia y crítica."
+        },
+        {
+            "id": "so-063",
+            "difficulty": "media",
+            "question": "Conforme al Art. 41 de la Ley 12.521, ¿cuál de las siguientes conductas configura una 'Falta Administrativa Leve'?",
+            "options": [
+                "El desaseo personal o descuido en la conservación del uniforme reglamentario",
+                "El abandono injustificado del puesto de guardia por más de 72 horas",
+                "El cobro indebido de sumas de dinero a comerciantes de la zona",
+                "La pérdida culposa del arma de fuego reglamentaria provista"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 82-83 / Ley 12.521",
+            "explanation": "Las faltas leves del Art. 41 refieren a descuidos de presentación, puntualidad o formalidades menores del servicio; las conductas lesivas graves o de corrupción caen bajo el Art. 43."
+        },
+        {
+            "id": "so-064",
+            "difficulty": "dificil",
+            "question": "Bajo el régimen del Decreto 461/15, ¿cuál es el plazo que tiene un efectivo para interponer Recurso de Revocatoria contra una sanción disciplinaria?",
+            "options": [
+                "No existe derecho a interponer ningún recurso administrativo",
+                "Dentro de los cinco (5) días hábiles siguientes a la notificación fehaciente",
+                "Hasta treinta (30) días hábiles por ante la Corte Suprema provincial",
+                "Dentro de las cuarenta y ocho (48) horas corridas de producido el hecho"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 84 / Dec. 461/15",
+            "explanation": "El Decreto 461/15 garantiza el debido proceso fijando 5 días hábiles desde la notificación formal para interponer la revocatoria con o sin apelación en subsidio."
+        },
+        {
+            "id": "so-065",
+            "difficulty": "facil",
+            "question": "¿Cómo se denominan las tres escuelas que integran el Instituto de Seguridad Pública (I.Se.P.) conforme al Decreto N° 12.333/04?",
+            "options": [
+                "Escuela Primaria Policial, Escuela de Suboficiales y Escuela de Generales",
+                "Escuela de Choferes, Escuela de Armería y Escuela de Infantería",
+                "Escuela de Policía, Escuela Superior de Seguridad Pública y Escuela de Especialidades",
+                "Escuela de Patrullaje Urbano, Escuela Rural y Escuela Fluvial"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Legislación Policial, Pág. 76-77",
+            "explanation": "El ISEP estructura su oferta académica en tres ramas: Escuela de Policía (ingreso de cadetes), Escuela Superior (oficiales de comando) y Escuela de Especialidades (cursos técnico-operativos)."
+        },
+        {
+            "id": "so-066",
+            "difficulty": "media",
+            "question": "En el marco del Art. 163 del CPP, ¿qué requisito legal es imprescindible al realizar una requisa personal sobre una mujer?",
+            "options": [
+                "Debe realizarse obligatoriamente en presencia de un representante consular",
+                "Puede ser practicada por cualquier personal masculino sin formalidad alguna",
+                "Debe ser efectuada exclusivamente por personal policial femenino, respetando su pudor y dignidad",
+                "Exige la autorización previa por escrito del ministro de seguridad provincial"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 107 / CPP Art. 163",
+            "explanation": "El Art. 163 del CPP manda taxativamente que las inspecciones corporales y requisas sean efectuadas por personas del mismo sexo del requisado para resguardar la intimidad y el pudor."
+        },
+        {
+            "id": "so-067",
+            "difficulty": "dificil",
+            "question": "¿En qué consiste el instituto de la 'Suspensión del Juicio a Prueba' (Probation) previsto en el Código Penal?",
+            "options": [
+                "El traslado compulsivo del imputado a otra provincia por dos años",
+                "La absolución automática sin condiciones para todo imputado primario",
+                "Una sanción de reclusión perpetua dictada en audiencia de trámite rápido",
+                "La suspensión del trámite del juicio a cambio de cumplir reglas de conducta y reparar el daño, evitando una condena si se cumple el plazo"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 105-106",
+            "explanation": "La probation busca la reinserción social y la resolución alternativa del conflicto en delitos de penas menores, imponiendo pautas de conducta sin registrar condena penal."
+        },
+        {
+            "id": "so-068",
+            "difficulty": "media",
+            "question": "Conforme al Art. 214 del Código Procesal Penal, ¿pueden los ciudadanos particulares aprehender a una persona?",
+            "options": [
+                "Sí, en los mismos casos de flagrancia que autorizan la aprehensión policial, debiendo entregar al aprehendido de inmediato a la autoridad",
+                "Únicamente con autorización escrita del Colegio de Abogados de la jurisdicción",
+                "No, la aprehensión por particulares está tipificada como delito en todos los casos",
+                "Solo si el particular es propietario de un inmueble rural de más de 100 hectáreas"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 111 / CPP Art. 214",
+            "explanation": "El Art. 214 faculta a cualquier ciudadano a practicar la aprehensión en situación flagrante, debiendo entregar al sujeto inmediatamente a la policía junto con los objetos secuestrados."
+        },
+        {
+            "id": "so-069",
+            "difficulty": "facil",
+            "question": "¿Qué acción judicial de garantía constitucional procede de inmediato cuando una persona sufre una privación ilegítima o amenaza a su libertad física?",
+            "options": [
+                "Juicio ordinario de quiebra comercial",
+                "Recurso de Hábeas Corpus (Art. 43 Constitución Nacional)",
+                "Recurso de casación administrativa",
+                "Denuncia contravencional por ruidos molestos"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Actualización Legal, Pág. 115",
+            "explanation": "El Hábeas Corpus es la acción constitucional rápida y expedita que puede interponer cualquier persona ante un juez para que ordene la cesación de un arresto o detención ilegal."
+        },
+        {
+            "id": "so-070",
+            "difficulty": "media",
+            "question": "En la Carta Iberoamericana de la Función Pública, ¿cuál es el principio rector fundamental que debe guiar al empleado policial?",
+            "options": [
+                "La obediencia a intereses de facciones partidarias por sobre las leyes",
+                "El cobro de honorarios adicionales privados a los vecinos por patrullaje",
+                "El secreto absoluto de todas las partidas presupuestarias ante el público",
+                "La vocación de servicio al ciudadano, la transparencia, el mérito y la ética pública"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 130",
+            "explanation": "La Carta Iberoamericana consagra la profesionalización de la función pública, la igualdad de oportunidades por mérito y el servicio orientado al bienestar de la sociedad."
+        },
+        {
+            "id": "so-071",
+            "difficulty": "dificil",
+            "question": "¿Cómo se define la 'distancia de reacción' en el contexto de la Regla de Tueller ante un atacante con arma blanca?",
+            "options": [
+                "La longitud máxima del cañón de la escopeta reglamentaria calibre 12/70",
+                "La separación física entre dos móviles patrulleros al estacionar en cordón",
+                "La distancia mínima que necesita el policía para percibir la amenaza letal, decidir la respuesta, desenfundar y efectuar un disparo certero",
+                "El radio de acción de las granadas de humo utilizadas por la Guardia de Infantería"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 148-150",
+            "explanation": "Los 6,4 metros (21 pies) combinan el tiempo de percepción-reacción del operador policial (aprox. 1,5 segundos) con la velocidad atlética del atacante para alcanzarlo."
+        },
+        {
+            "id": "so-072",
+            "difficulty": "facil",
+            "question": "En la entrevista a un testigo de un hecho delictivo, ¿qué tipo de preguntas debe priorizar el suboficial para obtener un relato veraz?",
+            "options": [
+                "Preguntas intimidatorias que amenacen con arrestar al testigo si no acusa a un vecino",
+                "Preguntas de respuesta única por 'Sí' o 'No' preparadas previamente en un formulario",
+                "Preguntas abiertas que permitan al testigo relatar libremente lo percibido por sus sentidos ('¿Qué observó?')",
+                "Preguntas capciosas o sugestivas que fuercen al testigo a afirmar lo que el policía piensa"
+            ],
+            "correctIndex": 2,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Práctica Policial, Pág. 134-136",
+            "explanation": "Las preguntas abiertas ('¿Dónde estaba?', '¿Qué escuchó?') incentivan la memoria testimonial espontánea y evitan la contaminación del relato con suposiciones del entrevistador."
+        },
+        {
+            "id": "so-073",
+            "difficulty": "media",
+            "question": "¿Por qué es fundamental evitar apreciaciones personales o juicios de valor al redactar un informe policial?",
+            "options": [
+                "Porque el Código Penal exige que las actas no superen las 100 palabras de longitud",
+                "Porque el acta es un documento público probatorio que debe reflejar hechos objetivos y comprobables para no vulnerar el debido proceso",
+                "Porque el personal policial carece de libertad de expresión fuera de su hogar",
+                "Porque los juicios de valor aumentan el costo de la tinta de impresión institucional"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 165-167",
+            "explanation": "La fe pública policial se basa en la neutralidad y precisión objetiva de lo observado y actuado; adjetivar o juzgar intenciones descalifica el rigor pericial del instrumento."
+        },
+        {
+            "id": "so-074",
+            "difficulty": "facil",
+            "question": "¿Qué es una 'Nota de Elevación' en el ámbito administrativo de la Policía de Santa Fe?",
+            "options": [
+                "Una planilla de cálculo exclusiva para registrar sueldos policiales",
+                "Una comunicación formal mediante la cual se eleva una actuación, informe o solicitud a la autoridad jerárquica competente",
+                "Un acta de defunción confeccionada por el médico de guardia",
+                "Una orden de arresto emitida verbalmente en el patio de armas"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Comunicación y Redacción, Pág. 173-174",
+            "explanation": "La nota de elevación es la pieza documental de estilo que acompaña y tramita expedientes, sumarios o solicitudes a través de la vía jerárquica correspondiente."
+        },
+        {
+            "id": "so-075",
+            "difficulty": "media",
+            "question": "En LibreOffice Calc, ¿cuál de las siguientes funciones permite sumar automáticamente los valores numéricos comprendidos entre la celda A1 y la celda A20?",
+            "options": [
+                "=AGREGAR_CELDAS[A1-A20]",
+                "=CALCULAR_TODO(A1:A20)",
+                "=TOTAL(A1..A20)",
+                "=SUMA(A1:A20)"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 228-232",
+            "explanation": "La función sintáctica estándar en español en Calc es '=SUMA(rango_inicial:rango_final)', procesando todos los valores numéricos del bloque seleccionado."
+        },
+        {
+            "id": "so-076",
+            "difficulty": "facil",
+            "question": "¿Qué significa que una página web oficial tenga el prefijo 'https://' y un candado cerrado en el navegador?",
+            "options": [
+                "Que el sitio web pertenece obligatoriamente al Ejército Argentino",
+                "Que el usuario ha olvidado su contraseña y la página está bloqueada",
+                "Que la computadora no tiene conexión a internet y trabaja fuera de línea",
+                "Que la conexión entre la computadora policial y el servidor web viaja encriptada y segura mediante certificado SSL/TLS"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Informática Inicial, Pág. 205-207",
+            "explanation": "HTTPS (Hypertext Transfer Protocol Secure) garantiza que los datos viajan cifrados, impidiendo que terceros intercepten claves o datos confidenciales en la red."
+        },
+        {
+            "id": "so-077",
+            "difficulty": "facil",
+            "question": "En la regla MIRAF, ¿qué exige la letra 'I' respecto al dedo índice del tirador?",
+            "options": [
+                "Apretar continuamente el disparador para verificar la resistencia del resorte",
+                "Introducir el dedo índice en la ventana expulsora para destrabar cartuchos",
+                "Usar el dedo índice para tapar la boca del cañón al transportar el arma",
+                "Mantener el dedo índice recto a lo largo del armazón y fuera de la cola del disparador hasta que las miras estén sobre el blanco y se decida disparar"
+            ],
+            "correctIndex": 3,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 255",
+            "explanation": "El dedo fuera del disparador (sobre el armazón) previene el 99% de los disparos involuntarios producidos por sobresalto, tropiezo o estrés fisiológico del operador."
+        },
+        {
+            "id": "so-078",
+            "difficulty": "media",
+            "question": "En balística general, ¿qué rama estudia los fenómenos que ocurren desde que el proyectil abandona la boca del cañón hasta que impacta en el blanco?",
+            "options": [
+                "Balística Exterior",
+                "Balística Terminal o de Efectos",
+                "Balística Interior",
+                "Balística Identificativa"
+            ],
+            "correctIndex": 0,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 260-262",
+            "explanation": "La balística se divide en: Interior (dentro del ánima del cañón), Exterior (trayectoria en el aire, gravedad y viento) y Terminal o de Efectos (comportamiento al impactar el blanco)."
+        },
+        {
+            "id": "so-079",
+            "difficulty": "dificil",
+            "question": "En una pistola de doble acción como la Bersa TPR9, ¿qué ocurre mecánicamente al presionar la cola del disparador cuando el martillo está en posición de reposo?",
+            "options": [
+                "Se requiere levantar la corredera con la otra mano obligatoriamente",
+                "El mecanismo monta el martillo hacia atrás y lo libera en el mismo recorrido continuo para golpear la aguja percutora",
+                "El percutor queda bloqueado hasta que se inserte una llave mecánica externa",
+                "El arma se traba de forma automática como dispositivo de seguridad"
+            ],
+            "correctIndex": 1,
+            "source": "Manual de Perfeccionamiento Suboficial ISEP - Tiro, Pág. 267-268",
+            "explanation": "La 'doble acción' cumple dos fases mecánicas en una sola tracción del disparador: monta el percutor/martillo y acto seguido lo libera para producir el disparo."
+        }
+    ],
     "oficial-subinspector": [
         {
             "id": "os-f01",
@@ -9743,9 +10863,9 @@ window.quizBank = {
 // METADATA DEL BANCO DE PREGUNTAS
 // ═══════════════════════════════════════════════════════════════
 window.quizBankMeta = {
-    "version": "8.0.0",
-    "lastUpdated": "2026-11-04",
-    "totalQuestions": 693,
+    "version": "8.1.0",
+    "lastUpdated": "2026-11-05",
+    "totalQuestions": 773,
     "difficulties": [
         {
             "id": "facil",
@@ -9780,6 +10900,14 @@ window.quizBankMeta = {
             "color": "from-blue-600 via-indigo-600 to-purple-700",
             "desc": "Evaluación integral con preguntas de Tiro, Conducción, Comunicación, Informática y Leyes",
             "programSyllabus": "Tiro MIRAF · Conducción Policial · Seguridad de la Información · CPP Ley 12.734 · Microtráfico Ley 14.239 · Jurados Ley 14.258"
+        },
+        {
+            "id": "suboficial-oficial",
+            "title": "Suboficial → Oficial de Policía",
+            "icon": "shield",
+            "color": "from-sky-600 via-blue-700 to-indigo-800",
+            "desc": "Escena del crimen, RPI, Decreto 461/15, CPP Art. 213, Regla de Tueller y MIRAF",
+            "programSyllabus": "Escena del Crimen y RPI · Inteligencia Emocional · Ley 12.521 y Dec. 461/15 · CPP Ley 12.734 · Convivencia Ley 13.774 · Microtráfico Ley 14.239 · Actas · Informática · Tiro ANMaC"
         },
         {
             "id": "oficial-subinspector",

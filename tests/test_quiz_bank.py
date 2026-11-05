@@ -47,8 +47,9 @@ class TestQuizBank(unittest.TestCase):
         self.assertEqual(proc.returncode, 0, f"Syntax error in quiz_bank.js: {proc.stderr}")
 
     def test_all_five_hierarchies_present(self):
-        """Verify all 5 police hierarchies are present in the question bank."""
+        """Verify all 6 police hierarchies are present in the question bank."""
         expected_hierarchies = [
+            "suboficial-oficial",
             "oficial-subinspector",
             "subinspector-inspector",
             "inspector-subcomisario",
@@ -60,9 +61,9 @@ class TestQuizBank(unittest.TestCase):
             self.assertGreater(len(self.quiz_bank[h]), 0, f"Hierarchy {h} has no questions")
 
     def test_minimum_questions_count(self):
-        """Verify the bank contains at least 180 total questions."""
+        """Verify the bank contains at least 700 total questions."""
         total = sum(len(questions) for questions in self.quiz_bank.values())
-        self.assertGreaterEqual(total, 180, f"Expected at least 180 questions, got {total}")
+        self.assertGreaterEqual(total, 700, f"Expected at least 700 questions, got {total}")
 
     def test_no_duplicate_question_ids(self):
         """Verify that every question has a strictly unique ID across the entire bank."""

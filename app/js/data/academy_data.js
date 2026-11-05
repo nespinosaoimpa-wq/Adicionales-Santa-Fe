@@ -4,6 +4,17 @@
  */
 
 window.academyLibraryItems = [
+    // Manual Oficial Suboficial a Oficial (ISEP 2026)
+    {
+        id: "manual-perfeccionamiento-suboficial",
+        title: "Manual de Estudio Perfeccionamiento Suboficial (ISEP 2026)",
+        desc: "Manual completo de estudio oficial (273 págs.): Escena del Crimen, RPI, Régimen Disciplinario, CPP, Microtráfico, Redacción de Actas, Informática y Tiro.",
+        file: "Material_de_Ascenso_ISEP/MANUAL DE ESTUDIO PERFECCIONAMIENTO SUBOFICIAL.pdf",
+        icon: "shield",
+        color: "from-sky-600/20 to-blue-600/20 text-sky-400 border-sky-500/30",
+        badge: "Manual Oficial Suboficial",
+        category: "manuales-2026"
+    },
     // Concurso 2026 (Manuales Oficiales Vigentes)
     {
         id: "manual-01-oficial-gen",
@@ -290,6 +301,115 @@ window.academyLibraryItems = [
 window.academyData = {
     manualSource: "Colección Oficial ISEP 2026 - Concursos de Ascenso Policial Santa Fe",
     hierarchies: [
+        {
+            id: "suboficial-oficial",
+            title: "Suboficial ➔ Oficial de Policía",
+            subtitle: "Manual Oficial ISEP 2026 (Curso de Perfeccionamiento Suboficial)",
+            icon: "shield",
+            badge: "ISEP 2026 Suboficial",
+            color: "from-sky-600 to-blue-700",
+            summaries: [
+                {
+                    id: "sum-subof-1",
+                    title: "Módulo 1: Escena del Crimen, RPI y Primeras Diligencias (Págs. 6-35)",
+                    readTime: "25 min",
+                    content: `
+                        <h3>1. Principios Criminalísticos Fundamentales</h3>
+                        <p>El estudio del lugar del hecho se rige por principios universales:</p>
+                        <ul>
+                            <li><strong>Principio de Intercambio (Locard 1910):</strong> Todo contacto físico produce una transferencia recíproca de materia entre el autor, la víctima y el lugar.</li>
+                            <li><strong>Principio de Correspondencia:</strong> La acción mecánica de un agente vulnerable deja marcas características de su forma en la superficie de impacto.</li>
+                            <li><strong>Principio de Reconstrucción:</strong> Las evidencias físicas permiten recrear científicamente la dinámica del hecho.</li>
+                        </ul>
+                        <h3>2. Las Siete Preguntas de Oro</h3>
+                        <p>Toda investigación policial inicial debe responder: ¿Qué sucedió? ¿Quién lo cometió o fue víctima? ¿Cómo ocurrió? ¿Cuándo fue? ¿Dónde tuvo lugar? ¿Con qué instrumentos se ejecutó? y ¿Por qué motivo?</p>
+                        <h3>3. Perímetros de Preservación</h3>
+                        <ul>
+                            <li><strong>Zona Interior Crítica:</strong> Perímetro primario con evidencias directas; acceso restringido exclusivamente a peritos y médico forense.</li>
+                            <li><strong>Zona Intermedia:</strong> Puesto de mando operativo, descanso pericial y depósito de instrumental.</li>
+                            <li><strong>Zona Exterior:</strong> Contención pública y desvío de tránsito.</li>
+                        </ul>
+                        <h3>4. Cadena de Custodia</h3>
+                        <p>Cada funcionario que reciba, traslade o perite un indicio debe documentar formalmente el traspaso para evitar nulidades probatorias.</p>
+                    `
+                },
+                {
+                    id: "sum-subof-2",
+                    title: "Módulo 2: Legislación Policial y Régimen Disciplinario (Págs. 71-88)",
+                    readTime: "30 min",
+                    content: `
+                        <h3>1. Ley del Personal Policial N° 12.521</h3>
+                        <p>Regula la carrera, deberes y derechos del personal santafesino. La escala jerárquica inicia en Suboficial de Policía y asciende a Oficial de Policía.</p>
+                        <h3>2. Régimen Disciplinario (Decreto N° 0461/2015)</h3>
+                        <ul>
+                            <li><strong>Faltas Leves (Art. 41):</strong> Desaseo, tardanzas, descuidos menores en el uniforme o servicio.</li>
+                            <li><strong>Faltas Graves (Art. 43):</strong> Abandono de servicio, insubordinación, pérdida de arma, ebriedad o hechos que afecten el prestigio institucional.</li>
+                            <li><strong>Sanciones:</strong> Reconvención, apercibimiento, arresto policial, suspensión de empleo, cesantía y exoneración.</li>
+                            <li><strong>Obligación de Sancionar:</strong> Omitir sancionar una falta comprobada constituye en sí misma una falta disciplinaria para el superior.</li>
+                        </ul>
+                        <h3>3. Decreto N° 1166/2018 (Régimen de Ascensos)</h3>
+                        <p>Los ascensos son grado a grado basados en el principio de idoneidad. El personal bajo sumario por falta grave concursa condicionalmente hasta la resolución del sumario.</p>
+                        <h3>4. Ley N° 11.516 (Art. 10 bis Ley 7.395)</h3>
+                        <p>Demora preventiva para averiguación de antecedentes: exige sospecha fundada de delito/contravención, negativa o imposibilidad de identificación fehaciente, plazo máximo perentorio de 6 horas y notificación inmediata.</p>
+                    `
+                },
+                {
+                    id: "sum-subof-3",
+                    title: "Módulo 3: Actualización Legal: CPP Santa Fe y Código de Convivencia (Págs. 89-124)",
+                    readTime: "30 min",
+                    content: `
+                        <h3>1. Código Procesal Penal (Ley N° 12.734)</h3>
+                        <ul>
+                            <li><strong>Flagrancia (Art. 213):</strong> Sorprendido en el hecho, inmediatamente después o perseguido con rastros concluyentes. Faculta aprehensión inmediata sin orden.</li>
+                            <li><strong>Arresto en el lugar del hecho (Art. 211):</strong> Plazo máximo de 8 horas para individualizar personas y recibir declaraciones urgentes.</li>
+                            <li><strong>Allanamientos sin orden (Art. 170):</strong> Incendio, explosión, estrago grave, pedidos de auxilio del interior o persecución de imputado flagrante.</li>
+                            <li><strong>Requisas (Art. 163):</strong> Palpado por personas del mismo sexo, con testigos y sospecha fundada.</li>
+                        </ul>
+                        <h3>2. Código de Convivencia (Ley N° 13.774)</h3>
+                        <p>Rige las contravenciones con enfoque pacificador y comunitario. Las multas se determinan en Unidades Jus. No se aplica pena de arresto a menores de 18 años (Ley 12.967).</p>
+                        <h3>3. Legítima Defensa (Art. 34 inc. 6 Código Penal)</h3>
+                        <p>Requiere: agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente.</p>
+                    `
+                },
+                {
+                    id: "sum-subof-4",
+                    title: "Módulo 4: Práctica Policial, Regla de Tueller y Microtráfico (Págs. 125-157)",
+                    readTime: "25 min",
+                    content: `
+                        <h3>1. Regla de Tueller (Dennis Tueller, 1983)</h3>
+                        <p>Un agresor con arma blanca cubre una distancia de <strong>21 pies (6,4 metros) en 1,5 segundos</strong>, tiempo mínimo que necesita el policía para percibir, desenfundar y efectuar un disparo defensivo.</p>
+                        <h3>2. Desfederalización de Narcomenudeo (Ley N° 14.239)</h3>
+                        <p>La Provincia de Santa Fe asumió la persecución del comercio ilícito minorista de estupefacientes bajo la órbita del MPA, facultando allanamientos e incautaciones policiales inmediatas.</p>
+                        <h3>3. Principios del Uso de la Fuerza (ONU)</h3>
+                        <ul>
+                            <li><strong>Legalidad:</strong> Amparado en la ley y reglamentos.</li>
+                            <li><strong>Necesidad:</strong> Cuando no haya alternativa menos gravosa.</li>
+                            <li><strong>Proporcionalidad:</strong> Nivel de fuerza adecuado a la intensidad de la agresión.</li>
+                        </ul>
+                    `
+                },
+                {
+                    id: "sum-subof-5",
+                    title: "Módulo 5: Tiro Policial, MIRAF, ANMaC e Informática (Págs. 190-273)",
+                    readTime: "25 min",
+                    content: `
+                        <h3>1. Regla de Seguridad MIRAF</h3>
+                        <ul>
+                            <li><strong>M:</strong> Manipular toda arma como si estuviera cargada.</li>
+                            <li><strong>I:</strong> Índice fuera del disparador hasta apuntar al blanco.</li>
+                            <li><strong>R:</strong> Rayo láser imaginario (boca del cañón siempre a lugar seguro).</li>
+                            <li><strong>A:</strong> Asegurarse del blanco y de lo que hay detrás.</li>
+                            <li><strong>F:</strong> Familiarizarse con el funcionamiento del arma.</li>
+                        </ul>
+                        <h3>2. Pistola Bersa TPR9 / Thunder Pro 9x19mm</h3>
+                        <p>Arma corta de puño semiautomática de doble acción. En posición SUL, el arma se protege pegada al pecho a 45° hacia el suelo.</p>
+                        <h3>3. Informática Policial</h3>
+                        <p>LibreOffice Writer para actas y notas; LibreOffice Calc para planillas numéricas con fórmulas (ej. '=SUMA(A1:A20)'). Medidas de ciberseguridad y protocolo seguro HTTPS.</p>
+                    `
+                }
+            ]
+        },
+
         {
             id: "oficial-subinspector",
             title: "Oficial de Policía ➔ Subinspector",
