@@ -72,7 +72,7 @@ function renderAgenda(container) {
                             <span class="text-[8px] font-black uppercase tracking-widest bg-red-950/80 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/40 animate-pulse">🔥 50% OFF</span>
                         </div>
                         <h3 class="text-sm font-black leading-tight mt-1">Simulador de Ascenso</h3>
-                        <p class="text-[10px] text-amber-100 font-medium">De <span class="line-through opacity-75">$10.000</span> a sólo <strong class="text-white">$5.000/mes</strong></p>
+                        <p class="text-[10px] text-amber-100 font-medium">De <span class="line-through opacity-75">$10.000</span> a sólo <strong class="text-white">$5.000 (Suscripción Única)</strong></p>
                     </div>
                 </div>
                 <button class="px-3.5 py-2 rounded-xl bg-white text-slate-900 font-black text-xs shadow-lg group-hover:bg-amber-100 transition-all flex items-center gap-1">

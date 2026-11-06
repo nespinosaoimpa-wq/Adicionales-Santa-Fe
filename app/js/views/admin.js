@@ -290,7 +290,7 @@ async function renderAdmin(container) {
                                         <h3 class="text-sm font-black text-white uppercase tracking-wider flex items-center gap-2">
                                             Aprobación de Pagos Academia PRO
                                         </h3>
-                                        <p class="text-[11px] text-slate-400">Suscripciones ISEP ($5.000 / mes - Promo 50% OFF o $10.000 regular)</p>
+                                        <p class="text-[11px] text-slate-400">Suscripciones ISEP ($5.000 Suscripción Única - Promo 50% OFF o $10.000 regular)</p>
                                     </div>
                                 </div>
                                 <span class="text-[10px] font-black uppercase px-3 py-1 rounded-full ${pendingCount > 0 ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse' : 'bg-white/5 text-slate-400 border border-white/10'}">

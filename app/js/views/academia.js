@@ -10,7 +10,7 @@
 
  * 1. Pantalla de inicio: Elegir jerarquía + Dificultad (Fácil, Media, Difícil) + Cantidad (25 o 50)
 
- * 2. Control de monetización: 3 intentos de examen gratuitos, luego suscripción ISEP PRO ($2.000/mes)
+ * 2. Control de monetización: 3 intentos de examen gratuitos, luego suscripción única ISEP PRO ($5.000)
 
  * 3. Pantalla de examen: Timer, preguntas, dificultad visible, navegación
 
@@ -73,14 +73,14 @@ window._quizState = window._quizState || {
 
 // ══════════════════════════════════════════════════════════════
 
-// MONETIZATION & FREE TRIAL HELPERS (2 gratis → desde el 3° pago ISEP PRO $2.000/mes)
+// MONETIZATION & FREE TRIAL HELPERS (2 gratis → desde el 3° pago ISEP PRO $5.000 suscripción única)
 
 // ══════════════════════════════════════════════════════════════
 
 const ISEP_FREE_LIMIT = 2;
 
-const ISEP_PRO_REGULAR_PRICE = "$10.000 / mes";
-const ISEP_PRO_PRICE = "$5.000 / mes";
+const ISEP_PRO_REGULAR_PRICE = "$10.000";
+const ISEP_PRO_PRICE = "$5.000";
 const ISEP_PRO_DISCOUNT = "50% OFF";
 
 const ISEP_WHATSAPP_PHONE = "5493425162372";
@@ -1529,7 +1529,7 @@ function _renderSimuladorTab(container) {
 
 // ══════════════════════════════════════════════════════════════
 
-// MODAL ISEP PRO ($2.000 / mes)
+// MODAL ISEP PRO ($5.000 Suscripción Única)
 
 // ══════════════════════════════════════════════════════════════
 
@@ -1562,11 +1562,11 @@ window._showIsepProModal = function() {
             </div>
 
             <h2 class="text-xl font-black text-white">ISEP PRO 2026: Tu Ascenso Seguro</h2>
-            <p class="text-xs text-amber-300 font-bold uppercase tracking-wider mt-0.5">Suscripción Exclusiva Concurso Policial</p>
+            <p class="text-xs text-amber-300 font-bold uppercase tracking-wider mt-0.5">Suscripción Única Concurso Policial</p>
 
             ${used >= ISEP_FREE_LIMIT ? `
                 <div class="mt-3 p-2.5 rounded-xl bg-red-500/10 border border-red-500/20 text-xs text-red-300">
-                    Completaste tus <strong>${ISEP_FREE_LIMIT} simulacros de prueba gratuitos</strong>. Suscribite para desbloquear el banco completo sin límites.
+                    Completaste tus <strong>${ISEP_FREE_LIMIT} simulacros de prueba gratuitos</strong>. Obtené tu suscripción única para desbloquear el banco completo sin límites.
                 </div>
             ` : `
                 <p class="text-xs text-slate-400 mt-2">La única herramienta pedagógica diseñada estrictamente para el examen de ascenso en Santa Fe.</p>
@@ -1580,8 +1580,9 @@ window._showIsepProModal = function() {
                 </div>
                 <div class="flex items-baseline justify-center gap-1">
                     <span class="text-3xl font-black text-amber-300">${ISEP_PRO_PRICE}</span>
+                    <span class="text-xs text-amber-300 font-bold uppercase tracking-wider ml-1">Suscripción Única</span>
                 </div>
-                <p class="text-[10px] text-amber-400/90 mt-0.5 uppercase tracking-wider font-semibold">Menos de media hora de adicional ordinario · Cancela cuando quieras</p>
+                <p class="text-[10px] text-amber-400/90 mt-0.5 uppercase tracking-wider font-semibold">Menos de media hora de adicional ordinario · Suscripción única hasta rendir</p>
             </div>
 
             <!-- UNBEATABLE BENEFITS LIST -->
@@ -2511,7 +2512,7 @@ function _renderResultsView(container) {
 
                     <button onclick="window._showIsepProModal()" class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-black text-xs uppercase tracking-wider rounded-2xl shadow-lg shadow-amber-500/25 active:scale-95 transition-all">
 
-                        Activar ISEP PRO · 50% OFF ($5.000 / mes)
+                        Activar ISEP PRO · 50% OFF ($5.000 Suscripción Única)
 
                     </button>
 
@@ -3705,7 +3706,7 @@ window._handleNotifyIsepProPayment = async function() {
     }
 
     // 2. Abrir WhatsApp oficial con comprobante
-    const msg = `Hola! Quiero activar mi suscripción a ISEP PRO ($5.000 / mes - Promo 50% OFF) para el Simulador de Ascenso en Adicionales Santa Fe.\n\n👤 Oficial: ${userName}\n📧 Email registrado: ${userEmail}\n\nAdjunto comprobante de transferencia a SmartFlow.Digital.`;
+    const msg = `Hola! Quiero activar mi suscripción única a ISEP PRO ($5.000 - Promo 50% OFF) para el Simulador de Ascenso en Adicionales Santa Fe.\n\n👤 Oficial: ${userName}\n📧 Email registrado: ${userEmail}\n\nAdjunto comprobante de transferencia a SmartFlow.Digital.`;
     const waUrl = `https://wa.me/5493425162372?text=${encodeURIComponent(msg)}`;
     window.open(waUrl, '_blank');
 
