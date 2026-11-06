@@ -18,8 +18,19 @@ jobs:
       - name: Build dual-path distribution directory
         run: |
           mkdir -p build/app
-          cp -r app/* build/
+          # 1. Copiar landing page, paginas de contenido (guias), politicas, terminos, about, robots, sitemap y ads.txt a la raiz
+          cp *.html build/
+          cp *.txt build/
+          cp *.xml build/
+          cp *.pdf build/ 2>/dev/null || true
+          cp *.js build/ 2>/dev/null || true
+          cp *.png build/ 2>/dev/null || true
+          if [ -d "assets" ]; then cp -r assets build/; fi
+          # 2. Copiar la PWA web application a /app
           cp -r app/* build/app/
+          # 3. Replicar paginas legales y ads.txt dentro de /app para evitar cualquier 404
+          cp privacy.html terms.html about.html ads.txt robots.txt build/app/
+          # 4. Asignar el dominio personalizado de produccion
           echo "adicionalessantafe.com.ar" > build/CNAME
 
       - name: Deploy to gh-pages branch

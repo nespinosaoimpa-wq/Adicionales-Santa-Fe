@@ -48,12 +48,18 @@
         gtag('config', 'G-Z882W79NHZ');
     </script>
 
-    <!-- Google AdSense Verification -->
+    <!-- Google AdSense Verification -->
+    <meta name="google-adsense-account" content="ca-pub-4261554477116731">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731"
         crossorigin="anonymous"></script>
 
     <!-- Cache Buster & PWA Standalone Redirect -->
     <script>
+        // Forward hash links (e.g. #academia, #agenda) to the app
+        if (window.location.hash && window.location.hash.length > 1) {
+            window.location.replace('./app/' + window.location.hash);
+        }
+
         if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
             window.location.replace('./app/');
         }

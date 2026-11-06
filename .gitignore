@@ -26,3 +26,6 @@ Microsoft/
 
 # Local manual uploads with special characters
 Manual Subcomisario - Escalafón General.pdf
+
+__pycache__/
+*.pyc
