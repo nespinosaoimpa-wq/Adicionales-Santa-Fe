@@ -392,6 +392,14 @@ function _activateIsepProWithCode(code) {
     const validCodes = ['ISEP2026', 'ASCENSO2026', 'PRO5000', 'PRO2000', 'SANTAFE2026', 'ADMINISEP'];
     if (validCodes.includes(clean)) {
         localStorage.setItem('isep_pro_code_active', 'true');
+        if (typeof store !== 'undefined' && store.user && store.user.email) {
+            store.user.pro_member = true;
+            store.user.isep_pro = true;
+            store.user.pro_status = 'approved';
+            if (typeof DB !== 'undefined' && DB.saveUser) {
+                DB.saveUser(store.user).catch(() => {});
+            }
+        }
         return true;
     }
     return false;
@@ -627,6 +635,22 @@ function renderAcademia(container) {
 
     if (!container) container = document.getElementById('app');
     try { localStorage.removeItem('isep_pro_subscriber'); } catch(e){}
+
+    // Proactive sync: verify with database in background if user was approved
+    if (!_isIsepPro() && typeof store !== 'undefined' && store.user && store.user.email && typeof DB !== 'undefined' && DB.getUser) {
+        DB.getUser(store.user.email).then(freshUser => {
+            if (freshUser && (freshUser.pro_member === true || freshUser.isep_pro === true || freshUser.plan === 'pro')) {
+                store.user = { ...store.user, ...freshUser };
+                if (typeof showToast === 'function' && !window._proWelcomeToastShown) {
+                    window._proWelcomeToastShown = true;
+                    showToast("🎉 ¡Tu suscripción ISEP PRO está aprobada! Acceso ilimitado.");
+                }
+                const existingModal = document.getElementById('isep-pro-modal');
+                if (existingModal) existingModal.remove();
+                renderAcademia(container);
+            }
+        }).catch(() => {});
+    }
 
     const state = window._quizState;
 
@@ -1508,6 +1532,12 @@ window._showSecurityCertModal = function() {
 };
 
 window._showIsepProModal = function() {
+    if (_isIsepPro()) {
+        if (typeof showToast === 'function') showToast("✅ Ya contás con acceso ISEP PRO ilimitado.");
+        renderAcademia();
+        return;
+    }
+
     const existing = document.getElementById('isep-pro-modal');
     if (existing) existing.remove();
 
