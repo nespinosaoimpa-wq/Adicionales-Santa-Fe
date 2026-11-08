@@ -986,6 +986,14 @@ function _renderSimuladorTab(container) {
 
             <div class="space-y-2">
 
+                <!-- Orientación de concurso -->
+                <div class="p-3.5 rounded-2xl bg-blue-500/10 border border-blue-500/25 flex items-start gap-3 shadow-sm">
+                    <span class="material-symbols-outlined text-blue-400 text-xl shrink-0 mt-0.5">school</span>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        <strong class="text-white">¿Para qué jerarquía concursás?</strong> Seleccioná el grado al que <span class="text-blue-300 font-semibold underline decoration-blue-500/40 underline-offset-2">aspirás ascender</span> (no tu jerarquía actual). Todo el banco y los ejes temáticos se calibran automáticamente según los manuales oficiales ISEP 2026.
+                    </p>
+                </div>
+
                 <div class="flex items-center justify-between ml-1">
 
                     <h3 class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">1. Jerarquía de concurso</h3>
@@ -1214,6 +1222,23 @@ function _renderSimuladorTab(container) {
 
             </button>
 
+            <!-- 🔒 Sello de Sitio Seguro y Verificado -->
+            <div onclick="window._showSecurityCertModal()" class="cursor-pointer p-3.5 rounded-2xl bg-slate-900/80 border border-emerald-500/25 hover:border-emerald-500/40 transition-all flex items-center justify-between gap-3 text-left mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="size-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-emerald-400 text-lg">verified_user</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <p class="text-xs font-bold text-white">Plataforma Verificada y Segura</p>
+                            <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 text-[9px] font-black">SSL 256-BIT</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400">Conexión cifrada de extremo a extremo · Protección Ley 25.326</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-slate-500 text-sm">chevron_right</span>
+            </div>
+
             <!-- ☕ Comunidad Policial: Aporte al Desarrollo -->
             <div onclick="window.showDonationModal()" class="cursor-pointer p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-slate-900 to-amber-500/10 border border-amber-500/20 hover:border-amber-500/40 transition-all flex items-center justify-between gap-3 text-left">
                 <div class="flex items-center gap-3">
@@ -1416,6 +1441,71 @@ function _renderSimuladorTab(container) {
 // MODAL ISEP PRO ($5.000 Suscripción Única)
 
 // ══════════════════════════════════════════════════════════════
+
+window._toggleSourceSnippet = function() {
+    const box = document.getElementById('source-snippet-box');
+    const txt = document.getElementById('btn-toggle-source-text');
+    if (!box) return;
+    const isHidden = box.classList.toggle('hidden');
+    if (txt) txt.textContent = isHidden ? 'Consultar fragmento fuente del Manual' : 'Ocultar fragmento del Manual';
+};
+
+window._showSecurityCertModal = function() {
+    const existing = document.getElementById('security-cert-modal');
+    if (existing) existing.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'security-cert-modal';
+    modal.className = 'fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in';
+    modal.innerHTML = `
+        <div class="relative w-full max-w-md bg-slate-900 border border-emerald-500/30 rounded-3xl p-6 text-center shadow-2xl overflow-hidden">
+            <div class="absolute -top-16 -right-16 size-36 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div class="size-14 mx-auto mb-3 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                <span class="material-symbols-outlined text-3xl">verified_user</span>
+            </div>
+
+            <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-black uppercase tracking-wider mb-2">
+                <span class="material-symbols-outlined text-xs">lock</span> Sitio Seguro y Verificado
+            </div>
+
+            <h3 class="text-lg font-black text-white mb-1">Verificación de Seguridad Activa</h3>
+            <p class="text-xs text-slate-400 mb-4">Adicionales Santa Fe · Conexión Cifrada SSL / TLS 1.3</p>
+
+            <div class="space-y-2.5 text-left mb-5">
+                <div class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0 mt-0.5">lock_clock</span>
+                    <div>
+                        <p class="text-xs font-bold text-white">Cifrado SSL 256-Bit de Extremo a Extremo</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed">Emitido por entidad certificadora de confianza (Let's Encrypt). La navegación entre tu dispositivo y el servidor está 100% blindada contra intercepciones.</p>
+                    </div>
+                </div>
+
+                <div class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0 mt-0.5">policy</span>
+                    <div>
+                        <p class="text-xs font-bold text-white">Protección de Datos Personales (Ley 25.326)</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed">Cumplimiento estricto de la legislación argentina. No recopilamos información bancaria confidencial ni cedemos datos a terceros.</p>
+                    </div>
+                </div>
+
+                <div class="p-3 rounded-xl bg-white/5 border border-white/5 flex items-start gap-2.5">
+                    <span class="material-symbols-outlined text-emerald-400 text-sm shrink-0 mt-0.5">gavel</span>
+                    <div>
+                        <p class="text-xs font-bold text-white">Transparencia e Independencia</p>
+                        <p class="text-[10px] text-slate-400 leading-relaxed">Herramienta técnica y pedagógica independiente desarrollada para la Policía de Santa Fe, con protocolos anti-phishing y auditoría de integridad.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="document.getElementById('security-cert-modal').remove()" 
+                class="w-full py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all">
+                Entendido · Continuar de Forma Segura
+            </button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+};
 
 window._showIsepProModal = function() {
     const existing = document.getElementById('isep-pro-modal');
@@ -1795,6 +1885,28 @@ function _renderExamView(container) {
 
                 }).join('')}
 
+            </div>
+
+            <!-- BOTÓN DESPLEGABLE DE PÁRRAFO FUENTE (Modelo Concurso 2026) -->
+            <div class="mt-4 pt-3 border-t border-white/5">
+                <button type="button" onclick="window._toggleSourceSnippet()" 
+                    class="w-full py-2.5 px-3 rounded-xl bg-blue-500/10 hover:bg-blue-500/15 border border-blue-500/20 text-xs font-bold text-blue-300 flex items-center justify-between transition-all active:scale-[0.99]">
+                    <span class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm text-blue-400">menu_book</span>
+                        <span id="btn-toggle-source-text">Consultar fragmento fuente del Manual</span>
+                    </span>
+                    <span class="text-[10px] uppercase font-black px-2 py-0.5 rounded bg-blue-500/20 text-blue-300">Párrafo oficial</span>
+                </button>
+                <div id="source-snippet-box" class="hidden mt-2.5 p-3.5 rounded-2xl bg-slate-900/90 border border-blue-500/30 text-xs text-slate-300 leading-relaxed font-sans shadow-xl">
+                    <div class="text-[10px] font-black text-blue-300 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-xs">local_library</span>
+                        ${q.source || 'Manual Oficial ISEP'}
+                    </div>
+                    <p class="text-slate-200 text-xs leading-relaxed italic border-l-2 border-blue-400 pl-2.5 my-1.5">
+                        "${q.explanation}"
+                    </p>
+                    <span class="text-[10px] text-slate-400">Podés ocultar este fragmento para practicar en condiciones de examen real.</span>
+                </div>
             </div>
 
         </main>
@@ -2666,7 +2778,22 @@ function _renderResultsView(container) {
 
                             <div class="p-2.5 rounded-xl bg-blue-500/5 border border-blue-500/10">
 
-                                <p class="text-[10px] text-blue-300 leading-relaxed">${d.explanation}</p>
+                                <div class="space-y-1.5">
+                                    <div>
+                                        <span class="text-[9px] font-black text-emerald-400 uppercase tracking-wider flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-[11px]">verified</span> Fundamento Oficial ISEP:
+                                        </span>
+                                        <p class="text-[10px] text-blue-200/90 leading-relaxed mt-0.5">${d.explanation}</p>
+                                    </div>
+                                    <div class="pt-1.5 border-t border-white/5">
+                                        <span class="text-[9px] font-black text-amber-400 uppercase tracking-wider flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-[11px]">warning</span> Clave sobre distractores:
+                                        </span>
+                                        <p class="text-[9px] text-amber-200/80 leading-relaxed mt-0.5">
+                                            Los distractores del concurso suelen alterar plazos procesales o inventar excepciones no contempladas en la normativa. Prestá atención a las palabras taxativas de la ley.
+                                        </p>
+                                    </div>
+                                </div>
                                 ${d.source ? `<p class="mt-1.5 text-[9px] text-slate-400 font-mono flex items-center gap-1"><span class="material-symbols-outlined text-[11px]">menu_book</span> ${d.source}</p>` : ''}
 
                             </div>
