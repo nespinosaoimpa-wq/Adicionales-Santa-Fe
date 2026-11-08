@@ -2168,3845 +2168,2140 @@ window.quizBank = {
             "explanation": "82-83 / 139-142. Las leves son faltas menores de conducta; las graves afectan el orden constitucional, deberes esenciales o configuran delitos."
         }
     ],
-    "oficial-subinspector": [
-        {
-            "id": "os-f01",
-            "difficulty": "facil",
-            "question": "¿Cuáles son las cuatro virtudes cardinales que según el Manual ISEP sustentan la 'autoridad real' del líder policial?",
-            "options": [
-                "Obediencia, Disciplina, Valentía y Lealtad institucional",
-                "Prudencia, Justicia, Fortaleza y Templanza",
-                "Eficiencia, Rapidez, Control operativo y Mando efectivo",
-                "Respeto jerárquico, Orden, Comando de zona y Firmeza operativa"
-            ],
-            "correctIndex": 1,
-            "source": "Manual ISEP 2026 - Oficial, Pág. 15: Liderazgo Policial",
-            "explanation": "El ISEP enseña que la autoridad no proviene solo del cargo jerárquico sino de las 4 virtudes cardinales: Prudencia, Justicia, Fortaleza y Templanza."
-        },
-        {
-            "id": "os-f02",
-            "difficulty": "facil",
-            "question": "¿Qué norma internacional consagra el Código de Conducta para Funcionarios Encargados de Hacer Cumplir la Ley?",
-            "options": [
-                "Resolución 34/169 de la Asamblea General de la ONU (1979)",
-                "Convenio 169 de la Organización Internacional del Trabajo (1989)",
-                "Protocolo Adicional II de los Convenios de Ginebra de 1949",
-                "Estatuto de Roma de la Corte Penal Internacional de 1998"
-            ],
-            "correctIndex": 0,
-            "source": "Manual ISEP 2026 - Oficial, Pág. 30: Código de Conducta ONU",
-            "explanation": "La Resolución 34/169 de la ONU de 1979 establece los 8 artículos fundamentales que rigen el ejercicio ético de la función policial."
-        },
-        {
-            "id": "os-f03",
-            "difficulty": "facil",
-            "question": "¿Cómo se divide el sistema de preservación de escena del hecho denominado 'Cordón Doble'?",
-            "options": [
-                "Zona de Ingreso controlado y Zona de Egreso supervisado por testigos civiles",
-                "Perímetro de Tránsito vehicular y Perímetro Vecinal restringido a civiles",
-                "Perímetro Interno (Zona de Exclusión) y Perímetro Externo (Zona de Seguridad)",
-                "Área de evidencia primaria y Área de contención perimetral secundaria"
-            ],
-            "correctIndex": 2,
-            "source": "Manual ISEP 2026 - Oficial, Pág. 22: Preservación del Lugar del Hecho",
-            "explanation": "El sistema de doble cordón define un Perímetro Interno exclusivo para peritos forenses y un Perímetro Externo para seguridad y apoyo."
-        },
-        {
-            "id": "os-f04",
-            "difficulty": "facil",
-            "question": "¿Qué tipo de falta disciplinaria constituye el desaliño en el uniforme o una tardanza menor sin justificar según el Decreto 461/15?",
-            "options": [
-                "Falta Leve, sancionable con apercibimiento o arresto menor",
-                "Falta Grave, sancionable con suspensión o pase a disponibilidad",
-                "Falta Gravísima, causal de instrucción de sumario administrativo",
-                "Irregularidad administrativa, causal de anotación en legajo personal"
-            ],
-            "correctIndex": 0,
-            "source": "Decreto 461/15 - Régimen Disciplinario Policial",
-            "explanation": "El desaliño o descuidos menores en el servicio constituyen faltas leves, sancionables con apercibimiento o arresto de hasta 10 días."
-        },
-        {
-            "id": "os-f05",
-            "difficulty": "facil",
-            "question": "¿Quién es considerado el 'Primer Preventor' policial en una escena delictiva?",
-            "options": [
-                "El primer personal policial uniformado que toma conocimiento e interviene en el lugar del hecho",
-                "El Jefe de la Comisaría jurisdiccional que asume la conducción operativa del procedimiento",
-                "El perito forense de la policía científica designado para el relevamiento de indicios",
-                "El Fiscal del Ministerio Público de la Acusación que dirige la investigación penal"
-            ],
-            "correctIndex": 0,
-            "source": "Manual ISEP 2026 - Oficial, Pág. 20: Rol del Primer Preventor",
-            "explanation": "El primer preventor es el efectivo que arriba en primer término al lugar, asumiendo la responsabilidad inicial de asegurar y preservar la escena."
-        },
-        {
-            "id": "os-f06",
-            "difficulty": "facil",
-            "question": "¿Qué es la 'Munición' según la reglamentación de tiro policial y la Ley Nacional de Armas?",
-            "options": [
-                "El conjunto de cartuchos que se proveen para ser utilizados en un arma de fuego",
-                "El cargador metálico reglamentario con capacidad de 15 cartuchos calibre 9mm",
-                "El dispositivo de puntería nocturna tritio que equipa al arma de dotación",
-                "La vaina servida que se expulsa del arma tras la percusión del fulminante"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Armamento y Tiro Policial / Daypo Tiro",
-            "explanation": "La munición es el conjunto o provisión de cartuchos diseñados y aptos para ser disparados por las armas de fuego."
-        },
-        {
-            "id": "os-f07",
-            "difficulty": "facil",
-            "question": "En las reglas cardinales de seguridad con armas de fuego, ¿cómo debe considerarse toda arma que se empuña?",
-            "options": [
-                "Siempre cargada y lista para disparar, aun cuando se crea que está descargada",
-                "Descargada mientras tenga el seguro manual colocado y el cargador retirado",
-                "Inofensiva si el portador se encuentra dentro de una dependencia policial",
-                "Segura si se verificó visualmente al inicio del turno en la formación diaria"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Reglas Cardinales de Seguridad",
-            "explanation": "La regla de oro del tiro policial exige tratar a toda arma en todo momento como si estuviese cargada, sin excepciones."
-        },
-        {
-            "id": "os-f08",
-            "difficulty": "facil",
-            "question": "¿Qué posición adopta el dedo índice del policía cuando no se ha tomado la decisión consciente de disparar?",
-            "options": [
-                "Completamente extendido y apoyado en el armazón, fuera del guardamonte",
-                "Apoyado levemente sobre la lengüeta del disparador sin aplicar presión",
-                "En contacto con el seguro de aleta lateral de la corredera de la pistola",
-                "Ubicado debajo de la empuñadura para mejorar la estabilidad del empuñe"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Pág. 12: Reglas de Manejo Seguro",
-            "explanation": "El dedo índice permanece fuera del disparador y apoyado en el armazón en todo momento hasta que las miras estén alineadas y se decida disparar."
-        },
-        {
-            "id": "os-f09",
-            "difficulty": "facil",
-            "question": "Según el Código Procesal Penal de Santa Fe (Ley 12.734), ¿cuándo se configura la 'Flagrancia'?",
-            "options": [
-                "Cuando el autor es sorprendido en el momento de cometer el hecho o inmediatamente después",
-                "Cuando existen sospechas vecinales fundadas de que una persona cometió un ilícito días atrás",
-                "Cuando la persona posee antecedentes penales por delitos contra la propiedad en el registro",
-                "Cuando el imputado confiesa espontáneamente ante los oficiales en la guardia de la comisaría"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Art. 212: Flagrancia",
-            "explanation": "Hay flagrancia cuando el autor es sorprendido en el momento de intentar o cometer el delito, o inmediatamente después mientras es perseguido o con objetos del hecho."
-        },
-        {
-            "id": "os-f10",
-            "difficulty": "facil",
-            "question": "¿Cuál es la función principal de la 'Posición SUL' en la doctrina de tiro policial?",
-            "options": [
-                "Mantener el arma apuntando al suelo a 45° pegada al pecho en entornos cerrados o con civiles",
-                "Efectuar disparos reactivos de cadera a corta distancia sin alinear los aparatos de puntería",
-                "Permitir la recarga del cargador con el arma apuntando directamente hacia el blanco hostil",
-                "Descansar los brazos del tirador durante las guardias prolongadas de control vehicular"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Posiciones Tácticas de Guardia",
-            "explanation": "La posición SUL mantiene el cañón orientado hacia el suelo a 45° con las manos al pecho, evitando apuntar a inocentes o camaradas en 360 grados."
-        },
-        {
-            "id": "os-f11",
-            "difficulty": "facil",
-            "question": "¿Qué principio rector del uso de la fuerza policial establece que solo debe emplearse cuando otros medios resulten ineficaces?",
-            "options": [
-                "Principio de Necesidad",
-                "Principio de Proporcionalidad",
-                "Principio de Legalidad",
-                "Principio de Oportunidad"
-            ],
-            "correctIndex": 0,
-            "source": "Protocolo de Uso Progresivo de la Fuerza - ISEP / ONU",
-            "explanation": "El principio de necesidad indica que el uso de la fuerza física o letal es el último recurso, aplicable únicamente cuando los métodos no violentos han fracasado."
-        },
-        {
-            "id": "os-f12",
-            "difficulty": "facil",
-            "question": "¿Quién tiene la dirección jurídica de la investigación penal preparatoria en el sistema procesal de Santa Fe?",
-            "options": [
-                "El Fiscal del Ministerio Público de la Acusación (MPA)",
-                "El Juez de Instrucción Penal de Distrito en turno",
-                "El Jefe de la Unidad Regional jurisdiccional actuante",
-                "El Secretario de Seguridad Pública de la Provincia"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Art. 16: Dirección de la Investigación",
-            "explanation": "En el sistema acusatorio de Santa Fe, el Fiscal del MPA dirige la investigación penal preparatoria y coordina a la policía en función judicial."
-        },
-        {
-            "id": "os-m01",
-            "difficulty": "media",
-            "question": "¿Cuál es la obligación inmediata del primer preventor policial al llegar a una escena del hecho con heridos de arma de fuego?",
-            "options": [
-                "Secuestrar de inmediato las vainas servidas, fotografiarlas y embalarlas para la cadena de custodia",
-                "Priorizar el auxilio médico y resguardo de la vida, coordinando el 107 y fijando la posición de indicios",
-                "Esperar la llegada del Fiscal del MPA para recibir instrucciones antes de actuar en la escena",
-                "Tomar declaración testimonial detallada a los vecinos presentes antes de que se retiren del lugar"
-            ],
-            "correctIndex": 1,
-            "source": "Manual ISEP 2026 - Oficial, Pág. 24: Primer Preventor y Auxilio",
-            "explanation": "La preservación de la vida es el mandato supremo; el auxilio médico prima sobre la intangibilidad de la evidencia, documentando las alteraciones necesarias."
-        },
-        {
-            "id": "os-m02",
-            "difficulty": "media",
-            "question": "En la pistola reglamentaria Bersa Thunder 9 Pro / TPR9, ¿qué función cumple la palanca de desamartillado (Decocker)?",
-            "options": [
-                "Desmonta el martillo de manera segura sin golpear el percutor, dejando el arma en doble acción",
-                "Traba mecánicamente la corredera para impedir que se extraiga el cargador durante el combate",
-                "Desconecta el fiador permanentemente requiriendo amartillar a mano para el primer disparo",
-                "Bloquea la cola del disparador únicamente cuando el cargador se encuentra completamente vacío"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Armamento Reglamentario: Pistola Bersa",
-            "explanation": "El decocker desciende el martillo de forma 100% controlada sin impacto sobre la aguja percutora, permitiendo portar el arma en cartucho en recámara con doble acción lista."
-        },
-        {
-            "id": "os-m03",
-            "difficulty": "media",
-            "question": "De acuerdo al Art. 215 del CPP de Santa Fe, ¿en qué circunstancia puede la policía realizar una requisa personal sin orden judicial previa?",
-            "options": [
-                "Cuando existan motivos fundados y circunstancias objetivas de que la persona oculta cosas vinculadas al delito",
-                "En cualquier momento de forma preventiva durante controles de tránsito o patrullajes de rutina en la vía pública",
-                "Únicamente cuando medie denuncia anónima previa registrada formalmente en el sistema de emergencias 911",
-                "Siempre que la persona demuestre nerviosismo o se niegue a responder sobre su domicilio a la patrulla"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Art. 215: Requisa sin orden judicial",
-            "explanation": "La requisa sin orden requiere indicios vehementes y circunstancias objetivas previas de que porta objetos ilícitos, debiendo labrarse acta con testigos hábiles."
-        },
-        {
-            "id": "os-m04",
-            "difficulty": "media",
-            "question": "¿Cuáles son los tiempos técnicos del desenfunde policial según la doctrina del Manual MIRAF?",
-            "options": [
-                "1: Desbloqueo y empuñe; 2: Extracción y rotación; 3: Encuentro de ambas manos; 4: Extensión y miras",
-                "1: Toma de empuñadura; 2: Retiro veloz; 3: Desbloqueo de seguro; 4: Presión sobre el disparador",
-                "1: Alerta visual; 2: Movimiento de cadera; 3: Apertura de funda; 4: Alineación de punto y alza",
-                "1: Identificación de blanco; 2: Desamartillado; 3: Presentación al pecho; 4: Disparo reactivo"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Pág. 18: Fases Técnicas del Desenfunde",
-            "explanation": "Los 4 tiempos del desenfunde coordinan: empuñe firme liberando seguros, elevación con cañón al frente, unión de manos al pecho y extensión visual al blanco."
-        },
-        {
-            "id": "os-m05",
-            "difficulty": "media",
-            "question": "Conforme a la Ley Provincial 14.239 de Narcomenudeo, ¿qué conductas son de competencia exclusiva de los fiscales provinciales del MPA?",
-            "options": [
-                "Comercio, fraccionamiento y tenencia de estupefacientes destinada directamente al consumidor final",
-                "El tráfico transnacional de precursores químicos y contrabando aduanero de sustancias prohibidas",
-                "Las redes de narcotráfico con lavado de activos transfronterizo investigadas por PROCUNAR",
-                "El transporte interprovincial de cargamentos mayores de clorhidrato de cocaína o cannabis"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 14.239 (Santa Fe) / Art. 34 de la Ley Nacional 23.737",
-            "explanation": "La Ley 14.239 desfederaliza el microtráfico en Santa Fe, asignando al MPA el comercio fraccionado directo a usuarios (narcomenudeo barrial)."
-        },
-        {
-            "id": "os-m06",
-            "difficulty": "media",
-            "question": "¿Cómo debe proceder el personal policial actuante ante el secuestro de un teléfono celular encendido en una escena de allanamiento?",
-            "options": [
-                "Colocarlo inmediatamente en Modo Avión, mantenerlo encendido y guardarlo en bolsa antiestática/Faraday",
-                "Apagarlo de inmediato quitando la batería para evitar que se borren los mensajes de WhatsApp",
-                "Navegar los chats recientes de mensajería para extraer capturas de pantalla antes de remitirlo",
-                "Conectarlo al cargador de la unidad móvil policial para asegurar que no se agote la batería"
-            ],
-            "correctIndex": 0,
-            "source": "Protocolo de Evidencia Digital ISEP - Pág. 28: Dispositivos Móviles",
-            "explanation": "El aislamiento de red en Modo Avión o bolsa de Faraday evita el borrado remoto; no se apaga para preservar datos volátiles de memoria RAM y claves abiertas."
-        },
-        {
-            "id": "os-m07",
-            "difficulty": "media",
-            "question": "¿Qué establece la 'Regla de Tueller' en el entrenamiento táctico y uso progresivo de la fuerza?",
-            "options": [
-                "Un atacante con arma blanca a 6,4 metros (21 pies) puede alcanzar al policía antes de que desenfunde y dispare",
-                "La distancia mínima para utilizar postas de goma (antidisturbios) sin provocar lesiones letales es de 21 metros",
-                "El tiempo que demora un cartucho 9mm en alcanzar la velocidad terminal en boca de cañón es de 0,21 segundos",
-                "La dispersión promedio del proyectil en tiro nocturno aumenta un 21% si no se utiliza linterna táctica"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF / Doctrina Operativa de Intervenciones Armadas",
-            "explanation": "La regla de Dennis Tueller (1983) demuestra que un agresor armado con cuchillo recorre 6.4 metros en 1.5 segundos, tiempo promedio de reacción y disparo defensivo."
-        },
-        {
-            "id": "os-m08",
-            "difficulty": "media",
-            "question": "En la redacción del Acta de Procedimiento (Art. 138 CPP), ¿quiénes NO pueden ser testigos de actuación según la ley procesal?",
-            "options": [
-                "Los menores de edad, las personas con alteración mental manifiesta y el propio personal policial interviniente",
-                "Cualquier ciudadano argentino mayor de 18 años que transite libremente por la vía pública en el horario",
-                "Los comerciantes del barrio que no tengan relación de parentesco demostrada con el imputado o la víctima",
-                "Los conductores de taxis o remises que hayan sido convocados expresamente como observadores del acto"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Arts. 138 y 139: Testigos de Actuación",
-            "explanation": "El personal policial actuante no puede ser testigo de su propia actuación; los testigos deben ser terceros civiles hábiles y desinteresados."
-        },
-        {
-            "id": "os-m09",
-            "difficulty": "media",
-            "question": "¿Qué sanción disciplinaria máxima puede imponer un Oficial Jefe (Subcomisario o Comisario) según el Decreto 461/15?",
-            "options": [
-                "Arresto policial de hasta 15 días y apercibimiento dentro de su jurisdicción",
-                "Suspensión de empleo por 60 días con retención del 50% de haberes mensuales",
-                "Destitución con pérdida del grado policial previo sumario de asuntos internos",
-                "Pase a retiro obligatorio por falta de idoneidad en el ejercicio del mando de tropa"
-            ],
-            "correctIndex": 0,
-            "source": "Decreto 461/15, Régimen Disciplinario - Facultades Sancionatorias",
-            "explanation": "Los Oficiales Jefes poseen facultades sancionatorias directas sobre el personal subalterno para aplicar apercibimiento y arresto hasta los límites fijados por jerarquía."
-        },
-        {
-            "id": "os-m10",
-            "difficulty": "media",
-            "question": "Durante un allanamiento urgente por persecución en flagrancia (Art. 211 CPP), ¿cuál es el requisito formal ineludible?",
-            "options": [
-                "Dar aviso inmediato al Fiscal en turno y labrar acta circunstanciada detallando los motivos de la urgencia",
-                "Esperar obligatoriamente la presencia física del Juez Penal de Turno antes de ingresar a la propiedad",
-                "Obtener previamente la autorización verbal o por escrito del dueño de la morada o de un vecino lindero",
-                "Secuestrar únicamente elementos que estén a la vista prohibiéndose la aprehensión del prófugo dentro"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Art. 211: Allanamiento sin orden judicial",
-            "explanation": "El ingreso sin orden por flagrancia o auxilio exige comunicación inmediata al fiscal del MPA y confección de acta con testigos detallando la causa de excepción."
-        },
-        {
-            "id": "os-m11",
-            "difficulty": "media",
-            "question": "¿Cuál es la causa de una traba de tiro del tipo 'Chimenea' (Stovepipe) en una pistola semiautomática?",
-            "options": [
-                "La vaina servida queda atrapada verticalmente por la corredera antes de ser expulsada por completo",
-                "El fulminante del cartucho percutido no inició la deflagración de la pólvora por defecto de fábrica",
-                "El proyectil quedó alojado en el interior del ánima del cañón bloqueando el paso de nuevos disparos",
-                "Dos cartuchos intentan ingresar simultáneamente a la recámara trabando el elevador del cargador"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Incidentes de Tiro y Resolución de Trabas",
-            "explanation": "El fallo de expulsión o chimenea ocurre cuando la vaina queda pinzada entre la recámara y la corredera, resolviéndose con el golpe de base y barrido (Tap & Rack)."
-        },
-        {
-            "id": "os-m12",
-            "difficulty": "media",
-            "question": "¿Qué estipula la Ley 12.521 respecto a la potestad de portación de arma de fuego del personal policial?",
-            "options": [
-                "Es un derecho y una obligación permanente del estado policial, salvo sanción disciplinaria o suspensión médica",
-                "Es una atribución opcional que el efectivo puede ejercer solo si cuenta con credencial CLU civil vigente",
-                "Se encuentra limitada exclusivamente al horario en que el oficial se encuentra prestando servicio ordinario",
-                "Requiere autorización expresa y escrita del Ministerio de Seguridad renovable cada seis meses calendario"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521 (Personal Policial de Santa Fe), Art. 12: Estado Policial",
-            "explanation": "El estado policial impone el deber y derecho a la portación del arma provista las 24 horas del día, excepto restricciones fundadas de salud o disciplinarias."
-        },
-        {
-            "id": "os-m13",
-            "difficulty": "media",
-            "question": "¿Cómo se define la 'Cadena de Custodia' de los elementos probatorios secuestrados en el marco del CPP?",
-            "options": [
-                "El procedimiento que garantiza la trazabilidad, inalterabilidad y autenticidad del indicio desde su hallazgo hasta el juicio",
-                "El registro fotográfico que efectúa el sumariante al momento de recepcionar los efectos en la oficina de guardia",
-                "El comprobante de entrega en mano que firma el fiscal del MPA cuando recibe los efectos secuestrados en audiencia",
-                "El libro foliado de guardia donde se anota el ingreso de pertenencias personales de los contraventores demorados"
-            ],
-            "correctIndex": 0,
-            "source": "Manual ISEP - Preservación de Evidencia y Cadena de Custodia",
-            "explanation": "La cadena de custodia asegura que el indicio presentado en juicio es exactamente el mismo que se recogió en la escena, sin adulteraciones ni reemplazos."
-        },
-        {
-            "id": "os-m14",
-            "difficulty": "media",
-            "question": "¿Cuál es la velocidad reglamentaria máxima para la conducción de patrulleros en desplazamiento normal de prevención según la reglamentación?",
-            "options": [
-                "Debe adecuarse estrictamente a los límites de la Ley Nacional de Tránsito respetando las normas viales generales",
-                "Posee una tolerancia automática de hasta un 50% superior a los vehículos civiles en cualquier arteria urbana",
-                "No posee límite de velocidad mientras la unidad mantenga las balizas lumínicas encendidas sin sirena acústica",
-                "Está fijada en 80 km/h uniformemente tanto en avenidas como en calles barriales de la ciudad de Santa Fe"
-            ],
-            "correctIndex": 0,
-            "source": "Reglamento de Conducción Policial - ISEP / Ley 24.449",
-            "explanation": "En patrullaje ordinario, el móvil policial está sujeto a las reglas generales de tránsito; la excepción rige solo ante emergencias debidamente señalizadas."
-        },
-        {
-            "id": "os-d01",
-            "difficulty": "dificil",
-            "question": "¿En qué plazo perentorio debe la autoridad policial comunicar la aprehensión de una persona al Fiscal del MPA según el CPP?",
-            "options": [
-                "De manera inmediata y dentro de las 6 horas de producido el acto material de privación de la libertad",
-                "Dentro del término improrrogable de las 24 horas posteriores a la confección del acta sumarial en comisaría",
-                "Al finalizar el turno de guardia de 24 horas en el cual se produjo la intervención de la patrulla policial",
-                "Antes de que se cumplan las 48 horas cuando el detenido deba ser trasladado a los tribunales penales"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Art. 214: Comunicación de la aprehensión",
-            "explanation": "El Art. 214 exige notificación inmediata y nunca más allá de las 6 horas, bajo apercibimiento de ilegalidad de la detención."
-        },
-        {
-            "id": "os-d02",
-            "difficulty": "dificil",
-            "question": "En el marco del Decreto 461/15, ¿cuándo prescribe la acción disciplinaria para juzgar una 'Falta Grave'?",
-            "options": [
-                "A los 2 años de cometida la falta o desde que cesó su consumación continua",
-                "Al cumplirse exactamente 1 año calendario desde la fecha del informe inicial",
-                "A los 3 años contados a partir del momento en que el superior tomó conocimiento",
-                "Es imprescriptible mientras el oficial involucrado se encuentre en actividad en la fuerza"
-            ],
-            "correctIndex": 0,
-            "source": "Decreto 461/15, Art. 45: Prescripción de la Acción Disciplinaria",
-            "explanation": "Las faltas leves prescriben al año, las graves a los dos años, y las gravísimas a los tres años (o al plazo de prescripción penal si constituye delito)."
-        },
-        {
-            "id": "os-d03",
-            "difficulty": "dificil",
-            "question": "¿Cuál es la consecuencia jurídica ineludible si se realiza un secuestro probatorio sin testigos civiles habiendo podido convocarlos?",
-            "options": [
-                "La nulidad absoluta del acto procesal por violación de las formas sustanciales de la prueba",
-                "Una simple falta administrativa leve que se subsana con la ratificación testimonial del sumariante",
-                "La convalidación automática por parte del fiscal al momento de formalizar la acusación en la audiencia",
-                "El pase a disponibilidad preventiva de todo el personal policial que firmó el acta de secuestro"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Arts. 138, 161 y 162: Régimen de Nulidades",
-            "explanation": "La omisión injustificada de testigos de actuación en requisas y secuestros vicia el acto de nulidad absoluta insanable (teoría del fruto del árbol envenenado)."
-        },
-        {
-            "id": "os-d04",
-            "difficulty": "dificil",
-            "question": "En balística forense, ¿qué elementos caracterizan al disparo a 'Quemarrropa' sobre un cuerpo humano?",
-            "options": [
-                "Presencia de tatuaje de pólvora indeleble, ahumamiento denso y quemadura por la llama de la deflagración",
-                "Orificio de entrada con bordes evertidos sin presencia de residuos químicos ni hollín circundante",
-                "Ausencia total de zona de Fish o anillo de enjugamiento alrededor del orificio de ingreso del proyectil",
-                "Presencia exclusiva de dispersión cónica de perdigones a una distancia mayor a los quince metros"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Balística Forense y Efectos de Disparo",
-            "explanation": "El disparo a quemarropa (dentro del alcance de la llama) produce quemadura de tejidos, depósito concentrado de hollín e incrustación de pólvora."
-        },
-        {
-            "id": "os-d05",
-            "difficulty": "dificil",
-            "question": "Conforme a la Ley 12.521, ¿qué recurso administrativo puede interponer el personal policial frente a una sanción disciplinaria directa?",
-            "options": [
-                "Recurso de Reconsideración dentro de los 5 días hábiles ante la misma autoridad que dictó la sanción",
-                "Demanda contencioso administrativa directa ante la Cámara Contenciosa dentro de las 48 horas",
-                "Acción de Amparo constitucional ante los Tribunales del Trabajo de la ciudad de Rosario o Santa Fe",
-                "Denuncia de ilegítima sanción ante el Defensor del Pueblo de la Provincia de Santa Fe"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521, Art. 78 y Decreto Reglamentario 461/15",
-            "explanation": "El policía sancionado puede interponer recurso de reconsideración dentro de 5 días hábiles, y subsidiariamente apelación jerárquica ante el superior inmediato."
-        },
-        {
-            "id": "os-d06",
-            "difficulty": "dificil",
-            "question": "¿Qué establece el Art. 15 de la Ley 12.521 respecto a los límites de la obediencia jerárquica policial?",
-            "options": [
-                "El deber de obediencia cesa cuando la orden impartida sea manifiestamente contraria a la ley o constituya delito",
-                "El subordinado debe cumplir siempre la orden impartida, limitándose su derecho a formular queja posterior por escrito",
-                "Solo los oficiales con jerarquía superior a Subcomisario pueden negarse a ejecutar órdenes de sus superiores directos",
-                "La objeción de conciencia permite rechazar órdenes de servicio adicionales durante fines de semana y feriados"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521 (Personal Policial de Santa Fe), Art. 15: Deber de Obediencia",
-            "explanation": "La obediencia debida no ampara la ejecución de actos manifiestamente ilegales o lesivos de derechos humanos fundamentales; la orden delictual no debe acatarse."
-        },
-        {
-            "id": "os-d07",
-            "difficulty": "dificil",
-            "question": "En materia de Juicio por Jurados (Ley 14.258 de Santa Fe), ¿qué causa criminal requiere obligatoriamente veredicto ciudadano popular?",
-            "options": [
-                "Homicidios calificados del Art. 80 del Código Penal y delitos cometidos por policías que resulten en muerte",
-                "Todos los delitos de robo calificado en poblado y en banda con armas de fuego de uso civil condicional",
-                "Las causas correccionales de lesiones leves en riña y accidentes de tránsito con imputados alcoholizados",
-                "Las causas de microtráfico barrial tramitadas bajo el régimen de desfederalización de la Ley 14.239"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 14.258 (Juicio por Jurados de Santa Fe), Art. 2: Competencia Material",
-            "explanation": "La Ley 14.258 establece jurados populares para homicidios calificados, abusos seguidos de muerte y delitos donde intervenga personal policial con resultado muerte."
-        },
-        {
-            "id": "os-d08",
-            "difficulty": "dificil",
-            "question": "¿Qué procedimiento técnico balístico debe ejecutarse ante una doble alimentación (Tipo 2) en situación de enfrentamiento armado?",
-            "options": [
-                "Fijar corredera atrás (Lock), extraer cargador a la fuerza (Strip), ciclar corredera dos veces (Rack) e insertar nuevo cargador",
-                "Presionar fuertemente la base del cargador hacia arriba (Tap) y ciclar la corredera una sola vez hacia atrás",
-                "Accionar inmediatamente la palanca de desamartillado (Decocker) y apretar la cola del disparador en doble acción",
-                "Girar el arma en posición SUL y soplar la recámara para liberar el proyectil que bloquea el percutor"
-            ],
-            "correctIndex": 0,
-            "source": "Manual MIRAF - Pág. 32: Resolución de Interrupciones Complejas",
-            "explanation": "La doble alimentación no sale con un simple Tap-Rack; requiere retener corredera, arrancar el cargador trabado, ciclar para vaciar la recámara y recargar."
-        },
-        {
-            "id": "os-d09",
-            "difficulty": "dificil",
-            "question": "Conforme al régimen disciplinario policial, ¿qué distingue sustancialmente a la 'Cesantía' de la 'Exoneración'?",
-            "options": [
-                "La cesantía no quita el derecho a los aportes previsionales acumulados; la exoneración extingue todos los derechos y es la máxima sanción",
-                "La cesantía permite reincorporarse a la fuerza a los seis meses; la exoneración requiere esperar cinco años para rendir concurso",
-                "La cesantía se aplica a Oficiales Subalternos y la exoneración es una figura exclusiva para el Agrupamiento de Supervisión",
-                "No existe diferencia jurídica ya que ambos términos se utilizan como sinónimos en los decretos del poder ejecutivo"
-            ],
-            "correctIndex": 0,
-            "source": "Decreto 461/15, Arts. 18 y 19: Destitución Policial",
-            "explanation": "La cesantía extingue la relación de empleo pero preserva derechos jubilatorios consolidados; la exoneración cancela todo beneficio y grado, siendo la más gravosa."
-        },
-        {
-            "id": "os-d10",
-            "difficulty": "dificil",
-            "question": "En el levantamiento de un arma de fuego en el lugar del hecho, ¿por qué está terminantemente prohibido levantarla introduciendo una lapicera en el cañón?",
-            "options": [
-                "Porque daña el estriado helicoidal del ánima y puede transferir fibras alterando las pruebas de microscopía comparativa",
-                "Porque activa mecánicamente el mecanismo del seguro automático de percutor bloqueando la corredera",
-                "Porque el peso del arma curva el cañón alterando permanentemente la precisión balística en disparos de prueba",
-                "Porque está prohibido por el Código de Procedimientos de la O.N.U. bajo apercibimiento de multa administrativa"
-            ],
-            "correctIndex": 0,
-            "source": "Manual de Criminalística y Preservación - ISEP 2026",
-            "explanation": "Introducir elementos en el ánima destruye residuos de pólvora y raya las estrías microscópicas que individualizan el arma con las balas testigo."
-        },
-        {
-            "id": "os-d11",
-            "difficulty": "dificil",
-            "question": "Según el CPP de Santa Fe, ¿cuál es el plazo máximo que puede durar la incomunicación de un detenido ordenada por el Fiscal?",
-            "options": [
-                "Hasta 48 horas y únicamente por resolución judicial fundada cuando existan motivos para temer entorpecimiento",
-                "Hasta 12 horas corridas a criterio exclusivo del sumariante de la comisaría sin intervención de terceros",
-                "Hasta 7 días hábiles siempre que se trate de bandas organizadas dedicadas al narcomenudeo o microtráfico",
-                "La incomunicación se encuentra expresamente prohibida en el sistema procesal penal santafesino"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Art. 219: Incomunicación del Imputado",
-            "explanation": "La incomunicación no la decide la policía; requiere orden del juez a pedido del fiscal por un máximo de 48 horas, preservando el contacto con su defensor."
-        },
-        {
-            "id": "os-d12",
-            "difficulty": "dificil",
-            "question": "¿Qué establece el principio de 'Prohibición de autoincriminación' respecto al personal policial en el momento de la aprehensión?",
-            "options": [
-                "La policía no puede interrogar al detenido sobre el hecho ni registrar manifestaciones suyas sin presencia de su abogado",
-                "El detenido tiene la obligación legal de declarar verbalmente ante el oficial de servicio en el libro de guardia",
-                "El personal policial puede ofrecer reducciones de pena si el demorado indica el lugar donde se escondió el botín",
-                "La policía debe grabar un video con el celular del oficial donde el sospechoso admita voluntariamente su autoría"
-            ],
-            "correctIndex": 0,
-            "source": "Constitución Nacional Art. 18 / Ley 12.734 (CPP Santa Fe), Art. 216",
-            "explanation": "Las manifestaciones espontáneas o interrogatorios policiales sin defensor son nulos de nulidad absoluta; solo puede declarar válidamente ante el juez o fiscal."
-        },
-        {
-            "id": "os-d13",
-            "difficulty": "dificil",
-            "question": "En la tríada de Seguridad de la Información (CID), ¿qué significa el principio de 'Disponibilidad'?",
-            "options": [
-                "Que la información y los sistemas operativos estén accesibles para los usuarios autorizados cuando sea necesario",
-                "Que los datos policiales sean de acceso público y gratuito para cualquier ciudadano a través de la web oficial",
-                "Que los oficiales de guardia estén disponibles para realizar horas de servicio adicional los fines de semana",
-                "Que el personal policial mantenga sus líneas de telefonía corporativa abiertas las 24 horas del día"
-            ],
-            "correctIndex": 0,
-            "source": "Manual ISEP 2026 - Seguridad de la Información: Tríada CID",
-            "explanation": "La Disponibilidad asegura que los recursos, bases de datos y sistemas de despacho 911 funcionen continuamente sin interrupciones por ciberataques o fallos."
-        },
-        {
-            "id": "os-d14",
-            "difficulty": "dificil",
-            "question": "¿Cuál es la consecuencia procesal de no informar los derechos constitucionales (Art. 216 CPP) al aprehendido al momento de su detención?",
-            "options": [
-                "Posible planteo de nulidad de las actuaciones posteriores y responsabilidad disciplinaria para el personal policial",
-                "El archivo inmediato de la causa penal sin posibilidad de reabrir investigación contra el imputado",
-                "Una sanción pecuniaria automática con descuento directo en el haber mensual del primer preventor",
-                "La libertad bajo caución real fijada exclusivamente por la guardia policial sin intervención del MPA"
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.734 (CPP Santa Fe), Art. 216 y 217: Lectura de Derechos",
-            "explanation": "La intimación de derechos (conocer la causa, guardar silencio, designar defensor, llamada telefónica) es una garantía de orden público cuya omisión acarrea nulidad."
-        },
-        {
-            "id": "isep-d26-011",
-            "difficulty": "media",
-            "question": "Una actuación policial ilegítima o irregular afecta directamente:",
-            "options": [
-                "Solo a la institución policial",
-                "El trabajo de fiscales y jueces",
-                "El procedimiento administrativo",
-                "El régimen disciplinario interno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El trabajo de fiscales y jueces\"."
-        },
-        {
-            "id": "isep-d26-021",
-            "difficulty": "facil",
-            "question": "El cumplimiento de la ley se inicia principalmente con:",
-            "options": [
-                "La actuación policial",
-                "La actuación legislativa",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
-                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
-            ],
-            "correctIndex": 0,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La actuación policial\"."
-        },
-        {
-            "id": "isep-d26-022",
-            "difficulty": "media",
-            "question": "El Judo Verbal es una técnica de:",
-            "options": [
-                "Comunicación táctica",
-                "Intimidación psicológica",
-                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida",
-                "Centralización absoluta de la toma de decisiones sin delegación de mando"
-            ],
-            "correctIndex": 0,
-            "source": "Manual ISEP - Comunicación Táctica y Judo Verbal Operativo",
-            "explanation": "El Judo Verbal enseña a utilizar la empatía y la persuasión táctica para desescalar conflictos y resolver intervenciones sin violencia. La opción correcta conforme a la normativa oficial es: \"Comunicación táctica\"."
-        },
-        {
-            "id": "isep-d26-023",
-            "difficulty": "media",
-            "question": "El objetivo principal del Judo Verbal es:",
-            "options": [
-                "Resolver conflictos sin recurrir a la fuerza física",
-                "Ganar discusiones",
-                "Imposición inflexible de la jerarquía mediante el principio de obediencia debida",
-                "Centralización absoluta de la toma de decisiones sin delegación de mando"
-            ],
-            "correctIndex": 0,
-            "source": "Manual ISEP - Comunicación Táctica y Judo Verbal Operativo",
-            "explanation": "El Judo Verbal enseña a utilizar la empatía y la persuasión táctica para desescalar conflictos y resolver intervenciones sin violencia. La opción correcta conforme a la normativa oficial es: \"Resolver conflictos sin recurrir a la fuerza física\"."
-        },
-        {
-            "id": "isep-d26-032",
-            "difficulty": "facil",
-            "question": "Si no se cuenta con documentación, la edad se acredita mediante:",
-            "options": [
-                "Declaración de los padres",
-                "Informe médico de menores",
-                "Intervención del fiscal",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Informe médico de menores\"."
-        },
-        {
-            "id": "isep-d26-033",
-            "difficulty": "facil",
-            "question": "La actuación policial en hechos que involucren menores se rige por:",
-            "options": [
-                "Código Procesal Penal",
-                "Ley de Seguridad Pública",
-                "Código Procesal de Menores",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Código Procesal de Menores\"."
-        },
-        {
-            "id": "isep-d26-034",
-            "difficulty": "media",
-            "question": "Ante la participación de un menor en un delito, la policía debe comunicar inmediatamente al:",
-            "options": [
-                "Fiscal de turno",
-                "Juez de Garantías",
-                "Juez de Menores",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Juez de Menores\"."
-        },
-        {
-            "id": "isep-d26-035",
-            "difficulty": "dificil",
-            "question": "Dentro de las 24 horas, la autoridad policial debe comunicar el hecho al:",
-            "options": [
-                "Fiscal de Menores",
-                "Asesor de Menores",
-                "Juez Penal",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Asesor de Menores\"."
-        },
-        {
-            "id": "isep-d26-036",
-            "difficulty": "facil",
-            "question": "Si el menor es punible, además se debe dar intervención inmediata al:",
-            "options": [
-                "Defensor Oficial",
-                "Asesor de Menores",
-                "Fiscal de Menores",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Fiscal de Menores\"."
-        },
-        {
-            "id": "isep-d26-037",
-            "difficulty": "media",
-            "question": "En caso de aprehensión de un menor, la policía debe informar de inmediato a:",
-            "options": [
-                "El fiscal",
-                "El juez",
-                "Los padres, tutor o guardadores",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Los padres, tutor o guardadores\"."
-        },
-        {
-            "id": "isep-d26-038",
-            "difficulty": "dificil",
-            "question": "Cuando un menor es aprehendido, detenido o citado, el funcionario policial debe informarle sus derechos:",
-            "options": [
-                "Dentro de las 24 horas",
-                "Luego del interrogatorio",
-                "De inmediato y antes de cualquier otro acto",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"De inmediato y antes de cualquier otro acto\"."
-        },
-        {
-            "id": "isep-d26-041",
-            "difficulty": "dificil",
-            "question": "Las diligencias urgentes realizadas por la policía deben informarse al juez dentro de:",
-            "options": [
-                "48 horas",
-                "72 horas",
-                "24 horas",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"24 horas\"."
-        },
-        {
-            "id": "isep-d26-044",
-            "difficulty": "dificil",
-            "question": "La omisión de informar los derechos al menor genera como consecuencia:",
-            "options": [
-                "Falta administrativa",
-                "Sanción disciplinaria",
-                "Nulidad del procedimiento",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Nulidad del procedimiento\"."
-        },
-        {
-            "id": "isep-d26-055",
-            "difficulty": "media",
-            "question": "El Acta de Procedimiento se define como:",
-            "options": [
-                "Un informe administrativo interno",
-                "Un relato subjetivo del personal interviniente",
-                "Un relato histórico, circunstanciado y escrito de toda intervención policial",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Un relato histórico, circunstanciado y escrito de toda intervención policial\"."
-        },
-        {
-            "id": "isep-d26-056",
-            "difficulty": "media",
-            "question": "El Acta de Procedimiento se labra cuando la intervención policial ocurre:",
-            "options": [
-                "Solo en comisión de delito",
-                "Solo con orden judicial",
-                "En prevención, comisión o con posterioridad al delito",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"En prevención, comisión o con posterioridad al delito\"."
-        },
-        {
-            "id": "isep-d26-057",
-            "difficulty": "media",
-            "question": "¿Cuál NO es una finalidad del Acta de Procedimiento?",
-            "options": [
-                "Dejar constancia clara de los hechos",
-                "Respaldar actuaciones judiciales futuras",
-                "Emitir opinión personal del funcionario",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Emitir opinión personal del funcionario\"."
-        },
-        {
-            "id": "isep-d26-059",
-            "difficulty": "media",
-            "question": "¿En qué casos el personal policial puede restringir la libertad sin orden judicial?",
-            "options": [
-                "En operativos preventivos",
-                "En averiguación de antecedentes",
-                "En casos de flagrancia",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"En casos de flagrancia\"."
-        },
-        {
-            "id": "isep-d26-060",
-            "difficulty": "dificil",
-            "question": "Según el Art. 213 del CPP, hay flagrancia cuando el presunto autor:",
-            "options": [
-                "Es señalado días después del hecho",
-                "Es sorprendido intentando o cometiendo el hecho",
-                "antecedentes penales",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Es sorprendido intentando o cometiendo el hecho\"."
-        },
-        {
-            "id": "isep-d26-061",
-            "difficulty": "dificil",
-            "question": "¿Cuál de las siguientes situaciones NO constituye flagrancia según el Art. 213 CPP?",
-            "options": [
-                "Ser perseguido inmediatamente después del delito",
-                "Poseer objetos que hagan presumir participación inmediata",
-                "Ser denunciado horas después sin otros indicios",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ser denunciado horas después sin otros indicios\"."
-        },
-        {
-            "id": "isep-d26-064",
-            "difficulty": "facil",
-            "question": "En caso de demora, el personal policial debe dar aviso inmediato a:",
-            "options": [
-                "El juez competente",
-                "El fiscal de turno",
-                "El Servicio Público Provincial de la Defensa Penal",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Servicio Público Provincial de la Defensa Penal\"."
-        },
-        {
-            "id": "isep-d26-066",
-            "difficulty": "media",
-            "question": "Las personas demoradas trasladadas a dependencias policiales:",
-            "options": [
-                "Pueden alojarse con detenidos",
-                "Deben permanecer en calabozos",
-                "No pueden ser alojadas con detenidos por delitos o contravenciones",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"No pueden ser alojadas con detenidos por delitos o contravenciones\"."
-        },
-        {
-            "id": "isep-d26-071",
-            "difficulty": "facil",
-            "question": "El personal interviniente deberá actuar:",
-            "options": [
-                "Con autoridad y severidad",
-                "Con firmeza y respeto",
-                "De manera discrecional",
-                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Con firmeza y respeto\"."
-        },
-        {
-            "id": "isep-d26-076",
-            "difficulty": "dificil",
-            "question": "El artículo del Código Penal que reprime las lesiones culposas es:",
-            "options": [
-                "Art. 94 CP",
-                "Art. 90 CP",
-                "Art. 89 CP",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 0,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Art. 94 CP\"."
-        },
-        {
-            "id": "isep-d26-077",
-            "difficulty": "media",
-            "question": "En lesiones culposas leves por accidente de tránsito, corresponde:",
-            "options": [
-                "Liberar al conductor sin actuaciones",
-                "Acta de procedimiento, secuestro preventivo y análisis biológicos",
-                "Allanamiento inmediato del domicilio",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Acta de procedimiento, secuestro preventivo y análisis biológicos\"."
-        },
-        {
-            "id": "isep-d26-079",
-            "difficulty": "facil",
-            "question": "En lesiones culposas graves u homicidio culposo, es obligatorio",
-            "options": [
-                "Consultar a la Fiscalía",
-                "Entregar el rodado inmediatamente",
-                "Evitar secuestros",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 0,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Consultar a la Fiscalía\"."
-        },
-        {
-            "id": "isep-d26-084",
-            "difficulty": "dificil",
-            "question": "El principio constitucional que regula los allanamientos es:",
-            "options": [
-                "Art. 14 CN",
-                "Art. 17 CN",
-                "Art. 18 CN",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 18 CN\"."
-        },
-        {
-            "id": "isep-d26-085",
-            "difficulty": "media",
-            "question": "En Santa Fe, el allanamiento con orden judicial puede ser autorizado por:",
-            "options": [
-                "Solo la policía",
-                "El Tribunal a solicitud fundada",
-                "El vecino",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Tribunal a solicitud fundada\"."
-        },
-        {
-            "id": "isep-d26-086",
-            "difficulty": "media",
-            "question": "El allanamiento sin orden judicial es válido cuando:",
-            "options": [
-                "Lo solicita la víctima",
-                "Existe urgencia legalmente justificada",
-                "El domicilio está cerrado",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Existe urgencia legalmente justificada\"."
-        },
-        {
-            "id": "isep-d26-087",
-            "difficulty": "dificil",
-            "question": "El art. 170 CPPP-SF habilita el allanamiento sin orden ante:",
-            "options": [
-                "Falta de testigos",
-                "Incendio o peligro grave",
-                "Sospechas genéricas",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Incendio o peligro grave\"."
-        },
-        {
-            "id": "isep-d26-088",
-            "difficulty": "media",
-            "question": "¿Bajo qué presupuestos y requisitos formales autoriza el Código Procesal Penal de Santa Fe al personal policial a efectuar una requisa personal sin orden judicial previa?",
-            "options": [
-                "Cuando existan motivos previos, objetivos y fundados para presumir que la persona oculta en su cuerpo cosas relacionadas con un delito, labrando acta circunstanciada ante testigos.",
-                "Por mera sospecha subjetiva del preventor basada en la apariencia física del individuo.",
-                "Únicamente con autorización verbal telefónica de un funcionario municipal de control.",
-                "Siempre que la persona transite por la vía pública en horario nocturno después de las 22:00 horas."
-            ],
-            "correctIndex": 0,
-            "source": "Código Procesal Penal de Santa Fe - Art. 167 (Requisa e Inspección de Personas sin Orden)",
-            "explanation": "La requisa sin orden judicial es una excepción reglada: requiere circunstancias objetivas fundadas de urgencia que hagan presumir el ocultamiento de cosas del delito, debiendo documentarse minuciosamente ante testigos hábiles."
-        },
-        {
-            "id": "isep-d26-089",
-            "difficulty": "media",
-            "question": "Antes de realizar una requisa, el personal debe:",
-            "options": [
-                "Reducir a la persona",
-                "Invitar a exhibir el objeto",
-                "Trasladar a la seccional",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Invitar a exhibir el objeto\"."
-        },
-        {
-            "id": "isep-d26-091",
-            "difficulty": "facil",
-            "question": "El efecto túnel en estrés táctico provoca:",
-            "options": [
-                "El efecto túnel en estrés táctico provoca:",
-                "Reducción severa de la visión periférica",
-                "Mejora de audición",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Reducción severa de la visión periférica\"."
-        },
-        {
-            "id": "isep-d26-096",
-            "difficulty": "facil",
-            "question": "La principal herramienta del policía en situaciones críticas o de crisis es:",
-            "options": [
-                "El uso inmediato del arma de fuego",
-                "La fuerza física",
-                "El uso de la palabra y el lenguaje gestual",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El uso de la palabra y el lenguaje gestual\"."
-        },
-        {
-            "id": "isep-d26-101",
-            "difficulty": "facil",
-            "question": "La Regla de Tueller establece que una persona armada con arma blanca puede representar una amenaza mortal hasta una distancia aproximada de:",
-            "options": [
-                "3 metros",
-                "5 metros",
-                "6,4 metros (21 pies)",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"6,4 metros (21 pies)\"."
-        },
-        {
-            "id": "isep-d26-106",
-            "difficulty": "facil",
-            "question": "¿Cuál de los siguientes NO es un requisito para los vehículos de emergencia?",
-            "options": [
-                "Habilitación técnica especial.",
-                "Antigüedad máxima de 15 años.",
-                "Uso permanente de sirena en toda intervención.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Uso permanente de sirena en toda intervención.\"."
-        },
-        {
-            "id": "isep-d26-111",
-            "difficulty": "facil",
-            "question": "Los programas actuales de formación policial incorporan principalmente",
-            "options": [
-                "Comunicación efectiva, desescalamiento y uso proporcional de la fuerza",
-                "Eliminación de protocolos previos.",
-                "Uso intensivo de la fuerza letal.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 0,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Comunicación efectiva, desescalamiento y uso proporcional de la fuerza\"."
-        },
-        {
-            "id": "isep-d26-126",
-            "difficulty": "facil",
-            "question": "Corresponde la competencia provincial cuando la venta es:",
-            "options": [
-                "Internacional.",
-                "A gran escala.",
-                "Directa al consumidor final.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Directa al consumidor final.\"."
-        },
-        {
-            "id": "isep-d26-131",
-            "difficulty": "facil",
-            "question": "Si el cultivo NO tiene destino inequívoco al consumo personal:",
-            "options": [
-                "Se aplica el tipo atenuado.",
-                "Se excluye responsabilidad penal.",
-                "Se aplica la pena de 4 a 15 años.",
-                "Conlleva suspensión preventiva de empleo y retención del 50% de haberes"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se aplica la pena de 4 a 15 años.\"."
-        },
-        {
-            "id": "isep-d26-141",
-            "difficulty": "facil",
-            "question": "La denuncia con reserva de identidad se caracteriza porque:",
-            "options": [
-                "El denunciante no se identifica en ningún momento",
-                "El denunciante está identificado, pero sus datos se mantienen en reserva",
-                "Solo puede ser realizada por funcionarios públicos",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El denunciante está identificado, pero sus datos se mantienen en reserva\"."
-        },
-        {
-            "id": "isep-d26-142",
-            "difficulty": "dificil",
-            "question": "Según el Código Procesal Penal de Santa Fe, la protección del denunciante o testigo tiene como finalidad principal:",
-            "options": [
-                "Evitar la nulidad del proceso",
-                "Garantizar el secreto de sumario",
-                "Preservarlo de intimidaciones o represalias",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Preservarlo de intimidaciones o represalias\"."
-        },
-        {
-            "id": "isep-d26-144",
-            "difficulty": "facil",
-            "question": "En la denuncia anónima, el denunciante:",
-            "options": [
-                "Se identifica ante el fiscal",
-                "Se identifica solo ante la policía",
-                "No se identifica",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No se identifica\"."
-        },
-        {
-            "id": "isep-d26-146",
-            "difficulty": "facil",
-            "question": "Para que una denuncia anónima sea considerada válida como noticia criminis, debe ser:",
-            "options": [
-                "Formal y escrita",
-                "Seria, verosímil y razonable, con datos concretos",
-                "Ratificada por un testigo",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Seria, verosímil y razonable, con datos concretos\"."
-        },
-        {
-            "id": "isep-d26-150",
-            "difficulty": "media",
-            "question": "El lugar del hecho se considera escena del delito:",
-            "options": [
-                "Solo cuando lo confirma el fiscal.",
-                "Hasta que se determine lo contrario.",
-                "Cuando hay testigos presenciales.",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Hasta que se determine lo contrario.\"."
-        },
-        {
-            "id": "isep-d26-151",
-            "difficulty": "facil",
-            "question": "¿Cuál de los siguientes NO integra el concepto de lugar del hecho?",
-            "options": [
-                "Lugar donde se cometió el hecho.",
-                "Lugar de ocultamiento.",
-                "Dependencia policial interviniente",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Dependencia policial interviniente\"."
-        },
-        {
-            "id": "isep-d26-156",
-            "difficulty": "facil",
-            "question": "Puede haber dentro de un mismo hecho:",
-            "options": [
-                "Un solo escenario posible.",
-                "Únicamente escenarios secundarios.",
-                "Varios escenarios primarios y secundarios.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Varios escenarios primarios y secundarios.\"."
-        },
-        {
-            "id": "isep-d26-161",
-            "difficulty": "facil",
-            "question": "La \"hostilidad de la zona\" se entiende como:",
-            "options": [
-                "Una característica barrial.",
-                "Un concepto socioeconómico.",
-                "Una situación circunstancial del lugar.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una situación circunstancial del lugar.\"."
-        },
-        {
-            "id": "isep-d26-162",
-            "difficulty": "dificil",
-            "question": "La actuación policial frente a la pérdida de indicios debe ajustarse a:",
-            "options": [
-                "Art. 18 de la Constitución Nacional.",
-                "Art. 174 del CPP Santa Fe.",
-                "Art. 268 del CPP Santa Fe (Ley 12.734).",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 268 del CPP Santa Fe (Ley 12.734).\"."
-        },
-        {
-            "id": "isep-d26-166",
-            "difficulty": "facil",
-            "question": "La primera etapa del proceso (indicio) se caracteriza por:",
-            "options": [
-                "Afirmar la naturaleza del indicio.",
-                "Validar testimonios como verdad absoluta.",
-                "Recolección inicial y aseguramiento legal.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Recolección inicial y aseguramiento legal.\"."
-        },
-        {
-            "id": "isep-d26-168",
-            "difficulty": "facil",
-            "question": "La tercera etapa del proceso permite:",
-            "options": [
-                "La simple conservación del indicio.",
-                "Elevar evidencia válida al Fiscal como prueba judicial.",
-                "La actuación autónoma policial.",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Elevar evidencia válida al Fiscal como prueba judicial.\"."
-        },
-        {
-            "id": "isep-d26-171",
-            "difficulty": "facil",
-            "question": "¿Cuáles son las acciones obligatorias del ACTO DE INTERVENCIÓN?",
-            "options": [
-                "Búsqueda – Recolección – Preservación",
-                "Comunicar – Preservar – Custodiar",
-                "Informar – Investigar – Secuestrar",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Comunicar – Preservar – Custodiar\"."
-        },
-        {
-            "id": "isep-d26-173",
-            "difficulty": "dificil",
-            "question": "El artículo del CPP que regula los actos irreproducibles o definitivos es:",
-            "options": [
-                "Art. 163",
-                "Art. 174",
-                "Art. 260",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 260\"."
-        },
-        {
-            "id": "isep-d26-175",
-            "difficulty": "media",
-            "question": "¿Qué documentación debe confeccionarse siempre como acto procesal?",
-            "options": [
-                "Solo el acta de procedimiento",
-                "Acta de procedimiento, croquis e inspección judicial",
-                "Informe preliminar y sumario",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Acta de procedimiento, croquis e inspección judicial\"."
-        },
-        {
-            "id": "isep-d26-181",
-            "difficulty": "dificil",
-            "question": "La inspección judicial (u ocular) está regulada por:",
-            "options": [
-                "Art. 260 CPP",
-                "Art. 268 CPP",
-                "Art. 163 CPP",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 163 CPP\"."
-        },
-        {
-            "id": "isep-d26-186",
-            "difficulty": "facil",
-            "question": "Sin legalidad en la actuación policial:",
-            "options": [
-                "La prueba se refuerza",
-                "La investigación continúa igual",
-                "No hay prueba válida",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No hay prueba válida\"."
-        },
-        {
-            "id": "isep-d26-187",
-            "difficulty": "facil",
-            "question": "La Ley N° 12.734 corresponde a:",
-            "options": [
-                "Ley Orgánica de la Policía",
-                "Nuevo Código Procesal Penal de Santa Fe",
-                "Código Penal Argentino",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Nuevo Código Procesal Penal de Santa Fe\"."
-        },
-        {
-            "id": "isep-d26-190",
-            "difficulty": "dificil",
-            "question": "Según el Art. 270 del CPP de Santa Fe, la Policía:",
-            "options": [
-                "Actúa con total autonomía",
-                "Debe cumplir directivas bajo dirección jurídica del MPA",
-                "Solo interviene por orden judicial escrita",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Debe cumplir directivas bajo dirección jurídica del MPA\"."
-        },
-        {
-            "id": "isep-d26-191",
-            "difficulty": "dificil",
-            "question": "El Art. 271 del CPP establece:",
-            "options": [
-                "Las facultades del Juez",
-                "El poder disciplinario ante incumplimientos policiales",
-                "Las atribuciones del Defensor",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El poder disciplinario ante incumplimientos policiales\"."
-        },
-        {
-            "id": "isep-d26-192",
-            "difficulty": "facil",
-            "question": "Las instrucciones del Fiscal pueden ser:",
-            "options": [
-                "Orales o escritas únicamente",
-                "Genéricas o específicas",
-                "Judiciales o administrativas",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Genéricas o específicas\"."
-        },
-        {
-            "id": "isep-d26-193",
-            "difficulty": "facil",
-            "question": "Las decisiones estratégicas de investigación deben ser:",
-            "options": [
-                "Tomadas exclusivamente por la Policía",
-                "Consultadas al Fiscal",
-                "Decididas por el Juez",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Consultadas al Fiscal\"."
-        },
-        {
-            "id": "isep-d26-194",
-            "difficulty": "facil",
-            "question": "En el sistema procesal penal acusatorio de Santa Fe (Ley 12.734), ¿cuál es la naturaleza jurídica y dirección del 'Legajo de Investigación' de la IPP?",
-            "options": [
-                "Es un expediente de propiedad del juez de instrucción penal cerrado a las partes.",
-                "Es un registro de trabajo dirigido por el Fiscal del MPA, en el cual la Policía actúa como auxiliar registrando las actuaciones investigativas de rigor.",
-                "Es un libro administrativo de guardia que queda archivado definitivamente en la comisaría.",
-                "Es un documento público de libre acceso para cualquier ciudadano y medio de prensa."
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe - Ley 12.734: Investigación Penal Preparatoria",
-            "explanation": "En el sistema acusatorio santafesino, el legajo de investigación pertenece a la fiscalía del MPA que dirige la pesquisa; la policía actúa como órgano auxiliar directo cumpliendo las instrucciones fiscales."
-        },
-        {
-            "id": "isep-d26-196",
-            "difficulty": "facil",
-            "question": "La Instrucción General N° 4 fue dictada por:",
-            "options": [
-                "El Ministro de Seguridad",
-                "El Gobernador de Santa Fe",
-                "El Dr. Julio de Olazábal",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"El Dr. Julio de Olazábal\"."
-        },
-        {
-            "id": "isep-d26-197",
-            "difficulty": "facil",
-            "question": "La IPP puede iniciarse por:",
-            "options": [
-                "Denuncia anónima exclusivamente",
-                "Decisión del Fiscal o acción de la Policía",
-                "Orden del Juez únicamente",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Decisión del Fiscal o acción de la Policía\"."
-        },
-        {
-            "id": "isep-d26-198",
-            "difficulty": "media",
-            "question": "La presencia del Fiscal en el lugar del hecho:",
-            "options": [
-                "Es obligatoria en todos los casos",
-                "Depende de su evaluación como director de la investigación",
-                "Solo ocurre en delitos graves",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Depende de su evaluación como director de la investigación\"."
-        },
-        {
-            "id": "isep-d26-201",
-            "difficulty": "facil",
-            "question": "El fiscal puede ingresar a la Zona Interior Crítica:",
-            "options": [
-                "Libremente en cualquier momento",
-                "Solo con autorización del jefe policial",
-                "Por canal seguro e indicado por el Coordinador Pericial",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Por canal seguro e indicado por el Coordinador Pericial\"."
-        },
-        {
-            "id": "isep-d26-206",
-            "difficulty": "facil",
-            "question": "La entrada y salida única de la escena es:",
-            "options": [
-                "De uso libre para funcionarios",
-                "Para ingreso de prensa",
-                "Un canal exclusivo y seguro para emergencias",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Un canal exclusivo y seguro para emergencias\"."
-        },
-        {
-            "id": "isep-d26-207",
-            "difficulty": "facil",
-            "question": "La figura del Coordinador Pericial surge de:",
-            "options": [
-                "Ley 12.734",
-                "Ley 13.013",
-                "Resolución 26/2014 de la Fiscalía Regional N° 2 Rosario",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Resolución 26/2014 de la Fiscalía Regional N° 2 Rosario\"."
-        },
-        {
-            "id": "isep-d26-209",
-            "difficulty": "facil",
-            "question": "Dentro de la escena, la máxima autoridad es:",
-            "options": [
-                "El jefe de comisaría",
-                "El fiscal",
-                "El Coordinador Pericial (en materia técnica-científica)",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Coordinador Pericial (en materia técnica-científica)\"."
-        },
-        {
-            "id": "isep-d26-211",
-            "difficulty": "facil",
-            "question": "La preservación de la cadena de custodia es responsabilidad:",
-            "options": [
-                "Exclusiva del juez",
-                "Del primer testigo",
-                "Del Coordinador Pericial y equipo interviniente",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Del Coordinador Pericial y equipo interviniente\"."
-        },
-        {
-            "id": "isep-d26-213",
-            "difficulty": "facil",
-            "question": "Al intervenir en una escena del crimen, ¿cuál es el deber funcional prioritario que tiene el 'Primer Interventor Policial' respecto a la preservación del lugar?",
-            "options": [
-                "Modificar la posición del cuerpo para verificar si la víctima tiene signos vitales aun cuando sea evidente el óbito.",
-                "Levantar apresuradamente las vainas servidas para que los curiosos no se las lleven.",
-                "Permanecer en el lugar, acordonar los perímetros de seguridad, registrar las condiciones iniciales y brindar informe circunstanciado al personal pericial y al Fiscal.",
-                "Retirarse de inmediato apenas llegan los móviles de refuerzo sin labrar acta de entrega."
-            ],
-            "correctIndex": 2,
-            "source": "Manual ISEP Oficial - Preservación de la Escena del Crimen y Primer Interventor",
-            "explanation": "El primer interventor es el garante inicial de la intangibilidad de la escena: debe asegurar perímetros, mantener la custodia ininterrumpida y entregar formalmente el lugar a los peritos de la Policía de Investigaciones (PDI)."
-        },
-        {
-            "id": "isep-d26-215",
-            "difficulty": "facil",
-            "question": "Entre las funciones técnicas del Coordinador Pericial se encuentra:",
-            "options": [
-                "Interrogar imputados",
-                "Determinar ubicación geográfica, vías de acceso, iluminación y clima",
-                "Ordenar allanamientos",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Determinar ubicación geográfica, vías de acceso, iluminación y clima\"."
-        },
-        {
-            "id": "isep-d26-222",
-            "difficulty": "dificil",
-            "question": "El contenido del legajo según el Art. 253 CPP debe incluir:",
-            "options": [
-                "Opiniones personales",
-                "Solo declaraciones testimoniales",
-                "Documentación de todos los actos y elementos para probar identidad y daño",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Documentación de todos los actos y elementos para probar identidad y daño\"."
-        },
-        {
-            "id": "isep-d26-223",
-            "difficulty": "dificil",
-            "question": "Los actos irreproducibles o definitivos están regulados en:",
-            "options": [
-                "Art. 18 CN",
-                "Art. 260 CPP",
-                "Decreto 2703/10",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 260 CPP\"."
-        },
-        {
-            "id": "isep-d26-224",
-            "difficulty": "facil",
-            "question": "El Nuevo Código Procesal Penal de la Provincia de Santa Fe fue establecido por:",
-            "options": [
-                "Ley 23.737",
-                "Ley 24.449",
-                "Ley 12.734",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 12.734\"."
-        },
-        {
-            "id": "isep-d26-225",
-            "difficulty": "facil",
-            "question": "La Investigación Penal Preparatoria (IPP) es dirigida por:",
-            "options": [
-                "Juez de Garantías",
-                "Defensor",
-                "Fiscal del MPA",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Fiscal del MPA\"."
-        },
-        {
-            "id": "isep-d26-226",
-            "difficulty": "facil",
-            "question": "El órgano encargado de la persecución penal en Santa Fe es el:",
-            "options": [
-                "Poder Ejecutivo",
-                "Ministerio de Seguridad",
-                "Ministerio Público de la Acusación",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ministerio Público de la Acusación\"."
-        },
-        {
-            "id": "isep-d26-227",
-            "difficulty": "facil",
-            "question": "El Ministerio Público de la Acusación fue creado por:",
-            "options": [
-                "Ley 12.734",
-                "Ley 13.013",
-                "Ley 24.660",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 13.013\"."
-        },
-        {
-            "id": "isep-d26-228",
-            "difficulty": "facil",
-            "question": "Según la Instrucción General N° 4 (2014) del Dr. Julio de Olazábal, la Policía debe:",
-            "options": [
-                "Iniciar sumario propio",
-                "Ajustar su actuación a guías para el legajo",
-                "Actuar sin comunicación al fiscal",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ajustar su actuación a guías para el legajo\"."
-        },
-        {
-            "id": "isep-d26-229",
-            "difficulty": "facil",
-            "question": "En el actual sistema procesal penal:",
-            "options": [
-                "Existe el sumario policial",
-                "Existe el legajo policial",
-                "Existe el Legajo de Investigación del Fiscal",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Existe el Legajo de Investigación del Fiscal\"."
-        },
-        {
-            "id": "isep-d26-231",
-            "difficulty": "facil",
-            "question": "¿Hasta qué momento procesal tiene vigencia y debe mantenerse la 'Cadena de Custodia' sobre un elemento probatorio secuestrado en un procedimiento?",
-            "options": [
-                "Únicamente hasta que el sospechoso presta declaración en sede policial.",
-                "Finaliza automáticamente a las 48 horas de efectuado el secuestro en la comisaría.",
-                "Solo hasta que el fiscal redacta la requisitoria de elevación a juicio.",
-                "Debe resguardarse de manera ininterrumpida durante toda la IPP, el juicio oral y hasta que la sentencia condenatoria o absolutoria quede firme o la autoridad judicial disponga su destino final."
-            ],
-            "correctIndex": 3,
-            "source": "Manual ISEP - Cadena de Custodia y Preservación de la Prueba Forense",
-            "explanation": "La cadena de custodia acompaña a la evidencia en todas las instancias recursivas y procesales; su fractura puede generar nulidades insubsanables aun en etapas de apelación o revisión."
-        },
-        {
-            "id": "isep-d26-236",
-            "difficulty": "facil",
-            "question": "Los residuos de disparo se analizan mediante:",
-            "options": [
-                "Microscopio óptico común",
-                "Cromatografía líquida",
-                "Microscopio Electrónico de Barrido",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Microscopio Electrónico de Barrido\"."
-        },
-        {
-            "id": "isep-d26-241",
-            "difficulty": "media",
-            "question": "Si una muestra biológica llega en malas condiciones, el funcionario debe:",
-            "options": [
-                "Rechazarla sin acta",
-                "Labrar acta e informar a la autoridad judicial",
-                "Desecharla",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Labrar acta e informar a la autoridad judicial\"."
-        },
-        {
-            "id": "isep-d26-242",
-            "difficulty": "facil",
-            "question": "En la IPP, la Policía puede:",
-            "options": [
-                "Investigar autónomamente sin control",
-                "Actuar en auxilio de la justicia bajo dirección del fiscal",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno",
-                "Solo ante la presencia de dos testigos hábiles y personal de la AIC/PDI"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Actuar en auxilio de la justicia bajo dirección del fiscal\"."
-        },
-        {
-            "id": "isep-d26-248",
-            "difficulty": "facil",
-            "question": "El Decreto que reglamenta el Régimen de Ascensos y Concursos es el:",
-            "options": [
-                "916/08",
-                "12734/09",
-                "1166/2018",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"1166/2018\"."
-        },
-        {
-            "id": "isep-d26-256",
-            "difficulty": "dificil",
-            "question": "La causal de inhabilidad por procesamiento se equipara a:",
-            "options": [
-                "Indagatoria",
-                "Detención preventiva",
-                "Audiencia imputativa del Art. 274 del Código Procesal Penal de la Provincia de Santa Fe",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Audiencia imputativa del Art. 274 del Código Procesal Penal de la Provincia de Santa Fe\"."
-        },
-        {
-            "id": "isep-d26-260",
-            "difficulty": "facil",
-            "question": "Si el sumario concluye con suspensión por falta grave:",
-            "options": [
-                "Puede ascender con retroactividad",
-                "Puede ascender sin restricciones",
-                "No corresponde el ascenso",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"No corresponde el ascenso\"."
-        },
-        {
-            "id": "isep-d26-266",
-            "difficulty": "facil",
-            "question": "La Policía es una organización:",
-            "options": [
-                "Privada",
-                "Judicial",
-                "Socialmente construida",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Socialmente construida\"."
-        },
-        {
-            "id": "isep-d26-269",
-            "difficulty": "facil",
-            "question": "El responsable de la conducción operativa y administrativa es:",
-            "options": [
-                "El Gobernador",
-                "El Fiscal",
-                "El Jefe de Policía",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Jefe de Policía\"."
-        },
-        {
-            "id": "isep-d26-271",
-            "difficulty": "facil",
-            "question": "La Policía se organiza como un cuerpo:",
-            "options": [
-                "Descentralizado totalmente",
-                "Centralizado administrativamente",
-                "Judicial",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Centralizado administrativamente\"."
-        },
-        {
-            "id": "isep-d26-276",
-            "difficulty": "facil",
-            "question": "En la estructura de la Jefatura de Policía de la Provincia de Santa Fe (Ley Orgánica Policial), ¿cuál es la denominación y función del Departamento D-3?",
-            "options": [
-                "Departamento Operaciones Policiales (D-3), encargado de la planificación, coordinación y supervisión de los servicios operativos de seguridad y patrullaje.",
-                "Departamento Judicial, encargado de los peritajes de balística forense.",
-                "Departamento Relaciones Policiales, encargado exclusivamente de la atención a la prensa.",
-                "Departamento Sanidad, encargado de los exámenes psicofísicos de los ingresantes."
-            ],
-            "correctIndex": 0,
-            "source": "Ley Orgánica Policial de Santa Fe - Estructura de la Plana Mayor (D-3 Operaciones)",
-            "explanation": "El D-3 es el órgano de la Plana Mayor que planifica, centraliza y coordina las operaciones policiales, órdenes de servicio y despliegue territorial de las unidades operativas."
-        },
-        {
-            "id": "isep-d26-284",
-            "difficulty": "facil",
-            "question": "La máxima autoridad policial es:",
-            "options": [
-                "Subjefe",
-                "Fiscal",
-                "Jefe de Policía",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Jefe de Policía\"."
-        },
-        {
-            "id": "isep-d26-291",
-            "difficulty": "dificil",
-            "question": "La legítima defensa está regulada en el:",
-            "options": [
-                "Art. 79 del Código Penal",
-                "Art. 268 CPP",
-                "Art. 34 inc. 6° del Código Penal de la Nación Argentina",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Art. 34 inc. 6° del Código Penal de la Nación Argentina\"."
-        },
-        {
-            "id": "isep-d26-292",
-            "difficulty": "facil",
-            "question": "Para que exista legítima defensa deben concurrir:",
-            "options": [
-                "Agresión culposa, medio proporcional y aviso previo",
-                "Agresión ilegítima, necesidad racional del medio y falta de provocación suficiente",
-                "Solo agresión ilegítima",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Agresión ilegítima, necesidad racional del medio y falta de provocación suficiente\"."
-        },
-        {
-            "id": "isep-d26-296",
-            "difficulty": "facil",
-            "question": "En la doctrina del uso racional y progresivo de la fuerza policial, para configurar 'Peligro Inminente' que justifique la defensa armada se exige:",
-            "options": [
-                "Que el agresor profiera insultos verbales sin exhibir armas de ningún tipo.",
-                "La concurrencia simultánea de capacidad lesiva, oportunidad táctica e intención manifiesta del agresor de causar la muerte o lesiones graves.",
-                "Que la persona posea antecedentes policiales desfavorables en su prontuario.",
-                "La orden verbal de un vecino que presenció una discusión familiar en la vereda."
-            ],
-            "correctIndex": 1,
-            "source": "Protocolo de Actuación Policial para el Uso Gradual de la Fuerza en Santa Fe",
-            "explanation": "El peligro inminente no es una suposición abstracta: requiere la tríada táctica de capacidad real de dañar (arma o fuerza desmedida), oportunidad de hacerlo (distancia/tiempo) e intención evidente de agredir."
-        },
-        {
-            "id": "isep-d26-301",
-            "difficulty": "facil",
-            "question": "En la escala progresiva, antes del arma de fuego debe intentarse:",
-            "options": [
-                "Fuerza letal",
-                "Neutralización directa",
-                "Medios no violentos y control físico",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Medios no violentos y control físico\"."
-        },
-        {
-            "id": "isep-d26-306",
-            "difficulty": "facil",
-            "question": "El uso progresivo de la fuerza consiste en:",
-            "options": [
-                "Aplicar siempre la máxima fuerza",
-                "Actuar según jerarquía",
-                "Seleccionar el nivel de fuerza según la conducta del sospechoso",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Seleccionar el nivel de fuerza según la conducta del sospechoso\"."
-        },
-        {
-            "id": "isep-d26-316",
-            "difficulty": "facil",
-            "question": "No será necesaria la advertencia previa cuando:",
-            "options": [
-                "Hay desobediencia",
-                "Hay insultos",
-                "La demora pueda provocar muerte o lesiones graves",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La demora pueda provocar muerte o lesiones graves\"."
-        },
-        {
-            "id": "isep-d26-326",
-            "difficulty": "facil",
-            "question": "El respeto irrestricto a los Derechos Humanos:",
-            "options": [
-                "Es opcional",
-                "Depende del contexto",
-                "Debe orientar toda actuación policial",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Debe orientar toda actuación policial\"."
-        },
-        {
-            "id": "isep-d26-331",
-            "difficulty": "dificil",
-            "question": "Según el Artículo 2°, el Servicio Penitenciario se rige por este Protocolo:",
-            "options": [
-                "Siempre, dentro y fuera de establecimientos.",
-                "Exclusivamente cuando actúa fuera del ámbito de los establecimientos penitenciarios.",
-                "Nunca.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Exclusivamente cuando actúa fuera del ámbito de los establecimientos penitenciarios.\"."
-        },
-        {
-            "id": "isep-d26-341",
-            "difficulty": "dificil",
-            "question": "La asimetría sobrevenida (Art. 6°) es aquella que:",
-            "options": [
-                "Existe antes del contacto.",
-                "Surge durante el desarrollo de la intervención.",
-                "Se determina judicialmente.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Surge durante el desarrollo de la intervención.\"."
-        },
-        {
-            "id": "isep-d26-345",
-            "difficulty": "facil",
-            "question": "El Código Procesal Penal de la Provincia de Santa Fe es la:",
-            "options": [
-                "Ley 12.521",
-                "Ley 12.734",
-                "Ley 13.774",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 12.734\"."
-        },
-        {
-            "id": "isep-d26-346",
-            "difficulty": "facil",
-            "question": "El nuevo sistema procesal penal en Santa Fe entró en vigencia en:",
-            "options": [
-                "2010",
-                "2012",
-                "2014",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"2014\"."
-        },
-        {
-            "id": "isep-d26-347",
-            "difficulty": "media",
-            "question": "Conforme al Código de Convivencia de la Provincia de Santa Fe (Ley 13.774), ¿cuál es la distinción fundamental entre una contravención y un delito penal?",
-            "options": [
-                "Las contravenciones son juzgadas por la Policía y los delitos por los intendentes municipales.",
-                "Las contravenciones no tienen penas de arresto bajo ninguna circunstancia.",
-                "La contravención es una infracción a las pautas de orden y convivencia ciudadana con sanciones administrativas y leves, a diferencia del delito que lesiona bienes jurídicos penales fundamentales.",
-                "No existe ninguna diferencia; son sinónimos técnicos en el ordenamiento santafesino."
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de Santa Fe - Ley 13.774: Principios y Ámbito de Aplicación",
-            "explanation": "El Código de Convivencia tipifica conductas que perturban la paz social y la vida urbana comunitaria, distinguiéndose de los delitos federales y ordinarios del Código Penal de la Nación."
-        },
-        {
-            "id": "isep-d26-348",
-            "difficulty": "facil",
-            "question": "El Código de Convivencia de la Provincia de Santa Fe corresponde a la:",
-            "options": [
-                "Ley 12.734",
-                "Ley 12.521",
-                "Ley 13.774",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 13.774\"."
-        },
-        {
-            "id": "isep-d26-349",
-            "difficulty": "facil",
-            "question": "El Código de Convivencia se aplica:",
-            "options": [
-                "En todo el país",
-                "Solo en municipios",
-                "En el territorio de la Provincia de Santa Fe",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"En el territorio de la Provincia de Santa Fe\"."
-        },
-        {
-            "id": "isep-d26-350",
-            "difficulty": "facil",
-            "question": "En cuanto al elemento subjetivo de imputabilidad, las faltas tipificadas en el Código de Convivencia de Santa Fe (Ley 13.774) admiten sanción:",
-            "options": [
-                "Únicamente si se comprueba premeditación de más de 30 días.",
-                "Bajo el principio de responsabilidad objetiva automática sin importar la culpa.",
-                "Solo si el contraventor confiesa voluntariamente su falta ante el oficial de guardia.",
-                "Tanto a título de dolo (intencionalidad) como de culpa (negligencia, imprudencia o impericia), salvo disposición legal expresa que requiera dolo."
-            ],
-            "correctIndex": 3,
-            "source": "Código de Convivencia de Santa Fe (Ley 13.774) - Elemento Subjetivo de la Falta",
-            "explanation": "La Ley 13.774 responsabiliza las conductas contraventoras dolosas y culposas, garantizando siempre el principio constitucional de culpabilidad en sede contravencional."
-        },
-        {
-            "id": "isep-d26-351",
-            "difficulty": "facil",
-            "question": "La forma culposa en las contravenciones:",
-            "options": [
-                "Siempre se castiga",
-                "Debe estar expresamente prevista en la ley",
-                "No se castiga nunca",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Debe estar expresamente prevista en la ley\"."
-        },
-        {
-            "id": "isep-d26-352",
-            "difficulty": "facil",
-            "question": "No son punibles en contravenciones:",
-            "options": [
-                "Los mayores de edad",
-                "Los menores de 16 años",
-                "Los mayores de 18",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Los menores de 16 años\"."
-        },
-        {
-            "id": "isep-d26-354",
-            "difficulty": "media",
-            "question": "Cuando un mismo hecho constituye delito y contravención:",
-            "options": [
-                "Se aplican ambas penas",
-                "Se aplica solo la contravención",
-                "Se aplica únicamente la pena del delito",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Se aplica únicamente la pena del delito\"."
-        },
-        {
-            "id": "isep-d26-355",
-            "difficulty": "facil",
-            "question": "Las personas entre 16 y 18 años:",
-            "options": [
-                "No tienen responsabilidad",
-                "Son responsables contravencionalmente con limitaciones",
-                "Siempre reciben arresto",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Son responsables contravencionalmente con limitaciones\"."
-        },
-        {
-            "id": "isep-d26-357",
-            "difficulty": "facil",
-            "question": "Los menores infractores son juzgados por:",
-            "options": [
-                "Fiscales penales",
-                "Jueces civiles",
-                "Jueces de menores",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Jueces de menores\"."
-        },
-        {
-            "id": "isep-d26-358",
-            "difficulty": "facil",
-            "question": "La Ley de protección integral de niños, niñas y adolescentes en Santa Fe es la:",
-            "options": [
-                "Ley 13.774",
-                "Ley 12.967",
-                "Ley 12.521",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Ley 12.967\"."
-        },
-        {
-            "id": "isep-d26-359",
-            "difficulty": "dificil",
-            "question": "Según el Código de Convivencia, las penas están establecidas en el:",
-            "options": [
-                "Artículo 8",
-                "Artículo 9",
-                "Artículo 11",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Artículo 11\"."
-        },
-        {
-            "id": "isep-d26-360",
-            "difficulty": "facil",
-            "question": "Una de las penas del Código de Convivencia es:",
-            "options": [
-                "Prisión perpetua",
-                "Arresto",
-                "Reclusión mayor",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Arresto\"."
-        },
-        {
-            "id": "isep-d26-361",
-            "difficulty": "facil",
-            "question": "Otra pena del Código de Convivencia es:",
-            "options": [
-                "Cadena perpetua",
-                "Multa",
-                "Suspensión política",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Multa\"."
-        },
-        {
-            "id": "isep-d26-371",
-            "difficulty": "facil",
-            "question": "El juez puede suspender la pena de arresto cuando:",
-            "options": [
-                "El infractor es reincidente",
-                "No tiene condenas en los últimos dos años",
-                "Tiene antecedentes penales",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No tiene condenas en los últimos dos años\"."
-        },
-        {
-            "id": "isep-d26-373",
-            "difficulty": "facil",
-            "question": "Si dentro de los dos años el condenado no comete otra contravención:",
-            "options": [
-                "Se reinicia el proceso",
-                "La condena se tendrá por no pronunciada",
-                "Se duplica la sanción",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"La condena se tendrá por no pronunciada\"."
-        },
-        {
-            "id": "isep-d26-374",
-            "difficulty": "facil",
-            "question": "Cuando un hecho queda subsumido en más de un tipo contravencional:",
-            "options": [
-                "Se aplican todas las penas.",
-                "Se aplica la pena menor.",
-                "Se aplica solamente la pena de mayor gravedad",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Se aplica solamente la pena de mayor gravedad\"."
-        },
-        {
-            "id": "isep-d26-376",
-            "difficulty": "facil",
-            "question": "Cuando las penas acumuladas son de la misma especie",
-            "options": [
-                "No tienen límite.",
-                "No podrán exceder el máximo legal fijado para ese tipo de pena.",
-                "Se reducen a la mitad.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"No podrán exceder el máximo legal fijado para ese tipo de pena.\"."
-        },
-        {
-            "id": "isep-d26-377",
-            "difficulty": "facil",
-            "question": "¿Bajo qué condiciones temporales y procesales se configura la 'Reincidencia' en el régimen contravencional de la Ley Provincial 13.774?",
-            "options": [
-                "Cuando una persona condenada por una contravención comete una nueva falta dentro de los 2 años contados desde que quedó firme la sentencia anterior.",
-                "Cuando el infractor fue demorado por averiguación de antecedentes dos veces en un mes.",
-                "Cuando la persona comete un delito penal federal luego de una contravención de tránsito.",
-                "La reincidencia está prohibida y no existe en el derecho contravencional de Santa Fe."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 13.774 (Santa Fe) - De la Reincidencia Contravencional",
-            "explanation": "El plazo legal de reincidencia contravencional en Santa Fe es de 2 años desde la sentencia firme, computable como agravante en la individualización de la sanción."
-        },
-        {
-            "id": "isep-d26-378",
-            "difficulty": "facil",
-            "question": "Si en un proceso contravencional de la Ley 13.774 se acredita la condición de reincidente del imputado, ¿qué efecto tiene sobre la pena a aplicar?",
-            "options": [
-                "El archivo automático de la causa por duplicidad de juzgamiento.",
-                "El juez o fiscal interviniente podrá elevar la sanción hasta el máximo de la escala legal prevista para la contravención cometida.",
-                "La remisión forzosa de la causa a los tribunales de la Ciudad de Buenos Aires.",
-                "La exención de toda sanción si el contraventor pide disculpas públicas."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 13.774 (Santa Fe) - Efectos Jurídicos de la Reincidencia",
-            "explanation": "La condición de reincidente habilita legalmente a la autoridad de juzgamiento a aplicar el máximo de las penas previstas (multa, arresto, clausura o trabajo comunitario)."
-        },
-        {
-            "id": "isep-d26-379",
-            "difficulty": "facil",
-            "question": "La acción contravencional se extingue por:",
-            "options": [
-                "Muerte del imputado.",
-                "Criterio de oportunidad.",
-                "Todas son correctas.",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
-        },
-        {
-            "id": "isep-d26-380",
-            "difficulty": "facil",
-            "question": "La acción contravencional prescribe a los:",
-            "options": [
-                "6 meses",
-                "1 año",
-                "2 años",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"2 años\"."
-        },
-        {
-            "id": "isep-d26-381",
-            "difficulty": "facil",
-            "question": "La prescripción de la acción se interrumpe por:",
-            "options": [
-                "Comisión de una nueva falta.",
-                "Sentencia condenatoria.",
-                "Todas son correctas",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas\"."
-        },
-        {
-            "id": "isep-d26-382",
-            "difficulty": "facil",
-            "question": "La sanción contravencional se extingue por:",
-            "options": [
-                "Cumplimiento de la pena.",
-                "Muerte del condenado.",
-                "Todas son correctas.",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
-        },
-        {
-            "id": "isep-d26-383",
-            "difficulty": "facil",
-            "question": "¿En qué plazo prescribe la potestad punitiva estatal para ejecutar la pena contravencional impuesta por sentencia firme (Ley 13.774)?",
-            "options": [
-                "A los 3 meses de dictada la resolución por el juez de faltas.",
-                "A los 10 años, asimilándose a las penas de reclusión criminal mayor.",
-                "A los 2 años contados desde que la sentencia quedó formalmente firme y ejecutable.",
-                "No prescribe nunca; las sanciones contravencionales son imprescriptibles."
-            ],
-            "correctIndex": 2,
-            "source": "Ley 13.774 (Santa Fe) - Prescripción de las Penas Contravencionales",
-            "explanation": "El artículo pertinente de la Ley 13.774 estipula que la pena contravencional prescribe a los dos años de adquirir firmeza la sentencia condenatoria."
-        },
-        {
-            "id": "isep-d26-384",
-            "difficulty": "facil",
-            "question": "La acción contravencional es promovida por:",
-            "options": [
-                "Ministerio Público de la Acusación",
-                "Defensor público.",
-                "Juez",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 0,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Ministerio Público de la Acusación\"."
-        },
-        {
-            "id": "isep-d26-385",
-            "difficulty": "facil",
-            "question": "El Ministerio Público de la Acusación puede:",
-            "options": [
-                "Delegar diligencias investigativas a la policía.",
-                "Dirigir la investigación",
-                "Promover la acción contravencional.",
-                "Todas son correctas."
-            ],
-            "correctIndex": 3,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
-        },
-        {
-            "id": "isep-d26-386",
-            "difficulty": "facil",
-            "question": "El imputado tiene derecho a:",
-            "options": [
-                "Defensa técnica.",
-                "Abogado particular.",
-                "Todas son correctas.",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
-        },
-        {
-            "id": "isep-d26-389",
-            "difficulty": "facil",
-            "question": "En el marco del Código Procesal Penal de Santa Fe y la Ley de Víctimas, ¿cuáles son los derechos esenciales de la persona damnificada por el hecho delictivo?",
-            "options": [
-                "Quedar excluida del proceso y no poder conocer el resultado de las audiencias.",
-                "Cobrar una remuneración fija mensual del tesoro provincial por ser víctima.",
-                "Imponer directamente penas de prisión al imputado sin intervención del juez.",
-                "Ser informada del avance de la causa, recibir trato digno y protección ante amenazas, constituirse en querellante y ser oída antes de acuerdos abreviados o salidas alternativas."
-            ],
-            "correctIndex": 3,
-            "source": "Código Procesal Penal de Santa Fe y Ley de Derechos y Garantías de las Víctimas",
-            "explanation": "El ordenamiento procesal reconoce a la víctima un rol protagónico: derecho a la tutela judicial efectiva, información continua, protección física y participación activa como querellante."
-        },
-        {
-            "id": "isep-d26-391",
-            "difficulty": "facil",
-            "question": "En las faltas de acción privada:",
-            "options": [
-                "Actúa el Fiscal.",
-                "Actúa la policía.",
-                "La acción la promueve el ofendido.",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"La acción la promueve el ofendido.\"."
-        },
-        {
-            "id": "isep-d26-392",
-            "difficulty": "facil",
-            "question": "La denuncia por contravención puede realizarse ante:",
-            "options": [
-                "Ministerio Público de la Acusación.",
-                "Centros Territoriales de Denuncias.",
-                "Todas son correctas.",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
-        },
-        {
-            "id": "isep-d26-394",
-            "difficulty": "dificil",
-            "question": "La investigación contravencional preparatoria dura:",
-            "options": [
-                "10 días.",
-                "15 días",
-                "30 días",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"15 días\"."
-        },
-        {
-            "id": "isep-d26-395",
-            "difficulty": "dificil",
-            "question": "En el procedimiento contravencional santafesino (Ley 13.774), el plazo legal de investigación preparatoria a cargo del Fiscal:",
-            "options": [
-                "Es de 15 días hábiles, prorrogable por única vez por otros 15 días mediante resolución debidamente fundada.",
-                "Es de 2 años sin posibilidad de suspensión procesal.",
-                "Es de 48 horas continuas contadas desde el acta de inicio.",
-                "Queda a exclusivo criterio discrecional del comisario de la seccional."
-            ],
-            "correctIndex": 0,
-            "source": "Código de Convivencia de Santa Fe (Ley 13.774) - Plazos de la Investigación Fiscal",
-            "explanation": "La investigación contravencional es sumamente abreviada: 15 días de plazo ordinario con prórroga máxima de otros 15 días si la complejidad lo exige."
-        },
-        {
-            "id": "isep-d26-396",
-            "difficulty": "facil",
-            "question": "El Fiscal puede desestimar la denuncia cuando:",
-            "options": [
-                "El hecho no es punible.",
-                "La acción está extinguida",
-                "Todas son correctas.",
-                "No existen elementos suficientes."
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
-        },
-        {
-            "id": "isep-d26-397",
-            "difficulty": "facil",
-            "question": "Entre las medidas cautelares que puede ordenar el Fiscal se encuentra:",
-            "options": [
-                "Secuestro de bienes.",
-                "Inmovilización de vehículos.",
-                "Todas son correctas.",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Todas son correctas.\"."
-        },
-        {
-            "id": "isep-d26-398",
-            "difficulty": "media",
-            "question": "La policía puede ejercer coacción directa:",
-            "options": [
-                "En cualquier caso.",
-                "Para hacer cesar una contravención flagrante.",
-                "Solo con orden judicial.",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Para hacer cesar una contravención flagrante.\"."
-        },
-        {
-            "id": "isep-d26-399",
-            "difficulty": "dificil",
-            "question": "Cuando el personal policial aprehende a una persona en flagrante infracción contravencional (Ley 13.774), ¿cuál es el plazo máximo improrrogable de privación de libertad preventiva?",
-            "options": [
-                "Hasta 72 horas para averiguar su conducta en el barrio.",
-                "No puede exceder en ningún caso las 12 horas, debiendo comunicarse de inmediato al funcionario judicial para resolver su comparecencia o libertad.",
-                "Hasta 5 días si la contravención fue cometida durante un fin de semana.",
-                "La privación de la libertad está prohibida en cualquier circunstancia contravencional."
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de Santa Fe (Ley 13.774) - Límite Temporal de la Aprehensión",
-            "explanation": "El tope de aprehensión contravencional en Santa Fe es de 12 horas; retener al infractor más allá de ese límite sin orden judicial constituye privación abusiva de la libertad."
-        },
-        {
-            "id": "isep-d26-400",
-            "difficulty": "facil",
-            "question": "¿Cuáles son las características procesales rectoras del Juicio Contravencional regulado en la Ley Provincial 13.774?",
-            "options": [
-                "Es un trámite secreto y escrito mediante expedientes cosidos en papel sellado.",
-                "Se resuelve mediante voto popular de los vecinos de la cuadra.",
-                "Es oral, público, continuo y contradictorio, garantizando la inmediación de las partes y la celeridad del debate.",
-                "Se realiza exclusivamente a través de mensajes de correo electrónico sin audiencia."
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de Santa Fe (Ley 13.774) - Principios del Juicio Oral",
-            "explanation": "El juicio contravencional adopta los principios republicanos del sistema acusatorio: oralidad, publicidad, contradicción y libre defensa en audiencia pública."
-        },
-        {
-            "id": "isep-d26-401",
-            "difficulty": "facil",
-            "question": "El juez no podrá condenar cuando:",
-            "options": [
-                "El imputado no declara.",
-                "El Fiscal solicita la absolución.",
-                "No hay testigos.",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Fiscal solicita la absolución.\"."
-        },
-        {
-            "id": "isep-d26-402",
-            "difficulty": "facil",
-            "question": "El juez no puede imponer:",
-            "options": [
-                "Pena mayor a la solicitada por el Fiscal.",
-                "Absolución.",
-                "Medidas cautelares",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 0,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Pena mayor a la solicitada por el Fiscal.\"."
-        },
-        {
-            "id": "isep-d26-404",
-            "difficulty": "dificil",
-            "question": "El acoso sexual callejero está regulado en:",
-            "options": [
-                "Artículo 84",
-                "Artículo 84 bis",
-                "Artículo 105",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Artículo 84 bis\"."
-        },
-        {
-            "id": "isep-d26-405",
-            "difficulty": "dificil",
-            "question": "El artículo 84 bis fue incorporado por:",
-            "options": [
-                "Ley 12.333",
-                "Ley 13.774",
-                "Ley 10.703",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Ley 13.774\"."
-        },
-        {
-            "id": "isep-d26-406",
-            "difficulty": "facil",
-            "question": "El acoso sexual callejero ocurre cuando:",
-            "options": [
-                "Hay consentimiento de la víctima",
-                "Se realiza un acto de connotación sexual sin consentimiento en espacios públicos",
-                "Ocurre en lugares privados",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se realiza un acto de connotación sexual sin consentimiento en espacios públicos\"."
-        },
-        {
-            "id": "isep-d26-409",
-            "difficulty": "dificil",
-            "question": "La conducción peligrosa está regulada en:",
-            "options": [
-                "Artículo 84 bis",
-                "Artículo 105",
-                "Artículo 70",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Artículo 105\"."
-        },
-        {
-            "id": "isep-d26-414",
-            "difficulty": "facil",
-            "question": "Código Procesal Penal de Santa Fe – Ley 12.734.....¿Qué ley regula el proceso penal en la provincia de Santa Fe?",
-            "options": [
-                "Ley 13.774",
-                "Ley 12.734",
-                "Ley 12.521",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ley 12.734\"."
-        },
-        {
-            "id": "isep-d26-415",
-            "difficulty": "facil",
-            "question": "¿En qué fecha fue sancionada la Ley 12.734?",
-            "options": [
-                "12 de julio de 2005",
-                "31 de agosto de 2007",
-                "15 de marzo de 2010",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"31 de agosto de 2007\"."
-        },
-        {
-            "id": "isep-d26-416",
-            "difficulty": "facil",
-            "question": "¿Cuáles son las tres etapas del proceso penal en Santa Fe?",
-            "options": [
-                "Investigación – juicio – sentencia",
-                "Investigación Penal Preparatoria, etapa intermedia y juicio oral",
-                "Denuncia – investigación – archivo",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Investigación Penal Preparatoria, etapa intermedia y juicio oral\"."
-        },
-        {
-            "id": "isep-d26-418",
-            "difficulty": "facil",
-            "question": "¿Quién dirige la Investigación Penal Preparatoria?",
-            "options": [
-                "El juez",
-                "El fiscal del Ministerio Público de la Acusación",
-                "El defensor público",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El fiscal del Ministerio Público de la Acusación\"."
-        },
-        {
-            "id": "isep-d26-420",
-            "difficulty": "facil",
-            "question": "¿Quién puede iniciar la Investigación Penal Preparatoria?",
-            "options": [
-                "Solo la policía",
-                "El fiscal o la policía con comunicación inmediata al fiscal",
-                "Solo la víctima",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El fiscal o la policía con comunicación inmediata al fiscal\"."
-        },
-        {
-            "id": "isep-d26-422",
-            "difficulty": "facil",
-            "question": "¿Ante quién se realiza la audiencia imputativa?",
-            "options": [
-                "Ante la policía",
-                "Ante un juez",
-                "Ante el fiscal regional",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Ante un juez\"."
-        },
-        {
-            "id": "isep-d26-423",
-            "difficulty": "facil",
-            "question": "Para que la audiencia imputativa sea válida debe estar presente:",
-            "options": [
-                "El fiscal regional",
-                "El defensor del imputado",
-                "El jefe de policía",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El defensor del imputado\"."
-        },
-        {
-            "id": "isep-d26-425",
-            "difficulty": "dificil",
-            "question": "¿En qué plazo debe resolver el fiscal el pedido de archivo solicitado por la defensa?",
-            "options": [
-                "10 días",
-                "15 días",
-                "30 días",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"15 días\"."
-        },
-        {
-            "id": "isep-d26-426",
-            "difficulty": "facil",
-            "question": "¿Quién dirige la investigación policial?",
-            "options": [
-                "El fiscal",
-                "El defensor",
-                "El gobernador",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 0,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El fiscal\"."
-        },
-        {
-            "id": "isep-d26-428",
-            "difficulty": "facil",
-            "question": "La reapertura de la investigación penal preparatoria procede cuando:",
-            "options": [
-                "Lo solicita el imputado",
-                "Aparecen nuevas pruebas y lo autoriza el Fiscal Regional",
-                "Lo ordena el juez sin fundamento",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Aparecen nuevas pruebas y lo autoriza el Fiscal Regional\"."
-        },
-        {
-            "id": "isep-d26-429",
-            "difficulty": "media",
-            "question": "¿Quién dirige las audiencias durante la investigación, procedimiento intermedio o ejecución penal?",
-            "options": [
-                "El fiscal",
-                "El defensor",
-                "El Tribunal",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"El Tribunal\"."
-        },
-        {
-            "id": "isep-d26-431",
-            "difficulty": "dificil",
-            "question": "¿Cuándo debe resolver el Tribunal en las audiencias?",
-            "options": [
-                "Dentro de los 10 días",
-                "En la próxima audiencia",
-                "Verbalmente en la misma audiencia",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Verbalmente en la misma audiencia\"."
-        },
-        {
-            "id": "isep-d26-436",
-            "difficulty": "dificil",
-            "question": "¿Cuántos días antes de la audiencia preliminar deben ofrecer las partes la prueba para el juicio oral?",
-            "options": [
-                "1 día",
-                "2 días",
-                "3 días",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"3 días\"."
-        },
-        {
-            "id": "isep-d26-440",
-            "difficulty": "facil",
-            "question": "¿Cómo deben valorar los tribunales la prueba?",
-            "options": [
-                "Según su criterio personal",
-                "Según la opinión del fiscal",
-                "Conforme a la sana crítica racional",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Conforme a la sana crítica racional\"."
-        },
-        {
-            "id": "isep-d26-441",
-            "difficulty": "facil",
-            "question": "¿Qué ocurre con la prueba obtenida violando garantías constitucionales?",
-            "options": [
-                "Se considera parcialmente válida",
-                "Carece de toda eficacia",
-                "Se analiza en juicio",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Carece de toda eficacia\"."
-        },
-        {
-            "id": "isep-d26-442",
-            "difficulty": "facil",
-            "question": "¿Quién realiza la entrevista a la víctima en la Cámara Gesell?",
-            "options": [
-                "Un psicólogo designado por el tribunal",
-                "El fiscal",
-                "El defensor",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 0,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Un psicólogo designado por el tribunal\"."
-        },
-        {
-            "id": "isep-d26-444",
-            "difficulty": "facil",
-            "question": "Para que la declaración del imputado sea válida debe:",
-            "options": [
-                "Estar presente el fiscal",
-                "Ser grabada",
-                "Estar presente su defensor",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Estar presente su defensor\"."
-        },
-        {
-            "id": "isep-d26-446",
-            "difficulty": "facil",
-            "question": "¿Quiénes pueden abstenerse de declarar?",
-            "options": [
-                "Solo los amigos del imputado",
-                "Cónyuge y parientes cercanos del imputado",
-                "Ninguna persona",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Cónyuge y parientes cercanos del imputado\"."
-        },
-        {
-            "id": "isep-d26-451",
-            "difficulty": "media",
-            "question": "¿Qué documento se realiza luego de la inspección del lugar del hecho?",
-            "options": [
-                "Denuncia",
-                "Acta detallada de lo observado",
-                "Pericia médica",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Acta detallada de lo observado\"."
-        },
-        {
-            "id": "isep-d26-452",
-            "difficulty": "facil",
-            "question": "¿Qué puede ordenar la Fiscalía en el lugar del hecho?",
-            "options": [
-                "La condena del imputado",
-                "El archivo del caso",
-                "La recolección de rastros biológicos o genéticos",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"La recolección de rastros biológicos o genéticos\"."
-        },
-        {
-            "id": "isep-d26-456",
-            "difficulty": "media",
-            "question": "¿Qué es la entrega vigilada?",
-            "options": [
-                "Un allanamiento nocturno",
-                "Una requisa personal",
-                "Postergar la detención o secuestro para no afectar la investigación",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Postergar la detención o secuestro para no afectar la investigación\"."
-        },
-        {
-            "id": "isep-d26-457",
-            "difficulty": "facil",
-            "question": "¿Quién puede autorizar la entrega vigilada?",
-            "options": [
-                "El juez únicamente",
-                "La policía",
-                "La Fiscalía con conocimiento inmediato del Tribunal",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 2,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"La Fiscalía con conocimiento inmediato del Tribunal\"."
-        },
-        {
-            "id": "isep-d26-458",
-            "difficulty": "facil",
-            "question": "¿Puede obligarse a un funcionario a actuar como agente encubierto?",
-            "options": [
-                "Sí, si lo ordena el fiscal",
-                "No, nadie puede ser obligado",
-                "Sí, si lo ordena el juez",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No, nadie puede ser obligado\"."
-        },
-        {
-            "id": "isep-d26-461",
-            "difficulty": "facil",
-            "question": "¿Qué debe garantizarse respecto al material obtenido?",
-            "options": [
-                "Su confidencialidad parcial",
-                "La cadena de custodia y su inalterabilidad",
-                "Tres veces",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"La cadena de custodia y su inalterabilidad\"."
-        },
-        {
-            "id": "isep-d26-464",
-            "difficulty": "facil",
-            "question": "¿Qué es el imputado arrepentido?",
-            "options": [
-                "Un testigo del hecho",
-                "Un imputado que brinda información útil a cambio de reducción de pena",
-                "Un fiscal auxiliar",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Un imputado que brinda información útil a cambio de reducción de pena\"."
-        },
-        {
-            "id": "isep-d26-466",
-            "difficulty": "facil",
-            "question": "¿Hasta cuándo puede presentarse el acuerdo del arrepentido?",
-            "options": [
-                "Solo antes de la denuncia",
-                "Hasta el requerimiento acusatorio o junto con éste",
-                "Durante el juicio oral",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Hasta el requerimiento acusatorio o junto con éste\"."
-        },
-        {
-            "id": "isep-d26-471",
-            "difficulty": "facil",
-            "question": "La exhibición de álbumes fotográficos procede cuando:",
-            "options": [
-                "Ya hay un imputado identificado",
-                "Se busca individualizar personas desconocidas",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
-                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Se busca individualizar personas desconocidas\"."
-        },
-        {
-            "id": "isep-d26-472",
-            "difficulty": "facil",
-            "question": "Manipular o sugerir fotografías al testigo constituye:",
-            "options": [
-                "Falta leve",
-                "Falta administrativa",
-                "Falta grave",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 2,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"Falta grave\"."
-        },
-        {
-            "id": "isep-d26-473",
-            "difficulty": "facil",
-            "question": "El reconocimiento de cosas exige previamente:",
-            "options": [
-                "Una orden fiscal",
-                "Que la persona describa el objeto",
-                "Presencia de testigos",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Que la persona describa el objeto\"."
-        },
-        {
-            "id": "isep-d26-476",
-            "difficulty": "facil",
-            "question": "En investigaciones judiciales complejas, la figura del 'Agente Encubierto' (Ley Nacional 27.319 y CPP SF) se caracteriza por:",
-            "options": [
-                "Un policía de civil que efectúa adicionales sin portar el uniforme oficial.",
-                "Un testigo presencial al que se le asigna custodia en su domicilio.",
-                "Un civil contratado de forma irregular para suministrar datos anónimos a la seccional.",
-                "Un funcionario de las fuerzas de seguridad autorizado judicialmente que se infiltra en una organización criminal ocultando su verdadera identidad con fines de obtener pruebas."
-            ],
-            "correctIndex": 3,
-            "source": "Ley Nacional 27.319 de Técnicas Especiales de Investigación y CPP Santa Fe",
-            "explanation": "El agente encubierto es un miembro de las fuerzas habilitado por orden judicial fundada con cambio de identidad registral para investigar delitos complejos de narcotráfico o crimen organizado."
-        },
-        {
-            "id": "isep-d26-481",
-            "difficulty": "facil",
-            "question": "Las medidas especiales pueden prorrogarse:",
-            "options": [
-                "Infinitamente",
-                "Una sola vez",
-                "Dos veces",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Una sola vez\"."
-        },
-        {
-            "id": "isep-d26-486",
-            "difficulty": "facil",
-            "question": "¿Qué se hace con un celular secuestrado?",
-            "options": [
-                "Apagarlo",
-                "Revisarlo",
-                "Ponerlo en modo avión y no apagarlo",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno"
-            ],
-            "correctIndex": 2,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Ponerlo en modo avión y no apagarlo\"."
-        },
-        {
-            "id": "isep-d26-487",
-            "difficulty": "media",
-            "question": "Al labrar el acta de procedimiento de aprehensión de una persona en la vía pública, ¿qué requisito formal otorga validez probatoria según el CPP Santa Fe?",
-            "options": [
-                "La presencia y firma de al menos dos testigos civiles hábiles ajenos a la fuerza policial que presencien la lectura de derechos y secuestros, dejando constancia si se niegan.",
-                "La sola firma del oficial aprehensor sin necesidad de constancia de fecha ni hora.",
-                "La fotografía del detenido publicada inmediatamente en redes sociales institucionales.",
-                "La firma del presidente de la vecinal del barrio donde ocurrió el hecho."
-            ],
-            "correctIndex": 0,
-            "source": "Código Procesal Penal de Santa Fe - Formalidades de las Actas Policiales",
-            "explanation": "Los testigos civiles dotan de fe pública al procedimiento y acreditan que no se vulneraron garantías constitucionales; su ausencia injustificada habilita planteos de nulidad."
-        },
-        {
-            "id": "isep-d26-488",
-            "difficulty": "facil",
-            "question": "En lesiones leves por accidente de tránsito:",
-            "options": [
-                "Se aprehende al conductor",
-                "No se aprehende al presunto responsable",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno",
-                "Solo ante la presencia de dos testigos hábiles y personal de la AIC/PDI"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"No se aprehende al presunto responsable\"."
-        },
-        {
-            "id": "isep-d26-490",
-            "difficulty": "facil",
-            "question": "En abuso de armas, ¿qué se realiza?",
-            "options": [
-                "Entrevista a vecinos únicamente",
-                "Dermotest al aprehendido",
-                "Únicamente con autorización previa y por escrito del Fiscal en turno",
-                "Solo ante la presencia de dos testigos hábiles y personal de la AIC/PDI"
-            ],
-            "correctIndex": 1,
-            "source": "Código Procesal Penal de Santa Fe (Ley 12.734) / Guía MPA",
-            "explanation": "El CPP de Santa Fe (Ley 12.734) y las instrucciones del MPA regulan taxativamente las atribuciones del personal policial y los plazos procesales. La opción correcta conforme a la normativa oficial es: \"Dermotest al aprehendido\"."
-        },
-        {
-            "id": "isep-d26-491",
-            "difficulty": "facil",
-            "question": "En amenazas, ¿cómo debe ser la declaración?",
-            "options": [
-                "Técnica",
-                "Textual y en primera persona",
-                "Queda a exclusivo criterio discrecional de la Superioridad de turno",
-                "Solo ante requerimiento expreso del Ministerio de Justicia y Seguridad"
-            ],
-            "correctIndex": 1,
-            "source": "Manual de Doctrina y Procedimiento Policial ISEP 2026",
-            "explanation": "Doctrina oficial establecida en el programa de concurso de ascenso del Instituto de Seguridad Pública (ISEP). La opción correcta conforme a la normativa oficial es: \"Textual y en primera persona\"."
-        },
-        {
-            "id": "isep-d26-493",
-            "difficulty": "media",
-            "question": "En el fuero penal juvenil de la Provincia de Santa Fe, para la aplicación del Procedimiento Abreviado es legalmente indispensable:",
-            "options": [
-                "La decisión unilateral del jefe de comisaría sin intervención de defensores.",
-                "El acuerdo conjunto entre el fiscal y el defensor, la conformidad expresa del menor imputado con asistencia letrada y la ratificación de sus progenitores o tutores legales.",
-                "La renuncia definitiva del menor a apelar la sentencia condenatoria.",
-                "Que el menor haya cumplido la mayoría de edad al momento del acuerdo."
-            ],
-            "correctIndex": 1,
-            "source": "Régimen Penal Juvenil de Santa Fe y Ley 12.967 de Protección Integral de Niñez",
-            "explanation": "El principio de especialidad penal juvenil exige que todo acuerdo de culpabilidad abreviada cuente con el consentimiento informado del joven y el respaldo activo de su defensa técnica y tutores."
-        },
-        {
-            "id": "isep-d26-501",
-            "difficulty": "facil",
-            "question": "Conforme a la Ley Nacional 26.485 de Protección Integral a las Mujeres, la 'Violencia Obstétrica' queda definida como:",
-            "options": [
-                "La disputa verbal entre dos pacientes en la sala de espera de una clínica.",
-                "La negativa a suministrar anticonceptivos en centros de salud comunitarios.",
-                "El trato deshumanizado, abuso de medicalización y patologización de los procesos naturales del parto y reproductivos por parte del personal de salud.",
-                "Cualquier falta disciplinaria cometida por empleadas de sanidad policial."
-            ],
-            "correctIndex": 2,
-            "source": "Ley 26.485 - Tipos y Modalidades de Violencia hacia las Mujeres (Art. 6)",
-            "explanation": "La violencia obstétrica se manifiesta en los servicios de salud mediante la pérdida de autonomía de la mujer durante el parto, prácticas invasivas no consentidas y trato deshumanizado."
-        },
-        {
-            "id": "isep-d26-510",
-            "difficulty": "media",
-            "question": "Respecto al procedimiento: En Argentina:",
-            "options": [
-                "Existe el delito \"violencia de género\"",
-                "No existe como delito autónomo",
-                "Solo es contravención",
-                "Mediante arresto preventivo inmediato sin orden del Juez Comunitario"
-            ],
-            "correctIndex": 1,
-            "source": "Código de Convivencia de la Provincia de Santa Fe (Ley 13.774)",
-            "explanation": "La Ley 13.774 rige las contravenciones y faltas en Santa Fe, privilegiando la mediación y el orden pacífico comunitario. La opción correcta conforme a la normativa oficial es: \"No existe como delito autónomo\"."
-        },
-        {
-            "id": "isep-d26-513",
-            "difficulty": "media",
-            "question": "El Código Procesal Penal de Santa Fe (Art. 213) define el estado de 'Flagrancia Delictiva' cuando el sospechoso es sorprendido en el momento de cometer el hecho o:",
-            "options": [
-                "Cuando la policía encuentra un vehículo sospechoso estacionado tres días después del delito.",
-                "Cuando un vecino anónimo asegura haberlo visto pasar por la cuadra horas antes.",
-                "Cuando el acusado confiesa el delito en una entrevista periodística informal.",
-                "Inmediatamente después de cometerlo, siendo perseguido por la fuerza pública, la víctima o el clamor público, o con objetos que hagan presumir con certeza su autoría."
-            ],
-            "correctIndex": 3,
-            "source": "Código Procesal Penal de Santa Fe - Art. 213 (Flagrancia)",
-            "explanation": "La flagrancia se extiende a la cuasi-flagrancia (persecución ininterrumpida inmediata) y a la flagrancia ficta (hallazgo de rastros, armas o efectos del delito en poder del sospechoso inmediatamente tras el hecho)."
+        "oficial-subinspector": [
+        {
+                "id": "os-p01",
+                "difficulty": "facil",
+                "module": "Práctica Policial",
+                "question": "¿Cuáles son las cuatro virtudes cardinales que según el Manual ISEP sustentan la 'autoridad real' del líder policial frente a la mera autoridad formal de reglamento?",
+                "options": [
+                        "Obediencia reglamentaria, verticalismo, antigüedad en el grado y discrecionalidad",
+                        "Humildad, Generosidad, Valentía y Justicia",
+                        "Severidad en el mando, carisma institucional, distancia jerárquica y elocuencia",
+                        "Inmunidad administrativa, rapidez de respuesta, disciplina ciega y mando directo"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Pequeños Grandes Líderes, Pág. 14-15",
+                "explanation": "El Manual de Perfeccionamiento ISEP para Oficiales enseña que la autoridad no es aquella que confiere el mero reglamento (autoridad formal), sino la 'autoridad real' que se conquista mediante cuatro virtudes: Humildad, Generosidad, Valentía y Justicia."
+        },
+        {
+                "id": "os-p02",
+                "difficulty": "facil",
+                "module": "Práctica Policial",
+                "question": "¿Cuáles son los cinco principios rectores universales del Uso Progresivo y Gradual de la Fuerza Policial según la doctrina ISEP y los estándares de la ONU?",
+                "options": [
+                        "Legalidad, Necesidad, Proporcionalidad, Moderación y Oportunidad",
+                        "Celeridad, Oportunidad, Superioridad numérica, Coerción e Inmediatez",
+                        "Autonomía operativa, Eficacia, Severidad táctica, Legitimidad y Fuerza letal",
+                        "Neutralización, Preeminencia armada, Intimidación, Racionalidad y Discrecionalidad"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Uso Progresivo de la Fuerza, Pág. 16-18",
+                "explanation": "Toda intervención policial con uso de la fuerza debe ajustarse a cinco principios obligatorios: Legalidad (marco normativo), Necesidad (cuando otros medios fallen), Proporcionalidad (nivel de fuerza acorde a la resistencia), Moderación (reducir daños) y Oportunidad (en el momento justo)."
+        },
+        {
+                "id": "os-p03",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "En la doctrina del Uso Progresivo de la Fuerza, ¿cómo define el Manual ISEP al principio de 'Proporcionalidad'?",
+                "options": [
+                        "El nivel de fuerza empleado por el personal policial debe guardar equivalencia y equilibrio con el nivel de agresión y resistencia ofrecido por el sujeto",
+                        "El policía debe contar con la misma cantidad de efectivos y el mismo calibre que la persona que comete el delito",
+                        "Es la obligación de aplicar siempre la máxima fuerza disponible para evitar bajas entre los funcionarios",
+                        "La necesidad de consultar previamente con la superioridad antes de decidir el medio a emplear"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Principio de Proporcionalidad, Pág. 17-18",
+                "explanation": "El principio de Proporcionalidad exige una relación equilibrada entre la gravedad de la amenaza o agresión que enfrenta el policía y la intensidad del nivel de fuerza aplicado para contenerla."
+        },
+        {
+                "id": "os-p04",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "Conforme al Manual ISEP, ¿cuál es la pauta básica de actuación policial ante una 'Crisis Subjetiva' (persona con padecimiento de salud mental descompensada sin armas)?",
+                "options": [
+                        "Proceder a su inmediata reducción física y traslado en patrullero hacia el penal más cercano",
+                        "Mantener distancia prudencial, evitar gestos hostiles o invasivos, utilizar contención y persuasión verbal y convocar al servicio de emergencias médicas (107/SIES)",
+                        "Efectuar disparos disuasivos al aire para lograr que la persona se tranquilice de inmediato",
+                        "Exigir a viva voz la entrega de pertenencias bajo amenaza de detención contravencional"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Crisis Subjetiva - Abordaje, Pág. 21-22",
+                "explanation": "En crisis de salud mental, el ISEP instruye abordar la situación con enfoque médico-sanitario: contención verbal, distanciamiento de seguridad y convocatoria urgente al personal de salud especializado (107/SIES)."
+        },
+        {
+                "id": "os-p05",
+                "difficulty": "dificil",
+                "module": "Práctica Policial",
+                "question": "De acuerdo a la Ley Provincial N° 12.967 y la doctrina ISEP, ¿qué prohibición estricta rige respecto a una persona menor de edad aprehendida?",
+                "options": [
+                        "No se le puede brindar asistencia médica sin la orden previa del juez de garantías",
+                        "Bajo ninguna circunstancia puede ser alojada en calabozos o dependencias compartidas con personas mayores de edad",
+                        "No se puede registrar su nombre en ningún libro de guardia ni comunicar el hecho al fiscal",
+                        "No puede ser interrogada sobre su domicilio hasta que cumpla los 18 años"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Procedimiento con Menores, Pág. 23-24",
+                "explanation": "El Sistema de Protección Integral de la Niñez y la Ley 12.967 prohíben taxativamente alojar a menores en lugares de detención de adultos o celdas comunes, rigiendo la separación física y la comunicación inmediata a los juzgados de menores."
+        },
+        {
+                "id": "os-p06",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "¿Cuáles son los requisitos esenciales de forma y fondo que debe reunir un Acta de Procedimiento para garantizar su validez procesal?",
+                "options": [
+                        "Conclusiones subjetivas del actuante, firmas en blanco y omisión de los datos de testigos por seguridad",
+                        "Lugar, fecha, hora, identidad de los actuantes, relato cronológico objetivo, detalle circunstanciado de secuestros, testigos hábiles y firmas",
+                        "Redacción exclusiva en computadora con firma digital homologada del jefe de unidad de destino",
+                        "Detalle pormenorizado del legajo personal de los policías intervinientes y antecedentes del juez"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Acta de Procedimiento, Pág. 25-27",
+                "explanation": "El Acta de Procedimiento debe consignar con exactitud lugar, fecha y hora, individualización de los funcionarios y testigos presenciales, descripción fáctica y cronológica sin valoraciones personales, y firmas al pie."
+        },
+        {
+                "id": "os-p07",
+                "difficulty": "facil",
+                "module": "Práctica Policial",
+                "question": "Durante la realización de una Entrevista Policial a un testigo presencial, ¿qué técnica prohíbe taxativamente la doctrina del ISEP?",
+                "options": [
+                        "Permitir que el testigo relate lo ocurrido con sus propias palabras",
+                        "Formular preguntas capciosas, sugestivas o inducir las respuestas deseadas por el preventor",
+                        "Anotar los datos filiatorios completos del entrevistado para citaciones posteriores",
+                        "Brindar contención en un espacio tranquilo y seguro fuera de la vista de curiosos"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Entrevista Policial, Pág. 27-29",
+                "explanation": "La entrevista debe ser neutra y abierta. Están prohibidas las preguntas capciosas o sugestivas que pretendan influir en la memoria del entrevistado o viciar la objetividad del testimonio."
+        },
+        {
+                "id": "os-p08",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "En un procedimiento por Lesiones Culposas en Accidente de Tránsito (L.C.A.T.), ¿qué misión tiene el relevamiento planimétrico o croquis de urgencia?",
+                "options": [
+                        "Establecer inmediatamente la condena pecuniaria del conductor responsable",
+                        "Fijar la posición final de los rodados, punto probable de impacto, huellas de frenada y derrape, visibilidad y estado de la calzada",
+                        "Secuestrar definitivamente los teléfonos celulares de todos los acompañantes",
+                        "Evaluar el costo de chapa y pintura de los rodados para remitir a las aseguradoras"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: L.C.A.T. e Inspección Ocular, Pág. 30-31",
+                "explanation": "En las L.C.A.T., la fijación planimétrica y el croquis son esenciales para la pericia accidentológica reconstructiva, debiendo plasmar huellas de neumáticos, punto de impacto y ubicación de los vehículos."
+        },
+        {
+                "id": "os-p09",
+                "difficulty": "dificil",
+                "module": "Práctica Policial",
+                "question": "Conforme a la 'Regla de Tueller' analizada en el Manual ISEP, ¿cuál es la distancia mínima estimada de seguridad frente a un atacante con arma blanca y por qué?",
+                "options": [
+                        "2 metros, porque el chaleco antibalas frena cualquier herida cortante",
+                        "6,4 metros (21 pies), porque es la distancia que un agresor recorre en 1,5 segundos mientras el policía percibe la agresión y desenfunda",
+                        "15 metros, porque las armas blancas alcanzan distancias de lanzamiento letal de hasta 20 metros",
+                        "1 metro, porque permite ejecutar una técnica de desarme marcial cuerpo a cuerpo"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Regla de Tueller, Pág. 41-43",
+                "explanation": "La Regla de Tueller demostró científicamente que un agresor con arma blanca puede abalanzarse y atacar a una distancia de 6,4 metros (21 pies) en tan solo 1,5 segundos, tiempo mínimo que necesita el policía para reaccionar y defenderse con su arma de fuego."
+        },
+        {
+                "id": "os-p10",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "¿Qué implicancia práctica tiene la Ley de Desfederalización del Microtráfico (Ley 14.239 en Santa Fe) para el personal policial de prevención?",
+                "options": [
+                        "Que no se puede detener a ninguna persona que transporte sustancias estupefacientes en la vía pública",
+                        "Que la Policía de Santa Fe investiga y actúa contra la venta minorista de drogas bajo la dirección directa de los fiscales del MPA provincial",
+                        "Que el narcomenudeo pasa a ser juzgado como una simple contravención municipal de tránsito",
+                        "Que toda intervención con drogas debe ser remitida exclusivamente a Gendarmería Nacional sin labrar actas"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Desfederalización y Microtráfico, Pág. 44-51",
+                "explanation": "Con la desfederalización (Ley 26.052 y adhesión santafesina Ley 14.239), los delitos de venta fraccionada de estupefacientes (narcomenudeo) son competencia del Ministerio Público de la Acusación provincial y las fuerzas provinciales de seguridad."
+        },
+        {
+                "id": "os-p11",
+                "difficulty": "facil",
+                "module": "Práctica Policial",
+                "question": "En el marco de la Carta Iberoamericana de la Función Pública analizada en el ISEP, ¿cuál es el deber ético fundamental del funcionario policial?",
+                "options": [
+                        "Priorizar los intereses partidarios del gobierno de turno sobre las normas legales vigentes",
+                        "Servir con objetividad e imparcialidad al interés general, respetando la dignidad humana y la legalidad",
+                        "Exigir compensaciones extraordinarias directas de los vecinos beneficiados por patrullajes",
+                        "Mantener hermetismo absoluto y negarse a brindar información pública a la comunidad"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Carta Iberoamericana, Pág. 20",
+                "explanation": "La Carta Iberoamericana consagra la profesionalización de la función pública sobre pilares de transparencia, imparcialidad, ética de servicio público y sumisión al orden constitucional."
+        },
+        {
+                "id": "os-p12",
+                "difficulty": "dificil",
+                "module": "Práctica Policial",
+                "question": "De acuerdo a la Guía Ministerial de Seguimientos Policiales Controlados (Res. 1427/19), ¿qué maniobra táctica vehicular está prohibida salvo extrema necesidad de defender la vida?",
+                "options": [
+                        "Mantener distancia prudencial y balizamiento encendido alertando a los demás conductores",
+                        "El embestimiento directo intencional (ramming) o encerronas en curvas y zonas de alta densidad peatonal",
+                        "Modular por frecuencia radial la ubicación y sentido de circulación del vehículo seguido",
+                        "Solicitar apoyo de móviles de cuadrículas linderas para realizar cerrojos viales"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Seguimientos Controlados, Pág. 40-41",
+                "explanation": "Las maniobras de impacto intencional (ramming) o intercepción forzada están expresamente restringidas y prohibidas en zonas pobladas por el altísimo riesgo de lesiones fatales o muerte a terceros inocentes."
+        },
+        {
+                "id": "os-p13",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "¿Qué rol asigna el Código de Conducta de la ONU (Res. 34/169) al funcionario policial frente a órdenes manifiestamente ilegales de cometer actos de tortura?",
+                "options": [
+                        "Debe cumplirlas en razón del principio de obediencia debida y jerarquía militarizada",
+                        "Tiene la obligación legal y moral de no obedecerlas y denunciar el hecho de forma inmediata",
+                        "Debe solicitar un recibo firmado por su superior antes de proceder a la ejecución de la tortura",
+                        "Puede cumplirlas si se trata de un presunto autor de delitos de conmoción pública"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Código de Conducta ONU, Pág. 18-20",
+                "explanation": "El Art. 5 del Código de Conducta para Funcionarios de la ONU establece que ningún funcionario puede infligir, instigar o tolerar actos de tortura o tratos crueles, inhumanos o degradantes, sin que puedan invocarse órdenes de un superior como justificación."
+        },
+        {
+                "id": "os-p14",
+                "difficulty": "facil",
+                "module": "Práctica Policial",
+                "question": "Al momento de proceder a la 'Identificación de Personas' en la vía pública, ¿cuál es la actitud profesional básica que debe observar el oficial de policía?",
+                "options": [
+                        "Mantener trato respetuoso, explicar los motivos de la identificación y mantener alerta de seguridad y cobertura de su binomio",
+                        "Retener el DNI y exigir que la persona permanezca de rodillas con las manos en la nuca",
+                        "Revisar el contenido privado de su teléfono celular sin orden judicial para descartar delitos",
+                        "Imponer un trato despectivo para intimidar a la persona identificada"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Identificación Policial, Pág. 32-35",
+                "explanation": "La identificación en la vía pública debe realizarse con cortesía profesional y apego a la legalidad, conservando siempre la táctica de binomio (un efectivo interactúa y el otro brinda cobertura de seguridad)."
+        },
+        {
+                "id": "os-p15",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "¿Qué recaudo legal debe tomarse en un Acta de Procedimiento si uno de los testigos o el propio aprehendido se niega o no puede firmar?",
+                "options": [
+                        "Se debe anular la totalidad del procedimiento y dejar en libertad al causante de inmediato",
+                        "Debe dejarse expresa constancia del motivo de la negativa o impedimento, firmando los demás intervinientes y el preventor",
+                        "El preventor está facultado legalmente a firmar en representación y suplencia del testigo",
+                        "Se debe arrestar al testigo por 30 días en la comisaría hasta que acceda a estampar su firma"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Formalidades del Acta, Pág. 26-27",
+                "explanation": "La normativa procesal indica que si el aprehendido o testigo no sabe o no quiere firmar, no se invalida el acto; se deja expresa constancia circunstanciada del motivo de la negativa y firman los restantes intervinientes."
+        },
+        {
+                "id": "os-p16",
+                "difficulty": "dificil",
+                "module": "Práctica Policial",
+                "question": "¿En qué situación excepcional puede la policía ingresar a una morada privada sin orden de allanamiento emanada por un juez, según el Art. 170 del CPP de Santa Fe?",
+                "options": [
+                        "Para verificar si los ocupantes de la vivienda están al día con los impuestos provinciales",
+                        "Si se introdujera en una casa alguien perseguido para su aprehensión por delito flagrante, o se oigan voces de auxilio que indiquen comisión de delito grave",
+                        "Cuando la policía tenga la simple sospecha de que dentro de la morada se fuma tabaco",
+                        "A cualquier hora de la noche siempre que los vecinos del barrio formulen reclamos por ruidos molestos"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Allanamiento y Requisa, Pág. 32-34",
+                "explanation": "El Art. 170 del CPP de Santa Fe taxativamente permite el allanamiento sin orden en casos extremos: incendio o catástrofe que amenace la vida, voces pidiendo auxilio de morada cerrada, o cuando se persiga a un presunto delincuente para su aprehensión en flagrancia."
+        },
+        {
+                "id": "os-p17",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "En el contexto del patrullaje preventivo, ¿a qué se denomina 'Triángulo de Fuego' o 'Zona de Riesgo' en un acercamiento vehicular a un rodado interceptado?",
+                "options": [
+                        "La zona ubicada entre el parante central y el guardabarros trasero del móvil policial",
+                        "El área directa frente a las ventanillas y puertas del sospechoso donde el policía queda expuesto a un ataque repentino o arrollamiento",
+                        "El sector donde se ubican las balizas luminosas del techo del móvil",
+                        "La distancia de más de 50 metros entre ambos vehículos"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Tácticas de Aproximación, Pág. 35-37",
+                "explanation": "La zona de máximo riesgo o ángulo ciego es el sector lateral directo de las puertas del rodado interceptado, recomendándose avanzar desde atrás y utilizar los pilares del vehículo como resguardo relativo."
+        },
+        {
+                "id": "os-p18",
+                "difficulty": "facil",
+                "module": "Práctica Policial",
+                "question": "¿Cuál es la obligación inmediata del personal policial al arribar al lugar de un siniestro vial con víctimas atrapadas?",
+                "options": [
+                        "Comenzar de inmediato a tomar huellas dactilares sobre los volantes",
+                        "Priorizar la preservación de la vida, coordinar la asistencia médica de urgencia (107) y rescatistas (Bomberos), y asegurar la zona para evitar nuevos choques",
+                        "Ordenar a los transeúntes que empujen los vehículos a la banquina para liberar el tránsito rápido",
+                        "Labrar multas contravencionales antes de que lleguen las ambulancias"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Accidentología y Primer Preventor, Pág. 30-32",
+                "explanation": "En todo siniestro vial con heridos rige el principio supremo: la vida y la salud de las víctimas priman sobre cualquier diligencia administrativa o mecánica, requiriendo auxilio médico inmediato y señalización preventiva."
+        },
+        {
+                "id": "os-p19",
+                "difficulty": "dificil",
+                "module": "Práctica Policial",
+                "question": "Conforme al Manual ISEP, ¿qué elemento sustancial distingue una requisa personal legal (Art. 215 CPP) de una privación ilegítima de la libertad o vejación?",
+                "options": [
+                        "Que la persona requisada pertenezca a un sector social vulnerable",
+                        "La existencia previa de motivos suficientes y fundados de que oculta cosas relacionadas a un hecho delictivo, labrándose el acta con testigos",
+                        "Que el oficial interviniente posea jerarquía de Oficial Superior",
+                        "Que la requisa se efectúe en horas de la madrugada y sin testigos civiles"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Requisa Personal (Art. 215 CPP), Pág. 33-34",
+                "explanation": "La requisa personal sin orden judicial requiere imperativamente 'motivos suficientes' y fundados que justifiquen la presunción de que la persona oculta cosas vinculadas al delito, labrando acta y respetando el decoro y pudor."
+        },
+        {
+                "id": "os-p20",
+                "difficulty": "facil",
+                "module": "Práctica Policial",
+                "question": "¿Cuál es la regla que rige el uso de armas de fuego frente a vehículos en fuga que no atacan con armas letales según los protocolos vigentes?",
+                "options": [
+                        "Disparar inmediatamente a los neumáticos del vehículo para forzar su detención",
+                        "No efectuar disparos a vehículos en movimiento si la única amenaza es la huida del conductor, por el riesgo extremo de desvío y daño a terceros",
+                        "Efectuar ráfagas intimidatorias hacia el parabrisas del conductor para obligarlo a frenar",
+                        "Disparar desde el interior del móvil policial en marcha en cualquier arteria pública"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Protocolo de Uso de la Fuerza, Pág. 19-20",
+                "explanation": "Los protocolos policiales internacionales y santafesinos prohíben disparar hacia o desde vehículos en movimiento como método de detención frente a la mera fuga, por la ineficacia balística y el peligro letal que genera sobre terceros."
+        },
+        {
+                "id": "os-p21",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "¿Qué establece el Manual ISEP sobre la actuación del Primer Preventor policial respecto a personas heridas en el lugar del hecho?",
+                "options": [
+                        "Que debe prohibir el ingreso de médicos hasta que los peritos de Criminalística terminen de fotografiar el piso",
+                        "Que debe facilitar y brindar auxilio médico inmediato, documentando minuciosamente el recorrido de los paramédicos para no confundir indicios",
+                        "Que debe esperar el arribo del Fiscal del MPA para que autorice el traslado de los heridos",
+                        "Que debe interrogar a las víctimas desangradas antes de autorizar la colocación de un torniquete"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Rol del Primer Preventor, Pág. 37-39",
+                "explanation": "El auxilio y preservación de la vida es el mandato primordial del primer preventor; el personal médico debe ingresar de inmediato, guiado por un sendero único documentado para no alterar indicios innecesariamente."
+        },
+        {
+                "id": "os-p22",
+                "difficulty": "media",
+                "module": "Práctica Policial",
+                "question": "En el marco de la preservación en vía pública, ¿cómo debe proceder el oficial si las condiciones climáticas (lluvia o viento fuerte) amenazan con destruir indicios biológicos o huellas?",
+                "options": [
+                        "Barrer los elementos con una escoba hacia el interior de un contenedor de residuos",
+                        "Protegerlos de inmediato con elementos adecuados (cajas de cartón, conos, cobertores limpios) sin tocarlos directamente, fijando su posición y avisando al perito",
+                        "Mojarlos con alcohol para evitar que la lluvia altere su composición molecular",
+                        "Dejar que el agua lave la zona ya que los peritos siempre pueden recuperar rastros con reactivos"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Buenas Prácticas en el Lugar del Hecho, Pág. 38-39",
+                "explanation": "Frente a factores climáticos adversos inminentes, el preventor debe actuar con prudencia cubriendo los indicios con recipientes no contaminantes y registrando fotográficamente la medida para salvar la evidencia."
+        },
+        {
+                "id": "os-p23",
+                "difficulty": "dificil",
+                "module": "Práctica Policial",
+                "question": "Conforme a la Carta Iberoamericana de la Función Pública, ¿qué garantía protege al personal policial frente a presiones arbitrarias en el ejercicio de su función?",
+                "options": [
+                        "La estabilidad en el empleo y la evaluación objetiva de mérito y conducta",
+                        "El derecho a negarse a patrullar si el clima es desfavorable",
+                        "La potestad de ignorar las leyes penales en razón de su uniforme",
+                        "La inmunidad total ante denuncias de particulares"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Carta Iberoamericana, Pág. 20-21",
+                "explanation": "La profesionalización pública y la Carta Iberoamericana tutelan la estabilidad y el sistema de méritos como garantías esenciales para que el servidor público actúe con apego a la ley sin temor a represalias arbitrarias."
+        },
+        {
+                "id": "os-p24",
+                "difficulty": "facil",
+                "module": "Práctica Policial",
+                "question": "¿Cuál es el concepto central que define el 'Liderazgo de Proximidad' en las nuevas directivas del ISEP para el oficial de policía?",
+                "options": [
+                        "El aislamiento del personal policial respecto a la vida comunitaria del barrio",
+                        "La capacidad de inspirar y conducir con el ejemplo, generando cercanía, escucha activa y confianza tanto con sus subordinados como con la ciudadanía",
+                        "El estricto cumplimiento horario sin involucrarse en las problemáticas vecinales",
+                        "La delegación total de las decisiones complejas en el oficial más antiguo de la guardia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Práctica Policial: Pequeños Grandes Líderes, Pág. 13-14",
+                "explanation": "El liderazgo policial del Siglo XXI impulsado por el ISEP promueve un líder con empatía, cercanía comunitaria, solvencia técnica y conducta ética ejemplar."
+        },
+        {
+                "id": "os-e01",
+                "difficulty": "facil",
+                "module": "Escena del Crimen",
+                "question": "¿Cómo define el Manual ISEP para Oficiales al 'Lugar del Hecho'?",
+                "options": [
+                        "Cualquier espacio o locación física en el que se ha producido un acontecimiento susceptible de una investigación con el propósito de establecer su naturaleza y quiénes intervinieron",
+                        "Exclusivamente el interior de un inmueble donde se constató el fallecimiento violento de una persona",
+                        "El despacho de la comisaría donde la víctima estampa la firma de su denuncia",
+                        "La oficina de la fiscalía donde se archiva el legajo penal preparatorio"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Lugar del Hecho, Pág. 54",
+                "explanation": "El Manual ISEP define Lugar del Hecho como cualquier espacio o locación física donde ocurrió un hecho presumiblemente delictivo susceptible de investigación, incluyendo también los lugares donde se realizaron actos preparatorios o posteriores."
+        },
+        {
+                "id": "os-e02",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "¿Cuál es la diferencia técnico-criminalística que establece el Manual ISEP entre 'Indicio', 'Evidencia' y 'Prueba'?",
+                "options": [
+                        "Son tres sinónimos exactos que pueden utilizarse indistintamente en cualquier parte del proceso penal",
+                        "Indicio es todo rastro o elemento material hallado que puede estar vinculado al hecho; Evidencia es el indicio sometido a análisis pericial con nexo comprobado; Prueba es la evidencia incorporada formalmente al juicio oral para formar convicción en el juez",
+                        "Prueba es lo que encuentra el policía de calle; Indicio es lo que dictamina el fiscal; Evidencia es la declaración jurada del imputado",
+                        "Indicio es un testimonio verbal; Evidencia es un arma de fuego; Prueba es una fotografía aérea"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Indicios, Evidencias y Prueba, Pág. 55-56",
+                "explanation": "El ISEP enseña la evolución criminalística: Indicio (material fáctico sin peritar), Evidencia (indicio con confirmación pericial de laboratorio que lo liga al hecho) y Prueba (elemento admitido en el debate oral para acreditar el delito)."
+        },
+        {
+                "id": "os-e03",
+                "difficulty": "facil",
+                "module": "Escena del Crimen",
+                "question": "¿Qué postula el 'Principio de Intercambio' enunciado por Edmond Locard en 1910, base de la criminalística moderna?",
+                "options": [
+                        "Que el imputado puede intercambiar su confesión a cambio de una reducción de pena en sede policial",
+                        "Que cuando dos objetos o personas entran en contacto, siempre se produce una transferencia mutua de materia entre el autor, la víctima y el lugar del hecho",
+                        "Que los peritos deben turnarse para ingresar al lugar del hecho para no cansarse",
+                        "Que la policía puede intercambiar indicios secuestrados con otras comisarías vecinas"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Principio de Locard, Pág. 54-55",
+                "explanation": "El Principio de Intercambio de Locard sostiene que 'el tiempo que pasa es la verdad que huye' y que nadie puede cometer un delito sin dejar rastros en el lugar ni llevarse vestigios del escenario o de la víctima."
+        },
+        {
+                "id": "os-e04",
+                "difficulty": "facil",
+                "module": "Escena del Crimen",
+                "question": "¿Cuáles son las conocidas 'Siete Preguntas de Oro' que guían la investigación criminal en el lugar del hecho según el ISEP?",
+                "options": [
+                        "¿Qué, Quién, Cómo, Cuándo, Dónde, Con qué y Por qué?",
+                        "¿Quién denuncia, Cuánto cobra el perito, Cuándo prescribe, Dónde vive el juez, Qué arma se usó, Cuándo termina la guardia y Quién firma?",
+                        "¿Quién fue el primer preventor, Cuántos cartuchos disparó, Qué dijo la prensa, Dónde está el fiscal, Quién secuestró y Cuándo se limpia el piso?",
+                        "¿Cuál es el móvil, Cuándo prescribe la falta, Quién es el jefe de zona, Dónde se archiva, Qué testigos hay, Cómo se fuga y Por qué no se evitó?"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Las 7 Preguntas de Oro, Pág. 57",
+                "explanation": "La investigación criminalística integral responde metodológicamente a las 7 preguntas: ¿Qué sucedió? ¿Quiénes intervinieron? ¿Cómo ocurrió? ¿Cuándo tuvo lugar? ¿Dónde fue? ¿Con qué instrumentos se ejecutó? ¿Por qué motivo se produjo?"
+        },
+        {
+                "id": "os-e05",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "Frente a un escenario delictivo con una persona herida de gravedad, ¿qué orden de prioridades impone inexorablemente el Manual ISEP al oficial primer preventor?",
+                "options": [
+                        "Primero fotografiar a la víctima desde varios ángulos y luego autorizar el ingreso de la ambulancia",
+                        "La preservación de la vida humana tiene prioridad absoluta sobre la preservación de los indicios y de la escena del hecho",
+                        "Esperar la presencia del Coordinador Pericial y del fiscal para que autoricen el traslado al nosocomio",
+                        "Secuestrar el arma antes de permitir que los paramédicos se acerquen a tomar el pulso"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Preservación de la Vida, Pág. 61-62",
+                "explanation": "El Manual del ISEP resalta taxativamente: 'La vida de las personas es el bien supremo. Jamás se subordinará la asistencia médica de urgencia a una persona herida al resguardo de huellas o rastros materiales'."
+        },
+        {
+                "id": "os-e06",
+                "difficulty": "dificil",
+                "module": "Escena del Crimen",
+                "question": "¿Cómo se estructuran y qué funciones cumplen los 'Tres Perímetros de Preservación' (Cordones de Seguridad) en el lugar del hecho?",
+                "options": [
+                        "Perímetro 1 (vecinos), Perímetro 2 (comerciantes) y Perímetro 3 (medios periodísticos)",
+                        "Zona Interior (crítica/roja: donde se encuentran los indicios principales, acceso restringido solo a peritos forenses); Zona Intermedia (operativa/naranja: puesto de comando policial y apoyo); Zona Exterior (pública/amarilla: bloqueo para curiosos y prensa)",
+                        "Perímetro del patrullero, perímetro de la ambulancia y perímetro de la morguera judicial",
+                        "Zona diurna, zona nocturna y zona de relevo de guardia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Perímetros de Preservación, Pág. 64-65",
+                "explanation": "El acordonamiento triple comprende: Cordón Interior o Crítico (aislado totalmente para trabajo pericial sin contaminación), Cordón Intermedio (puesto de comando operativo y preventores) y Cordón Exterior (contención de prensa y público)."
+        },
+        {
+                "id": "os-e07",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "¿En qué consiste la 'Cadena de Custodia' y cuál es su finalidad procesal obligatoria?",
+                "options": [
+                        "Es el traslado físico de los detenidos esposados uno detrás de otro hacia la alcaidía",
+                        "Es el procedimiento formal y documentado que garantiza la autenticidad, integridad y trazabilidad ininterrumpida de todo indicio secuestrado desde su recolección hasta su valoración en juicio",
+                        "Es el conjunto de directivas telefónicas que el fiscal imparte a la guardia de prevención",
+                        "El sistema de esposamiento táctico utilizado durante un allanamiento"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Cadena de Custodia, Pág. 68-71",
+                "explanation": "La Cadena de Custodia es el registro formal continuo que asegura que el elemento presentado en el juicio oral es el mismo que se levantó en el lugar del hecho, sin alteraciones, suplantaciones ni contaminaciones."
+        },
+        {
+                "id": "os-e08",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "¿Qué rol y facultades tiene el 'Coordinador Pericial' del equipo científico en el lugar del hecho?",
+                "options": [
+                        "Dictar de inmediato la sentencia condenatoria de los sospechosos aprehendidos",
+                        "Coordinar, organizar y supervisar el ingreso y trabajo de las diferentes disciplinas forenses (balística, planimetría, fotografía, rastros, medicina legal), fijando el sendero seguro de avance",
+                        "Brindar entrevistas a los medios de comunicación revelando el nombre de los testigos",
+                        "Reemplazar al fiscal en la acusación durante las audiencias preliminares"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Coordinador Pericial, Pág. 65-66",
+                "explanation": "El Coordinador Pericial es el oficial técnico responsable de dirigir a los peritos en el teatro de los hechos, definir el método de búsqueda de rastros, autorizar el levantamiento de evidencias y preservar la integridad pericial."
+        },
+        {
+                "id": "os-e09",
+                "difficulty": "dificil",
+                "module": "Escena del Crimen",
+                "question": "Para el secuestro y levantamiento de un arma de fuego en el lugar del hecho, ¿qué maniobra de seguridad y resguardo debe ejecutar el personal pericial?",
+                "options": [
+                        "Introducir una birome o alambre por el ánima del cañón para levantarla del suelo",
+                        "Fijarla fotográficamente en su posición original, manipularla por zonas estriadas o cuadrilladas que no conserven huellas papilares, despejar la recámara documentando su estado, embalarla en caja rígida y precintar",
+                        "Limpiarla inmediatamente con un paño con solvente para observar el número de serie",
+                        "Disparar un proyectil al suelo para comprobar si el percutor funciona correctamente"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Recolección de Indicios Balísticos, Pág. 67-68",
+                "explanation": "El arma de fuego debe fotografiarse in situ, levantarse tocando únicamente áreas rugosas que no porten huellas, colocarse en condición segura (descargada, sin dañar el cañón jamás introduciendo objetos por la boca) y embalarse asegurada con precintos."
+        },
+        {
+                "id": "os-e10",
+                "difficulty": "facil",
+                "module": "Escena del Crimen",
+                "question": "¿Cómo deben embalarse los indicios que contienen manchas de fluidos biológicos (sangre húmeda) recolectados en el lugar del hecho?",
+                "options": [
+                        "En bolsas de polietileno herméticamente selladas con cinta aisladora sin secar",
+                        "Deben dejarse secar a temperatura ambiente protegidos del sol directo y luego colocarse en sobres o bolsas de papel permeables para evitar putrefacción y hongos",
+                        "En frascos de vidrio con lavandina para desinfectar la muestra",
+                        "Sumergidos en agua tibia dentro de un recipiente de plástico"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Indicios Biológicos, Pág. 67",
+                "explanation": "Los indicios biológicos húmedos nunca deben sellarse en plástico sin secar, pues la humedad genera proliferación de bacterias y hongos que destruyen las muestras de ADN. Se secan al aire y se embalan en papel."
+        },
+        {
+                "id": "os-e11",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "¿Qué significa la sigla 'R.P.I.' y qué información registra dentro del proceso del legajo de investigación?",
+                "options": [
+                        "Registro Policial Inmobiliario (control de viviendas desocupadas)",
+                        "Registro de Personas e Imputados (sistema de identificación dactiloscópica, antecedentes, señas particulares y legajos judiciales de personas investigadas)",
+                        "Reglamento Provisorio de Instrucción (manual interno de sumarios)",
+                        "Resguardo Personal Inmunológico (carpeta médica del empleado policial)"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen y R.P.I., Pág. 52 y 74-75",
+                "explanation": "El R.P.I. (Registro de Personas e Imputados) es la base criminalística y judicial donde se individualiza formalmente a los imputados mediante fichas dactilares decadactilares, fotografía prontuarial y consulta de capturas."
+        },
+        {
+                "id": "os-e12",
+                "difficulty": "dificil",
+                "module": "Escena del Crimen",
+                "question": "En la fijación del lugar del hecho, ¿qué método criminalístico se encarga de representar de forma métrica, exacta y a escala las distancias entre indicios y puntos fijos de referencia?",
+                "options": [
+                        "La descripción poética en el informe policial de guardia",
+                        "El relevamiento planimétrico forense mediante triangulación o coordenadas cartesianas ortogonales",
+                        "El testimonio oral de los vecinos reunidos en la esquina",
+                        "La inspección mecánica del velocímetro del patrullero"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Planimetría Forense, Pág. 66",
+                "explanation": "La planimetría forense fija geométricamente la posición de los indicios midiendo distancias exactas desde dos puntos fijos inamovibles (postes, esquinas de ochavas, muros) mediante coordenadas o triangulación."
+        },
+        {
+                "id": "os-e13",
+                "difficulty": "facil",
+                "module": "Escena del Crimen",
+                "question": "¿Qué debe hacer el primer preventor policial si al llegar al lugar del hecho encuentra al presunto autor del delito aún en la escena?",
+                "options": [
+                        "Ignorarlo y ponerse a buscar vainas servidas para no perder tiempo",
+                        "Proceder a su inmediata aprehensión en flagrancia (Art. 214 CPP), desarmarlo, asegurar su custodia fuera del cordón crítico y comunicar de inmediato al fiscal",
+                        "Pedirle que espere sentado en la vereda hasta que arribe el móvil de la Policía de Investigaciones",
+                        "Dejarlo ir si promete comparecer voluntariamente a la comisaría a la mañana siguiente"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Aprehensión en Flagrancia, Pág. 58-59",
+                "explanation": "La aprehensión del sospechoso en flagrancia y el cese del peligro para terceros es prioridad operativa inmediata, trasladándolo fuera del área crítica para evitar que contamine o destruya indicios."
+        },
+        {
+                "id": "os-e14",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "¿Por qué el Manual ISEP prohíbe que el personal policial utilice los baños, beba líquidos o fume dentro de la escena del crimen?",
+                "options": [
+                        "Porque está prohibido por el sindicato policial provincial",
+                        "Porque altera gravemente la escena, depositando ADN, colillas, fibras, saliva y destruyendo rastros biológicos y químicos del autor",
+                        "Porque se considera una falta de respeto al personal que está de franco",
+                        "Únicamente para ahorrar agua en la propiedad privada"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Buenas Prácticas de Preservación, Pág. 60-63",
+                "explanation": "El uso de sanitarios, fumar o consumir alimentos en el lugar del hecho contamina irreparablemente la escena con material biológico y químico ajeno al delito, provocando nulidades o falsos positivos periciales."
+        },
+        {
+                "id": "os-e15",
+                "difficulty": "dificil",
+                "module": "Escena del Crimen",
+                "question": "¿Qué es la 'Fijación Fotográfica Forense' y qué tomas mínimas debe realizar el perito fotógrafo según el manual?",
+                "options": [
+                        "Fotografiar solo la cara del aprehendido para subirla a las redes sociales de la comisaría",
+                        "Tomas panorámicas o generales (ubicación geográfica del lugar), tomas de plano medio (relación entre indicios) y tomas de detalle o primer plano con testigo métrico de referencia",
+                        "Una fotografía de los policías actuantes posando frente al lugar del hecho",
+                        "Fotografías exclusivamente satelitales tomadas desde un dron militar"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Fotografía Forense, Pág. 66-67",
+                "explanation": "La fijación fotográfica va de lo general a lo particular: panorámicas (entorno), plano medio (distancia y vinculación entre objetos) y planos de detalle (macrofotografía de indicios siempre acompañada de testigo métrico)."
+        },
+        {
+                "id": "os-e16",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "Si en el lugar del hecho se constata el hallazgo de un artefacto sospechoso presuntamente explosivo, ¿cuál es la orden de actuación?",
+                "options": [
+                        "Moverlo cuidadosamente para comprobar si emite sonido de reloj",
+                        "Evacuar el área inmediatamente, ampliar el perímetro a distancias seguras, no tocar ni mover el bulto y convocar de urgencia a la Brigada de Explosivos",
+                        "Arrojarle agua con una manguera para desactivar la mecha",
+                        "Llevarlo en el baúl del patrullero a la comisaría para su inspección tranquila"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Artefactos Explosivos, Pág. 63-64",
+                "explanation": "Bajo ninguna circunstancia el personal no especializado debe tocar o manipular presuntos explosivos. Se evacua de inmediato y se entrega el teatro a la Brigada de Explosivos (Neutralización)."
+        },
+        {
+                "id": "os-e17",
+                "difficulty": "facil",
+                "module": "Escena del Crimen",
+                "question": "¿Qué documento debe confeccionarse y firmarse cada vez que una evidencia física cambia de custodio (por ejemplo, del policía preventor al perito químico)?",
+                "options": [
+                        "Un mensaje informal de WhatsApp sin número de legajo",
+                        "La Planilla de Registro de Cadena de Custodia con fecha, hora, motivo del traspaso, estado del embalaje y firma de entrega y recepción",
+                        "Un pagaré comercial en garantía del objeto",
+                        "No se confecciona ningún documento si los policías se conocen de la escuela"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Cadena de Custodia, Pág. 70-72",
+                "explanation": "Todo traspaso material de evidencia exige completar la planilla de cadena de custodia asentando fecha, hora, motivo, condición del precinto y la identidad y firma de quien entrega y quien recibe."
+        },
+        {
+                "id": "os-e18",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "En un hecho acaecido en un espacio abierto (descampado o plaza pública), ¿cuál es el criterio para fijar el límite del cordón interior de preservación?",
+                "options": [
+                        "Un metro cuadrado alrededor del indicio visible más cercano",
+                        "Un radio amplio y generoso que abarque el indicio más alejado más una franja de seguridad adicional, ya que es más fácil achicar el perímetro que agrandarlo tras ser pisoteado",
+                        "Exactamente el ancho de la cinta plástica de peligro que tenga en el móvil",
+                        "Solo el sector donde haya sombra para los peritos"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Delimitación de Perímetros, Pág. 64-65",
+                "explanation": "La regla de oro de la criminalística de campo señala: 'El perímetro siempre debe ser excesivo inicialmente; siempre es posible reducirlo más tarde, pero jamás se podrá recuperar el espacio que fue pisoteado por curiosos'."
+        },
+        {
+                "id": "os-e19",
+                "difficulty": "dificil",
+                "module": "Escena del Crimen",
+                "question": "Al intervenir en una muerte violenta con presunta utilización de arma de fuego, ¿qué recaudo debe tomarse respecto a las manos del occiso?",
+                "options": [
+                        "Lavarlas con jabón para eliminar restos de sangre antes de la autopsia",
+                        "Proteger las manos embolsándolas con bolsas de papel manila limpias y precintadas para conservar residuos de disparo (GSR / bario, plomo y antimonio) para el barrido electrónico",
+                        "Cortar las uñas en el lugar del hecho con una tijera común",
+                        "Tomar las huellas dactilares frotando tinta directamente con los dedos del preventor"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Resguardo de Manos en Muerte Violenta, Pág. 68",
+                "explanation": "Las manos de cadáveres en hechos con armas de fuego se embolsan en papel (nunca plástico) para no perder residuos de deflagración de pólvora y metálicos indispensables para el dermotest o barrido electrónico microscópico."
+        },
+        {
+                "id": "os-e20",
+                "difficulty": "facil",
+                "module": "Escena del Crimen",
+                "question": "¿Qué funcionario judicial tiene la atribución constitucional y procesal de dirigir la investigación penal preparatoria (IPP) en Santa Fe?",
+                "options": [
+                        "El Juez de Paz comunal",
+                        "El Fiscal del Ministerio Público de la Acusación (MPA)",
+                        "El Jefe de Policía de Provincia de forma exclusiva",
+                        "El Presidente de la Corte Suprema en persona"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Proceso del Legajo: Rol del Fiscal MPA, Pág. 52-53",
+                "explanation": "En el sistema acusatorio santafesino (Ley 12.734), la dirección jurídica y estratégica de la IPP corresponde exclusivamente a los Fiscales del MPA, actuando la policía como auxiliar bajo su conducción."
+        },
+        {
+                "id": "os-e21",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "¿Qué debe consignarse en el Libro de Guardia de la dependencia policial respecto a una persona aprehendida?",
+                "options": [
+                        "Únicamente su apodo barrial",
+                        "Día, hora exacta de ingreso, motivo de aprehensión, preventores, pertenencias secuestradas, estado de salud constatado por médico y fiscal interviniente notificado",
+                        "Solo si la persona accede voluntariamente a que se escriba su nombre",
+                        "No se registra nada hasta que el juez dicte la prisión preventiva"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Proceso del Legajo: Registros de Guardia, Pág. 74-76",
+                "explanation": "El Libro de Guardia es un instrumento público de contralor estricto. Debe registrar cronológicamente la hora de ingreso de todo aprehendido, su condición física, pertenencias y el magistrado notificado."
+        },
+        {
+                "id": "os-e22",
+                "difficulty": "dificil",
+                "module": "Escena del Crimen",
+                "question": "En la recolección de indicios digitales (teléfonos celulares o computadoras halladas encendidas), ¿qué directiva técnica básica imparte el ISEP para evitar el borrado remoto?",
+                "options": [
+                        "Apagar y encender repetidas veces el dispositivo para agotar la batería",
+                        "Aislar el dispositivo de señales inalámbricas activando 'Modo Avión' o colocándolo en una bolsa de Faraday (antirradiación), sin intentar desbloquearlo ni ingresar claves arbitrarias",
+                        "Abrir las conversaciones de WhatsApp del aprehendido y responder a los contactos",
+                        "Resetear el teléfono al modo de fábrica para ver si funciona rápido"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Evidencia Digital, Pág. 72-73",
+                "explanation": "La evidencia digital es sumamente volátil. Debe aislarse de la red inmediatamente (Modo Avión o bolsa de Faraday) para impedir que cómplices borren chats o datos remotamente por internet o iCloud."
+        },
+        {
+                "id": "os-e23",
+                "difficulty": "facil",
+                "module": "Escena del Crimen",
+                "question": "¿Quién es el único facultado a certificar formalmente el fallecimiento de una persona en el lugar del hecho?",
+                "options": [
+                        "El oficial primer preventor observando la palidez de la piel",
+                        "Un profesional médico matriculado mediante constatación de signos vitales",
+                        "El chofer del patrullero con más de diez años de servicio",
+                        "Cualquier testigo civil que firme el acta"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Constatación de Óbito, Pág. 61",
+                "explanation": "La constatación del óbito es un acto exclusivamente médico legal. El personal policial debe requerir la presencia de un médico (ambulancia o médico de policía) para certificar el fallecimiento con rigor científico."
+        },
+        {
+                "id": "os-e24",
+                "difficulty": "media",
+                "module": "Escena del Crimen",
+                "question": "Cuando un perito forense o preventor transita por el interior de una escena del crimen cerrada, ¿qué método de circulación debe emplear?",
+                "options": [
+                        "Caminar libremente por toda la habitación buscando objetos brillantes",
+                        "Utilizar una ruta o 'sendero de acceso único' predeterminado, pisando por los mismos lugares despejados para no alterar huellas ni trasladar material biológico",
+                        "Arrastrarse cuerpo a tierra para no ser visto por las ventanas",
+                        "Correr rápidamente de una pared a otra para terminar la inspección"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Escena del Crimen: Sendero Seguro de Circulación, Pág. 62-63",
+                "explanation": "El ingreso a la escena debe realizarse por un sendero único de circulación señalizado, que evita pisar manchas hemáticas, huellas de calzado del autor o transferir fibras a otros sectores."
+        },
+        {
+                "id": "os-c01",
+                "difficulty": "facil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Cuáles son las cuatro cualidades fundamentales que exige el Manual ISEP en la redacción de todo documento policial oficial?",
+                "options": [
+                        "Extensión prolongada, lenguaje metafórico, retórica jurídica y misterio",
+                        "Claridad, Precisión, Concisión y Rigor Formal (Objetividad)",
+                        "Uso excesivo de términos en latín, opinión del redactor, tecnicismos médicos y abreviaturas personales",
+                        "Subjetividad, emotividad, celeridad sin revisión y formato libre"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Cualidades de la Escritura, Pág. 80-82",
+                "explanation": "La redacción policial debe ser clara (fácil comprensión), precisa (sin ambigüedades), concisa (sin palabras superfluas) y rigurosa en su forma, garantizando fidelidad ante jueces y fiscales."
+        },
+        {
+                "id": "os-c02",
+                "difficulty": "facil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Cómo define el Manual ISEP la técnica de 'Judo Verbal' desarrollada por George Thompson y aplicada en la función policial?",
+                "options": [
+                        "Un arte marcial cuerpo a cuerpo utilizado para inmovilizar al oponente contra el suelo",
+                        "Una técnica táctica de comunicación persuasiva orientada a resolver y desescalar conflictos callejeros sin recurrir al uso de la fuerza física",
+                        "Un método de interrogatorio coercitivo para obligar a confesar a los imputados",
+                        "La forma de hablar con los superiores jerárquicos manteniendo silencio en todo momento"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Judo Verbal, Pág. 90-92",
+                "explanation": "El Judo Verbal es la disciplina de persuasión y comunicación táctica que permite canalizar la agresión verbal del ciudadano y lograr la cooperación voluntaria mediante la palabra, evitando la escalada violenta."
+        },
+        {
+                "id": "os-c03",
+                "difficulty": "media",
+                "module": "Comunicación y Redacción",
+                "question": "¿Cuáles son los 'Cinco Pasos de la Persuasión Táctica' que componen el protocolo de Judo Verbal enseñado en el ISEP?",
+                "options": [
+                        "1. Gritar, 2. Amenazar, 3. Empujar, 4. Esposar, 5. Trasladar",
+                        "1. Pedir o solicitar, 2. Establecer el contexto (explicar la razón legal), 3. Presentar opciones positivas y negativas, 4. Confirmar segunda oportunidad ('¿Hay algo que pueda decir para...?'), 5. Tomar acción",
+                        "1. Guardar silencio, 2. Mirar fijamente, 3. Desenfundar, 4. Disparar al aire, 5. Retirarse",
+                        "1. Saludar, 2. Pedir coima, 3. Discutir, 4. Enojarse, 5. Labrar acta"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Los 5 Pasos del Judo Verbal, Pág. 93-94",
+                "explanation": "La persuasión táctica sigue un orden estructurado: pedir cortésmente, contextualizar la ley, dar opciones para que elija cooperar, dar una última oportunidad de recapacitar y, si persiste la negativa, ejecutar la acción física legal."
+        },
+        {
+                "id": "os-c04",
+                "difficulty": "media",
+                "module": "Comunicación y Redacción",
+                "question": "¿En qué tiempo verbal gramatical debe redactarse el cuerpo circunstanciado de un Acta de Procedimiento según las directivas del ISEP?",
+                "options": [
+                        "En tiempo futuro imperfecto, indicando lo que podría pasar",
+                        "En tiempo pretérito perfecto simple del modo indicativo (tiempo pasado: 'se procedió', 'se observó', 'se constató')",
+                        "En tiempo presente continuo o condicional hipotético ('estaría procediendo', 'quizás ocurrió')",
+                        "En modo imperativo exclusivamente en segunda persona ('vos hiciste')"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Estilo Gramatical, Pág. 83-84",
+                "explanation": "Los actos procesales ya acontecidos deben redactarse rigurosamente en tiempo pasado (pretérito), en tercera persona o forma impersonal ('se constituyó', 'se procedió'), reflejando hechos consumados y constatados fehacientemente."
+        },
+        {
+                "id": "os-c05",
+                "difficulty": "dificil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Qué consecuencia procesal acarrea en juicio un acta policial que contiene enmiendas, raspaduras o agregados entre líneas que no fueron debidamente salvados al final antes de las firmas?",
+                "options": [
+                        "Se considera un estilo literario válido que demuestra la espontaneidad del preventor",
+                        "Puede ser declarada nula por violación a la formalidad de los instrumentos públicos (Art. 138 CPP) al presumirse adulteración documental",
+                        "Se premia al preventor con cinco días de licencia ordinaria por ahorrar papel",
+                        "El juez debe corregirla de puño y letra durante la audiencia oral"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Validez de Instrumentos Públicos, Pág. 85-86",
+                "explanation": "Toda enmienda, raspadura o texto entre líneas en un acta pública debe ser 'salvada' formalmente al pie del texto antes de las firmas; de lo contrario, carece de fe pública y puede ser tachada de falsedad material o nulidad procesal."
+        },
+        {
+                "id": "os-c06",
+                "difficulty": "facil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Qué documento policial oficial se utiliza para informar a la Superioridad de manera sucinta un acontecimiento relevante de servicio que no requiere inicio de legajo penal?",
+                "options": [
+                        "La Carta Documento certificada por escribano",
+                        "El Parte Informativo o Comunicación Interna",
+                        "El Edicto Contravencional publicado en el Boletín Oficial",
+                        "La Orden del Día secreta"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Tipos de Documentos, Pág. 81",
+                "explanation": "El Parte Informativo es el instrumento administrativo por excelencia para transmitir novedades operativas, servicios cubiertos o incidencias menores a la superioridad policial jerárquica."
+        },
+        {
+                "id": "os-c07",
+                "difficulty": "media",
+                "module": "Comunicación y Redacción",
+                "question": "En la técnica de Judo Verbal, ¿qué se entiende por 'Empatía Táctica'?",
+                "options": [
+                        "Hacerse amigo del infractor y justificar el delito cometido",
+                        "La capacidad de comprender el punto de vista y las emociones del interlocutor, no para estar de acuerdo, sino para anticipar su conducta y lograr la cooperación pacífica",
+                        "Ceder ante todas las pretensiones del agresor para evitar trabajar en el acta",
+                        "Fingir debilidad física para engañar al sospechoso"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Empatía Táctica, Pág. 91-92",
+                "explanation": "La empatía táctica es una herramienta estratégica: permite ver la situación desde la perspectiva del ciudadano para saber qué argumentos utilizar para desescalar el conflicto sin comprometer la misión policial."
+        },
+        {
+                "id": "os-c08",
+                "difficulty": "facil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Por qué el Manual ISEP prohíbe el uso de abreviaturas informales o siglas desconocidas en las actas de procedimiento elevadas a la justicia?",
+                "options": [
+                        "Porque la computadora de la comisaría no reconoce letras mayúsculas",
+                        "Porque generan ambigüedad, inducen a error a los operadores judiciales y vulneran el principio de claridad y precisión procesal",
+                        "Porque el reglamento penal exige escribir únicamente en versos rimados",
+                        "Solo está prohibido si el acta tiene más de diez carillas"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Precisión y Vocabulario, Pág. 82-83",
+                "explanation": "Las siglas o abreviaturas no regladas pueden ser malinterpretadas por jueces, defensores y fiscales. Todo concepto debe escribirse en forma completa y explícita para asegurar la transparencia."
+        },
+        {
+                "id": "os-c09",
+                "difficulty": "dificil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Cuál es la estructura formal completa de un 'Informe Técnico Policial' según el módulo de comunicación oficial?",
+                "options": [
+                        "Título, anécdotas personales, chismes de guardia y conclusión apresurada",
+                        "Encabezamiento (autoridad a quien se dirige), Objeto (motivo del informe), Antecedentes fácticos, Análisis técnico/operativo y Conclusión fundamentada",
+                        "Membrete de la comisaría y la firma del chofer del móvil únicamente",
+                        "Un formulario prediseñado donde solo se tildan casillas sin texto libre"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Estructura de Informes, Pág. 87-89",
+                "explanation": "El Informe Policial estructurado consta de encabezado formal, especificación del objeto, relación fáctica circunstanciada, consideraciones técnicas u operativas y conclusión precisa."
+        },
+        {
+                "id": "os-c10",
+                "difficulty": "media",
+                "module": "Comunicación y Redacción",
+                "question": "En la comunicación operativa por frecuencia radial (Comando Radioeléctrico / 911), ¿cuál es la pauta básica para transmitir un código de emergencia?",
+                "options": [
+                        "Gritar repetidas veces para demostrar la urgencia del caso",
+                        "Modular con voz clara, tono calmo y seguro, utilizando la codificación reglamentaria y transmitiendo de forma concisa ubicación, tipo de hecho y apoyo requerido",
+                        "Mantener presionado el pulsador PTT durante cinco minutos para bloquear la frecuencia",
+                        "Brindar opiniones personales sobre el carácter de los sospechosos"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Comunicación Operativa, Pág. 95-97",
+                "explanation": "La modulación radial requiere disciplina de frecuencia: brevedad, claridad acústica, ubicación exacta y requerimiento táctico preciso, evitando saturar el canal en momentos críticos."
+        },
+        {
+                "id": "os-c11",
+                "difficulty": "facil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Qué regla del Judo Verbal se conoce como 'El Principio del Respeto Incondicional'?",
+                "options": [
+                        "Tratar a las personas como a ellas les gustaría ser tratadas, o tratar a todos con dignidad sin importar su actitud o antecedentes delictivos",
+                        "Respetar únicamente a los ciudadanos que tengan autos de alta gama",
+                        "Saludar con reverencia a cualquier persona que camine por la vereda",
+                        "No hablarle a nadie durante las horas de la noche"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Principios de Judo Verbal, Pág. 90-91",
+                "explanation": "El Judo Verbal establece que el respeto profesional no depende de si el ciudadano es amable o agresivo: el policía profesional trata a todos con respeto incondicional porque representa al Estado y a la ley."
+        },
+        {
+                "id": "os-c12",
+                "difficulty": "media",
+                "module": "Comunicación y Redacción",
+                "question": "¿Qué vicio de redacción se produce cuando un preventor escribe en el acta: 'Se procedió al secuestro de un elemento sospechoso de color oscuro'?",
+                "options": [
+                        "Falta de ortografía en la palabra secuestro",
+                        "Vaguedad y falta de precisión descriptiva (debe detallarse naturaleza, dimensiones, marca, calibre, número de serie, material y estado de conservación)",
+                        "Es una frase perfecta que no requiere ninguna aclaración",
+                        "Exceso de adjetivación técnica"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Vicios de Redacción, Pág. 82-84",
+                "explanation": "La descripción de elementos secuestrados debe ser exhaustiva y precisa. Términos ambiguos como 'elemento sospechoso' debilitan la cadena de custodia y permiten planteos de nulidad defensiva."
+        },
+        {
+                "id": "os-c13",
+                "difficulty": "dificil",
+                "module": "Comunicación y Redacción",
+                "question": "En la redacción de un acta de entrevista policial a la víctima de un hecho violento, ¿cómo deben asentarse las manifestaciones textuales de relevancia?",
+                "options": [
+                        "Cambiando las palabras de la víctima por términos jurídicos rebuscados que el preventor invente",
+                        "Entre comillas y de manera textual y literal tal como fueron expresadas por la declarante, dejando constancia de modismos o palabras exactas",
+                        "Resumiendo todo en dos renglones sin reproducir los dichos",
+                        "Omitiendo las amenazas de muerte por considerarse de mal gusto"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Citas Textuales, Pág. 84-85",
+                "explanation": "Las manifestaciones textuales (insultos, amenazas, apodos, frases de los delincuentes) deben volcarse entrecomilladas de forma textual e inalterada, ya que poseen inmenso valor probatorio para la fiscalía."
+        },
+        {
+                "id": "os-c14",
+                "difficulty": "facil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Cuál es la función principal de la 'Nota de Elevación' en las actuaciones sumarias policiales?",
+                "options": [
+                        "Pedir el traslado de jurisdicción de un empleado",
+                        "Remitir formalmente el legajo de investigación o expediente a la autoridad judicial o administrativa correspondiente, detallando fojas y efectos secuestrados que se acompañan",
+                        "Reclamar el pago de servicios de policía adicional adeudados",
+                        "Publicar las felicitaciones de guardia en la cartelera comunitaria"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Nota de Elevación, Pág. 88-89",
+                "explanation": "La Nota de Elevación es la pieza documental que encabeza la remisión del legajo a la Fiscalía o Juzgado, detallando cantidad de fojas útiles, personas remitidas en calidad de aprehendidas y efectos reservados."
+        },
+        {
+                "id": "os-c15",
+                "difficulty": "media",
+                "module": "Comunicación y Redacción",
+                "question": "En el Judo Verbal, ¿qué frase se conoce como la 'Pregunta de la Segunda Oportunidad' antes de pasar a la acción física?",
+                "options": [
+                        "'¿Me vas a pegar o me vas a empujar primero?'",
+                        "'¿Hay algo que yo pueda decir o hacer para que usted colabore con nosotros en este momento? Me gustaría que así sea'",
+                        "'¿Sabe usted con quién está hablando?'",
+                        "'A mí no me importa nada lo que usted piense de la policía'"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Segunda Oportunidad, Pág. 94",
+                "explanation": "La confirmación de la segunda oportunidad es el paso 4 del Judo Verbal. Apela a la última oportunidad racional del sujeto para que obedezca la orden legal, dejando en evidencia ante testigos que se agotó el diálogo."
+        },
+        {
+                "id": "os-c16",
+                "difficulty": "facil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Por qué es fundamental la correcta foliación de un expediente o legajo de investigación penal?",
+                "options": [
+                        "Para que la carpeta pese más al momento de pesarla en la balanza",
+                        "Para asegurar el orden cronológico estricto de las piezas procesales, evitar extravíos, sustracciones o intercalaciones indebidas de fojas",
+                        "Solo se folian los legajos que tienen más de quinientas hojas",
+                        "Para que el empleado administrativo gaste la tinta del fechador"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Foliación de Expedientes, Pág. 86-87",
+                "explanation": "La foliación correlativa y en números y letras es una exigencia de seguridad jurídica que impide que se agreguen o retiren hojas de las actuaciones una vez labradas."
+        },
+        {
+                "id": "os-c17",
+                "difficulty": "dificil",
+                "module": "Comunicación y Redacción",
+                "question": "En la redacción de informes técnicos, ¿qué diferencia existe entre una 'Aseveración Fáctica' y una 'Opinión Personal'?",
+                "options": [
+                        "La aseveración fáctica describe un hecho observable y comprobable con evidencia física; la opinión personal es un juicio subjetivo o creencia del redactor que no debe formar parte de la descripción del hecho",
+                        "Son conceptos idénticos en el derecho procesal penal",
+                        "La opinión personal tiene más valor que las huellas balísticas",
+                        "La aseveración fáctica solo la puede hacer el juez de cámara"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Objetividad en el Informe, Pág. 82-83",
+                "explanation": "El preventor debe consignar exclusivamente hechos objetivos constatados ('el vehículo presentaba impacto en paragolpes') y abstenerse de conjeturas o valoraciones personales ('el conductor seguramente estaba distraído')."
+        },
+        {
+                "id": "os-c18",
+                "difficulty": "media",
+                "module": "Comunicación y Redacción",
+                "question": "Durante una intervención en conflicto vecinal, ¿qué frase 'gatillo' o contraproducente debe erradicar por completo el policía según el Judo Verbal?",
+                "options": [
+                        "'Buenas tardes, soy el Oficial Gómez de la Comisaría de la zona'",
+                        "'¡Cálmese!' o '¡Usted no me va a decir cómo hacer mi trabajo!'",
+                        "'Comprendo que esté preocupado, permítame explicarle el procedimiento'",
+                        "'¿Me permite su documento de identidad, por favor?'"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Frases Gatillo en Judo Verbal, Pág. 92",
+                "explanation": "Frases como '¡Cálmese!' o '¡A mí no me hable así!' son conocidas en Judo Verbal como frases gatillo: nunca calman a nadie, aumentan la hostilidad y demuestran pérdida de control emocional por parte del policía."
+        },
+        {
+                "id": "os-c19",
+                "difficulty": "facil",
+                "module": "Comunicación y Redacción",
+                "question": "¿Quiénes deben firmar el Acta de Notificación de Derechos del Imputado?",
+                "options": [
+                        "Solo el oficial que labra el acta sin que la persona aprehendida la lea",
+                        "El funcionario policial interviniente y la persona imputada, dejándose constancia fundada si se niega o no puede estampar su firma",
+                        "Cualquier vecino que camine por la vereda de enfrente",
+                        "El acta de derechos no requiere ninguna firma"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Notificación de Derechos, Pág. 85",
+                "explanation": "La notificación de derechos constitucionales y procesales al imputado (Art. 268 y conc. CPP) exige su firma como constancia formal de que fue instruido de sus garantías, labrándose constancia si se niega."
+        },
+        {
+                "id": "os-c20",
+                "difficulty": "media",
+                "module": "Comunicación y Redacción",
+                "question": "En la comunicación institucional policial, ¿qué principio asegura que los mandatos de la Superioridad sean interpretados de manera unívoca en todas las unidades operativas?",
+                "options": [
+                        "La libre interpretación poética de cada oficial de guardia",
+                        "La unidad de doctrina y la precisión terminológica en las directivas y órdenes de servicio",
+                        "La transmisión oral de boca en boca sin dejar registros escritos",
+                        "El secreto administrativo de las leyes vigentes"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Comunicación y Redacción: Unidad de Doctrina, Pág. 80-81",
+                "explanation": "La unidad de doctrina garantizada por el ISEP asegura que la terminología técnica, los protocolos operativos y las órdenes de servicio tengan el mismo significado e impacto en toda la provincia de Santa Fe."
+        },
+        {
+                "id": "os-l01",
+                "difficulty": "facil",
+                "module": "Legislación Policial",
+                "question": "¿Cuál es la ley que rige el régimen del Personal Policial de la Provincia de Santa Fe y en qué año fue sancionada derogando la antigua Ley 6769?",
+                "options": [
+                        "Ley Provincial N° 12.521, sancionada en el año 2006",
+                        "Ley Provincial N° 10.160 del Poder Judicial (1990)",
+                        "Ley Nacional N° 24.059 de Seguridad Interior (1991)",
+                        "Ley Provincial N° 13.774 del Código de Convivencia (2018)"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Ley 12.521/06, Pág. 106",
+                "explanation": "La Ley del Personal Policial de Santa Fe es la Ley N° 12.521 dictada en 2006, la cual unificó los cuadros en una escala jerárquica única y derogó el régimen anterior de la Ley 6769."
+        },
+        {
+                "id": "os-l02",
+                "difficulty": "facil",
+                "module": "Legislación Policial",
+                "question": "Conforme a la Ley 12.521, ¿qué es el 'Estado Policial' y cuál es su alcance fundamental?",
+                "options": [
+                        "Es una situación transitoria que solo rige mientras el agente viste el uniforme en su turno de guardia",
+                        "Es la situación jurídica creada por el conjunto de deberes, derechos y obligaciones que la ley y sus reglamentaciones imponen al personal policial, subsistiendo aún en situación de retiro",
+                        "Es la facultad exclusiva de labrar multas de tránsito comunales",
+                        "La autorización para realizar actividades comerciales privadas sin informar a la institución"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Estado Policial, Pág. 107-108",
+                "explanation": "El Estado Policial es el vínculo jurídico permanente que une al policía con la institución provincial, generando obligaciones irrenunciables (como intervenir ante delitos en defensa de terceros) incluso fuera de horario de servicio."
+        },
+        {
+                "id": "os-l03",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "De acuerdo a la Ley 12.521, ¿cuáles son los cuatro Escalafones en los que se agrupa el personal policial de la Provincia de Santa Fe?",
+                "options": [
+                        "Escalafón Táctico, Escalafón Motorizado, Escalafón Náutico y Escalafón Rural",
+                        "Escalafón General, Escalafón Profesional, Escalafón Técnico y Escalafón de Servicios",
+                        "Escalafón de Comisarios, Escalafón de Oficiales, Escalafón de Suboficiales y Civiles",
+                        "Escalafón de Tránsito, Escalafón Penitenciario, Escalafón Docente y Bomberos"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Estructura Escalafonaria, Pág. 106-107",
+                "explanation": "El Art. 14 de la Ley 12.521 divide al personal policial en cuatro escalafones: 1. Escalafón General; 2. Escalafón Profesional; 3. Escalafón Técnico; 4. Escalafón de Servicios."
+        },
+        {
+                "id": "os-l04",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "¿Cuáles son las tres clases de 'Superioridad Policial' reguladas en la Ley 12.521?",
+                "options": [
+                        "Superioridad Física, Superioridad Económica y Superioridad Intelectual",
+                        "Superioridad Jerárquica, Superioridad por Antigüedad y Superioridad por Cargo",
+                        "Superioridad Política, Superioridad Departamental y Superioridad Sindical",
+                        "Superioridad de Guardia, Superioridad de Patrulla y Superioridad de Almacén"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Superioridad Policial, Pág. 107",
+                "explanation": "La Ley 12.521 distingue tres tipos de superioridad: 1. Jerárquica (mayor grado en la escala); 2. Por antigüedad (dentro del mismo grado, mayor tiempo o prelación en la promoción); 3. Por cargo (la que resulta del puesto o función orgánica asignada)."
+        },
+        {
+                "id": "os-l05",
+                "difficulty": "dificil",
+                "module": "Legislación Policial",
+                "question": "Según el Régimen del Servicio Activo y el Art. 133 de la Ley 12.521, ¿qué consecuencias automáticas acarrea para el efectivo policial pasar a situación de 'Disponibilidad' o 'Pasiva'?",
+                "options": [
+                        "Debe continuar prestando servicios armados nocturnos en dependencias judiciales",
+                        "El personal es relevado de su servicio y queda privado del uso del uniforme, arma reglamentaria y credencial oficial",
+                        "Recibe un ascenso extraordinario automático por dedicación exclusiva",
+                        "Pierde el derecho a jubilarse en el futuro"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Situaciones de Revista, Pág. 110-111",
+                "explanation": "El Art. 133 dispone taxativamente que el agente en situación de Disponibilidad o Pasiva es relevado de todo servicio activo y se le retira de inmediato el uniforme, la credencial policial y el armamento provisto."
+        },
+        {
+                "id": "os-l06",
+                "difficulty": "facil",
+                "module": "Legislación Policial",
+                "question": "¿Cuál es el decreto reglamentario que regula el Régimen Disciplinario del Personal Policial de la Provincia de Santa Fe?",
+                "options": [
+                        "Decreto N° 461/15",
+                        "Decreto N° 1166/18",
+                        "Decreto N° 4157/15",
+                        "Decreto N° 2640/25"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Decreto 461/15, Pág. 115",
+                "explanation": "El régimen disciplinario policial santafesino está reglamentado íntegramente por el Decreto N° 461 del año 2015, que derogó el histórico reglamento de disciplina R.R.D.P."
+        },
+        {
+                "id": "os-l07",
+                "difficulty": "facil",
+                "module": "Legislación Policial",
+                "question": "Conforme al Decreto 461/15, ¿cómo se clasifican las faltas disciplinarias policiales en orden creciente de gravedad?",
+                "options": [
+                        "Infracciones de tránsito, faltas de asistencia y faltas penales",
+                        "Faltas Leves, Faltas Graves y Faltas Gravísimas",
+                        "Faltas verbales, faltas escritas y faltas judiciales",
+                        "Faltas simples, faltas compuestas y faltas complejas"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Clasificación de Faltas, Pág. 116-118",
+                "explanation": "El régimen del Decreto 461/15 clasifica tripartitamente las infracciones administrativas en: Faltas Leves, Faltas Graves y Faltas Gravísimas, con escalas punitivas diferenciadas para cada una."
+        },
+        {
+                "id": "os-l08",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "¿Cuáles son las sanciones disciplinarias aplicables por la comisión de Faltas Leves según el Decreto 461/15?",
+                "options": [
+                        "Exoneración inmediata del servicio sin sumario",
+                        "Apercibimiento y Arresto Policial de hasta diez (10) días",
+                        "Suspensión de empleo por seis meses con pérdida total de sueldo",
+                        "Trabajos comunitarios obligatorios en la vía pública de civil"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Sanciones por Faltas Leves, Pág. 118-119",
+                "explanation": "Las Faltas Leves son sancionables exclusivamente con: 1. Apercibimiento; o 2. Arresto policial de hasta un máximo de diez (10) días corridos."
+        },
+        {
+                "id": "os-l09",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "¿Cuáles son las sanciones disciplinarias previstas para las Faltas Graves en el régimen del Decreto 461/15?",
+                "options": [
+                        "Llamado de atención verbal sin constancia en legajo",
+                        "Arresto Policial de once (11) a treinta (30) días, o Suspensión de Empleo de hasta treinta (30) días",
+                        "Privación perpetua de la libertad en cárcel común",
+                        "Pérdida de la ciudadanía argentina"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Sanciones por Faltas Graves, Pág. 119-120",
+                "explanation": "Para las Faltas Graves, el Decreto 461/15 prevé Arresto policial de 11 a 30 días o Suspensión de empleo de hasta 30 días (con retención de haberes y pérdida de cómputo para ascenso)."
+        },
+        {
+                "id": "os-l10",
+                "difficulty": "dificil",
+                "module": "Legislación Policial",
+                "question": "¿Cuáles son las dos sanciones de 'Destitución' que se aplican exclusivamente a las Faltas Gravísimas según el Decreto 461/15 y cuál es su diferencia?",
+                "options": [
+                        "Pase a disponibilidad y traslado de unidad regional",
+                        "Cesantía (separa de la fuerza con derecho a solicitar rehabilitación pasados 5 años) y Exoneración (máxima sanción expulsiva que extingue definitivamente la relación y veda la reincorporación perpetua)",
+                        "Multa económica simple y descuento de adicionales",
+                        "Retiro voluntario y jubilación ordinaria con haber íntegro"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Destitución (Cesantía y Exoneración), Pág. 120-122",
+                "explanation": "La destitución comprende la Cesantía y la Exoneración. La Exoneración es la pena administrativa más severa: implica separación deshonrosa de la fuerza, pérdida de derechos previsionales policiales derivados y veda permanente de reincorporación."
+        },
+        {
+                "id": "os-l11",
+                "difficulty": "dificil",
+                "module": "Legislación Policial",
+                "question": "Conforme al Decreto 461/15, ¿cuáles son los plazos de prescripción de la acción disciplinaria administrativa según la gravedad de la falta?",
+                "options": [
+                        "Todas las faltas prescriben a los seis meses de cometidas",
+                        "1 año para las Faltas Leves, 2 años para las Faltas Graves y 3 años para las Faltas Gravísimas",
+                        "10 años para faltas leves y 20 años para faltas graves",
+                        "Las faltas policiales son imprescriptibles según la Constitución Nacional"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Prescripción de Faltas, Pág. 124-125",
+                "explanation": "Los plazos de prescripción de la acción disciplinaria en Santa Fe (Dec. 461/15) son: 1 año para faltas leves, 2 años para faltas graves y 3 años para faltas gravísimas, computados desde la comisión del hecho."
+        },
+        {
+                "id": "os-l12",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "En el marco de la Ley 12.521, ¿constituye un deber inherente al estado policial el intervenir para prevenir delitos estando de franco de servicio?",
+                "options": [
+                        "No, porque fuera del horario laboral el policía es un ciudadano común y no tiene facultades",
+                        "Sí, es un deber permanente e irrenunciable defender la vida, la libertad y la propiedad de las personas aun fuera del horario de guardia",
+                        "Solo si la víctima le abona previamente el costo de la hora adicional correspondiente",
+                        "Únicamente si el hecho delictivo ocurre dentro de la misma cuadra de su domicilio particular"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Deberes Esenciales, Pág. 108-109",
+                "explanation": "El Art. 12 inc. b de la Ley 12.521 establece como deber fundamental: 'Defender, conservar y restablecer el orden y la seguridad pública en cualquier lugar y momento, aun cuando no se encontrare en servicio efectivo'."
+        },
+        {
+                "id": "os-l13",
+                "difficulty": "facil",
+                "module": "Legislación Policial",
+                "question": "¿Qué derecho consagra expresamente la Ley 12.521 al personal policial respecto a su armamento y equipo?",
+                "options": [
+                        "El derecho a comprar sus propias armas en el extranjero sin registro",
+                        "El derecho a la provisión oficial por parte del Estado provincial del armamento, munición, uniforme y equipo reglamentario indispensable para el servicio",
+                        "La obligación de fabricar sus propias balas en su domicilio particular",
+                        "El derecho a prestar su arma a personas civiles que lo soliciten"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Derechos del Personal, Pág. 109-110",
+                "explanation": "El Estado Provincial está obligado por ley a proveer el uniforme reglamentario, chaleco balístico certificado, arma reglamentaria y munición apta para el cumplimiento seguro de la misión policial."
+        },
+        {
+                "id": "os-l14",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "De acuerdo al Decreto N° 1166/18, ¿cómo se definen los ascensos policiales en la Provincia de Santa Fe?",
+                "options": [
+                        "Por elección democrática mediante voto secreto de los vecinos de cada comisaría",
+                        "Mediante concursos públicos de antecedentes y oposición, con exámenes obligatorios en el ISEP, legajo de calificaciones y vacantes aprobadas por decreto del Poder Ejecutivo",
+                        "Por sorteo público realizado anualmente en la Lotería de Santa Fe",
+                        "De forma automática e inmediata al cumplir un año calendario en el grado"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Reglamento de Concursos (Dec. 1166/18), Pág. 126-127",
+                "explanation": "El Decreto 1166/18 estatuye que los ascensos policiales se efectúan grado a grado mediante el sistema de Concursos de Antecedentes y Oposición, con evaluaciones académicas exigentes en el ISEP."
+        },
+        {
+                "id": "os-l15",
+                "difficulty": "dificil",
+                "module": "Legislación Policial",
+                "question": "En el marco del Decreto 461/15, ¿qué autoridad tiene la facultad originaria y exclusiva para imponer las sanciones de Cesantía o Exoneración a un empleado policial?",
+                "options": [
+                        "El Jefe de la Comisaría de distrito donde presta servicios el sumariado",
+                        "El Gobernador de la Provincia de Santa Fe (Poder Ejecutivo), mediante decreto fundado previo dictamen de la Asesoría Letrada y sumario administrativo previo",
+                        "El Jefe del Centro de Operaciones 911 en turno",
+                        "Cualquier fiscal del Ministerio Público de la Acusación de oficio"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Facultades Disciplinarias, Pág. 122-124",
+                "explanation": "Las sanciones expulsivas de destitución (Cesantía y Exoneración) emanan con exclusividad de la máxima autoridad constitucional de la provincia: el Gobernador de la Provincia, mediante decreto previo sumario con debido proceso."
+        },
+        {
+                "id": "os-l16",
+                "difficulty": "facil",
+                "module": "Legislación Policial",
+                "question": "¿Cuál de las siguientes conductas configura una Falta Grave según el catálogo del Decreto 461/15?",
+                "options": [
+                        "Una leve mancha accidental en la bota reglamentaria en horario de lluvia",
+                        "El abandono del servicio de guardia o de custodia asignada sin autorización previa de la superioridad",
+                        "Llegar dos minutos tarde a una formación matutina con aviso justificado",
+                        "Tener el pelo prolijamente cortado según la norma institucional"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Faltas Graves, Pág. 117-118",
+                "explanation": "El abandono de puesto de guardia, vigilancia o custodia asignada sin relevo formal constituye falta grave, por comprometer la seguridad pública y el servicio esencial del Estado."
+        },
+        {
+                "id": "os-l17",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "¿Qué establece la Ley 12.521 respecto a la agremiación sindical del personal policial en actividad en Santa Fe?",
+                "options": [
+                        "Permite la huelga armada y la ocupación de cuarteles",
+                        "Prohíbe taxativamente la sindicalización, agremiación y la realización de medidas de fuerza, huelga o interrupción del servicio de seguridad pública",
+                        "Obliga a todos los agentes a afiliarse al sindicato docente provincial",
+                        "Permite el paro de actividades siempre que sea un fin de semana"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Prohibiciones, Pág. 109",
+                "explanation": "La Ley 12.521 y reiterada jurisprudencia de la Corte Suprema vedan la agremiación sindical y la huelga al personal con estado policial, en virtud del carácter esencial y armado de la seguridad pública del Estado."
+        },
+        {
+                "id": "os-l18",
+                "difficulty": "dificil",
+                "module": "Legislación Policial",
+                "question": "Conforme al régimen de licencias policiales (Decreto 4157/15), ¿cuántos días de Licencia Ordinaria Anual corresponden a un efectivo con más de 15 años y hasta 20 años de servicios en la fuerza?",
+                "options": [
+                        "10 días corridos",
+                        "25 días hábiles",
+                        "90 días corridos",
+                        "5 días hábiles"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Licencias Policiales (Dec. 4157/15), Pág. 112-114",
+                "explanation": "La escala del Decreto 4157/15 fija: hasta 5 años (15 días hábiles); de 5 a 10 años (19 días hábiles); de 10 a 15 años (22 días hábiles); de 15 a 20 años (25 días hábiles); más de 20 años (30 días hábiles)."
+        },
+        {
+                "id": "os-l19",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "¿Qué es la 'Información Sumaria' en el marco del procedimiento disciplinario y en qué casos se instruye?",
+                "options": [
+                        "Un juicio sumario con jurados populares en el patio de la jefatura",
+                        "El procedimiento abreviado y rápido que se instruye para investigar faltas leves o determinar causales de lesiones o extravío de bienes del Estado antes de resolver",
+                        "La publicación mensual de las mejores fotos de la policía en las redes sociales",
+                        "Una prueba escrita múltiple choice que se rinde en el ISEP"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Procedimiento de Información Sumaria, Pág. 123-124",
+                "explanation": "La información sumaria es una investigación de trámite breve y desformalizado, dirigida a esclarecer faltas menores, siniestros de patrulleros o pérdidas de equipos para fijar responsabilidades."
+        },
+        {
+                "id": "os-l20",
+                "difficulty": "facil",
+                "module": "Legislación Policial",
+                "question": "¿Qué sanción corresponde a quien incurra en actos de desobediencia manifiesta a una orden lícita de servicio impartida por un superior jerárquico?",
+                "options": [
+                        "Una felicitación por autonomía personal",
+                        "Falta Grave o Gravísima pasible de arresto severo, suspensión de empleo o cesantía conforme a la gravedad de las consecuencias",
+                        "Un premio monetario otorgado por el ministerio",
+                        "Ninguna sanción, porque el subordinado no está obligado a escuchar a su jefe"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Faltas a la Jerarquía y Mando, Pág. 117-119",
+                "explanation": "La desobediencia a órdenes legítimas de servicio atenta contra el orden disciplinario y la cadena de mando esencial de la policía, constituyendo falta grave o gravísima según la trascendencia del hecho."
+        },
+        {
+                "id": "os-l21",
+                "difficulty": "dificil",
+                "module": "Legislación Policial",
+                "question": "En el concurso de ascenso de Oficial a Subinspector, ¿qué valor tiene el concepto funcional anual del oficial emitido por sus superiores en la junta de calificaciones?",
+                "options": [
+                        "No tiene ningún valor, solo se cuenta el resultado del examen en PC",
+                        "Forma parte esencial del puntaje de Antecedentes y determina la aptitud para el ascenso, requiriendo un concepto mínimo de 'Bueno' o superior para postular",
+                        "Permite aprobar automáticamente sin rendir ningún examen teórico",
+                        "Solo se utiliza para desempatar si dos oficiales tienen exactamente el mismo número de documento"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Calificaciones y Concursos, Pág. 126-128",
+                "explanation": "El Decreto 1166/18 exige que el postulante al ascenso cuente con calificación de concepto positiva y no posea sanciones graves computables en el período calificado como requisito sine qua non."
+        },
+        {
+                "id": "os-l22",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "¿En qué situación de revista se encuentra el personal policial que hace uso de licencia por enfermedad de largo tratamiento ajena al servicio de más de dos meses?",
+                "options": [
+                        "Servicio Efectivo con recargo de guardias",
+                        "Disponibilidad, con retención proporcional de ciertos suplementos conforme a la ley",
+                        "Pase automático a retiro por exoneración",
+                        "Estado de Alerta Permanente en su casa"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Licencias por Enfermedad y Revista, Pág. 111-112",
+                "explanation": "Las licencias médicas prolongadas por afecciones desvinculadas del servicio colocan al personal en situación de Disponibilidad médica transcurrido el plazo inicial reglamentario de servicio efectivo."
+        },
+        {
+                "id": "os-l23",
+                "difficulty": "facil",
+                "module": "Legislación Policial",
+                "question": "¿Qué deber impone la Ley 12.521 respecto a la reserva y confidencialidad en las investigaciones policiales?",
+                "options": [
+                        "Filtrar audios de los operativos a conocidos y grupos de mensajería instantánea",
+                        "Guardar estricto secreto y reserva respecto de los asuntos y actuaciones de servicio que conozca con motivo del ejercicio de sus funciones",
+                        "Publicar el libro de guardia en redes sociales todos los viernes",
+                        "Comentar las declaraciones de los testigos con los vecinos en la vereda"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Legislación Policial: Deber de Reserva y Secreto, Pág. 108",
+                "explanation": "El secreto profesional y funcional es una obligación legal estricta (Art. 12 Ley 12.521). Su quebrantamiento constituye delito penal de violación de secretos y falta gravísima pasible de destitución."
+        },
+        {
+                "id": "os-l24",
+                "difficulty": "media",
+                "module": "Legislación Policial",
+                "question": "Conforme al Decreto 461/15, ¿qué garantía tiene el personal imputado en un sumario administrativo antes de que se dicte sanción en su contra?",
+                "options": [
+                        "Ninguna, la sanción es inapelable y se dicta sin escucharlo",
+                        "El derecho al debido proceso adjetivo: ser notificado formalmente de los cargos, tener acceso a las actuaciones, ofrecer pruebas, ejercer su descargo y contar con defensa técnica letrada",
+                        "La condonación automática de la falta si pide disculpas por escrito",
+                        "El derecho a suspender al instructor sumariante"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Régimen Disciplinario: Garantías del Sumario, Pág. 122-124",
+                "explanation": "El régimen disciplinario moderno consagra el principio de defensa en juicio y debido proceso: imputación precisa, vista del expediente, plazo para alegar y ofrecer pruebas de descargo antes de la resolución final."
+        },
+        {
+                "id": "os-d01",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "Conforme al Art. 211 del Código Procesal Penal de Santa Fe (Ley 12.734), ¿cuál es la función de la policía judicial?",
+                "options": [
+                        "Emitir sentencias definitivas y fijar condenas de prisión",
+                        "Investigar los delitos de acción pública bajo la dirección de los fiscales del Ministerio Público de la Acusación (MPA), impedir que los hechos se lleven a consecuencias ulteriores, individualizar a los culpables y reunir pruebas",
+                        "Dictar leyes provinciales en materia de seguridad",
+                        "Asignar la defensa de oficio a los imputados sin consultar al fiscal"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Policía en Función Judicial (Art. 211 CPP), Pág. 144-145",
+                "explanation": "El Art. 211 del CPP estatuye que los funcionarios de la policía judicial actuarán por disposición y bajo la dirección de los fiscales, debiendo intervenir de urgencia para hacer cesar el delito y conservar los rastros."
+        },
+        {
+                "id": "os-d02",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿Cuándo se considera legalmente que existe 'Flagrancia' según el Art. 212 del Código Procesal Penal de Santa Fe?",
+                "options": [
+                        "Cuando la policía sospecha que alguien cometerá un delito la semana próxima",
+                        "Cuando el autor del hecho es sorprendido en el momento de cometerlo, o inmediatamente después mientras es perseguido por la fuerza pública, la víctima o el clamor popular, o tenga objetos o rastros que hagan presumir vehementemente que acaba de participar en él",
+                        "Cualquier delito denunciado dentro de los 30 días posteriores al hecho",
+                        "Cuando el imputado confiesa voluntariamente en un control de alcoholemia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Flagrancia (Art. 212 CPP), Pág. 145-146",
+                "explanation": "La flagrancia se configura cuando se sorprende al sujeto en plena comisión del hecho o inmediatamente después con persecución ininterrumpida o elementos que evidencian su participación directa y reciente."
+        },
+        {
+                "id": "os-d03",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "De acuerdo al Art. 214 del CPP de Santa Fe, ¿en qué casos está facultada la policía para aprehender a una persona sin necesidad de orden judicial escrita?",
+                "options": [
+                        "Por no llevar puesto el cinturón de seguridad en un camino rural",
+                        "En caso de flagrancia delictiva de acción pública, o cuando se fugue de un establecimiento de detención o teniendo orden de detención firme",
+                        "Por manifestar opiniones contrarias a las directivas del intendente",
+                        "A cualquier persona que camine por la vereda en horas nocturnas sin testigos"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Aprehensión Policial (Art. 214 CPP), Pág. 146-147",
+                "explanation": "La aprehensión sin orden judicial es una medida cautelar excepcional restringida por el Art. 214 a casos de delito flagrante, prófugos de la justicia penal o personas con pedido de captura judicial vigente."
+        },
+        {
+                "id": "os-d04",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "Bajo las directivas del Art. 215 del CPP santafesino, ¿qué requisitos son ineludibles para que el oficial realice una 'Requisa Personal' sin orden judicial?",
+                "options": [
+                        "La mera intuición policial o el aspecto físico del ciudadano",
+                        "Existencia de motivos suficientes y fundados para presumir que la persona oculta en su cuerpo o vestimenta cosas relacionadas a un delito, respetando el pudor de la persona y haciéndose por personal del mismo sexo",
+                        "Que la persona acepte voluntariamente firmar un acta de donación de sus pertenencias",
+                        "Que la requisa se realice exclusivamente dentro del patrullero con las luces apagadas"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Requisa Personal (Art. 215 CPP), Pág. 147-148",
+                "explanation": "La requisa personal sin orden exige 'motivos suficientes y fundados', respeto al decoro y pudor del individuo, y que sea ejecutada por un funcionario del mismo sexo de la persona requisada, con acta y testigos."
+        },
+        {
+                "id": "os-d05",
+                "difficulty": "dificil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "En el sistema procesal penal santafesino (Ley 12.734), ¿cuál es el plazo perentorio e improrrogable que tiene la policía para comunicar al Fiscal del MPA la aprehensión de una persona?",
+                "options": [
+                        "Dentro de los 5 días hábiles posteriores a la detención",
+                        "Inmediatamente de producida la aprehensión, y remitir el informe policial inicial con los elementos secuestrados dentro del plazo perentorio de seis (6) horas",
+                        "A las 48 horas si el aprehendido es mayor de edad y a las 72 horas si es menor",
+                        "No hay plazo, se informa cuando la guardia tenga tiempo libre"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Plazos de Notificación al MPA, Pág. 148-150",
+                "explanation": "El CPP santafesino y las directivas generales del MPA exigen aviso inmediato por vía telefónica/radial y remisión del acta de procedimiento y sumario inicial dentro de las 6 horas de ocurrida la aprehensión."
+        },
+        {
+                "id": "os-d06",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿En qué circunstancias taxativas autoriza el Art. 170 del CPP de Santa Fe a la policía a allanar una morada privada sin orden judicial escrita de un juez?",
+                "options": [
+                        "Para cobrar impuestos atrasados o multas de tránsito",
+                        "Si se introdujera en una casa alguien a quien se persigue para su aprehensión por delito flagrante, o si se oigan voces de auxilio que indiquen comisión de delito, o en caso de incendio o estrago inminente que amenace vidas",
+                        "Cuando los vecinos afirmen que la casa está deshabitada sin constatarlo",
+                        "A cualquier hora del día si los moradores no atienden el timbre en un minuto"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Allanamiento sin Orden (Art. 170 CPP), Pág. 149-150",
+                "explanation": "El Art. 170 protege la garantía constitucional de inviolabilidad del domicilio, permitiendo la irrupción sin orden judicial únicamente ante emergencias vitales extremas: auxilio de personas, desastres graves o persecución inmediata en flagrancia."
+        },
+        {
+                "id": "os-d07",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿Qué establece el Art. 18 de la Constitución Nacional y el CPP de Santa Fe respecto a la declaración del imputado en sede policial?",
+                "options": [
+                        "La policía está obligada a interrogarlo bajo juramento de decir verdad",
+                        "Nadie puede ser obligado a declarar contra sí mismo, y la policía tiene expresamente prohibido recibir declaración indagatoria al imputado",
+                        "El imputado debe confesar obligatoriamente si hay dos testigos presentes",
+                        "Se le puede prometer la libertad a cambio de que delate a sus cómplices en la comisaría"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Garantías del Imputado, Pág. 151-152",
+                "explanation": "La garantía contra la autoincriminación es absoluta. En el sistema acusatorio, la declaración del imputado es un acto de defensa material que solo puede llevarse a cabo ante el fiscal o el juez, asistido por su abogado defensor."
+        },
+        {
+                "id": "os-d08",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "Conforme a la Ley Provincial N° 13.774 (Código de Convivencia de Santa Fe), ¿qué diferencia jurídica sustancial existe entre un 'Delito' y una 'Contravención'?",
+                "options": [
+                        "Los delitos son juzgados por la policía y las contravenciones por la Corte Suprema de Justicia",
+                        "Las contravenciones son infracciones a normas de convivencia social y orden público de menor gravedad que los delitos penales, con sanciones propias (multa, arresto contravencional, clausura o trabajo comunitario) y sin generar antecedentes penales en el RPI nacional",
+                        "No existe ninguna diferencia, son exactamente la misma figura legal",
+                        "Las contravenciones solo pueden ser cometidas por funcionarios públicos de uniforme"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Código de Convivencia: Ley 13.774, Pág. 140-143",
+                "explanation": "El Código de Convivencia (Ley 13.774) sanciona conductas lesivas a la convivencia urbana (ruidos, ebriedad escandalosa, ofensas al pudor, desórdenes) que no alcanzan el umbral de delitos del Código Penal de la Nación."
+        },
+        {
+                "id": "os-d09",
+                "difficulty": "dificil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "En el marco del Código de Convivencia (Ley 13.774), ¿cuál es el plazo de prescripción general de la acción contravencional y de la pena?",
+                "options": [
+                        "Prescribe a los diez años de cometida la falta",
+                        "La acción contravencional prescribe al año de cometida la infracción, y la pena al año de quedar firme la sentencia",
+                        "Las contravenciones no prescriben nunca según la ley provincial",
+                        "Prescribe a las 48 horas de labrada el acta"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Código de Convivencia: Extinción y Prescripción, Pág. 143",
+                "explanation": "El Código de Convivencia establece que la acción para perseguir contravenciones prescribe al término de 1 año contado desde el día en que se cometió la falta, salvo causales de interrupción procesal."
+        },
+        {
+                "id": "os-d10",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "Ante una denuncia por Violencia de Género o Familiar (Ley 11.529 y Ley 26.485), ¿qué temperamento operativo debe adoptar de inmediato la policía?",
+                "options": [
+                        "Enviar a la víctima de regreso a su hogar para que dialogue pacíficamente con el agresor",
+                        "Recibir de inmediato la denuncia sin dilación, brindar contención, solicitar medidas cautelares de exclusión o prohibición de acercamiento y notificar al Fiscal del MPA o Juez de Familia",
+                        "Exigir que la víctima acuda acompañada por dos testigos masculinos obligatoriamente",
+                        "Cobrar una tasa de sellado antes de imprimir el formulario de denuncia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Violencia de Género y Familiar: Ley 11.529, Pág. 268-270 y 284",
+                "explanation": "En violencia de género rige la debida diligencia reforzada: recepción inmediata y gratuita de la denuncia, evaluación del riesgo, notificación a la autoridad judicial y medidas cautelares urgentes de protección a la víctima."
+        },
+        {
+                "id": "os-d11",
+                "difficulty": "dificil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "Conforme al protocolo del Ministerio de Seguridad ante una denuncia de Violencia de Género donde el imputado es un empleado policial en actividad, ¿qué medida cautelar inmediata dispone la superioridad?",
+                "options": [
+                        "Ascenderlo de jerarquía para darle mayor responsabilidad familiar",
+                        "El retiro y retención preventiva inmediata del arma de fuego reglamentaria provista y credencial oficial, con pase transitorio de destino o situación de revista y evaluación psicológica obligatoria",
+                        "Permitirle que conserve el arma si promete no llevarla a su domicilio",
+                        "Ignorar la denuncia por tratarse de un problema de índole estrictamente privada"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Violencia de Género: Personal Policial Involucrado, Pág. 291-292",
+                "explanation": "El protocolo provincial para casos de violencia de género que involucran a miembros de fuerzas de seguridad impone la privación inmediata del arma reglamentaria y la credencial para anular el riesgo letal, con apertura de sumario disciplinario y reevaluación psicofísica."
+        },
+        {
+                "id": "os-d12",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿Qué consagra la Ley Nacional N° 26.743 de Identidad de Género respecto al trato institucional y procesal de las personas?",
+                "options": [
+                        "Que el trato se define según el sexo biológico original inmodificable",
+                        "El derecho al reconocimiento de la identidad de género autopercibida, a ser tratada de acuerdo con su identidad y a ser identificada con su nombre de elección en todos los registros públicos",
+                        "Que para cambiar de nombre es obligatorio realizarse una cirugía de reasignación genital",
+                        "La prohibición de que las personas trans formulen denuncias penales"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Identidad de Género: Ley 26.743, Pág. 277-279",
+                "explanation": "La Ley 26.743 garantiza el derecho humano a la identidad de género autopercibida, prohibiendo exigir cirugías o tratamientos médicos para el reconocimiento legal y obligando a los funcionarios al trato con el nombre de elección."
+        },
+        {
+                "id": "os-d13",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "En la requisa de un vehículo en la vía pública (registro vehicular Art. 215 CPP), ¿cuál es el alcance legal de la inspección policial sin orden judicial?",
+                "options": [
+                        "Desmantelar íntegramente la carrocería del automóvil sin sospecha fundada",
+                        "Inspeccionar los compartimentos del rodado (habitáculo, guantera, baúl) cuando existan indicios vehementes de que oculta objetos provenientes de un ilícito o armas no autorizadas, labrando acta circunstanciada",
+                        "Confiscar el automóvil de inmediato y venderlo en subasta comunal",
+                        "Solo se puede mirar a través de los vidrios exteriores sin abrir las puertas"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Registro Vehicular (Art. 215 CPP), Pág. 147-148",
+                "explanation": "El registro de vehículos automotores es una modalidad del Art. 215 del CPP: procede con motivos previos y fundados de sospecha delictiva, labrando el acta con testigos de actuación para salvaguardar la legalidad del secuestro."
+        },
+        {
+                "id": "os-d14",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿Qué derecho asiste a la persona aprehendida en el instante mismo de su ingreso a la dependencia policial según el CPP?",
+                "options": [
+                        "A que se le retenga incomunicada por diez días sin avisar a nadie",
+                        "A comunicarse de forma inmediata con un familiar o persona de su confianza y con un abogado defensor para hacer saber su situación y lugar de alojamiento",
+                        "A exigir que se le abone una indemnización en efectivo antes de declarar",
+                        "A designar a uno de los policías de guardia como su abogado personal"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Comunicación del Aprehendido, Pág. 150-151",
+                "explanation": "Todo aprehendido tiene el derecho constitucional y legal de realizar una llamada telefónica inmediata a un familiar o defensor de confianza para informar su privación de libertad y sede policial de alojamiento."
+        },
+        {
+                "id": "os-d15",
+                "difficulty": "dificil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "Conforme a la Ley Provincial N° 14.283 de Derechos de las Víctimas, ¿qué trato debe garantizar el personal policial a la persona damnificada por un delito?",
+                "options": [
+                        "Hacerla esperar en el mismo banco de la sala de guardia junto al presunto agresor",
+                        "Trato digno, respetuoso y con empatía, información clara sobre el estado de la causa, medidas de protección frente a posibles represalias y resguardo de su intimidad",
+                        "Obligarla a que investigue por sus propios medios el paradero de los delincuentes",
+                        "Sancionarla si no comparece todos los días a la comisaría a firmar el libro"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derechos de la Víctima: Ley 14.283, Pág. 152-154",
+                "explanation": "La Ley de Víctimas consagra la tutela integral: prohibición de contacto visual o confrontación con el imputado en dependencias oficiales, asistencia interdisciplinaria y protección ante intimidaciones."
+        },
+        {
+                "id": "os-d16",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "En el marco del Código de Convivencia (Ley 13.774), ¿cuál de las siguientes conductas configura una contravención contra la seguridad y el sosiego público?",
+                "options": [
+                        "Caminar por la vereda con ropa deportiva en horario diurno",
+                        "La portación ostensible de armas blancas o elementos contundentes aptos para agredir en lugares de concurrencia pública sin justificación legal",
+                        "Efectuar compras en un comercio habilitado pagando con tarjeta de débito",
+                        "Conducir un automóvil con la documentación reglamentaria en regla"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Código de Convivencia: Contravenciones Específicas, Pág. 141-142",
+                "explanation": "La portación injustificada de armas blancas o elementos intimidantes en espectáculos públicos, paseos o la vía pública es una falta contravencional típica del Código de Convivencia santafesino."
+        },
+        {
+                "id": "os-d17",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿Quién es el encargado de dictar una 'Medida Cautelar de Prisión Preventiva' en el sistema penal de Santa Fe?",
+                "options": [
+                        "El Oficial de Servicio de la Comisaría de la jurisdicción",
+                        "Un Juez Penal de la Investigación Penal Preparatoria (IPP) en audiencia oral y pública a requerimiento fundado del Fiscal",
+                        "El Comisario General de Policía en acuerdo general de jefatura",
+                        "El Intendente municipal mediante decreto de urgencia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Prisión Preventiva y Medidas Cautelares, Pág. 154-156",
+                "explanation": "La prisión preventiva es una resolución estrictamente jurisdiccional dictada por un Juez Penal en audiencia contradictoria, tras acreditarse verosimilitud de autoría y peligro de fuga o entorpecimiento probatorio."
+        },
+        {
+                "id": "os-d18",
+                "difficulty": "dificil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "De acuerdo al Art. 216 del CPP de Santa Fe, ¿qué potestad tiene la policía para clausurar preventivamente un local o preservar un lugar?",
+                "options": [
+                        "Clausurar locales indefinidamente sin dar aviso al MPA",
+                        "Disponer la custodia o clausura preventiva urgente del lugar donde se cometió el delito para impedir que se alteren los rastros, dando inmediata cuenta al Fiscal para su convalidación",
+                        "Vender las mercaderías del local clausurado para solventar el gasto policial",
+                        "Demoler la propiedad si los vecinos lo solicitan por unanimidad"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Medidas Urgentes sobre el Lugar (Art. 216 CPP), Pág. 149",
+                "explanation": "El Art. 216 faculta a la policía a adoptar medidas precautorias inmediatas de clausura o custodia perimetral sobre inmuebles donde se cometió un delito, sometiéndolas de inmediato a ratificación fiscal."
+        },
+        {
+                "id": "os-d19",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "En caso de aprehensión de una persona que presenta lesiones físicas visibles o manifiesta haber sido golpeada, ¿qué recaudo procesal es obligatorio cumplimentar?",
+                "options": [
+                        "Hacerla firmar un papel en blanco deslindando responsabilidades",
+                        "Hacerla examinar de forma inmediata por el Médico de Policía en turno o en un efector público de salud, adjuntando el dictamen médico oficial al legajo de prevención",
+                        "Esperar que transcurran cinco días hasta que las lesiones desaparezcan",
+                        "Omitir cualquier mención de las heridas en el libro de guardia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Constatación Médica de Aprehendidos, Pág. 150-151",
+                "explanation": "El examen médico legal de todo aprehendido al ingresar y egresar de la sede policial es un recaudo constitucional y de derechos humanos ineludible para constatar su integridad física y evitar alegaciones de apremios."
+        },
+        {
+                "id": "os-d20",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿Qué valor probatorio tiene en un juicio oral la manifestación informal o supuesta confesión que un aprehendido haga a los policías en el patrullero?",
+                "options": [
+                        "Tiene valor de prueba plena irrefutable que condena automáticamente al imputado",
+                        "Carece de todo valor probatorio en juicio, ya que la policía tiene prohibido interrogar al detenido y no se encuentra presente su defensor técnico",
+                        "Vale el doble que una pericia de ADN",
+                        "Se publica en el acta como verdad jurídica indiscutible"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Prohibición de Declaración ante la Policía, Pág. 151",
+                "explanation": "En el sistema acusatorio, las 'confesiones' informales prestadas ante personal policial son nulas de nulidad absoluta y violan la garantía constitucional de defensa en juicio (Art. 18 CN)."
+        },
+        {
+                "id": "os-d21",
+                "difficulty": "dificil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "De acuerdo a la Ley de Violencia Familiar N° 11.529, ¿quiénes pueden formular la denuncia ante hechos de violencia doméstica?",
+                "options": [
+                        "Únicamente los abogados matriculados en el colegio de la ciudad",
+                        "La propia víctima, sus familiares, o cualquier persona que haya tomado conocimiento directo de los hechos, pudiendo incluso los servicios asistenciales y educativos formular la comunicación de oficio",
+                        "Solo el cónyuge varón con título de propiedad del inmueble",
+                        "Nadie puede denunciar si no existe sangre visible en la vestimenta"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Violencia Familiar: Ley 11.529, Pág. 284-286",
+                "explanation": "La Ley 11.529 amplía la legitimación activa para denunciar situaciones de violencia intrafamiliar a la víctima y a cualquier tercero o institución educativa/sanitaria que tome conocimiento, protegiendo a niños y vulnerables."
+        },
+        {
+                "id": "os-d22",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "En un control policial de rutina, ¿puede el preventor secuestrar un vehículo por el solo hecho de que el conductor no tenga seguro automotor al día?",
+                "options": [
+                        "Sí, remitiéndolo como secuestro judicial penal a la fiscalía de homicidios",
+                        "No constituye delito penal, sino una infracción a la Ley Nacional de Tránsito N° 24.449, correspondiendo en su caso la retención preventiva administrativa en coordinación con la autoridad municipal de control",
+                        "Sí, quemando el vehículo en el corralón policial de inmediato",
+                        "No, la policía no puede controlar documentación vehicular bajo ninguna circunstancia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal y Tránsito: Ley 24.449, Pág. 40 y 144",
+                "explanation": "La falta de seguro es una infracción de tránsito de naturaleza administrativa municipal/provincial (Ley 24.449), que habilita retención preventiva administrativa pero no apertura de causa penal por delito."
+        },
+        {
+                "id": "os-d23",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿Qué es la 'Exclusión de Hogar' dictada en una causa de violencia familiar y cómo la ejecuta la fuerza policial?",
+                "options": [
+                        "La demolición de la vivienda familiar mediante maquinaria pesada",
+                        "La orden judicial que dispone el retiro físico inmediato del agresor del domicilio conyugal y la prohibición de acercarse a la víctima y al inmueble",
+                        "El corte de los servicios de agua y gas en la vivienda",
+                        "El traslado de la víctima hacia otra provincia de forma obligatoria"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Violencia Familiar: Medidas Cautelares, Pág. 285",
+                "explanation": "La exclusión de hogar es una medida de protección de urgencia que ordena el desalojo del agresor del hogar común, facultando el auxilio de la fuerza pública para notificarlo y asegurar el retiro seguro de sus efectos personales."
+        },
+        {
+                "id": "os-d24",
+                "difficulty": "media",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "En el procedimiento contravencional regulado por la Ley 13.774, ¿quién tiene competencia jurisdiccional para juzgar las contravenciones cometidas en la provincia?",
+                "options": [
+                        "El comisario de la seccional mediante juicio verbal de policía",
+                        "Los Jueces Comunitarios de las Pequeñas Causas o Jueces de Primera Instancia de Distrito conforme a la ley",
+                        "El presidente del centro de comerciantes barrial",
+                        "Un jurado de cinco suboficiales de la guardia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Código de Convivencia: Competencia Judicial, Pág. 142-143",
+                "explanation": "Con la reforma del Código de Convivencia (Ley 13.774), el juzgamiento de faltas contravencionales dejó de estar en manos policiales y corresponde exclusivamente al Poder Judicial provincial (Juzgados Comunitarios y de Faltas)."
+        },
+        {
+                "id": "os-d25",
+                "difficulty": "dificil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "¿Qué recaudo formal debe cumplimentarse de forma indispensable en un allanamiento domiciliario diurno con orden judicial?",
+                "options": [
+                        "Ingresar sin exhibir la orden a los moradores para no generar desconfianza",
+                        "Notificar la orden judicial al morador entregándole copia fundada del mandamiento, y realizar el acto con la presencia continua de dos testigos civiles hábiles no vinculados a la policía",
+                        "Llevar un camarógrafo de televisión abierta dentro del dormitorio principal",
+                        "Hacer firmar el acta únicamente a los menores de edad que se encuentren en la casa"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Formalidades del Allanamiento (Art. 169 CPP), Pág. 149-150",
+                "explanation": "El allanamiento con orden (Art. 169 CPP) exige exhibición de la manda judicial a los ocupantes, presencia constante de dos testigos de actuación hábiles e imparciales y redacción minuciosa del acta."
+        },
+        {
+                "id": "os-d26",
+                "difficulty": "facil",
+                "module": "Derecho Procesal Penal y Convivencia",
+                "question": "Si una persona aprehendida por un delito se encuentra en estado de ebriedad profunda o intoxicación aguda, ¿dónde debe ser trasladada inicialmente por el personal policial?",
+                "options": [
+                        "A un calabozo oscuro hasta que se le pase el efecto",
+                        "De forma inmediata a un hospital o efector público de salud para su atención y desintoxicación médica urgente con custodia policial",
+                        "A la casa de un vecino de la comisaría para que duerma",
+                        "Al polígono de tiro para una prueba de sobriedad"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Derecho Procesal Penal: Atención Médica Inmediata, Pág. 150",
+                "explanation": "Todo aprehendido en estado de intoxicación severa o compromiso de conciencia debe ser derivado prioritariamente a un centro asistencial médico; la custodia policial vela por su seguridad sin demorar la atención sanitaria."
+        },
+        {
+                "id": "os-t01",
+                "difficulty": "facil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿Cuáles son las 'Cuatro Reglas Cardinales de Seguridad' con armas de fuego obligatorias e inviolables en la doctrina policial santafesina (MIRAF)?",
+                "options": [
+                        "1. Asumir toda arma siempre como cargada; 2. Nunca apuntar a nada ni a nadie que no se esté dispuesto a destruir o lesionar; 3. Mantener el dedo índice fuera del guardamonte y sobre el armazón hasta tomar la decisión consciente de disparar; 4. Estar seguro del blanco y de lo que hay detrás y alrededor de él",
+                        "1. Disparar siempre primero; 2. Limpiar el arma con nafta; 3. Guardar el arma cargada bajo la almohada; 4. Prestar municiones a los camaradas",
+                        "1. Quitar el seguro en todo momento; 2. Apuntar al suelo en recintos cerrados; 3. No usar protectores auditivos; 4. Mirar por el cañón si está trabada",
+                        "1. Usar munición recargada; 2. Tirar con una sola mano; 3. Correr con el dedo en el disparador; 4. Desarmar el arma con cartucho en recámara"
+                ],
+                "correctIndex": 0,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Reglas Cardinales de Seguridad, Pág. 305-307",
+                "explanation": "Las 4 reglas de oro de Jeff Cooper adoptadas por el ISEP son la base de la seguridad con armas de fuego: tratar toda arma como cargada, no apuntar a lo que no se va a destruir, dedo fuera del disparador y seguridad del entorno del blanco."
+        },
+        {
+                "id": "os-t02",
+                "difficulty": "facil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En la pistola reglamentaria provista Bersa Thunder 9 Pro / TPR9, ¿qué función cumple la 'Palanca de Desamartillado' (Decocker)?",
+                "options": [
+                        "Aumenta la cadencia de disparo convirtiendo la pistola en ametralladora automática",
+                        "Permite abatir de manera 100% segura el martillo montado sin golpear el percutor, pasando el arma de Simple Acción a Doble Acción",
+                        "Expulsa automáticamente todos los cartuchos del cargador al suelo",
+                        "Ajusta la altura del alza y el guión de puntería"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Mecanismos de la Pistola Bersa, Pág. 311-314",
+                "explanation": "El decocker o palanca de desamartillado es un mecanismo de seguridad fundamental: interpone un fiador que bloquea el percutor mientras libera el martillo, dejándola en doble acción sin riesgo de disparo accidental."
+        },
+        {
+                "id": "os-t03",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿En qué consiste la 'Posición SUL' en las tácticas de tiro policial y en qué circunstancias operativas debe utilizarse?",
+                "options": [
+                        "Disparar acostado de espaldas con las piernas cruzadas",
+                        "Arma empuñada con ambas manos pegada al pecho a la altura del plexo solar, con el cañón apuntando 45° hacia el suelo entre los pies; se utiliza para desplazamientos en equipo, recintos cerrados o aglomeraciones evitando apuntar a camaradas",
+                        "Apuntar al cielo con un solo brazo extendido hacia arriba en señal de alerta",
+                        "Guardar el arma en la mochila del patrullero mientras se camina"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Posición Táctica SUL, Pág. 296-298",
+                "explanation": "La Posición SUL (término portugués para 'sur', cañón apuntando hacia abajo) mantiene el arma lista para un encare inmediato sin 'barrer' con la boca del cañón a compañeros de binomio o civiles en pasillos y allanamientos."
+        },
+        {
+                "id": "os-t04",
+                "difficulty": "facil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En la 'Posición Isósceles Modificado' de tiro con pistola, ¿cuál es la disposición corporal correcta del tirador?",
+                "options": [
+                        "Cuerpo totalmente de perfil, brazo hábil estirado y brazo débil en el bolsillo",
+                        "Pies separados al ancho de hombros, pie retrasado para estabilidad, torso ligeramente inclinado hacia adelante de frente al blanco, brazos extendidos con ligera flexión elástica de codos y empuñamiento firme con ambas manos",
+                        "De rodillas con la espalda encorvada mirando hacia el suelo",
+                        "Saltando en movimiento mientras se acciona la cola del disparador"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Posición Isósceles Modificado, Pág. 297",
+                "explanation": "El Isósceles Modificado es la posición moderna por excelencia: aprovecha la protección frontal del chaleco balístico, absorbe el retroceso con el torso adelantado y permite transiciones rápidas a múltiples blancos."
+        },
+        {
+                "id": "os-t05",
+                "difficulty": "dificil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿Cómo se clasifica y cuál es el procedimiento técnico inmediato para resolver una 'Traba Tipo 1' (Fallo de percusión o recámara vacía con corredera cerrada)?",
+                "options": [
+                        "Desarmar la corredera en el suelo con un destornillador",
+                        "Maniobra de emergencia 'TAP - RACK - BANG': 1. Golpe enérgico con la palma a la base del cargador (TAP); 2. Ciclado violento de la corredera hacia atrás expulsando la falla (RACK); 3. Reevaluar y disparar si persiste la amenaza (BANG)",
+                        "Guardar el arma en la cartuchera y esperar diez minutos",
+                        "Mirar por la boca del cañón para verificar si el perdigón se asoma"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Trabas e Interrupciones (Falla Tipo 1), Pág. 306-307",
+                "explanation": "La falla Tipo 1 se soluciona instantáneamente con Tap-Rack-Bang: asentar el cargador que pudo estar mal calzado, ciclar la corredera para alimentar un cartucho nuevo y recomponer la puntería."
+        },
+        {
+                "id": "os-t06",
+                "difficulty": "dificil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En una 'Doble Alimentación' (Traba Tipo 3, donde una vaina servida o cartucho quedó en recámara mientras otro intenta ingresar trabando la corredera), ¿cuál es el procedimiento secuencial correcto?",
+                "options": [
+                        "Seguir apretando el disparador hasta que el arma se destrabe sola",
+                        "1. Buscar cobertura; 2. Bloquear corredera atrás con el retén; 3. Extraer el cargador (forzándolo si está presionado); 4. Ciclar enérgicamente la corredera dos o tres veces para expulsar los cartuchos trabados; 5. Insertar un nuevo cargador; 6. Liberar corredera para alimentar recámara",
+                        "Golpear el arma contra el pavimento para que caiga la bala trabada",
+                        "Entregarle el arma al agresor para que la revise"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Doble Alimentación (Falla Tipo 3), Pág. 307-308",
+                "explanation": "La doble alimentación no sale con un simple tap-rack. Requiere obligatoriamente retener corredera, retirar cargador para liberar la presión sobre el elevador, barrer la recámara ciclando corredera y recargar con cargador fresco bajo cobertura."
+        },
+        {
+                "id": "os-t07",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿Qué diferencia existe entre una 'Recarga Táctica' y una 'Recarga de Emergencia' (Rápida) con pistola?",
+                "options": [
+                        "La recarga táctica se hace con los ojos cerrados y la de emergencia con los ojos abiertos",
+                        "La Recarga Táctica se realiza aprovechando una pausa en el enfrentamiento o tras cobertura, habiendo aún cartucho en recámara, conservando el cargador parcialmente usado; la Recarga de Emergencia se produce con corredera abierta trabada atrás por haberse agotado toda la munición",
+                        "No existe diferencia, ambas son la misma maniobra técnica",
+                        "La recarga táctica solo la pueden hacer los francotiradores"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Tipos de Recarga, Pág. 308-309",
+                "explanation": "La recarga táctica se ejecuta preventivamente con cartucho en recámara para tener el arma al 100% de capacidad guardando el cargador con cartuchos remanentes; la de emergencia es reactiva, con el arma vacía (corredera retenida atrás)."
+        },
+        {
+                "id": "os-t08",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En la escopeta policial calibre 12/70 provista (Hatsan Escort / Magtech), ¿cuál es la 'Condición de Servicio' obligatoria de transporte en el patrullero según el manual?",
+                "options": [
+                        "Con cartucho en recámara, martillo montado y seguro sacado",
+                        "Tubo almacén cargador abastecido, sin cartucho en recámara (recámara vacía), mecanismo cerrado y sin seguro puesto (para accionar directamente el guardamano móvil ante necesidad)",
+                        "Totalmente desarmada en piezas dentro del baúl",
+                        "Con un cartucho de plomo trabado a propósito en la ventana expulsora"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Escopeta Policial y Seguridad en Móvil, Pág. 341-343",
+                "explanation": "La doctrina ISEP prescribe transportar la escopeta en el patrullero con recámara despejada (vacía) y sin seguro: ante una agresión armada, el efectivo solo debe ciclar el guardamano móvil ('trombón') para alimentar y disparar sin demoras."
+        },
+        {
+                "id": "os-t09",
+                "difficulty": "dificil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿En qué consiste la 'Recarga de Emergencia' en una escopeta calibre 12/70 cuando se han agotado todos los cartuchos del almacén cargador?",
+                "options": [
+                        "Arrojar la escopeta y correr hacia el patrullero",
+                        "Con el guardamano móvil retenido hacia atrás (recámara y ventana expulsora abiertas), depositar un cartucho directamente a través de la ventana expulsora sobre el elevador y empujar enérgicamente el guardamano hacia adelante",
+                        "Desarmar la culata con la mano izquierda",
+                        "Colocar los cartuchos al revés para que entren más fácil"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Recarga de Emergencia en Escopeta, Pág. 340-341",
+                "explanation": "Ante la escopeta vacía y abierta, la alimentación más rápida es la introducción directa de un cartucho por la ventana de expulsión sobre el elevador ('violín') y cerrar de inmediato el guardamano hacia adelante."
+        },
+        {
+                "id": "os-t10",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿Cuál es la función del 'Liberador del Guardamano Móvil' en una escopeta de repetición?",
+                "options": [
+                        "Desmontar la cantonera de goma de la culata",
+                        "Permite desacerrojar y abrir el mecanismo deslizando el guardamano hacia atrás sin necesidad de haber producido un disparo previo",
+                        "Regular la dispersión de las postas de plomo en el aire",
+                        "Bloquear definitivamente el gatillo para siempre"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Mecanismo de Escopeta 12/70, Pág. 334-335",
+                "explanation": "El botón o palanca liberadora del guardamano (ubicada cerca del arco guardamonte) permite destrabar la corredera para descargar o abrir el arma cuando no se ha efectuado el disparo que la libera automáticamente."
+        },
+        {
+                "id": "os-t11",
+                "difficulty": "dificil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En un enfrentamiento armado con alta descarga de adrenalina (estrés de combate), ¿qué fenómeno psicofisiológico afecta la visión del oficial en un 70% de los casos según el manual?",
+                "options": [
+                        "Visión telescópica con zoom infrarrojo",
+                        "Visión de Túnel (pérdida severa de la visión periférica, focalizando la vista exclusivamente en la amenaza directa o en el arma del agresor)",
+                        "Ceguera nocturna total instantánea",
+                        "Visión en cámara rápida sin control"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Psicología del Tirador y Estrés de Combate, Pág. 309-311 y 327",
+                "explanation": "Bajo estrés letal extremo, el sistema nervioso simpático segrega adrenalina masiva produciendo taquicardia (>140 lpm) y 'visión de túnel' (se pierde hasta el 70% del campo visual periférico), requiriendo escanear activamente 360° tras disparar."
+        },
+        {
+                "id": "os-t12",
+                "difficulty": "facil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿Qué alteración sensorial acompaña habitualmente a la visión de túnel durante un tiroteo?",
+                "options": [
+                        "Aumento sobrenatural del olfato",
+                        "Exclusión Auditiva (el cerebro atenúa o suprime la percepción consciente de las detonaciones y ruidos del entorno)",
+                        "Pérdida absoluta del equilibrio que impide estar de pie",
+                        "Capacidad para escuchar susurros a doscientos metros de distancia"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Exclusión Auditiva, Pág. 310",
+                "explanation": "La exclusión auditiva es un fenómeno fisiológico defensivo por el cual el cerebro bloquea el sonido de los propios disparos para concentrar los recursos neurológicos en la supervivencia inmediata."
+        },
+        {
+                "id": "os-t13",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En táctica policial y balística, ¿cuál es la diferencia crucial entre una 'Cobertura' y un 'Ocultamiento'?",
+                "options": [
+                        "Son dos términos sinónimos en tiro táctico",
+                        "Cobertura es todo elemento material capaz de detener físicamente el impacto de proyectiles balísticos (ej: bloque de motor, pared de hormigón armado); Ocultamiento solo impide la visualización por parte del agresor pero no detiene los proyectiles (ej: arbusto, puerta de madera, chapa de automóvil)",
+                        "Ocultamiento es usar chaleco antibalas y cobertura es usar casco",
+                        "Cobertura solo sirve de día y ocultamiento solo de noche"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Coberturas y Ocultamientos, Pág. 311-313",
+                "explanation": "El ISEP remarca que confundir ocultamiento con cobertura puede ser fatal: una chapa de puerta de auto oculta la figura del policía pero un proyectil 9mm o de fusil la atraviesa fácilmente, mientras que el bloque de motor o un pilar de hormigón constituyen cobertura real."
+        },
+        {
+                "id": "os-t14",
+                "difficulty": "dificil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "Al momento de salir de urgencia de un patrullero bajo fuego frontal o lateral, ¿qué sector del vehículo ofrece la mejor cobertura balística inmediata según el manual?",
+                "options": [
+                        "El baúl trasero o la rueda de auxilio plástica",
+                        "El bloque del motor y los parantes delanteros ('Pilar A'), inclinando el cuerpo para reducir silueta y usando las bisagras y masa metálica delantera",
+                        "El centro de los asientos de tela traseros",
+                        "El techo corredizo o el capó de chapa simple"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Cobertura Vehicular y Apeo, Pág. 330-333",
+                "explanation": "El bloque de motor, las ruedas delanteras y los parantes macizos delanteros son las únicas partes del patrullero con densidad suficiente para frenar proyectiles de armas de fuego comunes."
+        },
+        {
+                "id": "os-t15",
+                "difficulty": "facil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿En qué consiste la 'Correcta Alineación de Aparatos de Puntería' con pistola?",
+                "options": [
+                        "Mirar únicamente el blanco ignorando el arma",
+                        "Alinear la parte superior del guión a la misma altura horizontal del alza metálica, manteniendo igual luz ('luz de miras') a ambos costados de la ranura, con foco visual nítido en el guión",
+                        "Colocar el guión por encima de la corredera apuntando al cielo",
+                        "Cerrar ambos ojos al presionar el disparador"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Alineación de Miras, Pág. 300-302",
+                "explanation": "La puntería precisa requiere enrasar el guión con la cima del alza con luces simétricas a los lados, enfocando la vista cristalinamente en el guión delantero ('front sight focus')."
+        },
+        {
+                "id": "os-t16",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En el arme de la pistola Bersa provista, ¿qué acción está expresamente desaconsejada durante el ciclado manual de la corredera?",
+                "options": [
+                        "Tirar la corredera con fuerza hacia atrás y soltarla libremente para que avance por inercia del resorte recuperador",
+                        "Acompañar la corredera con la mano hacia adelante mientras avanza, lo cual suele provocar que el cartucho no entre completamente a recámara e impida el acerrojado",
+                        "Verificar visualmente que ingresó un cartucho",
+                        "Mantener el dedo fuera del arco guardamonte"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Ciclado y Carga de Pistola, Pág. 305",
+                "explanation": "Acompañar la corredera con la mano frena la energía del resorte recuperador de corredera e impide que el cerrojo acerroje completamente, provocando interrupciones de disparo de tipo incompleto."
+        },
+        {
+                "id": "os-t17",
+                "difficulty": "facil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿Qué tipo de cartuchería para escopeta 12/70 se utiliza comúnmente para el control de disturbios públicos por su efecto no letal relativo?",
+                "options": [
+                        "Cartuchos con postas de plomo macizo (Propósito General)",
+                        "Cartuchos de Propósito Antitumulto (AT) con postas o perdigones de goma de impacto controlado",
+                        "Proyectiles perforantes de blindaje de acero",
+                        "Granadas fumígenas de mortero pesado"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Cartuchería de Escopeta 12/70, Pág. 317-319",
+                "explanation": "Los cartuchos AT (Antitumulto) están compuestos por postas de caucho/goma diseñadas para disuadir e impactar por dolor kinético a distancia sin penetración letal si se emplean respetando las distancias de seguridad."
+        },
+        {
+                "id": "os-t18",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En la mecánica de disparo de la pistola Bersa, ¿qué diferencia existe entre el primer disparo en 'Doble Acción' y los siguientes en 'Simple Acción'?",
+                "options": [
+                        "La doble acción solo dispara balas de fogueo y la simple balas reales",
+                        "En Doble Acción, al presionar el disparador, este monta el martillo hacia atrás y lo libera en un solo recorrido más largo y pesado (~4,5 kg); en Simple Acción, el martillo ya queda montado por el retroceso de la corredera, requiriendo un recorrido muy corto y liviano (~2 kg)",
+                        "En simple acción el arma dispara ráfagas automáticas de tres proyectiles",
+                        "La simple acción exige amartillar el arma con los dientes antes de cada disparo"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Acción Simple y Doble, Pág. 312-314",
+                "explanation": "La pistola Bersa TPR9 es de doble/simple acción (DA/SA). El primer disparo con martillo abatido tiene un recorrido largo y pesado de seguridad (DA), pero los disparos sucesivos son de simple acción (SA) con disparador suave y corto."
+        },
+        {
+                "id": "os-t19",
+                "difficulty": "dificil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿Qué maniobra de seguridad debe realizarse de forma obligatoria e inmediata al recibir o entregar un arma de fuego a otro efectivo policial?",
+                "options": [
+                        "Apretar el disparador apuntando al piso para ver si suena el chasquido",
+                        "Verificación de seguridad en tres pasos: 1. Quitar cargador; 2. Bloquear corredera abierta atrás; 3. Inspección visual y táctil de la recámara comprobando que esté vacía, entregándola con corredera abierta y cañón hacia zona segura",
+                        "Ponerle cinta adhesiva en la boca del cañón",
+                        "Guardarla cargada directamente en la guantera sin mirarla"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Entrega y Recepción Segura, Pág. 306-308",
+                "explanation": "Toda entrega o recepción de armamento exige el 'despeje' o condición de seguridad: cargador afuera, recámara abierta inspeccionada ocular y digitalmente, ofreciendo el arma abierta para que el receptor verifique que no contiene munición."
+        },
+        {
+                "id": "os-t20",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "Conforme al Manual ISEP, ¿por qué no debe utilizarse aceite lubricante en exceso en el interior del cañón o en el percutor de una pistola de servicio?",
+                "options": [
+                        "Porque mancha el pantalón del uniforme",
+                        "Porque el exceso de aceite acumula pólvora quemada y partículas de polvo, pudiendo inactivar los fulminantes de la munición de servicio o provocar sobrepresión peligrosa al disparar",
+                        "Porque el aceite está prohibido por los instructores de tiro",
+                        "Solo porque tiene un olor muy fuerte"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Limpieza y Mantenimiento de Armas, Pág. 311-312",
+                "explanation": "El exceso de lubricante en la recámara o canal de aguja percutora degrada los fulminantes químicos de los cartuchos y atrae carbón y arenilla, originando fallos de percusión."
+        },
+        {
+                "id": "os-t21",
+                "difficulty": "facil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "¿Cómo se denomina la interrupción de disparo en la cual la vaina vacía disparada no es expulsada completamente y queda atrapada entre la corredera y el cañón en posición vertical?",
+                "options": [
+                        "Fallo de percusión en frío",
+                        "Falla Tipo 2, conocida comúnmente como 'Chimenea' o 'Stovepipe'",
+                        "Explosión de recámara inversa",
+                        "Traba de fulminante doble"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Trabas e Interrupciones (Falla Tipo 2), Pág. 306",
+                "explanation": "La falla Tipo 2 o chimenea ('stovepipe') ocurre cuando la vaina queda pinzada verticalmente en la ventana expulsora, solucionándose rápidamente con la técnica Tap-Rack-Bang."
+        },
+        {
+                "id": "os-t22",
+                "difficulty": "dificil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "En el combate armado nocturno o con baja luminosidad, ¿cuál es la técnica táctica de empleo de linterna recomendada para no delatar la posición exacta del cuerpo?",
+                "options": [
+                        "Mantener la linterna encendida permanentemente atada a la frente",
+                        "Técnicas de iluminación intermitente (ráfagas de luz momentáneas para identificar y disparar, apagando y desplazándose lateralmente) como la Técnica Harries o Chapman",
+                        "Encender una vela dentro del móvil",
+                        "Gritar con la linterna en el pecho para que los sospechosos no se asusten"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Técnicas de Baja Luminosidad, Pág. 315-316",
+                "explanation": "La luz constante es un blanco perfecto para el agresor. En baja luminosidad se aplican pulsos de luz para identificar el blanco y reubicarse ('luz momentánea, disparo y desplazamiento')."
+        },
+        {
+                "id": "os-t23",
+                "difficulty": "media",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "Conforme a la doctrina de tiro policial MIRAF, ¿qué zona anatómica de impacto se prioriza al repeler una agresión armada letal inminente que pone en peligro la vida?",
+                "options": [
+                        "Disparar exclusivamente a los dedos de las manos del agresor",
+                        "El centro de masa corporal (torso / pecho), por ser la superficie de mayor dimensión que garantiza mayor probabilidad de impacto y detención de la agresión",
+                        "Disparar al cielo o al pavimento para que las esquirlas reboten",
+                        "Disparar al arma que sostiene en la mano"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Centro de Masa Corporal, Pág. 314-315",
+                "explanation": "Bajo estrés letal extremo con pulso acelerado, apuntar a extremidades pequeñas es ineficaz y de altísimo riesgo de desvío; el blanco táctico estándar es el centro de masa corporal para asegurar la neutralización de la amenaza letal."
+        },
+        {
+                "id": "os-t24",
+                "difficulty": "facil",
+                "module": "Armamento y Tiro (MIRAF)",
+                "question": "Al finalizar una práctica de tiro en polígono o un enfrentamiento armado, ¿qué acción debe ejecutar el oficial con su pistola antes de enfundar?",
+                "options": [
+                        "Guardarla amartillada con el dedo en el disparador",
+                        "Escanear el entorno en 360° para descartar nuevas amenazas, desamartillar mediante la palanca Decocker de forma segura y enfundar el arma sin mirar la funda mientras se mantiene la vista al frente",
+                        "Disparar los tiros que le queden hacia el techo",
+                        "Desarmar la corredera en el suelo"
+                ],
+                "correctIndex": 1,
+                "source": "Manual ISEP Oficial de Policía - Armamento y Tiro: Escaneo Táctico y Reenfunde Seguro, Pág. 308-310",
+                "explanation": "El escaneo táctico de 360° rompe la visión de túnel del combate; el desamartillado seguro con el decocker pasa el arma a doble acción y el reenfunde a ciegas permite mantener la vigilancia visual sobre el entorno amenazante."
         }
-,
-        {
-            "id": "os-leg-m01",
-            "difficulty": "media",
-            "question": "¿Cómo se define la superioridad jerárquica según el Artículo 4 de la Ley del Personal Policial N.° 12.521?",
-            "options": [
-                "La que surge por haber alcanzado un grado más elevado en la escala jerárquica única.",
-                "La que tiene el personal con respecto a otro exclusivamente por mayor antigüedad en el grado.",
-                "La que deviene del cargo específico o función orgánica asignada por orden del día.",
-                "La que se adquiere únicamente al obtener el título de grado universitario en el I.Se.P."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 4",
-            "explanation": "La superioridad jerárquica (Art. 4, L.P.P. 12.521) es la que surge por haber alcanzado un grado más elevado en la escala jerárquica. La permanencia en el mismo grado configura la superioridad por antigüedad."
-        },
-        {
-            "id": "os-leg-m02",
-            "difficulty": "media",
-            "question": "¿Cuál de las siguientes afirmaciones respecto del Cuadro Único de la Escala Jerárquica (Ley 12.521/06) es correcta?",
-            "options": [
-                "Se divide en tres cuadros independientes: Oficiales Superiores, Oficiales Jefes y Suboficiales.",
-                "Estructura un cuadro único de grados que abarca desde Suboficial de Policía hasta Director General de Policía.",
-                "Mantiene la vigencia del régimen jerárquico de la antigua Ley 6769.",
-                "Excluye al agrupamiento de Ejecución de las obligaciones disciplinarias."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 3 y 4",
-            "explanation": "Una de las reformas fundamentales de la Ley 12.521/06 fue la unificación de la escala jerárquica en un cuadro único integrado por los agrupamientos de Ejecución, Coordinación, Supervisión y Dirección."
-        },
-        {
-            "id": "os-leg-m03",
-            "difficulty": "media",
-            "question": "En el marco de la Ley 12.521, ¿qué efecto jurídico principal produce la 'superioridad por cargo' en la relación funcional?",
-            "options": [
-                "Impone únicamente un deber formal de saludo institucional sin obligación de acatamiento operativo.",
-                "Otorga competencia directa para impartir órdenes de servicio que el subordinado tiene la obligación legal de cumplir.",
-                "Faculta al superior a modificar las remuneraciones y suplementos particulares del dependiente.",
-                "Genera automáticamente la promoción al grado inmediato superior del jefe de dependencia."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 4",
-            "explanation": "La superioridad por cargo resulta de la dependencia orgánica. A diferencia de la jerárquica o por antigüedad (que imponen deber de respeto), la superioridad por cargo otorga competencia directa para impartir órdenes del servicio que deben ser acatadas obligatoriamente."
-        },
-        {
-            "id": "os-leg-m04",
-            "difficulty": "media",
-            "question": "Conforme al Artículo 25 de la Ley 12.521, ¿qué personal policial está legalmente investido de 'Autoridad Policial' en la Provincia de Santa Fe?",
-            "options": [
-                "Todos los integrantes de la fuerza policial, cualquiera sea su escalafón de revista.",
-                "Exclusivamente el personal perteneciente al Escalafón General.",
-                "El personal de los Escalafones Profesional y Técnico con título habilitante.",
-                "Únicamente el personal que ostente jerarquías de Oficiales Jefes y Superiores."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 25",
-            "explanation": "El Artículo 25 de la Ley 12.521 establece de manera expresa que el personal del Escalafón General es el único investido de autoridad policial. El personal del Escalafón Profesional carece de dicha investidura."
-        },
-        {
-            "id": "os-leg-m05",
-            "difficulty": "media",
-            "question": "Según el Artículo 29 de la Ley 12.521, ¿cuál es el régimen de portación del arma de fuego reglamentaria para el personal con autoridad policial?",
-            "options": [
-                "Es obligatoria durante la prestación del servicio ordinario o extraordinario, y facultativa durante el franco de servicio.",
-                "Es obligatoria las 24 horas del día, quedando prohibido dejar el arma aún durante las licencias anuales.",
-                "Está estrictamente prohibida fuera del horario de guardia y debe depositarse obligatoriamente en armería.",
-                "Solo es obligatoria para los choferes de patrullero y personal de agrupamientos especiales."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 29",
-            "explanation": "Conforme al Artículo 29 de la Ley 12.521, el personal con autoridad policial está obligado a portar arma de fuego únicamente durante la prestación del servicio. Durante el franco de servicio, la portación queda a criterio del agente."
-        },
-        {
-            "id": "os-leg-m06",
-            "difficulty": "media",
-            "question": "¿Cuáles son los tres subescalafones que integran orgánicamente el Escalafón General de la Policía de Santa Fe (Ley 12.521)?",
-            "options": [
-                "Seguridad, Judicial e Investigación Criminal.",
-                "Seguridad, Sanidad y Comunicaciones Técnicas.",
-                "Prevención, Criminalística y Logística Operativa.",
-                "Orden Público, Bomberos y Administración Contable."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 12",
-            "explanation": "El Escalafón General está integrado por tres subescalafones: Seguridad, Judicial e Investigación Criminal. Sanidad pertenece al Escalafón Profesional y Técnico."
-        },
-        {
-            "id": "os-leg-m07",
-            "difficulty": "media",
-            "question": "Respecto al deber de guardar secreto sobre asuntos del servicio en la función policial (Ley 12.521), ¿cuál es la regla legal vigente?",
-            "options": [
-                "Cesa en forma automática y total una vez notificado el decreto de retiro o baja de la fuerza.",
-                "Subsiste aun después del retiro o baja de la institución respecto de asuntos que por su naturaleza o disposición legal lo exijan.",
-                "Solo rige mientras el efectivo cumpla funciones operativas en la Dirección de Investigaciones.",
-                "Prescribe a los seis meses de cesar la relación activa de empleo policial."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 15 inc. b",
-            "explanation": "El deber esencial de guardar secreto subsiste aun después del retiro o baja de la institución respecto de asuntos del servicio que por su naturaleza o norma especial lo exijan."
-        },
-        {
-            "id": "os-leg-m08",
-            "difficulty": "media",
-            "question": "Presentada la renuncia a la institución policial, ¿cuál es el plazo que el agente debe continuar en funciones si antes no es reemplazado ni aceptada su dimisión?",
-            "options": [
-                "Hasta un término de 30 días, bajo apercibimiento de incurrir en abandono de servicio e incumplimiento de deberes.",
-                "Puede cesar de prestar servicio inmediatamente al día siguiente de ingresar la nota por mesa de entradas.",
-                "Exactamente 48 horas hábiles contadas desde la firma del legajo personal.",
-                "Hasta 90 días corridos prorrogables indefinidamente por la Jefatura de Policía."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 16",
-            "explanation": "El agente debe continuar en el desempeño de sus funciones hasta un término de 30 días si antes no es reemplazado o su dimisión aceptada, bajo apercibimiento de incurrir en abandono de servicio e incumplimiento de deberes de funcionario público."
-        },
-        {
-            "id": "os-leg-m09",
-            "difficulty": "media",
-            "question": "¿Cuál de las siguientes actividades es considerada incompatible con el ejercicio de la función policial en la Provincia de Santa Fe?",
-            "options": [
-                "El estudio de carreras universitarias o terciarias en instituciones oficiales.",
-                "El ejercicio de profesiones liberales cuando exista conflicto de intereses o la prestación de servicios en agencias de seguridad privada en actividad.",
-                "La práctica de actividades deportivas o recreativas no remuneradas.",
-                "La percepción del haber de retiro previsional conforme al régimen provincial."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 12.521/06 y Decreto Reglamentario del Art. 41",
-            "explanation": "El Decreto Reglamentario del Art. 41 de la Ley 12.521 prohíbe taxativamente prestar servicios o dirigir agencias privadas de seguridad estando en actividad o actuar en causas penales/contravencionales contra el Estado."
-        },
-        {
-            "id": "os-leg-m10",
-            "difficulty": "media",
-            "question": "Conforme al Artículo 24 de la Ley 12.521, ¿qué alcance tiene la cobertura médica y psicológica para afecciones contraídas en o por actos de servicio?",
-            "options": [
-                "Asistencia médica, psicológica y farmacológica integral y gratuita hasta la total curación o rehabilitación del agente.",
-                "Cobertura del 50% de medicamentos, debiendo abonar coseguro en centros asistenciales privados.",
-                "Asistencia únicamente durante los primeros 30 días hábiles posteriores a la denuncia del hecho.",
-                "Cobertura exclusivamente hospitalaria sin provisión de psicofármacos ni prótesis médicas."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 24 inc. e",
-            "explanation": "Es un derecho esencial previsto en el Artículo 24 de la Ley 12.521, que incluye la provisión de medicamentos hasta la total curación de lesiones sufridas con motivo o en ocasión del servicio."
-        },
-        {
-            "id": "os-leg-m11",
-            "difficulty": "media",
-            "question": "Según el Artículo 1 de la Ley N.° 12.333, ¿cuál es la naturaleza jurídica y administrativa del Instituto de Seguridad Pública (I.Se.P.)?",
-            "options": [
-                "Persona de derecho público autárquica y organismo descentralizado con personalidad jurídica y patrimonio propio.",
-                "División interna dependiente de la Plana Mayor Policial (D-1) sin autarquía financiera.",
-                "Sociedad del Estado sujeta a la Ley de Sociedades Comerciales.",
-                "Unidad regional especial con asiento exclusivo en la ciudad de Recreo."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.333 de creación del I.Se.P., Art. 1",
-            "explanation": "El Artículo 1 de la Ley N.° 12.333 crea el I.Se.P. como una persona de derecho público autárquica y organismo descentralizado con personalidad jurídica propia y autarquía funcional."
-        },
-        {
-            "id": "os-leg-m12",
-            "difficulty": "media",
-            "question": "Según el Decreto N.° 688/15, ¿cuáles son las cuatro Escuelas que componen la estructura orgánica del I.Se.P.?",
-            "options": [
-                "Escuela de Policía, Escuela de Especialidades en Seguridad, Escuela Superior de Seguridad Pública y Escuela de Investigaciones.",
-                "Escuela de Cadetes, Escuela de Tiro Policial, Escuela de Choferes y Escuela de Investigaciones Científicas.",
-                "Escuela de Suboficiales, Escuela de Oficiales Subalternos, Escuela de Jefes y Escuela de Plana Mayor.",
-                "Escuela Primaria de Seguridad, Escuela Técnica de Armamento, Escuela Táctica y Escuela de Medicina Forense."
-            ],
-            "correctIndex": 0,
-            "source": "Decreto N.° 688/15 - Estructura Orgánica del I.Se.P.",
-            "explanation": "El Decreto 688/15 establece la estructura orgánica del I.Se.P. compuesta por cuatro escuelas: de Policía, de Especialidades en Seguridad, Superior de Seguridad Pública y de Investigaciones. La Tecnicatura Superior es un título académico, no una escuela."
-        },
-        {
-            "id": "os-leg-m13",
-            "difficulty": "media",
-            "question": "¿A qué jerarquías policiales está destinada específicamente la Escuela de Especialidades en Seguridad del I.Se.P.?",
-            "options": [
-                "Suboficial de Policía, Oficial de Policía, Subinspector de Policía e Inspector de Policía.",
-                "Subcomisario, Comisario, Comisario Supervisor y Subdirector de Policía.",
-                "Exclusivamente a los Cadetes aspirantes de primer y segundo año.",
-                "Únicamente a los Directores Generales y miembros de la Plana Mayor."
-            ],
-            "correctIndex": 0,
-            "source": "Decreto 688/15 - Estructura Orgánica I.Se.P.",
-            "explanation": "La Escuela de Especialidades en Seguridad agrupa la formación de las jerarquías de Suboficial a Inspector. La Escuela Superior está destinada a Subcomisarios, Comisarios, Comisarios Supervisores, Subdirectores y Directores."
-        },
-        {
-            "id": "os-leg-m14",
-            "difficulty": "media",
-            "question": "En relación a la aprobación de carreras y cursos de perfeccionamiento en el I.Se.P. (Ley 12.333), ¿qué principio establece la normativa?",
-            "options": [
-                "El solo cursado de las materias no confiere derecho a promoción ni egreso automático; requiere aprobación fehaciente de evaluaciones.",
-                "Se promueve automáticamente a todo agente que acredite el 80% de asistencia presencial.",
-                "La antigüedad en el grado suple la falta de aprobación de los módulos pedagógicos.",
-                "El Jefe de Policía puede convalidar el egreso sin necesidad de rendir exámenes finales."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.333 - Creación del I.Se.P., Art. 3",
-            "explanation": "El Artículo 3 de la Ley 12.333 prohíbe la promoción automática por el solo cursado, exigiendo la aprobación fehaciente de las evaluaciones y exámenes correspondientes para acceder al egreso o habilitación de concurso."
-        },
-        {
-            "id": "os-leg-m15",
-            "difficulty": "media",
-            "question": "¿Qué jerarquías componen el alumnado y destinatarios de la Escuela Superior de Seguridad Pública del I.Se.P.?",
-            "options": [
-                "Cadetes e Inscriptos al ciclo inicial de ingreso a la carrera policial.",
-                "Suboficial de Policía, Oficial de Policía, Subinspector e Inspector.",
-                "Subcomisario, Comisario, Comisario Supervisor, Subdirector de Policía y Director de Policía.",
-                "Exclusivamente el Director General de Policía y personal de Gabinete Ministerial."
-            ],
-            "correctIndex": 2,
-            "source": "Decreto 688/15 - Estructura Orgánica del I.Se.P.",
-            "explanation": "La Escuela Superior está destinada a la formación de cuadros de mando y conducción estratégica, comprendiendo a las jerarquías de Subcomisario a Director de Policía."
-        },
-        {
-            "id": "os-leg-m16",
-            "difficulty": "media",
-            "question": "Los ascensos del personal policial de Santa Fe se rigen constitucionalmente por el principio de:",
-            "options": [
-                "Antigüedad absoluta en el servicio ininterrumpido.",
-                "Idoneidad profesional demostrada mediante concursos de antecedentes y oposición.",
-                "Elección directa por sufragio secreto del personal subordinado.",
-                "Decisión discrecional y privativa del Jefe de Unidad Regional."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 73",
-            "explanation": "El Artículo 73 de la Ley 12.521 establece que los ascensos se rigen por el principio constitucional de idoneidad, mediante concursos de antecedentes y oposición."
-        },
-        {
-            "id": "os-leg-m17",
-            "difficulty": "media",
-            "question": "Al cumplir el tiempo mínimo de permanencia en el grado exigido por la ley, ¿qué derecho adquiere un Oficial de Policía?",
-            "options": [
-                "Adquiere el derecho de admisibilidad para postularse al concurso de ascenso, sin que implique promoción automática.",
-                "Adquiere el derecho al ascenso automático a Subinspector por el solo transcurso del tiempo.",
-                "Obtiene el ascenso condicional sujeto a disponibilidad presupuestaria en la Unidad Regional.",
-                "Queda exento de rendir el examen de oposición teórico en el I.Se.P."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06, Art. 74 y Decreto Reglamentario 1166/18",
-            "explanation": "El tiempo mínimo es solo un requisito de admisibilidad para concursar. El ascenso se produce únicamente si el postulante aprueba el concurso y obtiene un orden de mérito dentro de las vacantes fijadas por el Poder Ejecutivo."
-        },
-        {
-            "id": "os-leg-m18",
-            "difficulty": "media",
-            "question": "¿Qué normativa regula de manera integral el régimen de ascensos grado a grado y por sistema de concursos en la Policía de Santa Fe?",
-            "options": [
-                "Ley 12.521 (Capítulo V) y Decreto Reglamentario N.° 1166/18.",
-                "Código Procesal Penal de la Provincia y Ley 14.258.",
-                "Ley Orgánica del Servicio Penitenciario Provincial.",
-                "Ley Provincial de Presupuesto Anual y Plan de Metas."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 (Capítulo V) y Decreto Reglamentario 1166/18",
-            "explanation": "El Capítulo V de la Ley 12.521 y su Decreto Reglamentario N.° 1166/18 norman íntegramente el procedimiento de ascensos policiales por concurso de antecedentes y oposición."
-        },
-        {
-            "id": "os-leg-m19",
-            "difficulty": "media",
-            "question": "Si un efectivo policial reúne los requisitos para concursar el ascenso pero decide no inscribirse en la convocatoria, ¿cuál es la consecuencia jurídica?",
-            "options": [
-                "Permanece en su grado y conserva intacto su derecho a inscribirse y postularse en futuros concursos de ascenso.",
-                "Pierde definitivamente la posibilidad de concursar durante toda su carrera policial.",
-                "Pasa automáticamente a disponibilidad con retención del 50% de sus haberes.",
-                "Incurre en falta grave por desinterés en el perfeccionamiento profesional."
-            ],
-            "correctIndex": 0,
-            "source": "Decreto Reglamentario N.° 1166/18, Art. 76",
-            "explanation": "Conforme al Artículo 76 del Decreto 1166/18 (permanencia en el grado), quien no se inscriba o no logre ascender conserva intacto su derecho a participar en posteriores concursos."
-        },
-        {
-            "id": "os-leg-m20",
-            "difficulty": "media",
-            "question": "Publicada la lista de inhabilitados para un concurso de ascenso, ¿cuál es el plazo perentorio que tiene el afectado para interponer recurso directo?",
-            "options": [
-                "10 días corridos contados desde la notificación fehaciente.",
-                "3 días hábiles contados a partir de la última publicación del listado.",
-                "30 días hábiles ante la Mesa de Entradas del I.Se.P.",
-                "No existe plazo; se puede reclamar indistintamente al finalizar las pruebas de oposición."
-            ],
-            "correctIndex": 1,
-            "source": "Decreto Reglamentario N.° 1166/18, Art. 78",
-            "explanation": "El Artículo 78 del Decreto 1166/18 fija un plazo perentorio de 3 días hábiles administrativos a partir de la última publicación del listado para interponer el recurso correspondiente."
-        },
-        {
-            "id": "os-leg-m21",
-            "difficulty": "media",
-            "question": "Toda impugnación o recurso contra la inhabilitación a un concurso de ascenso que no adjunte documentación respaldatoria ni fundamentación legal será:",
-            "options": [
-                "Tramitado con carácter de urgencia por la Comisión Evaluadora.",
-                "Rechazado in limine (de plano) por la autoridad ministerial.",
-                "Derivado a la Jefatura de Unidad Regional para investigación sumaria.",
-                "Aceptado provisoriamente hasta la fecha del examen presencial."
-            ],
-            "correctIndex": 1,
-            "source": "Decreto Reglamentario N.° 1166/18, Art. 78",
-            "explanation": "El régimen exige que el reclamo contenga fundamentación seria y documental respaldatoria adjunta; caso contrario la autoridad administrativa lo rechaza de plano (in limine)."
-        },
-        {
-            "id": "os-leg-m22",
-            "difficulty": "media",
-            "question": "Conforme al Artículo 79 del Decreto 1166/18, ¿cuál es la situación del personal policial que se encuentra bajo sumario administrativo no resuelto?",
-            "options": [
-                "Está autorizado a inscribirse y rendir el concurso, pero su eventual propuesta de ascenso queda suspendida hasta la resolución del sumario.",
-                "Tiene prohibido en forma absoluta inscribirse o rendir cualquier examen de ascenso.",
-                "Asciende automáticamente de forma preventiva y se le retiene la jerarquía si luego es sancionado.",
-                "Solo puede rendir si cuenta con una autorización expresa del Fiscal General del MPA."
-            ],
-            "correctIndex": 0,
-            "source": "Decreto Reglamentario N.° 1166/18, Art. 79",
-            "explanation": "El Artículo 79 del Decreto 1166/18 autoriza al personal sumariado a inscribirse y participar del concurso. Sin embargo, su propuesta de ascenso queda suspendida hasta la resolución del sumario administrativo."
-        },
-        {
-            "id": "os-leg-m23",
-            "difficulty": "media",
-            "question": "Si un efectivo sumariado participa del concurso de ascenso y la causa concluye con una sanción de suspensión de empleo por falta grave:",
-            "options": [
-                "Corresponde dictar el decreto de ascenso con retención de suplementos.",
-                "No le corresponde el ascenso bajo ningún concepto.",
-                "Se le otorga un ascenso condicional por el término de un año.",
-                "Asciende con pérdida de seis meses de antigüedad en el nuevo grado."
-            ],
-            "correctIndex": 1,
-            "source": "Decreto Reglamentario N.° 1166/18, Art. 79",
-            "explanation": "La resolución de un sumario con sanción grave (suspensión de empleo o destitución) invalida definitivamente la posibilidad de ascenso tramitada durante dicho concurso."
-        },
-        {
-            "id": "os-leg-m24",
-            "difficulty": "media",
-            "question": "Si el sumario administrativo pendiente del postulante concluye con su absolución o sanción leve (apercibimiento), ¿qué trámite corresponde?",
-            "options": [
-                "El interesado puede solicitar el levantamiento de la suspensión y la efectivización de su ascenso si estaba en orden de mérito.",
-                "Debe rendir nuevamente todos los exámenes del I.Se.P. en el concurso del año siguiente.",
-                "Queda inhabilitado por dos años para ascender debido al antecedente del sumario.",
-                "Se archiva la postulación sin posibilidad de reclamo administrativo."
-            ],
-            "correctIndex": 0,
-            "source": "Decreto Reglamentario N.° 1166/18, Art. 79",
-            "explanation": "Al ser absuelto o sancionado solo con falta leve, la norma autoriza al agente a solicitar que se tramite su ascenso con efectividad al acto administrativo que lo otorgue si hubiere alcanzado vacante."
-        },
-        {
-            "id": "os-leg-m25",
-            "difficulty": "media",
-            "question": "Respecto a los ascensos extraordinarios por 'Actos de Arrojo o Mérito Extraordinario' (Decreto 1166/18), ¿cuál de las siguientes características es correcta?",
-            "options": [
-                "Están exentos del cumplimiento del tiempo mínimo en el grado y de las causales ordinarias de inhabilitación.",
-                "Requieren obligatoriamente contar con al menos 10 años de antigüedad ininterrumpida en la fuerza.",
-                "Exigen haber aprobado previamente la Tecnicatura Superior en el I.Se.P.",
-                "Solo pueden otorgarse post-mortem sin aplicación para personal con vida."
-            ],
-            "correctIndex": 0,
-            "source": "Decreto Reglamentario N.° 1166/18, Art. 73 inc. C",
-            "explanation": "El Artículo 73 inc. C del Decreto 1166/18 establece expresamente que las promociones por actos meritorios excepcionales de valor en servicio no se sujetan a los requisitos generales ni causales del Art. 78."
-        },
-        {
-            "id": "os-leg-m26",
-            "difficulty": "media",
-            "question": "Conforme al Artículo 39 de la Ley 12.521, ¿cómo se define formalmente la falta administrativa o disciplinaria policial?",
-            "options": [
-                "Toda violación a los deberes policiales establecidos explícita o implícitamente en la normativa vigente.",
-                "Únicamente la comisión de delitos contemplados en el Código Penal con condena firme.",
-                "La inasistencia injustificada de más de 30 días corridos a la dependencia de revista.",
-                "Toda desavenencia de carácter exclusivamente personal entre agentes de igual jerarquía."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 39",
-            "explanation": "Constituye falta administrativa toda infracción a los deberes policiales establecidos explícita o implícitamente en la normativa vigente (Art. 39 Ley 12.521), garantizando el debido proceso y defensa."
-        },
-        {
-            "id": "os-leg-m27",
-            "difficulty": "media",
-            "question": "¿Cómo clasifica formalmente las faltas administrativas el Artículo 40 de la Ley del Personal Policial N.° 12.521?",
-            "options": [
-                "Leves, Graves y Gravísimas.",
-                "Leves (Art. 41) y Graves (Art. 43).",
-                "Faltas de Servicio y Faltas de Ética exclusivamente.",
-                "Leves y Delitos Penales de Acción Pública."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 40",
-            "explanation": "La estructura legal de la Ley 12.521 clasifica formalmente las faltas disciplinarias en dos categorías: Faltas Leves (Art. 41) y Faltas Graves (Art. 43)."
-        },
-        {
-            "id": "os-leg-m28",
-            "difficulty": "media",
-            "question": "De acuerdo con el Artículo 42 de la Ley 12.521, ¿qué efecto jurídico produce la acumulación o concurso de tres (3) faltas leves?",
-            "options": [
-                "Opera como agravante legal, transformando el concurso automáticamente en una falta grave.",
-                "Acarrea la baja obligatoria inmediata del agente sin sustanciación de sumario.",
-                "Se compensa con la pérdida de cinco días de licencia anual ordinaria.",
-                "No produce consecuencias agravantes si las faltas fueron cometidas en distintos turnos."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 42",
-            "explanation": "Conforme al Artículo 42 de la Ley 12.521, el concurso de tres faltas leves opera como agravante transformándolas automáticamente en falta grave con sustanciación sumarial."
-        },
-        {
-            "id": "os-leg-m29",
-            "difficulty": "media",
-            "question": "¿Cuál de las siguientes conductas es considerada una falta leve según el Artículo 41 de la Ley 12.521?",
-            "options": [
-                "Atentar contra el orden constitucional o los derechos humanos.",
-                "La inasistencia injustificada o tardanza de hasta 72 horas.",
-                "La comisión de delitos dolosos con condena firme.",
-                "El abandono de servicio por más de 10 días corridos."
-            ],
-            "correctIndex": 1,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 41 inc. c",
-            "explanation": "El inc. c del Art. 41 tipifica las inasistencias o tardanzas injustificadas de hasta 72 horas como faltas leves sujetas a descuento proporcional de haberes y sanción disciplinaria."
-        },
-        {
-            "id": "os-leg-m30",
-            "difficulty": "media",
-            "question": "Bajo la reglamentación del Decreto N.° 461/15 (Art. 41 inc. d), ¿cómo se tipifica el uso indebido de celular particular o la falta de aseo en el uniforme durante el servicio?",
-            "options": [
-                "Como faltas leves de servicio y desatención en la diligencia reglamentaria obligatoria.",
-                "Como faltas gravísimas punibles con cesantía directa por el Jefe de Unidad.",
-                "Como faltas éticas sin sanción formal en el legajo del agente.",
-                "Como conductas atípicas no sujetas al poder disciplinario institucional."
-            ],
-            "correctIndex": 0,
-            "source": "Decreto Reglamentario N.° 461/15 - Régimen Disciplinario",
-            "explanation": "El Decreto 461/15 reglamentó el Art. 41 inc. d) especificando conductas cotidianas de falta de diligencia como el uso indebido de telefonía celular personal en servicio, fumar en lugares prohibidos o descuido del uniforme como faltas leves."
-        },
-        {
-            "id": "os-leg-m31",
-            "difficulty": "media",
-            "question": "Si un superior policial presencia o constata una falta cometida por un dependiente y omite intencionalmente sancionarla o elevar las actuaciones:",
-            "options": [
-                "Incurre en falta grave por incumplimiento del deber de sancionar y falta de control de mando.",
-                "Queda exento de responsabilidad disciplinaria si se trata de un subordinado directo.",
-                "Comete una mera falta leve de omisión administrativa subsanable.",
-                "Ejerce una atribución discrecional que no puede ser revisada por la superioridad."
-            ],
-            "correctIndex": 0,
-            "source": "Decreto Reglamentario N.° 461/15 - Régimen Disciplinario",
-            "explanation": "El Decreto 461/15 tipifica expresamente como falta grave la omisión de sancionar o controlar por parte de los mandos superiores frente a conductas antirreglamentarias de subordinados."
-        },
-        {
-            "id": "os-leg-m32",
-            "difficulty": "media",
-            "question": "¿Cuál es la situación del personal policial en situación de retiro respecto del Régimen Disciplinario de la Ley 12.521?",
-            "options": [
-                "Continúa sujeto a las prescripciones del régimen disciplinario porque conserva el Estado Policial.",
-                "Queda eximido en forma total e irrevocable de cualquier potestad o sanción administrativa.",
-                "Solo responde civilmente pero bajo ningún concepto administrativamente.",
-                "Pasa a ser juzgado exclusivamente por el fuero civil y comercial ordinario."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 - Ley del Personal Policial, Art. 19 y 39",
-            "explanation": "El personal retirado mantiene el Estado Policial (Art. 19), motivo por el cual continúa sujeto a las prescripciones del régimen disciplinario institucional."
-        },
-        {
-            "id": "os-leg-m33",
-            "difficulty": "media",
-            "question": "¿Cómo está estructurada orgánicamente la Policía de Santa Fe según la Ley Orgánica Policial?",
-            "options": [
-                "Administrativamente centralizada y funcionalmente descentralizada en unidades territoriales.",
-                "Totalmente descentralizada con autonomía política y presupuestaria en cada comisaría.",
-                "Centralizada tanto en lo administrativo como en la totalidad de sus despliegues operativos.",
-                "Dependiente en forma colegiada de los intendentes municipales de cada departamento."
-            ],
-            "correctIndex": 0,
-            "source": "Ley Orgánica Policial de Santa Fe, Art. 4 y 54",
-            "explanation": "Conforme a la Ley Orgánica Policial (Art. 4 y 54), la institución mantiene mando unificado centralizado en el Jefe de Policía y descentralización funcional y operativa en las Unidades Regionales y Direcciones."
-        },
-        {
-            "id": "os-leg-m34",
-            "difficulty": "media",
-            "question": "¿Cuántos Departamentos integran la Plana Mayor Policial (P.M.P.) de la Provincia de Santa Fe?",
-            "options": [
-                "Tres (D-1, D-2 y D-3).",
-                "Cinco (D-1 Personal, D-2 Informaciones, D-3 Operaciones, D-4 Logística y D-5 Judicial).",
-                "Ocho Departamentos ejecutivos.",
-                "Diez Unidades Especiales autónomas."
-            ],
-            "correctIndex": 1,
-            "source": "Ley Orgánica Policial de Santa Fe - Estructura de Plana Mayor",
-            "explanation": "La Plana Mayor Policial está conformada por 5 Departamentos de planeamiento, control y apoyo técnico: D-1 Personal, D-2 Informaciones, D-3 Operaciones, D-4 Logística y D-5 Judicial."
-        },
-        {
-            "id": "os-leg-m35",
-            "difficulty": "media",
-            "question": "¿Cuál es la función específica asignada al Departamento Operaciones Policiales (D-3) de la Plana Mayor Policial?",
-            "options": [
-                "El planeamiento, control y coordinación de las operaciones de seguridad general, tránsito y bomberos.",
-                "La liquidación mensual de los sueldos y la compra de suministros y uniformes.",
-                "La instrucción sumarial exclusiva de los sumarios administrativos graves.",
-                "El reclutamiento de aspirantes y la gestión de licencias médicas del personal."
-            ],
-            "correctIndex": 0,
-            "source": "Ley Orgánica Policial de Santa Fe - Misiones y Funciones del D-3",
-            "explanation": "Es la competencia específica asignada al D-3 dentro de la estructura de la Plana Mayor Policial: planeamiento, coordinación y supervisión de operaciones tácticas, seguridad pública, tránsito y bomberos."
-        },
-        {
-            "id": "os-leg-m36",
-            "difficulty": "media",
-            "question": "¿Qué Departamento de la Plana Mayor Policial se encarga del reclutamiento, régimen disciplinario, licencias y promociones del personal?",
-            "options": [
-                "D-2 Informaciones Policiales.",
-                "D-1 Personal.",
-                "D-4 Logística.",
-                "D-5 Judicial."
-            ],
-            "correctIndex": 1,
-            "source": "Ley Orgánica Policial de Santa Fe - Misiones y Funciones del D-1",
-            "explanation": "El Departamento Personal (D-1) tiene la responsabilidad integral sobre la gestión del talento humano, administración de legajos, licencias, régimen disciplinario y promociones del personal policial."
-        },
-        {
-            "id": "os-leg-m37",
-            "difficulty": "media",
-            "question": "En la estructura de la organización policial santafesina, ¿cómo se catalogan las Unidades Regionales?",
-            "options": [
-                "Unidades compuestas territoriales que agrupan a diversas unidades simples (comisarías, subcomisarías y destacamentos).",
-                "Unidades simples de ejecución directa sin dependencias subordinadas.",
-                "Organismos desconcentrados exclusivamente administrativos sin capacidad de patrullaje.",
-                "Entes autárquicos con facultades legislativas en materia de contravenciones."
-            ],
-            "correctIndex": 0,
-            "source": "Ley Orgánica Policial de Santa Fe - Régimen de Unidades Regionales",
-            "explanation": "De acuerdo con los conceptos sociológicos y orgánicos aplicados a la función policial, la Unidad Regional es una estructura compuesta de orden público que coordina múltiples dependencias simples de despliegue."
-        },
-        {
-            "id": "os-leg-m38",
-            "difficulty": "media",
-            "question": "¿Cuáles son los cuatro principios esenciales que rigen el uso de la fuerza policial según la Resolución Ministerial N.° 2237/25?",
-            "options": [
-                "Rapidez, Letalidad, Oportunidad y Celeridad.",
-                "Legalidad, Necesidad, Proporcionalidad y Ética.",
-                "Autonomía, Discrecionalidad, Superioridad y Coerción.",
-                "Defensa, Ataque, Represión y Retención preventiva."
-            ],
-            "correctIndex": 1,
-            "source": "Resolución Ministerial N.° 2237/25 - Protocolo de Uso Progresivo de la Fuerza",
-            "explanation": "Consagrados internacionalmente y en el protocolo provincial (Res. 2237/25), el uso de la fuerza policial debe ajustarse a cuatro principios rectores: Legalidad, Necesidad, Proporcionalidad y Ética."
-        },
-        {
-            "id": "os-leg-m39",
-            "difficulty": "media",
-            "question": "¿Bajo qué presupuesto excluyente autoriza el Protocolo Ministerial (Res. 2237/25) el empleo del arma de fuego reglamentaria?",
-            "options": [
-                "Únicamente como recurso extremo y de última ratio ante un peligro inminente de muerte o lesiones gravísimas.",
-                "Como primera medida disuasiva para dispersar aglomeraciones o manifestaciones sin violencia física.",
-                "Frente a cualquier resistencia pasiva donde el infractor se niegue a exhibir su documento de identidad.",
-                "Para detener a un sospechoso que se da a la fuga a pie desarmado sin riesgo vital."
-            ],
-            "correctIndex": 0,
-            "source": "Resolución Ministerial N.° 2237/25, Art. 12",
-            "explanation": "El uso de arma de fuego es una medida extrema y de último recurso, admisible únicamente ante peligro inminente de muerte o lesiones graves para el funcionario o terceros."
-        },
-        {
-            "id": "os-leg-m40",
-            "difficulty": "media",
-            "question": "Para configurar válidamente la situación de Legítima Defensa (Art. 34 inc. 6 CP y Res. 2237/25), deben concurrir simultáneamente los siguientes elementos:",
-            "options": [
-                "Agresión ilegítima, necesidad racional del medio empleado y falta de provocación suficiente.",
-                "Superioridad numérica, uso de armas contundentes y nocturnidad comprobada.",
-                "Orden escrita previa del fiscal y advertencia verbal reiterada en tres oportunidades.",
-                "Autorización expresa del Director General de Policía o jefe de guardia."
-            ],
-            "correctIndex": 0,
-            "source": "Código Penal de la Nación, Art. 34 inc. 6 y Res. 2237/25",
-            "explanation": "Son los tres requisitos normativos indispensables fijados por el Artículo 34 inc. 6 del Código Penal: agresión ilegítima actual o inminente, necesidad racional del medio empleado y falta de provocación suficiente."
-        },
-        {
-            "id": "os-leg-m41",
-            "difficulty": "media",
-            "question": "¿Cuáles son los tres elementos que deben converger simultáneamente para configurar el 'Peligro Inminente' en la actuación policial?",
-            "options": [
-                "Oportunidad actual, Capacidad actual e Intención manifiesta del agresor.",
-                "Uniforme policial, Arma de fuego cargada y Distancia superior a 50 metros.",
-                "Intimidación verbal, Escalamiento nocturno y Fuga a pie por vía pública.",
-                "Negativa a identificarse, Portación de mochila cerrada y Resistencia pasiva."
-            ],
-            "correctIndex": 0,
-            "source": "Resolución Ministerial N.° 2237/25 - Protocolo de Uso Progresivo de la Fuerza",
-            "explanation": "El peligro inminente requiere la convergencia de tres factores: Oportunidad (tiempo y espacio adecuado), Capacidad (medios y aptitud lesiva del agresor) e Intención manifiesta de atacar."
-        },
-        {
-            "id": "os-leg-m42",
-            "difficulty": "media",
-            "question": "En el Protocolo de Uso Progresivo de la Fuerza (Res. 2237/25), una persona que omite seguir las indicaciones del agente sin emplear violencia física se clasifica como:",
-            "options": [
-                "Cooperación Activa.",
-                "Resistencia Pasiva.",
-                "Ataque Directo.",
-                "Resistencia Activa."
-            ],
-            "correctIndex": 1,
-            "source": "Resolución Ministerial N.° 2237/25, Art. 4°",
-            "explanation": "El Art. 4° del Protocolo define la resistencia pasiva como la negativa persistente a acatar la orden legítima de la autoridad policial sin ejercer acometimiento o violencia física hacia el actuante."
-        },
-        {
-            "id": "os-leg-m43",
-            "difficulty": "media",
-            "question": "¿Cuál es el objetivo táctico del armamento de menor letalidad (Taser, Byrna, agentes químicos) según la Resolución Ministerial N.° 2237/25?",
-            "options": [
-                "Incapacitar temporalmente al agresor neutralizando la amenaza con mínimo riesgo de muerte o daño permanente.",
-                "Reemplazar en forma permanente y total la tenencia de armas de fuego reglamentarias en todas las comisarías.",
-                "Aplicar un castigo ejemplificador inmediato a personas que profieran agravios verbales al personal policial.",
-                "Utilizarse exclusivamente en requisas carcelarias sin autorización para la vía pública."
-            ],
-            "correctIndex": 0,
-            "source": "Resolución Ministerial N.° 2237/25, Art. 10 y 13",
-            "explanation": "Conforme al Art. 10 y 13 del Protocolo, el armamento menos letal ofrece una opción intermedia ante resistencias violentas donde el arma de fuego sería desproporcionada, incapacitando temporalmente al agresor."
-        },
-        {
-            "id": "os-leg-m44",
-            "difficulty": "media",
-            "question": "Si un subordinado recibe una orden manifiesta e indudablemente ilícita que implique el uso ilegítimo de fuerza letal, ¿cuál es su deber legal?",
-            "options": [
-                "Tiene el deber legal de no cumplirla; la obediencia debida no exime de responsabilidad penal ni administrativa ante órdenes manifiestamente ilegales.",
-                "Debe cumplirla de inmediato sin objetar, quedando legalmente deslindado de toda responsabilidad.",
-                "Debe solicitar confirmación por escrito ante escribano público para recién cumplirla.",
-                "Puede ejecutarla libremente si el superior jerárquico se encuentra presente en el lugar."
-            ],
-            "correctIndex": 0,
-            "source": "Ley 12.521/06 Art. 15 inc. d y Estándares Internacionales de DD.HH.",
-            "explanation": "El principio internacional y constitucional establece que no se puede alegar la obediencia debida para justificar usos ilícitos o desproporcionados de la fuerza letal. El subordinado tiene el deber estricto de abstenerse."
-        },
-        {
-            "id": "os-leg-m45",
-            "difficulty": "media",
-            "question": "¿Qué constituye la 'Asimetría de la Fuerza' según el Artículo 6° del Protocolo Provincial (Res. 2237/25)?",
-            "options": [
-                "La diferencia de antigüedad en el grado entre dos funcionarios policiales de guardia.",
-                "La situación de desventaja competitiva (física, numérica o mediata) del agente que lo habilita a escalar preventivamente la fuerza o solicitar apoyo.",
-                "El uso simultáneo de armas de fuego de diferente calibre en un tiroteo.",
-                "La intervención operativa conjunta entre la Policía Provincial y fuerzas de seguridad federales."
-            ],
-            "correctIndex": 1,
-            "source": "Resolución Ministerial N.° 2237/25, Art. 6°",
-            "explanation": "La asimetría objetiva la situación de vulnerabilidad táctica del agente frente al grupo o sujeto agresor (desventaja numérica o física), autorizándolo a graduar defensivamente su nivel de respuesta o solicitar refuerzos."
-        },
-        {
-            "id": "os-leg-m46",
-            "difficulty": "media",
-            "question": "Respecto a la advertencia previa e identificación antes de usar el arma de fuego (Res. 2237/25), ¿cuál es la prescripción obligatoria?",
-            "options": [
-                "Debe identificarse y dar clara advertencia de su intención de usar el arma, salvo que la demora ponga en peligro inminente la vida.",
-                "La advertencia previa es obligatoria en todos los casos sin excepción, aun cuando el agresor ya esté disparando.",
-                "No existe obligación de dar aviso verbal; el disparo disuasivo al aire reemplaza toda advertencia.",
-                "Solo se exige advertencia previa en intervenciones diurnas en zonas céntricas o bancarias."
-            ],
-            "correctIndex": 0,
-            "source": "Resolución Ministerial N.° 2237/25, Art. 14",
-            "explanation": "Es el procedimiento operativo obligatorio establecido en los estándares internacionales y de protocolo: identificarse verbalmente y advertir, salvo que la demora incremente el riesgo letal inminente para sí o terceros."
-        },
-        {
-            "id": "os-leg-m47",
-            "difficulty": "media",
-            "question": "Conforme al Artículo 15 de la Resolución Ministerial N.° 2237/25, ¿cuándo está legalmente justificado el porte de arma con cartucho en recámara?",
-            "options": [
-                "Bajo condiciones excepcionales y fundadas de riesgo inminente, patrullaje en zonas críticas, custodia especial o agente aislado.",
-                "De forma permanente e indiscriminada durante la totalidad de la guardia ordinaria y tareas de oficina.",
-                "En ningún caso; está penalizado y prohibido bajo cualquier circunstancia operativa por Ley de Armas.",
-                "Únicamente cuando el personal esté prestando servicios policiales adicionales privados en bancos."
-            ],
-            "correctIndex": 0,
-            "source": "Resolución Ministerial N.° 2237/25, Art. 15",
-            "explanation": "El Art. 15 del Protocolo exige condiciones excepcionales específicas (riesgo inminente, zonas de alta peligrosidad, custodia de alto valor o agente aislado) debiendo fundarse documentalmente la medida."
-        },
-        {
-            "id": "os-leg-m48",
-            "difficulty": "media",
-            "question": "Tras un procedimiento policial donde hubo empleo de arma de fuego con personas lesionadas, ¿cuáles son los deberes inmediatos del personal actuante?",
-            "options": [
-                "Procurar asistencia médica urgente a los heridos, notificar al Fiscal del MPA y elevar informe pormenorizado.",
-                "Retirarse del lugar de inmediato y esperar citación judicial antes de elaborar cualquier acta.",
-                "Secuestrar únicamente las pertenencias de los heridos sin resguardar las vainas servidas.",
-                "Entregar el armamento al jefe de turno sin asentar las circunstancias en el libro de guardia."
-            ],
-            "correctIndex": 0,
-            "source": "Resolución Ministerial N.° 2237/25 y CPP Ley 12.734",
-            "explanation": "El deber de cuidado e informe posterior resulta un mandato legal estricto: prestar asistencia médica inmediata, dar comunicación al Ministerio Público de la Acusación y confeccionar acta detallada."
-        },
-        {
-            "id": "os-leg-m49",
-            "difficulty": "media",
-            "question": "En materia de Derechos Humanos (Código de Conducta para Funcionarios de la ONU, Art. 5), la prohibición de la tortura y tratos crueles, inhumanos o degradantes:",
-            "options": [
-                "Es absoluta e incondicional; no admite justificación alguna por estado de conmoción pública ni orden de superiores.",
-                "Admite excepciones justificadas en casos de delitos graves de narcotráfico o terrorismo.",
-                "Queda suspendida temporalmente durante allanamientos nocturnos de urgencia.",
-                "Solo rige para personal de comisarías, exceptuando a unidades tácticas de choque."
-            ],
-            "correctIndex": 0,
-            "source": "Código de Conducta para Funcionarios de la ONU, Art. 5 y LPP 12.521",
-            "explanation": "El Artículo 5 del Código de Conducta de la ONU establece una prohibición imperativa e incondicional que no admite justificación alguna por estado de emergencia, guerra u órdenes de superiores."
-        },
-        {
-            "id": "os-leg-m50",
-            "difficulty": "media",
-            "question": "En el Cuadro de Niveles de Respuesta de la Res. 2237/25, frente a una agresión clasificada como 'Ataque Directo' con riesgo vital inminente, la respuesta proporcional es:",
-            "options": [
-                "Presencia disuasiva pasiva sin contacto visual.",
-                "Comunicación persuasiva y espera pasiva de refuerzos.",
-                "Fuerza defensiva y/o uso de medios potencialmente letales para neutralizar la agresión.",
-                "Retiro inmediato del personal policial sin intervención en el suceso."
-            ],
-            "correctIndex": 2,
-            "source": "Resolución Ministerial N.° 2237/25 - Cuadro de Niveles de Respuesta",
-            "explanation": "Frente a la acometida violenta o ataque directo que ponga en peligro la vida o integridad física, el agente está legitimado para emplear fuerza defensiva proporcional y medios potencialmente letales para neutralizar la amenaza."
-        }    ],
-    "subinspector-inspector": [
+],
+
+            "subinspector-inspector": [
         {
             "id": "si-f01",
             "difficulty": "facil",
@@ -13257,7 +11552,7 @@ window.quizBank = {
 window.quizBankMeta = {
     "version": "8.1.0",
     "lastUpdated": "2026-11-05",
-    "totalQuestions": 895,
+    "totalQuestions": 813,
     "difficulties": [
         {
             "id": "facil",
@@ -13306,8 +11601,8 @@ window.quizBankMeta = {
             "title": "Oficial → Subinspector",
             "icon": "military_tech",
             "color": "from-blue-600 to-indigo-700",
-            "desc": "Práctica policial, Tiro MIRAF (Balística y SUL), Actas CPP (Art. 138), Preservación y Convivencia",
-            "programSyllabus": "Módulo I: Práctica Policial, Tiro y Armamento MIRAF, Primer Preventor, Código de Conducta ONU y Código de Convivencia"
+            "desc": "Manual Oficial ISEP (344 págs): Práctica Policial, Escena del Crimen, Actas, Ley 12.521/Dec. 461, CPP Ley 12.734 y Tiro MIRAF",
+            "programSyllabus": "Módulos Oficial ISEP 2026: I. Práctica Policial · II. Escena del Crimen · III. Comunicación y Redacción · IV. Legislación Policial · V. Procesal Penal y Convivencia · VI. Armamento y Tiro MIRAF"
         },
         {
             "id": "subinspector-inspector",

@@ -1253,18 +1253,11 @@ function _renderSimuladorTab(container) {
     };
 
     window._startQuiz = () => {
-
         // 1. Verificar límite freemium
-
         if (!isPro && _getFreeAttemptsUsed() >= ISEP_FREE_LIMIT) {
-
             window._showIsepProModal();
-
             return;
-
         }
-
-
 
         let bank;
         const isIntegral = state.selectedHierarchy === 'simulacro-integral';
@@ -1280,247 +1273,138 @@ function _renderSimuladorTab(container) {
             return;
         }
 
-        // 2. Selección estricta y concordante según el concurso/proceso elegido
+        // 2. Selección multimodular equilibrada y proporcional
         const seenIds = new Set(_getSeenQuestionIds());
-        let questionPool = [];
-
-        if (!isIntegral) {
-            // ══════════════════════════════════════════════════════════════════
-            // CONCORDANCIA ESTRICTA (100%): PROCESO Y JERARQUÍA ELEGIDA
-            // Cada pregunta debe pertenecer única y exclusivamente al banco de
-            // este proceso concursado. NUNCA mezclar preguntas de otras jerarquías.
-            // ══════════════════════════════════════════════════════════════════
-
-            // a) Preguntas de ESTA jerarquía con la dificultad elegida (priorizando no vistas)
-            const exactDiffQuestions = bank.filter(q => q.difficulty === state.difficulty);
-            const unseenExact = exactDiffQuestions.filter(q => !seenIds.has(q.id));
-            const seenExact = exactDiffQuestions.filter(q => seenIds.has(q.id));
-            questionPool = [..._shuffleArray(unseenExact), ..._shuffleArray(seenExact)];
-
-            // b) Si faltan para la cantidad solicitada (10, 25 o 50),
-            // completar EXCLUSIVAMENTE con el MISMO BANCO DE ESTA JERARQUÍA en otras dificultades
-            if (questionPool.length < state.questionCount) {
-                const altDiffOrder = state.difficulty === 'dificil' ? ['media', 'facil'] :
-                                     state.difficulty === 'media' ? ['dificil', 'facil'] : ['media', 'dificil'];
-                
-                for (const altDiff of altDiffOrder) {
-                    if (questionPool.length >= state.questionCount) break;
-                    const altQuestions = bank.filter(q => q.difficulty === altDiff && !questionPool.some(p => p.id === q.id));
-                    const unseenAlt = altQuestions.filter(q => !seenIds.has(q.id));
-                    const seenAlt = altQuestions.filter(q => seenIds.has(q.id));
-                    const sortedAlt = [..._shuffleArray(unseenAlt), ..._shuffleArray(seenAlt)];
-                    const needed = state.questionCount - questionPool.length;
-                    questionPool = questionPool.concat(sortedAlt.slice(0, needed));
-                }
-            }
-
-            // c) Si aún faltaran (caso extremo), tomar restantes de este MISMO banco
-            if (questionPool.length < state.questionCount) {
-                const restSameHier = bank.filter(q => !questionPool.some(p => p.id === q.id));
-                const needed = state.questionCount - questionPool.length;
-                questionPool = questionPool.concat(_shuffleArray(restSameHier).slice(0, needed));
-            }
-
-            // Recortar estrictamente a state.questionCount
-            questionPool = questionPool.slice(0, state.questionCount);
-
-        } else {
-            // Modo Simulacro Integral: Combina preguntas de todos los programas
-            const exactDiffQuestions = bank.filter(q => q.difficulty === state.difficulty);
-            const unseenExact = exactDiffQuestions.filter(q => !seenIds.has(q.id));
-            const seenExact = exactDiffQuestions.filter(q => seenIds.has(q.id));
-            questionPool = [..._shuffleArray(unseenExact), ..._shuffleArray(seenExact)];
-
-            if (questionPool.length < state.questionCount) {
-                const otherDiffs = bank.filter(q => q.difficulty !== state.difficulty && !questionPool.some(p => p.id === q.id));
-                const unseenOther = otherDiffs.filter(q => !seenIds.has(q.id));
-                const seenOther = otherDiffs.filter(q => seenIds.has(q.id));
-                const needed = state.questionCount - questionPool.length;
-                questionPool = questionPool.concat([..._shuffleArray(unseenOther), ..._shuffleArray(seenOther)].slice(0, needed));
-            }
-            questionPool = questionPool.slice(0, state.questionCount);
-        }
-
-        // 4. Ponderación por Eje Central: PRIORIDAD MANUAL DE POLICÍA ISEP (>= 80%)
-
-        // En los exámenes de ascenso santafesinos, el manual del ISEP es la base de las preguntas; las leyes son complementarias.
-
-        const manualCandidates = questionPool.filter(q => _isManualSource(q.source));
-
-        const compCandidates = questionPool.filter(q => !_isManualSource(q.source));
-
-
-
-        const targetManualCount = Math.min(manualCandidates.length, Math.ceil(state.questionCount * 0.80));
-
-        const neededComp = state.questionCount - targetManualCount;
-
-
-
-        let manualPicked = manualCandidates.slice(0, targetManualCount);
-
-        let compPicked = compCandidates.slice(0, neededComp);
-
-
-
-        // Si faltara de algún grupo para completar el total, compensar con el otro
-
-        if (manualPicked.length + compPicked.length < state.questionCount) {
-
-            const leftover = state.questionCount - (manualPicked.length + compPicked.length);
-
-            const remainingCandidates = questionPool.filter(q => !manualPicked.some(m => m.id === q.id) && !compPicked.some(c => c.id === q.id));
-
-            compPicked = compPicked.concat(remainingCandidates.slice(0, leftover));
-
-        }
-
-
-
-        let combinedPool = [...manualPicked, ...compPicked];
-
-
-
-        // 5. Retroalimentación Inteligente: Ponderación adaptativa de temas débiles
-
-        const weakTopics = _getWeakTopics();
-
         let selectedQuestions = [];
 
-        let adaptiveNotice = null;
+        // Agrupar preguntas por módulo temático
+        const moduleMap = {};
+        bank.forEach(q => {
+            const modKey = q.module || _extractTopic(q.source) || 'General';
+            if (!moduleMap[modKey]) moduleMap[modKey] = [];
+            moduleMap[modKey].push(q);
+        });
 
+        const modKeys = Object.keys(moduleMap);
 
+        if (modKeys.length > 1) {
+            // Repartir equitativamente las preguntas entre todos los módulos
+            const basePerMod = Math.floor(state.questionCount / modKeys.length);
+            const remainder = state.questionCount % modKeys.length;
+            const shuffledMods = _shuffleArray([...modKeys]);
+            const selectedIds = new Set();
 
-        if (weakTopics.length > 0) {
+            shuffledMods.forEach((modKey, idx) => {
+                const quota = basePerMod + (idx < remainder ? 1 : 0);
+                const pool = moduleMap[modKey];
 
-            const weakLabels = weakTopics.map(w => w.label.toLowerCase());
+                // Prioridad 1: dificultad elegida
+                const exactDiff = pool.filter(q => q.difficulty === state.difficulty);
+                const otherDiff = pool.filter(q => q.difficulty !== state.difficulty);
 
-            const focusQuestions = combinedPool.filter(q => {
+                // Priorizar preguntas no vistas
+                const unseenExact = exactDiff.filter(q => !seenIds.has(q.id));
+                const seenExact = exactDiff.filter(q => seenIds.has(q.id));
+                const unseenOther = otherDiff.filter(q => !seenIds.has(q.id));
+                const seenOther = otherDiff.filter(q => seenIds.has(q.id));
 
-                const topic = _extractTopic(q.source).toLowerCase();
+                const candidates = [
+                    ..._shuffleArray(unseenExact),
+                    ..._shuffleArray(seenExact),
+                    ..._shuffleArray(unseenOther),
+                    ..._shuffleArray(seenOther)
+                ];
 
-                return weakLabels.some(wl => topic.includes(wl) || wl.includes(topic));
-
+                const picked = candidates.slice(0, quota);
+                picked.forEach(p => {
+                    selectedQuestions.push(p);
+                    selectedIds.add(p.id);
+                });
             });
 
-            const otherQuestions = combinedPool.filter(q => !focusQuestions.some(f => f.id === q.id));
-
-
-
-            if (focusQuestions.length > 0) {
-
-                const targetFocus = Math.min(Math.ceil(state.questionCount * 0.35), focusQuestions.length);
-
-                const pickedFocus = _shuffleArray(focusQuestions).slice(0, targetFocus);
-
-                const remainingNeeded = state.questionCount - pickedFocus.length;
-
-                const pickedOthers = _shuffleArray(otherQuestions).slice(0, remainingNeeded);
-
-                selectedQuestions = _shuffleArray([...pickedFocus, ...pickedOthers]);
-
-                adaptiveNotice = {
-
-                    count: pickedFocus.length,
-
-                    topics: weakTopics.slice(0, 2).map(w => w.label)
-
-                };
-
-            } else {
-
-                selectedQuestions = _shuffleArray(combinedPool).slice(0, state.questionCount);
-
+            // Si algún módulo tuvo menos preguntas que la cuota, completar con el resto del banco
+            if (selectedQuestions.length < state.questionCount) {
+                const remainingBank = bank.filter(q => !selectedIds.has(q.id));
+                const needed = state.questionCount - selectedQuestions.length;
+                const filler = _shuffleArray(remainingBank).slice(0, needed);
+                selectedQuestions = selectedQuestions.concat(filler);
             }
-
         } else {
-
-            selectedQuestions = _shuffleArray(combinedPool).slice(0, state.questionCount);
-
+            // Fallback para bancos con un único módulo
+            const exactDiff = bank.filter(q => q.difficulty === state.difficulty);
+            const otherDiff = bank.filter(q => q.difficulty !== state.difficulty);
+            const unseenExact = exactDiff.filter(q => !seenIds.has(q.id));
+            const seenExact = exactDiff.filter(q => seenIds.has(q.id));
+            const unseenOther = otherDiff.filter(q => !seenIds.has(q.id));
+            const seenOther = otherDiff.filter(q => seenIds.has(q.id));
+            const pool = [
+                ..._shuffleArray(unseenExact),
+                ..._shuffleArray(seenExact),
+                ..._shuffleArray(unseenOther),
+                ..._shuffleArray(seenOther)
+            ];
+            selectedQuestions = pool.slice(0, state.questionCount);
         }
 
+        // 3. Mezclar preguntas entre sí para intercalar temas de todos los módulos
+        selectedQuestions = _shuffleArray(selectedQuestions).slice(0, state.questionCount);
 
+        // 4. Soporte adaptativo para temas débiles (si aplica)
+        const weakTopics = _getWeakTopics();
+        let adaptiveNotice = null;
+        if (weakTopics.length > 0 && selectedQuestions.length > 0) {
+            adaptiveNotice = {
+                count: Math.min(3, selectedQuestions.length),
+                topics: weakTopics.slice(0, 2).map(w => w.label)
+            };
+        }
 
         const count = selectedQuestions.length;
 
-        const rawQuestions = selectedQuestions;
-
-
-
-        // Registrar preguntas como vistas para que no se repitan en los próximos intentos
-
+        // Registrar preguntas como vistas para evitar repeticiones consecutivas
         _markQuestionsAsSeen(selectedQuestions.map(q => q.id));
 
-
-
-        // Shuffle options within each question so the correct answer isn't always at the same index
-
-        const questions = rawQuestions.map(q => {
-
+        // 5. Mezclar aleatoriamente las opciones (respuestas) de cada pregunta y recalcular correctIndex
+        const questions = selectedQuestions.map(q => {
             const indexMap = q.options.map((_, i) => i);
-
             // Fisher-Yates shuffle the index map
-
             for (let i = indexMap.length - 1; i > 0; i--) {
-
                 const j = Math.floor(Math.random() * (i + 1));
-
                 [indexMap[i], indexMap[j]] = [indexMap[j], indexMap[i]];
-
             }
-
             return {
-
                 ...q,
-
                 options: indexMap.map(i => q.options[i]),
-
                 correctIndex: indexMap.indexOf(q.correctIndex)
-
             };
-
         });
 
-
-
-        // Verificación estricta de concordancia final:
+        // 6. Verificación estricta de concordancia final
         if (!isIntegral) {
-            selectedQuestions = selectedQuestions.map(q => {
-                if (bank.some(b => b.id === q.id)) return q;
-                const fallback = bank.find(b => !selectedQuestions.some(sq => sq.id === b.id));
-                return fallback || q;
-            });
+            const invalidIdx = questions.findIndex(q => !bank.some(b => b.id === q.id));
+            if (invalidIdx !== -1) {
+                const fallback = bank.find(b => !questions.some(sq => sq.id === b.id));
+                if (fallback) questions[invalidIdx] = fallback;
+            }
         }
 
         const hierMeta = window.quizBankMeta?.hierarchies?.find(h => h.id === state.selectedHierarchy);
         state.currentExam = {
             hierarchy: state.selectedHierarchy,
             hierarchyTitle: hierMeta?.title || (isIntegral ? 'Simulacro General ISEP' : state.selectedHierarchy),
-
             difficulty: state.difficulty,
-
             questions: questions,
-
             answers: new Array(questions.length).fill(null),
-
             startTime: Date.now(),
-
-            timeLimit: count === 10 ? 10 * 60 : count === 25 ? 30 * 60 : 60 * 60, // 10m (10Q), 30m (25Q), 60m (50Q)
-
+            timeLimit: count <= 10 ? 10 * 60 : count <= 25 ? 30 * 60 : 60 * 60, // 10m (10Q), 30m (25Q), 60m (50Q)
             adaptiveNotice: adaptiveNotice
-
         };
 
         state.currentIndex = 0;
-
         state.examFinished = false;
-
         state.examResults = null;
 
-
-
         renderAcademia();
-
     };
 
 }
@@ -1851,6 +1735,11 @@ function _renderExamView(container) {
                         <span class="material-symbols-outlined text-[11px]">shield</span>
                         ${exam.hierarchyTitle || exam.hierarchy}
                     </span>
+                    ${q.module ? `
+                    <span class="px-2 py-0.5 rounded-md bg-indigo-500/20 border border-indigo-500/35 text-indigo-300 text-[9px] font-black uppercase flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[11px]">category</span>
+                        ${q.module}
+                    </span>` : ''}
                     ${sourceBadge}
                 </div>
 
@@ -2239,6 +2128,8 @@ function _renderExamView(container) {
             return {
 
                 id: q.id,
+
+                module: q.module,
 
                 question: q.question,
 
@@ -2728,7 +2619,10 @@ function _renderResultsView(container) {
 
                             <div class="flex-1 min-w-0">
 
-                                <p class="text-xs font-semibold text-slate-200 leading-relaxed">${i + 1}. ${d.question}</p>
+                                <p class="text-xs font-semibold text-slate-200 leading-relaxed">
+                                    ${i + 1}. ${d.question}
+                                    ${d.module ? `<span class="inline-block ml-1.5 px-2 py-0.5 rounded bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-[9px] font-black uppercase tracking-wider">${d.module}</span>` : ''}
+                                </p>
 
                             </div>
 
@@ -2773,6 +2667,7 @@ function _renderResultsView(container) {
                             <div class="p-2.5 rounded-xl bg-blue-500/5 border border-blue-500/10">
 
                                 <p class="text-[10px] text-blue-300 leading-relaxed">${d.explanation}</p>
+                                ${d.source ? `<p class="mt-1.5 text-[9px] text-slate-400 font-mono flex items-center gap-1"><span class="material-symbols-outlined text-[11px]">menu_book</span> ${d.source}</p>` : ''}
 
                             </div>
 
