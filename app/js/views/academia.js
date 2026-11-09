@@ -109,7 +109,7 @@ function _markQuestionsAsSeen(ids) {
 
         let seen = _getSeenQuestionIds();
 
-        seen = [...ids, ...seen.filter(x => !ids.includes(x))].slice(0, 90);
+        seen = [...ids, ...seen.filter(x => !ids.includes(x))].slice(0, 500);
 
         localStorage.setItem(SEEN_QUESTIONS_KEY, JSON.stringify(seen));
 
@@ -1323,7 +1323,16 @@ function _renderSimuladorTab(container) {
         }
 
         // 2. Selección multimodular equilibrada y proporcional
-        const seenIds = new Set(_getSeenQuestionIds());
+        let seenIds = new Set(_getSeenQuestionIds());
+        // Si el usuario ya recorrió más del 85% del banco total, reiniciar el ciclo de vistas
+        if (seenIds.size >= bank.length * 0.85) {
+            seenIds.clear();
+            try { localStorage.removeItem(SEEN_QUESTIONS_KEY); } catch(e){}
+            if (typeof showToast === 'function') {
+                showToast("🔄 ¡Completaste el banco oficial! Iniciando un nuevo ciclo aleatorio.");
+            }
+        }
+
         let selectedQuestions = [];
 
         // Agrupar preguntas por módulo temático
@@ -1351,16 +1360,16 @@ function _renderSimuladorTab(container) {
                 const exactDiff = pool.filter(q => q.difficulty === state.difficulty);
                 const otherDiff = pool.filter(q => q.difficulty !== state.difficulty);
 
-                // Priorizar preguntas no vistas
+                // Priorizar SIEMPRE preguntas NO VISTAS (incluso de otra dificultad antes de repetir una ya vista)
                 const unseenExact = exactDiff.filter(q => !seenIds.has(q.id));
-                const seenExact = exactDiff.filter(q => seenIds.has(q.id));
                 const unseenOther = otherDiff.filter(q => !seenIds.has(q.id));
+                const seenExact = exactDiff.filter(q => seenIds.has(q.id));
                 const seenOther = otherDiff.filter(q => seenIds.has(q.id));
 
                 const candidates = [
                     ..._shuffleArray(unseenExact),
-                    ..._shuffleArray(seenExact),
                     ..._shuffleArray(unseenOther),
+                    ..._shuffleArray(seenExact),
                     ..._shuffleArray(seenOther)
                 ];
 
@@ -1371,25 +1380,31 @@ function _renderSimuladorTab(container) {
                 });
             });
 
-            // Si algún módulo tuvo menos preguntas que la cuota, completar con el resto del banco
+            // Si algún módulo tuvo menos preguntas que la cuota, completar con el resto del banco sin repetir IDs
             if (selectedQuestions.length < state.questionCount) {
                 const remainingBank = bank.filter(q => !selectedIds.has(q.id));
+                const unseenRem = remainingBank.filter(q => !seenIds.has(q.id));
+                const seenRem = remainingBank.filter(q => seenIds.has(q.id));
+                const fillerCandidates = [..._shuffleArray(unseenRem), ..._shuffleArray(seenRem)];
                 const needed = state.questionCount - selectedQuestions.length;
-                const filler = _shuffleArray(remainingBank).slice(0, needed);
-                selectedQuestions = selectedQuestions.concat(filler);
+                const filler = fillerCandidates.slice(0, needed);
+                filler.forEach(p => {
+                    selectedQuestions.push(p);
+                    selectedIds.add(p.id);
+                });
             }
         } else {
             // Fallback para bancos con un único módulo
             const exactDiff = bank.filter(q => q.difficulty === state.difficulty);
             const otherDiff = bank.filter(q => q.difficulty !== state.difficulty);
             const unseenExact = exactDiff.filter(q => !seenIds.has(q.id));
-            const seenExact = exactDiff.filter(q => seenIds.has(q.id));
             const unseenOther = otherDiff.filter(q => !seenIds.has(q.id));
+            const seenExact = exactDiff.filter(q => seenIds.has(q.id));
             const seenOther = otherDiff.filter(q => seenIds.has(q.id));
             const pool = [
                 ..._shuffleArray(unseenExact),
-                ..._shuffleArray(seenExact),
                 ..._shuffleArray(unseenOther),
+                ..._shuffleArray(seenExact),
                 ..._shuffleArray(seenOther)
             ];
             selectedQuestions = pool.slice(0, state.questionCount);
