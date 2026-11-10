@@ -161,5 +161,61 @@ class TestQuizBank(unittest.TestCase):
                     for q in selected:
                         self.assertIn(q["id"], bank_ids, f"Cross-hierarchy leak: question {q['id']} found in exam for {h}")
 
+    def test_ley_12521_hierarchy_groupings_compliance(self):
+        """Verify strict statutory alignment with Ley Provincial N° 12.521 Art. 15 (Cuadro Único).
+        Agrupamiento Ejecución: Suboficial, Oficial, Subinspector.
+        Agrupamiento Coordinación: Inspector, Subcomisario.
+        Agrupamiento Supervisión: Comisario, Comisario Supervisor.
+        Agrupamiento Dirección: Subdirector, Director, Director General.
+        """
+        for hierarchy, questions in self.quiz_bank.items():
+            for q in questions:
+                q_text = q.get("question", "").lower()
+                c_idx = q.get("correctIndex", 0)
+                options = q.get("options", [])
+                correct_opt = options[c_idx].lower() if c_idx < len(options) else ""
+                expl = q.get("explanation", "").lower()
+                all_text = f"{q_text} {correct_opt} {expl}"
+
+                if "agrupamiento" in all_text:
+                    # Subinspector must ALWAYS be Agrupamiento Ejecución
+                    if "subinspector" in q_text and ("agrupamiento" in q_text or "cuadro único" in q_text or "cuadro unico" in q_text):
+                        self.assertTrue(
+                            "ejecución" in correct_opt or "ejecucion" in correct_opt,
+                            f"[{hierarchy}][{q['id']}] Ley 12.521 Art. 15 violation: Subinspector must belong to Agrupamiento Ejecución, got '{correct_opt}'"
+                        )
+                        self.assertFalse(
+                            "coordinación" in correct_opt or "coordinacion" in correct_opt,
+                            f"[{hierarchy}][{q['id']}] Ley 12.521 Art. 15 violation: Subinspector erroneously marked as Coordinación"
+                        )
+
+                    # Oficial must be Agrupamiento Ejecución
+                    if "oficial de policía" in q_text and ("agrupamiento" in q_text or "cuadro único" in q_text):
+                        self.assertTrue(
+                            "ejecución" in correct_opt or "ejecucion" in correct_opt,
+                            f"[{hierarchy}][{q['id']}] Ley 12.521 Art. 15 violation: Oficial must belong to Agrupamiento Ejecución"
+                        )
+
+                    # Inspector must be Agrupamiento Coordinación
+                    if "inspector" in q_text and "subinspector" not in q_text and ("agrupamiento" in q_text or "cuadro único" in q_text):
+                        self.assertTrue(
+                            "coordinación" in correct_opt or "coordinacion" in correct_opt,
+                            f"[{hierarchy}][{q['id']}] Ley 12.521 Art. 15 violation: Inspector must belong to Agrupamiento Coordinación"
+                        )
+
+                    # Subcomisario must be Agrupamiento Coordinación
+                    if "subcomisario" in q_text and ("agrupamiento" in q_text or "cuadro único" in q_text):
+                        self.assertTrue(
+                            "coordinación" in correct_opt or "coordinacion" in correct_opt,
+                            f"[{hierarchy}][{q['id']}] Ley 12.521 Art. 15 violation: Subcomisario must belong to Agrupamiento Coordinación"
+                        )
+
+                    # Comisario must be Agrupamiento Supervisión
+                    if "comisario" in q_text and "subcomisario" not in q_text and "supervisor" not in q_text and ("agrupamiento" in q_text or "cuadro único" in q_text):
+                        self.assertTrue(
+                            "supervisión" in correct_opt or "supervision" in correct_opt,
+                            f"[{hierarchy}][{q['id']}] Ley 12.521 Art. 15 violation: Comisario must belong to Agrupamiento Supervisión"
+                        )
+
 if __name__ == "__main__":
     unittest.main()

@@ -5699,17 +5699,17 @@ window.quizBank = {
             "id": "os-l28",
             "difficulty": "facil",
             "module": "Legislación Policial",
-            "question": "En la estructura jerárquica de la Ley 12.521, ¿a qué agrupamiento de escalafón corresponde la jerarquía de 'Subinspector'?",
+            "question": "En la estructura de Cuadro Único de la Ley 12.521 (Art. 15), ¿a qué agrupamiento corresponde la jerarquía de 'Subinspector de Policía'?",
             "options": [
-                        "Agrupamiento Dirección",
-                        "Agrupamiento Coordinación (Oficiales Subalternos)",
-                        "Agrupamiento Ejecución (Suboficiales)",
-                        "Agrupamiento Personal Civil Contratado"
+                "Agrupamiento Dirección (Subdirector, Director y Director General de Policía)",
+                "Agrupamiento Coordinación (Inspector y Subcomisario de Policía)",
+                "Agrupamiento Ejecución (Suboficial, Oficial y Subinspector de Policía)",
+                "Agrupamiento Supervisión (Comisario y Comisario Supervisor de Policía)"
             ],
-            "correctIndex": 1,
-            "source": "Manual ISEP Oficial de Policía - Legislación Policial: Grados y Escalafones Ley 12.521, Pág. 106",
-            "explanation": "El escalafón policial de Santa Fe clasifica a los Oficiales de Policía y Subinspectores dentro del agrupamiento operativo inicial de Oficiales, orientado a la conducción de personal y mando táctico inmediato."
-},
+            "correctIndex": 2,
+            "source": "Manual ISEP Subinspector - Legislación Policial: Cuadro Único Ley 12.521, Pág. 100 (y Ley 12.521 Art. 15)",
+            "explanation": "Conforme al Cuadro Único del Art. 15 de la Ley Provincial N° 12.521 y el Manual ISEP (Pág. 100), la carrera policial santafesina comprende cuatro agrupamientos: 1) Agrupamiento Ejecución: Suboficial, Oficial y Subinspector; 2) Agrupamiento Coordinación: Inspector y Subcomisario; 3) Agrupamiento Supervisión: Comisario y Comisario Supervisor; 4) Agrupamiento Dirección: Subdirector, Director y Director General. Por ende, la jerarquía de Subinspector pertenece al Agrupamiento Ejecución."
+        },
         {
             "id": "os-l29",
             "difficulty": "media",
