@@ -3,19 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Seguridad Física y Operacional en el Servicio de Policía Adicional</title>
-    <meta name="description" content="Consejos tácticos y de seguridad física para el personal policial que presta servicios adicionales en Santa Fe.">
-    
+    <title>Seguridad Física y Operacional en el Servicio de Policía Adicional en Santa Fe - Adicionales Santa Fe</title>
+    <meta name="description" content="Protocolos tácticos, alerta situacional, posicionamiento y medidas de autoprotección para custodias en bancos, comercios y puestos fijos en Santa Fe.">
+    <link rel="canonical" href="https://adicionalessantafe.com.ar/guia-seguridad-operacional.html">
+
     <!-- Google AdSense Verification -->
     <meta name="google-adsense-account" content="ca-pub-4261554477116731">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731" crossorigin="anonymous"></script>
 
     <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,typography"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,typography,container-queries"></script>
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Seguridad Física y Operacional en el Servicio de Policía Adicional en Santa Fe",
+      "description": "Protocolos tácticos, alerta situacional, posicionamiento y medidas de autoprotección para custodias en bancos, comercios y puestos fijos en Santa Fe.",
+      "url": "https://adicionalessantafe.com.ar/guia-seguridad-operacional.html",
+      "inLanguage": "es-AR",
+      "datePublished": "2026-03-01T08:00:00-03:00",
+      "dateModified": "2026-11-11T09:00:00-03:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Equipo Editorial Adicionales Santa Fe",
+        "url": "https://adicionalessantafe.com.ar/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adicionales Santa Fe",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://adicionalessantafe.com.ar/assets/icon-512.png"
+        }
+      },
+      "mainEntityOfPage": "https://adicionalessantafe.com.ar/guia-seguridad-operacional.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://adicionalessantafe.com.ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guías y Recursos",
+          "item": "https://adicionalessantafe.com.ar/guias.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Seguridad Física y Operacional en el Servicio de Policía Adicional en Santa Fe",
+          "item": "https://adicionalessantafe.com.ar/guia-seguridad-operacional.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Es obligatorio usar el chaleco balístico durante el servicio adicional?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí, sin excepción. El chaleco balístico es de uso obligatorio para todo el personal que presta servicio de seguridad con autoridad policial activa."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Puedo prestar servicio adicional con uniforme de civil?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Solo cuando la orden de servicio expresamente autorice tareas de prevención de civil encubierta; en los demás casos, el uso de uniforme reglamentario completo es mandatorio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué hacer en caso de un ilícito flagrante frente al comercio custodiado?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Actuá conforme al estado policial (Art. 25 LPP 12.521), preservando la seguridad de terceros, comunicando de inmediato al 911 y resguardando el lugar del hecho."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
 
     <script>
         tailwind.config = {
@@ -29,7 +114,8 @@
                     },
                     fontFamily: {
                         "display": ["Public Sans", "Inter", "sans-serif"],
-                        "body": ["Inter", "sans-serif"]
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
                     }
                 }
             }
@@ -37,16 +123,17 @@
     </script>
     <style>
         body { font-family: 'Public Sans', sans-serif; background-color: #0a0c12; color: #f5f6f8; }
-        .glass-card { background: rgba(16, 22, 34, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(16, 22, 34, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
     </style>
 
     <!-- GDPR/Cookie Consent -->
-    <script src="cookie-consent.js" defer></script></head>
+    <script src="cookie-consent.js" defer></script>
+</head>
 <body class="antialiased min-h-screen flex flex-col">
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
                     <div class="size-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30">
@@ -54,95 +141,189 @@
                     </div>
                     <span class="font-bold text-lg tracking-tight">Adicionales <span class="text-primary">SF</span></span>
                 </a>
-                <a href="guias.html" class="text-sm font-medium text-slate-400 hover:text-white flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[18px]">arrow_back</span> Ver todas las Guías
-                </a>
+                <div class="flex items-center gap-4 text-sm font-medium">
+                    <a href="index.html" class="text-slate-400 hover:text-white transition-colors">Inicio</a>
+                    <a href="guias.html" class="text-primary font-bold">Guías</a>
+                    <a href="about.html" class="text-slate-400 hover:text-white transition-colors hidden sm:inline">Nosotros</a>
+                    <a href="./app/" class="bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 px-3 py-1.5 rounded-lg transition-all text-xs font-bold">Abrir App</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Content -->
-    <main class="flex-grow pt-28 pb-12 px-4 sm:px-6 lg:px-8">
-        <article class="max-w-3xl mx-auto glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+    <!-- Main Content -->
+    <main class="flex-grow pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+        <article class="max-w-4xl mx-auto glass-card p-8 sm:p-14 rounded-3xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+
+            <!-- Breadcrumbs -->
+            <nav class="text-xs text-slate-400 flex items-center gap-2 mb-4 font-mono">
+                <a href="index.html" class="hover:text-white transition-colors">Inicio</a>
+                <span>/</span>
+                <a href="guias.html" class="hover:text-white transition-colors">Guías y Recursos</a>
+                <span>/</span>
+                <span class="text-primary truncate max-w-xs sm:max-w-md">Seguridad Física y Operacional en el Servicio de Policía Adicional en Santa Fe</span>
+            </nav>
 
             <header class="mb-10 border-b border-white/10 pb-8 relative">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="text-xs font-bold px-3 py-1 bg-primary/20 text-primary rounded-full">Seguridad y Táctica</span>
-                    <span class="text-xs text-slate-500">Lectura de 4 min</span>
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <span class="text-xs font-bold px-3 py-1 bg-primary/20 text-primary rounded-full border border-primary/30">Táctica y Seguridad</span>
+                    <span class="text-xs text-slate-400 font-mono flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm">schedule</span> Lectura de 8 min
+                    </span>
+                    <span class="text-xs text-slate-500 font-mono">Actualizado: Noviembre 2026</span>
                 </div>
-                <h1 class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400 mb-4 leading-tight">
-                    Seguridad Física y Operacional en el Servicio de Policía Adicional
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-300 mb-4 leading-tight">
+                    Seguridad Física y Operacional en el Servicio de Policía Adicional en Santa Fe
                 </h1>
-                <p class="text-slate-400 text-lg">Pautas de autoprotección, posicionamiento táctico y alerta situacional para custodias bancarias, comerciales y eventos masivos.</p>
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">Protocolos tácticos, alerta situacional, posicionamiento y medidas de autoprotección para custodias en bancos, comercios y puestos fijos en Santa Fe.</p>
+                <div class="mt-4 flex items-center gap-3 pt-4 border-t border-white/5 text-xs text-slate-400">
+                    <span class="material-symbols-outlined text-primary text-base">verified</span>
+                    <span>Redactado por el <strong>Equipo Técnico Editorial de Adicionales Santa Fe</strong> · Revisión de Legislación Policial</span>
+                </div>
             </header>
 
-            <div class="prose prose-invert prose-lg max-w-none text-slate-300 relative space-y-6">
-                <p>Prestar servicio de <strong>Policía Adicional (SPA)</strong> implica, la mayoría de las veces, desempeñarse en ámbitos con dinámicas muy distintas a las de una comisaría o patrullero convencional. Ya sea custodiando una entidad bancaria, un comercio minorista o en el marco de un espectáculo público, el oficial suele encontrarse en una posición fija y solitaria, lo que incrementa su exposición a riesgos de seguridad.</p>
-                
-                <p>Por este motivo, mantener una conducta profesional estricta, un alto nivel de alerta situacional y el cumplimiento de pautas tácticas de posicionamiento es vital para preservar la integridad física propia y de terceros.</p>
+            <!-- Body Content -->
+            <div class="prose prose-invert prose-slate max-w-none space-y-6 text-slate-300 text-sm sm:text-base leading-relaxed">
 
-                <h2 class="text-2xl font-bold text-white mt-8 mb-4">Reglas de Oro del Posicionamiento Táctico</h2>
-                <p>Cuando tome su puesto en un servicio adicional, recuerde aplicar siempre los siguientes principios de ubicación:</p>
-                
-                <ul class="list-disc pl-6 space-y-2 text-slate-400">
-                    <li><strong class="text-white">Evite la rutina y la inmovilidad absoluta:</strong> Modifique levemente su posición física dentro de la zona asignada. Un blanco estático es más fácil de predecir y neutralizar para un posible atacante.</li>
-                    <li><strong class="text-white">Zona de Seguridad Posterior:</strong> Procure posicionarse de espaldas a estructuras sólidas (paredes, columnas de hormigón) que anulen su ángulo ciego de aproximación posterior y le ofrezcan cobertura física en caso de tiroteo.</li>
-                    <li><strong class="text-white">Triángulo Táctico de Observación:</strong> Sitúese en un punto que le permita visualizar de manera simultánea los principales accesos del comercio o banco, las cajas de cobro y la vía pública circundante, manteniendo distancias prudenciales (mínimo 3 metros) con las aglomeraciones de personas.</li>
-                </ul>
+<p>Durante la prestación de <strong>Servicios de Policía Adicional (SPA)</strong>, el agente policial suele encontrarse en una condición de mayor vulnerabilidad táctica que durante el patrullaje habitual: a menudo presta servicio en puestos fijos o de facción, de forma solitaria o con reducida cantidad de efectivos, en lugares abiertos al público o con circulación constante de personas.</p>
 
-                <h2 class="text-2xl font-bold text-white mt-8 mb-4">La Distracción: El Mayor Enemigo en el Puesto</h2>
-                <div class="bg-black/30 border border-white/10 p-5 rounded-2xl my-6">
-                    <p class="text-slate-300 text-sm leading-relaxed m-0">
-                        Estudios operacionales demuestran que **más del 70% de los incidentes de agresión** sufridos por personal de facción o custodia adicional ocurren durante momentos de distracción. La utilización no reglamentaria del teléfono celular o mantener conversaciones informales prolongadas anulan la visión periférica y reducen el tiempo de reacción táctica ante una agresión inminente.
-                    </p>
+<p>Esta situación exige una disciplina de <strong>alerta situacional permanente</strong>, rigor en el porte del equipo de protección y apego irrestricto a los protocolos de seguridad física y operacional para neutralizar riesgos y salvaguardar la vida propia y de terceros.</p>
+
+<h2 class="text-2xl font-bold text-white mt-8 mb-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary">security</span> 1. Equipamiento Individual Mandatorio
+</h2>
+<p>Ningún efectivo policial en la Provincia de Santa Fe debe iniciar un servicio de policía adicional sin verificar personalmente su dotación de seguridad:</p>
+<ul class="list-disc pl-6 space-y-2 text-slate-300">
+    <li><strong>Chaleco Balístico Reglamentario:</strong> Confeccionado conforme a normas ANMaC (Nivel RB2 o RB3), debidamente ajustado a los hombros y laterales del torso, con funda en óptimas condiciones y fecha de vida útil vigente.</li>
+    <li><strong>Arma de Fuego Reglamentaria:</strong> Pistola 9x19mm limpia, lubricada, con cargadores completos de munición provista oficial en perfecto estado y funda de seguridad con retención activa (Nivel II o superior).</li>
+    <li><strong>Medios de Comunicación y Alarma:</strong> Equipo de radiocomunicación portátil (HT Tetra/Motorola) sincronizado con la Central 911 de la jurisdicción o teléfono móvil con carga completa y números directos de emergencia de la seccional de zona.</li>
+    <li><strong>Elementos No Letales:</strong> Esposas de seguridad (grilletes) con su llave accesible y bastón táctico (tonfa o extensible reglamentario).</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-white mt-8 mb-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary">visibility</span> 2. Posicionamiento Táctico y Conos de Seguridad
+</h2>
+<p>En custodias comerciales y bancarias, la ubicación del efectivo determina su capacidad de supervivencia ante un ataque súbito:</p>
+<ul class="list-disc pl-6 space-y-2 text-slate-300">
+    <li><strong>Evitar la "Figura de Vidriera":</strong> No permanezcas ubicado detrás de ventanales o puertas de cristal templado que expongan tu silueta desde el exterior sin ofrecer cobertura balística real.</li>
+    <li><strong>Buscar Cobertura y Ocultamiento:</strong> Identificá columnas de hormigón, mostradores blindados o estructuras sólidas capaces de detener proyectiles en caso de un enfrentamiento armado.</li>
+    <li><strong>Dominio Visual de los Accesos:</strong> Mantené una visualización panorámica constante de los puntos de entrada, salida y vías de escape sin descuidar tu retaguardia.</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-white mt-8 mb-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary">phone_in_talk</span> 3. Coordinación Inmediata con la Central 911
+</h2>
+<p>Ante cualquier actitud sospechosa, persona en actitud de marcaje de la entidad o vehículo con ocupantes en vigilancia estacionaria:</p>
+<ol class="list-decimal pl-6 space-y-2 text-slate-300">
+    <li>Modulá inmediatamente a la Central 911 de la Unidad Regional describiendo características fisonómicas, vestimenta, dominio del rodado y sentido de circulación.</li>
+    <li>Solicitá el paso preventivo de un móvil del Comando Radioeléctrico o Policía de Acción Táctica (PAT) para la identificación de los sospechosos en la vía pública.</li>
+    <li>Nunca abandones tu perímetro de custodia fijado para perseguir vehículos a pie; tu misión primaria es la seguridad del punto asignado.</li>
+</ol>
+
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="mt-14 pt-8 border-t border-white/10 space-y-6">
+                <div class="flex items-center gap-2">
+                    <div class="size-8 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-lg">quiz</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">Preguntas Frecuentes sobre esta Temática</h2>
                 </div>
+                <div class="space-y-4">
 
-                <h2 class="text-2xl font-bold text-white mt-8 mb-4">Protocolo en caso de Emergencia o Ilícito</h2>
-                <p>Si se suscita una situación de riesgo (asalto, agresión física o altercado de magnitud), siga el protocolo estándar de actuación operativa:</p>
-                
-                <ol class="list-decimal pl-6 space-y-2 text-slate-400">
-                    <li><strong class="text-white">Dar Alerta Inmediata:</strong> Antes de intervenir directamente, si las condiciones de seguridad lo permiten, module por radio o comuníquese con el despacho del 911 de su Unidad Regional para reportar la situación exacta y solicitar apoyo.</li>
-                    <li><strong class="text-white">Priorizar la Vida Humana:</strong> Evalúe el escenario. La prioridad absoluta es resguardar la vida de los civiles presentes y la propia. Evite confrontaciones armadas en espacios cerrados y concurridos a menos que sea el único recurso extremo para salvar una vida.</li>
-                    <li><strong class="text-white">Uso Progresivo de la Fuerza:</strong> Ríjase estrictamente por las normativas vigentes en la Provincia de Santa Fe (ej. Decreto 461/15) y los principios generales de Congruencia, Proporcionalidad y Oportunidad en el uso del armamento reglamentario.</li>
-                </ol>
+        <div class="bg-black/25 border border-white/5 p-5 rounded-2xl space-y-2">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-lg">help_outline</span> ¿Es obligatorio usar el chaleco balístico durante el servicio adicional?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-7">Sí, sin excepción. El chaleco balístico es de uso obligatorio para todo el personal que presta servicio de seguridad con autoridad policial activa.</p>
+        </div>
+        
+        <div class="bg-black/25 border border-white/5 p-5 rounded-2xl space-y-2">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-lg">help_outline</span> ¿Puedo prestar servicio adicional con uniforme de civil?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-7">Solo cuando la orden de servicio expresamente autorice tareas de prevención de civil encubierta; en los demás casos, el uso de uniforme reglamentario completo es mandatorio.</p>
+        </div>
+        
+        <div class="bg-black/25 border border-white/5 p-5 rounded-2xl space-y-2">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-lg">help_outline</span> ¿Qué hacer en caso de un ilícito flagrante frente al comercio custodiado?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-7">Actuá conforme al estado policial (Art. 25 LPP 12.521), preservando la seguridad de terceros, comunicando de inmediato al 911 y resguardando el lugar del hecho.</p>
+        </div>
+        
+                </div>
+            </section>
 
-                <div class="bg-primary/10 border border-primary/20 p-6 rounded-2xl mt-8">
-                    <h3 class="text-primary font-bold text-lg mb-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined">shield</span> Enlace con la Jurisdicción
+            <!-- Related Guides Section -->
+            <section class="mt-14 pt-8 border-t border-white/10 space-y-6">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">library_books</span> Guías Relacionadas Recomendadas
                     </h3>
-                    <p class="text-sm text-slate-400 m-0">Al iniciar y al finalizar su servicio adicional, es un deber reportar su presencia a la Comisaría de la jurisdicción correspondiente. En nuestra guía de teléfonos interactiva de **Adicionales Santa Fe** puede consultar rápidamente las vías de comunicación directa de cada dependencia regional para coordinar en tiempo real ante emergencias.</p>
+                    <a href="guias.html" class="text-xs text-primary font-bold hover:underline">Ver todas</a>
                 </div>
-            </div>
-            
-            
-            <!-- AdSense Banner -->
-            <div class="mt-8 flex justify-center">
-                <div class="w-full bg-[#101622]/40 backdrop-blur-md rounded-2xl border border-white/5 p-4 flex justify-center items-center overflow-hidden">
-                    <ins class="adsbygoogle"
-                         style="display:block; width:100%; max-width:728px; height:90px;"
-                         data-ad-client="ca-pub-4261554477116731"
-                         data-ad-slot="2506973015"
-                         data-ad-format="horizontal"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-            <footer class="mt-12 pt-8 border-t border-white/10 text-center relative">
-                <a href="guias.html" class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl text-sm font-bold border border-white/10 transition-all">
-                    Volver a las Guías
+        <a href="guia-uso-racional-fuerza.html" class="glass-card p-5 rounded-2xl border border-white/5 hover:border-primary/40 transition-all flex flex-col justify-between group">
+            <div>
+                <span class="text-[10px] font-mono uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full inline-block mb-2">Protocolos</span>
+                <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors leading-snug">Protocolos de Uso de la Fuerza</h4>
+                <p class="text-xs text-slate-400 mt-2 line-clamp-2">Resoluciones Ministeriales 2237/25 y 2871/25 en Santa Fe.</p>
+            </div>
+            <span class="text-xs text-primary font-bold flex items-center gap-1 mt-4">Leer artículo <span class="material-symbols-outlined text-xs">arrow_forward</span></span>
+        </a>
+        
+        <a href="guia-organizacion-turnos.html" class="glass-card p-5 rounded-2xl border border-white/5 hover:border-primary/40 transition-all flex flex-col justify-between group">
+            <div>
+                <span class="text-[10px] font-mono uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full inline-block mb-2">Salud</span>
+                <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors leading-snug">Organización y Descanso</h4>
+                <p class="text-xs text-slate-400 mt-2 line-clamp-2">Pautas de prevención de fatiga física y alerta operacional.</p>
+            </div>
+            <span class="text-xs text-primary font-bold flex items-center gap-1 mt-4">Leer artículo <span class="material-symbols-outlined text-xs">arrow_forward</span></span>
+        </a>
+        
+        <a href="guia-miraf-armas.html" class="glass-card p-5 rounded-2xl border border-white/5 hover:border-primary/40 transition-all flex flex-col justify-between group">
+            <div>
+                <span class="text-[10px] font-mono uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full inline-block mb-2">Balística</span>
+                <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors leading-snug">Manual MIRAF de Armas</h4>
+                <p class="text-xs text-slate-400 mt-2 line-clamp-2">Cadena de custodia y seguridad balística en procedimientos.</p>
+            </div>
+            <span class="text-xs text-primary font-bold flex items-center gap-1 mt-4">Leer artículo <span class="material-symbols-outlined text-xs">arrow_forward</span></span>
+        </a>
+        
+                </div>
+            </section>
+
+            <!-- Article Footer -->
+            <footer class="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                <a href="guias.html" class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-5 py-2.5 rounded-xl text-sm font-bold border border-white/10 transition-all">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span> Volver a la Biblioteca
+                </a>
+                <a href="./app/" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all">
+                    Abrir Calculadora y Agenda <span class="material-symbols-outlined text-sm">launch</span>
                 </a>
             </footer>
         </article>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer Institucional -->
     <footer class="border-t border-white/10 glass-card mt-auto">
-        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center text-sm text-slate-400">
-            Adicionales Santa Fe &copy; 2026. <a href="privacy.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <div class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center text-xs text-slate-400 space-y-3">
+            <p>Adicionales Santa Fe &copy; 2026. Todos los derechos reservados. Desarrollado por SmartFlow Digital.</p>
+            <div class="flex justify-center gap-4 text-slate-400 text-xs font-mono">
+                <a href="index.html" class="hover:text-white transition-colors">Inicio</a>
+                <span>•</span>
+                <a href="about.html" class="hover:text-white transition-colors">Sobre Nosotros</a>
+                <span>•</span>
+                <a href="guias.html" class="hover:text-white transition-colors">Guías</a>
+                <span>•</span>
+                <a href="privacy.html" class="hover:text-white transition-colors">Privacidad</a>
+                <span>•</span>
+                <a href="terms.html" class="hover:text-white transition-colors">Términos</a>
+            </div>
         </div>
     </footer>
 </body>

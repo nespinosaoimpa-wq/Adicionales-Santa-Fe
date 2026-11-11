@@ -22,6 +22,7 @@ if (Test-Path ".\cookie-consent.js") { Copy-Item -Path ".\cookie-consent.js" -De
 # Copy app directory
 New-Item -ItemType Directory -Path ".\dist\app" -Force | Out-Null
 Copy-Item -Path ".\app\*" -Destination ".\dist\app" -Recurse -Force
+Copy-Item -Path ".\privacy.html", ".\terms.html", ".\about.html", ".\ads.txt", ".\robots.txt" -Destination ".\dist\app\" -Force
 
 if (Test-Path $serviceAccountKey) {
     # Set environment variable for the session

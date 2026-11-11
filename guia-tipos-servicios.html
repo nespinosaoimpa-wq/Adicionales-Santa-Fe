@@ -3,18 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diferencias entre servicios Públicos, Privados y Bancarios - Guías</title>
-    <meta name="description" content="Conoce las categorías de servicios de policía adicional en Santa Fe, sus diferencias tarifarias, contratantes habituales y modalidades de cobro.">
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,typography"></script>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <title>Diferencias entre Servicios Públicos, Privados, Bancarios y Canchas en Santa Fe - Adicionales Santa Fe</title>
+    <meta name="description" content="Clasificación oficial de los servicios de policía adicional en Santa Fe: marco de responsabilidades, tarifas, requerimientos de uniforme y circuitos de liquidación.">
+    <link rel="canonical" href="https://adicionalessantafe.com.ar/guia-tipos-servicios.html">
 
     <!-- Google AdSense Verification -->
     <meta name="google-adsense-account" content="ca-pub-4261554477116731">
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4261554477116731" crossorigin="anonymous"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com/3.4.15?plugins=forms,typography,container-queries"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Diferencias entre Servicios Públicos, Privados, Bancarios y Canchas en Santa Fe",
+      "description": "Clasificación oficial de los servicios de policía adicional en Santa Fe: marco de responsabilidades, tarifas, requerimientos de uniforme y circuitos de liquidación.",
+      "url": "https://adicionalessantafe.com.ar/guia-tipos-servicios.html",
+      "inLanguage": "es-AR",
+      "datePublished": "2026-03-01T08:00:00-03:00",
+      "dateModified": "2026-11-11T09:00:00-03:00",
+      "author": {
+        "@type": "Organization",
+        "name": "Equipo Editorial Adicionales Santa Fe",
+        "url": "https://adicionalessantafe.com.ar/about.html"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Adicionales Santa Fe",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://adicionalessantafe.com.ar/assets/icon-512.png"
+        }
+      },
+      "mainEntityOfPage": "https://adicionalessantafe.com.ar/guia-tipos-servicios.html"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://adicionalessantafe.com.ar/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guías y Recursos",
+          "item": "https://adicionalessantafe.com.ar/guias.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Diferencias entre Servicios Públicos, Privados, Bancarios y Canchas en Santa Fe",
+          "item": "https://adicionalessantafe.com.ar/guia-tipos-servicios.html"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Puede un contratante privado exigirme tareas de cajero o control de stock?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, taxativamente. El Artículo 25 y 29 de la Ley 12.521 determinan que el policía ejerce exclusivamente funciones de seguridad y mantenimiento del orden público."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué equipo es obligatorio portar en un servicio bancario?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Uniforme reglamentario completo, credencial policial oficial, arma reglamentaria y chaleco de protección balística en perfecto estado de conservación y fecha vigente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo se computan las horas en partidos de fútbol con alargue o demoras?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Si el encuentro o la desconcentración se prolonga más allá del tiempo planificado, el Jefe de Operativo debe consignar el recargo en el parte final para el pago de horas extraordinarias."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
 
     <script>
         tailwind.config = {
@@ -28,7 +114,8 @@
                     },
                     fontFamily: {
                         "display": ["Public Sans", "Inter", "sans-serif"],
-                        "body": ["Inter", "sans-serif"]
+                        "body": ["Inter", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"]
                     }
                 }
             }
@@ -36,16 +123,17 @@
     </script>
     <style>
         body { font-family: 'Public Sans', sans-serif; background-color: #0a0c12; color: #f5f6f8; }
-        .glass-card { background: rgba(16, 22, 34, 0.7); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .glass-card { background: rgba(16, 22, 34, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.08); }
     </style>
 
     <!-- GDPR/Cookie Consent -->
-    <script src="cookie-consent.js" defer></script></head>
+    <script src="cookie-consent.js" defer></script>
+</head>
 <body class="antialiased min-h-screen flex flex-col">
 
     <!-- Navbar -->
     <nav class="fixed top-0 w-full z-50 glass-card border-b border-white/10">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
                     <div class="size-10 bg-primary/20 rounded-xl flex items-center justify-center border border-primary/30">
@@ -53,81 +141,198 @@
                     </div>
                     <span class="font-bold text-lg tracking-tight">Adicionales <span class="text-primary">SF</span></span>
                 </a>
-                <a href="guias.html" class="text-sm font-medium text-slate-400 hover:text-white flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[18px]">arrow_back</span> Ver todas las Guías
-                </a>
+                <div class="flex items-center gap-4 text-sm font-medium">
+                    <a href="index.html" class="text-slate-400 hover:text-white transition-colors">Inicio</a>
+                    <a href="guias.html" class="text-primary font-bold">Guías</a>
+                    <a href="about.html" class="text-slate-400 hover:text-white transition-colors hidden sm:inline">Nosotros</a>
+                    <a href="./app/" class="bg-primary/20 hover:bg-primary/30 text-primary border border-primary/40 px-3 py-1.5 rounded-lg transition-all text-xs font-bold">Abrir App</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Content -->
-    <main class="flex-grow pt-28 pb-12 px-4 sm:px-6 lg:px-8">
-        <article class="max-w-3xl mx-auto glass-card p-8 sm:p-12 rounded-3xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+    <!-- Main Content -->
+    <main class="flex-grow pt-28 pb-16 px-4 sm:px-6 lg:px-8">
+        <article class="max-w-4xl mx-auto glass-card p-8 sm:p-14 rounded-3xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+
+            <!-- Breadcrumbs -->
+            <nav class="text-xs text-slate-400 flex items-center gap-2 mb-4 font-mono">
+                <a href="index.html" class="hover:text-white transition-colors">Inicio</a>
+                <span>/</span>
+                <a href="guias.html" class="hover:text-white transition-colors">Guías y Recursos</a>
+                <span>/</span>
+                <span class="text-primary truncate max-w-xs sm:max-w-md">Diferencias entre Servicios Públicos, Privados, Bancarios y Canchas en Santa Fe</span>
+            </nav>
 
             <header class="mb-10 border-b border-white/10 pb-8 relative">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="text-xs font-bold px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full">Finanzas</span>
-                    <span class="text-xs text-slate-500">Lectura de 5 min</span>
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <span class="text-xs font-bold px-3 py-1 bg-primary/20 text-primary rounded-full border border-primary/30">Operatividad y Finanzas</span>
+                    <span class="text-xs text-slate-400 font-mono flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm">schedule</span> Lectura de 6 min
+                    </span>
+                    <span class="text-xs text-slate-500 font-mono">Actualizado: Noviembre 2026</span>
                 </div>
-                <h1 class="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-500 mb-4 leading-tight">
-                    Diferencias entre servicios Públicos, Privados y Bancarios
+                <h1 class="text-2xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-slate-300 mb-4 leading-tight">
+                    Diferencias entre Servicios Públicos, Privados, Bancarios y Canchas en Santa Fe
                 </h1>
-                <p class="text-slate-400 text-lg">Entiende las clasificaciones del servicio adicional para proyectar tus ganancias con precisión y conocer los canales de cobro.</p>
+                <p class="text-slate-300 text-base sm:text-lg leading-relaxed">Clasificación oficial de los servicios de policía adicional en Santa Fe: marco de responsabilidades, tarifas, requerimientos de uniforme y circuitos de liquidación.</p>
+                <div class="mt-4 flex items-center gap-3 pt-4 border-t border-white/5 text-xs text-slate-400">
+                    <span class="material-symbols-outlined text-primary text-base">verified</span>
+                    <span>Redactado por el <strong>Equipo Técnico Editorial de Adicionales Santa Fe</strong> · Revisión de Legislación Policial</span>
+                </div>
             </header>
 
-            <div class="prose prose-invert prose-lg max-w-none text-slate-300 relative space-y-6">
-                
-                <p>Dentro del marco de la Ley 14283 que regula el Servicio de Policía Adicional en la Provincia de Santa Fe, no todos los servicios se abonan igual. La normativa clasifica a los contratantes y el tipo de servicio en distintas categorías, lo que afecta directamente el coeficiente multiplicador y, en consecuencia, el monto neto que percibe el efectivo policial.</p>
+            <!-- Body Content -->
+            <div class="prose prose-invert prose-slate max-w-none space-y-6 text-slate-300 text-sm sm:text-base leading-relaxed">
 
-                <h2 class="text-2xl font-bold text-white mt-8 mb-4">1. Servicios Públicos (Estatales / Municipales)</h2>
-                <p>Se consideran servicios públicos aquellos requeridos por dependencias del estado provincial, nacional o municipal. Esto incluye la custodia de edificios gubernamentales, oficinas públicas, eventos organizados por municipios y comunas, y otros entes estatales.</p>
-                <p>Históricamente, estos servicios poseen un coeficiente tarifario base. Suelen ser muy seguros en cuanto a la garantía de pago (el estado es el garante), pero los tiempos administrativos para la liquidación pueden ser más extensos dependiendo de los procesos burocráticos de cada repartición estatal.</p>
+<p>En la Provincia de Santa Fe, los <strong>Servicios de Policía Adicional (SPA)</strong> abarcan un amplio espectro de requerimientos de custodia preventiva que van desde la vigilancia perimetral de un nosocomio público hasta la seguridad en eventos deportivos de alta concurrencia como los clásicos de fútbol de Primera División. Cada modalidad presenta exigencias tácticas, equipamiento y normativas particulares.</p>
 
-                <h2 class="text-2xl font-bold text-white mt-8 mb-4">2. Servicios Privados (Espectáculos, Comercios, Empresas)</h2>
-                <p>Cuando una empresa privada, un supermercado, un organizador de eventos o una entidad no gubernamental requiere seguridad policial, el servicio se clasifica como privado. Estos servicios suelen abarcar desde la vigilancia en obras en construcción hasta la custodia de grandes eventos deportivos y espectáculos masivos.</p>
-                <p>Debido a la naturaleza del servicio y, en muchos casos, al mayor riesgo o desgaste asociado (como en el caso de eventos deportivos o espectáculos nocturnos), la ley a menudo estipula un coeficiente mayor para esta categoría. Esto significa que la <strong>hora de servicio privado suele pagarse mejor</strong> que la hora de servicio público ordinario.</p>
+<p>En esta guía explicamos en detalle las características de cada categoría de servicio, las obligaciones del efectivo durante el turno y las particularidades del régimen de cobro.</p>
 
-                <h2 class="text-2xl font-bold text-white mt-8 mb-4">3. Servicios Bancarios (y Transporte de Caudales)</h2>
-                <p>La categoría más específica y, por lo general, la que ostenta la <strong>tarifa más alta</strong> es la de servicios prestados a entidades bancarias, financieras y transportadoras de caudales.</p>
-                <p>El motivo principal es el alto nivel de riesgo involucrado en la custodia de valores y el resguardo de instituciones financieras operando con público. La normativa provincial asigna un coeficiente diferenciado superior para compensar este riesgo y la responsabilidad que asume el efectivo durante el servicio.</p>
+<h2 class="text-2xl font-bold text-white mt-8 mb-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary">domain</span> 1. Servicios en Organismos Públicos (Categoría A)
+</h2>
+<p>Comprenden la custodia de edificios gubernamentales, centros de salud pública (hospitales provinciales y centros de salud municipales), delegaciones de ministerios, escuelas y sedes judiciales:</p>
+<ul class="list-disc pl-6 space-y-2 text-slate-300">
+    <li><strong>Objetivo Primario:</strong> Garantizar el orden en salas de espera, protección del personal médico y docente, y resguardo de bienes del patrimonio público provincial.</li>
+    <li><strong>Régimen Horario:</strong> Habitualmente organizados en guardias diurnas fijas de 4 u 8 horas.</li>
+    <li><strong>Particularidad de Cobro:</strong> Al depender de partidas presupuestarias del Estado Provincial o Municipal, los plazos de acreditación suelen ser estables aunque pueden presentar demoras administrativas en cambios de ejercicio fiscal.</li>
+</ul>
 
-                <div class="bg-emerald-500/10 border border-emerald-500/20 p-6 rounded-2xl mt-8">
-                    <h3 class="text-emerald-400 font-bold text-lg mb-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined">account_balance</span> Impacto en tu liquidación mensual
+<h2 class="text-2xl font-bold text-white mt-8 mb-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary">store</span> 2. Servicios en Establecimientos Privados y Comerciales (Categoría B)
+</h2>
+<p>Incluyen comercios, plantas industriales, cadenas de supermercados, predios logísticos y obras civiles en construcción que solicitan presencia policial preventiva para disuadir hechos delictivos:</p>
+<ul class="list-disc pl-6 space-y-2 text-slate-300">
+    <li><strong>Misión Táctica:</strong> Presencia visible en accesos peatonales o vehiculares, control disuasivo y coordinación inmediata con la central 911 ante emergencias.</li>
+    <li><strong>Tarifa:</strong> Posee un coeficiente superior al servicio público debido a la naturaleza lucrativa del requirente.</li>
+    <li><strong>Regla de Oro:</strong> El agente no es un empleado de seguridad privada de la empresa contratante; mantiene en todo momento su investidura de funcionario policial y sus deberes institucionales. No puede realizar tareas ajenas a la seguridad (ej. control de mercadería o cobros).</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-white mt-8 mb-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary">account_balance</span> 3. Entidades Bancarias y Financieras (Categoría C)
+</h2>
+<p>La custodia de bancos públicos y privados, agencias financieras y transporte de caudales representa uno de los servicios de mayor exigencia y remuneración dentro de la fuerza:</p>
+<ul class="list-disc pl-6 space-y-2 text-slate-300">
+    <li><strong>Requisitos de Seguridad:</strong> Porte obligatorio de chaleco balístico reglamentario con nivel de protección vigente, arma de fuego provista en óptimas condiciones y conocimiento riguroso de protocolos de asalto y pulsadores de pánico.</li>
+    <li><strong>Horario Específico:</strong> Habitualmente coincide con el horario de atención al público y apertura del tesoro (de 07:00 a 13:00 o 15:00 hs según plaza financiera).</li>
+    <li><strong>Remuneración:</strong> La tarifa por módulo de 4 horas es de las más elevadas del escalafón por la exposición al riesgo delictivo.</li>
+</ul>
+
+<h2 class="text-2xl font-bold text-white mt-8 mb-3 flex items-center gap-2">
+    <span class="material-symbols-outlined text-primary">sports_soccer</span> 4. Espectáculos Públicos y Canchas de Fútbol (Categoría D)
+</h2>
+<p>Los operativos de seguridad en eventos masivos (fútbol profesional en estadios como Colón, Unión, Rosario Central, Newell's Old Boys, festivales musicales y carreras automovilísticas):</p>
+<ul class="list-disc pl-6 space-y-2 text-slate-300">
+    <li><strong>Plan de Operaciones:</strong> El personal queda bajo la subordinación táctica del Jefe de Operativo de la Unidad Regional, cumpliendo puestos fijos (molinetes, pulmones, tribunas o cordones de cápsula de micros).</li>
+    <li><strong>Cómputo Horario:</strong> Incluye tanto las horas previas de requisa y vallado perimetral como las horas posteriores de desconcentración total del público.</li>
+    <li><strong>Pago Diferencial:</strong> Al tratarse de espectáculos de alta densidad, cuentan con tarifas de recargo y liquidaciones especiales gestionadas a través del Ministerio de Seguridad.</li>
+</ul>
+
+            </div>
+
+            <!-- FAQ Section -->
+            <section class="mt-14 pt-8 border-t border-white/10 space-y-6">
+                <div class="flex items-center gap-2">
+                    <div class="size-8 bg-primary/20 rounded-lg flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined text-lg">quiz</span>
+                    </div>
+                    <h2 class="text-xl font-bold text-white">Preguntas Frecuentes sobre esta Temática</h2>
+                </div>
+                <div class="space-y-4">
+
+        <div class="bg-black/25 border border-white/5 p-5 rounded-2xl space-y-2">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-lg">help_outline</span> ¿Puede un contratante privado exigirme tareas de cajero o control de stock?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-7">No, taxativamente. El Artículo 25 y 29 de la Ley 12.521 determinan que el policía ejerce exclusivamente funciones de seguridad y mantenimiento del orden público.</p>
+        </div>
+        
+        <div class="bg-black/25 border border-white/5 p-5 rounded-2xl space-y-2">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-lg">help_outline</span> ¿Qué equipo es obligatorio portar en un servicio bancario?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-7">Uniforme reglamentario completo, credencial policial oficial, arma reglamentaria y chaleco de protección balística en perfecto estado de conservación y fecha vigente.</p>
+        </div>
+        
+        <div class="bg-black/25 border border-white/5 p-5 rounded-2xl space-y-2">
+            <h3 class="text-base font-bold text-white flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-lg">help_outline</span> ¿Cómo se computan las horas en partidos de fútbol con alargue o demoras?
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed pl-7">Si el encuentro o la desconcentración se prolonga más allá del tiempo planificado, el Jefe de Operativo debe consignar el recargo en el parte final para el pago de horas extraordinarias.</p>
+        </div>
+        
+                </div>
+            </section>
+
+            <!-- Related Guides Section -->
+            <section class="mt-14 pt-8 border-t border-white/10 space-y-6">
+                <div class="flex items-center justify-between">
+                    <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">library_books</span> Guías Relacionadas Recomendadas
                     </h3>
-                    <p class="text-sm text-slate-400 m-0">A la hora de usar herramientas como <strong>Adicionales Santa Fe</strong> para estimar tu ingreso de fin de mes, es vital categorizar correctamente cada turno. Mezclar módulos bancarios con módulos públicos en tus anotaciones arrojará un cálculo erróneo, ya que la diferencia económica por módulo de 4 horas puede ser significativa al sumarse a fin de mes.</p>
+                    <a href="guias.html" class="text-xs text-primary font-bold hover:underline">Ver todas</a>
                 </div>
-            </div>
-            
-            
-            <!-- AdSense Banner -->
-            <div class="mt-8 flex justify-center">
-                <div class="w-full bg-[#101622]/40 backdrop-blur-md rounded-2xl border border-white/5 p-4 flex justify-center items-center overflow-hidden">
-                    <ins class="adsbygoogle"
-                         style="display:block; width:100%; max-width:728px; height:90px;"
-                         data-ad-client="ca-pub-4261554477116731"
-                         data-ad-slot="2506973015"
-                         data-ad-format="horizontal"
-                         data-full-width-responsive="true"></ins>
-                    <script>
-                         (adsbygoogle = window.adsbygoogle || []).push({});
-                    </script>
-                </div>
-            </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
-            <footer class="mt-12 pt-8 border-t border-white/10 text-center relative">
-                <a href="guias.html" class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-6 py-3 rounded-xl text-sm font-bold border border-white/10 transition-all">
-                    Volver a las Guías
+        <a href="guia-seguridad-operacional.html" class="glass-card p-5 rounded-2xl border border-white/5 hover:border-primary/40 transition-all flex flex-col justify-between group">
+            <div>
+                <span class="text-[10px] font-mono uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full inline-block mb-2">Seguridad</span>
+                <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors leading-snug">Seguridad Física y Operacional</h4>
+                <p class="text-xs text-slate-400 mt-2 line-clamp-2">Protocolos tácticos para custodias de facción y puestos fijos.</p>
+            </div>
+            <span class="text-xs text-primary font-bold flex items-center gap-1 mt-4">Leer artículo <span class="material-symbols-outlined text-xs">arrow_forward</span></span>
+        </a>
+        
+        <a href="guia-calculo-adicionales.html" class="glass-card p-5 rounded-2xl border border-white/5 hover:border-primary/40 transition-all flex flex-col justify-between group">
+            <div>
+                <span class="text-[10px] font-mono uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full inline-block mb-2">Cálculo</span>
+                <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors leading-snug">Cálculo de Haberes SPA</h4>
+                <p class="text-xs text-slate-400 mt-2 line-clamp-2">Conocé cómo se calculan las tarifas por categoría.</p>
+            </div>
+            <span class="text-xs text-primary font-bold flex items-center gap-1 mt-4">Leer artículo <span class="material-symbols-outlined text-xs">arrow_forward</span></span>
+        </a>
+        
+        <a href="guia-decretos-tarifas.html" class="glass-card p-5 rounded-2xl border border-white/5 hover:border-primary/40 transition-all flex flex-col justify-between group">
+            <div>
+                <span class="text-[10px] font-mono uppercase font-bold text-primary bg-primary/10 px-2 py-0.5 rounded-full inline-block mb-2">Tarifas</span>
+                <h4 class="text-sm font-bold text-white group-hover:text-primary transition-colors leading-snug">Tarifas Actualizadas</h4>
+                <p class="text-xs text-slate-400 mt-2 line-clamp-2">Escala salarial y decretos provinciales vigentes.</p>
+            </div>
+            <span class="text-xs text-primary font-bold flex items-center gap-1 mt-4">Leer artículo <span class="material-symbols-outlined text-xs">arrow_forward</span></span>
+        </a>
+        
+                </div>
+            </section>
+
+            <!-- Article Footer -->
+            <footer class="mt-12 pt-8 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                <a href="guias.html" class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-white px-5 py-2.5 rounded-xl text-sm font-bold border border-white/10 transition-all">
+                    <span class="material-symbols-outlined text-sm">arrow_back</span> Volver a la Biblioteca
+                </a>
+                <a href="./app/" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-primary/20 transition-all">
+                    Abrir Calculadora y Agenda <span class="material-symbols-outlined text-sm">launch</span>
                 </a>
             </footer>
         </article>
     </main>
 
-    <!-- Footer -->
+    <!-- Footer Institucional -->
     <footer class="border-t border-white/10 glass-card mt-auto">
-        <div class="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center text-sm text-slate-400">
-            Adicionales Santa Fe &copy; 2026. <a href="privacy.html" class="hover:text-white transition-colors">Política de Privacidad</a>
+        <div class="max-w-5xl mx-auto px-4 py-8 sm:px-6 lg:px-8 text-center text-xs text-slate-400 space-y-3">
+            <p>Adicionales Santa Fe &copy; 2026. Todos los derechos reservados. Desarrollado por SmartFlow Digital.</p>
+            <div class="flex justify-center gap-4 text-slate-400 text-xs font-mono">
+                <a href="index.html" class="hover:text-white transition-colors">Inicio</a>
+                <span>•</span>
+                <a href="about.html" class="hover:text-white transition-colors">Sobre Nosotros</a>
+                <span>•</span>
+                <a href="guias.html" class="hover:text-white transition-colors">Guías</a>
+                <span>•</span>
+                <a href="privacy.html" class="hover:text-white transition-colors">Privacidad</a>
+                <span>•</span>
+                <a href="terms.html" class="hover:text-white transition-colors">Términos</a>
+            </div>
         </div>
     </footer>
 </body>
