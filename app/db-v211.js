@@ -1319,5 +1319,33 @@ const DB = {
         } catch(e) {}
 
         return true;
+    },
+
+    async rejectAcademyPayment(paymentId, userEmail) {
+        const cleanEmail = (userEmail || '').toLowerCase().trim();
+        const nowIso = new Date().toISOString();
+
+        const userUpdate = {
+            pro_member: false,
+            isep_pro: false,
+            pro_status: 'rejected',
+            academy_payment_request: null
+        };
+
+        await db.collection('users').doc(cleanEmail).set(userUpdate, { merge: true }).catch(console.warn);
+        await supabaseClient.from('profiles').update(userUpdate).eq('email', cleanEmail).catch(console.warn);
+
+        try {
+            if (paymentId && !paymentId.startsWith('usr_')) {
+                await db.collection('academy_payments').doc(paymentId).update({ status: 'rejected', rejected_at: nowIso });
+            }
+        } catch(e) {}
+        try {
+            if (paymentId && !paymentId.startsWith('usr_')) {
+                await supabaseClient.from('academy_payments').update({ status: 'rejected', rejected_at: nowIso }).eq('id', paymentId);
+            }
+        } catch(e) {}
+
+        return true;
     }
 };

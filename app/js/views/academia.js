@@ -327,14 +327,19 @@ function _getFreeAttemptsUsed() {
 
     try {
 
-        const val = localStorage.getItem('isep_free_attempts_used');
+        let val = parseInt(localStorage.getItem('isep_free_attempts_used'), 10) || 0;
 
-        if (val !== null) return parseInt(val, 10) || 0;
+        // Si el usuario está registrado, respetar intentos sincronizados en la nube
+        if (typeof store !== 'undefined' && store.user) {
+            if (typeof store.user.isep_free_attempts_used === 'number') {
+                val = Math.max(val, store.user.isep_free_attempts_used);
+            }
+        }
+
+        if (val > 0) return val;
 
         // Fallback: si ya tenía historial de antes, respetar los exámenes ya hechos
-
         const hist = _getQuizHistory();
-
         return hist.length;
 
     } catch {
@@ -356,6 +361,14 @@ function _incrementFreeAttempts() {
         const next = current + 1;
 
         localStorage.setItem('isep_free_attempts_used', next.toString());
+
+        // Sincronizar a la nube de inmediato si está autenticado
+        if (typeof store !== 'undefined' && store.user && store.user.email) {
+            store.user.isep_free_attempts_used = next;
+            if (typeof DB !== 'undefined' && DB.saveUser) {
+                DB.saveUser(store.user).catch(() => {});
+            }
+        }
 
         return next;
 

@@ -320,10 +320,16 @@ async function renderAdmin(container) {
                                                     <span class="material-symbols-outlined text-sm">check</span> Habilitado
                                                 </span>
                                             ` : `
-                                                <button onclick="window.approveAcademyPaymentAction('${p.id}', '${p.user_email}', '${p.hierarchy}')" 
-                                                    class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all flex items-center gap-1.5">
-                                                    <span class="material-symbols-outlined text-base">verified</span> Aprobar Pase PRO
-                                                </button>
+                                                <div class="flex items-center gap-1.5">
+                                                    <button onclick="window.approveAcademyPaymentAction('${p.id}', '${p.user_email}', '${p.hierarchy}')" 
+                                                        class="px-3 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-400 hover:to-green-500 text-slate-950 font-black text-xs shadow-lg shadow-emerald-500/20 active:scale-95 transition-all flex items-center gap-1">
+                                                        <span class="material-symbols-outlined text-sm">verified</span> Aprobar
+                                                    </button>
+                                                    <button onclick="window.rejectAcademyPaymentAction('${p.id}', '${p.user_email}')" 
+                                                        class="px-2.5 py-2 rounded-xl bg-red-500/15 hover:bg-red-500/25 text-red-400 border border-red-500/30 text-xs font-bold active:scale-95 transition-all flex items-center gap-1" title="Rechazar si no realizó el pago">
+                                                        <span class="material-symbols-outlined text-sm">close</span> Rechazar
+                                                    </button>
+                                                </div>
                                             `}
                                         </div>
                                     </div>
@@ -727,6 +733,34 @@ async function renderAdmin(container) {
         if (window.GeminiService) {
             window.GeminiService.setApiKey(key);
             showToast("✅ Clave API Global de Gemini guardada. ¡Centinela AI está activado para todos!");
+        }
+    };
+
+    window.rejectAcademyPaymentAction = async (paymentId, email) => {
+        if (!confirm("¿Deseas RECHAZAR y desestimar la solicitud de pago de " + email + "?\n\nEl usuario NO tendrá acceso al simulador PRO hasta que abone.")) return;
+        try {
+            await DB.rejectAcademyPayment(paymentId, email);
+            if (window.showToast) showToast("❌ Solicitud rechazada para " + email);
+            if (Array.isArray(window.academyPayments)) {
+                window.academyPayments = window.academyPayments.map(p => {
+                    if (p.id === paymentId || (p.user_email || '').toLowerCase() === (email || '').toLowerCase()) {
+                        return { ...p, status: 'rejected' };
+                    }
+                    return p;
+                });
+            }
+            if (Array.isArray(window.allUsers)) {
+                window.allUsers = window.allUsers.map(u => {
+                    if ((u.email || '').toLowerCase() === (email || '').toLowerCase()) {
+                        return { ...u, pro_member: false, isep_pro: false, pro_status: 'rejected', academy_payment_request: null };
+                    }
+                    return u;
+                });
+            }
+            updateUI();
+            if (window.location.hash === '#admin' && window.router) router.handleRoute();
+        } catch(e) {
+            if (window.showToast) showToast("Error al rechazar pago: " + e.message);
         }
     };
 
