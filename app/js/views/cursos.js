@@ -567,34 +567,38 @@
                             <!-- SELECT TEMA -->
                             <div>
                                 <label class="block text-[11px] font-bold text-slate-400 mb-1">Tema</label>
-                                <select onchange="window._filterCursosTopic(this.value)" class="w-full px-3 py-2.5 rounded-xl bg-[#161a20] border border-slate-700 text-xs text-white focus:outline-none focus:border-primary">
-                                    <option value="todos" ${activeTopic === 'todos' ? 'selected' : ''}>Todos los temas</option>
-                                    <option value="Inteligencia artificial" ${activeTopic === 'Inteligencia artificial' ? 'selected' : ''}>Inteligencia artificial</option>
-                                    <option value="Ciberseguridad" ${activeTopic === 'Ciberseguridad' ? 'selected' : ''}>Ciberseguridad</option>
-                                    <option value="Ciencia de datos" ${activeTopic === 'Ciencia de datos' ? 'selected' : ''}>Ciencia de datos</option>
-                                    <option value="Habilidades blandas" ${activeTopic === 'Habilidades blandas' ? 'selected' : ''}>Habilidades blandas</option>
-                                    <option value="Computación en la nube" ${activeTopic === 'Computación en la nube' ? 'selected' : ''}>Computación en la nube</option>
-                                    <option value="Marketing e Investigación de mercado" ${activeTopic === 'Marketing e Investigación de mercado' ? 'selected' : ''}>Marketing / Investigación</option>
-                                    <option value="Finanzas" ${activeTopic === 'Finanzas' ? 'selected' : ''}>Finanzas</option>
-                                    <option value="Comercialización" ${activeTopic === 'Comercialización' ? 'selected' : ''}>Comercialización</option>
-                                    <option value="Diseño gráfico y multimedia" ${activeTopic === 'Diseño gráfico y multimedia' ? 'selected' : ''}>Diseño gráfico / Multimedia</option>
-                                    <option value="Tecnología y Sistemas" ${activeTopic === 'Tecnología y Sistemas' ? 'selected' : ''}>Tecnología y Sistemas</option>
+                                <select onchange="window._filterCursosTopic(this.value)" 
+                                        class="w-full px-3 py-2.5 rounded-xl bg-[#161a20] border border-slate-700 text-xs text-white focus:outline-none focus:border-primary cursor-pointer"
+                                        style="color-scheme: dark; background-color: #161a20; color: #f8fafc;">
+                                    <option value="todos" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'todos' ? 'selected' : ''}>Todos los temas</option>
+                                    <option value="Inteligencia artificial" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Inteligencia artificial' ? 'selected' : ''}>Inteligencia artificial</option>
+                                    <option value="Ciberseguridad" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Ciberseguridad' ? 'selected' : ''}>Ciberseguridad</option>
+                                    <option value="Ciencia de datos" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Ciencia de datos' ? 'selected' : ''}>Ciencia de datos</option>
+                                    <option value="Habilidades blandas" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Habilidades blandas' ? 'selected' : ''}>Habilidades blandas</option>
+                                    <option value="Computación en la nube" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Computación en la nube' ? 'selected' : ''}>Computación en la nube</option>
+                                    <option value="Marketing e Investigación de mercado" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Marketing e Investigación de mercado' ? 'selected' : ''}>Marketing / Investigación</option>
+                                    <option value="Finanzas" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Finanzas' ? 'selected' : ''}>Finanzas</option>
+                                    <option value="Comercialización" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Comercialización' ? 'selected' : ''}>Comercialización</option>
+                                    <option value="Diseño gráfico y multimedia" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Diseño gráfico y multimedia' ? 'selected' : ''}>Diseño gráfico / Multimedia</option>
+                                    <option value="Tecnología y Sistemas" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeTopic === 'Tecnología y Sistemas' ? 'selected' : ''}>Tecnología y Sistemas</option>
                                 </select>
                             </div>
 
                             <!-- SELECT ALIANZA -->
                             <div>
                                 <label class="block text-[11px] font-bold text-slate-400 mb-1">Alianza</label>
-                                <select onchange="window._filterCursosAlliance(this.value)" class="w-full px-3 py-2.5 rounded-xl bg-[#161a20] border border-slate-700 text-xs text-white focus:outline-none focus:border-primary">
-                                    <option value="todas" ${activeAlliance === 'todas' ? 'selected' : ''}>Todas las alianzas</option>
-                                    <option value="Google" ${activeAlliance === 'Google' ? 'selected' : ''}>Google</option>
-                                    <option value="Santander" ${activeAlliance === 'Santander' ? 'selected' : ''}>Santander</option>
-                                    <option value="Microsoft" ${activeAlliance === 'Microsoft' ? 'selected' : ''}>Microsoft</option>
-                                    <option value="Accenture" ${activeAlliance === 'Accenture' ? 'selected' : ''}>Accenture</option>
-                                    <option value="Aionixs" ${activeAlliance === 'Aionixs' ? 'selected' : ''}>Aionixs</option>
-                                    <option value="AWS" ${activeAlliance === 'AWS' ? 'selected' : ''}>AWS</option>
-                                    <option value="Oracle" ${activeAlliance === 'Oracle' ? 'selected' : ''}>Oracle</option>
-                                    <option value="Convenio Oficial" ${activeAlliance === 'Convenio Oficial' ? 'selected' : ''}>Convenio Oficial (Alta Carga)</option>
+                                <select onchange="window._filterCursosAlliance(this.value)" 
+                                        class="w-full px-3 py-2.5 rounded-xl bg-[#161a20] border border-slate-700 text-xs text-white focus:outline-none focus:border-primary cursor-pointer"
+                                        style="color-scheme: dark; background-color: #161a20; color: #f8fafc;">
+                                    <option value="todas" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'todas' ? 'selected' : ''}>Todas las alianzas</option>
+                                    <option value="Google" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'Google' ? 'selected' : ''}>Google</option>
+                                    <option value="Santander" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'Santander' ? 'selected' : ''}>Santander</option>
+                                    <option value="Microsoft" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'Microsoft' ? 'selected' : ''}>Microsoft</option>
+                                    <option value="Accenture" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'Accenture' ? 'selected' : ''}>Accenture</option>
+                                    <option value="Aionixs" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'Aionixs' ? 'selected' : ''}>Aionixs</option>
+                                    <option value="AWS" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'AWS' ? 'selected' : ''}>AWS</option>
+                                    <option value="Oracle" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'Oracle' ? 'selected' : ''}>Oracle</option>
+                                    <option value="Convenio Oficial" class="bg-[#161a20] text-slate-100" style="background-color: #161a20; color: #f8fafc;" ${activeAlliance === 'Convenio Oficial' ? 'selected' : ''}>Convenio Oficial (Alta Carga)</option>
                                 </select>
                             </div>
 
