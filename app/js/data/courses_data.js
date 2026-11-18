@@ -1,7 +1,8 @@
 /**
- * Adicionales Santa Fe - Repositorio de Cursos Oficiales con Puntaje para Ascenso
- * Conforme Decreto Reglamentario N.° 1166/18 (Santa Fe) y Ley del Personal Policial 12.521
- * Cursos 100% Gratuitos y Asincrónicos de Plataformas Oficiales (Capacitar, Accenture, CAME, INAP)
+ * Adicionales Santa Fe - Repositorio de Cursos Oficiales Gratuitos con Certificado
+ * Plataforma Capacitar (Secretaría de Industria y Comercio / Ministerio de Economía de la Nación)
+ * En alianza con líderes globales: Accenture, Microsoft, Amazon Web Services (AWS) y Oracle.
+ * Cursos 100% Gratuitos y Asincrónicos con Certificación Oficial para Legajo Policial.
  */
 
 (function() {
@@ -10,146 +11,179 @@
     window.academyCourses = [
         {
             id: 'capacitar-forense-accenture',
+            code: 'C48040',
             title: 'Análisis forense',
-            fullTitle: 'Análisis forense digital y preservación de evidencia',
             partner: 'En alianza con Accenture',
-            provider: 'Ministerio de Economía de la Nación (Capacitar) & Accenture',
+            provider: 'Plataforma Capacitar · Ministerio de Economía de la Nación',
             topic: 'Ciberseguridad',
             category: 'ciberseguridad',
             level: 'Intermedio',
             duration: '3 hs y 18 min',
-            cost: 'Curso y certificado sin costo',
+            cost: 'Curso y certificado oficial sin costo ($0)',
+            modality: '100% Online y Asincrónico',
             programTag: 'Aplica a Programa Insertar',
-            tags: ['Sin costo', 'Certificado Oficial', 'Ciberseguridad', 'Puntaje Ascenso D-1'],
+            tags: ['Sin costo', 'Certificado Oficial', 'Ciberseguridad', 'Para Legajo'],
             featured: true,
-            description: 'Aprendé en qué consiste la actividad de análisis forense y su importancia para analizar lo ocurrido, permitiendo llegar al origen del problema y actuando en consecuencia para evitar daños futuros. Conocé también las metodologías y herramientas más comunes para llevar a cabo esta labor.',
+            description: 'Aprendé en qué consiste la actividad de análisis forense y su importancia para analizar lo ocurrido, permitiendo llegar al origen del problema y actuando en consecuencia para evitar daños futuros. Conocé también las metodologías y herramientas más comunes para llevar a cabo esta labor pericial.',
             syllabus: [
                 'Concepto e importancia del análisis forense informático.',
                 'Identificación del origen del problema e incidentes digitales.',
                 'Metodologías estandarizadas de investigación pericial.',
-                'Herramientas más comunes para llevar a cabo la labor forense.',
-                'Preservación de la cadena de custodia y prevención de daños futuros.'
+                'Herramientas más comunes para la labor pericial y análisis de causa-raíz.',
+                'Preservación de la cadena de custodia y prevención de incidentes.'
             ],
-            ascensoImpact: {
-                rubro: 'Capacitación y Perfeccionamiento Adicional (Decreto 1166/18)',
-                points: '0.25 a 0.50 pts en el Legajo de Concurso',
-                recommendation: 'Clave para personal de Seguridad, PDI / AIC y oficiales que buscan sumar antecedentes en delitos complejos.'
-            },
             registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48040',
             catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48040'
         },
         {
-            id: 'capacitar-problemas-accenture',
-            title: 'Análisis y resolución de problemas Inicial',
-            fullTitle: 'Análisis y resolución metodológica de problemas operativos',
+            id: 'capacitar-problemas-inicial-accenture',
+            code: 'C48099',
+            title: 'Análisis y resolución de problemas (Inicial)',
             partner: 'En alianza con Accenture',
-            provider: 'Ministerio de Economía de la Nación (Capacitar) & Accenture',
-            topic: 'Habilidades blandas',
-            category: 'liderazgo',
+            provider: 'Plataforma Capacitar · Ministerio de Economía de la Nación',
+            topic: 'Gestión y Toma de Decisiones',
+            category: 'gestion',
             level: 'Inicial',
             duration: '1 h',
-            cost: 'Curso y certificado sin costo',
+            cost: 'Curso y certificado oficial sin costo ($0)',
+            modality: '100% Online y Asincrónico',
             programTag: 'Aplica a Programa Insertar',
-            tags: ['Sin costo', 'Certificado Oficial', 'Habilidades de Mando', 'Puntaje Ascenso'],
+            tags: ['Sin costo', 'Certificado Oficial', 'Resolución de Conflictos', 'Para Legajo'],
             featured: false,
-            description: 'Ser eficaz y autónomo en el análisis y resolución de problemas es una competencia altamente demandada hoy en día, en el mercado laboral y la función de conducción. Aprendé metodologías para desglosar contingencias, priorizar alternativas y resolver incidentes bajo presión.',
+            description: 'Ser eficaz y autónomo en el análisis y resolución de problemas es una competencia altamente demandada en la función policial y operativa. Comprendé cómo surgen los inconvenientes, por qué algunos son más complejos y de qué manera la investigación facilita la toma de decisiones acertadas.',
             syllabus: [
-                'Definición y encuadre operativo de un problema.',
-                'Técnicas de análisis causa-raíz y diagnóstico de situación.',
-                'Generación de alternativas y toma de decisiones tácticas.',
-                'Monitoreo de resultados e implementación de correcciones.'
+                'Identificación y encuadre operativo de un problema.',
+                'Técnicas de diagnóstico rápido de situación bajo presión.',
+                'Desglose metodológico de causas y factores intervinientes.',
+                'Formulación y selección de alternativas viables de acción.'
             ],
-            ascensoImpact: {
-                rubro: 'Capacitación en Conducción y Habilidades Operativas (Decreto 1166/18)',
-                points: '0.25 pts en el Legajo de Concurso',
-                recommendation: 'Ideal para Suboficiales que concursan para Oficial y oficiales a cargo de guardias.'
-            },
             registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48099',
             catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48099'
         },
         {
-            id: 'came-ciberseguridad-datos',
-            title: 'Ciberseguridad y Protección de Datos Personales',
-            fullTitle: 'Gestión de la Ciberseguridad, Privacidad y Cadena de Custodia',
-            partner: 'CAME Educativa',
-            provider: 'Confederación Argentina de la Mediana Empresa (CAME)',
+            id: 'capacitar-problemas-intermedio-accenture',
+            code: 'C48100',
+            title: 'Análisis y resolución de problemas (Intermedio)',
+            partner: 'En alianza con Accenture',
+            provider: 'Plataforma Capacitar · Ministerio de Economía de la Nación',
+            topic: 'Gestión y Toma de Decisiones',
+            category: 'gestion',
+            level: 'Intermedio',
+            duration: '1 h',
+            cost: 'Curso y certificado oficial sin costo ($0)',
+            modality: '100% Online y Asincrónico',
+            programTag: 'Aplica a Programa Insertar',
+            tags: ['Sin costo', 'Certificado Oficial', 'Estrategia Operativa', 'Para Legajo'],
+            featured: false,
+            description: 'Profundizá en metodologías de evaluación de alternativas complejas, selección de la solución más adecuada ante incidentes críticos e implementación de planes con monitoreo de resultados para personal de mando y oficiales.',
+            syllabus: [
+                'Evaluación multidimensional de soluciones posibles.',
+                'Criterios de viabilidad, costo-beneficio e impacto institucional.',
+                'Ejecución estructurada del plan de acción.',
+                'Medición de efectividad y ajuste preventivo ante contingencias.'
+            ],
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48100',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48100'
+        },
+        {
+            id: 'capacitar-pensamiento-critico-accenture',
+            code: 'C48207',
+            title: 'Habilidades para el pensamiento crítico',
+            partner: 'En alianza con Accenture',
+            provider: 'Plataforma Capacitar · Ministerio de Economía de la Nación',
+            topic: 'Análisis de Información',
+            category: 'gestion',
+            level: 'Intermedio',
+            duration: '1 h',
+            cost: 'Curso y certificado oficial sin costo ($0)',
+            modality: '100% Online y Asincrónico',
+            programTag: 'Aplica a Programa Insertar',
+            tags: ['Sin costo', 'Certificado Oficial', 'Pensamiento Crítico', 'Para Legajo'],
+            featured: false,
+            description: 'Aprendé a diferenciar hipótesis de meras suposiciones, analizar fuentes testimoniales y documentales con rigor metodológico y estructurar razonamientos lógicos para la confección de informes, sumarios e investigaciones.',
+            syllabus: [
+                'Diferenciación entre hipótesis, hechos y suposiciones.',
+                'Evaluación de sesgos cognitivos en el análisis de información.',
+                'Construcción de argumentos basados en evidencia comprobable.',
+                'Aplicación práctica en redacción y toma de decisiones.'
+            ],
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48207',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48207'
+        },
+        {
+            id: 'capacitar-ciberseguridad-microsoft',
+            code: 'MS-SEC',
+            title: 'Fundamentos de Ciberseguridad',
+            partner: 'En alianza con Microsoft',
+            provider: 'Plataforma Capacitar · Ministerio de Economía de la Nación',
             topic: 'Ciberseguridad',
             category: 'ciberseguridad',
-            level: 'Intermedio',
-            duration: '4 semanas (30 hs cátedra)',
-            cost: 'Curso y certificado sin costo',
-            programTag: 'Plataforma CAME Educativa',
-            tags: ['30 Hs Cátedra', 'Puntaje Máximo', 'Sin costo', 'Certificado Homologable'],
+            level: 'Inicial / Intermedio',
+            duration: 'Autogestionado (Asincrónico)',
+            cost: 'Curso y certificado oficial sin costo ($0)',
+            modality: '100% Online y Asincrónico',
+            programTag: 'Ruta de Aprendizaje Microsoft',
+            tags: ['Microsoft', 'Sin costo', 'Certificado Oficial', 'Ciberseguridad'],
             featured: true,
-            description: 'Capacitación integral sobre ciberseguridad, normativas de privacidad (Ley 25.326), protección de activos de información, detección de malware y protocolos de respuesta ante fuga o alteración de datos.',
+            description: 'Certificado profesional avalado por Microsoft enfocado en conceptos fundamentales de ciberseguridad, gestión de identidades y accesos, protección de infraestructura de redes y defensa ante amenazas informáticas y ransomware.',
             syllabus: [
-                'Marco regulatorio de protección de datos personales y privacidad.',
-                'Vulnerabilidades informáticas habituales y vectores de ataque.',
-                'Políticas de seguridad de la información y buenas prácticas operativas.',
-                'Preservación de evidencia digital y protocolos de actuación.'
+                'Fundamentos de seguridad de la información y vectores de ataque.',
+                'Protección de datos y gestión segura de credenciales e identidades.',
+                'Protocolos de seguridad en redes e internet.',
+                'Buenas prácticas institucionales contra phishing e ingeniería social.'
             ],
-            ascensoImpact: {
-                rubro: 'Cursos con Carga Horaria Mayor a 30 Horas (Decreto 1166/18)',
-                points: '0.50 a 1.00 pt en el Legajo de Concurso',
-                recommendation: 'Por superar las 30 horas cátedra acreditadas, otorga el puntaje más alto del baremo de antecedentes.'
-            },
-            registrationUrl: 'https://came-educativa.com.ar/'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-microsoft',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-microsoft'
         },
         {
-            id: 'salud-rcp-primer-respondiente',
-            title: 'Soporte Vital Básico y RCP para Primer Respondiente',
-            fullTitle: 'Primeros Socorros Tácticos, RCP y Manejo del Desfibrilador (DEA)',
-            partner: 'Ministerio de Salud & Cruz Roja',
-            provider: 'Programa Nacional de Capacitación Continua en Salud',
-            topic: 'Emergentología Operativa',
-            category: 'operativo',
-            level: 'Operativo',
-            duration: '6 hs (Asincrónico)',
-            cost: 'Curso y certificado sin costo',
-            programTag: 'Ministerio de Salud',
-            tags: ['Aptitud Operativa', 'Sin costo', 'RCP Oficial', 'Primer Respondiente'],
+            id: 'capacitar-cloud-aws',
+            code: 'AWS-CLOUD',
+            title: 'Fundamentos de Cloud y Seguridad en la Nube',
+            partner: 'En alianza con Amazon Web Services (AWS)',
+            provider: 'Plataforma Capacitar · Ministerio de Economía de la Nación',
+            topic: 'Tecnología y Cloud',
+            category: 'tecnologia',
+            level: 'Inicial',
+            duration: 'Autogestionado (Asincrónico)',
+            cost: 'Curso y certificado oficial sin costo ($0)',
+            modality: '100% Online y Asincrónico',
+            programTag: 'Ruta de Aprendizaje AWS',
+            tags: ['AWS', 'Sin costo', 'Certificado Oficial', 'Cloud y Servidores'],
             featured: false,
-            description: 'Protocolos de actuación inmediata para policías en calle como primeros respondientes ante paros cardiorrespiratorios, asfixias y traumatismos severos, garantizando la cadena de supervivencia hasta el arribo del SIES 107.',
+            description: 'Capacitación oficial provista por Amazon Web Services en alianza con Capacitar. Aprendé los fundamentos de servidores en la nube, alta disponibilidad de servicios y resguardo centralizado de datos e información.',
             syllabus: [
-                'Evaluación rápida de la escena y bioseguridad del efectivo.',
-                'Maniobras de RCP para adultos, niños y lactantes.',
-                'Uso correcto del Desfibrilador Externo Automático (DEA).',
-                'Desobstrucción de vía aérea (Heimlich) y contención de hemorragias.'
+                'Arquitectura de computación y servidores en la nube.',
+                'Modelo de responsabilidad compartida y seguridad de datos.',
+                'Almacenamiento seguro, copias de respaldo y redundancia.',
+                'Casos de uso e infraestructura para organizaciones modernas.'
             ],
-            ascensoImpact: {
-                rubro: 'Aptitud Operativa y Auxilio a la Comunidad (Decreto 1166/18)',
-                points: '0.25 a 0.50 pts en el Legajo de Concurso',
-                recommendation: 'Indispensable para numerarios de Comando Radioeléctrico, Policía de Acción Táctica y Comisarías.'
-            },
-            registrationUrl: 'https://www.argentina.gob.ar/salud/primeros-auxilios'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-aws',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-aws'
         },
         {
-            id: 'inap-redaccion-actas-sumarios',
-            title: 'Redacción Administrativa Policial y Actas Procesales',
-            fullTitle: 'Técnicas de Redacción Normativa, Informes y Sumarios Preventivos',
-            partner: 'INAP (Instituto Nacional de la Administración Pública)',
-            provider: 'Instituto Nacional de la Administración Pública',
-            topic: 'Procedimientos Administrativos',
-            category: 'procedimientos',
-            level: 'Intermedio',
-            duration: '15 hs certificadas',
-            cost: 'Curso y certificado sin costo',
-            programTag: 'INAP - Gobierno Nacional',
-            tags: ['Subescalafón Judicial', 'Sin costo', '15 Hs Certificadas', 'Actas y Sumarios'],
+            id: 'capacitar-datos-oracle',
+            code: 'ORA-DATA',
+            title: 'Fundamentos de Infraestructura y Datos',
+            partner: 'En alianza con Oracle',
+            provider: 'Plataforma Capacitar · Ministerio de Economía de la Nación',
+            topic: 'Tecnología y Bases de Datos',
+            category: 'tecnologia',
+            level: 'Inicial',
+            duration: 'Autogestionado (Asincrónico)',
+            cost: 'Curso y certificado oficial sin costo ($0)',
+            modality: '100% Online y Asincrónico',
+            programTag: 'Oracle University / Capacitar',
+            tags: ['Oracle', 'Sin costo', 'Certificado Oficial', 'Gestión de Datos'],
             featured: false,
-            description: 'Dominá las técnicas de redacción técnico-administrativa para la confección de sumarios, elevaciones y actas de secuestro o aprehensión con estricto valor probatorio conforme al Código Procesal Penal de Santa Fe.',
+            description: 'Formación introductoria sobre infraestructura de datos de Oracle: resguardo perimetral de bases de datos, administración de registros y mejores prácticas de integridad para el manejo de información confidencial.',
             syllabus: [
-                'Claridad y precisión expositiva en documentos oficiales.',
-                'Estructura legal del acta de procedimiento y garantías procesales.',
-                'Confección de informes circunstanciados e inicios sumarios.',
-                'Evitación de nulidades procesales por vicios de forma o redacción.'
+                'Conceptos clave de bases de datos relacionales y cloud.',
+                'Seguridad, roles de usuario y control de acceso a registros.',
+                'Mecanismos de respaldo y recuperación ante desastres.',
+                'Certificación oficial emitida por Oracle University.'
             ],
-            ascensoImpact: {
-                rubro: 'Capacitación Técnico-Jurídica y Sumarial (Decreto 1166/18)',
-                points: '0.25 a 0.50 pts en el Legajo de Concurso',
-                recommendation: 'Recomendado para Oficiales de Guardia, Sumariantes de Comisaría e Investigadores Judiciales.'
-            },
-            registrationUrl: 'https://capacitacion.inap.gob.ar/'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-oracle',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-oracle'
         }
     ];
 
@@ -169,7 +203,7 @@
             return null;
         }
         var course = window.academyCourses.find(function(c) { return c.id === courseId; });
-        return course ? course.registrationUrl : null;
+        return course ? (course.registrationUrl || course.catalogueUrl) : null;
     };
 
 })();
