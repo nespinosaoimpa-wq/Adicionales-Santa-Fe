@@ -154,16 +154,27 @@ class TestAcademyCourses(unittest.TestCase):
         self.assertGreaterEqual(len(self.courses), 50)
 
     def test_router_and_agenda_promotion(self):
-        """Verify router routes #cursos and agenda displays top promo banner for $10.000."""
+        """Verify router routes #cursos publicly and agenda displays top promo banner for $10.000."""
         with open(ROUTER_PATH, "r", encoding="utf-8") as f:
             router_code = f.read()
         self.assertIn("case '#cursos':", router_code)
         self.assertIn("renderCursos", router_code)
+        self.assertIn("hash !== '#cursos'", router_code, "Public access to #cursos should not be blocked by auth check")
 
         with open(AGENDA_PATH, "r", encoding="utf-8") as f:
             agenda_code = f.read()
         self.assertIn("router.navigateTo('#cursos')", agenda_code)
         self.assertIn("10.000", agenda_code)
+
+    def test_landing_page_cursos_promotion(self):
+        """Verify landing page index.html contains Cursos section, nav link, and FAQ item."""
+        landing_path = os.path.join(WORKSPACE_ROOT, "index.html")
+        with open(landing_path, "r", encoding="utf-8") as f:
+            html = f.read()
+        self.assertIn('id="cursos"', html, "Landing page missing #cursos section")
+        self.assertIn('Cursos para Ascenso', html, "Landing page missing nav link to cursos")
+        self.assertIn('¿Cómo funciona el Repositorio de Cursos para el Concurso de Ascenso?', html, "Landing page missing FAQ item for cursos")
+        self.assertIn('10.000', html, "Landing page should mention 10.000 fee")
 
 if __name__ == "__main__":
     unittest.main()

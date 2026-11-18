@@ -56,6 +56,22 @@ function renderLogin(container) {
                     </div>
                 </form>
 
+                <!-- Acceso directo al Repositorio de Cursos Oficiales -->
+                <div class="pt-2">
+                    <a href="#cursos" class="flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-purple-900/30 via-blue-900/30 to-slate-900 border border-purple-500/30 hover:border-purple-400 transition-all text-left group">
+                        <div class="flex items-center gap-3">
+                            <div class="size-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 shrink-0">
+                                <span class="material-symbols-outlined text-xl">school</span>
+                            </div>
+                            <div>
+                                <div class="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">Repositorio de Cursos Oficiales</div>
+                                <div class="text-[11px] text-slate-400">Sumá puntaje en legajo con Google, Microsoft y más</div>
+                            </div>
+                        </div>
+                        <span class="material-symbols-outlined text-purple-400 text-sm group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+                    </a>
+                </div>
+
             <div class="mt-8 text-center sm:mx-auto sm:w-full sm:max-w-sm">
                 <p class="text-slate-500 text-xs text-center">
                     ¿No tienes cuenta? <a href="#signup" class="text-primary font-bold hover:underline">Regístrate gratis</a>

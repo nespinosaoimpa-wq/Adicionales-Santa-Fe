@@ -29,9 +29,9 @@ window.router = {
             return;
         }
 
-        // Protect routes that require authentication (except login, signup, and legal)
+        // Protect routes that require authentication (except login, signup, legal, and public courses catalog)
         const isLegalRoute = hash.startsWith('#legal/');
-        if (!store.isAuthenticated() && hash !== '#login' && hash !== '#signup' && !isLegalRoute) {
+        if (!store.isAuthenticated() && hash !== '#login' && hash !== '#signup' && !isLegalRoute && hash !== '#cursos') {
             console.log("🚫 Unauthorized access attempt to", hash);
             this.navigateTo('#login');
             return;
