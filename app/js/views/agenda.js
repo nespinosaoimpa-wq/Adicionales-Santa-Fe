@@ -103,6 +103,10 @@ function renderAgenda(container) {
                             <span class="material-symbols-outlined text-sm text-emerald-400 shrink-0">verified</span>
                             <span><strong class="text-white">Certificación Oficial con QR:</strong> Avalados con validación digital y convenios con líderes tech (Accenture, Microsoft, AWS, Oracle).</span>
                         </div>
+                        <div class="option">
+                            <span class="material-symbols-outlined text-sm text-cyan-400 shrink-0">info</span>
+                            <span><strong class="text-white">Facilitador de Enlaces:</strong> Brindamos la curaduría y links directos. Cursado y certificación dependen de cada plataforma emisora.</span>
+                        </div>
                     </div>
                 </div>
             </div>

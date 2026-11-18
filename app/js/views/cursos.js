@@ -576,6 +576,20 @@
                         ${_renderCursosMainContentHTML()}
                     </div>
 
+                    <!-- ⚖️ CLÁUSULA LEGAL Y ALCANCE DEL SERVICIO -->
+                    <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/70 border border-slate-800 text-[11px] text-slate-400 space-y-2 shadow-inner">
+                        <div class="flex items-center gap-2 text-slate-200 font-bold text-xs">
+                            <span class="material-symbols-outlined text-amber-400 text-base">info</span>
+                            <span>Alcance del Servicio y Términos del Repositorio</span>
+                        </div>
+                        <p class="leading-relaxed">
+                            <strong>Adicionales Santa Fe</strong> actúa exclusivamente como facilitador e intermediario informativo, brindando un servicio de búsqueda, curaduría y enlaces directos a las opciones de capacitación.
+                        </p>
+                        <p class="leading-relaxed text-slate-400/90">
+                            Las instancias de cursado, plataformas virtuales, contenidos pedagógicos, evaluaciones, plazos, soporte técnico y la posterior emisión y validación de certificados oficiales dependen única y exclusivamente de cada entidad o empresa que dicta el curso (Accenture, Microsoft, AWS, Oracle y convenios oficiales). Adicionales Santa Fe no emite certificados propios ni se responsabiliza por las políticas, disponibilidad o modificaciones de las plataformas externas.
+                        </p>
+                    </div>
+
                 </main>
 
                 <!-- MODAL PAYWALL / TARJETA UIVERSE.IO ($10.000) -->
@@ -639,6 +653,10 @@
                                         <span class="material-symbols-outlined text-sm text-amber-400 shrink-0">bolt</span>
                                         <span><strong class="text-white">Enlaces Directos Curados:</strong> Ahorrá tiempo. Accedé sin intermediarios al formulario de preinscripción directa de cada curso.</span>
                                     </div>
+                                    <div class="option">
+                                        <span class="material-symbols-outlined text-sm text-cyan-400 shrink-0">info</span>
+                                        <span><strong class="text-white">Intermediario Facilitador:</strong> Facilitamos el repositorio y links directos. El cursado, evaluación y emisión de certificados dependen exclusivamente de cada plataforma que brinda la capacitación.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -658,6 +676,17 @@
                                     <span class="text-slate-400">Monto exacto:</span>
                                     <span class="font-black text-amber-400">$10.000 ARS</span>
                                 </div>
+                            </div>
+
+                            <!-- AVISO DE RESPONSABILIDAD -->
+                            <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 text-[10px] text-slate-400 space-y-1">
+                                <span class="font-bold text-slate-300 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-xs text-amber-400">gavel</span>
+                                    Alcance del Servicio ($10.000):
+                                </span>
+                                <p class="leading-relaxed">
+                                    La suscripción cubre la búsqueda, organización y facilitación de los enlaces directos. Cursado, plataforma y certificación corresponden a cada entidad externa emisora.
+                                </p>
                             </div>
 
                             ${isPending ? `
