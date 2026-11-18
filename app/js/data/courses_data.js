@@ -35,8 +35,8 @@
                 'Comunicación entre servidores y protocolos de red.',
                 'Desarrollo de proyectos y evaluación final con certificado de 86 hs.'
             ],
-            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar',
-            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=RA38009',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=RA38009'
         },
         {
             id: 'capacitar-ruta-ciberseguridad-62h',
@@ -63,8 +63,8 @@
                 'Respuesta operativa ante incidentes y preservación de registros.',
                 'Evaluación final integradora con certificación oficial de 62 hs.'
             ],
-            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar',
-            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C38015',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C38015'
         },
 
         // ==========================================
@@ -1426,8 +1426,8 @@
                 'Almacenamiento seguro, copias de respaldo y redundancia.',
                 'Casos de uso e infraestructura para organizaciones modernas.'
             ],
-            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-aws',
-            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-aws'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar'
         },
         {
             id: 'capacitar-datos-oracle',
@@ -1453,8 +1453,8 @@
                 'Mecanismos de respaldo y recuperación ante desastres.',
                 'Certificación oficial emitida por Oracle University.'
             ],
-            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-oracle',
-            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-oracle'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar'
         }
     ];
 
@@ -1473,7 +1473,17 @@
             return null;
         }
         var course = window.academyCourses.find(function(c) { return c.id === courseId || c.code === courseId; });
-        return course ? (course.registrationUrl || course.catalogueUrl) : null;
+        if (!course) return null;
+        var formBase = 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar';
+        var url = course.registrationUrl || course.catalogueUrl;
+        if (!url || !url.includes('formulario-de-registro-cursos-de-capacitar')) {
+            if (course.code && /^(C|RA|CAMP)[0-9]+/i.test(course.code)) {
+                url = formBase + '?id_curso=' + course.code;
+            } else {
+                url = formBase;
+            }
+        }
+        return url;
     };
 
 })();

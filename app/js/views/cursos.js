@@ -158,7 +158,16 @@
             return;
         }
 
-        const url = course.registrationUrl || course.catalogueUrl;
+        const formBase = 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar';
+        let url = course.registrationUrl || course.catalogueUrl;
+        if (!url || !url.includes('formulario-de-registro-cursos-de-capacitar')) {
+            if (course.code && /^(C|RA|CAMP)[0-9]+/i.test(course.code)) {
+                url = `${formBase}?id_curso=${course.code}`;
+            } else {
+                url = formBase;
+            }
+        }
+
         if (url) {
             window.open(url, '_blank', 'noopener,noreferrer');
         } else {

@@ -188,5 +188,28 @@ class TestAcademyCourses(unittest.TestCase):
         for c in self.courses:
             self.assertTrue(c.get("protectedTitle"), f"Course {c.get('id')} missing protectedTitle")
 
+    def test_all_courses_have_official_registration_form_urls(self):
+        """Verify that all 54 courses point directly to the official pre-registration form."""
+        form_base = "https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar"
+        self.assertEqual(len(self.courses), 54)
+        for c in self.courses:
+            url = c.get("registrationUrl", "")
+            self.assertTrue(
+                url.startswith(form_base),
+                f"Course {c.get('id')} ({c.get('code')}) does not point to official form: {url}"
+            )
+
+        # Check explicit user samples
+        user_samples = {
+            "C38015": f"{form_base}?id_curso=C38015",
+            "RA38014": f"{form_base}?id_curso=RA38014",
+            "RA38009": f"{form_base}?id_curso=RA38009",
+            "RA38019": f"{form_base}?id_curso=RA38019",
+        }
+        for code, expected_url in user_samples.items():
+            course = next((c for c in self.courses if c.get("code") == code), None)
+            self.assertIsNotNone(course, f"Sample course {code} missing")
+            self.assertEqual(course.get("registrationUrl"), expected_url)
+
 if __name__ == "__main__":
     unittest.main()
