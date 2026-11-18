@@ -1,15 +1,18 @@
 /**
  * Adicionales Santa Fe - Repositorio de Cursos Oficiales
  * Catálogo Abierto y Gratuito con Protección de Enlaces Directos de Preinscripción ($10.000 Suscripción Única)
+ * Incluye Oferta Formativa Completa con Alianzas: Google, Santander, Microsoft, Accenture, Aionixs, AWS, Oracle y Convenio Oficial.
  */
 
 (function() {
     'use strict';
 
     window._cursosState = window._cursosState || {
+        topicFilter: 'todos',
+        allianceFilter: 'todas',
         categoryFilter: 'todos',
         searchTerm: '',
-        viewMode: 'table', // 'table' (igual a oferta-formativa de argentina.gob.ar) o 'cards'
+        viewMode: 'table', // 'table' (igual a oferta-formativa) o 'cards'
         modalCourseId: null
     };
 
@@ -163,26 +166,50 @@
         }
     };
 
+    window._filterCursosTopic = function(topic) {
+        window._cursosState.topicFilter = topic;
+        _updateCursosList();
+    };
+
+    window._filterCursosAlliance = function(alliance) {
+        window._cursosState.allianceFilter = alliance;
+        _updateCursosList();
+    };
+
     window._filterCursosCategory = function(cat) {
+        window._cursosState.topicFilter = cat;
         window._cursosState.categoryFilter = cat;
+        _updateCursosList();
+    };
+
+    window._resetCursosFilters = function() {
+        window._cursosState.topicFilter = 'todos';
+        window._cursosState.allianceFilter = 'todas';
+        window._cursosState.categoryFilter = 'todos';
+        window._cursosState.searchTerm = '';
         renderCursos();
     };
 
     window._toggleCursosView = function(mode) {
         window._cursosState.viewMode = mode;
-        const container = document.getElementById('cursos-list-container');
-        if (container) {
-            container.innerHTML = _renderCursosMainContentHTML();
-        }
+        _updateCursosList();
     };
 
     window._searchCursosInput = function(query) {
         window._cursosState.searchTerm = query;
+        _updateCursosList();
+    };
+
+    function _updateCursosList() {
         const container = document.getElementById('cursos-list-container');
         if (container) {
             container.innerHTML = _renderCursosMainContentHTML();
         }
-    };
+        const countEl = document.getElementById('cursos-result-count');
+        if (countEl) {
+            countEl.innerText = `${_getFilteredCourses().length} resultados`;
+        }
+    }
 
     function _getCoursesList() {
         if (window.academyCourses && Array.isArray(window.academyCourses) && window.academyCourses.length > 0) {
@@ -194,11 +221,18 @@
     function _getFilteredCourses() {
         const courses = _getCoursesList();
         const state = window._cursosState;
-        const activeCategory = state.categoryFilter || 'todos';
+        const activeTopic = state.topicFilter || state.categoryFilter || 'todos';
+        const activeAlliance = state.allianceFilter || 'todas';
         const searchTerm = (state.searchTerm || '').trim().toLowerCase();
 
         return courses.filter(c => {
-            const matchCategory = activeCategory === 'todos' || c.category === activeCategory;
+            const matchTopic = activeTopic === 'todos' || 
+                (c.topic && c.topic.toLowerCase() === activeTopic.toLowerCase()) ||
+                (c.category && c.category.toLowerCase() === activeTopic.toLowerCase());
+            
+            const matchAlliance = activeAlliance === 'todas' || 
+                (c.partner && c.partner.toLowerCase().includes(activeAlliance.toLowerCase()));
+
             const matchSearch = !searchTerm ||
                 (c.code && c.code.toLowerCase().includes(searchTerm)) ||
                 (c.title && c.title.toLowerCase().includes(searchTerm)) ||
@@ -206,7 +240,8 @@
                 (c.partner && c.partner.toLowerCase().includes(searchTerm)) ||
                 (c.topic && c.topic.toLowerCase().includes(searchTerm)) ||
                 (c.description && c.description.toLowerCase().includes(searchTerm));
-            return matchCategory && matchSearch;
+
+            return matchTopic && matchAlliance && matchSearch;
         });
     }
 
@@ -218,9 +253,9 @@
             return `
                 <div class="text-center py-12 px-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
                     <span class="material-symbols-outlined text-4xl text-slate-500">search_off</span>
-                    <p class="text-sm font-bold text-slate-300">No se encontraron capacitaciones con ese filtro</p>
-                    <p class="text-xs text-slate-500">Probá con otra palabra clave o cambiá la temática.</p>
-                    <button onclick="window._filterCursosCategory('todos')" class="mt-2 text-xs font-black text-primary hover:underline">
+                    <p class="text-sm font-bold text-slate-300">No se encontraron capacitaciones con esos filtros</p>
+                    <p class="text-xs text-slate-500">Probá con otra palabra clave o restablecé los filtros.</p>
+                    <button onclick="window._resetCursosFilters()" class="mt-2 text-xs font-black text-primary hover:underline">
                         Ver todas las capacitaciones
                     </button>
                 </div>
@@ -276,7 +311,7 @@
 
                                     <!-- TEMA -->
                                     <td class="py-3.5 px-3">
-                                        <span class="px-2 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/80 text-slate-300 text-[10px] font-semibold whitespace-nowrap">
+                                        <span class="px-2.5 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/80 text-slate-300 text-[10px] font-semibold whitespace-nowrap">
                                             ${course.topic || 'General'}
                                         </span>
                                     </td>
@@ -315,7 +350,7 @@
                 </table>
             </div>
             <div class="flex items-center justify-between text-[11px] text-slate-400 px-2 pt-2">
-                <span>Mostrando <strong>${filtered.length}</strong> capacitaciones oficiales</span>
+                <span>Mostrando <strong>${filtered.length}</strong> capacitaciones</span>
                 <span class="sm:hidden text-[10px] text-slate-400 flex items-center gap-1">
                     <span class="material-symbols-outlined text-xs">swipe</span> Deslizá para ver tabla completa
                 </span>
@@ -332,8 +367,8 @@
                 <div class="col-span-full text-center py-12 px-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
                     <span class="material-symbols-outlined text-4xl text-slate-500">search_off</span>
                     <p class="text-sm font-bold text-slate-300">No se encontraron cursos con ese filtro</p>
-                    <p class="text-xs text-slate-500">Probá con otra palabra clave o cambiá la categoría.</p>
-                    <button onclick="window._filterCursosCategory('todos')" class="mt-2 text-xs font-black text-primary hover:underline">
+                    <p class="text-xs text-slate-500">Probá con otra palabra clave o cambiá los filtros.</p>
+                    <button onclick="window._resetCursosFilters()" class="mt-2 text-xs font-black text-primary hover:underline">
                         Ver todos los cursos
                     </button>
                 </div>
@@ -453,15 +488,10 @@
                           (localStorage.getItem('asf_cursos_pending') === 'true');
 
         const state = window._cursosState;
-        const activeCategory = state.categoryFilter || 'todos';
+        const activeTopic = state.topicFilter || 'todos';
+        const activeAlliance = state.allianceFilter || 'todas';
         const viewMode = state.viewMode || 'table';
-
-        const categories = [
-            { id: 'todos', label: 'Todas las Capacitaciones', icon: 'apps' },
-            { id: 'ciberseguridad', label: 'Ciberseguridad', icon: 'security' },
-            { id: 'habilidades-blandas', label: 'Habilidades Blandas', icon: 'psychology' },
-            { id: 'tecnologia', label: 'Tecnología & Cloud', icon: 'cloud' }
-        ];
+        const filtered = _getFilteredCourses();
 
         container.innerHTML = `
             <div class="min-h-screen bg-background-dark text-white flex flex-col justify-between pb-32">
@@ -507,10 +537,10 @@
                                         <span class="text-[9px] font-black uppercase tracking-widest bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/30">🔥 $10.000 SUSCRIPCIÓN ÚNICA</span>
                                     </div>
                                     <h2 class="text-sm sm:text-base font-black text-white">
-                                        Explorá todos los cursos oficiales gratis
+                                        Explorá todas las capacitaciones oficiales gratis
                                     </h2>
                                     <p class="text-xs text-slate-300 leading-relaxed">
-                                        Podés consultar libremente toda la lista. Para acceder a los <strong>links directos de preinscripción</strong> de cada curso y sumar puntos al legajo policial, activá el repositorio con suscripción única.
+                                        Consultá libremente toda la oferta. Para acceder a los <strong>enlaces directos de preinscripción</strong> de cada curso y sumar puntos al legajo policial, habilitá el repositorio con suscripción única.
                                     </p>
                                 </div>
                             </div>
@@ -530,45 +560,82 @@
                         </div>
                     `}
 
-                    <!-- CONTROLES: BÚSQUEDA Y VISTA -->
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
-                        
-                        <!-- BARRA DE BÚSQUEDA -->
-                        <div class="relative flex-1">
-                            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-                            <input type="text" 
-                                   id="cursos-search-input"
-                                   value="${state.searchTerm || ''}"
-                                   oninput="window._searchCursosInput(this.value)"
-                                   placeholder="Buscar por código (ej. C48040), nombre, temática o alianza..." 
-                                   class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary/50 transition-colors shadow-inner" />
+                    <!-- FILTROS ESTILO OFERTA-FORMATIVA (TEMA, ALIANZA, BUSCADOR) -->
+                    <div class="space-y-3 p-4 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                            
+                            <!-- SELECT TEMA -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-400 mb-1">Tema</label>
+                                <select onchange="window._filterCursosTopic(this.value)" class="w-full px-3 py-2.5 rounded-xl bg-[#161a20] border border-slate-700 text-xs text-white focus:outline-none focus:border-primary">
+                                    <option value="todos" ${activeTopic === 'todos' ? 'selected' : ''}>Todos los temas</option>
+                                    <option value="Inteligencia artificial" ${activeTopic === 'Inteligencia artificial' ? 'selected' : ''}>Inteligencia artificial</option>
+                                    <option value="Ciberseguridad" ${activeTopic === 'Ciberseguridad' ? 'selected' : ''}>Ciberseguridad</option>
+                                    <option value="Ciencia de datos" ${activeTopic === 'Ciencia de datos' ? 'selected' : ''}>Ciencia de datos</option>
+                                    <option value="Habilidades blandas" ${activeTopic === 'Habilidades blandas' ? 'selected' : ''}>Habilidades blandas</option>
+                                    <option value="Computación en la nube" ${activeTopic === 'Computación en la nube' ? 'selected' : ''}>Computación en la nube</option>
+                                    <option value="Marketing e Investigación de mercado" ${activeTopic === 'Marketing e Investigación de mercado' ? 'selected' : ''}>Marketing / Investigación</option>
+                                    <option value="Finanzas" ${activeTopic === 'Finanzas' ? 'selected' : ''}>Finanzas</option>
+                                    <option value="Comercialización" ${activeTopic === 'Comercialización' ? 'selected' : ''}>Comercialización</option>
+                                    <option value="Diseño gráfico y multimedia" ${activeTopic === 'Diseño gráfico y multimedia' ? 'selected' : ''}>Diseño gráfico / Multimedia</option>
+                                    <option value="Tecnología y Sistemas" ${activeTopic === 'Tecnología y Sistemas' ? 'selected' : ''}>Tecnología y Sistemas</option>
+                                </select>
+                            </div>
+
+                            <!-- SELECT ALIANZA -->
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-400 mb-1">Alianza</label>
+                                <select onchange="window._filterCursosAlliance(this.value)" class="w-full px-3 py-2.5 rounded-xl bg-[#161a20] border border-slate-700 text-xs text-white focus:outline-none focus:border-primary">
+                                    <option value="todas" ${activeAlliance === 'todas' ? 'selected' : ''}>Todas las alianzas</option>
+                                    <option value="Google" ${activeAlliance === 'Google' ? 'selected' : ''}>Google</option>
+                                    <option value="Santander" ${activeAlliance === 'Santander' ? 'selected' : ''}>Santander</option>
+                                    <option value="Microsoft" ${activeAlliance === 'Microsoft' ? 'selected' : ''}>Microsoft</option>
+                                    <option value="Accenture" ${activeAlliance === 'Accenture' ? 'selected' : ''}>Accenture</option>
+                                    <option value="Aionixs" ${activeAlliance === 'Aionixs' ? 'selected' : ''}>Aionixs</option>
+                                    <option value="AWS" ${activeAlliance === 'AWS' ? 'selected' : ''}>AWS</option>
+                                    <option value="Oracle" ${activeAlliance === 'Oracle' ? 'selected' : ''}>Oracle</option>
+                                    <option value="Convenio Oficial" ${activeAlliance === 'Convenio Oficial' ? 'selected' : ''}>Convenio Oficial (Alta Carga)</option>
+                                </select>
+                            </div>
+
+                            <!-- BUSCADOR -->
+                            <div class="sm:col-span-2 lg:col-span-1">
+                                <label class="block text-[11px] font-bold text-slate-400 mb-1">Buscá por palabra clave</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-base">search</span>
+                                    <input type="text" 
+                                           id="cursos-search-input"
+                                           value="${state.searchTerm || ''}"
+                                           oninput="window._searchCursosInput(this.value)"
+                                           placeholder="Código (ej. C46002), nombre..." 
+                                           class="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#161a20] border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary" />
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- TOGGLE VISTA (TABLA / FICHAS) -->
-                        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-2xl border border-slate-800 shrink-0 self-end sm:self-auto">
-                            <button onclick="window._toggleCursosView('table')" 
-                                    class="px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 transition-all ${viewMode === 'table' ? 'bg-primary text-white shadow-md' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">table_rows</span>
-                                <span>Tabla</span>
-                            </button>
-                            <button onclick="window._toggleCursosView('cards')" 
-                                    class="px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 transition-all ${viewMode === 'cards' ? 'bg-primary text-white shadow-md' : 'text-slate-400 hover:text-white'}">
-                                <span class="material-symbols-outlined text-sm">grid_view</span>
-                                <span>Fichas</span>
-                            </button>
+                        <!-- CONTADOR Y BOTÓN RESTABLECER -->
+                        <div class="flex items-center justify-between pt-1 border-t border-slate-800/60 text-xs">
+                            <div class="flex items-center gap-2">
+                                <span id="cursos-result-count" class="font-bold text-slate-200">${filtered.length} resultados</span>
+                                <button onclick="window._resetCursosFilters()" class="text-blue-400 hover:text-blue-300 font-semibold underline text-xs">
+                                    Restablecer
+                                </button>
+                            </div>
+
+                            <!-- TOGGLE VISTA (TABLA / FICHAS) -->
+                            <div class="flex items-center gap-1 bg-black/40 p-1 rounded-xl border border-slate-800">
+                                <button onclick="window._toggleCursosView('table')" 
+                                        class="px-2.5 py-1 rounded-lg text-xs font-black flex items-center gap-1 transition-all ${viewMode === 'table' ? 'bg-primary text-white shadow-md' : 'text-slate-400 hover:text-white'}">
+                                    <span class="material-symbols-outlined text-xs">table_rows</span>
+                                    <span>Tabla</span>
+                                </button>
+                                <button onclick="window._toggleCursosView('cards')" 
+                                        class="px-2.5 py-1 rounded-lg text-xs font-black flex items-center gap-1 transition-all ${viewMode === 'cards' ? 'bg-primary text-white shadow-md' : 'text-slate-400 hover:text-white'}">
+                                    <span class="material-symbols-outlined text-xs">grid_view</span>
+                                    <span>Fichas</span>
+                                </button>
+                            </div>
                         </div>
-
-                    </div>
-
-                    <!-- CHIPS DE CATEGORÍAS -->
-                    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-                        ${categories.map(cat => `
-                            <button onclick="window._filterCursosCategory('${cat.id}')" 
-                                    class="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${activeCategory === cat.id ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30' : 'bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800'}">
-                                <span class="material-symbols-outlined text-xs">${cat.icon}</span>
-                                <span>${cat.label}</span>
-                            </button>
-                        `).join('')}
                     </div>
 
                     <!-- LISTADO DINÁMICO (TABLA O FICHAS) -->
@@ -586,7 +653,7 @@
                             <strong>Adicionales Santa Fe</strong> actúa exclusivamente como facilitador e intermediario informativo, brindando un servicio de búsqueda, curaduría y enlaces directos a las opciones de capacitación.
                         </p>
                         <p class="leading-relaxed text-slate-400/90">
-                            Las instancias de cursado, plataformas virtuales, contenidos pedagógicos, evaluaciones, plazos, soporte técnico y la posterior emisión y validación de certificados oficiales dependen única y exclusivamente de cada entidad o empresa que dicta el curso (Accenture, Microsoft, AWS, Oracle y convenios oficiales). Adicionales Santa Fe no emite certificados propios ni se responsabiliza por las políticas, disponibilidad o modificaciones de las plataformas externas.
+                            Las instancias de cursado, plataformas virtuales, contenidos pedagógicos, evaluaciones, plazos, soporte técnico y la posterior emisión y validación de certificados oficiales dependen única y exclusivamente de cada entidad o empresa que dicta el curso (Accenture, Google, Microsoft, Santander, Aionixs, AWS, Oracle y convenios oficiales). Adicionales Santa Fe no emite certificados propios ni se responsabiliza por las políticas, disponibilidad o modificaciones de las plataformas externas.
                         </p>
                     </div>
 
@@ -647,7 +714,7 @@
                                     </div>
                                     <div class="option">
                                         <span class="material-symbols-outlined text-sm text-emerald-400 shrink-0">verified</span>
-                                        <span><strong class="text-white">Certificación Oficial con Validación QR:</strong> Avalados con código de validación digital y convenios con líderes tecnológicos (Accenture, Microsoft, AWS, Oracle).</span>
+                                        <span><strong class="text-white">Certificación Oficial con Validación QR:</strong> Avalados con código de validación digital y convenios con líderes tecnológicos (Accenture, Google, Microsoft, Santander, AWS, Oracle).</span>
                                     </div>
                                     <div class="option">
                                         <span class="material-symbols-outlined text-sm text-amber-400 shrink-0">bolt</span>

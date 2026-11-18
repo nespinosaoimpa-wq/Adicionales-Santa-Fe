@@ -120,15 +120,38 @@ class TestAcademyCourses(unittest.TestCase):
         self.assertIn("10000", code, "Cursos fee should be 10000")
 
     def test_capacitar_screenshot_courses_dataset(self):
-        """Verify that all courses from Capacitar oferta-formativa screenshot are in the dataset."""
+        """Verify that all courses from screenshot oferta-formativa tables are in the dataset."""
         codes = [c.get("code") for c in self.courses if c.get("code")]
-        expected = [
+        # Accenture & Rutas
+        expected_accenture = [
             "C48040", "C48099", "C48100", "C48212", "C48215",
             "C48207", "C48214", "C48211", "C48209", "C48213",
             "RUTA-CIBER-62H", "RUTA-DEV-86H"
         ]
-        for exp in expected:
+        # Google
+        expected_google = [
+            "C46002", "C46008", "C46009", "C46004", "C46003",
+            "C46005", "C46006", "C46010", "C46007", "C46011"
+        ]
+        # Santander
+        expected_santander = [
+            "C42000", "C42053", "C48204", "C42001", "C42044",
+            "C42048", "C42002", "C42056", "C48205", "C42004"
+        ]
+        # Aionixs
+        expected_aionixs = ["CAMP0015"]
+        # Microsoft & LinkedIn
+        expected_microsoft = [
+            "C38002", "C38023", "C38000", "C38026", "RA38002",
+            "C38028", "C38027", "C38020", "RA38016", "C38009",
+            "C38001", "RA38003", "C38015", "RA38014", "RA38009",
+            "RA38019", "C38008", "C38006", "RA38017"
+        ]
+
+        all_expected = expected_accenture + expected_google + expected_santander + expected_aionixs + expected_microsoft
+        for exp in all_expected:
             self.assertIn(exp, codes, f"Course code {exp} missing from academyCourses")
+        self.assertGreaterEqual(len(self.courses), 50)
 
     def test_router_and_agenda_promotion(self):
         """Verify router routes #cursos and agenda displays top promo banner for $10.000."""
