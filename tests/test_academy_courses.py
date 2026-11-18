@@ -176,5 +176,17 @@ class TestAcademyCourses(unittest.TestCase):
         self.assertIn('¿Cómo funciona el Repositorio de Cursos para el Concurso de Ascenso?', html, "Landing page missing FAQ item for cursos")
         self.assertIn('10.000', html, "Landing page should mention 10.000 fee")
 
+    def test_anti_copy_and_code_protection(self):
+        """Verify that cursos.js protects official codes and titles from copying and Google searching."""
+        with open(CURSOS_VIEW_PATH, "r", encoding="utf-8") as f:
+            code = f.read()
+        self.assertIn("cursos-no-copy", code, "cursos.js missing anti-copy class")
+        self.assertIn("Código Protegido", code, "cursos.js should display Código Protegido for unsubscribed users")
+        self.assertIn("protectedTitle", code, "cursos.js should display protectedTitle for unsubscribed users")
+
+        # Verify all courses have protectedTitle
+        for c in self.courses:
+            self.assertTrue(c.get("protectedTitle"), f"Course {c.get('id')} missing protectedTitle")
+
 if __name__ == "__main__":
     unittest.main()

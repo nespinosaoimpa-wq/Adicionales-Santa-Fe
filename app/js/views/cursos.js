@@ -274,29 +274,42 @@
                             <th class="py-3.5 px-4 font-black">Alianza</th>
                         </tr>
                     </thead>
-                    <tbody class="divide-y divide-slate-800/70">
+                    <tbody class="divide-y divide-slate-800/70 cursos-no-copy select-none">
                         ${filtered.map((course, idx) => {
                             const isAlt = idx % 2 === 1;
                             const isHighHours = course.hours && course.hours >= 60;
+                            const displayTitle = hasAccess ? course.title : (course.protectedTitle || course.title);
                             return `
-                                <tr class="${isAlt ? 'bg-slate-900/30' : 'bg-transparent'} hover:bg-slate-800/40 transition-colors">
+                                <tr class="${isAlt ? 'bg-slate-900/30' : 'bg-transparent'} hover:bg-slate-800/40 transition-colors cursos-protected-row select-none ${hasAccess ? '' : 'cursor-pointer'}"
+                                    ${hasAccess ? '' : `onclick="window._openCursosPaywallModal('${course.id}')"`}>
                                     
                                     <!-- NOMBRE -->
                                     <td class="py-3.5 px-4">
-                                        <div class="space-y-0.5">
-                                            <span class="font-bold text-slate-100 text-xs sm:text-sm block leading-snug">
-                                                ${course.code ? `<span class="text-blue-400 font-mono font-bold">${course.code}</span> - ` : ''}${course.title}
+                                        <div class="space-y-1">
+                                            <div class="flex items-center gap-1.5 flex-wrap">
+                                                ${hasAccess ? (
+                                                    course.code ? `<span class="text-blue-400 font-mono font-bold text-xs">${course.code}</span>` : ''
+                                                ) : `
+                                                    <span class="px-2 py-0.5 rounded bg-purple-900/60 border border-purple-500/40 text-purple-300 text-[10px] font-mono font-bold inline-flex items-center gap-1 select-none">
+                                                        <span class="material-symbols-outlined text-[12px] text-purple-400">lock</span> Código Protegido
+                                                    </span>
+                                                `}
+                                                ${isHighHours ? `
+                                                    <span class="px-1.5 py-0.2 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 font-black uppercase text-[9px] inline-flex items-center gap-0.5 select-none">
+                                                        <span class="material-symbols-outlined text-[10px]">military_tech</span> Máximo Puntaje
+                                                    </span>
+                                                ` : ''}
+                                            </div>
+                                            <span class="font-bold text-slate-100 text-xs sm:text-sm block leading-snug select-none cursos-protected-title">
+                                                ${displayTitle}
                                             </span>
-                                            <div class="flex items-center gap-2 text-[10px] text-slate-400">
+                                            <div class="flex items-center gap-2 text-[10px] text-slate-400 select-none">
                                                 <span class="flex items-center gap-0.5">
                                                     <span class="material-symbols-outlined text-[11px] text-primary">schedule</span>
                                                     ${course.duration}
                                                 </span>
-                                                ${isHighHours ? `
-                                                    <span class="px-1.5 py-0.2 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 font-black uppercase text-[9px] flex items-center gap-0.5">
-                                                        <span class="material-symbols-outlined text-[10px]">military_tech</span> Máximo Puntaje
-                                                    </span>
-                                                ` : ''}
+                                                <span>•</span>
+                                                <span class="text-emerald-400 font-semibold">100% Asincrónico</span>
                                             </div>
                                         </div>
                                     </td>
@@ -376,11 +389,12 @@
         }
 
         return `
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 cursos-no-copy select-none">
                 ${filtered.map(course => {
                     const isHighHours = course.hours && course.hours >= 60;
+                    const displayTitle = hasAccess ? course.title : (course.protectedTitle || course.title);
                     return `
-                        <article class="bg-slate-900 border ${course.featured ? 'border-primary/50 shadow-xl shadow-primary/10' : 'border-slate-800 shadow-lg'} rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-all space-y-4">
+                        <article class="bg-slate-900 border ${course.featured ? 'border-primary/50 shadow-xl shadow-primary/10' : 'border-slate-800 shadow-lg'} rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-all space-y-4 cursos-protected-row select-none">
                             
                             <div class="space-y-3">
                                 <!-- BADGES -->
@@ -395,19 +409,25 @@
                                         </span>
                                     </div>
 
-                                    ${isHighHours ? `
-                                        <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[9px] font-black uppercase tracking-wider flex items-center gap-1">
-                                            <span class="material-symbols-outlined text-xs">military_tech</span> ${course.hours} HS CÁTEDRA
+                                    ${hasAccess ? (
+                                        isHighHours ? `
+                                            <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[9px] font-black uppercase tracking-wider flex items-center gap-1">
+                                                <span class="material-symbols-outlined text-xs">military_tech</span> ${course.hours} HS CÁTEDRA
+                                            </span>
+                                        ` : ''
+                                    ) : `
+                                        <span class="px-2 py-0.5 rounded bg-purple-900/60 border border-purple-500/40 text-purple-300 text-[9px] font-mono font-bold inline-flex items-center gap-1 select-none">
+                                            <span class="material-symbols-outlined text-[11px] text-purple-400">lock</span> Código Protegido
                                         </span>
-                                    ` : ''}
+                                    `}
                                 </div>
 
                                 <!-- TITLE -->
                                 <div>
-                                    <h3 class="text-base font-black text-white leading-snug">
-                                        ${course.code ? `<span class="text-primary font-mono">${course.code}</span> · ` : ''}${course.title}
+                                    <h3 class="text-base font-black text-white leading-snug select-none cursos-protected-title">
+                                        ${hasAccess && course.code ? `<span class="text-primary font-mono">${course.code}</span> · ` : ''}${displayTitle}
                                     </h3>
-                                    <p class="text-xs font-medium text-slate-400 mt-0.5 flex items-center gap-1">
+                                    <p class="text-xs font-medium text-slate-400 mt-0.5 flex items-center gap-1 select-none">
                                         <span class="material-symbols-outlined text-xs text-emerald-400">verified</span>
                                         ${course.partner} · Certificación Oficial
                                     </p>
@@ -794,6 +814,30 @@
                 ${typeof renderBottomNav === 'function' ? renderBottomNav('agenda') : ''}
             </div>
         `;
+
+        // Blindaje contra copiado no autorizado para usuarios sin suscripción
+        const listEl = targetContainer.querySelector('#cursos-list-container');
+        if (listEl) {
+            listEl.addEventListener('copy', (e) => {
+                if (!window._hasCursosAccess()) {
+                    e.preventDefault();
+                    if (typeof showToast === 'function') {
+                        showToast("🔒 Código y enlace protegidos. Habilitá tu suscripción para desbloquearlos.");
+                    }
+                }
+            });
+            listEl.addEventListener('selectstart', (e) => {
+                if (!window._hasCursosAccess()) {
+                    if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) return;
+                    e.preventDefault();
+                }
+            });
+            listEl.addEventListener('contextmenu', (e) => {
+                if (!window._hasCursosAccess()) {
+                    e.preventDefault();
+                }
+            });
+        }
     };
 
 })();

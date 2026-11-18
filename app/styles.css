@@ -766,3 +766,16 @@ select {
   font-size: 11px;
   line-height: 1.35;
 }
+
+/* ============================================================
+   PROTECCIÓN DE CATÁLOGO Y ENLACES (ANTI-COPY & BLINDAJE DE CURSOS)
+   ============================================================ */
+.cursos-no-copy,
+.cursos-protected-row,
+.cursos-protected-title {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
