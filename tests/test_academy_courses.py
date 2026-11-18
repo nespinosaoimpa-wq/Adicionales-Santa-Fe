@@ -115,7 +115,20 @@ class TestAcademyCourses(unittest.TestCase):
         self.assertIn("window.renderCursos", code)
         self.assertIn("window._hasCursosAccess", code)
         self.assertIn("window._submitCursosPayment", code)
+        self.assertIn("window._openCourseOfficial", code)
+        self.assertIn("window._openCursosPaywallModal", code)
         self.assertIn("10000", code, "Cursos fee should be 10000")
+
+    def test_capacitar_screenshot_courses_dataset(self):
+        """Verify that all courses from Capacitar oferta-formativa screenshot are in the dataset."""
+        codes = [c.get("code") for c in self.courses if c.get("code")]
+        expected = [
+            "C48040", "C48099", "C48100", "C48212", "C48215",
+            "C48207", "C48214", "C48211", "C48209", "C48213",
+            "RUTA-CIBER-62H", "RUTA-DEV-86H"
+        ]
+        for exp in expected:
+            self.assertIn(exp, codes, f"Course code {exp} missing from academyCourses")
 
     def test_router_and_agenda_promotion(self):
         """Verify router routes #cursos and agenda displays top promo banner for $10.000."""

@@ -1,6 +1,6 @@
 /**
  * Adicionales Santa Fe - Repositorio de Cursos Oficiales Capacitar
- * Acceso Restringido: Suscripción Única $10.000 con Aprobación del Administrador
+ * Catálogo Abierto y Gratuito con Protección de Enlaces Directos de Preinscripción ($10.000 Suscripción Única)
  */
 
 (function() {
@@ -8,11 +8,13 @@
 
     window._cursosState = window._cursosState || {
         categoryFilter: 'todos',
-        searchTerm: ''
+        searchTerm: '',
+        viewMode: 'table', // 'table' (igual a oferta-formativa de argentina.gob.ar) o 'cards'
+        modalCourseId: null
     };
 
     /**
-     * Verifica si el usuario actual cuenta con habilitación para acceder al repositorio.
+     * Verifica si el usuario actual cuenta con habilitación para acceder a los enlaces directos.
      */
     window._hasCursosAccess = function() {
         // 1. Super Administrador siempre tiene acceso total
@@ -88,14 +90,77 @@
         }
 
         // 3. Abrir WhatsApp oficial con comprobante
-        const msg = `Hola! Quiero activar mi acceso al Repositorio Oficial de Cursos Capacitar ($10.000 - Suscripción Única) en Adicionales Santa Fe.\n\n👤 Oficial: ${userName}\n📧 Email registrado: ${userEmail}\n\nAdjunto comprobante de transferencia a SmartFlow.Digital.`;
+        const msg = `Hola! Quiero activar mi acceso a los enlaces del Repositorio Oficial de Cursos Capacitar ($10.000 - Suscripción Única) en Adicionales Santa Fe.\n\n👤 Oficial: ${userName}\n📧 Email registrado: ${userEmail}\n\nAdjunto comprobante de transferencia a SmartFlow.Digital.`;
         const waUrl = `https://wa.me/5493425162372?text=${encodeURIComponent(msg)}`;
         window.open(waUrl, '_blank');
 
         if (typeof showToast === 'function') {
             showToast("✅ Solicitud registrada. Al verificar tu comprobante por WhatsApp se habilitará tu acceso.");
         }
+        window._closeCursosPaywallModal();
         renderCursos();
+    };
+
+    /**
+     * Abre el modal del paywall cuando un usuario sin suscripción intenta ver un enlace protegido.
+     */
+    window._openCursosPaywallModal = function(courseId) {
+        window._cursosState.modalCourseId = courseId || null;
+        const modal = document.getElementById('cursos-paywall-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Actualizar info del curso si corresponde
+            const courseInfoEl = document.getElementById('modal-course-target-info');
+            if (courseInfoEl) {
+                if (courseId) {
+                    const c = (window.academyCourses || []).find(item => item.id === courseId || item.code === courseId);
+                    if (c) {
+                        courseInfoEl.innerHTML = `Para acceder al enlace directo de preinscripción de <strong>${c.code} - ${c.title}</strong> (${c.partner}) y a más de 135 cursos oficiales:`;
+                        courseInfoEl.classList.remove('hidden');
+                    } else {
+                        courseInfoEl.classList.add('hidden');
+                    }
+                } else {
+                    courseInfoEl.classList.add('hidden');
+                }
+            }
+        }
+    };
+
+    /**
+     * Cierra el modal del paywall.
+     */
+    window._closeCursosPaywallModal = function() {
+        window._cursosState.modalCourseId = null;
+        const modal = document.getElementById('cursos-paywall-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    };
+
+    /**
+     * Intenta abrir el enlace oficial del curso. Si no tiene acceso, abre el paywall.
+     */
+    window._openCourseOfficial = function(courseId) {
+        if (!window._hasCursosAccess()) {
+            window._openCursosPaywallModal(courseId);
+            return;
+        }
+
+        const course = (window.academyCourses || []).find(c => c.id === courseId || c.code === courseId);
+        if (!course) {
+            if (window.showToast) window.showToast("Curso no encontrado.");
+            return;
+        }
+
+        const url = course.registrationUrl || course.catalogueUrl;
+        if (url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        } else {
+            if (window.showToast) window.showToast("Enlace de preinscripción temporalmente no disponible.");
+        }
     };
 
     window._filterCursosCategory = function(cat) {
@@ -103,11 +168,19 @@
         renderCursos();
     };
 
+    window._toggleCursosView = function(mode) {
+        window._cursosState.viewMode = mode;
+        const container = document.getElementById('cursos-list-container');
+        if (container) {
+            container.innerHTML = _renderCursosMainContentHTML();
+        }
+    };
+
     window._searchCursosInput = function(query) {
         window._cursosState.searchTerm = query;
-        const container = document.getElementById('cursos-cards-grid');
+        const container = document.getElementById('cursos-list-container');
         if (container) {
-            container.innerHTML = _renderCursosCardsListHTML();
+            container.innerHTML = _renderCursosMainContentHTML();
         }
     };
 
@@ -118,15 +191,16 @@
         return [];
     }
 
-    function _renderCursosCardsListHTML() {
+    function _getFilteredCourses() {
         const courses = _getCoursesList();
         const state = window._cursosState;
         const activeCategory = state.categoryFilter || 'todos';
         const searchTerm = (state.searchTerm || '').trim().toLowerCase();
 
-        const filtered = courses.filter(c => {
+        return courses.filter(c => {
             const matchCategory = activeCategory === 'todos' || c.category === activeCategory;
             const matchSearch = !searchTerm ||
+                (c.code && c.code.toLowerCase().includes(searchTerm)) ||
                 (c.title && c.title.toLowerCase().includes(searchTerm)) ||
                 (c.provider && c.provider.toLowerCase().includes(searchTerm)) ||
                 (c.partner && c.partner.toLowerCase().includes(searchTerm)) ||
@@ -134,7 +208,125 @@
                 (c.description && c.description.toLowerCase().includes(searchTerm));
             return matchCategory && matchSearch;
         });
+    }
 
+    /**
+     * Renderiza la tabla estilo oferta-formativa de argentina.gob.ar
+     */
+    function _renderCursosTableHTML(filtered, hasAccess) {
+        if (filtered.length === 0) {
+            return `
+                <div class="text-center py-12 px-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
+                    <span class="material-symbols-outlined text-4xl text-slate-500">search_off</span>
+                    <p class="text-sm font-bold text-slate-300">No se encontraron capacitaciones con ese filtro</p>
+                    <p class="text-xs text-slate-500">Probá con otra palabra clave o cambiá la temática.</p>
+                    <button onclick="window._filterCursosCategory('todos')" class="mt-2 text-xs font-black text-primary hover:underline">
+                        Ver todas las capacitaciones
+                    </button>
+                </div>
+            `;
+        }
+
+        return `
+            <div class="overflow-x-auto rounded-2xl border border-slate-800 bg-[#12161f]/90 shadow-2xl">
+                <table class="w-full text-left text-xs border-collapse min-w-[620px]">
+                    <thead>
+                        <tr class="border-b border-slate-800 bg-slate-900/90 text-slate-400 uppercase text-[10px] font-black tracking-wider">
+                            <th class="py-3.5 px-4 font-black">Nombre de la capacitación</th>
+                            <th class="py-3.5 px-3 font-black whitespace-nowrap">Modalidad</th>
+                            <th class="py-3.5 px-3 font-black">Tema</th>
+                            <th class="py-3.5 px-3 font-black text-center">Enlace</th>
+                            <th class="py-3.5 px-4 font-black">Alianza</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-800/70">
+                        ${filtered.map((course, idx) => {
+                            const isAlt = idx % 2 === 1;
+                            const isHighHours = course.hours && course.hours >= 60;
+                            return `
+                                <tr class="${isAlt ? 'bg-slate-900/30' : 'bg-transparent'} hover:bg-slate-800/40 transition-colors">
+                                    
+                                    <!-- NOMBRE -->
+                                    <td class="py-3.5 px-4">
+                                        <div class="space-y-0.5">
+                                            <span class="font-bold text-slate-100 text-xs sm:text-sm block leading-snug">
+                                                ${course.code ? `<span class="text-blue-400 font-mono font-bold">${course.code}</span> - ` : ''}${course.title}
+                                            </span>
+                                            <div class="flex items-center gap-2 text-[10px] text-slate-400">
+                                                <span class="flex items-center gap-0.5">
+                                                    <span class="material-symbols-outlined text-[11px] text-primary">schedule</span>
+                                                    ${course.duration}
+                                                </span>
+                                                ${isHighHours ? `
+                                                    <span class="px-1.5 py-0.2 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 font-black uppercase text-[9px] flex items-center gap-0.5">
+                                                        <span class="material-symbols-outlined text-[10px]">military_tech</span> Máximo Puntaje
+                                                    </span>
+                                                ` : ''}
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <!-- MODALIDAD -->
+                                    <td class="py-3.5 px-3 whitespace-nowrap">
+                                        <span class="text-slate-300 font-medium text-[11px] flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-xs text-emerald-400">laptop_chromebook</span>
+                                            ${course.modality || 'Virtual asincrónica'}
+                                        </span>
+                                    </td>
+
+                                    <!-- TEMA -->
+                                    <td class="py-3.5 px-3">
+                                        <span class="px-2 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/80 text-slate-300 text-[10px] font-semibold whitespace-nowrap">
+                                            ${course.topic || 'General'}
+                                        </span>
+                                    </td>
+
+                                    <!-- ENLACE -->
+                                    <td class="py-3.5 px-3 text-center">
+                                        ${hasAccess ? `
+                                            <button onclick="window._openCourseOfficial('${course.id}')" 
+                                                    title="Abrir Formulario Oficial de Preinscripción"
+                                                    class="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-black text-[11px] shadow-md shadow-blue-600/30 active:scale-95 transition-all">
+                                                <span>ver</span>
+                                                <span class="material-symbols-outlined text-xs">open_in_new</span>
+                                            </button>
+                                        ` : `
+                                            <button onclick="window._openCursosPaywallModal('${course.id}')" 
+                                                    title="Enlace protegido - Habilitá tu suscripción de $10.000 para acceder"
+                                                    class="inline-flex items-center justify-center gap-1 px-3 py-1.5 rounded-full bg-[#181d27] hover:bg-purple-900/60 border border-purple-500/40 text-purple-300 hover:text-white font-black text-[11px] shadow-sm active:scale-95 transition-all group">
+                                                <span>ver</span>
+                                                <span class="material-symbols-outlined text-xs text-purple-400 group-hover:scale-110">lock</span>
+                                            </button>
+                                        `}
+                                    </td>
+
+                                    <!-- ALIANZA -->
+                                    <td class="py-3.5 px-4 whitespace-nowrap">
+                                        <span class="font-bold text-slate-200 text-xs flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-xs text-slate-400">handshake</span>
+                                            ${course.partner}
+                                        </span>
+                                    </td>
+
+                                </tr>
+                            `;
+                        }).join('')}
+                    </tbody>
+                </table>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-slate-400 px-2 pt-2">
+                <span>Mostrando <strong>${filtered.length}</strong> capacitaciones oficiales</span>
+                <span class="sm:hidden text-[10px] text-slate-400 flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">swipe</span> Deslizá para ver tabla completa
+                </span>
+            </div>
+        `;
+    }
+
+    /**
+     * Renderiza en modo tarjetas (Cards)
+     */
+    function _renderCursosCardsListHTML(filtered, hasAccess) {
         if (filtered.length === 0) {
             return `
                 <div class="col-span-full text-center py-12 px-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
@@ -148,103 +340,103 @@
             `;
         }
 
-        return filtered.map(course => {
-            const isFeatured = !!course.featured;
-            return `
-                <article class="bg-slate-900 border ${isFeatured ? 'border-primary/50 shadow-xl shadow-primary/10' : 'border-slate-800 shadow-lg'} rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-all space-y-4">
-                    
-                    <div class="space-y-3">
-                        <!-- TOP BADGES -->
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <div class="flex flex-wrap items-center gap-1.5">
-                                <span class="px-2.5 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-xs">apartment</span>
-                                    ${course.partner || 'Capacitar'}
-                                </span>
-                                <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700/80 text-slate-300 text-[10px] font-semibold">
-                                    ${course.topic || 'General'}
-                                </span>
+        return `
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                ${filtered.map(course => {
+                    const isHighHours = course.hours && course.hours >= 60;
+                    return `
+                        <article class="bg-slate-900 border ${course.featured ? 'border-primary/50 shadow-xl shadow-primary/10' : 'border-slate-800 shadow-lg'} rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-all space-y-4">
+                            
+                            <div class="space-y-3">
+                                <!-- BADGES -->
+                                <div class="flex flex-wrap items-center justify-between gap-2">
+                                    <div class="flex flex-wrap items-center gap-1.5">
+                                        <span class="px-2.5 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-xs">apartment</span>
+                                            ${course.partner}
+                                        </span>
+                                        <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700/80 text-slate-300 text-[10px] font-semibold">
+                                            ${course.topic || 'General'}
+                                        </span>
+                                    </div>
+
+                                    ${isHighHours ? `
+                                        <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[9px] font-black uppercase tracking-wider flex items-center gap-1">
+                                            <span class="material-symbols-outlined text-xs">military_tech</span> ${course.hours} HS CÁTEDRA
+                                        </span>
+                                    ` : ''}
+                                </div>
+
+                                <!-- TITLE -->
+                                <div>
+                                    <h3 class="text-base font-black text-white leading-snug">
+                                        ${course.code ? `<span class="text-primary font-mono">${course.code}</span> · ` : ''}${course.title}
+                                    </h3>
+                                    <p class="text-xs font-medium text-slate-400 mt-0.5 flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-xs text-emerald-400">verified</span>
+                                        ${course.partner} · Plataforma Capacitar
+                                    </p>
+                                </div>
+
+                                <!-- DESCRIPTION -->
+                                <p class="text-xs text-slate-300 leading-relaxed line-clamp-3">
+                                    ${course.description}
+                                </p>
+
+                                <!-- METADATA PILLS -->
+                                <div class="grid grid-cols-3 gap-2 p-2.5 rounded-xl bg-black/40 border border-slate-800 text-[10px] text-center">
+                                    <div>
+                                        <span class="block text-slate-400 font-bold uppercase text-[9px]">Duración</span>
+                                        <span class="text-white font-semibold flex items-center justify-center gap-0.5 mt-0.5">
+                                            <span class="material-symbols-outlined text-xs text-primary">schedule</span>
+                                            ${course.duration}
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-slate-400 font-bold uppercase text-[9px]">Modalidad</span>
+                                        <span class="text-white font-semibold block mt-0.5">Asincrónica</span>
+                                    </div>
+                                    <div>
+                                        <span class="block text-slate-400 font-bold uppercase text-[9px]">Costo</span>
+                                        <span class="text-emerald-400 font-bold block mt-0.5">Gratis ($0)</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            ${isFeatured ? `
-                                <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[9px] font-black uppercase tracking-wider flex items-center gap-1 animate-pulse">
-                                    <span class="material-symbols-outlined text-xs">local_fire_department</span> DESTACADO
-                                </span>
-                            ` : ''}
-                        </div>
-
-                        <!-- TITLE & PARTNER -->
-                        <div>
-                            <h3 class="text-lg font-black text-white leading-snug">${course.title}</h3>
-                            <p class="text-xs font-medium text-slate-400 mt-0.5 flex items-center gap-1">
-                                <span class="material-symbols-outlined text-xs text-emerald-400">verified</span>
-                                ${course.partner} · Plataforma Capacitar
-                            </p>
-                        </div>
-
-                        <!-- DESCRIPTION -->
-                        <p class="text-xs text-slate-300 leading-relaxed">
-                            ${course.description}
-                        </p>
-
-                        <!-- SPECS / METADATA PILLS -->
-                        <div class="grid grid-cols-3 gap-2 p-3 rounded-xl bg-black/40 border border-slate-800 text-[11px] text-center">
-                            <div>
-                                <span class="block text-slate-400 font-bold uppercase text-[9px]">Duración</span>
-                                <span class="text-white font-semibold flex items-center justify-center gap-0.5 mt-0.5">
-                                    <span class="material-symbols-outlined text-xs text-primary">schedule</span>
-                                    ${course.duration}
-                                </span>
+                            <!-- ACTION BUTTON -->
+                            <div class="pt-3 border-t border-slate-800">
+                                ${hasAccess ? `
+                                    <button onclick="window._openCourseOfficial('${course.id}')"
+                                            class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 active:scale-98 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-all">
+                                        <span class="material-symbols-outlined text-sm">how_to_reg</span>
+                                        <span>Ir al Formulario de Inscripción Oficial</span>
+                                        <span class="material-symbols-outlined text-xs">open_in_new</span>
+                                    </button>
+                                ` : `
+                                    <button onclick="window._openCursosPaywallModal('${course.id}')"
+                                            class="w-full py-2.5 px-4 rounded-xl bg-[#161a20] hover:bg-purple-950/80 border border-purple-500/40 text-purple-200 hover:text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all group">
+                                        <span class="material-symbols-outlined text-sm text-purple-400 group-hover:scale-110">lock</span>
+                                        <span>Desbloquear Enlace ($10.000)</span>
+                                    </button>
+                                `}
                             </div>
-                            <div>
-                                <span class="block text-slate-400 font-bold uppercase text-[9px]">Nivel</span>
-                                <span class="text-white font-semibold block mt-0.5">${course.level || 'Todos'}</span>
-                            </div>
-                            <div>
-                                <span class="block text-slate-400 font-bold uppercase text-[9px]">Costo</span>
-                                <span class="text-emerald-400 font-bold block mt-0.5">Gratis ($0)</span>
-                            </div>
-                        </div>
 
-                        <!-- KEY SYLLABUS POINTS -->
-                        <div class="space-y-1.5 pt-1">
-                            <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                                <span class="material-symbols-outlined text-xs text-primary">menu_book</span>
-                                Contenidos Clave:
-                            </span>
-                            <ul class="space-y-1 text-xs text-slate-300">
-                                ${(course.syllabus || []).slice(0, 3).map(m => `
-                                    <li class="flex items-start gap-1.5">
-                                        <span class="material-symbols-outlined text-xs text-emerald-400 shrink-0 mt-0.5">check_circle</span>
-                                        <span class="leading-tight">${m}</span>
-                                    </li>
-                                `).join('')}
-                            </ul>
-                        </div>
-                    </div>
+                        </article>
+                    `;
+                }).join('')}
+            </div>
+        `;
+    }
 
-                    <!-- ACTION BUTTONS (DESBLOQUEADOS) -->
-                    <div class="pt-3 border-t border-slate-800 space-y-2">
-                        <a href="${course.registrationUrl}" target="_blank" rel="noopener noreferrer" 
-                           class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 active:scale-98 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-all">
-                            <span class="material-symbols-outlined text-base">how_to_reg</span>
-                            <span>Ir al Formulario de Inscripción Oficial</span>
-                            <span class="material-symbols-outlined text-xs">open_in_new</span>
-                        </a>
+    function _renderCursosMainContentHTML() {
+        const filtered = _getFilteredCourses();
+        const hasAccess = window._hasCursosAccess();
+        const mode = window._cursosState.viewMode || 'table';
 
-                        ${course.catalogueUrl ? `
-                            <a href="${course.catalogueUrl}" target="_blank" rel="noopener noreferrer" 
-                               class="w-full py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 active:scale-98 text-emerald-300 font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 border border-emerald-500/20 transition-all">
-                                <span class="material-symbols-outlined text-sm">open_in_browser</span>
-                                <span>Ver Ficha Oficial en Argentina.gob.ar</span>
-                                <span class="material-symbols-outlined text-[10px]">launch</span>
-                            </a>
-                        ` : ''}
-                    </div>
-
-                </article>
-            `;
-        }).join('');
+        if (mode === 'cards') {
+            return _renderCursosCardsListHTML(filtered, hasAccess);
+        }
+        return _renderCursosTableHTML(filtered, hasAccess);
     }
 
     /**
@@ -260,32 +452,146 @@
         const isPending = (typeof store !== 'undefined' && store.user && store.user.pro_status === 'pending') ||
                           (localStorage.getItem('asf_cursos_pending') === 'true');
 
-        if (!hasAccess) {
-            // ══════════════════════════════════════════════════════════════
-            // PANTALLA DE ACCESO RESTRINGIDO / PAGO Y ACTIVACIÓN ($10.000)
-            // ══════════════════════════════════════════════════════════════
-            container.innerHTML = `
-                <div class="min-h-screen bg-background-dark text-white flex flex-col justify-between pb-32">
-                    
-                    <!-- HEADER -->
-                    <header class="p-4 border-b border-white/5 flex items-center justify-between sticky top-0 bg-background-dark/90 backdrop-blur-md z-30">
-                        <div class="flex items-center gap-3">
-                            <button onclick="router.navigateTo('#agenda')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
-                                <span class="material-symbols-outlined">arrow_back</span>
-                            </button>
-                            <div>
-                                <h1 class="text-base font-black text-white leading-tight">Repositorio Oficial Capacitar</h1>
-                                <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest">Acceso Restringido</span>
-                            </div>
-                        </div>
-                        <span class="px-2.5 py-1 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                            <span class="material-symbols-outlined text-xs">lock</span> $10.000 ÚNICO
-                        </span>
-                    </header>
+        const state = window._cursosState;
+        const activeCategory = state.categoryFilter || 'todos';
+        const viewMode = state.viewMode || 'table';
 
-                    <!-- CONTENT -->
-                    <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-md mx-auto w-full space-y-6">
+        const categories = [
+            { id: 'todos', label: 'Todas las Capacitaciones', icon: 'apps' },
+            { id: 'ciberseguridad', label: 'Ciberseguridad', icon: 'security' },
+            { id: 'habilidades-blandas', label: 'Habilidades Blandas', icon: 'psychology' },
+            { id: 'tecnologia', label: 'Tecnología & Cloud', icon: 'cloud' }
+        ];
+
+        container.innerHTML = `
+            <div class="min-h-screen bg-background-dark text-white flex flex-col justify-between pb-32">
+                
+                <!-- HEADER -->
+                <header class="p-4 border-b border-white/5 flex items-center justify-between sticky top-0 bg-background-dark/95 backdrop-blur-md z-30">
+                    <div class="flex items-center gap-3">
+                        <button onclick="router.navigateTo('#agenda')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                        </button>
+                        <div>
+                            <h1 class="text-base font-black text-white leading-tight">Oferta Formativa Capacitar</h1>
+                            <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[11px]">verified</span> Oficial Nación · 100% Gratuitos
+                            </span>
+                        </div>
+                    </div>
+                    
+                    ${hasAccess ? `
+                        <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">verified</span> ACCESO TOTAL
+                        </span>
+                    ` : `
+                        <button onclick="window._openCursosPaywallModal()" class="px-3 py-1.5 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 hover:brightness-110 text-white text-[10px] font-black uppercase tracking-wider flex items-center gap-1 shadow-lg shadow-purple-500/25 active:scale-95 transition-all">
+                            <span class="material-symbols-outlined text-xs">lock</span> HABILITAR ENLACES ($10.000)
+                        </button>
+                    `}
+                </header>
+
+                <!-- MAIN WRAPPER -->
+                <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto w-full space-y-5">
+                    
+                    <!-- BANNER INFORMATIVO / CONVERSIÓN -->
+                    ${!hasAccess ? `
+                        <div class="p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-purple-950/60 via-slate-900 to-blue-950/60 border border-purple-500/30 shadow-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div class="flex items-center gap-3.5">
+                                <div class="size-11 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 text-white flex items-center justify-center shrink-0 shadow-lg shadow-purple-500/30">
+                                    <span class="material-symbols-outlined text-2xl">school</span>
+                                </div>
+                                <div class="space-y-0.5">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-[9px] font-black uppercase tracking-widest bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded-full border border-purple-500/30">CATÁLOGO ABIERTO</span>
+                                        <span class="text-[9px] font-black uppercase tracking-widest bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-500/30">🔥 $10.000 SUSCRIPCIÓN ÚNICA</span>
+                                    </div>
+                                    <h2 class="text-sm sm:text-base font-black text-white">
+                                        Explorá todos los cursos oficiales gratis
+                                    </h2>
+                                    <p class="text-xs text-slate-300 leading-relaxed">
+                                        Podés consultar libremente toda la lista. Para acceder a los <strong>links directos de preinscripción</strong> de cada curso y sumar puntos al legajo policial, activá el repositorio con suscripción única.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <button onclick="window._openCursosPaywallModal()" class="w-full sm:w-auto px-5 py-3 rounded-2xl bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:brightness-110 active:scale-95 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-purple-600/30 shrink-0 transition-all">
+                                <span class="material-symbols-outlined text-sm">key</span>
+                                <span>Ver Beneficios y Desbloquear ($10.000)</span>
+                            </button>
+                        </div>
+                    ` : `
+                        <div class="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-200 text-xs flex items-center justify-between gap-3">
+                            <div class="flex items-center gap-2.5">
+                                <span class="material-symbols-outlined text-emerald-400 text-lg">check_circle</span>
+                                <span><strong>Pase Habilitado:</strong> Tenés acceso libre a todos los formularios de inscripción oficial.</span>
+                            </div>
+                            <span class="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">Activo</span>
+                        </div>
+                    `}
+
+                    <!-- CONTROLES: BÚSQUEDA Y VISTA -->
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
                         
+                        <!-- BARRA DE BÚSQUEDA -->
+                        <div class="relative flex-1">
+                            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                            <input type="text" 
+                                   id="cursos-search-input"
+                                   value="${state.searchTerm || ''}"
+                                   oninput="window._searchCursosInput(this.value)"
+                                   placeholder="Buscar por código (ej. C48040), nombre, temática o alianza..." 
+                                   class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary/50 transition-colors shadow-inner" />
+                        </div>
+
+                        <!-- TOGGLE VISTA (TABLA / FICHAS) -->
+                        <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-2xl border border-slate-800 shrink-0 self-end sm:self-auto">
+                            <button onclick="window._toggleCursosView('table')" 
+                                    class="px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 transition-all ${viewMode === 'table' ? 'bg-primary text-white shadow-md' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">table_rows</span>
+                                <span>Tabla</span>
+                            </button>
+                            <button onclick="window._toggleCursosView('cards')" 
+                                    class="px-3 py-1.5 rounded-xl text-xs font-black flex items-center gap-1 transition-all ${viewMode === 'cards' ? 'bg-primary text-white shadow-md' : 'text-slate-400 hover:text-white'}">
+                                <span class="material-symbols-outlined text-sm">grid_view</span>
+                                <span>Fichas</span>
+                            </button>
+                        </div>
+
+                    </div>
+
+                    <!-- CHIPS DE CATEGORÍAS -->
+                    <div class="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
+                        ${categories.map(cat => `
+                            <button onclick="window._filterCursosCategory('${cat.id}')" 
+                                    class="px-3.5 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition-all flex items-center gap-1.5 shrink-0 ${activeCategory === cat.id ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30' : 'bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800'}">
+                                <span class="material-symbols-outlined text-xs">${cat.icon}</span>
+                                <span>${cat.label}</span>
+                            </button>
+                        `).join('')}
+                    </div>
+
+                    <!-- LISTADO DINÁMICO (TABLA O FICHAS) -->
+                    <div id="cursos-list-container">
+                        ${_renderCursosMainContentHTML()}
+                    </div>
+
+                </main>
+
+                <!-- MODAL PAYWALL / TARJETA UIVERSE.IO ($10.000) -->
+                <div id="cursos-paywall-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md items-center justify-center p-4 overflow-y-auto">
+                    <div class="relative w-full max-w-md my-auto space-y-4">
+                        
+                        <!-- BOTÓN CERRAR -->
+                        <div class="flex justify-end">
+                            <button onclick="window._closeCursosPaywallModal()" class="size-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center shadow-lg transition-all">
+                                <span class="material-symbols-outlined text-base">close</span>
+                            </button>
+                        </div>
+
+                        <!-- MENSAJE DE CURSO OBJETIVO SI FUE CLICKEADO -->
+                        <div id="modal-course-target-info" class="hidden p-3 rounded-2xl bg-purple-950/80 border border-purple-500/40 text-purple-200 text-xs text-center font-medium shadow-lg"></div>
+
                         <!-- 🎓 TARJETA DE PRESENTACIÓN UIVERSE.IO -->
                         <div class="card-container uiverse-pricing-card shadow-2xl">
                             <div class="title-card">
@@ -315,11 +621,11 @@
                                 <div class="card-list-features">
                                     <div class="option">
                                         <span class="material-symbols-outlined text-sm text-purple-400 shrink-0">military_tech</span>
-                                        <span><strong class="text-white">Mayor Carga Horaria (Puntos en Legajo):</strong> Cursos oficiales de hasta <strong class="text-amber-300">86 y 62 Hs cátedra</strong> (Rutas Ciberseguridad y Sistemas). A mayor carga horaria, mayor puntaje en el concurso de ascensos policiales.</span>
+                                        <span><strong class="text-white">Mayor Carga Horaria (Puntos en Legajo):</strong> Cursos oficiales de hasta <strong class="text-amber-300">86 y 62 Hs cátedra</strong> (Rutas Ciberseguridad y Sistemas). A mayor carga horaria, mayor puntaje en ascensos policiales.</span>
                                     </div>
                                     <div class="option">
                                         <span class="material-symbols-outlined text-sm text-blue-400 shrink-0">schedule</span>
-                                        <span><strong class="text-white">100% Asincrónico:</strong> Cursás en tus tiempos libres, descansos o guardias. Sin clases en vivo obligatorias ni horarios rígidos.</span>
+                                        <span><strong class="text-white">100% Asincrónico:</strong> Cursás en tus tiempos libres, descansos o guardias. Sin clases en vivo obligatorias.</span>
                                     </div>
                                     <div class="option">
                                         <span class="material-symbols-outlined text-sm text-indigo-400 shrink-0">devices</span>
@@ -337,21 +643,9 @@
                             </div>
                         </div>
 
-                        <!-- PRICING & PAYMENT CARD -->
-                        <div class="p-6 rounded-3xl bg-slate-900 border border-amber-500/30 shadow-2xl space-y-5">
-                            
-                            <div class="flex items-center justify-between border-b border-slate-800 pb-4">
-                                <div>
-                                    <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Costo de Habilitación</span>
-                                    <h3 class="text-2xl font-black text-amber-400 leading-none mt-1">$10.000 <span class="text-xs text-slate-400 font-normal">/ suscripción única</span></h3>
-                                </div>
-                                <span class="px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px] font-black uppercase">
-                                    Sin Mensualidades
-                                </span>
-                            </div>
-
-                            <!-- DATOS DE TRANSFERENCIA -->
-                            <div class="p-4 rounded-2xl bg-black/50 border border-slate-800 space-y-2.5 text-xs">
+                        <!-- DATOS DE TRANSFERENCIA Y APROBACIÓN ADMIN -->
+                        <div class="p-5 rounded-3xl bg-slate-900 border border-amber-500/30 shadow-2xl space-y-4">
+                            <div class="p-3.5 rounded-2xl bg-black/60 border border-slate-800 space-y-2 text-xs">
                                 <div class="flex items-center justify-between">
                                     <span class="text-slate-400">Destino / Empresa:</span>
                                     <span class="font-bold text-white">SmartFlow.Digital</span>
@@ -366,138 +660,36 @@
                                 </div>
                             </div>
 
-                            <!-- ACTION STATUS -->
                             ${isPending ? `
-                                <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs space-y-3">
-                                    <div class="flex items-center gap-2 font-bold text-amber-300">
-                                        <span class="material-symbols-outlined text-lg">hourglass_top</span>
-                                        <span>Solicitud en Proceso de Verificación</span>
+                                <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs space-y-2">
+                                    <div class="flex items-center gap-1.5 font-bold text-amber-300">
+                                        <span class="material-symbols-outlined text-base">hourglass_top</span>
+                                        <span>Solicitud en Proceso</span>
                                     </div>
-                                    <p class="leading-relaxed text-[11px] text-amber-200/90">
+                                    <p class="text-[11px] text-amber-200/90 leading-relaxed">
                                         Tu comprobante fue registrado. El administrador verificará la transferencia y habilitará tu acceso a la brevedad.
                                     </p>
-                                    <button onclick="window._submitCursosPayment()" class="w-full py-2.5 px-4 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 border border-amber-500/40 transition-all">
-                                        <span class="material-symbols-outlined text-base">chat</span>
-                                        <span>Reenviar o Consultar por WhatsApp</span>
+                                    <button onclick="window._submitCursosPayment()" class="w-full py-2 px-3 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-1.5 border border-amber-500/40 transition-all">
+                                        <span class="material-symbols-outlined text-sm">chat</span>
+                                        <span>Reenviar Comprobante por WhatsApp</span>
                                     </button>
                                 </div>
                             ` : `
-                                <div class="space-y-3">
-                                    <p class="text-xs text-slate-400 leading-relaxed">
-                                        Transferí <strong>$10.000</strong> a <strong>SmartFlow.Digital</strong> y enviá el comprobante por WhatsApp para que el administrador te habilite el acceso inmediato.
-                                    </p>
-
-                                    <button onclick="window._submitCursosPayment()" class="w-full py-4 px-5 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:brightness-110 active:scale-98 text-white font-black text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/20 transition-all">
-                                        <span class="material-symbols-outlined text-lg">send</span>
-                                        <span>Enviar Comprobante por WhatsApp ($10.000)</span>
-                                    </button>
-                                </div>
+                                <button onclick="window._submitCursosPayment()" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-emerald-600 hover:brightness-110 active:scale-98 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/20 transition-all">
+                                    <span class="material-symbols-outlined text-base">send</span>
+                                    <span>Enviar Comprobante por WhatsApp ($10.000)</span>
+                                </button>
                             `}
 
-                        </div>
-
-                    </main>
-
-                    ${typeof renderBottomNav === 'function' ? renderBottomNav('agenda') : ''}
-                </div>
-            `;
-            return;
-        }
-
-        // ══════════════════════════════════════════════════════════════
-        // PANTALLA HABILITADA (REPOSITORIO COMPLETO DESBLOQUEADO)
-        // ══════════════════════════════════════════════════════════════
-        const state = window._cursosState;
-        const activeCategory = state.categoryFilter || 'todos';
-
-        const categories = [
-            { id: 'todos', label: 'Todos los Cursos', icon: 'apps' },
-            { id: 'ciberseguridad', label: 'Ciberseguridad', icon: 'security' },
-            { id: 'gestion', label: 'Gestión & Decisión', icon: 'psychology' },
-            { id: 'tecnologia', label: 'Tecnología & Cloud', icon: 'cloud' }
-        ];
-
-        container.innerHTML = `
-            <div class="min-h-screen bg-background-dark text-white flex flex-col justify-between pb-32">
-                
-                <!-- HEADER -->
-                <header class="p-4 border-b border-white/5 flex items-center justify-between sticky top-0 bg-background-dark/90 backdrop-blur-md z-30">
-                    <div class="flex items-center gap-3">
-                        <button onclick="router.navigateTo('#agenda')" class="p-2 -ml-2 text-slate-400 hover:text-white transition-colors">
-                            <span class="material-symbols-outlined">arrow_back</span>
-                        </button>
-                        <div>
-                            <h1 class="text-base font-black text-white leading-tight">Repositorio Oficial Capacitar</h1>
-                            <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">Nación & Líderes Globales</span>
-                        </div>
-                    </div>
-                    <span class="px-2.5 py-1 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1 shadow-sm">
-                        <span class="material-symbols-outlined text-xs">verified</span> ACCESO HABILITADO
-                    </span>
-                </header>
-
-                <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-5xl mx-auto w-full space-y-6">
-                    
-                    <!-- HERO BANNER -->
-                    <div class="p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950 border border-blue-500/30 shadow-2xl space-y-4">
-                        <div class="flex flex-wrap items-center justify-between gap-2">
-                            <span class="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                <span class="material-symbols-outlined text-xs">account_balance</span>
-                                PLATAFORMA CAPACITAR · MINISTERIO DE ECONOMÍA DE LA NACIÓN
-                            </span>
-                            <span class="text-[11px] font-bold text-emerald-400">Enlaces Oficiales Verificados</span>
-                        </div>
-
-                        <div class="space-y-1.5">
-                            <h2 class="text-xl sm:text-2xl font-black text-white leading-tight">
-                                Catálogo de Cursos Oficiales Gratuitos
-                            </h2>
-                            <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
-                                Todos los enlaces de preinscripción oficial están habilitados. Cursá de forma 100% gratuita y asincrónica en <strong>Accenture, Microsoft, AWS y Oracle</strong> para obtener tus certificados oficiales y sumarlos a tu legajo de antecedentes.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- SEARCH & FILTERS CONTROLS -->
-                    <div class="space-y-3 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg">
-                        <div class="relative">
-                            <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-                            <input type="text" 
-                                   id="cursos-search-input"
-                                   value="${state.searchTerm || ''}"
-                                   oninput="window._searchCursosInput(this.value)"
-                                   placeholder="Buscar por título, temática o entidad (Accenture, Microsoft, AWS, Oracle)..." 
-                                   class="w-full bg-black/50 border border-slate-700/60 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary transition-all">
-                        </div>
-
-                        <div class="flex flex-wrap items-center gap-2 pt-1">
-                            ${categories.map(cat => `
-                                <button onclick="window._filterCursosCategory('${cat.id}')"
-                                        class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${activeCategory === cat.id ? 'bg-primary text-white shadow-md shadow-primary/25' : 'bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 border border-slate-700/60'}">
-                                    <span class="material-symbols-outlined text-sm">${cat.icon}</span>
-                                    <span>${cat.label}</span>
+                            <div class="text-center pt-1">
+                                <button onclick="window._closeCursosPaywallModal()" class="text-xs text-slate-400 hover:text-white transition-colors">
+                                    Continuar explorando el catálogo gratis
                                 </button>
-                            `).join('')}
+                            </div>
                         </div>
-                    </div>
 
-                    <!-- COURSES CARDS LIST -->
-                    <div id="cursos-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-                        ${_renderCursosCardsListHTML()}
                     </div>
-
-                    <!-- FOOTER -->
-                    <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2 text-xs text-slate-400">
-                        <div class="flex items-center gap-2 text-slate-200 font-bold">
-                            <span class="material-symbols-outlined text-base text-primary">verified_user</span>
-                            <span>Acreditación Oficial</span>
-                        </div>
-                        <p class="leading-relaxed">
-                            Al finalizar cada curso en su respectivo campus, descargá tu diploma oficial con código de validación digital y presentalo en División Personal D-1 para su inclusión en tu legajo de antecedentes.
-                        </p>
-                    </div>
-
-                </main>
+                </div>
 
                 ${typeof renderBottomNav === 'function' ? renderBottomNav('agenda') : ''}
             </div>
@@ -505,4 +697,3 @@
     };
 
 })();
-
