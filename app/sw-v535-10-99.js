@@ -17,6 +17,7 @@ const ASSETS = [
     './js/data/directory.js?v=535.10.99',
     './js/data/resources.js?v=535.10.99',
     './js/data/academy_data.js?v=535.10.99',
+    './js/data/courses_data.js?v=535.10.99',
     './js/data/quiz_bank.js?v=535.10.99',
     './js/views/auth.js?v=535.10.99',
     './js/views/legal.js?v=535.10.99',
