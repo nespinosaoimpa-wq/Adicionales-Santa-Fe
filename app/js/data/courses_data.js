@@ -35,7 +35,8 @@
                 points: '0.25 a 0.50 pts en el Legajo de Concurso',
                 recommendation: 'Clave para personal de Seguridad, PDI / AIC y oficiales que buscan sumar antecedentes en delitos complejos.'
             },
-            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48040'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48040',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48040'
         },
         {
             id: 'capacitar-problemas-accenture',
@@ -63,7 +64,8 @@
                 points: '0.25 pts en el Legajo de Concurso',
                 recommendation: 'Ideal para Suboficiales que concursan para Oficial y oficiales a cargo de guardias.'
             },
-            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48039'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48099',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48099'
         },
         {
             id: 'came-ciberseguridad-datos',

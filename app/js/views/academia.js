@@ -3057,7 +3057,8 @@ function _getCoursesData() {
                 points: '0.25 a 0.50 pts en el Legajo de Concurso',
                 recommendation: 'Clave para personal de Seguridad, PDI / AIC y oficiales que buscan sumar antecedentes en delitos complejos.'
             },
-            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48040'
+            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48040',
+            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48040'
         }
     ];
 }
@@ -3219,12 +3220,23 @@ function _renderCoursesCardsHTML() {
                             </span>
                         </div>
 
-                        <a href="${course.registrationUrl}" target="_blank" rel="noopener noreferrer" 
-                           class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 active:scale-98 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-all">
-                            <span class="material-symbols-outlined text-base">how_to_reg</span>
-                            <span>Preinscribite Gratis en el Formulario Oficial</span>
-                            <span class="material-symbols-outlined text-xs">open_in_new</span>
-                        </a>
+                        <div class="space-y-2">
+                            <a href="${course.registrationUrl}" target="_blank" rel="noopener noreferrer" 
+                               class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 active:scale-98 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-all">
+                                <span class="material-symbols-outlined text-base">how_to_reg</span>
+                                <span>Preinscribite Gratis en el Formulario Oficial</span>
+                                <span class="material-symbols-outlined text-xs">open_in_new</span>
+                            </a>
+
+                            ${course.catalogueUrl ? `
+                                <a href="${course.catalogueUrl}" target="_blank" rel="noopener noreferrer" 
+                                   class="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 active:scale-98 text-emerald-300 font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 border border-emerald-500/20 transition-all">
+                                    <span class="material-symbols-outlined text-sm">open_in_browser</span>
+                                    <span>Ver Ficha Oficial en Argentina.gob.ar</span>
+                                    <span class="material-symbols-outlined text-[10px]">launch</span>
+                                </a>
+                            ` : ''}
+                        </div>
 
                         <div class="flex items-start gap-2 bg-black/40 rounded-xl p-2.5 border border-white/5 text-[11px] text-emerald-200/90 leading-tight">
                             <span class="material-symbols-outlined text-xs text-emerald-400 shrink-0 mt-0.5">info</span>
@@ -3248,7 +3260,7 @@ function _renderCoursesCardsHTML() {
                         <div class="flex items-center justify-between bg-black/60 border border-white/5 rounded-xl px-3 py-2 text-xs select-none">
                             <div class="flex items-center gap-2 overflow-hidden text-slate-500 font-mono text-[11px]">
                                 <span class="material-symbols-outlined text-xs text-amber-400/80">link</span>
-                                <span class="truncate blur-[3px]">https://argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48040</span>
+                                <span class="truncate blur-[3px]">${course.catalogueUrl || 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48040'}</span>
                             </div>
                             <span class="text-[9px] font-bold text-amber-400/90 shrink-0 ml-2">Bloqueado</span>
                         </div>
