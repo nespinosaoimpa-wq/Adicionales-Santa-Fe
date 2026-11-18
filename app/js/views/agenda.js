@@ -60,7 +60,7 @@ function renderAgenda(container) {
 
         <main class="flex-1 overflow-y-auto px-4 space-y-5 pb-32 max-w-md mx-auto w-full">
 
-            <!-- 🏛️ Tarjeta de Presentación Uiverse.io - Repositorio Oficial Cursos Capacitar ($10.000 Único) -->
+            <!-- 🏛️ Tarjeta de Presentación Uiverse.io - Repositorio de Cursos Oficiales ($10.000 Único) -->
             <div class="card-container uiverse-pricing-card my-1 shadow-2xl">
                 <div class="title-card">
                     <p>Sumá Puntos en tu Legajo</p>
@@ -68,9 +68,9 @@ function renderAgenda(container) {
                 </div>
                 <div class="card-content">
                     <div class="title flex items-center justify-between">
-                        <span>REPOSITORIO CAPACITAR</span>
+                        <span>REPOSITORIO DE CURSOS</span>
                         <span class="text-[9px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1">
-                            <span class="material-symbols-outlined text-xs text-amber-400">verified</span> NACIÓN
+                            <span class="material-symbols-outlined text-xs text-amber-400">verified</span> CERTIFICADOS
                         </span>
                     </div>
                     <div class="plain">
@@ -101,7 +101,7 @@ function renderAgenda(container) {
                         </div>
                         <div class="option">
                             <span class="material-symbols-outlined text-sm text-emerald-400 shrink-0">verified</span>
-                            <span><strong class="text-white">Certificación Oficial con QR:</strong> Avalados por Nación y líderes tech (Accenture, Microsoft, AWS, Oracle).</span>
+                            <span><strong class="text-white">Certificación Oficial con QR:</strong> Avalados con validación digital y convenios con líderes tech (Accenture, Microsoft, AWS, Oracle).</span>
                         </div>
                     </div>
                 </div>

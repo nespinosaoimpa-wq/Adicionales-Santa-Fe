@@ -1,5 +1,5 @@
 /**
- * Adicionales Santa Fe - Repositorio de Cursos Oficiales Capacitar
+ * Adicionales Santa Fe - Repositorio de Cursos Oficiales
  * Catálogo Abierto y Gratuito con Protección de Enlaces Directos de Preinscripción ($10.000 Suscripción Única)
  */
 
@@ -74,7 +74,7 @@
                     email: userEmail,
                     name: userName,
                     amount: 10000,
-                    hierarchy: 'Repositorio Cursos Capacitar ($10.000)'
+                    hierarchy: 'Repositorio Cursos Oficiales ($10.000)'
                 });
             } catch(e) {
                 console.warn("Error notifying cursos payment:", e);
@@ -90,7 +90,7 @@
         }
 
         // 3. Abrir WhatsApp oficial con comprobante
-        const msg = `Hola! Quiero activar mi acceso a los enlaces del Repositorio Oficial de Cursos Capacitar ($10.000 - Suscripción Única) en Adicionales Santa Fe.\n\n👤 Oficial: ${userName}\n📧 Email registrado: ${userEmail}\n\nAdjunto comprobante de transferencia a SmartFlow.Digital.`;
+        const msg = `Hola! Quiero activar mi acceso a los enlaces del Repositorio de Cursos Oficiales ($10.000 - Suscripción Única) en Adicionales Santa Fe.\n\n👤 Oficial: ${userName}\n📧 Email registrado: ${userEmail}\n\nAdjunto comprobante de transferencia a SmartFlow.Digital.`;
         const waUrl = `https://wa.me/5493425162372?text=${encodeURIComponent(msg)}`;
         window.open(waUrl, '_blank');
 
@@ -116,7 +116,7 @@
                 if (courseId) {
                     const c = (window.academyCourses || []).find(item => item.id === courseId || item.code === courseId);
                     if (c) {
-                        courseInfoEl.innerHTML = `Para acceder al enlace directo de preinscripción de <strong>${c.code} - ${c.title}</strong> (${c.partner}) y a más de 135 cursos oficiales:`;
+                        courseInfoEl.innerHTML = `Para acceder al enlace directo de preinscripción de <strong>${c.code} - ${c.title}</strong> (${c.partner}) y a más de 135 capacitaciones con certificación oficial:`;
                         courseInfoEl.classList.remove('hidden');
                     } else {
                         courseInfoEl.classList.add('hidden');
@@ -374,7 +374,7 @@
                                     </h3>
                                     <p class="text-xs font-medium text-slate-400 mt-0.5 flex items-center gap-1">
                                         <span class="material-symbols-outlined text-xs text-emerald-400">verified</span>
-                                        ${course.partner} · Plataforma Capacitar
+                                        ${course.partner} · Certificación Oficial
                                     </p>
                                 </div>
 
@@ -473,9 +473,9 @@
                             <span class="material-symbols-outlined">arrow_back</span>
                         </button>
                         <div>
-                            <h1 class="text-base font-black text-white leading-tight">Oferta Formativa Capacitar</h1>
+                            <h1 class="text-base font-black text-white leading-tight">Repositorio de Cursos Oficiales</h1>
                             <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest flex items-center gap-1">
-                                <span class="material-symbols-outlined text-[11px]">verified</span> Oficial Nación · 100% Gratuitos
+                                <span class="material-symbols-outlined text-[11px]">verified</span> Certificación Oficial · 100% Gratuitos
                             </span>
                         </div>
                     </div>
@@ -600,9 +600,9 @@
                             </div>
                             <div class="card-content">
                                 <div class="title flex items-center justify-between">
-                                    <span>REPOSITORIO CAPACITAR</span>
+                                    <span>REPOSITORIO DE CURSOS</span>
                                     <span class="text-[9px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1">
-                                        <span class="material-symbols-outlined text-xs text-amber-400">verified</span> NACIÓN
+                                        <span class="material-symbols-outlined text-xs text-amber-400">verified</span> CERTIFICADOS
                                     </span>
                                 </div>
                                 <div class="plain">
@@ -633,7 +633,7 @@
                                     </div>
                                     <div class="option">
                                         <span class="material-symbols-outlined text-sm text-emerald-400 shrink-0">verified</span>
-                                        <span><strong class="text-white">Certificación Oficial con Validación QR:</strong> Avalados por el Ministerio de Economía de la Nación en alianza con líderes tecnológicos (Accenture, Microsoft, AWS, Oracle).</span>
+                                        <span><strong class="text-white">Certificación Oficial con Validación QR:</strong> Avalados con código de validación digital y convenios con líderes tecnológicos (Accenture, Microsoft, AWS, Oracle).</span>
                                     </div>
                                     <div class="option">
                                         <span class="material-symbols-outlined text-sm text-amber-400 shrink-0">bolt</span>
