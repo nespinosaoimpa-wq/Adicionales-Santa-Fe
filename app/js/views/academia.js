@@ -59,9 +59,7 @@ const _savedCount = (() => {
 })();
 
 window._quizState = window._quizState || {
-    activeTab: 'simulador',       // 'simulador' | 'novedades' | 'cursos' | 'biblioteca' | 'historial'
-    courseCategoryFilter: 'todos',
-    courseSearchTerm: '',
+    activeTab: 'simulador',       // 'simulador' | 'novedades' | 'biblioteca' | 'historial'
     selectedHierarchy: _savedHier,
     difficulty: _savedDiff,       // 'facil' | 'media' | 'dificil'
     questionCount: _savedCount,   // 10 | 25 | 50
@@ -757,13 +755,13 @@ function renderAcademia(container) {
 
 
 
-                <!-- TABS (Simulador | Novedades ISEP | Cursos Puntos | Biblioteca | Historial) -->
+                <!-- TABS (Simulador | Novedades ISEP | Biblioteca | Historial) -->
 
         <div class="flex border-b border-white/5 bg-background-dark/50 overflow-x-auto no-scrollbar">
 
             <button onclick="window._quizState.activeTab='simulador'; renderAcademia()"
 
-                class="flex-1 min-w-[70px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all ${state.activeTab === 'simulador' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
+                class="flex-1 min-w-[75px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all ${state.activeTab === 'simulador' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
 
                 <span class="material-symbols-outlined text-base align-middle mr-1">quiz</span>Simulador
 
@@ -771,7 +769,7 @@ function renderAcademia(container) {
 
             <button onclick="window._quizState.activeTab='novedades'; renderAcademia()"
 
-                class="flex-1 min-w-[90px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all relative ${state.activeTab === 'novedades' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
+                class="flex-1 min-w-[95px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all relative ${state.activeTab === 'novedades' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
 
                 <span class="material-symbols-outlined text-base align-middle mr-1 text-red-400">campaign</span>Novedades
 
@@ -779,19 +777,9 @@ function renderAcademia(container) {
 
             </button>
 
-            <button onclick="window._quizState.activeTab='cursos'; renderAcademia()"
-
-                class="flex-1 min-w-[85px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all relative ${state.activeTab === 'cursos' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
-
-                <span class="material-symbols-outlined text-base align-middle mr-1 text-emerald-400">school</span>Cursos
-
-                <span class="inline-block px-1.5 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[8px] font-black leading-tight ml-0.5">PUNTOS</span>
-
-            </button>
-
             <button onclick="window._quizState.activeTab='biblioteca'; renderAcademia()"
 
-                class="flex-1 min-w-[70px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all ${state.activeTab === 'biblioteca' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
+                class="flex-1 min-w-[75px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all ${state.activeTab === 'biblioteca' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
 
                 <span class="material-symbols-outlined text-base align-middle mr-1">library_books</span>Biblioteca
 
@@ -799,7 +787,7 @@ function renderAcademia(container) {
 
             <button onclick="window._quizState.activeTab='historial'; renderAcademia()"
 
-                class="flex-1 min-w-[70px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all ${state.activeTab === 'historial' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
+                class="flex-1 min-w-[75px] py-3 text-xs font-bold uppercase tracking-wider text-center transition-all ${state.activeTab === 'historial' ? 'text-primary border-b-2 border-primary' : 'text-slate-500 hover:text-slate-300'}">
 
                 <span class="material-symbols-outlined text-base align-middle mr-1">history</span>Historial
 
@@ -826,8 +814,6 @@ function renderAcademia(container) {
     if (state.activeTab === 'simulador') _renderSimuladorTab(tabContent);
 
     else if (state.activeTab === 'novedades') _renderNovedadesTab(tabContent);
-
-    else if (state.activeTab === 'cursos') _renderCursosTab(tabContent);
 
     else if (state.activeTab === 'biblioteca') _renderBibliotecaTab(tabContent);
 
@@ -864,25 +850,6 @@ function _renderSimuladorTab(container) {
     container.innerHTML = `
 
         <div class="p-5 space-y-5 max-w-lg mx-auto">
-
-            <!-- 🎓 PROMO CURSOS OFICIALES GRATUITOS CAPACITAR -->
-            <div onclick="window._quizState.activeTab='cursos'; renderAcademia();"
-                 class="cursor-pointer p-3.5 rounded-2xl bg-gradient-to-r from-blue-950/70 via-slate-900 to-indigo-950/70 border border-blue-500/30 hover:border-blue-400 flex items-center justify-between gap-3 shadow-lg transition-all active:scale-[0.98]">
-                <div class="flex items-center gap-3">
-                    <div class="size-9 rounded-xl bg-blue-500/20 text-blue-300 flex items-center justify-center shrink-0 border border-blue-400/30">
-                        <span class="material-symbols-outlined text-xl">school</span>
-                    </div>
-                    <div>
-                        <div class="flex items-center gap-1.5">
-                            <span class="text-[8px] font-black uppercase tracking-wider text-blue-300 bg-blue-500/20 px-2 py-0.5 rounded-full border border-blue-500/30">NUEVO · CAPACITAR</span>
-                            <span class="text-[8px] font-bold text-slate-400">Plataforma Oficial</span>
-                        </div>
-                        <h4 class="text-xs font-black text-white mt-0.5">Cursos Gratuitos con Certificado Oficial</h4>
-                        <p class="text-[10px] text-slate-300">Sumá certificaciones de Accenture, Microsoft y AWS a tu legajo.</p>
-                    </div>
-                </div>
-                <span class="material-symbols-outlined text-blue-400 text-lg shrink-0">arrow_forward</span>
-            </div>
 
             <!-- FREE TRIAL / PRO BANNER -->
 
@@ -3020,356 +2987,6 @@ function _renderResultsView(container) {
 }
 
 
-
-// ══════════════════════════════════════════════════════════════
-// TAB: CURSOS OFICIALES CAPACITAR (Plataforma Oficial de Formación Gratuita)
-// ══════════════════════════════════════════════════════════════
-
-window._filterCoursesByCategory = function(category) {
-    if (!window._quizState) window._quizState = {};
-    window._quizState.courseCategoryFilter = category;
-    const container = document.getElementById('quiz-tab-content');
-    if (container) _renderCursosTab(container);
-};
-
-window._searchCourses = function(query) {
-    if (!window._quizState) window._quizState = {};
-    window._quizState.courseSearchTerm = query;
-    const cardsContainer = document.getElementById('courses-cards-list');
-    if (cardsContainer) {
-        cardsContainer.innerHTML = _renderCoursesCardsHTML();
-    }
-};
-
-function _getCoursesData() {
-    if (window.academyCourses && Array.isArray(window.academyCourses) && window.academyCourses.length > 0) {
-        return window.academyCourses;
-    }
-    return [
-        {
-            id: 'capacitar-forense-accenture',
-            code: 'C48040',
-            title: 'Análisis forense',
-            partner: 'En alianza con Accenture',
-            provider: 'Plataforma Capacitar · Ministerio de Economía de la Nación',
-            topic: 'Ciberseguridad',
-            category: 'ciberseguridad',
-            level: 'Intermedio',
-            duration: '3 hs y 18 min',
-            cost: 'Curso y certificado oficial sin costo ($0)',
-            modality: '100% Online y Asincrónico',
-            programTag: 'Aplica a Programa Insertar',
-            tags: ['Sin costo', 'Certificado Oficial', 'Ciberseguridad', 'Para Legajo'],
-            featured: true,
-            description: 'Aprendé en qué consiste la actividad de análisis forense y su importancia para analizar lo ocurrido, permitiendo llegar al origen del problema y actuando en consecuencia para evitar daños futuros. Conocé también las metodologías y herramientas más comunes para llevar a cabo esta labor pericial.',
-            syllabus: [
-                'Concepto e importancia del análisis forense informático.',
-                'Identificación del origen del problema e incidentes digitales.',
-                'Metodologías estandarizadas de investigación pericial.',
-                'Herramientas más comunes para la labor pericial y análisis de causa-raíz.',
-                'Preservación de la cadena de custodia y prevención de incidentes.'
-            ],
-            registrationUrl: 'https://www.argentina.gob.ar/economia/capacitar/formulario-de-registro-cursos-de-capacitar?id_curso=C48040',
-            catalogueUrl: 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48040'
-        }
-    ];
-}
-
-function _renderCoursesCardsHTML() {
-    const courses = _getCoursesData();
-    const state = window._quizState || {};
-    const activeCategory = state.courseCategoryFilter || 'todos';
-    const searchTerm = (state.courseSearchTerm || '').trim().toLowerCase();
-    const isPro = _isIsepPro();
-
-    const filtered = courses.filter(c => {
-        const matchCategory = activeCategory === 'todos' || c.category === activeCategory;
-        const matchSearch = !searchTerm ||
-            (c.title && c.title.toLowerCase().includes(searchTerm)) ||
-            (c.provider && c.provider.toLowerCase().includes(searchTerm)) ||
-            (c.partner && c.partner.toLowerCase().includes(searchTerm)) ||
-            (c.topic && c.topic.toLowerCase().includes(searchTerm)) ||
-            (c.description && c.description.toLowerCase().includes(searchTerm));
-        return matchCategory && matchSearch;
-    });
-
-    if (filtered.length === 0) {
-        return `
-            <div class="col-span-full text-center py-12 px-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-3">
-                <span class="material-symbols-outlined text-4xl text-slate-500">search_off</span>
-                <p class="text-sm font-bold text-slate-300">No se encontraron cursos con ese criterio</p>
-                <p class="text-xs text-slate-500">Probá con otra palabra clave o cambiá la categoría.</p>
-                <button onclick="window._filterCoursesByCategory('todos')" class="mt-2 text-xs font-black text-primary hover:underline">
-                    Ver todos los cursos
-                </button>
-            </div>
-        `;
-    }
-
-    return filtered.map(course => {
-        const isFeatured = !!course.featured;
-        return `
-            <article class="bg-slate-900 border ${isFeatured ? 'border-primary/50 shadow-xl shadow-primary/10' : 'border-slate-800 shadow-lg'} rounded-2xl p-5 flex flex-col justify-between hover:border-slate-700 transition-all space-y-4">
-                
-                <div class="space-y-3">
-                    <!-- TOP BADGES -->
-                    <div class="flex flex-wrap items-center justify-between gap-2">
-                        <div class="flex flex-wrap items-center gap-1.5">
-                            <span class="px-2.5 py-1 rounded-full bg-blue-500/15 border border-blue-500/30 text-blue-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1">
-                                <span class="material-symbols-outlined text-xs">apartment</span>
-                                ${course.partner || 'Capacitar'}
-                            </span>
-                            <span class="px-2.5 py-1 rounded-full bg-slate-800 border border-slate-700/80 text-slate-300 text-[10px] font-semibold">
-                                ${course.topic || 'General'}
-                            </span>
-                        </div>
-
-                        ${isFeatured ? `
-                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-[9px] font-black uppercase tracking-wider flex items-center gap-1 animate-pulse">
-                                <span class="material-symbols-outlined text-xs">local_fire_department</span> DESTACADO
-                            </span>
-                        ` : ''}
-                    </div>
-
-                    <!-- TITLE & PARTNER -->
-                    <div>
-                        <h3 class="text-lg font-black text-white leading-snug">${course.title}</h3>
-                        <p class="text-xs font-medium text-slate-400 mt-0.5 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-xs text-emerald-400">verified</span>
-                            ${course.partner} · Plataforma Capacitar
-                        </p>
-                    </div>
-
-                    <!-- DESCRIPTION -->
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        ${course.description}
-                    </p>
-
-                    <!-- SPECS / METADATA PILLS -->
-                    <div class="grid grid-cols-3 gap-2 p-3 rounded-xl bg-black/40 border border-slate-800 text-[11px] text-center">
-                        <div>
-                            <span class="block text-slate-400 font-bold uppercase text-[9px]">Duración</span>
-                            <span class="text-white font-semibold flex items-center justify-center gap-0.5 mt-0.5">
-                                <span class="material-symbols-outlined text-xs text-primary">schedule</span>
-                                ${course.duration}
-                            </span>
-                        </div>
-                        <div>
-                            <span class="block text-slate-400 font-bold uppercase text-[9px]">Nivel</span>
-                            <span class="text-white font-semibold block mt-0.5">${course.level || 'Todos'}</span>
-                        </div>
-                        <div>
-                            <span class="block text-slate-400 font-bold uppercase text-[9px]">Costo</span>
-                            <span class="text-emerald-400 font-bold block mt-0.5">Gratis ($0)</span>
-                        </div>
-                    </div>
-
-                    <!-- KEY SYLLABUS POINTS -->
-                    <div class="space-y-1.5 pt-1">
-                        <span class="text-[10px] font-black uppercase tracking-wider text-slate-400 flex items-center gap-1">
-                            <span class="material-symbols-outlined text-xs text-primary">menu_book</span>
-                            Contenidos Clave:
-                        </span>
-                        <ul class="space-y-1 text-xs text-slate-300">
-                            ${(course.syllabus || []).slice(0, 3).map(m => `
-                                <li class="flex items-start gap-1.5">
-                                    <span class="material-symbols-outlined text-xs text-emerald-400 shrink-0 mt-0.5">check_circle</span>
-                                    <span class="leading-tight">${m}</span>
-                                </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- CALL TO ACTION / GATED LINK SECTION -->
-                <div class="pt-3 border-t border-slate-800">
-                    ${isPro ? `
-                        <!-- UNLOCKED PRO VIEW -->
-                        <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 space-y-2.5">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-black text-emerald-300 flex items-center gap-1.5">
-                                    <span class="material-symbols-outlined text-sm text-emerald-400">verified</span>
-                                    Enlaces Oficiales Desbloqueados
-                                </span>
-                                <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[9px] font-black uppercase tracking-wider border border-emerald-500/30">
-                                    Pase PRO Activo
-                                </span>
-                            </div>
-
-                            <div class="space-y-2">
-                                <a href="${course.registrationUrl}" target="_blank" rel="noopener noreferrer" 
-                                   class="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 active:scale-98 text-white font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 transition-all">
-                                    <span class="material-symbols-outlined text-base">how_to_reg</span>
-                                    <span>Ir al Formulario de Inscripción Oficial</span>
-                                    <span class="material-symbols-outlined text-xs">open_in_new</span>
-                                </a>
-
-                                ${course.catalogueUrl ? `
-                                    <a href="${course.catalogueUrl}" target="_blank" rel="noopener noreferrer" 
-                                       class="w-full py-2 px-3 rounded-xl bg-white/5 hover:bg-white/10 active:scale-98 text-emerald-300 font-bold text-[11px] uppercase tracking-wider flex items-center justify-center gap-1.5 border border-emerald-500/20 transition-all">
-                                        <span class="material-symbols-outlined text-sm">open_in_browser</span>
-                                        <span>Ver Ficha Oficial en Argentina.gob.ar</span>
-                                        <span class="material-symbols-outlined text-[10px]">launch</span>
-                                    </a>
-                                ` : ''}
-                            </div>
-
-                            <p class="text-[10px] text-emerald-200/80 leading-relaxed text-center">
-                                💡 Al finalizar el curso, recordá descargar el certificado oficial con QR para tu legajo personal.
-                            </p>
-                        </div>
-                    ` : `
-                        <!-- LOCKED NON-PRO VIEW -->
-                        <div class="p-3.5 rounded-xl bg-slate-950 border border-amber-500/30 space-y-2.5">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-black text-amber-300 flex items-center gap-1.5">
-                                    <span class="material-symbols-outlined text-sm text-amber-400">lock</span>
-                                    Enlaces Oficiales Protegidos
-                                </span>
-                                <span class="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 text-[9px] font-black uppercase tracking-wider border border-amber-500/30">
-                                    Solo con Pase PRO
-                                </span>
-                            </div>
-
-                            <!-- Obfuscated Link Preview -->
-                            <div class="flex items-center justify-between bg-black/60 border border-slate-800 rounded-xl px-3 py-2 text-xs select-none">
-                                <div class="flex items-center gap-2 overflow-hidden text-slate-500 font-mono text-[11px]">
-                                    <span class="material-symbols-outlined text-xs text-amber-400/80">link</span>
-                                    <span class="truncate blur-[3px]">${course.catalogueUrl || 'https://www.argentina.gob.ar/economia/capacitar/cursos-en-alianza-con-accenture#C48040'}</span>
-                                </div>
-                                <span class="text-[9px] font-bold text-amber-400/90 shrink-0 ml-2">Bloqueado</span>
-                            </div>
-
-                            <!-- Unlock Button -->
-                            <button onclick="window._showIsepProModal()"
-                                    class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-500 hover:brightness-110 active:scale-98 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 transition-all">
-                                <span class="material-symbols-outlined text-base">workspace_premium</span>
-                                <span>Desbloquear Enlaces de Inscripción (Pase PRO)</span>
-                            </button>
-
-                            <p class="text-[10px] text-slate-400 text-center leading-relaxed">
-                                Curso y certificado <strong>100% gratuitos</strong>. Tu suscripción ISEP PRO incluye acceso directo a todos los enlaces de inscripción y al simulador de exámenes.
-                            </p>
-                        </div>
-                    `}
-                </div>
-
-            </article>
-        `;
-    }).join('');
-}
-
-function _renderCursosTab(container) {
-    const isPro = _isIsepPro();
-    const state = window._quizState || {};
-    const activeCategory = state.courseCategoryFilter || 'todos';
-
-    const categories = [
-        { id: 'todos', label: 'Todos los Cursos', icon: 'apps' },
-        { id: 'ciberseguridad', label: 'Ciberseguridad', icon: 'security' },
-        { id: 'gestion', label: 'Gestión & Decisión', icon: 'psychology' },
-        { id: 'tecnologia', label: 'Tecnología & Cloud', icon: 'cloud' }
-    ];
-
-    container.innerHTML = `
-        <div class="p-4 sm:p-6 lg:p-8 space-y-6 max-w-5xl mx-auto w-full">
-            
-            <!-- HERO BANNER -->
-            <div class="p-5 sm:p-6 rounded-3xl bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950 border border-blue-500/30 shadow-2xl space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-2">
-                    <span class="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                        <span class="material-symbols-outlined text-xs">account_balance</span>
-                        PLATAFORMA CAPACITAR · MINISTERIO DE ECONOMÍA DE LA NACIÓN
-                    </span>
-                    <span class="text-[11px] font-bold text-slate-400">Capacitación para Legajo</span>
-                </div>
-
-                <div class="space-y-1.5">
-                    <h2 class="text-xl sm:text-2xl font-black text-white leading-tight">
-                        Cursos Oficiales Gratuitos con Certificado
-                    </h2>
-                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl">
-                        Capacitaciones oficiales <strong>100% gratuitas y asincrónicas</strong> de la plataforma estatal <strong>Capacitar</strong>, en alianza con líderes globales como <strong>Accenture, Microsoft, AWS y Oracle</strong>. Obtené certificados con código de validación para enriquecer tus antecedentes y legajo personal.
-                    </p>
-                </div>
-
-                <!-- HIGHLIGHTS BAR -->
-                <div class="grid grid-cols-3 gap-2 sm:gap-3 pt-2 border-t border-slate-800 text-center">
-                    <div class="p-2.5 sm:p-3 rounded-2xl bg-black/40 border border-slate-800">
-                        <span class="block text-base sm:text-lg font-black text-emerald-400">$0</span>
-                        <span class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-bold">100% Gratuitos</span>
-                    </div>
-                    <div class="p-2.5 sm:p-3 rounded-2xl bg-black/40 border border-slate-800">
-                        <span class="block text-base sm:text-lg font-black text-blue-400">24/7</span>
-                        <span class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-bold">A tu Propio Ritmo</span>
-                    </div>
-                    <div class="p-2.5 sm:p-3 rounded-2xl bg-black/40 border border-slate-800">
-                        <span class="block text-base sm:text-lg font-black text-amber-400">Oficial</span>
-                        <span class="text-[9px] sm:text-[10px] text-slate-400 uppercase font-bold">Certificado con QR</span>
-                    </div>
-                </div>
-
-                <!-- PRO BANNER OR NOTICE -->
-                ${isPro ? `
-                    <div class="flex items-center gap-2.5 p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs">
-                        <span class="material-symbols-outlined text-lg text-emerald-400 shrink-0">verified</span>
-                        <span><strong>Pase PRO habilitado:</strong> Tenés acceso libre e irrestricto a todos los enlaces directos de preinscripción oficial.</span>
-                    </div>
-                ` : `
-                    <div class="flex flex-col sm:flex-row items-center justify-between gap-3 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30">
-                        <div class="flex items-center gap-2 text-xs text-amber-200">
-                            <span class="material-symbols-outlined text-lg text-amber-400 shrink-0">workspace_premium</span>
-                            <span>Los enlaces de inscripción directa son exclusivos para suscriptores <strong>ISEP PRO</strong>.</span>
-                        </div>
-                        <button onclick="window._showIsepProModal()" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-black text-xs uppercase tracking-wider shrink-0 transition-all shadow-md shadow-amber-500/20">
-                            Activar PRO
-                        </button>
-                    </div>
-                `}
-            </div>
-
-            <!-- SEARCH & FILTERS CONTROLS -->
-            <div class="space-y-3 bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-lg">
-                <div class="relative">
-                    <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-                    <input type="text" 
-                           id="courses-search-input"
-                           value="${state.courseSearchTerm || ''}"
-                           oninput="window._searchCourses(this.value)"
-                           placeholder="Buscar por título, temática o entidad (Accenture, Microsoft, AWS, Oracle)..." 
-                           class="w-full bg-black/50 border border-slate-700/60 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-primary transition-all">
-                </div>
-
-                <div class="flex flex-wrap items-center gap-2 pt-1">
-                    ${categories.map(cat => `
-                        <button onclick="window._filterCoursesByCategory('${cat.id}')"
-                                class="px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${activeCategory === cat.id ? 'bg-primary text-white shadow-md shadow-primary/25' : 'bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 border border-slate-700/60'}">
-                            <span class="material-symbols-outlined text-sm">${cat.icon}</span>
-                            <span>${cat.label}</span>
-                        </button>
-                    `).join('')}
-                </div>
-            </div>
-
-            <!-- COURSES CARDS LIST (RESPONSIVE GRID) -->
-            <div id="courses-cards-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 lg:gap-6">
-                ${_renderCoursesCardsHTML()}
-            </div>
-
-            <!-- INFO FOOTER -->
-            <div class="p-4 rounded-2xl bg-slate-900 border border-slate-800 space-y-2 text-xs text-slate-400">
-                <div class="flex items-center gap-2 text-slate-200 font-bold">
-                    <span class="material-symbols-outlined text-base text-primary">verified_user</span>
-                    <span>Validez y Certificación Oficial</span>
-                </div>
-                <p class="leading-relaxed">
-                    Las capacitaciones listadas son dictadas por los programas oficiales de la plataforma <strong>Capacitar</strong> del Ministerio de Economía de la Nación en alianza con empresas del sector tecnológico. Al finalizar y aprobar las evaluaciones, la plataforma emite un certificado oficial con código de validación digital verificable para presentar en tu legajo de antecedentes.
-                </p>
-            </div>
-
-        </div>
-    `;
-}
 
 // ══════════════════════════════════════════════════════════════
 

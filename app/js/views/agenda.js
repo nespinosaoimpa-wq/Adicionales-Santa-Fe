@@ -60,43 +60,43 @@ function renderAgenda(container) {
 
         <main class="flex-1 overflow-y-auto px-4 space-y-5 pb-32 max-w-md mx-auto w-full">
 
-            <!-- 🎓 Campus Ascenso Policial Banner (50% OFF Promo) -->
-            <div onclick="router.navigateTo('#academia')" class="cursor-pointer bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 p-4 rounded-3xl text-white shadow-xl shadow-amber-500/20 flex items-center justify-between relative overflow-hidden group active:scale-[0.98] transition-all border border-amber-400/30">
+            <!-- 🏛️ Repositorio Oficial Cursos Capacitar ($10.000 Único) -->
+            <div onclick="router.navigateTo('#cursos')" class="cursor-pointer bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 p-4 rounded-3xl text-white shadow-xl shadow-amber-500/20 flex items-center justify-between relative overflow-hidden group active:scale-[0.98] transition-all border border-amber-400/30">
                 <div class="flex items-center gap-3.5 relative z-10">
                     <div class="size-11 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shrink-0 shadow-inner">
-                        <span class="material-symbols-outlined text-2xl text-amber-200">workspace_premium</span>
+                        <span class="material-symbols-outlined text-2xl text-amber-200">school</span>
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-[8px] font-black uppercase tracking-widest bg-white/20 text-white px-2 py-0.5 rounded-full border border-white/20">ISEP 2026</span>
-                            <span class="text-[8px] font-black uppercase tracking-widest bg-red-950/80 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/40 animate-pulse">🔥 50% OFF</span>
+                            <span class="text-[8px] font-black uppercase tracking-widest bg-white/20 text-white px-2 py-0.5 rounded-full border border-white/20">CAPACITAR NACIÓN</span>
+                            <span class="text-[8px] font-black uppercase tracking-widest bg-red-950/80 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/40 animate-pulse">🔥 $10.000 ÚNICO</span>
                         </div>
-                        <h3 class="text-sm font-black leading-tight mt-1">Simulador de Ascenso</h3>
-                        <p class="text-[10px] text-amber-100 font-medium">De <span class="line-through opacity-75">$10.000</span> a sólo <strong class="text-white">$5.000 (Suscripción Única)</strong></p>
+                        <h3 class="text-sm font-black leading-tight mt-1">Repositorio Cursos Oficiales</h3>
+                        <p class="text-[10px] text-amber-100 font-medium">Acceso a cursos de Accenture, Microsoft y AWS a sólo <strong class="text-white">$10.000 (Suscripción Única)</strong></p>
                     </div>
                 </div>
-                <button class="px-3.5 py-2 rounded-xl bg-white text-slate-900 font-black text-xs shadow-lg group-hover:bg-amber-100 transition-all flex items-center gap-1">
+                <button class="px-3.5 py-2 rounded-xl bg-white text-slate-900 font-black text-xs shadow-lg group-hover:bg-amber-100 transition-all flex items-center gap-1 shrink-0 ml-2">
                     Entrar <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
             </div>
 
-            <!-- 🎓 Cursos Oficiales Gratuitos con Certificado Promo Card (Capacitar / Nación) -->
-            <div onclick="router.navigateTo('#cursos')" class="cursor-pointer bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 p-4 rounded-3xl text-white shadow-xl shadow-blue-950/30 flex items-center justify-between relative overflow-hidden group active:scale-[0.98] transition-all border border-blue-500/30 hover:border-blue-400/60">
+            <!-- 🎓 Campus Ascenso Policial Banner (Simulador ISEP $5.000) -->
+            <div onclick="router.navigateTo('#academia')" class="cursor-pointer bg-gradient-to-r from-blue-950 via-slate-900 to-indigo-950 p-4 rounded-3xl text-white shadow-xl shadow-blue-950/30 flex items-center justify-between relative overflow-hidden group active:scale-[0.98] transition-all border border-blue-500/30 hover:border-blue-400/60">
                 <div class="flex items-center gap-3.5 relative z-10">
                     <div class="size-11 rounded-2xl bg-blue-500/20 backdrop-blur-md border border-blue-400/30 flex items-center justify-center shrink-0 shadow-inner">
-                        <span class="material-symbols-outlined text-2xl text-blue-300">school</span>
+                        <span class="material-symbols-outlined text-2xl text-blue-300">quiz</span>
                     </div>
                     <div>
                         <div class="flex items-center gap-2">
-                            <span class="text-[8px] font-black uppercase tracking-widest bg-blue-500/30 text-blue-300 px-2 py-0.5 rounded-full border border-blue-400/30">NUEVO · CAPACITAR</span>
-                            <span class="text-[8px] font-black uppercase tracking-widest bg-emerald-950/80 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-400/40">100% GRATIS</span>
+                            <span class="text-[8px] font-black uppercase tracking-widest bg-blue-500/30 text-blue-300 px-2 py-0.5 rounded-full border border-blue-400/30">ISEP 2026</span>
+                            <span class="text-[8px] font-black uppercase tracking-widest bg-emerald-950/80 text-emerald-300 px-2 py-0.5 rounded-full border border-emerald-400/40">$5.000</span>
                         </div>
-                        <h3 class="text-sm font-black leading-tight mt-1">Cursos con Certificado Oficial</h3>
-                        <p class="text-[10px] text-slate-300 font-medium">Accenture, Microsoft, AWS y Oracle para sumar a tu legajo.</p>
+                        <h3 class="text-sm font-black leading-tight mt-1">Simulador de Ascenso ISEP</h3>
+                        <p class="text-[10px] text-slate-300 font-medium">Examen policial y preguntas con manuales oficiales.</p>
                     </div>
                 </div>
                 <button class="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-black text-xs shadow-lg group-hover:bg-blue-500 transition-all flex items-center gap-1 shrink-0 ml-2">
-                    Ver <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    Simulador <span class="material-symbols-outlined text-sm">arrow_forward</span>
                 </button>
             </div>
 

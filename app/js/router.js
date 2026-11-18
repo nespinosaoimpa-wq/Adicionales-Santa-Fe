@@ -144,9 +144,11 @@ window.router = {
                     renderAcademia(app);
                     break;
                 case '#cursos':
-                    if (!window._quizState) window._quizState = {};
-                    window._quizState.activeTab = 'cursos';
-                    renderAcademia(app);
+                    if (typeof renderCursos === 'function') {
+                        renderCursos(app);
+                    } else {
+                        renderAcademia(app);
+                    }
                     break;
                 case '#asistente/partes':
 

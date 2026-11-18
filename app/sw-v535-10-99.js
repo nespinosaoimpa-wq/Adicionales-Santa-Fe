@@ -38,6 +38,7 @@ const ASSETS = [
     './js/views/auditoria.js?v=535.10.99',
     './js/views/iapos.js?v=535.10.99',
     './js/views/academia.js?v=535.10.99',
+    './js/views/cursos.js?v=535.10.99',
     './js/views/admin.js?v=535.10.99',
     './js/views/diagnostics.js?v=535.10.99',
     './js/views/onboarding.js?v=535.10.99',
