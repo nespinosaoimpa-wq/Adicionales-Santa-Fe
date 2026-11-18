@@ -284,40 +284,55 @@
                     </header>
 
                     <!-- CONTENT -->
-                    <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-2xl mx-auto w-full space-y-6">
+                    <main class="flex-1 p-4 sm:p-6 lg:p-8 max-w-md mx-auto w-full space-y-6">
                         
-                        <!-- HERO PRESENTATION -->
-                        <div class="p-6 rounded-3xl bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950 border border-blue-500/30 shadow-2xl space-y-4">
-                            <div class="flex items-center justify-between">
-                                <span class="px-3 py-1 rounded-full bg-blue-500/20 border border-blue-500/30 text-blue-300 text-[10px] font-black uppercase tracking-wider flex items-center gap-1.5">
-                                    <span class="material-symbols-outlined text-xs">account_balance</span>
-                                    MINISTERIO DE ECONOMÍA DE LA NACIÓN
-                                </span>
-                                <span class="text-[10px] font-bold text-emerald-400">Certificación Oficial</span>
+                        <!-- 🎓 TARJETA DE PRESENTACIÓN UIVERSE.IO -->
+                        <div class="card-container uiverse-pricing-card shadow-2xl">
+                            <div class="title-card">
+                                <p>Sumá Puntos en tu Legajo</p>
+                                <span class="px-2 py-0.5 rounded-full bg-white/20 text-white text-[9px] font-black uppercase tracking-wider backdrop-blur-md">Oficial</span>
                             </div>
-
-                            <div class="space-y-2">
-                                <h2 class="text-2xl font-black text-white leading-tight">
-                                    Repositorio Oficial de Cursos con Certificado
-                                </h2>
-                                <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                                    Accedé a los <strong>enlaces directos y curados</strong> de más de 135 cursos oficiales y gratuitos de la plataforma estatal <strong>Capacitar</strong>, en alianza con líderes globales como <strong>Accenture, Microsoft, AWS y Oracle</strong>.
-                                </p>
-                            </div>
-
-                            <!-- BENEFICIOS -->
-                            <div class="space-y-2.5 pt-3 border-t border-slate-800 text-xs text-slate-200">
-                                <div class="flex items-start gap-2.5">
-                                    <span class="material-symbols-outlined text-emerald-400 text-base shrink-0 mt-0.5">verified</span>
-                                    <span><strong>Certificados oficiales con QR</strong> y código de validación digital para sumar a tu legajo de antecedentes.</span>
+                            <div class="card-content">
+                                <div class="title flex items-center justify-between">
+                                    <span>REPOSITORIO CAPACITAR</span>
+                                    <span class="text-[9px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                                        <span class="material-symbols-outlined text-xs text-amber-400">verified</span> NACIÓN
+                                    </span>
                                 </div>
-                                <div class="flex items-start gap-2.5">
-                                    <span class="material-symbols-outlined text-blue-400 text-base shrink-0 mt-0.5">bolt</span>
-                                    <span><strong>Enlaces directos a los formularios:</strong> Olvidate de buscar y dar vueltas en portales gubernamentales.</span>
+                                <div class="plain">
+                                    <span>$10.000</span>
+                                    <span class="text-xs text-slate-400 font-medium">/ suscripción única</span>
                                 </div>
-                                <div class="flex items-start gap-2.5">
-                                    <span class="material-symbols-outlined text-amber-400 text-base shrink-0 mt-0.5">schedule</span>
-                                    <span><strong>100% Online y Asincrónicos:</strong> Cursás a tu propio ritmo, desde tu celular o computadora.</span>
+                                <button type="button" onclick="window._submitCursosPayment()" class="card-btn">
+                                    <span>HABILITAR ACCESO INMEDIATO</span>
+                                    <span class="material-symbols-outlined text-sm">send</span>
+                                </button>
+                                <div class="card-separate">
+                                    <div class="separate"></div>
+                                    <span>BENEFICIOS CLAVE</span>
+                                    <div class="separate"></div>
+                                </div>
+                                <div class="card-list-features">
+                                    <div class="option">
+                                        <span class="material-symbols-outlined text-sm text-purple-400 shrink-0">military_tech</span>
+                                        <span><strong class="text-white">Mayor Carga Horaria (Puntos en Legajo):</strong> Cursos oficiales de hasta <strong class="text-amber-300">86 y 62 Hs cátedra</strong> (Rutas Ciberseguridad y Sistemas). A mayor carga horaria, mayor puntaje en el concurso de ascensos policiales.</span>
+                                    </div>
+                                    <div class="option">
+                                        <span class="material-symbols-outlined text-sm text-blue-400 shrink-0">schedule</span>
+                                        <span><strong class="text-white">100% Asincrónico:</strong> Cursás en tus tiempos libres, descansos o guardias. Sin clases en vivo obligatorias ni horarios rígidos.</span>
+                                    </div>
+                                    <div class="option">
+                                        <span class="material-symbols-outlined text-sm text-indigo-400 shrink-0">devices</span>
+                                        <span><strong class="text-white">100% Modalidad Virtual:</strong> Realizás el cursado y las evaluaciones desde cualquier celular, tablet o PC.</span>
+                                    </div>
+                                    <div class="option">
+                                        <span class="material-symbols-outlined text-sm text-emerald-400 shrink-0">verified</span>
+                                        <span><strong class="text-white">Certificación Oficial con Validación QR:</strong> Avalados por el Ministerio de Economía de la Nación en alianza con líderes tecnológicos (Accenture, Microsoft, AWS, Oracle).</span>
+                                    </div>
+                                    <div class="option">
+                                        <span class="material-symbols-outlined text-sm text-amber-400 shrink-0">bolt</span>
+                                        <span><strong class="text-white">Enlaces Directos Curados:</strong> Ahorrá tiempo. Accedé sin intermediarios al formulario de preinscripción directa de cada curso.</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -490,3 +505,4 @@
     };
 
 })();
+

@@ -60,24 +60,51 @@ function renderAgenda(container) {
 
         <main class="flex-1 overflow-y-auto px-4 space-y-5 pb-32 max-w-md mx-auto w-full">
 
-            <!-- 🏛️ Repositorio Oficial Cursos Capacitar ($10.000 Único) -->
-            <div onclick="router.navigateTo('#cursos')" class="cursor-pointer bg-gradient-to-r from-amber-500 via-orange-600 to-red-600 p-4 rounded-3xl text-white shadow-xl shadow-amber-500/20 flex items-center justify-between relative overflow-hidden group active:scale-[0.98] transition-all border border-amber-400/30">
-                <div class="flex items-center gap-3.5 relative z-10">
-                    <div class="size-11 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shrink-0 shadow-inner">
-                        <span class="material-symbols-outlined text-2xl text-amber-200">school</span>
+            <!-- 🏛️ Tarjeta de Presentación Uiverse.io - Repositorio Oficial Cursos Capacitar ($10.000 Único) -->
+            <div class="card-container uiverse-pricing-card my-1 shadow-2xl">
+                <div class="title-card">
+                    <p>Sumá Puntos en tu Legajo</p>
+                    <span class="px-2 py-0.5 rounded-full bg-white/20 text-white text-[9px] font-black uppercase tracking-wider backdrop-blur-md">Oficial</span>
+                </div>
+                <div class="card-content">
+                    <div class="title flex items-center justify-between">
+                        <span>REPOSITORIO CAPACITAR</span>
+                        <span class="text-[9px] text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs text-amber-400">verified</span> NACIÓN
+                        </span>
                     </div>
-                    <div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-[8px] font-black uppercase tracking-widest bg-white/20 text-white px-2 py-0.5 rounded-full border border-white/20">CAPACITAR NACIÓN</span>
-                            <span class="text-[8px] font-black uppercase tracking-widest bg-red-950/80 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/40 animate-pulse">🔥 $10.000 ÚNICO</span>
+                    <div class="plain">
+                        <span>$10.000</span>
+                        <span class="text-xs text-slate-400 font-medium">/ suscripción única</span>
+                    </div>
+                    <button type="button" onclick="router.navigateTo('#cursos')" class="card-btn">
+                        <span>VER REPOSITORIO Y ACTIVAR</span>
+                        <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                    </button>
+                    <div class="card-separate">
+                        <div class="separate"></div>
+                        <span>BENEFICIOS CLAVE</span>
+                        <div class="separate"></div>
+                    </div>
+                    <div class="card-list-features">
+                        <div class="option">
+                            <span class="material-symbols-outlined text-sm text-purple-400 shrink-0">military_tech</span>
+                            <span><strong class="text-white">Mayor Puntaje para Ascenso:</strong> Cursos de hasta <strong class="text-amber-300">86 y 62 Hs cátedra</strong> para sumar el máximo puntaje en antecedentes de concurso policial.</span>
                         </div>
-                        <h3 class="text-sm font-black leading-tight mt-1">Repositorio Cursos Oficiales</h3>
-                        <p class="text-[10px] text-amber-100 font-medium">Acceso a cursos de Accenture, Microsoft y AWS a sólo <strong class="text-white">$10.000 (Suscripción Única)</strong></p>
+                        <div class="option">
+                            <span class="material-symbols-outlined text-sm text-blue-400 shrink-0">schedule</span>
+                            <span><strong class="text-white">100% Asincrónico:</strong> Cursás en tus francos o descansos sin días ni horarios fijos.</span>
+                        </div>
+                        <div class="option">
+                            <span class="material-symbols-outlined text-sm text-indigo-400 shrink-0">devices</span>
+                            <span><strong class="text-white">100% Virtual:</strong> Desde tu celular o PC de guardia con acceso inmediato.</span>
+                        </div>
+                        <div class="option">
+                            <span class="material-symbols-outlined text-sm text-emerald-400 shrink-0">verified</span>
+                            <span><strong class="text-white">Certificación Oficial con QR:</strong> Avalados por Nación y líderes tech (Accenture, Microsoft, AWS, Oracle).</span>
+                        </div>
                     </div>
                 </div>
-                <button class="px-3.5 py-2 rounded-xl bg-white text-slate-900 font-black text-xs shadow-lg group-hover:bg-amber-100 transition-all flex items-center gap-1 shrink-0 ml-2">
-                    Entrar <span class="material-symbols-outlined text-sm">arrow_forward</span>
-                </button>
             </div>
 
             <!-- 🎓 Campus Ascenso Policial Banner (Simulador ISEP $5.000) -->
